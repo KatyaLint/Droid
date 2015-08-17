@@ -1,8 +1,10 @@
-package hellogbye.com.hellogbyeandroid;
+package hellogbye.com.hellogbyeandroid.application;
 
 import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -14,5 +16,6 @@ public class HGBApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
+        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(HGBApplication.this));
     }
 }

@@ -3,4 +3,17 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+
+    <string-array name="nav_draw_array">
+        <item>Home</item>
+        <item>History</item>
+        <item>My Trips</item>
+        <item>Travel Companions</item>
+        <item>Prefrence Settings</item>
+        <item>Account Settings</item>
+        <item>Help  Feedback</item>
+    </string-array>
+
 </resources>
