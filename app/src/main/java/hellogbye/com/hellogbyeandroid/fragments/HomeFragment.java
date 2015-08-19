@@ -5,15 +5,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.views.HGBProgressRelativeLayout;
 
 /**
  * Created by arisprung on 8/17/15.
  */
 public class HomeFragment extends Fragment {
+
+    private ImageView mSpinnerImageView;
 
 
     public HomeFragment() {
@@ -36,10 +42,14 @@ public class HomeFragment extends Fragment {
         String strFrag = getResources().getStringArray(R.array.nav_draw_array)[i];
 
         TextView textView = (TextView)rootView.findViewById(R.id.text);
+//        HGBProgressRelativeLayout relativeLayout = (HGBProgressRelativeLayout)rootView.findViewById(R.id.loader_spinner);
+//        relativeLayout.setVisibility(View.VISIBLE);
+
         textView.setText(strFrag);
 
 
         getActivity().setTitle(strFrag);
+
         return rootView;
     }
 }
