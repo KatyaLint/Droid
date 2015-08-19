@@ -59,7 +59,7 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
         mProfileImage = (RoundedImageView)findViewById(R.id.nav_profile_image);
 
         // set a custom shadow that overlays the main content when the drawer opens
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+       // mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // improve performance by indicating the list if fixed size.
         mDrawerList.setHasFixedSize(true);
         mDrawerList.setLayoutManager(new LinearLayoutManager(this));
@@ -84,6 +84,7 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         mDrawerToggle.syncState();
 
         HGBUtility.loadImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);

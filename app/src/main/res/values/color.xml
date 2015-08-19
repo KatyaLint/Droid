@@ -2,6 +2,7 @@
 <resources>
 
     <color name="hgb_blue">#085676</color>
+    <color name="hgb_toolbar_blue">#00374B</color>
     <color name="hgb_nav_font_unselected">#7FA5B4</color>
     <color name="white">#ffffff</color>
 
