@@ -25,17 +25,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Adapter for the planet data used in our drawer menu,
  */
 public class NavListAdapter extends RecyclerView.Adapter<NavListAdapter.ViewHolder> {
-    private String[] mDataset;
+    private ArrayList<NavItem> mDataset;
     private OnItemClickListener mListener;
     private Context mContext;
-
+    private int mSelectedItem;
 
 
     /**
@@ -55,7 +58,7 @@ public class NavListAdapter extends RecyclerView.Adapter<NavListAdapter.ViewHold
         }
     }
 
-    public NavListAdapter(String[] myDataset, OnItemClickListener listener,Context context) {
+    public NavListAdapter(ArrayList<NavItem> myDataset, OnItemClickListener listener,Context context) {
         mDataset = myDataset;
         mListener = listener;
         mContext = context;
@@ -66,40 +69,44 @@ public class NavListAdapter extends RecyclerView.Adapter<NavListAdapter.ViewHold
         LayoutInflater vi = LayoutInflater.from(parent.getContext());
         View v = vi.inflate(R.layout.drawer_list_item, parent, false);
         FontTextView tv = (FontTextView) v.findViewById(R.id.text1);
-        Typeface face=Typeface.createFromAsset(mContext.getAssets(), "fonts/dinnextltpro_bold.otf");
-        tv.setTypeface(face);
-        tv.setTextColor(mContext.getResources().getColor(R.color.white));
+   //     Typeface face=Typeface.createFromAsset(mContext.getAssets(), "fonts/dinnextltpro_bold.otf");
+//        tv.setTypeface(face);
+//        tv.setTextColor(mContext.getResources().getColor(R.color.white));
         return new ViewHolder(tv);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.mTextView.setText(mDataset[position]);
+        NavItem item = mDataset.get(position);
+        holder.mTextView.setText(item.getName());
+        if(item.isSelected()){
+            Typeface face=Typeface.createFromAsset(mContext.getAssets(), "fonts/dinnextltpro_bold.otf");
+            holder.mTextView.setTypeface(face);
+            holder.mTextView.setTextColor(mContext.getResources().getColor(R.color.white));
+        }else{
+            Typeface face=Typeface.createFromAsset(mContext.getAssets(), "fonts/dinnextltpro_regular.otf");
+            holder.mTextView.setTypeface(face);
+            holder.mTextView.setTextColor(mContext.getResources().getColor(R.color.hgb_nav_font_unselected));
+        }
         holder.mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 mListener.onClick(view, position);
-//                if(mDataset[position].equals(holder.mTextView.getText().toString())){
-//                    Typeface face=Typeface.createFromAsset(mContext.getAssets(), "fonts/dinnextltpro_bold.otf");
-//                    holder.mTextView.setTypeface(face);
-//                    holder.mTextView.setTextColor(mContext.getResources().getColor(R.color.white));
-//                }else{
-//                    Typeface face=Typeface.createFromAsset(mContext.getAssets(), "fonts/dinnextltpro_regular.otf");
-//                    holder.mTextView.setTypeface(face);
-//                    holder.mTextView.setTextColor(mContext.getResources().getColor(R.color.hgb_nav_font_unselected));
-//                }
-
-                notifyDataSetChanged();
-                //ViewGroup row = (ViewGroup) view.getParent();
-               // TextView textView = (TextView) row.findViewById(R.id.text1);
-
+                mDataset.get(position).setIsSelected(true);
+                mDataset.get(mSelectedItem).setIsSelected(false);
+                notifyItemChanged(position);
+                notifyItemChanged(mSelectedItem);
+                mSelectedItem = position;
 
             }
         });
+
+
     }
 
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return mDataset.size();
     }
 }

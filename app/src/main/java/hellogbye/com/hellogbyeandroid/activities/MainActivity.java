@@ -16,6 +16,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import java.util.ArrayList;
+
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.AccountSettingsFragment;
@@ -25,6 +28,7 @@ import hellogbye.com.hellogbyeandroid.fragments.HomeFragment;
 import hellogbye.com.hellogbyeandroid.fragments.MyTripsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PrefrenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
+import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
@@ -38,6 +42,8 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
     private CharSequence mTitle;
     private String[] mNavTitles;
     private RoundedImageView mProfileImage;
+    private NavListAdapter mAdapter;
+    private ArrayList<NavItem> mNavItemsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +65,10 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
         mDrawerList.setLayoutManager(new LinearLayoutManager(this));
 
         // set up the drawer's list view with items and click listener
-        mDrawerList.setAdapter(new NavListAdapter(mNavTitles, this,getApplicationContext()));
+        loadNavItems();
+        mAdapter = new NavListAdapter(mNavItemsList, this,getApplicationContext());
+
+        mDrawerList.setAdapter(mAdapter);
 
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -77,8 +86,20 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
         getSupportActionBar().setHomeButtonEnabled(true);
         mDrawerToggle.syncState();
 
-        HGBUtility.loadImage(getApplicationContext(),"http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg",mProfileImage);
+        HGBUtility.loadImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
         selectItem(0);
+    }
+
+    private void loadNavItems() {
+        mNavItemsList = new ArrayList<>();
+        mNavItemsList.add(new NavItem(mNavTitles[0],true));
+        mNavItemsList.add(new NavItem(mNavTitles[1],false));
+        mNavItemsList.add(new NavItem(mNavTitles[2],false));
+        mNavItemsList.add(new NavItem(mNavTitles[3],false));
+        mNavItemsList.add(new NavItem(mNavTitles[4],false));
+        mNavItemsList.add(new NavItem(mNavTitles[5],false));
+        mNavItemsList.add(new NavItem(mNavTitles[6],false));
+
     }
 
 
@@ -158,9 +179,6 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
 
         }
 
-
-
-
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.replace(R.id.content_frame, fragment);
@@ -169,6 +187,9 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
         // update selected item title, then close the drawer
         setTitle(mNavTitles[position]);
         mDrawerLayout.closeDrawer(mNavDrawerLinearLayout);
+
+
+
     }
 
     @Override
