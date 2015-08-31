@@ -1,8 +1,6 @@
 package hellogbye.com.hellogbyeandroid.views;
 
-/**
- * Created by Yehuda on 09-Jun-15.
- */
+
 
 import android.content.Context;
 import android.content.res.TypedArray;

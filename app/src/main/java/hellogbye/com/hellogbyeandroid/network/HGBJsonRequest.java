@@ -4,9 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -18,13 +18,17 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonObject;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
+import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 
 
 public class HGBJsonRequest extends Request<String> {
@@ -34,7 +38,7 @@ public class HGBJsonRequest extends Request<String> {
      */
     private static final String PROTOCOL_CONTENT_TYPE =
             String.format("application/json; charset=%s", PROTOCOL_CHARSET);
-    private String authorizationString;
+   // private String authorizationString;
     private RequestQueue queue;
     private static final String TAG = "NETWORK";
     private String url;
@@ -42,14 +46,19 @@ public class HGBJsonRequest extends Request<String> {
     private static Context mContext;
     private Listener<String> listener;
     private ErrorListener errorListener;
-    private JsonObject params;
+ //   HashMap<String,String> params = new HashMap<String, String>();
+    private JSONObject jsonObject = new JSONObject();
+    private Map<String, String> params;
+
+
+
     private static String token;
     private boolean showLoader;
     ProgressDialog progressDialog;
     String loading;
 
 
-    public HGBJsonRequest(int method, String url, JsonObject params, Listener<String> listener, ErrorListener errorListener) {
+    public HGBJsonRequest(int method, String url,  Map<String, String> params, Listener<String> listener, ErrorListener errorListener) {
 
         super(method, url, errorListener);
         this.listener = listener;
@@ -57,6 +66,7 @@ public class HGBJsonRequest extends Request<String> {
         this.errorListener = errorListener;
         this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
         this.url = url;
+
         showLoader = true;
         progressDialog = new ProgressDialog(mContext);
         loading = "Loading...";
@@ -64,7 +74,7 @@ public class HGBJsonRequest extends Request<String> {
         send();
     }
 
-    public HGBJsonRequest(int method, String url, JsonObject params, Listener<String> listener, ErrorListener errorListener, boolean showLoader) {
+    public HGBJsonRequest(int method, String url, Map<String, String> params, Listener<String> listener, ErrorListener errorListener, boolean showLoader) {
         super(method, url, errorListener);
         this.listener = listener;
         this.params = params;
@@ -79,10 +89,10 @@ public class HGBJsonRequest extends Request<String> {
     }
 
 
-    @Override
-    protected Map<String, String> getParams() throws AuthFailureError {
-        return super.getParams();
-    }
+    protected Map<String, String> getParams()
+            throws com.android.volley.AuthFailureError {
+        return params;
+    };
 
     private void setService(String url) {
         URI uri;
@@ -104,10 +114,8 @@ public class HGBJsonRequest extends Request<String> {
         removeLoader();
         if (listener != null) {
 
-            listener.onResponse(response);
+            listener.onResponse(response.toString());
         }
-
-
     }
 
     @Override
@@ -124,54 +132,61 @@ public class HGBJsonRequest extends Request<String> {
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Accept", "application/json");
-        headers.put("Authorization", "Token token=" + token);
-        if (!TextUtils.isEmpty(this.authorizationString)) {
-            headers.put("Authorization", this.authorizationString);
-        }
+       headers.put("Accept", "application/json");
+     //   headers.put("Content-Type", "application/json");
+        HGBPreferencesManager sharedPreferences = HGBPreferencesManager.getInstance(mContext);
+        String token = sharedPreferences.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
+        headers.put("Authorization", "Session " + token);
+//        if (!TextUtils.isEmpty(this.authorizationString)) {
+//            headers.put("Authorization", this.authorizationString);
+//        }
+
+
         return headers;
     }
 
-    public void setHeader(String header) {
-        authorizationString = header;
-    }
+//    public void setHeader(String header) {
+//        authorizationString = header;
+//    }
 
+
+//    @Override
+//    public byte[] getBody() {
+//        try {
+//            return params == null ? null : params.toString().getBytes(PROTOCOL_CHARSET);
+//        } catch (UnsupportedEncodingException uee) {
+//            VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s",
+//                    params.toString(), PROTOCOL_CHARSET);
+//            return null;
+//        }
+//    }
 
     @Override
-    public byte[] getBody() {
-        try {
-            return params == null ? null : params.toString().getBytes(PROTOCOL_CHARSET);
-        } catch (UnsupportedEncodingException uee) {
-            VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s",
-                    params.toString(), PROTOCOL_CHARSET);
-            return null;
-        }
-    }
+    protected Response<String> parseNetworkResponse(final NetworkResponse response) {
 
-    @Override
-    protected Response<String> parseNetworkResponse(NetworkResponse response) {
-        String jsonString;
+
         try {
-            jsonString = new String(response.data,
+            String jsonString = new String(response.data,
                     HttpHeaderParser.parseCharset(response.headers));
-        } catch (UnsupportedEncodingException e) {
-            jsonString = new String(response.data);
+            return Response.success(jsonString,
+                    HttpHeaderParser.parseCacheHeaders(response));
+        } catch (Exception e) {
+            return Response.error(new ParseError(e));
         }
-        return Response.success(jsonString,
-                HttpHeaderParser.parseCacheHeaders(response));
     }
 
     @Override
     public String getBodyContentType() {
-        return PROTOCOL_CONTENT_TYPE;
+        return "application/x-www-form-urlencoded; charset=UTF-8";
     }
 
 
     public void send() {
-        Log.d(TAG, service + "\nURL: " + url + "\nPARAMS: " + params);
+      //  Log.d(TAG, service + "\nURL: " + url + "\nPARAMS: " + params);
         Log.d(TAG, "TOKEN: " + token);
 //        DataStore.getInstance(mContext).showLoader();
         showLoader();
+
         queue.add(this);
     }
 
@@ -182,6 +197,8 @@ public class HGBJsonRequest extends Request<String> {
     public static void setContext(Context context) {
         mContext = context;
     }
+
+
 
     public void showLoader() {
         if (showLoader) {
@@ -203,4 +220,6 @@ public class HGBJsonRequest extends Request<String> {
         if (progressDialog != null && progressDialog.isShowing())
             progressDialog.dismiss();
     }
+
+
 }
