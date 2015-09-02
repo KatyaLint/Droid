@@ -8,21 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
-import java.util.HashMap;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
+import hellogbye.com.hellogbyeandroid.models.UserPreference;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
-import hellogbye.com.hellogbyeandroid.network.CustomRequest;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 
 
@@ -37,6 +30,7 @@ public class LoginTest extends Activity {
     private Button userProfileButton;
     private TextView responceText;
     private HGBPreferencesManager hgbPrefrenceManager;
+    private Button travelPreference;
 
 
     @Override
@@ -53,6 +47,33 @@ public class LoginTest extends Activity {
         userProfileButton= (Button)findViewById(R.id.userprofile);
         responceText = (TextView)findViewById(R.id.responce);
 
+        travelPreference = (Button)findViewById(R.id.userPreference);
+
+        travelPreference.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ConnectionManager.getInstance(LoginTest.this).getPreference(new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+
+                        responceText.setText((String) data);
+                        Gson gson = new Gson();
+                        Type type = new TypeToken<UserPreference>() {
+                        }.getType();
+                        UserPreference[] arr = gson.fromJson((String) data, UserPreference[].class);
+
+                        Log.d("PreferenceTest", arr.toString());
+                    }
+
+                    @Override
+                    public void onError(Object data) {
+
+                    }
+                });
+
+            }
+        });
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,8 +83,7 @@ public class LoginTest extends Activity {
 
                         responceText.setText((String) data);
                         Gson gson = new Gson();
-                        Type type = new TypeToken<UserLoginCredentials>() {
-                        }.getType();
+                        Type type = new TypeToken<UserLoginCredentials>() {}.getType();
                         UserLoginCredentials user = gson.fromJson((String) data, type);
                         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN,user.getToken());
                         Log.d("LoginTest", user.toString());
@@ -74,11 +94,6 @@ public class LoginTest extends Activity {
 
                     }
                 });
-
-
-
-
-
             }
         });
 

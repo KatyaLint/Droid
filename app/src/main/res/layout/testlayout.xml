@@ -29,9 +29,17 @@
         android:layout_height="wrap_content"
         android:text="userprofile"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TravelPref"
+        android:id="@+id/userPreference" />
+
     <TextView
         android:id="@+id/responce"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+
 
 </LinearLayout>

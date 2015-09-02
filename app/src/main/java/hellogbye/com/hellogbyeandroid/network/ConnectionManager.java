@@ -10,9 +10,8 @@ public class ConnectionManager {
 
 
     public interface ServerRequestListener {
-        public void onSuccess(Object data);
-
-        public void onError(Object data);
+         void onSuccess(Object data);
+         void onError(Object data);
     }
 
     public static String BASE_URL = "http://gtaqa-1141527982.us-east-1.elb.amazonaws.com/GTAREST/REST/";
@@ -20,7 +19,7 @@ public class ConnectionManager {
     private Context mContext;
 
     public enum Services {
-        USER_POST_LOGIN, USER_GET_PROFILE;
+        USER_POST_LOGIN, USER_GET_PROFILE,USER_POST_PREFERENCE
     }
 
 
@@ -80,6 +79,26 @@ public class ConnectionManager {
     }
 
 
+
+    public void getPreference(final ServerRequestListener listener) {
+        String url = getURL(Services.USER_POST_PREFERENCE);
+        HashMap<String, String> map = new HashMap<String, String>();
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                map, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
+
+
     public void getUserProfile(final ServerRequestListener listener) {
         String url = getURL(Services.USER_GET_PROFILE);
 
@@ -107,6 +126,8 @@ public class ConnectionManager {
                 return BASE_URL + "Session";
             case USER_GET_PROFILE:
                 return BASE_URL + "UserProfile";
+            case USER_POST_PREFERENCE:
+                return BASE_URL + "TravelPreference/Profiles";
 
         }
         return url;
