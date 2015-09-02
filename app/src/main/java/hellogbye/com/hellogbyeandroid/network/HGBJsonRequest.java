@@ -46,7 +46,7 @@ public class HGBJsonRequest extends Request<String> {
     private static Context mContext;
     private Listener<String> listener;
     private ErrorListener errorListener;
- //   HashMap<String,String> params = new HashMap<String, String>();
+  // HashMap<String,String> params = new HashMap<String, String>();
     private JSONObject jsonObject = new JSONObject();
     private Map<String, String> params;
 
@@ -63,6 +63,8 @@ public class HGBJsonRequest extends Request<String> {
         super(method, url, errorListener);
         this.listener = listener;
         this.params = params;
+//        params.put("username","omer.vinik@amginetech.com");
+//        params.put("password","password");
         this.errorListener = errorListener;
         this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
         this.url = url;
@@ -77,7 +79,7 @@ public class HGBJsonRequest extends Request<String> {
     public HGBJsonRequest(int method, String url, Map<String, String> params, Listener<String> listener, ErrorListener errorListener, boolean showLoader) {
         super(method, url, errorListener);
         this.listener = listener;
-        this.params = params;
+       //    this.params = params;
         this.errorListener = errorListener;
         this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
         this.url = url;
@@ -136,12 +138,9 @@ public class HGBJsonRequest extends Request<String> {
      //   headers.put("Content-Type", "application/json");
         HGBPreferencesManager sharedPreferences = HGBPreferencesManager.getInstance(mContext);
         String token = sharedPreferences.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
-        headers.put("Authorization", "Session " + token);
-//        if (!TextUtils.isEmpty(this.authorizationString)) {
-//            headers.put("Authorization", this.authorizationString);
-//        }
-
-
+        if(!token.equals("")){
+            headers.put("Authorization", "Session " + token);
+        }
         return headers;
     }
 

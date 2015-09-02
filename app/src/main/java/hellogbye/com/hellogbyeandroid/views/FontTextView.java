@@ -1,7 +1,5 @@
 package hellogbye.com.hellogbyeandroid.views;
 
-
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
