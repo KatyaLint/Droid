@@ -8,14 +8,14 @@
         android:id="@+id/email"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:text="omer.vinik@amginetech.com"
+        android:text="jyeap@pivotal.io"
         />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="password"
+        android:text="123456"
         />
 
     <Button
