@@ -100,7 +100,7 @@ public class LoginTest extends Activity {
         userProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ConnectionManager.getInstance(LoginTest.this).getUserProfile( new ConnectionManager.ServerRequestListener() {
+                ConnectionManager.getInstance(LoginTest.this).getSearchWithQuery("Fly to New York to Seattle for 2 days",null, new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
                         responceText.setText((String) data);
