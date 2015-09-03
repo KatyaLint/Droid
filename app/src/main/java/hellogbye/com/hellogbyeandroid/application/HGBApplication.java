@@ -6,6 +6,7 @@ import com.crashlytics.android.Crashlytics;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import io.fabric.sdk.android.Fabric;
 
 /**

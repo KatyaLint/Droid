@@ -1,7 +1,9 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
-import android.app.Activity;
+
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,13 +18,14 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.models.UserPreference;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 
 
 /**
  * Created by arisprung on 8/31/15.
  */
-public class LoginTest extends Activity {
+public class LoginTest extends ActionBarActivity {
 
     private EditText emailEditText;
     private EditText paswordEditText;
@@ -31,7 +34,8 @@ public class LoginTest extends Activity {
     private TextView responceText;
     private HGBPreferencesManager hgbPrefrenceManager;
     private Button travelPreference;
-
+    private Button oopenDialog;
+    private FragmentManager fm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,10 @@ public class LoginTest extends Activity {
 
         travelPreference = (Button)findViewById(R.id.userPreference);
 
+
+
+
+
         travelPreference.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,12 +70,14 @@ public class LoginTest extends Activity {
                         }.getType();
                         UserPreference[] arr = gson.fromJson((String) data, UserPreference[].class);
 
+
                         Log.d("PreferenceTest", arr.toString());
                     }
 
                     @Override
                     public void onError(Object data) {
-
+                        HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.show(getSupportFragmentManager(), "Sorry, we have connection problem");
                     }
                 });
 
@@ -91,7 +101,8 @@ public class LoginTest extends Activity {
 
                     @Override
                     public void onError(Object data) {
-
+                        HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.show(getSupportFragmentManager(), "Sorry, there are login problem");
                     }
                 });
             }
@@ -109,7 +120,8 @@ public class LoginTest extends Activity {
 
                     @Override
                     public void onError(Object data) {
-
+                        HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.show(getSupportFragmentManager(), "Sorry, can't get your profile data");
                     }
                 });
             }

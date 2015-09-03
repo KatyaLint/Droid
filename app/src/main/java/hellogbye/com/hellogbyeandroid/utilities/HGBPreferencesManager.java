@@ -13,10 +13,6 @@ public class HGBPreferencesManager
 	private SharedPreferences mSharedPreferencesFile;
 	private static HGBPreferencesManager mHomeSharedPreferences = null;
 
-
-
-
-
 	private HGBPreferencesManager(Context context)
 	{
 		mSharedPreferencesFile = context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);

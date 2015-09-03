@@ -29,6 +29,7 @@ import hellogbye.com.hellogbyeandroid.fragments.MyTripsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PrefrenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
@@ -50,6 +51,9 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main_activity_layout);
+
+
+
 
         mTitle = mDrawerTitle = getTitle();
         mNavTitles = getResources().getStringArray(R.array.nav_draw_array);

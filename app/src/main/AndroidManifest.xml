@@ -32,6 +32,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".utilities.HGBErrorHelper">
+
+        </activity>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="36d36acddb6b8aaa2983590bed7a69638ca0b7c8" />
