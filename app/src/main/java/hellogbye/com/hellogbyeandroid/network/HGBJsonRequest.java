@@ -5,6 +5,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
@@ -68,7 +69,10 @@ public class HGBJsonRequest extends Request<String> {
         this.errorListener = errorListener;
         this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
         this.url = url;
-
+        setRetryPolicy((new DefaultRetryPolicy(
+                        10000,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)));
         showLoader = true;
         progressDialog = new ProgressDialog(mContext);
         loading = "Loading...";
@@ -83,6 +87,10 @@ public class HGBJsonRequest extends Request<String> {
         this.errorListener = errorListener;
         this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
         this.url = url;
+        setRetryPolicy((new DefaultRetryPolicy(
+                10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)));
         setService(url);
         progressDialog = new ProgressDialog(mContext);
         loading = "loading...";
@@ -134,7 +142,7 @@ public class HGBJsonRequest extends Request<String> {
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
         Map<String, String> headers = new HashMap<String, String>();
-       headers.put("Accept", "application/json");
+        headers.put("Accept", "application/json");
      //   headers.put("Content-Type", "application/json");
         HGBPreferencesManager sharedPreferences = HGBPreferencesManager.getInstance(mContext);
         String token = sharedPreferences.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
