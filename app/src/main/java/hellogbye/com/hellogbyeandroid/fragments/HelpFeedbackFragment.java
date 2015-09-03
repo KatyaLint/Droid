@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 
 /**
@@ -33,7 +34,8 @@ public class HelpFeedbackFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_help_layout, container, false);
         int i = getArguments().getInt(HGBConstants.ARG_NAV_NUMBER);
-        String strFrag = getResources().getStringArray(R.array.nav_draw_array)[i];
+      //  String strFrag = getResources().getStringArray(R.array.nav_draw_array)[i];
+        String strFrag = ToolBarNavEnum.getNavNameByPosition(i);
 
         TextView textView = (TextView)rootView.findViewById(R.id.text);
         textView.setText(strFrag);

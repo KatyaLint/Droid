@@ -5,21 +5,21 @@ package hellogbye.com.hellogbyeandroid.models;
  */
 public class NavItem {
 
-    private String name;
+    private ToolBarNavEnum name;
     private boolean isSelected;
 
-    public NavItem(String name, boolean isSelected) {
+    public NavItem(ToolBarNavEnum name, boolean isSelected) {
         this.name = name;
         this.isSelected = isSelected;
     }
 
     public String getName() {
-        return name;
+        return name.getNavTitle();
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     public boolean isSelected() {
         return isSelected;
@@ -29,3 +29,4 @@ public class NavItem {
         this.isSelected = isSelected;
     }
 }
+

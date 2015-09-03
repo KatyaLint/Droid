@@ -16,4 +16,6 @@
         <item>Help  Feedback</item>
     </string-array>
 
+    <string name="tool_bar">Edit</string>
+
 </resources>

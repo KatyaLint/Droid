@@ -25,10 +25,12 @@ import hellogbye.com.hellogbyeandroid.fragments.AccountSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HistoryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HomeFragment;
+import hellogbye.com.hellogbyeandroid.fragments.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.MyTripsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PrefrenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
@@ -45,6 +47,7 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
     private RoundedImageView mProfileImage;
     private NavListAdapter mAdapter;
     private ArrayList<NavItem> mNavItemsList;
+    private CostumeToolBar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +77,14 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
 
         mDrawerList.setAdapter(mAdapter);
 
+        mToolbar = (CostumeToolBar)findViewById(R.id.toolbar);
+        initToolBar();
 
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
+    }
+
+    private void initToolBar(){
+
         setSupportActionBar(mToolbar);
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -83,7 +92,7 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
         mDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(
                 this,  mDrawerLayout, mToolbar,
                 R.string.drawer_open,  /* "open drawer" description for accessibility */
-               R.string.drawer_close
+                R.string.drawer_close
         );
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -91,19 +100,24 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         mDrawerToggle.syncState();
 
+
+
+
         HGBUtility.loadImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
-        selectItem(0);
+        selectItem(ToolBarNavEnum.HOME.getNavNumber());
+
     }
 
     private void loadNavItems() {
         mNavItemsList = new ArrayList<>();
-        mNavItemsList.add(new NavItem(mNavTitles[0],true));
-        mNavItemsList.add(new NavItem(mNavTitles[1],false));
-        mNavItemsList.add(new NavItem(mNavTitles[2],false));
-        mNavItemsList.add(new NavItem(mNavTitles[3],false));
-        mNavItemsList.add(new NavItem(mNavTitles[4],false));
-        mNavItemsList.add(new NavItem(mNavTitles[5],false));
-        mNavItemsList.add(new NavItem(mNavTitles[6],false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.HOME,true));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.ITINARERY,false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.HISTORY,false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.TRIPS,false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.COMPANIONS,false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.PREFERENCE,false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.ACCOUNT,false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.HELP,false));
 
     }
 
@@ -157,29 +171,32 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
     private void selectItem(int position) {
         // update the main content by replacing fragments
         Fragment fragment = null;
-
-
-        switch (position) {
-            case 0:
-                fragment = HomeFragment.newInstance(position);
+        ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
+        int navPosition = position;//navBar.getNavNumber();
+        switch (navBar) {
+            case HOME:
+                fragment = HomeFragment.newInstance(navPosition);
                 break;
-            case 1:
-                fragment = HistoryFragment.newInstance(position);
+            case HISTORY:
+                fragment = HistoryFragment.newInstance(navPosition);
                 break;
-            case 2:
-                fragment = MyTripsFragment.newInstance(position);
+            case TRIPS:
+                fragment = MyTripsFragment.newInstance(navPosition);
                 break;
-            case 3:
-                fragment = TravelCompanionsFragment.newInstance(position);
+            case COMPANIONS:
+                fragment = TravelCompanionsFragment.newInstance(navPosition);
                 break;
-            case 4:
-                fragment = PrefrenceSettingsFragment.newInstance(position);
+            case PREFERENCE:
+                fragment = PrefrenceSettingsFragment.newInstance(navPosition);
                 break;
-            case 5:
-                fragment = AccountSettingsFragment.newInstance(position);
+            case ACCOUNT:
+                fragment = AccountSettingsFragment.newInstance(navPosition);
                 break;
-            case 6:
-                fragment = HelpFeedbackFragment.newInstance(position);
+            case HELP:
+                fragment = HelpFeedbackFragment.newInstance(navPosition);
+                break;
+            case ITINARERY:
+                fragment = ItineraryFragment.newInstance(navPosition);
                 break;
 
         }
@@ -190,12 +207,16 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
         ft.commit();
 
         // update selected item title, then close the drawer
-        setTitle(mNavTitles[position]);
+        //  setTitle(mNavTitles[position]);
+
+        mToolbar.initToolBarItems();
+        mToolbar.updateToolBarView(position);
         mDrawerLayout.closeDrawer(mNavDrawerLinearLayout);
 
 
 
     }
+
 
     @Override
     public void setTitle(CharSequence title) {
