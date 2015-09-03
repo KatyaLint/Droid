@@ -37,6 +37,9 @@ public class LoginTest extends ActionBarActivity {
     private Button oopenDialog;
     private FragmentManager fm;
 
+    String solutionID = "e977aac6-0fd7-4321-8e1f-44cb597cfbb2";
+    String pax = "9d2c85f5-d295-4064-a8c6-a4d0015b52e4";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,18 +63,18 @@ public class LoginTest extends ActionBarActivity {
         travelPreference.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ConnectionManager.getInstance(LoginTest.this).getPreference(new ConnectionManager.ServerRequestListener() {
+                ConnectionManager.getInstance(LoginTest.this).getPreferencesForProfileId("7316d95c-732f-4b59-8d71-d3874e26878a", new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
 
                         responceText.setText((String) data);
-                        Gson gson = new Gson();
-                        Type type = new TypeToken<UserPreference>() {
-                        }.getType();
-                        UserPreference[] arr = gson.fromJson((String) data, UserPreference[].class);
-
-
-                        Log.d("PreferenceTest", arr.toString());
+//                        Gson gson = new Gson();
+//                        Type type = new TypeToken<UserPreference>() {
+//                        }.getType();
+//                        UserPreference[] arr = gson.fromJson((String) data, UserPreference[].class);
+//
+//
+//                        Log.d("PreferenceTest", arr.toString());
                     }
 
                     @Override
@@ -93,9 +96,10 @@ public class LoginTest extends ActionBarActivity {
 
                         responceText.setText((String) data);
                         Gson gson = new Gson();
-                        Type type = new TypeToken<UserLoginCredentials>() {}.getType();
+                        Type type = new TypeToken<UserLoginCredentials>() {
+                        }.getType();
                         UserLoginCredentials user = gson.fromJson((String) data, type);
-                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN,user.getToken());
+                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
                         Log.d("LoginTest", user.toString());
                     }
 
@@ -107,11 +111,11 @@ public class LoginTest extends ActionBarActivity {
                 });
             }
         });
-
+        // http://gtaqa-1141527982.us-east-1.elb.amazonaws.com/GTAREST/REST/Hotel?solution=e977aac6-0fd7-4321-8e1f-44cb597cfbb2&paxid=9d2c85f5-d295-4064-a8c6-a4d0015b52e4&checkin=2015-09-02&checkout=2015-09-04
         userProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ConnectionManager.getInstance(LoginTest.this).getSearchWithQuery("Fly to New York to Seattle for 2 days",null, new ConnectionManager.ServerRequestListener() {
+                ConnectionManager.getInstance(LoginTest.this).putAlternateHotel(solutionID, pax, "2015-09-02", "2015-09-04", new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
                         responceText.setText((String) data);
@@ -121,18 +125,16 @@ public class LoginTest extends ActionBarActivity {
                     @Override
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
-                        errorHelper.show(getSupportFragmentManager(), "Sorry, can't get your profile data");
+                        try {
+                            errorHelper.show(getSupportFragmentManager(), (String) data);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 });
             }
         });
-
-
-
-
-
-
-
 
     }
 }

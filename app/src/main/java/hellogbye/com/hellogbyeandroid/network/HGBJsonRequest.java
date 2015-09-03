@@ -51,9 +51,6 @@ public class HGBJsonRequest extends Request<String> {
     private JSONObject jsonObject = new JSONObject();
     private Map<String, String> params;
 
-
-
-    private static String token;
     private boolean showLoader;
     ProgressDialog progressDialog;
     String loading;
@@ -143,7 +140,7 @@ public class HGBJsonRequest extends Request<String> {
     public Map<String, String> getHeaders() throws AuthFailureError {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Accept", "application/json");
-     //   headers.put("Content-Type", "application/json");
+       // headers.put("Content-Type", "application/json");
         HGBPreferencesManager sharedPreferences = HGBPreferencesManager.getInstance(mContext);
         String token = sharedPreferences.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
         if(!token.equals("")){
@@ -182,24 +179,24 @@ public class HGBJsonRequest extends Request<String> {
         }
     }
 
-    @Override
-    public String getBodyContentType() {
-        return "application/x-www-form-urlencoded; charset=UTF-8";
-    }
+//    @Override
+//    public String getBodyContentType() {
+//        return "application/x-www-form-urlencoded; charset=UTF-8";
+//    }
 
 
     public void send() {
       //  Log.d(TAG, service + "\nURL: " + url + "\nPARAMS: " + params);
-        Log.d(TAG, "TOKEN: " + token);
+   //     Log.d(TAG, "TOKEN: " + token);
 //        DataStore.getInstance(mContext).showLoader();
         showLoader();
 
         queue.add(this);
     }
 
-    public static void setToken(String userToken) {
-        token = userToken;
-    }
+//    public static void setToken(String userToken) {
+//        token = userToken;
+//    }
 
     public static void setContext(Context context) {
         mContext = context;
