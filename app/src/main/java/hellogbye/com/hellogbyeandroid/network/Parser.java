@@ -10,13 +10,14 @@ public class Parser {
 
     public static String parseErrorMessage(VolleyError error) {
         String err = "server error";
+        JSONObject errJson = null;
         try {
-            JSONObject errJson = new JSONObject(new String(error.networkResponse.data));
+             errJson = new JSONObject(new String(error.networkResponse.data));
             err = errJson.getString("message");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return err;
+        return errJson.toString();
     }
 
 

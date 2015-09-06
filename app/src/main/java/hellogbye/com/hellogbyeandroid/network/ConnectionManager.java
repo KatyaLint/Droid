@@ -30,7 +30,8 @@ public class ConnectionManager {
         USER_GET_SEARCH_QUERY,USER_GET_UPDATE_SEARCH_QUERY,USER_GET_HOTEL_ALTERNATIVE,
         USER_HOTEL_ROOM_ALTERNATIVE,USER_PUT_HOTEL,USER_GET_BOOKING_OPTIONS,
         USER_FLIGHT_SOLUTIONS,USER_GET_TRAVELER_INFO,USER_GET_USER_PROFILE_ACCOUNTS,
-        USER_POST_USER_PROFILE_EMAIL,USER_TRAVEL_PROFILES,USER_PROFILE_RESET_PASSWORD
+        USER_POST_USER_PROFILE_EMAIL,USER_TRAVEL_PROFILES,USER_PROFILE_RESET_PASSWORD,
+        USER_SOLUTION
     }
 
     //TODO DOnt undersatnd these calls
@@ -78,6 +79,10 @@ public class ConnectionManager {
             }
         });
     }
+
+
+
+
 
     public void postChangePasswordWithOldPassword(String prevpassword, String password, final ServerRequestListener listener) {
         String url = getURL(Services.USER_POST_CHANGE_PASSWORD);
@@ -640,7 +645,37 @@ public class ConnectionManager {
         //  {"parameters":{"solution":"c86d9879-eb15-4164-8b75-6bbac0787b75","paxid":"9d2c85f5-d295-4064-a8c6-a4d0015b52e4","checkin":"2015-09-03","checkout":"2015-09-04"},"hotel":"c329c20a-4836-4bec-9580-48f7814e9fbd"}
         String url = getURL(Services.USER_PROFILE_RESET_PASSWORD)+email;//TODO need to check this looks wierd.....
         JSONObject jsonObjectWrapper = new JSONObject();
-   
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
+                jsonObjectWrapper, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
+
+
+
+    public void putSolutionWithId(String solutionID,boolean isfav , final ServerRequestListener listener) {
+        String url = getURL(Services.USER_SOLUTION)+solutionID;
+        JSONObject jsonObjectWrapper = new JSONObject();
+        try{
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("isfavorite", isfav);
+
+
+
+        }catch (Exception e ){
+            e.printStackTrace();
+        }
+
         HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
                 jsonObjectWrapper, new Response.Listener<String>() {
             @Override
@@ -703,7 +738,10 @@ public class ConnectionManager {
             case USER_TRAVEL_PROFILES:
                 return BASE_URL + "TravelPreference/Profiles/";
             case USER_PROFILE_RESET_PASSWORD:
-                return BASE_URL + " UserProfile/ResetPassword?email=";
+                return BASE_URL + "UserProfile/ResetPassword?email=";
+            case USER_SOLUTION:
+                return BASE_URL + "Solution/";
+
 
 
 

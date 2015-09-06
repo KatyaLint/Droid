@@ -80,7 +80,7 @@ public class LoginTest extends ActionBarActivity {
                     @Override
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
-                        errorHelper.show(getSupportFragmentManager(), "Sorry, we have connection problem");
+                        errorHelper.show(getSupportFragmentManager(), (String)data);
                     }
                 });
 
@@ -94,7 +94,7 @@ public class LoginTest extends ActionBarActivity {
         travelPreference.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ConnectionManager.getInstance(LoginTest.this).putAlternateHotel("7316d95c-732f-4b59-8d71-d3874e26878a","","","","", new ConnectionManager.ServerRequestListener() {
+                ConnectionManager.getInstance(LoginTest.this).putSolutionWithId(solutionID, true, new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
 
@@ -111,7 +111,7 @@ public class LoginTest extends ActionBarActivity {
                     @Override
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
-                        errorHelper.show(getSupportFragmentManager(), "Sorry, we have connection problem");
+                        errorHelper.show(getSupportFragmentManager(), (String) data);
                     }
                 });
 
@@ -137,7 +137,7 @@ public class LoginTest extends ActionBarActivity {
                     @Override
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
-                        errorHelper.show(getSupportFragmentManager(), "Sorry, there are login problem");
+                        errorHelper.show(getSupportFragmentManager(), (String) data);
                     }
                 });
             }
