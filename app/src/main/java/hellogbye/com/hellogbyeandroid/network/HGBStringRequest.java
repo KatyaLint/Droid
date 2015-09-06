@@ -2,7 +2,6 @@ package hellogbye.com.hellogbyeandroid.network;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.text.TextUtils;
 import android.util.Log;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -14,25 +13,18 @@ import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonObject;
-
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 
 
-public class HGBJsonRequest extends Request<String> {
+public class HGBStringRequest extends Request<String> {
     protected static final String PROTOCOL_CHARSET = "utf-8";
     /**
      * Content type for request.
@@ -56,7 +48,7 @@ public class HGBJsonRequest extends Request<String> {
     String loading;
 
 
-    public HGBJsonRequest(int method, String url,  Map<String, String> params, Listener<String> listener, ErrorListener errorListener) {
+    public HGBStringRequest(int method, String url, Map<String, String> params, Listener<String> listener, ErrorListener errorListener) {
 
         super(method, url, errorListener);
         this.listener = listener;
@@ -77,7 +69,7 @@ public class HGBJsonRequest extends Request<String> {
         send();
     }
 
-    public HGBJsonRequest(int method, String url, Map<String, String> params, Listener<String> listener, ErrorListener errorListener, boolean showLoader) {
+    public HGBStringRequest(int method, String url, Map<String, String> params, Listener<String> listener, ErrorListener errorListener, boolean showLoader) {
         super(method, url, errorListener);
         this.listener = listener;
        //    this.params = params;

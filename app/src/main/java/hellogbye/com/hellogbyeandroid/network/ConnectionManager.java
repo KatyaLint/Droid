@@ -2,11 +2,10 @@ package hellogbye.com.hellogbyeandroid.network;
 
 import android.content.Context;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -23,13 +22,15 @@ public class ConnectionManager {
     private static ConnectionManager _instance;
     private Context mContext;
 
+    private String SOLUTION="?solution=";
+
     public enum Services {
         USER_POST_LOGIN, USER_GET_PROFILE,USER_POST_PREFERENCE,USER_POST_CHANGE_PASSWORD,
         USER_POST_TRAVEL_PROFILES,USER_GET_TRAVEL_PROFILES_DEFAULT,USER_POST_CHECKOUT,
         USER_GET_SEARCH_QUERY,USER_GET_UPDATE_SEARCH_QUERY,USER_GET_HOTEL_ALTERNATIVE,
-        USER_GET_HOTEL_ROOM_ALTERNATIVE,USER_PUT_HOTEL,USER_GET_BOOKING_OPTIONS,
-        USER_GET_FLIGHT_SOLUTIONS,USER_GET_TRAVELER_INFO,USER_GET_USER_PROFILE_ACCOUNTS,
-        USER_POST_USER_PROFILE_EMAIL,USER_TRAVEL_PROFILES
+        USER_HOTEL_ROOM_ALTERNATIVE,USER_PUT_HOTEL,USER_GET_BOOKING_OPTIONS,
+        USER_FLIGHT_SOLUTIONS,USER_GET_TRAVELER_INFO,USER_GET_USER_PROFILE_ACCOUNTS,
+        USER_POST_USER_PROFILE_EMAIL,USER_TRAVEL_PROFILES,USER_PROFILE_RESET_PASSWORD
     }
 
     //TODO DOnt undersatnd these calls
@@ -47,10 +48,15 @@ public class ConnectionManager {
             _instance = new ConnectionManager();
         }
         _instance.mContext = context;
+        HGBStringRequest.setContext(context);
         HGBJsonRequest.setContext(context);
         return _instance;
     }
 
+
+    ////////////////////////////////
+    // POST
+    ///////////////////////////////
 
 
     public void login(String email, String password, final ServerRequestListener listener) {
@@ -59,7 +65,7 @@ public class ConnectionManager {
         map.put("username", email);
         map.put("password", password);
 
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+        HGBStringRequest req = new HGBStringRequest(Request.Method.POST, url,
                 map, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -71,46 +77,6 @@ public class ConnectionManager {
                 listener.onError(Parser.parseErrorMessage(error));
             }
         });
-    }
-
-
-
-    public void getPreference(final ServerRequestListener listener) {
-        String url = getURL(Services.USER_POST_PREFERENCE);
-
-
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
-                null, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listener.onSuccess(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
-            }
-        });
-    }
-
-
-    public void getUserProfile(final ServerRequestListener listener) {
-        String url = getURL(Services.USER_GET_PROFILE);
-
-
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
-                null, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listener.onSuccess(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
-            }
-        });
-
     }
 
     public void postChangePasswordWithOldPassword(String prevpassword, String password, final ServerRequestListener listener) {
@@ -119,24 +85,8 @@ public class ConnectionManager {
         map.put("previouspassword", prevpassword);
         map.put("password", password);
 
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+        HGBStringRequest req = new HGBStringRequest(Request.Method.POST, url,
                 map, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listener.onSuccess(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
-            }
-        });
-    }
-
-    public void getTravelProfiles(final ServerRequestListener listener) {
-        String url = getURL(Services.USER_GET_TRAVEL_PROFILES_DEFAULT);
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
-                null, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 listener.onSuccess(response);
@@ -155,7 +105,7 @@ public class ConnectionManager {
         map.put("defaultprofileid", profileId);
         map.put("profilename", profileName);
 
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+        HGBStringRequest req = new HGBStringRequest(Request.Method.POST, url,
                 map, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -174,7 +124,7 @@ public class ConnectionManager {
         map.put("solutionId", profileId);
         map.put("ItemIds", items.toString());//TODO NEED TO CHECK MIGHT NOT WORK
 
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+        HGBStringRequest req = new HGBStringRequest(Request.Method.POST, url,
                 map, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -188,6 +138,152 @@ public class ConnectionManager {
         });
     }
 
+    public void postUserProfileAccountsWithEmail(String email, final ServerRequestListener listener) {
+        String url = getURL(Services.USER_GET_USER_PROFILE_ACCOUNTS);
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("username", email);
+
+        HGBStringRequest req = new HGBStringRequest(Request.Method.POST, url,
+                map, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
+
+    public void postPayItinerarForSolutionId(String profileId, ArrayList<String> items, final ServerRequestListener listener) {
+        //TODO need to imopmemnt
+    }
+
+    public void postNewPreferenceProfile(String profilename, final ServerRequestListener listener) {
+        String url = getURL(Services.USER_POST_PREFERENCE);
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("profilename", profilename);
+
+        HGBStringRequest req = new HGBStringRequest(Request.Method.POST, url,
+                map, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
+
+
+    ////////////////////////////////
+    // GETS
+    ///////////////////////////////
+
+
+    public void getPreferenceProfiles(final ServerRequestListener listener) {
+        String url = getURL(Services.USER_POST_PREFERENCE);
+
+
+        HGBStringRequest req = new HGBStringRequest(Request.Method.GET, url,
+                null, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
+    }
+
+
+    public void getPreferencesForProfileId(String profileid,final ServerRequestListener listener) {
+        String url = getURL(Services.USER_TRAVEL_PROFILES)+profileid+"/Preferences";
+
+
+        HGBStringRequest req = new HGBStringRequest(Request.Method.GET, url,
+                null, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
+    }
+
+
+
+    public void getPreference(final ServerRequestListener listener) {
+        String url = getURL(Services.USER_POST_PREFERENCE);
+
+
+        HGBStringRequest req = new HGBStringRequest(Request.Method.GET, url,
+                null, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
+
+
+    public void getUserProfile(final ServerRequestListener listener) {
+        String url = getURL(Services.USER_GET_PROFILE);
+
+
+        HGBStringRequest req = new HGBStringRequest(Request.Method.GET, url,
+                null, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
+    }
+
+
+
+    public void getTravelProfiles(final ServerRequestListener listener) {
+        String url = getURL(Services.USER_GET_TRAVEL_PROFILES_DEFAULT);
+        HGBStringRequest req = new HGBStringRequest(Request.Method.GET, url,
+                null, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
+
+
     public void getSearchWithQuery(String query, String profileid, final ServerRequestListener listener) {
         String url = getURL(Services.USER_GET_SEARCH_QUERY);
         query = query.replaceAll(" ","%20");
@@ -198,7 +294,7 @@ public class ConnectionManager {
         }
 
 
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+        HGBStringRequest req = new HGBStringRequest(Request.Method.GET, url,
                 null, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -240,11 +336,11 @@ public class ConnectionManager {
     public void getAlternateHotelsWithHotel(String solutioid, String paxid,String checkin,String checkout, final ServerRequestListener listener) {
         // http://gtaqa-1141527982.us-east-1.elb.amazonaws.com/GTAREST/REST/Hotel?solution=e977aac6-0fd7-4321-8e1f-44cb597cfbb2&paxid=9d2c85f5-d295-4064-a8c6-a4d0015b52e4&checkin=2015-09-02&checkout=2015-09-04
         String url = getURL(Services.USER_GET_HOTEL_ALTERNATIVE);
-        url= url+solutioid+"&paxid="+paxid+"&checkin="+checkin+"&checkout="+checkout;
+        url= url+SOLUTION+"&paxid="+paxid+"&checkin="+checkin+"&checkout="+checkout;
 
 
 
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+        HGBStringRequest req = new HGBStringRequest(Request.Method.GET, url,
                 null, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -260,12 +356,12 @@ public class ConnectionManager {
 
     public void getAlternateHotelRoomsWithHotel(String solutioid, String paxid,String checkin,String checkout,String hotelcode ,final ServerRequestListener listener) {
 
-        String url = getURL(Services.USER_GET_HOTEL_ROOM_ALTERNATIVE);
+        String url = getURL(Services.USER_HOTEL_ROOM_ALTERNATIVE);
         url= url+solutioid+"&paxid="+paxid+"&checkin="+checkin+"&checkout="+checkout+"hotelcode="+hotelcode;
 
 
 
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+        HGBStringRequest req = new HGBStringRequest(Request.Method.GET, url,
                 null, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -281,64 +377,16 @@ public class ConnectionManager {
 
     //{"parameters":{"solution":"c86d9879-eb15-4164-8b75-6bbac0787b75","paxid":"9d2c85f5-d295-4064-a8c6-a4d0015b52e4","checkin":"2015-09-03","checkout":"2015-09-04"},"hotel":"c329c20a-4836-4bec-9580-48f7814e9fbd"}
 
-    public void putAlternateHotel(String solutioid, String paxid,String checkin,String checkout, final ServerRequestListener listener) {
-      //  {"parameters":{"solution":"c86d9879-eb15-4164-8b75-6bbac0787b75","paxid":"9d2c85f5-d295-4064-a8c6-a4d0015b52e4","checkin":"2015-09-03","checkout":"2015-09-04"},"hotel":"c329c20a-4836-4bec-9580-48f7814e9fbd"}
-        String url = getURL(Services.USER_PUT_HOTEL);
-        HashMap<String, String> map = new HashMap<String, String>();
-        JSONObject jsonObjectWrapper = new JSONObject();
-        try{
-            HashMap<String, String> mapinner = new HashMap<String, String>();
-            mapinner.put("solution","c86d9879-eb15-4164-8b75-6bbac0787b75");
-            mapinner.put("paxid","9d2c85f5-d295-4064-a8c6-a4d0015b52e4");
-            mapinner.put("checkin","2015-09-03");
-            mapinner.put("checkout","2015-09-05");
-
-
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("solution","c86d9879-eb15-4164-8b75-6bbac0787b75");
-            jsonObject.put("paxid","9d2c85f5-d295-4064-a8c6-a4d0015b52e4");
-            jsonObject.put("checkin","2015-09-03");
-            jsonObject.put("checkout","2015-09-05");
-            jsonObjectWrapper.put("parameters", jsonObject.toString());
-            jsonObjectWrapper.put("hotel","c329c20a-4836-4bec-9580-48f7814e9fbd");
-
-            map.put("parameters", jsonObject.toString());
-            map.put("hotel", "c329c20a-4836-4bec-9580-48f7814e9fbd");
-
-        }catch (Exception e ){
-            e.printStackTrace();
-        }
-        RequestQueue requestQueue = Volley.newRequestQueue(mContext);
-        CustomRequest jsObjRequest = new CustomRequest(Request.Method.PUT, url, map, null, null);
-        requestQueue.add(jsObjRequest);
-
-
-//
-//        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
-//                map, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                listener.onSuccess(response);
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                listener.onError(Parser.parseErrorMessage(error));
-//            }
-//        });
-    }
-
-
 
 
     public void getAlternateFlightsForFlight(String solutioid, String paxid,String flightid ,final ServerRequestListener listener) {
 
-        String url = getURL(Services.USER_GET_FLIGHT_SOLUTIONS);
-        url= url+solutioid+"&paxid="+paxid+"&flight="+flightid;
+        String url = getURL(Services.USER_FLIGHT_SOLUTIONS);
+        url= url+SOLUTION+"&paxid="+paxid+"&flight="+flightid;
 
 
 
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+        HGBStringRequest req = new HGBStringRequest(Request.Method.GET, url,
                 null, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -355,7 +403,7 @@ public class ConnectionManager {
     public void getBookingOptions(final ServerRequestListener listener) {
 
         String url = getURL(Services.USER_GET_BOOKING_OPTIONS);
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+        HGBStringRequest req = new HGBStringRequest(Request.Method.GET, url,
                 null, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -372,7 +420,7 @@ public class ConnectionManager {
     public void getTravellersInforWithSolutionId(String solutionid,final ServerRequestListener listener) {
 
         String url = getURL(Services.USER_GET_TRAVELER_INFO)+solutionid;
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+        HGBStringRequest req = new HGBStringRequest(Request.Method.GET, url,
                 null, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -386,15 +434,13 @@ public class ConnectionManager {
         });
     }
 
-    public void postPayItinerarForSolutionId(String profileId, ArrayList<String> items, final ServerRequestListener listener) {
-      //TODO need to imopmemnt
-    }
+
 
     public void getUserProfileAccounts(final ServerRequestListener listener) {
         String url = getURL(Services.USER_GET_USER_PROFILE_ACCOUNTS);
 
 
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+        HGBStringRequest req = new HGBStringRequest(Request.Method.GET, url,
                 null, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -409,31 +455,18 @@ public class ConnectionManager {
 
     }
 
-    public void postUserProfileAccountsWithEmail(String email, final ServerRequestListener listener) {
-        String url = getURL(Services.USER_GET_USER_PROFILE_ACCOUNTS);
-        HashMap<String, String> map = new HashMap<String, String>();
-        map.put("username", email);
 
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
-                map, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listener.onSuccess(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
-            }
-        });
-    }
+    ////////////////////////////////
+    // DELETE
+    ///////////////////////////////
+
 
     public void deleteUserProfileAccountsWithEmail(String email, final ServerRequestListener listener) {
         String url = getURL(Services.USER_GET_USER_PROFILE_ACCOUNTS);
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("username", email);
 
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.DELETE, url,
+        HGBStringRequest req = new HGBStringRequest(Request.Method.DELETE, url,
                 map, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -448,50 +481,15 @@ public class ConnectionManager {
     }
 
 
-    public void getPreferenceProfiles(final ServerRequestListener listener) {
-        String url = getURL(Services.USER_POST_PREFERENCE);
 
 
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
-                null, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listener.onSuccess(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
-            }
-        });
-
-    }
-
-    public void postNewPreferenceProfile(String profilename, final ServerRequestListener listener) {
-        String url = getURL(Services.USER_POST_PREFERENCE);
-        HashMap<String, String> map = new HashMap<String, String>();
-        map.put("profilename", profilename);
-
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
-                map, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listener.onSuccess(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
-            }
-        });
-    }
 
     public void deletePreferenceProfileId(String profileid, final ServerRequestListener listener) {
         String url = getURL(Services.USER_TRAVEL_PROFILES)+profileid;
         HashMap<String, String> map = new HashMap<String, String>();
 
 
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.DELETE, url,
+        HGBStringRequest req = new HGBStringRequest(Request.Method.DELETE, url,
                 map, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -505,12 +503,28 @@ public class ConnectionManager {
         });
     }
 
-    public void getPreferencesForProfileId(String profileid,final ServerRequestListener listener) {
-        String url = getURL(Services.USER_TRAVEL_PROFILES)+profileid+"/Preferences";
+    ////////////////////////////////
+    // PUT
+    ///////////////////////////////
 
+    public void putAttributesValues(String profileid,String prefrenceid,String attributeid,String description,String id,String rank,String name,final ServerRequestListener listener) {
+        //  {"parameters":{"solution":"c86d9879-eb15-4164-8b75-6bbac0787b75","paxid":"9d2c85f5-d295-4064-a8c6-a4d0015b52e4","checkin":"2015-09-03","checkout":"2015-09-04"},"hotel":"c329c20a-4836-4bec-9580-48f7814e9fbd"}
+        String url = getURL(Services.USER_TRAVEL_PROFILES)+profileid+"/Preferences/"+prefrenceid+"/Attributes/"+attributeid+"/Values";
+        HashMap<String, String> map = new HashMap<String, String>();
+        JSONArray array = new JSONArray();
+        try{
+            JSONObject json1 = new JSONObject();
+            json1.put("description",description);
+            json1.put("id",id);
+            json1.put("rank",rank);
+            json1.put("name",name);
+            array.put(json1);
+        }catch (Exception e ){
+            e.printStackTrace();
+        }
 
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
-                null, new Response.Listener<String>() {
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
+                array, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 listener.onSuccess(response);
@@ -521,8 +535,129 @@ public class ConnectionManager {
                 listener.onError(Parser.parseErrorMessage(error));
             }
         });
-
     }
+
+    public void putAlternateHotel(String solutionid, String paxid,String checkin,String checkout,String hotelid ,final ServerRequestListener listener) {
+        //  {"parameters":{"solution":"c86d9879-eb15-4164-8b75-6bbac0787b75","paxid":"9d2c85f5-d295-4064-a8c6-a4d0015b52e4","checkin":"2015-09-03","checkout":"2015-09-04"},"hotel":"c329c20a-4836-4bec-9580-48f7814e9fbd"}
+        String url = getURL(Services.USER_PUT_HOTEL);
+        JSONObject jsonObjectWrapper = new JSONObject();
+        try{
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("solution", solutionid);
+            jsonObject.put("paxid", paxid);
+            jsonObject.put("checkin",checkin);
+            jsonObject.put("checkout", checkout);
+            jsonObjectWrapper.put("parameters", jsonObject);
+            jsonObjectWrapper.put("hotel", hotelid);
+
+
+        }catch (Exception e ){
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
+                jsonObjectWrapper, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
+
+
+    public void putAlternateHotelRoom(String solutioid, String paxid,String checkin,String checkout,String hotelroomid , final ServerRequestListener listener) {
+        //  {"parameters":{"solution":"c86d9879-eb15-4164-8b75-6bbac0787b75","paxid":"9d2c85f5-d295-4064-a8c6-a4d0015b52e4","checkin":"2015-09-03","checkout":"2015-09-04"},"hotel":"c329c20a-4836-4bec-9580-48f7814e9fbd"}
+        String url = getURL(Services.USER_HOTEL_ROOM_ALTERNATIVE);
+        JSONObject jsonObjectWrapper = new JSONObject();
+        try{
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("solution", solutioid);
+            jsonObject.put("paxid", paxid);
+            jsonObject.put("checkin", checkin);
+            jsonObject.put("checkout", checkout);
+            jsonObjectWrapper.put("parameters", jsonObject);
+            jsonObjectWrapper.put("hotelroom", hotelroomid);
+
+
+        }catch (Exception e ){
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
+                jsonObjectWrapper, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
+
+    public void putFlight(String solutioid, String paxid,String bookedflight,String newflight , final ServerRequestListener listener) {
+        //  {"parameters":{"solution":"c86d9879-eb15-4164-8b75-6bbac0787b75","paxid":"9d2c85f5-d295-4064-a8c6-a4d0015b52e4","checkin":"2015-09-03","checkout":"2015-09-04"},"hotel":"c329c20a-4836-4bec-9580-48f7814e9fbd"}
+        String url = getURL(Services.USER_FLIGHT_SOLUTIONS);
+        JSONObject jsonObjectWrapper = new JSONObject();
+        try{
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("solution", solutioid);
+            jsonObject.put("paxid", paxid);
+            jsonObject.put("flight", bookedflight);
+            jsonObjectWrapper.put("parameters", jsonObject);
+            jsonObjectWrapper.put("flight", newflight);
+
+
+        }catch (Exception e ){
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
+                jsonObjectWrapper, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
+
+    public void resetPasswordWithEmail(String email,  final ServerRequestListener listener) {
+        //  {"parameters":{"solution":"c86d9879-eb15-4164-8b75-6bbac0787b75","paxid":"9d2c85f5-d295-4064-a8c6-a4d0015b52e4","checkin":"2015-09-03","checkout":"2015-09-04"},"hotel":"c329c20a-4836-4bec-9580-48f7814e9fbd"}
+        String url = getURL(Services.USER_PROFILE_RESET_PASSWORD)+email;//TODO need to check this looks wierd.....
+        JSONObject jsonObjectWrapper = new JSONObject();
+   
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
+                jsonObjectWrapper, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
+
+
+
+
 
 
 
@@ -550,15 +685,15 @@ public class ConnectionManager {
             case USER_GET_UPDATE_SEARCH_QUERY:
                 return BASE_URL + "Solution/UpdateSearch?query=";
             case USER_GET_HOTEL_ALTERNATIVE:
-                return BASE_URL + "Hotel?solution=";
-            case USER_GET_HOTEL_ROOM_ALTERNATIVE:
-                return BASE_URL + "HotelRoom?solution=";
+                return BASE_URL + "Hotel";
+            case USER_HOTEL_ROOM_ALTERNATIVE:
+                return BASE_URL + "HotelRoom";
             case USER_PUT_HOTEL:
                 return BASE_URL + "Hotel";
             case USER_GET_BOOKING_OPTIONS:
                 return BASE_URL + "Statics/BookingOptions";
-            case USER_GET_FLIGHT_SOLUTIONS:
-                return BASE_URL + "Flight?solution=";
+            case USER_FLIGHT_SOLUTIONS:
+                return BASE_URL + "Flight";
             case USER_GET_TRAVELER_INFO:
                 return BASE_URL + "Traveler/Get/";
             case USER_GET_USER_PROFILE_ACCOUNTS:
@@ -567,16 +702,8 @@ public class ConnectionManager {
                 return BASE_URL + "UserProfile/ResetPassword?email=";
             case USER_TRAVEL_PROFILES:
                 return BASE_URL + "TravelPreference/Profiles/";
-
-
-
-
-
-
-
-
-
-
+            case USER_PROFILE_RESET_PASSWORD:
+                return BASE_URL + " UserProfile/ResetPassword?email=";
 
 
 

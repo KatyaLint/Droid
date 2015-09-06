@@ -34,6 +34,11 @@
         android:layout_height="wrap_content"
         android:text="TravelPref"
         android:id="@+id/userPreference" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="puthotelroom"
+        android:id="@+id/hotelroom" />
 
 
     <TextView
