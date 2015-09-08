@@ -9,6 +9,7 @@ public class HGBPreferencesManager
 
 	private static final String SHARED_PREFS = "hgb_prefs";
 	public static final String TOKEN = "token";
+	public static final String REMMEMBER_ME = "remmember_me";
 
 	private SharedPreferences mSharedPreferencesFile;
 	private static HGBPreferencesManager mHomeSharedPreferences = null;

@@ -17,5 +17,14 @@
     </string-array>
 
     <string name="tool_bar">Edit</string>
+    <string name="remmeber_me">Remmember Me</string>
+    <string name="password">Password</string>
+    <string name="email_address">Email Address</string>
+    <string name="login">Login</string>
+    <string name="forgot_password"><u>Forgot password?</u></string>
+    <string name="password_reset">Password Reset</string>
+    <string name="email_reset_succesfully">Email rest succesfully! Go check email</string>
+    <string name="create_account">Create an Account</string>
+    <string name="already_have_account">Already have a HellGbye account?</string>
 
 </resources>
