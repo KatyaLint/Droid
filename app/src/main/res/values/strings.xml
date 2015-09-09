@@ -26,5 +26,8 @@
     <string name="email_reset_succesfully">Email rest succesfully! Go check email</string>
     <string name="create_account">Create an Account</string>
     <string name="already_have_account">Already have a HellGbye account?</string>
+    <string name="terms">By clicking pre-register. You agree to HelloGbye\nUser Agreement and Privacy Policy.</string>
+    <string name="url_user_agreement">http://www.hellogbye.com/assets/docs/tos.pdf</string>
+    <string name="url_pp">http://www.hellogbye.com/assets/docs/pp.pdf</string>
 
 </resources>
