@@ -121,7 +121,9 @@ public class LoginTest extends ActionBarActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ConnectionManager.getInstance(LoginTest.this).login(emailEditText.getText().toString(), paswordEditText.getText().toString(), new ConnectionManager.ServerRequestListener() {
+                ConnectionManager.getInstance(LoginTest.this).login(emailEditText.getText().toString(),
+                        paswordEditText.getText().toString(),
+                        new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
 

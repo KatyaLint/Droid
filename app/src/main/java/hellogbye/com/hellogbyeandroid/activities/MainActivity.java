@@ -17,6 +17,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
@@ -31,6 +37,10 @@ import hellogbye.com.hellogbyeandroid.fragments.PrefrenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
+import hellogbye.com.hellogbyeandroid.models.vo.AirplaneDataVO;
+import hellogbye.com.hellogbyeandroid.models.vo.FlightsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.UserDataVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
@@ -80,6 +90,7 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
         mToolbar = (CostumeToolBar)findViewById(R.id.toolbar);
         initToolBar();
 
+        //parseFlight();
 
     }
 
@@ -212,10 +223,31 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
         mToolbar.initToolBarItems();
         mToolbar.updateToolBarView(position);
         mDrawerLayout.closeDrawer(mNavDrawerLinearLayout);
-
-
-
     }
+
+//    private void parseFlight(){
+//        Gson gson = new Gson();
+//        Type type = new TypeToken<ArrayList<FlightsVO>>(){}.getType();
+//        String strJson = loadJSONFromAsset();
+//        ArrayList<FlightsVO> airplaneDataVO = gson.fromJson(strJson, type);
+//        int i=0;
+//    }
+//
+//    public String loadJSONFromAsset() {
+//        String json = null;
+//        try {
+//            InputStream is = getAssets().open("airplane.txt");
+//            int size = is.available();
+//            byte[] buffer = new byte[size];
+//            is.read(buffer);
+//            is.close();
+//            json = new String(buffer, "UTF-8");
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//            return null;
+//        }
+//        return json;
+//    }
 
 
     @Override
