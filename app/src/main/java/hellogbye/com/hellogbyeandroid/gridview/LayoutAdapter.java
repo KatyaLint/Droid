@@ -83,7 +83,7 @@ public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleView
 
     @Override
     public void onBindViewHolder(SimpleViewHolder holder, int position) {
-        
+
 //        if(mItems.get(position).ismIsAlternative()){
 //            return;
 //        }

@@ -181,7 +181,7 @@ public class ItineraryFragment extends Fragment {
 
         final Drawable divider = getResources().getDrawable(R.drawable.divider);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(divider));
-
+        airplaneDataForAdapterVO = airplaneDataVO;
         mRecyclerView.setAdapter(new LayoutAdapter(activity, mRecyclerView, mLayoutId, airplaneDataForAdapterVO));
     }
 

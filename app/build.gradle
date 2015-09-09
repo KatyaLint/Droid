@@ -21,11 +21,9 @@ android {
 
     defaultConfig {
         applicationId "hellogbye.com.hellogbyeandroid"
-<<<<<<< HEAD
+
         minSdkVersion 13
-=======
         minSdkVersion 14
->>>>>>> cbb97503f3c4e54794fe8bfcb3357797de67d132
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
