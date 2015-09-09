@@ -5,6 +5,11 @@
     <color name="hgb_toolbar_blue">#00374B</color>
     <color name="hgb_nav_font_unselected">#7FA5B4</color>
     <color name="white">#ffffff</color>
+    <color name="hgb_edit_text_color">#5D808E</color>
+    <color name="green_button_color">#36B784</color>
+    <color name="red_button_color">#EE3A3C</color>
+
+
 
     <color name="item_border_color">#666666</color>
     <color name="item_default_color">#EEEEEE</color>

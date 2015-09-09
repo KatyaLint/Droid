@@ -4,10 +4,8 @@ import android.content.Context;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -34,13 +32,7 @@ public class ConnectionManager {
         USER_SOLUTION
     }
 
-    //TODO DOnt undersatnd these calls
-   // updateSearchWithQuery
-    //putAlternateHotel
-
-
     private ConnectionManager() {
-
 
     }
 
@@ -313,29 +305,7 @@ public class ConnectionManager {
         });
     }
 
-//    public void getSearchWithQuery(String query, String profileid, final ServerRequestListener listener) {
-//        String url = getURL(Services.USER_GET_SEARCH_QUERY);
-//        query = query.replaceAll(" ","%20");
-//        if(profileid !=null){
-//            url= url+query+"&TravelPreferenceProfileId="+profileid;
-//        }else{
-//            url= url+query;
-//        }
-//
-//
-//        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
-//                null, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                listener.onSuccess(response);
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                listener.onError(Parser.parseErrorMessage(error));
-//            }
-//        });
-//    }
+
 
 
     public void getAlternateHotelsWithHotel(String solutioid, String paxid,String checkin,String checkout, final ServerRequestListener listener) {
@@ -689,14 +659,6 @@ public class ConnectionManager {
             }
         });
     }
-
-
-
-
-
-
-
-
 
     private String getURL(Services type) {
         String url = "";

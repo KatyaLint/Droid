@@ -1,0 +1,60 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/b_g_android"
+    android:orientation="vertical"
+    android:paddingLeft="50dp"
+    android:paddingRight="50dp">
+
+    <ImageView
+        android:id="@+id/large_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/create_account"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/large_logo" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/create_account"
+        style="@style/RedCustomButtonStyle"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/red_button"
+        android:text="@string/create_account" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/forgotpassword"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/create_account"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="@string/already_have_account"
+        android:textColor="@color/hgb_edit_text_color"
+        app:fontName="dinnextltpro_light.otf" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/login_button"
+        style="@style/GreenCustomButtonStyle"
+        android:layout_below="@id/forgotpassword"
+        android:layout_marginTop="10dp"
+        android:text="@string/login"
+/>
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/terms_conditions"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:text="By clicking pre-register. You agree to HelloGbye\nUser Agreement and Privacy Policy." />
+
+</RelativeLayout>
+
+
+

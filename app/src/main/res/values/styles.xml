@@ -11,6 +11,7 @@
         <item name="color">@android:color/white</item>
     </style>
 
+<<<<<<< HEAD
 
     <style name="TwoWayViewBase">
         <item name="android:background">#999999</item>
@@ -33,4 +34,38 @@
     </style>
 
 
+=======
+    <style name="register_edit_text">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColorHint">@color/hgb_edit_text_color</item>
+        <item name="android:textColor">@color/hgb_edit_text_color</item>
+        <item name="android:background">@drawable/edit_text_border</item>
+
+    </style>
+
+    <style name="CustomButtonTextStyle">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fontName">dinnextltpro_light.otf</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:paddingBottom">10sp</item>
+        <item name="android:paddingTop">10sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+
+    <style name="RedCustomButtonStyle" parent="CustomButtonTextStyle">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/red_button</item>
+    </style>
+    <style name="GreenCustomButtonStyle" parent="CustomButtonTextStyle">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/green_button</item>
+    </style>
+
+>>>>>>> cbb97503f3c4e54794fe8bfcb3357797de67d132
 </resources>
