@@ -41,18 +41,17 @@
         style="@style/GreenCustomButtonStyle"
         android:layout_below="@id/forgotpassword"
         android:layout_marginTop="10dp"
-        android:text="@string/login"
-/>
+        android:text="@string/login" />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/terms_conditions"
-        android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:gravity="center"
-        android:textSize="12sp"
-        android:textColor="@android:color/white"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="By clicking pre-register. You agree to HelloGbye\nUser Agreement and Privacy Policy." />
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="12sp" />
 
 </RelativeLayout>
 

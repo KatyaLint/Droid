@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/nyawka/Documents/HelloGByeDroid/libs/layouts/src/main/assets"/></dataSet><dataSet config="debug"><source path="/Users/nyawka/Documents/HelloGByeDroid/libs/layouts/src/debug/assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Volumes/code/HelloGbye/HelloGByeDroid/libs/layouts/src/main/assets"/></dataSet><dataSet config="debug"><source path="/Volumes/code/HelloGbye/HelloGByeDroid/libs/layouts/src/debug/assets"/></dataSet></merger>
