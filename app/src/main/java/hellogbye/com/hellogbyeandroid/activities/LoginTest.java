@@ -94,7 +94,7 @@ public class LoginTest extends ActionBarActivity {
         travelPreference.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ConnectionManager.getInstance(LoginTest.this).putSolutionWithId(solutionID, true, new ConnectionManager.ServerRequestListener() {
+                ConnectionManager.getInstance(LoginTest.this).getPreferenceProfiles( new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
 

@@ -29,9 +29,7 @@ import com.android.volley.toolbox.Volley;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 
 
-/**
- * Created by gilad on 19/03/15.
- */
+
 public class HGBJsonRequest extends Request<String> {
     protected static final String PROTOCOL_CHARSET = "utf-8";
     /**
