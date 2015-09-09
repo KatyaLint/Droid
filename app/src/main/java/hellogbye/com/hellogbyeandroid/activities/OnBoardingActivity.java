@@ -1,141 +1,87 @@
-//package hellogbye.com.hellogbyeandroid.activities;
-//
-//import android.app.ActionBar;
-//import android.app.Activity;
-//import android.app.FragmentTransaction;
-//import android.content.Context;
-//import android.os.Bundle;
-//import android.support.v4.app.FragmentPagerAdapter;
-//import android.support.v4.view.ViewPager;
-//
-//import java.util.ArrayList;
-//
-//import hellogbye.com.hellogbyeandroid.R;
-//
-///**
-// * Created by arisprung on 9/9/15.
-// */
-//public class OnBoardingActivity extends Activity {
-//    ViewPager mViewPager;
-//    TabsAdapter mTabsAdapter;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        mViewPager = new ViewPager(this);
-//        mViewPager.setId(R.id.pager);
-//        setContentView(mViewPager);
-//
-//        final ActionBar bar = getActionBar();
-//        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-//        bar.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
-//
-//        mTabsAdapter = new TabsAdapter(this, mViewPager);
-//        mTabsAdapter.addTab(bar.newTab().setText("Simple"),
-//                CountingFragment.class, null);
-//        mTabsAdapter.addTab(bar.newTab().setText("List"),
-//                FragmentPagerSupport.ArrayListFragment.class, null);
-//        mTabsAdapter.addTab(bar.newTab().setText("Cursor"),
-//                CursorFragment.class, null);
-//
-//        if (savedInstanceState != null) {
-//            bar.setSelectedNavigationItem(savedInstanceState.getInt("tab", 0));
-//        }
-//    }
-//
-//    @Override
-//    protected void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.putInt("tab", getActionBar().getSelectedNavigationIndex());
-//    }
-//
-//    /**
-//     * This is a helper class that implements the management of tabs and all
-//     * details of connecting a ViewPager with associated TabHost.  It relies on a
-//     * trick.  Normally a tab host has a simple API for supplying a View or
-//     * Intent that each tab will show.  This is not sufficient for switching
-//     * between pages.  So instead we make the content part of the tab host
-//     * 0dp high (it is not shown) and the TabsAdapter supplies its own dummy
-//     * view to show as the tab content.  It listens to changes in tabs, and takes
-//     * care of switch to the correct paged in the ViewPager whenever the selected
-//     * tab changes.
-//     */
-//    public static class TabsAdapter extends FragmentPagerAdapter
-//            implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
-//        private final Context mContext;
-//        private final ActionBar mActionBar;
-//        private final ViewPager mViewPager;
-//        private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
-//
-//        static final class TabInfo {
-//            private final Class<?> clss;
-//            private final Bundle args;
-//
-//            TabInfo(Class<?> _class, Bundle _args) {
-//                clss = _class;
-//                args = _args;
-//            }
-//        }
-//
-//        public TabsAdapter(Activity activity, ViewPager pager) {
-//            super(activity.getFragmentManager());
-//            mContext = activity;
-//            mActionBar = activity.getActionBar();
-//            mViewPager = pager;
-//            mViewPager.setAdapter(this);
-//            mViewPager.setOnPageChangeListener(this);
-//        }
-//
-//        public void addTab(ActionBar.Tab tab, Class<?> clss, Bundle args) {
-//            TabInfo info = new TabInfo(clss, args);
-//            tab.setTag(info);
-//            tab.setTabListener(this);
-//            mTabs.add(info);
-//            mActionBar.addTab(tab);
-//            notifyDataSetChanged();
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return mTabs.size();
-//        }
-//
-//        @Override
-//        public Fragment getItem(int position) {
-//            TabInfo info = mTabs.get(position);
-//            return Fragment.instantiate(mContext, info.clss.getName(), info.args);
-//        }
-//
-//        @Override
-//        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//        }
-//
-//        @Override
-//        public void onPageSelected(int position) {
-//            mActionBar.setSelectedNavigationItem(position);
-//        }
-//
-//        @Override
-//        public void onPageScrollStateChanged(int state) {
-//        }
-//
-//        @Override
-//        public void onTabSelected(Tab tab, FragmentTransaction ft) {
-//            Object tag = tab.getTag();
-//            for (int i=0; i<mTabs.size(); i++) {
-//                if (mTabs.get(i) == tag) {
-//                    mViewPager.setCurrentItem(i);
-//                }
-//            }
-//        }
-//
-//        @Override
-//        public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-//        }
-//
-//        @Override
-//        public void onTabReselected(Tab tab, FragmentTransaction ft) {
-//        }
-//    }
-//}
+package hellogbye.com.hellogbyeandroid.activities;
+
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.fragments.OnBoardingFragment;
+import hellogbye.com.hellogbyeandroid.views.CirclePageIndicator;
+
+/**
+ * Created by arisprung on 9/9/15.
+ */
+public class OnBoardingActivity extends FragmentActivity {
+    /**
+     * The number of pages (wizard steps) to show in this demo.
+     */
+    private static final int NUM_PAGES = 4;
+
+    /**
+     * The pager widget, which handles animation and allows swiping horizontally to access previous
+     * and next wizard steps.
+     */
+    private ViewPager mPager;
+
+    /**
+     * The pager adapter, which provides the pages to the view pager widget.
+     */
+    private PagerAdapter mPagerAdapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.onboarding_layout);
+
+        // Instantiate a ViewPager and a PagerAdapter.
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        mPager.setAdapter(mPagerAdapter);
+
+        CirclePageIndicator titleIndicator = (CirclePageIndicator)findViewById(R.id.titles);
+        titleIndicator.setExtraSpacing(20);
+        titleIndicator.setPageColor(Color.argb(63, 255, 255, 255));
+        titleIndicator.setStrokeWidth(0);
+        titleIndicator.setViewPager(mPager);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mPager.getCurrentItem() == 0) {
+            // If the user is currently looking at the first step, allow the system to handle the
+            // Back button. This calls finish() on this activity and pops the back stack.
+            super.onBackPressed();
+        } else {
+            // Otherwise, select the previous step.
+            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+        }
+    }
+
+    /**
+     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
+     * sequence.
+     */
+    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+        public ScreenSlidePagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public android.support.v4.app.Fragment getItem(int position) {
+            final Bundle bundle = new Bundle();
+            bundle.putInt("position", position);
+            final OnBoardingFragment fragment = new OnBoardingFragment();
+            fragment.setArguments(bundle);
+            return fragment;
+        }
+
+        @Override
+        public int getCount() {
+            return NUM_PAGES;
+        }
+    }
+}
