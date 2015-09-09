@@ -27,7 +27,9 @@ import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.gridview.LayoutAdapter;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.vo.AirplaneDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.FlightsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
@@ -43,7 +45,7 @@ public class ItineraryFragment extends Fragment {
     private Toast mToast;
     private static final String ARG_LAYOUT_ID = "layout_id";
     private int mLayoutId;
-    private ArrayList<FlightsVO> airplaneDataVO;
+
 
     private ArrayList<FlightsVO> airplaneDataForAdapterVO;
 
@@ -66,11 +68,14 @@ public class ItineraryFragment extends Fragment {
         parseFlight();
     }
 
+    private UserTravelVO airplaneDataVO;
     //TODO move to correct place
     private void parseFlight(){
         Gson gson = new Gson();
-        Type type = new TypeToken<ArrayList<FlightsVO>>(){}.getType();
+        Type type = new TypeToken<UserTravelVO>(){}.getType();
+      //  Type type = new TypeToken<ArrayList<AirplaneDataVO>>(){}.getType();
         String strJson = loadJSONFromAsset();
+
          airplaneDataVO = gson.fromJson(strJson, type);
     }
 
@@ -80,7 +85,7 @@ public class ItineraryFragment extends Fragment {
         for (FlightsVO flightsVO: airplaneDataForAdapterVO){
             if(flightsVO.ismIsAlternative()){
                 FlightsVO flight = new FlightsVO();
-                flight.setmFlightTime(flightsVO.getmFlightTime());
+              //  flight.getsetmFlightTime(flightsVO.getmFlightTime());
                 airplaneDataForAdapterVO.add(flight);
                 airplaneDataForAdapterVO.add(flightsVO);
             }
@@ -181,8 +186,8 @@ public class ItineraryFragment extends Fragment {
 
         final Drawable divider = getResources().getDrawable(R.drawable.divider);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(divider));
-        airplaneDataForAdapterVO = airplaneDataVO;
-        mRecyclerView.setAdapter(new LayoutAdapter(activity, mRecyclerView, mLayoutId, airplaneDataForAdapterVO));
+
+        mRecyclerView.setAdapter(new LayoutAdapter(activity, mRecyclerView, mLayoutId, airplaneDataVO));
     }
 
     private void updateState(int scrollState) {

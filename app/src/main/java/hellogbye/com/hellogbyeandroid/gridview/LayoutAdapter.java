@@ -17,6 +17,8 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.vo.FlightsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.PassengersVO;
+import hellogbye.com.hellogbyeandroid.models.vo.UserTravelVO;
 
 /**
  * Created by nyawka on 9/6/15.
@@ -26,8 +28,9 @@ public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleView
 
     private final Context mContext;
     private final TwoWayView mRecyclerView;
-    private List<FlightsVO> mItems;
+
     private final int mLayoutId;
+    private final ArrayList<PassengersVO> mItems;
     private int mCurrentItemId = 0;
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {
@@ -50,9 +53,9 @@ public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleView
         }
     }
 
-    public LayoutAdapter(Context context, TwoWayView recyclerView, int layoutId, ArrayList<FlightsVO> airplaneDataVO) {
+    public LayoutAdapter(Context context, TwoWayView recyclerView, int layoutId, UserTravelVO airplaneDataVO) {
         mContext = context;
-        this.mItems = airplaneDataVO;
+        this.mItems = airplaneDataVO.getPassengerses();//airplaneDataVO;
 //        mItems = new ArrayList<FlightsVO>(COUNT);
 //        for (int i = 0; i < COUNT; i++) {
 //            addItem(i);
@@ -90,7 +93,7 @@ public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleView
       //  boolean isVertical = (mRecyclerView.getOrientation() == TwoWayLayoutManager.Orientation.VERTICAL);
         final View itemView = holder.itemView;
 
-        final FlightsVO itemId = mItems.get(position);
+       // final FlightsVO itemId = mItems.get(position);
 
         if (mLayoutId == R.layout.layout_staggered_grid) {
             final int span;
@@ -157,7 +160,7 @@ public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleView
         holder.flightNumber.setVisibility(View.GONE);
         holder.flightTime.setVisibility(View.GONE);
 
-        holder.travelMonth.setText(mItems.get(position).getmFlightTime());
+       // holder.travelMonth.setText(mItems.get(position).getmFlightTime());
     }
 
 
