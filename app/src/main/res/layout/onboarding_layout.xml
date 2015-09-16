@@ -13,14 +13,14 @@
 
     <hellogbye.com.hellogbyeandroid.views.CirclePageIndicator
         android:id="@+id/titles"
-        android:layout_above="@+id/travel_pref"
+        android:layout_above="@+id/travel_pref_but"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:layout_width="match_parent" />
 
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/travel_pref"
+        android:id="@+id/travel_pref_but"
         style="@style/RedCustomButtonStyle"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"

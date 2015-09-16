@@ -34,6 +34,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        dev {
+            applicationId "com.hellgbye.dev"
+            versionName "1.0-dev"
+
+        }
+        live {
+            applicationId "com.hellgbye"
+            versionName "1.0"
+
+        }
+    }
 }
 
 dependencies {

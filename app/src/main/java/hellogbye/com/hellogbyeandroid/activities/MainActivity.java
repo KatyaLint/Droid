@@ -37,11 +37,7 @@ import hellogbye.com.hellogbyeandroid.fragments.PrefrenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
-import hellogbye.com.hellogbyeandroid.models.vo.AirplaneDataVO;
-import hellogbye.com.hellogbyeandroid.models.vo.FlightsVO;
-import hellogbye.com.hellogbyeandroid.models.vo.UserDataVO;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
+
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 

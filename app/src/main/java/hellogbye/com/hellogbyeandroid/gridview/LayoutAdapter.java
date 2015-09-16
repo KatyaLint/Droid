@@ -10,13 +10,8 @@ import android.widget.TextView;
 import org.lucasr.twowayview.TwoWayLayoutManager;
 import org.lucasr.twowayview.widget.StaggeredGridLayoutManager;
 import org.lucasr.twowayview.widget.TwoWayView;
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.List;
-
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.models.vo.FlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.UserTravelVO;
 

@@ -12,10 +12,14 @@ public class Parser {
         String err = "server error";
         JSONObject errJson = null;
         try {
+            err =  errJson.getString("message");
              errJson = new JSONObject(new String(error.networkResponse.data));
-            err = errJson.getString("message");
+            if(errJson == null){
+                return  errJson.getString("message");
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            return  err;
         }
         return errJson.toString();
     }

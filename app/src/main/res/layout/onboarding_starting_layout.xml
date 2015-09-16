@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingRight="50dp"
+    android:paddingLeft="50dp"
+    android:background="@drawable/b_g_android">
+
+    <ImageView
+        android:id="@+id/image_icons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/travel_icons" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/type_travler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_icons"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Almost Done! Choose a Travel Profile"
+        android:textColor="@android:color/white"
+        android:textSize="26sp"
+        app:fontName="dinnextltpro_bold.otf" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/type_travler_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/type_travler"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:lineSpacingExtra="5dp"
+        android:text="Travel Profile helps us choose the right types of flights and hotels that most interest you. You can always change them later"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        app:fontName="dinnextltpro_light.otf" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travel_pref_but"
+        style="@style/RedCustomButtonStyle"
+        android:layout_above="@+id/skip"
+        android:background="@drawable/red_button"
+        android:text="Choose a profile" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Skip for now"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:fontName="dinnextltpro_light.otf" />
+
+
+</RelativeLayout>

@@ -26,9 +26,7 @@ import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.gridview.LayoutAdapter;
-import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.vo.AirplaneDataVO;
-import hellogbye.com.hellogbyeandroid.models.vo.FlightsVO;
+
 import hellogbye.com.hellogbyeandroid.models.vo.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 
@@ -47,7 +45,7 @@ public class ItineraryFragment extends Fragment {
     private int mLayoutId;
 
 
-    private ArrayList<FlightsVO> airplaneDataForAdapterVO;
+ //   private ArrayList<FlightsVO> airplaneDataForAdapterVO;
 
     public ItineraryFragment() {
         // Empty constructor required for fragment subclasses
@@ -81,15 +79,15 @@ public class ItineraryFragment extends Fragment {
 
 
     private void createAdaptiveArray(){
-        airplaneDataForAdapterVO = new ArrayList<FlightsVO>();
-        for (FlightsVO flightsVO: airplaneDataForAdapterVO){
-            if(flightsVO.ismIsAlternative()){
-                FlightsVO flight = new FlightsVO();
-              //  flight.getsetmFlightTime(flightsVO.getmFlightTime());
-                airplaneDataForAdapterVO.add(flight);
-                airplaneDataForAdapterVO.add(flightsVO);
-            }
-        }
+//        airplaneDataForAdapterVO = new ArrayList<FlightsVO>();
+//        for (FlightsVO flightsVO: airplaneDataForAdapterVO){
+//            if(flightsVO.ismIsAlternative()){
+//                FlightsVO flight = new FlightsVO();
+//              //  flight.getsetmFlightTime(flightsVO.getmFlightTime());
+//                airplaneDataForAdapterVO.add(flight);
+//                airplaneDataForAdapterVO.add(flightsVO);
+//            }
+//        }
     }
 
     public String loadJSONFromAsset() {

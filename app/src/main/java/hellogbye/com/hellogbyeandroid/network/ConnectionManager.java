@@ -23,7 +23,7 @@ public class ConnectionManager {
     private String SOLUTION="?solution=";
 
     public enum Services {
-        USER_POST_LOGIN, USER_GET_PROFILE,USER_POST_PREFERENCE,USER_POST_CHANGE_PASSWORD,
+        USER_POST_LOGIN, USER_GET_PROFILE,USER_POST_CHANGE_PASSWORD,
         USER_POST_TRAVEL_PROFILES,USER_GET_TRAVEL_PROFILES_DEFAULT,USER_POST_CHECKOUT,
         USER_GET_SEARCH_QUERY,USER_GET_UPDATE_SEARCH_QUERY,USER_GET_HOTEL_ALTERNATIVE,
         USER_HOTEL_ROOM_ALTERNATIVE,USER_PUT_HOTEL,USER_GET_BOOKING_OPTIONS,
@@ -191,7 +191,7 @@ public class ConnectionManager {
     }
 
     public void postNewPreferenceProfile(String profilename, final ServerRequestListener listener) {
-        String url = getURL(Services.USER_POST_PREFERENCE);
+        String url = getURL(Services.USER_POST_TRAVEL_PROFILES);
         JSONObject jsonObject = new JSONObject();
         try{
             jsonObject.put("profilename", profilename);
@@ -222,7 +222,7 @@ public class ConnectionManager {
 
 
     public void getPreferenceProfiles(final ServerRequestListener listener) {
-        String url = getURL(Services.USER_POST_PREFERENCE);
+        String url = getURL(Services.USER_POST_TRAVEL_PROFILES);
 
         JSONObject jsonObject = new JSONObject();
         HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
@@ -263,7 +263,7 @@ public class ConnectionManager {
 
 
     public void getPreference(final ServerRequestListener listener) {
-        String url = getURL(Services.USER_POST_PREFERENCE);
+        String url = getURL(Services.USER_POST_TRAVEL_PROFILES);
         JSONObject jsonObject = new JSONObject();
 
         HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
@@ -710,8 +710,6 @@ public class ConnectionManager {
                 return BASE_URL + "Session";
             case USER_GET_PROFILE:
                 return BASE_URL + "UserProfile";
-            case USER_POST_PREFERENCE:
-                return BASE_URL + "TravelPreference/Profiles";
             case USER_POST_CHANGE_PASSWORD:
                 return BASE_URL + "UserProfile/Password";
             case USER_GET_TRAVEL_PROFILES_DEFAULT:
