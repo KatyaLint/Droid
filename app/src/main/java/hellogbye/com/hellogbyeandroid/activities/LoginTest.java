@@ -88,9 +88,6 @@ public class LoginTest extends ActionBarActivity {
         });
 
 
-
-
-
         travelPreference.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -16,11 +17,15 @@ public class TravelPrefrenceStartingActivity extends Activity {
 
     FontTextView mButtonTextView;
     FontTextView mSkip;
+    private HGBPreferencesManager hgbPrefrenceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.onboarding_starting_layout);
+        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
+        hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY,true);
+
 
         mButtonTextView = (FontTextView)findViewById(R.id.travel_pref_but);
         mSkip = (FontTextView)findViewById(R.id.skip);

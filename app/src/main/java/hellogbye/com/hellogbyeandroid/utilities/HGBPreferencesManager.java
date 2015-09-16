@@ -10,6 +10,7 @@ public class HGBPreferencesManager
 	private static final String SHARED_PREFS = "hgb_prefs";
 	public static final String TOKEN = "token";
 	public static final String REMMEMBER_ME = "remmember_me";
+	public static final String TRAVEL_PREF_ENTRY = "travel_entry";
 
 	private SharedPreferences mSharedPreferencesFile;
 	private static HGBPreferencesManager mHomeSharedPreferences = null;

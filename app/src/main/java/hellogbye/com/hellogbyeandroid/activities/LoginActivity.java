@@ -91,8 +91,15 @@ public class LoginActivity extends FragmentActivity {
 
     private void goToMainActivity() {
 
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
+        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
+       boolean  doesExist = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY,false);
+        if(doesExist){
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(getApplicationContext(), TravelPrefrenceStartingActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void resetPassword() {
