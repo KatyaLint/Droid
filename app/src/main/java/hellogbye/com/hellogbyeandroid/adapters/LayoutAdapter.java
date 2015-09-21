@@ -1,4 +1,4 @@
-package hellogbye.com.hellogbyeandroid.gridview;
+package hellogbye.com.hellogbyeandroid.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.lucasr.twowayview.TwoWayLayoutManager;
 import org.lucasr.twowayview.widget.StaggeredGridLayoutManager;
 import org.lucasr.twowayview.widget.TwoWayView;
 import java.util.ArrayList;

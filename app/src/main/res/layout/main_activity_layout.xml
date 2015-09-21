@@ -74,7 +74,8 @@
             <hellogbye.com.hellogbyeandroid.views.RoundedImageView
                 android:id="@+id/nav_profile_image"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/nav_profile_name"

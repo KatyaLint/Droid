@@ -4,27 +4,24 @@ package hellogbye.com.hellogbyeandroid.activities;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
+import android.speech.RecognizerIntent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import hellogbye.com.hellogbyeandroid.HGBMainInterface;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.AccountSettingsFragment;
@@ -39,9 +36,10 @@ import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
-public class MainActivity extends ActionBarActivity implements NavListAdapter.OnItemClickListener {
+public class MainActivity extends ActionBarActivity implements NavListAdapter.OnItemClickListener, HGBMainInterface {
     private DrawerLayout mDrawerLayout;
     private RecyclerView mDrawerList;
     private LinearLayout mNavDrawerLinearLayout;
@@ -62,42 +60,40 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
         setContentView(R.layout.main_activity_layout);
 
 
-
-
         mTitle = mDrawerTitle = getTitle();
         mNavTitles = getResources().getStringArray(R.array.nav_draw_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (RecyclerView) findViewById(R.id.left_drawer_rv);
         mNavDrawerLinearLayout = (LinearLayout) findViewById(R.id.drawer);
-        mProfileImage = (RoundedImageView)findViewById(R.id.nav_profile_image);
+        mProfileImage = (RoundedImageView) findViewById(R.id.nav_profile_image);
 
         // set a custom shadow that overlays the main content when the drawer opens
-       // mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+        // mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // improve performance by indicating the list if fixed size.
         mDrawerList.setHasFixedSize(true);
         mDrawerList.setLayoutManager(new LinearLayoutManager(this));
 
         // set up the drawer's list view with items and click listener
         loadNavItems();
-        mAdapter = new NavListAdapter(mNavItemsList, this,getApplicationContext());
+        mAdapter = new NavListAdapter(mNavItemsList, this, getApplicationContext());
 
         mDrawerList.setAdapter(mAdapter);
 
-        mToolbar = (CostumeToolBar)findViewById(R.id.toolbar);
+        mToolbar = (CostumeToolBar) findViewById(R.id.toolbar);
         initToolBar();
 
         //parseFlight();
 
     }
 
-    private void initToolBar(){
+    private void initToolBar() {
 
         setSupportActionBar(mToolbar);
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 
         mDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(
-                this,  mDrawerLayout, mToolbar,
+                this, mDrawerLayout, mToolbar,
                 R.string.drawer_open,  /* "open drawer" description for accessibility */
                 R.string.drawer_close
         );
@@ -108,8 +104,6 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
         mDrawerToggle.syncState();
 
 
-
-
         HGBUtility.loadImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
         selectItem(ToolBarNavEnum.HOME.getNavNumber());
 
@@ -117,14 +111,14 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
 
     private void loadNavItems() {
         mNavItemsList = new ArrayList<>();
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.HOME,true));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.ITINARERY,false));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.HISTORY,false));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.TRIPS,false));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.COMPANIONS,false));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.PREFERENCE,false));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.ACCOUNT,false));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.HELP,false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.HOME, true));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.ITINARERY, false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.HISTORY, false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.TRIPS, false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.COMPANIONS, false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.PREFERENCE, false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.ACCOUNT, false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.HELP, false));
 
     }
 
@@ -208,10 +202,11 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
 
         }
 
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(R.id.content_frame, fragment);
-        ft.commit();
+        //fragment.setArguments(getIntent().getExtras());
+        getFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, fragment, fragment.getClass().toString())
+                .addToBackStack(fragment.getClass().toString())
+                .commit();
 
         // update selected item title, then close the drawer
         //  setTitle(mNavTitles[position]);
@@ -271,5 +266,37 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    public CostumeToolBar getmToolbar() {
+        return mToolbar;
+    }
 
+    public void setmToolbar(CostumeToolBar mToolbar) {
+        this.mToolbar = mToolbar;
+    }
+
+    @Override
+    public void openVoiceToTextControl() {
+        try {
+            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak Now...");
+            startActivityForResult(intent, 0);
+        } catch (ActivityNotFoundException e) {
+            Log.v("Speech", "Could not find any Speech Recognition Actions");
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 0 && resultCode == RESULT_OK) {
+            ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            HomeFragment fragment = (HomeFragment) getFragmentManager().findFragmentByTag(HomeFragment.class.toString());
+            if (fragment != null) {
+                fragment.handleClick(matches.get(0));
+            }
+        }
+    }
 }

@@ -22,10 +22,9 @@ import org.lucasr.twowayview.widget.TwoWayView;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.gridview.LayoutAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.LayoutAdapter;
 
 import hellogbye.com.hellogbyeandroid.models.vo.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;

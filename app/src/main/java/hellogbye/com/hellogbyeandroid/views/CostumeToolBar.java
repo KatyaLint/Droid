@@ -1,6 +1,7 @@
-package hellogbye.com.hellogbyeandroid.activities;
+package hellogbye.com.hellogbyeandroid.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 public class CostumeToolBar extends Toolbar {
@@ -20,44 +22,50 @@ public class CostumeToolBar extends Toolbar {
     private ImageView homeTitleImage;
     private FontTextView titleText;
     private Toolbar mToolbar;
+    private Context mContext;
 
     public CostumeToolBar(Context context) {
         super(context);
+        mContext = context;
     }
 
     public CostumeToolBar(Context context, AttributeSet attrs) {
-        super(context,attrs);
+        super(context, attrs);
+        mContext = context;
     }
 
 
     public CostumeToolBar(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context,attrs, defStyleAttr);
+        super(context, attrs, defStyleAttr);
+        mContext = context;
     }
 
 
-    public void initToolBarItems(){
-        if(homeTitleImage == null) {
+    public void initToolBarItems() {
+
+
+        if (homeTitleImage == null) {
             homeTitleImage = (ImageView) findViewById(R.id.home_image);
         }
-        if(titleText == null) {
+        if (titleText == null) {
             titleText = (FontTextView) findViewById(R.id.titleBar);
         }
-        if(keyBoardImage == null) {
+        if (keyBoardImage == null) {
             keyBoardImage = (ImageButton) findViewById(R.id.keyboard);
         }
-        if(purchaseButton == null) {
+        if (purchaseButton == null) {
             purchaseButton = (ImageButton) findViewById(R.id.purchaseButton);
         }
-        if(favoriteButton == null) {
+        if (favoriteButton == null) {
             favoriteButton = (ImageButton) findViewById(R.id.favority);
         }
-        if(editPreferense == null) {
+        if (editPreferense == null) {
             editPreferense = (FontTextView) findViewById(R.id.editPreference);
         }
     }
 
 
-    public void updateToolBarView(int position){
+    public void updateToolBarView(int position) {
 
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
 
@@ -105,6 +113,33 @@ public class CostumeToolBar extends Toolbar {
         String selectedItem = navBar.getNavTitle();
         //setTitle(selectedItem);
         titleText.setText(selectedItem);
+
+        keyBoardImage.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String id = (String) v.getTag();//instead i need the int of the drawable image
+
+                if (id.equals("keyboard")) {
+                    Intent intent2 = new Intent(HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION);
+                    intent2.putExtra(HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION, HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION_KEYBOARD_ACTION);
+                    mContext.sendBroadcast(intent2);
+                    keyBoardImage.setBackgroundResource(R.drawable.app_bar_microphone_icn);
+                    keyBoardImage.setTag("mic");
+                } else if (id.equals("mic")) {
+                    Intent intent1 = new Intent(HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION);
+                    intent1.putExtra(HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION, HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION_MIC_ACTION);
+                    mContext.sendBroadcast(intent1);
+                    keyBoardImage.setBackgroundResource(R.drawable.keyboard_icon);
+                    keyBoardImage.setTag("keyboard");
+
+                }
+
+
+
+            }
+        });
+
     }
 
 
