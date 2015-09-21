@@ -11,9 +11,11 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -32,6 +34,8 @@ public class HomeFragment extends HGBAbtsractFragment {
     private ImageView mMicImageView;
     private FontTextView mBubble;
     private HGBProgressRelativeLayout mHGBSpinner;
+    private LinearLayout mSpeechLayout;
+    private LinearLayout mKeyBoardLayout;
 
     public HomeFragment() {
         // Empty constructor required for fragment subclasses
@@ -56,6 +60,8 @@ public class HomeFragment extends HGBAbtsractFragment {
         mSearch = (FontTextView) rootView.findViewById(R.id.search);
         mBubble = (FontTextView) rootView.findViewById(R.id.please_hold);
         mMicImageView = (ImageView) rootView.findViewById(R.id.mic);
+        mSpeechLayout = (LinearLayout)rootView.findViewById(R.id.speech_ll);
+        mKeyBoardLayout = (LinearLayout)rootView.findViewById(R.id.keyboard_layout);
         mHGBSpinner = (HGBProgressRelativeLayout) rootView.findViewById(R.id.loader_spinner);
         mQueryEditText.setMovementMethod(new ScrollingMovementMethod());
         mQueryEditText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
@@ -119,24 +125,21 @@ public class HomeFragment extends HGBAbtsractFragment {
     };
 
     private void setKeyboardMode() {
-        mMicImageView.setVisibility(View.GONE);
-        mBubble.setVisibility(View.GONE);
-        mQueryEditText.setVisibility(View.VISIBLE);
-        mSearch.setVisibility(View.VISIBLE);
+        mSpeechLayout.setVisibility(View.INVISIBLE);
+        mKeyBoardLayout.setVisibility(View.VISIBLE);
     }
 
     private void setMicMode() {
-        mMicImageView.setVisibility(View.VISIBLE);
-        mBubble.setVisibility(View.VISIBLE);
-        mQueryEditText.setVisibility(View.GONE);
-        mSearch.setVisibility(View.GONE);
+        mSpeechLayout.setVisibility(View.VISIBLE);
+        mKeyBoardLayout.setVisibility(View.INVISIBLE);
     }
 
 
     public void handleClick(String query) {
         mQueryEditText.setVisibility(View.VISIBLE);
-        mMicImageView.setVisibility(View.INVISIBLE);
-        mBubble.setVisibility(View.INVISIBLE);
+        mSearch.setVisibility(View.INVISIBLE);
+        mKeyBoardLayout.setVisibility(View.VISIBLE);
+        mSpeechLayout.setVisibility(View.INVISIBLE);
         mSearch.setVisibility(View.INVISIBLE);
         mQueryEditText.setText(query);
         mHGBSpinner.setVisibility(View.VISIBLE);
