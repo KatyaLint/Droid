@@ -75,6 +75,13 @@ public class HomeFragment extends HGBAbtsractFragment {
             }
         });
 
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleClick(mQueryEditText.getText().toString());
+            }
+        });
+
         mMicImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

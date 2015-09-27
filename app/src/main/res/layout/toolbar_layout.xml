@@ -27,8 +27,8 @@
         android:visibility="gone"/>
 
     <ImageButton
-        android:layout_width="@dimen/DP24"
-        android:layout_height="@dimen/DP24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/keyboard"
         android:tag="keyboard"
         android:background="@drawable/keyboard_icon"
@@ -38,8 +38,8 @@
         />
 
     <ImageButton
-        android:layout_width="@dimen/DP24"
-        android:layout_height="@dimen/DP24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginRight="@dimen/DP14"
         android:background="@drawable/shopping_cart2"
@@ -47,8 +47,8 @@
         android:visibility="gone"/>
 
     <ImageButton
-        android:layout_width="@dimen/DP24"
-        android:layout_height="@dimen/DP24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/favority"
         android:background="@drawable/star2"
         android:layout_gravity="right"

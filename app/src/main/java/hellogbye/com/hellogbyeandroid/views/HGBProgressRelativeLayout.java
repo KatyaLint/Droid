@@ -23,8 +23,8 @@ public class HGBProgressRelativeLayout extends RelativeLayout {
         mSpinnerImageView = new ImageView(context);
         mSuitcaseImageView = new ImageView(context);
         //TODO need to change good images for good fit
-        mSpinnerImageView.setImageResource(R.drawable.spinner_red);
-        mSuitcaseImageView.setImageResource(R.drawable.suitcase_loader);
+        mSpinnerImageView.setImageResource(R.drawable.spinner_red_suitcase_loader);
+        mSuitcaseImageView.setImageResource(R.drawable.suitcase_loader_rectangle_170);
         Animation rotation = AnimationUtils.loadAnimation(context, R.anim.loader_spinner_rotate);
         mSpinnerImageView.startAnimation(rotation);
         LayoutParams fullScreenLayout = new LayoutParams(
