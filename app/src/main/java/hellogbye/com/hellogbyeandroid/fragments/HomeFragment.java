@@ -11,17 +11,16 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
-import hellogbye.com.hellogbyeandroid.views.HGBProgressRelativeLayout;
 
 /**
  * Created by arisprung on 8/17/15.
@@ -33,7 +32,7 @@ public class HomeFragment extends HGBAbtsractFragment {
     private FontTextView mSearch;
     private ImageView mMicImageView;
     private FontTextView mBubble;
-    private HGBProgressRelativeLayout mHGBSpinner;
+    private RelativeLayout mHGBSpinner;
     private LinearLayout mSpeechLayout;
     private LinearLayout mKeyBoardLayout;
 
@@ -62,7 +61,7 @@ public class HomeFragment extends HGBAbtsractFragment {
         mMicImageView = (ImageView) rootView.findViewById(R.id.mic);
         mSpeechLayout = (LinearLayout)rootView.findViewById(R.id.speech_ll);
         mKeyBoardLayout = (LinearLayout)rootView.findViewById(R.id.keyboard_layout);
-        mHGBSpinner = (HGBProgressRelativeLayout) rootView.findViewById(R.id.loader_spinner);
+        mHGBSpinner = (RelativeLayout) rootView.findViewById(R.id.loader_spinner);
         mQueryEditText.setMovementMethod(new ScrollingMovementMethod());
         mQueryEditText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
