@@ -1,5 +1,9 @@
 package hellogbye.com.hellogbyeandroid.utilities;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -11,13 +15,14 @@ import android.graphics.RectF;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.crashlytics.android.Crashlytics;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.process.BitmapProcessor;
 
-
+import hellogbye.com.hellogbyeandroid.R;
 
 
 /**
@@ -89,5 +94,33 @@ public class HGBUtility {
         canvas.drawBitmap(bitmap, rect, rect, paint);
 
         return output;
+    }
+
+    public static void goToNextFragmentIsAddToBackStack(Activity activity, Fragment fragment, boolean isAddToBackStack){
+        try{
+            FragmentTransaction transaction = activity.getFragmentManager().beginTransaction();
+            transaction.replace(R.id.content_frame, fragment, fragment.getClass().toString());
+
+            if (isAddToBackStack) {
+                transaction.addToBackStack(fragment.getClass().toString());
+            }
+
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            Crashlytics.logException(e);
+        }
+
+    }
+
+    public static void clearBackStackAndGoToNextFragment(Activity activity, Fragment fragment) {
+
+        if (activity == null) {
+            return;
+        }
+
+        activity.getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        goToNextFragmentIsAddToBackStack(activity, fragment, true); //now we always want to add to the backstack
     }
 }

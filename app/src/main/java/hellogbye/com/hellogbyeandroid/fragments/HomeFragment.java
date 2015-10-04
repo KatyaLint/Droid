@@ -17,9 +17,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -59,8 +61,8 @@ public class HomeFragment extends HGBAbtsractFragment {
         mSearch = (FontTextView) rootView.findViewById(R.id.search);
         mBubble = (FontTextView) rootView.findViewById(R.id.please_hold);
         mMicImageView = (ImageView) rootView.findViewById(R.id.mic);
-        mSpeechLayout = (LinearLayout)rootView.findViewById(R.id.speech_ll);
-        mKeyBoardLayout = (LinearLayout)rootView.findViewById(R.id.keyboard_layout);
+        mSpeechLayout = (LinearLayout) rootView.findViewById(R.id.speech_ll);
+        mKeyBoardLayout = (LinearLayout) rootView.findViewById(R.id.keyboard_layout);
         mHGBSpinner = (RelativeLayout) rootView.findViewById(R.id.loader_spinner);
         mQueryEditText.setMovementMethod(new ScrollingMovementMethod());
         mQueryEditText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
@@ -84,9 +86,9 @@ public class HomeFragment extends HGBAbtsractFragment {
         mMicImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                getActivityInterface().openVoiceToTextControl();
+                Fragment fragment = new HotelFragment();
+                HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragment, true);
+               // getActivityInterface().openVoiceToTextControl();
 
             }
         });
@@ -150,10 +152,6 @@ public class HomeFragment extends HGBAbtsractFragment {
         mQueryEditText.setText(query);
         mHGBSpinner.setVisibility(View.VISIBLE);
     }
-
-
-
-
 
 
 }
