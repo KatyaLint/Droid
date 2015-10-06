@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginRight="@dimen/DP14"
-        android:background="@drawable/shopping_cart2"
+        android:background="@drawable/icon_shopping_cart_white"
         android:id="@+id/purchaseButton"
         android:visibility="gone"/>
 
@@ -50,14 +50,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/favority"
-        android:background="@drawable/star2"
+
         android:layout_gravity="right"
         android:layout_marginRight="@dimen/DP34"
         android:visibility="gone"
         />
 
 
-
+    <!--android:background="@drawable/star2"-->
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_width="wrap_content"

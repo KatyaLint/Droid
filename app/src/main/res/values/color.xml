@@ -18,4 +18,6 @@
     <color name="item_pressed_color">#CCCCCC</color>
     <color name="item_activated_color">#77CEEE</color>
 
+    <color name="azure">#069ee0</color>
+
 </resources>

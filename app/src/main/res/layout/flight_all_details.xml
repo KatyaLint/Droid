@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/flight_ticket_details_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/flight_ticket_details"/>
+
+
+    <include
+        android:id="@+id/airplane_details_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/flight_ticket_details_layout"
+        layout="@layout/airplane_details"/>
+
+
+    <include
+        android:layout_below="@+id/airplane_details_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/flight_stop_over"/>
+
+</RelativeLayout>

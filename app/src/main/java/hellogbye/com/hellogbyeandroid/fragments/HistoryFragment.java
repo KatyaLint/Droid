@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import hellogbye.com.hellogbyeandroid.R;
@@ -32,13 +33,17 @@ public class HistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_history_layout, container, false);
+        //View rootView = inflater.inflate(R.layout.fragment_history_layout, container, false);
+        View rootView = inflater.inflate(R.layout.flight_layout_details, container, false);
         int i = getArguments().getInt(HGBConstants.ARG_NAV_NUMBER);
       //  String strFrag = getResources().getStringArray(R.array.nav_draw_array)[i];
         String strFrag = ToolBarNavEnum.getNavNameByPosition(i);
 
-        TextView textView = (TextView)rootView.findViewById(R.id.text);
-        textView.setText(strFrag);
+//        TextView textView = (TextView)rootView.findViewById(R.id.text);
+//        textView.setText(strFrag);
+
+
+
 
         getActivity().setTitle(strFrag);
         return rootView;

@@ -6,15 +6,15 @@
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
 
-    <string-array name="nav_draw_array">
-        <item>Home</item>
-        <item>History</item>
-        <item>My Trips</item>
-        <item>Travel Companions</item>
-        <item>Prefrence Settings</item>
-        <item>Account Settings</item>
-        <item>Help  Feedback</item>
-    </string-array>
+    <!--<string-array name="nav_draw_array">-->
+        <!--<item>Home</item>-->
+        <!--<item>History</item>-->
+        <!--<item>My Trips</item>-->
+        <!--<item>Travel Companions</item>-->
+        <!--<item>Prefrence Settings</item>-->
+        <!--<item>Account Settings</item>-->
+        <!--<item>Help  Feedback</item>-->
+    <!--</string-array>-->
 
     <string name="tool_bar">Edit</string>
     <string name="remmeber_me">Remmember Me</string>
@@ -32,4 +32,19 @@
     <string name="tell_us">Tell us in your own words where you\nwant to go, when and with who.</string>
     <string name="title_activity_maps">Map</string>
 
+    <string name="flight_operator">OPERATED BY</string>
+    <string name="flight_number">FLIGHT #</string>
+
+    <string name="flight_airport">AIRPORTS</string>
+    <string name="flight_boarding">BOARDING</string>
+    <string name="flight_duration">DURATION</string>
+    <string name="flight_class">CLASS</string>
+    <string name="flight_meal">MEAL</string>
+    <string name="flight_aircraft">AIRCRAFT</string>
+    <string name="flight_baggage">BAGGAGE</string>
+    <string name="flight_seat_selection">SEAT SELECTION</string>
+
+    <string name="flight_select_flight">Select Flight</string>
+    <string name="flight_show_alternate_flights">Show Alternate Flight</string>
+    <string name="flight_stop_over">STOPOVER: </string>
 </resources>

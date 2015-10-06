@@ -61,7 +61,7 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
 
 
         mTitle = mDrawerTitle = getTitle();
-        mNavTitles = getResources().getStringArray(R.array.nav_draw_array);
+       // mNavTitles = getResources().getStringArray(R.array.nav_draw_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (RecyclerView) findViewById(R.id.left_drawer_rv);
         mNavDrawerLinearLayout = (LinearLayout) findViewById(R.id.drawer);
