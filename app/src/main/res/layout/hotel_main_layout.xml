@@ -24,9 +24,28 @@
             android:orientation="vertical">
 
             <RelativeLayout
-                android:id=""
+                android:id="@+id/rl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_teal"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="18sp"
+                    android:text="The Boston Park Plaza Hotel"
+                    app:fontName="dinnextltpro_medium.otf"
+                    />
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_teal"
+                    android:layout_alignParentRight="true"
+                    android:textSize="32sp"
+                    android:text="$432.22"
+                    app:fontName="dinnextltpro_medium.otf"
+                    />
 
 
 

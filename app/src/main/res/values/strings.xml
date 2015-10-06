@@ -30,5 +30,6 @@
     <string name="url_user_agreement">http://www.hellogbye.com/assets/docs/tos.pdf</string>
     <string name="url_pp">http://www.hellogbye.com/assets/docs/pp.pdf</string>
     <string name="tell_us">Tell us in your own words where you\nwant to go, when and with who.</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
