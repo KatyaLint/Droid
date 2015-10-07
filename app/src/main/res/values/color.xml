@@ -15,12 +15,14 @@
     <color name="red_pink">#eb3e43</color>
 
 
-
+    <color name="dark_blue">#555555</color>
     <color name="item_border_color">#666666</color>
     <color name="item_default_color">#EEEEEE</color>
     <color name="item_pressed_color">#CCCCCC</color>
     <color name="item_activated_color">#77CEEE</color>
 
     <color name="azure">#069ee0</color>
+    <color name="dark_grey">#575757</color>
+    <color name="light_grey">#999999</color>
 
 </resources>

@@ -4,20 +4,32 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
 
-   <RelativeLayout
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:id="@+id/flight_details">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/flight_details"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp">
+
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="200"
+        android:orientation="vertical">
+
+
 
        <hellogbye.com.hellogbyeandroid.views.FontTextView
            android:id="@+id/operatored_by"
-           android:layout_width="@dimen/DP144"
+           android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="@string/flight_operator"
-           android:textSize="@dimen/SP18"
-           app:fontName="dinnextltpro_medium.otf"
-
-          />
+           android:textSize="@dimen/SP12"
+           android:textColor="@color/marine"
+           app:fontName="dinnextltpro_regular.otf" />
 
        <hellogbye.com.hellogbyeandroid.views.FontTextView
            android:id="@+id/operated_by_text"
@@ -25,8 +37,25 @@
            android:layout_height="wrap_content"
            android:layout_below="@+id/operatored_by"
            android:text="Air Canada"
-           android:textSize="@dimen/SP18"
-           app:fontName="dinnextltpro_medium.otf"/>
+           android:textColor="@color/dark_blue"
+           android:textSize="16sp"
+           app:fontName="dinnextltpro_light.otf"  />
+    </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/DP20"
+            android:layout_marginRight="@dimen/DP20"
+            android:layout_marginTop="@dimen/DP10"
+            android:layout_weight="1"
+            android:background="@color/warm_grey"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="120"
+        android:orientation="vertical">
 
        <hellogbye.com.hellogbyeandroid.views.FontTextView
            android:id="@+id/flight_number"
@@ -34,9 +63,10 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="@string/flight_number"
-           android:textSize="@dimen/SP18"
-           app:fontName="dinnextltpro_medium.otf"
-           />
+           android:textColor="@color/marine"
+           app:fontName="dinnextltpro_regular.otf"
+           android:textSize="@dimen/SP12"/>
+
        <hellogbye.com.hellogbyeandroid.views.FontTextView
            android:id="@+id/flight_number_text"
            android:layout_below="@+id/flight_number"
@@ -44,163 +74,285 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="AC222"
-           android:textSize="@dimen/SP18"
-           app:fontName="dinnextltpro_medium.otf"
+           android:textSize="@dimen/SP16"
+           app:fontName="dinnextltpro_light.otf"
+           android:textColor="@color/dark_blue"
            />
 
-       </RelativeLayout>
+       </LinearLayout>
+    </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/flight_time_details"
+
+    <View
+        android:id="@+id/footer_separator_first"
         android:layout_below="@+id/flight_details"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/DP1"
+        android:layout_marginTop="@dimen/DP10"
+        android:layout_weight="1"
+        android:background="@color/warm_grey" />
+
+
+    <LinearLayout
+        android:paddingLeft="10dp"
+        android:layout_below="@+id/footer_separator_first"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/flight_time_details_ll">
+
+    <LinearLayout
+         android:id="@+id/boarding_details_ll"
+        android:layout_below="@+id/footer_separator_first"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/DP10"
+        android:layout_weight="90"
+
+        >
 
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/flight_airport"
-            android:layout_width="@dimen/DP144"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/flight_airport"
-            android:textSize="@dimen/SP18"
-            app:fontName="dinnextltpro_medium.otf"
+            android:textColor="@color/marine"
+            android:textSize="12sp"
+            app:fontName="dinnextltpro_regular.otf"
             />
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/flight_airport_text"
             android:layout_below="@+id/flight_airport"
-            android:layout_width="@dimen/DP144"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="AMS-CPT"
-            android:textSize="@dimen/SP18"
-            app:fontName="dinnextltpro_medium.otf"
+            android:textSize="@dimen/SP16"
+            app:fontName="dinnextltpro_light.otf"
+            android:textColor="@color/dark_blue"
             />
 
+    </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/DP1"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/DP10"
+            android:layout_weight="1"
+            android:background="@color/warm_grey"/>
+
+        <LinearLayout
+            android:layout_weight="90"
+            android:layout_marginTop="@dimen/DP10"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/DP10">
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/flight_boarding"
             android:layout_toRightOf="@+id/flight_airport"
-            android:layout_width="@dimen/DP144"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/flight_boarding"
-            android:textSize="@dimen/SP18"
-            app:fontName="dinnextltpro_medium.otf"
+            android:textColor="@color/marine"
+            android:textSize="12sp"
+            app:fontName="dinnextltpro_regular.otf"
             />
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/flight_boarding_text"
             android:layout_below="@+id/flight_boarding"
             android:layout_toRightOf="@+id/flight_airport"
-            android:layout_width="@dimen/DP144"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="07:30"
-            android:textSize="@dimen/SP18"
-            app:fontName="dinnextltpro_medium.otf"
+            android:textSize="@dimen/SP16"
+            app:fontName="dinnextltpro_light.otf"
+            android:textColor="@color/dark_blue"
             />
+        </LinearLayout>
 
+        <View
+            android:layout_width="@dimen/DP1"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/DP10"
+            android:layout_weight="1"
+            android:background="@color/warm_grey"/>
+
+    <LinearLayout
+        android:layout_marginLeft="@dimen/DP10"
+        android:layout_marginTop="@dimen/DP10"
+        android:layout_weight="140"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/flight_duration"
             android:layout_toRightOf="@+id/flight_boarding_text"
-            android:layout_width="@dimen/DP144"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/flight_duration"
-            android:textSize="@dimen/SP18"
-            app:fontName="dinnextltpro_medium.otf"
+            android:textColor="@color/marine"
+            android:textSize="12sp"
+            app:fontName="dinnextltpro_regular.otf"
             />
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/flight_duration_text"
             android:layout_below="@+id/flight_duration"
             android:layout_toRightOf="@+id/flight_boarding_text"
-            android:layout_width="@dimen/DP144"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="06h 30m"
-            android:textSize="@dimen/SP18"
-            app:fontName="dinnextltpro_medium.otf"
+            android:textSize="@dimen/SP16"
+            app:fontName="dinnextltpro_light.otf"
+            android:textColor="@color/dark_blue"
             />
+    </LinearLayout>
 
-        </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/flight_class_details"
-        android:layout_below="@+id/flight_time_details"
-        android:layout_width="wrap_content"
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/footer_separator_second"
+        android:layout_below="@+id/flight_time_details_ll"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/DP1"
+        android:layout_marginTop="@dimen/DP10"
+        android:layout_weight="1"
+        android:background="@color/warm_grey" />
+
+
+
+
+    <LinearLayout
+        android:paddingLeft="10dp"
+        android:id="@+id/flight_class_details_ll"
+        android:layout_below="@+id/footer_separator_second"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
+
+
+        <LinearLayout
             android:id="@+id/flight_class_layout"
+            android:layout_weight="100"
+            android:layout_marginTop="@dimen/DP10"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/flight_class"
-                android:layout_width="@dimen/DP104"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/flight_class"
-                android:textSize="@dimen/SP18"
-                app:fontName="dinnextltpro_medium.otf"
+                android:textColor="@color/marine"
+                android:textSize="12sp"
+                app:fontName="dinnextltpro_regular.otf"
             />
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/flight_class_text"
                 android:layout_below="@+id/flight_class"
-                android:layout_width="@dimen/DP104"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Economy"
-                android:textSize="@dimen/SP18"
-                app:fontName="dinnextltpro_medium.otf"
+                android:textSize="@dimen/SP16"
+                app:fontName="dinnextltpro_light.otf"
+                android:textColor="@color/red_pink"
             />
-            <include  android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/flight_class_text"
-                layout="@layout/layout_arrow"/>
 
-    </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_toRightOf="@+id/flight_class_layout"
+    </LinearLayout>
+
+        <include  android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_toRightOf="@+id/flight_class_text"
+            android:layout_marginTop="@dimen/DP20"
+            android:layout_marginRight="@dimen/DP20"
+            layout="@layout/layout_arrow"/>
+
+        <View
+            android:layout_width="@dimen/DP1"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/DP10"
+            android:layout_weight="1"
+            android:background="@color/warm_grey"/>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/DP10"
+            android:layout_weight="100"
+            android:layout_marginLeft="@dimen/DP10"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/flight_meal"
-                android:layout_width="@dimen/DP104"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/flight_meal"
-                android:textSize="@dimen/SP18"
-                app:fontName="dinnextltpro_medium.otf"/>
+                android:textColor="@color/marine"
+                android:textSize="12sp"
+                app:fontName="dinnextltpro_regular.otf"/>
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/flight_meal_text"
                 android:layout_below="@+id/flight_meal"
-                android:layout_width="@dimen/DP104"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Standart"
-                android:textSize="@dimen/SP18"
-                app:fontName="dinnextltpro_medium.otf"/>
+                android:textSize="@dimen/SP16"
+                app:fontName="dinnextltpro_light.otf"
+                android:textColor="@color/red_pink"/>
 
-
-            <include  android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/flight_meal_text"
-                layout="@layout/layout_arrow"/>
+        </LinearLayout>
 
 
 
-        </RelativeLayout>
+        <include
+            android:layout_marginTop="@dimen/DP20"
+            android:layout_marginRight="@dimen/DP20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_toRightOf="@+id/flight_meal_text"
+            layout="@layout/layout_arrow"/>
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
+
+    <View
+        android:id="@+id/footer_separator_third"
+        android:layout_below="@+id/flight_class_details_ll"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/DP1"
+        android:layout_marginTop="@dimen/DP10"
+        android:layout_weight="1"
+        android:background="@color/warm_grey" />
+
+
+    <LinearLayout
         android:id="@+id/aircraft_layout"
-        android:layout_below="@+id/flight_class_details"
-        android:layout_width="wrap_content"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="@dimen/DP10"
+        android:layout_below="@+id/footer_separator_third"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content">
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/flight_aircraft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/flight_aircraft"
-            android:textSize="@dimen/SP18"
-            app:fontName="dinnextltpro_medium.otf"/>
+            android:textColor="@color/marine"
+            android:textSize="12sp"
+            app:fontName="dinnextltpro_regular.otf"/>
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/flight_aircraft_text"
@@ -208,27 +360,47 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Boeing 777"
-            android:textSize="@dimen/SP18"
-            app:fontName="dinnextltpro_medium.otf"/>
-        </RelativeLayout>
+            android:textSize="@dimen/SP16"
+            app:fontName="dinnextltpro_light.otf"
+            android:textColor="@color/dark_blue"/>
+        </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/baggage_layout_main"
+
+
+    <View
+        android:id="@+id/footer_separator_fourth"
         android:layout_below="@+id/aircraft_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/DP1"
+        android:layout_marginTop="@dimen/DP10"
+        android:layout_weight="1"
+        android:background="@color/warm_grey" />
+
+
+    <LinearLayout
+        android:id="@+id/baggage_layout_main_ll"
+        android:orientation="horizontal"
+        android:layout_below="@+id/footer_separator_fourth"
+        android:paddingLeft="10dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/baggage_layout"
+            android:layout_weight="100"
+            android:layout_marginTop="@dimen/DP10"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/flight_baggage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/flight_baggage"
-                android:textSize="@dimen/SP18"
-                app:fontName="dinnextltpro_medium.otf"/>
+                android:textColor="@color/marine"
+                android:textSize="12sp"
+                app:fontName="dinnextltpro_regular.otf"/>
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/flight_baggage_text"
@@ -236,12 +408,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1 (23kg)"
-                android:textSize="@dimen/SP18"
-                app:fontName="dinnextltpro_medium.otf"/>
-            </RelativeLayout>
+                android:textSize="@dimen/SP16"
+                app:fontName="dinnextltpro_light.otf"
+                android:textColor="@color/red_pink"/>
+            </LinearLayout>
 
-        <RelativeLayout
-            android:layout_toRightOf="@+id/baggage_layout"
+        <include  android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_toRightOf="@+id/flight_class_text"
+            android:layout_marginTop="@dimen/DP20"
+            android:layout_marginRight="@dimen/DP20"
+            layout="@layout/layout_arrow"/>
+
+        <View
+            android:layout_width="@dimen/DP1"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/DP10"
+            android:layout_weight="1"
+            android:background="@color/warm_grey"/>
+
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/DP10"
+            android:layout_weight="100"
+            android:layout_marginLeft="@dimen/DP10"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -249,8 +441,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/flight_seat_selection"
-                android:textSize="@dimen/SP18"
-                app:fontName="dinnextltpro_medium.otf"/>
+                android:textColor="@color/marine"
+                android:textSize="12sp"
+                app:fontName="dinnextltpro_regular.otf"/>
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/flight_seat_selection_text"
@@ -258,20 +451,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="W3"
-                android:textSize="@dimen/SP18"
-                app:fontName="dinnextltpro_medium.otf"/>
+                android:textSize="@dimen/SP16"
+                app:fontName="dinnextltpro_light.otf"
+                android:textColor="@color/red_pink"/>
 
-          <include  android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_toRightOf="@+id/flight_seat_selection"
-              layout="@layout/layout_arrow"/>
 
-        </RelativeLayout>
+        </LinearLayout>
+        <include
+            android:layout_marginTop="@dimen/DP20"
+            android:layout_marginRight="@dimen/DP20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_toRightOf="@+id/flight_meal_text"
+            layout="@layout/layout_arrow"/>
 
-        </RelativeLayout>
+        </LinearLayout>
+
+
+    <View
+        android:id="@+id/footer_separator_fifth"
+        android:layout_below="@+id/baggage_layout_main_ll"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/DP1"
+        android:layout_marginTop="@dimen/DP10"
+        android:layout_weight="1"
+        android:background="@color/warm_grey" />
 
     <Button
-        android:layout_below="@+id/baggage_layout_main"
+        android:layout_marginTop="@dimen/DP10"
+        android:layout_below="@+id/footer_separator_fifth"
         android:layout_centerHorizontal="true"
         android:layout_width="@dimen/DP300"
         android:layout_height="@dimen/DP44"
@@ -280,8 +489,7 @@
         android:textColor="@color/white"
         android:textAlignment="center"
         android:textSize="@dimen/SP16"
-        android:textAllCaps="false"
-    />
+        android:textAllCaps="false" />
 
 
 </RelativeLayout>

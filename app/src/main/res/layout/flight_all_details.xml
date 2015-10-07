@@ -4,14 +4,14 @@
 
     <include
         android:id="@+id/flight_ticket_details_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         layout="@layout/flight_ticket_details"/>
 
 
     <include
         android:id="@+id/airplane_details_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/flight_ticket_details_layout"
         layout="@layout/airplane_details"/>
@@ -19,8 +19,9 @@
 
     <include
         android:layout_below="@+id/airplane_details_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/DP82"
+        android:layout_marginTop="@dimen/DP10"
         layout="@layout/flight_stop_over"/>
 
 </RelativeLayout>
