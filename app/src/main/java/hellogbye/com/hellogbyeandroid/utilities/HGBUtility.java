@@ -30,7 +30,7 @@ import hellogbye.com.hellogbyeandroid.R;
  */
 public class HGBUtility {
 
-    public static void loadImage(Context context, String imageUrl, ImageView imageView) {
+    public static void loadRoundedImage(Context context, String imageUrl, ImageView imageView) {
 
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .considerExifParams(true)
@@ -51,6 +51,38 @@ public class HGBUtility {
                         return null;
                     }
                 })
+                .build();
+        ImageLoader.getInstance().displayImage(imageUrl, imageView, options, new ImageLoadingListener() {
+            @Override
+            public void onLoadingStarted(String s, View view) {
+            }
+
+            @Override
+            public void onLoadingFailed(String s, View view, FailReason failReason) {
+            }
+
+            @Override
+            public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+
+            }
+
+            @Override
+            public void onLoadingCancelled(String s, View view) {
+            }
+        });
+
+    }
+
+    public static void loadImage(Context context, String imageUrl, ImageView imageView) {
+
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .considerExifParams(true)
+//                .showImageForEmptyUri(R.drawable.new_action_profile_edit_large)
+//                .cacheInMemory(true)
+//                .showImageOnLoading(R.drawable.icon_placeholder)
+//                .showImageOnFail(R.drawable.icon_placeholder)
+//                .showImageForEmptyUri(R.drawable.icon_placeholder)
+                .cacheOnDisk(true)
                 .build();
         ImageLoader.getInstance().displayImage(imageUrl, imageView, options, new ImageLoadingListener() {
             @Override

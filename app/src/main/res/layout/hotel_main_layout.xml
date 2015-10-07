@@ -1,10 +1,9 @@
-<com.nirhart.parallaxscroll.views.ParallaxScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:parallax_factor="1.9"
-    tools:context=".MainActivity">
+
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,10 +23,11 @@
 
             <RelativeLayout
                 android:id="@+id/rl"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+               >
 
                 <hellogbye.com.hellogbyeandroid.views.FontTextView
                     android:id="@+id/hotel_name"
@@ -128,13 +128,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+               >
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="200"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:orientation="vertical">
 
                     <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -218,14 +219,15 @@
                 android:id="@+id/hotel_dates_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:paddingRight="10dp"
+                android:orientation="horizontal"
+                >
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="50"
+                    android:layout_weight="120"
                     android:orientation="vertical">
 
                     <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -266,7 +268,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="50"
+                    android:layout_weight="120"
                     android:orientation="vertical">
 
                     <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -303,6 +305,134 @@
                 android:background="@color/warm_grey_line" />
         </LinearLayout>
 
+
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/hotel_full_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hotel_room"
+            android:layout_marginTop="10dp"
+            android:text="ADDRESS"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/marine"
+            android:textSize="12sp"
+            app:fontName="dinnextltpro_regular.otf" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/hotel_full_address_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hotel_room"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="366 West 52nd Street,\nNew York, NY"
+            android:textColor="@color/greyish_brown"
+            android:textSize="16sp"
+            app:fontName="dinnextltpro_light.otf" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/hotel_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hotel_room"
+            android:layout_marginTop="10dp"
+            android:text="CONTACT"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/marine"
+            android:textSize="12sp"
+            app:fontName="dinnextltpro_regular.otf" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/hotel_contact_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hotel_room"
+            android:layout_marginTop="10dp"
+            android:text="888-123-456\ninfo@gmail.com"
+            android:textColor="@color/greyish_brown"
+            android:textSize="16sp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:fontName="dinnextltpro_light.otf" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/hotel_photo_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hotel_room"
+            android:layout_marginTop="10dp"
+            android:text="PHOTO GALLERY"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/marine"
+            android:textSize="12sp"
+            app:fontName="dinnextltpro_regular.otf" />
+
+
+        <HorizontalScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="10dp"
+            android:fillViewport="true"
+            android:minWidth="200dp"
+            android:scrollbars="none">
+
+            <TableLayout
+                android:id="@+id/tableLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:stretchColumns="*"></TableLayout>
+        </HorizontalScrollView>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/hotel_amnities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="AMENITIES"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+        android:textColor="@color/marine"
+        android:textSize="12sp"
+        app:fontName="dinnextltpro_light.otf" />
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/hotel_amnities_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Striking the balance between its storied past and limitless future, The Plaza is the ultimate New York City luxury lifestyle destination - an iconic urban resort with a new and contemporary spirit. While traditions remain, such as the opulent grandeur of the Beaux Arts decor and the iconic Afternoon Tea in The Palm Court, exciting new offerings at this legendary hotel include the elegant Champagne Bar, the stylish Rose Club, and The Plaza Food Hall. The Plaza Hotel offers 282 distinctive guestrooms, including 102 luxurious suites, which boast the largest square footage of any luxury hotel in New York City. From the sumptuous decor to the impeccable white glove service, The Plaza is an extraordinary hotel that offers every indulgence. For our suite guests, The Plaza is pleased to offer Butler Service 24 hours a day."
+            android:textColor="@color/greyish_brown"
+            android:textSize="16sp"
+            app:fontName="dinnextltpro_light.otf" />
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/hotel_nearby_attrictaions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="NEARBY ATTRACTIONS"
+            android:textColor="@color/marine"
+            android:textSize="12sp"
+            app:fontName="dinnextltpro_light.otf" />
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/hotel_nearby_attrictaions_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="This is the iconic New York that so many visitors imagine before they visit—spectacular skyscrapers like the Chrysler Building and Empire State Building, iconic public buildings like Grand Central Terminal and the New York Public Library, and the non-stop hustle and bustle of the city streets. "
+            android:textColor="@color/greyish_brown"
+            android:textSize="16sp"
+            app:fontName="dinnextltpro_light.otf" />
+
     </LinearLayout>
 
-</com.nirhart.parallaxscroll.views.ParallaxScrollView>
+</ScrollView>
