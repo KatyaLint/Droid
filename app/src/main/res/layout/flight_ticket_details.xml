@@ -79,13 +79,10 @@
 
         </LinearLayout>
 
-
-
     <Button
-
         android:layout_alignEnd="@+id/flight_price"
         android:layout_below="@+id/flight_price"
-        android:background="@color/red_button_color"
+        android:background="@drawable/round_red_button_shape"
         android:id="@+id/select_flight"
         android:text="@string/flight_select_flight"
         android:textColor="@color/white"
@@ -95,8 +92,9 @@
         android:layout_height="@dimen/DP26"
         android:textAllCaps="false"
         android:layout_marginTop="@dimen/DP8"
-        android:shadowRadius="@dimen/DP2"
         />
+
+
 </RelativeLayout>
 
     <View

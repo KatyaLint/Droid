@@ -484,7 +484,8 @@
         android:layout_centerHorizontal="true"
         android:layout_width="@dimen/DP300"
         android:layout_height="@dimen/DP44"
-        android:background="@color/azure"
+        android:background="@drawable/round_azure_button_shape"
+
         android:text="@string/flight_show_alternate_flights"
         android:textColor="@color/white"
         android:textAlignment="center"
