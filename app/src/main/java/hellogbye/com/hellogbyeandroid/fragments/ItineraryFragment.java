@@ -26,8 +26,9 @@ import java.lang.reflect.Type;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.LayoutAdapter;
 
-import hellogbye.com.hellogbyeandroid.models.vo.UserTravelVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
@@ -71,7 +72,7 @@ public class ItineraryFragment extends Fragment {
         Gson gson = new Gson();
         Type type = new TypeToken<UserTravelVO>(){}.getType();
       //  Type type = new TypeToken<ArrayList<AirplaneDataVO>>(){}.getType();
-        String strJson = loadJSONFromAsset();
+        String strJson = HGBUtility.loadJSONFromAsset("airplane.txt", getActivity());
 
          airplaneDataVO = gson.fromJson(strJson, type);
     }
@@ -89,21 +90,21 @@ public class ItineraryFragment extends Fragment {
 //        }
     }
 
-    public String loadJSONFromAsset() {
-        String json = null;
-        try {
-            InputStream is = getActivity().getAssets().open("airplane.txt");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
+//    public String loadJSONFromAsset(String fileName, Activity activity) {
+//        String json = null;
+//        try {
+//            InputStream is = activity.getAssets().open(fileName);
+//            int size = is.available();
+//            byte[] buffer = new byte[size];
+//            is.read(buffer);
+//            is.close();
+//            json = new String(buffer, "UTF-8");
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//            return null;
+//        }
+//        return json;
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

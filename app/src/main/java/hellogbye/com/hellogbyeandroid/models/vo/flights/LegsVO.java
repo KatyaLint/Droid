@@ -1,4 +1,4 @@
-package hellogbye.com.hellogbyeandroid.models.vo;
+package hellogbye.com.hellogbyeandroid.models.vo.flights;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -58,6 +58,10 @@ public class LegsVO {
     @SerializedName("farepreference")
     private String mFarePreference;
 
+    @SerializedName("normalizedduration")
+    private double mNormalizedDuration;
+
+    //stop over details
     @SerializedName("durationhours")
     private double mDurationHours;
     @SerializedName("durationmminutes")
@@ -71,4 +75,28 @@ public class LegsVO {
     @SerializedName("arrivaltime")
     private String mArrivalTime;
 
+    public double getmNormalizedDuration() {
+        return mNormalizedDuration;
+    }
+
+
+    public String getmType() {
+        return mType;
+    }
+
+    public String getmOrigin() {
+        return mOrigin;
+    }
+
+    public void setmOrigin(String mOrigin) {
+        this.mOrigin = mOrigin;
+    }
+
+    public String getmDestination() {
+        return mDestination;
+    }
+
+    public void setmDestination(String mDestination) {
+        this.mDestination = mDestination;
+    }
 }

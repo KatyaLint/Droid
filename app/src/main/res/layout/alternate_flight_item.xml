@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <RelativeLayout
+        android:padding="@dimen/DP10"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/alternative_flight_cost_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        >
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/alternative_flight_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/marine"
+            android:textSize="@dimen/SP18"
+            android:text="$1556.12"
+            app:fontName="dinnextltpro_mediumcond.ttf"
+
+            />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/alternative_flight_multiple"
+            android:text="Multiple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/warm_grey"
+            android:textSize="@dimen/SP12"
+            android:layout_gravity="right"
+            app:fontName="dinnextltpro_light.otf" />
+
+    </LinearLayout>
+
+
+    <hellogbye.com.hellogbyeandroid.adapters.GraphicsViewLayout
+        android:id="@+id/view"
+        android:layout_toLeftOf="@+id/alternative_flight_cost_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/DP44" />
+
+
+    <RelativeLayout
+
+        android:id="@+id/flight_time_ll"
+        android:layout_below="@+id/view"
+        android:layout_toLeftOf="@+id/alternative_flight_cost_ll"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/startTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="7:14"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/marine"
+        android:textSize="@dimen/SP14"
+        app:fontName="dinnextltpro_regular.otf"/>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/travelTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="14h"
+            android:layout_centerInParent="true"
+            android:textColor="@color/marine"
+            android:textSize="@dimen/SP14"
+            app:fontName="dinnextltpro_light.otf"
+            />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/endTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:50"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/marine"
+            android:textSize="@dimen/SP14"
+            app:fontName="dinnextltpro_regular.otf"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+
+    <View
+        android:id="@+id/alternative_list_divider"
+        android:layout_alignParentBottom="true"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/DP1"
+        android:background="@color/light_grey"
+        />
+
+</RelativeLayout>

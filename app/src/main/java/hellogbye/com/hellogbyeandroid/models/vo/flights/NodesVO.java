@@ -1,4 +1,4 @@
-package hellogbye.com.hellogbyeandroid.models.vo;
+package hellogbye.com.hellogbyeandroid.models.vo.flights;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -127,12 +127,9 @@ public class NodesVO
     @SerializedName("guid")
     private String mGuid;
     @SerializedName("rank")
-    private int mRank;
+    private double mRank;
     @SerializedName("isalternative")
     private boolean mIsAlternative;
-
-
-
 
 
 }

@@ -22,6 +22,9 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.process.BitmapProcessor;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import hellogbye.com.hellogbyeandroid.R;
 
 
@@ -154,5 +157,22 @@ public class HGBUtility {
         activity.getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
         goToNextFragmentIsAddToBackStack(activity, fragment, true); //now we always want to add to the backstack
+    }
+
+
+    public static String loadJSONFromAsset(String fileName, Activity activity) {
+        String json = null;
+        try {
+            InputStream is = activity.getAssets().open(fileName);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
     }
 }

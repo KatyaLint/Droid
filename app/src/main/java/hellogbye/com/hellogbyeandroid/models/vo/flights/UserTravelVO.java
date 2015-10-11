@@ -1,4 +1,4 @@
-package hellogbye.com.hellogbyeandroid.models.vo;
+package hellogbye.com.hellogbyeandroid.models.vo.flights;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -15,10 +15,9 @@ public class UserTravelVO {
     @SerializedName("totalprice")
     private String mTotalPrice;
     @SerializedName("parsermessage")
-
     private String mParseMessage;
-
     @SerializedName("passengers")
+
     private ArrayList<PassengersVO> passengerses = new ArrayList<PassengersVO>();
 
     public String getmSolutionID() {

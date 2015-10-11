@@ -11,8 +11,8 @@ import org.lucasr.twowayview.widget.StaggeredGridLayoutManager;
 import org.lucasr.twowayview.widget.TwoWayView;
 import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.models.vo.PassengersVO;
-import hellogbye.com.hellogbyeandroid.models.vo.UserTravelVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 
 /**
  * Created by nyawka on 9/6/15.
