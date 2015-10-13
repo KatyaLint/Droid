@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +35,7 @@ import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_SETTLING;
 
-public class ItineraryFragment extends Fragment {
+public class ItineraryFragment extends HGBAbtsractFragment {
 
     private TwoWayView mRecyclerView;
     private TextView mPositionText;
@@ -43,6 +44,7 @@ public class ItineraryFragment extends Fragment {
     private Toast mToast;
     private static final String ARG_LAYOUT_ID = "layout_id";
     private int mLayoutId;
+    UserTravelVO userOrder;
 
 
  //   private ArrayList<FlightsVO> airplaneDataForAdapterVO;
@@ -64,6 +66,8 @@ public class ItineraryFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mLayoutId = R.layout.layout_staggered_grid;
         parseFlight();
+        userOrder = getActivityInterface().getTravelOrder();
+        Log.d("ItineraryFragment",userOrder.toString());
     }
 
     private UserTravelVO airplaneDataVO;
@@ -110,6 +114,8 @@ public class ItineraryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.layout_staggered_grid, container, false);
+
+
     }
 
 

@@ -1,9 +1,17 @@
 package hellogbye.com.hellogbyeandroid.network;
 
 
+import android.util.Log;
+
 import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 
 public class Parser {
 
@@ -25,21 +33,18 @@ public class Parser {
     }
 
 
-//    public static Object parseEstimation(String response) {
-//        Estimation est = new Estimation();
-//
-//        try {
-//            JSONObject json = new JSONObject(response);
-//            est.setEstimateTime(json.getInt("estimateTime"));
-//            est.setLatitude(json.getDouble("lat"));
-//            est.setLongnitude(json.getDouble("lon"));
-//
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return est;
-//
-//    }
+    public static Object parseAirplaneData(String response) {
+        UserTravelVO airplaneDataVO = null;
+        try {
+            Gson gson = new Gson();
+            Type type = new TypeToken<UserTravelVO>() {
+            }.getType();
+            airplaneDataVO = gson.fromJson(response, type);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return airplaneDataVO;
+    }
 
 }

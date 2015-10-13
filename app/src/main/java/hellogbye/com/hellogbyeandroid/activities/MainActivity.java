@@ -2,17 +2,15 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,7 +32,7 @@ import hellogbye.com.hellogbyeandroid.fragments.PrefrenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
@@ -52,6 +50,7 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
     private NavListAdapter mAdapter;
     private ArrayList<NavItem> mNavItemsList;
     private CostumeToolBar mToolbar;
+    private UserTravelVO mUserTravelOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,7 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
 
 
         mTitle = mDrawerTitle = getTitle();
-       // mNavTitles = getResources().getStringArray(R.array.nav_draw_array);
+        // mNavTitles = getResources().getStringArray(R.array.nav_draw_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (RecyclerView) findViewById(R.id.left_drawer_rv);
         mNavDrawerLinearLayout = (LinearLayout) findViewById(R.id.drawer);
@@ -287,6 +286,17 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
         }
     }
 
+    @Override
+    public void setTravelOrder(UserTravelVO travelorder) {
+        mUserTravelOrder = travelorder;
+
+    }
+
+    @Override
+    public UserTravelVO getTravelOrder() {
+        return mUserTravelOrder;
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -299,4 +309,9 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
             }
         }
     }
+
+
+
+
+
 }

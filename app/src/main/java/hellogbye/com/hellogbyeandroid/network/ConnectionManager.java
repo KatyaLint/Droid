@@ -16,7 +16,8 @@ public class ConnectionManager {
          void onError(Object data);
     }
 
-    public static String BASE_URL = "http://gtaqa-1141527982.us-east-1.elb.amazonaws.com/GTAREST/REST/";
+    public static String BASE_URL = "https://alpha.hellogbye.com/gtarest/rest/";
+
     private static ConnectionManager _instance;
     private Context mContext;
 
@@ -25,7 +26,7 @@ public class ConnectionManager {
     public enum Services {
         USER_POST_LOGIN, USER_GET_PROFILE,USER_POST_CHANGE_PASSWORD,
         USER_POST_TRAVEL_PROFILES,USER_GET_TRAVEL_PROFILES_DEFAULT,USER_POST_CHECKOUT,
-        USER_GET_SEARCH_QUERY,USER_GET_UPDATE_SEARCH_QUERY,USER_GET_HOTEL_ALTERNATIVE,
+        USER_GET_SEARCH_QUERY,USER_GET_HOTEL_ALTERNATIVE,
         USER_HOTEL_ROOM_ALTERNATIVE,USER_PUT_HOTEL,USER_GET_BOOKING_OPTIONS,
         USER_FLIGHT_SOLUTIONS,USER_GET_TRAVELER_INFO,USER_GET_USER_PROFILE_ACCOUNTS,
         USER_POST_USER_PROFILE_EMAIL,USER_TRAVEL_PROFILES,USER_PROFILE_RESET_PASSWORD,
@@ -334,14 +335,14 @@ public class ConnectionManager {
                 jsonObject, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(response);
+                listener.onSuccess(Parser.parseAirplaneData(response));
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 listener.onError(Parser.parseErrorMessage(error));
             }
-        });
+        },false);
     }
 
 
@@ -720,8 +721,6 @@ public class ConnectionManager {
                 return BASE_URL + "CheckOut";
             case USER_GET_SEARCH_QUERY:
                 return BASE_URL + "Solution/Primarysearch?query=";
-            case USER_GET_UPDATE_SEARCH_QUERY:
-                return BASE_URL + "Solution/UpdateSearch?query=";
             case USER_GET_HOTEL_ALTERNATIVE:
                 return BASE_URL + "Hotel";
             case USER_HOTEL_ROOM_ALTERNATIVE:
