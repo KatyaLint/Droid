@@ -8,8 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
@@ -20,7 +18,10 @@ import com.google.android.gms.maps.MapFragment;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by arisprung on 9/30/15.
@@ -35,6 +36,27 @@ public class HotelFragment extends HGBAbtsractFragment {
     private static final String TAG = "HotelFragment";
     private boolean mStartedSliding;
     private ScrollView mScrollView;
+    private FontTextView mHotelNameFontTextView;
+    private FontTextView mHotelPriceFontTextView;
+    private FontTextView mHotelDaysFontTextView;
+    private FontTextView mHotelAddressFontTextView;
+    private FontTextView mHotelRoomFontTextView;
+    private FontTextView mHotelRoomNameFontTextView;
+    private FontTextView mHotelGuestNumberFontTextView;
+    private FontTextView mHotelCheckInFontTextView;
+    private FontTextView mHotelCheckOutFontTextView;
+    private FontTextView mAlertnativeHotelFontTextView;
+    private FontTextView mHotelNameFullFontTextView;
+    private FontTextView mHotelContactFontTextView;
+    private FontTextView mHotelAmnitiesFontTextView;
+    private FontTextView mHotelNearbyAttrictionsFontTextView;
+    private UserTravelVO mTravelDetails;
+
+
+
+
+
+
 
 
     @Nullable
@@ -46,6 +68,36 @@ public class HotelFragment extends HGBAbtsractFragment {
         mSlidingPanels.setCoveredFadeColor(Color.TRANSPARENT);
         mSlidingPanels.setParalaxOffset(100);
         mScrollView= (ScrollView)rootView.findViewById(R.id.detail_scroll_view);
+
+        mHotelNameFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_name);
+        mHotelPriceFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_price);
+        mHotelDaysFontTextView = (FontTextView)rootView.findViewById(R.id.days);
+        mHotelAddressFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_address);
+        mHotelRoomFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_room);
+        mHotelRoomNameFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_room_name);
+        mHotelGuestNumberFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_guest_number);
+        mHotelCheckInFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_dates_checkin);
+        mHotelCheckOutFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_dates_checkout);
+        mAlertnativeHotelFontTextView= (FontTextView)rootView.findViewById(R.id.show_alternative_hotel);
+        mHotelNameFullFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_full_address_name);
+        mHotelContactFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_contact_name);
+        mHotelAmnitiesFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_amnities_name);
+        mHotelNearbyAttrictionsFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_nearby_attrictaions_name);
+
+
+
+        mTravelDetails = getActivityInterface().getTravelOrder();
+
+
+
+
+
+
+
+
+
+
+
 //        Animation  mAnimation = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
 //                Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
 //                0.0f, Animation.RELATIVE_TO_SELF, -5.0f);
@@ -166,6 +218,26 @@ public class HotelFragment extends HGBAbtsractFragment {
             }
             mTableLayout.addView(row);
         }
+    }
+
+    private void init(){
+
+//        PassengersVO passengersVO = mTravelDetails.getPassengerses().get(0).
+//        mHotelNameFontTextView.setText();
+//        mHotelPriceFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_price);
+//        mHotelDaysFontTextView = (FontTextView)rootView.findViewById(R.id.days);
+//        mHotelAddressFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_address);
+//        mHotelRoomFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_room);
+//        mHotelRoomNameFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_room_name);
+//        mHotelGuestNumberFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_guest_number);
+//        mHotelCheckInFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_dates_checkin);
+//        mHotelCheckOutFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_dates_checkout);
+//        mAlertnativeHotelFontTextView= (FontTextView)rootView.findViewById(R.id.show_alternative_hotel);
+//        mHotelNameFullFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_full_address_name);
+//        mHotelContactFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_contact_name);
+//        mHotelAmnitiesFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_amnities_name);
+//        mHotelNearbyAttrictionsFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_nearby_attrictaions_name);
+
     }
 
 }
