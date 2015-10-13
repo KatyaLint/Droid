@@ -3,15 +3,17 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="DP24">34dp</dimen>
+    <dimen name="DP24">24dp</dimen>
     <dimen name="DP14">14dp</dimen>
     <dimen name="DP34">34dp</dimen>
 
     <dimen name="DP144">144dp</dimen>
     <dimen name="DP115">115dp</dimen>
+    <dimen name="DP340">340dp</dimen>
     <dimen name="DP104">104dp</dimen>
     <dimen name="DP26">26dp</dimen>
     <dimen name="DP300">300dp</dimen>
+    <dimen name="DP280">280dp</dimen>
     <dimen name="DP44">44dp</dimen>
     <dimen name="DP2">2dp</dimen>
     <dimen name="DP1">1dp</dimen>

@@ -20,14 +20,16 @@ public class GraphicsViewLayout extends View {
     private float xStart ;
     private float yStart;
     private float xEnd ;
-    private int r = 6;
+    private float r;
     private Paint drawPaint;
     private ArrayList<LegsVO> legs;
     private Context context;
     private float stopOverOffset;
     private float duration;
     private float durationOffset;
-    private int yTextOffset;
+    private float yTextOffset;
+    private float xEndOffset;
+
 
     public GraphicsViewLayout(Context context) {
         super(context);
@@ -52,14 +54,21 @@ public class GraphicsViewLayout extends View {
 
 
     private void initialize(){
-        xStart = 24;
-        yStart = 60;
-        xEnd = 540;
+
+        xStart =  getContext().getResources().getDimension(R.dimen.DP10);//24;
+        yStart =  getContext().getResources().getDimension(R.dimen.DP24);//60;
+        xEnd =  getContext().getResources().getDimension(R.dimen.DP280); //540;
         xStartEnd = 0;
         duration = 0;
-        durationOffset = 500;
-        stopOverOffset = 30;
-        yTextOffset = 30;
+        durationOffset =  getContext().getResources().getDimension(R.dimen.DP82);//500;
+        stopOverOffset =  getContext().getResources().getDimension(R.dimen.DP14);//30;
+        yTextOffset =  getContext().getResources().getDimension(R.dimen.DP10); //30;
+
+        r=getContext().getResources().getDimension(R.dimen.DP2);
+
+        xEndOffset = getContext().getResources().getDimension(R.dimen.DP20);
+
+
     }
 
 
@@ -67,7 +76,7 @@ public class GraphicsViewLayout extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        System.out.println("Kate draw");
+
         initialize();
         durationOffset = (xEnd / legs.size()) * 2;
         int legSize = legs.size();
@@ -75,7 +84,7 @@ public class GraphicsViewLayout extends View {
             LegsVO leg = legs.get(i);
             if (leg.getmType().equals("Leg")) {   //TODO change "leg" to enum can be stopOver
                 canvas.drawCircle(xStart, yStart, r, drawPaint); // draw first circle
-
+                initDrawText(canvas,  leg.getmOrigin(),xStart - yTextOffset,yStart - yTextOffset);
                 float xDuration = (float) leg.getmNormalizedDuration();
                 duration = xDuration * durationOffset;
 
@@ -83,13 +92,13 @@ public class GraphicsViewLayout extends View {
                 if (xStartEnd > xEnd || legSize - 1 == i) { // if line more then maxmimumEndPostion, or if last destionatio
                     canvas.drawLine(xStart + r, yStart, xEnd, yStart, drawPaint);
                     canvas.drawCircle(xEnd + r, yStart, r, drawPaint);
-                    initDrawText(canvas,  leg.getmDestination(),xEnd - 20,yStart - yTextOffset);
+                    initDrawText(canvas,  leg.getmDestination(),xEnd - xEndOffset,yStart - yTextOffset);
                 } else {
 
                     canvas.drawLine(xStart + r, yStart, xStartEnd, yStart, drawPaint);
                     canvas.drawCircle(xStartEnd + r, yStart, r, drawPaint);
-                    initDrawText(canvas,  leg.getmOrigin(),xStart - 10,yStart - yTextOffset);
-                    initDrawText(canvas,  leg.getmDestination(),xStartEnd - 6,yStart - yTextOffset);
+
+                 //   initDrawText(canvas,  leg.getmDestination(),xStartEnd - xStartEndOffset,yStart - yTextOffset);
                 }
                 xStart = xStartEnd + stopOverOffset;
             }
