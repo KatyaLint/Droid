@@ -188,8 +188,6 @@ public class HotelFragment extends HGBAbtsractFragment {
             mMap.getUiSettings().setCompassEnabled(true);
             mMap.getUiSettings().setZoomControlsEnabled(false);
             mMap.setMyLocationEnabled(true);
-
-
         } else {
             Log.d("DEBUG", "map is null");
         }
@@ -222,9 +220,9 @@ public class HotelFragment extends HGBAbtsractFragment {
 
     private void init(){
 
-//        PassengersVO passengersVO = mTravelDetails.getPassengerses().get(0).
-//        mHotelNameFontTextView.setText();
-//        mHotelPriceFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_price);
+
+//        mHotelNameFontTextView.setText(mTravelDetails.getPassengerses().get(1).getmCells().get(0).getmNodes().get(0).getmHotelName());
+//        mHotelPriceFontTextView.setText(mTravelDetails.getPassengerses().get(1).getmCells().get(0).getmNodes().get(0).getmMinimumAmount());
 //        mHotelDaysFontTextView = (FontTextView)rootView.findViewById(R.id.days);
 //        mHotelAddressFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_address);
 //        mHotelRoomFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_room);
