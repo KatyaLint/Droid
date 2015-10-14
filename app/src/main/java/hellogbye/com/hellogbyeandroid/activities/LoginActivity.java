@@ -26,8 +26,8 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  */
 public class LoginActivity extends FragmentActivity {
 
-    private FontEditTextView mEmailEditText;
-    private FontEditTextView mPasswordEditText;
+    private EditText mEmailEditText;
+    private EditText mPasswordEditText;
     private CheckBox mRemmeberMeCheckbox;
     private FontTextView mLoginTextView;
     private HGBPreferencesManager hgbPrefrenceManager;
@@ -37,16 +37,17 @@ public class LoginActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.login_layout);
+
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
 //        if(!"".equals(hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.TOKEN,""))){
 //            if(hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME,false)){
 //                goToMainActivity();
 //            }
 //        }
-        setContentView(R.layout.login_layout);
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
-        mEmailEditText = (FontEditTextView) findViewById(R.id.email);
-        mPasswordEditText = (FontEditTextView) findViewById(R.id.password);
+        mEmailEditText = (EditText) findViewById(R.id.email);
+        mPasswordEditText = (EditText) findViewById(R.id.password);
         mRemmeberMeCheckbox = (CheckBox) findViewById(R.id.remmember_me_checkbox);
         mLoginTextView = (FontTextView) findViewById(R.id.user_login);
         mForgotPasswordTextView = (FontTextView) findViewById(R.id.forgotpassword);

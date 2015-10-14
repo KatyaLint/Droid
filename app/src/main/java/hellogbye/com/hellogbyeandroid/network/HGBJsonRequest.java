@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -68,10 +69,37 @@ public class HGBJsonRequest extends Request<String> {
         showLoader = true;
         progressDialog = new ProgressDialog(mContext);
         loading = "Loading";
+        setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         setService(url);
         send();
     }
 
+    public HGBJsonRequest(int method, String url, JSONObject params, Listener<String> listener, ErrorListener errorListener, boolean showLoader) {
+
+//        super(method, url, (stringBodyRequest == null || stringBodyRequest.length() == 0) ? null : stringBodyRequest, listener,	errorListener);
+        super(method, url, errorListener);
+
+        this.listener = listener;
+        this.jsonParams = params;
+
+
+        this.errorListener = errorListener;
+        this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
+        this.url = url;
+        this.showLoader=showLoader;
+        progressDialog = new ProgressDialog(mContext);
+        loading = "Loading";
+        setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        setService(url);
+        setService(url);
+        send();
+    }
     public HGBJsonRequest(int method, String url, JSONObject params, Listener<String> listener, ErrorListener errorListener) {
 
 //        super(method, url, (stringBodyRequest == null || stringBodyRequest.length() == 0) ? null : stringBodyRequest, listener,	errorListener);
@@ -84,9 +112,14 @@ public class HGBJsonRequest extends Request<String> {
         this.errorListener = errorListener;
         this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
         this.url = url;
-        showLoader = true;
+        this.showLoader=true;
         progressDialog = new ProgressDialog(mContext);
         loading = "Loading";
+        setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        setService(url);
         setService(url);
         send();
     }

@@ -7,24 +7,23 @@
     android:background="@drawable/b_g_android"
     android:orientation="vertical">
 
-    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+    <EditText
         android:id="@+id/email"
         style="@style/register_edit_text"
         android:layout_marginTop="100dp"
         android:inputType="textEmailAddress"
-        android:text="jyeap@pivotal.io"
-        app:fontName="dinnextltpro_light.otf"
+        android:text="ari.sprung@amginetech.com"
+
         android:hint="@string/email_address"
        />
 
-    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+    <EditText
         android:id="@+id/password"
         style="@style/register_edit_text"
         android:layout_below="@+id/email"
         android:inputType="textPassword"
         android:text="123456"
         android:layout_marginTop="15dp"
-        app:fontName="dinnextltpro_light.otf"
         android:hint="@string/password"
        />
 

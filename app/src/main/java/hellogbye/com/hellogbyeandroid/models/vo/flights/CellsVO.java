@@ -13,4 +13,12 @@ public class CellsVO {
 
     @SerializedName("nodes")
     private ArrayList<NodesVO> mNodes = new ArrayList<NodesVO>();
+
+    public ArrayList<NodesVO> getmNodes() {
+        return mNodes;
+    }
+
+    public void setmNodes(ArrayList<NodesVO> mNodes) {
+        this.mNodes = mNodes;
+    }
 }

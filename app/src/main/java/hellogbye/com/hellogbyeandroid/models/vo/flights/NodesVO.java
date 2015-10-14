@@ -132,4 +132,171 @@ public class NodesVO
     private boolean mIsAlternative;
 
 
+    public int getmStarRating() {
+        return mStarRating;
+    }
+
+    public void setmStarRating(int mStarRating) {
+        this.mStarRating = mStarRating;
+    }
+
+    public String getmHotelName() {
+        return mHotelName;
+    }
+
+    public void setmHotelName(String mHotelName) {
+        this.mHotelName = mHotelName;
+    }
+
+    public String getmShortDescription() {
+        return mShortDescription;
+    }
+
+    public void setmShortDescription(String mShortDescription) {
+        this.mShortDescription = mShortDescription;
+    }
+
+    public String getmLocationDescription() {
+        return mLocationDescription;
+    }
+
+    public void setmLocationDescription(String mLocationDescription) {
+        this.mLocationDescription = mLocationDescription;
+    }
+
+    public String getmPostalCode() {
+        return mPostalCode;
+    }
+
+    public void setmPostalCode(String mPostalCode) {
+        this.mPostalCode = mPostalCode;
+    }
+
+    public double getmLatitude() {
+        return mLatitude;
+    }
+
+    public void setmLatitude(double mLatitude) {
+        this.mLatitude = mLatitude;
+    }
+
+    public double getmLongitude() {
+        return mLongitude;
+    }
+
+    public void setmLongitude(double mLongitude) {
+        this.mLongitude = mLongitude;
+    }
+
+    public String getmPhone() {
+        return mPhone;
+    }
+
+    public void setmPhone(String mPhone) {
+        this.mPhone = mPhone;
+    }
+
+    public String getmImage() {
+        return mImage;
+    }
+
+    public void setmImage(String mImage) {
+        this.mImage = mImage;
+    }
+
+    public ArrayList<AllImagesVO> getAllImagesVOs() {
+        return allImagesVOs;
+    }
+
+    public void setAllImagesVOs(ArrayList<AllImagesVO> allImagesVOs) {
+        this.allImagesVOs = allImagesVOs;
+    }
+
+    public String getmAddress1() {
+        return mAddress1;
+    }
+
+    public void setmAddress1(String mAddress1) {
+        this.mAddress1 = mAddress1;
+    }
+
+    public String getmAddress2() {
+        return mAddress2;
+    }
+
+    public void setmAddress2(String mAddress2) {
+        this.mAddress2 = mAddress2;
+    }
+
+    public String getmAddress3() {
+        return mAddress3;
+    }
+
+    public void setmAddress3(String mAddress3) {
+        this.mAddress3 = mAddress3;
+    }
+
+    public double getmMinimumAmount() {
+        return mMinimumAmount;
+    }
+
+    public void setmMinimumAmount(double mMinimumAmount) {
+        this.mMinimumAmount = mMinimumAmount;
+    }
+
+    public double getmMaximumAmount() {
+        return mMaximumAmount;
+    }
+
+    public void setmMaximumAmount(double mMaximumAmount) {
+        this.mMaximumAmount = mMaximumAmount;
+    }
+
+    public String getmCheckIn() {
+        return mCheckIn;
+    }
+
+    public void setmCheckIn(String mCheckIn) {
+        this.mCheckIn = mCheckIn;
+    }
+
+    public String getmCheckOut() {
+        return mCheckOut;
+    }
+
+    public void setmCheckOut(String mCheckOut) {
+        this.mCheckOut = mCheckOut;
+    }
+
+    public String getmCountry() {
+        return mCountry;
+    }
+
+    public void setmCountry(String mCountry) {
+        this.mCountry = mCountry;
+    }
+
+    public String getmStateProvince() {
+        return mStateProvince;
+    }
+
+    public void setmStateProvince(String mStateProvince) {
+        this.mStateProvince = mStateProvince;
+    }
+
+    public String getmDefaultRoomGuid() {
+        return mDefaultRoomGuid;
+    }
+
+    public void setmDefaultRoomGuid(String mDefaultRoomGuid) {
+        this.mDefaultRoomGuid = mDefaultRoomGuid;
+    }
+
+    public boolean ismHasAlternative() {
+        return mHasAlternative;
+    }
+
+    public void setmHasAlternative(boolean mHasAlternative) {
+        this.mHasAlternative = mHasAlternative;
+    }
 }

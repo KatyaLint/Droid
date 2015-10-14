@@ -27,4 +27,13 @@ public class PassengersVO {
 
     @SerializedName("cells")
     private ArrayList<CellsVO> mCells = new ArrayList<CellsVO>();
+
+
+    public ArrayList<CellsVO> getmCells() {
+        return mCells;
+    }
+
+    public void setmCells(ArrayList<CellsVO> mCells) {
+        this.mCells = mCells;
+    }
 }

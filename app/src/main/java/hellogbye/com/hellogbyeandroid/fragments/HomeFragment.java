@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +19,20 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.LoginActivity;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
+import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -151,6 +163,26 @@ public class HomeFragment extends HGBAbtsractFragment {
         mSearch.setVisibility(View.INVISIBLE);
         mQueryEditText.setText(query);
         mHGBSpinner.setVisibility(View.VISIBLE);
+
+        ConnectionManager.getInstance(getActivity()).getSearchWithQuery(query, "", new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                if(data !=null){
+                    getActivityInterface().setTravelOrder((UserTravelVO) data);
+                    ItineraryFragment fragemnt = new ItineraryFragment();
+                    HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack
+                }
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+            }
+        });
+
+
+
     }
 
 

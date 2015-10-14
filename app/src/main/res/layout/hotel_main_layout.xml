@@ -7,7 +7,7 @@
     android:gravity="bottom"
     sothree:umanoPanelHeight="70dp"
     sothree:umanoScrollableView="@+id/detail_scroll_view"
-    sothree:umanoShadowHeight="0dp">
+    >
 
     <FrameLayout
         android:id="@+id/map"
@@ -332,7 +332,7 @@
 
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
-                android:id="@+id/user_login"
+                android:id="@+id/show_alternative_hotel"
                 style="@style/RedCustomButtonStyle"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
