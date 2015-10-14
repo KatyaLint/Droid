@@ -144,4 +144,28 @@ public class AlternativeFlightsVO {
     public void setmTravelTime(String mTravelTime) {
         this.mTravelTime = mTravelTime;
     }
+
+    public boolean ismIsAlternative() {
+        return mIsAlternative;
+    }
+
+    public void setmIsAlternative(boolean mIsAlternative) {
+        this.mIsAlternative = mIsAlternative;
+    }
+
+    public String getmOperatorName() {
+        return mOperatorName;
+    }
+
+    public void setmOperatorName(String mOperatorName) {
+        this.mOperatorName = mOperatorName;
+    }
+
+    public String getmOperator() {
+        return mOperator;
+    }
+
+    public void setmOperator(String mOperator) {
+        this.mOperator = mOperator;
+    }
 }

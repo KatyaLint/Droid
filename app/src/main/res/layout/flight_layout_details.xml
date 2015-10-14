@@ -2,34 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-<ScrollView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-    <include
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    layout="@layout/flight_all_details"/>
-
+<!--<ScrollView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content">-->
 
     <!--<include-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--layout="@layout/flight_ticket_details">-->
-
-    <!--</include>-->
-    <!--<include-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--layout="@layout/airplane_details"></include>-->
+     <!--android:id="@+id/main_flight_details"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--layout="@layout/flight_all_details"/>-->
 
 
-    <!--<include-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--layout="@layout/flight_stop_over"/>-->
 
-    </ScrollView>
+
+
+
+
+    <!--</ScrollView>-->
+
+
+
+    <android.support.v7.widget.RecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/white"
+        android:id="@+id/flightRecyclerView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
 
 
 </LinearLayout>
