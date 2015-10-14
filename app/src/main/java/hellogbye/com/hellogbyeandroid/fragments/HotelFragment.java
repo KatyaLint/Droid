@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,9 @@ import com.google.android.gms.maps.MapFragment;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.AllImagesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -40,7 +44,7 @@ public class HotelFragment extends HGBAbtsractFragment {
     private FontTextView mHotelPriceFontTextView;
     private FontTextView mHotelDaysFontTextView;
     private FontTextView mHotelAddressFontTextView;
-    private FontTextView mHotelRoomFontTextView;
+
     private FontTextView mHotelRoomNameFontTextView;
     private FontTextView mHotelGuestNumberFontTextView;
     private FontTextView mHotelCheckInFontTextView;
@@ -51,12 +55,6 @@ public class HotelFragment extends HGBAbtsractFragment {
     private FontTextView mHotelAmnitiesFontTextView;
     private FontTextView mHotelNearbyAttrictionsFontTextView;
     private UserTravelVO mTravelDetails;
-
-
-
-
-
-
 
 
     @Nullable
@@ -73,29 +71,19 @@ public class HotelFragment extends HGBAbtsractFragment {
         mHotelPriceFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_price);
         mHotelDaysFontTextView = (FontTextView)rootView.findViewById(R.id.days);
         mHotelAddressFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_address);
-        mHotelRoomFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_room);
         mHotelRoomNameFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_room_name);
         mHotelGuestNumberFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_guest_number);
-        mHotelCheckInFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_dates_checkin);
-        mHotelCheckOutFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_dates_checkout);
+        mHotelCheckInFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_dates_checkin_name);
+        mHotelCheckOutFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_dates_checkout_name);
         mAlertnativeHotelFontTextView= (FontTextView)rootView.findViewById(R.id.show_alternative_hotel);
         mHotelNameFullFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_full_address_name);
         mHotelContactFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_contact_name);
         mHotelAmnitiesFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_amnities_name);
         mHotelNearbyAttrictionsFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_nearby_attrictaions_name);
 
-
-
         mTravelDetails = getActivityInterface().getTravelOrder();
 
-
-
-
-
-
-
-
-
+        init();
 
 
 //        Animation  mAnimation = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
@@ -141,28 +129,6 @@ public class HotelFragment extends HGBAbtsractFragment {
             }
         });
 
-        mImageList = new ArrayList<>();
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        mImageList.add("http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg");
-        buildTable(mImageList.size() / 2);//
         return rootView;
     }
 
@@ -205,8 +171,9 @@ public class HotelFragment extends HGBAbtsractFragment {
                     LayoutParams.WRAP_CONTENT));
             for (int j = 1; j <= cols; j++) {
                 ImageView tv = new ImageView(getActivity());
-                tv.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
-                        LayoutParams.WRAP_CONTENT));
+                tv.setLayoutParams(new LayoutParams(350,
+                        350));
+              //  tv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                 tv.setPadding(5, 5, 5, 5);
                 if (mImageList.size() > 0) {
                     String strValue = mImageList.remove(0);
@@ -221,20 +188,27 @@ public class HotelFragment extends HGBAbtsractFragment {
     private void init(){
 
 
-//        mHotelNameFontTextView.setText(mTravelDetails.getPassengerses().get(1).getmCells().get(0).getmNodes().get(0).getmHotelName());
-//        mHotelPriceFontTextView.setText(mTravelDetails.getPassengerses().get(1).getmCells().get(0).getmNodes().get(0).getmMinimumAmount());
-//        mHotelDaysFontTextView = (FontTextView)rootView.findViewById(R.id.days);
-//        mHotelAddressFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_address);
-//        mHotelRoomFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_room);
-//        mHotelRoomNameFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_room_name);
-//        mHotelGuestNumberFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_guest_number);
-//        mHotelCheckInFontTextView = (FontTextView)rootView.findViewById(R.id.hotel_dates_checkin);
-//        mHotelCheckOutFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_dates_checkout);
-//        mAlertnativeHotelFontTextView= (FontTextView)rootView.findViewById(R.id.show_alternative_hotel);
-//        mHotelNameFullFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_full_address_name);
-//        mHotelContactFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_contact_name);
-//        mHotelAmnitiesFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_amnities_name);
-//        mHotelNearbyAttrictionsFontTextView= (FontTextView)rootView.findViewById(R.id.hotel_nearby_attrictaions_name);
+        PassengersVO passengersVO = mTravelDetails.getPassengerses().get(0);
+        CellsVO cellsVO = passengersVO.getmCells().get(0);
+        NodesVO nodesVO = cellsVO.getmNodes().get(1);
+        mHotelNameFontTextView.setText(nodesVO.getmHotelName());
+        mHotelPriceFontTextView.setText(String.valueOf(nodesVO.getmMinimumAmount()));
+      //  mHotelDaysFontTextView = (FontTextView)rootView.findViewById(R.id.days);
+        mHotelAddressFontTextView.setText(nodesVO.getmAddress1());
+        mHotelRoomNameFontTextView.setText(nodesVO.getmDefaultRoomGuid());
+       // mHotelGuestNumberFontTextView.setText(mTravelDetails.getPassengerses().get(1).getmCells().get(0).getmNodes().get(0).getm());
+        mHotelCheckInFontTextView.setText(nodesVO.getmCheckIn());
+        mHotelCheckOutFontTextView.setText(nodesVO.getmCheckOut());
+
+        mHotelNameFullFontTextView.setText(nodesVO.getmHotelName());
+        mHotelAmnitiesFontTextView.setText(Html.fromHtml(nodesVO.getmAmenities()));
+        mHotelContactFontTextView.setText(nodesVO.getmPhone());
+        mHotelNearbyAttrictionsFontTextView.setText(Html.fromHtml(nodesVO.getmShortDescription()));
+        mImageList = new ArrayList<>();
+        for(AllImagesVO image :nodesVO.getAllImagesVOs()){
+            mImageList.add(image.getmImage());
+        }
+        buildTable(mImageList.size() / 2);//
 
     }
 

@@ -73,7 +73,7 @@ public class NodesVO
     @SerializedName("hotelchain")
     private String mHotelChain;
     @SerializedName("starrating")
-    private int mStarRating;
+    private float mStarRating;
     @SerializedName("shortdescription")
     private String mShortDescription;
     @SerializedName("locationdescription")
@@ -130,13 +130,15 @@ public class NodesVO
     private double mRank;
     @SerializedName("isalternative")
     private boolean mIsAlternative;
+    @SerializedName("amenities")
+    private String mAmenities;
 
 
-    public int getmStarRating() {
+    public float getmStarRating() {
         return mStarRating;
     }
 
-    public void setmStarRating(int mStarRating) {
+    public void setmStarRating(float mStarRating) {
         this.mStarRating = mStarRating;
     }
 
@@ -298,5 +300,14 @@ public class NodesVO
 
     public void setmHasAlternative(boolean mHasAlternative) {
         this.mHasAlternative = mHasAlternative;
+    }
+
+
+    public String getmAmenities() {
+        return mAmenities;
+    }
+
+    public void setmAmenities(String mAmenities) {
+        this.mAmenities = mAmenities;
     }
 }
