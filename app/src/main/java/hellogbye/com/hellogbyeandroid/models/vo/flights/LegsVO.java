@@ -64,7 +64,7 @@ public class LegsVO {
     //stop over details
     @SerializedName("durationhours")
     private double mDurationHours;
-    @SerializedName("durationmminutes")
+    @SerializedName("durationminutes")
     private double mDurationMinutes;
     @SerializedName("cityname")
     private String mCityName;
@@ -98,5 +98,85 @@ public class LegsVO {
 
     public void setmDestination(String mDestination) {
         this.mDestination = mDestination;
+    }
+
+    public String getmOriginCityName() {
+        return mOriginCityName;
+    }
+
+    public void setmOriginCityName(String mOriginCityName) {
+        this.mOriginCityName = mOriginCityName;
+    }
+
+    public String getmDestinationCityName() {
+        return mDestinationCityName;
+    }
+
+    public void setmDestinationCityName(String mDestinationCityName) {
+        this.mDestinationCityName = mDestinationCityName;
+    }
+
+    public String getmCarrierName() {
+        return mCarrierName;
+    }
+
+    public void setmCarrierName(String mCarrierName) {
+        this.mCarrierName = mCarrierName;
+    }
+
+    public String getmFlightNumber() {
+        return mFlightNumber;
+    }
+
+    public void setmFlightNumber(String mFlightNumber) {
+        this.mFlightNumber = mFlightNumber;
+    }
+
+    public String getmCarrierCode() {
+        return mCarrierCode;
+    }
+
+    public void setmCarrierCode(String mCarrierCode) {
+        this.mCarrierCode = mCarrierCode;
+    }
+
+    public String getmDepartureTime() {
+        return mDepartureTime;
+    }
+
+    public void setmDepartureTime(String mDepartureTime) {
+        this.mDepartureTime = mDepartureTime;
+    }
+
+    public String getmFareClass() {
+        return mFareClass;
+    }
+
+    public void setmFareClass(String mFareClass) {
+        this.mFareClass = mFareClass;
+    }
+
+    public String getmCityName() {
+        return mCityName;
+    }
+
+    public void setmCityName(String mCityName) {
+        this.mCityName = mCityName;
+    }
+
+    public double getmDurationHours() {
+        return mDurationHours;
+    }
+
+    public void setmDurationHours(double mDurationHours) {
+        this.mDurationHours = mDurationHours;
+    }
+
+    public double getmDurationMinutes() {
+        return mDurationMinutes;
+    }
+
+    public void setmDurationMinutes(double mDurationMinutes) {
+        this.mDurationMinutes = mDurationMinutes;
     }
 }
