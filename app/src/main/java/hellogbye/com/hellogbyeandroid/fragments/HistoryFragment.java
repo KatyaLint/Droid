@@ -33,7 +33,7 @@ public class HistoryFragment extends Fragment {
 
 
     private ArrayList<AlternativeFlightsVO> airplaneDataVO;
-    private FlightDetailsInitialize flightDetailsInitialize;
+    
     public HistoryFragment() {
         // Empty constructor required for fragment subclasses
     }
