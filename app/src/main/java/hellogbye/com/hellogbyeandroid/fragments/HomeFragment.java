@@ -177,7 +177,9 @@ public class HomeFragment extends HGBAbtsractFragment {
 
             @Override
             public void onError(Object data) {
+
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
+                mHGBSpinner.setVisibility(View.GONE);
             }
         });
 

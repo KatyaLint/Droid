@@ -35,20 +35,13 @@
         layout="@layout/flight_stop_over"/>
 
 
-    <!--<include-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--layout="@layout/bottom_separator"/>-->
-
     <Button
         android:id="@+id/show_alternative_flights"
-        android:layout_below="@+id/include_layout_separator_details"
+        android:layout_below="@+id/stop_over_include_layout"
         android:layout_margin="@dimen/DP16"
-
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/DP44"
+        android:layout_height="wrap_content"
         android:background="@drawable/round_azure_button_shape"
         android:layout_gravity="center_horizontal"
         android:text="@string/flight_show_alternate_flights"
@@ -56,6 +49,13 @@
         android:textAlignment="center"
         android:textSize="@dimen/SP16"
         android:textAllCaps="false" />
+
+    <!--<include-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--layout="@layout/bottom_separator"/>-->
+
+
 
     <!--android:layout_width="@dimen/DP300"-->
 

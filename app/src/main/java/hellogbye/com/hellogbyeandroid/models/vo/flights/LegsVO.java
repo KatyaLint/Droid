@@ -179,4 +179,12 @@ public class LegsVO {
     public void setmDurationMinutes(double mDurationMinutes) {
         this.mDurationMinutes = mDurationMinutes;
     }
+
+    public String getmParentguid() {
+        return mParentguid;
+    }
+
+    public void setmParentguid(String mParentguid) {
+        this.mParentguid = mParentguid;
+    }
 }

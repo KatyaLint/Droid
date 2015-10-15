@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
@@ -22,9 +23,9 @@ import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFl
 public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<AlternativeFlightsAdapter.ViewHolder> {
 
 
-    private  ArrayList<AlternativeFlightsVO> itemsData;
+    private  List<AlternativeFlightsVO> itemsData;
 
-    public AlternativeFlightsAdapter(Context context,  ArrayList<AlternativeFlightsVO> itemsData) {
+    public AlternativeFlightsAdapter(Context context,  List<AlternativeFlightsVO> itemsData) {
         this.itemsData = itemsData;
 
     }

@@ -28,7 +28,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.Volley;
 
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
-
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 
 public class HGBJsonRequest extends Request<String> {
@@ -50,8 +50,8 @@ public class HGBJsonRequest extends Request<String> {
     private JSONObject jsonParams;
     private static String token;
     private boolean showLoader;
-    ProgressDialog progressDialog;
-    String loading;
+//    ProgressDialog progressDialog;
+//    String loading;
 
 
     public HGBJsonRequest(int method, String url, JSONArray params, Listener<String> listener, ErrorListener errorListener) {
@@ -67,8 +67,8 @@ public class HGBJsonRequest extends Request<String> {
         this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
         this.url = url;
         showLoader = true;
-        progressDialog = new ProgressDialog(mContext);
-        loading = "Loading";
+//        progressDialog = new ProgressDialog(mContext);
+//        loading = "Loading";
         setRetryPolicy(new DefaultRetryPolicy(
                 10000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
@@ -90,8 +90,8 @@ public class HGBJsonRequest extends Request<String> {
         this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
         this.url = url;
         this.showLoader=showLoader;
-        progressDialog = new ProgressDialog(mContext);
-        loading = "Loading";
+//        progressDialog = new ProgressDialog(mContext);
+//        loading = "Loading";
         setRetryPolicy(new DefaultRetryPolicy(
                 10000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
@@ -113,8 +113,8 @@ public class HGBJsonRequest extends Request<String> {
         this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
         this.url = url;
         this.showLoader=true;
-        progressDialog = new ProgressDialog(mContext);
-        loading = "Loading";
+//        progressDialog = new ProgressDialog(mContext);
+//        loading = "Loading";
         setRetryPolicy(new DefaultRetryPolicy(
                 10000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
@@ -167,7 +167,7 @@ public class HGBJsonRequest extends Request<String> {
     @Override
     protected void deliverResponse(String response) {
         Log.i(TAG, service + ":\t" + response.toString());
-        removeLoader();
+        HGBUtility.removeLoader();
         if (listener != null) {
 
             listener.onResponse(response);
@@ -179,8 +179,8 @@ public class HGBJsonRequest extends Request<String> {
     @Override
     public void deliverError(VolleyError error) {
         Log.e(TAG, "ERROR: " + service + " " + (error != null && error.networkResponse != null ? error.getClass().getSimpleName() + ": " + error.networkResponse.statusCode + " " + new String(error.networkResponse.data) : "null"));
-        removeLoader();
-        if (errorListener != null) {
+        HGBUtility.removeLoader();
+        if (errorListener != null && error != null) {
             errorListener.onErrorResponse(error);
         }
 
@@ -244,7 +244,8 @@ public class HGBJsonRequest extends Request<String> {
         Log.d(TAG, service + "\nURL: " + url + "\nPARAMS: " + returnParams());
         Log.d(TAG, "TOKEN: " + token);
 //        DataStore.getInstance(mContext).showLoader();
-        showLoader();
+        HGBUtility.showLoader(true,mContext,"Loading");
+
         queue.add(this);
     }
 
@@ -256,26 +257,26 @@ public class HGBJsonRequest extends Request<String> {
         mContext = context;
     }
 
-    public void showLoader() {
-        if (showLoader) {
-            try {
+//    public void showLoader() {
+//        if (showLoader) {
+//            try {
+//
+//                if (progressDialog != null && !progressDialog.isShowing()) {
+//
+//                    progressDialog = ProgressDialog.show(mContext, "", loading);
+//                    progressDialog.setCancelable(false);
+//                    progressDialog.setCanceledOnTouchOutside(false);
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
-                if (progressDialog != null && !progressDialog.isShowing()) {
-
-                    progressDialog = ProgressDialog.show(mContext, "", loading);
-                    progressDialog.setCancelable(false);
-                    progressDialog.setCanceledOnTouchOutside(false);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void removeLoader() {
-        if (progressDialog != null && progressDialog.isShowing())
-            progressDialog.dismiss();
-    }
+//    public void removeLoader() {
+//        if (progressDialog != null && progressDialog.isShowing())
+//            progressDialog.dismiss();
+//    }
 
     private Object returnParams() {
 

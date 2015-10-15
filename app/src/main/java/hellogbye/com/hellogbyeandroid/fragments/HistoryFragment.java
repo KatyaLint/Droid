@@ -33,7 +33,7 @@ public class HistoryFragment extends Fragment {
 
 
     private ArrayList<AlternativeFlightsVO> airplaneDataVO;
-    
+
     public HistoryFragment() {
         // Empty constructor required for fragment subclasses
     }
@@ -52,36 +52,36 @@ public class HistoryFragment extends Fragment {
         //View rootView = inflater.inflate(R.layout.fragment_history_layout, container, false);
         View rootView = inflater.inflate(R.layout.flight_layout_details, container, false);
 
-
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.flightRecyclerView);
-
-        ArrayList<AlternativeFlightsVO> alternativeFlights = parseFlight();
-        ArrayList<LegsVO> legsFlights = alternativeFlights.get(0).getLegs(); //TODO change
-        AlternativeFlightsVO currentFlightToShow = alternativeFlights.get(0);
-        String allFlights = "";
-
-        for (int i = 0; i < legsFlights.size(); i++) {
-            LegsVO leg = legsFlights.get(i);
-            if(leg.getmType().equals("Leg")) {
-                if (i == legsFlights.size() - 1) {
-                    allFlights = allFlights + leg.getmOrigin() + " - " +leg.getmDestination();
-                }else {
-                    allFlights = allFlights + leg.getmOrigin() + " - ";
-                }
-            }
-        }
-
-
-        // 2. set layoutManger
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        // 3. create an adapter
-        FlightAdapter mAdapter = new FlightAdapter(getActivity(),legsFlights);
-        // 4. set adapter
-        recyclerView.setAdapter(mAdapter);
-        // 5. set item animator to DefaultAnimator
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        mAdapter.setFlightCost(currentFlightToShow.getCost());
-        mAdapter.setDestinationFlights(allFlights);
+//
+//        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.flightRecyclerView);
+//
+//        ArrayList<AlternativeFlightsVO> alternativeFlights = parseFlight();
+//        ArrayList<LegsVO> legsFlights = alternativeFlights.get(0).getLegs(); //TODO change
+//        AlternativeFlightsVO currentFlightToShow = alternativeFlights.get(0);
+//        String allFlights = "";
+//
+//        for (int i = 0; i < legsFlights.size(); i++) {
+//            LegsVO leg = legsFlights.get(i);
+//            if(leg.getmType().equals("Leg")) {
+//                if (i == legsFlights.size() - 1) {
+//                    allFlights = allFlights + leg.getmOrigin() + " - " +leg.getmDestination();
+//                }else {
+//                    allFlights = allFlights + leg.getmOrigin() + " - ";
+//                }
+//            }
+//        }
+//
+//
+//        // 2. set layoutManger
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        // 3. create an adapter
+//        FlightAdapter mAdapter = new FlightAdapter(getActivity(),legsFlights);
+//        // 4. set adapter
+//        recyclerView.setAdapter(mAdapter);
+//        // 5. set item animator to DefaultAnimator
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        mAdapter.setFlightCost(currentFlightToShow.getCost());
+//        mAdapter.setDestinationFlights(allFlights);
 
 
         return rootView;

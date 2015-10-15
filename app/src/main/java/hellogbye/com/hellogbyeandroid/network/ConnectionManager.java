@@ -340,6 +340,7 @@ public class ConnectionManager {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
                 listener.onError(Parser.parseErrorMessage(error));
             }
         },false);
@@ -394,10 +395,10 @@ public class ConnectionManager {
 
 
 
-    public void getAlternateFlightsForFlight(String solutioid, String paxid,String flightid ,final ServerRequestListener listener) {
+    public void getAlternateFlightsForFlight(String solutionid, String paxid,String flightid ,final ServerRequestListener listener) {
 
         String url = getURL(Services.USER_FLIGHT_SOLUTIONS);
-        url= url+SOLUTION+"&paxid="+paxid+"&flight="+flightid;
+        url= url+SOLUTION+solutionid+"&paxid="+paxid+"&flight="+flightid;
         JSONObject jsonObject = new JSONObject();
 
 

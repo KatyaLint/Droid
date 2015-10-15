@@ -13,6 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.fragments.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 
@@ -25,6 +26,8 @@ public class FlightAdapter extends  RecyclerView.Adapter<FlightAdapter.ViewHolde
     private  ArrayList<LegsVO> itemsData;
     private double flightCost;
     private String destinationFlights;
+
+
     public FlightAdapter(Context context, ArrayList<LegsVO>  itemsData) {
         this.itemsData = itemsData;
     }
@@ -95,6 +98,12 @@ public class FlightAdapter extends  RecyclerView.Adapter<FlightAdapter.ViewHolde
         this.destinationFlights = destinationFlights;
     }
 
+    private  static AlternativeFlightFragment.AlternativeButtonCB alternativeButtonCB;
+
+    public void setButtonListener(AlternativeFlightFragment.AlternativeButtonCB alternativeButtonCB){
+        this.alternativeButtonCB = alternativeButtonCB;
+    }
+
     // inner class to hold a reference to each item of RecyclerView
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -119,6 +128,8 @@ public class FlightAdapter extends  RecyclerView.Adapter<FlightAdapter.ViewHolde
         public TextView flight_direction;
         public TextView flight_cost;
 
+
+
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
             initializeAirplaneDetails(itemLayoutView);
@@ -126,8 +137,16 @@ public class FlightAdapter extends  RecyclerView.Adapter<FlightAdapter.ViewHolde
             flightMainCostInitialization( itemLayoutView);
             show_alternative_flights = (Button)itemLayoutView.findViewById(R.id.show_alternative_flights);
 
+            show_alternative_flights.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alternativeButtonCB.showAlternative();
+                }
+            });
 
         }
+
+
 
         private void flightMainCostInitialization(View mainView){
             flight_ticket_details_layout = mainView.findViewById(R.id.flight_ticket_details_layout);

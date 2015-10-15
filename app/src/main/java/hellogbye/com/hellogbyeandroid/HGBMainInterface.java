@@ -1,5 +1,9 @@
 package hellogbye.com.hellogbyeandroid;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 
 /**
@@ -7,7 +11,9 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
  */
 public interface HGBMainInterface  {
 
-    public void openVoiceToTextControl();
-    public void setTravelOrder(UserTravelVO travelorder);
-    public UserTravelVO getTravelOrder();
+     void openVoiceToTextControl();
+     void setTravelOrder(UserTravelVO travelorder);
+     void setAlternativeFlights(List<AlternativeFlightsVO> alternativeFlightsVO);
+     UserTravelVO getTravelOrder();
+    List<AlternativeFlightsVO>  getAlternativeFlights();
 }

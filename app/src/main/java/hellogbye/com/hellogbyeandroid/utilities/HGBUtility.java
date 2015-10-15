@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -15,6 +16,7 @@ import android.graphics.RectF;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.crashlytics.android.Crashlytics;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -32,6 +34,9 @@ import hellogbye.com.hellogbyeandroid.R;
  * Created by arisprung on 8/17/15.
  */
 public class HGBUtility {
+
+
+    private static ProgressDialog progressDialog;
 
     public static void loadRoundedImage(Context context, String imageUrl, ImageView imageView) {
 
@@ -175,4 +180,30 @@ public class HGBUtility {
         }
         return json;
     }
+
+
+    public static void showLoader(boolean isShowLoader, Context mContext, String loading) {
+        progressDialog = new ProgressDialog(mContext);
+        isShowLoader = false;
+        if (isShowLoader) {
+            try {
+
+                if (progressDialog != null && !progressDialog.isShowing()) {
+
+                    progressDialog = ProgressDialog.show(mContext, "", loading);
+                    progressDialog.setCancelable(false);
+                    progressDialog.setCanceledOnTouchOutside(false);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void removeLoader() {
+        if (progressDialog != null && progressDialog.isShowing())
+            progressDialog.dismiss();
+    }
+
+
 }

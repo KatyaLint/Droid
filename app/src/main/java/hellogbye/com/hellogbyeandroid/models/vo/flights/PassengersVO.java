@@ -36,4 +36,12 @@ public class PassengersVO {
     public void setmCells(ArrayList<CellsVO> mCells) {
         this.mCells = mCells;
     }
+
+    public String getmPaxguid() {
+        return mPaxguid;
+    }
+
+    public void setmPaxguid(String mPaxguid) {
+        this.mPaxguid = mPaxguid;
+    }
 }

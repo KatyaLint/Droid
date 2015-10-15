@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.HGBMainInterface;
 import hellogbye.com.hellogbyeandroid.R;
@@ -32,6 +33,7 @@ import hellogbye.com.hellogbyeandroid.fragments.PrefrenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
@@ -50,7 +52,11 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
     private NavListAdapter mAdapter;
     private ArrayList<NavItem> mNavItemsList;
     private CostumeToolBar mToolbar;
+
+
     private UserTravelVO mUserTravelOrder;
+    private List<AlternativeFlightsVO> alternativeFlights;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -293,8 +299,20 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
     }
 
     @Override
+    public void setAlternativeFlights(List<AlternativeFlightsVO> alternativeFlightsVO) {
+        this.alternativeFlights = alternativeFlightsVO;
+    }
+
+
+
+    @Override
     public UserTravelVO getTravelOrder() {
         return mUserTravelOrder;
+    }
+
+    @Override
+    public List<AlternativeFlightsVO> getAlternativeFlights() {
+        return alternativeFlights;
     }
 
 

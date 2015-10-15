@@ -299,4 +299,20 @@ public class NodesVO
     public void setmHasAlternative(boolean mHasAlternative) {
         this.mHasAlternative = mHasAlternative;
     }
+
+    public ArrayList<LegsVO> getLegs() {
+        return legs;
+    }
+
+    public void setLegs(ArrayList<LegsVO> legs) {
+        this.legs = legs;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
 }

@@ -1,34 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-
-<!--<ScrollView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content">-->
-
-    <!--<include-->
-     <!--android:id="@+id/main_flight_details"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--layout="@layout/flight_all_details"/>-->
-
-
-
-
-
-
-
-    <!--</ScrollView>-->
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
 
 
     <android.support.v7.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:background="@color/white"
+        android:background="@color/light_grey"
         android:id="@+id/flightRecyclerView"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/flightRecyclerView"
+        />
 
 
 
-</LinearLayout>
+
+</RelativeLayout>

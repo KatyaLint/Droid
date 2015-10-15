@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,12 +24,18 @@ import org.lucasr.twowayview.widget.TwoWayView;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.LayoutAdapter;
 
+import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
@@ -44,7 +51,8 @@ public class ItineraryFragment extends HGBAbtsractFragment {
     private Toast mToast;
     private static final String ARG_LAYOUT_ID = "layout_id";
     private int mLayoutId;
-    UserTravelVO userOrder;
+    private UserTravelVO userOrder;
+    private AlternativeFlightsVO alternativeFlightsVO;
 
 
  //   private ArrayList<FlightsVO> airplaneDataForAdapterVO;
@@ -67,7 +75,11 @@ public class ItineraryFragment extends HGBAbtsractFragment {
         mLayoutId = R.layout.layout_staggered_grid;
         parseFlight();
         userOrder = getActivityInterface().getTravelOrder();
-        Log.d("ItineraryFragment",userOrder.toString());
+        if(userOrder != null) {
+            Log.d("ItineraryFragment", userOrder.toString());
+        }
+
+
     }
 
     private UserTravelVO airplaneDataVO;
@@ -94,26 +106,29 @@ public class ItineraryFragment extends HGBAbtsractFragment {
 //        }
     }
 
-//    public String loadJSONFromAsset(String fileName, Activity activity) {
-//        String json = null;
-//        try {
-//            InputStream is = activity.getAssets().open(fileName);
-//            int size = is.available();
-//            byte[] buffer = new byte[size];
-//            is.read(buffer);
-//            is.close();
-//            json = new String(buffer, "UTF-8");
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//            return null;
-//        }
-//        return json;
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.layout_staggered_grid, container, false);
+//        View rootView = inflater.inflate(R.layout.layout_staggered_grid, container, false);
+        View rootView = inflater.inflate(R.layout.dumb_layout, container, false);
+
+        Button btn = (Button)rootView.findViewById(R.id.button);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //show flight
+                //on alternative show alternative flight
+
+                Fragment fragment = new AlternativeFlightFragment();
+                HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragment, true);
+
+
+            }
+        });
+
+
+        return rootView;
 
 
     }
@@ -143,55 +158,58 @@ public class ItineraryFragment extends HGBAbtsractFragment {
 
         final Activity activity = getActivity();
 
-        mToast = Toast.makeText(activity, "", Toast.LENGTH_SHORT);
-        mToast.setGravity(Gravity.CENTER, 0, 0);
+     //   View rootView = inflater.inflate(R.layout.flight_layout_details, container, false);
 
-        mRecyclerView = (TwoWayView) view.findViewById(R.id.list);
-        mRecyclerView.setHasFixedSize(false);
-        mRecyclerView.setLongClickable(true);
 
-        mPositionText = (TextView) view.getRootView().findViewById(R.id.position);
-        mCountText = (TextView) view.getRootView().findViewById(R.id.count);
-
-        mStateText = (TextView) view.getRootView().findViewById(R.id.state);
-        updateState(SCROLL_STATE_IDLE);
-
-        final ItemClickSupport itemClick = ItemClickSupport.addTo(mRecyclerView);
-
-        itemClick.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView parent, View child, int position, long id) {
-                mToast.setText("Item clicked: " + position);
-                mToast.show();
-            }
-        });
-
-        itemClick.setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(RecyclerView parent, View child, int position, long id) {
-                mToast.setText("Item long pressed: " + position);
-                mToast.show();
-                return true;
-            }
-        });
-
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
-                updateState(scrollState);
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int i, int i2) {
-                mPositionText.setText("First: " + mRecyclerView.getFirstVisiblePosition());
-                mCountText.setText("Count: " + mRecyclerView.getChildCount());
-            }
-        });
-
-        final Drawable divider = getResources().getDrawable(R.drawable.divider);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(divider));
-
-        mRecyclerView.setAdapter(new LayoutAdapter(activity, mRecyclerView, mLayoutId, airplaneDataVO));
+//        mToast = Toast.makeText(activity, "", Toast.LENGTH_SHORT);
+//        mToast.setGravity(Gravity.CENTER, 0, 0);
+//
+//        mRecyclerView = (TwoWayView) view.findViewById(R.id.list);
+//        mRecyclerView.setHasFixedSize(false);
+//        mRecyclerView.setLongClickable(true);
+//
+//        mPositionText = (TextView) view.getRootView().findViewById(R.id.position);
+//        mCountText = (TextView) view.getRootView().findViewById(R.id.count);
+//
+//        mStateText = (TextView) view.getRootView().findViewById(R.id.state);
+//        updateState(SCROLL_STATE_IDLE);
+//
+//        final ItemClickSupport itemClick = ItemClickSupport.addTo(mRecyclerView);
+//
+//        itemClick.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(RecyclerView parent, View child, int position, long id) {
+//                mToast.setText("Item clicked: " + position);
+//                mToast.show();
+//            }
+//        });
+//
+//        itemClick.setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(RecyclerView parent, View child, int position, long id) {
+//                mToast.setText("Item long pressed: " + position);
+//                mToast.show();
+//                return true;
+//            }
+//        });
+//
+//        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
+//                updateState(scrollState);
+//            }
+//
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int i, int i2) {
+//                mPositionText.setText("First: " + mRecyclerView.getFirstVisiblePosition());
+//                mCountText.setText("Count: " + mRecyclerView.getChildCount());
+//            }
+//        });
+//
+//        final Drawable divider = getResources().getDrawable(R.drawable.divider);
+//        mRecyclerView.addItemDecoration(new DividerItemDecoration(divider));
+//
+//        mRecyclerView.setAdapter(new LayoutAdapter(activity, mRecyclerView, mLayoutId, airplaneDataVO));
     }
 
     private void updateState(int scrollState) {
