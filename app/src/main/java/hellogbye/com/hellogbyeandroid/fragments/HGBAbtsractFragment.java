@@ -104,4 +104,10 @@ public class HGBAbtsractFragment extends Fragment {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
+    protected void handleRequestFailure(String error) {
+
+
+        errorDialog("Error", error);
+    }
 }

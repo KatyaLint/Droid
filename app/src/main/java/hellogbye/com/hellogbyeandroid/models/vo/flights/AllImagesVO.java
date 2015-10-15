@@ -14,4 +14,13 @@ public class AllImagesVO {
     private long mWidth;
     @SerializedName("height")
     private long mHotelName;
+
+
+    public String getmImage() {
+        return mImage;
+    }
+
+    public void setmImage(String mImage) {
+        this.mImage = mImage;
+    }
 }

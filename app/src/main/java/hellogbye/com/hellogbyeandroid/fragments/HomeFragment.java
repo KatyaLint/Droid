@@ -76,6 +76,7 @@ public class HomeFragment extends HGBAbtsractFragment {
         mSpeechLayout = (LinearLayout) rootView.findViewById(R.id.speech_ll);
         mKeyBoardLayout = (LinearLayout) rootView.findViewById(R.id.keyboard_layout);
         mHGBSpinner = (RelativeLayout) rootView.findViewById(R.id.loader_spinner);
+
         mQueryEditText.setMovementMethod(new ScrollingMovementMethod());
         mQueryEditText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
@@ -160,7 +161,6 @@ public class HomeFragment extends HGBAbtsractFragment {
         mSearch.setVisibility(View.INVISIBLE);
         mKeyBoardLayout.setVisibility(View.VISIBLE);
         mSpeechLayout.setVisibility(View.INVISIBLE);
-        mSearch.setVisibility(View.INVISIBLE);
         mQueryEditText.setText(query);
         mHGBSpinner.setVisibility(View.VISIBLE);
 
@@ -169,7 +169,7 @@ public class HomeFragment extends HGBAbtsractFragment {
             public void onSuccess(Object data) {
                 if(data !=null){
                     getActivityInterface().setTravelOrder((UserTravelVO) data);
-                    ItineraryFragment fragemnt = new ItineraryFragment();
+                    HotelFragment fragemnt = new HotelFragment();
                     HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack
                 }
 
@@ -177,9 +177,18 @@ public class HomeFragment extends HGBAbtsractFragment {
 
             @Override
             public void onError(Object data) {
+<<<<<<< HEAD
 
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 mHGBSpinner.setVisibility(View.GONE);
+=======
+                handleRequestFailure((String)data);
+                mQueryEditText.setVisibility(View.VISIBLE);
+                mKeyBoardLayout.setVisibility(View.VISIBLE);
+                mSpeechLayout.setVisibility(View.VISIBLE);
+                mSearch.setVisibility(View.VISIBLE);
+                mHGBSpinner.setVisibility(View.INVISIBLE);
+>>>>>>> 203f5f18f7b023b2a4164077d86f84e7b1bfe03f
             }
         });
 

@@ -2,7 +2,14 @@ package hellogbye.com.hellogbyeandroid.network;
 
 
 import android.util.Log;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -11,25 +18,25 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 
+import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 
 public class Parser {
 
 
     public static String parseErrorMessage(VolleyError error) {
-        String err = "server error";
-        JSONObject errJson = null;
-        try {
-            err =  errJson.getString("message");
-             errJson = new JSONObject(new String(error.networkResponse.data));
-            if(errJson == null){
-                return  errJson.getString("message");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return  err;
+        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+            return "Network timed out error "+error.networkResponse.statusCode;
+        } else if (error instanceof AuthFailureError) {
+            return "AuthFailureError error "+error.networkResponse.statusCode;
+        } else if (error instanceof ServerError) {
+            return "ServerError error "+error.networkResponse.statusCode;
+        } else if (error instanceof NetworkError) {
+            return "NetworkError error "+error.networkResponse.statusCode;
+        } else if (error instanceof ParseError) {
+            return "ParseError error "+error.networkResponse.statusCode;
         }
-        return errJson.toString();
+        return"Error "+error.networkResponse.statusCode;
     }
 
 
