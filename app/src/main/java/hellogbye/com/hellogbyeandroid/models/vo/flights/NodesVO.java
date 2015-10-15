@@ -302,7 +302,7 @@ public class NodesVO
         this.mHasAlternative = mHasAlternative;
     }
 
-<<<<<<< HEAD
+
     public ArrayList<LegsVO> getLegs() {
         return legs;
     }
@@ -317,14 +317,13 @@ public class NodesVO
 
     public void setCost(double cost) {
         this.cost = cost;
-=======
-
+    }
     public String getmAmenities() {
         return mAmenities;
     }
 
     public void setmAmenities(String mAmenities) {
         this.mAmenities = mAmenities;
->>>>>>> 203f5f18f7b023b2a4164077d86f84e7b1bfe03f
+
     }
 }

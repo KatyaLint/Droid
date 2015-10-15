@@ -5,14 +5,9 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:background="@color/light_grey"
         android:id="@+id/flightRecyclerView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/flightRecyclerView"
-        />
-
-
-
+        android:layout_below="@+id/flightRecyclerView" />
 
 </RelativeLayout>

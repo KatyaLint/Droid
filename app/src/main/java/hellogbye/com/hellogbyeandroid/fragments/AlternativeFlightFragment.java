@@ -84,12 +84,6 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
 
                     List<AlternativeFlightsVO> alternativeFlightsVOs = gson.fromJson((String) data, listType);
                     getActivityInterface().setAlternativeFlights(alternativeFlightsVOs);
-                    int sub = 0;
-//                    ArrayList<AlternativeFlightsVO> flights = (ArrayList<AlternativeFlightsVO>) data;
-//                    getActivityInterface().setAlternativeFlights((ArrayList<AlternativeFlightsVO>) data);
-                    //  getActivityInterface().setTravelOrder((UserTravelVO) data);
-                    //ItineraryFragment fragemnt = new ItineraryFragment();
-                    //HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack
                 }
 
             }
@@ -164,25 +158,5 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
     public interface AlternativeButtonCB{
         void showAlternative();
     }
-
-
-//    private ArrayList<AlternativeFlightsVO> parseFlight(){
-//        Gson gson = new Gson();
-//
-//        //        Gson gson = new Gson();
-////        Type type = new TypeToken<ArrayList<FlightsVO>>(){}.getType();
-////        String strJson = loadJSONFromAsset();
-////        ArrayList<FlightsVO> airplaneDataVO = gson.fromJson(strJson, type);
-//
-//
-//        Type type = new TypeToken<ArrayList<AlternativeFlightsVO>>(){}.getType();
-//        //  Type type = new TypeToken<ArrayList<AirplaneDataVO>>(){}.getType();
-//        String strJson = HGBUtility.loadJSONFromAsset("flightdetails.txt", getActivity());
-//
-//        airplaneDataVO = gson.fromJson(strJson, type);
-//        return airplaneDataVO;
-//    }
-
-
 
 }
