@@ -1,14 +1,18 @@
 
 package hellogbye.com.hellogbyeandroid.activities;
 
+
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,6 +23,7 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import hellogbye.com.hellogbyeandroid.HGBMainInterface;
 import hellogbye.com.hellogbyeandroid.R;
@@ -39,7 +44,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
-public class MainActivity extends ActionBarActivity implements NavListAdapter.OnItemClickListener, HGBMainInterface {
+public class MainActivity extends AppCompatActivity implements NavListAdapter.OnItemClickListener, HGBMainInterface {
     private DrawerLayout mDrawerLayout;
     private RecyclerView mDrawerList;
     private LinearLayout mNavDrawerLinearLayout;
@@ -58,11 +63,15 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
     private List<AlternativeFlightsVO> alternativeFlights;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main_activity_layout);
+
+
+
 
 
         mTitle = mDrawerTitle = getTitle();
@@ -86,8 +95,6 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
 
         mToolbar = (CostumeToolBar) findViewById(R.id.toolbar);
         initToolBar();
-
-        //parseFlight();
 
     }
 
@@ -182,6 +189,7 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
         switch (navBar) {
             case HOME:
                 fragment = HomeFragment.newInstance(navPosition);
+
                 break;
             case HISTORY:
                 fragment = HistoryFragment.newInstance(navPosition);
@@ -207,44 +215,21 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
 
         }
 
-        //fragment.setArguments(getIntent().getExtras());
-        getFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, fragment, fragment.getClass().toString())
-                .addToBackStack(fragment.getClass().toString())
-                .commit();
 
-        // update selected item title, then close the drawer
-        //  setTitle(mNavTitles[position]);
+    HGBUtility.goToNextFragmentIsAddToBackStack(this,fragment,true);
 
         mToolbar.initToolBarItems();
         mToolbar.updateToolBarView(position);
         mDrawerLayout.closeDrawer(mNavDrawerLinearLayout);
     }
 
-//    private void parseFlight(){
-//        Gson gson = new Gson();
-//        Type type = new TypeToken<ArrayList<FlightsVO>>(){}.getType();
-//        String strJson = loadJSONFromAsset();
-//        ArrayList<FlightsVO> airplaneDataVO = gson.fromJson(strJson, type);
-//        int i=0;
-//    }
-//
-//    public String loadJSONFromAsset() {
-//        String json = null;
-//        try {
-//            InputStream is = getAssets().open("airplane.txt");
-//            int size = is.available();
-//            byte[] buffer = new byte[size];
-//            is.read(buffer);
-//            is.close();
-//            json = new String(buffer, "UTF-8");
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//            return null;
-//        }
-//        return json;
-//    }
-
+    @Override
+    public void onBackPressed() {
+            if(!HGBUtility.clearBackStackAndGoToNextFragment(this))
+            {
+               // super.onBackPressed();
+            }
+    }
 
     @Override
     public void setTitle(CharSequence title) {
@@ -327,8 +312,6 @@ public class MainActivity extends ActionBarActivity implements NavListAdapter.On
             }
         }
     }
-
-
 
 
 

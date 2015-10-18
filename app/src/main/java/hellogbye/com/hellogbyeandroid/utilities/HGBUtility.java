@@ -26,6 +26,7 @@ import com.nostra13.universalimageloader.core.process.BitmapProcessor;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Stack;
 
 import hellogbye.com.hellogbyeandroid.R;
 
@@ -136,13 +137,18 @@ public class HGBUtility {
         return output;
     }
 
+    private static Stack<Fragment> fragmentStack = new Stack<Fragment>();
+
+
     public static void goToNextFragmentIsAddToBackStack(Activity activity, Fragment fragment, boolean isAddToBackStack){
+
         try{
             FragmentTransaction transaction = activity.getFragmentManager().beginTransaction();
             transaction.replace(R.id.content_frame, fragment, fragment.getClass().toString());
 
             if (isAddToBackStack) {
                 transaction.addToBackStack(fragment.getClass().toString());
+                fragmentStack.push(fragment);
             }
 
             transaction.commit();
@@ -153,15 +159,20 @@ public class HGBUtility {
 
     }
 
-    public static void clearBackStackAndGoToNextFragment(Activity activity, Fragment fragment) {
+    public static boolean clearBackStackAndGoToNextFragment(Activity activity) {
 
-        if (activity == null) {
-            return;
+        if(fragmentStack.size() >= 2){
+            FragmentTransaction fragmentTransaction =  activity.getFragmentManager().beginTransaction();
+            fragmentTransaction.hide(fragmentStack.pop());
+            //fragmentStack.pop();
+            Fragment fragmentTemp = fragmentStack.lastElement();
+            goToNextFragmentIsAddToBackStack(activity,fragmentTemp,false);
+            return true;
         }
 
-        activity.getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
-        goToNextFragmentIsAddToBackStack(activity, fragment, true); //now we always want to add to the backstack
+        //TODO change the action bar relative to current fragment
+        return false;
     }
 
 

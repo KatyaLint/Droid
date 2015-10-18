@@ -2,11 +2,10 @@ package hellogbye.com.hellogbyeandroid.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.graphics.drawable.Drawable;
+
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,25 +16,20 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.lucasr.twowayview.ItemClickSupport;
-import org.lucasr.twowayview.widget.DividerItemDecoration;
+
 import org.lucasr.twowayview.widget.TwoWayView;
 
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.adapters.LayoutAdapter;
+
+
 
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
+
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
-import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
@@ -66,6 +60,7 @@ public class ItineraryFragment extends HGBAbtsractFragment {
         Bundle args = new Bundle();
         args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
         fragment.setArguments(args);
+
         return fragment;
     }
 
