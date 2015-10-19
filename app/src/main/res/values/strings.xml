@@ -31,10 +31,8 @@
     <string name="url_pp">http://www.hellogbye.com/assets/docs/pp.pdf</string>
     <string name="tell_us">Tell us in your own words where you\nwant to go, when and with who.</string>
     <string name="title_activity_maps">Map</string>
-
     <string name="flight_operator">OPERATED BY</string>
     <string name="flight_number">FLIGHT #</string>
-
     <string name="flight_airport">AIRPORTS</string>
     <string name="flight_boarding">BOARDING</string>
     <string name="flight_duration">DURATION</string>

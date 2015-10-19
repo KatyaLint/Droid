@@ -93,41 +93,41 @@ public class HotelFragment extends HGBAbtsractFragment {
 //        mAnimation.setFillAfter(true);
 //        mScrollView.setAnimation(mAnimation);
 
-        mSlidingPanels.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
-            @Override
-            public void onPanelSlide(View panel, float slideOffset) {
-                Log.i(TAG, "onPanelSlide, offset " + slideOffset);
-//                Log.i(TAG, "main height=" + mSlidingPanels.findViewById(R.id.main).getHeight());
-//                if(!mStartedSliding){
-//                    mStartedSliding = true;
-//                    mSlidingPanels.setPanelHeight(200);
-//                }
-
-            }
-
-            @Override
-            public void onPanelCollapsed(View panel) {
-                Log.i(TAG, "onPanelCollapsed");
-  //              Log.i(TAG, "main height=" + mSlidingPanels.findViewById(R.id.main).getHeight());
-            }
-
-            @Override
-            public void onPanelExpanded(View panel) {
-                Log.i(TAG, "onPanelExpanded");
-      ///          Log.i(TAG, "main height=" + mSlidingPanels.findViewById(R.id.main).getHeight());
-            }
-
-            @Override
-            public void onPanelAnchored(View panel) {
-                Log.i(TAG, "onPanelAnchored");
-      //          Log.i(TAG, "main height=" + mSlidingPanels.findViewById(R.id.main).getHeight());
-            }
-
-            @Override
-            public void onPanelHidden(View panel) {
-
-            }
-        });
+//        mSlidingPanels.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+//            @Override
+//            public void onPanelSlide(View panel, float slideOffset) {
+//                Log.i(TAG, "onPanelSlide, offset " + slideOffset);
+////                Log.i(TAG, "main height=" + mSlidingPanels.findViewById(R.id.main).getHeight());
+////                if(!mStartedSliding){
+////                    mStartedSliding = true;
+////                    mSlidingPanels.setPanelHeight(200);
+////                }
+//
+//            }
+//
+//            @Override
+//            public void onPanelCollapsed(View panel) {
+//                Log.i(TAG, "onPanelCollapsed");
+//  //              Log.i(TAG, "main height=" + mSlidingPanels.findViewById(R.id.main).getHeight());
+//            }
+//
+//            @Override
+//            public void onPanelExpanded(View panel) {
+//                Log.i(TAG, "onPanelExpanded");
+//      ///          Log.i(TAG, "main height=" + mSlidingPanels.findViewById(R.id.main).getHeight());
+//            }
+//
+//            @Override
+//            public void onPanelAnchored(View panel) {
+//                Log.i(TAG, "onPanelAnchored");
+//      //          Log.i(TAG, "main height=" + mSlidingPanels.findViewById(R.id.main).getHeight());
+//            }
+//
+//            @Override
+//            public void onPanelHidden(View panel) {
+//
+//            }
+//        });
 
         return rootView;
     }
