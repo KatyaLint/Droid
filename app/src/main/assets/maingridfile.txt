@@ -1,0 +1,2423 @@
+{
+  "solutionid": "88a1435d-120a-439d-bc45-01ddba2679c2",
+  "solutionname": "Vlad + Hussam Sheikh : Seattle : 2015-11-13",
+  "isfavorite": false,
+  "totalprice": 6502.57,
+  "passengers": [
+    {
+      "paxguid": "18a511f8-f82d-4ddf-b8af-a52100f6d054",
+      "accountid": "18a511f8-f82d-4ddf-b8af-a52100f6d054",
+      "name": "Vlad",
+      "displayname": "Vlad",
+      "totalprice": 3230.28,
+      "totalflightprice": 1963,
+      "totalhotelprice": 1267.28,
+      "paxstatus": "Null",
+      "cells": [
+        {
+          "date": "2015-11-13T00:00:00",
+          "nodes": [
+            {
+              "legs": [
+                {
+                  "type": "Leg",
+                  "parentguid": "980da851-e902-4505-b2df-b0c09c11ab14",
+                  "guid": "1ce2f4e1-1320-48b4-b530-a41ac84a0f06",
+                  "flightnumber": "681",
+                  "flighttime": "2h 39m",
+                  "departure": "2015-11-13T13:14:00",
+                  "departuretime": "01:14 PM",
+                  "arrival": "2015-11-13T14:53:00",
+                  "arrivaltime": "02:53 PM",
+                  "code": "Z",
+                  "origin": "LGA",
+                  "destination": "ORD",
+                  "origincityname": "New York",
+                  "destinationcityname": "Chicago",
+                  "originairportname": "La Guardia",
+                  "destinationairportname": "O'hare ",
+                  "origincountry": "US",
+                  "destinationcountry": "US",
+                  "carriercode": "UA",
+                  "carriername": "United Airlines Inc",
+                  "equipment": "319",
+                  "paxguid": "18a511f8-f82d-4ddf-b8af-a52100f6d054",
+                  "ref": "00000000-0000-0000-0000-000000000000",
+                  "seq": 0,
+                  "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/UA_sq.jpg",
+                  "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/UA.png",
+                  "fareclass": "Business",
+                  "farepreference": "Refundable",
+                  "normalizedduration": 0.3613636363636364
+                },
+                {
+                  "type": "StopOver",
+                  "durationhours": 1,
+                  "durationminutes": 12,
+                  "cityname": "Chicago",
+                  "airportname": "O'hare ",
+                  "airportcode": "ORD",
+                  "arrivaltime": "02:53 PM",
+                  "departuretime": "04:05 PM"
+                },
+                {
+                  "type": "Leg",
+                  "parentguid": "980da851-e902-4505-b2df-b0c09c11ab14",
+                  "guid": "caaa9aa9-05d6-47b4-bad5-f0b938aad86f",
+                  "flightnumber": "1641",
+                  "flighttime": "4h 41m",
+                  "departure": "2015-11-13T16:05:00",
+                  "departuretime": "04:05 PM",
+                  "arrival": "2015-11-13T18:46:00",
+                  "arrivaltime": "06:46 PM",
+                  "code": "A",
+                  "origin": "ORD",
+                  "destination": "SEA",
+                  "origincityname": "Chicago",
+                  "destinationcityname": "Seattle",
+                  "originairportname": "O'hare ",
+                  "destinationairportname": "Seattle-Tacoma ",
+                  "origincountry": "US",
+                  "destinationcountry": "US",
+                  "carriercode": "UA",
+                  "carriername": "United Airlines Inc",
+                  "equipment": "739",
+                  "paxguid": "18a511f8-f82d-4ddf-b8af-a52100f6d054",
+                  "ref": "00000000-0000-0000-0000-000000000000",
+                  "seq": 1,
+                  "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/UA_sq.jpg",
+                  "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/UA.png",
+                  "fareclass": "Business",
+                  "farepreference": "Refundable",
+                  "normalizedduration": 0.6386363636363637
+                }
+              ],
+              "isalternative": false,
+              "flighttime": "7h 20m",
+              "departure": "2015-11-13T13:14:00",
+              "departuretime": "01:14 PM",
+              "arrival": "2015-11-13T18:46:00",
+              "arrivaltime": "06:46 PM",
+              "origin": "LGA",
+              "destination": "SEA",
+              "origincityname": "New York",
+              "destinationcityname": "Seattle",
+              "originairportname": "La Guardia",
+              "destinationairportname": "Seattle-Tacoma ",
+              "origincountry": "US",
+              "destinationcountry": "US",
+              "operator": "UA",
+              "operatorname": "United Airlines Inc",
+              "equipment": "319",
+              "fareclass": "Business",
+              "farepreference": "Refundable",
+              "cost": 1708.5,
+              "tax": 0,
+              "traveltime": "8h 32m",
+              "paxguid": "18a511f8-f82d-4ddf-b8af-a52100f6d054",
+              "travelsector": "domestic",
+              "primaryguid": "00000000-0000-0000-0000-000000000000",
+              "normalizedduration": 1,
+              "type": "flight",
+              "dateorder": "2015-11-13T13:14:00",
+              "guid": "980da851-e902-4505-b2df-b0c09c11ab14",
+              "rank": 10.513333333333334,
+              "paymentprocessingstate": "PROCESSING"
+            },
+            {
+              "paymentprocessingstate": "PROCESSING",
+              "hotelcode": "210985",
+              "cityname": "seattle",
+              "hotelname": "Seattle Marriott Waterfront",
+              "hotelchain": "Marriott Hotels & Resorts",
+              "starrating": 4,
+              "shortdescription": "<p><b>Property Location</b> <br />With a stay at Seattle Marriott Waterfront, you'll be centrally located in Seattle, minutes from Original Starbucks and Pike Place Market. This 4-star hotel is within close proximity of Bell Street Cruise Terminal at Pier 66 and Seattle Aquarium.</p><p><b>Rooms</b> <br />Make yourself at home in one of the 358 air-conditioned guestrooms. High-speed (wired) Internet access (surcharge) keeps you connected, and cable programming is available for your entertainment. Bathrooms feature shower/tub combinations, complimentary toiletries, and hair dryers. Conveniences include phones, as well as safes and desks.</p><p><b>Rec, Spa, Premium Amenities</b> <br />Be sure to enjoy recreational amenities including an outdoor pool and a fitness center. Additional amenities include gift shops/newsstands, shopping on site, and tour/ticket assistance.</p><p><b>Dining</b> <br />You can enjoy a meal at a restaurant serving the guests of Seattle Marriott Waterfront, or find a snack in a coffee shop/café. Quench your thirst with your favorite drink at a bar/lounge.</p><p><b>Business, Other Amenities</b> <br />Featured amenities include high-speed (wired) Internet access (surcharge), a business center, and express check-in.</p>",
+              "locationdescription": "Near Pike Place Market",
+              "postalcode": "98121",
+              "latitude": 47.61016,
+              "longitude": -122.346512,
+              "address1": "2100 Alaskan Way",
+              "address2": "",
+              "address3": "",
+              "phone": "",
+              "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_159_b.jpg",
+              "allimages": [
+                {
+                  "caption": "Executive Lounge",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_141_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Fitness Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_144_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Outdoor Pool",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_162_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Featured Image",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_159_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_129_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Indoor/Outdoor Pool",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_132_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Delicatessen",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_136_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Interior",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_149_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Interior",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_150_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_154_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Lounge",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_155_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Exterior",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_167_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Exterior",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_171_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_174_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Ballroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_177_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_165_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_168_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Dining",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_178_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_170_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_176_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Check-in/Check-out Kiosk",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_166_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_179_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_180_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_181_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_182_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_183_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_184_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_185_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_186_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_187_b.jpg",
+                  "width": 350,
+                  "height": 350
+                }
+              ],
+              "amenities": "The hotel's 24-hour fitness center includes treadmills with personal TV monitors, stationary bikes, elliptical machines, and free weights. A glass wall separates the gym from a small outdoor pool.  <p>  A jogging/biking path runs in front of the hotel and continues along the waterfront; guests can follow it less than a mile (1.6 kilometers) to Myrtle Edwards Park. Parasailing adventures, sightseeing cruises, and sailing excursions depart from points along the waterfront, all within a 10-minute walk from the hotel. Bowling and squash are within 5 miles (8 kilometers) of the hotel.</p>    <p>  The recreational activities listed below are available either on site or near the hotel; fees may apply.</p>",
+              "minimumamount": 369,
+              "maximumamount": 399,
+              "checkin": "2015-11-13T00:00:00",
+              "checkout": "2015-11-16T00:00:00",
+              "country": "US",
+              "stateprovince": "WA",
+              "paxguid": "18a511f8-f82d-4ddf-b8af-a52100f6d054",
+              "defaultroomguid": "bacb0653-deb1-4d38-b2ef-1200b1ade0dd",
+              "type": "hotel",
+              "dateorder": "2015-11-13T00:00:00",
+              "guid": "c86f9828-d730-4664-b46d-5e5cb694f148",
+              "rank": 0.8500000000000001,
+              "rooms": [
+                {
+                  "primaryguid": "00000000-0000-0000-0000-000000000000",
+                  "roomtype": "Standard Room, 1 King Bed, Sea View",
+                  "code": "146332",
+                  "description": "1 king bed with Marriott's signature premium bedding. Views of Elliott Bay. 337 square feet (31 square meters). Desk and chair. Upholstered chair. High-speed Internet access (surcharge). Cable TV. Premium cable channels. Pay movies. 2 multi-line phones (one cordless). Refrigerator and minibar upon request. Coffee/tea maker. Complimentary weekday newspaper. Hair dryer. Iron/ironing board.",
+                  "smoking": "Non-Smoking",
+                  "bedtypes": [],
+                  "cost": 1267.28,
+                  "nightlyrate": [
+                    346.04,
+                    371.77,
+                    371.77
+                  ],
+                  "averagerate": 363.19,
+                  "surchargetotal": 177.7,
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_180_s.jpg",
+                  "isalternative": false,
+                  "type": "hotelroom",
+                  "dateorder": "2015-11-13T00:00:00",
+                  "guid": "bacb0653-deb1-4d38-b2ef-1200b1ade0dd",
+                  "rank": 2,
+                  "checkin": "2015-11-13T00:00:00",
+                  "checkout": "2015-11-16T00:00:00",
+                  "totalbeforetax": 1089.58
+                }
+              ],
+              "isalternative": false,
+              "hasalternative": true
+            }
+          ]
+        },
+        {
+          "date": "2015-11-14T00:00:00",
+          "nodes": [
+            {
+              "paymentprocessingstate": "PROCESSING",
+              "hotelcode": "210985",
+              "cityname": "seattle",
+              "hotelname": "Seattle Marriott Waterfront",
+              "hotelchain": "Marriott Hotels & Resorts",
+              "starrating": 4,
+              "shortdescription": "<p><b>Property Location</b> <br />With a stay at Seattle Marriott Waterfront, you'll be centrally located in Seattle, minutes from Original Starbucks and Pike Place Market. This 4-star hotel is within close proximity of Bell Street Cruise Terminal at Pier 66 and Seattle Aquarium.</p><p><b>Rooms</b> <br />Make yourself at home in one of the 358 air-conditioned guestrooms. High-speed (wired) Internet access (surcharge) keeps you connected, and cable programming is available for your entertainment. Bathrooms feature shower/tub combinations, complimentary toiletries, and hair dryers. Conveniences include phones, as well as safes and desks.</p><p><b>Rec, Spa, Premium Amenities</b> <br />Be sure to enjoy recreational amenities including an outdoor pool and a fitness center. Additional amenities include gift shops/newsstands, shopping on site, and tour/ticket assistance.</p><p><b>Dining</b> <br />You can enjoy a meal at a restaurant serving the guests of Seattle Marriott Waterfront, or find a snack in a coffee shop/café. Quench your thirst with your favorite drink at a bar/lounge.</p><p><b>Business, Other Amenities</b> <br />Featured amenities include high-speed (wired) Internet access (surcharge), a business center, and express check-in.</p>",
+              "locationdescription": "Near Pike Place Market",
+              "postalcode": "98121",
+              "latitude": 47.61016,
+              "longitude": -122.346512,
+              "address1": "2100 Alaskan Way",
+              "address2": "",
+              "address3": "",
+              "phone": "",
+              "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_159_b.jpg",
+              "allimages": [
+                {
+                  "caption": "Executive Lounge",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_141_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Fitness Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_144_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Outdoor Pool",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_162_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Featured Image",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_159_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_129_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Indoor/Outdoor Pool",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_132_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Delicatessen",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_136_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Interior",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_149_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Interior",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_150_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_154_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Lounge",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_155_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Exterior",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_167_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Exterior",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_171_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_174_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Ballroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_177_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_165_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_168_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Dining",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_178_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_170_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_176_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Check-in/Check-out Kiosk",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_166_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_179_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_180_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_181_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_182_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_183_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_184_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_185_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_186_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_187_b.jpg",
+                  "width": 350,
+                  "height": 350
+                }
+              ],
+              "amenities": "The hotel's 24-hour fitness center includes treadmills with personal TV monitors, stationary bikes, elliptical machines, and free weights. A glass wall separates the gym from a small outdoor pool.  <p>  A jogging/biking path runs in front of the hotel and continues along the waterfront; guests can follow it less than a mile (1.6 kilometers) to Myrtle Edwards Park. Parasailing adventures, sightseeing cruises, and sailing excursions depart from points along the waterfront, all within a 10-minute walk from the hotel. Bowling and squash are within 5 miles (8 kilometers) of the hotel.</p>    <p>  The recreational activities listed below are available either on site or near the hotel; fees may apply.</p>",
+              "minimumamount": 369,
+              "maximumamount": 399,
+              "checkin": "2015-11-13T00:00:00",
+              "checkout": "2015-11-16T00:00:00",
+              "country": "US",
+              "stateprovince": "WA",
+              "paxguid": "18a511f8-f82d-4ddf-b8af-a52100f6d054",
+              "defaultroomguid": "bacb0653-deb1-4d38-b2ef-1200b1ade0dd",
+              "type": "hotel",
+              "dateorder": "2015-11-13T00:00:00",
+              "guid": "c86f9828-d730-4664-b46d-5e5cb694f148",
+              "rank": 0.8500000000000001,
+              "rooms": [
+                {
+                  "primaryguid": "00000000-0000-0000-0000-000000000000",
+                  "roomtype": "Standard Room, 1 King Bed, Sea View",
+                  "code": "146332",
+                  "description": "1 king bed with Marriott's signature premium bedding. Views of Elliott Bay. 337 square feet (31 square meters). Desk and chair. Upholstered chair. High-speed Internet access (surcharge). Cable TV. Premium cable channels. Pay movies. 2 multi-line phones (one cordless). Refrigerator and minibar upon request. Coffee/tea maker. Complimentary weekday newspaper. Hair dryer. Iron/ironing board.",
+                  "smoking": "Non-Smoking",
+                  "bedtypes": [],
+                  "cost": 1267.28,
+                  "nightlyrate": [
+                    346.04,
+                    371.77,
+                    371.77
+                  ],
+                  "averagerate": 363.19,
+                  "surchargetotal": 177.7,
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_180_s.jpg",
+                  "isalternative": false,
+                  "type": "hotelroom",
+                  "dateorder": "2015-11-13T00:00:00",
+                  "guid": "bacb0653-deb1-4d38-b2ef-1200b1ade0dd",
+                  "rank": 2,
+                  "checkin": "2015-11-13T00:00:00",
+                  "checkout": "2015-11-16T00:00:00",
+                  "totalbeforetax": 1089.58
+                }
+              ],
+              "isalternative": false,
+              "hasalternative": true
+            }
+          ]
+        },
+        {
+          "date": "2015-11-15T00:00:00",
+          "nodes": [
+            {
+              "paymentprocessingstate": "PROCESSING",
+              "hotelcode": "210985",
+              "cityname": "seattle",
+              "hotelname": "Seattle Marriott Waterfront",
+              "hotelchain": "Marriott Hotels & Resorts",
+              "starrating": 4,
+              "shortdescription": "<p><b>Property Location</b> <br />With a stay at Seattle Marriott Waterfront, you'll be centrally located in Seattle, minutes from Original Starbucks and Pike Place Market. This 4-star hotel is within close proximity of Bell Street Cruise Terminal at Pier 66 and Seattle Aquarium.</p><p><b>Rooms</b> <br />Make yourself at home in one of the 358 air-conditioned guestrooms. High-speed (wired) Internet access (surcharge) keeps you connected, and cable programming is available for your entertainment. Bathrooms feature shower/tub combinations, complimentary toiletries, and hair dryers. Conveniences include phones, as well as safes and desks.</p><p><b>Rec, Spa, Premium Amenities</b> <br />Be sure to enjoy recreational amenities including an outdoor pool and a fitness center. Additional amenities include gift shops/newsstands, shopping on site, and tour/ticket assistance.</p><p><b>Dining</b> <br />You can enjoy a meal at a restaurant serving the guests of Seattle Marriott Waterfront, or find a snack in a coffee shop/café. Quench your thirst with your favorite drink at a bar/lounge.</p><p><b>Business, Other Amenities</b> <br />Featured amenities include high-speed (wired) Internet access (surcharge), a business center, and express check-in.</p>",
+              "locationdescription": "Near Pike Place Market",
+              "postalcode": "98121",
+              "latitude": 47.61016,
+              "longitude": -122.346512,
+              "address1": "2100 Alaskan Way",
+              "address2": "",
+              "address3": "",
+              "phone": "",
+              "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_159_b.jpg",
+              "allimages": [
+                {
+                  "caption": "Executive Lounge",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_141_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Fitness Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_144_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Outdoor Pool",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_162_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Featured Image",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_159_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_129_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Indoor/Outdoor Pool",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_132_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Delicatessen",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_136_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Interior",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_149_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Interior",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_150_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_154_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Lounge",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_155_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Exterior",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_167_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Exterior",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_171_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_174_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Ballroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_177_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_165_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_168_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Dining",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_178_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_170_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_176_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Check-in/Check-out Kiosk",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_166_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_179_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_180_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_181_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_182_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_183_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_184_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_185_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_186_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_187_b.jpg",
+                  "width": 350,
+                  "height": 350
+                }
+              ],
+              "amenities": "The hotel's 24-hour fitness center includes treadmills with personal TV monitors, stationary bikes, elliptical machines, and free weights. A glass wall separates the gym from a small outdoor pool.  <p>  A jogging/biking path runs in front of the hotel and continues along the waterfront; guests can follow it less than a mile (1.6 kilometers) to Myrtle Edwards Park. Parasailing adventures, sightseeing cruises, and sailing excursions depart from points along the waterfront, all within a 10-minute walk from the hotel. Bowling and squash are within 5 miles (8 kilometers) of the hotel.</p>    <p>  The recreational activities listed below are available either on site or near the hotel; fees may apply.</p>",
+              "minimumamount": 369,
+              "maximumamount": 399,
+              "checkin": "2015-11-13T00:00:00",
+              "checkout": "2015-11-16T00:00:00",
+              "country": "US",
+              "stateprovince": "WA",
+              "paxguid": "18a511f8-f82d-4ddf-b8af-a52100f6d054",
+              "defaultroomguid": "bacb0653-deb1-4d38-b2ef-1200b1ade0dd",
+              "type": "hotel",
+              "dateorder": "2015-11-13T00:00:00",
+              "guid": "c86f9828-d730-4664-b46d-5e5cb694f148",
+              "rank": 0.8500000000000001,
+              "rooms": [
+                {
+                  "primaryguid": "00000000-0000-0000-0000-000000000000",
+                  "roomtype": "Standard Room, 1 King Bed, Sea View",
+                  "code": "146332",
+                  "description": "1 king bed with Marriott's signature premium bedding. Views of Elliott Bay. 337 square feet (31 square meters). Desk and chair. Upholstered chair. High-speed Internet access (surcharge). Cable TV. Premium cable channels. Pay movies. 2 multi-line phones (one cordless). Refrigerator and minibar upon request. Coffee/tea maker. Complimentary weekday newspaper. Hair dryer. Iron/ironing board.",
+                  "smoking": "Non-Smoking",
+                  "bedtypes": [],
+                  "cost": 1267.28,
+                  "nightlyrate": [
+                    346.04,
+                    371.77,
+                    371.77
+                  ],
+                  "averagerate": 363.19,
+                  "surchargetotal": 177.7,
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_180_s.jpg",
+                  "isalternative": false,
+                  "type": "hotelroom",
+                  "dateorder": "2015-11-13T00:00:00",
+                  "guid": "bacb0653-deb1-4d38-b2ef-1200b1ade0dd",
+                  "rank": 2,
+                  "checkin": "2015-11-13T00:00:00",
+                  "checkout": "2015-11-16T00:00:00",
+                  "totalbeforetax": 1089.58
+                }
+              ],
+              "isalternative": false,
+              "hasalternative": true
+            }
+          ]
+        },
+        {
+          "date": "2015-11-16T00:00:00",
+          "nodes": [
+            {
+              "legs": [
+                {
+                  "type": "Leg",
+                  "parentguid": "3da9ad26-45e4-470a-9412-6e1687bcdfa2",
+                  "guid": "13a6266d-7f0d-4ddd-8d32-99b3f835bec0",
+                  "flightnumber": "244",
+                  "flighttime": "9h 45m",
+                  "departure": "2015-11-16T05:27:00",
+                  "departuretime": "05:27 AM",
+                  "arrival": "2015-11-16T18:12:00",
+                  "arrivaltime": "06:12 PM",
+                  "code": "L",
+                  "origin": "SEA",
+                  "destination": "LGA",
+                  "origincityname": "Seattle",
+                  "destinationcityname": "New York",
+                  "originairportname": "Seattle-Tacoma ",
+                  "destinationairportname": "La Guardia",
+                  "origincountry": "US",
+                  "destinationcountry": "US",
+                  "carriercode": "UA",
+                  "carriername": "United Airlines Inc",
+                  "equipment": "CHG",
+                  "paxguid": "18a511f8-f82d-4ddf-b8af-a52100f6d054",
+                  "ref": "00000000-0000-0000-0000-000000000000",
+                  "seq": 0,
+                  "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/UA_sq.jpg",
+                  "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/UA.png",
+                  "fareclass": "Economy",
+                  "farepreference": "Nonrefundable",
+                  "normalizedduration": 1
+                }
+              ],
+              "isalternative": false,
+              "flighttime": "9h 45m",
+              "departure": "2015-11-16T05:27:00",
+              "departuretime": "05:27 AM",
+              "arrival": "2015-11-16T18:12:00",
+              "arrivaltime": "06:12 PM",
+              "origin": "SEA",
+              "destination": "LGA",
+              "origincityname": "Seattle",
+              "destinationcityname": "New York",
+              "originairportname": "Seattle-Tacoma ",
+              "destinationairportname": "La Guardia",
+              "origincountry": "US",
+              "destinationcountry": "US",
+              "operator": "UA",
+              "operatorname": "United Airlines Inc",
+              "equipment": "CHG",
+              "fareclass": "Economy",
+              "farepreference": "Nonrefundable",
+              "cost": 254.5,
+              "tax": 0,
+              "traveltime": "9h 45m",
+              "paxguid": "18a511f8-f82d-4ddf-b8af-a52100f6d054",
+              "travelsector": "domestic",
+              "primaryguid": "00000000-0000-0000-0000-000000000000",
+              "normalizedduration": 1,
+              "type": "flight",
+              "dateorder": "2015-11-16T05:27:00",
+              "guid": "3da9ad26-45e4-470a-9412-6e1687bcdfa2",
+              "rank": 10.62,
+              "paymentprocessingstate": "PROCESSING"
+            },
+            {
+              "paymentprocessingstate": "PROCESSING",
+              "hotelcode": "210985",
+              "cityname": "seattle",
+              "hotelname": "Seattle Marriott Waterfront",
+              "hotelchain": "Marriott Hotels & Resorts",
+              "starrating": 4,
+              "shortdescription": "<p><b>Property Location</b> <br />With a stay at Seattle Marriott Waterfront, you'll be centrally located in Seattle, minutes from Original Starbucks and Pike Place Market. This 4-star hotel is within close proximity of Bell Street Cruise Terminal at Pier 66 and Seattle Aquarium.</p><p><b>Rooms</b> <br />Make yourself at home in one of the 358 air-conditioned guestrooms. High-speed (wired) Internet access (surcharge) keeps you connected, and cable programming is available for your entertainment. Bathrooms feature shower/tub combinations, complimentary toiletries, and hair dryers. Conveniences include phones, as well as safes and desks.</p><p><b>Rec, Spa, Premium Amenities</b> <br />Be sure to enjoy recreational amenities including an outdoor pool and a fitness center. Additional amenities include gift shops/newsstands, shopping on site, and tour/ticket assistance.</p><p><b>Dining</b> <br />You can enjoy a meal at a restaurant serving the guests of Seattle Marriott Waterfront, or find a snack in a coffee shop/café. Quench your thirst with your favorite drink at a bar/lounge.</p><p><b>Business, Other Amenities</b> <br />Featured amenities include high-speed (wired) Internet access (surcharge), a business center, and express check-in.</p>",
+              "locationdescription": "Near Pike Place Market",
+              "postalcode": "98121",
+              "latitude": 47.61016,
+              "longitude": -122.346512,
+              "address1": "2100 Alaskan Way",
+              "address2": "",
+              "address3": "",
+              "phone": "",
+              "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_159_b.jpg",
+              "allimages": [
+                {
+                  "caption": "Executive Lounge",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_141_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Fitness Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_144_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Outdoor Pool",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_162_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Featured Image",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_159_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_129_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Indoor/Outdoor Pool",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_132_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Delicatessen",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_136_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Interior",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_149_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Interior",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_150_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_154_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Lounge",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_155_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Exterior",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_167_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Exterior",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_171_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_174_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Ballroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_177_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_165_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_168_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Dining",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_178_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_170_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_176_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Check-in/Check-out Kiosk",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_166_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_179_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_180_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_181_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_182_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_183_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_184_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_185_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_186_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_187_b.jpg",
+                  "width": 350,
+                  "height": 350
+                }
+              ],
+              "amenities": "The hotel's 24-hour fitness center includes treadmills with personal TV monitors, stationary bikes, elliptical machines, and free weights. A glass wall separates the gym from a small outdoor pool.  <p>  A jogging/biking path runs in front of the hotel and continues along the waterfront; guests can follow it less than a mile (1.6 kilometers) to Myrtle Edwards Park. Parasailing adventures, sightseeing cruises, and sailing excursions depart from points along the waterfront, all within a 10-minute walk from the hotel. Bowling and squash are within 5 miles (8 kilometers) of the hotel.</p>    <p>  The recreational activities listed below are available either on site or near the hotel; fees may apply.</p>",
+              "minimumamount": 369,
+              "maximumamount": 399,
+              "checkin": "2015-11-13T00:00:00",
+              "checkout": "2015-11-16T00:00:00",
+              "country": "US",
+              "stateprovince": "WA",
+              "paxguid": "18a511f8-f82d-4ddf-b8af-a52100f6d054",
+              "defaultroomguid": "bacb0653-deb1-4d38-b2ef-1200b1ade0dd",
+              "type": "hotel",
+              "dateorder": "2015-11-13T00:00:00",
+              "guid": "c86f9828-d730-4664-b46d-5e5cb694f148",
+              "rank": 0.8500000000000001,
+              "rooms": [
+                {
+                  "primaryguid": "00000000-0000-0000-0000-000000000000",
+                  "roomtype": "Standard Room, 1 King Bed, Sea View",
+                  "code": "146332",
+                  "description": "1 king bed with Marriott's signature premium bedding. Views of Elliott Bay. 337 square feet (31 square meters). Desk and chair. Upholstered chair. High-speed Internet access (surcharge). Cable TV. Premium cable channels. Pay movies. 2 multi-line phones (one cordless). Refrigerator and minibar upon request. Coffee/tea maker. Complimentary weekday newspaper. Hair dryer. Iron/ironing board.",
+                  "smoking": "Non-Smoking",
+                  "bedtypes": [],
+                  "cost": 1267.28,
+                  "nightlyrate": [
+                    346.04,
+                    371.77,
+                    371.77
+                  ],
+                  "averagerate": 363.19,
+                  "surchargetotal": 177.7,
+                  "image": "http://media.expedia.com/hotels/1000000/920000/911800/911767/911767_180_s.jpg",
+                  "isalternative": false,
+                  "type": "hotelroom",
+                  "dateorder": "2015-11-13T00:00:00",
+                  "guid": "bacb0653-deb1-4d38-b2ef-1200b1ade0dd",
+                  "rank": 2,
+                  "checkin": "2015-11-13T00:00:00",
+                  "checkout": "2015-11-16T00:00:00",
+                  "totalbeforetax": 1089.58
+                }
+              ],
+              "isalternative": false,
+              "hasalternative": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "paxguid": "170d7240-f9bb-4c44-8188-a521010504cb",
+      "accountid": "170d7240-f9bb-4c44-8188-a521010504cb",
+      "name": "Hussam Sheikh",
+      "displayname": "Hussam Sheikh",
+      "totalprice": 3272.29,
+      "totalflightprice": 1963,
+      "totalhotelprice": 1309.29,
+      "paxstatus": "Null",
+      "cells": [
+        {
+          "date": "2015-11-13T00:00:00",
+          "nodes": [
+            {
+              "legs": [
+                {
+                  "type": "Leg",
+                  "parentguid": "d9f153aa-dca0-4840-8b75-3329e47145cd",
+                  "guid": "f66aa7af-cab1-4c12-b820-84101688f191",
+                  "flightnumber": "681",
+                  "flighttime": "2h 39m",
+                  "departure": "2015-11-13T13:14:00",
+                  "departuretime": "01:14 PM",
+                  "arrival": "2015-11-13T14:53:00",
+                  "arrivaltime": "02:53 PM",
+                  "code": "Z",
+                  "origin": "LGA",
+                  "destination": "ORD",
+                  "origincityname": "New York",
+                  "destinationcityname": "Chicago",
+                  "originairportname": "La Guardia",
+                  "destinationairportname": "O'hare ",
+                  "origincountry": "US",
+                  "destinationcountry": "US",
+                  "carriercode": "UA",
+                  "carriername": "United Airlines Inc",
+                  "equipment": "319",
+                  "paxguid": "170d7240-f9bb-4c44-8188-a521010504cb",
+                  "ref": "00000000-0000-0000-0000-000000000000",
+                  "seq": 0,
+                  "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/UA_sq.jpg",
+                  "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/UA.png",
+                  "fareclass": "Business",
+                  "farepreference": "Refundable",
+                  "normalizedduration": 0.3613636363636364
+                },
+                {
+                  "type": "StopOver",
+                  "durationhours": 1,
+                  "durationminutes": 12,
+                  "cityname": "Chicago",
+                  "airportname": "O'hare ",
+                  "airportcode": "ORD",
+                  "arrivaltime": "02:53 PM",
+                  "departuretime": "04:05 PM"
+                },
+                {
+                  "type": "Leg",
+                  "parentguid": "d9f153aa-dca0-4840-8b75-3329e47145cd",
+                  "guid": "a6ddde24-4264-4ecd-9d1d-887335988820",
+                  "flightnumber": "1641",
+                  "flighttime": "4h 41m",
+                  "departure": "2015-11-13T16:05:00",
+                  "departuretime": "04:05 PM",
+                  "arrival": "2015-11-13T18:46:00",
+                  "arrivaltime": "06:46 PM",
+                  "code": "A",
+                  "origin": "ORD",
+                  "destination": "SEA",
+                  "origincityname": "Chicago",
+                  "destinationcityname": "Seattle",
+                  "originairportname": "O'hare ",
+                  "destinationairportname": "Seattle-Tacoma ",
+                  "origincountry": "US",
+                  "destinationcountry": "US",
+                  "carriercode": "UA",
+                  "carriername": "United Airlines Inc",
+                  "equipment": "739",
+                  "paxguid": "170d7240-f9bb-4c44-8188-a521010504cb",
+                  "ref": "00000000-0000-0000-0000-000000000000",
+                  "seq": 1,
+                  "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/UA_sq.jpg",
+                  "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/UA.png",
+                  "fareclass": "Business",
+                  "farepreference": "Refundable",
+                  "normalizedduration": 0.6386363636363637
+                }
+              ],
+              "isalternative": false,
+              "flighttime": "7h 20m",
+              "departure": "2015-11-13T13:14:00",
+              "departuretime": "01:14 PM",
+              "arrival": "2015-11-13T18:46:00",
+              "arrivaltime": "06:46 PM",
+              "origin": "LGA",
+              "destination": "SEA",
+              "origincityname": "New York",
+              "destinationcityname": "Seattle",
+              "originairportname": "La Guardia",
+              "destinationairportname": "Seattle-Tacoma ",
+              "origincountry": "US",
+              "destinationcountry": "US",
+              "operator": "UA",
+              "operatorname": "United Airlines Inc",
+              "equipment": "319",
+              "fareclass": "Business",
+              "farepreference": "Refundable",
+              "cost": 1708.5,
+              "tax": 0,
+              "traveltime": "8h 32m",
+              "paxguid": "170d7240-f9bb-4c44-8188-a521010504cb",
+              "travelsector": "domestic",
+              "primaryguid": "00000000-0000-0000-0000-000000000000",
+              "normalizedduration": 1,
+              "type": "flight",
+              "dateorder": "2015-11-13T13:14:00",
+              "guid": "d9f153aa-dca0-4840-8b75-3329e47145cd",
+              "rank": 10.513333333333334,
+              "paymentprocessingstate": "PROCESSING"
+            },
+            {
+              "paymentprocessingstate": "PROCESSING",
+              "hotelcode": "115072",
+              "cityname": "seattle",
+              "hotelname": "Fairmont Olympic Hotel",
+              "hotelchain": "Fairmont",
+              "starrating": 5,
+              "shortdescription": "<p><b>Property Location</b> <br />With a stay at Fairmont Olympic Hotel, you'll be centrally located in Seattle, steps from 5th Avenue Theater and Benaroya Hall. This 5-star hotel is close to Pike Place Market and Space Needle.</p><p><b>Rooms</b> <br />Make yourself at home in one of the 450  air-conditioned rooms featuring minibars. Wireless Internet access (surcharge) keeps you connected, and cable programming is available for your entertainment. Bathrooms have designer toiletries and hair dryers. Conveniences include phones, as well as laptop-compatible safes and desks.</p><p><b>Rec, Spa, Premium Amenities</b> <br />Pamper yourself with a visit to the spa, which offers massages, body treatments, and facials. You can take advantage of recreational amenities such as a health club, an indoor pool, and a spa tub. Additional amenities include wireless Internet access (surcharge), concierge services, and supervised childcare/activities.</p><p><b>Dining</b> <br />Enjoy a meal at a restaurant or in a coffee shop/café. Or stay in and take advantage of the hotel's 24-hour room service. Quench your thirst with your favorite drink at a bar/lounge.</p><p><b>Business, Other Amenities</b> <br />Featured amenities include a business center, limo/town car service, and express check-out. Event facilities at this hotel consist of conference/meeting rooms and small meeting rooms. Guests may use a roundtrip airport shuttle for a surcharge, and self parking (subject to charges) is available onsite.</p>",
+              "locationdescription": "Near Pike Place Market",
+              "postalcode": "98101",
+              "latitude": 47.60831,
+              "longitude": -122.334808,
+              "address1": "411 University St",
+              "address2": "",
+              "address3": "",
+              "phone": "",
+              "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_115_b.jpg",
+              "allimages": [
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_76_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby Sitting Area",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_79_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Lounge",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_77_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Treatment Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_75_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Front",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_78_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Indoor Pool",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_80_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Dining",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_83_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_81_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_84_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_62_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_64_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_82_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Entrance",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_58_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Staircase",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_61_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_108_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_111_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_73_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_124_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Bathroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_127_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_130_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_116_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_119_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Area",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_122_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Indoor Pool",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_129_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_117_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_120_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_123_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Fitness Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_126_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "In-Room Dining",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_118_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Bathroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_125_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_128_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_121_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Featured Image",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_115_b.jpg",
+                  "width": 350,
+                  "height": 350
+                }
+              ],
+              "amenities": "",
+              "minimumamount": 419,
+              "maximumamount": 529,
+              "checkin": "2015-11-13T00:00:00",
+              "checkout": "2015-11-16T00:00:00",
+              "country": "US",
+              "stateprovince": "WA",
+              "paxguid": "170d7240-f9bb-4c44-8188-a521010504cb",
+              "defaultroomguid": "7fbeb1f7-1bc4-4e37-afb2-bb8ac6b23977",
+              "type": "hotel",
+              "dateorder": "2015-11-13T00:00:00",
+              "guid": "c98e0705-c393-4571-8fa9-40876ded3c35",
+              "rank": 0,
+              "rooms": [
+                {
+                  "primaryguid": "00000000-0000-0000-0000-000000000000",
+                  "roomtype": "Deluxe Room, 1 King Bed, Non Smoking",
+                  "code": "1947227",
+                  "description": "Deluxe Room, 1 King Bed, Non Smoking",
+                  "smoking": "Non-Smoking",
+                  "bedtypes": [],
+                  "cost": 1309.29,
+                  "nightlyrate": [
+                    375.31,
+                    375.31,
+                    375.31
+                  ],
+                  "averagerate": 375.31,
+                  "surchargetotal": 183.36,
+                  "isalternative": false,
+                  "type": "hotelroom",
+                  "dateorder": "2015-11-13T00:00:00",
+                  "guid": "7fbeb1f7-1bc4-4e37-afb2-bb8ac6b23977",
+                  "rank": 0,
+                  "checkin": "2015-11-13T00:00:00",
+                  "checkout": "2015-11-16T00:00:00",
+                  "totalbeforetax": 1125.93
+                }
+              ],
+              "isalternative": false,
+              "hasalternative": true
+            }
+          ]
+        },
+        {
+          "date": "2015-11-14T00:00:00",
+          "nodes": [
+            {
+              "paymentprocessingstate": "PROCESSING",
+              "hotelcode": "115072",
+              "cityname": "seattle",
+              "hotelname": "Fairmont Olympic Hotel",
+              "hotelchain": "Fairmont",
+              "starrating": 5,
+              "shortdescription": "<p><b>Property Location</b> <br />With a stay at Fairmont Olympic Hotel, you'll be centrally located in Seattle, steps from 5th Avenue Theater and Benaroya Hall. This 5-star hotel is close to Pike Place Market and Space Needle.</p><p><b>Rooms</b> <br />Make yourself at home in one of the 450  air-conditioned rooms featuring minibars. Wireless Internet access (surcharge) keeps you connected, and cable programming is available for your entertainment. Bathrooms have designer toiletries and hair dryers. Conveniences include phones, as well as laptop-compatible safes and desks.</p><p><b>Rec, Spa, Premium Amenities</b> <br />Pamper yourself with a visit to the spa, which offers massages, body treatments, and facials. You can take advantage of recreational amenities such as a health club, an indoor pool, and a spa tub. Additional amenities include wireless Internet access (surcharge), concierge services, and supervised childcare/activities.</p><p><b>Dining</b> <br />Enjoy a meal at a restaurant or in a coffee shop/café. Or stay in and take advantage of the hotel's 24-hour room service. Quench your thirst with your favorite drink at a bar/lounge.</p><p><b>Business, Other Amenities</b> <br />Featured amenities include a business center, limo/town car service, and express check-out. Event facilities at this hotel consist of conference/meeting rooms and small meeting rooms. Guests may use a roundtrip airport shuttle for a surcharge, and self parking (subject to charges) is available onsite.</p>",
+              "locationdescription": "Near Pike Place Market",
+              "postalcode": "98101",
+              "latitude": 47.60831,
+              "longitude": -122.334808,
+              "address1": "411 University St",
+              "address2": "",
+              "address3": "",
+              "phone": "",
+              "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_115_b.jpg",
+              "allimages": [
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_76_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby Sitting Area",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_79_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Lounge",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_77_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Treatment Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_75_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Front",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_78_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Indoor Pool",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_80_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Dining",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_83_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_81_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_84_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_62_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_64_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_82_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Entrance",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_58_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Staircase",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_61_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_108_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_111_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_73_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_124_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Bathroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_127_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_130_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_116_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_119_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Area",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_122_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Indoor Pool",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_129_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_117_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_120_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_123_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Fitness Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_126_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "In-Room Dining",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_118_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Bathroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_125_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_128_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_121_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Featured Image",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_115_b.jpg",
+                  "width": 350,
+                  "height": 350
+                }
+              ],
+              "amenities": "",
+              "minimumamount": 419,
+              "maximumamount": 529,
+              "checkin": "2015-11-13T00:00:00",
+              "checkout": "2015-11-16T00:00:00",
+              "country": "US",
+              "stateprovince": "WA",
+              "paxguid": "170d7240-f9bb-4c44-8188-a521010504cb",
+              "defaultroomguid": "7fbeb1f7-1bc4-4e37-afb2-bb8ac6b23977",
+              "type": "hotel",
+              "dateorder": "2015-11-13T00:00:00",
+              "guid": "c98e0705-c393-4571-8fa9-40876ded3c35",
+              "rank": 0,
+              "rooms": [
+                {
+                  "primaryguid": "00000000-0000-0000-0000-000000000000",
+                  "roomtype": "Deluxe Room, 1 King Bed, Non Smoking",
+                  "code": "1947227",
+                  "description": "Deluxe Room, 1 King Bed, Non Smoking",
+                  "smoking": "Non-Smoking",
+                  "bedtypes": [],
+                  "cost": 1309.29,
+                  "nightlyrate": [
+                    375.31,
+                    375.31,
+                    375.31
+                  ],
+                  "averagerate": 375.31,
+                  "surchargetotal": 183.36,
+                  "isalternative": false,
+                  "type": "hotelroom",
+                  "dateorder": "2015-11-13T00:00:00",
+                  "guid": "7fbeb1f7-1bc4-4e37-afb2-bb8ac6b23977",
+                  "rank": 0,
+                  "checkin": "2015-11-13T00:00:00",
+                  "checkout": "2015-11-16T00:00:00",
+                  "totalbeforetax": 1125.93
+                }
+              ],
+              "isalternative": false,
+              "hasalternative": true
+            }
+          ]
+        },
+        {
+          "date": "2015-11-15T00:00:00",
+          "nodes": [
+            {
+              "paymentprocessingstate": "PROCESSING",
+              "hotelcode": "115072",
+              "cityname": "seattle",
+              "hotelname": "Fairmont Olympic Hotel",
+              "hotelchain": "Fairmont",
+              "starrating": 5,
+              "shortdescription": "<p><b>Property Location</b> <br />With a stay at Fairmont Olympic Hotel, you'll be centrally located in Seattle, steps from 5th Avenue Theater and Benaroya Hall. This 5-star hotel is close to Pike Place Market and Space Needle.</p><p><b>Rooms</b> <br />Make yourself at home in one of the 450  air-conditioned rooms featuring minibars. Wireless Internet access (surcharge) keeps you connected, and cable programming is available for your entertainment. Bathrooms have designer toiletries and hair dryers. Conveniences include phones, as well as laptop-compatible safes and desks.</p><p><b>Rec, Spa, Premium Amenities</b> <br />Pamper yourself with a visit to the spa, which offers massages, body treatments, and facials. You can take advantage of recreational amenities such as a health club, an indoor pool, and a spa tub. Additional amenities include wireless Internet access (surcharge), concierge services, and supervised childcare/activities.</p><p><b>Dining</b> <br />Enjoy a meal at a restaurant or in a coffee shop/café. Or stay in and take advantage of the hotel's 24-hour room service. Quench your thirst with your favorite drink at a bar/lounge.</p><p><b>Business, Other Amenities</b> <br />Featured amenities include a business center, limo/town car service, and express check-out. Event facilities at this hotel consist of conference/meeting rooms and small meeting rooms. Guests may use a roundtrip airport shuttle for a surcharge, and self parking (subject to charges) is available onsite.</p>",
+              "locationdescription": "Near Pike Place Market",
+              "postalcode": "98101",
+              "latitude": 47.60831,
+              "longitude": -122.334808,
+              "address1": "411 University St",
+              "address2": "",
+              "address3": "",
+              "phone": "",
+              "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_115_b.jpg",
+              "allimages": [
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_76_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby Sitting Area",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_79_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Lounge",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_77_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Treatment Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_75_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Front",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_78_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Indoor Pool",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_80_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Dining",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_83_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_81_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_84_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_62_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_64_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_82_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Entrance",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_58_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Staircase",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_61_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_108_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_111_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_73_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_124_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Bathroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_127_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_130_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_116_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_119_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Area",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_122_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Indoor Pool",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_129_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_117_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_120_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_123_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Fitness Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_126_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "In-Room Dining",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_118_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Bathroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_125_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_128_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_121_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Featured Image",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_115_b.jpg",
+                  "width": 350,
+                  "height": 350
+                }
+              ],
+              "amenities": "",
+              "minimumamount": 419,
+              "maximumamount": 529,
+              "checkin": "2015-11-13T00:00:00",
+              "checkout": "2015-11-16T00:00:00",
+              "country": "US",
+              "stateprovince": "WA",
+              "paxguid": "170d7240-f9bb-4c44-8188-a521010504cb",
+              "defaultroomguid": "7fbeb1f7-1bc4-4e37-afb2-bb8ac6b23977",
+              "type": "hotel",
+              "dateorder": "2015-11-13T00:00:00",
+              "guid": "c98e0705-c393-4571-8fa9-40876ded3c35",
+              "rank": 0,
+              "rooms": [
+                {
+                  "primaryguid": "00000000-0000-0000-0000-000000000000",
+                  "roomtype": "Deluxe Room, 1 King Bed, Non Smoking",
+                  "code": "1947227",
+                  "description": "Deluxe Room, 1 King Bed, Non Smoking",
+                  "smoking": "Non-Smoking",
+                  "bedtypes": [],
+                  "cost": 1309.29,
+                  "nightlyrate": [
+                    375.31,
+                    375.31,
+                    375.31
+                  ],
+                  "averagerate": 375.31,
+                  "surchargetotal": 183.36,
+                  "isalternative": false,
+                  "type": "hotelroom",
+                  "dateorder": "2015-11-13T00:00:00",
+                  "guid": "7fbeb1f7-1bc4-4e37-afb2-bb8ac6b23977",
+                  "rank": 0,
+                  "checkin": "2015-11-13T00:00:00",
+                  "checkout": "2015-11-16T00:00:00",
+                  "totalbeforetax": 1125.93
+                }
+              ],
+              "isalternative": false,
+              "hasalternative": true
+            }
+          ]
+        },
+        {
+          "date": "2015-11-16T00:00:00",
+          "nodes": [
+            {
+              "legs": [
+                {
+                  "type": "Leg",
+                  "parentguid": "9e4ccc5f-5921-44b5-85b2-16cd6e2171e2",
+                  "guid": "37d98146-f412-4473-aa25-f665eacb2fb1",
+                  "flightnumber": "244",
+                  "flighttime": "9h 45m",
+                  "departure": "2015-11-16T05:27:00",
+                  "departuretime": "05:27 AM",
+                  "arrival": "2015-11-16T18:12:00",
+                  "arrivaltime": "06:12 PM",
+                  "code": "L",
+                  "origin": "SEA",
+                  "destination": "LGA",
+                  "origincityname": "Seattle",
+                  "destinationcityname": "New York",
+                  "originairportname": "Seattle-Tacoma ",
+                  "destinationairportname": "La Guardia",
+                  "origincountry": "US",
+                  "destinationcountry": "US",
+                  "carriercode": "UA",
+                  "carriername": "United Airlines Inc",
+                  "equipment": "CHG",
+                  "paxguid": "170d7240-f9bb-4c44-8188-a521010504cb",
+                  "ref": "00000000-0000-0000-0000-000000000000",
+                  "seq": 0,
+                  "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/UA_sq.jpg",
+                  "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/UA.png",
+                  "fareclass": "Economy",
+                  "farepreference": "Nonrefundable",
+                  "normalizedduration": 1
+                }
+              ],
+              "isalternative": false,
+              "flighttime": "9h 45m",
+              "departure": "2015-11-16T05:27:00",
+              "departuretime": "05:27 AM",
+              "arrival": "2015-11-16T18:12:00",
+              "arrivaltime": "06:12 PM",
+              "origin": "SEA",
+              "destination": "LGA",
+              "origincityname": "Seattle",
+              "destinationcityname": "New York",
+              "originairportname": "Seattle-Tacoma ",
+              "destinationairportname": "La Guardia",
+              "origincountry": "US",
+              "destinationcountry": "US",
+              "operator": "UA",
+              "operatorname": "United Airlines Inc",
+              "equipment": "CHG",
+              "fareclass": "Economy",
+              "farepreference": "Nonrefundable",
+              "cost": 254.5,
+              "tax": 0,
+              "traveltime": "9h 45m",
+              "paxguid": "170d7240-f9bb-4c44-8188-a521010504cb",
+              "travelsector": "domestic",
+              "primaryguid": "00000000-0000-0000-0000-000000000000",
+              "normalizedduration": 1,
+              "type": "flight",
+              "dateorder": "2015-11-16T05:27:00",
+              "guid": "9e4ccc5f-5921-44b5-85b2-16cd6e2171e2",
+              "rank": 10.62,
+              "paymentprocessingstate": "PROCESSING"
+            },
+            {
+              "paymentprocessingstate": "PROCESSING",
+              "hotelcode": "115072",
+              "cityname": "seattle",
+              "hotelname": "Fairmont Olympic Hotel",
+              "hotelchain": "Fairmont",
+              "starrating": 5,
+              "shortdescription": "<p><b>Property Location</b> <br />With a stay at Fairmont Olympic Hotel, you'll be centrally located in Seattle, steps from 5th Avenue Theater and Benaroya Hall. This 5-star hotel is close to Pike Place Market and Space Needle.</p><p><b>Rooms</b> <br />Make yourself at home in one of the 450  air-conditioned rooms featuring minibars. Wireless Internet access (surcharge) keeps you connected, and cable programming is available for your entertainment. Bathrooms have designer toiletries and hair dryers. Conveniences include phones, as well as laptop-compatible safes and desks.</p><p><b>Rec, Spa, Premium Amenities</b> <br />Pamper yourself with a visit to the spa, which offers massages, body treatments, and facials. You can take advantage of recreational amenities such as a health club, an indoor pool, and a spa tub. Additional amenities include wireless Internet access (surcharge), concierge services, and supervised childcare/activities.</p><p><b>Dining</b> <br />Enjoy a meal at a restaurant or in a coffee shop/café. Or stay in and take advantage of the hotel's 24-hour room service. Quench your thirst with your favorite drink at a bar/lounge.</p><p><b>Business, Other Amenities</b> <br />Featured amenities include a business center, limo/town car service, and express check-out. Event facilities at this hotel consist of conference/meeting rooms and small meeting rooms. Guests may use a roundtrip airport shuttle for a surcharge, and self parking (subject to charges) is available onsite.</p>",
+              "locationdescription": "Near Pike Place Market",
+              "postalcode": "98101",
+              "latitude": 47.60831,
+              "longitude": -122.334808,
+              "address1": "411 University St",
+              "address2": "",
+              "address3": "",
+              "phone": "",
+              "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_115_b.jpg",
+              "allimages": [
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_76_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby Sitting Area",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_79_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Lounge",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_77_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Treatment Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_75_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Front",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_78_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Indoor Pool",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_80_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Dining",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_83_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_81_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_84_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_62_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_64_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_82_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Entrance",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_58_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Staircase",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_61_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_108_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_111_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_73_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_124_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Bathroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_127_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_130_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_116_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_119_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Area",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_122_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Indoor Pool",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_129_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_117_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_120_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_123_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Fitness Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_126_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "In-Room Dining",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_118_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Bathroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_125_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_128_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_121_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Featured Image",
+                  "image": "http://media.expedia.com/hotels/1000000/30000/20300/20230/20230_115_b.jpg",
+                  "width": 350,
+                  "height": 350
+                }
+              ],
+              "amenities": "",
+              "minimumamount": 419,
+              "maximumamount": 529,
+              "checkin": "2015-11-13T00:00:00",
+              "checkout": "2015-11-16T00:00:00",
+              "country": "US",
+              "stateprovince": "WA",
+              "paxguid": "170d7240-f9bb-4c44-8188-a521010504cb",
+              "defaultroomguid": "7fbeb1f7-1bc4-4e37-afb2-bb8ac6b23977",
+              "type": "hotel",
+              "dateorder": "2015-11-13T00:00:00",
+              "guid": "c98e0705-c393-4571-8fa9-40876ded3c35",
+              "rank": 0,
+              "rooms": [
+                {
+                  "primaryguid": "00000000-0000-0000-0000-000000000000",
+                  "roomtype": "Deluxe Room, 1 King Bed, Non Smoking",
+                  "code": "1947227",
+                  "description": "Deluxe Room, 1 King Bed, Non Smoking",
+                  "smoking": "Non-Smoking",
+                  "bedtypes": [],
+                  "cost": 1309.29,
+                  "nightlyrate": [
+                    375.31,
+                    375.31,
+                    375.31
+                  ],
+                  "averagerate": 375.31,
+                  "surchargetotal": 183.36,
+                  "isalternative": false,
+                  "type": "hotelroom",
+                  "dateorder": "2015-11-13T00:00:00",
+                  "guid": "7fbeb1f7-1bc4-4e37-afb2-bb8ac6b23977",
+                  "rank": 0,
+                  "checkin": "2015-11-13T00:00:00",
+                  "checkout": "2015-11-16T00:00:00",
+                  "totalbeforetax": 1125.93
+                }
+              ],
+              "isalternative": false,
+              "hasalternative": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "parsermessage": ""
+}
