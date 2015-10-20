@@ -21,6 +21,7 @@ import com.crashlytics.android.Crashlytics;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.process.BitmapProcessor;
 
@@ -82,7 +83,7 @@ public class HGBUtility {
 
     }
 
-    public static void loadImage(Context context, String imageUrl, ImageView imageView) {
+    public static void loadHotelImage(Context context, String imageUrl, ImageView imageView) {
 
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .considerExifParams(true)
@@ -92,6 +93,17 @@ public class HGBUtility {
 //                .showImageOnFail(R.drawable.icon_placeholder)
 //                .showImageForEmptyUri(R.drawable.icon_placeholder)
                 .cacheOnDisk(true)
+                .postProcessor(new BitmapProcessor() {
+                    @Override
+                    public Bitmap process(Bitmap bmp) {
+                        try {
+                            return Bitmap.createScaledBitmap(bmp, 300, 300, false);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+                })
                 .build();
         ImageLoader.getInstance().displayImage(imageUrl, imageView, options, new ImageLoadingListener() {
             @Override
@@ -100,6 +112,8 @@ public class HGBUtility {
 
             @Override
             public void onLoadingFailed(String s, View view, FailReason failReason) {
+
+                view.setVisibility(View.GONE);
             }
 
             @Override
@@ -110,6 +124,8 @@ public class HGBUtility {
             @Override
             public void onLoadingCancelled(String s, View view) {
             }
+
+
         });
 
     }

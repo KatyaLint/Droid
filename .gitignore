@@ -9,3 +9,9 @@
 *.aar
 
 libs/layouts/build/intermediates/exploded-aar/HelloGByeDroid.libs/core/unspecified/jars/classes.jar
+
+*.iml
+
+HelloGByeDroid.iml
+
+library/library.iml
