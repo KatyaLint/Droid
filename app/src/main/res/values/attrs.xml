@@ -3,4 +3,7 @@
     <declare-styleable name="FontTextView">
         <attr name="fontName" format="string" />
     </declare-styleable>
+    <declare-styleable name="MyGallery">
+        <attr name="android:galleryItemBackground" />
+    </declare-styleable>
 </resources>

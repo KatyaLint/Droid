@@ -181,11 +181,15 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 //
         //----------------
 
+<<<<<<< HEAD
 
      //   mDrawerToggle.syncState();
 
 
     //    HGBUtility.loadImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
+=======
+        HGBUtility.loadHotelImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
+>>>>>>> origin/master
         selectItem(ToolBarNavEnum.HOME.getNavNumber());
 
     }
