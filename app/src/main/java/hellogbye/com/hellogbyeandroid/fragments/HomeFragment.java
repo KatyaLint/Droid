@@ -106,7 +106,7 @@ public class HomeFragment extends HGBAbtsractFragment {
             }
         });
 
-        getActivity().setTitle(strFrag);
+     //   getActivity().setTitle(strFrag);
         return rootView;
     }
 
@@ -170,11 +170,11 @@ public class HomeFragment extends HGBAbtsractFragment {
                 if(data !=null){
                     getActivityInterface().setTravelOrder((UserTravelVO) data);
 
-                    ItineraryFragment fragemnt = new ItineraryFragment();
-                    HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack
-
-//                    HotelFragment fragemnt = new HotelFragment();
+//                    ItineraryFragment fragemnt = new ItineraryFragment();
 //                    HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack
+
+                    HotelFragment fragemnt = new HotelFragment();
+                    HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack
                 }
 
             }

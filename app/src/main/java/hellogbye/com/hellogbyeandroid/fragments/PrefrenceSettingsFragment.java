@@ -40,7 +40,7 @@ public class PrefrenceSettingsFragment extends Fragment {
         TextView textView = (TextView)rootView.findViewById(R.id.text);
         textView.setText(strFrag);
 
-        getActivity().setTitle(strFrag);
+        //getActivity().setTitle(strFrag);
         return rootView;
     }
 }
