@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <hellogbye.com.hellogbyeandroid.views.CostumeToolBar
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/toolbar"
-    android:layout_height="wrap_content"
+    android:id="@+id/toolbar_costume"
+    android:layout_height="@dimen/abc_action_bar_default_height_material"
     android:layout_width="match_parent"
+
     android:minHeight="?attr/actionBarSize"
     android:background="@color/hgb_toolbar_blue">
 

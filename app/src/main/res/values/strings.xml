@@ -46,5 +46,12 @@
     <string name="flight_show_alternate_flights">Show Alternate Flight</string>
     <string name="flight_stop_over">STOPOVER: </string>
     <string name="show_alterate_hotels">Show Alternate Hotels</string>
+
     <string name="select_hotel">Select Hotel</string>
+
+
+
+    <string name="closeDrawer">Navigation View</string>
+    <string name="openDrawer">Navigation View Closed</string>
+
 </resources>

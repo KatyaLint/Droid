@@ -5,10 +5,13 @@
       <module fileurl="file://$PROJECT_DIR$/HelloGByeDroid.iml" filepath="$PROJECT_DIR$/HelloGByeDroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/HelloGByeDroid.iml" filepath="$PROJECT_DIR$/HelloGByeDroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/libs/core/core.iml" filepath="$PROJECT_DIR$/libs/core/core.iml" />
       <module fileurl="file://$PROJECT_DIR$/libs/layouts/layouts.iml" filepath="$PROJECT_DIR$/libs/layouts/layouts.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+=======
+>>>>>>> origin/master
       <module fileurl="file://$PROJECT_DIR$/libs/libs.iml" filepath="$PROJECT_DIR$/libs/libs.iml" />
     </modules>
   </component>

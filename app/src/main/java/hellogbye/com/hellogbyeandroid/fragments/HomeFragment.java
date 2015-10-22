@@ -106,7 +106,7 @@ public class HomeFragment extends HGBAbtsractFragment {
             }
         });
 
-        getActivity().setTitle(strFrag);
+     //   getActivity().setTitle(strFrag);
         return rootView;
     }
 

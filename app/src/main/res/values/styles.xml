@@ -11,16 +11,13 @@
         <item name="color">@android:color/white</item>
     </style>
 
+<!--kate-->
 
-
-    <style name="TwoWayViewBase">
-        <item name="android:background">#999999</item>
-    </style>
-
-    <style name="TwoWayView" parent="TwoWayViewBase">
-        <item name="android:orientation">vertical</item>
-        <item name="android:scrollbars">vertical</item>
-    </style>
+<style name="NavigationTextStyle">
+    <item name="android:textColor">@color/navigation_text_state</item>
+    <item name="android:textSize">@dimen/SP18</item>
+    <item name="android:fontFamily">dinnextltpro_regular.otf</item>
+</style>
 
 
     <style name="StateText">

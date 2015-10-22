@@ -17,6 +17,10 @@ public class NavItem {
         return name.getNavTitle();
     }
 
+    public int getIndex(){
+        return name.getNavNumber();
+    }
+
 //    public void setName(String name) {
 //        this.name = name;
 //    }
