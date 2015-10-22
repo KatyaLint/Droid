@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="bottom"
-    sothree:umanoPanelHeight="70dp"
+    sothree:umanoPanelHeight="100dp"
     sothree:umanoScrollableView="@+id/detail_scroll_view"
     >
 
@@ -41,6 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
+                    android:maxWidth="@dimen/DP280"
                     android:text="The Boston Park Plaza Hotel"
                     android:textColor="@color/dark_teal"
                     android:textSize="18sp"
@@ -67,6 +68,47 @@
                     android:textSize="17sp"
                     app:fontName="dinnextltpro_light.otf" />
 
+                <LinearLayout
+                    android:id="@+id/my_hotel_ll"
+                    android:layout_below="@+id/days"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/image_my_hotel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/check_on"/>
+
+                    <hellogbye.com.hellogbyeandroid.views.FontTextView
+                        android:id="@+id/text_my_hotel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/warm_grey"
+                        app:fontName="dinnextltpro_light.otf"
+                        android:textSize="17sp"
+                        android:text="My Hotel"/>
+
+                    <hellogbye.com.hellogbyeandroid.views.FontTextView
+                        android:id="@+id/text_select_hotel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:padding="5dp"
+                        android:layout_marginBottom="5dp"
+                        app:fontName="dinnextltpro_light.otf"
+                        android:textSize="17sp"
+                        android:visibility="gone"
+                        android:background="@drawable/red_button"
+                        android:text="Select Hotel"/>
+
+
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/star_rl"
@@ -80,31 +122,31 @@
                         android:id="@+id/star1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/fill_1_copy" />
+                        android:background="@drawable/full_star" />
 
                     <ImageView
                         android:id="@+id/star2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/fill_1_copy" />
+                        android:background="@drawable/full_star" />
 
                     <ImageView
                         android:id="@+id/star3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/fill_1_copy" />
+                        android:background="@drawable/full_star" />
 
                     <ImageView
                         android:id="@+id/star4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/fill_1_copy" />
+                        android:background="@drawable/full_star" />
 
                     <ImageView
                         android:id="@+id/star5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/fill_1_copy" />
+                        android:background="@drawable/full_star" />
                 </LinearLayout>
 
                 <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -216,7 +258,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_below="@+id/hotel_room"
                         android:layout_marginTop="10dp"
-                        android:text="1"
+                        android:text="N/A"
                         android:textColor="@color/red_pink"
                         android:textSize="16sp"
                         app:fontName="dinnextltpro_regular.otf" />

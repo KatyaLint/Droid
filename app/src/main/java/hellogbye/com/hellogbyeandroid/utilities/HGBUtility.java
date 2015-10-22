@@ -6,8 +6,11 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -27,6 +30,9 @@ import com.nostra13.universalimageloader.core.process.BitmapProcessor;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Stack;
 
 import hellogbye.com.hellogbyeandroid.R;
@@ -230,6 +236,97 @@ public class HGBUtility {
     public static void removeLoader() {
         if (progressDialog != null && progressDialog.isShowing())
             progressDialog.dismiss();
+    }
+
+    public Bitmap GetBitmapMarker(Context mContext, int resourceId,  String mText)
+    {
+        try
+        {
+            Resources resources = mContext.getResources();
+            float scale = resources.getDisplayMetrics().density;
+            Bitmap bitmap = BitmapFactory.decodeResource(resources, resourceId);
+
+            android.graphics.Bitmap.Config bitmapConfig = bitmap.getConfig();
+
+            // set default bitmap config if none
+            if(bitmapConfig == null)
+                bitmapConfig = android.graphics.Bitmap.Config.ARGB_8888;
+
+            bitmap = bitmap.copy(bitmapConfig, true);
+
+            Canvas canvas = new Canvas(bitmap);
+            Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            paint.setColor(Color.WHITE);
+            paint.setTextSize((int) (14 * scale));
+            paint.setShadowLayer(1f, 0f, 1f, Color.DKGRAY);
+
+            // draw text to the Canvas center
+            Rect bounds = new Rect();
+            paint.getTextBounds(mText, 0, mText.length(), bounds);
+            int x = (bitmap.getWidth() - bounds.width())/2;
+            int y = (bitmap.getHeight() + bounds.height())/2;
+
+            canvas.drawText(mText, x * scale, y * scale, paint);
+
+            return bitmap;
+
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+    }
+
+    public static String parseDateToddMMyyyy(String time) {
+        String inputPattern = "yyyy-MM-dd'T'HH:mm:ss";
+        String outputPattern = "EEE,MM dd,yyyy";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+        Date date = null;
+        String str = null;
+
+        try {
+            date = getDateFromServer(time);
+            str = outputFormat.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
+
+    public static String getDateDiffString(String strDate1, String strDate2)
+    {
+
+        Date date1 = getDateFromServer(strDate1);
+        Date date2 = getDateFromServer(strDate2);
+        long timeOne = date1.getTime();
+        long timeTwo = date2.getTime();
+        long oneDay = 1000 * 60 * 60 * 24;
+        long delta = (timeTwo - timeOne) / oneDay;
+
+        if (delta > 0) {
+            return delta + " Nights";
+        }
+        else {
+            delta *= -1;
+            return delta + " Nights";
+        }
+    }
+
+    public static Date getDateFromServer(String time){
+
+        String inputPattern = "yyyy-MM-dd'T'HH:mm:ss";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        Date date = null;
+        try {
+            date = inputFormat.parse(time);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+
     }
 
 

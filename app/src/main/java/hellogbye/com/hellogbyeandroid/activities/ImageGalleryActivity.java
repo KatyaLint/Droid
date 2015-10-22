@@ -1,26 +1,13 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-import com.nostra13.universalimageloader.core.process.BitmapProcessor;
 import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.ImageFragment;
@@ -44,78 +31,7 @@ public class ImageGalleryActivity extends FragmentActivity {
         viewPager.setAdapter(adapter);
 
     }
-//    private class ImagePagerAdapter extends PagerAdapter {
-//
-//        SparseArray<DrawingFragment> registeredFragments = new SparseArray<DrawingFragment>();
-//        @Override
-//        public void destroyItem(final ViewGroup container, final int position, final Object object) {
-//            ((ViewPager) container).removeView((ImageView) object);
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return listImages.size();
-//        }
-//
-//        @Override
-//        public Object instantiateItem(final ViewGroup container, final int position) {
-//            final Context context = ImageGalleryActivity.this;
-//            final ImageView imageView = new ImageView(context);
-////            final int padding = context.getResources().getDimensionPixelSize(
-////                    R.dimen.padding_medium);
-//           // imageView.setPadding(padding, padding, padding, padding);
-//            imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-//           // HGBUtility.loadHotelImage(getApplicationContext(), listImages.get(position), imageView);
-//
-//            DisplayImageOptions options = new DisplayImageOptions.Builder()
-//                    .considerExifParams(true)
-////                .showImageForEmptyUri(R.drawable.new_action_profile_edit_large)
-////                .cacheInMemory(true)
-////                .showImageOnLoading(R.drawable.icon_placeholder)
-////                .showImageOnFail(R.drawable.icon_placeholder)
-////                .showImageForEmptyUri(R.drawable.icon_placeholder)
-//                    .cacheOnDisk(true)
-//                    .postProcessor(new BitmapProcessor() {
-//                        @Override
-//                        public Bitmap process(Bitmap bmp) {
-//                            try {
-//                                return Bitmap.createScaledBitmap(bmp, 800, 800, false);
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//                            return null;
-//                        }
-//                    })
-//                    .build();
-//            ImageLoader.getInstance().displayImage(listImages.get(position), imageView, options, new ImageLoadingListener() {
-//                @Override
-//                public void onLoadingStarted(String s, View view) {
-//                }
-//
-//                @Override
-//                public void onLoadingFailed(String s, View view, FailReason failReason) {
-//
-//                    view.setVisibility(View.GONE);
-//                }
-//
-//                @Override
-//                public void onLoadingComplete(String s, View view, Bitmap bitmap) {
-//
-//                }
-//
-//                @Override
-//                public void onLoadingCancelled(String s, View view) {
-//                }
-//            });
-//            ((ViewPager) container).addView(imageView, 0);
-//            return imageView;
-//        }
-//
-//        @Override
-//        public boolean isViewFromObject(final View view, final Object object) {
-//            return view == ((ImageView) object);
-//        }
-//    }
+
 
     private  final class ImagePagerAdapter extends FragmentStatePagerAdapter {
 

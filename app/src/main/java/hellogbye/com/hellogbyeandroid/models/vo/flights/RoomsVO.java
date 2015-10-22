@@ -39,7 +39,7 @@ public class RoomsVO {
     @SerializedName("guid")
     private String mGuid;
     @SerializedName("rank")
-    private int mRank;
+    private double mRank;
     @SerializedName("checkin")
     private String mCheckIn;
     @SerializedName("checkout")
@@ -48,4 +48,11 @@ public class RoomsVO {
     private double mTotalBeforeTax;
 
 
+    public String getmRoomType() {
+        return mRoomType;
+    }
+
+    public void setmRoomType(String mRoomType) {
+        this.mRoomType = mRoomType;
+    }
 }

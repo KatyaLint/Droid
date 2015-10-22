@@ -1,15 +1,11 @@
 package hellogbye.com.hellogbyeandroid.application;
 
-import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
-
 import com.crashlytics.android.Crashlytics;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import io.fabric.sdk.android.Fabric;
 
 /**

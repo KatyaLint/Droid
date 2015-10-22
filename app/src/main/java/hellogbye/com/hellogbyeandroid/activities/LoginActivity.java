@@ -37,9 +37,14 @@ public class LoginActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
+       String strToken =  hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
+        if(!strToken.equals("")){
+            goToMainActivity();
+        }
         setContentView(R.layout.login_layout);
 
-        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
+
 //        if(!"".equals(hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.TOKEN,""))){
 //            if(hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME,false)){
 //                goToMainActivity();

@@ -326,4 +326,28 @@ public class NodesVO
         this.mAmenities = mAmenities;
 
     }
+
+    public String getmCityName() {
+        return mCityName;
+    }
+
+    public void setmCityName(String mCityName) {
+        this.mCityName = mCityName;
+    }
+
+    public String getmHotelCode() {
+        return mHotelCode;
+    }
+
+    public void setmHotelCode(String mHotelCode) {
+        this.mHotelCode = mHotelCode;
+    }
+
+    public ArrayList<RoomsVO> getRoomsVOs() {
+        return roomsVOs;
+    }
+
+    public void setRoomsVOs(ArrayList<RoomsVO> roomsVOs) {
+        this.roomsVOs = roomsVOs;
+    }
 }
