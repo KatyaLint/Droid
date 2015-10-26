@@ -34,6 +34,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -47,6 +48,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
+
 
 /**
  * Created by arisprung on 9/30/15.
@@ -102,6 +104,10 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
         mSlidingPanels.setCoveredFadeColor(Color.TRANSPARENT);
         nodeMarkerMap = new HashMap<Marker, NodesVO>();
 
+        mSlidingPanels.setAnchorPoint(0.3f);
+        mSlidingPanels.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
+
+
         mScrollView = (ScrollView) rootView.findViewById(R.id.detail_scroll_view);
 
         mHotelNameFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_name);
@@ -140,6 +146,21 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
                     Log.d("","");
                 }else{
                     Log.d("","");
+                    //GET ALL HOTEL NODES AND SET CURRENT ONE
+
+                    //TODO set hotel locall and call server
+
+                    ConnectionManager.getInstance(getActivity()).putAlternateHotel(mTravelDetails.getmSolutionID(), passengersVO.getmPaxguid(), nodesVO.getmCheckIn(), nodesVO.getmCheckOut(),"", new ConnectionManager.ServerRequestListener() {
+                        @Override
+                        public void onSuccess(Object data) {
+
+                        }
+
+                        @Override
+                        public void onError(Object data) {
+                            Log.d("", "");
+                        }
+                    });
                 }
             }
         });
@@ -226,11 +247,6 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
             mMap.getUiSettings().setZoomControlsEnabled(false);
             mMap.setMyLocationEnabled(true);
             mMap.setOnMarkerClickListener(this);
-
-
-
-
-
         } else {
             Log.d("DEBUG", "map is null");
         }

@@ -53,13 +53,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private NavListAdapter mAdapter;
     private ArrayList<NavItem> mNavItemsList;
     private CostumeToolBar mToolbar;
-
-
     private UserTravelVO mUserTravelOrder;
     private List<AlternativeFlightsVO> alternativeFlights;
-
-
-
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
 
