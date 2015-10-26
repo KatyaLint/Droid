@@ -21,7 +21,7 @@
             android:id="@+id/query_edit_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Fly from Boston to New York for 3 days"
+            android:text="Fly from Boston to LAs Vegas for 3 days"
             android:background="@drawable/edit_text_border"
             android:drawableLeft="@android:drawable/ic_menu_search"
             android:gravity="top"

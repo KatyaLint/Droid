@@ -18,6 +18,7 @@ import hellogbye.com.hellogbyeandroid.fragments.ImageFragment;
 public class ImageGalleryActivity extends FragmentActivity {
 
     private ArrayList<String> listImages ;
+    private int mIndex;
 
 
     @Override
@@ -28,7 +29,9 @@ public class ImageGalleryActivity extends FragmentActivity {
         final ViewPager viewPager = (ViewPager) findViewById(R.id.image_gallery_view_pager);
         final ImagePagerAdapter adapter = new ImagePagerAdapter(getSupportFragmentManager());
         listImages = getIntent().getStringArrayListExtra("images");
+        mIndex = getIntent().getIntExtra("image_index",0);
         viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(mIndex);
 
     }
 

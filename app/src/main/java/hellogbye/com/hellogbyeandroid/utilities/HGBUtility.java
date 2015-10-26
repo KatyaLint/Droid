@@ -119,7 +119,7 @@ public class HGBUtility {
             @Override
             public void onLoadingFailed(String s, View view, FailReason failReason) {
 
-                view.setVisibility(View.GONE);
+
             }
 
             @Override
