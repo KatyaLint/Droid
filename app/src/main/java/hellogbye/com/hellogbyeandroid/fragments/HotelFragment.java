@@ -1,20 +1,20 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -22,7 +22,6 @@ import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TableRow.LayoutParams;
-import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,15 +37,20 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.ImageGalleryActivity;
+import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelAdapter;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.AllImagesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
@@ -61,7 +65,7 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
     private ArrayList<String> mImageList;
     private SlidingUpPanelLayout mSlidingPanels;
     private static final String TAG = "HotelFragment";
-    private boolean mStartedSliding;
+
     private ScrollView mScrollView;
     private FontTextView mHotelNameFontTextView;
     private FontTextView mHotelPriceFontTextView;
@@ -89,11 +93,17 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
     private FontTextView mMyHotelText;
     private FontTextView mSelectHotelText;
 
+    private AlternativeHotelAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView mRecyclerView;
+
     PassengersVO passengersVO;
     CellsVO cellsVO;
     NodesVO nodesVO;
     private ArrayList<String> mListForGallery;
     private HashMap<Marker, NodesVO> nodeMarkerMap;
+
+    private NodesVO currentSelectedNode;
 
 
     @Nullable
@@ -102,68 +112,24 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
         View rootView = inflater.inflate(R.layout.hotel_main_layout, container, false);
         mTableLayout = (TableLayout) rootView.findViewById(R.id.tableLayout1);
         mSlidingPanels = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout);
-        mSlidingPanels.setCoveredFadeColor(Color.TRANSPARENT);
+
         nodeMarkerMap = new HashMap<Marker, NodesVO>();
-
-        mSlidingPanels.setAnchorPoint(0.4f);
-        mSlidingPanels.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
+        mAdapter = new AlternativeHotelAdapter(new ArrayList<NodesVO>(nodeMarkerMap.values()));
 
 
-        mScrollView = (ScrollView) rootView.findViewById(R.id.detail_scroll_view);
 
-        mHotelNameFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_name);
-        mHotelPriceFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_price);
-        mHotelDaysFontTextView = (FontTextView) rootView.findViewById(R.id.days);
-        mHotelAddressFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_address);
-        mHotelRoomNameFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_room_name);
-        mHotelGuestNumberFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_guest_number);
-        mHotelCheckInFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_dates_checkin_name);
-        mHotelCheckOutFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_dates_checkout_name);
-        mAlertnativeHotelFontTextView = (FontTextView) rootView.findViewById(R.id.show_alternative_hotel);
-        mHotelNameFullFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_full_address_name);
-        mHotelContactFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_contact_name);
-        mHotelAmnitiesFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_amnities_name);
-        mHotelNearbyAttrictionsFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_nearby_attrictaions_name);
-        mMyHotelLinearLayout = (LinearLayout) rootView.findViewById(R.id.my_hotel_ll);
-        mMyHotelImage = (ImageView) rootView.findViewById(R.id.image_my_hotel);
-        mMyHotelText = (FontTextView) rootView.findViewById(R.id.text_my_hotel);
-        mSelectHotelText = (FontTextView) rootView.findViewById(R.id.text_select_hotel);
-        mPullDOwnRelativeLayout = (RelativeLayout) rootView.findViewById(R.id.pull_down);
+        initSliderPanel();
 
+        initRootView(rootView);
 
-        mStart1ImageView = (ImageView) rootView.findViewById(R.id.star1);
-        mStart2ImageView = (ImageView) rootView.findViewById(R.id.star2);
-        mStart3ImageView = (ImageView) rootView.findViewById(R.id.star3);
-        mStart4ImageView = (ImageView) rootView.findViewById(R.id.star4);
-        mStart5ImageView = (ImageView) rootView.findViewById(R.id.star5);
-
-        mTravelDetails = getActivityInterface().getTravelOrder();
-        passengersVO = mTravelDetails.getPassengerses().get(0);
-        cellsVO = passengersVO.getmCells().get(0);
-        nodesVO = cellsVO.getmNodes().get(1);
+        initCurrentHotel();
 
         mMyHotelLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mMyHotelImage.getVisibility() != View.VISIBLE) {
-                    Log.d("", "");
-                } else {
-                    Log.d("", "");
-                    //GET ALL HOTEL NODES AND SET CURRENT ONE
+                    sendServerNewHotelOrder(currentSelectedNode);
 
-                    //TODO set hotel locall and call server
-
-                    ConnectionManager.getInstance(getActivity()).putAlternateHotel(mTravelDetails.getmSolutionID(), passengersVO.getmPaxguid(), nodesVO.getmCheckIn(), nodesVO.getmCheckOut(), "", new ConnectionManager.ServerRequestListener() {
-                        @Override
-                        public void onSuccess(Object data) {
-
-                        }
-
-                        @Override
-                        public void onError(Object data) {
-                            Log.d("", "");
-                        }
-                    });
                 }
             }
         });
@@ -171,50 +137,51 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
         mAlertnativeHotelFontTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-            }
-        });
-//        Animation  mAnimation = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
-//                Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
-//                0.0f, Animation.RELATIVE_TO_SELF, -5.0f);
-//        mAnimation.setDuration(5000);
-//        mAnimation.setFillAfter(true);
-//        mScrollView.setAnimation(mAnimation);
-
-        mSlidingPanels.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
-            @Override
-            public void onPanelSlide(View panel, float slideOffset) {
-                Log.i(TAG, "onPanelSlide, offset " + slideOffset);
-                mPullDOwnRelativeLayout.setVisibility(View.GONE);
-
-            }
-
-            @Override
-            public void onPanelCollapsed(View panel) {
-                Log.i(TAG, "onPanelCollapsed");
-                //              Log.i(TAG, "main height=" + mSlidingPanels.findViewById(R.id.main).getHeight());
-            }
-
-            @Override
-            public void onPanelExpanded(View panel) {
-                Log.i(TAG, "onPanelExpanded");
-                ///          Log.i(TAG, "main height=" + mSlidingPanels.findViewById(R.id.main).getHeight());
-            }
-
-            @Override
-            public void onPanelAnchored(View panel) {
-                Log.i(TAG, "onPanelAnchored");
-                //          Log.i(TAG, "main height=" + mSlidingPanels.findViewById(R.id.main).getHeight());
-            }
-
-            @Override
-            public void onPanelHidden(View panel) {
-
+                showAlternativeHotels();
             }
         });
 
+        ((MainActivity) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
+            public void doBack() {
+                if(mRecyclerView.getVisibility() != View.VISIBLE){
+                    FragmentManager fm = getActivity()
+                            .getFragmentManager();
+                    fm.popBackStack (HotelFragment.class.toString(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                }else{
+                    hideAlternativeHotels();
+                }
+
+            }
+        });
         return rootView;
     }
+
+    private void sendServerNewHotelOrder(NodesVO cnode) {
+
+        ConnectionManager.getInstance(getActivity()).putAlternateHotel(mTravelDetails.getmSolutionID(), passengersVO.getmPaxguid(), nodesVO.getmCheckIn(), nodesVO.getmCheckOut(), cnode.getmGuid(), new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+                //GET ALL HOTEL NODES AND SET CURRENT ONE
+                nodesVO = currentSelectedNode;
+
+                //TODO set hotel locall and call server
+                cellsVO.getmNodes().set(1, currentSelectedNode);
+
+                loadMap();
+
+                hideAlternativeHotels();
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
+    }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -246,6 +213,83 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
         } else {
             Log.d("DEBUG", "map is null");
         }
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        NodesVO node = nodeMarkerMap.get(marker);
+        if (node != null) {
+            initHotel(node, marker);
+            currentSelectedNode = node;
+        } else {
+            setCurrentHotel();
+            initHotel(nodesVO, null);
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+
+        loadMap();
+
+
+    }
+
+    private void loadMap() {
+
+        //GET ALL HOTEL NODES AND SET CURRENT ONE
+        ConnectionManager.getInstance(getActivity()).getAlternateHotelsWithHotel(mTravelDetails.getmSolutionID(), passengersVO.getmPaxguid(), nodesVO.getmCheckIn(), nodesVO.getmCheckOut(), new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                CellsVO cellsVO = (CellsVO) data;
+                setCurrentHotel();
+                if (nodeMarkerMap.size() > 0) {
+                    nodeMarkerMap.clear();
+                    mMap.clear();
+                }
+
+                setCurrentHotel();
+
+
+                for (NodesVO node : cellsVO.getmNodes()) {
+                    if (nodesVO.getmHotelCode().equals(node.getmHotelCode())) {
+                        initHotel(node, null);
+                        //  nodeMarkerMap.put(marker, node);
+                    } else {
+
+
+                        Marker mark = mMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(Double.valueOf(node.getmLatitude()), Double.valueOf(node.getmLongitude())))
+                                .icon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(getActivity(), String.valueOf((int) node.getmMinimumAmount()), R.drawable.other_location_blue))));
+                        nodeMarkerMap.put(mark, node);
+
+                    }
+                }
+
+                // specify an adapter (see also next example)
+
+                mAdapter = new AlternativeHotelAdapter(new ArrayList<NodesVO>(nodeMarkerMap.values()));
+                mRecyclerView.setAdapter(mAdapter);
+                mAdapter.SetOnItemClickListener(new AlternativeHotelAdapter.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(View v, int position) {
+                        NodesVO node = (new ArrayList<NodesVO>(nodeMarkerMap.values())).get(position);
+                        currentSelectedNode = node;
+                        sendServerNewHotelOrder(node);
+                    }
+                });
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
     }
 
 
@@ -287,6 +331,98 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
 
             mTableLayout.addView(row);
         }
+    }
+
+    private void initCurrentHotel() {
+
+        mTravelDetails = getActivityInterface().getTravelOrder();
+        passengersVO = mTravelDetails.getPassengerses().get(0);
+        cellsVO = passengersVO.getmCells().get(0);
+        nodesVO = cellsVO.getmNodes().get(1);
+        currentSelectedNode = nodesVO;
+    }
+
+
+    private View initRootView(View rootView) {
+
+        mScrollView = (ScrollView) rootView.findViewById(R.id.detail_scroll_view);
+        mHotelNameFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_name);
+        mHotelPriceFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_price);
+        mHotelDaysFontTextView = (FontTextView) rootView.findViewById(R.id.days);
+        mHotelAddressFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_address);
+        mHotelRoomNameFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_room_name);
+        mHotelGuestNumberFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_guest_number);
+        mHotelCheckInFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_dates_checkin_name);
+        mHotelCheckOutFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_dates_checkout_name);
+        mAlertnativeHotelFontTextView = (FontTextView) rootView.findViewById(R.id.show_alternative_hotel);
+        mHotelNameFullFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_full_address_name);
+        mHotelContactFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_contact_name);
+        mHotelAmnitiesFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_amnities_name);
+        mHotelNearbyAttrictionsFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_nearby_attrictaions_name);
+        mMyHotelLinearLayout = (LinearLayout) rootView.findViewById(R.id.my_hotel_ll);
+        mMyHotelImage = (ImageView) rootView.findViewById(R.id.image_my_hotel);
+        mMyHotelText = (FontTextView) rootView.findViewById(R.id.text_my_hotel);
+        mSelectHotelText = (FontTextView) rootView.findViewById(R.id.text_select_hotel);
+        mPullDOwnRelativeLayout = (RelativeLayout) rootView.findViewById(R.id.pull_down);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.alt_hotel_recycler_view);
+
+
+        mStart1ImageView = (ImageView) rootView.findViewById(R.id.star1);
+        mStart2ImageView = (ImageView) rootView.findViewById(R.id.star2);
+        mStart3ImageView = (ImageView) rootView.findViewById(R.id.star3);
+        mStart4ImageView = (ImageView) rootView.findViewById(R.id.star4);
+        mStart5ImageView = (ImageView) rootView.findViewById(R.id.star5);
+
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+
+        return rootView;
+    }
+
+    private void initSliderPanel() {
+        mSlidingPanels.setCoveredFadeColor(Color.TRANSPARENT);
+        mSlidingPanels.setAnchorPoint(0.4f);
+        mSlidingPanels.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
+        mSlidingPanels.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+            @Override
+            public void onPanelSlide(View panel, float slideOffset) {
+                Log.i(TAG, "onPanelSlide, offset " + slideOffset);
+                mPullDOwnRelativeLayout.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onPanelCollapsed(View panel) {
+                Log.i(TAG, "onPanelCollapsed");
+                //              Log.i(TAG, "main height=" + mSlidingPanels.findViewById(R.id.main).getHeight());
+            }
+
+            @Override
+            public void onPanelExpanded(View panel) {
+                Log.i(TAG, "onPanelExpanded");
+                ///          Log.i(TAG, "main height=" + mSlidingPanels.findViewById(R.id.main).getHeight());
+            }
+
+            @Override
+            public void onPanelAnchored(View panel) {
+                Log.i(TAG, "onPanelAnchored");
+                //          Log.i(TAG, "main height=" + mSlidingPanels.findViewById(R.id.main).getHeight());
+            }
+
+            @Override
+            public void onPanelHidden(View panel) {
+
+            }
+        });
+
+
     }
 
     private void initHotel(NodesVO node, Marker marker) {
@@ -332,10 +468,10 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
             for (Marker marker1 : nodeMarkerMap.keySet()) {
 
                 if (!marker.equals(marker1)) {
-                    marker1.setIcon(BitmapDescriptorFactory.fromBitmap(getMarkerBitmap(getActivity(), String.valueOf(nodeMarkerMap.get(marker1).getmMinimumAmount()), R.drawable.other_location_blue)));
+                    marker1.setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(getActivity(), String.valueOf((int)nodeMarkerMap.get(marker1).getmMinimumAmount()), R.drawable.other_location_blue)));
 
-                }else{
-                    marker1.setIcon(BitmapDescriptorFactory.fromBitmap(getMarkerBitmap(getActivity(), String.valueOf(nodeMarkerMap.get(marker1).getmMinimumAmount()), R.drawable.other_location_red)));
+                } else {
+                    marker1.setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(getActivity(), String.valueOf((int)nodeMarkerMap.get(marker1).getmMinimumAmount()), R.drawable.other_location_red)));
                 }
 
             }
@@ -422,46 +558,6 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
 
     }
 
-    private Bitmap getMarkerBitmap(Context context, String text, int resource) {
-        View markerHotelView = ((LayoutInflater) getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_marker_layout, null);
-        TextView numTxt = (TextView) markerHotelView.findViewById(R.id.num_txt);
-        numTxt.setBackgroundResource(resource);
-        numTxt.setText("$" + text);
-
-        return createDrawableFromView(context, markerHotelView);
-    }
-
-    // Convert a view to bitmap
-    private Bitmap createDrawableFromView(Context context, View view) {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        view.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
-        view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels);
-
-        view.buildDrawingCache();
-        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
-
-        Canvas canvas = new Canvas(bitmap);
-        view.draw(canvas);
-
-        return bitmap;
-    }
-
-
-    @Override
-    public boolean onMarkerClick(Marker marker) {
-
-        NodesVO node = nodeMarkerMap.get(marker);
-        if(node !=null){
-            initHotel(node, marker);
-        }else{
-            setCurrentHotel();
-            initHotel(nodesVO, null);
-        }
-
-        return false;
-    }
 
     private Marker setCurrentHotel() {
         LatLng currentHotelLatLon = new LatLng(nodesVO.getmLatitude(), nodesVO.getmLongitude());
@@ -479,39 +575,61 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
 
     }
 
+    private void showAlternativeHotels() {
+        mRecyclerView.clearAnimation();
+        mRecyclerView.setVisibility(View.VISIBLE);
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        //GET ALL HOTEL NODES AND SET CURRENT ONE
-        ConnectionManager.getInstance(getActivity()).getAlternateHotelsWithHotel(mTravelDetails.getmSolutionID(), passengersVO.getmPaxguid(), nodesVO.getmCheckIn(), nodesVO.getmCheckOut(), new ConnectionManager.ServerRequestListener() {
+        Animation anim = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.slide_in_up);
+        anim.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onSuccess(Object data) {
-                CellsVO cellsVO = (CellsVO) data;
-                Marker marker = setCurrentHotel();
+            public void onAnimationStart(Animation animation) {
 
-
-                for (NodesVO node : cellsVO.getmNodes()) {
-                    if (nodesVO.getmHotelCode().equals(node.getmHotelCode())) {
-                        initHotel(node, null);
-                      //  nodeMarkerMap.put(marker, node);
-                    } else {
-
-
-                        Marker mark = mMap.addMarker(new MarkerOptions()
-                                .position(new LatLng(Double.valueOf(node.getmLatitude()), Double.valueOf(node.getmLongitude())))
-                                .icon(BitmapDescriptorFactory.fromBitmap(getMarkerBitmap(getActivity(), String.valueOf((int) node.getmMinimumAmount()), R.drawable.other_location_blue))));
-                      nodeMarkerMap.put(mark, node);
-
-                    }
-                }
             }
 
             @Override
-            public void onError(Object data) {
-                Log.d("", "");
+            public void onAnimationEnd(Animation animation) {
+                mSlidingPanels.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
             }
         });
+        mRecyclerView.setAnimation(anim);
+        anim.start();
 
     }
+
+    private void hideAlternativeHotels() {
+        mRecyclerView.clearAnimation();
+        if (mRecyclerView.getVisibility() != View.VISIBLE) {
+            return;
+        }
+
+        Animation animDown = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.slide_out_down);
+        animDown.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                mSlidingPanels.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mRecyclerView.setVisibility(View.GONE);
+                mSlidingPanels.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        mRecyclerView.setAnimation(animDown);
+        animDown.start();
+
+    }
+
+
 }

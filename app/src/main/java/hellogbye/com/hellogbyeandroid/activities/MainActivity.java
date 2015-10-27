@@ -4,6 +4,7 @@ package hellogbye.com.hellogbyeandroid.activities;
 
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.HGBMainInterface;
+import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.AccountSettingsFragment;
@@ -33,6 +35,7 @@ import hellogbye.com.hellogbyeandroid.fragments.ContentFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HistoryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HomeFragment;
+import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.MyTripsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PrefrenceSettingsFragment;
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private List<AlternativeFlightsVO> alternativeFlights;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
+    protected OnBackPressedListener onBackPressedListener;
 
 
     @Override
@@ -314,6 +318,17 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     @Override
     public void onBackPressed() {
+        if (onBackPressedListener != null){
+            onBackPressedListener.doBack();
+        }
+
+        //TODO this is when I want the fragment to contorl the back -Kate I suggest we do this for all Fragments
+        FragmentManager.BackStackEntry backEntry=getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount()-1);
+        String str=backEntry.getName();
+        if( str.equals(HotelFragment.class.toString())){
+            return;
+        }
+
             if(!HGBUtility.clearBackStackAndGoToNextFragment(this))
             {
                // super.onBackPressed();
@@ -344,19 +359,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         // Pass any configuration change to the drawer toggls
 //        mDrawerToggle.onConfigurationChanged(newConfig);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public CostumeToolBar getmToolbar() {
@@ -418,7 +420,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             }
         }
     }
-
+    public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
+        this.onBackPressedListener = onBackPressedListener;
+    }
 
 
 }

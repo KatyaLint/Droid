@@ -3,6 +3,7 @@ package hellogbye.com.hellogbyeandroid.utilities;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -13,7 +14,7 @@ import android.support.v4.app.FragmentManager;
 /**
  * Created by nyawka on 9/2/15.
  */
-public class HGBErrorHelper extends DialogFragment {
+public class HGBErrorHelper extends android.app.DialogFragment {
 
     private  static AlertDialog.Builder builder1;
     private static String NETWORK_ERROR = "Sorry you have ";
@@ -40,10 +41,19 @@ public class HGBErrorHelper extends DialogFragment {
     }
 
     @Override
-    public void show(FragmentManager manager, String tag) {
+    public int show(FragmentTransaction transaction, String tag) {
+
         if(tag != null){
             this.mMessage = tag;
         }
-        super.show(manager, tag);
+        return super.show(transaction, tag);
     }
+
+    //    @Override
+//    public void show(FragmentManager manager, String tag) {
+//        if(tag != null){
+//            this.mMessage = tag;
+//        }
+//        super.show(manager, tag);
+//    }
 }

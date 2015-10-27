@@ -16,8 +16,12 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.crashlytics.android.Crashlytics;
@@ -181,6 +185,26 @@ public class HGBUtility {
 
     }
 
+    public static void goToNextFragmentIsAddToBackStackWithAnimation(Activity activity, Fragment fragment, boolean isAddToBackStack){
+
+        try{
+            FragmentTransaction transaction = activity.getFragmentManager().beginTransaction();
+            transaction.replace(R.id.content_frame, fragment, fragment.getClass().toString());
+            transaction.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_down);
+            if (isAddToBackStack) {
+                transaction.addToBackStack(fragment.getClass().toString());
+
+                fragmentStack.push(fragment);
+            }
+
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            Crashlytics.logException(e);
+        }
+
+    }
+
     public static boolean clearBackStackAndGoToNextFragment(Activity activity) {
 
         if(fragmentStack.size() >= 2){
@@ -327,6 +351,32 @@ public class HGBUtility {
         }
         return date;
 
+    }
+
+    public static Bitmap getMarkerBitmap(Context context, String text, int resource) {
+        View markerHotelView = ((LayoutInflater) context.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_marker_layout, null);
+        TextView numTxt = (TextView) markerHotelView.findViewById(R.id.num_txt);
+        numTxt.setBackgroundResource(resource);
+        numTxt.setText("$" + text);
+
+        return createDrawableFromView(context, markerHotelView);
+    }
+
+    // Convert a view to bitmap
+    public static Bitmap createDrawableFromView(Context context, View view) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        view.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+        view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
+        view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels);
+
+        view.buildDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+
+        return bitmap;
     }
 
 

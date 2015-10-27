@@ -183,6 +183,7 @@ public class HomeFragment extends HGBAbtsractFragment {
             public void onError(Object data) {
 
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.show(getFragmentManager(), (String) data);
                 mHGBSpinner.setVisibility(View.GONE);
 
                 handleRequestFailure((String)data);

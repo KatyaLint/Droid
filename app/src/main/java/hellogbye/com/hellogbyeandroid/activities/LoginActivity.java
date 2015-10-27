@@ -87,7 +87,7 @@ public class LoginActivity extends FragmentActivity {
                     @Override
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
-                        errorHelper.show(getSupportFragmentManager(), (String) data);
+                        errorHelper.show(getFragmentManager(), (String) data);
                     }
                 });
             }
@@ -137,7 +137,7 @@ public class LoginActivity extends FragmentActivity {
                                     @Override
                                     public void onError(Object data) {
                                         HGBErrorHelper errorHelper = new HGBErrorHelper();
-                                        errorHelper.show(getSupportFragmentManager(), (String) data);
+                                        errorHelper.show(getFragmentManager(), (String) data);
                                     }
                                 });
                             }

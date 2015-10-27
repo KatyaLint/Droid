@@ -350,4 +350,12 @@ public class NodesVO
     public void setRoomsVOs(ArrayList<RoomsVO> roomsVOs) {
         this.roomsVOs = roomsVOs;
     }
+
+    public String getmGuid() {
+        return mGuid;
+    }
+
+    public void setmGuid(String mGuid) {
+        this.mGuid = mGuid;
+    }
 }
