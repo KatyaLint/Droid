@@ -80,7 +80,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:maxWidth="250dp"
-                        android:text="The Boston Park Plaza Hotel"
                         android:textColor="@color/dark_teal"
                         android:textSize="18sp"
                         app:fontName="dinnextltpro_medium.otf" />
@@ -90,7 +89,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="$432.22"
                         android:textColor="@color/dark_teal"
                         android:textSize="32sp"
                         app:fontName="dinnextltpro_medium.otf" />
@@ -101,7 +99,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_below="@+id/hotel_price"
-                        android:text="2 Nights"
                         android:textColor="@color/warm_grey"
                         android:textSize="17sp"
                         app:fontName="dinnextltpro_light.otf" />
@@ -167,7 +164,6 @@
                         android:layout_below="@+id/star_rl"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="123 Street, Cape Town"
                         android:textColor="@color/warm_grey"
                         android:textSize="12sp"
                         app:fontName="dinnextltpro_light.otf" />
@@ -214,7 +210,6 @@
                             android:layout_alignParentLeft="true"
                             android:layout_below="@+id/hotel_room"
                             android:layout_marginTop="10dp"
-                            android:text="Deluxe, 1 King bed, Double bed with 2 washrooms"
                             android:textColor="@color/red_pink"
                             android:textSize="16sp"
                             app:fontName="dinnextltpro_regular.otf" />
@@ -328,7 +323,6 @@
                             android:layout_alignParentLeft="true"
                             android:layout_below="@+id/hotel_room"
                             android:layout_marginTop="10dp"
-                            android:text="Tue, Apr 21, 2015"
                             android:textColor="@color/red_pink"
                             android:textSize="16sp"
                             app:fontName="dinnextltpro_regular.otf" />
@@ -369,7 +363,6 @@
                             android:layout_alignParentLeft="true"
                             android:layout_below="@+id/hotel_room"
                             android:layout_marginTop="10dp"
-                            android:text="Wed, Apr 22, 2015"
                             android:textColor="@color/red_pink"
                             android:textSize="16sp"
                             app:fontName="dinnextltpro_regular.otf" />
@@ -415,7 +408,6 @@
                     android:layout_marginTop="10dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="366 West 52nd Street,\nNew York, NY"
                     android:textColor="@color/greyish_brown"
                     android:textSize="16sp"
                     app:fontName="dinnextltpro_light.otf" />
@@ -441,7 +433,6 @@
                     android:layout_marginTop="10dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="888-123-456\ninfo@gmail.com"
                     android:textColor="@color/greyish_brown"
                     android:textSize="16sp"
                     app:fontName="dinnextltpro_light.otf" />
@@ -495,7 +486,6 @@
                     android:layout_marginTop="10dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Striking the balance between its storied past and limitless future, The Plaza is the ultimate New York City luxury lifestyle destination - an iconic urban resort with a new and contemporary spirit. While traditions remain, such as the opulent grandeur of the Beaux Arts decor and the iconic Afternoon Tea in The Palm Court, exciting new offerings at this legendary hotel include the elegant Champagne Bar, the stylish Rose Club, and The Plaza Food Hall. The Plaza Hotel offers 282 distinctive guestrooms, including 102 luxurious suites, which boast the largest square footage of any luxury hotel in New York City. From the sumptuous decor to the impeccable white glove service, The Plaza is an extraordinary hotel that offers every indulgence. For our suite guests, The Plaza is pleased to offer Butler Service 24 hours a day."
                     android:textColor="@color/greyish_brown"
                     android:textSize="16sp"
                     app:fontName="dinnextltpro_light.otf" />
@@ -519,7 +509,6 @@
                     android:layout_marginTop="10dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="This is the iconic New York that so many visitors imagine before they visit—spectacular skyscrapers like the Chrysler Building and Empire State Building, iconic public buildings like Grand Central Terminal and the New York Public Library, and the non-stop hustle and bustle of the city streets. "
                     android:textColor="@color/greyish_brown"
                     android:textSize="16sp"
                     app:fontName="dinnextltpro_light.otf" />

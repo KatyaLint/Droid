@@ -166,7 +166,14 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
                 nodesVO = currentSelectedNode;
 
                 //TODO set hotel locall and call server
-                cellsVO.getmNodes().set(1, currentSelectedNode);
+
+                for(int i = 0;i<cellsVO.getmNodes().size();i++){
+                    NodesVO node = cellsVO.getmNodes().get(i);
+                    if(node.getmType().equals("hotel")){
+                        cellsVO.getmNodes().set(i,currentSelectedNode);
+                    }
+
+                }
 
                 loadMap();
 
@@ -401,20 +408,16 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
             public void onPanelSlide(View panel, float slideOffset) {
                 Log.i(TAG, "onPanelSlide, offset " + slideOffset);
                 mPullDOwnRelativeLayout.setVisibility(View.GONE);
-
-
             }
 
             @Override
             public void onPanelCollapsed(View panel) {
                 Log.i(TAG, "onPanelCollapsed");
-                //              Log.i(TAG, "main height=" + mSlidingPanels.findViewById(R.id.main).getHeight());
             }
 
             @Override
             public void onPanelExpanded(View panel) {
                 Log.i(TAG, "onPanelExpanded");
-                ///          Log.i(TAG, "main height=" + mSlidingPanels.findViewById(R.id.main).getHeight());
             }
 
             @Override
