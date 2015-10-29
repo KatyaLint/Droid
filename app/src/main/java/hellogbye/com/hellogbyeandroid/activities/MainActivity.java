@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,10 +21,9 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-<<<<<<< HEAD
-=======
+
 import android.widget.LinearLayout;
->>>>>>> origin/master
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +48,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFl
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
+import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
 public class MainActivity extends AppCompatActivity implements NavListAdapter.OnItemClickListener, HGBMainInterface {
     private DrawerLayout mDrawerLayout;
@@ -62,19 +63,15 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private NavListAdapter mAdapter;
     private ArrayList<NavItem> mNavItemsList;
     private CostumeToolBar mToolbar;
-    protected OnBackPressedListener onBackPressedListener;
+
 
     private UserTravelVO mUserTravelOrder;
     private List<AlternativeFlightsVO> alternativeFlights;
-<<<<<<< HEAD
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     protected OnBackPressedListener onBackPressedListener;
     private String solutionID;
-=======
 
-
->>>>>>> origin/master
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

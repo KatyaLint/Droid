@@ -99,15 +99,15 @@ public class HomeFragment extends HGBAbtsractFragment {
         mMicImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-<<<<<<< HEAD
+
                 //handleClick(query);
 //                Fragment fragment = new HotelFragment();
 //                HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragment, true);
                // getActivityInterface().openVoiceToTextControl();
-=======
+
 
                 getActivityInterface().openVoiceToTextControl();
->>>>>>> origin/master
+
 
             }
         });
