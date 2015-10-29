@@ -21,7 +21,10 @@
             android:id="@+id/query_edit_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="Fly Sam from NYC to Vegas on Nov 15th for 3 nights in the morning then back to NYC. Fly Warren from Miami to Vegas on Nov 15th before 5PM for 3 nights then on to Toronto for a 1 night then back to Miami. Fly me from Toronto to Vegas, on the earliest flight available for 3 nights on Nov 15th then back to Toronto"
+=======
+>>>>>>> origin/master
             android:background="@drawable/edit_text_border"
             android:drawableLeft="@android:drawable/ic_menu_search"
             android:gravity="top"
@@ -29,6 +32,7 @@
             android:inputType="textMultiLine"
             android:padding="10dp"
             android:scrollbars="vertical"
+            android:text="Fly from Boston to LAs Vegas for 3 days"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -46,11 +50,11 @@
         android:id="@+id/speech_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
-        android:visibility="visible"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/please_hold"
@@ -58,21 +62,20 @@
             android:layout_height="wrap_content"
             android:background="@drawable/tip_bubble"
             android:gravity="center"
-            android:text="Press, hold and speak"
             android:padding="10dp"
+            android:text="Press, hold and speak"
             android:textColor="@android:color/white"
             android:textSize="20dp"
             app:fontName="dinnextltpro_light.otf" />
 
         <ImageView
             android:id="@+id/mic"
-            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/please_hold"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:src="@drawable/mic_button_active"
-             />
+            android:src="@drawable/mic_button_active" />
     </LinearLayout>
 
 
@@ -84,8 +87,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="75dp"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/text"
@@ -98,7 +100,6 @@
         android:textColor="@android:color/white"
         android:textSize="17sp"
         app:fontName="dinnextltpro_light.otf" />
-
 
 
 </RelativeLayout>

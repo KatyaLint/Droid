@@ -88,7 +88,7 @@ public class ImageFragment extends Fragment {
             public void onLoadingCancelled(String s, View view) {
             }
         });
-        text.setText(position+" of "+size);
+        text.setText(position+1+" of "+size);
         return view;
 
     }

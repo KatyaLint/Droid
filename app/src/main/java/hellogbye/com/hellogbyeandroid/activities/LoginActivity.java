@@ -39,9 +39,14 @@ public class LoginActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
+        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
+       String strToken =  hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
+        if(!strToken.equals("")){
+            goToMainActivity();
+        }
         setContentView(R.layout.login_layout);
 
-        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
+
 //        if(!"".equals(hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.TOKEN,""))){
 //            if(hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME,false)){
 //                goToMainActivity();
@@ -84,7 +89,7 @@ public class LoginActivity extends FragmentActivity {
                     @Override
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
-                        errorHelper.show(getSupportFragmentManager(), (String) data);
+                        errorHelper.show(getFragmentManager(), (String) data);
                     }
                 });
             }
@@ -134,7 +139,7 @@ public class LoginActivity extends FragmentActivity {
                                     @Override
                                     public void onError(Object data) {
                                         HGBErrorHelper errorHelper = new HGBErrorHelper();
-                                        errorHelper.show(getSupportFragmentManager(), (String) data);
+                                        errorHelper.show(getFragmentManager(), (String) data);
                                     }
                                 });
                             }

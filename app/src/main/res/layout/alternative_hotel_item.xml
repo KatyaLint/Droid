@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:padding="@dimen/DP10"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/alternate_hotel_item_left_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:orientation="vertical">
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/alt_hotel_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The Boston Park Plaza Hotel"
+            android:maxWidth="@dimen/DP280"
+            android:textColor="@color/marine"
+            android:textSize="18sp"
+            app:fontName="dinnextltpro_medium.otf" />
+        <include layout="@layout/star_layout" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical">
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/alt_hotel_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$432"
+            android:textColor="@color/marine"
+            android:textSize="18sp"
+            app:fontName="dinnextltpro_medium.otf" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/alt_hotel_nights"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2 Nights"
+            android:textColor="@color/warm_grey"
+            android:textSize="12sp"
+            app:fontName="dinnextltpro_light.otf"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

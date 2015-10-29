@@ -6,15 +6,22 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.crashlytics.android.Crashlytics;
@@ -27,6 +34,7 @@ import com.nostra13.universalimageloader.core.process.BitmapProcessor;
 
 import java.io.IOException;
 import java.io.InputStream;
+<<<<<<< HEAD
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,6 +42,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+=======
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+>>>>>>> origin/master
 import java.util.Stack;
 
 import hellogbye.com.hellogbyeandroid.R;
@@ -120,7 +133,7 @@ public class HGBUtility {
             @Override
             public void onLoadingFailed(String s, View view, FailReason failReason) {
 
-                view.setVisibility(View.GONE);
+
             }
 
             @Override
@@ -171,6 +184,26 @@ public class HGBUtility {
 
             if (isAddToBackStack) {
                 transaction.addToBackStack(fragment.getClass().toString());
+                fragmentStack.push(fragment);
+            }
+
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            Crashlytics.logException(e);
+        }
+
+    }
+
+    public static void goToNextFragmentIsAddToBackStackWithAnimation(Activity activity, Fragment fragment, boolean isAddToBackStack){
+
+        try{
+            FragmentTransaction transaction = activity.getFragmentManager().beginTransaction();
+            transaction.replace(R.id.content_frame, fragment, fragment.getClass().toString());
+            transaction.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_down);
+            if (isAddToBackStack) {
+                transaction.addToBackStack(fragment.getClass().toString());
+
                 fragmentStack.push(fragment);
             }
 
@@ -237,6 +270,123 @@ public class HGBUtility {
     public static void removeLoader() {
         if (progressDialog != null && progressDialog.isShowing())
             progressDialog.dismiss();
+    }
+
+    public Bitmap GetBitmapMarker(Context mContext, int resourceId,  String mText)
+    {
+        try
+        {
+            Resources resources = mContext.getResources();
+            float scale = resources.getDisplayMetrics().density;
+            Bitmap bitmap = BitmapFactory.decodeResource(resources, resourceId);
+
+            android.graphics.Bitmap.Config bitmapConfig = bitmap.getConfig();
+
+            // set default bitmap config if none
+            if(bitmapConfig == null)
+                bitmapConfig = android.graphics.Bitmap.Config.ARGB_8888;
+
+            bitmap = bitmap.copy(bitmapConfig, true);
+
+            Canvas canvas = new Canvas(bitmap);
+            Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            paint.setColor(Color.WHITE);
+            paint.setTextSize((int) (14 * scale));
+            paint.setShadowLayer(1f, 0f, 1f, Color.DKGRAY);
+
+            // draw text to the Canvas center
+            Rect bounds = new Rect();
+            paint.getTextBounds(mText, 0, mText.length(), bounds);
+            int x = (bitmap.getWidth() - bounds.width())/2;
+            int y = (bitmap.getHeight() + bounds.height())/2;
+
+            canvas.drawText(mText, x * scale, y * scale, paint);
+
+            return bitmap;
+
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+    }
+
+    public static String parseDateToddMMyyyy(String time) {
+        String inputPattern = "yyyy-MM-dd'T'HH:mm:ss";
+        String outputPattern = "EEE,MM dd,yyyy";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+        Date date = null;
+        String str = null;
+
+        try {
+            date = getDateFromServer(time);
+            str = outputFormat.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
+
+    public static String getDateDiffString(String strDate1, String strDate2)
+    {
+
+        Date date1 = getDateFromServer(strDate1);
+        Date date2 = getDateFromServer(strDate2);
+        long timeOne = date1.getTime();
+        long timeTwo = date2.getTime();
+        long oneDay = 1000 * 60 * 60 * 24;
+        long delta = (timeTwo - timeOne) / oneDay;
+
+        if (delta > 0) {
+            return delta + " Nights";
+        }
+        else {
+            delta *= -1;
+            return delta + " Nights";
+        }
+    }
+
+    public static Date getDateFromServer(String time){
+
+        String inputPattern = "yyyy-MM-dd'T'HH:mm:ss";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        Date date = null;
+        try {
+            date = inputFormat.parse(time);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+
+    }
+
+    public static Bitmap getMarkerBitmap(Context context, String text, int resource) {
+        View markerHotelView = ((LayoutInflater) context.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_marker_layout, null);
+        TextView numTxt = (TextView) markerHotelView.findViewById(R.id.num_txt);
+        numTxt.setBackgroundResource(resource);
+        numTxt.setText("$" + text);
+
+        return createDrawableFromView(context, markerHotelView);
+    }
+
+    // Convert a view to bitmap
+    public static Bitmap createDrawableFromView(Context context, View view) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        view.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+        view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
+        view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels);
+
+        view.buildDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+
+        return bitmap;
     }
 
 

@@ -17,8 +17,12 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 
 public class Parser {
@@ -52,6 +56,21 @@ public class Parser {
             e.printStackTrace();
         }
         return airplaneDataVO;
+    }
+
+    public static Object parseHotelData(String response) {
+        CellsVO cell = new CellsVO();
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<NodesVO>>(){}.getType();
+            List<NodesVO> posts = (List<NodesVO>) gson.fromJson(response, listType);
+            cell.setmNodes((ArrayList)posts);
+            Log.d("","");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cell;
     }
 
 }

@@ -352,7 +352,7 @@ public class ConnectionManager {
     public void getAlternateHotelsWithHotel(String solutioid, String paxid,String checkin,String checkout, final ServerRequestListener listener) {
         // http://gtaqa-1141527982.us-east-1.elb.amazonaws.com/GTAREST/REST/Hotel?solution=e977aac6-0fd7-4321-8e1f-44cb597cfbb2&paxid=9d2c85f5-d295-4064-a8c6-a4d0015b52e4&checkin=2015-09-02&checkout=2015-09-04
         String url = getURL(Services.USER_GET_HOTEL_ALTERNATIVE);
-        url= url+SOLUTION+"&paxid="+paxid+"&checkin="+checkin+"&checkout="+checkout;
+        url= url+SOLUTION+solutioid+"&paxid="+paxid+"&checkin="+checkin+"&checkout="+checkout;
         JSONObject jsonObject = new JSONObject();
 
 
@@ -360,7 +360,7 @@ public class ConnectionManager {
                 jsonObject, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(response);
+                listener.onSuccess(Parser.parseHotelData(response));
             }
         }, new Response.ErrorListener() {
             @Override
