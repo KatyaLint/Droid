@@ -27,6 +27,13 @@ import com.nostra13.universalimageloader.core.process.BitmapProcessor;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.Stack;
 
 import hellogbye.com.hellogbyeandroid.R;
@@ -233,4 +240,36 @@ public class HGBUtility {
     }
 
 
+public static String formattDateToStringMonthDate(String dateInString) {
+
+    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    Date startDate;
+    try {
+        startDate = df.parse(dateInString);
+        Calendar mydate = new GregorianCalendar();
+        mydate.setTime(startDate);
+        String strDate= mydate.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.getDefault()) + ":" + mydate.get(Calendar.DATE);
+        return strDate;
+
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
+    return null;
+
 }
+//    SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM");
+//
+//    try {
+//
+//        Date date = formatter.parse(dateInString);
+//
+//       return formatter.format(date);
+//
+//    } catch (ParseException e) {
+//        e.printStackTrace();
+//    }
+//    return null;
+}
+
+
+

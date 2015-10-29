@@ -11,6 +11,10 @@ public class CellsVO {
     @SerializedName("date")
     private String mDate;
 
+
+
+
+
     @SerializedName("nodes")
     private ArrayList<NodesVO> mNodes = new ArrayList<NodesVO>();
 
@@ -20,5 +24,13 @@ public class CellsVO {
 
     public void setmNodes(ArrayList<NodesVO> mNodes) {
         this.mNodes = mNodes;
+    }
+
+    public String getmDate() {
+        return mDate;
+    }
+
+    public void setmDate(String mDate) {
+        this.mDate = mDate;
     }
 }

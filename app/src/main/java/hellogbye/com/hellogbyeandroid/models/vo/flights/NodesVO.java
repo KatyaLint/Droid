@@ -7,8 +7,21 @@ import java.util.ArrayList;
 /**
  * Created by nyawka on 9/9/15.
  */
-public class NodesVO
+public class NodesVO implements Comparable<NodesVO>
 {
+
+    private boolean isEmpty = false;
+
+    public String getDateOfCell() {
+        return dateOfCell;
+    }
+
+    public void setDateOfCell(String dateOfCell) {
+        this.dateOfCell = dateOfCell;
+    }
+
+    private String dateOfCell = "";
+
     //-------Flight-----------------------
     @SerializedName("legs")
     private ArrayList<LegsVO> legs = new ArrayList<LegsVO>();
@@ -325,5 +338,98 @@ public class NodesVO
     public void setmAmenities(String mAmenities) {
         this.mAmenities = mAmenities;
 
+    }
+
+    public String getmType() {
+        return mType;
+    }
+
+    public void setmType(String mType) {
+        this.mType = mType;
+    }
+
+    public String getmOriginCityName() {
+        return mOriginCityName;
+    }
+
+    public void setmOriginCityName(String mOriginCityName) {
+        this.mOriginCityName = mOriginCityName;
+    }
+
+    public String getmDestinationCityName() {
+        return mDestinationCityName;
+    }
+
+    public void setmDestinationCityName(String mDestinationCityName) {
+        this.mDestinationCityName = mDestinationCityName;
+    }
+
+    public String getmDestination() {
+        return mDestination;
+    }
+
+    public void setmDestination(String mDestination) {
+        this.mDestination = mDestination;
+    }
+
+    public String getmFlightTime() {
+        return mFlightTime;
+    }
+
+    public void setmFlightTime(String mFlightTime) {
+        this.mFlightTime = mFlightTime;
+    }
+
+    public String getmOperatorName() {
+        return mOperatorName;
+    }
+
+    public void setmOperatorName(String mOperatorName) {
+        this.mOperatorName = mOperatorName;
+    }
+
+    public String getmCityName() {
+        return mCityName;
+    }
+
+    public void setmCityName(String mCityName) {
+        this.mCityName = mCityName;
+    }
+
+    public String getmDepartureTime() {
+        return mDepartureTime;
+    }
+
+    public void setmDepartureTime(String mDepartureTime) {
+        this.mDepartureTime = mDepartureTime;
+    }
+
+    public boolean isEmpty() {
+        return isEmpty;
+    }
+
+    public void setEmpty(boolean isEmpty) {
+        this.isEmpty = isEmpty;
+    }
+
+    public String getmDeparture() {
+        return mDeparture;
+    }
+
+    public void setmDeparture(String mDeparture) {
+        this.mDeparture = mDeparture;
+    }
+
+    @Override
+    public int compareTo(NodesVO nodesVO) {
+        return getDateOfCell().compareTo(nodesVO.getDateOfCell());
+    }
+
+    public ArrayList<RoomsVO> getRoomsVOs() {
+        return roomsVOs;
+    }
+
+    public void setRoomsVOs(ArrayList<RoomsVO> roomsVOs) {
+        this.roomsVOs = roomsVOs;
     }
 }

@@ -44,4 +44,12 @@ public class PassengersVO {
     public void setmPaxguid(String mPaxguid) {
         this.mPaxguid = mPaxguid;
     }
+
+    public String getmDisplayName() {
+        return mDisplayName;
+    }
+
+    public void setmDisplayName(String mDisplayName) {
+        this.mDisplayName = mDisplayName;
+    }
 }

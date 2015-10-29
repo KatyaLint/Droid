@@ -48,4 +48,11 @@ public class RoomsVO {
     private double mTotalBeforeTax;
 
 
+    public double getmCost() {
+        return mCost;
+    }
+
+    public void setmCost(double mCost) {
+        this.mCost = mCost;
+    }
 }

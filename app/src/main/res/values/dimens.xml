@@ -6,6 +6,7 @@
     <dimen name="DP24">24dp</dimen>
     <dimen name="DP14">14dp</dimen>
     <dimen name="DP34">34dp</dimen>
+    <dimen name="DP38">38dp</dimen>
 
     <dimen name="DP144">144dp</dimen>
     <dimen name="DP115">115dp</dimen>
@@ -23,6 +24,7 @@
     <dimen name="DP8">8dp</dimen>
     <dimen name="DP82">82dp</dimen>
     <dimen name="DP54">54dp</dimen>
+    <dimen name="DP100">100dp</dimen>
 
     <dimen name="item_border_width">1dp</dimen>
 
@@ -37,7 +39,10 @@
     <dimen name="SP18">18sp</dimen>
     <dimen name="SP16">16sp</dimen>
     <dimen name="SP14">14sp</dimen>
+    <dimen name="SP13">13sp</dimen>
     <dimen name="SP12">12sp</dimen>
+    <dimen name="SP10">10sp</dimen>
+
 
 
 </resources>

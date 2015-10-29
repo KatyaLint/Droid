@@ -1,0 +1,1992 @@
+{
+  "solutionid": "4d88dff6-ea2c-4cda-82a1-011cf2e77f1a",
+  "isfavorite": false,
+  "totalprice": 5221.84,
+  "passengers": [
+    {
+      "paxguid": "0f5e91cf-b6d1-4ab1-a188-a4e30156a100",
+      "accountid": "0f5e91cf-b6d1-4ab1-a188-a4e30156a100",
+      "name": "Sam",
+      "displayname": "Sam",
+      "totalprice": 1835.06,
+      "totalflightprice": 1367.3,
+      "totalhotelprice": 467.76,
+      "paxstatus": "Null",
+      "cells": [
+        {
+          "date": "2015-10-22T00:00:00",
+          "empty": true
+        },
+        {
+          "date": "2015-10-23T00:00:00",
+          "empty": true
+        },
+        {
+          "date": "2015-10-24T00:00:00",
+          "skip": true
+        },
+        {
+          "date": "2015-11-15T00:00:00",
+          "nodes": [
+            {
+              "legs": [
+                {
+                  "type": "Leg",
+                  "parentguid": "43675c03-28fc-4fd4-8128-5b1a94e1a4c1",
+                  "guid": "592d6668-ba5a-4ed6-9eca-36d0fde70a15",
+                  "flightnumber": "251",
+                  "flighttime": "5h 45m",
+                  "departure": "2015-11-15T09:05:00",
+                  "departuretime": "09:05 AM",
+                  "arrival": "2015-11-15T11:50:00",
+                  "arrivaltime": "11:50 AM",
+                  "code": "N",
+                  "origin": "JFK",
+                  "destination": "LAS",
+                  "origincityname": "New York",
+                  "destinationcityname": "Las Vegas",
+                  "originairportname": "John F Kennedy ",
+                  "destinationairportname": "Mc Carran ",
+                  "origincountry": "US",
+                  "destinationcountry": "US",
+                  "carriercode": "VX",
+                  "carriername": "Virgin America",
+                  "equipment": "320",
+                  "paxguid": "0f5e91cf-b6d1-4ab1-a188-a4e30156a100",
+                  "ref": "00000000-0000-0000-0000-000000000000",
+                  "seq": 0,
+                  "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/VX_sq.jpg",
+                  "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/VX.png",
+                  "fareclass": "Economy",
+                  "farepreference": "Nonrefundable",
+                  "normalizedduration": 1
+                }
+              ],
+              "isalternative": false,
+              "flighttime": "5h 45m",
+              "departure": "2015-11-15T09:05:00",
+              "departuretime": "09:05 AM",
+              "arrival": "2015-11-15T11:50:00",
+              "arrivaltime": "11:50 AM",
+              "origin": "JFK",
+              "destination": "LAS",
+              "origincityname": "New York",
+              "destinationcityname": "Las Vegas",
+              "originairportname": "John F Kennedy ",
+              "destinationairportname": "Mc Carran ",
+              "origincountry": "US",
+              "destinationcountry": "US",
+              "operator": "VX",
+              "operatorname": "Virgin America",
+              "equipment": "320",
+              "fareclass": "Economy",
+              "farepreference": "Nonrefundable",
+              "cost": 195.8,
+              "tax": 0,
+              "traveltime": "5h 45m",
+              "paxguid": "0f5e91cf-b6d1-4ab1-a188-a4e30156a100",
+              "travelsector": "domestic",
+              "primaryguid": "00000000-0000-0000-0000-000000000000",
+              "normalizedduration": 1,
+              "type": "flight",
+              "dateorder": "2015-11-15T09:05:00",
+              "guid": "43675c03-28fc-4fd4-8128-5b1a94e1a4c1",
+              "rank": 10.446666666666667,
+              "paymentprocessingstate": "UNPAID"
+            },
+            {
+              "legs": [
+                {
+                  "type": "Leg",
+                  "parentguid": "c53b9833-a871-45e2-8c13-e38a8a04e6c9",
+                  "guid": "2792df1d-ac49-427d-855f-1aac08df3081",
+                  "flightnumber": "1299",
+                  "flighttime": "9h 03m",
+                  "departure": "2015-11-15T13:02:00",
+                  "departuretime": "01:02 PM",
+                  "arrival": "2015-11-15T19:05:00",
+                  "arrivaltime": "07:05 PM",
+                  "code": "U",
+                  "origin": "MIA",
+                  "destination": "LAS",
+                  "origincityname": "Miami",
+                  "destinationcityname": "Las Vegas",
+                  "originairportname": "Miami  ",
+                  "destinationairportname": "Mc Carran ",
+                  "origincountry": "US",
+                  "destinationcountry": "US",
+                  "carriercode": "UA",
+                  "carriername": "United Airlines Inc",
+                  "equipment": "CHG",
+                  "paxguid": "0f5e91cf-b6d1-4ab1-a188-a4e30156a100",
+                  "ref": "00000000-0000-0000-0000-000000000000",
+                  "seq": 0,
+                  "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/UA_sq.jpg",
+                  "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/UA.png",
+                  "fareclass": "Economy",
+                  "farepreference": "Nonrefundable",
+                  "normalizedduration": 1
+                }
+              ],
+              "isalternative": false,
+              "flighttime": "9h 3m",
+              "departure": "2015-11-15T13:02:00",
+              "departuretime": "01:02 PM",
+              "arrival": "2015-11-15T19:05:00",
+              "arrivaltime": "07:05 PM",
+              "origin": "MIA",
+              "destination": "LAS",
+              "origincityname": "Miami",
+              "destinationcityname": "Las Vegas",
+              "originairportname": "Miami  ",
+              "destinationairportname": "Mc Carran ",
+              "origincountry": "US",
+              "destinationcountry": "US",
+              "operator": "UA",
+              "operatorname": "United Airlines Inc",
+              "equipment": "CHG",
+              "fareclass": "Economy",
+              "farepreference": "Nonrefundable",
+              "cost": 610.6,
+              "tax": 0,
+              "traveltime": "9h 3m",
+              "paxguid": "0f5e91cf-b6d1-4ab1-a188-a4e30156a100",
+              "travelsector": "domestic",
+              "primaryguid": "00000000-0000-0000-0000-000000000000",
+              "normalizedduration": 1,
+              "type": "flight",
+              "dateorder": "2015-11-15T13:02:00",
+              "guid": "c53b9833-a871-45e2-8c13-e38a8a04e6c9",
+              "rank": 10.446666666666667,
+              "paymentprocessingstate": "UNPAID"
+            },
+            {
+              "paymentprocessingstate": "UNPAID",
+              "hotelcode": "130152",
+              "cityname": "las vegas",
+              "hotelname": "Golden Gate Hotel and Casino",
+              "hotelchain": "Independent",
+              "starrating": 3,
+              "shortdescription": "<p><b>Property Location</b> <br />With a stay at Golden Gate Hotel and Casino in Las Vegas (Fremont Street - Downtown Las Vegas), you'll be minutes from Mob Museum and close to Las Vegas Convention Center. This casino hotel is within close proximity of Las Vegas City Hall and Fremont Street Flightlinez.</p><p><b>Rooms</b> <br />Make yourself at home in one of the 122 guestrooms. Complimentary wired and wireless Internet access keeps you connected, and cable programming provides entertainment. Bathrooms have complimentary toiletries and hair dryers. Conveniences include safes, as well as phones with free local calls.</p><p><b>Rec, Spa, Premium Amenities</b> <br />Take advantage of recreation opportunities such as a casino, or other amenities including complimentary wireless Internet access and gift shops/newsstands.</p><p><b>Dining</b> <br />Satisfy your appetite at the hotel's restaurant, which serves breakfast, lunch, and dinner, or grab a snack at a coffee shop/café. Quench your thirst with your favorite drink at a bar/lounge.</p><p><b>Business, Other Amenities</b> <br />Featured amenities include a 24-hour front desk, a safe deposit box at the front desk, and ATM/banking services.</p>",
+              "locationdescription": "In Las Vegas (Fremont Street - Downtown Las Vegas)",
+              "postalcode": "89101",
+              "latitude": 36.17157,
+              "longitude": -115.1464,
+              "address1": "1 Fremont St",
+              "address2": "",
+              "address3": "",
+              "phone": "",
+              "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_41_b.jpg",
+              "allimages": [
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_39_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Bathroom Shower",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_24_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Featured Image",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_41_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_44_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Casino",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_47_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Interior",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_46_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Exterior",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_49_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_42_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_48_b.jpg",
+                  "width": 350,
+                  "height": 350
+                }
+              ],
+              "amenities": "",
+              "minimumamount": 21.0025,
+              "maximumamount": 69.0004,
+              "checkin": "2015-11-15T00:00:00",
+              "checkout": "2015-11-18T00:00:00",
+              "country": "US",
+              "stateprovince": "NV",
+              "paxguid": "0f5e91cf-b6d1-4ab1-a188-a4e30156a100",
+              "defaultroomguid": "56a25824-9798-478b-bb15-80add2f6cbcb",
+              "type": "hotel",
+              "dateorder": "2015-11-15T00:00:00",
+              "guid": "feb753b1-c7c5-4de5-912c-adf0b8665936",
+              "rank": 1.3,
+              "rooms": [
+                {
+                  "primaryguid": "00000000-0000-0000-0000-000000000000",
+                  "roomtype": "Standard Room, 1 Queen Bed",
+                  "code": "137107",
+                  "description": "<strong>1 queen bed</strong><br /> 250 sq feet (23 sq meters)<br /><br /><b>Entertainment</b> - Free WiFi and wired Internet access, cable channels <br /><b>Bathroom</b> - Free toiletries and a hair dryer<br /><b>Practical</b> - Air conditioning<br />",
+                  "smoking": "Smoking",
+                  "bedtypes": [],
+                  "cost": 233.88,
+                  "nightlyrate": [
+                    116.88,
+                    64.35,
+                    27.58
+                  ],
+                  "averagerate": 69.6,
+                  "surchargetotal": 25.07,
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_42_s.jpg",
+                  "isalternative": false,
+                  "type": "hotelroom",
+                  "dateorder": "2015-11-15T00:00:00",
+                  "guid": "56a25824-9798-478b-bb15-80add2f6cbcb",
+                  "rank": 1,
+                  "checkin": "2015-11-15T00:00:00",
+                  "checkout": "2015-11-18T00:00:00",
+                  "totalbeforetax": 208.81
+                }
+              ],
+              "isalternative": false,
+              "hasalternative": true
+            },
+            {
+              "paymentprocessingstate": "UNPAID",
+              "hotelcode": "130152",
+              "cityname": "las vegas",
+              "hotelname": "Golden Gate Hotel and Casino",
+              "hotelchain": "Independent",
+              "starrating": 3,
+              "shortdescription": "<p><b>Property Location</b> <br />With a stay at Golden Gate Hotel and Casino in Las Vegas (Fremont Street - Downtown Las Vegas), you'll be minutes from Mob Museum and close to Las Vegas Convention Center. This casino hotel is within close proximity of Las Vegas City Hall and Fremont Street Flightlinez.</p><p><b>Rooms</b> <br />Make yourself at home in one of the 122 guestrooms. Complimentary wired and wireless Internet access keeps you connected, and cable programming provides entertainment. Bathrooms have complimentary toiletries and hair dryers. Conveniences include safes, as well as phones with free local calls.</p><p><b>Rec, Spa, Premium Amenities</b> <br />Take advantage of recreation opportunities such as a casino, or other amenities including complimentary wireless Internet access and gift shops/newsstands.</p><p><b>Dining</b> <br />Satisfy your appetite at the hotel's restaurant, which serves breakfast, lunch, and dinner, or grab a snack at a coffee shop/café. Quench your thirst with your favorite drink at a bar/lounge.</p><p><b>Business, Other Amenities</b> <br />Featured amenities include a 24-hour front desk, a safe deposit box at the front desk, and ATM/banking services.</p>",
+              "locationdescription": "In Las Vegas (Fremont Street - Downtown Las Vegas)",
+              "postalcode": "89101",
+              "latitude": 36.17157,
+              "longitude": -115.1464,
+              "address1": "1 Fremont St",
+              "address2": "",
+              "address3": "",
+              "phone": "",
+              "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_41_b.jpg",
+              "allimages": [
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_39_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Bathroom Shower",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_24_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Featured Image",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_41_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_44_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Casino",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_47_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Interior",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_46_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Exterior",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_49_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_42_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_48_b.jpg",
+                  "width": 350,
+                  "height": 350
+                }
+              ],
+              "amenities": "",
+              "minimumamount": 21.0025,
+              "maximumamount": 69.0004,
+              "checkin": "2015-11-15T00:00:00",
+              "checkout": "2015-11-18T00:00:00",
+              "country": "US",
+              "stateprovince": "NV",
+              "paxguid": "0f5e91cf-b6d1-4ab1-a188-a4e30156a100",
+              "defaultroomguid": "02947c31-a1d3-4d24-bdd8-39c9ff46ea8d",
+              "type": "hotel",
+              "dateorder": "2015-11-15T00:00:00",
+              "guid": "e5a4ff52-3741-46cd-9c9c-343d3a128ea6",
+              "rank": 1.3,
+              "rooms": [
+                {
+                  "primaryguid": "00000000-0000-0000-0000-000000000000",
+                  "roomtype": "Standard Room, 1 Queen Bed",
+                  "code": "137107",
+                  "description": "<strong>1 queen bed</strong><br /> 250 sq feet (23 sq meters)<br /><br /><b>Entertainment</b> - Free WiFi and wired Internet access, cable channels <br /><b>Bathroom</b> - Free toiletries and a hair dryer<br /><b>Practical</b> - Air conditioning<br />",
+                  "smoking": "Smoking",
+                  "bedtypes": [],
+                  "cost": 233.88,
+                  "nightlyrate": [
+                    116.88,
+                    64.35,
+                    27.58
+                  ],
+                  "averagerate": 69.6,
+                  "surchargetotal": 25.07,
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_42_s.jpg",
+                  "isalternative": false,
+                  "type": "hotelroom",
+                  "dateorder": "2015-11-15T00:00:00",
+                  "guid": "02947c31-a1d3-4d24-bdd8-39c9ff46ea8d",
+                  "rank": 1,
+                  "checkin": "2015-11-15T00:00:00",
+                  "checkout": "2015-11-18T00:00:00",
+                  "totalbeforetax": 208.81
+                }
+              ],
+              "isalternative": false,
+              "hasalternative": true
+            }
+          ]
+        },
+        {
+          "date": "2015-11-16T00:00:00",
+          "nodes": [
+            {
+              "paymentprocessingstate": "UNPAID",
+              "hotelcode": "130152",
+              "cityname": "las vegas",
+              "hotelname": "Golden Gate Hotel and Casino",
+              "hotelchain": "Independent",
+              "starrating": 3,
+              "shortdescription": "<p><b>Property Location</b> <br />With a stay at Golden Gate Hotel and Casino in Las Vegas (Fremont Street - Downtown Las Vegas), you'll be minutes from Mob Museum and close to Las Vegas Convention Center. This casino hotel is within close proximity of Las Vegas City Hall and Fremont Street Flightlinez.</p><p><b>Rooms</b> <br />Make yourself at home in one of the 122 guestrooms. Complimentary wired and wireless Internet access keeps you connected, and cable programming provides entertainment. Bathrooms have complimentary toiletries and hair dryers. Conveniences include safes, as well as phones with free local calls.</p><p><b>Rec, Spa, Premium Amenities</b> <br />Take advantage of recreation opportunities such as a casino, or other amenities including complimentary wireless Internet access and gift shops/newsstands.</p><p><b>Dining</b> <br />Satisfy your appetite at the hotel's restaurant, which serves breakfast, lunch, and dinner, or grab a snack at a coffee shop/café. Quench your thirst with your favorite drink at a bar/lounge.</p><p><b>Business, Other Amenities</b> <br />Featured amenities include a 24-hour front desk, a safe deposit box at the front desk, and ATM/banking services.</p>",
+              "locationdescription": "In Las Vegas (Fremont Street - Downtown Las Vegas)",
+              "postalcode": "89101",
+              "latitude": 36.17157,
+              "longitude": -115.1464,
+              "address1": "1 Fremont St",
+              "address2": "",
+              "address3": "",
+              "phone": "",
+              "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_41_b.jpg",
+              "allimages": [
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_39_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Bathroom Shower",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_24_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Featured Image",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_41_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_44_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Casino",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_47_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Interior",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_46_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Exterior",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_49_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_42_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_48_b.jpg",
+                  "width": 350,
+                  "height": 350
+                }
+              ],
+              "amenities": "",
+              "minimumamount": 21.0025,
+              "maximumamount": 69.0004,
+              "checkin": "2015-11-15T00:00:00",
+              "checkout": "2015-11-18T00:00:00",
+              "country": "US",
+              "stateprovince": "NV",
+              "paxguid": "0f5e91cf-b6d1-4ab1-a188-a4e30156a100",
+              "defaultroomguid": "56a25824-9798-478b-bb15-80add2f6cbcb",
+              "type": "hotel",
+              "dateorder": "2015-11-15T00:00:00",
+              "guid": "feb753b1-c7c5-4de5-912c-adf0b8665936",
+              "rank": 1.3,
+              "rooms": [
+                {
+                  "primaryguid": "00000000-0000-0000-0000-000000000000",
+                  "roomtype": "Standard Room, 1 Queen Bed",
+                  "code": "137107",
+                  "description": "<strong>1 queen bed</strong><br /> 250 sq feet (23 sq meters)<br /><br /><b>Entertainment</b> - Free WiFi and wired Internet access, cable channels <br /><b>Bathroom</b> - Free toiletries and a hair dryer<br /><b>Practical</b> - Air conditioning<br />",
+                  "smoking": "Smoking",
+                  "bedtypes": [],
+                  "cost": 233.88,
+                  "nightlyrate": [
+                    116.88,
+                    64.35,
+                    27.58
+                  ],
+                  "averagerate": 69.6,
+                  "surchargetotal": 25.07,
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_42_s.jpg",
+                  "isalternative": false,
+                  "type": "hotelroom",
+                  "dateorder": "2015-11-15T00:00:00",
+                  "guid": "56a25824-9798-478b-bb15-80add2f6cbcb",
+                  "rank": 1,
+                  "checkin": "2015-11-15T00:00:00",
+                  "checkout": "2015-11-18T00:00:00",
+                  "totalbeforetax": 208.81
+                }
+              ],
+              "isalternative": false,
+              "hasalternative": true
+            },
+            {
+              "paymentprocessingstate": "UNPAID",
+              "hotelcode": "130152",
+              "cityname": "las vegas",
+              "hotelname": "Golden Gate Hotel and Casino",
+              "hotelchain": "Independent",
+              "starrating": 3,
+              "shortdescription": "<p><b>Property Location</b> <br />With a stay at Golden Gate Hotel and Casino in Las Vegas (Fremont Street - Downtown Las Vegas), you'll be minutes from Mob Museum and close to Las Vegas Convention Center. This casino hotel is within close proximity of Las Vegas City Hall and Fremont Street Flightlinez.</p><p><b>Rooms</b> <br />Make yourself at home in one of the 122 guestrooms. Complimentary wired and wireless Internet access keeps you connected, and cable programming provides entertainment. Bathrooms have complimentary toiletries and hair dryers. Conveniences include safes, as well as phones with free local calls.</p><p><b>Rec, Spa, Premium Amenities</b> <br />Take advantage of recreation opportunities such as a casino, or other amenities including complimentary wireless Internet access and gift shops/newsstands.</p><p><b>Dining</b> <br />Satisfy your appetite at the hotel's restaurant, which serves breakfast, lunch, and dinner, or grab a snack at a coffee shop/café. Quench your thirst with your favorite drink at a bar/lounge.</p><p><b>Business, Other Amenities</b> <br />Featured amenities include a 24-hour front desk, a safe deposit box at the front desk, and ATM/banking services.</p>",
+              "locationdescription": "In Las Vegas (Fremont Street - Downtown Las Vegas)",
+              "postalcode": "89101",
+              "latitude": 36.17157,
+              "longitude": -115.1464,
+              "address1": "1 Fremont St",
+              "address2": "",
+              "address3": "",
+              "phone": "",
+              "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_41_b.jpg",
+              "allimages": [
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_39_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Bathroom Shower",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_24_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Featured Image",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_41_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_44_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Casino",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_47_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Interior",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_46_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Exterior",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_49_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_42_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_48_b.jpg",
+                  "width": 350,
+                  "height": 350
+                }
+              ],
+              "amenities": "",
+              "minimumamount": 21.0025,
+              "maximumamount": 69.0004,
+              "checkin": "2015-11-15T00:00:00",
+              "checkout": "2015-11-18T00:00:00",
+              "country": "US",
+              "stateprovince": "NV",
+              "paxguid": "0f5e91cf-b6d1-4ab1-a188-a4e30156a100",
+              "defaultroomguid": "02947c31-a1d3-4d24-bdd8-39c9ff46ea8d",
+              "type": "hotel",
+              "dateorder": "2015-11-15T00:00:00",
+              "guid": "e5a4ff52-3741-46cd-9c9c-343d3a128ea6",
+              "rank": 1.3,
+              "rooms": [
+                {
+                  "primaryguid": "00000000-0000-0000-0000-000000000000",
+                  "roomtype": "Standard Room, 1 Queen Bed",
+                  "code": "137107",
+                  "description": "<strong>1 queen bed</strong><br /> 250 sq feet (23 sq meters)<br /><br /><b>Entertainment</b> - Free WiFi and wired Internet access, cable channels <br /><b>Bathroom</b> - Free toiletries and a hair dryer<br /><b>Practical</b> - Air conditioning<br />",
+                  "smoking": "Smoking",
+                  "bedtypes": [],
+                  "cost": 233.88,
+                  "nightlyrate": [
+                    116.88,
+                    64.35,
+                    27.58
+                  ],
+                  "averagerate": 69.6,
+                  "surchargetotal": 25.07,
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_42_s.jpg",
+                  "isalternative": false,
+                  "type": "hotelroom",
+                  "dateorder": "2015-11-15T00:00:00",
+                  "guid": "02947c31-a1d3-4d24-bdd8-39c9ff46ea8d",
+                  "rank": 1,
+                  "checkin": "2015-11-15T00:00:00",
+                  "checkout": "2015-11-18T00:00:00",
+                  "totalbeforetax": 208.81
+                }
+              ],
+              "isalternative": false,
+              "hasalternative": true
+            }
+          ]
+        },
+        {
+          "date": "2015-11-17T00:00:00",
+          "nodes": [
+            {
+              "paymentprocessingstate": "UNPAID",
+              "hotelcode": "130152",
+              "cityname": "las vegas",
+              "hotelname": "Golden Gate Hotel and Casino",
+              "hotelchain": "Independent",
+              "starrating": 3,
+              "shortdescription": "<p><b>Property Location</b> <br />With a stay at Golden Gate Hotel and Casino in Las Vegas (Fremont Street - Downtown Las Vegas), you'll be minutes from Mob Museum and close to Las Vegas Convention Center. This casino hotel is within close proximity of Las Vegas City Hall and Fremont Street Flightlinez.</p><p><b>Rooms</b> <br />Make yourself at home in one of the 122 guestrooms. Complimentary wired and wireless Internet access keeps you connected, and cable programming provides entertainment. Bathrooms have complimentary toiletries and hair dryers. Conveniences include safes, as well as phones with free local calls.</p><p><b>Rec, Spa, Premium Amenities</b> <br />Take advantage of recreation opportunities such as a casino, or other amenities including complimentary wireless Internet access and gift shops/newsstands.</p><p><b>Dining</b> <br />Satisfy your appetite at the hotel's restaurant, which serves breakfast, lunch, and dinner, or grab a snack at a coffee shop/café. Quench your thirst with your favorite drink at a bar/lounge.</p><p><b>Business, Other Amenities</b> <br />Featured amenities include a 24-hour front desk, a safe deposit box at the front desk, and ATM/banking services.</p>",
+              "locationdescription": "In Las Vegas (Fremont Street - Downtown Las Vegas)",
+              "postalcode": "89101",
+              "latitude": 36.17157,
+              "longitude": -115.1464,
+              "address1": "1 Fremont St",
+              "address2": "",
+              "address3": "",
+              "phone": "",
+              "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_41_b.jpg",
+              "allimages": [
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_39_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Bathroom Shower",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_24_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Featured Image",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_41_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_44_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Casino",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_47_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Interior",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_46_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Exterior",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_49_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_42_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_48_b.jpg",
+                  "width": 350,
+                  "height": 350
+                }
+              ],
+              "amenities": "",
+              "minimumamount": 21.0025,
+              "maximumamount": 69.0004,
+              "checkin": "2015-11-15T00:00:00",
+              "checkout": "2015-11-18T00:00:00",
+              "country": "US",
+              "stateprovince": "NV",
+              "paxguid": "0f5e91cf-b6d1-4ab1-a188-a4e30156a100",
+              "defaultroomguid": "56a25824-9798-478b-bb15-80add2f6cbcb",
+              "type": "hotel",
+              "dateorder": "2015-11-15T00:00:00",
+              "guid": "feb753b1-c7c5-4de5-912c-adf0b8665936",
+              "rank": 1.3,
+              "rooms": [
+                {
+                  "primaryguid": "00000000-0000-0000-0000-000000000000",
+                  "roomtype": "Standard Room, 1 Queen Bed",
+                  "code": "137107",
+                  "description": "<strong>1 queen bed</strong><br /> 250 sq feet (23 sq meters)<br /><br /><b>Entertainment</b> - Free WiFi and wired Internet access, cable channels <br /><b>Bathroom</b> - Free toiletries and a hair dryer<br /><b>Practical</b> - Air conditioning<br />",
+                  "smoking": "Smoking",
+                  "bedtypes": [],
+                  "cost": 233.88,
+                  "nightlyrate": [
+                    116.88,
+                    64.35,
+                    27.58
+                  ],
+                  "averagerate": 69.6,
+                  "surchargetotal": 25.07,
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_42_s.jpg",
+                  "isalternative": false,
+                  "type": "hotelroom",
+                  "dateorder": "2015-11-15T00:00:00",
+                  "guid": "56a25824-9798-478b-bb15-80add2f6cbcb",
+                  "rank": 1,
+                  "checkin": "2015-11-15T00:00:00",
+                  "checkout": "2015-11-18T00:00:00",
+                  "totalbeforetax": 208.81
+                }
+              ],
+              "isalternative": false,
+              "hasalternative": true
+            },
+            {
+              "paymentprocessingstate": "UNPAID",
+              "hotelcode": "130152",
+              "cityname": "las vegas",
+              "hotelname": "Golden Gate Hotel and Casino",
+              "hotelchain": "Independent",
+              "starrating": 3,
+              "shortdescription": "<p><b>Property Location</b> <br />With a stay at Golden Gate Hotel and Casino in Las Vegas (Fremont Street - Downtown Las Vegas), you'll be minutes from Mob Museum and close to Las Vegas Convention Center. This casino hotel is within close proximity of Las Vegas City Hall and Fremont Street Flightlinez.</p><p><b>Rooms</b> <br />Make yourself at home in one of the 122 guestrooms. Complimentary wired and wireless Internet access keeps you connected, and cable programming provides entertainment. Bathrooms have complimentary toiletries and hair dryers. Conveniences include safes, as well as phones with free local calls.</p><p><b>Rec, Spa, Premium Amenities</b> <br />Take advantage of recreation opportunities such as a casino, or other amenities including complimentary wireless Internet access and gift shops/newsstands.</p><p><b>Dining</b> <br />Satisfy your appetite at the hotel's restaurant, which serves breakfast, lunch, and dinner, or grab a snack at a coffee shop/café. Quench your thirst with your favorite drink at a bar/lounge.</p><p><b>Business, Other Amenities</b> <br />Featured amenities include a 24-hour front desk, a safe deposit box at the front desk, and ATM/banking services.</p>",
+              "locationdescription": "In Las Vegas (Fremont Street - Downtown Las Vegas)",
+              "postalcode": "89101",
+              "latitude": 36.17157,
+              "longitude": -115.1464,
+              "address1": "1 Fremont St",
+              "address2": "",
+              "address3": "",
+              "phone": "",
+              "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_41_b.jpg",
+              "allimages": [
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_39_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Bathroom Shower",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_24_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Featured Image",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_41_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_44_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Casino",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_47_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Interior",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_46_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Exterior",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_49_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_42_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_48_b.jpg",
+                  "width": 350,
+                  "height": 350
+                }
+              ],
+              "amenities": "",
+              "minimumamount": 21.0025,
+              "maximumamount": 69.0004,
+              "checkin": "2015-11-15T00:00:00",
+              "checkout": "2015-11-18T00:00:00",
+              "country": "US",
+              "stateprovince": "NV",
+              "paxguid": "0f5e91cf-b6d1-4ab1-a188-a4e30156a100",
+              "defaultroomguid": "02947c31-a1d3-4d24-bdd8-39c9ff46ea8d",
+              "type": "hotel",
+              "dateorder": "2015-11-15T00:00:00",
+              "guid": "e5a4ff52-3741-46cd-9c9c-343d3a128ea6",
+              "rank": 1.3,
+              "rooms": [
+                {
+                  "primaryguid": "00000000-0000-0000-0000-000000000000",
+                  "roomtype": "Standard Room, 1 Queen Bed",
+                  "code": "137107",
+                  "description": "<strong>1 queen bed</strong><br /> 250 sq feet (23 sq meters)<br /><br /><b>Entertainment</b> - Free WiFi and wired Internet access, cable channels <br /><b>Bathroom</b> - Free toiletries and a hair dryer<br /><b>Practical</b> - Air conditioning<br />",
+                  "smoking": "Smoking",
+                  "bedtypes": [],
+                  "cost": 233.88,
+                  "nightlyrate": [
+                    116.88,
+                    64.35,
+                    27.58
+                  ],
+                  "averagerate": 69.6,
+                  "surchargetotal": 25.07,
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_42_s.jpg",
+                  "isalternative": false,
+                  "type": "hotelroom",
+                  "dateorder": "2015-11-15T00:00:00",
+                  "guid": "02947c31-a1d3-4d24-bdd8-39c9ff46ea8d",
+                  "rank": 1,
+                  "checkin": "2015-11-15T00:00:00",
+                  "checkout": "2015-11-18T00:00:00",
+                  "totalbeforetax": 208.81
+                }
+              ],
+              "isalternative": false,
+              "hasalternative": true
+            }
+          ]
+        },
+        {
+          "date": "2015-11-18T00:00:00",
+          "nodes": [
+            {
+              "legs": [
+                {
+                  "type": "Leg",
+                  "parentguid": "40126da7-c671-4a00-9b70-46ed607dd03a",
+                  "guid": "4dc9aa87-971e-4d87-a898-be6b40bb128f",
+                  "flightnumber": "8487",
+                  "flighttime": "4h 00m",
+                  "departure": "2015-11-18T12:25:00",
+                  "departuretime": "12:25 PM",
+                  "arrival": "2015-11-18T19:25:00",
+                  "arrivaltime": "07:25 PM",
+                  "code": "K",
+                  "origin": "LAS",
+                  "destination": "YYZ",
+                  "origincityname": "Las Vegas",
+                  "destinationcityname": "Toronto",
+                  "originairportname": "Mc Carran ",
+                  "destinationairportname": "Pearson ",
+                  "origincountry": "US",
+                  "destinationcountry": "CA",
+                  "carriercode": "UA",
+                  "carriername": "United Airlines Inc",
+                  "equipment": "763",
+                  "paxguid": "0f5e91cf-b6d1-4ab1-a188-a4e30156a100",
+                  "ref": "00000000-0000-0000-0000-000000000000",
+                  "seq": 0,
+                  "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/UA_sq.jpg",
+                  "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/UA.png",
+                  "fareclass": "Economy",
+                  "farepreference": "Nonrefundable",
+                  "normalizedduration": 1
+                }
+              ],
+              "isalternative": false,
+              "flighttime": "4h 0m",
+              "departure": "2015-11-18T12:25:00",
+              "departuretime": "12:25 PM",
+              "arrival": "2015-11-18T19:25:00",
+              "arrivaltime": "07:25 PM",
+              "origin": "LAS",
+              "destination": "YYZ",
+              "origincityname": "Las Vegas",
+              "destinationcityname": "Toronto",
+              "originairportname": "Mc Carran ",
+              "destinationairportname": "Pearson ",
+              "origincountry": "US",
+              "destinationcountry": "CA",
+              "operator": "UA",
+              "operatorname": "United Airlines Inc",
+              "equipment": "763",
+              "fareclass": "Economy",
+              "farepreference": "Nonrefundable",
+              "cost": 244.7,
+              "tax": 0,
+              "traveltime": "4h 0m",
+              "paxguid": "0f5e91cf-b6d1-4ab1-a188-a4e30156a100",
+              "travelsector": "domestic",
+              "primaryguid": "00000000-0000-0000-0000-000000000000",
+              "normalizedduration": 1,
+              "type": "flight",
+              "dateorder": "2015-11-18T12:25:00",
+              "guid": "40126da7-c671-4a00-9b70-46ed607dd03a",
+              "rank": 0.44666666666666666,
+              "paymentprocessingstate": "UNPAID"
+            },
+            {
+              "legs": [
+                {
+                  "type": "Leg",
+                  "parentguid": "43eeab33-6ceb-44ac-9840-4c98778a5f6f",
+                  "guid": "90d413e3-8c20-481e-9c84-b0d1afdf594f",
+                  "flightnumber": "2229",
+                  "flighttime": "5h 00m",
+                  "departure": "2015-11-18T14:45:00",
+                  "departuretime": "02:45 PM",
+                  "arrival": "2015-11-18T22:45:00",
+                  "arrivaltime": "10:45 PM",
+                  "code": "G",
+                  "origin": "LAS",
+                  "destination": "JFK",
+                  "origincityname": "Las Vegas",
+                  "destinationcityname": "New York",
+                  "originairportname": "Mc Carran ",
+                  "destinationairportname": "John F Kennedy ",
+                  "origincountry": "US",
+                  "destinationcountry": "US",
+                  "carriercode": "AA",
+                  "carriername": "American Airlines",
+                  "equipment": "738",
+                  "paxguid": "0f5e91cf-b6d1-4ab1-a188-a4e30156a100",
+                  "ref": "00000000-0000-0000-0000-000000000000",
+                  "seq": 0,
+                  "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/AA_sq.jpg",
+                  "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/AA.png",
+                  "fareclass": "Economy",
+                  "farepreference": "Nonrefundable",
+                  "normalizedduration": 1
+                }
+              ],
+              "isalternative": false,
+              "flighttime": "5h 0m",
+              "departure": "2015-11-18T14:45:00",
+              "departuretime": "02:45 PM",
+              "arrival": "2015-11-18T22:45:00",
+              "arrivaltime": "10:45 PM",
+              "origin": "LAS",
+              "destination": "JFK",
+              "origincityname": "Las Vegas",
+              "destinationcityname": "New York",
+              "originairportname": "Mc Carran ",
+              "destinationairportname": "John F Kennedy ",
+              "origincountry": "US",
+              "destinationcountry": "US",
+              "operator": "AA",
+              "operatorname": "American Airlines",
+              "equipment": "738",
+              "fareclass": "Economy",
+              "farepreference": "Nonrefundable",
+              "cost": 316.2,
+              "tax": 0,
+              "traveltime": "5h 0m",
+              "paxguid": "0f5e91cf-b6d1-4ab1-a188-a4e30156a100",
+              "travelsector": "domestic",
+              "primaryguid": "00000000-0000-0000-0000-000000000000",
+              "normalizedduration": 1,
+              "type": "flight",
+              "dateorder": "2015-11-18T14:45:00",
+              "guid": "43eeab33-6ceb-44ac-9840-4c98778a5f6f",
+              "rank": 0.44666666666666666,
+              "paymentprocessingstate": "UNPAID"
+            },
+            {
+              "paymentprocessingstate": "UNPAID",
+              "hotelcode": "130152",
+              "cityname": "las vegas",
+              "hotelname": "Golden Gate Hotel and Casino",
+              "hotelchain": "Independent",
+              "starrating": 3,
+              "shortdescription": "<p><b>Property Location</b> <br />With a stay at Golden Gate Hotel and Casino in Las Vegas (Fremont Street - Downtown Las Vegas), you'll be minutes from Mob Museum and close to Las Vegas Convention Center. This casino hotel is within close proximity of Las Vegas City Hall and Fremont Street Flightlinez.</p><p><b>Rooms</b> <br />Make yourself at home in one of the 122 guestrooms. Complimentary wired and wireless Internet access keeps you connected, and cable programming provides entertainment. Bathrooms have complimentary toiletries and hair dryers. Conveniences include safes, as well as phones with free local calls.</p><p><b>Rec, Spa, Premium Amenities</b> <br />Take advantage of recreation opportunities such as a casino, or other amenities including complimentary wireless Internet access and gift shops/newsstands.</p><p><b>Dining</b> <br />Satisfy your appetite at the hotel's restaurant, which serves breakfast, lunch, and dinner, or grab a snack at a coffee shop/café. Quench your thirst with your favorite drink at a bar/lounge.</p><p><b>Business, Other Amenities</b> <br />Featured amenities include a 24-hour front desk, a safe deposit box at the front desk, and ATM/banking services.</p>",
+              "locationdescription": "In Las Vegas (Fremont Street - Downtown Las Vegas)",
+              "postalcode": "89101",
+              "latitude": 36.17157,
+              "longitude": -115.1464,
+              "address1": "1 Fremont St",
+              "address2": "",
+              "address3": "",
+              "phone": "",
+              "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_41_b.jpg",
+              "allimages": [
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_39_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Bathroom Shower",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_24_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Featured Image",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_41_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_44_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Casino",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_47_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Interior",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_46_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Exterior",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_49_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_42_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_48_b.jpg",
+                  "width": 350,
+                  "height": 350
+                }
+              ],
+              "amenities": "",
+              "minimumamount": 21.0025,
+              "maximumamount": 69.0004,
+              "checkin": "2015-11-15T00:00:00",
+              "checkout": "2015-11-18T00:00:00",
+              "country": "US",
+              "stateprovince": "NV",
+              "paxguid": "0f5e91cf-b6d1-4ab1-a188-a4e30156a100",
+              "defaultroomguid": "56a25824-9798-478b-bb15-80add2f6cbcb",
+              "type": "hotel",
+              "dateorder": "2015-11-15T00:00:00",
+              "guid": "feb753b1-c7c5-4de5-912c-adf0b8665936",
+              "rank": 1.3,
+              "rooms": [
+                {
+                  "primaryguid": "00000000-0000-0000-0000-000000000000",
+                  "roomtype": "Standard Room, 1 Queen Bed",
+                  "code": "137107",
+                  "description": "<strong>1 queen bed</strong><br /> 250 sq feet (23 sq meters)<br /><br /><b>Entertainment</b> - Free WiFi and wired Internet access, cable channels <br /><b>Bathroom</b> - Free toiletries and a hair dryer<br /><b>Practical</b> - Air conditioning<br />",
+                  "smoking": "Smoking",
+                  "bedtypes": [],
+                  "cost": 233.88,
+                  "nightlyrate": [
+                    116.88,
+                    64.35,
+                    27.58
+                  ],
+                  "averagerate": 69.6,
+                  "surchargetotal": 25.07,
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_42_s.jpg",
+                  "isalternative": false,
+                  "type": "hotelroom",
+                  "dateorder": "2015-11-15T00:00:00",
+                  "guid": "56a25824-9798-478b-bb15-80add2f6cbcb",
+                  "rank": 1,
+                  "checkin": "2015-11-15T00:00:00",
+                  "checkout": "2015-11-18T00:00:00",
+                  "totalbeforetax": 208.81
+                }
+              ],
+              "isalternative": false,
+              "hasalternative": true
+            },
+            {
+              "paymentprocessingstate": "UNPAID",
+              "hotelcode": "130152",
+              "cityname": "las vegas",
+              "hotelname": "Golden Gate Hotel and Casino",
+              "hotelchain": "Independent",
+              "starrating": 3,
+              "shortdescription": "<p><b>Property Location</b> <br />With a stay at Golden Gate Hotel and Casino in Las Vegas (Fremont Street - Downtown Las Vegas), you'll be minutes from Mob Museum and close to Las Vegas Convention Center. This casino hotel is within close proximity of Las Vegas City Hall and Fremont Street Flightlinez.</p><p><b>Rooms</b> <br />Make yourself at home in one of the 122 guestrooms. Complimentary wired and wireless Internet access keeps you connected, and cable programming provides entertainment. Bathrooms have complimentary toiletries and hair dryers. Conveniences include safes, as well as phones with free local calls.</p><p><b>Rec, Spa, Premium Amenities</b> <br />Take advantage of recreation opportunities such as a casino, or other amenities including complimentary wireless Internet access and gift shops/newsstands.</p><p><b>Dining</b> <br />Satisfy your appetite at the hotel's restaurant, which serves breakfast, lunch, and dinner, or grab a snack at a coffee shop/café. Quench your thirst with your favorite drink at a bar/lounge.</p><p><b>Business, Other Amenities</b> <br />Featured amenities include a 24-hour front desk, a safe deposit box at the front desk, and ATM/banking services.</p>",
+              "locationdescription": "In Las Vegas (Fremont Street - Downtown Las Vegas)",
+              "postalcode": "89101",
+              "latitude": 36.17157,
+              "longitude": -115.1464,
+              "address1": "1 Fremont St",
+              "address2": "",
+              "address3": "",
+              "phone": "",
+              "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_41_b.jpg",
+              "allimages": [
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_39_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Bathroom Shower",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_24_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Featured Image",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_41_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_44_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Casino",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_47_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_43_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Interior",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_46_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Exterior",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_49_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_42_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Hotel Bar",
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_48_b.jpg",
+                  "width": 350,
+                  "height": 350
+                }
+              ],
+              "amenities": "",
+              "minimumamount": 21.0025,
+              "maximumamount": 69.0004,
+              "checkin": "2015-11-15T00:00:00",
+              "checkout": "2015-11-18T00:00:00",
+              "country": "US",
+              "stateprovince": "NV",
+              "paxguid": "0f5e91cf-b6d1-4ab1-a188-a4e30156a100",
+              "defaultroomguid": "02947c31-a1d3-4d24-bdd8-39c9ff46ea8d",
+              "type": "hotel",
+              "dateorder": "2015-11-15T00:00:00",
+              "guid": "e5a4ff52-3741-46cd-9c9c-343d3a128ea6",
+              "rank": 1.3,
+              "rooms": [
+                {
+                  "primaryguid": "00000000-0000-0000-0000-000000000000",
+                  "roomtype": "Standard Room, 1 Queen Bed",
+                  "code": "137107",
+                  "description": "<strong>1 queen bed</strong><br /> 250 sq feet (23 sq meters)<br /><br /><b>Entertainment</b> - Free WiFi and wired Internet access, cable channels <br /><b>Bathroom</b> - Free toiletries and a hair dryer<br /><b>Practical</b> - Air conditioning<br />",
+                  "smoking": "Smoking",
+                  "bedtypes": [],
+                  "cost": 233.88,
+                  "nightlyrate": [
+                    116.88,
+                    64.35,
+                    27.58
+                  ],
+                  "averagerate": 69.6,
+                  "surchargetotal": 25.07,
+                  "image": "http://media.expedia.com/hotels/1000000/50000/41300/41247/41247_42_s.jpg",
+                  "isalternative": false,
+                  "type": "hotelroom",
+                  "dateorder": "2015-11-15T00:00:00",
+                  "guid": "02947c31-a1d3-4d24-bdd8-39c9ff46ea8d",
+                  "rank": 1,
+                  "checkin": "2015-11-15T00:00:00",
+                  "checkout": "2015-11-18T00:00:00",
+                  "totalbeforetax": 208.81
+                }
+              ],
+              "isalternative": false,
+              "hasalternative": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "paxguid": "0578bdff-d332-4ae6-aeb1-a50200deb23e",
+      "accountid": "0578bdff-d332-4ae6-aeb1-a50200deb23e",
+      "name": "a",
+      "displayname": "a",
+      "totalprice": 2427.3,
+      "totalflightprice": 1983.56,
+      "totalhotelprice": 443.74,
+      "paxstatus": "Null",
+      "cells": [
+        {
+          "date": "2015-10-22T00:00:00",
+          "nodes": [
+            {
+              "legs": [
+                {
+                  "type": "Leg",
+                  "parentguid": "237d6eb6-15c1-4333-bb84-686bc85e9bf4",
+                  "guid": "e68ff7c9-34e8-4556-be0f-727e3d8be739",
+                  "flightnumber": "7403",
+                  "flighttime": "1h 41m",
+                  "departure": "2015-10-22T14:25:00",
+                  "departuretime": "02:25 PM",
+                  "arrival": "2015-10-22T15:06:00",
+                  "arrivaltime": "03:06 PM",
+                  "code": "B",
+                  "origin": "YYZ",
+                  "destination": "ORD",
+                  "origincityname": "Toronto",
+                  "destinationcityname": "Chicago",
+                  "originairportname": "Pearson ",
+                  "destinationairportname": "O'hare ",
+                  "origincountry": "CA",
+                  "destinationcountry": "US",
+                  "carriercode": "AC",
+                  "carriername": "Air Canada",
+                  "equipment": "E75",
+                  "paxguid": "0578bdff-d332-4ae6-aeb1-a50200deb23e",
+                  "ref": "00000000-0000-0000-0000-000000000000",
+                  "seq": 0,
+                  "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/AC_sq.jpg",
+                  "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/AC.png",
+                  "fareclass": "Economy",
+                  "farepreference": "Refundable",
+                  "normalizedduration": 0.3447098976109215
+                },
+                {
+                  "type": "StopOver",
+                  "durationhours": 2,
+                  "durationminutes": 35,
+                  "cityname": "Chicago",
+                  "airportname": "O'hare ",
+                  "airportcode": "ORD",
+                  "arrivaltime": "03:06 PM",
+                  "departuretime": "05:41 PM"
+                },
+                {
+                  "type": "Leg",
+                  "parentguid": "237d6eb6-15c1-4333-bb84-686bc85e9bf4",
+                  "guid": "0cf31364-3cf4-46bd-9832-58283a652508",
+                  "flightnumber": "1847",
+                  "flighttime": "3h 12m",
+                  "departure": "2015-10-22T17:41:00",
+                  "departuretime": "05:41 PM",
+                  "arrival": "2015-10-22T21:53:00",
+                  "arrivaltime": "09:53 PM",
+                  "code": "U",
+                  "origin": "ORD",
+                  "destination": "MIA",
+                  "origincityname": "Chicago",
+                  "destinationcityname": "Miami",
+                  "originairportname": "O'hare ",
+                  "destinationairportname": "Miami  ",
+                  "origincountry": "US",
+                  "destinationcountry": "US",
+                  "carriercode": "UA",
+                  "carriername": "United Airlines Inc",
+                  "equipment": "739",
+                  "paxguid": "0578bdff-d332-4ae6-aeb1-a50200deb23e",
+                  "ref": "00000000-0000-0000-0000-000000000000",
+                  "seq": 1,
+                  "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/UA_sq.jpg",
+                  "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/UA.png",
+                  "fareclass": "Economy",
+                  "farepreference": "Refundable",
+                  "normalizedduration": 0.6552901023890785
+                }
+              ],
+              "isalternative": false,
+              "flighttime": "4h 53m",
+              "departure": "2015-10-22T14:25:00",
+              "departuretime": "02:25 PM",
+              "arrival": "2015-10-22T21:53:00",
+              "arrivaltime": "09:53 PM",
+              "origin": "YYZ",
+              "destination": "MIA",
+              "origincityname": "Toronto",
+              "destinationcityname": "Miami",
+              "originairportname": "Pearson ",
+              "destinationairportname": "Miami  ",
+              "origincountry": "CA",
+              "destinationcountry": "US",
+              "operator": "AC",
+              "operatorname": "Air Canada",
+              "equipment": "E75",
+              "fareclass": "Economy",
+              "farepreference": "Refundable",
+              "cost": 1591.36,
+              "tax": 12.1,
+              "traveltime": "7h 28m",
+              "paxguid": "0578bdff-d332-4ae6-aeb1-a50200deb23e",
+              "travelsector": "domestic",
+              "primaryguid": "00000000-0000-0000-0000-000000000000",
+              "normalizedduration": 1,
+              "type": "flight",
+              "dateorder": "2015-10-22T14:25:00",
+              "guid": "237d6eb6-15c1-4333-bb84-686bc85e9bf4",
+              "rank": 0,
+              "paymentprocessingstate": "UNPAID"
+            },
+            {
+              "paymentprocessingstate": "UNPAID",
+              "hotelcode": "243930",
+              "cityname": "miami",
+              "hotelname": "The Ritz-Carlton, Coconut Grove",
+              "hotelchain": "Ritz-Carlton",
+              "starrating": 5,
+              "shortdescription": "<p><b>Property Location</b> <br />The Ritz-Carlton, Coconut Grove is in the heart of Miami, walking distance from Coconut Grove Convention Center and Mayfair in the Grove. This 5-star resort is close to Vizcaya Museum and Gardens and University of Miami.</p><p><b>Rooms</b> <br />Make yourself at home in one of the 115  air-conditioned rooms featuring iPod docking stations and LCD televisions. Your pillowtop bed comes with down comforters and Frette Italian sheets. Rooms have private balconies. Premium TV channels and DVD players are provided for your entertainment, with wired and wireless Internet access available for a surcharge. Private bathrooms with separate bathtubs and showers feature rainfall showerheads and designer toiletries.</p><p><b>Rec, Spa, Premium Amenities</b> <br />Relax at the full-service spa, where you can enjoy massages, body treatments, and facials. If you're looking for recreational opportunities, you'll find an outdoor pool, a sauna, and a 24-hour fitness center. Additional amenities include complimentary wireless Internet access, gift shops/newsstands, and wedding services.</p><p><b>Dining</b> <br />Enjoy a satisfying meal at a restaurant serving guests of The Ritz-Carlton, Coconut Grove. Relax with your favorite drink at a bar/lounge or a poolside bar.</p><p><b>Business, Other Amenities</b> <br />Featured amenities include a 24-hour business center, limo/town car service, and express check-out. Event facilities at this resort consist of a conference center and a meeting/conference room.</p>",
+              "locationdescription": "In Miami (Coconut Grove)",
+              "postalcode": "33133",
+              "latitude": 25.73036,
+              "longitude": -80.23744,
+              "address1": "3300 Southwest 27th Ave",
+              "address2": "",
+              "address3": "",
+              "phone": "",
+              "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_47_b.jpg",
+              "allimages": [
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_34_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_36_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Outdoor Wedding Area",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_38_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby Sitting Area",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_53_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_52_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_39_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_40_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_44_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Banquet Hall",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_45_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Featured Image",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_47_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Treatment Room",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_48_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Boating",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_49_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Terrace/Patio",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_50_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_51_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Outdoor Dining",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_54_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby Sitting Area",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_55_b.jpg",
+                  "width": 350,
+                  "height": 350
+                }
+              ],
+              "amenities": "Guests won't have to miss their workouts at The Ritz-Carlton Coconut Grove, which has a 5,000-square-foot 24-hour fitness center with a variety of cardio and weight machines as well as free weights. The fitness center also offers exercise classes and personal trainers (surcharge). The men's and women's lounges each have a sauna and steam room. The hotel has a lap pool on the second-floor terrace, with a good view of Coconut Grove.  <br /><br />  The recreational activities listed below are available either on site or near the hotel; fees may apply.  ",
+              "minimumamount": 299,
+              "maximumamount": 419,
+              "checkin": "2015-10-22T00:00:00",
+              "checkout": "2015-10-23T00:00:00",
+              "country": "US",
+              "stateprovince": "FL",
+              "paxguid": "0578bdff-d332-4ae6-aeb1-a50200deb23e",
+              "defaultroomguid": "8324dc00-9819-4c86-a590-ba8a5f3fa509",
+              "type": "hotel",
+              "dateorder": "2015-10-22T00:00:00",
+              "guid": "703ea06c-edf8-4923-a5ec-5da20ad05cfb",
+              "rank": 0,
+              "rooms": [
+                {
+                  "primaryguid": "00000000-0000-0000-0000-000000000000",
+                  "roomtype": "Deluxe Room, 1 King Bed, Balcony, City View",
+                  "code": "280287",
+                  "description": "These rooms have 1 king bed or 2 double beds with Frette Italian linens, down comforters, and down non-allergenic pillows, and measure 39 square meters (420 square feet). All rooms have 60 square feet of private balcony space, with a view of the Miami skyline, and floor-to-ceiling windows. Rooms are furnished in mahogany, with a reading chair, large desk with high-speed Internet access (surcharge), CD player/radio, laptop-compatible safe, and a high-definition cable TV with DVD player and premium channels. Elegant bathrooms have marble baths with separate shower, complimentary toiletries, makeup mirrors, scales, bathrobes, and slippers. Services include in-room massage, twice-daily housekeeping, complimentary overnight shoe shine, and morning newspaper.",
+                  "smoking": "Non-Smoking",
+                  "bedtypes": [],
+                  "cost": 443.74,
+                  "nightlyrate": [
+                    392.68
+                  ],
+                  "averagerate": 392.68,
+                  "surchargetotal": 51.06,
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_51_s.jpg",
+                  "isalternative": false,
+                  "type": "hotelroom",
+                  "dateorder": "2015-10-22T00:00:00",
+                  "guid": "8324dc00-9819-4c86-a590-ba8a5f3fa509",
+                  "rank": 0,
+                  "checkin": "2015-10-22T00:00:00",
+                  "checkout": "2015-10-23T00:00:00",
+                  "totalbeforetax": 392.68
+                }
+              ],
+              "isalternative": false,
+              "hasalternative": true
+            }
+          ]
+        },
+        {
+          "date": "2015-10-23T00:00:00",
+          "nodes": [
+            {
+              "legs": [
+                {
+                  "type": "Leg",
+                  "parentguid": "e69b8395-21e7-4d6c-ae2a-835488ff15e1",
+                  "guid": "8b32ef11-4bad-47af-925e-ca4cc7d76c6c",
+                  "flightnumber": "1668",
+                  "flighttime": "3h 13m",
+                  "departure": "2015-10-23T15:32:00",
+                  "departuretime": "03:32 PM",
+                  "arrival": "2015-10-23T18:45:00",
+                  "arrivaltime": "06:45 PM",
+                  "code": "V",
+                  "origin": "MIA",
+                  "destination": "YYZ",
+                  "origincityname": "Miami",
+                  "destinationcityname": "Toronto",
+                  "originairportname": "Miami  ",
+                  "destinationairportname": "Pearson ",
+                  "origincountry": "US",
+                  "destinationcountry": "CA",
+                  "carriercode": "AA",
+                  "carriername": "American Airlines",
+                  "equipment": "738",
+                  "paxguid": "0578bdff-d332-4ae6-aeb1-a50200deb23e",
+                  "ref": "00000000-0000-0000-0000-000000000000",
+                  "seq": 0,
+                  "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/AA_sq.jpg",
+                  "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/AA.png",
+                  "fareclass": "Economy",
+                  "farepreference": "Nonrefundable",
+                  "normalizedduration": 1
+                }
+              ],
+              "isalternative": false,
+              "flighttime": "3h 13m",
+              "departure": "2015-10-23T15:32:00",
+              "departuretime": "03:32 PM",
+              "arrival": "2015-10-23T18:45:00",
+              "arrivaltime": "06:45 PM",
+              "origin": "MIA",
+              "destination": "YYZ",
+              "origincityname": "Miami",
+              "destinationcityname": "Toronto",
+              "originairportname": "Miami  ",
+              "destinationairportname": "Pearson ",
+              "origincountry": "US",
+              "destinationcountry": "CA",
+              "operator": "AA",
+              "operatorname": "American Airlines",
+              "equipment": "738",
+              "fareclass": "Economy",
+              "farepreference": "Nonrefundable",
+              "cost": 392.2,
+              "tax": 0,
+              "traveltime": "3h 13m",
+              "paxguid": "0578bdff-d332-4ae6-aeb1-a50200deb23e",
+              "travelsector": "domestic",
+              "primaryguid": "00000000-0000-0000-0000-000000000000",
+              "normalizedduration": 1,
+              "type": "flight",
+              "dateorder": "2015-10-23T15:32:00",
+              "guid": "e69b8395-21e7-4d6c-ae2a-835488ff15e1",
+              "rank": 0,
+              "paymentprocessingstate": "UNPAID"
+            },
+            {
+              "paymentprocessingstate": "UNPAID",
+              "hotelcode": "243930",
+              "cityname": "miami",
+              "hotelname": "The Ritz-Carlton, Coconut Grove",
+              "hotelchain": "Ritz-Carlton",
+              "starrating": 5,
+              "shortdescription": "<p><b>Property Location</b> <br />The Ritz-Carlton, Coconut Grove is in the heart of Miami, walking distance from Coconut Grove Convention Center and Mayfair in the Grove. This 5-star resort is close to Vizcaya Museum and Gardens and University of Miami.</p><p><b>Rooms</b> <br />Make yourself at home in one of the 115  air-conditioned rooms featuring iPod docking stations and LCD televisions. Your pillowtop bed comes with down comforters and Frette Italian sheets. Rooms have private balconies. Premium TV channels and DVD players are provided for your entertainment, with wired and wireless Internet access available for a surcharge. Private bathrooms with separate bathtubs and showers feature rainfall showerheads and designer toiletries.</p><p><b>Rec, Spa, Premium Amenities</b> <br />Relax at the full-service spa, where you can enjoy massages, body treatments, and facials. If you're looking for recreational opportunities, you'll find an outdoor pool, a sauna, and a 24-hour fitness center. Additional amenities include complimentary wireless Internet access, gift shops/newsstands, and wedding services.</p><p><b>Dining</b> <br />Enjoy a satisfying meal at a restaurant serving guests of The Ritz-Carlton, Coconut Grove. Relax with your favorite drink at a bar/lounge or a poolside bar.</p><p><b>Business, Other Amenities</b> <br />Featured amenities include a 24-hour business center, limo/town car service, and express check-out. Event facilities at this resort consist of a conference center and a meeting/conference room.</p>",
+              "locationdescription": "In Miami (Coconut Grove)",
+              "postalcode": "33133",
+              "latitude": 25.73036,
+              "longitude": -80.23744,
+              "address1": "3300 Southwest 27th Ave",
+              "address2": "",
+              "address3": "",
+              "phone": "",
+              "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_47_b.jpg",
+              "allimages": [
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_34_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Meeting Facility",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_36_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Outdoor Wedding Area",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_38_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby Sitting Area",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_53_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_52_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_39_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Living Room",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_40_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Restaurant",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_44_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Banquet Hall",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_45_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Featured Image",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_47_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Treatment Room",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_48_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Boating",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_49_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Terrace/Patio",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_50_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Guestroom",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_51_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Outdoor Dining",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_54_b.jpg",
+                  "width": 350,
+                  "height": 350
+                },
+                {
+                  "caption": "Lobby Sitting Area",
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_55_b.jpg",
+                  "width": 350,
+                  "height": 350
+                }
+              ],
+              "amenities": "Guests won't have to miss their workouts at The Ritz-Carlton Coconut Grove, which has a 5,000-square-foot 24-hour fitness center with a variety of cardio and weight machines as well as free weights. The fitness center also offers exercise classes and personal trainers (surcharge). The men's and women's lounges each have a sauna and steam room. The hotel has a lap pool on the second-floor terrace, with a good view of Coconut Grove.  <br /><br />  The recreational activities listed below are available either on site or near the hotel; fees may apply.  ",
+              "minimumamount": 299,
+              "maximumamount": 419,
+              "checkin": "2015-10-22T00:00:00",
+              "checkout": "2015-10-23T00:00:00",
+              "country": "US",
+              "stateprovince": "FL",
+              "paxguid": "0578bdff-d332-4ae6-aeb1-a50200deb23e",
+              "defaultroomguid": "8324dc00-9819-4c86-a590-ba8a5f3fa509",
+              "type": "hotel",
+              "dateorder": "2015-10-22T00:00:00",
+              "guid": "703ea06c-edf8-4923-a5ec-5da20ad05cfb",
+              "rank": 0,
+              "rooms": [
+                {
+                  "primaryguid": "00000000-0000-0000-0000-000000000000",
+                  "roomtype": "Deluxe Room, 1 King Bed, Balcony, City View",
+                  "code": "280287",
+                  "description": "These rooms have 1 king bed or 2 double beds with Frette Italian linens, down comforters, and down non-allergenic pillows, and measure 39 square meters (420 square feet). All rooms have 60 square feet of private balcony space, with a view of the Miami skyline, and floor-to-ceiling windows. Rooms are furnished in mahogany, with a reading chair, large desk with high-speed Internet access (surcharge), CD player/radio, laptop-compatible safe, and a high-definition cable TV with DVD player and premium channels. Elegant bathrooms have marble baths with separate shower, complimentary toiletries, makeup mirrors, scales, bathrobes, and slippers. Services include in-room massage, twice-daily housekeeping, complimentary overnight shoe shine, and morning newspaper.",
+                  "smoking": "Non-Smoking",
+                  "bedtypes": [],
+                  "cost": 443.74,
+                  "nightlyrate": [
+                    392.68
+                  ],
+                  "averagerate": 392.68,
+                  "surchargetotal": 51.06,
+                  "image": "http://media.expedia.com/hotels/1000000/580000/579400/579331/579331_51_s.jpg",
+                  "isalternative": false,
+                  "type": "hotelroom",
+                  "dateorder": "2015-10-22T00:00:00",
+                  "guid": "8324dc00-9819-4c86-a590-ba8a5f3fa509",
+                  "rank": 0,
+                  "checkin": "2015-10-22T00:00:00",
+                  "checkout": "2015-10-23T00:00:00",
+                  "totalbeforetax": 392.68
+                }
+              ],
+              "isalternative": false,
+              "hasalternative": true
+            }
+          ]
+        },
+        {
+          "date": "2015-10-24T00:00:00",
+          "skip": true
+        },
+        {
+          "date": "2015-11-15T00:00:00",
+          "empty": true
+        },
+        {
+          "date": "2015-11-16T00:00:00",
+          "empty": true
+        },
+        {
+          "date": "2015-11-17T00:00:00",
+          "empty": true
+        },
+        {
+          "date": "2015-11-18T00:00:00",
+          "empty": true
+        }
+      ]
+    },
+    {
+      "paxguid": "f44e75a7-12fa-4693-ba2b-a4cd0139babb",
+      "accountid": "f44e75a7-12fa-4693-ba2b-a4cd0139babb",
+      "name": "Hussam",
+      "displayname": "Hussam",
+      "totalprice": 959.48,
+      "totalflightprice": 959.48,
+      "totalhotelprice": 0,
+      "paxstatus": "Null",
+      "cells": [
+        {
+          "date": "2015-10-22T00:00:00",
+          "nodes": [
+            {
+              "legs": [
+                {
+                  "type": "Leg",
+                  "parentguid": "ed46197f-1d2c-4cde-ad8f-3a4f68ea850a",
+                  "guid": "0295db82-c16b-445f-81f1-f8cd75f004e1",
+                  "flightnumber": "8243",
+                  "flighttime": "4h 40m",
+                  "departure": "2015-10-22T20:50:00",
+                  "departuretime": "08:50 PM",
+                  "arrival": "2015-10-22T22:30:00",
+                  "arrivaltime": "10:30 PM",
+                  "code": "G",
+                  "origin": "YYZ",
+                  "destination": "LAS",
+                  "origincityname": "Toronto",
+                  "destinationcityname": "Las Vegas",
+                  "originairportname": "Pearson ",
+                  "destinationairportname": "Mc Carran ",
+                  "origincountry": "CA",
+                  "destinationcountry": "US",
+                  "carriercode": "AA",
+                  "carriername": "American Airlines",
+                  "equipment": "737",
+                  "paxguid": "f44e75a7-12fa-4693-ba2b-a4cd0139babb",
+                  "ref": "00000000-0000-0000-0000-000000000000",
+                  "seq": 0,
+                  "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/AA_sq.jpg",
+                  "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/AA.png",
+                  "fareclass": "Economy",
+                  "farepreference": "Nonrefundable",
+                  "normalizedduration": 1
+                }
+              ],
+              "isalternative": false,
+              "flighttime": "4h 40m",
+              "departure": "2015-10-22T20:50:00",
+              "departuretime": "08:50 PM",
+              "arrival": "2015-10-22T22:30:00",
+              "arrivaltime": "10:30 PM",
+              "origin": "YYZ",
+              "destination": "LAS",
+              "origincityname": "Toronto",
+              "destinationcityname": "Las Vegas",
+              "originairportname": "Pearson ",
+              "destinationairportname": "Mc Carran ",
+              "origincountry": "CA",
+              "destinationcountry": "US",
+              "operator": "AA",
+              "operatorname": "American Airlines",
+              "equipment": "737",
+              "fareclass": "Economy",
+              "farepreference": "Nonrefundable",
+              "cost": 486.28,
+              "tax": 12.1,
+              "traveltime": "4h 40m",
+              "paxguid": "f44e75a7-12fa-4693-ba2b-a4cd0139babb",
+              "travelsector": "domestic",
+              "primaryguid": "00000000-0000-0000-0000-000000000000",
+              "normalizedduration": 1,
+              "type": "flight",
+              "dateorder": "2015-10-22T20:50:00",
+              "guid": "ed46197f-1d2c-4cde-ad8f-3a4f68ea850a",
+              "rank": 0.44666666666666666,
+              "paymentprocessingstate": "UNPAID"
+            },
+            {
+              "legs": [
+                {
+                  "type": "Leg",
+                  "parentguid": "57d0e5f6-5eda-40b0-91ba-76da12459e57",
+                  "guid": "26552933-eb2a-4f30-88dc-ae4cf0016733",
+                  "flightnumber": "7162",
+                  "flighttime": "4h 17m",
+                  "departure": "2015-10-22T23:30:00",
+                  "departuretime": "11:30 PM",
+                  "arrival": "2015-10-23T06:47:00",
+                  "arrivaltime": "06:47 AM",
+                  "code": "Q",
+                  "origin": "LAS",
+                  "destination": "YYZ",
+                  "origincityname": "Las Vegas",
+                  "destinationcityname": "Toronto",
+                  "originairportname": "Mc Carran ",
+                  "destinationairportname": "Pearson ",
+                  "origincountry": "US",
+                  "destinationcountry": "CA",
+                  "carriercode": "DL",
+                  "carriername": "Delta Air Lines",
+                  "equipment": "73H",
+                  "paxguid": "f44e75a7-12fa-4693-ba2b-a4cd0139babb",
+                  "ref": "00000000-0000-0000-0000-000000000000",
+                  "seq": 0,
+                  "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/DL_sq.jpg",
+                  "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/DL.png",
+                  "fareclass": "Economy",
+                  "farepreference": "Nonrefundable",
+                  "normalizedduration": 1
+                }
+              ],
+              "isalternative": false,
+              "flighttime": "4h 17m",
+              "departure": "2015-10-22T23:30:00",
+              "departuretime": "11:30 PM",
+              "arrival": "2015-10-23T06:47:00",
+              "arrivaltime": "06:47 AM",
+              "origin": "LAS",
+              "destination": "YYZ",
+              "origincityname": "Las Vegas",
+              "destinationcityname": "Toronto",
+              "originairportname": "Mc Carran ",
+              "destinationairportname": "Pearson ",
+              "origincountry": "US",
+              "destinationcountry": "CA",
+              "operator": "DL",
+              "operatorname": "Delta Air Lines",
+              "equipment": "73H",
+              "fareclass": "Economy",
+              "farepreference": "Nonrefundable",
+              "cost": 473.2,
+              "tax": 0,
+              "traveltime": "4h 17m",
+              "paxguid": "f44e75a7-12fa-4693-ba2b-a4cd0139babb",
+              "travelsector": "domestic",
+              "primaryguid": "00000000-0000-0000-0000-000000000000",
+              "normalizedduration": 1,
+              "type": "flight",
+              "dateorder": "2015-10-22T23:30:00",
+              "guid": "57d0e5f6-5eda-40b0-91ba-76da12459e57",
+              "rank": 0.44666666666666666,
+              "paymentprocessingstate": "UNPAID"
+            }
+          ]
+        },
+        {
+          "date": "2015-10-23T00:00:00",
+          "empty": true
+        },
+        {
+          "date": "2015-10-24T00:00:00",
+          "skip": true
+        },
+        {
+          "date": "2015-11-15T00:00:00",
+          "empty": true
+        },
+        {
+          "date": "2015-11-16T00:00:00",
+          "empty": true
+        },
+        {
+          "date": "2015-11-17T00:00:00",
+          "empty": true
+        },
+        {
+          "date": "2015-11-18T00:00:00",
+          "empty": true
+        }
+      ]
+    }
+  ],
+  "parsermessage": " The hotel for a initially assumed at location Toronto is actually understood as Miami.\r\n"
+}

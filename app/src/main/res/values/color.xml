@@ -28,8 +28,10 @@
 
 
     <color name="brown_blue">#063345</color>
-            <color name="PrimaryColor">#2196F3</color>
-            <color name="PrimaryDarkColor">#1976D2</color>
+          
+    <color name="black">#000000</color>
+    <color name="grey_very_light">#f7f7f7</color>
+    <color name="red_money">#ff5a5f</color>
 
 
 </resources>
