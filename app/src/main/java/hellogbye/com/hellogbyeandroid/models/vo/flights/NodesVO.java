@@ -23,6 +23,9 @@ public class NodesVO implements Comparable<NodesVO>
 
     private String dateOfCell = "";
 
+    @SerializedName("skip")
+    private boolean mSkip;
+
     //-------Flight-----------------------
     @SerializedName("legs")
     private ArrayList<LegsVO> legs = new ArrayList<LegsVO>();
@@ -459,5 +462,13 @@ public class NodesVO implements Comparable<NodesVO>
 
     public void setAccountID(String accountID) {
         this.accountID = accountID;
+    }
+
+    public boolean ismSkip() {
+        return mSkip;
+    }
+
+    public void setmSkip(boolean mSkip) {
+        this.mSkip = mSkip;
     }
 }

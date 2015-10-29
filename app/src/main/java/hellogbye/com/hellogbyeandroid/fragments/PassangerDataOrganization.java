@@ -70,6 +70,11 @@ public class PassangerDataOrganization {
                 HashMap<String, ArrayList<NodesVO>> hashMapPass = passangersVOsTemp.getHashMap();
                 ArrayList<NodesVO> nodes = hashMapPass.get(currKey);
                 nodesSize = nodes.size();
+                for (NodesVO nodesVO:nodes){
+                    if(nodesVO.ismSkip()){
+                        nodesSize = nodesSize - 1;
+                    }
+                }
                 if(maxNodesSize < nodesSize){
                     maxNodesSize = maxNodesSize + nodesSize;
                 }
@@ -87,7 +92,7 @@ public class PassangerDataOrganization {
             PassengersVO passangersVOsTemp = passangersVOs.get(j);
             HashMap<String, ArrayList<NodesVO>> hashMapPass = passangersVOsTemp.getHashMap();
             ArrayList<NodesVO> nodes = hashMapPass.get(currKey);
-            if(nodes.size() < maxNodesSize){
+            if(nodes.size() < maxNodesSize ){
                 int nodesToAdd = maxNodesSize - nodes.size();
                 for(int i=0;i<nodesToAdd;i++){
                     NodesVO nodesVO = new NodesVO();

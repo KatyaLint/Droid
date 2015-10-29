@@ -338,7 +338,7 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
         @Override
         public void onClick(View view) {
             View main_view = (View) view.getRootView();
-            EditText text = (EditText)main_view.findViewById(R.id.nodeGuIdNumberFlight);
+            EditText text = (EditText)main_view.findViewById(R.id.grid_hotel_guid);
             String guID = text.getText().toString();
             itemSelected.itemSelected(guID,"hotel");
             System.out.println("Kate guID =" + guID);
