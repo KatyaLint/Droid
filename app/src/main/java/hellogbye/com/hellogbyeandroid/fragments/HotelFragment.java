@@ -277,9 +277,14 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
 
                     @Override
                     public void onItemClick(View v, int position) {
+
                         NodesVO node = (new ArrayList<NodesVO>(nodeMarkerMap.values())).get(position);
+                        Marker marker = (new ArrayList<Marker>(nodeMarkerMap.keySet())).get(position);
                         currentSelectedNode = node;
-                        sendServerNewHotelOrder(node);
+                        initHotel(node, marker);
+                        hideAlternativeHotels();
+
+                        //sendServerNewHotelOrder(node);
                     }
                 });
             }
@@ -390,11 +395,13 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
         mSlidingPanels.setCoveredFadeColor(Color.TRANSPARENT);
         mSlidingPanels.setAnchorPoint(0.4f);
         mSlidingPanels.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
+
         mSlidingPanels.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
             @Override
             public void onPanelSlide(View panel, float slideOffset) {
                 Log.i(TAG, "onPanelSlide, offset " + slideOffset);
                 mPullDOwnRelativeLayout.setVisibility(View.GONE);
+
 
             }
 

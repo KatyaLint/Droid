@@ -56,6 +56,7 @@ public class AlternativeHotelFragment extends HGBAbtsractFragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
+
         mAdapter = new AlternativeHotelAdapter(mArrayNodes);
         mRecyclerView.setAdapter(mAdapter);
         //GET ALL HOTEL NODES AND SET CURRENT ONE
