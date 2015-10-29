@@ -2,32 +2,28 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
 
-import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import android.widget.LinearLayout;
 
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 import hellogbye.com.hellogbyeandroid.HGBMainInterface;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
@@ -44,10 +40,15 @@ import hellogbye.com.hellogbyeandroid.fragments.PrefrenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
+import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
+import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
 public class MainActivity extends AppCompatActivity implements NavListAdapter.OnItemClickListener, HGBMainInterface {
@@ -63,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private NavListAdapter mAdapter;
     private ArrayList<NavItem> mNavItemsList;
     private CostumeToolBar mToolbar;
+    private FontTextView mName;
+    private HGBPreferencesManager hgbPrefrenceManager;
 
 
     private UserTravelVO mUserTravelOrder;
@@ -78,15 +81,13 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main_activity_layout);
-
-
-
-
+        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
 
         mTitle = mDrawerTitle = getTitle();
         // mNavTitles = getResources().getStringArray(R.array.nav_draw_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (RecyclerView) findViewById(R.id.left_drawer_rv);
+         mName = (FontTextView) findViewById(R.id.nav_profile_name);
         mNavDrawerLinearLayout = (LinearLayout) findViewById(R.id.drawer);
         mProfileImage = (RoundedImageView) findViewById(R.id.nav_profile_image);
 
@@ -104,6 +105,36 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         mToolbar = (CostumeToolBar) findViewById(R.id.toolbar_costume);
         initToolBar();
+        setNameInNavDraw();
+
+    }
+
+    private void setNameInNavDraw() {
+
+        String strName = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_NAME, "");
+
+        if(strName.equals(hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_NAME, ""))){
+            ConnectionManager.getInstance(MainActivity.this).getUserProfile(new ConnectionManager.ServerRequestListener() {
+                @Override
+                public void onSuccess(Object data) {
+
+                    UserData userr = (UserData)data;
+                    String name = userr.getFirstname()+" "+userr.getLastname();
+                    hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_NAME,"");
+                    mName.setText(name);
+
+                }
+
+                @Override
+                public void onError(Object data) {
+                    HGBErrorHelper errorHelper = new HGBErrorHelper();
+                    errorHelper.show(getFragmentManager(), (String) data);
+                }
+            });
+        }else{
+            mName.setText(strName);
+        }
+
 
     }
 
@@ -225,7 +256,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         }
 
 
-    HGBUtility.goToNextFragmentIsAddToBackStack(this,fragment,true);
+        HGBUtility.goToNextFragmentIsAddToBackStack(this, fragment, true);
 
         mToolbar.initToolBarItems();
         mToolbar.updateToolBarView(position);
@@ -234,19 +265,18 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     @Override
     public void onBackPressed() {
-        if (onBackPressedListener != null){
+        if (onBackPressedListener != null) {
             onBackPressedListener.doBack();
         }
 
         //TODO this is when I want the fragment to contorl the back -Kate I suggest we do this for all Fragments
-        FragmentManager.BackStackEntry backEntry=getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount()-1);
-        String str=backEntry.getName();
-        if( str.equals(HotelFragment.class.toString())){
+        FragmentManager.BackStackEntry backEntry = getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1);
+        String str = backEntry.getName();
+        if (str.equals(HotelFragment.class.toString())) {
             return;
         }
 
-        if(!HGBUtility.clearBackStackAndGoToNextFragment(this))
-        {
+        if (!HGBUtility.clearBackStackAndGoToNextFragment(this)) {
             // super.onBackPressed();
         }
     }
@@ -320,7 +350,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
-
     @Override
     public UserTravelVO getTravelOrder() {
         return mUserTravelOrder;
@@ -343,10 +372,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             }
         }
     }
+
     public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
         this.onBackPressedListener = onBackPressedListener;
     }
-
 
 
 }

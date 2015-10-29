@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
@@ -72,5 +73,21 @@ public class Parser {
         }
         return cell;
     }
+
+    public static Object parseUser(String response) {
+        UserData userdata = new UserData();
+        try {
+            Gson gson = new Gson();
+            Type type = new TypeToken<UserData>() {
+            }.getType();
+            userdata = gson.fromJson(response, type);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userdata;
+    }
+
+
 
 }
