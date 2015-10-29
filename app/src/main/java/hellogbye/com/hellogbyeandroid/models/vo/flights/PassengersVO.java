@@ -3,6 +3,7 @@ package hellogbye.com.hellogbyeandroid.models.vo.flights;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by nyawka on 9/9/15.
@@ -52,4 +53,31 @@ public class PassengersVO {
     public void setmDisplayName(String mDisplayName) {
         this.mDisplayName = mDisplayName;
     }
+
+
+
+
+    public ArrayList<NodesVO> passengerNodes = new ArrayList<>();
+
+    public HashMap<String,ArrayList<NodesVO> > hashMap = new HashMap<>();
+
+    public void editHashMap(String date,ArrayList<NodesVO> nodes){
+        hashMap.put(date,nodes);
+        passengerNodes.addAll(nodes);
+    }
+
+    public void addToPassenger(NodesVO node){
+        passengerNodes.add(node);
+    }
+
+    public HashMap<String,ArrayList<NodesVO> > getHashMap(){
+        return hashMap;
+    }
+
+    public ArrayList<NodesVO> getPassengerNodes(){
+        return passengerNodes;
+    }
+
+
+
 }

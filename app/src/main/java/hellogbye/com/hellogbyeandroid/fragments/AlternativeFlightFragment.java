@@ -56,20 +56,28 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        System.out.println("Kate onCreate");
+
         userOrder = getActivityInterface().getTravelOrder();
         conectionRequest();
     }
 
+
+
+    private NodesVO currentNode;
     private void conectionRequest(){
 
-        String solutionID = userOrder.getmSolutionID();
-        ArrayList<PassengersVO> passengers = userOrder.getPassengerses();
-        String paxId = passengers.get(0).getmPaxguid();
-        ArrayList<CellsVO> cells = passengers.get(0).getmCells();
-        ArrayList<NodesVO> node = passengers.get(0).getmCells().get(0).getmNodes();
-        ArrayList<LegsVO> leg = node.get(0).getLegs();
-        String flightID =   leg.get(0).getmParentguid(); //paxId;
+
+        currentNode = getLegWitGuid(userOrder);
+
+
+        String solutionID =getActivityInterface().getSolutionID();
+      //  ArrayList<PassengersVO> passengers = userOrder.getPassengerses();
+        String paxId = currentNode.getAccountID();//passengers.get(0).getmPaxguid();
+    //    ArrayList<CellsVO> cells = passengers.get(0).getmCells();
+    //    ArrayList<NodesVO> node = passengers.get(0).getmCells().get(0).getmNodes();
+       // ArrayList<LegsVO> leg = node.get(0).getLegs();
+
+        String flightID =   currentNode.getmGuid(); //leg.get(0).getmParentguid(); //paxId;
 
         ConnectionManager.getInstance(getActivity()).getAlternateFlightsForFlight(solutionID, paxId, flightID, new ConnectionManager.ServerRequestListener() {
             @Override
@@ -99,24 +107,24 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        System.out.println("Kate onCreateVIew");
+
         //View rootView = inflater.inflate(R.layout.fragment_history_layout, container, false);
         View rootView = inflater.inflate(R.layout.flight_layout_details, container, false);
 
 
-        UserTravelVO travelOrder = getActivityInterface().getTravelOrder();
-        ArrayList<PassengersVO> passengers = travelOrder.getPassengerses();
-        ArrayList<CellsVO> cells = passengers.get(0).getmCells();
-        ArrayList<NodesVO> nodes = cells.get(0).getmNodes();
-        ArrayList<LegsVO> legs = nodes.get(0).getLegs();
+//        UserTravelVO travelOrder = getActivityInterface().getTravelOrder();
+//        ArrayList<PassengersVO> passengers = travelOrder.getPassengerses();
+//        ArrayList<CellsVO> cells = passengers.get(0).getmCells();
+//        ArrayList<NodesVO> nodes = cells.get(0).getmNodes();
+//        ArrayList<LegsVO> legs = nodes.get(0).getLegs();
 
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.flightRecyclerView);
 
        // ArrayList<AlternativeFlightsVO> alternativeFlights = parseFlight();
 //        ArrayList<LegsVO> legsFlights = alternativeFlights.get(0).getLegs(); //TODO change
 //        AlternativeFlightsVO currentFlightToShow = alternativeFlights.get(0);
-        ArrayList<LegsVO> legsFlights = legs; //TODO change
-        NodesVO currentFlightToShow = cells.get(0).getmNodes().get(0);
+        ArrayList<LegsVO> legsFlights =  currentNode.getLegs();// legs; //TODO change
+        NodesVO currentFlightToShow = currentNode;
         String allFlights = "";
 
         for (int i = 0; i < legsFlights.size(); i++) {

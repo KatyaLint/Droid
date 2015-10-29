@@ -16,18 +16,18 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
  */
 public class PassangerDataOrganization {
 
-    public ArrayList<PassangersVO> passangersVOs;
+    public ArrayList<PassengersVO> passangersVOs;
 
     public void organizeDataStructure(UserTravelVO userTravelVO){
         ArrayList<PassengersVO> passengers = userTravelVO.getPassengerses();
 
 
-        passangersVOs = new ArrayList<PassangersVO>();
+        passangersVOs = new ArrayList<PassengersVO>();
 
 
         for (int i = 0; i < passengers.size(); i++) {
             PassengersVO passenger = passengers.get(i);
-            PassangersVO passangersVO = new PassangersVO();
+            PassengersVO passangersVO = new PassengersVO();
             ArrayList<CellsVO> cells = passenger.getmCells();
             for (int j = 0; j < cells.size(); j++) {
                 CellsVO cell = cells.get(j);
@@ -41,7 +41,7 @@ public class PassangerDataOrganization {
 
         correctTheHashMapCells();
         for (int i = 0; i <passangersVOs.size() ; i++) {
-            PassangersVO passenger = passangersVOs.get(i);
+            PassengersVO passenger = passangersVOs.get(i);
             Collections.sort(passenger.getPassengerNodes());
         }
     }
@@ -66,7 +66,7 @@ public class PassangerDataOrganization {
         for (int i = 0; i < keysArr.length; i++) {
             String currKey = keysArr[i];
             for (int j = 0; j < passangersVOs.size(); j++) {
-                PassangersVO passangersVOsTemp = passangersVOs.get(j);
+                PassengersVO passangersVOsTemp = passangersVOs.get(j);
                 HashMap<String, ArrayList<NodesVO>> hashMapPass = passangersVOsTemp.getHashMap();
                 ArrayList<NodesVO> nodes = hashMapPass.get(currKey);
                 nodesSize = nodes.size();
@@ -81,10 +81,10 @@ public class PassangerDataOrganization {
     }
 
     private void updateAllPassengersForMaximum(int maxNodesSize, String currKey) {
-        System.out.println("Kate maxNodesSize" + maxNodesSize);
+
 
         for (int j = 0; j < passangersVOs.size(); j++) {
-            PassangersVO passangersVOsTemp = passangersVOs.get(j);
+            PassengersVO passangersVOsTemp = passangersVOs.get(j);
             HashMap<String, ArrayList<NodesVO>> hashMapPass = passangersVOsTemp.getHashMap();
             ArrayList<NodesVO> nodes = hashMapPass.get(currKey);
             if(nodes.size() < maxNodesSize){
@@ -101,100 +101,31 @@ public class PassangerDataOrganization {
 
     }
 
-    public class PassangersVO {
-
-        public ArrayList<NodesVO> passengerNodes = new ArrayList<>();
-
-        public HashMap<String,ArrayList<NodesVO> > hashMap = new HashMap<>();
-
-        public void editHashMap(String date,ArrayList<NodesVO> nodes){
-            hashMap.put(date,nodes);
-            passengerNodes.addAll(nodes);
-        }
-
-        public void addToPassenger(NodesVO node){
-            passengerNodes.add(node);
-        }
-
-        public HashMap<String,ArrayList<NodesVO> > getHashMap(){
-            return hashMap;
-        }
-
-        public ArrayList<NodesVO> getPassengerNodes(){
-            return passengerNodes;
-        }
-
-
-    }
-
-
-
-
-
-    private int getMaxmimuRowNumber(ArrayList<PassengersVO> passengers){
-        int maxRowNumber = 0;
-        int maxRowNumberStub = 0;
-        int biggestRowNumber = 0;
-        for(PassengersVO passanger:passengers){
-            ArrayList<CellsVO> cells = passanger.getmCells();
-            maxRowNumber = cells.size();
-            for (CellsVO cell: cells){
-                ArrayList<NodesVO> nodes = cell.getmNodes();
-                if(!nodes.isEmpty()) {
-                    maxRowNumberStub = maxRowNumberStub + nodes.size();
-                }else{
-                    maxRowNumberStub = maxRowNumberStub + 1;
-                }
-                if(maxRowNumberStub > maxRowNumber){
-                    maxRowNumber = maxRowNumberStub;
-                }
-            }
-            if(maxRowNumber > biggestRowNumber){
-                biggestRowNumber = maxRowNumber;
-            }
-
-            maxRowNumberStub = 0;
-        }
-
-        return biggestRowNumber;
-    }
-
-
-    private void getMaximumNodes(UserTravelVO userTravelVO){
-
-        ArrayList<PassengersVO> passengers = userTravelVO.getPassengerses();
-
-        ArrayList<CellsVO> mCells = new ArrayList<CellsVO>();
-
-
-
-
-        for(int i=0;i<passengers.size();i++){
-            PassengersVO passenger = passengers.get(i);
-
-            ArrayList<CellsVO> cells = passenger.getmCells();
-            for(int j=0;j<cells.size();j++){
-
-                ArrayList<NodesVO> nodesNewNodes = new ArrayList<>();
-
-                CellsVO cell = cells.get(j);
-
-                ArrayList<NodesVO> nodes = cell.getmNodes();
-
-
-
-
-                for(int k=0;k<nodes.size();k++){
-
-                }
-            }
-        }
-
-
-
-
-
-    }
+//    public class PassangersVO {
+//
+//        public ArrayList<NodesVO> passengerNodes = new ArrayList<>();
+//
+//        public HashMap<String,ArrayList<NodesVO> > hashMap = new HashMap<>();
+//
+//        public void editHashMap(String date,ArrayList<NodesVO> nodes){
+//            hashMap.put(date,nodes);
+//            passengerNodes.addAll(nodes);
+//        }
+//
+//        public void addToPassenger(NodesVO node){
+//            passengerNodes.add(node);
+//        }
+//
+//        public HashMap<String,ArrayList<NodesVO> > getHashMap(){
+//            return hashMap;
+//        }
+//
+//        public ArrayList<NodesVO> getPassengerNodes(){
+//            return passengerNodes;
+//        }
+//
+//
+//    }
 
 
 

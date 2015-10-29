@@ -9,7 +9,13 @@ import android.view.WindowManager;
 
 import org.apache.http.Header;
 
+import java.util.ArrayList;
+
 import hellogbye.com.hellogbyeandroid.HGBMainInterface;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 
 /**
  * Created by arisprung on 9/20/15.
@@ -17,6 +23,9 @@ import hellogbye.com.hellogbyeandroid.HGBMainInterface;
 public class HGBAbtsractFragment extends Fragment {
 
     private HGBMainInterface mActivityInterface;
+    private String selectedItem;
+
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -35,6 +44,36 @@ public class HGBAbtsractFragment extends Fragment {
         return  null;
 
 
+    }
+
+
+
+    public NodesVO getLegWitGuid(UserTravelVO userOrder){
+        String guid = getSelectedGuid();
+
+        ArrayList<PassengersVO> passengers = userOrder.getPassengerses();
+        for (PassengersVO passenger :passengers){
+            ArrayList<CellsVO> cells = passenger.getmCells();
+            for (CellsVO cell : cells){
+                ArrayList<NodesVO> nodes = cell.getmNodes();
+                for (NodesVO node: nodes){
+                    if(node.getmGuid()!= null && node.getmGuid().equals(guid)){
+                        node.setAccountID(passenger.getmPaxguid());
+                        return node;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public void selectedItem(String guidSlected){
+        this.selectedItem = guidSlected;
+    }
+
+    public String getSelectedGuid(){
+        return selectedItem;
     }
 
     @Override
@@ -108,4 +147,6 @@ public class HGBAbtsractFragment extends Fragment {
 
         errorDialog("Error", error);
     }
+
+
 }

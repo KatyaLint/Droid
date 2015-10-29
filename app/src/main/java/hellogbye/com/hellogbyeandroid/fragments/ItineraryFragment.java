@@ -24,7 +24,7 @@ public class ItineraryFragment extends HGBAbtsractFragment {
 
 
     private UserTravelVO userOrder;
-    private UserTravelVO airplaneDataVO;
+   // private UserTravelVO airplaneDataVO;
     public ItineraryFragment() {
         // Empty constructor required for fragment subclasses
     }
@@ -42,7 +42,8 @@ public class ItineraryFragment extends HGBAbtsractFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        parseFlight();
+       // parseFlight();
+
         userOrder = getActivityInterface().getTravelOrder();
         if(userOrder != null) {
             Log.d("ItineraryFragment", userOrder.toString());
@@ -51,17 +52,9 @@ public class ItineraryFragment extends HGBAbtsractFragment {
     }
 
 
-    //TODO move to correct place
-    private void parseFlight(){
-        Gson gson = new Gson();
-        Type type = new TypeToken<UserTravelVO>(){}.getType();
-      //  Type type = new TypeToken<ArrayList<AirplaneDataVO>>(){}.getType();
-//        String strJson = HGBUtility.loadJSONFromAsset("maingridfile.txt", getActivity());
-        String strJson = HGBUtility.loadJSONFromAsset("maingridfilethree.txt", getActivity());
-
-         airplaneDataVO = gson.fromJson(strJson, type);
+    public interface TravelerShowChoose{
+        void itemSelected(String guidSelectedItem);
     }
-
 
 
 
@@ -71,35 +64,34 @@ public class ItineraryFragment extends HGBAbtsractFragment {
 
         View rootView = inflater.inflate(R.layout.grid_view_table_main_layoutl, container, false);
         FlightGridMainFragment flightGridMainFragment = new FlightGridMainFragment();
-      //  View gridView = inflater.inflate(R.layout.grid_view_inner_flight_item, null);
-
-        //View gridTravelName = inflater.inflate(R.layout.grid_view_sticky_header, null);
-
-
-        rootView = flightGridMainFragment.createGridView(getActivity(),rootView,airplaneDataVO , inflater);
-
-
-//        TableMainLayout tableMainLayout = new TableMainLayout(getActivity());
-//
-//        rootView = tableMainLayout;
-
-
-        View dumbRootView = inflater.inflate(R.layout.dumb_layout, container, false);
-
-
-        Button btn = (Button)dumbRootView.findViewById(R.id.button);
-        btn.setOnClickListener(new View.OnClickListener() {
+        flightGridMainFragment.initializeCB(new TravelerShowChoose() {
             @Override
-            public void onClick(View view) {
-                //show flight
-                //on alternative show alternative flight
-
+            public void itemSelected(String guidSelectedItem) {
                 Fragment fragment = new AlternativeFlightFragment();
+                ((AlternativeFlightFragment)fragment).selectedItem(guidSelectedItem);
                 HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragment, true);
-
-
             }
         });
+        if(userOrder != null) {
+            rootView = flightGridMainFragment.createGridView(getActivity(), rootView, userOrder, inflater);
+        }
+
+//        View dumbRootView = inflater.inflate(R.layout.dumb_layout, container, false);
+
+
+//        Button btn = (Button)dumbRootView.findViewById(R.id.button);
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //show flight
+//                //on alternative show alternative flight
+//
+//                Fragment fragment = new AlternativeFlightFragment();
+//                HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragment, true);
+//
+//
+//            }
+//        });
 
 
         return rootView;

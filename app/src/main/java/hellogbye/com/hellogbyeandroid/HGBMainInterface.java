@@ -13,6 +13,8 @@ public interface HGBMainInterface  {
 
      void openVoiceToTextControl();
      void setTravelOrder(UserTravelVO travelorder);
+    void setSolutionID(String userID);
+    String getSolutionID();
      void setAlternativeFlights(List<AlternativeFlightsVO> alternativeFlightsVO);
      UserTravelVO getTravelOrder();
     List<AlternativeFlightsVO>  getAlternativeFlights();

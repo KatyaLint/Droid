@@ -99,8 +99,9 @@ public class HomeFragment extends HGBAbtsractFragment {
         mMicImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new HotelFragment();
-                HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragment, true);
+                //handleClick(query);
+//                Fragment fragment = new HotelFragment();
+//                HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragment, true);
                // getActivityInterface().openVoiceToTextControl();
 
             }
@@ -170,11 +171,11 @@ public class HomeFragment extends HGBAbtsractFragment {
                 if(data !=null){
                     getActivityInterface().setTravelOrder((UserTravelVO) data);
 
-//                    ItineraryFragment fragemnt = new ItineraryFragment();
-//                    HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack
-
-                    HotelFragment fragemnt = new HotelFragment();
+                    ItineraryFragment fragemnt = new ItineraryFragment();
                     HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack
+
+//                    HotelFragment fragemnt = new HotelFragment();
+//                    HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack
                 }
 
             }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class NodesVO implements Comparable<NodesVO>
 {
 
+    private String accountID;
     private boolean isEmpty = false;
 
     public String getDateOfCell() {
@@ -452,4 +453,11 @@ public class NodesVO implements Comparable<NodesVO>
         this.mGuid = mGuid;
     }
 
+    public String getAccountID() {
+        return accountID;
+    }
+
+    public void setAccountID(String accountID) {
+        this.accountID = accountID;
+    }
 }

@@ -21,8 +21,6 @@ import android.view.MenuItem;
 
 import android.view.View;
 
-import android.view.WindowManager;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +29,6 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.AccountSettingsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.ContentFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HistoryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HomeFragment;
@@ -46,7 +43,6 @@ import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFl
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
-import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
 public class MainActivity extends AppCompatActivity implements NavListAdapter.OnItemClickListener, HGBMainInterface {
 
@@ -61,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     protected OnBackPressedListener onBackPressedListener;
-
+    private String solutionID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -388,7 +384,18 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public void setTravelOrder(UserTravelVO travelorder) {
         mUserTravelOrder = travelorder;
+        setSolutionID(mUserTravelOrder.getmSolutionID());
 
+    }
+
+    @Override
+    public void setSolutionID(String solutionID) {
+        this.solutionID = solutionID;
+    }
+
+    @Override
+    public String getSolutionID() {
+        return solutionID;
     }
 
     @Override
