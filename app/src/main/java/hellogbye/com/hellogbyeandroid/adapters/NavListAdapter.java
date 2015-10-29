@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -51,10 +52,13 @@ public class NavListAdapter extends RecyclerView.Adapter<NavListAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final FontTextView mTextView;
+        public final ImageView mSelectedImage;
+
 
         public ViewHolder(View v) {
             super(v);
             mTextView = (FontTextView)v.findViewById(R.id.nav_item_text);
+            mSelectedImage = (ImageView)v.findViewById(R.id.nav_item_selected_image);
         }
     }
 
@@ -80,13 +84,13 @@ public class NavListAdapter extends RecyclerView.Adapter<NavListAdapter.ViewHold
         NavItem item = mDataset.get(position);
         holder.mTextView.setText(item.getName());
         if(item.isSelected()){
-            Typeface face=Typeface.createFromAsset(mContext.getAssets(), "fonts/dinnextltpro_bold.otf");
-            holder.mTextView.setTypeface(face);
-            holder.mTextView.setTextColor(mContext.getResources().getColor(R.color.white));
+
+            holder.mTextView.setTextColor(mContext.getResources().getColor(R.color.brown_blue));
+            holder.mSelectedImage.setVisibility(View.VISIBLE);
         }else{
-            Typeface face=Typeface.createFromAsset(mContext.getAssets(), "fonts/dinnextltpro_regular.otf");
-            holder.mTextView.setTypeface(face);
+
             holder.mTextView.setTextColor(mContext.getResources().getColor(R.color.hgb_nav_font_unselected));
+            holder.mSelectedImage.setVisibility(View.INVISIBLE);
         }
         holder.mTextView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -34,24 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center">
 
-            <TextView
-                android:id="@+id/position"
-                style="@style/StateText"/>
-
-            <TextView
-                android:id="@+id/count"
-                style="@style/StateText"/>
-
-            <TextView
-                android:id="@+id/state"
-                style="@style/StateText"/>
-
-        </LinearLayout>
 
 
         <!-- android:layout_gravity="start" tells DrawerLayout to treat
@@ -62,16 +45,24 @@
              with the content view. -->
         <LinearLayout
             android:id="@+id/drawer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:background="@color/white"
+            android:background="@color/hgb_toolbar_blue"
             android:divider="@android:color/transparent"
-            android:dividerHeight="@null"
-
+            android:dividerHeight="0dp"
             android:orientation="vertical">
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_height="match_parent">
+
+
+
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/profile_b_g">
@@ -85,11 +76,9 @@
                 android:id="@+id/nav_profile_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
+                android:layout_centerInParent="true"
                 android:text="Ari Sprung"
-                android:minHeight="?android:attr/listPreferredItemHeightSmall"
-                android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="@color/hgb_nav_font_unselected"
+                android:textColor="@color/white"
                 app:fontName="dinnextltpro_regular.otf" />
 
 
@@ -99,16 +88,17 @@
                 <!--android:layout_centerVertical="true"-->
                 <!--android:background="#ffffff" />-->
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/left_drawer_rv"
-                android:layout_width="240dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="left|start"
                 android:choiceMode="singleChoice"
                 android:divider="@null"
                 android:scrollbars="vertical" />
+            </LinearLayout>
         </LinearLayout>
 
     </android.support.v4.widget.DrawerLayout>

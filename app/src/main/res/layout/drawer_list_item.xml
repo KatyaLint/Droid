@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical"
    >
 
@@ -10,6 +11,7 @@
         android:id="@+id/nav_item_selected_image"
         android:layout_width="wrap_content"
         android:layout_alignParentLeft="true"
+        android:background="@drawable/selected_item"
         android:layout_height="wrap_content" />
 
 
@@ -19,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/nav_item_selected_image"
         android:layout_marginLeft="@dimen/DP10"
+        android:layout_centerVertical="true"
         android:textSize="18sp"
         android:textColor="@color/hgb_nav_font_unselected"
         app:fontName="dinnextltpro_regular.otf" />
