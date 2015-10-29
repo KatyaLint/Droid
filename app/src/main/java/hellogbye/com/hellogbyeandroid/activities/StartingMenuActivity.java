@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -26,10 +27,17 @@ public class StartingMenuActivity extends Activity {
     private FontTextView mSignUp;
     private FontTextView mLogin;
     private FontTextView mPrivacyPolicy;
-
+    private HGBPreferencesManager hgbPrefrenceManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
+
+        String strToken =  hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
+        if(!strToken.equals("")){
+            goToMainActivity();
+            finish();
+        }
         setContentView(R.layout.starting_menu_layout);
         mSignUp = (FontTextView)findViewById(R.id.create_account);
         mLogin = (FontTextView)findViewById(R.id.login_button);
@@ -91,6 +99,17 @@ public class StartingMenuActivity extends Activity {
         }
 
     }
+    private void goToMainActivity() {
 
+        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
+        boolean  doesExist = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY,false);
+        if(doesExist){
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(getApplicationContext(), TravelPrefrenceStartingActivity.class);
+            startActivity(intent);
+        }
+    }
 
 }

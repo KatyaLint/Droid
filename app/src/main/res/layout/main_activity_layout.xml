@@ -35,8 +35,6 @@
             android:layout_height="match_parent" />
 
 
-
-
         <!-- android:layout_gravity="start" tells DrawerLayout to treat
              this as a sliding drawer on the left side for left-to-right
              languages and on the right side for right-to-left languages.
@@ -55,49 +53,48 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:background="@color/white"
-                android:layout_height="match_parent">
-
-
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/profile_b_g">
-            <hellogbye.com.hellogbyeandroid.views.RoundedImageView
-                android:id="@+id/nav_profile_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
-
-            <hellogbye.com.hellogbyeandroid.views.FontTextView
-                android:id="@+id/nav_profile_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Ari Sprung"
-                android:textColor="@color/white"
-                app:fontName="dinnextltpro_regular.otf" />
-
-
-            <!--<View-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:layout_centerVertical="true"-->
-                <!--android:background="#ffffff" />-->
-
-            </RelativeLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/left_drawer_rv"
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="left|start"
-                android:choiceMode="singleChoice"
-                android:divider="@null"
-                android:scrollbars="vertical" />
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/profile_b_g">
+
+                    <hellogbye.com.hellogbyeandroid.views.RoundedImageView
+                        android:id="@+id/nav_profile_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+
+                    <hellogbye.com.hellogbyeandroid.views.FontTextView
+                        android:id="@+id/nav_profile_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_centerHorizontal="true"
+                        android:text="Ari Sprung"
+                        android:textColor="@color/white"
+                        app:fontName="dinnextltpro_regular.otf" />
+
+
+                    <!--<View-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:background="#ffffff" />-->
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/left_drawer_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left|start"
+                    android:choiceMode="singleChoice"
+                    android:divider="@null"
+                    android:scrollbars="vertical" />
             </LinearLayout>
         </LinearLayout>
 

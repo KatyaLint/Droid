@@ -83,8 +83,6 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
-
-
                     Type listType = new TypeToken<List<AlternativeFlightsVO>>() {
                     }.getType();
 

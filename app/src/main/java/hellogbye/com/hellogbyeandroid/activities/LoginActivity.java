@@ -11,15 +11,17 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import java.lang.reflect.Type;
+
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
-import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -39,11 +41,7 @@ public class LoginActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
-       String strToken =  hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
-        if(!strToken.equals("")){
-            goToMainActivity();
-        }
+
         setContentView(R.layout.login_layout);
 
 
@@ -100,11 +98,11 @@ public class LoginActivity extends FragmentActivity {
     private void goToMainActivity() {
 
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
-       boolean  doesExist = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY,false);
-        if(doesExist){
+        boolean doesExist = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY, false);
+        if (doesExist) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
-        }else{
+        } else {
             Intent intent = new Intent(getApplicationContext(), TravelPrefrenceStartingActivity.class);
             startActivity(intent);
         }
