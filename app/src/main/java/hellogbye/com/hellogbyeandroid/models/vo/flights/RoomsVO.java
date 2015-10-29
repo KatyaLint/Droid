@@ -48,20 +48,20 @@ public class RoomsVO {
     private double mTotalBeforeTax;
 
 
-<<<<<<< HEAD
+
     public double getmCost() {
         return mCost;
     }
 
     public void setmCost(double mCost) {
         this.mCost = mCost;
-=======
+    }
+
     public String getmRoomType() {
         return mRoomType;
     }
 
     public void setmRoomType(String mRoomType) {
         this.mRoomType = mRoomType;
->>>>>>> origin/master
     }
 }

@@ -21,10 +21,7 @@
             android:id="@+id/query_edit_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
             android:text="Fly Sam from NYC to Vegas on Nov 15th for 3 nights in the morning then back to NYC. Fly Warren from Miami to Vegas on Nov 15th before 5PM for 3 nights then on to Toronto for a 1 night then back to Miami. Fly me from Toronto to Vegas, on the earliest flight available for 3 nights on Nov 15th then back to Toronto"
-=======
->>>>>>> origin/master
             android:background="@drawable/edit_text_border"
             android:drawableLeft="@android:drawable/ic_menu_search"
             android:gravity="top"
@@ -32,7 +29,6 @@
             android:inputType="textMultiLine"
             android:padding="10dp"
             android:scrollbars="vertical"
-            android:text="Fly from Boston to LAs Vegas for 3 days"
             android:textColor="@color/white"
             android:textSize="20sp" />
 

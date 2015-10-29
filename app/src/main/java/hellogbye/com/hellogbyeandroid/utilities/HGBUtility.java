@@ -34,7 +34,7 @@ import com.nostra13.universalimageloader.core.process.BitmapProcessor;
 
 import java.io.IOException;
 import java.io.InputStream;
-<<<<<<< HEAD
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,11 +42,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
-=======
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
->>>>>>> origin/master
+
 import java.util.Stack;
 
 import hellogbye.com.hellogbyeandroid.R;

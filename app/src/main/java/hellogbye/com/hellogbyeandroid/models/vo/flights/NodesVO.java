@@ -340,7 +340,7 @@ public class NodesVO implements Comparable<NodesVO>
 
     }
 
-<<<<<<< HEAD
+
     public String getmType() {
         return mType;
     }
@@ -389,8 +389,7 @@ public class NodesVO implements Comparable<NodesVO>
         this.mOperatorName = mOperatorName;
     }
 
-=======
->>>>>>> origin/master
+
     public String getmCityName() {
         return mCityName;
     }
@@ -399,7 +398,6 @@ public class NodesVO implements Comparable<NodesVO>
         this.mCityName = mCityName;
     }
 
-<<<<<<< HEAD
     public String getmDepartureTime() {
         return mDepartureTime;
     }
@@ -427,14 +425,14 @@ public class NodesVO implements Comparable<NodesVO>
     @Override
     public int compareTo(NodesVO nodesVO) {
         return getDateOfCell().compareTo(nodesVO.getDateOfCell());
-=======
+    }
+
     public String getmHotelCode() {
         return mHotelCode;
     }
 
     public void setmHotelCode(String mHotelCode) {
         this.mHotelCode = mHotelCode;
->>>>>>> origin/master
     }
 
     public ArrayList<RoomsVO> getRoomsVOs() {
@@ -444,8 +442,7 @@ public class NodesVO implements Comparable<NodesVO>
     public void setRoomsVOs(ArrayList<RoomsVO> roomsVOs) {
         this.roomsVOs = roomsVOs;
     }
-<<<<<<< HEAD
-=======
+
 
     public String getmGuid() {
         return mGuid;
@@ -454,5 +451,5 @@ public class NodesVO implements Comparable<NodesVO>
     public void setmGuid(String mGuid) {
         this.mGuid = mGuid;
     }
->>>>>>> origin/master
+
 }
