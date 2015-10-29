@@ -68,6 +68,28 @@ public class HGBAbtsractFragment extends Fragment {
         return null;
     }
 
+    public CellsVO getCellWitGuid(UserTravelVO userOrder){
+        String guid = getSelectedGuid();
+
+        ArrayList<PassengersVO> passengers = userOrder.getPassengerses();
+        for (PassengersVO passenger :passengers){
+            ArrayList<CellsVO> cells = passenger.getmCells();
+            for (CellsVO cell : cells){
+                ArrayList<NodesVO> nodes = cell.getmNodes();
+                for (NodesVO node: nodes){
+                    if(node.getmGuid()!= null && node.getmGuid().equals(guid)){
+                        node.setAccountID(passenger.getmPaxguid());
+                        return cell;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+
+
     public void selectedItem(String guidSlected){
         this.selectedItem = guidSlected;
     }

@@ -329,7 +329,7 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
             View main_view = (View) view.getRootView();
             EditText text = (EditText)main_view.findViewById(R.id.nodeGuIdNumberFlight);
             String guID = text.getText().toString();
-            itemSelected.itemSelected(guID);
+            itemSelected.itemSelected(guID, "flight");
             System.out.println("Kate guID =" + guID);
         }
     };
@@ -340,7 +340,7 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
             View main_view = (View) view.getRootView();
             EditText text = (EditText)main_view.findViewById(R.id.nodeGuIdNumberFlight);
             String guID = text.getText().toString();
-            itemSelected.itemSelected(guID);
+            itemSelected.itemSelected(guID,"hotel");
             System.out.println("Kate guID =" + guID);
         }
     };

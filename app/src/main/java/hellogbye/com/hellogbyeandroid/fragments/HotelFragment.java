@@ -342,8 +342,8 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
 
         mTravelDetails = getActivityInterface().getTravelOrder();
         passengersVO = mTravelDetails.getPassengerses().get(0);
-        cellsVO = passengersVO.getmCells().get(0);
-        nodesVO = cellsVO.getmNodes().get(1);
+        cellsVO = getCellWitGuid(getActivityInterface().getTravelOrder());  //passengersVO.getmCells().get(0);
+        nodesVO = getLegWitGuid(getActivityInterface().getTravelOrder());//cellsVO.getmNodes().get(1);
         currentSelectedNode = nodesVO;
     }
 
