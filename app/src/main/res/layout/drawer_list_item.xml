@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<hellogbye.com.hellogbyeandroid.views.FontTextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/text1"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
+   >
 
-    android:gravity="center_vertical"
-    android:minHeight="?android:attr/listPreferredItemHeightSmall"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall"
-    android:textColor="@color/hgb_nav_font_unselected"
-    app:fontName="dinnextltpro_regular.otf" />
+    <ImageView
+        android:id="@+id/nav_item_selected_image"
+        android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_height="wrap_content" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/nav_item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/nav_item_selected_image"
+        android:layout_marginLeft="@dimen/DP10"
+        android:textSize="18sp"
+        android:textColor="@color/hgb_nav_font_unselected"
+        app:fontName="dinnextltpro_regular.otf" />
+
+</RelativeLayout>

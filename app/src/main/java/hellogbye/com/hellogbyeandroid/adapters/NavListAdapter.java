@@ -50,11 +50,11 @@ public class NavListAdapter extends RecyclerView.Adapter<NavListAdapter.ViewHold
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mTextView;
+        public final FontTextView mTextView;
 
-        public ViewHolder(TextView v) {
+        public ViewHolder(View v) {
             super(v);
-            mTextView = v;
+            mTextView = (FontTextView)v.findViewById(R.id.nav_item_text);
         }
     }
 
@@ -66,13 +66,13 @@ public class NavListAdapter extends RecyclerView.Adapter<NavListAdapter.ViewHold
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater vi = LayoutInflater.from(parent.getContext());
-        View v = vi.inflate(R.layout.drawer_list_item, parent, false);
-        FontTextView tv = (FontTextView) v.findViewById(R.id.text1);
-   //     Typeface face=Typeface.createFromAsset(mContext.getAssets(), "fonts/dinnextltpro_bold.otf");
-//        tv.setTypeface(face);
-//        tv.setTextColor(mContext.getResources().getColor(R.color.white));
-        return new ViewHolder(tv);
+
+        // create a new view
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.drawer_list_item, parent, false);
+
+        ViewHolder vh = new ViewHolder(v);
+        return vh;
     }
 
     @Override
