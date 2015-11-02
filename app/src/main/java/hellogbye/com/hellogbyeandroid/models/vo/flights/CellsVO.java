@@ -11,7 +11,8 @@ public class CellsVO {
     @SerializedName("date")
     private String mDate;
 
-
+    @SerializedName("skip")
+    private boolean mSkip;
 
 
 
@@ -32,5 +33,13 @@ public class CellsVO {
 
     public void setmDate(String mDate) {
         this.mDate = mDate;
+    }
+
+    public boolean ismSkip() {
+        return mSkip;
+    }
+
+    public void setmSkip(boolean mSkip) {
+        this.mSkip = mSkip;
     }
 }

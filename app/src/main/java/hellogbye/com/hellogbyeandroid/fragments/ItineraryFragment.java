@@ -83,24 +83,6 @@ public class ItineraryFragment extends HGBAbtsractFragment {
             rootView = flightGridMainFragment.createGridView(getActivity(), rootView, userOrder, inflater);
         }
 
-//        View dumbRootView = inflater.inflate(R.layout.dumb_layout, container, false);
-
-
-//        Button btn = (Button)dumbRootView.findViewById(R.id.button);
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //show flight
-//                //on alternative show alternative flight
-//
-//                Fragment fragment = new AlternativeFlightFragment();
-//                HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragment, true);
-//
-//
-//            }
-//        });
-
-
         return rootView;
 
     }

@@ -24,7 +24,6 @@
             android:background="@drawable/edit_text_border"
             android:drawableLeft="@android:drawable/ic_menu_search"
             android:gravity="top"
-            android:text="Fly from Boston to Las Vegas for 3 days"
             android:imeOptions="actionDone"
             android:inputType="textMultiLine"
             android:padding="10dp"

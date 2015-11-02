@@ -73,6 +73,7 @@ public class ConnectionManager {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
                 listener.onError(Parser.parseErrorMessage(error));
             }
         });
@@ -340,6 +341,8 @@ public class ConnectionManager {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
+                String parser = Parser.parseErrorMessage(error);
 
                 listener.onError(Parser.parseErrorMessage(error));
             }

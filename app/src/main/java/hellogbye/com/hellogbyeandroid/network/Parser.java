@@ -1,9 +1,6 @@
 package hellogbye.com.hellogbyeandroid.network;
 
 
-import android.util.Log;
-import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
@@ -14,13 +11,10 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONObject;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
@@ -30,18 +24,23 @@ public class Parser {
 
 
     public static String parseErrorMessage(VolleyError error) {
-        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-            return "Network timed out error ";
-        } else if (error instanceof AuthFailureError) {
-            return "AuthFailureError error "+error.networkResponse.statusCode;
-        } else if (error instanceof ServerError) {
-            return "ServerError error "+error.networkResponse.statusCode;
-        } else if (error instanceof NetworkError) {
-            return "NetworkError error "+error.networkResponse.statusCode;
-        } else if (error instanceof ParseError) {
-            return "ParseError error "+error.networkResponse.statusCode;
+
+        try {
+            if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                return "Network timed out error " + error.networkResponse.statusCode;
+            } else if (error instanceof AuthFailureError) {
+                return "AuthFailureError error " + error.networkResponse.statusCode;
+            } else if (error instanceof ServerError) {
+                return "ServerError error " + error.networkResponse.statusCode;
+            } else if (error instanceof NetworkError) {
+                return "NetworkError error " + error.networkResponse.statusCode;
+            } else if (error instanceof ParseError) {
+                return "ParseError error " + error.networkResponse.statusCode;
+            }
+            return "Error " + error.networkResponse.statusCode;
+        } catch (Exception exception) {
+            return "NetworkError error ";
         }
-        return"Error "+error.networkResponse.statusCode;
     }
 
 
@@ -63,9 +62,10 @@ public class Parser {
         CellsVO cell = new CellsVO();
         try {
             Gson gson = new Gson();
-            Type listType = new TypeToken<List<NodesVO>>(){}.getType();
+            Type listType = new TypeToken<List<NodesVO>>() {
+            }.getType();
             List<NodesVO> posts = (List<NodesVO>) gson.fromJson(response, listType);
-            cell.setmNodes((ArrayList)posts);
+            cell.setmNodes((ArrayList) posts);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -85,7 +85,6 @@ public class Parser {
         }
         return userdata;
     }
-
 
 
 }

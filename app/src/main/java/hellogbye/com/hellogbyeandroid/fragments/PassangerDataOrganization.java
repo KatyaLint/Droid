@@ -31,9 +31,15 @@ public class PassangerDataOrganization {
             ArrayList<CellsVO> cells = passenger.getmCells();
             for (int j = 0; j < cells.size(); j++) {
                 CellsVO cell = cells.get(j);
-                ArrayList<NodesVO> nodes = correctDateInNode(cell);
-                passangersVO.editHashMap(cell.getmDate(),nodes);
-
+                if(!cell.ismSkip()) {
+                    ArrayList<NodesVO> nodes = correctDateInNode(cell);
+                    for (NodesVO nodesVO : nodes) {
+                        if (nodesVO.ismSkip()) {
+                            nodes.remove(nodesVO);
+                        }
+                    }
+                    passangersVO.editHashMap(cell.getmDate(), nodes);
+                }
             }
 
             passangersVOs.add(passangersVO);
@@ -49,7 +55,11 @@ public class PassangerDataOrganization {
     private ArrayList<NodesVO> correctDateInNode(CellsVO cell){
         ArrayList<NodesVO> nodes = cell.getmNodes();
         for (NodesVO node:nodes){
-            node.setDateOfCell(cell.getmDate());
+            if(node.ismSkip()){
+                nodes.remove(node);
+            }else {
+                node.setDateOfCell(cell.getmDate());
+            }
         }
 
         return nodes;
@@ -70,13 +80,9 @@ public class PassangerDataOrganization {
                 HashMap<String, ArrayList<NodesVO>> hashMapPass = passangersVOsTemp.getHashMap();
                 ArrayList<NodesVO> nodes = hashMapPass.get(currKey);
                 nodesSize = nodes.size();
-                for (NodesVO nodesVO:nodes){
-                    if(nodesVO.ismSkip()){
-                        nodesSize = nodesSize - 1;
-                    }
-                }
+
                 if(maxNodesSize < nodesSize){
-                    maxNodesSize = maxNodesSize + nodesSize;
+                    maxNodesSize = nodesSize;
                 }
 
             }
