@@ -14,6 +14,7 @@ public interface HGBMainInterface  {
      void openVoiceToTextControl();
      void setTravelOrder(UserTravelVO travelorder);
     void setSolutionID(String userID);
+    void setHomeImage(String id);
     String getSolutionID();
      void setAlternativeFlights(List<AlternativeFlightsVO> alternativeFlightsVO);
      UserTravelVO getTravelOrder();

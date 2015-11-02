@@ -2,6 +2,7 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
 
+import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.ActivityNotFoundException;
@@ -18,9 +19,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.crashlytics.android.Crashlytics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,14 +46,13 @@ import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
-public class MainActivity extends AppCompatActivity implements NavListAdapter.OnItemClickListener, HGBMainInterface {
+public class MainActivity extends AppCompatActivity implements NavListAdapter.OnItemClickListener, HGBMainInterface, ActionBar.OnMenuVisibilityListener {
     private DrawerLayout mDrawerLayout;
     private RecyclerView mDrawerList;
     private LinearLayout mNavDrawerLinearLayout;
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private CostumeToolBar mToolbar;
     private FontTextView mName;
     private HGBPreferencesManager hgbPrefrenceManager;
+    private ImageButton imageButton;
 
 
     private UserTravelVO mUserTravelOrder;
@@ -87,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         // mNavTitles = getResources().getStringArray(R.array.nav_draw_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (RecyclerView) findViewById(R.id.left_drawer_rv);
-         mName = (FontTextView) findViewById(R.id.nav_profile_name);
+        mName = (FontTextView) findViewById(R.id.nav_profile_name);
         mNavDrawerLinearLayout = (LinearLayout) findViewById(R.id.drawer);
         mProfileImage = (RoundedImageView) findViewById(R.id.nav_profile_image);
 
@@ -104,6 +106,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mDrawerList.setAdapter(mAdapter);
 
         mToolbar = (CostumeToolBar) findViewById(R.id.toolbar_costume);
+
+
         initToolBar();
         setNameInNavDraw();
 
@@ -113,25 +117,24 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         String strName = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_NAME, "");
 
-        if(strName.equals(hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_NAME, ""))){
+        if (strName.equals(hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_NAME, ""))) {
             ConnectionManager.getInstance(MainActivity.this).getUserProfile(new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
 
-                    UserData userr = (UserData)data;
-                    String name = userr.getFirstname()+" "+userr.getLastname();
-                    hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_NAME,"");
+                    UserData userr = (UserData) data;
+                    String name = userr.getFirstname() + " " + userr.getLastname();
+                    hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_NAME, "");
                     mName.setText(name);
 
                 }
 
                 @Override
                 public void onError(Object data) {
-                    HGBErrorHelper errorHelper = new HGBErrorHelper();
-                    errorHelper.show(getFragmentManager(), (String) data);
+
                 }
             });
-        }else{
+        } else {
             mName.setText(strName);
         }
 
@@ -141,6 +144,14 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private void initToolBar() {
 
         setSupportActionBar(mToolbar);
+        imageButton = (ImageButton) mToolbar.findViewById(R.id.keyboard);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String id = (String) v.getTag();
+                setHomeFragmentState(id);
+            }
+        });
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 
@@ -148,7 +159,22 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 this, mDrawerLayout, mToolbar,
                 R.string.drawer_open,  /* "open drawer" description for accessibility */
                 R.string.drawer_close
-        );
+        ) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                HGBUtility.hideKeyboard(getApplicationContext(),drawerView);
+
+            }
+        };
+
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -156,8 +182,26 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mDrawerToggle.syncState();
 
 
-        HGBUtility.loadHotelImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
+        //HGBUtility.loadHotelImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
         selectItem(ToolBarNavEnum.HOME.getNavNumber());
+
+    }
+
+    private void setHomeFragmentState(String id) {
+        try {
+            Fragment currentFragment = getFragmentManager().findFragmentByTag(HomeFragment.class.toString());
+
+            if (id.equals("keyboard")) {
+                ((HomeFragment) currentFragment).setKeyboardMode();
+            } else if (id.equals("mic")) {
+                ((HomeFragment) currentFragment).setMicMode();
+            }
+            setHomeImage(id);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Crashlytics.logException(e);
+        }
 
     }
 
@@ -221,6 +265,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         selectItem(position);
     }
 
+
     private void selectItem(int position) {
         // update the main content by replacing fragments
         Fragment fragment = null;
@@ -262,6 +307,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mToolbar.updateToolBarView(position);
         mDrawerLayout.closeDrawer(mNavDrawerLinearLayout);
     }
+
 
     @Override
     public void onBackPressed() {
@@ -375,6 +421,35 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
         this.onBackPressedListener = onBackPressedListener;
+    }
+
+    @Override
+    public void setHomeImage(String id) {
+        if (id.equals("keyboard")) {
+            imageButton.setBackgroundResource(R.drawable.app_bar_microphone_icn);
+            imageButton.setTag("mic");
+        } else if (id.equals("mic")) {
+            imageButton.setBackgroundResource(R.drawable.keyboard_icon);
+            imageButton.setTag("keyboard");
+        }
+    }
+
+    @Override
+    public void onMenuVisibilityChanged(boolean isVisible) {
+
+
+        Log.d("", "");
+
+    }
+
+    @Override
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        return super.onMenuOpened(featureId, menu);
+    }
+
+    @Override
+    public void onOptionsMenuClosed(Menu menu) {
+        super.onOptionsMenuClosed(menu);
     }
 
 

@@ -1,5 +1,6 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -7,7 +8,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,20 +19,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.LoginActivity;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
-import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -49,6 +41,9 @@ public class HomeFragment extends HGBAbtsractFragment {
     private RelativeLayout mHGBSpinner;
     private LinearLayout mSpeechLayout;
     private LinearLayout mKeyBoardLayout;
+    private final int MIC_STATE = 1;
+    private final int KEYBOARD_STATE = 2;
+    private int HOME_FRAGMENT_STATE = 0;
 
     public HomeFragment() {
         // Empty constructor required for fragment subclasses
@@ -103,7 +98,7 @@ public class HomeFragment extends HGBAbtsractFragment {
                 //handleClick(query);
 //                Fragment fragment = new HotelFragment();
 //                HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragment, true);
-               // getActivityInterface().openVoiceToTextControl();
+                // getActivityInterface().openVoiceToTextControl();
 
 
                 getActivityInterface().openVoiceToTextControl();
@@ -112,7 +107,9 @@ public class HomeFragment extends HGBAbtsractFragment {
             }
         });
 
-     //   getActivity().setTitle(strFrag);
+
+
+        //   getActivity().setTitle(strFrag);
         return rootView;
     }
 
@@ -121,9 +118,16 @@ public class HomeFragment extends HGBAbtsractFragment {
         super.onResume();
         IntentFilter intentFilter = new IntentFilter(HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION);
         getActivity().registerReceiver(mHomeFragmentReciever, intentFilter);
+        checkState();
     }
 
-//    @Override
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+    }
+
+    //    @Override
 //    protected void onDestroy() {
 //        super.onDestroy();
 //        unregisterReceiver(mGCMReceiver);
@@ -151,34 +155,34 @@ public class HomeFragment extends HGBAbtsractFragment {
         }
     };
 
-    private void setKeyboardMode() {
+    public void setKeyboardMode() {
+        HOME_FRAGMENT_STATE = KEYBOARD_STATE;
         mSpeechLayout.setVisibility(View.INVISIBLE);
         mKeyBoardLayout.setVisibility(View.VISIBLE);
+        getActivityInterface().setHomeImage("keyboard");
     }
 
-    private void setMicMode() {
+    public void setMicMode() {
+        HOME_FRAGMENT_STATE = MIC_STATE;
         mSpeechLayout.setVisibility(View.VISIBLE);
         mKeyBoardLayout.setVisibility(View.INVISIBLE);
+        getActivityInterface().setHomeImage("mic");
     }
 
 
     public void handleClick(String query) {
-        mQueryEditText.setVisibility(View.VISIBLE);
-        mSearch.setVisibility(View.INVISIBLE);
-        mKeyBoardLayout.setVisibility(View.VISIBLE);
-        mSpeechLayout.setVisibility(View.INVISIBLE);
-        mQueryEditText.setText(query);
+
         mHGBSpinner.setVisibility(View.VISIBLE);
 
         ConnectionManager.getInstance(getActivity()).getSearchWithQuery(query, "", new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                if(data !=null){
+                if (data != null) {
                     getActivityInterface().setTravelOrder((UserTravelVO) data);
 
                     ItineraryFragment fragemnt = new ItineraryFragment();
                     HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack
-
+                    checkState();
 //                    HotelFragment fragemnt = new HotelFragment();
 //                    HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack
                 }
@@ -191,19 +195,24 @@ public class HomeFragment extends HGBAbtsractFragment {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.show(getFragmentManager(), (String) data);
                 mHGBSpinner.setVisibility(View.GONE);
-
-                handleRequestFailure((String)data);
-                mQueryEditText.setVisibility(View.VISIBLE);
-                mKeyBoardLayout.setVisibility(View.VISIBLE);
-                mSpeechLayout.setVisibility(View.VISIBLE);
-                mSearch.setVisibility(View.VISIBLE);
-                mHGBSpinner.setVisibility(View.INVISIBLE);
+                handleRequestFailure((String) data);
+                checkState();
 
             }
         });
 
+    }
 
+    private void checkState() {
 
+        if(HOME_FRAGMENT_STATE == MIC_STATE){
+            setMicMode();
+
+        }else if(HOME_FRAGMENT_STATE == KEYBOARD_STATE){
+            setKeyboardMode();
+        }else{
+            setMicMode();
+        }
     }
 
 

@@ -31,7 +31,7 @@ public class Parser {
 
     public static String parseErrorMessage(VolleyError error) {
         if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-            return "Network timed out error "+error.networkResponse.statusCode;
+            return "Network timed out error ";
         } else if (error instanceof AuthFailureError) {
             return "AuthFailureError error "+error.networkResponse.statusCode;
         } else if (error instanceof ServerError) {

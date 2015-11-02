@@ -19,6 +19,7 @@ import android.graphics.RectF;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -407,18 +408,21 @@ public static String formattDateToStringMonthDate(String dateInString) {
     return null;
 
 }
-//    SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM");
-//
-//    try {
-//
-//        Date date = formatter.parse(dateInString);
-//
-//       return formatter.format(date);
-//
-//    } catch (ParseException e) {
-//        e.printStackTrace();
-//    }
-//    return null;
+
+    public static void hideKeyboard(Context context,View view) {
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    public static void showKeyboard(Context context,View view) {
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+        }
+    }
+
 }
 
 

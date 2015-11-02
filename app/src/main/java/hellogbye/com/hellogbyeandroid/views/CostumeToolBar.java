@@ -114,31 +114,31 @@ public class CostumeToolBar extends Toolbar {
         //setTitle(selectedItem);
         titleText.setText(selectedItem);
 
-        keyBoardImage.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String id = (String) v.getTag();//instead i need the int of the drawable image
-
-                if (id.equals("keyboard")) {
-                    Intent intent2 = new Intent(HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION);
-                    intent2.putExtra(HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION, HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION_KEYBOARD_ACTION);
-                    mContext.sendBroadcast(intent2);
-                    keyBoardImage.setBackgroundResource(R.drawable.app_bar_microphone_icn);
-                    keyBoardImage.setTag("mic");
-                } else if (id.equals("mic")) {
-                    Intent intent1 = new Intent(HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION);
-                    intent1.putExtra(HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION, HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION_MIC_ACTION);
-                    mContext.sendBroadcast(intent1);
-                    keyBoardImage.setBackgroundResource(R.drawable.keyboard_icon);
-                    keyBoardImage.setTag("keyboard");
-
-                }
-
-
-
-            }
-        });
+//        keyBoardImage.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                String id = (String) v.getTag();
+//
+//                if (id.equals("keyboard")) {
+//                    Intent intent2 = new Intent(HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION);
+//                    intent2.putExtra(HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION, HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION_KEYBOARD_ACTION);
+//                    mContext.sendBroadcast(intent2);
+//                    keyBoardImage.setBackgroundResource(R.drawable.app_bar_microphone_icn);
+//                    keyBoardImage.setTag("mic");
+//                } else if (id.equals("mic")) {
+//                    Intent intent1 = new Intent(HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION);
+//                    intent1.putExtra(HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION, HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION_MIC_ACTION);
+//                    mContext.sendBroadcast(intent1);
+//                    keyBoardImage.setBackgroundResource(R.drawable.keyboard_icon);
+//                    keyBoardImage.setTag("keyboard");
+//
+//                }
+//
+//
+//
+//            }
+//        });
 
     }
 
