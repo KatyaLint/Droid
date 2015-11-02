@@ -30,18 +30,24 @@ public class Parser {
 
 
     public static String parseErrorMessage(VolleyError error) {
-        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-            return "Network timed out error "+error.networkResponse.statusCode;
-        } else if (error instanceof AuthFailureError) {
-            return "AuthFailureError error "+error.networkResponse.statusCode;
-        } else if (error instanceof ServerError) {
-            return "ServerError error "+error.networkResponse.statusCode;
-        } else if (error instanceof NetworkError) {
-            return "NetworkError error "+error.networkResponse.statusCode;
-        } else if (error instanceof ParseError) {
-            return "ParseError error "+error.networkResponse.statusCode;
+        try {
+
+
+             if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                return "Network timed out error " + error.networkResponse.statusCode;
+            } else if (error instanceof AuthFailureError) {
+                return "AuthFailureError error " + error.networkResponse.statusCode;
+            } else if (error instanceof ServerError) {
+                return "ServerError error " + error.networkResponse.statusCode;
+            } else if (error instanceof NetworkError) {
+                return "NetworkError error " + error.networkResponse.statusCode;
+            } else if (error instanceof ParseError) {
+                return "ParseError error " + error.networkResponse.statusCode;
+            }
+            return "Error " + error.networkResponse.statusCode;
+        }catch (Exception exception){
+            return "NetworkError error ";
         }
-        return"Error "+error.networkResponse.statusCode;
     }
 
 

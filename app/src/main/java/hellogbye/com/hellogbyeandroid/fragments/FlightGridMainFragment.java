@@ -39,6 +39,7 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
     private LinearLayout[] linarLayoutDateEmpty;
     private LinearLayout[] white_squer_ll;
     private EditText[] grid_hotel_guid;
+    private TableLayout stickyHeader;
 
     public FlightGridMainFragment(){}
     private UserTravelVO airplaneDataVO;
@@ -46,14 +47,28 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
     private LayoutInflater inflater;
     private Activity activity;
     private TableLayout table;
+
+    private static int MAXIMUM_ROW_NUMBER = 8;
+    private static int MAXIMUM_COL_NUMBER = 3;
+
     public View createGridView(Activity activity,View rootView, UserTravelVO userTravelVO,  LayoutInflater inflater
                                ){
         table = (TableLayout)rootView.findViewById(R.id.tlGridTable);
+
+        stickyHeader = (TableLayout)rootView.findViewById(R.id.stickyHeader);
+
         this.inflater = inflater;
         this.activity = activity;
+        createGridViewTable(userTravelVO);
+
+        return rootView;
+    }
+
+
+
+    private void createGridViewTable(UserTravelVO userTravelVO){
 
         int counter = 0;
-
 
         ArrayList<PassengersVO> passengers = userTravelVO.getPassengerses();
 
@@ -64,78 +79,80 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
         ArrayList<PassengersVO> pass = passData.passangersVOs;
 
 
-
-
         int columnNumber = pass.size();//passengers.size();
 
-
-
-        initializeItemsHeader(columnNumber);
 
         setStickyHeaderData(passengers);
 
 
-        int size = pass.get(0).getPassengerNodes().size();//nodesTemp.size(); //rowNumber * columnNumber
+        int numberOfRow = pass.get(0).getPassengerNodes().size();
+        int realRowNumber = pass.get(0).getPassengerNodes().size();
+        int maxRowNumber = numberOfRow*columnNumber;
 
-        int maxRowNumber = size*columnNumber;
-
-
+        if(maxRowNumber < MAXIMUM_ROW_NUMBER || columnNumber<MAXIMUM_COL_NUMBER){
+            maxRowNumber = MAXIMUM_ROW_NUMBER *MAXIMUM_COL_NUMBER;
+        }
         initializeFlightItems(maxRowNumber);
         initializeHotelItems(maxRowNumber);
         initializeEmptyItems(maxRowNumber);
 
 
-       // int maxRowNumber = pass.get(0).getPassengerNodes().size(); //passengers.get(0).getmCells().size();
+        if(numberOfRow < MAXIMUM_ROW_NUMBER){
+            numberOfRow = MAXIMUM_ROW_NUMBER;
+        }
+        if(columnNumber < MAXIMUM_COL_NUMBER){
+            columnNumber = MAXIMUM_COL_NUMBER;
+        }
 
 
-        for(int i=0;i < size ;i++){  // row 16
+        for(int i=0;i < numberOfRow ;i++){  // row 16
 
-          //  row[i] = new TableRow(activity);
+            //  row[i] = new TableRow(activity);
             row[i] = new TableRow(activity);
             for(int j=0;j< columnNumber  ;j++) {  //column  0-1-2
-                PassengersVO traveler = pass.get(j);
-
-                ArrayList<NodesVO> travelerNodes = traveler.getPassengerNodes();
 
 
                 initializeFlightGridItems(counter, j);
                 initializeHotelGridItems(counter,j);
                 initializeEmptyGridItems(counter, j);
 
-                NodesVO travelerNode = travelerNodes.get(i);
+                if(pass.size() > j && i < realRowNumber){
+                    String date = "";
+                    PassengersVO traveler = pass.get(j);
+                    ArrayList<NodesVO> travelerNodes = traveler.getPassengerNodes();
+                    NodesVO travelerNode = travelerNodes.get(i);
+                    if(travelerNode.getmType().isEmpty()){
+                        emptyNode(j, counter);
+                        date = travelerNode.getDateOfCell();
+                        //  initializeEmptyView(j, counter);
+                        row[i].addView(childEmptyView[counter]);
+                    }else {
+                        if (travelerNode.getmType().equals("flight")) {
+                            initializeFlightData(travelerNode, counter);
+                            row[i].addView(child[counter]);
 
+                        } else if (travelerNode.getmType().equals("hotel")) {
+                            initializeHotelData(travelerNode, counter);
+                            row[i].addView(childHotel[counter]);
 
-
-                String date = "";
-
-                if(travelerNode.getmType().isEmpty()){
-                    emptyNode(j, counter);
-                    date = travelerNode.getDateOfCell();
-                  //  initializeEmptyView(j, counter);
-                    row[i].addView(childEmptyView[counter]);
-                }else {
-                    if (travelerNode.getmType().equals("flight")) {
-                        initializeFlightData(travelerNode, counter);
-                        row[i].addView(child[counter]);
-
-                    } else if (travelerNode.getmType().equals("hotel")) {
-                        initializeHotelData(travelerNode, counter);
-                        row[i].addView(childHotel[counter]);
+                        }
+                        date = travelerNode.getDateOfCell();
 
                     }
-                    date = travelerNode.getDateOfCell();
-
+                    setDate(j, counter, date); //TODO date to hotels
+                }else{
+                    emptyNode(j, counter);
+                    row[i].addView(childEmptyView[counter]);
                 }
-                setDate(j, counter, date); //TODO date to hotels
-
 
                 counter++;
 
             }
+
+
             table.addView(row[i]);
         }
 
-        return rootView;
     }
 
 
@@ -231,18 +248,31 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
 
     private void setStickyHeaderData(ArrayList<PassengersVO> passengers){
         stickyRow = new TableRow(activity);
-        for(int i=0; i<passengers.size();i++){
-            PassengersVO passenger = passengers.get(i);
+
+        int passengerSize = passengers.size();
+        int passengerSizeCorrect = passengers.size();
+        if(passengerSize < MAXIMUM_COL_NUMBER){
+            passengerSize = MAXIMUM_COL_NUMBER;
+        }
+        initializeItemsHeader(passengerSize);
+        for(int i=0; i<passengerSize;i++){
             mainHeaderView[i] = inflater.inflate(R.layout.grid_view_sticky_header, null);
-            travelerName[i] = (TextView) mainHeaderView[i].findViewById(R.id.traveler_name);
-            travelerName[i].setText(passenger.getmDisplayName());
-            if(i ==0 ) {
-                travelerName[i].setPadding((int)activity.getResources().getDimension(R.dimen.DP44), 0, 0, 0);
+            if(passengerSizeCorrect > i){
+                PassengersVO passenger = passengers.get(i);
+                travelerName[i] = (TextView) mainHeaderView[i].findViewById(R.id.traveler_name);
+                travelerName[i].setText(passenger.getmDisplayName());
+                if(i ==0 ) {
+                    travelerName[i].setPadding((int)activity.getResources().getDimension(R.dimen.DP44), 0, 0, 0);
+                }
             }
+
             stickyRow.addView(mainHeaderView[i]);
             //tableStickyHeader
         }
 //        tableStickyHeader.addView(stickyRow);
+
+
+       // stickyHeader.addView(stickyRow);
         table.addView(stickyRow);
 
     }

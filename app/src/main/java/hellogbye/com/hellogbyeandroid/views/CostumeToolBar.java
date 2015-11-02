@@ -86,7 +86,7 @@ public class CostumeToolBar extends Toolbar {
             case ITINARERY:
                 titleText.setVisibility(View.VISIBLE);
                 purchaseButton.setVisibility(View.VISIBLE);
-                favoriteButton.setVisibility(View.VISIBLE);
+                favoriteButton.setVisibility(View.GONE);
                 break;
             case HISTORY:
                 titleText.setVisibility(View.VISIBLE);
