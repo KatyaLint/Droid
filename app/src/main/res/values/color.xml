@@ -34,6 +34,10 @@
     <color name="black">#000000</color>
     <color name="grey_very_light">#f7f7f7</color>
     <color name="red_money">#ff5a5f</color>
+    <color name="cnc_hgb_backround">#20647C</color>
+    <color name="cnc_hgb_text">#cae2eb</color>
+
+
 
 
 </resources>
