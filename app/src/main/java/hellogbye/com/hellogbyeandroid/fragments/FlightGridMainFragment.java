@@ -48,8 +48,12 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
     private Activity activity;
     private TableLayout table;
 
-    private static int MAXIMUM_ROW_NUMBER = 8;
+    private static int MAXIMUM_ROW_NUMBER = 7;
     private static int MAXIMUM_COL_NUMBER = 3;
+    private int maxRowNumber;
+    private int realRowNumber;
+    private int numberOfRow;
+    private int columnNumber;
 
     public View createGridView(Activity activity,View rootView, UserTravelVO userTravelVO,  LayoutInflater inflater
                                ){
@@ -64,6 +68,27 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
         return rootView;
     }
 
+    private void calculateNumberOfRowAndCol(){
+        if(maxRowNumber < MAXIMUM_ROW_NUMBER && columnNumber<MAXIMUM_COL_NUMBER){
+            maxRowNumber = MAXIMUM_ROW_NUMBER * MAXIMUM_COL_NUMBER;
+        }else if(maxRowNumber < MAXIMUM_ROW_NUMBER){
+            maxRowNumber = MAXIMUM_ROW_NUMBER*columnNumber;
+        }else if(columnNumber < MAXIMUM_COL_NUMBER){
+            maxRowNumber = realRowNumber*MAXIMUM_COL_NUMBER;
+        }
+
+        initializeFlightItems(maxRowNumber);
+        initializeHotelItems(maxRowNumber);
+        initializeEmptyItems(maxRowNumber);
+
+
+        if(numberOfRow < MAXIMUM_ROW_NUMBER){
+            numberOfRow = MAXIMUM_ROW_NUMBER;
+        }
+        if(columnNumber < MAXIMUM_COL_NUMBER){
+            columnNumber = MAXIMUM_COL_NUMBER;
+        }
+    }
 
 
     private void createGridViewTable(UserTravelVO userTravelVO){
@@ -79,30 +104,18 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
         ArrayList<PassengersVO> pass = passData.passangersVOs;
 
 
-        int columnNumber = pass.size();//passengers.size();
+         columnNumber = pass.size();//passengers.size();
 
 
         setStickyHeaderData(passengers);
 
 
-        int numberOfRow = pass.get(0).getPassengerNodes().size();
-        int realRowNumber = pass.get(0).getPassengerNodes().size();
-        int maxRowNumber = numberOfRow*columnNumber;
-
-        if(maxRowNumber < MAXIMUM_ROW_NUMBER || columnNumber<MAXIMUM_COL_NUMBER){
-            maxRowNumber = MAXIMUM_ROW_NUMBER *MAXIMUM_COL_NUMBER;
-        }
-        initializeFlightItems(maxRowNumber);
-        initializeHotelItems(maxRowNumber);
-        initializeEmptyItems(maxRowNumber);
+         numberOfRow = pass.get(0).getPassengerNodes().size();
+         realRowNumber = pass.get(0).getPassengerNodes().size();
+         maxRowNumber = numberOfRow*columnNumber;
+        calculateNumberOfRowAndCol();
 
 
-        if(numberOfRow < MAXIMUM_ROW_NUMBER){
-            numberOfRow = MAXIMUM_ROW_NUMBER;
-        }
-        if(columnNumber < MAXIMUM_COL_NUMBER){
-            columnNumber = MAXIMUM_COL_NUMBER;
-        }
 
 
         for(int i=0;i < numberOfRow ;i++){  // row 16
@@ -226,7 +239,6 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
                     gridDateEmpty[counter].setText(result[1]);
 
                 }
-            //}
         }else{
             gridMonth[counter].setVisibility(View.GONE);
             gridDate[counter].setVisibility(View.GONE);
@@ -340,9 +352,9 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
 
         if(colomnNumber%2 == 0){ //even colum lightgray color
 
-            linaerLayoutFlight[counter].setBackgroundColor(activity.getResources().getColor(R.color.light_grey));
+            linaerLayoutFlight[counter].setBackgroundColor(activity.getResources().getColor(R.color.grey_very_light));
         }else{ //odd colomn dark_gray color
-            linaerLayoutFlight[counter].setBackgroundColor(activity.getResources().getColor(R.color.item_pressed_color));
+            linaerLayoutFlight[counter].setBackgroundColor(activity.getResources().getColor(R.color.odd_grey));
         }
 
         child[counter].setOnClickListener(itemClickListenerFlight);
@@ -403,9 +415,9 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
 
         if(colomnNumber%2 == 0){ //even colum lightgray color
 
-            linaerLayoutHotel[counter].setBackgroundColor(activity.getResources().getColor(R.color.light_grey));
+            linaerLayoutHotel[counter].setBackgroundColor(activity.getResources().getColor(R.color.grey_very_light));
         }else{ //odd colomn dark_gray color
-            linaerLayoutHotel[counter].setBackgroundColor(activity.getResources().getColor(R.color.item_pressed_color));
+            linaerLayoutHotel[counter].setBackgroundColor(activity.getResources().getColor(R.color.odd_grey));
         }
 
 
@@ -439,11 +451,11 @@ private void initializeEmptyGridItems(int counter, int colomnNumber){
     linarLayoutDateEmpty[counter] = (LinearLayout)childEmptyView[counter].findViewById(R.id.grid_date_ll_empty);
 
     if(colomnNumber%2 == 0){ //even colum lightgray color
-        white_squer_ll[counter].setBackgroundColor(activity.getResources().getColor(R.color.light_grey));
-        linaerLayoutEmpty[counter].setBackgroundColor(activity.getResources().getColor(R.color.light_grey));
+        white_squer_ll[counter].setBackgroundColor(activity.getResources().getColor(R.color.grey_very_light));
+        linaerLayoutEmpty[counter].setBackgroundColor(activity.getResources().getColor(R.color.grey_very_light));
     }else{ //odd colomn dark_gray color
-        white_squer_ll[counter].setBackgroundColor(activity.getResources().getColor(R.color.item_pressed_color));
-        linaerLayoutEmpty[counter].setBackgroundColor(activity.getResources().getColor(R.color.item_pressed_color));
+        white_squer_ll[counter].setBackgroundColor(activity.getResources().getColor(R.color.odd_grey));
+        linaerLayoutEmpty[counter].setBackgroundColor(activity.getResources().getColor(R.color.odd_grey));
     }
 }
 
