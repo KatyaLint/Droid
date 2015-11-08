@@ -35,6 +35,8 @@
     <color name="grey_very_light">#f7f7f7</color>
     <color name="red_money">#ff5a5f</color>
     <color name="odd_grey">#E5E5E5</color>
+    <color name="profile_blue">#053c4b</color>
 
-
+<color name="disable_tab">#588596</color>
+    <color name="enable_tab">#E2EBEE</color>
 </resources>

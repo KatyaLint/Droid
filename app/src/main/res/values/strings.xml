@@ -49,7 +49,20 @@
 
     <string name="select_hotel">Select Hotel</string>
 
+    <string name="preferences_smoking">Smoking Preference</string>
+    <string name="preferences_smoking_prefer">Do you prefer to have smiking or non-\nsmoking rooms int your hotel?</string>
+    <string name="preferences_non_smoking_choice">Non-Smoking</string>
+    <string name="preferences_smoking_choice">Smoking</string>
 
+    <string name="preferences_bed_type">Preferred Bed Type</string>
+    <string name="preferences_bed_rank">Rank the importance of Bed Types\nfrom most important to least important</string>
+
+    <string name="preferences_prefered_hotel_chain">Preferred Hotel Chain</string>
+    <string name="preferences_prefered_hotel_favorite">Do you have any favorite Hotels? Add\nthem here to make sure HelloGbye\nalwayes finds you the right Hotel!</string>
+
+
+    <string name="preferences_preferred_cabin_class">Preferred Cabin Class</string>
+    <string name="preferences_preferred_cabin_class_rank">Rank the importance of Cabin Class\nfrom most important to least important</string>
 
     <string name="closeDrawer">Navigation View</string>
     <string name="openDrawer">Navigation View Closed</string>
