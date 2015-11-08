@@ -275,6 +275,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         switch (navBar) {
             case HOME:
                 fragment = HomeFragment.newInstance(navPosition);
+               // fragment = CNCFragment.newInstance(navPosition);
 
                 break;
             case HISTORY:
