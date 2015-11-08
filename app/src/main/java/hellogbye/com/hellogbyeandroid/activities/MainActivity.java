@@ -32,6 +32,7 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.AccountSettingsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HistoryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HomeFragment;
@@ -412,10 +413,17 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         if (requestCode == 0 && resultCode == RESULT_OK) {
             ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            HomeFragment fragment = (HomeFragment) getFragmentManager().findFragmentByTag(HomeFragment.class.toString());
-            if (fragment != null) {
-                fragment.handleClick(matches.get(0));
+
+            String fragmentTag = getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1).getName();
+            Fragment currentFragment = getFragmentManager().findFragmentByTag(fragmentTag);
+
+            if (currentFragment instanceof CNCFragment) {
+                ((CNCFragment) currentFragment).handleMessage(matches.get(0));
             }
+//            HomeFragment fragment = (HomeFragment) getFragmentManager().findFragmentByTag(HomeFragment.class.toString());
+//            if (fragment != null) {
+//                fragment.handleClick(matches.get(0));
+//            }
         }
     }
 

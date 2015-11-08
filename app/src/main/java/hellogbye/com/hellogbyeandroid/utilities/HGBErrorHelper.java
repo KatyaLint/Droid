@@ -19,7 +19,7 @@ public class HGBErrorHelper extends android.app.DialogFragment {
     private  static AlertDialog.Builder builder1;
     private static String NETWORK_ERROR = "Sorry you have ";
     private static String OK = "Ok";
-    private String mMessage = "Please try again latter";
+    private String mMessage = "Please try again later";
     private String mMessageTitle = "Error";
 
 

@@ -15,3 +15,9 @@ libs/layouts/build/intermediates/exploded-aar/HelloGByeDroid.libs/core/unspecifi
 HelloGByeDroid.iml
 
 library/library.iml
+
+*.iml
+
+*.iml
+
+app/app.iml
