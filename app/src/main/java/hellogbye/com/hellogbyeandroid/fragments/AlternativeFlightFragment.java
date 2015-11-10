@@ -22,15 +22,11 @@ import hellogbye.com.hellogbyeandroid.adapters.FlightAdapter;
 
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
-import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
-import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 /**
  * Created by kate on 8/17/15.
@@ -68,7 +64,7 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
     private void conectionRequest(){
 
 
-        currentNode = getLegWitGuid(userOrder);
+        currentNode = getLegWithGuid(userOrder);
 
 
         String solutionID =getActivityInterface().getSolutionID();

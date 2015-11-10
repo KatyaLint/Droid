@@ -57,7 +57,7 @@ public class HGBAbtsractFragment extends Fragment {
 
 
 
-    public NodesVO getLegWitGuid(UserTravelVO userOrder){
+    public NodesVO getLegWithGuid(UserTravelVO userOrder){
         String guid = getSelectedGuid();
 
         ArrayList<PassengersVO> passengers = userOrder.getPassengerses();
@@ -99,7 +99,7 @@ public class HGBAbtsractFragment extends Fragment {
 
 
 
-    public void selectedItem(String guidSlected){
+    public void selectedItemFromGrid(String guidSlected){
         this.selectedItem = guidSlected;
     }
 

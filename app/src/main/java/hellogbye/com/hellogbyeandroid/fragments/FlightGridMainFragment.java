@@ -55,6 +55,7 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
     private int numberOfRow;
     private int columnNumber;
 
+
     public View createGridView(Activity activity,View rootView, UserTravelVO userTravelVO,  LayoutInflater inflater
                                ){
         table = (TableLayout)rootView.findViewById(R.id.tlGridTable);

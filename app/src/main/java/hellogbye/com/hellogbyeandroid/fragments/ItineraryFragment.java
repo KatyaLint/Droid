@@ -61,17 +61,21 @@ public class ItineraryFragment extends HGBAbtsractFragment {
             public void itemSelected(String guidSelectedItem, String itemType) {
                 if (itemType.equals("flight")) {
                     Fragment fragment = new AlternativeFlightFragment();
-                    ((AlternativeFlightFragment) fragment).selectedItem(guidSelectedItem);
+                    ((AlternativeFlightFragment) fragment).selectedItemFromGrid(guidSelectedItem);
                     // HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragment, true);
                     getActivityInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber());
                 } else if (itemType.equals("hotel")) {
                     Fragment fragment = new HotelFragment();
-                    ((HotelFragment) fragment).selectedItem(guidSelectedItem);
+                    ((HotelFragment) fragment).selectedItemFromGrid(guidSelectedItem);
                     getActivityInterface().goToFragment(ToolBarNavEnum.HOTEL.getNavNumber());
                 }
             }
         });
 
+
+        System.out.println("Kate onCreateView flight");
+
+        userOrder = getActivityInterface().getTravelOrder();
         if (userOrder != null) {
             rootView = flightGridMainFragment.createGridView(getActivity(), rootView, userOrder, inflater);
         }

@@ -21,3 +21,11 @@ library/library.iml
 *.iml
 
 app/app.iml
+
+.idea/modules.xml
+
+.idea/modules.xml
+
+app/app.iml
+
+libs/libs.iml
