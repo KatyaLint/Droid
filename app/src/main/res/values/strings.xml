@@ -68,5 +68,8 @@
     <string name="openDrawer">Navigation View Closed</string>
     <string name="type_message">Type Message</string>
     <string name="send">Send</string>
+    <string name="default_cnc_message">Where would you like to go? Tell us WHERE you\'re going, WHEN you\'re, and WHO you want to travel with. Here\'s how you can search...Fly me from Miami to Atlanta direct on November 15th in the morning.</string>
+    <string name="iteinerary_created">Itinerary Created</string>
+    <string name="grid_has_been_updated">OK, the grid has been updated</string>
 
 </resources>

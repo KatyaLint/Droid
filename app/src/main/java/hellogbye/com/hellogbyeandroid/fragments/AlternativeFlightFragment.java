@@ -20,6 +20,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.FlightAdapter;
 
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
@@ -150,8 +151,9 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
         mAdapter.setButtonListener(new AlternativeButtonCB() {
             @Override
             public void showAlternative() {
-                AlternativeFlightsDetailsFragment fragemnt = new AlternativeFlightsDetailsFragment();
-                HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack
+//                AlternativeFlightsDetailsFragment fragemnt = new AlternativeFlightsDetailsFragment();
+//                HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack
+                getActivityInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber());
             }
         });
 

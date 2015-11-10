@@ -13,13 +13,18 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-
 import java.util.ArrayList;
-
+import java.util.Iterator;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.CNCAdapter;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -29,35 +34,84 @@ public class CNCFragment extends HGBAbtsractFragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<CNCItem> mArrayList;
+
     private CNCAdapter mAdapter;
     private EditText mEditText;
     private ImageView mMicImageView;
     private FontTextView mSendTextView;
+    private HGBPreferencesManager mHGBPrefrenceManager;
+    private static int mPosition;
+
+    public static Fragment newInstance(int position) {
+        Fragment fragment = new CNCFragment();
+        Bundle args = new Bundle();
+        args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
+        mPosition = position;
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.cnc_fragment_layout, container, false);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.cnc_recycler_view);
-        mEditText = (EditText) rootView.findViewById(R.id.cnc_edit_text);
-        mMicImageView = (ImageView) rootView.findViewById(R.id.cnc_mic);
-        mSendTextView = (FontTextView)rootView.findViewById(R.id.cnc_send);
+        mHGBPrefrenceManager = HGBPreferencesManager.getInstance(getActivity().getApplicationContext());
+        init(rootView);
+        initList();
+        getActivityInterface().getToolBar().updateToolBarView(ToolBarNavEnum.CNC.getNavNumber());
 
+        return rootView;
+    }
+
+    public void initList() {
+
+        mRecyclerView.setHasFixedSize(true);
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+
+        loadCNCList();
+        mAdapter = new CNCAdapter(getActivity().getApplicationContext(), getActivityInterface().getCNCItems());
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.SetOnItemClickListener(new CNCAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                String strText = getActivityInterface().getCNCItems().get(position).getText();
+                //TODO this logic needs to change once we get final api
+                if (getString(R.string.iteinerary_created).equals(strText)
+                        || getString(R.string.grid_has_been_updated).equals(strText)) {
+                    getActivityInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber());
+                }
+            }
+        });
+    }
+
+    private void loadCNCList() {
+        if (getActivityInterface().getCNCItems() == null || getActivityInterface().getCNCItems().size() == 0) {
+            ArrayList<CNCItem> mArrayList = new ArrayList<>();
+            mArrayList.add(new CNCItem(getResources().getString(R.string.default_cnc_message), CNCAdapter.HGB_ITEM));
+            getActivityInterface().setCNCItems(mArrayList);
+        }
+    }
+
+    private void init(View view) {
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.cnc_recycler_view);
+        mEditText = (EditText) view.findViewById(R.id.cnc_edit_text);
+        mMicImageView = (ImageView) view.findViewById(R.id.cnc_mic);
+        mSendTextView = (FontTextView) view.findViewById(R.id.cnc_send);
         mSendTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String strMessage = mEditText.getText().toString();
-                handleMessage(strMessage);
+                handleMyMessage(strMessage);
             }
         });
-
 
         mEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
 
             }
 
@@ -69,9 +123,9 @@ public class CNCFragment extends HGBAbtsractFragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() > 0) {
-                    setEditorState(true);
+                    setMessageSendingState(true);
                 } else {
-                    setEditorState(false);
+                    setMessageSendingState(false);
                 }
             }
         });
@@ -83,48 +137,82 @@ public class CNCFragment extends HGBAbtsractFragment {
             }
         });
 
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mArrayList = new ArrayList<>();
-        mArrayList.add(new CNCItem("Yo", CNCAdapter.ME_ITEM));
-        mArrayList.add(new CNCItem("How are you?", CNCAdapter.HGB_ITEM));
-        mAdapter = new CNCAdapter(mArrayList);
-        mRecyclerView.setAdapter(mAdapter);
-
-        return rootView;
     }
 
-    public void handleMessage(String strMessage) {
-
-        mArrayList.add(new CNCItem(strMessage.trim(),CNCAdapter.ME_ITEM));
+    public void handleMyMessage(String strMessage) {
+        getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.ME_ITEM));
+        addWaitingItem();
         mAdapter.notifyDataSetChanged();
-
+        resetMessageEditText();
+        sendMessageToServer(strMessage);
     }
 
-    private void setEditorState(boolean b) {
+    public void handleHGBMessage(String strMessage) {
+        getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.HGB_ITEM));
+        removeWaitingItem();
+        mAdapter.notifyDataSetChanged();
+    }
 
+    private void sendMessageToServer(String strMessage) {
+        String strPrefId = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_PREFRENCE_ID, "");
+
+        if(getActivityInterface().getSolutionID() == null){
+            ConnectionManager.getInstance(getActivity()).ItinerarySearch(strMessage, strPrefId, new ConnectionManager.ServerRequestListener() {
+                @Override
+                public void onSuccess(Object data) {
+                    getActivityInterface().setTravelOrder((UserTravelVO) data);
+                    handleHGBMessage(getString(R.string.iteinerary_created));
+                }
+
+                @Override
+                public void onError(Object data) {
+                    handleHGBMessage((String) data);
+                }
+            });
+        }else{
+
+            ConnectionManager.getInstance(getActivity()).ItineraryCNCSearch(strMessage, strPrefId,getActivityInterface().getSolutionID(), new ConnectionManager.ServerRequestListener() {
+                @Override
+                public void onSuccess(Object data) {
+                    getActivityInterface().setTravelOrder((UserTravelVO) data);
+                    handleHGBMessage(getString(R.string.grid_has_been_updated));
+                }
+
+                @Override
+                public void onError(Object data) {
+                    handleHGBMessage((String) data);
+                }
+            });
+        }
+    }
+
+    private void resetMessageEditText() {
+        mEditText.setText("");
+        mRecyclerView.scrollToPosition(getActivityInterface().getCNCItems().size() - 1);
+        HGBUtility.hideKeyboard(getActivity().getApplicationContext(), mEditText);
+    }
+
+    private void setMessageSendingState(boolean b) {
         if (b) {
-
             mMicImageView.setVisibility(View.GONE);
             mSendTextView.setVisibility(View.VISIBLE);
-
         } else {
             mMicImageView.setVisibility(View.VISIBLE);
             mSendTextView.setVisibility(View.GONE);
         }
     }
 
-    public static Fragment newInstance(int position) {
-        Fragment fragment = new CNCFragment();
-        Bundle args = new Bundle();
-        args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
-        fragment.setArguments(args);
-        return fragment;
+    private void addWaitingItem() {
+        removeWaitingItem();
+        getActivityInterface().getCNCItems().add(new CNCItem(CNCAdapter.WAITING_ITEM));
+    }
+
+    private void removeWaitingItem() {
+        Iterator<CNCItem> iter = getActivityInterface().getCNCItems().iterator();
+        while (iter.hasNext()) {
+            if (iter.next().getType() == CNCAdapter.WAITING_ITEM) {
+                iter.remove();
+            }
+        }
     }
 }

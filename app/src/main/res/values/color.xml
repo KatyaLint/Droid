@@ -17,7 +17,6 @@
     <color name="greyish_alternative_hotel">#F2F2F2</color>
 
 
-
     <color name="dark_blue">#555555</color>
     <color name="item_border_color">#666666</color>
     <color name="item_default_color">#EEEEEE</color>
@@ -30,7 +29,7 @@
 
 
     <color name="brown_blue">#063345</color>
-          
+      
     <color name="black">#000000</color>
     <color name="grey_very_light">#f7f7f7</color>
     <color name="red_money">#ff5a5f</color>
@@ -39,11 +38,15 @@
     <color name="odd_grey">#E5E5E5</color>
     <color name="profile_blue">#053c4b</color>
 
+<<<<<<< HEAD
 
 <color name="disable_tab">#588596</color>
     <color name="enable_tab">#E2EBEE</color>
 
 
-
+=======
+    <color name="disable_tab">#588596</color>
+    <color name="enable_tab">#E2EBEE</color>
 >>>>>>> origin/master
+
 </resources>

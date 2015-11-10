@@ -1,5 +1,6 @@
 package hellogbye.com.hellogbyeandroid.application;
 
+import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
@@ -11,17 +12,24 @@ import io.fabric.sdk.android.Fabric;
 /**
  * Created by arisprung on 8/12/15.
  */
-public class HGBApplication extends MultiDexApplication {
+public class HGBApplication extends Application {
+    private static HGBApplication instance;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         Fabric.with(this, new Crashlytics());
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(HGBApplication.this));
     }
 
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);
+//    @Override
+//    protected void attachBaseContext(Context base) {
+//        super.attachBaseContext(base);
+//        MultiDex.install(this);
+//    }
+
+    public static HGBApplication getInstance() {
+        return instance;
     }
 }

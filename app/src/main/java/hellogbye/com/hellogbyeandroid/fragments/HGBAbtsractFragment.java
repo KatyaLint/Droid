@@ -9,6 +9,7 @@ import android.view.WindowManager;
 
 import org.apache.http.Header;
 
+import java.security.PrivateKey;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.HGBMainInterface;
@@ -16,6 +17,8 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 
 /**
  * Created by arisprung on 9/20/15.
@@ -24,6 +27,7 @@ public class HGBAbtsractFragment extends Fragment {
 
     private HGBMainInterface mActivityInterface;
     private String selectedItem;
+    private CostumeToolBar mToolBar;
 
 
 
@@ -35,7 +39,12 @@ public class HGBAbtsractFragment extends Fragment {
         } catch (ClassCastException e) {
             throw new ClassCastException(getActivity().toString() + " must implement HostingActivityInterface");
         }
+
+     //   mActivityInterface.getToolBar().updateToolBarView(getArguments().getInt(HGBConstants.ARG_NAV_NUMBER));
     }
+
+
+
 
     protected HGBMainInterface getActivityInterface() {
         if (mActivityInterface != null) {

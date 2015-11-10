@@ -12,6 +12,7 @@ public class HGBPreferencesManager
 	public static final String REMMEMBER_ME = "remmember_me";
 	public static final String TRAVEL_PREF_ENTRY = "travel_entry";
 	public static final String HGB_NAME = "name";
+	public static final String HGB_PREFRENCE_ID = "prefrence_id";
 
 	private SharedPreferences mSharedPreferencesFile;
 	private static HGBPreferencesManager mHomeSharedPreferences = null;

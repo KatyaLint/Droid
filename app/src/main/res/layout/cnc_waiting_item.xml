@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:dots="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp">
+
+    <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
+        <!--android:id="@+id/cnc_hgb_waiting_text"-->
+        <!--style="@style/CNCStyle"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="30sp"-->
+        <!--android:text="..."-->
+
+        <!--android:textColor="@color/cnc_hgb_text"-->
+        <!--app:fontName="dinnextltpro_light.otf"-->
+        <!--android:background="@drawable/hgb_cnc_backround"-->
+        <!--android:layout_alignParentLeft="true"/>-->
+
+    <pl.tajchert.sample.DotsTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dots"
+        android:gravity="center"
+        android:textSize="45sp"
+        style="@style/CNCStyle"
+        android:textColor="@color/cnc_hgb_text"
+        dots:autoplay="true"
+        app:fontName="dinnextltpro_light.otf"
+        android:background="@drawable/hgb_cnc_backround"
+        dots:period="1000"/>
+
+</RelativeLayout>

@@ -37,6 +37,7 @@
                 android:layout_centerVertical="true"
                 android:gravity="center_vertical"
                 android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:hint="@string/type_message"
                 android:minHeight="40dp" />
 
