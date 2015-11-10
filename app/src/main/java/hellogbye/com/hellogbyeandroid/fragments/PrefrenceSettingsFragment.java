@@ -107,7 +107,7 @@ public class PrefrenceSettingsFragment extends HGBAbtsractFragment {
 //                    createListAdapter();
 //                    pbHeaderProgress.setVisibility(View.GONE);
 
-                    TabsFragment fragemnt = new TabsFragment();
+                    Fragment fragemnt = new TabsFragmentSettings();
                     HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true);
 
 //                    PreferencesAttributeFragment fragemnt = new PreferencesAttributeFragment();

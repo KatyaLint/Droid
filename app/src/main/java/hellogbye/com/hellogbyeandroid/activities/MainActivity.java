@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private DrawerLayout drawerLayout;
     protected OnBackPressedListener onBackPressedListener;
     private String solutionID;
+    private ActionBar actionBar;
 
 
     @Override
@@ -107,6 +108,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mDrawerList.setAdapter(mAdapter);
 
         mToolbar = (CostumeToolBar) findViewById(R.id.toolbar_costume);
+
+
+
+
 
 
         initToolBar();
@@ -181,6 +186,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         mDrawerToggle.syncState();
+
 
 
         //HGBUtility.loadHotelImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
