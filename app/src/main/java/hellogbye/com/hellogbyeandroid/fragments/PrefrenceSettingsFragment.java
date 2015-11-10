@@ -118,7 +118,6 @@ public class PrefrenceSettingsFragment extends HGBAbtsractFragment {
 
             @Override
             public void onError(Object data) {
-                System.out.println("Kate faild");
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
             }
         });

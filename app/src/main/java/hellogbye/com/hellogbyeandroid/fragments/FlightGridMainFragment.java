@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
@@ -64,6 +65,7 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
 
         this.inflater = inflater;
         this.activity = activity;
+
         createGridViewTable(userTravelVO);
 
         return rootView;
@@ -207,7 +209,7 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
         grid_flight_operator[counter].setText(node.getmOperatorName());
 
 
-        nodeGuIdNumberFlight[counter].setText(node.getmGuid());
+        nodeGuIdNumberFlight[counter].setTag(node.getmGuid());
 
 
     }
@@ -217,7 +219,7 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
         grid_hotel_name[counter].setText(hotelName);
         grid_hotel_price[counter].setText("$" + node.getRoomsVOs().get(0).getmCost());
         grid_hotel_place[counter].setText(node.getmCityName());
-        grid_hotel_guid[counter].setText(node.getmGuid());
+        grid_hotel_guid[counter].setTag(node.getmGuid());
     }
 
 
@@ -371,9 +373,8 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
         public void onClick(View view) {
             View main_view = (View) view.getRootView();
             EditText text = (EditText)main_view.findViewById(R.id.nodeGuIdNumberFlight);
-            String guID = text.getText().toString();
+            String guID = text.getTag().toString();
             itemSelected.itemSelected(guID, "flight");
-            System.out.println("Kate guID =" + guID);
         }
     };
 
@@ -382,9 +383,8 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
         public void onClick(View view) {
             View main_view = (View) view.getRootView();
             EditText text = (EditText)main_view.findViewById(R.id.grid_hotel_guid);
-            String guID = text.getText().toString();
+            String guID = text.getTag().toString();
             itemSelected.itemSelected(guID,"hotel");
-            System.out.println("Kate guID =" + guID);
         }
     };
 
