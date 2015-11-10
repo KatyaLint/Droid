@@ -26,7 +26,7 @@ import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 public class HGBAbtsractFragment extends Fragment {
 
     private HGBMainInterface mActivityInterface;
-    private String selectedItem;
+    private static String selectedItem;
     private CostumeToolBar mToolBar;
 
 
