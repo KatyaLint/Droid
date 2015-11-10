@@ -144,17 +144,22 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
                         row[i].addView(childEmptyView[counter]);
                     }else {
                         if (travelerNode.getmType().equals("flight")) {
+                            linaerLayoutFlight[counter].setTag(traveler.getmPaxguid());
                             initializeFlightData(travelerNode, counter);
                             row[i].addView(child[counter]);
 
+
                         } else if (travelerNode.getmType().equals("hotel")) {
+                            linaerLayoutHotel[counter].setTag(traveler.getmPaxguid());
                             initializeHotelData(travelerNode, counter);
+
                             row[i].addView(childHotel[counter]);
 
                         }
                         date = travelerNode.getDateOfCell();
 
                     }
+
                     setDate(j, counter, date); //TODO date to hotels
                 }else{
                     emptyNode(j, counter);
@@ -220,6 +225,7 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
         grid_hotel_price[counter].setText("$" + node.getRoomsVOs().get(0).getmCost());
         grid_hotel_place[counter].setText(node.getmCityName());
         grid_hotel_guid[counter].setTag(node.getmGuid());
+
     }
 
 
@@ -374,7 +380,9 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
             View main_view = (View) view.getRootView();
             EditText text = (EditText)main_view.findViewById(R.id.nodeGuIdNumberFlight);
             String guID = text.getTag().toString();
-            itemSelected.itemSelected(guID, "flight");
+            LinearLayout linaerLayoutFlight = (LinearLayout)main_view.findViewById(R.id.grid_squer);
+            String userGuid = linaerLayoutFlight.getTag().toString();
+            itemSelected.itemSelected(guID, "flight",userGuid);
         }
     };
 
@@ -384,7 +392,9 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
             View main_view = (View) view.getRootView();
             EditText text = (EditText)main_view.findViewById(R.id.grid_hotel_guid);
             String guID = text.getTag().toString();
-            itemSelected.itemSelected(guID,"hotel");
+            LinearLayout linaerLayoutHotel = (LinearLayout)main_view.findViewById(R.id.grid_squer_hotel);
+            String userGuid = linaerLayoutHotel.getTag().toString();
+            itemSelected.itemSelected(guID,"hotel",userGuid);
         }
     };
 

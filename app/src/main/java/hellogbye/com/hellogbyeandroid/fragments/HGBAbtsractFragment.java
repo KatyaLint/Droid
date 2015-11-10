@@ -26,7 +26,8 @@ import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 public class HGBAbtsractFragment extends Fragment {
 
     private HGBMainInterface mActivityInterface;
-    private static String selectedItem;
+    private static String selectedItemGuid;
+    private static String selectedUserGuid;
     private CostumeToolBar mToolBar;
 
 
@@ -93,18 +94,35 @@ public class HGBAbtsractFragment extends Fragment {
                 }
             }
         }
+        return null;
+    }
+
+    public PassengersVO getTravellerWitGuid(UserTravelVO userOrder){
+        String guid = getSelectedUserGuid();
+
+        ArrayList<PassengersVO> passengers = userOrder.getPassengerses();
+        for (PassengersVO passenger :passengers){
+            if(guid.equals(passenger.getmPaxguid())){
+                return passenger;
+            }
+        }
 
         return null;
     }
 
 
 
-    public void selectedItemFromGrid(String guidSlected){
-        this.selectedItem = guidSlected;
+    public void selectedItemFromGrid(String guidSlected, String guidUser){
+        this.selectedItemGuid = guidSlected;
+        this.selectedUserGuid = guidUser;
     }
 
     public String getSelectedGuid(){
-        return selectedItem;
+        return selectedItemGuid;
+    }
+
+    public String getSelectedUserGuid(){
+        return this.selectedUserGuid;
     }
 
     @Override

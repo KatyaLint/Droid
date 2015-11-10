@@ -32,7 +32,7 @@ public class ItineraryFragment extends HGBAbtsractFragment {
     }
 
     public interface TravelerShowChoose {
-        void itemSelected(String guidSelectedItem, String itemType);
+        void itemSelected(String guidSelectedItem, String itemType,String guidSelectedUser);
     }
 
 
@@ -45,15 +45,15 @@ public class ItineraryFragment extends HGBAbtsractFragment {
         FlightGridMainFragment flightGridMainFragment = new FlightGridMainFragment();
         flightGridMainFragment.initializeCB(new TravelerShowChoose() {
             @Override
-            public void itemSelected(String guidSelectedItem, String itemType) {
+            public void itemSelected(String guidSelectedItem, String itemType, String guidSelectedUser) {
                 if (itemType.equals("flight")) {
                     Fragment fragment = new AlternativeFlightFragment();
-                    ((AlternativeFlightFragment) fragment).selectedItemFromGrid(guidSelectedItem);
+                    ((AlternativeFlightFragment) fragment).selectedItemFromGrid(guidSelectedItem,guidSelectedUser);
                     // HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragment, true);
                     getActivityInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber());
                 } else if (itemType.equals("hotel")) {
                     Fragment fragment = new HotelFragment();
-                    ((HotelFragment) fragment).selectedItemFromGrid(guidSelectedItem);
+                    ((HotelFragment) fragment).selectedItemFromGrid(guidSelectedItem,guidSelectedUser);
                     getActivityInterface().goToFragment(ToolBarNavEnum.HOTEL.getNavNumber());
                 }
             }

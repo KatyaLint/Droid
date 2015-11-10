@@ -32,13 +32,16 @@ public class PassangerDataOrganization {
             for (int j = 0; j < cells.size(); j++) {
                 CellsVO cell = cells.get(j);
                 if(!cell.ismSkip()) {
+                    //TODO check
                     ArrayList<NodesVO> nodes = correctDateInNode(cell);
                     for (NodesVO nodesVO : nodes) {
                         if (nodesVO.ismSkip()) {
                             nodes.remove(nodesVO);
                         }
                     }
+                    passangersVO.setmPaxguid(passenger.getmPaxguid());
                     passangersVO.editHashMap(cell.getmDate(), nodes);
+
                 }
             }
 
