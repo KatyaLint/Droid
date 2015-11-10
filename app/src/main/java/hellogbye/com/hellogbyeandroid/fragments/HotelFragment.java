@@ -1,5 +1,6 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
@@ -42,12 +43,12 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.ImageGalleryActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelAdapter;
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.AllImagesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
@@ -82,7 +83,7 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
     private FontTextView mHotelContactFontTextView;
     private FontTextView mHotelAmnitiesFontTextView;
     private FontTextView mHotelNearbyAttrictionsFontTextView;
-    private UserTravelVO mTravelDetails;
+    //  private UserTravelVO mTravelDetails;
     private ImageView mStart1ImageView;
     private ImageView mStart2ImageView;
     private ImageView mStart3ImageView;
@@ -97,15 +98,22 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView mRecyclerView;
 
-    PassengersVO passengersVO;
-    CellsVO cellsVO;
-    NodesVO nodesVO;
+    //    PassengersVO passengersVO;
+//    CellsVO cellsVO;
+    private NodesVO nodesVO;
     private ArrayList<String> mListForGallery;
     private HashMap<Marker, NodesVO> nodeMarkerMap;
 
     private NodesVO currentSelectedNode;
 
+    public static Fragment newInstance(int position) {
+        Fragment fragment = new HotelFragment();
+        Bundle args = new Bundle();
+        args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
+        fragment.setArguments(args);
 
+        return fragment;
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -115,7 +123,6 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
 
         nodeMarkerMap = new HashMap<Marker, NodesVO>();
         mAdapter = new AlternativeHotelAdapter(new ArrayList<NodesVO>(nodeMarkerMap.values()));
-
 
 
         initSliderPanel();
@@ -143,50 +150,55 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
 
         ((MainActivity) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
             public void doBack() {
-                if(mRecyclerView.getVisibility() != View.VISIBLE){
-                    FragmentManager fm = getActivity()
-                            .getFragmentManager();
-                    fm.popBackStack (HotelFragment.class.toString(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                }else{
+                if (mRecyclerView.getVisibility() != View.VISIBLE) {
+                    if (getActivity() != null && getActivity().getFragmentManager() != null) {
+                        FragmentManager fm = getActivity().getFragmentManager();
+                        fm.popBackStack(HotelFragment.class.toString(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    }
+                } else {
                     hideAlternativeHotels();
                 }
 
             }
         });
+
+        getActivityInterface().getToolBar().updateToolBarView(ToolBarNavEnum.HOTEL.getNavNumber());
         return rootView;
     }
 
     private void sendServerNewHotelOrder(NodesVO cnode) {
 
-        ConnectionManager.getInstance(getActivity()).putAlternateHotel(mTravelDetails.getmSolutionID(), passengersVO.getmPaxguid(), nodesVO.getmCheckIn(), nodesVO.getmCheckOut(), cnode.getmGuid(), new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
+        ConnectionManager.getInstance(getActivity()).putAlternateHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
+                getActivityInterface().getTravelOrder().getPassengerses().get(0).getmPaxguid(),
+                nodesVO.getmCheckIn(), nodesVO.getmCheckOut(), cnode.getmGuid(),
+                new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        getActivityInterface().callRefreshItinerary();
+                        //GET ALL HOTEL NODES AND SET CURRENT ONE
+                        nodesVO = currentSelectedNode;
+                        //TODO set hotel locall and call server
 
-                //GET ALL HOTEL NODES AND SET CURRENT ONE
-                nodesVO = currentSelectedNode;
+//                for (int i = 0; i < cellsVO.getmNodes().size(); i++) {
+//                    NodesVO node = cellsVO.getmNodes().get(i);
+//                    if (node.getmType().equals("hotel")) {
+//                        cellsVO.getmNodes().set(i, currentSelectedNode);
+//                    }
+//
+//                }
 
-                //TODO set hotel locall and call server
+                        loadMap();
 
-                for(int i = 0;i<cellsVO.getmNodes().size();i++){
-                    NodesVO node = cellsVO.getmNodes().get(i);
-                    if(node.getmType().equals("hotel")){
-                        cellsVO.getmNodes().set(i,currentSelectedNode);
+                        hideAlternativeHotels();
+
                     }
 
-                }
-
-                loadMap();
-
-                hideAlternativeHotels();
-
-            }
-
-            @Override
-            public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.show(getFragmentManager(), (String) data);
-            }
-        });
+                    @Override
+                    public void onError(Object data) {
+                        HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.show(getFragmentManager(), (String) data);
+                    }
+                });
     }
 
 
@@ -238,70 +250,68 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
-
         loadMap();
-
-
     }
 
     private void loadMap() {
 
         //GET ALL HOTEL NODES AND SET CURRENT ONE
-        ConnectionManager.getInstance(getActivity()).getAlternateHotelsWithHotel(mTravelDetails.getmSolutionID(), passengersVO.getmPaxguid(), nodesVO.getmCheckIn(), nodesVO.getmCheckOut(), new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
-                CellsVO cellsVO = (CellsVO) data;
-                setCurrentHotel();
-                if (nodeMarkerMap.size() > 0) {
-                    nodeMarkerMap.clear();
-                    mMap.clear();
-                }
+        ConnectionManager.getInstance(getActivity()).getAlternateHotelsWithHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
+                getActivityInterface().getTravelOrder().getPassengerses().get(0).getmPaxguid(),
+                nodesVO.getmCheckIn(), nodesVO.getmCheckOut(), new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        CellsVO cellsVO = (CellsVO) data;
+                        setCurrentHotel();
+                        if (nodeMarkerMap.size() > 0) {
+                            nodeMarkerMap.clear();
+                            mMap.clear();
+                        }
 
-                setCurrentHotel();
-
-
-                for (NodesVO node : cellsVO.getmNodes()) {
-                    if (nodesVO.getmHotelCode().equals(node.getmHotelCode())) {
-                        initHotel(node, null);
-                        //  nodeMarkerMap.put(marker, node);
-                    } else {
+                        setCurrentHotel();
 
 
-                        Marker mark = mMap.addMarker(new MarkerOptions()
-                                .position(new LatLng(Double.valueOf(node.getmLatitude()), Double.valueOf(node.getmLongitude())))
-                                .icon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(getActivity(), String.valueOf((int) node.getmMinimumAmount()), R.drawable.other_location_blue))));
-                        nodeMarkerMap.put(mark, node);
+                        for (NodesVO node : cellsVO.getmNodes()) {
+                            if (nodesVO.getmHotelCode().equals(node.getmHotelCode())) {
+                                initHotel(node, null);
+                                //  nodeMarkerMap.put(marker, node);
+                            } else {
 
+
+                                Marker mark = mMap.addMarker(new MarkerOptions()
+                                        .position(new LatLng(Double.valueOf(node.getmLatitude()), Double.valueOf(node.getmLongitude())))
+                                        .icon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(getActivity(), String.valueOf((int) node.getmMinimumAmount()), R.drawable.other_location_blue))));
+                                nodeMarkerMap.put(mark, node);
+
+                            }
+                        }
+
+                        // specify an adapter (see also next example)
+
+                        mAdapter = new AlternativeHotelAdapter(new ArrayList<NodesVO>(nodeMarkerMap.values()));
+                        mRecyclerView.setAdapter(mAdapter);
+                        mAdapter.SetOnItemClickListener(new AlternativeHotelAdapter.OnItemClickListener() {
+
+                            @Override
+                            public void onItemClick(View v, int position) {
+
+                                NodesVO node = (new ArrayList<NodesVO>(nodeMarkerMap.values())).get(position);
+                                Marker marker = (new ArrayList<Marker>(nodeMarkerMap.keySet())).get(position);
+                                currentSelectedNode = node;
+                                initHotel(node, marker);
+                                hideAlternativeHotels();
+
+                                //sendServerNewHotelOrder(node);
+                            }
+                        });
                     }
-                }
-
-                // specify an adapter (see also next example)
-
-                mAdapter = new AlternativeHotelAdapter(new ArrayList<NodesVO>(nodeMarkerMap.values()));
-                mRecyclerView.setAdapter(mAdapter);
-                mAdapter.SetOnItemClickListener(new AlternativeHotelAdapter.OnItemClickListener() {
 
                     @Override
-                    public void onItemClick(View v, int position) {
-
-                        NodesVO node = (new ArrayList<NodesVO>(nodeMarkerMap.values())).get(position);
-                        Marker marker = (new ArrayList<Marker>(nodeMarkerMap.keySet())).get(position);
-                        currentSelectedNode = node;
-                        initHotel(node, marker);
-                        hideAlternativeHotels();
-
-                        //sendServerNewHotelOrder(node);
+                    public void onError(Object data) {
+                        HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.show(getFragmentManager(), (String) data);
                     }
                 });
-            }
-
-            @Override
-            public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.show(getFragmentManager(), (String) data);
-            }
-        });
     }
 
 
@@ -347,9 +357,9 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
 
     private void initCurrentHotel() {
 
-        mTravelDetails = getActivityInterface().getTravelOrder();
-        passengersVO = mTravelDetails.getPassengerses().get(0);
-        cellsVO = getCellWitGuid(getActivityInterface().getTravelOrder());  //passengersVO.getmCells().get(0);
+        //   mTravelDetails = getActivityInterface().getTravelOrder();
+//        passengersVO = mTravelDetails.getPassengerses().get(0);
+//        cellsVO = getCellWitGuid(getActivityInterface().getTravelOrder());  //passengersVO.getmCells().get(0);
         nodesVO = getLegWitGuid(getActivityInterface().getTravelOrder());//cellsVO.getmNodes().get(1);
         currentSelectedNode = nodesVO;
     }
@@ -478,10 +488,10 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
             for (Marker marker1 : nodeMarkerMap.keySet()) {
 
                 if (!marker.equals(marker1)) {
-                    marker1.setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(getActivity(), String.valueOf((int)nodeMarkerMap.get(marker1).getmMinimumAmount()), R.drawable.other_location_blue)));
+                    marker1.setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(getActivity(), String.valueOf((int) nodeMarkerMap.get(marker1).getmMinimumAmount()), R.drawable.other_location_blue)));
 
                 } else {
-                    marker1.setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(getActivity(), String.valueOf((int)nodeMarkerMap.get(marker1).getmMinimumAmount()), R.drawable.other_location_red)));
+                    marker1.setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(getActivity(), String.valueOf((int) nodeMarkerMap.get(marker1).getmMinimumAmount()), R.drawable.other_location_red)));
                 }
 
             }

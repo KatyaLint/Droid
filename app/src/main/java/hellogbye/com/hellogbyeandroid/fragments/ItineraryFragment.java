@@ -1,30 +1,23 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
 import android.app.Fragment;
-
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
 import hellogbye.com.hellogbyeandroid.R;
-
-
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 public class ItineraryFragment extends HGBAbtsractFragment {
 
 
     private UserTravelVO userOrder;
-   // private UserTravelVO airplaneDataVO;
+
+    // private UserTravelVO airplaneDataVO;
     public ItineraryFragment() {
         // Empty constructor required for fragment subclasses
     }
@@ -42,20 +35,19 @@ public class ItineraryFragment extends HGBAbtsractFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       // parseFlight();
+        // parseFlight();
 
         userOrder = getActivityInterface().getTravelOrder();
-        if(userOrder != null) {
+        if (userOrder != null) {
             Log.d("ItineraryFragment", userOrder.toString());
         }
 
     }
 
 
-    public interface TravelerShowChoose{
+    public interface TravelerShowChoose {
         void itemSelected(String guidSelectedItem, String itemType);
     }
-
 
 
     @Override
@@ -67,22 +59,23 @@ public class ItineraryFragment extends HGBAbtsractFragment {
         flightGridMainFragment.initializeCB(new TravelerShowChoose() {
             @Override
             public void itemSelected(String guidSelectedItem, String itemType) {
-                if(itemType.equals("flight")){
-                Fragment fragment = new AlternativeFlightFragment();
-                ((AlternativeFlightFragment)fragment).selectedItem(guidSelectedItem);
-                HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragment, true);
-                }else if(itemType.equals("hotel")){
+                if (itemType.equals("flight")) {
+                    Fragment fragment = new AlternativeFlightFragment();
+                    ((AlternativeFlightFragment) fragment).selectedItem(guidSelectedItem);
+                    // HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragment, true);
+                    getActivityInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber());
+                } else if (itemType.equals("hotel")) {
                     Fragment fragment = new HotelFragment();
-                    ((HotelFragment)fragment).selectedItem(guidSelectedItem);
-                    HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragment, true);
+                    ((HotelFragment) fragment).selectedItem(guidSelectedItem);
+                    getActivityInterface().goToFragment(ToolBarNavEnum.HOTEL.getNavNumber());
                 }
             }
         });
 
-        if(userOrder != null) {
+        if (userOrder != null) {
             rootView = flightGridMainFragment.createGridView(getActivity(), rootView, userOrder, inflater);
         }
-
+        getActivityInterface().getToolBar().updateToolBarView(ToolBarNavEnum.ITINARERY.getNavNumber());
         return rootView;
 
     }

@@ -87,25 +87,37 @@ public class CostumeToolBar extends Toolbar {
                 titleText.setVisibility(View.VISIBLE);
                 purchaseButton.setVisibility(View.VISIBLE);
                 favoriteButton.setVisibility(View.GONE);
+                keyBoardImage.setVisibility(View.GONE);
                 break;
             case HISTORY:
                 titleText.setVisibility(View.VISIBLE);
+                keyBoardImage.setVisibility(View.INVISIBLE);
                 break;
             case TRIPS:
                 titleText.setVisibility(View.VISIBLE);
+                keyBoardImage.setVisibility(View.INVISIBLE);
                 break;
             case COMPANIONS:
                 titleText.setVisibility(View.VISIBLE);
+                keyBoardImage.setVisibility(View.INVISIBLE);
                 break;
             case PREFERENCE:
                 titleText.setVisibility(View.VISIBLE);
                 editPreferense.setVisibility(View.VISIBLE);
+                keyBoardImage.setVisibility(View.INVISIBLE);
                 break;
             case ACCOUNT:
                 titleText.setVisibility(View.VISIBLE);
+                keyBoardImage.setVisibility(View.INVISIBLE);
                 break;
             case HELP:
                 titleText.setVisibility(View.VISIBLE);
+                keyBoardImage.setVisibility(View.INVISIBLE);
+                break;
+            case CNC:
+                titleText.setVisibility(View.INVISIBLE);
+                homeTitleImage.setVisibility(View.VISIBLE);
+                keyBoardImage.setVisibility(View.VISIBLE);
                 break;
 
 

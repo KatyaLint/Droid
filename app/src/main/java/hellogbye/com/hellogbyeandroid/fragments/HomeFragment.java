@@ -180,8 +180,10 @@ public class HomeFragment extends HGBAbtsractFragment {
                 if (data != null) {
                     getActivityInterface().setTravelOrder((UserTravelVO) data);
 
-                    ItineraryFragment fragemnt = new ItineraryFragment();
-                    HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack
+//                    ItineraryFragment fragemnt = new ItineraryFragment();
+//                    HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack
+                  getActivityInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber());
+
                     checkState();
 //                    HotelFragment fragemnt = new HotelFragment();
 //                    HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack

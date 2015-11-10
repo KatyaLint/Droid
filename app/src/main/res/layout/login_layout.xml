@@ -12,7 +12,7 @@
         style="@style/register_edit_text"
         android:layout_marginTop="100dp"
         android:inputType="textEmailAddress"
-        android:text="ari.sprung@amginetech.com"
+        android:text="hussam@hellogbye.com"
 
         android:hint="@string/email_address"
        />

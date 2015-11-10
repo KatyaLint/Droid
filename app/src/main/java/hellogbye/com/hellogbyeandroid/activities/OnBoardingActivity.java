@@ -24,6 +24,7 @@ import hellogbye.com.hellogbyeandroid.fragments.OnBoardingFragment;
 import hellogbye.com.hellogbyeandroid.models.TravelPreference;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
+import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.views.CirclePageIndicator;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -46,12 +47,14 @@ public class OnBoardingActivity extends FragmentActivity {
     private ArrayList<TravelPreference> mTravelPrefList;
     private CirclePageIndicator titleIndicator;
     private FontTextView mSetTravelPrefrenceFontTextView;
+    private HGBPreferencesManager hgbPrefrenceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.onboarding_layout);
         mSetTravelPrefrenceFontTextView = (FontTextView) findViewById(R.id.travel_pref_but);
+        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         final TravelPreference dummyTravelPreference = new TravelPreference(0, "Almost Done! Choose a Travel Profile", "Travel Profile helps us choose" +
                 "the right types of flights and hotels that most interest you. You can always change them later", "", "");
 
@@ -92,11 +95,13 @@ public class OnBoardingActivity extends FragmentActivity {
             public void onClick(View view) {
 
                 TravelPreference preference = mTravelPrefList.get(mPager.getCurrentItem());
-                int i = preference.getId();
+                final String strPrefrence = String.valueOf(preference.getId());
 
-                ConnectionManager.getInstance(OnBoardingActivity.this).postChoosePrebuiltPreferenceProfileId(String.valueOf(i), preference.getName(), new ConnectionManager.ServerRequestListener() {
+                ConnectionManager.getInstance(OnBoardingActivity.this).postChoosePrebuiltPreferenceProfileId(strPrefrence, preference.getName(), new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
+
+                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_PREFRENCE_ID,strPrefrence);
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                     }

@@ -5,7 +5,6 @@ package hellogbye.com.hellogbyeandroid.activities;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -32,6 +31,7 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.AccountSettingsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.AlternativeFlightsDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HistoryFragment;
@@ -41,6 +41,7 @@ import hellogbye.com.hellogbyeandroid.fragments.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.MyTripsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PrefrenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
+import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserData;
@@ -49,9 +50,11 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.SpeechRecognitionUtil;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
+import io.fabric.sdk.android.services.common.Crash;
 
 public class MainActivity extends AppCompatActivity implements NavListAdapter.OnItemClickListener, HGBMainInterface, ActionBar.OnMenuVisibilityListener {
     private DrawerLayout mDrawerLayout;
@@ -70,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private HGBPreferencesManager hgbPrefrenceManager;
     private ImageButton imageButton;
 
+    private ArrayList<CNCItem> mCNCItems;
+
 
     private UserTravelVO mUserTravelOrder;
     private List<AlternativeFlightsVO> alternativeFlights;
@@ -85,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         setContentView(R.layout.main_activity_layout);
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
+
 
         mTitle = mDrawerTitle = getTitle();
         // mNavTitles = getResources().getStringArray(R.array.nav_draw_array);
@@ -149,8 +155,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String id = (String) v.getTag();
-                setHomeFragmentState(id);
+//                String id = (String) v.getTag();
+//                setHomeFragmentState(id);
+
+                clearCNCItems();
             }
         });
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -186,6 +194,14 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         //HGBUtility.loadHotelImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
         selectItem(ToolBarNavEnum.HOME.getNavNumber());
 
+    }
+
+    private void clearCNCItems() {
+
+        setCNCItems(null);
+        setTravelOrder(null);
+        Fragment currentFragment = getFragmentManager().findFragmentByTag(CNCFragment.class.toString());
+        ((CNCFragment) currentFragment).initList();
     }
 
     private void setHomeFragmentState(String id) {
@@ -267,15 +283,15 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
-    private void selectItem(int position) {
+    public void selectItem(int position) {
         // update the main content by replacing fragments
         Fragment fragment = null;
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
         int navPosition = position;//navBar.getNavNumber();
         switch (navBar) {
             case HOME:
-                fragment = HomeFragment.newInstance(navPosition);
-               // fragment = CNCFragment.newInstance(navPosition);
+              //  fragment = HomeFragment.newInstance(navPosition);
+                fragment = CNCFragment.newInstance(navPosition);
 
                 break;
             case HISTORY:
@@ -299,12 +315,17 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case ITINARERY:
                 fragment = ItineraryFragment.newInstance(navPosition);
                 break;
+            case ALTERNATIVE_FLIGHT:
+                fragment = AlternativeFlightsDetailsFragment.newInstance(navPosition);
+                break;
+            case HOTEL:
+                fragment = HotelFragment.newInstance(navPosition);
+                break;
+
 
         }
 
-
         HGBUtility.goToNextFragmentIsAddToBackStack(this, fragment, true);
-
         mToolbar.initToolBarItems();
         mToolbar.updateToolBarView(position);
         mDrawerLayout.closeDrawer(mNavDrawerLinearLayout);
@@ -365,12 +386,22 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public void openVoiceToTextControl() {
         try {
-            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak Now...");
-            startActivityForResult(intent, 0);
-        } catch (ActivityNotFoundException e) {
+            boolean recognizerIntent =
+                    SpeechRecognitionUtil.isSpeechAvailable(this);
+            if(recognizerIntent){
+                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                //intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US");
+                intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak Now...");
+                startActivityForResult(intent, 0);
+            }else{
+                Crashlytics.logException(new Exception("Speech not avaibale"));
+                Log.e("MainActvity", "Speeach not avaiable");
+            }
+
+        } catch (Exception e) {
             Log.v("Speech", "Could not find any Speech Recognition Actions");
         }
     }
@@ -378,8 +409,17 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public void setTravelOrder(UserTravelVO travelorder) {
         mUserTravelOrder = travelorder;
-        setSolutionID(mUserTravelOrder.getmSolutionID());
+        if(travelorder ==null){
+            setSolutionID(null);
+        }else{
+            setSolutionID(mUserTravelOrder.getmSolutionID());
+        }
 
+    }
+
+    @Override
+    public void setCNCItems(ArrayList<CNCItem> cncItemArrayList) {
+        this.mCNCItems = cncItemArrayList;
     }
 
     @Override
@@ -404,8 +444,47 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
+    public ArrayList<CNCItem> getCNCItems() {
+        return mCNCItems;
+    }
+
+    @Override
     public List<AlternativeFlightsVO> getAlternativeFlights() {
         return alternativeFlights;
+    }
+
+    @Override
+    public void addCNCItem(CNCItem cncitem) {
+
+        mCNCItems.add(cncitem);
+    }
+
+    @Override
+    public void callRefreshItinerary() {
+
+        ConnectionManager.getInstance(MainActivity.this).getItinerary(solutionID, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                setTravelOrder((UserTravelVO) data);
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                Log.e("MainActivity", "Problem updating grid  " + data);
+            }
+        });
+
+    }
+
+    @Override
+    public CostumeToolBar getToolBar() {
+        return mToolbar;
+    }
+
+    @Override
+    public void goToFragment(int fragmentname) {
+        selectItem(fragmentname);
     }
 
 
@@ -419,7 +498,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             Fragment currentFragment = getFragmentManager().findFragmentByTag(fragmentTag);
 
             if (currentFragment instanceof CNCFragment) {
-                ((CNCFragment) currentFragment).handleMessage(matches.get(0));
+                ((CNCFragment) currentFragment).handleMyMessage(matches.get(0));
             }
 //            HomeFragment fragment = (HomeFragment) getFragmentManager().findFragmentByTag(HomeFragment.class.toString());
 //            if (fragment != null) {

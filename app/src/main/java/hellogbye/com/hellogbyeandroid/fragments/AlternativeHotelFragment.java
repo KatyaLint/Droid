@@ -83,20 +83,6 @@ public class AlternativeHotelFragment extends HGBAbtsractFragment {
         return rootView;
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-
-
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
 
     public class AlternativeHotelAdapter extends RecyclerView.Adapter<AlternativeHotelAdapter.ViewHolder> {
         private ArrayList<NodesVO> mArrayList;

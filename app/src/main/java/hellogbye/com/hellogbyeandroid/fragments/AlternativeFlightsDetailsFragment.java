@@ -1,5 +1,6 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,12 +21,22 @@ import hellogbye.com.hellogbyeandroid.adapters.AlternativeFlightsAdapter;
 import hellogbye.com.hellogbyeandroid.models.TravelPreference;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 /**
  * Created by nyawka on 10/14/15.
  */
 public class AlternativeFlightsDetailsFragment extends HGBAbtsractFragment {
+
+    public static Fragment newInstance(int position) {
+        Fragment fragment = new AlternativeFlightsDetailsFragment();
+        Bundle args = new Bundle();
+        args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
+        fragment.setArguments(args);
+
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

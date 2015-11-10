@@ -8,6 +8,13 @@ public class CNCItem {
     private String text;
     private int type;
 
+    public CNCItem(){
+
+    }
+    public CNCItem(int type){
+        this.type = type;
+    }
+
     public CNCItem(String text, int type) {
         this.text = text;
         this.type = type;
