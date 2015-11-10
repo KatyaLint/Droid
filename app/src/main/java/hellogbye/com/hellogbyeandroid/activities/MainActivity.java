@@ -54,14 +54,12 @@ import hellogbye.com.hellogbyeandroid.utilities.SpeechRecognitionUtil;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
-import io.fabric.sdk.android.services.common.Crash;
 
 public class MainActivity extends AppCompatActivity implements NavListAdapter.OnItemClickListener, HGBMainInterface, ActionBar.OnMenuVisibilityListener {
     private DrawerLayout mDrawerLayout;
     private RecyclerView mDrawerList;
     private LinearLayout mNavDrawerLinearLayout;
     private android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
-
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mNavTitles;
@@ -72,10 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private FontTextView mName;
     private HGBPreferencesManager hgbPrefrenceManager;
     private ImageButton imageButton;
-
     private ArrayList<CNCItem> mCNCItems;
-
-
     private UserTravelVO mUserTravelOrder;
     private List<AlternativeFlightsVO> alternativeFlights;
     private NavigationView navigationView;
@@ -184,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                HGBUtility.hideKeyboard(getApplicationContext(),drawerView);
+                HGBUtility.hideKeyboard(getApplicationContext(), drawerView);
 
             }
         };
@@ -296,7 +291,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         int navPosition = position;//navBar.getNavNumber();
         switch (navBar) {
             case HOME:
-              //  fragment = HomeFragment.newInstance(navPosition);
+                //  fragment = HomeFragment.newInstance(navPosition);
                 fragment = CNCFragment.newInstance(navPosition);
 
                 break;
@@ -394,7 +389,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         try {
             boolean recognizerIntent =
                     SpeechRecognitionUtil.isSpeechAvailable(this);
-            if(recognizerIntent){
+            if (recognizerIntent) {
                 Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
                 intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                         RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -402,7 +397,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US");
                 intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak Now...");
                 startActivityForResult(intent, 0);
-            }else{
+            } else {
                 Crashlytics.logException(new Exception("Speech not avaibale"));
                 Log.e("MainActvity", "Speeach not avaiable");
             }
@@ -415,9 +410,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public void setTravelOrder(UserTravelVO travelorder) {
         mUserTravelOrder = travelorder;
-        if(travelorder ==null){
+        if (travelorder == null) {
             setSolutionID(null);
-        }else{
+        } else {
             setSolutionID(mUserTravelOrder.getmSolutionID());
         }
 
@@ -472,7 +467,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             @Override
             public void onSuccess(Object data) {
                 setTravelOrder((UserTravelVO) data);
-
             }
 
             @Override

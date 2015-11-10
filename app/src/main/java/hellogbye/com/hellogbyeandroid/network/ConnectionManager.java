@@ -22,6 +22,7 @@ public class ConnectionManager {
 
 
     public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
+   //public static String BASE_URL = "http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/";
 
 
     private static ConnectionManager _instance;
