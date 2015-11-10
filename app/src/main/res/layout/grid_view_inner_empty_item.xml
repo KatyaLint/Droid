@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:id="@+id/grid_date_ll_empty"
-            android:background="@color/odd_grey"
+            android:background="@color/grey_very_light"
             android:layout_weight="20"
             android:gravity="center_vertical|center_horizontal"
             android:layout_width="@dimen/DP38"

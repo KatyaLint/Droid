@@ -17,11 +17,13 @@
     <dimen name="DP280">280dp</dimen>
     <dimen name="DP44">44dp</dimen>
     <dimen name="DP2">2dp</dimen>
+    <dimen name="DP4">4dp</dimen>
     <dimen name="DP1">1dp</dimen>
     <dimen name="DP10">10dp</dimen>
     <dimen name="DP16">16dp</dimen>
     <dimen name="DP20">20dp</dimen>
     <dimen name="DP8">8dp</dimen>
+    <dimen name="DP6">6dp</dimen>
     <dimen name="DP82">82dp</dimen>
     <dimen name="DP54">54dp</dimen>
     <dimen name="DP100">100dp</dimen>

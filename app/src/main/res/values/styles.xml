@@ -32,6 +32,11 @@
 
 
 
+    <style name="GridTextStyle">
+        <item name="android:textSize">@dimen/SP12</item>
+        <item name="android:paddingLeft">@dimen/DP4</item>
+    </style>
+
     <style name="register_edit_text">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>

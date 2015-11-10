@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:background="@color/red_pink"
     android:id="@+id/grid_main_ll_grid_view_hotel"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -24,14 +23,13 @@
 
         <LinearLayout
             android:id="@+id/grid_date_ll_hotel"
-            android:background="@color/odd_grey"
+            android:background="@color/grey_very_light"
             android:layout_weight="20"
             android:gravity="center_vertical|center_horizontal"
             android:layout_width="@dimen/DP38"
             android:layout_height="fill_parent"
             android:orientation="vertical"
-            android:padding="@dimen/DP2"
-            >
+            android:padding="@dimen/DP2">
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/grid_calendar_month_hotel"
@@ -57,9 +55,10 @@
 
 
         <LinearLayout
+            android:id="@+id/grid_main_hotel_square_ll"
             android:layout_margin="@dimen/DP10"
             android:paddingLeft="@dimen/DP2"
-            android:background="@color/white"
+
             android:layout_weight="200"
             android:layout_width="@dimen/DP100"
             android:layout_height="@dimen/DP100"
@@ -67,10 +66,10 @@
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/grid_hotel_name"
-
+                android:maxLines="1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/SP10"
+                style="@style/GridTextStyle"
                 android:textColor="@color/dark_teal"
                 app:fontName="dinnextltpro_medium.otf"
                 android:text="Table Bay Hotel"/>
@@ -79,7 +78,7 @@
                 android:id="@+id/grid_hotel_place"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/SP10"
+                style="@style/GridTextStyle"
                 android:textColor="@color/dark_teal"
                 app:fontName="dinnextltpro_medium.otf"
                 android:text="Cape Town"/>
@@ -96,6 +95,7 @@
 
 
             <LinearLayout
+                android:paddingTop="@dimen/DP6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -104,7 +104,7 @@
                     android:id="@+id/grid_hotel_price"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/SP10"
+                    style="@style/GridTextStyle"
                     android:textColor="@color/red_pink"
                     app:fontName="dinnextltpro_medium.otf"
                     android:text="$100000"/>
@@ -113,7 +113,7 @@
                     android:id="@+id/grid_hotel_night"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/SP10"
+                    style="@style/GridTextStyle"
                     android:textColor="@color/brown_blue"
                     app:fontName="dinnextltpro_medium.otf"
                     android:text="/Night"/>
