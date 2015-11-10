@@ -31,20 +31,6 @@ public class ItineraryFragment extends HGBAbtsractFragment {
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // parseFlight();
-
-        userOrder = getActivityInterface().getTravelOrder();
-        if (userOrder != null) {
-            Log.d("ItineraryFragment", userOrder.toString());
-        }
-
-    }
-
-
     public interface TravelerShowChoose {
         void itemSelected(String guidSelectedItem, String itemType);
     }
@@ -54,6 +40,7 @@ public class ItineraryFragment extends HGBAbtsractFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        userOrder = getActivityInterface().getTravelOrder();
         View rootView = inflater.inflate(R.layout.grid_view_table_main_layoutl, container, false);
         FlightGridMainFragment flightGridMainFragment = new FlightGridMainFragment();
         flightGridMainFragment.initializeCB(new TravelerShowChoose() {
@@ -73,9 +60,6 @@ public class ItineraryFragment extends HGBAbtsractFragment {
         });
 
 
-        System.out.println("Kate onCreateView flight");
-
-        userOrder = getActivityInterface().getTravelOrder();
         if (userOrder != null) {
             rootView = flightGridMainFragment.createGridView(getActivity(), rootView, userOrder, inflater);
         }
