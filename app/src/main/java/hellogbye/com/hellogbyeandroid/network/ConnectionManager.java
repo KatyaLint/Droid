@@ -20,12 +20,16 @@ public class ConnectionManager {
         void onError(Object data);
     }
 
+
     public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
+
 
     private static ConnectionManager _instance;
     private Context mContext;
 
-    private String SOLUTION = "?solution=";
+    private String SOLUTION="?solution=";
+    private String PREFERENCES = "Preferences";
+
 
     public enum Services {
         USER_POST_LOGIN, USER_GET_PROFILE, USER_POST_CHANGE_PASSWORD,
@@ -446,8 +450,49 @@ public class ConnectionManager {
 
     //{"parameters":{"solution":"c86d9879-eb15-4164-8b75-6bbac0787b75","paxid":"9d2c85f5-d295-4064-a8c6-a4d0015b52e4","checkin":"2015-09-03","checkout":"2015-09-04"},"hotel":"c329c20a-4836-4bec-9580-48f7814e9fbd"}
 
+public void getUserSettingsAttributes(String attributesId,final ServerRequestListener listener){
+    String url = getURL(Services.USER_POST_TRAVEL_PROFILES);
+    JSONObject jsonObject = new JSONObject();
 
-    public void getAlternateFlightsForFlight(String solutionid, String paxid, String flightid, final ServerRequestListener listener) {
+
+    url= url+"/"+attributesId+"/"+PREFERENCES;
+
+    HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+            jsonObject, new Response.Listener<String>() {
+        @Override
+        public void onResponse(String response) {
+            listener.onSuccess(response);
+        }
+    }, new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            listener.onError(Parser.parseErrorMessage(error));
+        }
+    });
+}
+
+    public void getUserSettingsDefault(final ServerRequestListener listener){
+        String url = getURL(Services.USER_POST_TRAVEL_PROFILES);
+        JSONObject jsonObject = new JSONObject();
+
+
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
+
+    public void getAlternateFlightsForFlight(String solutionid, String paxid,String flightid ,final ServerRequestListener listener) {
+
 
         String url = getURL(Services.USER_FLIGHT_SOLUTIONS);
         url = url + SOLUTION + solutionid + "&paxid=" + paxid + "&flight=" + flightid;

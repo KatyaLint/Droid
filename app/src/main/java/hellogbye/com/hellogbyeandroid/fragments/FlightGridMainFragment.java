@@ -110,9 +110,9 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
         setStickyHeaderData(passengers);
 
 
-         numberOfRow = pass.get(0).getPassengerNodes().size();
-         realRowNumber = pass.get(0).getPassengerNodes().size();
-         maxRowNumber = numberOfRow*columnNumber;
+        numberOfRow = pass.get(0).getPassengerNodes().size();
+        realRowNumber = pass.get(0).getPassengerNodes().size();
+        maxRowNumber = numberOfRow*columnNumber;
         calculateNumberOfRowAndCol();
 
 

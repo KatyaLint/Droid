@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/SP32"
+        app:fontName="dinnextltpro_condensed.ttf"
+        android:textColor="@color/dark_teal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:text="@string/preferences_bed_type"
+        android:layout_marginTop="@dimen/DP38"
+        android:layout_marginBottom="@dimen/DP38"/>
+
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/SP18"
+        app:fontName="dinnextltpro_light.otf"
+        android:textColor="@color/warm_grey"
+        android:gravity="center_horizontal"
+
+        android:layout_gravity="center_horizontal"
+        android:text="@string/preferences_bed_rank" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/settingsBedRank"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/flightRecyclerView"
+        android:layout_above="@+id/add_preferences"/>
+
+
+</LinearLayout>

@@ -14,8 +14,10 @@
         android:inputType="textEmailAddress"
         android:text="hussam@hellogbye.com"
 
-        android:hint="@string/email_address"
-       />
+        android:hint="@string/email_address"/>
+
+
+    <!--android:text="ari.sprung@amginetech.com"-->
 
     <EditText
         android:id="@+id/password"

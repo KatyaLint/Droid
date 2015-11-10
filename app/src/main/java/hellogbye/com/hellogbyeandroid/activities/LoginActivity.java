@@ -106,6 +106,7 @@ public class LoginActivity extends FragmentActivity {
             Intent intent = new Intent(getApplicationContext(), TravelPrefrenceStartingActivity.class);
             startActivity(intent);
         }
+
     }
 
     private void resetPassword() {
