@@ -21,8 +21,8 @@ public class ConnectionManager {
     }
 
 
-    public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
-   //public static String BASE_URL = "http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/";
+   // public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
+   public static String BASE_URL = "http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/";
 
 
     private static ConnectionManager _instance;
@@ -425,7 +425,7 @@ public class ConnectionManager {
             public void onErrorResponse(VolleyError error) {
                 listener.onError(Parser.parseErrorMessage(error));
             }
-        });
+        },false);
     }
 
     public void getAlternateHotelRoomsWithHotel(String solutioid, String paxid, String checkin, String checkout, String hotelcode, final ServerRequestListener listener) {
@@ -533,7 +533,7 @@ public void getUserSettingsAttributes(String attributesId,final ServerRequestLis
             public void onErrorResponse(VolleyError error) {
                 listener.onError(Parser.parseErrorMessage(error));
             }
-        });
+        },false);
     }
 
     public void getBookingOptions(final ServerRequestListener listener) {
@@ -673,7 +673,6 @@ public void getUserSettingsAttributes(String attributesId,final ServerRequestLis
     }
 
     public void putAlternateHotel(String solutionid, String paxid, String checkin, String checkout, String hotelid, final ServerRequestListener listener) {
-        //  {"parameters":{"solution":"c86d9879-eb15-4164-8b75-6bbac0787b75","paxid":"9d2c85f5-d295-4064-a8c6-a4d0015b52e4","checkin":"2015-09-03","checkout":"2015-09-04"},"hotel":"c329c20a-4836-4bec-9580-48f7814e9fbd"}
         String url = getURL(Services.USER_PUT_HOTEL);
         JSONObject jsonObjectWrapper = new JSONObject();
         try {
@@ -702,7 +701,7 @@ public void getUserSettingsAttributes(String attributesId,final ServerRequestLis
             public void onErrorResponse(VolleyError error) {
                 listener.onError(Parser.parseErrorMessage(error));
             }
-        });
+        },false);
     }
 
 

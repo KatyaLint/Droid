@@ -33,19 +33,16 @@ public class CNCFragment extends HGBAbtsractFragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-
     private CNCAdapter mAdapter;
     private EditText mEditText;
     private ImageView mMicImageView;
     private FontTextView mSendTextView;
     private HGBPreferencesManager mHGBPrefrenceManager;
-    private static int mPosition;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new CNCFragment();
         Bundle args = new Bundle();
         args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
-        mPosition = position;
         fragment.setArguments(args);
         return fragment;
     }

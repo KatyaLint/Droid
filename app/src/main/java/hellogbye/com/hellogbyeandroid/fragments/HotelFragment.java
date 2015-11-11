@@ -114,6 +114,7 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
 
         return fragment;
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
