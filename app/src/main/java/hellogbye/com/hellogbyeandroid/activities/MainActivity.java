@@ -22,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,7 @@ import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.network.Parser;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.SpeechRecognitionUtil;
@@ -88,6 +90,13 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         setContentView(R.layout.main_activity_layout);
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
 
+        //check if we have travelitinery in db
+        String strTravel = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO, "");
+        if (!"".equals(strTravel)) {
+            UserTravelVO userTravelVO = (UserTravelVO) Parser.parseAirplaneData(strTravel);
+            setTravelOrder(userTravelVO);
+        }
+
 
         mTitle = mDrawerTitle = getTitle();
         // mNavTitles = getResources().getStringArray(R.array.nav_draw_array);
@@ -110,10 +119,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mDrawerList.setAdapter(mAdapter);
 
         mToolbar = (CostumeToolBar) findViewById(R.id.toolbar_costume);
-
-
-
-
 
 
         initToolBar();
@@ -192,7 +197,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mDrawerToggle.syncState();
 
 
-
         //HGBUtility.loadHotelImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
         selectItem(ToolBarNavEnum.HOME.getNavNumber());
 
@@ -202,6 +206,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         setCNCItems(null);
         setTravelOrder(null);
+        hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
+        hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
         Fragment currentFragment = getFragmentManager().findFragmentByTag(CNCFragment.class.toString());
         ((CNCFragment) currentFragment).initList();
     }
@@ -228,12 +234,12 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mNavItemsList = new ArrayList<>();
         mNavItemsList.add(new NavItem(ToolBarNavEnum.HOME, true));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.ITINARERY, false));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.HISTORY, false));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.TRIPS, false));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.COMPANIONS, false));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.PREFERENCE, false));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.ACCOUNT, false));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.HELP, false));
+//        mNavItemsList.add(new NavItem(ToolBarNavEnum.HISTORY, false));
+//        mNavItemsList.add(new NavItem(ToolBarNavEnum.TRIPS, false));
+//        mNavItemsList.add(new NavItem(ToolBarNavEnum.COMPANIONS, false));
+//        mNavItemsList.add(new NavItem(ToolBarNavEnum.PREFERENCE, false));
+//        mNavItemsList.add(new NavItem(ToolBarNavEnum.ACCOUNT, false));
+//        mNavItemsList.add(new NavItem(ToolBarNavEnum.HELP, false));
 
     }
 
@@ -423,6 +429,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             setSolutionID(null);
         } else {
             setSolutionID(mUserTravelOrder.getmSolutionID());
+            Gson gson = new Gson();
+            String json = gson.toJson(travelorder);
+            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO, json);
         }
 
     }
@@ -466,7 +475,13 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public void addCNCItem(CNCItem cncitem) {
 
+        if(mCNCItems == null ){
+            mCNCItems = new ArrayList<>();
+        }
+
         mCNCItems.add(cncitem);
+
+
     }
 
     @Override
@@ -503,12 +518,12 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         if (requestCode == 0 && resultCode == RESULT_OK) {
             ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
-            String fragmentTag = getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1).getName();
-            Fragment currentFragment = getFragmentManager().findFragmentByTag(fragmentTag);
-
-            if (currentFragment instanceof CNCFragment) {
-                ((CNCFragment) currentFragment).handleMyMessage(matches.get(0));
-            }
+            //   String fragmentTag = getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1).getName();
+            Fragment currentFragment = getFragmentManager().findFragmentByTag(CNCFragment.class.toString());
+            ((CNCFragment) currentFragment).handleMyMessage(matches.get(0));
+//            if (currentFragment instanceof CNCFragment) {
+//                ((CNCFragment) currentFragment).handleMyMessage(matches.get(0));
+//            }
 //            HomeFragment fragment = (HomeFragment) getFragmentManager().findFragmentByTag(HomeFragment.class.toString());
 //            if (fragment != null) {
 //                fragment.handleClick(matches.get(0));
@@ -550,4 +565,18 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
+        try {
+            Gson gsonback = new Gson();
+            String json = gsonback.toJson(mCNCItems);
+            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, json);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -67,7 +67,7 @@ public class HGBJsonRequest extends Request<String> {
         this.url = url;
         showLoader = true;
         progressDialog = new ProgressDialog(mContext);
-        loading = "Loading";
+        loading = "Loading...";
         setRetryPolicy(new DefaultRetryPolicy(
                 10000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,

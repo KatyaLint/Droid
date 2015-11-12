@@ -13,8 +13,16 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.CNCAdapter;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
@@ -33,19 +41,16 @@ public class CNCFragment extends HGBAbtsractFragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-
     private CNCAdapter mAdapter;
     private EditText mEditText;
     private ImageView mMicImageView;
     private FontTextView mSendTextView;
     private HGBPreferencesManager mHGBPrefrenceManager;
-    private static int mPosition;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new CNCFragment();
         Bundle args = new Bundle();
         args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
-        mPosition = position;
         fragment.setArguments(args);
         return fragment;
     }
@@ -88,11 +93,27 @@ public class CNCFragment extends HGBAbtsractFragment {
     }
 
     private void loadCNCList() {
-        if (getActivityInterface().getCNCItems() == null || getActivityInterface().getCNCItems().size() == 0) {
-            ArrayList<CNCItem> mArrayList = new ArrayList<>();
-            mArrayList.add(new CNCItem(getResources().getString(R.string.default_cnc_message), CNCAdapter.HGB_ITEM));
-            getActivityInterface().setCNCItems(mArrayList);
+        String strCNCList = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, "");
+        if ("".equals(strCNCList) && getActivityInterface().getCNCItems()== null) {
+            getActivityInterface().addCNCItem(new CNCItem(getResources().getString(R.string.default_cnc_message), CNCAdapter.HGB_ITEM));
+        } else {
+
+            if (getActivityInterface().getCNCItems() == null) {
+                try {
+                    Gson gson = new Gson();
+                    Type listType = new TypeToken<List<CNCItem>>() {
+                    }.getType();
+                    ArrayList<CNCItem> posts = (ArrayList<CNCItem>) gson.fromJson(strCNCList, listType);
+                    getActivityInterface().setCNCItems(posts);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+
         }
+
+
     }
 
     private void init(View view) {
@@ -155,7 +176,7 @@ public class CNCFragment extends HGBAbtsractFragment {
     private void sendMessageToServer(String strMessage) {
         String strPrefId = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_PREFRENCE_ID, "");
 
-        if(getActivityInterface().getSolutionID() == null){
+        if (getActivityInterface().getSolutionID() == null) {
             ConnectionManager.getInstance(getActivity()).ItinerarySearch(strMessage, strPrefId, new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
@@ -168,9 +189,9 @@ public class CNCFragment extends HGBAbtsractFragment {
                     handleHGBMessage((String) data);
                 }
             });
-        }else{
+        } else {
 
-            ConnectionManager.getInstance(getActivity()).ItineraryCNCSearch(strMessage, strPrefId,getActivityInterface().getSolutionID(), new ConnectionManager.ServerRequestListener() {
+            ConnectionManager.getInstance(getActivity()).ItineraryCNCSearch(strMessage, strPrefId, getActivityInterface().getSolutionID(), new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
                     getActivityInterface().setTravelOrder((UserTravelVO) data);
