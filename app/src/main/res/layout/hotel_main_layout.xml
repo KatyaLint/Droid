@@ -463,8 +463,7 @@
                         android:id="@+id/tableLayout1"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-
-                        android:stretchColumns="1"></TableLayout>
+                        android:stretchColumns="1"/>
                 </HorizontalScrollView>
 
                 <hellogbye.com.hellogbyeandroid.views.FontTextView

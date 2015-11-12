@@ -112,11 +112,15 @@ public class HGBAbtsractFragment extends Fragment {
 
 
 
-    public void selectedItemFromGrid(String guidSlected, String guidUser){
+    public void selectedItemGuidNumber(String guidSlected){
         this.selectedItemGuid = guidSlected;
-        this.selectedUserGuid = guidUser;
+
     }
 
+
+    public void selectedUserGuidNumber(String guidSelectedUser) {
+        this.selectedUserGuid = guidSelectedUser;
+    }
     public String getSelectedGuid(){
         return selectedItemGuid;
     }

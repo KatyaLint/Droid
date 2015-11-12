@@ -27,25 +27,20 @@ public class PassangerDataOrganization {
 
         for (int i = 0; i < passengers.size(); i++) {
             PassengersVO passenger = passengers.get(i);
-            PassengersVO passangersVO = new PassengersVO();
+         //   PassengersVO passangersVO = new PassengersVO();
             ArrayList<CellsVO> cells = passenger.getmCells();
             for (int j = 0; j < cells.size(); j++) {
                 CellsVO cell = cells.get(j);
                 if(!cell.ismSkip()) {
                     //TODO check
                     ArrayList<NodesVO> nodes = correctDateInNode(cell);
-                    for (NodesVO nodesVO : nodes) {
-                        if (nodesVO.ismSkip()) {
-                            nodes.remove(nodesVO);
-                        }
-                    }
-                    passangersVO.setmPaxguid(passenger.getmPaxguid());
-                    passangersVO.editHashMap(cell.getmDate(), nodes);
+
+                    passenger.editHashMap(cell.getmDate(), nodes);
 
                 }
             }
 
-            passangersVOs.add(passangersVO);
+            passangersVOs.add(passenger);
         }
 
         correctTheHashMapCells();

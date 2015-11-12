@@ -36,6 +36,7 @@ public class AlternativeHotelAdapter extends RecyclerView.Adapter<AlternativeHot
         public ImageView mStart3ImageView;
         public ImageView mStart4ImageView;
         public ImageView mStart5ImageView;
+
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
             mHotelName = (FontTextView)itemLayoutView.findViewById(R.id.alt_hotel_name);

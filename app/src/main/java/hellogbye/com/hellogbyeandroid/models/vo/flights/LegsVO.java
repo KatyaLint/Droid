@@ -187,4 +187,12 @@ public class LegsVO {
     public void setmParentguid(String mParentguid) {
         this.mParentguid = mParentguid;
     }
+
+    public String getmGuid() {
+        return mGuid;
+    }
+
+    public void setmGuid(String mGuid) {
+        this.mGuid = mGuid;
+    }
 }

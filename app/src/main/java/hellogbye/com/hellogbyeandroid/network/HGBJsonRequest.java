@@ -175,8 +175,10 @@ public class HGBJsonRequest extends Request<String> {
         headers.put("Content-Type", "application/json; charset=utf-8");
         HGBPreferencesManager sharedPreferences = HGBPreferencesManager.getInstance(mContext);
         String token = sharedPreferences.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
+        Log.d("Token", token);
         if (!token.equals("")) {
             headers.put("Authorization", "Session " + token);
+            Log.d("Session: ", token);
         }
         return headers;
     }

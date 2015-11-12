@@ -31,6 +31,7 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.AccountSettingsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.fragments.AlternativeFlightsDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
@@ -45,7 +46,7 @@ import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserData;
-import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private ImageButton imageButton;
     private ArrayList<CNCItem> mCNCItems;
     private UserTravelVO mUserTravelOrder;
-    private List<AlternativeFlightsVO> alternativeFlights;
+    private List<NodesVO> alternativeFlights;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     protected OnBackPressedListener onBackPressedListener;
@@ -288,6 +289,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         // update the main content by replacing fragments
         Fragment fragment = null;
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
+        boolean stashToBack = true;
         int navPosition = position;//navBar.getNavNumber();
         switch (navBar) {
             case HOME:
@@ -317,16 +319,23 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 fragment = ItineraryFragment.newInstance(navPosition);
                 break;
             case ALTERNATIVE_FLIGHT:
-                fragment = AlternativeFlightsDetailsFragment.newInstance(navPosition);
+                fragment = AlternativeFlightFragment.newInstance(navPosition);
+                stashToBack = false;
                 break;
             case HOTEL:
                 fragment = HotelFragment.newInstance(navPosition);
                 break;
+            case ALTERNATIVE_FLIGHT_DETAILS:
+                fragment = AlternativeFlightsDetailsFragment.newInstance(navPosition);
+                stashToBack = false;
+                break;
+
+
 
 
         }
 
-        HGBUtility.goToNextFragmentIsAddToBackStack(this, fragment, true);
+        HGBUtility.goToNextFragmentIsAddToBackStack(this, fragment, stashToBack);
         mToolbar.initToolBarItems();
         mToolbar.updateToolBarView(position);
         mDrawerLayout.closeDrawer(mNavDrawerLinearLayout);
@@ -434,7 +443,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
-    public void setAlternativeFlights(List<AlternativeFlightsVO> alternativeFlightsVO) {
+    public void setAlternativeFlights(List<NodesVO> alternativeFlightsVO) {
         this.alternativeFlights = alternativeFlightsVO;
     }
 
@@ -450,7 +459,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
-    public List<AlternativeFlightsVO> getAlternativeFlights() {
+    public List<NodesVO> getAlternativeFlights() {
         return alternativeFlights;
     }
 

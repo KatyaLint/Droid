@@ -1,8 +1,12 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
 import android.app.Activity;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -12,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
@@ -22,7 +27,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 /**
  * Created by nyawka on 10/19/15.
  */
-public class FlightGridMainFragment extends HGBAbtsractFragment {
+public class FlightGridMainFragment {
 
     private ItineraryFragment.TravelerShowChoose itemSelected;
     private TextView[] gridDateHotel;
@@ -50,7 +55,7 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
     private Activity activity;
     private TableLayout table;
 
-    private static int MAXIMUM_ROW_NUMBER = 7;
+    private static int MAXIMUM_ROW_NUMBER = 5;
     private static int MAXIMUM_COL_NUMBER = 3;
     private int maxRowNumber;
     private int realRowNumber;
@@ -58,18 +63,17 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
     private int columnNumber;
 
 
-    public View createGridView(Activity activity,View rootView, UserTravelVO userTravelVO,  LayoutInflater inflater
-                               ){
-        table = (TableLayout)rootView.findViewById(R.id.tlGridTable);
 
-        stickyHeader = (TableLayout)rootView.findViewById(R.id.stickyHeader);
+
+    public void createGridView(Activity activity,View rootView, UserTravelVO userTravelVO,  LayoutInflater inflater){
+        table = (TableLayout)rootView.findViewById(R.id.tlGridTable);
 
         this.inflater = inflater;
         this.activity = activity;
 
         createGridViewTable(userTravelVO);
 
-        return rootView;
+       // return rootView;
     }
 
     private void calculateNumberOfRowAndCol(){
@@ -108,7 +112,7 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
         ArrayList<PassengersVO> pass = passData.passangersVOs;
 
 
-         columnNumber = pass.size();//passengers.size();
+        columnNumber = pass.size();//passengers.size();
 
 
         setStickyHeaderData(passengers);
@@ -289,14 +293,9 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
             }
 
             stickyRow.addView(mainHeaderView[i]);
-            //tableStickyHeader
         }
-//        tableStickyHeader.addView(stickyRow);
 
-
-       // stickyHeader.addView(stickyRow);
         table.addView(stickyRow);
-
     }
 
 
@@ -325,7 +324,7 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
     EditText[] nodeGuIdNumberFlight;
 
     private void initializeFlightItems(int itemNumber){
-       linaerLayoutFlight = new LinearLayout[itemNumber];
+        linaerLayoutFlight = new LinearLayout[itemNumber];
         grid_flight_destination_from = new TextView[itemNumber];
         grid_flight_destination_to = new TextView[itemNumber];
         grid_traveler_flight_price  = new TextView[itemNumber];
@@ -335,8 +334,8 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
         gridMonth = new TextView[itemNumber];
         gridDate = new TextView[itemNumber];
         nodeGuIdNumberFlight = new EditText[itemNumber];
-       row = new TableRow[itemNumber];
-       childFlight = new View[itemNumber];
+        row = new TableRow[itemNumber];
+        childFlight = new View[itemNumber];
         linarLayoutDate = new LinearLayout[itemNumber];
         grid_flight_square_ll = new LinearLayout[itemNumber];
     }
@@ -360,18 +359,14 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
         linaerLayoutFlight[counter] = (LinearLayout) childFlight[counter].findViewById(R.id.grid_squer);
         linarLayoutDate[counter] = (LinearLayout) childFlight[counter].findViewById(R.id.grid_date_ll);
 
-
-
         grid_flight_square_ll[counter] = (LinearLayout) childFlight[counter].findViewById(R.id.grid_flight_square_ll);
         grid_flight_square_ll[counter].setBackgroundResource(R.drawable.rounded_corner);
 
 
         if(colomnNumber%2 == 0){ //even colum lightgray color
-
             linaerLayoutFlight[counter].setBackgroundColor(activity.getResources().getColor(R.color.odd_grey));
         }else{ //odd colomn dark_gray color
             linaerLayoutFlight[counter].setBackgroundColor(activity.getResources().getColor(R.color.grey_very_light));
-
         }
 
         childFlight[counter].setOnClickListener(itemClickListenerFlight);
@@ -446,14 +441,7 @@ public class FlightGridMainFragment extends HGBAbtsractFragment {
 
 
         childHotel[counter].setOnClickListener(itemClickListenerHotel);
-
     }
-
-
-
-
-
-
 
     private void initializeEmptyItems(int itemNumber) {
         childEmptyView=  new View[itemNumber];
@@ -475,7 +463,6 @@ private void initializeEmptyGridItems(int counter, int colomnNumber){
     linarLayoutDateEmpty[counter] = (LinearLayout)childEmptyView[counter].findViewById(R.id.grid_date_ll_empty);
 
     if(colomnNumber%2 == 0){ //even colum lightgray color
-
         white_squer_ll[counter].setBackgroundColor(activity.getResources().getColor(R.color.odd_grey));
         linaerLayoutEmpty[counter].setBackgroundColor(activity.getResources().getColor(R.color.odd_grey));
     }else{ //odd colomn dark_gray color
@@ -485,42 +472,33 @@ private void initializeEmptyGridItems(int counter, int colomnNumber){
 }
 
 
-    ArrayList<NodesVO> nodesTemp = new ArrayList<NodesVO>();
-
-
-    private int getMaxmimuRowNumber(ArrayList<PassengersVO> passengers){
-
-        for(PassengersVO passanger:passengers) {
-            ArrayList<CellsVO> cells = passanger.getmCells();
-
-            for (int i = 0; i < cells.size(); i++) {
-                CellsVO cell = cells.get(i);
-                ArrayList<NodesVO> nodes = cell.getmNodes();
-
-                if (nodes.size() == 0) {
-                    NodesVO demoNode = new NodesVO();
-                    demoNode.setDateOfCell(cell.getmDate());
-                    demoNode.setEmpty(true);
-                    nodesTemp.add(demoNode);
-                }else{
-                    for (int j = 0; j < nodes.size(); j++) {
-                        nodesTemp.add(nodes.get(j));
-                    }
+    private class LongOperation extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            for(int i=0;i<5;i++) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
             }
+        //    TextView txt = (TextView) findViewById(R.id.output);
+      //      txt.setText("Executed");
+            return null;
         }
 
+        @Override
+        protected void onPostExecute(String result) {
+        }
 
-        return nodesTemp.size();
-    }
+        @Override
+        protected void onPreExecute() {
+        }
 
-
-
-    public UserTravelVO getAirplaneDataVO() {
-        return airplaneDataVO;
-    }
-
-    public void setAirplaneDataVO(UserTravelVO airplaneDataVO) {
-        this.airplaneDataVO = airplaneDataVO;
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
     }
 }
+

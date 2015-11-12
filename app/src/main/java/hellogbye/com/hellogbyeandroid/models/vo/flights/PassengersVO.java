@@ -79,5 +79,10 @@ public class PassengersVO {
     }
 
 
+    public void clearData(){
+        hashMap.clear();
+        passengerNodes.clear();
+    }
+
 
 }

@@ -1,6 +1,7 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +18,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.FlightAdapter;
 
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -37,6 +40,8 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
     private ArrayList<AlternativeFlightsVO> airplaneDataVO;
     private UserTravelVO userOrder;
     private Button showAlternativeFlight;
+    private NodesVO nodeFromAlternative;
+    
 
     public AlternativeFlightFragment() {
         // Empty constructor required for fragment subclasses
@@ -50,21 +55,10 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        userOrder = getActivityInterface().getTravelOrder();
-        conectionRequest();
-    }
 
 
+    private void conectionRequest(NodesVO currentNode){
 
-    private NodesVO currentNode;
-    private void conectionRequest(){
-
-
-        currentNode = getLegWithGuid(userOrder);
 
 
         String solutionID =getActivityInterface().getSolutionID();
@@ -80,12 +74,12 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
-                    Type listType = new TypeToken<List<AlternativeFlightsVO>>() {
+                    Type listType = new TypeToken<List<NodesVO>>() {
                     }.getType();
 
                     Gson gson = new Gson();
 
-                    List<AlternativeFlightsVO> alternativeFlightsVOs = gson.fromJson((String) data, listType);
+                    List<NodesVO> alternativeFlightsVOs = gson.fromJson((String) data, listType);
                     getActivityInterface().setAlternativeFlights(alternativeFlightsVOs);
                 }
 
@@ -99,35 +93,59 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
     }
 
 
+//    private onBackPressEvent(){
+//        ((MainActivity) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
+//            public void doBack() {
+//                if (mRecyclerView.getVisibility() != View.VISIBLE) {
+//                    if (getActivity() != null && getActivity().getFragmentManager() != null) {
+//                        FragmentManager fm = getActivity().getFragmentManager();
+//                        fm.popBackStack(HotelFragment.class.toString(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//                    }
+//                } else {
+//                    hideAlternativeHotels();
+//                }
+//
+//            }
+//        });
+//    }
+
+   // private static NodesVO userFirstChoice;
+    private static String primaryGuid;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        //View rootView = inflater.inflate(R.layout.fragment_history_layout, container, false);
         View rootView = inflater.inflate(R.layout.flight_layout_details, container, false);
-
-
-//        UserTravelVO travelOrder = getActivityInterface().getTravelOrder();
-//        ArrayList<PassengersVO> passengers = travelOrder.getPassengerses();
-//        ArrayList<CellsVO> cells = passengers.get(0).getmCells();
-//        ArrayList<NodesVO> nodes = cells.get(0).getmNodes();
-//        ArrayList<LegsVO> legs = nodes.get(0).getLegs();
-
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.flightRecyclerView);
+        recyclerView.removeAllViews();
+        recyclerView.removeAllViewsInLayout();
+        boolean isMyFlight = true;
 
-       // ArrayList<AlternativeFlightsVO> alternativeFlights = parseFlight();
-//        ArrayList<LegsVO> legsFlights = alternativeFlights.get(0).getLegs(); //TODO change
-//        AlternativeFlightsVO currentFlightToShow = alternativeFlights.get(0);
-        ArrayList<LegsVO> legsFlights =  currentNode.getLegs();// legs; //TODO change
-        NodesVO currentFlightToShow = currentNode;
+        final NodesVO currentNode;
+        List<NodesVO> alternativeFlights = getActivityInterface().getAlternativeFlights();
+        if (alternativeFlights != null) {
+            currentNode = getNodeFromAlternative(alternativeFlights);
+            primaryGuid = currentNode.getmPrimaryguid();
+            isMyFlight = false;
+        }else {
+            userOrder = getActivityInterface().getTravelOrder();
+            currentNode = getLegWithGuid(userOrder);
+       //     userFirstChoice = currentNode;
+        }
+
+
+
+       // NodesVO currentFlightToShow = currentNode;
         String allFlights = "";
+
+        ArrayList<LegsVO> legsFlights = currentNode.getLegs();// legs; //TODO change
 
         for (int i = 0; i < legsFlights.size(); i++) {
             LegsVO leg = legsFlights.get(i);
-            if(leg.getmType().equals("Leg")) {
+            if (leg.getmType().equals("Leg")) {
                 if (i == legsFlights.size() - 1) {
-                    allFlights = allFlights + leg.getmOrigin() + " - " +leg.getmDestination();
-                }else {
+                    allFlights = allFlights + leg.getmOrigin() + " - " + leg.getmDestination();
+                } else {
                     allFlights = allFlights + leg.getmOrigin() + " - ";
                 }
             }
@@ -137,30 +155,82 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
         // 2. set layoutManger
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         // 3. create an adapter
-        FlightAdapter mAdapter = new FlightAdapter(getActivity(),legsFlights);
+        FlightAdapter mAdapter = new FlightAdapter(currentNode,legsFlights, isMyFlight);
         // 4. set adapter
         recyclerView.setAdapter(mAdapter);
         // 5. set item animator to DefaultAnimator
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        mAdapter.setFlightCost(currentFlightToShow.getCost());
+      //  recyclerView.setItemAnimator(new DefaultItemAnimator());
+        mAdapter.setFlightCost(currentNode.getCost());
         mAdapter.setDestinationFlights(allFlights);
         mAdapter.setButtonListener(new AlternativeButtonCB() {
             @Override
             public void showAlternative() {
 //                AlternativeFlightsDetailsFragment fragemnt = new AlternativeFlightsDetailsFragment();
 //                HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack
-                getActivityInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber());
+                getActivityInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_DETAILS.getNavNumber());
+            }
+
+            @Override
+            public void selectCurrentFlight(String guidSelected) {
+                sendServerNewHotelOrder(guidSelected);
             }
         });
 
+
+
+
+
+
+        // TODO empty alternative flight after select clicked
+
+
+        conectionRequest(currentNode);
 
         return rootView;
     }
 
 
+    private void sendServerNewHotelOrder(String guiSelected) {
+
+        ConnectionManager.getInstance(getActivity()).putFlight(getActivityInterface().getTravelOrder().getmSolutionID(),
+                getTravellerWitGuid(getActivityInterface().getTravelOrder()).getmPaxguid(),
+                guiSelected,primaryGuid,
+                new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        getActivityInterface().callRefreshItinerary();
+                        //TODO clean nodeVO, go to iternarary screen
+
+
+                    }
+
+                    @Override
+                    public void onError(Object data) {
+                        HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.show(getFragmentManager(), (String) data);
+                    }
+                });
+    }
+
+
+    public NodesVO getNodeFromAlternative(List<NodesVO> alternativeFlights) {
+
+        String selectedGuid = getSelectedGuid();
+        for(NodesVO nodeVO:alternativeFlights){
+            if(selectedGuid.equals(nodeVO.getmGuid())){
+                return nodeVO;
+            }
+        }
+
+        return null;
+    }
+
 
     public interface AlternativeButtonCB{
         void showAlternative();
+        void selectCurrentFlight( String guid);
     }
+
+
 
 }

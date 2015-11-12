@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,6 +17,8 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
+import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by nyawka on 10/7/15.
@@ -26,10 +29,11 @@ public class FlightAdapter extends  RecyclerView.Adapter<FlightAdapter.ViewHolde
     private  ArrayList<LegsVO> itemsData;
     private double flightCost;
     private String destinationFlights;
+    private boolean mIsMyFlight;
 
-
-    public FlightAdapter(Context context, ArrayList<LegsVO>  itemsData) {
+    public FlightAdapter(NodesVO currentNode, ArrayList<LegsVO>  itemsData, boolean isMyFlight) {
         this.itemsData = itemsData;
+        this.mIsMyFlight = isMyFlight;
     }
 
     @Override
@@ -75,6 +79,19 @@ public class FlightAdapter extends  RecyclerView.Adapter<FlightAdapter.ViewHolde
 
             viewHolder.includeAirplaneDetails.setVisibility(View.GONE);
         }
+
+        if(mIsMyFlight){
+            viewHolder.image_my_flight.setVisibility(View.VISIBLE);
+            viewHolder.text_my_flight.setVisibility(View.VISIBLE);
+            viewHolder.select_flight.setVisibility(View.GONE);
+
+        }else{
+            viewHolder.image_my_flight.setVisibility(View.GONE);
+            viewHolder.text_my_flight.setVisibility(View.GONE);
+            viewHolder.select_flight.setVisibility(View.VISIBLE);
+        }
+
+        viewHolder.select_flight.setTag(legFlightVO.getmGuid());
     }
 
     @Override
@@ -105,30 +122,32 @@ public class FlightAdapter extends  RecyclerView.Adapter<FlightAdapter.ViewHolde
     }
 
     // inner class to hold a reference to each item of RecyclerView
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public  class ViewHolder extends RecyclerView.ViewHolder {
 
         public  Button show_alternative_flights;
         public  View flight_ticket_details_layout;
-        public TextView operatorName;
-        public  TextView flightNumber;
-        public TextView flight_airport_text ;
-        public TextView flight_boarding_text;
-        public TextView flight_duration_text;
-        public TextView flight_class_text;
-        public  TextView flight_meal_text;
-        public TextView flight_aircraft_text;
-        public TextView flight_baggage_text;
-        public TextView flight_seat_selection_text;
-        public TextView stop_over_txt;
-        public TextView stop_over_time;
+        public FontTextView operatorName;
+        public  FontTextView flightNumber;
+        public FontTextView flight_airport_text ;
+        public FontTextView flight_boarding_text;
+        public FontTextView flight_duration_text;
+        public FontTextView flight_class_text;
+        public FontTextView flight_meal_text;
+        public FontTextView flight_aircraft_text;
+        public FontTextView flight_baggage_text;
+        public FontTextView flight_seat_selection_text;
+        public FontTextView stop_over_txt;
+        public FontTextView stop_over_time;
 
         public View includeAirplaneDetails;
         public View stop_over_include_layout;
 
-        public TextView flight_direction;
-        public TextView flight_cost;
+        public FontTextView flight_direction;
+        public FontTextView flight_cost;
 
-
+        private ImageView image_my_flight;
+        private FontTextView text_my_flight;
+        private FontTextView select_flight;
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
@@ -144,43 +163,57 @@ public class FlightAdapter extends  RecyclerView.Adapter<FlightAdapter.ViewHolde
                 }
             });
 
+
+            select_flight.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    String guid = view.getTag().toString();
+                    alternativeButtonCB.selectCurrentFlight(guid);
+                }
+            });
+
         }
 
 
 
+        private void initializeSelecteOrMyFlight(View mainView){
+            image_my_flight = (ImageView)mainView.findViewById(R.id.image_my_flight);
+            text_my_flight = (FontTextView)mainView.findViewById(R.id.text_my_flight);
+            select_flight = (FontTextView)mainView.findViewById(R.id.select_flight);
+        }
+
         private void flightMainCostInitialization(View mainView){
             flight_ticket_details_layout = mainView.findViewById(R.id.flight_ticket_details_layout);
-            flight_direction = (TextView)flight_ticket_details_layout.findViewById(R.id.flight_direction);
-
-           flight_cost = (TextView)flight_ticket_details_layout.findViewById(R.id.flight_cost);
-
+            flight_direction = (FontTextView)flight_ticket_details_layout.findViewById(R.id.flight_direction);
+            flight_cost = (FontTextView)flight_ticket_details_layout.findViewById(R.id.flight_cost);
+            initializeSelecteOrMyFlight(flight_ticket_details_layout);
         }
 
 
         private void stopOverInitialization(View mainView){
-             stop_over_include_layout = mainView.findViewById(R.id.stop_over_include_layout);
-            stop_over_txt = (TextView)stop_over_include_layout.findViewById(R.id.stop_over_txt);
-            stop_over_time = (TextView)stop_over_include_layout.findViewById(R.id.stop_over_time);
+            stop_over_include_layout = mainView.findViewById(R.id.stop_over_include_layout);
+            stop_over_txt = (FontTextView)stop_over_include_layout.findViewById(R.id.stop_over_txt);
+            stop_over_time = (FontTextView)stop_over_include_layout.findViewById(R.id.stop_over_time);
         }
 
 
         private void initializeAirplaneDetails(View itemLayoutView){
-              includeAirplaneDetails = itemLayoutView.findViewById(R.id.airplane_details_layout);
-            operatorName = (TextView)includeAirplaneDetails.findViewById(R.id.operated_by_text);
-            flightNumber = (TextView)includeAirplaneDetails.findViewById(R.id.flight_number_text);
-             flight_airport_text = (TextView)includeAirplaneDetails.findViewById(R.id.flight_airport_text);
-             flight_boarding_text = (TextView)includeAirplaneDetails.findViewById(R.id.flight_boarding_text);
-             flight_duration_text = (TextView)includeAirplaneDetails.findViewById(R.id.flight_duration_text);
-             flight_class_text = (TextView)includeAirplaneDetails.findViewById(R.id.flight_class_text);
-             flight_meal_text = (TextView)includeAirplaneDetails.findViewById(R.id.flight_meal_text);
+             includeAirplaneDetails = itemLayoutView.findViewById(R.id.airplane_details_layout);
+            operatorName = (FontTextView)includeAirplaneDetails.findViewById(R.id.operated_by_text);
+            flightNumber = (FontTextView)includeAirplaneDetails.findViewById(R.id.flight_number_text);
+             flight_airport_text = (FontTextView)includeAirplaneDetails.findViewById(R.id.flight_airport_text);
+             flight_boarding_text = (FontTextView)includeAirplaneDetails.findViewById(R.id.flight_boarding_text);
+             flight_duration_text = (FontTextView)includeAirplaneDetails.findViewById(R.id.flight_duration_text);
+             flight_class_text = (FontTextView)includeAirplaneDetails.findViewById(R.id.flight_class_text);
+             flight_meal_text = (FontTextView)includeAirplaneDetails.findViewById(R.id.flight_meal_text);
             // flight_meal_text.setText(legFlightVO.getmFareClass());
 
-             flight_aircraft_text = (TextView)includeAirplaneDetails.findViewById(R.id.flight_aircraft_text);
+             flight_aircraft_text = (FontTextView)includeAirplaneDetails.findViewById(R.id.flight_aircraft_text);
             //flight_aircraft_text.setText(legFlightVO.getmFareClass());
 
-             flight_baggage_text = (TextView)includeAirplaneDetails.findViewById(R.id.flight_baggage_text);
+             flight_baggage_text = (FontTextView)includeAirplaneDetails.findViewById(R.id.flight_baggage_text);
 
-             flight_seat_selection_text = (TextView)includeAirplaneDetails.findViewById(R.id.flight_seat_selection_text);
+             flight_seat_selection_text = (FontTextView)includeAirplaneDetails.findViewById(R.id.flight_seat_selection_text);
         }
 
     }

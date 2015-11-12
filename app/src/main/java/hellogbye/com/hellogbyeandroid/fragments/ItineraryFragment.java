@@ -2,13 +2,15 @@ package hellogbye.com.hellogbyeandroid.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 
@@ -42,30 +44,48 @@ public class ItineraryFragment extends HGBAbtsractFragment {
 
 
         View rootView = inflater.inflate(R.layout.grid_view_table_main_layoutl, container, false);
+
+
         FlightGridMainFragment flightGridMainFragment = new FlightGridMainFragment();
+
+
         flightGridMainFragment.initializeCB(new TravelerShowChoose() {
             @Override
             public void itemSelected(String guidSelectedItem, String itemType, String guidSelectedUser) {
                 if (itemType.equals("flight")) {
                     Fragment fragment = new AlternativeFlightFragment();
-                    ((AlternativeFlightFragment) fragment).selectedItemFromGrid(guidSelectedItem,guidSelectedUser);
+                    ((AlternativeFlightFragment) fragment).selectedItemGuidNumber(guidSelectedItem);
+                    ((AlternativeFlightFragment) fragment).selectedUserGuidNumber(guidSelectedUser);
                     // HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragment, true);
                     getActivityInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber());
                 } else if (itemType.equals("hotel")) {
                     Fragment fragment = new HotelFragment();
-                    ((HotelFragment) fragment).selectedItemFromGrid(guidSelectedItem,guidSelectedUser);
+                    ((HotelFragment) fragment).selectedItemGuidNumber(guidSelectedItem);
+                    ((HotelFragment) fragment).selectedUserGuidNumber(guidSelectedUser);
                     getActivityInterface().goToFragment(ToolBarNavEnum.HOTEL.getNavNumber());
                 }
             }
         });
 
+
         userOrder = getActivityInterface().getTravelOrder();
+
         if (userOrder != null) {
-            rootView = flightGridMainFragment.createGridView(getActivity(), rootView, userOrder, inflater);
+           flightGridMainFragment.createGridView(getActivity(), rootView, userOrder, inflater);
         }
+
         getActivityInterface().getToolBar().updateToolBarView(ToolBarNavEnum.ITINARERY.getNavNumber());
         return rootView;
-
     }
 
+
+    @Override
+    public void onDestroyView() {
+        userOrder = getActivityInterface().getTravelOrder();
+        ArrayList<PassengersVO> passangers = userOrder.getPassengerses();
+        for(PassengersVO passanger:passangers){
+            passanger.clearData();
+        }
+        super.onDestroyView();
+    }
 }

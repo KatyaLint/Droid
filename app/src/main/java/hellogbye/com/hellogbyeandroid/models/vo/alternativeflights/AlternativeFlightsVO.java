@@ -168,4 +168,12 @@ public class AlternativeFlightsVO {
     public void setmOperator(String mOperator) {
         this.mOperator = mOperator;
     }
+
+    public String getmGuid() {
+        return mGuid;
+    }
+
+    public void setmGuid(String mGuid) {
+        this.mGuid = mGuid;
+    }
 }

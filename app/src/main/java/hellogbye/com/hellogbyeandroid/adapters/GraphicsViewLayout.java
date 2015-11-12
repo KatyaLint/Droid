@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 
 /**
  * Created by nyawka on 10/8/15.
@@ -46,7 +47,7 @@ public class GraphicsViewLayout extends View {
     }
 
 
-    public void drawAlternativeFlights( AlternativeFlightsVO alternativeFlightsVO ){
+    public void drawAlternativeFlights( NodesVO alternativeFlightsVO ){
         setupPaint();
         legs = alternativeFlightsVO.getLegs();
         initialize();

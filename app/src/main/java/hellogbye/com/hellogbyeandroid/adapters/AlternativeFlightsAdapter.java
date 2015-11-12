@@ -1,21 +1,22 @@
 package hellogbye.com.hellogbyeandroid.adapters;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
+
+import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 
 /**
  * Created by nyawka on 10/7/15.
@@ -23,9 +24,10 @@ import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFl
 public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<AlternativeFlightsAdapter.ViewHolder> {
 
 
-    private  List<AlternativeFlightsVO> itemsData;
+    private  List<NodesVO> itemsData;
 
-    public AlternativeFlightsAdapter(Context context,  List<AlternativeFlightsVO> itemsData) {
+    private OnItemClickListener mItemClickListener;
+    public AlternativeFlightsAdapter(List<NodesVO> itemsData) {
         this.itemsData = itemsData;
 
     }
@@ -49,7 +51,7 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
         if(position == getItemCount()){
             viewHolder.viewDivider.setVisibility(View.GONE);
         }
-        AlternativeFlightsVO itemData = itemsData.get(position);
+        NodesVO itemData = itemsData.get(position);
         viewHolder.view.drawAlternativeFlights(itemData);
        // String startTime = itemData.getmDepartureTime().split(" ",2)[0];
         viewHolder.txtStartTime.setText(itemData.getmDepartureTime());
@@ -59,6 +61,9 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
         viewHolder.txtTravelTime.setText(itemData.getmTravelTime());
 
         viewHolder.txtTravelCost.setText("$"+itemData.getCost());
+        viewHolder.txtTravelCost.setTag(itemData.getmGuid());
+
+      //  viewHolder.mainRelativeItem.setOnClickListener(clickListener);
     }
 
     @Override
@@ -66,8 +71,10 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
         return (null != itemsData ? itemsData.size() : 0);
     }
 
+
+
     // inner class to hold a reference to each item of RecyclerView
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView txtStartTime;
         public TextView txtEndTime;
@@ -75,18 +82,41 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
         public TextView txtTravelCost;
         public GraphicsViewLayout view;
         public View viewDivider;
+        private RelativeLayout mainRelativeItem;
+        private TextView alternative_flight_guid;
 
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
+            alternative_flight_guid = (TextView)itemLayoutView.findViewById(R.id.alternative_flight_guid);
+            mainRelativeItem = (RelativeLayout)itemLayoutView.findViewById(R.id.alternate_flight_item_rl);
             txtStartTime = (TextView) itemLayoutView.findViewById(R.id.startTime);
             txtEndTime = (TextView) itemLayoutView.findViewById(R.id.endTime);
             txtTravelTime = (TextView) itemLayoutView.findViewById(R.id.travelTime);
             view = (GraphicsViewLayout)itemLayoutView.findViewById(R.id.view);
             viewDivider = (View)itemLayoutView.findViewById(R.id.alternative_list_divider);
             txtTravelCost = (TextView)itemLayoutView.findViewById(R.id.alternative_flight_price);
+            itemLayoutView.setOnClickListener(this);
         }
+
+
+        @Override
+        public void onClick(View v) {
+            View root = v.getRootView();
+            TextView textView = (TextView)v.findViewById(R.id.alternative_flight_price);
+            mItemClickListener.onItemClick(textView.getTag().toString());
+        }
+
     }
 
+
+
+    public interface OnItemClickListener {
+        public void onItemClick(String guid);
+    }
+
+    public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
+    }
 
 }

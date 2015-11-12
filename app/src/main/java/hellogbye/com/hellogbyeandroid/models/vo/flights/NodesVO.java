@@ -74,7 +74,7 @@ public class NodesVO implements Comparable<NodesVO>
     @SerializedName("primaryguid")
     private String mPrimaryguid;
     @SerializedName("normalizedduration")
-    private int mNormalizedDuration;
+    private double mNormalizedDuration;
 
 
 
@@ -470,5 +470,29 @@ public class NodesVO implements Comparable<NodesVO>
 
     public void setmSkip(boolean mSkip) {
         this.mSkip = mSkip;
+    }
+
+    public String getmArrivalTime() {
+        return mArrivalTime;
+    }
+
+    public void setmArrivalTime(String mArrivalTime) {
+        this.mArrivalTime = mArrivalTime;
+    }
+
+    public String getmTravelTime() {
+        return mTravelTime;
+    }
+
+    public void setmTravelTime(String mTravelTime) {
+        this.mTravelTime = mTravelTime;
+    }
+
+    public String getmPrimaryguid() {
+        return mPrimaryguid;
+    }
+
+    public void setmPrimaryguid(String mPrimaryguid) {
+        this.mPrimaryguid = mPrimaryguid;
     }
 }

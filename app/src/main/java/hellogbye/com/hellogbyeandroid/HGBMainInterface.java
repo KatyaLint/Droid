@@ -7,6 +7,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 
@@ -27,13 +28,13 @@ public interface HGBMainInterface {
 
     String getSolutionID();
 
-    void setAlternativeFlights(List<AlternativeFlightsVO> alternativeFlightsVO);
+    void setAlternativeFlights(List<NodesVO> alternativeFlightsVO);
 
     UserTravelVO getTravelOrder();
 
     ArrayList<CNCItem> getCNCItems();
 
-    List<AlternativeFlightsVO> getAlternativeFlights();
+    List<NodesVO> getAlternativeFlights();
 
     void addCNCItem(CNCItem cncitem);
 
