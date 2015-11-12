@@ -90,8 +90,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
 
         //check if we have travelitinery in db
-        String strTravel =hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO,"");
-        if(!"".equals(strTravel)){
+        String strTravel = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO, "");
+        if (!"".equals(strTravel)) {
             UserTravelVO userTravelVO = (UserTravelVO) Parser.parseAirplaneData(strTravel);
             setTravelOrder(userTravelVO);
         }
@@ -118,10 +118,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mDrawerList.setAdapter(mAdapter);
 
         mToolbar = (CostumeToolBar) findViewById(R.id.toolbar_costume);
-
-
-
-
 
 
         initToolBar();
@@ -200,7 +196,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mDrawerToggle.syncState();
 
 
-
         //HGBUtility.loadHotelImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
         selectItem(ToolBarNavEnum.HOME.getNavNumber());
 
@@ -210,6 +205,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         setCNCItems(null);
         setTravelOrder(null);
+        hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
+        hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
         Fragment currentFragment = getFragmentManager().findFragmentByTag(CNCFragment.class.toString());
         ((CNCFragment) currentFragment).initList();
     }
@@ -425,7 +422,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             setSolutionID(mUserTravelOrder.getmSolutionID());
             Gson gson = new Gson();
             String json = gson.toJson(travelorder);
-            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO,json);
+            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO, json);
         }
 
     }
@@ -469,7 +466,13 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public void addCNCItem(CNCItem cncitem) {
 
+        if(mCNCItems == null ){
+            mCNCItems = new ArrayList<>();
+        }
+
         mCNCItems.add(cncitem);
+
+
     }
 
     @Override
@@ -506,7 +509,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         if (requestCode == 0 && resultCode == RESULT_OK) {
             ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
-         //   String fragmentTag = getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1).getName();
+            //   String fragmentTag = getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1).getName();
             Fragment currentFragment = getFragmentManager().findFragmentByTag(CNCFragment.class.toString());
             ((CNCFragment) currentFragment).handleMyMessage(matches.get(0));
 //            if (currentFragment instanceof CNCFragment) {
@@ -553,4 +556,18 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
+        try {
+            Gson gsonback = new Gson();
+            String json = gsonback.toJson(mCNCItems);
+            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, json);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
