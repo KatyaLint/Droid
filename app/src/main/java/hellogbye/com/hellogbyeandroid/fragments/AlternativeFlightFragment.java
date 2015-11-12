@@ -73,6 +73,8 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
         ConnectionManager.getInstance(getActivity()).getAlternateFlightsForFlight(solutionID, paxId, flightID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
+
+                //TODO this needs to be done in parser not on main UI THREAD!!
                 if (data != null) {
                     Type listType = new TypeToken<List<NodesVO>>() {
                     }.getType();
@@ -126,6 +128,7 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
         if (alternativeFlights != null) {
             currentNode = getNodeFromAlternative(alternativeFlights);
             primaryGuid = currentNode.getmPrimaryguid();
+
             isMyFlight = false;
         }else {
             userOrder = getActivityInterface().getTravelOrder();
@@ -183,8 +186,9 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
 
         // TODO empty alternative flight after select clicked
 
-
-        conectionRequest(currentNode);
+        if(isMyFlight){
+            conectionRequest(currentNode);
+        }
 
         return rootView;
     }
@@ -194,7 +198,7 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
 
         ConnectionManager.getInstance(getActivity()).putFlight(getActivityInterface().getTravelOrder().getmSolutionID(),
                 getTravellerWitGuid(getActivityInterface().getTravelOrder()).getmPaxguid(),
-                guiSelected,primaryGuid,
+                primaryGuid,guiSelected,
                 new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {

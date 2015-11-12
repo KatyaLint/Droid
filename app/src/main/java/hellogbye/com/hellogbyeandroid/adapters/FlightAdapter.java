@@ -91,7 +91,7 @@ public class FlightAdapter extends  RecyclerView.Adapter<FlightAdapter.ViewHolde
             viewHolder.select_flight.setVisibility(View.VISIBLE);
         }
 
-        viewHolder.select_flight.setTag(legFlightVO.getmGuid());
+        viewHolder.select_flight.setTag(legFlightVO.getmParentguid());
     }
 
     @Override

@@ -506,7 +506,7 @@ public class ConnectionManager {
             public void onResponse(String response) {
                 listener.onSuccess(response);
             }
-        }, new Response.ErrorListener() {
+        },  new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 listener.onError(Parser.parseErrorMessage(error));
