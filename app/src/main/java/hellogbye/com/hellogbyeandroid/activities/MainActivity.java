@@ -22,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,7 @@ import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.network.Parser;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.SpeechRecognitionUtil;
@@ -86,6 +88,13 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         setContentView(R.layout.main_activity_layout);
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
+
+        //check if we have travelitinery in db
+        String strTravel =hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO,"");
+        if(!"".equals(strTravel)){
+            UserTravelVO userTravelVO = (UserTravelVO) Parser.parseAirplaneData(strTravel);
+            setTravelOrder(userTravelVO);
+        }
 
 
         mTitle = mDrawerTitle = getTitle();
@@ -414,6 +423,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             setSolutionID(null);
         } else {
             setSolutionID(mUserTravelOrder.getmSolutionID());
+            Gson gson = new Gson();
+            String json = gson.toJson(travelorder);
+            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO,json);
         }
 
     }
@@ -494,12 +506,12 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         if (requestCode == 0 && resultCode == RESULT_OK) {
             ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
-            String fragmentTag = getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1).getName();
-            Fragment currentFragment = getFragmentManager().findFragmentByTag(fragmentTag);
-
-            if (currentFragment instanceof CNCFragment) {
-                ((CNCFragment) currentFragment).handleMyMessage(matches.get(0));
-            }
+         //   String fragmentTag = getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1).getName();
+            Fragment currentFragment = getFragmentManager().findFragmentByTag(CNCFragment.class.toString());
+            ((CNCFragment) currentFragment).handleMyMessage(matches.get(0));
+//            if (currentFragment instanceof CNCFragment) {
+//                ((CNCFragment) currentFragment).handleMyMessage(matches.get(0));
+//            }
 //            HomeFragment fragment = (HomeFragment) getFragmentManager().findFragmentByTag(HomeFragment.class.toString());
 //            if (fragment != null) {
 //                fragment.handleClick(matches.get(0));

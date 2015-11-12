@@ -38,7 +38,6 @@
                 android:gravity="center_vertical"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
-                android:text="Fly to New York for 4 day"
                 android:hint="@string/type_message"
                 android:minHeight="40dp" />
 

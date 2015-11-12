@@ -47,6 +47,7 @@ import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.AllImagesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
@@ -103,8 +104,10 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
     private NodesVO nodesVO;
     private ArrayList<String> mListForGallery;
     private HashMap<Marker, NodesVO> nodeMarkerMap;
-
+    private PassengersVO passengersVO;
     private NodesVO currentSelectedNode;
+
+    private float PANEL_HIGHT = 0.4f;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new HotelFragment();
@@ -169,8 +172,10 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
 
     private void sendServerNewHotelOrder(NodesVO cnode) {
 
+
+
         ConnectionManager.getInstance(getActivity()).putAlternateHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
-                getActivityInterface().getTravelOrder().getPassengerses().get(0).getmPaxguid(),
+                passengersVO.getmPaxguid(),
                 nodesVO.getmCheckIn(), nodesVO.getmCheckOut(), cnode.getmGuid(),
                 new ConnectionManager.ServerRequestListener() {
                     @Override
@@ -179,15 +184,6 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
                         //GET ALL HOTEL NODES AND SET CURRENT ONE
                         nodesVO = currentSelectedNode;
                         //TODO set hotel locall and call server
-
-//                for (int i = 0; i < cellsVO.getmNodes().size(); i++) {
-//                    NodesVO node = cellsVO.getmNodes().get(i);
-//                    if (node.getmType().equals("hotel")) {
-//                        cellsVO.getmNodes().set(i, currentSelectedNode);
-//                    }
-//
-//                }
-
                         loadMap();
 
                         hideAlternativeHotels();
@@ -258,7 +254,7 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
 
         //GET ALL HOTEL NODES AND SET CURRENT ONE
         ConnectionManager.getInstance(getActivity()).getAlternateHotelsWithHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
-                getActivityInterface().getTravelOrder().getPassengerses().get(0).getmPaxguid(),
+              passengersVO.getmPaxguid(),
                 nodesVO.getmCheckIn(), nodesVO.getmCheckOut(), new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
@@ -361,6 +357,7 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
         //   mTravelDetails = getActivityInterface().getTravelOrder();
 //        passengersVO = mTravelDetails.getPassengerses().get(0);
 //        cellsVO = getCellWitGuid(getActivityInterface().getTravelOrder());  //passengersVO.getmCells().get(0);
+        passengersVO = getTravellerWitGuid(getActivityInterface().getTravelOrder());//cellsVO.getmNodes().get(1);
         nodesVO = getLegWithGuid(getActivityInterface().getTravelOrder());//cellsVO.getmNodes().get(1);
         currentSelectedNode = nodesVO;
     }
@@ -411,29 +408,25 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
 
     private void initSliderPanel() {
         mSlidingPanels.setCoveredFadeColor(Color.TRANSPARENT);
-        mSlidingPanels.setAnchorPoint(0.4f);
+        mSlidingPanels.setAnchorPoint(PANEL_HIGHT);
         mSlidingPanels.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
 
         mSlidingPanels.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
             @Override
             public void onPanelSlide(View panel, float slideOffset) {
-                Log.i(TAG, "onPanelSlide, offset " + slideOffset);
                 mPullDOwnRelativeLayout.setVisibility(View.GONE);
             }
 
             @Override
             public void onPanelCollapsed(View panel) {
-                Log.i(TAG, "onPanelCollapsed");
             }
 
             @Override
             public void onPanelExpanded(View panel) {
-                Log.i(TAG, "onPanelExpanded");
             }
 
             @Override
             public void onPanelAnchored(View panel) {
-                Log.i(TAG, "onPanelAnchored");
                 //          Log.i(TAG, "main height=" + mSlidingPanels.findViewById(R.id.main).getHeight());
             }
 
@@ -498,8 +491,6 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
             }
 
         }
-
-
     }
 
     private void setStarRating(float star) {
@@ -587,7 +578,7 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_selected_hotel_blue)));
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(currentHotelLatLon)      // Sets the center of the map to Mountain View
-                .zoom(13)                   // Sets the zoom
+                .zoom(20)                   // Sets the zoom
                 .bearing(90)                // Sets the orientation of the camera to east
                 .tilt(30)                   // Sets the tilt of the camera to 30 degrees
                 .build();                   // Creates a CameraPosition from the builder
