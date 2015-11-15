@@ -741,6 +741,7 @@ public class ConnectionManager {
     public void putFlight(String solutioid, String paxid, String bookedflight, String newflight, final ServerRequestListener listener) {
         String url = getURL(Services.USER_FLIGHT_SOLUTIONS);
         JSONObject jsonObjectWrapper = new JSONObject();
+
         try {
 
             JSONObject jsonObject = new JSONObject();

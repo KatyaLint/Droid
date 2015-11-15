@@ -180,7 +180,7 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
                 new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
-                        getActivityInterface().callRefreshItinerary();
+                        getActivityInterface().callRefreshItinerary(ToolBarNavEnum.HOTEL.getNavNumber());
                         //GET ALL HOTEL NODES AND SET CURRENT ONE
                         nodesVO = currentSelectedNode;
                         //TODO set hotel locall and call server

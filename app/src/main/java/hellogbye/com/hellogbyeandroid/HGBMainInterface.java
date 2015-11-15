@@ -38,9 +38,11 @@ public interface HGBMainInterface {
 
     void addCNCItem(CNCItem cncitem);
 
-    void callRefreshItinerary();
+    void callRefreshItinerary(final int fragment);
 
     CostumeToolBar getToolBar();
 
     void goToFragment(int fragment);
+
+    void continueFlow(int fragment);
 }

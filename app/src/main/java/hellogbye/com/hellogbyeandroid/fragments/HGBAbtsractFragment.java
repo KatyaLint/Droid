@@ -11,6 +11,7 @@ import org.apache.http.Header;
 
 import java.security.PrivateKey;
 import java.util.ArrayList;
+import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.HGBMainInterface;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
@@ -75,6 +76,18 @@ public class HGBAbtsractFragment extends Fragment {
             }
         }
 
+        return null;
+    }
+
+
+
+    public String getPrimaryGuid(String guiSelected, List<NodesVO> alternative){
+
+                for (NodesVO node: alternative){
+                    if(node.getmGuid().equals(guiSelected)){
+                        return node.getmPrimaryguid();
+                    }
+                }
         return null;
     }
 

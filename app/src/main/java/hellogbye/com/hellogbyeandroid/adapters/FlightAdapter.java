@@ -30,10 +30,16 @@ public class FlightAdapter extends  RecyclerView.Adapter<FlightAdapter.ViewHolde
     private double flightCost;
     private String destinationFlights;
     private boolean mIsMyFlight;
+    private boolean alternativeButtonDisable;
 
-    public FlightAdapter(NodesVO currentNode, ArrayList<LegsVO>  itemsData, boolean isMyFlight) {
+    public FlightAdapter(NodesVO currentNode, ArrayList<LegsVO>  itemsData) {
         this.itemsData = itemsData;
-        this.mIsMyFlight = isMyFlight;
+    }
+
+
+    public void updateMyFlight(boolean  mIsMyFlight){
+        this.mIsMyFlight = mIsMyFlight;
+      //  notifyDataSetChanged();
     }
 
     @Override
@@ -91,7 +97,15 @@ public class FlightAdapter extends  RecyclerView.Adapter<FlightAdapter.ViewHolde
             viewHolder.select_flight.setVisibility(View.VISIBLE);
         }
 
+      if(alternativeButtonDisable){
+          viewHolder.show_alternative_flights.setBackgroundColor(R.drawable.round_grey_button_shape);
+      }else{
+          viewHolder.show_alternative_flights.setBackgroundColor(R.drawable.round_azure_button_shape);
+
+      }
+
         viewHolder.select_flight.setTag(legFlightVO.getmParentguid());
+
     }
 
     @Override
@@ -119,6 +133,10 @@ public class FlightAdapter extends  RecyclerView.Adapter<FlightAdapter.ViewHolde
 
     public void setButtonListener(AlternativeFlightFragment.AlternativeButtonCB alternativeButtonCB){
         this.alternativeButtonCB = alternativeButtonCB;
+    }
+
+    public void setAlternativeButtonDisable(boolean alternativeButtonDisable) {
+        this.alternativeButtonDisable = alternativeButtonDisable;
     }
 
     // inner class to hold a reference to each item of RecyclerView

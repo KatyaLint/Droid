@@ -291,6 +291,16 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
+    @Override
+    public void continueFlow(int fragment) {
+
+        if(fragment == ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber()) {
+            selectItem(ToolBarNavEnum.ITINARERY.getNavNumber());
+        }
+    }
+
+
+
     public void selectItem(int position) {
         // update the main content by replacing fragments
         Fragment fragment = null;
@@ -485,12 +495,13 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
-    public void callRefreshItinerary() {
+    public void callRefreshItinerary(final int fragment) {
 
         ConnectionManager.getInstance(MainActivity.this).getItinerary(solutionID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 setTravelOrder((UserTravelVO) data);
+                continueFlow(fragment);
             }
 
             @Override
@@ -510,6 +521,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     public void goToFragment(int fragmentname) {
         selectItem(fragmentname);
     }
+
+
+
+
 
 
     @Override
