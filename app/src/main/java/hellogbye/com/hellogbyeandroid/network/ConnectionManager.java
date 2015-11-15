@@ -131,7 +131,7 @@ public class ConnectionManager {
                 jsonObject, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(response);
+                listener.onSuccess(Parser.loginData(response));
             }
         }, new Response.ErrorListener() {
             @Override

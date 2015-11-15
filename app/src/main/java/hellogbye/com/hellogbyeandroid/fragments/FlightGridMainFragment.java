@@ -124,8 +124,6 @@ public class FlightGridMainFragment {
         calculateNumberOfRowAndCol();
 
 
-
-
         for(int i=0;i < numberOfRow ;i++){  // row 16
 
             //  row[i] = new TableRow(activity);
@@ -498,6 +496,8 @@ private void initializeEmptyGridItems(int counter, int colomnNumber){
 
         @Override
         protected void onProgressUpdate(Void... values) {
+
+            
         }
     }
 }

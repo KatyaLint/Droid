@@ -75,10 +75,7 @@ public class LoginActivity extends FragmentActivity {
                 ConnectionManager.getInstance(LoginActivity.this).login(mEmailEditText.getText().toString(), mPasswordEditText.getText().toString(), new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
-                        Gson gson = new Gson();
-                        Type type = new TypeToken<UserLoginCredentials>() {
-                        }.getType();
-                        UserLoginCredentials user = gson.fromJson((String) data, type);
+                        UserLoginCredentials user = (UserLoginCredentials) data;
                         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
                         goToMainActivity();
 

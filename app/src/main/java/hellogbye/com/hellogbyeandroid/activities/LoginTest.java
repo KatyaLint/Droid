@@ -124,11 +124,11 @@ public class LoginTest extends ActionBarActivity {
                     @Override
                     public void onSuccess(Object data) {
 
-                        responceText.setText((String) data);
-                        Gson gson = new Gson();
-                        Type type = new TypeToken<UserLoginCredentials>() {
-                        }.getType();
-                        UserLoginCredentials user = gson.fromJson((String) data, type);
+//                        responceText.setText((String) data);
+//                        Gson gson = new Gson();
+//                        Type type = new TypeToken<UserLoginCredentials>() {
+//                        }.getType();
+                        UserLoginCredentials user = (UserLoginCredentials)data;
                         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
                         Log.d("LoginTest", user.toString());
                     }

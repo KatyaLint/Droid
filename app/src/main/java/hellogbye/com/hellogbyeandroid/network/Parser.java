@@ -16,9 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
+import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 
 public class Parser {
 
@@ -42,6 +44,17 @@ public class Parser {
                     return "NetworkError error ";
                 }
     }
+
+
+    public static Object loginData(String response){
+        Gson gson = new Gson();
+        Type type = new TypeToken<UserLoginCredentials>() {
+        }.getType();
+        UserLoginCredentials user = gson.fromJson((String) response, type);
+        return user;
+        //hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
+    }
+
 
 
     public static Object parseAirplaneData(String response) {
