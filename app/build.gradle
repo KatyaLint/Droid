@@ -39,11 +39,13 @@ android {
 
     productFlavors {
         dev {
-            applicationId "com.hellgbye.dev"
+            buildConfigField 'boolean', 'IS_DEV', 'true'
+            applicationId "com.hellogbye.dev"
             versionName "1.0-dev"
         }
         live {
-            applicationId "com.hellgbye"
+            buildConfigField 'boolean', 'IS_DEV', 'false'
+            applicationId "com.hellogbye"
             versionName "1.0"
 
         }
@@ -68,6 +70,7 @@ dependencies {
     compile 'com.sothree.slidinguppanel:library:3.2.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
     compile 'pl.tajchert:waitingdots:0.2.0'
+    compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
 
 
 }

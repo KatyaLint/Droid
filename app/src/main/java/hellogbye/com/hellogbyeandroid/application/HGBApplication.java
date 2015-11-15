@@ -5,8 +5,11 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import com.crashlytics.android.Crashlytics;
+import com.facebook.stetho.Stetho;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+import hellogbye.com.hellogbyeandroid.BuildConfig;
 import io.fabric.sdk.android.Fabric;
 
 /**
@@ -21,6 +24,9 @@ public class HGBApplication extends Application {
         instance = this;
         Fabric.with(this, new Crashlytics());
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(HGBApplication.this));
+        if (BuildConfig.IS_DEV) {
+            Stetho.initializeWithDefaults(this);
+        }
     }
 
 //    @Override
