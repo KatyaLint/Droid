@@ -74,17 +74,8 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
             @Override
             public void onSuccess(Object data) {
 
-                //TODO this needs to be done in parser not on main UI THREAD!!
-                if (data != null) {
-                    Type listType = new TypeToken<List<NodesVO>>() {
-                    }.getType();
-
-                    Gson gson = new Gson();
-
-                    List<NodesVO> alternativeFlightsVOs = gson.fromJson((String) data, listType);
+                    List<NodesVO> alternativeFlightsVOs = (List<NodesVO>)data;//gson.fromJson((String) data, listType);
                     getActivityInterface().setAlternativeFlights(alternativeFlightsVOs);
-                }
-
             }
 
             @Override

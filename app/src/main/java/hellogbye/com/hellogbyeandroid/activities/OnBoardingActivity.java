@@ -61,10 +61,10 @@ public class OnBoardingActivity extends FragmentActivity {
         ConnectionManager.getInstance(OnBoardingActivity.this).getTravelProfiles(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                Gson gson = new Gson();
-                Type listType = new TypeToken<List<TravelPreference>>() {
-                }.getType();
-                mTravelPrefList = gson.fromJson((String) data, listType);
+//                Gson gson = new Gson();
+//                Type listType = new TypeToken<List<TravelPreference>>() {
+//                }.getType();
+                mTravelPrefList = (ArrayList<TravelPreference>)data;  //gson.fromJson((String) data, listType);
                 // Instantiate a ViewPager and a PagerAdapter.
                 mPager = (ViewPager) findViewById(R.id.pager);
                 mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());

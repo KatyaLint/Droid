@@ -15,8 +15,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.models.TravelPreference;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AcountDefaultSettingsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
@@ -46,11 +49,86 @@ public class Parser {
     }
 
 
+
+
+
+
+    public static Object getSettingsDefault(String response){
+        List<AcountDefaultSettingsVO> acountDefaultSettings = null;
+        try {
+            Type listType = new TypeToken<List<AcountDefaultSettingsVO>>() {
+            }.getType();
+
+            Gson gson = new Gson();
+
+            acountDefaultSettings = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return acountDefaultSettings;
+    }
+
+
+
+
+
+
+    public static Object getSettingsAttributeData(String response){
+        List<SettingsAttributeParamVO> acountSettingsAttributes = null;
+        try {
+            Type listType = new TypeToken<List<SettingsAttributeParamVO>>() {
+            }.getType();
+
+            Gson gson = new Gson();
+
+            acountSettingsAttributes = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return acountSettingsAttributes;
+    }
+
+
+    public static Object parseAlternativeFlight(String response) {
+        List<NodesVO> alternativeFlightsVOs = null;
+        try {
+            Type listType = new TypeToken<List<NodesVO>>() {
+            }.getType();
+
+            Gson gson = new Gson();
+
+          alternativeFlightsVOs = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+            return alternativeFlightsVOs;
+
+    }
+
+
+    public static Object getTravelProfileData(String response){
+        ArrayList<TravelPreference>  mTravelPrefList = null;
+        try {
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<TravelPreference>>() {
+        }.getType();
+         mTravelPrefList = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mTravelPrefList;
+    }
+
     public static Object loginData(String response){
+        UserLoginCredentials user = null;
+        try {
         Gson gson = new Gson();
         Type type = new TypeToken<UserLoginCredentials>() {
         }.getType();
-        UserLoginCredentials user = gson.fromJson((String) response, type);
+        user = gson.fromJson((String) response, type);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return user;
         //hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
     }

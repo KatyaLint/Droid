@@ -98,12 +98,12 @@ public class PrefrenceSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
-                    Type listType = new TypeToken<List<SettingsAttributeParamVO>>() {
-                    }.getType();
+//                    Type listType = new TypeToken<List<SettingsAttributeParamVO>>() {
+//                    }.getType();
+//
+//                    Gson gson = new Gson();
 
-                    Gson gson = new Gson();
-
-                    acountSettingsAttributes = gson.fromJson((String) data, listType);
+                    acountSettingsAttributes = (List<SettingsAttributeParamVO>)data;//gson.fromJson((String) data, listType);
 //                    createListAdapter();
 //                    pbHeaderProgress.setVisibility(View.GONE);
 
@@ -136,12 +136,12 @@ public class PrefrenceSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
-                    Type listType = new TypeToken<List<AcountDefaultSettingsVO>>() {
-                    }.getType();
+//                    Type listType = new TypeToken<List<AcountDefaultSettingsVO>>() {
+//                    }.getType();
+//
+//                    Gson gson = new Gson();
 
-                    Gson gson = new Gson();
-
-                    acountDefaultSettings = gson.fromJson((String) data, listType);
+                    acountDefaultSettings =  (List<AcountDefaultSettingsVO>)data;// gson.fromJson((String) data, listType);
                     createListAdapter();
                     pbHeaderProgress.setVisibility(View.GONE);
                 }
