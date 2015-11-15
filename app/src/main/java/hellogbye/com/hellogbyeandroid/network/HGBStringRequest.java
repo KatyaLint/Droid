@@ -15,6 +15,9 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.Volley;
+import com.facebook.stetho.okhttp.StethoInterceptor;
+import com.squareup.okhttp.OkHttpClient;
+
 import org.json.JSONObject;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -56,7 +59,10 @@ public class HGBStringRequest extends Request<String> {
 //        params.put("username","omer.vinik@amginetech.com");
 //        params.put("password","password");
         this.errorListener = errorListener;
-        this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
+        OkHttpClient client = new OkHttpClient();
+        client.networkInterceptors().add(new StethoInterceptor());
+        this.queue = Volley.newRequestQueue(mContext.getApplicationContext(), new OkHttpStack(client));
+      //  this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
         this.url = url;
         setRetryPolicy((new DefaultRetryPolicy(
                         10000,
@@ -74,7 +80,10 @@ public class HGBStringRequest extends Request<String> {
         this.listener = listener;
        //    this.params = params;
         this.errorListener = errorListener;
-        this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
+        OkHttpClient client = new OkHttpClient();
+        client.networkInterceptors().add(new StethoInterceptor());
+        this.queue = Volley.newRequestQueue(mContext.getApplicationContext(), new OkHttpStack(client));
+       // this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
         this.url = url;
         setRetryPolicy((new DefaultRetryPolicy(
                 10000,

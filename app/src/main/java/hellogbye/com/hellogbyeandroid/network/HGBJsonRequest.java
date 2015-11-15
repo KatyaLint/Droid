@@ -16,6 +16,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.Volley;
+import com.facebook.stetho.okhttp.StethoInterceptor;
+import com.squareup.okhttp.OkHttpClient;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -63,7 +65,10 @@ public class HGBJsonRequest extends Request<String> {
 
 
         this.errorListener = errorListener;
-        this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
+        OkHttpClient client = new OkHttpClient();
+        client.networkInterceptors().add(new StethoInterceptor());
+        this.queue = Volley.newRequestQueue(mContext.getApplicationContext(), new OkHttpStack(client));
+       // this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
         this.url = url;
         showLoader = true;
         progressDialog = new ProgressDialog(mContext);
@@ -86,11 +91,14 @@ public class HGBJsonRequest extends Request<String> {
 
 
         this.errorListener = errorListener;
-        this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
+        OkHttpClient client = new OkHttpClient();
+        client.networkInterceptors().add(new StethoInterceptor());
+        this.queue = Volley.newRequestQueue(mContext.getApplicationContext(), new OkHttpStack(client));
+      //  this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
         this.url = url;
         this.showLoader = showLoader;
         progressDialog = new ProgressDialog(mContext);
-        loading = "Loading";
+        loading = "Loading...";
         setRetryPolicy(new DefaultRetryPolicy(
                 10000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
@@ -110,11 +118,14 @@ public class HGBJsonRequest extends Request<String> {
 
 
         this.errorListener = errorListener;
-        this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
+        OkHttpClient client = new OkHttpClient();
+        client.networkInterceptors().add(new StethoInterceptor());
+        this.queue = Volley.newRequestQueue(mContext.getApplicationContext(), new OkHttpStack(client));
+       // this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
         this.url = url;
         this.showLoader = true;
         progressDialog = new ProgressDialog(mContext);
-        loading = "Loading";
+        loading = "Loading...";
         setRetryPolicy(new DefaultRetryPolicy(
                 10000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
