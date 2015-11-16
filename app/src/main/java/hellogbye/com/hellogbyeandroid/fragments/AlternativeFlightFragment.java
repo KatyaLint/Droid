@@ -71,9 +71,6 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
     }
 
 
-   // private static NodesVO userFirstChoice;
-   // private String primaryGuid;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
