@@ -5,7 +5,7 @@ public enum ToolBarNavEnum {
     TRIPS (3,"My Trips"), COMPANIONS(4,"Travel Companions"),
     PREFERENCE(5,"Preference Settings"), ACCOUNT(6,"Account Settings"),
     HELP(7,"Help & Feedback"),CNC(8,"cnc"),ALTERNATIVE_FLIGHT(9,"Alternative Flight"),HOTEL(10,"Hotel"),
-    ALTERNATIVE_FLIGHT_DETAILS(11,"Alternative flight details");
+    ALTERNATIVE_FLIGHT_DETAILS(11,"Alternative flight details"),PAYMENT_DETAILS(12,"Payment details");
 
     private final int navNumber;
     private final String navTitle;

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:paddingLeft="@dimen/DP26">
+
+    <CheckBox
+        android:id="@+id/payment_child_checkbox"
+        style="@style/PaymentCheckBoxStyle"
+        android:layout_alignParentLeft="true"
+        />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/payment_child_name"
+        style="@style/PaymentItemStyle"
+        android:layout_toRightOf="@+id/payment_child_checkbox"
+        app:fontName="dinnextltpro_light.otf" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/payment_child_price"
+        style="@style/PaymentItemStyle"
+        android:layout_alignParentRight="true"
+        app:fontName="dinnextltpro_light.otf" />
+
+</RelativeLayout>

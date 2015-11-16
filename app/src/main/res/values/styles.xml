@@ -11,13 +11,13 @@
         <item name="color">@android:color/white</item>
     </style>
 
-<!--kate-->
+    <!--kate-->
 
-<style name="NavigationTextStyle">
-    <item name="android:textColor">@color/navigation_text_state</item>
-    <item name="android:textSize">@dimen/SP18</item>
-    <item name="android:fontFamily">dinnextltpro_regular.otf</item>
-</style>
+    <style name="NavigationTextStyle">
+        <item name="android:textColor">@color/navigation_text_state</item>
+        <item name="android:textSize">@dimen/SP18</item>
+        <item name="android:fontFamily">dinnextltpro_regular.otf</item>
+    </style>
 
 
     <style name="StateText">
@@ -29,7 +29,6 @@
         <item name="android:textColor">#ffffff</item>
         <item name="android:background">#33000000</item>
     </style>
-
 
 
     <style name="GridTextStyle">
@@ -60,17 +59,17 @@
     </style>
 
 
-
     <style name="RedCustomButtonStyle" parent="CustomButtonTextStyle">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@drawable/red_button</item>
     </style>
+
     <style name="GreenCustomButtonStyle" parent="CustomButtonTextStyle">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@drawable/green_button</item>
     </style>
 
-    <style name="CNCStyle" >
+    <style name="CNCStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:maxWidth">300dp</item>
@@ -80,8 +79,27 @@
 
     </style>
 
+    <style name="PaymentItemStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxWidth">300dp</item>
+        <item name="android:minWidth">80dp</item>
+        <item name="android:textColor">@color/marine</item>
+        <item name="android:textSize">@dimen/SP18</item>
+        <item name="android:padding">10dp</item>
 
 
+    </style>
+
+
+
+    <style name="PaymentCheckBoxStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:checked">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:button">@drawable/hgb_checkbox</item>
+    </style>
 
 
 </resources>

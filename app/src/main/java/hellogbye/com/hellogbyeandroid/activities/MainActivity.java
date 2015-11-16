@@ -41,6 +41,7 @@ import hellogbye.com.hellogbyeandroid.fragments.HomeFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.MyTripsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.PaymentDetailsFragemnt;
 import hellogbye.com.hellogbyeandroid.fragments.PrefrenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private FontTextView mName;
     private HGBPreferencesManager hgbPrefrenceManager;
     private ImageButton imageButton;
+    private ImageButton purchaseButton;
     private ArrayList<CNCItem> mCNCItems;
     private UserTravelVO mUserTravelOrder;
     private List<NodesVO> alternativeFlights;
@@ -158,6 +160,13 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         setSupportActionBar(mToolbar);
         imageButton = (ImageButton) mToolbar.findViewById(R.id.keyboard);
+        purchaseButton = (ImageButton) mToolbar.findViewById(R.id.purchaseButton);
+        purchaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber());
+            }
+        });
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,6 +176,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 clearCNCItems();
             }
         });
+
+
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 
@@ -344,6 +355,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case ALTERNATIVE_FLIGHT_DETAILS:
                 fragment = AlternativeFlightsDetailsFragment.newInstance(navPosition);
                 stashToBack = false;
+                break;
+            case PAYMENT_DETAILS:
+                fragment = PaymentDetailsFragemnt.newInstance(navPosition);
                 break;
 
 

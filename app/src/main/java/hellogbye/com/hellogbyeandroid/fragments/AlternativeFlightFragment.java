@@ -21,6 +21,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 
 /**
@@ -41,9 +42,9 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new AlternativeFlightFragment();
-//        Bundle args = new Bundle();
-//        args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
-//        fragment.setArguments(args);
+        Bundle args = new Bundle();
+        args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
+        fragment.setArguments(args);
         return fragment;
     }
 

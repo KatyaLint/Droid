@@ -55,6 +55,7 @@ public class CostumeToolBar extends Toolbar {
         }
         if (purchaseButton == null) {
             purchaseButton = (ImageButton) findViewById(R.id.purchaseButton);
+
         }
         if (favoriteButton == null) {
             favoriteButton = (ImageButton) findViewById(R.id.favority);
