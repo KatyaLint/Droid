@@ -495,4 +495,20 @@ public class NodesVO implements Comparable<NodesVO>
     public void setmPrimaryguid(String mPrimaryguid) {
         this.mPrimaryguid = mPrimaryguid;
     }
+
+    public String getmOrigin() {
+        return mOrigin;
+    }
+
+    public void setmOrigin(String mOrigin) {
+        this.mOrigin = mOrigin;
+    }
+
+    public String getmEquipment() {
+        return mEquipment;
+    }
+
+    public void setmEquipment(String mEquipment) {
+        this.mEquipment = mEquipment;
+    }
 }

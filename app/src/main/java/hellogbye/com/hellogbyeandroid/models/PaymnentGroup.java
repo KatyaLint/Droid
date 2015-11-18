@@ -27,6 +27,14 @@ public class PaymnentGroup {
         return totalText;
     }
 
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
     public void setTotalText(String totalText) {
         this.totalText = totalText;
     }

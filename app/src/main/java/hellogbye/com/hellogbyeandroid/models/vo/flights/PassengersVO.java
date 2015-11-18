@@ -84,5 +84,35 @@ public class PassengersVO {
         passengerNodes.clear();
     }
 
+    public String getmName() {
+        return mName;
+    }
 
+    public void setmName(String mName) {
+        this.mName = mName;
+    }
+
+    public double getmTotalPrice() {
+        return mTotalPrice;
+    }
+
+    public void setmTotalPrice(double mTotalPrice) {
+        this.mTotalPrice = mTotalPrice;
+    }
+
+    public double getmTotalFlightPrice() {
+        return mTotalFlightPrice;
+    }
+
+    public void setmTotalFlightPrice(double mTotalFlightPrice) {
+        this.mTotalFlightPrice = mTotalFlightPrice;
+    }
+
+    public double getmTotalHotelPrice() {
+        return mTotalHotelPrice;
+    }
+
+    public void setmTotalHotelPrice(double mTotalHotelPrice) {
+        this.mTotalHotelPrice = mTotalHotelPrice;
+    }
 }

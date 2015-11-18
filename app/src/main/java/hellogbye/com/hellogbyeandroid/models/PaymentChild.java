@@ -30,4 +30,12 @@ public class PaymentChild {
     public void setTotalText(String totalText) {
         this.totalText = totalText;
     }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 }

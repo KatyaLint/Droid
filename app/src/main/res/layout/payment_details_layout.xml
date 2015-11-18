@@ -1,13 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:background="#f4f4f4" >
+    android:background="#f4f4f4"
+    android:orientation="vertical">
 
-    <ExpandableListView
-        android:id="@+id/flight_ex_list"
+
+    <LinearLayout
+        android:id="@+id/payment_details_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"></LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"/>
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/hgb_blue">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/payment_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:fontName="dinnextltpro_light.otf" />
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/payment_total_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:textColor="@color/white"
+                android:text="$1234"
+                app:fontName="dinnextltpro_bold.otf" />
+
+
+        </LinearLayout>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/payment_submit"
+            style="@style/RedCustomButtonStyle"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:layout_below="@+id/remmember_me_checkbox"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/red_button"
+            android:text="Proceed" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
