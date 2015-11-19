@@ -21,4 +21,28 @@ public class SettingsAttributesVO {
     private String mType;
     @SerializedName("description")
     private String mDescription;
+
+    public ArrayList<SettingsValuesVO> getAttributesVOs() {
+        return attributesVOs;
+    }
+
+    public void setAttributesVOs(ArrayList<SettingsValuesVO> attributesVOs) {
+        this.attributesVOs = attributesVOs;
+    }
+
+    public String getmName() {
+        return mName;
+    }
+
+    public void setmName(String mName) {
+        this.mName = mName;
+    }
+
+    public String getmId() {
+        return mId;
+    }
+
+    public void setmId(String mId) {
+        this.mId = mId;
+    }
 }

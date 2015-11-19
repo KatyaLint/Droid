@@ -15,4 +15,12 @@ public class SettingsValuesVO {
     private String mName;
     @SerializedName("description")
     private String mDescription;
+
+    public String getmDescription() {
+        return mDescription;
+    }
+
+    public void setmDescription(String mDescription) {
+        this.mDescription = mDescription;
+    }
 }

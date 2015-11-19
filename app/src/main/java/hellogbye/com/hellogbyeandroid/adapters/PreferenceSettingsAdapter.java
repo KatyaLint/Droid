@@ -23,6 +23,7 @@ public class PreferenceSettingsAdapter extends  RecyclerView.Adapter<PreferenceS
 
     private List<AcountDefaultSettingsVO> itemsData = new ArrayList<AcountDefaultSettingsVO>();
     private PrefrenceSettingsFragment.IViewCallBackClick prefernceViewClick;
+
     public void swapArray(List<AcountDefaultSettingsVO> acountDefaultSettings){
         if(acountDefaultSettings != null) {
             this.itemsData.clear();

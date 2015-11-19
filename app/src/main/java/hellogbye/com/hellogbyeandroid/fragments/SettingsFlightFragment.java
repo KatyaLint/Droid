@@ -28,8 +28,8 @@ public class SettingsFlightFragment extends HGBAbtsractFragment {
 
 
     public void setFlightData(View rootView){
-        FontTextView text = (FontTextView)rootView.findViewById(R.id.setting_content_text);
-        text.setText("Flight");
+//        FontTextView text = (FontTextView)rootView.findViewById(R.id.setting_content_text);
+//        text.setText("Flight");
 
 
     }

@@ -2,11 +2,10 @@ package hellogbye.com.hellogbyeandroid.fragments;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -16,8 +15,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.MainActivity;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
+import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
+
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
@@ -44,12 +43,14 @@ public class FlightGridMainFragment {
     private LinearLayout[] linarLayoutDateEmpty;
     private LinearLayout[] white_squer_ll;
     private EditText[] grid_hotel_guid;
-    private TableLayout stickyHeader;
+
     private LinearLayout[] grid_main_hotel_square_ll;
     private LinearLayout[] grid_flight_square_ll;
+    private Handler handler;
+    private PassengerDataOrganization passData;
 
     public FlightGridMainFragment(){}
-    private UserTravelVO airplaneDataVO;
+
 
     private LayoutInflater inflater;
     private Activity activity;
@@ -63,18 +64,73 @@ public class FlightGridMainFragment {
     private int columnNumber;
 
 
-
-
     public void createGridView(Activity activity,View rootView, UserTravelVO userTravelVO,  LayoutInflater inflater){
         table = (TableLayout)rootView.findViewById(R.id.tlGridTable);
 
         this.inflater = inflater;
         this.activity = activity;
 
+
+        // create a handler to update the UI
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                //table issue
+                System.out.println("Kate post running");
+                grideInitialization();
+            }
+
+        };
+
+
         createGridViewTable(userTravelVO);
 
        // return rootView;
     }
+
+
+
+    private class LongOperation extends AsyncTask<UserTravelVO, Void, String> {
+
+        @Override
+        protected String doInBackground(UserTravelVO... strings) {
+            UserTravelVO userTravelVO1 = strings[0];
+            passData = new PassengerDataOrganization();
+            passData.organizeDataStructure(userTravelVO1);
+
+
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            grideInitialization();
+
+        }
+    }
+
+    public class MyThread extends Thread {
+        @Override
+        public void run() {
+            try {
+                // Simulate a slow network
+
+                System.out.println("Kate running");
+
+                passData = new PassengerDataOrganization();
+                passData.organizeDataStructure(userTravelVO);
+
+                // Updates the user interface
+                handler.sendEmptyMessage(0);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+
+            }
+        }
+    }
+
+
 
     private void calculateNumberOfRowAndCol(){
         if(maxRowNumber < MAXIMUM_ROW_NUMBER && columnNumber<MAXIMUM_COL_NUMBER){
@@ -98,23 +154,19 @@ public class FlightGridMainFragment {
         }
     }
 
+    UserTravelVO userTravelVO;
 
-    private void createGridViewTable(UserTravelVO userTravelVO){
+    private void grideInitialization(){
+
 
         int counter = 0;
-
-        ArrayList<PassengersVO> passengers = userTravelVO.getPassengerses();
-
-
-        PassangerDataOrganization passData = new PassangerDataOrganization();
-        passData.organizeDataStructure(userTravelVO);
-
         ArrayList<PassengersVO> pass = passData.passangersVOs;
 
 
         columnNumber = pass.size();//passengers.size();
 
 
+        ArrayList<PassengersVO> passengers = userTravelVO.getPassengerses();
         setStickyHeaderData(passengers);
 
 
@@ -146,13 +198,13 @@ public class FlightGridMainFragment {
                         //  initializeEmptyView(j, counter);
                         row[i].addView(childEmptyView[counter]);
                     }else {
-                        if (travelerNode.getmType().equals("flight")) {
+                        if (travelerNode.getmType().equals(NodeTypeEnum.FLIGHT.getType())) {
                             linaerLayoutFlight[counter].setTag(traveler.getmPaxguid());
                             initializeFlightData(travelerNode, counter);
                             row[i].addView(childFlight[counter]);
 
 
-                        } else if (travelerNode.getmType().equals("hotel")) {
+                        } else if (travelerNode.getmType().equals(NodeTypeEnum.HOTEL.getType())) {
                             linaerLayoutHotel[counter].setTag(traveler.getmPaxguid());
                             initializeHotelData(travelerNode, counter);
 
@@ -176,6 +228,95 @@ public class FlightGridMainFragment {
 
             table.addView(row[i]);
         }
+    }
+
+
+    private void createGridViewTable(UserTravelVO userTravelVO){
+
+     //   int counter = 0;
+        this.userTravelVO = userTravelVO;
+
+        new LongOperation().execute(userTravelVO);
+
+
+//
+//        MyThread myThread = new MyThread();
+//        myThread.start();
+
+//        ArrayList<PassengersVO> passengers = userTravelVO.getPassengerses();
+//
+//
+//        PassangerDataOrganization passData = new PassangerDataOrganization();
+//        passData.organizeDataStructure(userTravelVO);
+
+//        ArrayList<PassengersVO> pass = passData.passangersVOs;
+//
+//
+//        columnNumber = pass.size();//passengers.size();
+//
+//
+//        ArrayList<PassengersVO> passengers = userTravelVO.getPassengerses();
+//        setStickyHeaderData(passengers);
+//
+//
+//        numberOfRow = pass.get(0).getPassengerNodes().size();
+//        realRowNumber = pass.get(0).getPassengerNodes().size();
+//        maxRowNumber = numberOfRow*columnNumber;
+//        calculateNumberOfRowAndCol();
+//
+//
+//        for(int i=0;i < numberOfRow ;i++){  // row 16
+//
+//            //  row[i] = new TableRow(activity);
+//            row[i] = new TableRow(activity);
+//            for(int j=0;j< columnNumber  ;j++) {  //column  0-1-2
+//
+//
+//                initializeFlightGridItems(counter, j);
+//                initializeHotelGridItems(counter,j);
+//                initializeEmptyGridItems(counter, j);
+//
+//                if(pass.size() > j && i < realRowNumber){
+//                    String date = "";
+//                    PassengersVO traveler = pass.get(j);
+//                    ArrayList<NodesVO> travelerNodes = traveler.getPassengerNodes();
+//                    NodesVO travelerNode = travelerNodes.get(i);
+//                    if(travelerNode.getmType().isEmpty()){
+//                        emptyNode(j, counter);
+//                        date = travelerNode.getDateOfCell();
+//                        //  initializeEmptyView(j, counter);
+//                        row[i].addView(childEmptyView[counter]);
+//                    }else {
+//                        if (travelerNode.getmType().equals(NodeTypeEnum.FLIGHT.getType())) {
+//                            linaerLayoutFlight[counter].setTag(traveler.getmPaxguid());
+//                            initializeFlightData(travelerNode, counter);
+//                            row[i].addView(childFlight[counter]);
+//
+//
+//                        } else if (travelerNode.getmType().equals(NodeTypeEnum.HOTEL.getType())) {
+//                            linaerLayoutHotel[counter].setTag(traveler.getmPaxguid());
+//                            initializeHotelData(travelerNode, counter);
+//
+//                            row[i].addView(childHotel[counter]);
+//
+//                        }
+//                        date = travelerNode.getDateOfCell();
+//
+//                    }
+//
+//                    setDate(j, counter, date); //TODO date to hotels
+//                }else{
+//                    emptyNode(j, counter);
+//                    row[i].addView(childEmptyView[counter]);
+//                }
+//
+//                counter++;
+//
+//            }
+//
+//
+//            table.addView(row[i]);
+//        }
 
     }
 
@@ -363,12 +504,11 @@ public class FlightGridMainFragment {
 
         if(colomnNumber%2 == 0){ //even colum lightgray color
             linaerLayoutFlight[counter].setBackgroundColor(activity.getResources().getColor(R.color.odd_grey));
-        }else{ //odd colomn dark_gray color
+        }else{  //odd colomn dark_gray color
             linaerLayoutFlight[counter].setBackgroundColor(activity.getResources().getColor(R.color.grey_very_light));
         }
 
         childFlight[counter].setOnClickListener(itemClickListenerFlight);
-
     }
 
     public void initializeCB(ItineraryFragment.TravelerShowChoose itemSelected){
@@ -437,7 +577,6 @@ public class FlightGridMainFragment {
             linaerLayoutHotel[counter].setBackgroundColor(activity.getResources().getColor(R.color.grey_very_light));
         }
 
-
         childHotel[counter].setOnClickListener(itemClickListenerHotel);
     }
 
@@ -470,35 +609,5 @@ private void initializeEmptyGridItems(int counter, int colomnNumber){
 }
 
 
-    private class LongOperation extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... params) {
-            for(int i=0;i<5;i++) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        //    TextView txt = (TextView) findViewById(R.id.output);
-      //      txt.setText("Executed");
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-        }
-
-        @Override
-        protected void onPreExecute() {
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-
-            
-        }
-    }
 }
 

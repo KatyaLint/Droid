@@ -1,19 +1,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
+        android:background="@color/hgb_toolbar_blue"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="@dimen/DP34"
+        android:orientation="horizontal"
+        android:gravity="center">
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_width="wrap_content"
         android:id="@+id/settings_flight_tab"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-    android:text="flight"/>
+        android:textColor="@drawable/tabs_states"
+        android:text="@string/flight_tab"
+        android:textSize="@dimen/DP14"
+        app:fontName="dinnextltpro_regular.otf"
+        />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_width="wrap_content"
@@ -21,24 +28,17 @@
         android:layout_weight="1"
         android:gravity="center"
         android:id="@+id/setting_hotel_tab"
-        android:text="hotel"/>
+        android:text="@string/hotel_tab"
+        android:textColor="@drawable/tabs_states"
+        android:textSize="@dimen/DP14"
+        app:fontName="dinnextltpro_regular.otf"
+        />
     </LinearLayout>
 
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="flight"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        android:id="@+id/setting_content_text"
-        android:layout_centerInParent="true"/>
-  </LinearLayout>
+    <include layout="@layout/settings_tabs_flight_list" android:id="@+id/setting_flight_include"/>
 
-
+    <include layout="@layout/settings_flight_tab_fragment" android:id="@+id/setting_hotel_include"/>
 
 
  </LinearLayout>

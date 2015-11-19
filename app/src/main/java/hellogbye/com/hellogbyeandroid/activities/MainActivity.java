@@ -43,11 +43,13 @@ import hellogbye.com.hellogbyeandroid.fragments.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.MyTripsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PaymentDetailsFragemnt;
 import hellogbye.com.hellogbyeandroid.fragments.PrefrenceSettingsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.TabsFragmentSettings;
 import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
@@ -83,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     protected OnBackPressedListener onBackPressedListener;
     private String solutionID;
     private ActionBar actionBar;
+    private List<SettingsAttributeParamVO> mSettingsAttribute;
 
 
     @Override
@@ -245,12 +248,12 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mNavItemsList = new ArrayList<>();
         mNavItemsList.add(new NavItem(ToolBarNavEnum.HOME, true));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.ITINARERY, false));
-//        mNavItemsList.add(new NavItem(ToolBarNavEnum.HISTORY, false));
-//        mNavItemsList.add(new NavItem(ToolBarNavEnum.TRIPS, false));
-//        mNavItemsList.add(new NavItem(ToolBarNavEnum.COMPANIONS, false));
-//        mNavItemsList.add(new NavItem(ToolBarNavEnum.PREFERENCE, false));
-//        mNavItemsList.add(new NavItem(ToolBarNavEnum.ACCOUNT, false));
-//        mNavItemsList.add(new NavItem(ToolBarNavEnum.HELP, false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.HISTORY, false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.TRIPS, false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.COMPANIONS, false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.PREFERENCE, false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.ACCOUNT, false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.HELP, false));
 
     }
 
@@ -310,6 +313,15 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         }
     }
 
+    @Override
+    public void setAccountSettingsAttribute(List<SettingsAttributeParamVO> settingsAttribute) {
+        this.mSettingsAttribute = settingsAttribute;
+    }
+
+    @Override
+    public List<SettingsAttributeParamVO> getAccountSettingsAttribute() {
+        return mSettingsAttribute;
+    }
 
 
     public void selectItem(int position) {
@@ -359,7 +371,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case PAYMENT_DETAILS:
                 fragment = PaymentDetailsFragemnt.newInstance(navPosition);
                 break;
-
+            case PREFERENCES_TAB_SETTINGS:
+                fragment = TabsFragmentSettings.newInstance(navPosition);
+                break;
 
 
 

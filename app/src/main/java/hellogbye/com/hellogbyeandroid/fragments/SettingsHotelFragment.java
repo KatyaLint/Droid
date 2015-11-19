@@ -26,7 +26,7 @@ public class SettingsHotelFragment  extends HGBAbtsractFragment {
 
 
     public void setFlightData(View rootView){
-        FontTextView text = (FontTextView)rootView.findViewById(R.id.setting_content_text);
-        text.setText("hotel");
+//        FontTextView text = (FontTextView)rootView.findViewById(R.id.setting_content_text);
+//        text.setText("hotel");
     }
 }

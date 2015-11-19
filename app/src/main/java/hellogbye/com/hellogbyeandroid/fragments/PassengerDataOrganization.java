@@ -14,7 +14,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 /**
  * Created by nyawka on 10/27/15.
  */
-public class PassangerDataOrganization {
+public class PassengerDataOrganization {
 
     public ArrayList<PassengersVO> passangersVOs;
 

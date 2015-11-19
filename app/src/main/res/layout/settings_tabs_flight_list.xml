@@ -6,7 +6,8 @@
 
     <android.support.v7.widget.RecyclerView
         android:background="@color/white"
-        android:id="@+id/recyclerView"
+        android:id="@+id/settings_flight_recyclerView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
 </RelativeLayout>
+

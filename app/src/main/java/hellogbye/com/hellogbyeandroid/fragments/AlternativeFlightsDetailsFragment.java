@@ -87,9 +87,7 @@ public class AlternativeFlightsDetailsFragment extends HGBAbtsractFragment {
         return rootView;
     }
 
-    public interface IClickAlternativeItemListener{
-        void clickedItemListener(View flightView);
-    }
+
 
     private ArrayList<AlternativeFlightsVO> airplaneDataVO;
     //TODO move to correct place

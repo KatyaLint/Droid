@@ -12,12 +12,12 @@
             android:layout_below="@+id/flightRecyclerView"
             android:layout_above="@+id/add_preferences"/>
 
-    <ProgressBar
-        android:id="@+id/pbHeaderProgress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        />
+    <!--<ProgressBar-->
+        <!--android:id="@+id/pbHeaderProgress"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--/>-->
 
 
 

@@ -19,6 +19,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 
 import hellogbye.com.hellogbyeandroid.adapters.PreferenceSettingsAdapter;
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AcountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
@@ -34,7 +35,7 @@ public class PrefrenceSettingsFragment extends HGBAbtsractFragment {
 
 
 
-    private ProgressBar pbHeaderProgress;
+  //  private ProgressBar pbHeaderProgress;
     private RecyclerView mRecyclerView;
     private PreferenceSettingsAdapter mAdapter;
 
@@ -78,7 +79,7 @@ public class PrefrenceSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void viewCallBackClick(String viewId) {
                 getSettingsAttributes(viewId);
-                pbHeaderProgress.setVisibility(View.GONE);
+              //  pbHeaderProgress.setVisibility(View.GONE);
             }
         });
 
@@ -104,11 +105,14 @@ public class PrefrenceSettingsFragment extends HGBAbtsractFragment {
 //                    Gson gson = new Gson();
 
                     acountSettingsAttributes = (List<SettingsAttributeParamVO>)data;//gson.fromJson((String) data, listType);
+                    getActivityInterface().setAccountSettingsAttribute(acountSettingsAttributes);
 //                    createListAdapter();
 //                    pbHeaderProgress.setVisibility(View.GONE);
 
-                    Fragment fragemnt = new TabsFragmentSettings();
-                    HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true);
+
+                    getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_TAB_SETTINGS.getNavNumber());
+//                    Fragment fragemnt = new TabsFragmentSettings();
+//                    HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true);
 
 //                    PreferencesAttributeFragment fragemnt = new PreferencesAttributeFragment();
 //                    HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true);
@@ -129,27 +133,23 @@ public class PrefrenceSettingsFragment extends HGBAbtsractFragment {
         View rootView = inflater.inflate(R.layout.settings_list_layout, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.settingsRecyclerView);
 
-        pbHeaderProgress = (ProgressBar) rootView.findViewById(R.id.pbHeaderProgress);
-        pbHeaderProgress.setVisibility(View.VISIBLE);
+//        pbHeaderProgress = (ProgressBar) rootView.findViewById(R.id.pbHeaderProgress);
+     //   pbHeaderProgress.setVisibility(View.VISIBLE);
 
         ConnectionManager.getInstance(getActivity()).getUserSettingsDefault(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
-//                    Type listType = new TypeToken<List<AcountDefaultSettingsVO>>() {
-//                    }.getType();
-//
-//                    Gson gson = new Gson();
 
-                    acountDefaultSettings =  (List<AcountDefaultSettingsVO>)data;// gson.fromJson((String) data, listType);
+                    acountDefaultSettings =  (List<AcountDefaultSettingsVO>)data;
                     createListAdapter();
-                    pbHeaderProgress.setVisibility(View.GONE);
+                   // pbHeaderProgress.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onError(Object data) {
-                pbHeaderProgress.setVisibility(View.GONE);
+            //    pbHeaderProgress.setVisibility(View.GONE);
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
             }
         });

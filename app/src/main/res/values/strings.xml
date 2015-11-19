@@ -48,6 +48,9 @@
     <string name="flight_stop_over">STOPOVER: </string>
     <string name="show_alterate_hotels">Show Alternate Hotels</string>
 
+    <string name="flight_tab">Flight</string>
+    <string name="hotel_tab">Hotel</string>
+
     <string name="select_hotel">Select Hotel</string>
 
     <string name="preferences_smoking">Smoking Preference</string>

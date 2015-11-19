@@ -22,4 +22,44 @@ public class SettingsAttributeParamVO {
 
     @SerializedName("attributes")
     private ArrayList<SettingsAttributesVO> attributesVOs = new ArrayList<SettingsAttributesVO>();
+
+    public String getmId() {
+        return mId;
+    }
+
+    public void setmId(String mId) {
+        this.mId = mId;
+    }
+
+    public String getmName() {
+        return mName;
+    }
+
+    public void setmName(String mName) {
+        this.mName = mName;
+    }
+
+    public String getmDescription() {
+        return mDescription;
+    }
+
+    public void setmDescription(String mDescription) {
+        this.mDescription = mDescription;
+    }
+
+    public double getmRank() {
+        return mRank;
+    }
+
+    public void setmRank(double mRank) {
+        this.mRank = mRank;
+    }
+
+    public ArrayList<SettingsAttributesVO> getAttributesVOs() {
+        return attributesVOs;
+    }
+
+    public void setAttributesVOs(ArrayList<SettingsAttributesVO> attributesVOs) {
+        this.attributesVOs = attributesVOs;
+    }
 }
