@@ -9,5 +9,13 @@
         android:id="@+id/settings_flight_recyclerView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
+
+
+    <!--<com.nhaarman.listviewanimations.itemmanipulation.DynamicListView-->
+        <!--android:id="@+id/settings_flight_recyclerView"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent" />-->
+
+
 </RelativeLayout>
 

@@ -20,6 +20,7 @@ import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AcountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
@@ -69,6 +70,20 @@ public class Parser {
     }
 
 
+    public static Object getSettingsSpecificAttributeData(String response){
+        List<SettingsAttributesVO> acountSettingsAttributes = null;
+        try {
+            Type listType = new TypeToken<List<SettingsAttributesVO>>() {
+            }.getType();
+
+            Gson gson = new Gson();
+
+            acountSettingsAttributes = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return acountSettingsAttributes;
+    }
 
 
 

@@ -8,12 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
@@ -22,16 +17,16 @@ import hellogbye.com.hellogbyeandroid.adapters.PreferenceSettingsAdapter;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AcountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
-import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 
 /**
  * Created by arisprung on 8/17/15.
  */
-public class PrefrenceSettingsFragment extends HGBAbtsractFragment {
+public class PreferenceSettingsFragment extends HGBAbtsractFragment {
 
 
 
@@ -39,12 +34,12 @@ public class PrefrenceSettingsFragment extends HGBAbtsractFragment {
     private RecyclerView mRecyclerView;
     private PreferenceSettingsAdapter mAdapter;
 
-    public PrefrenceSettingsFragment() {
+    public PreferenceSettingsFragment() {
         // Empty constructor required for fragment subclasses
     }
 
     public static Fragment newInstance(int position) {
-        Fragment fragment = new PrefrenceSettingsFragment();
+        Fragment fragment = new PreferenceSettingsFragment();
         Bundle args = new Bundle();
         args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
         fragment.setArguments(args);
@@ -79,7 +74,6 @@ public class PrefrenceSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void viewCallBackClick(String viewId) {
                 getSettingsAttributes(viewId);
-              //  pbHeaderProgress.setVisibility(View.GONE);
             }
         });
 
@@ -94,29 +88,35 @@ public class PrefrenceSettingsFragment extends HGBAbtsractFragment {
         void viewCallBackClick(String viewId);
     }
 
-    private void getSettingsAttributes(String clickedAttributeID){
+
+//    private void getSettingsAttributes(String clickedAttributeID, String type, int attributeID, List<SettingsAttributeParamVO> data) {
+//        ConnectionManager.getInstance(getActivity()).getUserSettingAttributesForAttributeID(clickedAttributeID,  type, new ConnectionManager.ServerRequestListener() {
+//            @Override
+//            public void onSuccess(Object data) {
+//                if (data != null) {
+//                    List<SettingsAttributesVO> acountSettingsAttributes = (List<SettingsAttributesVO>) data; //gson.fromJson((String) data, listType);
+//                    getActivityInterface().setAccountSettingsAttributeSpecific(acountSettingsAttributes);
+//                    getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_TAB_SETTINGS.getNavNumber());
+//                }
+//            }
+//
+//            @Override
+//            public void onError(Object data) {
+//                HGBErrorHelper errorHelper = new HGBErrorHelper();
+//            }
+//        });
+//    }
+
+
+    private void getSettingsAttributes(final String clickedAttributeID) {
         ConnectionManager.getInstance(getActivity()).getUserSettingsAttributes(clickedAttributeID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
-//                    Type listType = new TypeToken<List<SettingsAttributeParamVO>>() {
-//                    }.getType();
-//
-//                    Gson gson = new Gson();
-
-                    acountSettingsAttributes = (List<SettingsAttributeParamVO>)data;//gson.fromJson((String) data, listType);
+                    acountSettingsAttributes = (List<SettingsAttributeParamVO>) data;//gson.fromJson((String) data, listType);
                     getActivityInterface().setAccountSettingsAttribute(acountSettingsAttributes);
-//                    createListAdapter();
-//                    pbHeaderProgress.setVisibility(View.GONE);
-
-
+//                    getSettingsAttributes(clickedAttributeID, "", 3,acountSettingsAttributes);
                     getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_TAB_SETTINGS.getNavNumber());
-//                    Fragment fragemnt = new TabsFragmentSettings();
-//                    HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true);
-
-//                    PreferencesAttributeFragment fragemnt = new PreferencesAttributeFragment();
-//                    HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true);
-
                 }
             }
 
@@ -125,7 +125,7 @@ public class PrefrenceSettingsFragment extends HGBAbtsractFragment {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
             }
         });
-        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

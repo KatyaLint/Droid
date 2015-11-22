@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 
@@ -12,20 +11,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.fragments.PrefrenceSettingsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AcountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by nyawka on 11/3/15.
  */
-public class PreferenceSettingsAdapter extends  RecyclerView.Adapter<PreferenceSettingsAdapter.ViewHolder> {
+public class PreferenceSettingsAdapter extends RecyclerView.Adapter<PreferenceSettingsAdapter.ViewHolder> {
 
     private List<AcountDefaultSettingsVO> itemsData = new ArrayList<AcountDefaultSettingsVO>();
-    private PrefrenceSettingsFragment.IViewCallBackClick prefernceViewClick;
+    private PreferenceSettingsFragment.IViewCallBackClick prefernceViewClick;
 
-    public void swapArray(List<AcountDefaultSettingsVO> acountDefaultSettings){
-        if(acountDefaultSettings != null) {
+    public void swapArray(List<AcountDefaultSettingsVO> acountDefaultSettings) {
+        if (acountDefaultSettings != null) {
             this.itemsData.clear();
             this.itemsData.addAll(acountDefaultSettings);
 
@@ -63,26 +62,25 @@ public class PreferenceSettingsAdapter extends  RecyclerView.Adapter<PreferenceS
         return (null != itemsData ? itemsData.size() : 0);
     }
 
-    public void setViewClickListener(PrefrenceSettingsFragment.IViewCallBackClick iViewCallBackClick) {
+    public void setViewClickListener(PreferenceSettingsFragment.IViewCallBackClick iViewCallBackClick) {
         this.prefernceViewClick = iViewCallBackClick;
     }
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-       private FontTextView preferenses_name;
+        private FontTextView preferenses_name;
         private View more_view;
         private RelativeLayout settings_layout;
+
         public ViewHolder(View itemView) {
             super(itemView);
-            preferenses_name = (FontTextView)itemView.findViewById(R.id.preferenses_name);
-            more_view = (View)itemView.findViewById(R.id.preferences_more);
-            settings_layout=(RelativeLayout)itemView.findViewById(R.id.settings_ll);
+            preferenses_name = (FontTextView) itemView.findViewById(R.id.preferenses_name);
+            more_view = (View) itemView.findViewById(R.id.preferences_more);
+            settings_layout = (RelativeLayout) itemView.findViewById(R.id.settings_ll);
 
         }
     }
 
 
-
-
-    }
+}

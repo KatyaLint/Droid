@@ -16,8 +16,8 @@ import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
- * Created by nyawka on 11/3/15.
- */
+* Created by nyawka on 11/3/15.
+*/
 public class PreferenceSettingsFlightTabsAdapter extends  RecyclerView.Adapter<PreferenceSettingsFlightTabsAdapter.ViewHolder> {
 
    // private List<AcountDefaultSettingsVO> itemsData = new ArrayList<AcountDefaultSettingsVO>();
@@ -49,7 +49,7 @@ public class PreferenceSettingsFlightTabsAdapter extends  RecyclerView.Adapter<P
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         SettingsAttributesVO item = itemsData.get(position);
-        holder.settings_flight_title.setText(item.getmName());
+
         ArrayList<SettingsValuesVO> attributes = item.getAttributesVOs();
         String strAttributes = "";
         for (int i = 0; i < attributes.size(); i++) {
@@ -60,6 +60,8 @@ public class PreferenceSettingsFlightTabsAdapter extends  RecyclerView.Adapter<P
             }
         }
         holder.setting_flight_text.setText(strAttributes);
+
+        holder.settings_flight_title.setText(item.getmName());
         holder.settings_flight_title.setTag(item.getmId());
     }
 

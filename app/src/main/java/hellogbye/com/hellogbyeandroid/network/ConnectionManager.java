@@ -11,6 +11,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 
 public class ConnectionManager {
 
@@ -40,7 +43,7 @@ public class ConnectionManager {
         USER_HOTEL_ROOM_ALTERNATIVE, USER_PUT_HOTEL, USER_GET_BOOKING_OPTIONS,
         USER_FLIGHT_SOLUTIONS, USER_GET_TRAVELER_INFO, USER_GET_USER_PROFILE_ACCOUNTS,
         USER_POST_USER_PROFILE_EMAIL, USER_TRAVEL_PROFILES, USER_PROFILE_RESET_PASSWORD,
-        USER_SOLUTION, ITINERARY, ITINERARY_CNC
+        USER_SOLUTION, ITINERARY, USER_POST_TRAVEL_PREFERENCES, ITINERARY_CNC
     }
 
     private ConnectionManager() {
@@ -473,6 +476,38 @@ public class ConnectionManager {
         });
     }
 
+//    http://cnc.hellogbye.com/cnc/rest/TravelPreference/Profiles/3a3be8e4-57b6-4b48-98f7-2624701b20af/Preferences/FLT/Attributes/2/Values
+
+
+    public void getUserSettingAttributesForAttributeID(String attributesId, String type,final ServerRequestListener listener) {
+        String url = getURL(Services.USER_POST_TRAVEL_PREFERENCES);
+        JSONObject jsonObject = new JSONObject();
+
+
+//        for(SettingsAttributeParamVO attributeParamVO : data) {
+//            String attributeType = attributeParamVO.getmId();
+            url = url + "/" + PREFERENCES + "/" + type+"/" + "Attributes/" + attributesId+"/Values";
+
+
+            // url = url + "/" + attributesId + "/" + PREFERENCES + "/" + type+"/" + "Attributes/" + attributePositionId +"/Values";
+
+            HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                    jsonObject, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    listener.onSuccess(Parser.getSettingsSpecificAttributeData(response));
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    listener.onError(Parser.parseErrorMessage(error));
+                }
+            });
+//        }
+    }
+
+
+
     public void getUserSettingsDefault(final ServerRequestListener listener) {
         String url = getURL(Services.USER_POST_TRAVEL_PROFILES);
         JSONObject jsonObject = new JSONObject();
@@ -830,6 +865,8 @@ public class ConnectionManager {
                 return BASE_URL + "TravelPreference/Profiles/Defaults";
             case USER_POST_TRAVEL_PROFILES:
                 return BASE_URL + "TravelPreference/Profiles";
+            case USER_POST_TRAVEL_PREFERENCES:
+                return BASE_URL + "TravelPreference";
             case USER_POST_CHECKOUT:
                 return BASE_URL + "CheckOut";
             case USER_GET_SEARCH_QUERY:

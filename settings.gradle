@@ -1,2 +1,1 @@
-include ':app', ':libs', ':DragNDropList'
-project(':DragNDropList').projectDir = new File('DragNDropList-master')
+include ':app', ':DragNDropList'

@@ -19,6 +19,7 @@
         android:textColor="@drawable/tabs_states"
         android:text="@string/flight_tab"
         android:textSize="@dimen/DP14"
+
         app:fontName="dinnextltpro_regular.otf"
         />
 

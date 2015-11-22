@@ -42,7 +42,7 @@ import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.MyTripsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PaymentDetailsFragemnt;
-import hellogbye.com.hellogbyeandroid.fragments.PrefrenceSettingsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TabsFragmentSettings;
 import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
@@ -50,6 +50,7 @@ import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
@@ -323,6 +324,16 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         return mSettingsAttribute;
     }
 
+    @Override
+    public void setAccountSettingsAttributeSpecific(List<SettingsAttributesVO> settingsAttribute) {
+
+    }
+
+    @Override
+    public List<SettingsAttributesVO> getAccountSettingsAttributeSpecific() {
+        return null;
+    }
+
 
     public void selectItem(int position) {
         // update the main content by replacing fragments
@@ -346,7 +357,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 fragment = TravelCompanionsFragment.newInstance(navPosition);
                 break;
             case PREFERENCE:
-                fragment = PrefrenceSettingsFragment.newInstance(navPosition);
+                fragment = PreferenceSettingsFragment.newInstance(navPosition);
                 break;
             case ACCOUNT:
                 fragment = AccountSettingsFragment.newInstance(navPosition);
