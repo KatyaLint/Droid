@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/greyish_alternative_hotel"
     android:clickable="true"
     android:paddingLeft="@dimen/DP26">
 
@@ -16,12 +17,14 @@
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/payment_child_name"
         style="@style/PaymentItemStyle"
+        android:textSize="14sp"
         android:layout_toRightOf="@+id/payment_child_checkbox"
         app:fontName="dinnextltpro_light.otf" />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/payment_child_price"
         style="@style/PaymentItemStyle"
+        android:textSize="14sp"
         android:layout_alignParentRight="true"
         app:fontName="dinnextltpro_light.otf" />
 

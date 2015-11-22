@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#f4f4f4"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/checkout_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/DP10">
+
+        <LinearLayout
+            android:id="@+id/checkout_header_name_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:layout_alignParentLeft="true">
+
+            <ImageView
+                android:id="@+id/checkout_image_name_round_image_view"
+                android:layout_width="@dimen/DP34"
+                android:layout_height="@dimen/DP34" />
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/checkout_name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginLeft="5dp"
+
+                android:text="Ari" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true">
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/checkout_name_total"
+                android:layout_width="wrap_content"
+                android:textColor="@color/red_button_color"
+                android:layout_height="wrap_content"
+                app:fontName="dinnextltpro_light.otf"
+                android:text="Total" />
+
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/checkout_name_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red_button_color"
+                app:fontName="dinnextltpro_bold.otf"
+                android:text="$1234" />
+
+
+        </LinearLayout>
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/DP10"
+            android:layout_below="@+id/checkout_header_name_image"
+            android:background="@color/warm_grey_line" />
+
+    </RelativeLayout>
+
+    <ExpandableListView
+        android:id="@+id/ex_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>
