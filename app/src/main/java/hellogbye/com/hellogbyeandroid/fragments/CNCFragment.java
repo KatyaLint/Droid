@@ -86,7 +86,7 @@ public class CNCFragment extends HGBAbtsractFragment {
                 //TODO this logic needs to change once we get final api
                 if (getString(R.string.iteinerary_created).equals(strText)
                         || getString(R.string.grid_has_been_updated).equals(strText)) {
-                    getActivityInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber());
+                    getActivityInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(),null);
                 }
             }
         });

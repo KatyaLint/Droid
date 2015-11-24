@@ -7,8 +7,13 @@ import com.google.gson.annotations.SerializedName;
  */
 public class UserData {
 
+
     @SerializedName("userprofileid")
     private String userprofileid;
+
+    @SerializedName("emailaddress")
+    private String emailaddress;
+
 
     @SerializedName("firstname")
     private String firstname;
@@ -42,8 +47,24 @@ public class UserData {
     @SerializedName("ispremiumuser")
     private boolean ispremiumuser;
 
-    public UserData(String userprofileid, String firstname, String lastname, String dob, String country, String address, String city, String state, String postalcode, String avatar, boolean ispremiumuser) {
+    @SerializedName("paxid")
+    private String paxid;
+
+    @SerializedName("phone")
+    private String phone;
+
+    @SerializedName("title")
+    private String title;
+
+
+    public UserData(){
+
+    }
+
+
+    public UserData(String userprofileid, String emailaddress, String firstname, String lastname, String dob, String country, String address, String city, String state, String postalcode, String avatar, boolean ispremiumuser, String paxid, String phone, String title) {
         this.userprofileid = userprofileid;
+        this.emailaddress = emailaddress;
         this.firstname = firstname;
         this.lastname = lastname;
         this.dob = dob;
@@ -54,11 +75,11 @@ public class UserData {
         this.postalcode = postalcode;
         this.avatar = avatar;
         this.ispremiumuser = ispremiumuser;
+        this.paxid = paxid;
+        this.phone = phone;
+        this.title = title;
     }
 
-    public UserData(){
-
-    }
 
     public String getUserprofileid() {
         return userprofileid;
@@ -66,6 +87,14 @@ public class UserData {
 
     public void setUserprofileid(String userprofileid) {
         this.userprofileid = userprofileid;
+    }
+
+    public String getEmailaddress() {
+        return emailaddress;
+    }
+
+    public void setEmailaddress(String emailaddress) {
+        this.emailaddress = emailaddress;
     }
 
     public String getFirstname() {
@@ -146,5 +175,29 @@ public class UserData {
 
     public void setIspremiumuser(boolean ispremiumuser) {
         this.ispremiumuser = ispremiumuser;
+    }
+
+    public String getPaxid() {
+        return paxid;
+    }
+
+    public void setPaxid(String paxid) {
+        this.paxid = paxid;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

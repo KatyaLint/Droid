@@ -8,11 +8,13 @@ public class PaymentChild {
     private String nameText;
     private String totalText;
     private boolean selected;
+    private String guid;
 
-    public PaymentChild(String nameText, String totalText, boolean selected) {
+    public PaymentChild(String nameText, String totalText, boolean selected,String guid) {
         this.nameText = nameText;
         this.totalText = totalText;
         this.selected = selected;
+        this.guid = guid;
     }
 
     public String getNameText() {
@@ -37,5 +39,13 @@ public class PaymentChild {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
     }
 }

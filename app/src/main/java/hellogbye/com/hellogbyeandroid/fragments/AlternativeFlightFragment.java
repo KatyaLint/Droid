@@ -127,7 +127,7 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
             @Override
             public void showAlternative() {
 
-                getActivityInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_DETAILS.getNavNumber());
+                getActivityInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_DETAILS.getNavNumber(),null);
 
             }
 

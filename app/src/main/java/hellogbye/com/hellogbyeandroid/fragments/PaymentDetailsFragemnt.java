@@ -14,23 +14,24 @@ import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import com.amulyakhare.textdrawable.TextDrawable;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.PaymentChild;
 import hellogbye.com.hellogbyeandroid.models.PaymnentGroup;
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -44,6 +45,9 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
 
     private LinearLayout mRootView;
     private FontTextView mTotalPrice;
+    private FontTextView mPaymentSubmit;
+  private HashSet<String> itenearySet = new HashSet<String>();
+
 
     // private ArrayList<FontTextView> mArralistView;
 
@@ -75,6 +79,8 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
 
         mRootView = (LinearLayout) view.findViewById(R.id.payment_details_root);
         mTotalPrice = (FontTextView) view.findViewById(R.id.payment_total_price);
+        mPaymentSubmit= (FontTextView) view.findViewById(R.id.payment_submit);
+
 
         //mArralistView = new ArrayList<>();
 
@@ -109,7 +115,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
 
                         if (!isHotelAdded) {
                             hotelChildArray = new ArrayList<>();
-                            groups.add(new PaymnentGroup("Hotel", String.valueOf(passengersVO.getmTotalHotelPrice()), true));
+                            groups.add(new PaymnentGroup("Hotel", "$"+String.valueOf(passengersVO.getmTotalHotelPrice()), true));
 
                             isHotelAdded = true;
                         }
@@ -117,7 +123,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
                     } else if (node.getmType().equals("flight")) {
                         if (!isFlightAdded) {
                             flightChildArray = new ArrayList<>();
-                            groups.add(new PaymnentGroup("Flight", String.valueOf(passengersVO.getmTotalFlightPrice()), true));
+                            groups.add(new PaymnentGroup("Flight", "$"+ String.valueOf(passengersVO.getmTotalFlightPrice()), true));
                             isFlightAdded = true;
                         }
                     }
@@ -140,12 +146,14 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
                                 "-" + HGBUtility.parseDateToddMMyyyyForPayment(nodesVO.getmCheckOut())+ "\n" +
                                 nodesVO.getRoomsVOs().get(0).getmRoomType() + " " +
                                 HGBUtility.getDateDiffString(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()),
-                                String.valueOf(nodesVO.getmMinimumAmount()) , true));
+                                "$"+String.valueOf(nodesVO.getmMinimumAmount()) , true,nodesVO.getmGuid()));
+                        itenearySet.add(nodesVO.getmGuid());
                     } else if (list.get(0).getmType().equals("flight")) {
                         flightChildArray.add(new PaymentChild(nodesVO.getmOrigin() + "-" + nodesVO.getmDestination() + "\n" +
                                 nodesVO.getmOperatorName() + "" + nodesVO.getmEquipment() +
                                 "\n" + HGBUtility.parseDateToddMMyyyyForPayment(nodesVO.getDateOfCell()),
-                                String.valueOf(totalprice), true));
+                                "$"+String.valueOf(totalprice), true,nodesVO.getmGuid()));
+                        itenearySet.add(nodesVO.getmGuid());
                     }
                 }
             }
@@ -159,6 +167,25 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
 
 
         mTotalPrice.setText("$" + getActivityInterface().getTravelOrder().getmTotalPrice());
+
+        mPaymentSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ConnectionManager.getInstance(getActivity()).checkoutSolutionId(getActivityInterface().getSolutionID(), itenearySet, new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        getActivityInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS.getNavNumber(),null);
+                    }
+
+                    @Override
+                    public void onError(Object data) {
+                        HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.show(getFragmentManager(), (String) data);
+                    }
+                });
+            }
+        });
     }
 
     public class ExpandableListAdapter extends BaseExpandableListAdapter {
@@ -284,6 +311,8 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
                         getChecked[childPosition] = isChecked;
                         mChildCheckStates.put(groupPosition, getChecked);
 
+                        itenearySet.add(  childrenList.get(groupPosition).get(childPosition).getGuid());
+
 
                         //TODO this is a bug we need to deselct/select parent
                         groupsList.get(groupPosition).setSelected(true);
@@ -304,6 +333,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
                         setGroupPrice(false, groupPosition, holder.childPricetext);
                         setHeaderPrice(false, nameHeaderPriceTextView, holder.childPricetext.getText().toString());
                         setTotalPrice(false, holder.childPricetext.getText().toString());
+                        itenearySet.remove(childrenList.get(groupPosition).get(childPosition).getGuid());
                     }
                     notifyDataSetChanged();
                 }
@@ -387,7 +417,8 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
                     if (isChecked) {
                         double iSum = 0;
                         for (PaymentChild child : childrenList.get(groupPosition)) {
-                            iSum += Double.valueOf(child.getTotalText());
+                            iSum += Double.valueOf(child.getTotalText().substring(1));
+                            itenearySet.add(child.getGuid());
                         }
                         boolean getChecked[] = mChildCheckStates.get(groupPosition);
                         if (getChecked != null) {
@@ -396,7 +427,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
                         }
 
 
-                        groupsList.get(groupPosition).setTotalText(String.valueOf(iSum));
+                        groupsList.get(groupPosition).setTotalText("$"+String.valueOf(iSum));
                         setHeaderPrice(true, nameHeaderPriceTextView, String.valueOf(iSum));
 
                         setTotalPrice(true, String.valueOf(iSum));
@@ -408,9 +439,13 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
                             mChildCheckStates.put(groupPosition, getChecked);
                         }
 
-                        groupsList.get(groupPosition).setTotalText("0.0");
+                        groupsList.get(groupPosition).setTotalText("$0.0");
                         setHeaderPrice(false, nameHeaderPriceTextView, holder.groupPricetext.getText().toString());
                         setTotalPrice(false, holder.groupPricetext.getText().toString());
+                        for (PaymentChild child : childrenList.get(groupPosition)) {
+
+                            itenearySet.remove(child.getGuid());
+                        }
                     }
                     notifyDataSetChanged();
                 }
@@ -442,12 +477,14 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
 
         private void setGroupPrice(boolean add, int groupPosition, FontTextView childPricetext) {
             PaymnentGroup paymnentGroup = groupsList.get(groupPosition);
+            String string =childPricetext.getText().toString().substring(1);
+
             if (add) {
-                double d = Double.valueOf(paymnentGroup.getTotalText()) + Double.valueOf(childPricetext.getText().toString());
-                groupsList.get(groupPosition).setTotalText(String.valueOf(d));
+                double d = Double.valueOf(paymnentGroup.getTotalText().substring(1)) + Double.valueOf(string);
+                groupsList.get(groupPosition).setTotalText("$"+String.valueOf(d));
             } else {
-                double d = Double.valueOf(paymnentGroup.getTotalText()) - Double.valueOf(childPricetext.getText().toString());
-                groupsList.get(groupPosition).setTotalText(String.valueOf(d));
+                double d = Double.valueOf(paymnentGroup.getTotalText().substring(1)) - Double.valueOf(string);
+                groupsList.get(groupPosition).setTotalText("$"+String.valueOf(d));
             }
 
         }
@@ -463,6 +500,9 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
         private void setHeaderPrice(boolean add, View nameHeaderPriceTextView, String value) {
             FontTextView priceFontText = (FontTextView) nameHeaderPriceTextView.findViewById(R.id.checkout_name_price);
             String string = priceFontText.getText().toString().substring(1);
+            if(value.contains("$")){
+                value = value.substring(1);
+            }
             if (add) {
                 double dTotal = Double.valueOf(string) + Double.valueOf(value);
                 priceFontText.setText("$" + String.format("%.2f", dTotal));
@@ -476,6 +516,9 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
 
     private void setTotalPrice(boolean b, String s) {
         String strTotal = mTotalPrice.getText().toString().substring(1);
+        if(s.contains("$")){
+            s = s.substring(1);
+        }
         if (b) {
             double d = Double.valueOf(strTotal) + Double.valueOf(s);
             mTotalPrice.setText("$" + String.format("%.2f", d));

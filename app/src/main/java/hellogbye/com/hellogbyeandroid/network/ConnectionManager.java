@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
@@ -24,8 +25,8 @@ public class ConnectionManager {
     }
 
 
-    public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
- //   public static String BASE_URL = "http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/";
+ //   public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
+    public static String BASE_URL = "http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/";
 
 
 
@@ -199,13 +200,18 @@ public class ConnectionManager {
     }
 
 
-    public void checkoutSolutionId(String profileId, ArrayList<String> items, final ServerRequestListener listener) {
+    public void checkoutSolutionId(String profileId, HashSet<String> items, final ServerRequestListener listener) {
         String url = getURL(Services.USER_POST_CHECKOUT);
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("solutionId", profileId);
-            jsonObject.put("ItemIds", items.toString());//TODO NEED TO CHECK MIGHT NOT WORK
+            jsonObject.put("itineraryid", profileId);
+
+            JSONArray jsonArray = new JSONArray();
+            for(String s :items){
+                jsonArray.put(s);
+            }
+            jsonObject.put("itemIds", jsonArray);//TODO NEED TO CHECK MIGHT NOT WORK
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -581,7 +587,7 @@ public class ConnectionManager {
                 jsonObject, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(response);
+                listener.onSuccess(Parser.parseBookingOptions(response));
             }
         }, new Response.ErrorListener() {
             @Override
@@ -599,7 +605,7 @@ public class ConnectionManager {
                 jsonObject, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(response);
+                listener.onSuccess(Parser.getTravels(response));
             }
         }, new Response.ErrorListener() {
             @Override
