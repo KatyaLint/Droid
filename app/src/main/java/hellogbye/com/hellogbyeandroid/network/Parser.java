@@ -15,6 +15,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.models.BookingRequest;
 import hellogbye.com.hellogbyeandroid.models.TravelPreference;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
@@ -134,6 +135,19 @@ public class Parser {
         return mTravelPrefList;
     }
 
+    public static Object getTravels(String response){
+        ArrayList<UserData>  mTravelList = null;
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<UserData>>() {
+            }.getType();
+            mTravelList = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mTravelList;
+    }
+
     public static Object loginData(String response){
         UserLoginCredentials user = null;
         try {
@@ -191,6 +205,24 @@ public class Parser {
         }
         return userdata;
     }
+
+    public static Object parseBookingOptions(String response) {
+        BookingRequest bookingrequest = new BookingRequest();
+        try {
+            Gson gson = new Gson();
+            Type type = new TypeToken<BookingRequest>() {
+            }.getType();
+            bookingrequest = gson.fromJson(response, type);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bookingrequest;
+    }
+
+
+
+
 
 
 }

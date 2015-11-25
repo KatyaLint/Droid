@@ -1,6 +1,7 @@
 package hellogbye.com.hellogbyeandroid;
 
 import android.app.Fragment;
+import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ public interface HGBMainInterface {
 
     CostumeToolBar getToolBar();
 
-    void goToFragment(int fragment);
+    void goToFragment(int fragment, Bundle bundle);
 
     void continueFlow(int fragment);
 

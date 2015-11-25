@@ -1,0 +1,179 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_very_light"
+    android:orientation="vertical">
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travel_detail_title"
+        style="@style/TravelerDetailsTextStyle"
+        android:hint="Title"
+        app:fontName="dinnextltpro_light.otf" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/warm_grey_line"  />
+
+    <EditText
+        android:id="@+id/travel_detail_first_name"
+        style="@style/TravelerDetailsTextStyle"
+        android:hint="First Name"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/warm_grey_line"  />
+
+    <EditText
+        android:id="@+id/travel_detail_last_name"
+        style="@style/TravelerDetailsTextStyle"
+        android:hint="Last Name"
+         />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/warm_grey_line"  />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/travel_detail_dob"
+            style="@style/TravelerDetailsTextStyle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:hint="Date of Birth"
+            app:fontName="dinnextltpro_light.otf" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/warm_grey_line" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/travel_detail_gender"
+            style="@style/TravelerDetailsTextStyle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:hint="Gender"
+            app:fontName="dinnextltpro_light.otf" />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/warm_grey_line"  />
+
+    <EditText
+        android:id="@+id/travel_detail_email"
+        style="@style/TravelerDetailsTextStyle"
+        android:hint="Email"
+         />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/warm_grey_line"  />
+
+    <EditText
+        android:id="@+id/travel_detail_phone"
+        style="@style/TravelerDetailsTextStyle"
+        android:hint="Phone"
+
+         />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/warm_grey_line"  />
+
+    <EditText
+        android:id="@+id/travel_detail_adress"
+        style="@style/TravelerDetailsTextStyle"
+        android:hint="Address"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/warm_grey_line"  />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/travel_detail_city"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:hint="City"
+            style="@style/TravelerDetailsTextStyle"
+           />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/warm_grey_line"  />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/travel_detail_country"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:hint="Country"
+            style="@style/TravelerDetailsTextStyle"
+            app:fontName="dinnextltpro_light.otf" />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/warm_grey_line"  />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/travel_detail_postal_code"
+            style="@style/TravelerDetailsTextStyle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:hint="Postal Code"
+             />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/warm_grey_line"  />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/travel_detail_province"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:hint="Province"
+            style="@style/TravelerDetailsTextStyle"
+            app:fontName="dinnextltpro_light.otf" />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/warm_grey_line"  />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_detail_save"
+        style="@style/RedCustomButtonStyle"
+        android:layout_below="@+id/remmember_me_checkbox"
+        android:layout_marginLeft="@dimen/DP34"
+        android:layout_marginRight="@dimen/DP34"
+        android:layout_marginTop="@dimen/DP20"
+        android:background="@drawable/red_button"
+        android:text="Save" />
+
+
+</LinearLayout>

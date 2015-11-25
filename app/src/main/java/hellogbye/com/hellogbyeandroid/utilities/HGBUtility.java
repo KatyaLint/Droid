@@ -53,6 +53,7 @@ import java.util.Date;
 import java.util.Stack;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.UserData;
 
 
 /**
@@ -457,6 +458,34 @@ public static String formattDateToStringMonthDate(String dateInString) {
                     haveConnectedMobile = true;
         }
         return haveConnectedWifi || haveConnectedMobile;
+    }
+
+    public static boolean isUserDataValid(UserData user){
+        boolean isValid = true;
+        if(user.getFirstname().length()== 0){
+            return isValid;
+        }
+
+        if(user.getLastname().length()== 0){
+            return isValid;
+        }
+
+        if(user.getCity().length()== 0){
+            return isValid;
+        }
+
+        if(user.getState().length()== 0){
+            return isValid;
+        }
+        if(user.getCountry().length()== 0){
+            return isValid;
+        }
+        if(user.getPostalcode().length()== 0){
+            return isValid;
+        }
+
+
+        return isValid;
     }
 
 }

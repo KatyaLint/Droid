@@ -93,10 +93,17 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
+<<<<<<< HEAD
                     accountSettingsAttributes = (List<SettingsAttributeParamVO>) data;//gson.fromJson((String) data, listType);
                     getActivityInterface().setAccountSettingsAttribute(accountSettingsAttributes);
 
                     getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_TAB_SETTINGS.getNavNumber());
+=======
+                    acountSettingsAttributes = (List<SettingsAttributeParamVO>) data;//gson.fromJson((String) data, listType);
+                    getActivityInterface().setAccountSettingsAttribute(acountSettingsAttributes);
+//                    getSettingsAttributes(clickedAttributeID, "", 3,acountSettingsAttributes);
+                    getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_TAB_SETTINGS.getNavNumber(),null);
+>>>>>>> origin/master
                 }
             }
 

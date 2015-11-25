@@ -8,6 +8,7 @@
     <color name="hgb_edit_text_color">#5D808E</color>
     <color name="green_button_color">#36B784</color>
     <color name="red_button_color">#EE3A3C</color>
+    <color name="red_disable_button_color">#F1979A</color>
     <color name="dark_teal">#003d4c</color>
     <color name="marine">#053246</color>
     <color name="warm_grey">#777777</color>

@@ -46,6 +46,8 @@ import hellogbye.com.hellogbyeandroid.fragments.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PreferencesAttributeFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PreferencesTabsFragmentSettings;
 import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.TravlerDetailsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.TravlersFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -177,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         purchaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber());
+                goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(),null);
             }
         });
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -222,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
 
         //HGBUtility.loadHotelImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
-        selectItem(ToolBarNavEnum.HOME.getNavNumber());
+        selectItem(ToolBarNavEnum.HOME.getNavNumber(),null);
 
     }
 
@@ -311,7 +313,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     /* The click listener for RecyclerView in the navigation drawer */
     @Override
     public void onClick(View view, int position) {
-        selectItem(position);
+        selectItem(position,null);
     }
 
 
@@ -319,7 +321,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     public void continueFlow(int fragment) {
 
         if(fragment == ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber()) {
-            selectItem(ToolBarNavEnum.ITINARERY.getNavNumber());
+            selectItem(ToolBarNavEnum.ITINARERY.getNavNumber(),null);
         }
     }
 
@@ -414,8 +416,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
-    public void selectItem(int position) {
+    public void selectItem(int position,Bundle bundle) {
         // update the main content by replacing fragments
+
         Fragment fragment = null;
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
         boolean stashToBack = true;
@@ -467,11 +470,19 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case PREFERENCES_SPECIFIC_LIST_SETTINGS:
                 fragment = PreferencesAttributeFragment.newInstance(navPosition);
                 break;
+            case PAYMENT_TRAVLERS:
+                fragment = TravlersFragment.newInstance(navPosition);
+                break;
+            case PAYMENT_TRAVLERS_DETAILS:
+                fragment = TravlerDetailsFragment.newInstance(navPosition);
+                break;
 
 
 
         }
-
+        if(bundle != null){
+            fragment.setArguments(bundle);
+        }
         HGBUtility.goToNextFragmentIsAddToBackStack(this, fragment, stashToBack);
         mToolbar.initToolBarItems();
         mToolbar.updateToolBarView(position);
@@ -639,8 +650,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
-    public void goToFragment(int fragmentname) {
-        selectItem(fragmentname);
+    public void goToFragment(int fragmentname,Bundle bundle) {
+        selectItem(fragmentname,bundle);
     }
 
 
