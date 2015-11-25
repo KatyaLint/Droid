@@ -17,7 +17,6 @@ import hellogbye.com.hellogbyeandroid.adapters.PreferenceSettingsAdapter;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AcountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
@@ -29,10 +28,10 @@ import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 public class PreferenceSettingsFragment extends HGBAbtsractFragment {
 
 
-
-  //  private ProgressBar pbHeaderProgress;
     private RecyclerView mRecyclerView;
     private PreferenceSettingsAdapter mAdapter;
+    private List<AcountDefaultSettingsVO> accountDefaultSettings;
+    private List<SettingsAttributeParamVO> accountSettingsAttributes;
 
     public PreferenceSettingsFragment() {
         // Empty constructor required for fragment subclasses
@@ -46,8 +45,7 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
         return fragment;
     }
 
-    List<AcountDefaultSettingsVO> acountDefaultSettings;
-    List<SettingsAttributeParamVO> acountSettingsAttributes;
+
 
 
     @Override
@@ -59,7 +57,6 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
 
     private void createListAdapter(){
 
-
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         mRecyclerView.setHasFixedSize(true);
         // use a linear layout manager
@@ -69,7 +66,7 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
         // specify an adapter (see also next example)
 
         mAdapter = new PreferenceSettingsAdapter();
-        mAdapter.swapArray(acountDefaultSettings);
+        mAdapter.swapArray(accountDefaultSettings);
         mAdapter.setViewClickListener(new IViewCallBackClick() {
             @Override
             public void viewCallBackClick(String viewId) {
@@ -89,23 +86,6 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
     }
 
 
-//    private void getSettingsAttributes(String clickedAttributeID, String type, int attributeID, List<SettingsAttributeParamVO> data) {
-//        ConnectionManager.getInstance(getActivity()).getUserSettingAttributesForAttributeID(clickedAttributeID,  type, new ConnectionManager.ServerRequestListener() {
-//            @Override
-//            public void onSuccess(Object data) {
-//                if (data != null) {
-//                    List<SettingsAttributesVO> acountSettingsAttributes = (List<SettingsAttributesVO>) data; //gson.fromJson((String) data, listType);
-//                    getActivityInterface().setAccountSettingsAttributeSpecific(acountSettingsAttributes);
-//                    getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_TAB_SETTINGS.getNavNumber());
-//                }
-//            }
-//
-//            @Override
-//            public void onError(Object data) {
-//                HGBErrorHelper errorHelper = new HGBErrorHelper();
-//            }
-//        });
-//    }
 
 
     private void getSettingsAttributes(final String clickedAttributeID) {
@@ -113,9 +93,9 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
-                    acountSettingsAttributes = (List<SettingsAttributeParamVO>) data;//gson.fromJson((String) data, listType);
-                    getActivityInterface().setAccountSettingsAttribute(acountSettingsAttributes);
-//                    getSettingsAttributes(clickedAttributeID, "", 3,acountSettingsAttributes);
+                    accountSettingsAttributes = (List<SettingsAttributeParamVO>) data;//gson.fromJson((String) data, listType);
+                    getActivityInterface().setAccountSettingsAttribute(accountSettingsAttributes);
+
                     getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_TAB_SETTINGS.getNavNumber());
                 }
             }
@@ -133,30 +113,20 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
         View rootView = inflater.inflate(R.layout.settings_list_layout, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.settingsRecyclerView);
 
-//        pbHeaderProgress = (ProgressBar) rootView.findViewById(R.id.pbHeaderProgress);
-     //   pbHeaderProgress.setVisibility(View.VISIBLE);
-
         ConnectionManager.getInstance(getActivity()).getUserSettingsDefault(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
-
-                    acountDefaultSettings =  (List<AcountDefaultSettingsVO>)data;
+                    accountDefaultSettings =  (List<AcountDefaultSettingsVO>)data;
                     createListAdapter();
-                   // pbHeaderProgress.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onError(Object data) {
-            //    pbHeaderProgress.setVisibility(View.GONE);
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
             }
         });
-
-
-
-
 
         return rootView;
     }

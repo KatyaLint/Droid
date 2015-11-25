@@ -43,7 +43,8 @@ import hellogbye.com.hellogbyeandroid.fragments.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.MyTripsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PaymentDetailsFragemnt;
 import hellogbye.com.hellogbyeandroid.fragments.PreferenceSettingsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.TabsFragmentSettings;
+import hellogbye.com.hellogbyeandroid.fragments.PreferencesAttributeFragment;
+import hellogbye.com.hellogbyeandroid.fragments.PreferencesTabsFragmentSettings;
 import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
@@ -87,6 +88,14 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private String solutionID;
     private ActionBar actionBar;
     private List<SettingsAttributeParamVO> mSettingsAttribute;
+    private List<SettingsAttributesVO> settingsAttribute;
+    private List<SettingsAttributesVO> flightCarrierAttributes;
+    private List<SettingsAttributesVO> hotelBedTypeAttributes;
+    private List<SettingsAttributesVO> flightAircraftAttributes;
+    private List<SettingsAttributesVO> hotelChainAttributes;
+    private List<SettingsAttributesVO> hotelStarAttributes;
+    private List<SettingsAttributesVO> flightCabinClassAttributes;
+    private List<SettingsAttributesVO> hotelSmokingAttributes;
 
 
     @Override
@@ -325,13 +334,83 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
-    public void setAccountSettingsAttributeSpecific(List<SettingsAttributesVO> settingsAttribute) {
-
+    public void setAccountSettingsFlightStopAttributes(List<SettingsAttributesVO> settingsAttribute) {
+            this.settingsAttribute = settingsAttribute;
     }
 
     @Override
-    public List<SettingsAttributesVO> getAccountSettingsAttributeSpecific() {
-        return null;
+    public List<SettingsAttributesVO> getAccountSettingsFlightStopAttributes() {
+        return settingsAttribute;
+    }
+
+    @Override
+    public void setAccountSettingsFlightCarrierAttributes(List<SettingsAttributesVO> flightCarrierAttributes) {
+        this.flightCarrierAttributes = flightCarrierAttributes;
+    }
+
+    @Override
+    public List<SettingsAttributesVO> getAccountSettingsFlightCarrierAttributes() {
+        return flightCarrierAttributes;
+    }
+
+    @Override
+    public void setAccountSettingsFlightCabinClassAttributes(List<SettingsAttributesVO> flightCabinClassAttributes) {
+        this.flightCabinClassAttributes = flightCabinClassAttributes;
+    }
+
+    @Override
+    public List<SettingsAttributesVO> getAccountSettingsFlightCabinClassAttributes() {
+        return flightCabinClassAttributes;
+    }
+
+    @Override
+    public void setAccountSettingsFlightAircraftAttributes(List<SettingsAttributesVO> flightAircraftAttributes) {
+        this.flightAircraftAttributes = flightAircraftAttributes;
+    }
+
+    @Override
+    public List<SettingsAttributesVO> getAccountSettingsFlightAircraftAttributes() {
+        return flightAircraftAttributes;
+    }
+
+    @Override
+    public void setAccountSettingsHotelStarAttributes(List<SettingsAttributesVO> hotelStarAttributes) {
+        this.hotelStarAttributes = hotelStarAttributes;
+    }
+
+    @Override
+    public List<SettingsAttributesVO> getAccountSettingsHotelStarAttributes() {
+        return hotelStarAttributes;
+    }
+
+    @Override
+    public void setAccountSettingsHotelChainAttributes(List<SettingsAttributesVO> hotelChainAttributes) {
+        this.hotelChainAttributes = hotelChainAttributes;
+    }
+
+    @Override
+    public List<SettingsAttributesVO> getAccountSettingsHotelChainAttributes() {
+        return hotelChainAttributes;
+    }
+
+    @Override
+    public void setAccountSettingsHotelSmokingAttributes(List<SettingsAttributesVO> hotelSmokingAttributes) {
+        this.hotelSmokingAttributes = hotelSmokingAttributes;
+    }
+
+    @Override
+    public List<SettingsAttributesVO> getAccountSettingsHotelSmokingClassAttributes() {
+        return hotelSmokingAttributes;
+    }
+
+    @Override
+    public void setAccountSettingsHotelBedTypeAttributes(List<SettingsAttributesVO> hotelBedTypeAttributes) {
+        this.hotelBedTypeAttributes = hotelBedTypeAttributes;
+    }
+
+    @Override
+    public List<SettingsAttributesVO> getAccountSettingsHotelBedTypeAttributes() {
+        return hotelBedTypeAttributes;
     }
 
 
@@ -383,7 +462,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 fragment = PaymentDetailsFragemnt.newInstance(navPosition);
                 break;
             case PREFERENCES_TAB_SETTINGS:
-                fragment = TabsFragmentSettings.newInstance(navPosition);
+                fragment = PreferencesTabsFragmentSettings.newInstance(navPosition);
+                break;
+            case PREFERENCES_SPECIFIC_LIST_SETTINGS:
+                fragment = PreferencesAttributeFragment.newInstance(navPosition);
                 break;
 
 

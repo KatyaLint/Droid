@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/settings_layout_tabs"
         android:background="@color/hgb_toolbar_blue"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/DP34"
@@ -19,9 +20,7 @@
         android:textColor="@drawable/tabs_states"
         android:text="@string/flight_tab"
         android:textSize="@dimen/DP14"
-
-        app:fontName="dinnextltpro_regular.otf"
-        />
+        app:fontName="dinnextltpro_regular.otf"/>
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_width="wrap_content"
@@ -32,15 +31,15 @@
         android:text="@string/hotel_tab"
         android:textColor="@drawable/tabs_states"
         android:textSize="@dimen/DP14"
-        app:fontName="dinnextltpro_regular.otf"
-        />
+        app:fontName="dinnextltpro_regular.otf"/>
     </LinearLayout>
 
 
     <include layout="@layout/settings_tabs_flight_list" android:id="@+id/setting_flight_include"/>
 
-    <include layout="@layout/settings_flight_tab_fragment" android:id="@+id/setting_hotel_include"/>
+    <include layout="@layout/settings_tabs_hotel_list" android:id="@+id/setting_hotel_include"/>
 
+    <!--<include layout="@layout/settings_drag_and_drop_list" android:id="@+id/settings_drag_drop"/>-->
 
  </LinearLayout>
 

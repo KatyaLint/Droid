@@ -52,6 +52,30 @@ public interface HGBMainInterface {
     void setAccountSettingsAttribute(List<SettingsAttributeParamVO> settingsAttribute);
     List<SettingsAttributeParamVO> getAccountSettingsAttribute();
 
-    void setAccountSettingsAttributeSpecific(List<SettingsAttributesVO> settingsAttribute);
-    List<SettingsAttributesVO> getAccountSettingsAttributeSpecific();
+    void setAccountSettingsFlightStopAttributes(List<SettingsAttributesVO> settingsAttribute);
+    List<SettingsAttributesVO> getAccountSettingsFlightStopAttributes();
+
+    void setAccountSettingsFlightCarrierAttributes(List<SettingsAttributesVO> flightCarrierAttributes);
+    List<SettingsAttributesVO> getAccountSettingsFlightCarrierAttributes();
+
+    void setAccountSettingsFlightCabinClassAttributes(List<SettingsAttributesVO> flightCabinClassAttributes);
+    List<SettingsAttributesVO> getAccountSettingsFlightCabinClassAttributes();
+
+    void setAccountSettingsFlightAircraftAttributes(List<SettingsAttributesVO> flightAircraftAttributes);
+    List<SettingsAttributesVO> getAccountSettingsFlightAircraftAttributes();
+
+
+    void setAccountSettingsHotelStarAttributes(List<SettingsAttributesVO> hotelStarAttributes);
+    List<SettingsAttributesVO> getAccountSettingsHotelStarAttributes();
+
+    void setAccountSettingsHotelChainAttributes(List<SettingsAttributesVO> hotelChainAttributes);
+    List<SettingsAttributesVO> getAccountSettingsHotelChainAttributes();
+
+    void setAccountSettingsHotelSmokingAttributes(List<SettingsAttributesVO> hotelSmokingAttributes);
+    List<SettingsAttributesVO> getAccountSettingsHotelSmokingClassAttributes();
+
+    void setAccountSettingsHotelBedTypeAttributes(List<SettingsAttributesVO> hotelBedTypeAttributes);
+    List<SettingsAttributesVO> getAccountSettingsHotelBedTypeAttributes();
+
+
 }

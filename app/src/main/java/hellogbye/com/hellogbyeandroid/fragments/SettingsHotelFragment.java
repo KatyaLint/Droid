@@ -1,32 +1,32 @@
-package hellogbye.com.hellogbyeandroid.fragments;
-
-import android.app.Activity;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.views.FontTextView;
-
-/**
- * Created by nyawka on 11/4/15.
- */
-public class SettingsHotelFragment  extends HGBAbtsractFragment {
-
-//    @Nullable
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.settings_hotel_tab_fragment,container,false);
-//        return view;
+//package hellogbye.com.hellogbyeandroid.fragments;
+//
+//import android.app.Activity;
+//import android.os.Bundle;
+//import android.support.annotation.Nullable;
+//import android.view.Gravity;
+//import android.view.LayoutInflater;
+//import android.view.View;
+//import android.view.ViewGroup;
+//import android.widget.TextView;
+//
+//import hellogbye.com.hellogbyeandroid.R;
+//import hellogbye.com.hellogbyeandroid.views.FontTextView;
+//
+///**
+// * Created by nyawka on 11/4/15.
+// */
+//public class SettingsHotelFragment  extends HGBAbtsractFragment {
+//
+////    @Nullable
+////    @Override
+////    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+////        View view = inflater.inflate(R.layout.settings_hotel_tab_fragment,container,false);
+////        return view;
+////    }
+//
+//
+//    public void setFlightData(View rootView){
+////        FontTextView text = (FontTextView)rootView.findViewById(R.id.setting_content_text);
+////        text.setText("hotel");
 //    }
-
-
-    public void setFlightData(View rootView){
-//        FontTextView text = (FontTextView)rootView.findViewById(R.id.setting_content_text);
-//        text.setText("hotel");
-    }
-}
+//}

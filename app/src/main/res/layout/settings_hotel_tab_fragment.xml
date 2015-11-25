@@ -18,8 +18,8 @@
             android:layout_height="wrap_content"
             android:textColor="@color/marine"
             android:textSize="@dimen/DP14"
+            android:text="may be it's here"
             app:fontName="dinnextltpro_regular.otf"
-
             android:layout_centerInParent="true"/>
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
