@@ -155,7 +155,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
                 accountAttributes = getActivityInterface().getAccountSettingsFlightCarrierAttributes();
                 setSettingGuidSelected(guid);
                 if (accountAttributes != null) {
-                    getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_SPECIFIC_LIST_SETTINGS.getNavNumber());
+                    getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_SPECIFIC_LIST_SETTINGS.getNavNumber(), null);
                 } else {
                     getSettingsAttributes(guid, "FLT");
                 }
@@ -165,7 +165,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
                 accountAttributes = getActivityInterface().getAccountSettingsFlightStopAttributes();
                 setSettingGuidSelected(guid);
                 if (accountAttributes != null) {
-                    getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_SPECIFIC_LIST_SETTINGS.getNavNumber());
+                    getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_SPECIFIC_LIST_SETTINGS.getNavNumber(), null);
                 } else {
                     getSettingsAttributes(guid, "FLT");
                 }
@@ -193,7 +193,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
                             break;
                     }
 
-                    getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_SPECIFIC_LIST_SETTINGS.getNavNumber());
+                    getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_SPECIFIC_LIST_SETTINGS.getNavNumber(), null);
                 }
             }
 

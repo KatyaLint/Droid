@@ -43,13 +43,7 @@ public class ItineraryFragment extends HGBAbtsractFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-<<<<<<< HEAD
 //        View rootView = inflater.inflate(R.layout.itinerary_main_view, container, false);
-=======
- //       View rootView = inflater.inflate(R.layout.itinerary_main_view, container, false);
->>>>>>> origin/master
-
         View rootView = inflater.inflate(R.layout.grid_view_table_main_layoutl, container, false);
 
 
@@ -64,21 +58,14 @@ public class ItineraryFragment extends HGBAbtsractFragment {
                     Fragment fragment = new AlternativeFlightFragment();
                     ((AlternativeFlightFragment) fragment).selectedItemGuidNumber(guidSelectedItem);
                     ((AlternativeFlightFragment) fragment).selectedUserGuidNumber(guidSelectedUser);
-
-<<<<<<< HEAD
-                    getActivityInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber());
-=======
                     getActivityInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber(),null);
->>>>>>> origin/master
+
                 } else if (itemType.equals( NodeTypeEnum.HOTEL.getType())) {
                     Fragment fragment = new HotelFragment();
                     ((HotelFragment) fragment).selectedItemGuidNumber(guidSelectedItem);
                     ((HotelFragment) fragment).selectedUserGuidNumber(guidSelectedUser);
-<<<<<<< HEAD
-                    getActivityInterface().goToFragment(ToolBarNavEnum.HOTEL.getNavNumber());
-=======
                     getActivityInterface().goToFragment(ToolBarNavEnum.HOTEL.getNavNumber(),null);
->>>>>>> origin/master
+
                 }
             }
         });
