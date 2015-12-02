@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
+import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
@@ -55,4 +56,9 @@ public interface HGBMainInterface {
 
     void setAccountSettingsAttributeSpecific(List<SettingsAttributesVO> settingsAttribute);
     List<SettingsAttributesVO> getAccountSettingsAttributeSpecific();
+
+    ArrayList<UserData> getListUsers();
+    UserData getCurrentUser();
+
+    void setListUsers( ArrayList<UserData> mTravelList);
 }

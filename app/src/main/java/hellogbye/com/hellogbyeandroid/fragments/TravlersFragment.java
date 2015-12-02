@@ -33,7 +33,7 @@ public class TravlersFragment extends HGBAbtsractFragment {
 
 
     private  FontTextView mNext;
-    private ArrayList<UserData> mTravelList;
+
     private TravlerAdapter mAdapter;
 
     private RecyclerView mRecyclerView;
@@ -76,22 +76,19 @@ public class TravlersFragment extends HGBAbtsractFragment {
             @Override
             public void onSuccess(Object data) {
 
-                mTravelList = (ArrayList<UserData>) data;
-                mAdapter = new TravlerAdapter(mTravelList,getActivity().getApplicationContext(),TravlersFragment.this);
+                getActivityInterface().setListUsers((ArrayList<UserData>) data);
+                mAdapter = new TravlerAdapter(getActivityInterface().getListUsers(),getActivity().getApplicationContext(),TravlersFragment.this);
                 mRecyclerView.setAdapter(mAdapter);
                 mAdapter.SetOnItemClickListener(new TravlerAdapter.OnItemClickListener() {
 
                     @Override
                     public void onItemClick(View v, int position) {
 
-                        UserData user = mTravelList.get(position);
-
+                        UserData user = getActivityInterface().getListUsers().get(position);
                         Gson gson = new Gson();
                         String json = gson.toJson(user);
                         Bundle args = new Bundle();
                         args.putString("user_json", json);
-
-
 
                         getActivityInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS_DETAILS.getNavNumber(),args);
 

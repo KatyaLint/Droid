@@ -200,7 +200,7 @@ public class CNCFragment extends HGBAbtsractFragment {
 
                 @Override
                 public void onError(Object data) {
-                    handleHGBMessage((String) data);
+                    handleHGBMessage((String) data );
                 }
             });
         }

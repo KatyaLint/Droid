@@ -56,8 +56,11 @@ public class UserData {
     @SerializedName("title")
     private String title;
 
+    @SerializedName("gender")
+    private String gender;
 
-    public UserData(){
+
+    public UserData() {
 
     }
 
@@ -122,10 +125,14 @@ public class UserData {
     }
 
     public String getCountry() {
-        return country;
+
+            return country;
+
     }
 
     public void setCountry(String country) {
+
+
         this.country = country;
     }
 
@@ -199,5 +206,13 @@ public class UserData {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

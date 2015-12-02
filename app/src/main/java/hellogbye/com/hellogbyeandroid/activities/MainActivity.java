@@ -89,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private String solutionID;
     private ActionBar actionBar;
     private List<SettingsAttributeParamVO> mSettingsAttribute;
+    private ArrayList<UserData> mTravelList;
+
+    private UserData mCurrentUser;
 
 
     @Override
@@ -143,8 +146,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 @Override
                 public void onSuccess(Object data) {
 
-                    UserData userr = (UserData) data;
-                    String name = userr.getFirstname() + " " + userr.getLastname();
+                    mCurrentUser = (UserData) data;
+                    String name = mCurrentUser.getFirstname() + " " + mCurrentUser.getLastname();
                     hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_NAME, "");
                     mName.setText(name);
 
@@ -334,6 +337,21 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public List<SettingsAttributesVO> getAccountSettingsAttributeSpecific() {
         return null;
+    }
+
+    @Override
+    public ArrayList<UserData> getListUsers() {
+        return  mTravelList;
+    }
+
+    @Override
+    public UserData getCurrentUser() {
+        return mCurrentUser;
+    }
+
+    @Override
+    public void setListUsers(ArrayList<UserData> mTravelList) {
+        this.mTravelList = mTravelList;
     }
 
 

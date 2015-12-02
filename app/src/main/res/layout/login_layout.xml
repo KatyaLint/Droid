@@ -51,8 +51,6 @@
       />
 
 
-
-
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/user_login"
         style="@style/RedCustomButtonStyle"

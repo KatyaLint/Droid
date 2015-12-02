@@ -12,9 +12,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
+import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 public class ConnectionManager {
 
@@ -25,9 +25,8 @@ public class ConnectionManager {
     }
 
 
- //   public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
-    public static String BASE_URL = "http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/";
-
+    public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
+   //    public static String BASE_URL = "http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/";
 
 
     private static ConnectionManager _instance;
@@ -44,7 +43,7 @@ public class ConnectionManager {
         USER_HOTEL_ROOM_ALTERNATIVE, USER_PUT_HOTEL, USER_GET_BOOKING_OPTIONS,
         USER_FLIGHT_SOLUTIONS, USER_GET_TRAVELER_INFO, USER_GET_USER_PROFILE_ACCOUNTS,
         USER_POST_USER_PROFILE_EMAIL, USER_TRAVEL_PROFILES, USER_PROFILE_RESET_PASSWORD,
-        USER_SOLUTION, ITINERARY, USER_POST_TRAVEL_PREFERENCES, ITINERARY_CNC
+        USER_SOLUTION, ITINERARY, USER_POST_TRAVEL_PREFERENCES, ITINERARY_CNC, COMPANIONS
     }
 
     private ConnectionManager() {
@@ -208,7 +207,7 @@ public class ConnectionManager {
             jsonObject.put("itineraryid", profileId);
 
             JSONArray jsonArray = new JSONArray();
-            for(String s :items){
+            for (String s : items) {
                 jsonArray.put(s);
             }
             jsonObject.put("itemIds", jsonArray);//TODO NEED TO CHECK MIGHT NOT WORK
@@ -485,33 +484,32 @@ public class ConnectionManager {
 //    http://cnc.hellogbye.com/cnc/rest/TravelPreference/Profiles/3a3be8e4-57b6-4b48-98f7-2624701b20af/Preferences/FLT/Attributes/2/Values
 
 
-    public void getUserSettingAttributesForAttributeID(String attributesId, String type,final ServerRequestListener listener) {
+    public void getUserSettingAttributesForAttributeID(String attributesId, String type, final ServerRequestListener listener) {
         String url = getURL(Services.USER_POST_TRAVEL_PREFERENCES);
         JSONObject jsonObject = new JSONObject();
 
 
 //        for(SettingsAttributeParamVO attributeParamVO : data) {
 //            String attributeType = attributeParamVO.getmId();
-            url = url + "/" + PREFERENCES + "/" + type+"/" + "Attributes/" + attributesId+"/Values";
+        url = url + "/" + PREFERENCES + "/" + type + "/" + "Attributes/" + attributesId + "/Values";
 
 
-            // url = url + "/" + attributesId + "/" + PREFERENCES + "/" + type+"/" + "Attributes/" + attributePositionId +"/Values";
+        // url = url + "/" + attributesId + "/" + PREFERENCES + "/" + type+"/" + "Attributes/" + attributePositionId +"/Values";
 
-            HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
-                    jsonObject, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    listener.onSuccess(Parser.getSettingsSpecificAttributeData(response));
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    listener.onError(Parser.parseErrorMessage(error));
-                }
-            });
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.getSettingsSpecificAttributeData(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
 //        }
     }
-
 
 
     public void getUserSettingsDefault(final ServerRequestListener listener) {
@@ -547,7 +545,7 @@ public class ConnectionManager {
             public void onResponse(String response) {
                 listener.onSuccess(Parser.parseAlternativeFlight(response));
             }
-        },  new Response.ErrorListener() {
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 listener.onError(Parser.parseErrorMessage(error));
@@ -683,6 +681,50 @@ public class ConnectionManager {
     ////////////////////////////////
     // PUT
     ///////////////////////////////
+
+
+    public void putCompanion(String id, UserData user, final ServerRequestListener listener) {
+        String url = getURL(Services.COMPANIONS);
+        JSONObject json1 = new JSONObject();
+        try {
+
+            json1.put("companionid", id);
+
+            JSONObject json2 = new JSONObject();
+            json2.put("state", user.getState());
+            json2.put("emailaddress", user.getEmailaddress());
+            json2.put("phone", user.getPhone());
+            json2.put("postalcode", user.getPostalcode());
+            json2.put("lastname",user.getLastname());
+            json2.put("dob", HGBUtility.parseDateToServertime(user.getDob()));
+            json2.put("firstname", user.getFirstname());
+            json2.put("title", user.getTitle());
+            json2.put("address", user.getAddress());
+            json2.put("city", user.getCity());
+            json2.put("country", user.getCountry());
+            json2.put("gender", user.getGender());
+            json2.put("userprofileid", user.getUserprofileid());
+
+            json1.put("stubcompanion", json2);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
+                json1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
 
     public void putAttributesValues(String profileid, String prefrenceid, String attributeid, String description, String id, String rank, String name, final ServerRequestListener listener) {
         //  {"parameters":{"solution":"c86d9879-eb15-4164-8b75-6bbac0787b75","paxid":"9d2c85f5-d295-4064-a8c6-a4d0015b52e4","checkin":"2015-09-03","checkout":"2015-09-04"},"hotel":"c329c20a-4836-4bec-9580-48f7814e9fbd"}
@@ -903,6 +945,8 @@ public class ConnectionManager {
                 return BASE_URL + "Itinerary/";
             case ITINERARY_CNC:
                 return BASE_URL + "Itinerary/CNC";
+            case COMPANIONS:
+                return BASE_URL + "Companions";
 
         }
         return url;
