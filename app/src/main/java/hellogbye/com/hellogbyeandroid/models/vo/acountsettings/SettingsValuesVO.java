@@ -23,4 +23,12 @@ public class SettingsValuesVO {
     public void setmDescription(String mDescription) {
         this.mDescription = mDescription;
     }
+
+    public String getmName() {
+        return mName;
+    }
+
+    public void setmName(String mName) {
+        this.mName = mName;
+    }
 }

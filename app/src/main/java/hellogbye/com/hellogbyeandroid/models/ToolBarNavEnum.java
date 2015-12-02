@@ -6,7 +6,9 @@ public enum ToolBarNavEnum {
     PREFERENCE(5,"Preference Settings"), ACCOUNT(6,"Account Settings"),
     HELP(7,"Help & Feedback"),CNC(8,"cnc"),ALTERNATIVE_FLIGHT(9,"Alternative Flight"),HOTEL(10,"Hotel"),
     ALTERNATIVE_FLIGHT_DETAILS(11,"Alternative flight details"),PAYMENT_DETAILS(12,"Payment details"),
-    PREFERENCES_TAB_SETTINGS(13,"Preferences Tabs Settings"),PAYMENT_TRAVLERS(14,"Preferences Travelrs"),PAYMENT_TRAVLERS_DETAILS(15,"Preferences Travelrs Details");
+    PREFERENCES_TAB_SETTINGS(13,"Preferences Tabs Settings"),PAYMENT_TRAVLERS(14,"Preferences Travelrs"),PAYMENT_TRAVLERS_DETAILS(15,"Preferences Travelrs Details"),
+    PREFERENCES_SPECIFIC_LIST_SETTINGS(16,"Preferences Specific List Settings");
+
 
     private final int navNumber;
     private final String navTitle;

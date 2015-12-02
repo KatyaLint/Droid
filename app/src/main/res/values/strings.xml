@@ -76,4 +76,6 @@
     <string name="iteinerary_created">Itinerary Created</string>
     <string name="grid_has_been_updated">OK, the grid has been updated</string>
 
+    <string name="settings_search_hunt">Search</string>
+
 </resources>

@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+
+    <SearchView
+        android:layout_width="fill_parent"
+        android:id="@+id/settings_search"
+        android:layout_height="wrap_content"/>
+
 
 
     <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
+        android:layout_below="@+id/settings_search"
         android:id="@+id/settings_drag_drop_list"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="wrap_content" />
 
 
-</LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/settings_drag_drop_list"
+        android:background="@color/white"
+        android:id="@+id/settings_search_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>

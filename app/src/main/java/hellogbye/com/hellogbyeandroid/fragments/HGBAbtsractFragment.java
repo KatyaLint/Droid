@@ -30,6 +30,7 @@ public class HGBAbtsractFragment extends Fragment {
     private static String selectedItemGuid;
     private static String selectedUserGuid;
     private CostumeToolBar mToolBar;
+    private static String settingGuidSelected;
 
 
 
@@ -238,4 +239,11 @@ public class HGBAbtsractFragment extends Fragment {
     }
 
 
+    public String getSettingGuidSelected() {
+        return settingGuidSelected;
+    }
+
+    public void setSettingGuidSelected(final String settingGuidSelected) {
+        this.settingGuidSelected = settingGuidSelected;
+    }
 }

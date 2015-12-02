@@ -3,6 +3,7 @@ package hellogbye.com.hellogbyeandroid.models.vo.acountsettings;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nyawka on 11/5/15.
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 public class SettingsAttributesVO {
 
     @SerializedName("values")
-    private ArrayList<SettingsValuesVO> attributesVOs = new ArrayList<SettingsValuesVO>();
+    private List<SettingsValuesVO> attributesVOs = new ArrayList<SettingsValuesVO>();
     @SerializedName("rank")
     private double mRank;
     @SerializedName("id")
@@ -22,11 +23,11 @@ public class SettingsAttributesVO {
     @SerializedName("description")
     private String mDescription;
 
-    public ArrayList<SettingsValuesVO> getAttributesVOs() {
+    public List<SettingsValuesVO> getAttributesVOs() {
         return attributesVOs;
     }
 
-    public void setAttributesVOs(ArrayList<SettingsValuesVO> attributesVOs) {
+    public void setAttributesVOs(List<SettingsValuesVO> attributesVOs) {
         this.attributesVOs = attributesVOs;
     }
 
