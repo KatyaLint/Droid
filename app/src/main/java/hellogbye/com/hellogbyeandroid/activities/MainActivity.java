@@ -35,6 +35,7 @@ import hellogbye.com.hellogbyeandroid.fragments.AccountSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.fragments.AlternativeFlightsDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
+import hellogbye.com.hellogbyeandroid.fragments.CreditCardListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HistoryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HomeFragment;
@@ -49,6 +50,7 @@ import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TravlerDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TravlersFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
+import hellogbye.com.hellogbyeandroid.models.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserData;
@@ -92,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private List<SettingsAttributeParamVO> mSettingsAttribute;
 
     private ArrayList<UserData> mTravelList;
+    private ArrayList<CreditCardItem> mCreditCardList;
 
     private UserData mCurrentUser;
 
@@ -434,6 +437,18 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
+    public ArrayList<CreditCardItem> getCreditCards() {
+        return mCreditCardList;
+    }
+
+    @Override
+    public void setCreditCards(ArrayList<CreditCardItem> mCreditCardList) {
+
+        this.mCreditCardList = mCreditCardList;
+
+    }
+
+    @Override
     public void setListUsers(ArrayList<UserData> mTravelList) {
         this.mTravelList = mTravelList;
     }
@@ -498,6 +513,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case PAYMENT_TRAVLERS_DETAILS:
                 fragment = TravlerDetailsFragment.newInstance(navPosition);
+                break;
+            case SELECT_CREDIT_CARD:
+                fragment = CreditCardListFragment.newInstance(navPosition);
                 break;
 
 

@@ -43,7 +43,7 @@ public class ConnectionManager {
         USER_HOTEL_ROOM_ALTERNATIVE, USER_PUT_HOTEL, USER_GET_BOOKING_OPTIONS,
         USER_FLIGHT_SOLUTIONS, USER_GET_TRAVELER_INFO, USER_GET_USER_PROFILE_ACCOUNTS,
         USER_POST_USER_PROFILE_EMAIL, USER_TRAVEL_PROFILES, USER_PROFILE_RESET_PASSWORD,
-        USER_SOLUTION, ITINERARY, USER_POST_TRAVEL_PREFERENCES, ITINERARY_CNC, COMPANIONS
+        USER_SOLUTION, ITINERARY, USER_POST_TRAVEL_PREFERENCES, ITINERARY_CNC, COMPANIONS,CARD_TOKEN
     }
 
     private ConnectionManager() {
@@ -289,6 +289,26 @@ public class ConnectionManager {
     ////////////////////////////////
     // GETS
     ///////////////////////////////
+
+
+    public void getCreditCards(final ServerRequestListener listener) {
+        String url = getURL(Services.CARD_TOKEN);
+
+        JSONObject jsonObject = new JSONObject();
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseCreditCardList(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
+    }
 
 
     public void getPreferenceProfiles(final ServerRequestListener listener) {
@@ -947,6 +967,9 @@ public class ConnectionManager {
                 return BASE_URL + "Itinerary/CNC";
             case COMPANIONS:
                 return BASE_URL + "Companions";
+            case CARD_TOKEN:
+                return BASE_URL + "Card/Token";
+
 
         }
         return url;

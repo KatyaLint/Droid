@@ -105,11 +105,10 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
         mState = (FontTextView) view.findViewById(R.id.travel_detail_province);
         mSave = (FontTextView) view.findViewById(R.id.travler_detail_save);
 
-        Gson gson = new Gson();
         Bundle args = getArguments();
         if (args != null) {
-            String strJson = args.getString("user_json");
-            mUser = gson.fromJson(strJson, UserData.class);
+            int position = args.getInt("user_json_position");
+            mUser = getActivityInterface().getListUsers().get(position);
         }
 
         if (mUser != null) {
