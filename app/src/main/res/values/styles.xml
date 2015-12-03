@@ -45,7 +45,17 @@
         <item name="android:textColorHint">@color/hgb_edit_text_color</item>
         <item name="android:textColor">@color/hgb_edit_text_color</item>
         <item name="android:background">@drawable/edit_text_border</item>
+    </style>
 
+    <style name="cc_edit_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:paddingBottom">10sp</item>
+        <item name="android:textColorHint">@color/cc_edit_text</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:background">@drawable/cc_edit_text_border</item>
     </style>
 
     <style name="CustomButtonTextStyle">

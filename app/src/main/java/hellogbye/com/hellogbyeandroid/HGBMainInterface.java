@@ -51,6 +51,10 @@ public interface HGBMainInterface {
 
     void continueFlow(int fragment);
 
+    void setTotalPrice(String totalPrice);
+
+    String getTotalPrice();
+
 
     void setAccountSettingsAttribute(List<SettingsAttributeParamVO> settingsAttribute);
     List<SettingsAttributeParamVO> getAccountSettingsAttribute();

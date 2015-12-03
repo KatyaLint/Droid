@@ -26,6 +26,7 @@
             app:fontName="dinnextltpro_regular.otf"
             android:layout_marginLeft="10dp"
             android:text="1234"
+            android:textColor="@color/warm_grey_line"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

@@ -6,11 +6,38 @@
     android:background="#f4f4f4"
     android:orientation="vertical">
 
+
+    <LinearLayout
+        android:id="@+id/select_cc_header"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_height="@dimen/DP38"
+        android:gravity="center_horizontal"
+        android:background="@color/white">
+
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/cc_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:fontName="dinnextltpro_medium.otf"
+            android:drawableLeft="@drawable/expand"
+            android:drawablePadding="10dp"
+            android:textColor="@color/warm_grey_line"
+            android:text="Add Credit/Debit Card" />
+
+
+
+
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/select_cc_recyclerView"
         android:layout_width="match_parent"
-        android:layout_above="@+id/traveler_next_rl"
-        android:layout_height="match_parent">
+        android:layout_above="@+id/select_cc_rl"
+        android:layout_below="@+id/select_cc_header"
+        android:layout_height="wrap_content">
 
 
     </android.support.v7.widget.RecyclerView>

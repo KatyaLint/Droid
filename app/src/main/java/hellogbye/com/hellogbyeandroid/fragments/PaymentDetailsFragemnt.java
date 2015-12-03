@@ -14,13 +14,16 @@ import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import com.amulyakhare.textdrawable.TextDrawable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.PaymentChild;
 import hellogbye.com.hellogbyeandroid.models.PaymnentGroup;
@@ -28,7 +31,6 @@ import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
@@ -175,6 +177,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
                 ConnectionManager.getInstance(getActivity()).checkoutSolutionId(getActivityInterface().getSolutionID(), itenearySet, new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
+                        getActivityInterface().setTotalPrice(mTotalPrice.getText().toString());
                         getActivityInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS.getNavNumber(),null);
                     }
 
@@ -372,6 +375,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
                 holder.groupNametext = (FontTextView) convertView.findViewById(R.id.payment_group_name);
                 holder.groupPricetext = (FontTextView) convertView.findViewById(R.id.payment_group_price);
                 holder.groupCheckBox = (CheckBox) convertView.findViewById(R.id.payment_group_checkbox);
+                holder.groupImageView = (ImageView) convertView.findViewById(R.id.payment_group_image);
 
 
                 convertView.setOnClickListener(new View.OnClickListener() {
@@ -381,8 +385,10 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
                         ExpandableListView listView = (ExpandableListView) v.getParent();
                         if (listView.isGroupExpanded(groupPosition)) {
                             listView.collapseGroup(groupPosition);
+                            holder.groupImageView.setBackgroundResource(R.drawable.collapse);
                         } else {
                             listView.expandGroup(groupPosition);
+                            holder.groupImageView.setBackgroundResource(R.drawable.expand);
                         }
                     }
                 });
@@ -394,11 +400,14 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
                     public void onClick(View v) {
                         //TODO need to fix this up not good
                         ExpandableListView listView = (ExpandableListView) v.getParent();
-                        Log.d("", "");
+
                         if (listView.isGroupExpanded(groupPosition)) {
                             listView.collapseGroup(groupPosition);
+                            holder.groupImageView.setBackgroundResource(R.drawable.expand);
                         } else {
                             listView.expandGroup(groupPosition);
+
+                            holder.groupImageView.setBackgroundResource(R.drawable.collapse);
                         }
                     }
                 });
@@ -464,6 +473,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
             FontTextView groupNametext;
             FontTextView groupPricetext;
             CheckBox groupCheckBox;
+            ImageView groupImageView;
 
         }
 

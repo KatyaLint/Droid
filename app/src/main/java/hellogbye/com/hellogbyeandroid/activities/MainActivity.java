@@ -32,6 +32,7 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.AccountSettingsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.AddCreditCardFragment;
 import hellogbye.com.hellogbyeandroid.fragments.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.fragments.AlternativeFlightsDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
@@ -92,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private String solutionID;
     private ActionBar actionBar;
     private List<SettingsAttributeParamVO> mSettingsAttribute;
+
+    private String mTotalPrice;
 
     private ArrayList<UserData> mTravelList;
     private ArrayList<CreditCardItem> mCreditCardList;
@@ -335,6 +338,18 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
+    public void setTotalPrice(String totalPrice) {
+
+        mTotalPrice = totalPrice;
+
+    }
+
+    @Override
+    public String getTotalPrice() {
+        return mTotalPrice;
+    }
+
+    @Override
     public void setAccountSettingsAttribute(List<SettingsAttributeParamVO> settingsAttribute) {
         this.mSettingsAttribute = settingsAttribute;
     }
@@ -516,6 +531,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case SELECT_CREDIT_CARD:
                 fragment = CreditCardListFragment.newInstance(navPosition);
+                break;
+            case ADD_CREDIT_CARD:
+                fragment = AddCreditCardFragment.newInstance(navPosition);
                 break;
 
 
