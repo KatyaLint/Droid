@@ -1,0 +1,186 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cc_add_backround">
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/cc_info"
+        android:layout_alignParentTop="true"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:text="Card Information"
+        app:fontName="dinnextltpro_regular.otf" />
+
+
+
+    <LinearLayout
+        android:id="@+id/cc_details_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@color/white"
+        android:layout_below="@+id/cc_info"
+        android:orientation="vertical"
+        android:padding='@dimen/DP24'>
+
+        <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+            android:id="@+id/cc_number"
+            style="@style/cc_edit_text"
+            android:layout_width="match_parent"
+            android:hint="Card Number"
+            android:inputType="number"
+            app:fontName="dinnextltpro_regular.otf" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/DP24"
+            android:orientation="horizontal">
+
+            <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+                android:id="@+id/cc_expiry"
+                style="@style/cc_edit_text"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:hint="Expiry Date"
+                android:inputType="number"
+                app:fontName="dinnextltpro_regular.otf" />
+
+            <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+                android:id="@+id/cc_ccv"
+                style="@style/cc_edit_text"
+                android:layout_width="0dp"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:hint="CCV"
+                android:inputType="number"
+                app:fontName="dinnextltpro_regular.otf" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/DP24"
+
+            android:orientation="horizontal">
+
+            <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+                android:id="@+id/cc_first_name"
+                style="@style/cc_edit_text"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:hint="First Name"
+                android:inputType="text"
+                app:fontName="dinnextltpro_regular.otf" />
+
+            <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+                android:id="@+id/cc_last_name"
+                style="@style/cc_edit_text"
+                android:layout_width="0dp"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:hint="Last Name"
+                android:inputType="text"
+                app:fontName="dinnextltpro_regular.otf" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/cc_billing_address"
+        android:padding="10dp"
+        android:layout_below="@+id/cc_details_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="7sp"
+        android:text="Billing Address"
+        app:fontName="dinnextltpro_regular.otf" />
+
+
+    <LinearLayout
+        android:id="@+id/cc_billing_adress_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cc_billing_address"
+
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding='@dimen/DP24'>
+
+        <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+            android:id="@+id/cc_billint_st"
+            style="@style/cc_edit_text"
+            android:layout_width="match_parent"
+            android:hint="Street"
+            android:inputType="text"
+            app:fontName="dinnextltpro_regular.otf" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/cc_country"
+            style="@style/cc_edit_text"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/DP24"
+            android:hint="Country"
+            app:fontName="dinnextltpro_regular.otf" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/DP24"
+            android:orientation="horizontal">
+
+            <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+                android:id="@+id/cc_billing_city"
+                style="@style/cc_edit_text"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:hint="City"
+                android:inputType="text"
+                app:fontName="dinnextltpro_regular.otf" />
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/cc_billing_province"
+                style="@style/cc_edit_text"
+                android:layout_width="0dp"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:hint="Province"
+                android:inputType="text"
+                app:fontName="dinnextltpro_regular.otf" />
+
+            <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+                android:id="@+id/cc_billing_postal"
+                style="@style/cc_edit_text"
+                android:layout_width="0dp"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:hint="Postal"
+                android:inputType="number"
+                app:fontName="dinnextltpro_regular.otf" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/cc_save"
+        style="@style/RedCustomButtonStyle"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="40dp"
+
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginBottom="40dp"
+        android:text="Save Card" />
+
+
+</RelativeLayout>

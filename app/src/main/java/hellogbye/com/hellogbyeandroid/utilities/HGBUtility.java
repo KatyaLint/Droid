@@ -315,6 +315,33 @@ public class HGBUtility {
         }
     }
 
+    public static String parseDateToServertime(String time) {
+        String outputPattern = "yyyy-MM-dd'T'HH:mm:ss";
+        String inputPattern = "dd/MM/yyyy";
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+
+        String str = null;
+
+        try {
+
+            SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+            Date date = null;
+            try {
+                date = inputFormat.parse(time);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            str = outputFormat.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
+
+
     public static String parseDateToddMMyyyy(String time) {
         String inputPattern = "yyyy-MM-dd'T'HH:mm:ss";
         String outputPattern = "EEE,MM dd,yyyy";
@@ -463,26 +490,30 @@ public static String formattDateToStringMonthDate(String dateInString) {
     public static boolean isUserDataValid(UserData user){
         boolean isValid = true;
         if(user.getFirstname().length()== 0){
-            return isValid;
+            return false;
         }
 
         if(user.getLastname().length()== 0){
-            return isValid;
+            return false;
         }
 
         if(user.getCity().length()== 0){
-            return isValid;
+            return false;
         }
 
         if(user.getState().length()== 0){
-            return isValid;
+            return false;
         }
         if(user.getCountry().length()== 0){
-            return isValid;
+            return false;
         }
-        if(user.getPostalcode().length()== 0){
-            return isValid;
-        }
+        //todo waiting on server bug to enable
+//        if(user.getPostalcode().length()== 0){
+//            return false;
+//        }
+//                if(user.getPhone().length()== 0){
+//            return false;
+//        }
 
 
         return isValid;

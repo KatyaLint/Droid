@@ -32,9 +32,11 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.AccountSettingsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.AddCreditCardFragment;
 import hellogbye.com.hellogbyeandroid.fragments.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.fragments.AlternativeFlightsDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
+import hellogbye.com.hellogbyeandroid.fragments.CreditCardListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HistoryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HomeFragment;
@@ -51,6 +53,7 @@ import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TravlerDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TravlersFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
+import hellogbye.com.hellogbyeandroid.models.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserData;
@@ -92,6 +95,14 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private String solutionID;
     private ActionBar actionBar;
     private List<SettingsAttributeParamVO> mSettingsAttribute;
+
+    private String mTotalPrice;
+
+    private ArrayList<UserData> mTravelList;
+    private ArrayList<CreditCardItem> mCreditCardList;
+
+    private UserData mCurrentUser;
+
     private List<SettingsAttributesVO> settingsAttribute;
     private List<SettingsAttributesVO> flightCarrierAttributes;
     private List<SettingsAttributesVO> hotelBedTypeAttributes;
@@ -100,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private List<SettingsAttributesVO> hotelStarAttributes;
     private List<SettingsAttributesVO> flightCabinClassAttributes;
     private List<SettingsAttributesVO> hotelSmokingAttributes;
+
 
 
     @Override
@@ -154,8 +166,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 @Override
                 public void onSuccess(Object data) {
 
-                    UserData userr = (UserData) data;
-                    String name = userr.getFirstname() + " " + userr.getLastname();
+                    mCurrentUser = (UserData) data;
+                    String name = mCurrentUser.getFirstname() + " " + mCurrentUser.getLastname();
                     hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_NAME, "");
                     mName.setText(name);
 
@@ -328,6 +340,18 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
+    public void setTotalPrice(String totalPrice) {
+
+        mTotalPrice = totalPrice;
+
+    }
+
+    @Override
+    public String getTotalPrice() {
+        return mTotalPrice;
+    }
+
+    @Override
     public void setAccountSettingsAttribute(List<SettingsAttributeParamVO> settingsAttribute) {
         this.mSettingsAttribute = settingsAttribute;
     }
@@ -336,6 +360,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     public List<SettingsAttributeParamVO> getAccountSettingsAttribute() {
         return mSettingsAttribute;
     }
+
+
 
     @Override
     public void setAccountSettingsFlightStopAttributes(List<SettingsAttributesVO> settingsAttribute) {
@@ -417,6 +443,33 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         return hotelBedTypeAttributes;
     }
 
+    @Override
+    public ArrayList<UserData> getListUsers() {
+        return  mTravelList;
+    }
+
+    @Override
+    public UserData getCurrentUser() {
+        return mCurrentUser;
+    }
+
+    @Override
+    public ArrayList<CreditCardItem> getCreditCards() {
+        return mCreditCardList;
+    }
+
+    @Override
+    public void setCreditCards(ArrayList<CreditCardItem> mCreditCardList) {
+
+        this.mCreditCardList = mCreditCardList;
+
+    }
+
+    @Override
+    public void setListUsers(ArrayList<UserData> mTravelList) {
+        this.mTravelList = mTravelList;
+    }
+
 
     public void selectItem(int position,Bundle bundle) {
         // update the main content by replacing fragments
@@ -484,6 +537,12 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case PAYMENT_TRAVLERS_DETAILS:
                 fragment = TravlerDetailsFragment.newInstance(navPosition);
+                break;
+            case SELECT_CREDIT_CARD:
+                fragment = CreditCardListFragment.newInstance(navPosition);
+                break;
+            case ADD_CREDIT_CARD:
+                fragment = AddCreditCardFragment.newInstance(navPosition);
                 break;
 
 
@@ -735,4 +794,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             e.printStackTrace();
         }
     }
+
+
 }

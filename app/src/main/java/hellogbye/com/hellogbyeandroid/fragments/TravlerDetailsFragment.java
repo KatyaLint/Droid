@@ -1,12 +1,19 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -14,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -48,13 +56,20 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
     private EditText mPostalCode;
     private FontTextView mState;
     private UserData mUser;
+    private AlertDialog mCountryDialog;
+    private AlertDialog stateDialog;
 
     private NumberPicker countryPicker;
     private NumberPicker statePicker;
+    private NumberPicker genderPicker;
+    private NumberPicker titlePicker;
+
 
     private HashMap<String, ArrayList<ProvincesItem>> list = new HashMap<>();
 
     private ArrayList<CountryItem> mEligabileCountryList = new ArrayList<>();
+
+    private AlertDialog countryDialog;
 
 
     public static Fragment newInstance(int position) {
@@ -68,7 +83,7 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.travler_detail_layout, container, false);
-
+        loadJSONFromAsset();
         return rootView;
     }
 
@@ -90,54 +105,288 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
         mState = (FontTextView) view.findViewById(R.id.travel_detail_province);
         mSave = (FontTextView) view.findViewById(R.id.travler_detail_save);
 
-        Gson gson = new Gson();
         Bundle args = getArguments();
         if (args != null) {
-            String strJson = args.getString("user_json");
-            mUser = gson.fromJson(strJson, UserData.class);
+            int position = args.getInt("user_json_position");
+            mUser = getActivityInterface().getListUsers().get(position);
         }
 
         if (mUser != null) {
             initUser();
         }
 
-        if (HGBUtility.isUserDataValid(mUser)) {
-            mSave.setBackgroundResource(R.drawable.red_button);
-        } else {
-            mSave.setBackgroundResource(R.drawable.red_disable_button);
-        }
+        setSaveButton();
 
+        buildCountryDialog();
+        buildStateDialog();
+        setClickListner();
 
-        ConnectionManager.getInstance(getActivity()).getBookingOptions(new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
-
-
-                //TODO need to load provnices from API not file
-                loadJSONFromAsset();
-                // BookingRequest booking = (BookingRequest)data;
-
-                countryPicker = new NumberPicker(getActivity());
-                countryPicker.setMinValue(0);
-                countryPicker.setMaxValue(mEligabileCountryList.size());
-                String[] countryarray = new String[mEligabileCountryList.size()];
-                for (int i = 0; i < mEligabileCountryList.size(); i++) {
-                    countryarray[i] = mEligabileCountryList.get(i).getName();
-                }
-                countryPicker.setDisplayedValues(countryarray);
-
-
+//TODO need to load provnices from API not file
+//        ConnectionManager.getInstance(getActivity()).getBookingOptions(new ConnectionManager.ServerRequestListener() {
+//            @Override
+//            public void onSuccess(Object data) {
 //
+//
+//
+//
+//
+//            }
+//
+//            @Override
+//            public void onError(Object data) {
+//                HGBErrorHelper errorHelper = new HGBErrorHelper();
+//                errorHelper.show(getFragmentManager(), (String) data);
+//            }
+//        });
 
+    }
 
-            }
+    private void setClickListner() {
 
+        mCountry.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.show(getFragmentManager(), (String) data);
+            public void onClick(View v) {
+                countryDialog.show();
             }
         });
+
+        mState.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                stateDialog.show();
+            }
+        });
+
+        mGender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showGenderDialog();
+            }
+        });
+
+        mTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showTitleDialog();
+            }
+        });
+
+        mDOB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showDateDialog();
+            }
+        });
+
+        mSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mUser.setTitle(mTitle.getText().toString());
+                mUser.setGender(mGender.getText().toString());
+                mUser.setAddress(mAddress.getText().toString());
+
+                if (mCountry.getText().toString().equals("Canada")) {
+                    mUser.setCountry("CN");
+                } else if (mCountry.getText().toString().equals("UnitedStates")) {
+                    mUser.setCountry("US");
+                }
+
+                mUser.setState(mEligabileCountryList.get(countryPicker.getValue()).getProvinces().get(statePicker.getValue()).getCode());
+                mUser.setPostalcode(mPostalCode.getText().toString());
+                mUser.setDob(mDOB.getText().toString());
+                mUser.setCity(mCity.getText().toString());
+                mUser.setFirstname(mFirstName.getText().toString());
+                mUser.setLastname(mLastName.getText().toString());
+                mUser.setPhone(mPhone.getText().toString());
+                mUser.setEmailaddress(mEmail.getText().toString());
+
+                if (mUser.getUserprofileid().equals(mUser.getPaxid())) {
+
+                    Toast.makeText(getActivity().getApplicationContext(), "Please change your data on profile page", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    ConnectionManager.getInstance(getActivity()).putCompanion(mUser.getPaxid(), mUser, new ConnectionManager.ServerRequestListener() {
+                        @Override
+                        public void onSuccess(Object data) {
+                            getFragmentManager().popBackStack();
+                        }
+
+                        @Override
+                        public void onError(Object data) {
+                            Toast.makeText(getActivity().getApplicationContext(), "There was a problem saving your information please try again", Toast.LENGTH_SHORT).show();
+                            HGBErrorHelper errorHelper = new HGBErrorHelper();
+                            errorHelper.show(getFragmentManager(), (String) data);
+                        }
+                    });
+                }
+
+
+            }
+        });
+    }
+
+    private void setSaveButton() {
+        if (HGBUtility.isUserDataValid(mUser)) {
+            mSave.setBackgroundResource(R.drawable.red_button);
+            mSave.setEnabled(true);
+        } else {
+            mSave.setBackgroundResource(R.drawable.red_disable_button);
+            mSave.setEnabled(false);
+        }
+        mSave.setPadding(0, 30, 0, 30);
+
+    }
+
+    private void showDateDialog() {
+
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dpd = new DatePickerDialog(getActivity(),
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        mDOB.setText(dayOfMonth + "/"
+                                + (monthOfYear + 1) + "/" + year);
+
+                    }
+                }, mYear, mMonth, mDay);
+        dpd.show();
+    }
+
+
+    private void showTitleDialog() {
+        View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
+
+        titlePicker = (NumberPicker) v1.findViewById(R.id.np);
+        titlePicker.setMinValue(0);
+
+        titlePicker.setMaxValue(2);
+        final String[] titleArray = {"Mr", "Mrs", "Miss"};
+        titlePicker.setDisplayedValues(titleArray);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(v1);
+        builder.setTitle("Select Title");
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                mTitle.setText(titleArray[titlePicker.getValue()]);
+                return;
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void showGenderDialog() {
+
+        View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
+
+        genderPicker = (NumberPicker) v1.findViewById(R.id.np);
+        genderPicker.setMinValue(0);
+
+        genderPicker.setMaxValue(1);
+        final String[] genderArray = {"M", "F"};
+        genderPicker.setDisplayedValues(genderArray);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(v1);
+        builder.setTitle("Select Gender");
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                mGender.setText(genderArray[genderPicker.getValue()]);
+                return;
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
+    private void buildCountryDialog() {
+        View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
+
+        countryPicker = (NumberPicker) v1.findViewById(R.id.np);
+        countryPicker.setMinValue(0);
+        countryPicker.setMaxValue(mEligabileCountryList.size() - 1);
+        final String[] countryarray = new String[mEligabileCountryList.size()];
+        for (int i = 0; i < mEligabileCountryList.size(); i++) {
+            countryarray[i] = mEligabileCountryList.get(i).getName();
+        }
+        countryPicker.setDisplayedValues(countryarray);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(v1);
+        builder.setTitle("Select Country");
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                mCountry.setText(countryarray[countryPicker.getValue()]);
+                buildStateDialog();
+                return;
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+
+        countryDialog = builder.create();
+    }
+
+    private void buildStateDialog() {
+        View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
+
+        statePicker = (NumberPicker) v1.findViewById(R.id.np);
+        statePicker.setMinValue(0);
+
+        statePicker.setMaxValue(mEligabileCountryList.get(countryPicker.getValue()).getProvinces().size() - 1);
+        final String[] stateArray = new String[mEligabileCountryList.get(countryPicker.getValue()).getProvinces().size()];
+        for (int i = 0; i < mEligabileCountryList.get(countryPicker.getValue()).getProvinces().size(); i++) {
+            stateArray[i] = mEligabileCountryList.get(countryPicker.getValue()).getProvinces().get(i).getName();
+        }
+        statePicker.setDisplayedValues(stateArray);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(v1);
+        builder.setTitle("Select Province");
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                mState.setText(stateArray[statePicker.getValue()]);
+                return;
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+
+
+        stateDialog = builder.create();
+
 
     }
 
@@ -152,16 +401,137 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
         mPhone.setText(mUser.getPhone());
         mAddress.setText(mUser.getAddress());
         mCity.setText(mUser.getCity());
-        mCountry.setText(mUser.getCountry());
+
+        if (mUser.getCountry().equals("CA")) {
+            mCountry.setText("Canada");
+        } else if (mUser.getCountry().equals("US")) {
+            mCountry.setText("UnitedStates");
+        }
+
         mPostalCode.setText(mUser.getPostalcode());
         mState.setText(mUser.getState());
 
-        mCountry.setOnClickListener(new View.OnClickListener() {
+
+        setTextListner();
+
+    }
+
+    private void setTextListner() {
+
+        mFirstName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mUser.setFirstname(s.toString());
+                setSaveButton();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
             }
         });
+
+        mLastName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mUser.setLastname(s.toString());
+                setSaveButton();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+            }
+        });
+
+        mCity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mUser.setCity(s.toString());
+                setSaveButton();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+            }
+        });
+
+        mState.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mUser.setState(s.toString());
+                setSaveButton();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+            }
+        });
+
+        mCountry.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mUser.setCountry(s.toString());
+                setSaveButton();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+            }
+        });
+
+        mPostalCode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mUser.setPostalcode(s.toString());
+                setSaveButton();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+            }
+        });
+
 
     }
 
@@ -170,17 +540,11 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
         try {
 
             InputStream is = getActivity().getAssets().open("countrieswithprovinces.txt");
-
             int size = is.available();
-
             byte[] buffer = new byte[size];
-
             is.read(buffer);
-
             is.close();
-
             json = new String(buffer, "UTF-8");
-
             Gson gson = new Gson();
             Type listType = new TypeToken<List<CountryItem>>() {
             }.getType();
@@ -190,26 +554,6 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
             ex.printStackTrace();
         }
 
-    }
-
-    private void setStatePicker(String name) {
-        String[] stateArray = null;
-
-        statePicker = new NumberPicker(getActivity());
-        statePicker.setMinValue(0);
-        for (CountryItem item : mEligabileCountryList) {
-            if (item.getName().equals(name)) {
-                statePicker.setMaxValue(item.getProvinces().size());
-
-                stateArray = new String[item.getProvinces().size()];
-                for (int i = 0; i < item.getProvinces().size(); i++) {
-                    stateArray[i] = item.getProvinces().get(i).getName();
-                }
-                break;
-            }
-        }
-
-        statePicker.setDisplayedValues(stateArray);
     }
 
 }

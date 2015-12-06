@@ -13,10 +13,13 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.TravlerAdapter;
+import hellogbye.com.hellogbyeandroid.models.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
@@ -33,7 +36,7 @@ public class TravlersFragment extends HGBAbtsractFragment {
 
 
     private  FontTextView mNext;
-    private ArrayList<UserData> mTravelList;
+
     private TravlerAdapter mAdapter;
 
     private RecyclerView mRecyclerView;
@@ -76,26 +79,17 @@ public class TravlersFragment extends HGBAbtsractFragment {
             @Override
             public void onSuccess(Object data) {
 
-                mTravelList = (ArrayList<UserData>) data;
-                mAdapter = new TravlerAdapter(mTravelList,getActivity().getApplicationContext(),TravlersFragment.this);
+                getActivityInterface().setListUsers((ArrayList<UserData>) data);
+                mAdapter = new TravlerAdapter(getActivityInterface().getListUsers(),getActivity().getApplicationContext(),TravlersFragment.this);
                 mRecyclerView.setAdapter(mAdapter);
                 mAdapter.SetOnItemClickListener(new TravlerAdapter.OnItemClickListener() {
 
                     @Override
                     public void onItemClick(View v, int position) {
 
-                        UserData user = mTravelList.get(position);
-
-                        Gson gson = new Gson();
-                        String json = gson.toJson(user);
                         Bundle args = new Bundle();
-                        args.putString("user_json", json);
-
-
-
+                        args.putInt("user_json_position", position);
                         getActivityInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS_DETAILS.getNavNumber(),args);
-
-
                     }
                 });
             }
@@ -110,6 +104,21 @@ public class TravlersFragment extends HGBAbtsractFragment {
         mNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                ConnectionManager.getInstance(getActivity()).getCreditCards(new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        getActivityInterface().setCreditCards((ArrayList<CreditCardItem>) data);
+                        getActivityInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(),null);
+
+                    }
+
+                    @Override
+                    public void onError(Object data) {
+                        HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.show(getFragmentManager(), (String) data);
+                    }
+                });
 
             }
         });

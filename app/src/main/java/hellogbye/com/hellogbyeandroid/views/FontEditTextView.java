@@ -4,11 +4,12 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import hellogbye.com.hellogbyeandroid.R;
 
-public class FontEditTextView extends TextView {
+public class FontEditTextView extends EditText {
 
     public FontEditTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
