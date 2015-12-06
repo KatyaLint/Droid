@@ -97,9 +97,12 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
                     accountSettingsAttributes = (List<SettingsAttributeParamVO>) data;//gson.fromJson((String) data, listType);
                     getActivityInterface().setAccountSettingsAttribute(accountSettingsAttributes);
 
-                    getActivityInterface().setAccountSettingsAttribute(accountSettingsAttributes);
+                 //   getActivityInterface().setAccountSettingsAttribute(accountSettingsAttributes);
 //                    getSettingsAttributes(clickedAttributeID, "", 3,acountSettingsAttributes);
-                    getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_TAB_SETTINGS.getNavNumber(),null);
+                    Bundle args = new Bundle();
+                    args.putString("setting_att_id", clickedAttributeID);
+
+                    getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_TAB_SETTINGS.getNavNumber(),args);
 
                 }
             }

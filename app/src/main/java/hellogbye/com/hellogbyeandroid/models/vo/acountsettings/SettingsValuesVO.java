@@ -16,6 +16,13 @@ public class SettingsValuesVO {
     @SerializedName("description")
     private String mDescription;
 
+    public SettingsValuesVO(String id, String name, String description, String rank) {
+        this.mID = id;
+        this.mName = name;
+        this.mDescription = description;
+        this.mRank = rank;
+    }
+
     public String getmDescription() {
         return mDescription;
     }
@@ -30,5 +37,21 @@ public class SettingsValuesVO {
 
     public void setmName(String mName) {
         this.mName = mName;
+    }
+
+    public String getmID() {
+        return mID;
+    }
+
+    public void setmID(String mID) {
+        this.mID = mID;
+    }
+
+    public String getmRank() {
+        return mRank;
+    }
+
+    public void setmRank(String mRank) {
+        this.mRank = mRank;
     }
 }

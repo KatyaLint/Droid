@@ -9,36 +9,36 @@ import android.view.ViewGroup;
 import com.nhaarman.listviewanimations.ArrayAdapter;
 import com.nhaarman.listviewanimations.util.Swappable;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by nyawka on 11/25/15.
  */
-public class PreferenceSettingsAttributeAdapter extends ArrayAdapter<SettingsValuesVO> implements Swappable {
+public class PreferencesSettingsDragListAdapter extends ArrayAdapter<SettingsAttributesVO> implements Swappable {
 
     private Context context;
     private List<SettingsValuesVO> items;
 
-    public PreferenceSettingsAttributeAdapter(Context context, List<SettingsValuesVO> accountAttributes) {
-         super(accountAttributes);
-      //  items = accountAttributes;
+    public PreferencesSettingsDragListAdapter(Context context, List<SettingsAttributesVO> accountAttributes) {
+        super(accountAttributes);
+        //  items = accountAttributes;
         this.context = context;
     }
 
     @Override
-    public boolean addAll(@NonNull Collection<? extends SettingsValuesVO> collection) {
-       // this.items = (List<SettingsValuesVO>) collection;
+    public boolean addAll(@NonNull Collection<? extends SettingsAttributesVO> collection) {
+        // this.items = (List<SettingsValuesVO>) collection;
         return super.addAll(collection);
     }
 
     @Override
-    public boolean add(@NonNull SettingsValuesVO object) {
+    public boolean add(@NonNull SettingsAttributesVO object) {
         return super.add(object);
     }
 
@@ -53,15 +53,20 @@ public class PreferenceSettingsAttributeAdapter extends ArrayAdapter<SettingsVal
 
         if (v == null) {
             v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.settings_hotel_tab_fragment, null);
+                    .inflate(R.layout.settings_item_drag_layout, null);
         }
-        SettingsValuesVO attribute = this.getItem(position);//items.get(position);
+        SettingsAttributesVO attribute = this.getItem(position);//items.get(position);
         if(attribute != null){
-            FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_flight_title);
+            FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.setting_text_drag);
             if(settings_flight_title != null){
                 settings_flight_title.setText(attribute.getmDescription());
-                settings_flight_title.setTag(attribute.getmID());
+                settings_flight_title.setTag(attribute.getmId());
             }
+            FontTextView settings_text_drag = (FontTextView) v.findViewById(R.id.settings_place_number);
+          //  settings_text_drag.setText();
+            int correntPosition = position+1;
+            settings_text_drag.setText(""+correntPosition);
+            this.getItem(position).setmRank(""+correntPosition);
         }
 
         return v;

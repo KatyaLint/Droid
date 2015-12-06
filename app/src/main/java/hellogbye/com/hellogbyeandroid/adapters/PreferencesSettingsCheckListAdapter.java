@@ -1,44 +1,46 @@
 package hellogbye.com.hellogbyeandroid.adapters;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.nhaarman.listviewanimations.ArrayAdapter;
 import com.nhaarman.listviewanimations.util.Swappable;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by nyawka on 11/25/15.
  */
-public class PreferenceSettingsAttributeAdapter extends ArrayAdapter<SettingsValuesVO> implements Swappable {
+public class PreferencesSettingsCheckListAdapter extends ArrayAdapter<SettingsAttributesVO> implements Swappable{
 
     private Context context;
     private List<SettingsValuesVO> items;
 
-    public PreferenceSettingsAttributeAdapter(Context context, List<SettingsValuesVO> accountAttributes) {
-         super(accountAttributes);
-      //  items = accountAttributes;
+    public PreferencesSettingsCheckListAdapter(Context context, List<SettingsAttributesVO> accountAttributes) {
+        super(accountAttributes);
+        //  items = accountAttributes;
         this.context = context;
     }
 
     @Override
-    public boolean addAll(@NonNull Collection<? extends SettingsValuesVO> collection) {
-       // this.items = (List<SettingsValuesVO>) collection;
+    public boolean addAll(@NonNull Collection<? extends SettingsAttributesVO> collection) {
+        // this.items = (List<SettingsValuesVO>) collection;
         return super.addAll(collection);
     }
 
     @Override
-    public boolean add(@NonNull SettingsValuesVO object) {
+    public boolean add(@NonNull SettingsAttributesVO object) {
         return super.add(object);
     }
 
@@ -53,19 +55,28 @@ public class PreferenceSettingsAttributeAdapter extends ArrayAdapter<SettingsVal
 
         if (v == null) {
             v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.settings_hotel_tab_fragment, null);
+                    .inflate(R.layout.settings_item_check_layout, null);
         }
-        SettingsValuesVO attribute = this.getItem(position);//items.get(position);
+        SettingsAttributesVO attribute = this.getItem(position);//items.get(position);
         if(attribute != null){
-            FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_flight_title);
+            FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_check_name);
             if(settings_flight_title != null){
                 settings_flight_title.setText(attribute.getmDescription());
-                settings_flight_title.setTag(attribute.getmID());
+                settings_flight_title.setTag(attribute.getmId());
+            }
+            ImageView setting_check_image = (ImageView)v.findViewById(R.id.setting_check_image);
+            if(attribute.getmRank() != null){
+                setting_check_image.setBackgroundResource(R.drawable.check_on);
+            }else{
+                setting_check_image.setBackgroundResource(R.drawable.check_off);
             }
         }
 
         return v;
     }
+
+
+
 
     @Override
     public boolean hasStableIds() {
@@ -76,4 +87,6 @@ public class PreferenceSettingsAttributeAdapter extends ArrayAdapter<SettingsVal
     public void swapItems(int i, int i2) {
         super.swapItems(i,i2);
     }
+
+
 }

@@ -10,9 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-
-import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +17,6 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 
 import hellogbye.com.hellogbyeandroid.adapters.PreferenceSettingsFlightTabsAdapter;
-import hellogbye.com.hellogbyeandroid.adapters.PreferenceSettingsListAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.PreferencesSettingsHotelTabsAdapter;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -38,12 +34,13 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  */
 public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
 
-    private DynamicListView mDynamicListView;
+
     private RecyclerView flightRecyclerView;
     private RecyclerView hotelRecyclerView;
     private boolean mIsFlightViewShown = true;
     private View flight_tab_view;
     private View hotel_tab_view;
+    private String strJson;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new PreferencesTabsFragmentSettings();
@@ -54,6 +51,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
     }
 
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,8 +59,9 @@ public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
 
         flight_tab_view = (View) rootView.findViewById(R.id.setting_flight_include);
         hotel_tab_view = (View) rootView.findViewById(R.id.setting_hotel_include);
-        //  settings_drag_drop = (View) rootView.findViewById(R.id.settings_drag_drop);
 
+
+        //TODO sort by rank :)
         List<SettingsAttributeParamVO> accountSettings = getActivityInterface().getAccountSettingsAttribute();
         ArrayList<SettingsAttributesVO> accountFlightSettings = null;
         ArrayList<SettingsAttributesVO> accountHotelSettings = null;
@@ -99,6 +98,12 @@ public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
             }
         });
 
+
+        Bundle args = getArguments();
+        if (args != null) {
+            strJson = args.getString("setting_att_id");
+        }
+
         return rootView;
     }
 
@@ -117,7 +122,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
 
         mTabsAdapter.SetOnItemClickListener(new PreferenceSettingsFlightTabsAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(String guid) {
+            public void onItemClick(String guid, String position) {
                 switchBetweenOptions(guid);
             }
         });
@@ -140,43 +145,72 @@ public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
         mTabsAdapter.SetOnItemClickListener(new PreferencesSettingsHotelTabsAdapter.OnItemClickListener() {
 
             @Override
-            public void onItemClick(String guid) {
+            public void onItemClick(String guid, String position) {
                 switchBetweenOptions(guid);
             }
         });
     }
 
-
     private void switchBetweenOptions(String guid) {
         List<SettingsAttributesVO> accountAttributes = null;
+        boolean goToNewFragment = false;
+        String type = null;
         switch (guid) {
             case "1":
-
+                type = "FLT";
                 accountAttributes = getActivityInterface().getAccountSettingsFlightCarrierAttributes();
-                setSettingGuidSelected(guid);
-                if (accountAttributes != null) {
-                    getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_SPECIFIC_LIST_SETTINGS.getNavNumber(), null);
-                } else {
-                    getSettingsAttributes(guid, "FLT");
-                }
+                break;
+            case "3":
+                type = "FLT";
+                accountAttributes = getActivityInterface().getAccountSettingsFlightCabinClassAttributes();
                 break;
             case "5":
-
+                type = "FLT";
                 accountAttributes = getActivityInterface().getAccountSettingsFlightStopAttributes();
-                setSettingGuidSelected(guid);
-                if (accountAttributes != null) {
-                    getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_SPECIFIC_LIST_SETTINGS.getNavNumber(), null);
-                } else {
-                    getSettingsAttributes(guid, "FLT");
-                }
+                break;
+            case "8":
+                type = "HTL";
+                accountAttributes = getActivityInterface().getAccountSettingsHotelSmokingClassAttributes();
                 break;
         }
 
 
+        setSettingGuidSelected(guid);
+        if (accountAttributes != null) {
+            goToNewFragment = true;
+        } else {
+            getSettingsAttributes(guid, type);
+        }
+
+        if(goToNewFragment){
+            gotToSelectedFragment(guid,type);
+        }
+
     }
 
 
-    private void getSettingsAttributes(String clickedAttributeID, String type) {
+    private void gotToSelectedFragment(String guid, String type){
+        args.putString("setting_att_id", strJson);
+        args.putString("setting_type", type);
+        switch (guid){
+            case "1":
+                getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_SEARCH_LIST_SETTINGS.getNavNumber(), args);
+                break;
+            case "5":
+            case "8":
+                getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_CHECK_LIST_SETTINGS.getNavNumber(), args);
+                break;
+            case "3":
+                getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_DRAG_LIST_SETTINGS.getNavNumber(), args);
+                break;
+
+
+        }
+    }
+
+
+    Bundle args = new Bundle();
+    private void getSettingsAttributes(String clickedAttributeID, final String type) {
 
         ConnectionManager.getInstance(getActivity()).getUserSettingAttributesForAttributeID(clickedAttributeID, type, new ConnectionManager.ServerRequestListener() {
             @Override
@@ -191,9 +225,17 @@ public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
                         case "1":
                             getActivityInterface().setAccountSettingsFlightCarrierAttributes(acountSettingsAttributes);
                             break;
+                        case "3":
+                            getActivityInterface().setAccountSettingsFlightCabinClassAttributes(acountSettingsAttributes);
+                            break;
+                        case "8":
+                            getActivityInterface().setAccountSettingsHotelSmokingAttributes(acountSettingsAttributes);
+                            break;
                     }
+                    gotToSelectedFragment(settingsGuid,type);
 
-                    getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_SPECIFIC_LIST_SETTINGS.getNavNumber(), null);
+
+                  //  getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_SEARCH_LIST_SETTINGS.getNavNumber(), args);
                 }
             }
 

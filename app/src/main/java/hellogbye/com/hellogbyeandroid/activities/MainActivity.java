@@ -43,7 +43,9 @@ import hellogbye.com.hellogbyeandroid.fragments.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.MyTripsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PaymentDetailsFragemnt;
 import hellogbye.com.hellogbyeandroid.fragments.PreferenceSettingsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.PreferencesAttributeFragment;
+import hellogbye.com.hellogbyeandroid.fragments.PreferencesCheckListFragment;
+import hellogbye.com.hellogbyeandroid.fragments.PreferencesDragListFragment;
+import hellogbye.com.hellogbyeandroid.fragments.PreferencesSearchListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PreferencesTabsFragmentSettings;
 import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TravlerDetailsFragment;
@@ -467,9 +469,16 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case PREFERENCES_TAB_SETTINGS:
                 fragment = PreferencesTabsFragmentSettings.newInstance(navPosition);
                 break;
-            case PREFERENCES_SPECIFIC_LIST_SETTINGS:
-                fragment = PreferencesAttributeFragment.newInstance(navPosition);
+            case PREFERENCES_SEARCH_LIST_SETTINGS:
+                fragment = PreferencesSearchListFragment.newInstance(navPosition);
                 break;
+            case PREFERENCES_CHECK_LIST_SETTINGS:
+                fragment = PreferencesCheckListFragment.newInstance(navPosition);
+                break;
+            case PREFERENCES_DRAG_LIST_SETTINGS:
+                fragment = PreferencesDragListFragment.newInstance(navPosition);
+                break;
+
             case PAYMENT_TRAVLERS:
                 fragment = TravlersFragment.newInstance(navPosition);
                 break;

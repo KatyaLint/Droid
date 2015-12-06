@@ -54,9 +54,17 @@
     <string name="select_hotel">Select Hotel</string>
 
     <string name="preferences_smoking">Smoking Preference</string>
-    <string name="preferences_smoking_prefer">Do you prefer to have smiking or non-\nsmoking rooms int your hotel?</string>
+    <string name="preferences_smoking_prefer">Do you prefer to have smoking or non-\nsmoking rooms int your hotel?</string>
     <string name="preferences_non_smoking_choice">Non-Smoking</string>
     <string name="preferences_smoking_choice">Smoking</string>
+
+
+    <string name="preferences_stops">Preferred Number of Stops</string>
+    <string name="preferences_stops_prefer">Do you prefer to have flights that are\nnon-stop? or do you mind the\nodd layover?</string>
+
+
+    <string name="preferences_class">Preferred Flight Class</string>
+    <string name="preferences_class_prefer">Drag to change your preferred flight class.</string>
 
     <string name="preferences_bed_type">Preferred Bed Type</string>
     <string name="preferences_bed_rank">Rank the importance of Bed Types\nfrom most important to least important</string>

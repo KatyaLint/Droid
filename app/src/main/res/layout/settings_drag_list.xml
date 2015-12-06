@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:layout_width="fill_parent" android:layout_height="fill_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:orientation="vertical">
+
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/settings_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/SP32"
@@ -18,16 +20,20 @@
 
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/settings_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/SP18"
-        app:fontName="dinnextltpro_light.otf"
+        app:fontName="dinnextltpro_regular.otf"
         android:textColor="@color/warm_grey"
         android:gravity="center_horizontal"
-
         android:layout_gravity="center_horizontal"
         android:text="@string/preferences_prefered_hotel_favorite" />
 
-
+    <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
+        android:layout_margin="@dimen/DP20"
+        android:id="@+id/settings_drag_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

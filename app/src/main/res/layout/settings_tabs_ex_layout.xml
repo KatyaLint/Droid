@@ -39,7 +39,7 @@
 
     <include layout="@layout/settings_tabs_hotel_list" android:id="@+id/setting_hotel_include"/>
 
-    <!--<include layout="@layout/settings_drag_and_drop_list" android:id="@+id/settings_drag_drop"/>-->
+
 
  </LinearLayout>
 

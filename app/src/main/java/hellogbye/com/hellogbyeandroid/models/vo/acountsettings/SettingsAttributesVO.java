@@ -13,7 +13,7 @@ public class SettingsAttributesVO {
     @SerializedName("values")
     private List<SettingsValuesVO> attributesVOs = new ArrayList<SettingsValuesVO>();
     @SerializedName("rank")
-    private double mRank;
+    private String mRank;
     @SerializedName("id")
     private String mId;
     @SerializedName("name")
@@ -30,6 +30,15 @@ public class SettingsAttributesVO {
     public void setAttributesVOs(List<SettingsValuesVO> attributesVOs) {
         this.attributesVOs = attributesVOs;
     }
+
+
+//    SettingsAttributesVO(String name,String description,String id,String rank){
+//        this.mName = name;
+//        this.mDescription = description;
+//        this.mId = id;
+//        this.mRank = rank;
+//    }
+
 
     public String getmName() {
         return mName;
@@ -53,5 +62,21 @@ public class SettingsAttributesVO {
 
     public void setmType(String mType) {
         this.mType = mType;
+    }
+
+    public String getmRank() {
+        return mRank;
+    }
+
+    public void setmRank(String mRank) {
+        this.mRank = mRank;
+    }
+
+    public String getmDescription() {
+        return mDescription;
+    }
+
+    public void setmDescription(String mDescription) {
+        this.mDescription = mDescription;
     }
 }

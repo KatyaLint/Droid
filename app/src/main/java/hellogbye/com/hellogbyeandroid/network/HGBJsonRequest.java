@@ -104,7 +104,6 @@ public class HGBJsonRequest extends Request<String> {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         setService(url);
-        setService(url);
         send();
     }
 
@@ -203,15 +202,28 @@ public class HGBJsonRequest extends Request<String> {
     public byte[] getBody() {
         try {
 
+            if (jsonArrayParams != null) {
+                return jsonArrayParams == null ? null : jsonArrayParams.toString().getBytes(PROTOCOL_CHARSET);
+            } else if (jsonParams != null) {
+                return jsonParams == null ? null : jsonParams.toString().getBytes(PROTOCOL_CHARSET);
+            }
+
 //            Object oo = returnParams();
 //            return oo == null ? null : oo.toString().getBytes(PROTOCOL_CHARSET);
-            return jsonParams == null ? null : jsonParams.toString().getBytes(PROTOCOL_CHARSET);
+     //       return jsonParams == null ? null : jsonParams.toString().getBytes(PROTOCOL_CHARSET);
 
         } catch (UnsupportedEncodingException uee) {
-            VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s",
-                    returnParams().toString(), PROTOCOL_CHARSET);
+            if (jsonArrayParams != null) {
+                VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s",
+                        jsonArrayParams.toString(), PROTOCOL_CHARSET);
+            } else if (jsonParams != null) {
+                VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s",
+                        jsonParams.toString(), PROTOCOL_CHARSET);
+            }
+
             return null;
         }
+        return null;
     }
 
     @Override

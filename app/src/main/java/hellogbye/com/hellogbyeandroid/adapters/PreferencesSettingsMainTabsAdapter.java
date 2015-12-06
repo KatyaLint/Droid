@@ -17,15 +17,19 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by nyawka on 11/3/15.
  */
-public class PreferencesSettingsMainTabsAdapter extends  RecyclerView.Adapter<PreferencesSettingsMainTabsAdapter.ViewHolder> {
-
-    // private List<AcountDefaultSettingsVO> itemsData = new ArrayList<AcountDefaultSettingsVO>();
+public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<PreferencesSettingsMainTabsAdapter.ViewHolder> {
 
     private OnItemClickListener mItemClickListener;
     private List<SettingsAttributesVO> itemsData;
+
     public PreferencesSettingsMainTabsAdapter(List<SettingsAttributesVO> accountSettings) {
-      //  this.itemsData = accountSettings;
         itemsData = new ArrayList<>(accountSettings);
+    }
+
+
+    public void updateItems(List<SettingsAttributesVO> accountSettings){
+        this.itemsData = new ArrayList<>(accountSettings);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -37,8 +41,6 @@ public class PreferencesSettingsMainTabsAdapter extends  RecyclerView.Adapter<Pr
         return viewHolder;
     }
 
-
-
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         SettingsAttributesVO item = itemsData.get(position);
@@ -47,13 +49,13 @@ public class PreferencesSettingsMainTabsAdapter extends  RecyclerView.Adapter<Pr
         String strAttributes = "";
         for (int i = 0; i < attributes.size(); i++) {
             SettingsValuesVO attribute = attributes.get(i);
-            strAttributes =  strAttributes + attribute.getmDescription();
-            if(i < attributes.size() - 1){
-                strAttributes = strAttributes+ ", ";
+            strAttributes = strAttributes + attribute.getmDescription();
+            if (i < attributes.size() - 1) {
+                strAttributes = strAttributes + ", ";
             }
         }
         holder.setting_flight_text.setText(strAttributes);
-
+        holder.setting_flight_text.setTag(position);
         holder.settings_flight_title.setText(item.getmName());
         holder.settings_flight_title.setTag(item.getmId());
     }
@@ -65,16 +67,15 @@ public class PreferencesSettingsMainTabsAdapter extends  RecyclerView.Adapter<Pr
     }
 
 
-
-    public  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private FontTextView settings_flight_title;
         private FontTextView setting_flight_text;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            settings_flight_title = (FontTextView)itemView.findViewById(R.id.settings_flight_title);
-            setting_flight_text = (FontTextView)itemView.findViewById(R.id.setting_flight_text);
+            settings_flight_title = (FontTextView) itemView.findViewById(R.id.settings_flight_title);
+            setting_flight_text = (FontTextView) itemView.findViewById(R.id.setting_flight_text);
             itemView.setOnClickListener(this);
 
         }
@@ -82,24 +83,20 @@ public class PreferencesSettingsMainTabsAdapter extends  RecyclerView.Adapter<Pr
         @Override
         public void onClick(View view) {
 
-            FontTextView textView = (FontTextView)view.findViewById(R.id.settings_flight_title);
-            mItemClickListener.onItemClick(textView.getTag().toString());
+            FontTextView textView = (FontTextView) view.findViewById(R.id.settings_flight_title);
+            FontTextView textViewText = (FontTextView) view.findViewById(R.id.setting_flight_text);
+            mItemClickListener.onItemClick(textView.getTag().toString(), textViewText.getTag().toString());
         }
     }
 
     public interface OnItemClickListener {
-        public void onItemClick(String guid);
+        public void onItemClick(String guid, String position);
     }
 
 
     public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
     }
-
-
-//    public void setModels(List<SettingsAttributesVO> models) {
-//        itemsData = new ArrayList<SettingsAttributesVO>(models);
-//    }
 
     public List<SettingsAttributesVO> removeItem(int position) {
         final SettingsAttributesVO model = itemsData.remove(position);
@@ -152,8 +149,6 @@ public class PreferencesSettingsMainTabsAdapter extends  RecyclerView.Adapter<Pr
             }
         }
     }
-
-
 
 
 }
