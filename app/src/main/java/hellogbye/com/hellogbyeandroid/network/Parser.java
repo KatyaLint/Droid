@@ -196,6 +196,7 @@ public class Parser {
         return airplaneDataVO;
     }
 
+
     public static Object parseHotelData(String response) {
         CellsVO cell = new CellsVO();
         try {

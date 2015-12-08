@@ -39,6 +39,8 @@ public class PreferencesCheckListFragment extends PreferencesSettingsMainClass {
     private List<SettingsValuesVO> choosedItems;
     private List<SettingsValuesVO> selectedItem;
     private List<SettingsAttributesVO> accountAttributes;
+    private FontTextView settings_title_text;
+    private FontTextView settings_text;
 
 
     public static Fragment newInstance(int position) {
@@ -61,6 +63,8 @@ public class PreferencesCheckListFragment extends PreferencesSettingsMainClass {
 
         }
 
+        settings_title_text = (FontTextView)rootView.findViewById(R.id.settings_item_title);
+        settings_text = (FontTextView)rootView.findViewById(R.id.settings_item_text);
         noBack = false;
 
         selectedItem = new ArrayList<>();
@@ -164,32 +168,41 @@ public class PreferencesCheckListFragment extends PreferencesSettingsMainClass {
         );
     }
 
-    private void addSmokingText(View rootView){
-        FontTextView settings_title_text = (FontTextView)rootView.findViewById(R.id.settings_title);
+    private void addSmokingText(){
         settings_title_text.setText(getActivity().getResources().getText(R.string.preferences_smoking));
-        FontTextView settings_text = (FontTextView)rootView.findViewById(R.id.settings_text);
         settings_text.setText(getActivity().getResources().getText(R.string.preferences_smoking_prefer));
     }
 
-    private void addStopsText(View rootView){
-        FontTextView settings_title_text = (FontTextView)rootView.findViewById(R.id.settings_title);
+    private void addStopsText(){
+
         settings_title_text.setText(getActivity().getResources().getText(R.string.preferences_stops));
-        FontTextView settings_text = (FontTextView)rootView.findViewById(R.id.settings_text);
         settings_text.setText(getActivity().getResources().getText(R.string.preferences_stops_prefer));
     }
+
+
 
     private void getCorrectAccountAtribute(View rootView){
         String guid = getSettingGuidSelected();
         switch (guid){
             case "5":
-                addStopsText(rootView);
+                addStopsText();
                 accountAttributes  = correctCheckList(getActivityInterface().getAccountSettingsFlightStopAttributes());
                 break;
             case "8":
-                addSmokingText(rootView);
+                addSmokingText();
                 accountAttributes  = correctCheckList(getActivityInterface().getAccountSettingsHotelSmokingClassAttributes());
                 break;
+            case "7":
+                addStarPreferenceText();
+                accountAttributes  = correctCheckList(getActivityInterface().getAccountSettingsHotelStarAttributes());
+                break;
+
         }
+    }
+
+    private void addStarPreferenceText() {
+        settings_title_text.setText(getActivity().getResources().getText(R.string.preferences_stars));
+        settings_text.setText(getActivity().getResources().getText(R.string.preferences_stars_prefer));
     }
 
 }

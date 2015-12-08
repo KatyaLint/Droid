@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/DP10">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/settings_search_place_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/DP10"
+            android:layout_marginStart="@dimen/DP10"
+            android:text="1"
+            android:textColor="@color/dark_teal"
+            android:textSize="@dimen/SP20"
+            app:fontName="dinnextltpro_condensed.ttf" />
+
+        <ImageView
+            android:id="@+id/setting_search_check_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_on" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/settings_search_check_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="dsfsdfdsf"
+            android:textColor="@color/warm_grey"
+            android:textSize="17sp"
+            app:fontName="dinnextltpro_medium.otf" />
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -34,6 +34,7 @@ import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.PreferenceSettingsAirlineCarriersAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.PreferenceSettingsAttributeAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.PreferenceSettingsFlightTabsAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.PreferencesSettingsSearchCheckListAdapter;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
@@ -41,6 +42,7 @@ import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
+import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
 * Created by nyawka on 11/5/15.
@@ -51,12 +53,15 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
     private DynamicListView mDynamicListView;
     private RecyclerView searchRecyclerView;
     private PreferenceSettingsAirlineCarriersAdapter searchListAdapter;
-
     private SettingsAttributesVO myAccountAttribute;
-    private PreferenceSettingsAttributeAdapter preferenceSettingsListAdapter;
+    private PreferencesSettingsSearchCheckListAdapter preferenceSettingsListAdapter;
     private String strJson;
     private String strType;
     private List<SettingsValuesVO> myAccountAttributeList;
+    private FontTextView my_settings;
+    private FontTextView popular_settings;
+    private FontTextView settings_item_title;
+    private FontTextView settings_item_text;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new PreferencesSearchListFragment();
@@ -69,7 +74,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
 
     private void searchListInitialization(View rootView){
         mSearchView = (SearchView)rootView.findViewById(R.id.settings_search);
-        mSearchView.setVisibility(View.GONE);
+       // mSearchView.setVisibility(View.GONE);
         setupSearchView();
         searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.settings_search_list);
         searchRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
@@ -98,28 +103,17 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         );
 
         myAccountAttribute = getMyAcountAttributes();
-
-
-        preferenceSettingsListAdapter = new PreferenceSettingsAttributeAdapter(getActivity(), myAccountAttribute.getAttributesVOs());
+        preferenceSettingsListAdapter = new PreferencesSettingsSearchCheckListAdapter(getActivity(), myAccountAttribute.getAttributesVOs());
         mDynamicListView.setAdapter(preferenceSettingsListAdapter);
-
-        mDynamicListView.enableSwipeToDismiss(
-                new OnDismissCallback() {
-                    @Override
-                    public void onDismiss(@NonNull final ViewGroup listView, @NonNull final int[] reverseSortedPositions) {
-
-                        for (int position : reverseSortedPositions) {
-
-                            SettingsValuesVO item = preferenceSettingsListAdapter.remove(position);
-                            addToSearchList(item);
-
-                        }
-
-                        List<SettingsValuesVO> myAccountVOs = myAccountAttribute.getAttributesVOs();
-
-                    }
-                }
-        );
+        mDynamicListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                FontTextView settings_flight_title = (FontTextView) view.findViewById(R.id.settings_search_check_name);
+                String id = settings_flight_title.getTag().toString();
+                SettingsValuesVO item = preferenceSettingsListAdapter.remove(position);
+                addToSearchList(item);
+                //remove from list
+            }});
     }
 
 
@@ -136,6 +130,11 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
             strType = args.getString("setting_type");
         }
         noBack = false;
+        my_settings = (FontTextView)rootView.findViewById(R.id.my_flights_settings);
+        popular_settings = (FontTextView)rootView.findViewById(R.id.popular_settings);
+
+        settings_item_title = (FontTextView)rootView.findViewById(R.id.settings_item_title);
+        settings_item_text = (FontTextView)rootView.findViewById(R.id.settings_item_text);
 
         searchListInitialization(rootView);
 
@@ -181,28 +180,12 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
 
         backOnListClicked(strType,strJson,myAccountAttribute.getAttributesVOs());
 
-//        ((MainActivity) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
-//            public void doBack() {
-//
-//                  String guid = getSettingGuidSelected();
-//                List<SettingsValuesVO> accountAttributesVO = myAccountAttribute.getAttributesVOs();
-//                        ConnectionManager.getInstance(getActivity()).putAttributesValues(
-//                                strJson, strType, guid, accountAttributesVO, new ConnectionManager.ServerRequestListener() {
-//                                    @Override
-//                                    public void onSuccess(Object data) {
-//                                    }
-//                                    @Override
-//                                    public void onError(Object data) {
-//                                        HGBErrorHelper errorHelper = new HGBErrorHelper();
-//                                    }
-//                                });
-//                }
-//            //}
-//        });
-//
-//
+
+
+
+
         return rootView;
-//
+
     }
 
     private void addToSearchList(SettingsValuesVO item ){
@@ -234,19 +217,35 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         mSearchView.setQueryHint(getString(R.string.settings_search_hunt));
     }
 
+
+
+
     private List<SettingsAttributesVO> getCorrectAttribute(){
         String guid = getSettingGuidSelected();
         List<SettingsAttributesVO> accountAttributes = null;
+        mDynamicListView.setVisibility(View.VISIBLE);
+        mSearchView.setVisibility(View.VISIBLE);
         switch (guid){
-//            case "5":
-//                accountAttributes = getActivityInterface().getAccountSettingsFlightStopAttributes();
-//                mDynamicListView.setVisibility(View.GONE);
-//                mSearchView.setVisibility(View.GONE);
-//                break;
+            case "9":
+                accountAttributes = getActivityInterface().getAccountSettingsHotelChainAttributes();
+                my_settings.setText(R.string.my_settings_hotel);
+                popular_settings.setText(R.string.popular_settings_hotel);
+                settings_item_title.setText(R.string.preferences_prefered_hotel_chain);
+                settings_item_text.setText(R.string.preferences_prefered_hotel_favorite);
+                break;
+            case "2":
+                accountAttributes = getActivityInterface().getAccountSettingsFlightAircraftAttributes();
+                my_settings.setText(R.string.my_settings_flight);
+                popular_settings.setText(R.string.popular_settings_flight);
+                settings_item_title.setText(R.string.preferences_prefered_aircraft);
+                settings_item_text.setText(R.string.preferences_prefered_aircraft_favorite);
+                break;
             case "1":
                 accountAttributes = getActivityInterface().getAccountSettingsFlightCarrierAttributes();
-                mDynamicListView.setVisibility(View.VISIBLE);
-                mSearchView.setVisibility(View.VISIBLE);
+                my_settings.setText(R.string.my_settings_flight);
+                popular_settings.setText(R.string.popular_settings_flight);
+                settings_item_title.setText(R.string.preferences_prefered_flight_carrier);
+                settings_item_text.setText(R.string.preferences_prefered_flight_carrier_favorite);
                 break;
 
         }

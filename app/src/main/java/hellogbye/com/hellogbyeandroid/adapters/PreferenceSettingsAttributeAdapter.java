@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import com.nhaarman.listviewanimations.ArrayAdapter;
 import com.nhaarman.listviewanimations.util.Swappable;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,18 +21,12 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  */
 public class PreferenceSettingsAttributeAdapter extends ArrayAdapter<SettingsValuesVO> implements Swappable {
 
-    private Context context;
-    private List<SettingsValuesVO> items;
-
     public PreferenceSettingsAttributeAdapter(Context context, List<SettingsValuesVO> accountAttributes) {
          super(accountAttributes);
-      //  items = accountAttributes;
-        this.context = context;
     }
 
     @Override
     public boolean addAll(@NonNull Collection<? extends SettingsValuesVO> collection) {
-       // this.items = (List<SettingsValuesVO>) collection;
         return super.addAll(collection);
     }
 
@@ -53,7 +46,7 @@ public class PreferenceSettingsAttributeAdapter extends ArrayAdapter<SettingsVal
 
         if (v == null) {
             v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.settings_hotel_tab_fragment, null);
+                    .inflate(R.layout.settings_recycle_list_search, null);
         }
         SettingsValuesVO attribute = this.getItem(position);//items.get(position);
         if(attribute != null){

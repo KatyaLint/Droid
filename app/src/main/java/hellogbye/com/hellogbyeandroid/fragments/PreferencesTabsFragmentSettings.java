@@ -10,6 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+
+import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +20,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 
 import hellogbye.com.hellogbyeandroid.adapters.PreferenceSettingsFlightTabsAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.PreferencesSettingsDragListAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.PreferencesSettingsHotelTabsAdapter;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -33,14 +37,18 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  * Created by nyawka on 11/8/15.
  */
 public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
-
-
-    private RecyclerView flightRecyclerView;
-    private RecyclerView hotelRecyclerView;
+    private DynamicListView mFlightDynamicListView;
+    private DynamicListView mHotelDynamicListView;
     private boolean mIsFlightViewShown = true;
     private View flight_tab_view;
     private View hotel_tab_view;
     private String strJson;
+    private FontTextView hotelTab;
+    private FontTextView flightTab;
+    private FontTextView settings_hotel_text;
+    private FontTextView settings_title_flight_text;
+    private FontTextView settings_flight_text;
+    private FontTextView settings_title_hotel_text;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new PreferencesTabsFragmentSettings();
@@ -75,10 +83,11 @@ public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
             }
         }
 
-        initializeFlightRecycle(rootView, accountFlightSettings);
-        initializeHotelRecycle(rootView, accountHotelSettings);
+        initializeFlightRecycle(flight_tab_view, accountFlightSettings);
+        initializeHotelRecycle(hotel_tab_view, accountHotelSettings);
 
-        FontTextView flightTab = (FontTextView) rootView.findViewById(R.id.settings_flight_tab);
+
+        flightTab = (FontTextView) rootView.findViewById(R.id.settings_flight_tab);
         flightTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,7 +97,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
         });
 
 
-        FontTextView hotelTab = (FontTextView) rootView.findViewById(R.id.setting_hotel_tab);
+        hotelTab = (FontTextView) rootView.findViewById(R.id.setting_hotel_tab);
         hotelTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,56 +108,90 @@ public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
         });
 
 
+
         Bundle args = getArguments();
         if (args != null) {
             strJson = args.getString("setting_att_id");
         }
-
+        initializeFontText(flight_tab_view, hotel_tab_view);
+        showCorrectView();
         return rootView;
     }
 
-    private void initializeFlightRecycle(View rootView, ArrayList<SettingsAttributesVO> accountFlightSettings) {
-        flightRecyclerView = (RecyclerView) rootView.findViewById(R.id.settings_flight_recyclerView);
-        flightRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-        // 5. set item animator to DefaultAnimator
-        flightRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        // 2. set layoutManger
-        flightRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        // 3. create an adapter
 
-        PreferenceSettingsFlightTabsAdapter mTabsAdapter = new PreferenceSettingsFlightTabsAdapter(accountFlightSettings);
-        flightRecyclerView.setAdapter(mTabsAdapter);
+    private void initializeFontText(View flightView, View hotelView){
+         settings_title_flight_text = (FontTextView)flightView.findViewById(R.id.settings_item_title);
+         settings_flight_text = (FontTextView)flightView.findViewById(R.id.settings_item_text);
+         settings_title_hotel_text = (FontTextView)hotelView.findViewById(R.id.settings_item_title);
+         settings_hotel_text = (FontTextView)hotelView.findViewById(R.id.settings_item_text);
+    }
+
+    private void addFlightPreferenceText(){
+        settings_title_flight_text.setText(getActivity().getResources().getText(R.string.preferences_flight_preferences));
+        settings_flight_text.setText(getActivity().getResources().getText(R.string.preferences_flight_prefer));
+    }
 
 
-        mTabsAdapter.SetOnItemClickListener(new PreferenceSettingsFlightTabsAdapter.OnItemClickListener() {
+    private void addHotelPreferenceText(){
+        settings_title_hotel_text.setText(getActivity().getResources().getText(R.string.preferences_hotel_preferences));
+        settings_hotel_text.setText(getActivity().getResources().getText(R.string.preferences_flight_prefer));
+    }
+
+    private void initializeFlightRecycle(View rootView,  List<SettingsAttributesVO> accountFlightSettings) {
+
+        mFlightDynamicListView = (DynamicListView) rootView.findViewById(R.id.settings_drag_list);
+        mFlightDynamicListView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(String guid, String position) {
-                switchBetweenOptions(guid);
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                FontTextView settings_flight_title = (FontTextView) view.findViewById(R.id.setting_preferences_title_drag);
+                String clickedItemID = settings_flight_title.getTag().toString();
+                switchBetweenOptions(clickedItemID);
             }
         });
+
+        PreferencesSettingsDragListAdapter mTabsAdapter = new PreferencesSettingsDragListAdapter(getActivity(),accountFlightSettings);
+        mFlightDynamicListView.setAdapter(mTabsAdapter);
+        mFlightDynamicListView.enableDragAndDrop();
+        mFlightDynamicListView.setOnItemLongClickListener(
+                new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(final AdapterView<?> parent, final View view,
+                                                   final int position, final long id) {
+                        mFlightDynamicListView.startDragging(position);
+                        return true;
+                    }
+                }
+        );
+
     }
 
 
     private void initializeHotelRecycle(View rootView, ArrayList<SettingsAttributesVO> accountFlightSettings) {
-        hotelRecyclerView = (RecyclerView) rootView.findViewById(R.id.settings_hotel_recyclerView_list);
-        hotelRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-        // 5. set item animator to DefaultAnimator
-        hotelRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        // 2. set layoutManger
-        hotelRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        // 3. create an adapter
-
-        PreferencesSettingsHotelTabsAdapter mTabsAdapter = new PreferencesSettingsHotelTabsAdapter(accountFlightSettings);
-        hotelRecyclerView.setAdapter(mTabsAdapter);
-
-
-        mTabsAdapter.SetOnItemClickListener(new PreferencesSettingsHotelTabsAdapter.OnItemClickListener() {
-
+        mHotelDynamicListView = (DynamicListView) rootView.findViewById(R.id.settings_hotel_drag_list);
+        mHotelDynamicListView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(String guid, String position) {
-                switchBetweenOptions(guid);
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                FontTextView settings_flight_title = (FontTextView) view.findViewById(R.id.setting_preferences_title_drag);
+                String clickedItemID = settings_flight_title.getTag().toString();
+                switchBetweenOptions(clickedItemID);
             }
         });
+        PreferencesSettingsDragListAdapter mTabsAdapter = new PreferencesSettingsDragListAdapter(getActivity(),accountFlightSettings);
+        mHotelDynamicListView.setAdapter(mTabsAdapter);
+        mHotelDynamicListView.enableDragAndDrop();
+        mHotelDynamicListView.setOnItemLongClickListener(
+                new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(final AdapterView<?> parent, final View view,
+                                                   final int position, final long id) {
+                        mHotelDynamicListView.startDragging(position);
+                        return true;
+                    }
+                }
+        );
+
     }
 
     private void switchBetweenOptions(String guid) {
@@ -160,13 +203,29 @@ public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
                 type = "FLT";
                 accountAttributes = getActivityInterface().getAccountSettingsFlightCarrierAttributes();
                 break;
+            case "2":
+                type = "FLT";
+                accountAttributes = getActivityInterface().getAccountSettingsFlightAircraftAttributes();
+                break;
             case "3":
                 type = "FLT";
                 accountAttributes = getActivityInterface().getAccountSettingsFlightCabinClassAttributes();
                 break;
+            case "9":
+                type = "HTL";
+                accountAttributes = getActivityInterface().getAccountSettingsHotelChainAttributes();
+                break;
             case "5":
                 type = "FLT";
                 accountAttributes = getActivityInterface().getAccountSettingsFlightStopAttributes();
+                break;
+            case "6":
+                type = "HTL";
+                accountAttributes = getActivityInterface().getAccountSettingsHotelBedTypeAttributes();
+                break;
+            case "7":
+                type = "HTL";
+                accountAttributes = getActivityInterface().getAccountSettingsHotelStarAttributes();
                 break;
             case "8":
                 type = "HTL";
@@ -194,13 +253,17 @@ public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
         args.putString("setting_type", type);
         switch (guid){
             case "1":
+            case "2":
+            case "9":
                 getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_SEARCH_LIST_SETTINGS.getNavNumber(), args);
                 break;
             case "5":
             case "8":
+            case "7":
                 getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_CHECK_LIST_SETTINGS.getNavNumber(), args);
                 break;
             case "3":
+            case "6":
                 getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_DRAG_LIST_SETTINGS.getNavNumber(), args);
                 break;
 
@@ -219,23 +282,32 @@ public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
                     List<SettingsAttributesVO> acountSettingsAttributes = (List<SettingsAttributesVO>) data; //gson.fromJson((String) data, listType);
                     String settingsGuid = getSettingGuidSelected();
                     switch (settingsGuid) {
-                        case "5":
-                            getActivityInterface().setAccountSettingsFlightStopAttributes(acountSettingsAttributes);
-                            break;
                         case "1":
                             getActivityInterface().setAccountSettingsFlightCarrierAttributes(acountSettingsAttributes);
+                            break;
+                        case "2":
+                            getActivityInterface().setAccountSettingsFlightAircraftAttributes(acountSettingsAttributes);
                             break;
                         case "3":
                             getActivityInterface().setAccountSettingsFlightCabinClassAttributes(acountSettingsAttributes);
                             break;
+                        case "5":
+                            getActivityInterface().setAccountSettingsFlightStopAttributes(acountSettingsAttributes);
+                            break;
+                        case "6":
+                            getActivityInterface().setAccountSettingsHotelBedTypeAttributes(acountSettingsAttributes);
+                            break;
+                        case "7":
+                            getActivityInterface().setAccountSettingsHotelStarAttributes(acountSettingsAttributes);
+                            break;
                         case "8":
                             getActivityInterface().setAccountSettingsHotelSmokingAttributes(acountSettingsAttributes);
                             break;
+                        case "9":
+                            getActivityInterface().setAccountSettingsHotelChainAttributes(acountSettingsAttributes);
+                            break;
                     }
                     gotToSelectedFragment(settingsGuid,type);
-
-
-                  //  getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_SEARCH_LIST_SETTINGS.getNavNumber(), args);
                 }
             }
 
@@ -251,15 +323,23 @@ public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
         if (mIsFlightViewShown) {
             hotel_tab_view.setVisibility(View.GONE);
             flight_tab_view.setVisibility(View.VISIBLE);
+
+            hotelTab.setTextColor(getActivity().getResources().getColor(R.color.hgb_nav_font_unselected));
+            flightTab.setTextColor(getActivity().getResources().getColor(R.color.white));
             flight_tab_view.setSelected(true);
             hotel_tab_view.setSelected(false);
+            addFlightPreferenceText();
+
 
             //show flight
         } else {
             hotel_tab_view.setVisibility(View.VISIBLE);
             flight_tab_view.setVisibility(View.GONE);
+            hotelTab.setTextColor(getActivity().getResources().getColor(R.color.white));
+            flightTab.setTextColor(getActivity().getResources().getColor(R.color.hgb_nav_font_unselected));
             flight_tab_view.setSelected(false);
             hotel_tab_view.setSelected(true);
+            addHotelPreferenceText();
             //show hotel
         }
 

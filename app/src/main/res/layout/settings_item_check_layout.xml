@@ -5,6 +5,7 @@
     android:padding="@dimen/DP10" >
 
     <LinearLayout
+        android:id="@+id/settings_chack_ll"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

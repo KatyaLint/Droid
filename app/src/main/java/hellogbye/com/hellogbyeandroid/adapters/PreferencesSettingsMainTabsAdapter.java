@@ -1,9 +1,12 @@
 package hellogbye.com.hellogbyeandroid.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +38,7 @@ public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<Pre
     @Override
     public PreferencesSettingsMainTabsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemLayoutView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.settings_hotel_tab_fragment, null);
+                .inflate(R.layout.settings_item_check_layout, null);
 
         ViewHolder viewHolder = new ViewHolder(itemLayoutView);
         return viewHolder;
@@ -54,10 +57,11 @@ public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<Pre
                 strAttributes = strAttributes + ", ";
             }
         }
-        holder.setting_flight_text.setText(strAttributes);
+      //  holder.setting_flight_text.setText(strAttributes);
         holder.setting_flight_text.setTag(position);
         holder.settings_flight_title.setText(item.getmName());
         holder.settings_flight_title.setTag(item.getmId());
+        holder.setting_check_image.setBackgroundResource(R.drawable.check_off);
     }
 
 
@@ -70,12 +74,14 @@ public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<Pre
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private FontTextView settings_flight_title;
-        private FontTextView setting_flight_text;
-
+        private LinearLayout setting_flight_text;
+        private ImageView setting_check_image;
         public ViewHolder(View itemView) {
             super(itemView);
-            settings_flight_title = (FontTextView) itemView.findViewById(R.id.settings_flight_title);
-            setting_flight_text = (FontTextView) itemView.findViewById(R.id.setting_flight_text);
+            settings_flight_title = (FontTextView) itemView.findViewById(R.id.settings_check_name);
+            setting_flight_text = (LinearLayout) itemView.findViewById(R.id.settings_chack_ll);
+            setting_check_image = (ImageView) itemView.findViewById(R.id.setting_check_image);
+
             itemView.setOnClickListener(this);
 
         }
@@ -83,8 +89,8 @@ public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<Pre
         @Override
         public void onClick(View view) {
 
-            FontTextView textView = (FontTextView) view.findViewById(R.id.settings_flight_title);
-            FontTextView textViewText = (FontTextView) view.findViewById(R.id.setting_flight_text);
+            FontTextView textView = (FontTextView) view.findViewById(R.id.settings_check_name);
+            LinearLayout textViewText = (LinearLayout) view.findViewById(R.id.settings_chack_ll);
             mItemClickListener.onItemClick(textView.getTag().toString(), textViewText.getTag().toString());
         }
     }

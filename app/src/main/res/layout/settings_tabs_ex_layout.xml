@@ -35,9 +35,12 @@
     </LinearLayout>
 
 
-    <include layout="@layout/settings_tabs_flight_list" android:id="@+id/setting_flight_include"/>
+    <include android:id="@+id/setting_flight_include" layout="@layout/settings_drag_list" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <include android:id="@+id/setting_hotel_include" layout="@layout/settings_tabs_hotel_list" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 
-    <include layout="@layout/settings_tabs_hotel_list" android:id="@+id/setting_hotel_include"/>
+    <!--<include layout="@layout/settings_tabs_flight_list" android:id="@+id/setting_flight_include"/>-->
+
+    <!--<include layout="@layout/settings_tabs_hotel_list" android:id="@+id/setting_hotel_include"/>-->
 
 
 

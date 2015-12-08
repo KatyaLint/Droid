@@ -1,7 +1,7 @@
 package hellogbye.com.hellogbyeandroid.adapters;
 
+import android.app.Activity;
 import android.content.Context;
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,19 +22,27 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by nyawka on 11/25/15.
  */
-public class PreferencesSettingsCheckListAdapter extends ArrayAdapter<SettingsAttributesVO> implements Swappable{
+public class PreferencesSettingsSearchCheckListAdapter extends ArrayAdapter<SettingsValuesVO> implements Swappable{
 
-    public PreferencesSettingsCheckListAdapter(Context context, List<SettingsAttributesVO> accountAttributes) {
-        super(accountAttributes);
+    private Context context;
+    private List<SettingsValuesVO> items;
+
+
+
+    public PreferencesSettingsSearchCheckListAdapter(Activity activity, List<SettingsValuesVO> attributesVOs) {
+        super(attributesVOs);
+        //  items = accountAttributes;
+        this.context = context;
     }
 
     @Override
-    public boolean addAll(@NonNull Collection<? extends SettingsAttributesVO> collection) {
+    public boolean addAll(@NonNull Collection<? extends SettingsValuesVO> collection) {
+        // this.items = (List<SettingsValuesVO>) collection;
         return super.addAll(collection);
     }
 
     @Override
-    public boolean add(@NonNull SettingsAttributesVO object) {
+    public boolean add(@NonNull SettingsValuesVO object) {
         return super.add(object);
     }
 
@@ -49,21 +57,26 @@ public class PreferencesSettingsCheckListAdapter extends ArrayAdapter<SettingsAt
 
         if (v == null) {
             v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.settings_item_check_layout, null);
+                    .inflate(R.layout.settings_item_serach_check_layout, null);
         }
-        SettingsAttributesVO attribute = this.getItem(position);//items.get(position);
+        SettingsValuesVO attribute = this.getItem(position);//items.get(position);
         if(attribute != null){
-            FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_check_name);
+            FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_search_check_name);
             if(settings_flight_title != null){
                 settings_flight_title.setText(attribute.getmDescription());
-                settings_flight_title.setTag(attribute.getmId());
+                settings_flight_title.setTag(attribute.getmID());
             }
-            ImageView setting_check_image = (ImageView)v.findViewById(R.id.setting_check_image);
+            ImageView setting_check_image = (ImageView)v.findViewById(R.id.setting_search_check_image);
             if(attribute.getmRank() != null){
                 setting_check_image.setBackgroundResource(R.drawable.check_on);
             }else{
                 setting_check_image.setBackgroundResource(R.drawable.check_off);
             }
+
+            FontTextView settings_search_place_number = (FontTextView) v.findViewById(R.id.settings_search_place_number);
+            int correntPosition = position+1;
+            settings_search_place_number.setText(""+correntPosition);
+            this.getItem(position).setmRank(""+correntPosition);
         }
 
         return v;

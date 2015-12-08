@@ -6,6 +6,9 @@ import com.google.gson.annotations.SerializedName;
  * Created by nyawka on 11/4/15.
  */
 public class AcountDefaultSettingsVO {
+
+    private String rank;
+
     @SerializedName("id")
     private String mId;
 
@@ -26,5 +29,14 @@ public class AcountDefaultSettingsVO {
 
     public void setmProfileName(String mProfileName) {
         this.mProfileName = mProfileName;
+    }
+
+
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank;
     }
 }

@@ -20,9 +20,7 @@ public class PreferencesSettingsMainClass extends HGBAbtsractFragment  {
 
         ((MainActivity) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
             public void doBack() {
-                System.out.println("Kate onBack");
                 if(noBack){
-                    System.out.println("Kate no onBack");
                     return;
                 }
                 String guid = getSettingGuidSelected();
@@ -30,7 +28,6 @@ public class PreferencesSettingsMainClass extends HGBAbtsractFragment  {
                         strId, strType, guid, accountAttributesVO, new ConnectionManager.ServerRequestListener() {
                             @Override
                             public void onSuccess(Object data) {
-
                             }
 
                             @Override

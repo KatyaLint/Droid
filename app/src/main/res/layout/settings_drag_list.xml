@@ -1,39 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent" android:layout_height="fill_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/settings_title"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/SP32"
-        app:fontName="dinnextltpro_condensed.ttf"
-        android:textColor="@color/dark_teal"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:text="@string/preferences_prefered_hotel_chain"
-        android:layout_marginTop="@dimen/DP38"
-        android:layout_marginBottom="@dimen/DP38"/>
-
-
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/settings_text"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/SP18"
-        app:fontName="dinnextltpro_regular.otf"
-        android:textColor="@color/warm_grey"
-        android:gravity="center_horizontal"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/preferences_prefered_hotel_favorite" />
+    <include layout="@layout/settings_layout_title" android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
 
     <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
-        android:layout_margin="@dimen/DP20"
+        android:layout_margin="@dimen/DP10"
         android:id="@+id/settings_drag_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
+
 
 </LinearLayout>

@@ -85,9 +85,13 @@ public class ItineraryFragment extends HGBAbtsractFragment {
     @Override
     public void onDestroyView() {
         userOrder = getActivityInterface().getTravelOrder();
-        ArrayList<PassengersVO> passangers = userOrder.getPassengerses();
-        for(PassengersVO passanger:passangers){
-            passanger.clearData();
+        if (userOrder != null) {
+
+
+            ArrayList<PassengersVO> passangers = userOrder.getPassengerses();
+            for (PassengersVO passanger : passangers) {
+                passanger.clearData();
+            }
         }
         super.onDestroyView();
     }

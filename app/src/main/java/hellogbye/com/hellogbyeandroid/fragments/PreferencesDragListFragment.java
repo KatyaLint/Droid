@@ -40,6 +40,8 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
     private List<SettingsValuesVO> choosedItems;
     private List<SettingsValuesVO> selectedItem;
     private List<SettingsAttributesVO> accountAttributes;
+    private FontTextView settings_title_text;
+    private FontTextView settings_text;
 
 
     public static Fragment newInstance(int position) {
@@ -64,6 +66,9 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
 
         }
 
+        settings_title_text = (FontTextView)rootView.findViewById(R.id.settings_item_title);
+        settings_text = (FontTextView)rootView.findViewById(R.id.settings_item_text);
+
         noBack = false;
 
         selectedItem = new ArrayList<>();
@@ -83,9 +88,7 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
         ((MainActivity) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
             public void doBack() {
                 converSettingsAttributesVO();
-                System.out.println("Kate onBack");
                 if(noBack){
-                    System.out.println("Kate no onBack");
                     return;
                 }
                 String guid = getSettingGuidSelected();
@@ -144,19 +147,6 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
         return accountAttributes;
     }
 
-
-    private void selectedItemForServer(SettingsAttributesVO accountAttribute){
-        selectedItem.clear();
-        SettingsValuesVO selectedValue = new SettingsValuesVO(accountAttribute.getmId(),
-                accountAttribute.getmName(),
-                accountAttribute.getmDescription(),
-                accountAttribute.getmRank());
-        selectedItem.add(selectedValue);
-        choosedItems.clear();
-        choosedItems.add(selectedValue);
-    }
-
-
     private void dragDropListInitialization(View rootView){
         mDynamicListView = (DynamicListView) rootView.findViewById(R.id.settings_drag_list);
         mDynamicListView.enableDragAndDrop();
@@ -166,52 +156,31 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
                     public boolean onItemLongClick(final AdapterView<?> parent, final View view,
                                                    final int position, final long id) {
                         mDynamicListView.startDragging(position);
-
-//                        converSettingsAttributesVO();
                         return true;
                     }
                 }
         );
 
-
-
-        getCorrectAccountAtribute(rootView);
+        getCorrectAccountAtribute();
         preferenceSettingsListAdapter = new PreferencesSettingsDragListAdapter(getActivity(), accountAttributes);
         mDynamicListView.setAdapter(preferenceSettingsListAdapter);
-
-//        mDynamicListView.enableSwipeToDismiss(
-//                new OnDismissCallback() {
-//                    @Override
-//                    public void onDismiss(@NonNull final ViewGroup listView, @NonNull final int[] reverseSortedPositions) {
-//
-//                        for (int position : reverseSortedPositions) {
-//
-//                            preferenceSettingsListAdapter.remove(position);
-//
-//                        }
-//                    }
-//                }
-//        );
     }
 
-    private void selectedItemForServer() {
-
-    }
-
-    private void addClassText(View rootView){
-        FontTextView settings_title_text = (FontTextView)rootView.findViewById(R.id.settings_title);
-        settings_title_text.setText(getActivity().getResources().getText(R.string.preferences_class));
-        FontTextView settings_text = (FontTextView)rootView.findViewById(R.id.settings_text);
-        settings_text.setText(getActivity().getResources().getText(R.string.preferences_class_prefer));
-    }
-
-
-    private void getCorrectAccountAtribute(View rootView){
+    private void getCorrectAccountAtribute(){
         String guid = getSettingGuidSelected();
         switch (guid){
             case "3":
-                addClassText(rootView);
+
                 accountAttributes  = correctCheckList(getActivityInterface().getAccountSettingsFlightCabinClassAttributes());
+                settings_title_text.setText(getActivity().getResources().getText(R.string.preferences_class));
+                settings_text.setText(getActivity().getResources().getText(R.string.preferences_class_prefer));
+                break;
+
+            case "6":
+
+                accountAttributes  = correctCheckList(getActivityInterface().getAccountSettingsFlightCabinClassAttributes());
+                settings_title_text.setText(getActivity().getResources().getText(R.string.preferences_bed_type));
+                settings_text.setText(getActivity().getResources().getText(R.string.preferences_bed_rank));
                 break;
 
         }
