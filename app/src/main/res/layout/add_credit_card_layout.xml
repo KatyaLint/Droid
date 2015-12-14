@@ -94,11 +94,11 @@
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/cc_billing_address"
-        android:padding="10dp"
+        android:padding="15dp"
         android:layout_below="@+id/cc_details_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="7sp"
+        android:textSize="10sp"
         android:text="Billing Address"
         app:fontName="dinnextltpro_regular.otf" />
 
@@ -172,14 +172,13 @@
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/cc_save"
         style="@style/RedCustomButtonStyle"
-        android:layout_alignParentBottom="true"
+
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_marginLeft="40dp"
-
         android:layout_centerHorizontal="true"
-
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/cc_billing_adress_ll"
         android:text="Save Card" />
 
 
