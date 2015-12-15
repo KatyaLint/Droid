@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
 
         //HGBUtility.loadHotelImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
-        selectItem(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(),null);
+        selectItem(ToolBarNavEnum.HOME.getNavNumber(),null);
 
     }
 
