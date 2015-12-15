@@ -65,7 +65,7 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
     private NumberPicker titlePicker;
 
 
-    private HashMap<String, ArrayList<ProvincesItem>> list = new HashMap<>();
+   // private HashMap<String, ArrayList<ProvincesItem>> list = new HashMap<>();
 
     private ArrayList<CountryItem> mEligabileCountryList = new ArrayList<>();
 
@@ -549,6 +549,7 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
             Type listType = new TypeToken<List<CountryItem>>() {
             }.getType();
             mEligabileCountryList = (ArrayList<CountryItem>) gson.fromJson(json, listType);
+            getActivityInterface().setEligabileCountries(mEligabileCountryList);
 
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -6,6 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
@@ -14,6 +18,7 @@ import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 public class ItineraryFragment extends HGBAbtsractFragment {
 
@@ -70,11 +75,14 @@ public class ItineraryFragment extends HGBAbtsractFragment {
             }
         });
 
+        UserTravelVO userOrder = parseFlight();
+        getActivityInterface().setTravelOrder(userOrder);
 
-        userOrder = getActivityInterface().getTravelOrder();
+
+        //  userOrder = getActivityInterface().getTravelOrder();
 
         if (userOrder != null) {
-           flightGridMainFragment.createGridView(getActivity(), rootView, userOrder, inflater);
+            flightGridMainFragment.createGridView(getActivity(), rootView, userOrder, inflater);
         }
 
         getActivityInterface().getToolBar().updateToolBarView(ToolBarNavEnum.ITINARERY.getNavNumber());
@@ -95,4 +103,25 @@ public class ItineraryFragment extends HGBAbtsractFragment {
         }
         super.onDestroyView();
     }
+
+    private UserTravelVO parseFlight(){
+        UserTravelVO airplaneDataVO = null;
+        try {
+            Gson gson = new Gson();
+            Type type = new TypeToken<UserTravelVO>() {
+            }.getType();
+            String strJson = HGBUtility.loadJSONFromAsset("maingridfileone.txt", getActivity());
+
+            airplaneDataVO = gson.fromJson(strJson, type);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return airplaneDataVO;
+    }
+
+
+
 }

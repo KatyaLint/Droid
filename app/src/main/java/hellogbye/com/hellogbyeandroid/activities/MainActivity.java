@@ -53,6 +53,7 @@ import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TravlerDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TravlersFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
+import hellogbye.com.hellogbyeandroid.models.CountryItem;
 import hellogbye.com.hellogbyeandroid.models.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private String solutionID;
     private ActionBar actionBar;
     private List<SettingsAttributeParamVO> mSettingsAttribute;
+    private ArrayList<CountryItem> mEligabileCountryList = new ArrayList<>();
 
     private String mTotalPrice;
 
@@ -238,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
 
         //HGBUtility.loadHotelImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
-        selectItem(ToolBarNavEnum.HOME.getNavNumber(),null);
+        selectItem(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(),null);
 
     }
 
@@ -451,6 +453,17 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public UserData getCurrentUser() {
         return mCurrentUser;
+    }
+
+    @Override
+    public ArrayList<CountryItem> getEligabileCountries() {
+        return mEligabileCountryList;
+    }
+
+    @Override
+    public void setEligabileCountries(ArrayList<CountryItem> list) {
+        mEligabileCountryList = list;
+
     }
 
     @Override
@@ -794,6 +807,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             e.printStackTrace();
         }
     }
+
+
+
+
 
 
 }
