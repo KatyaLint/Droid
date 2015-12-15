@@ -1,4 +1,4 @@
-package hellogbye.com.hellogbyeandroid.fragments;
+package hellogbye.com.hellogbyeandroid.fragments.checkout;
 
 import android.app.Fragment;
 import android.graphics.Color;
@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Set;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.PaymentChild;
 import hellogbye.com.hellogbyeandroid.models.PaymnentGroup;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;

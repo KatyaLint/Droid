@@ -49,7 +49,7 @@ public class ConnectionManager {
         USER_FLIGHT_SOLUTIONS, USER_GET_TRAVELER_INFO, USER_GET_USER_PROFILE_ACCOUNTS,
         USER_POST_USER_PROFILE_EMAIL, USER_TRAVEL_PROFILES, USER_PROFILE_RESET_PASSWORD,
         USER_SOLUTION, ITINERARY, USER_GET_TRAVEL_PREFERENCES, ITINERARY_CNC,
-        USER_POST_TRAVEL_PREFERENCES, COMPANIONS,CARD_TOKEN
+        USER_POST_TRAVEL_PREFERENCES, COMPANIONS,CARD_TOKEN,ITINERARY_MY_TRIP
 
     }
 
@@ -296,6 +296,28 @@ public class ConnectionManager {
     ////////////////////////////////
     // GETS
     ///////////////////////////////
+
+
+    public void getMyTrips(final ServerRequestListener listener) {
+
+        String url = getURL(Services.ITINERARY_MY_TRIP) + "?count=15&skip=0";
+      //  http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/itinerary?count=15&skip=0
+
+        JSONObject jsonObject = new JSONObject();
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseMyTrips(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
+    }
 
 
     public void getCreditCards(final ServerRequestListener listener) {
@@ -987,6 +1009,8 @@ public class ConnectionManager {
                 return BASE_URL + "Solution/";
             case ITINERARY:
                 return BASE_URL + "Itinerary/";
+            case ITINERARY_MY_TRIP:
+                return BASE_URL + "Itinerary";
             case ITINERARY_CNC:
                 return BASE_URL + "Itinerary/CNC";
             case COMPANIONS:

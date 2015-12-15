@@ -1,18 +1,14 @@
 package hellogbye.com.hellogbyeandroid;
 
-import android.app.Fragment;
 import android.os.Bundle;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.CountryItem;
 import hellogbye.com.hellogbyeandroid.models.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
-import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;

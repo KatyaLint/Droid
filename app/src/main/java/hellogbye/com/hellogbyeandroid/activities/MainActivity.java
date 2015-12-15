@@ -35,26 +35,26 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.AccountSettingsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.AddCreditCardFragment;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.AddCreditCardFragment;
 import hellogbye.com.hellogbyeandroid.fragments.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.fragments.AlternativeFlightsDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
-import hellogbye.com.hellogbyeandroid.fragments.CreditCardListFragment;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HistoryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HomeFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.MyTripsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.PaymentDetailsFragemnt;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.PaymentDetailsFragemnt;
 import hellogbye.com.hellogbyeandroid.fragments.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PreferencesCheckListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PreferencesDragListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PreferencesSearchListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PreferencesTabsFragmentSettings;
 import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.TravlerDetailsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.TravlersFragment;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlerDetailsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlersFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.CountryItem;
 import hellogbye.com.hellogbyeandroid.models.CreditCardItem;
@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
 
         //HGBUtility.loadHotelImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
-        selectItem(ToolBarNavEnum.HOME.getNavNumber(), null);
+        selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null);
 
     }
 

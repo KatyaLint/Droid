@@ -9,32 +9,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-
-
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
-
-
-import hellogbye.com.hellogbyeandroid.adapters.AlternativeFlightsAdapter;
-import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
+import hellogbye.com.hellogbyeandroid.adapters.MyTripAdapter;
+import hellogbye.com.hellogbyeandroid.models.MyTripItem;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 
 /**
  * Created by arisprung on 8/17/15.
  */
 public class MyTripsFragment extends Fragment {
 
+    private RecyclerView mRecycerView;
 
-    public MyTripsFragment() {
-        // Empty constructor required for fragment subclasses
-    }
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new MyTripsFragment();
@@ -48,46 +38,38 @@ public class MyTripsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.dumb_layout, container, false);
-//
-//        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
-//
-//        ArrayList<AlternativeFlightsVO> alternativeFlights = parseFlight();
-//
-//
-//        // 2. set layoutManger
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        // 3. create an adapter
-//        AlternativeFlightsAdapter mAdapter = new AlternativeFlightsAdapter(getActivity(),alternativeFlights);
-//        // 4. set adapter
-//        recyclerView.setAdapter(mAdapter);
-//        // 5. set item animator to DefaultAnimator
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
-
+        View rootView = inflater.inflate(R.layout.my_trips_layout, container, false);
         return rootView;
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mRecycerView = (RecyclerView) view.findViewById(R.id.my_trip_recycler_view);
+        ConnectionManager.getInstance(getActivity()).getMyTrips(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                ArrayList<MyTripItem> list = (ArrayList<MyTripItem>) data;
+                mRecycerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                // 3. create an adapter
+                MyTripAdapter mAdapter = new MyTripAdapter(list);
+                // 4. set adapter
+                mRecycerView.setAdapter(mAdapter);
+                // 5. set item animator to DefaultAnimator
+                mRecycerView.setItemAnimator(new DefaultItemAnimator());
 
-//    private ArrayList<AlternativeFlightsVO> airplaneDataVO;
-//    //TODO move to correct place
-//    private ArrayList<AlternativeFlightsVO> parseFlight(){
-//        Gson gson = new Gson();
-//
-//        //        Gson gson = new Gson();
-////        Type type = new TypeToken<ArrayList<FlightsVO>>(){}.getType();
-////        String strJson = loadJSONFromAsset();
-////        ArrayList<FlightsVO> airplaneDataVO = gson.fromJson(strJson, type);
-//
-//
-//        Type type = new TypeToken<ArrayList<AlternativeFlightsVO>>(){}.getType();
-//        //  Type type = new TypeToken<ArrayList<AirplaneDataVO>>(){}.getType();
-//        String strJson = HGBUtility.loadJSONFromAsset("alternativeflights.txt", getActivity());
-//
-//        airplaneDataVO = gson.fromJson(strJson, type);
-//        return airplaneDataVO;
-//    }
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
 
 
+        // 2. set layoutManger
+
+
+    }
 }

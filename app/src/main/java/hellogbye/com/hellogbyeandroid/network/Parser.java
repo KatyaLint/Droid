@@ -17,6 +17,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.models.BookingRequest;
 import hellogbye.com.hellogbyeandroid.models.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.TravelPreference;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
@@ -240,8 +241,16 @@ public class Parser {
     }
 
 
-
-
-
-
+    public static Object parseMyTrips(String response) {
+        ArrayList<MyTripItem>  mMyTripslList = null;
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<MyTripItem>>() {
+            }.getType();
+            mMyTripslList = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mMyTripslList;
+    }
 }
