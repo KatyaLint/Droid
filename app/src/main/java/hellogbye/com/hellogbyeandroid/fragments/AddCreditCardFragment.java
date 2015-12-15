@@ -71,7 +71,7 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        loadJSONFromAsset();
+        getActivityInterface().loadJSONFromAsset();
         init(view);
         buildCountryDialog();
         buildStateDialog();
@@ -193,27 +193,6 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
 
     }
 
-    public void loadJSONFromAsset() {
-        String json = null;
-        try {
-
-            InputStream is = getActivity().getAssets().open("countrieswithprovinces.txt");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-            Gson gson = new Gson();
-            Type listType = new TypeToken<List<CountryItem>>() {
-            }.getType();
-            ArrayList<CountryItem> list =  (ArrayList<CountryItem>) gson.fromJson(json, listType);
-            getActivityInterface().setEligabileCountries(list);
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

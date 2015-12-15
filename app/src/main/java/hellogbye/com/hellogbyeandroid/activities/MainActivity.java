@@ -23,7 +23,10 @@ import android.widget.LinearLayout;
 
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private List<SettingsAttributesVO> hotelSmokingAttributes;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -195,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         purchaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(),null);
+                goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
             }
         });
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -240,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
 
         //HGBUtility.loadHotelImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
-        selectItem(ToolBarNavEnum.HOME.getNavNumber(),null);
+        selectItem(ToolBarNavEnum.HOME.getNavNumber(), null);
 
     }
 
@@ -329,15 +331,15 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     /* The click listener for RecyclerView in the navigation drawer */
     @Override
     public void onClick(View view, int position) {
-        selectItem(position,null);
+        selectItem(position, null);
     }
 
 
     @Override
     public void continueFlow(int fragment) {
 
-        if(fragment == ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber()) {
-            selectItem(ToolBarNavEnum.ITINARERY.getNavNumber(),null);
+        if (fragment == ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber()) {
+            selectItem(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
         }
     }
 
@@ -354,6 +356,33 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
+    public void loadJSONFromAsset() {
+
+        if (mEligabileCountryList.size() > 0) {
+            return;
+        }
+        String json = null;
+        try {
+
+            InputStream is = getAssets().open("countrieswithprovinces.txt");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<CountryItem>>() {
+            }.getType();
+            ArrayList<CountryItem> list = (ArrayList<CountryItem>) gson.fromJson(json, listType);
+            setEligabileCountries(list);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    @Override
     public void setAccountSettingsAttribute(List<SettingsAttributeParamVO> settingsAttribute) {
         this.mSettingsAttribute = settingsAttribute;
     }
@@ -364,10 +393,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
-
     @Override
     public void setAccountSettingsFlightStopAttributes(List<SettingsAttributesVO> settingsAttribute) {
-            this.settingsAttribute = settingsAttribute;
+        this.settingsAttribute = settingsAttribute;
     }
 
     @Override
@@ -447,7 +475,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     @Override
     public ArrayList<UserData> getListUsers() {
-        return  mTravelList;
+        return mTravelList;
     }
 
     @Override
@@ -484,7 +512,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
-    public void selectItem(int position,Bundle bundle) {
+    public void selectItem(int position, Bundle bundle) {
         // update the main content by replacing fragments
 
         Fragment fragment = null;
@@ -559,9 +587,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
 
 
-
         }
-        if(bundle != null){
+        if (bundle != null) {
             fragment.setArguments(bundle);
         }
         HGBUtility.goToNextFragmentIsAddToBackStack(this, fragment, stashToBack);
@@ -698,7 +725,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public void addCNCItem(CNCItem cncitem) {
 
-        if(mCNCItems == null ){
+        if (mCNCItems == null) {
             mCNCItems = new ArrayList<>();
         }
 
@@ -731,13 +758,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
-    public void goToFragment(int fragmentname,Bundle bundle) {
-        selectItem(fragmentname,bundle);
+    public void goToFragment(int fragmentname, Bundle bundle) {
+        selectItem(fragmentname, bundle);
     }
-
-
-
-
 
 
     @Override
@@ -793,7 +816,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
-
     @Override
     protected void onStop() {
         super.onStop();
@@ -807,10 +829,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             e.printStackTrace();
         }
     }
-
-
-
-
 
 
 }

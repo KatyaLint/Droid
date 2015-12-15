@@ -56,6 +56,8 @@ public interface HGBMainInterface {
 
     String getTotalPrice();
 
+    void loadJSONFromAsset();
+
 
     void setAccountSettingsAttribute(List<SettingsAttributeParamVO> settingsAttribute);
     List<SettingsAttributeParamVO> getAccountSettingsAttribute();

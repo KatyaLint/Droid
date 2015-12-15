@@ -83,14 +83,14 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.travler_detail_layout, container, false);
-        loadJSONFromAsset();
+
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        getActivityInterface().loadJSONFromAsset();
         mTitle = (FontTextView) view.findViewById(R.id.travel_detail_title);
         mFirstName = (EditText) view.findViewById(R.id.travel_detail_first_name);
         mLastName = (EditText) view.findViewById(R.id.travel_detail_last_name);
@@ -535,26 +535,5 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
 
     }
 
-    public void loadJSONFromAsset() {
-        String json = null;
-        try {
-
-            InputStream is = getActivity().getAssets().open("countrieswithprovinces.txt");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-            Gson gson = new Gson();
-            Type listType = new TypeToken<List<CountryItem>>() {
-            }.getType();
-            mEligabileCountryList = (ArrayList<CountryItem>) gson.fromJson(json, listType);
-            getActivityInterface().setEligabileCountries(mEligabileCountryList);
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-    }
 
 }
