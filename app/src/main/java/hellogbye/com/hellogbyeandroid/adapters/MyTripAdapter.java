@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -40,7 +41,9 @@ public class MyTripAdapter extends RecyclerView.Adapter<MyTripAdapter.ViewHolder
         MyTripItem item = itemsData.get(position);
 
         holder.name.setText(item.getName());
-        holder.date.setText(item.getStartdate());
+
+
+        holder.date.setText(HGBUtility.parseDateToddMMyyyyMyTrip(item.getStartdate())+" - "+HGBUtility.parseDateToddMMyyyyMyTrip(item.getEnddate()));
         if(item.getPaymentstatus().equals("UPD")){
             holder.paid.setText("UNPAID");
         }else{

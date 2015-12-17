@@ -16,7 +16,7 @@
             android:textColor="@color/marine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:textSize="15sp"
             android:text="Name"
             app:fontName="dinnextltpro_regular.otf" />
         <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -24,7 +24,7 @@
             android:textColor="@color/warm_grey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:layout_marginTop="@dimen/DP2"
             android:text="dates"
             app:fontName="dinnextltpro_light.otf" />
@@ -34,7 +34,7 @@
             android:textColor="@android:color/holo_red_dark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:text="Paid"
             app:fontName="dinnextltpro_light.otf" />
 

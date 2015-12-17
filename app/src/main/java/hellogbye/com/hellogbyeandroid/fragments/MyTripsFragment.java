@@ -2,28 +2,32 @@ package hellogbye.com.hellogbyeandroid.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.adapters.MyTripAdapter;
+import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+import hellogbye.com.hellogbyeandroid.adapters.MyTripPinnedAdapter;
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
+import hellogbye.com.hellogbyeandroid.views.PinnedHeaderListView;
+
 
 /**
  * Created by arisprung on 8/17/15.
  */
 public class MyTripsFragment extends Fragment {
 
-    private RecyclerView mRecycerView;
+    private PinnedHeaderListView stickyList;
+    private  ArrayList<MyTripItem> mItemsList;
 
 
     public static Fragment newInstance(int position) {
@@ -42,21 +46,18 @@ public class MyTripsFragment extends Fragment {
         return rootView;
     }
 
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecycerView = (RecyclerView) view.findViewById(R.id.my_trip_recycler_view);
+        stickyList = (PinnedHeaderListView) view.findViewById(R.id.pinnedListView);
         ConnectionManager.getInstance(getActivity()).getMyTrips(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                ArrayList<MyTripItem> list = (ArrayList<MyTripItem>) data;
-                mRecycerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                // 3. create an adapter
-                MyTripAdapter mAdapter = new MyTripAdapter(list);
-                // 4. set adapter
-                mRecycerView.setAdapter(mAdapter);
-                // 5. set item animator to DefaultAnimator
-                mRecycerView.setItemAnimator(new DefaultItemAnimator());
+                mItemsList= (ArrayList<MyTripItem>) data;
+
+                MyTripPinnedAdapter sectionedAdapter = new MyTripPinnedAdapter(mItemsList);
+                stickyList.setAdapter(sectionedAdapter);
 
             }
 
@@ -67,9 +68,38 @@ public class MyTripsFragment extends Fragment {
             }
         });
 
+        stickyList.setOnItemClickListener(new PinnedHeaderListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int section, int position, long id) {
 
-        // 2. set layoutManger
+                if (section == 0) {
+                    //TODO go to current itinerary
 
+                } else if (section == 1) {
+
+                    String solutionId = mItemsList.get(position).getSolutionid();
+                    ConnectionManager.getInstance(getActivity()).getItinerary(solutionId, new ConnectionManager.ServerRequestListener() {
+                        @Override
+                        public void onSuccess(Object data) {
+                          Log.d("","");
+                            //TODO set Travel and got to current itenrary
+                        }
+
+                        @Override
+                        public void onError(Object data) {
+                            Log.e("MainActivity", "Problem updating grid  " + data);
+                        }
+                    });
+
+                }
+
+            }
+
+            @Override
+            public void onSectionClick(AdapterView<?> adapterView, View view, int section, long id) {
+
+            }
+        });
 
     }
 }
