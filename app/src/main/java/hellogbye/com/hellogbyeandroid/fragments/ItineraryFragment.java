@@ -32,10 +32,10 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
-
 
 public class ItineraryFragment extends HGBAbtsractFragment{
 
@@ -463,6 +463,7 @@ private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO 
         LinearLayout itineraryLayout = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.scroll_view_ll);
 
         UserTravelMainVO user = parseFlight();
+        //getActivityInterface().setTravelOrder(user);
         //userOrder = getActivityInterface().getTravelOrder();
         userOrder = user;
                 //getActivityInterface().setTravelOrder(userOrder);
@@ -497,6 +498,11 @@ private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO 
         getDimenstions();
         createItinenaryView(rootView);
 
+        //  userOrder = getActivityInterface().getTravelOrder();
+
+//        if (userOrder != null) {
+//            flightGridMainFragment.createGridView(getActivity(), rootView, userOrder, inflater);
+//        }
 
 
 //        FlightGridMainFragment flightGridMainFragment = new FlightGridMainFragment();
@@ -551,4 +557,6 @@ private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO 
         }
         super.onDestroyView();
     }
+
+
 }

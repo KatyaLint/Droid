@@ -1,4 +1,4 @@
-package hellogbye.com.hellogbyeandroid.fragments;
+package hellogbye.com.hellogbyeandroid.fragments.checkout;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.CreditCardAdapter;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;

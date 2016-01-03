@@ -14,6 +14,20 @@
         android:text="Card Information"
         app:fontName="dinnextltpro_regular.otf" />
 
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/cc_scan"
+        style="@style/GreenCustomButtonStyle"
+        android:layout_alignParentTop="true"
+        android:padding="5dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textSize="10sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+
+        android:text="Scan Card" />
+
 
 
     <LinearLayout
@@ -26,13 +40,14 @@
         android:orientation="vertical"
         android:padding='@dimen/DP24'>
 
-        <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+        <hellogbye.com.hellogbyeandroid.views.CreditCardEditText
             android:id="@+id/cc_number"
             style="@style/cc_edit_text"
             android:layout_width="match_parent"
             android:hint="Card Number"
-            android:inputType="number"
+            android:inputType=""
             app:fontName="dinnextltpro_regular.otf" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -94,11 +109,11 @@
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/cc_billing_address"
-        android:padding="10dp"
+        android:padding="15dp"
         android:layout_below="@+id/cc_details_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="7sp"
+        android:textSize="10sp"
         android:text="Billing Address"
         app:fontName="dinnextltpro_regular.otf" />
 
@@ -172,15 +187,17 @@
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/cc_save"
         style="@style/RedCustomButtonStyle"
-        android:layout_alignParentBottom="true"
+
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_marginLeft="40dp"
-
         android:layout_centerHorizontal="true"
-
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/cc_billing_adress_ll"
         android:text="Save Card" />
+
+
+
 
 
 </RelativeLayout>

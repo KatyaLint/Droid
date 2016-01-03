@@ -1,11 +1,10 @@
 package hellogbye.com.hellogbyeandroid;
 
 import android.os.Bundle;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
+import hellogbye.com.hellogbyeandroid.models.CountryItem;
 import hellogbye.com.hellogbyeandroid.models.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
@@ -53,6 +52,8 @@ public interface HGBMainInterface {
 
     String getTotalPrice();
 
+    void loadJSONFromAsset();
+
 
     void setAccountSettingsAttribute(List<SettingsAttributeParamVO> settingsAttribute);
     List<SettingsAttributeParamVO> getAccountSettingsAttribute();
@@ -61,6 +62,11 @@ public interface HGBMainInterface {
 
     ArrayList<UserData> getListUsers();
     UserData getCurrentUser();
+
+    ArrayList<CountryItem> getEligabileCountries();
+    void setEligabileCountries(ArrayList<CountryItem> mEligabileCountries);
+
+
 
     ArrayList<CreditCardItem> getCreditCards();
     void setCreditCards( ArrayList<CreditCardItem> mCreditCardsList);

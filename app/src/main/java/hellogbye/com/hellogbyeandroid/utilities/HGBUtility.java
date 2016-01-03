@@ -373,6 +373,7 @@ public class HGBUtility {
         return str;
     }
 
+
     public static String parseDateFromddMMyyyyToddmmYYYY(String time) {
         String outputPattern = "EEE, MM dd, yyyy";
         String inputPattern = "MM/dd/yyyy";
@@ -381,16 +382,29 @@ public class HGBUtility {
 
         String str = null;
 
-        try {
+
 
             SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
             Date date = null;
             try {
                 date = inputFormat.parse(time);
-
+                str = outputFormat.format(date);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+        return str;
+        }
+    public static String parseDateToddMMyyyyMyTrip(String time) {
+        String inputPattern = "yyyy-MM-dd'T'HH:mm:ss";
+        String outputPattern = "MMM dd,yyyy";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+        Date date = null;
+        String str = null;
+
+        try {
+            date = getDateFromServer(time);
 
             str = outputFormat.format(date);
         } catch (Exception e) {
@@ -398,6 +412,7 @@ public class HGBUtility {
         }
         return str;
     }
+
 
     public static String addDayToDate(String dateToIncr) {
         String newDate="";
@@ -415,6 +430,7 @@ public class HGBUtility {
 
         return newDate;
     }
+
     public static String parseDateToddMMyyyyForPayment(String time) {
         String inputPattern = "yyyy-MM-dd'T'HH:mm:ss";
         String outputPattern = "MM/dd/yyyy";

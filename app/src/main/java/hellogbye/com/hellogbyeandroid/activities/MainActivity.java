@@ -23,7 +23,10 @@ import android.widget.LinearLayout;
 
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,27 +35,28 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.AccountSettingsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.AddCreditCardFragment;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.AddCreditCardFragment;
 import hellogbye.com.hellogbyeandroid.fragments.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.fragments.AlternativeFlightsDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
-import hellogbye.com.hellogbyeandroid.fragments.CreditCardListFragment;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HistoryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HomeFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.MyTripsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.PaymentDetailsFragemnt;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.PaymentDetailsFragemnt;
 import hellogbye.com.hellogbyeandroid.fragments.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PreferencesCheckListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PreferencesDragListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PreferencesSearchListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.PreferencesTabsFragmentSettings;
 import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.TravlerDetailsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.TravlersFragment;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlerDetailsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlersFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
+import hellogbye.com.hellogbyeandroid.models.CountryItem;
 import hellogbye.com.hellogbyeandroid.models.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -95,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private String solutionID;
     private ActionBar actionBar;
     private List<SettingsAttributeParamVO> mSettingsAttribute;
+    private ArrayList<CountryItem> mEligabileCountryList = new ArrayList<>();
 
     private String mTotalPrice;
 
@@ -111,7 +116,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private List<SettingsAttributesVO> hotelStarAttributes;
     private List<SettingsAttributesVO> flightCabinClassAttributes;
     private List<SettingsAttributesVO> hotelSmokingAttributes;
-
 
 
     @Override
@@ -193,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         purchaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(),null);
+                goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
             }
         });
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -238,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
 
         //HGBUtility.loadHotelImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
-        selectItem(ToolBarNavEnum.HOME.getNavNumber(),null);
+        selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null);
 
     }
 
@@ -327,15 +331,15 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     /* The click listener for RecyclerView in the navigation drawer */
     @Override
     public void onClick(View view, int position) {
-        selectItem(position,null);
+        selectItem(position, null);
     }
 
 
     @Override
     public void continueFlow(int fragment) {
 
-        if(fragment == ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber()) {
-            selectItem(ToolBarNavEnum.ITINARERY.getNavNumber(),null);
+        if (fragment == ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber()) {
+            selectItem(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
         }
     }
 
@@ -352,6 +356,33 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
+    public void loadJSONFromAsset() {
+
+        if (mEligabileCountryList.size() > 0) {
+            return;
+        }
+        String json = null;
+        try {
+
+            InputStream is = getAssets().open("countrieswithprovinces.txt");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<CountryItem>>() {
+            }.getType();
+            ArrayList<CountryItem> list = (ArrayList<CountryItem>) gson.fromJson(json, listType);
+            setEligabileCountries(list);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    @Override
     public void setAccountSettingsAttribute(List<SettingsAttributeParamVO> settingsAttribute) {
         this.mSettingsAttribute = settingsAttribute;
     }
@@ -362,10 +393,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
-
     @Override
     public void setAccountSettingsFlightStopAttributes(List<SettingsAttributesVO> settingsAttribute) {
-            this.settingsAttribute = settingsAttribute;
+        this.settingsAttribute = settingsAttribute;
     }
 
     @Override
@@ -445,12 +475,23 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     @Override
     public ArrayList<UserData> getListUsers() {
-        return  mTravelList;
+        return mTravelList;
     }
 
     @Override
     public UserData getCurrentUser() {
         return mCurrentUser;
+    }
+
+    @Override
+    public ArrayList<CountryItem> getEligabileCountries() {
+        return mEligabileCountryList;
+    }
+
+    @Override
+    public void setEligabileCountries(ArrayList<CountryItem> list) {
+        mEligabileCountryList = list;
+
     }
 
     @Override
@@ -471,7 +512,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
-    public void selectItem(int position,Bundle bundle) {
+    public void selectItem(int position, Bundle bundle) {
         // update the main content by replacing fragments
 
         Fragment fragment = null;
@@ -546,9 +587,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
 
 
-
         }
-        if(bundle != null){
+        if (bundle != null) {
             fragment.setArguments(bundle);
         }
         HGBUtility.goToNextFragmentIsAddToBackStack(this, fragment, stashToBack);
@@ -685,7 +725,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public void addCNCItem(CNCItem cncitem) {
 
-        if(mCNCItems == null ){
+        if (mCNCItems == null) {
             mCNCItems = new ArrayList<>();
         }
 
@@ -718,13 +758,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
-    public void goToFragment(int fragmentname,Bundle bundle) {
-        selectItem(fragmentname,bundle);
+    public void goToFragment(int fragmentname, Bundle bundle) {
+        selectItem(fragmentname, bundle);
     }
-
-
-
-
 
 
     @Override
@@ -778,7 +814,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     public void onOptionsMenuClosed(Menu menu) {
         super.onOptionsMenuClosed(menu);
     }
-
 
 
     @Override

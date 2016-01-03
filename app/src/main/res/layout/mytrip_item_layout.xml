@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:padding="20dp"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/my_trip_name"
+            android:textColor="@color/marine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="Name"
+            app:fontName="dinnextltpro_regular.otf" />
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/my_trip_dates"
+            android:textColor="@color/warm_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:layout_marginTop="@dimen/DP2"
+            android:text="dates"
+            app:fontName="dinnextltpro_light.otf" />
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/my_trip_paid"
+            android:layout_marginTop="@dimen/DP2"
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:text="Paid"
+            app:fontName="dinnextltpro_light.otf" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/chevron_right"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        />
+</RelativeLayout>

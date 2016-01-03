@@ -2,39 +2,33 @@ package hellogbye.com.hellogbyeandroid.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-
-
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
-
-
-import hellogbye.com.hellogbyeandroid.adapters.AlternativeFlightsAdapter;
-import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
+import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+import hellogbye.com.hellogbyeandroid.adapters.MyTripPinnedAdapter;
+import hellogbye.com.hellogbyeandroid.models.MyTripItem;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
+import hellogbye.com.hellogbyeandroid.views.PinnedHeaderListView;
+
 
 /**
  * Created by arisprung on 8/17/15.
  */
 public class MyTripsFragment extends Fragment {
 
+    private PinnedHeaderListView stickyList;
+    private  ArrayList<MyTripItem> mItemsList;
 
-    public MyTripsFragment() {
-        // Empty constructor required for fragment subclasses
-    }
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new MyTripsFragment();
@@ -48,46 +42,64 @@ public class MyTripsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.dumb_layout, container, false);
-//
-//        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
-//
-//        ArrayList<AlternativeFlightsVO> alternativeFlights = parseFlight();
-//
-//
-//        // 2. set layoutManger
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        // 3. create an adapter
-//        AlternativeFlightsAdapter mAdapter = new AlternativeFlightsAdapter(getActivity(),alternativeFlights);
-//        // 4. set adapter
-//        recyclerView.setAdapter(mAdapter);
-//        // 5. set item animator to DefaultAnimator
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
-
+        View rootView = inflater.inflate(R.layout.my_trips_layout, container, false);
         return rootView;
     }
 
 
-//    private ArrayList<AlternativeFlightsVO> airplaneDataVO;
-//    //TODO move to correct place
-//    private ArrayList<AlternativeFlightsVO> parseFlight(){
-//        Gson gson = new Gson();
-//
-//        //        Gson gson = new Gson();
-////        Type type = new TypeToken<ArrayList<FlightsVO>>(){}.getType();
-////        String strJson = loadJSONFromAsset();
-////        ArrayList<FlightsVO> airplaneDataVO = gson.fromJson(strJson, type);
-//
-//
-//        Type type = new TypeToken<ArrayList<AlternativeFlightsVO>>(){}.getType();
-//        //  Type type = new TypeToken<ArrayList<AirplaneDataVO>>(){}.getType();
-//        String strJson = HGBUtility.loadJSONFromAsset("alternativeflights.txt", getActivity());
-//
-//        airplaneDataVO = gson.fromJson(strJson, type);
-//        return airplaneDataVO;
-//    }
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        stickyList = (PinnedHeaderListView) view.findViewById(R.id.pinnedListView);
+        ConnectionManager.getInstance(getActivity()).getMyTrips(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                mItemsList= (ArrayList<MyTripItem>) data;
 
+                MyTripPinnedAdapter sectionedAdapter = new MyTripPinnedAdapter(mItemsList);
+                stickyList.setAdapter(sectionedAdapter);
 
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
+
+        stickyList.setOnItemClickListener(new PinnedHeaderListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int section, int position, long id) {
+
+                if (section == 0) {
+                    //TODO go to current itinerary
+
+                } else if (section == 1) {
+
+                    String solutionId = mItemsList.get(position).getSolutionid();
+                    ConnectionManager.getInstance(getActivity()).getItinerary(solutionId, new ConnectionManager.ServerRequestListener() {
+                        @Override
+                        public void onSuccess(Object data) {
+                          Log.d("","");
+                            //TODO set Travel and got to current itenrary
+                        }
+
+                        @Override
+                        public void onError(Object data) {
+                            Log.e("MainActivity", "Problem updating grid  " + data);
+                        }
+                    });
+
+                }
+
+            }
+
+            @Override
+            public void onSectionClick(AdapterView<?> adapterView, View view, int section, long id) {
+
+            }
+        });
+
+    }
 }
