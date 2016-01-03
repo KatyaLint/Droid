@@ -60,7 +60,7 @@ import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.network.Parser;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private ImageButton imageButton;
     private ImageButton purchaseButton;
     private ArrayList<CNCItem> mCNCItems;
-    private UserTravelVO mUserTravelOrder;
+    private UserTravelMainVO mUserTravelOrder;
     private List<NodesVO> alternativeFlights;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         //check if we have travelitinery in db
         String strTravel = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO, "");
         if (!"".equals(strTravel)) {
-            UserTravelVO userTravelVO = (UserTravelVO) Parser.parseAirplaneData(strTravel);
+            UserTravelMainVO userTravelVO = (UserTravelMainVO) Parser.parseAirplaneData(strTravel);
             setTravelOrder(userTravelVO);
         }
 
@@ -633,7 +633,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
-    public void setTravelOrder(UserTravelVO travelorder) {
+    public void setTravelOrder(UserTravelMainVO travelorder) {
         mUserTravelOrder = travelorder;
         if (travelorder == null) {
             setSolutionID(null);
@@ -668,7 +668,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
 
     @Override
-    public UserTravelVO getTravelOrder() {
+    public UserTravelMainVO getTravelOrder() {
         return mUserTravelOrder;
     }
 
@@ -700,7 +700,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         ConnectionManager.getInstance(MainActivity.this).getItinerary(solutionID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                setTravelOrder((UserTravelVO) data);
+                setTravelOrder((UserTravelMainVO) data);
                 continueFlow(fragment);
             }
 

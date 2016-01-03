@@ -1,6 +1,5 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,7 +14,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
@@ -25,7 +24,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  * Created by arisprung on 10/26/15.
  */
 public class AlternativeHotelFragment extends HGBAbtsractFragment {
-    private UserTravelVO mTravelDetails;
+    private UserTravelMainVO mTravelDetails;
     private PassengersVO passengersVO;
     private CellsVO cellsVO;
     private NodesVO nodesVO;

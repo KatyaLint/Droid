@@ -5,14 +5,6 @@
     android:orientation="vertical" >
 
 
-    <!--<LinearLayout-->
-        <!--android:id="@+id/layout"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:scrollbars="horizontal|vertical"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:orientation="vertical"-->
-        <!--android:scrollbarStyle="insideOverlay"-->
-        <!--android:fillViewport="true">-->
 
         <TableLayout
             android:layout_width="fill_parent"
@@ -34,9 +26,6 @@
             android:scrollbarStyle="insideOverlay"
             android:layout_width="wrap_content" >
 
-
-
-
             <TableLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,10 +34,5 @@
 
         </HorizontalScrollView>
         </ScrollView>
-    <!--</LinearLayout>-->
-
-
-
-
 
 </LinearLayout>

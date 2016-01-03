@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -27,7 +26,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.CNCAdapter;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
@@ -180,7 +179,7 @@ public class CNCFragment extends HGBAbtsractFragment {
             ConnectionManager.getInstance(getActivity()).ItinerarySearch(strMessage, strPrefId, new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
-                    getActivityInterface().setTravelOrder((UserTravelVO) data);
+                    getActivityInterface().setTravelOrder((UserTravelMainVO) data);
                     handleHGBMessage(getString(R.string.iteinerary_created));
                 }
 
@@ -194,7 +193,7 @@ public class CNCFragment extends HGBAbtsractFragment {
             ConnectionManager.getInstance(getActivity()).ItineraryCNCSearch(strMessage, strPrefId, getActivityInterface().getSolutionID(), new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
-                    getActivityInterface().setTravelOrder((UserTravelVO) data);
+                    getActivityInterface().setTravelOrder((UserTravelMainVO) data);
                     handleHGBMessage(getString(R.string.grid_has_been_updated));
                 }
 

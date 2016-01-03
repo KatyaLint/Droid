@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<HorizontalScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/table_scroll"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    android:background="@color/white"
+    android:scrollbars="horizontal">
+
+    <include
+        layout="@layout/new_grid_main_layout"/>
+
+
+
+</HorizontalScrollView>

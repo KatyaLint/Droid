@@ -1,6 +1,5 @@
 package hellogbye.com.hellogbyeandroid;
 
-import android.app.Fragment;
 import android.os.Bundle;
 
 import java.util.ArrayList;
@@ -11,9 +10,8 @@ import hellogbye.com.hellogbyeandroid.models.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
-import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 
 /**
@@ -23,7 +21,7 @@ public interface HGBMainInterface {
 
     void openVoiceToTextControl();
 
-    void setTravelOrder(UserTravelVO travelorder);
+    void setTravelOrder(UserTravelMainVO travelorder);
 
     void setCNCItems(ArrayList<CNCItem> cncItemArrayList);
 
@@ -35,7 +33,7 @@ public interface HGBMainInterface {
 
     void setAlternativeFlights(List<NodesVO> alternativeFlightsVO);
 
-    UserTravelVO getTravelOrder();
+    UserTravelMainVO getTravelOrder();
 
     ArrayList<CNCItem> getCNCItems();
 

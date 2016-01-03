@@ -20,7 +20,7 @@ import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 /**
@@ -64,7 +64,7 @@ public class FlightGridMainFragment {
     private int columnNumber;
 
 
-    public void createGridView(Activity activity,View rootView, UserTravelVO userTravelVO,  LayoutInflater inflater){
+    public void createGridView(Activity activity,View rootView, UserTravelMainVO userTravelVO,  LayoutInflater inflater){
         table = (TableLayout)rootView.findViewById(R.id.tlGridTable);
 
         this.inflater = inflater;
@@ -90,11 +90,11 @@ public class FlightGridMainFragment {
 
 
 
-    private class LongOperation extends AsyncTask<UserTravelVO, Void, String> {
+    private class LongOperation extends AsyncTask<UserTravelMainVO, Void, String> {
 
         @Override
-        protected String doInBackground(UserTravelVO... strings) {
-            UserTravelVO userTravelVO1 = strings[0];
+        protected String doInBackground(UserTravelMainVO... strings) {
+            UserTravelMainVO userTravelVO1 = strings[0];
             passData = new PassengerDataOrganization();
             passData.organizeDataStructure(userTravelVO1);
 
@@ -154,7 +154,7 @@ public class FlightGridMainFragment {
         }
     }
 
-    UserTravelVO userTravelVO;
+    UserTravelMainVO userTravelVO;
 
     private void grideInitialization(){
 
@@ -231,7 +231,7 @@ public class FlightGridMainFragment {
     }
 
 
-    private void createGridViewTable(UserTravelVO userTravelVO){
+    private void createGridViewTable(UserTravelMainVO userTravelVO){
 
      //   int counter = 0;
         this.userTravelVO = userTravelVO;

@@ -11,20 +11,30 @@ import java.util.HashMap;
 public class PassengersVO {
     @SerializedName("paxguid")
     private String mPaxguid;
-    @SerializedName("accountid")
-    private String mAccountID;
     @SerializedName("name")
     private String mName;
-    @SerializedName("displayname")
-    private String mDisplayName;
     @SerializedName("totalprice")
     private double mTotalPrice;
     @SerializedName("totalflightprice")
     private double mTotalFlightPrice;
     @SerializedName("totalhotelprice")
     private double mTotalHotelPrice;
+
+    //OLD
+    @SerializedName("accountid")
+    private String mAccountID;
+    @SerializedName("displayname")
+    private String mDisplayName;
     @SerializedName("paxstatus")
     private String mPaxStatus;
+
+
+
+    @SerializedName("itineraryitems")
+    private ArrayList<String> mItineraryItems = new ArrayList<String>();
+
+
+
 
     @SerializedName("cells")
     private ArrayList<CellsVO> mCells = new ArrayList<CellsVO>();
@@ -60,6 +70,13 @@ public class PassengersVO {
     public ArrayList<NodesVO> passengerNodes = new ArrayList<>();
 
     public HashMap<String,ArrayList<NodesVO> > hashMap = new HashMap<>();
+
+
+
+    public void setDateHashMap(String date,ArrayList<NodesVO> nodes){
+        hashMap.put(date,nodes);
+    }
+
 
     public void editHashMap(String date,ArrayList<NodesVO> nodes){
         hashMap.put(date,nodes);
@@ -114,5 +131,13 @@ public class PassengersVO {
 
     public void setmTotalHotelPrice(double mTotalHotelPrice) {
         this.mTotalHotelPrice = mTotalHotelPrice;
+    }
+
+    public ArrayList<String> getmItineraryItems() {
+        return mItineraryItems;
+    }
+
+    public void setmItineraryItems(ArrayList<String> mItineraryItems) {
+        this.mItineraryItems = mItineraryItems;
     }
 }

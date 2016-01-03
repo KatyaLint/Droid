@@ -19,6 +19,7 @@ import android.graphics.RectF;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -219,6 +220,18 @@ public class HGBUtility {
 
     }
 
+    public static long dayDifference(String startDay, String endDate){
+        Date date1 = getDateFromServer(startDay);
+        Date date2 = getDateFromServer(endDate);
+        long timeOne = date1.getTime();
+        long timeTwo = date2.getTime();
+        long oneDay = 1000 * 60 * 60 * 24;
+        long delta = (timeTwo - timeOne) / oneDay;
+        return delta;
+    }
+
+
+
     public static boolean clearBackStackAndGoToNextFragment(Activity activity) {
 
         if(fragmentStack.size() >= 2){
@@ -360,6 +373,48 @@ public class HGBUtility {
         return str;
     }
 
+    public static String parseDateFromddMMyyyyToddmmYYYY(String time) {
+        String outputPattern = "EEE, MM dd, yyyy";
+        String inputPattern = "MM/dd/yyyy";
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+
+        String str = null;
+
+        try {
+
+            SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+            Date date = null;
+            try {
+                date = inputFormat.parse(time);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            str = outputFormat.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
+
+    public static String addDayToDate(String dateToIncr) {
+        String newDate="";
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        String outputPattern = "MM/dd/yyyy";
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+        Date date ;
+        try {
+            date = df.parse(dateToIncr);
+            Date dayAfter = new Date(date.getTime() + (24 * 60 * 60 * 1000));
+            newDate = outputFormat.format(dayAfter);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+        return newDate;
+    }
     public static String parseDateToddMMyyyyForPayment(String time) {
         String inputPattern = "yyyy-MM-dd'T'HH:mm:ss";
         String outputPattern = "MM/dd/yyyy";
@@ -396,6 +451,8 @@ public class HGBUtility {
             return delta + " Nights";
         }
     }
+
+
 
     public static Date getDateFromServer(String time){
 

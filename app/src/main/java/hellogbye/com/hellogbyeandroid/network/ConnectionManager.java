@@ -30,8 +30,8 @@ public class ConnectionManager {
 
 
 
-    //   public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
-    public static String BASE_URL = "http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/";
+       public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
+  //  public static String BASE_URL = "http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/";
 
 
     private static ConnectionManager _instance;
@@ -988,7 +988,7 @@ public class ConnectionManager {
             case ITINERARY:
                 return BASE_URL + "Itinerary/";
             case ITINERARY_CNC:
-                return BASE_URL + "Itinerary/CNC";
+                return BASE_URL + "Itinerary/"; //return BASE_URL + "Itinerary/CNC";
             case COMPANIONS:
                 return BASE_URL + "Companions";
             case CARD_TOKEN:

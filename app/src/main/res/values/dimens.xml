@@ -27,6 +27,16 @@
     <dimen name="DP82">82dp</dimen>
     <dimen name="DP54">54dp</dimen>
     <dimen name="DP100">100dp</dimen>
+    <dimen name="DP150">150dp</dimen>
+    <dimen name="DP130">130dp</dimen>
+
+    <dimen name="DP160">160dp</dimen>
+    <dimen name="DP180">180dp</dimen>
+
+    <dimen name="DP90">90dp</dimen>
+    <dimen name="DP110">110dp</dimen>
+    <dimen name="DP120">120dp</dimen>
+    <dimen name="DP140">140dp</dimen>
 
     <dimen name="item_border_width">1dp</dimen>
 

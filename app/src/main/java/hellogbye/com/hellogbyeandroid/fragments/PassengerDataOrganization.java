@@ -3,13 +3,12 @@ package hellogbye.com.hellogbyeandroid.fragments;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 
 /**
  * Created by nyawka on 10/27/15.
@@ -18,7 +17,7 @@ public class PassengerDataOrganization {
 
     public ArrayList<PassengersVO> passangersVOs;
 
-    public void organizeDataStructure(UserTravelVO userTravelVO){
+    public void organizeDataStructure(UserTravelMainVO userTravelVO){
         ArrayList<PassengersVO> passengers = userTravelVO.getPassengerses();
 
 

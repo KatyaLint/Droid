@@ -4,21 +4,19 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.WindowManager;
 
 import org.apache.http.Header;
 
-import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import hellogbye.com.hellogbyeandroid.HGBMainInterface;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
-import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 
 /**
@@ -58,27 +56,47 @@ public class HGBAbtsractFragment extends Fragment {
 
     }
 
-
-
-    public NodesVO getLegWithGuid(UserTravelVO userOrder){
+    public NodesVO getLegWithGuid(UserTravelMainVO userOrder){
         String guid = getSelectedGuid();
+        Map<String, NodesVO> itemsMap = userOrder.getItems();
+        NodesVO userNode = itemsMap.get(guid);
 
-        ArrayList<PassengersVO> passengers = userOrder.getPassengerses();
-        for (PassengersVO passenger :passengers){
-            ArrayList<CellsVO> cells = passenger.getmCells();
-            for (CellsVO cell : cells){
-                ArrayList<NodesVO> nodes = cell.getmNodes();
-                for (NodesVO node: nodes){
-                    if(node.getmGuid()!= null && node.getmGuid().equals(guid)){
-                        node.setAccountID(passenger.getmPaxguid());
-                        return node;
-                    }
-                }
-            }
-        }
+//        ArrayList<PassengersVO> passengers = userOrder.getPassengerses();
+//        for (PassengersVO passenger :passengers){
+//            ArrayList<CellsVO> cells = passenger.getmCells();
+//            for (CellsVO cell : cells){
+//                ArrayList<NodesVO> nodes = cell.getmNodes();
+//                for (NodesVO node: nodes){
+//                    if(node.getmGuid()!= null && node.getmGuid().equals(guid)){
+//                        node.setAccountID(passenger.getmPaxguid());
+//                        return node;
+//                    }
+//                }
+//            }
+//        }
 
-        return null;
+        return userNode;
     }
+
+//    public NodesVO getLegWithGuid(UserTravelMainVO userOrder){
+//        String guid = getSelectedGuid();
+//
+//        ArrayList<PassengersVO> passengers = userOrder.getPassengerses();
+//        for (PassengersVO passenger :passengers){
+//            ArrayList<CellsVO> cells = passenger.getmCells();
+//            for (CellsVO cell : cells){
+//                ArrayList<NodesVO> nodes = cell.getmNodes();
+//                for (NodesVO node: nodes){
+//                    if(node.getmGuid()!= null && node.getmGuid().equals(guid)){
+//                        node.setAccountID(passenger.getmPaxguid());
+//                        return node;
+//                    }
+//                }
+//            }
+//        }
+//
+//        return null;
+//    }
 
 
     public ArrayList<NodesVO> getNodeWithGuidAndPaxID(String selectedItemGuid,String paxid){
@@ -115,7 +133,7 @@ public class HGBAbtsractFragment extends Fragment {
         return null;
     }
 
-    public CellsVO getCellWitGuid(UserTravelVO userOrder){
+    public CellsVO getCellWitGuid(UserTravelMainVO userOrder){
         String guid = getSelectedGuid();
 
         ArrayList<PassengersVO> passengers = userOrder.getPassengerses();
@@ -134,7 +152,7 @@ public class HGBAbtsractFragment extends Fragment {
         return null;
     }
 
-    public PassengersVO getTravellerWitGuid(UserTravelVO userOrder){
+    public PassengersVO getTravellerWitGuid(UserTravelMainVO userOrder){
         String guid = getSelectedUserGuid();
 
         ArrayList<PassengersVO> passengers = userOrder.getPassengerses();

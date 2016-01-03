@@ -19,7 +19,7 @@ import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
@@ -31,7 +31,7 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
 
 
     private ArrayList<AlternativeFlightsVO> airplaneDataVO;
-    private UserTravelVO userOrder;
+    private UserTravelMainVO userOrder;
     private Button showAlternativeFlight;
     private NodesVO nodeFromAlternative;
     

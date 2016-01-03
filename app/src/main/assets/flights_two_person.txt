@@ -1,0 +1,544 @@
+{
+  "solutionid": "3fbaedfd-0cae-4ee6-8e02-297de1c18b4a",
+  "startdatetime": "2015-12-17T00:00:00",
+  "enddatetime": "2015-12-24T21:45:00",
+  "solutionname": "Greg + Roy : New York : 2015-12-17",
+  "isfavorite": false,
+  "totalprice": 9686.73,
+  "passengers": [
+    {
+      "paxguid": "f5cbac10-e4d9-4ec8-8d45-a4dd00e8c634",
+      "name": "Greg",
+      "totalprice": 6433.38,
+      "totalflightprice": 2361.98,
+      "totalhotelprice": 4071.4,
+      "itineraryitems": [
+        "f758fff2-b76b-4833-9100-66ac55fe1e77",
+        "de7b0a48-6891-418b-87c2-7aa878549591",
+        "452aedc0-91c4-4650-b30e-656f30df8ff3"
+      ]
+    },
+    {
+      "paxguid": "aa455dab-bdf5-4668-8c2c-a529014d142a",
+      "name": "Roy",
+      "totalprice": 3253.35,
+      "totalflightprice": 2227.58,
+      "totalhotelprice": 1025.77,
+      "itineraryitems": [
+        "78276463-45c3-4bb0-b00a-8d21e17ac1d7",
+        "28210389-3ae5-4c25-b05c-c6f06a5db1ef"
+      ]
+    }
+  ],
+  "items": {
+    "f758fff2-b76b-4833-9100-66ac55fe1e77": {
+      "legs": [
+        {
+          "type": "Leg",
+          "parentguid": "f758fff2-b76b-4833-9100-66ac55fe1e77",
+          "guid": "50384ee1-b209-4cd7-973c-bc8d2fc9eb05",
+          "flightnumber": "420",
+          "flighttime": "1h 20m",
+          "departure": "2015-12-17T17:00:00",
+          "departuretime": "05:00 PM",
+          "arrival": "2015-12-17T18:20:00",
+          "arrivaltime": "06:20 PM",
+          "code": "D",
+          "origin": "YYZ",
+          "destination": "YUL",
+          "origincityname": "Toronto",
+          "destinationcityname": "Montreal",
+          "originairportname": "Pearson ",
+          "destinationairportname": "Pierre Elliott Trudeau ",
+          "origincountry": "CA",
+          "destinationcountry": "CA",
+          "carriercode": "AC",
+          "carriername": "Air Canada",
+          "equipment": "333",
+          "paxguid": "f5cbac10-e4d9-4ec8-8d45-a4dd00e8c634",
+          "ref": "00000000-0000-0000-0000-000000000000",
+          "seq": 0,
+          "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/AC_sq.jpg",
+          "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/AC.png",
+          "fareclass": "Business",
+          "farepreference": "Refundable",
+          "normalizedduration": 0.4444444444444444
+        },
+        {
+          "type": "StopOver",
+          "durationhours": 1,
+          "durationminutes": 35,
+          "cityname": "Montreal",
+          "airportname": "Pierre Elliott Trudeau ",
+          "airportcode": "YUL",
+          "arrivaltime": "06:20 PM",
+          "departuretime": "07:55 PM"
+        },
+        {
+          "type": "Leg",
+          "parentguid": "f758fff2-b76b-4833-9100-66ac55fe1e77",
+          "guid": "9af8addc-f295-4821-ab77-9aa1d79da9fd",
+          "flightnumber": "8400",
+          "flighttime": "1h 40m",
+          "departure": "2015-12-17T19:55:00",
+          "departuretime": "07:55 PM",
+          "arrival": "2015-12-17T21:35:00",
+          "arrivaltime": "09:35 PM",
+          "code": "A",
+          "origin": "YUL",
+          "destination": "LGA",
+          "origincityname": "Montreal",
+          "destinationcityname": "New York",
+          "originairportname": "Pierre Elliott Trudeau ",
+          "destinationairportname": "La Guardia",
+          "origincountry": "CA",
+          "destinationcountry": "US",
+          "carriercode": "UA",
+          "carriername": "United Airlines Inc",
+          "equipment": "E90",
+          "paxguid": "f5cbac10-e4d9-4ec8-8d45-a4dd00e8c634",
+          "ref": "00000000-0000-0000-0000-000000000000",
+          "seq": 1,
+          "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/UA_sq.jpg",
+          "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/UA.png",
+          "fareclass": "Business",
+          "farepreference": "Refundable",
+          "normalizedduration": 0.5555555555555556
+        }
+      ],
+      "isalternative": false,
+      "flighttime": "3h 0m",
+      "departure": "2015-12-17T17:00:00",
+      "arrival": "2015-12-17T21:35:00",
+      "origin": "YYZ",
+      "destination": "LGA",
+      "origincityname": "Toronto",
+      "destinationcityname": "New York",
+      "originairportname": "Pearson ",
+      "destinationairportname": "La Guardia",
+      "origincountry": "CA",
+      "destinationcountry": "US",
+      "operator": "AC",
+      "operatorname": "Air Canada",
+      "equipment": "333",
+      "fareclass": "Business",
+      "farepreference": "Refundable",
+      "cost": 2227.58,
+      "tax": 12.1,
+      "traveltime": "4h 35m",
+      "paxguid": "f5cbac10-e4d9-4ec8-8d45-a4dd00e8c634",
+      "travelsector": "domestic",
+      "primaryguid": "00000000-0000-0000-0000-000000000000",
+      "normalizedduration": 1,
+      "paymentprocessingstate": "UNPAID",
+      "type": "flight",
+      "dateorder": "2015-12-17T17:00:00",
+      "guid": "f758fff2-b76b-4833-9100-66ac55fe1e77",
+      "rank": 0.5133333333333333
+    },
+    "78276463-45c3-4bb0-b00a-8d21e17ac1d7": {
+      "legs": [
+        {
+          "type": "Leg",
+          "parentguid": "78276463-45c3-4bb0-b00a-8d21e17ac1d7",
+          "guid": "29c77b21-8453-4715-9212-4942955f5e3c",
+          "flightnumber": "420",
+          "flighttime": "1h 20m",
+          "departure": "2015-12-17T17:00:00",
+          "departuretime": "05:00 PM",
+          "arrival": "2015-12-17T18:20:00",
+          "arrivaltime": "06:20 PM",
+          "code": "D",
+          "origin": "YYZ",
+          "destination": "YUL",
+          "origincityname": "Toronto",
+          "destinationcityname": "Montreal",
+          "originairportname": "Pearson ",
+          "destinationairportname": "Pierre Elliott Trudeau ",
+          "origincountry": "CA",
+          "destinationcountry": "CA",
+          "carriercode": "AC",
+          "carriername": "Air Canada",
+          "equipment": "333",
+          "paxguid": "aa455dab-bdf5-4668-8c2c-a529014d142a",
+          "ref": "00000000-0000-0000-0000-000000000000",
+          "seq": 0,
+          "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/AC_sq.jpg",
+          "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/AC.png",
+          "fareclass": "Business",
+          "farepreference": "Refundable",
+          "normalizedduration": 0.4444444444444444
+        },
+        {
+          "type": "StopOver",
+          "durationhours": 1,
+          "durationminutes": 35,
+          "cityname": "Montreal",
+          "airportname": "Pierre Elliott Trudeau ",
+          "airportcode": "YUL",
+          "arrivaltime": "06:20 PM",
+          "departuretime": "07:55 PM"
+        },
+        {
+          "type": "Leg",
+          "parentguid": "78276463-45c3-4bb0-b00a-8d21e17ac1d7",
+          "guid": "c1536e36-0065-443b-a294-3a94bf7d2818",
+          "flightnumber": "8400",
+          "flighttime": "1h 40m",
+          "departure": "2015-12-17T19:55:00",
+          "departuretime": "07:55 PM",
+          "arrival": "2015-12-17T21:35:00",
+          "arrivaltime": "09:35 PM",
+          "code": "A",
+          "origin": "YUL",
+          "destination": "LGA",
+          "origincityname": "Montreal",
+          "destinationcityname": "New York",
+          "originairportname": "Pierre Elliott Trudeau ",
+          "destinationairportname": "La Guardia",
+          "origincountry": "CA",
+          "destinationcountry": "US",
+          "carriercode": "UA",
+          "carriername": "United Airlines Inc",
+          "equipment": "E90",
+          "paxguid": "aa455dab-bdf5-4668-8c2c-a529014d142a",
+          "ref": "00000000-0000-0000-0000-000000000000",
+          "seq": 1,
+          "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/UA_sq.jpg",
+          "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/UA.png",
+          "fareclass": "Business",
+          "farepreference": "Refundable",
+          "normalizedduration": 0.5555555555555556
+        }
+      ],
+      "isalternative": false,
+      "flighttime": "3h 0m",
+      "departure": "2015-12-17T17:00:00",
+      "arrival": "2015-12-17T21:35:00",
+      "origin": "YYZ",
+      "destination": "LGA",
+      "origincityname": "Toronto",
+      "destinationcityname": "New York",
+      "originairportname": "Pearson ",
+      "destinationairportname": "La Guardia",
+      "origincountry": "CA",
+      "destinationcountry": "US",
+      "operator": "AC",
+      "operatorname": "Air Canada",
+      "equipment": "333",
+      "fareclass": "Business",
+      "farepreference": "Refundable",
+      "cost": 2227.58,
+      "tax": 12.1,
+      "traveltime": "4h 35m",
+      "paxguid": "aa455dab-bdf5-4668-8c2c-a529014d142a",
+      "travelsector": "domestic",
+      "primaryguid": "00000000-0000-0000-0000-000000000000",
+      "normalizedduration": 1,
+      "paymentprocessingstate": "UNPAID",
+      "type": "flight",
+      "dateorder": "2015-12-17T17:00:00",
+      "guid": "78276463-45c3-4bb0-b00a-8d21e17ac1d7",
+      "rank": 0.5133333333333333
+    },
+    "de7b0a48-6891-418b-87c2-7aa878549591": {
+      "legs": [
+        {
+          "type": "Leg",
+          "parentguid": "de7b0a48-6891-418b-87c2-7aa878549591",
+          "guid": "7bc907e0-7a48-483e-8982-50924edeff22",
+          "flightnumber": "235",
+          "flighttime": "1h 10m",
+          "departure": "2015-12-24T20:35:00",
+          "departuretime": "08:35 PM",
+          "arrival": "2015-12-24T21:45:00",
+          "arrivaltime": "09:45 PM",
+          "code": "Q",
+          "origin": "JFK",
+          "destination": "BOS",
+          "origincityname": "New York",
+          "destinationcityname": "Boston",
+          "originairportname": "John F Kennedy ",
+          "destinationairportname": "Logan ",
+          "origincountry": "US",
+          "destinationcountry": "US",
+          "carriercode": "AA",
+          "carriername": "American Airlines",
+          "equipment": "738",
+          "paxguid": "f5cbac10-e4d9-4ec8-8d45-a4dd00e8c634",
+          "ref": "00000000-0000-0000-0000-000000000000",
+          "seq": 0,
+          "carrierbadgeurl": "http://images.trvl-media.com/media/content/expus/graphics/static_content/fusion/v0.1b/images/airlines/s/AA_sq.jpg",
+          "carrierlogourl": "http://0.omg.io/wego/image/upload/flights/airlines_rectangular/AA.png",
+          "fareclass": "Economy",
+          "farepreference": "Nonrefundable",
+          "normalizedduration": 1
+        }
+      ],
+      "isalternative": false,
+      "flighttime": "1h 10m",
+      "departure": "2015-12-24T20:35:00",
+      "arrival": "2015-12-24T21:45:00",
+      "origin": "JFK",
+      "destination": "BOS",
+      "origincityname": "New York",
+      "destinationcityname": "Boston",
+      "originairportname": "John F Kennedy ",
+      "destinationairportname": "Logan ",
+      "origincountry": "US",
+      "destinationcountry": "US",
+      "operator": "AA",
+      "operatorname": "American Airlines",
+      "equipment": "738",
+      "fareclass": "Economy",
+      "farepreference": "Nonrefundable",
+      "cost": 134.4,
+      "tax": 0,
+      "traveltime": "1h 10m",
+      "paxguid": "f5cbac10-e4d9-4ec8-8d45-a4dd00e8c634",
+      "travelsector": "domestic",
+      "primaryguid": "00000000-0000-0000-0000-000000000000",
+      "normalizedduration": 0.2545454545454545,
+      "paymentprocessingstate": "UNPAID",
+      "type": "flight",
+      "dateorder": "2015-12-24T20:35:00",
+      "guid": "de7b0a48-6891-418b-87c2-7aa878549591",
+      "rank": 0.020000000000000004
+    },
+    "452aedc0-91c4-4650-b30e-656f30df8ff3": {
+      "paymentprocessingstate": "UNPAID",
+      "hotelcode": "4459740",
+      "cityname": "New York",
+      "hotelname": "Jw Marriott Essex House New York",
+      "hotelchain": "JW Marriott                                       ",
+      "starrating": 5,
+      "shortdescription": "<p><b>Property Location</b><br/>A stay at JW Marriott Essex House New York places you in the heart of New York, convenient to Central Park. This 4.5-star hotel is close to Rockefeller Center and Broadway.</p><p><b>Rooms</b><br/>Make yourself at home in one of the 509 air-conditioned rooms featuring iPod docking stations and flat-screen televisions. Your pillowtop bed comes with down comforters. Digital programming provides entertainment, and wired and wireless Internet access is available for a surcharge. Private bathrooms have designer toiletries and complimentary toiletries.</p><p><b>Rec, Spa, Premium Amenities</b><br/>Pamper yourself with a visit to the spa, which offers massages, body treatments, and facials. If you're looking for recreational opportunities, you'll find a sauna, a steam room, and a 24-hour fitness center. This Art Deco hotel also features complimentary wireless Internet access, concierge services, and babysitting/childcare (surcharge).</p><p><b>Dining</b><br/>Satisfy your appetite at the hotel's restaurant, which features a bar. Dining is also available at a coffee shop/cafÃ©. Quench your thirst with your favorite drink at a bar/lounge. Full breakfasts are available daily for a fee.</p><p><b>Business, Other Amenities</b><br/>Featured amenities include a 24-hour business center, limo/town car service, and a computer station. Planning an event in New York? This hotel has 11592 square feet (1077 square meters) of space consisting of a conference center, conference space, and meeting rooms.</p><p><b>Policies</b><br/>Pets allowed ,Check-out time is noon,Check-in time starts at 3 PM,Only dogs are allowed ,Minimum check-in age is 18,Pet maximum weight in lb is 25,Service animals exempt from fees/restrictions ,Maximum number of pets per room 2</p>",
+      "locationdescription": "Central Park",
+      "postalcode": "10019",
+      "latitude": 40.7664337,
+      "longitude": -73.97831,
+      "address1": "160 Central Park South, New York",
+      "phone": "001 212 247 0300",
+      "image": "https://az712897.vo.msecnd.net/images/full/FBB811A0-AF17-4B99-AD6B-7F28442A3078.jpeg",
+      "allimages": [
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/fbb811a0-af17-4b99-ad6b-7f28442a3078.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/d1e02d47-737a-45c8-8b49-3bc27c87a6c1.jpeg",
+          "width": 350,
+          "height": 350
+        }
+      ],
+      "amenities": "Adjoining rooms,Air conditioning,ATM,Babysitting service,Bar/Lounge,Bathrobe,Bathroom,Bell boy,Business Center,Climate control,Coffee,Computer room,Concierge,Cribs Available,Desk,Dry cleaning service,Express check in,Express check out,Free newspaper,Free Wifi,Gift shop,Hairdryer,Health Spa,Housekeeping,Internet access,Ipod dock,Iron and board,Lifts,Luggage storage,Massage,Meeting room,Minibar,Multilingual staff,Number of floors - over 10,Refrigerator,Restaurant(s),Safe,Sauna,Shops,Slippers,Sofa bed,Steam room,Surcharge,Toiletries,Total number of rooms 500+,TV,Wedding services",
+      "minimumamount": 4071.4,
+      "maximumamount": 4071.4,
+      "checkin": "2015-12-17T00:00:00",
+      "checkout": "2015-12-24T00:00:00",
+      "country": "US",
+      "stateprovince": "NY",
+      "paxguid": "f5cbac10-e4d9-4ec8-8d45-a4dd00e8c634",
+      "defaultroomguid": "50d33e62-5ade-4c76-a959-0699c7351e9f",
+      "rooms": [
+        {
+          "primaryguid": "00000000-0000-0000-0000-000000000000",
+          "roomtype": "1 king bed Room, 1 King Bed",
+          "code": "50d33e62-5ade-4c76-a959-0699c7351e9f",
+          "description": "Room, 1 King Bed",
+          "bedtypes": [],
+          "cost": 4071.4,
+          "nightlyrate": [],
+          "averagerate": 581.6285714285714,
+          "surchargetotal": 0,
+          "isalternative": false,
+          "checkin": "2015-12-17T00:00:00",
+          "checkout": "2015-12-24T00:00:00",
+          "totalbeforetax": 0,
+          "type": "hotelroom",
+          "dateorder": "2015-12-17T00:00:00",
+          "guid": "50d33e62-5ade-4c76-a959-0699c7351e9f",
+          "rank": 0
+        }
+      ],
+      "isalternative": false,
+      "hasalternative": true,
+      "type": "hotel",
+      "dateorder": "2015-12-17T00:00:00",
+      "guid": "452aedc0-91c4-4650-b30e-656f30df8ff3",
+      "rank": 0.5833333333333334
+    },
+    "28210389-3ae5-4c25-b05c-c6f06a5db1ef": {
+      "paymentprocessingstate": "UNPAID",
+      "hotelcode": "4162529",
+      "cityname": "New York",
+      "hotelname": "La Quinta Inn Queens",
+      "hotelchain": "La Quinta Inn & Suites                            ",
+      "starrating": 2,
+      "shortdescription": "<p><b>Property Location</b><br/>With a stay at La Quinta Inn Queens (New York City) in Long Island City, you'll be in the business district and minutes from Museum for African Art and close to Chrysler Building. This hotel is close to Grand Central Terminal and Rockefeller Center.</p><p><b>Rooms</b><br/>Make yourself at home in one of the 100 air-conditioned rooms featuring refrigerators. Complimentary wired and wireless Internet access keeps you connected, and premium TV channels provides entertainment. Bathrooms feature shower/tub combinations, complimentary toiletries, and hair dryers. Conveniences include coffee/tea makers and irons/ironing boards, and housekeeping is provided daily.</p><p><b>Rec, Spa, Premium Amenities</b><br/>Take advantage of recreation opportunities such as a fitness center, or other amenities including complimentary wireless Internet access and a fireplace in the lobby.</p><p><b>Dining</b><br/>A complimentary continental breakfast is included.</p><p><b>Business, Other Amenities</b><br/>Featured amenities include complimentary high-speed (wired) Internet access, a business center, and a 24-hour front desk. This hotel has 3 meeting rooms available for events. Free self parking is available onsite.</p><p><b>Policies</b><br/>Check-in time starts at 3 PM,Check-out time is 11 AM,Pets not allowed ,Minimum check-in age is 18</p>",
+      "locationdescription": "Suburb",
+      "postalcode": "11101",
+      "latitude": 40.74399,
+      "longitude": -73.92735,
+      "address1": "37 18 Queens Blvd, New York",
+      "phone": "+1 (718) 729-8775",
+      "image": "https://az712897.vo.msecnd.net/images/full/34B5ABDE-9C8E-4E31-B7EB-B7AD4A3C8160.jpeg",
+      "allimages": [
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/dfe94ede-7735-4a3e-88d6-0099b443dd9d.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/62626ff2-ff72-47e1-80c4-16783acad244.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/14664c3b-6180-423b-82be-fdd3c7b55535.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/abb9e63a-201b-428a-9c76-d9466e9c8482.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/75436830-f97c-455f-b08a-77cd693a878e.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/34b5abde-9c8e-4e31-b7eb-b7ad4a3c8160.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/9815d9af-540c-4118-8f37-ee0d37b047e1.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/5df42942-3545-438d-b4a0-c9d4c3736e01.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/6ea90652-9e3c-4270-8fad-306504c2b89c.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/b0aecfcb-6471-4d75-9342-97ab4be51ff6.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/7b9f6000-b678-4c4f-9731-bf389623ced5.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/c7c90b43-c935-4921-9f34-8100694e00b0.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/d2470955-14b7-4583-b9d3-df0afaf67fae.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/40ba7530-f0bd-42ef-bcb9-61c2258bfd62.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/06724fae-68ce-4535-9570-57517e8e83f7.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/fd8b35f4-7a9f-4e88-9a6d-070e80a7e0f0.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/12dd94d2-583f-4152-872c-dd43d1951d56.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/1e407d46-b048-40e6-806a-8ef2ffd5c015.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/9515cbdf-6d6a-4ae2-bcc6-86663ef9ecf1.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/5da2dad5-f576-427a-8085-fe03a22b1ad4.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/eae422f6-315e-4088-a771-fc4c96142f58.jpeg",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "image": "https://az712897.vo.msecnd.net/images/full/6addcf35-9015-4e81-90dc-e02cf383ae22.jpeg",
+          "width": 350,
+          "height": 350
+        }
+      ],
+      "amenities": "Air conditioning,ATM,Breakfast,Business Center,Climate control,Coffee,Cribs Available,Desk,Fireplace,Free car parking,Free Internet access (Lounge),Free local calls,Free Wifi,Hairdryer,Housekeeping,Iron and board,Lifts,Meeting room,Number of floors - under 10,Parking,Refrigerator,Shower,Sofa bed,Toiletries,Total number of rooms 51 - 100,TV",
+      "minimumamount": 1025.77,
+      "maximumamount": 1025.77,
+      "checkin": "2015-12-17T00:00:00",
+      "checkout": "2015-12-24T00:00:00",
+      "country": "US",
+      "stateprovince": "NY",
+      "paxguid": "aa455dab-bdf5-4668-8c2c-a529014d142a",
+      "defaultroomguid": "c7eec607-bb4e-408e-b93b-3618f22dcdfb",
+      "rooms": [
+        {
+          "primaryguid": "00000000-0000-0000-0000-000000000000",
+          "roomtype": "1 king bed Standard King",
+          "code": "c7eec607-bb4e-408e-b93b-3618f22dcdfb",
+          "description": "Standard King",
+          "bedtypes": [],
+          "cost": 1025.77,
+          "nightlyrate": [],
+          "averagerate": 146.53857142857143,
+          "surchargetotal": 0,
+          "isalternative": false,
+          "checkin": "2015-12-17T00:00:00",
+          "checkout": "2015-12-24T00:00:00",
+          "totalbeforetax": 0,
+          "type": "hotelroom",
+          "dateorder": "2015-12-17T00:00:00",
+          "guid": "c7eec607-bb4e-408e-b93b-3618f22dcdfb",
+          "rank": 0
+        }
+      ],
+      "isalternative": false,
+      "hasalternative": true,
+      "type": "hotel",
+      "dateorder": "2015-12-17T00:00:00",
+      "guid": "28210389-3ae5-4c25-b05c-c6f06a5db1ef",
+      "rank": 0
+    }
+  },
+  "conversation": [
+    {
+      "message": "fly with Roy and Steve to New York for one week, and then fly me to Boston",
+      "participant": "User",
+      "messagedatetime": "2015-12-17T16:16:45"
+    }
+  ]
+}

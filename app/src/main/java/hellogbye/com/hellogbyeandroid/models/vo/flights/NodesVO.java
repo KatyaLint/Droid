@@ -4,21 +4,33 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+
 /**
  * Created by nyawka on 9/9/15.
  */
-public class NodesVO implements Comparable<NodesVO>
+public class NodesVO implements Comparable<NodesVO>, Cloneable
 {
 
+    private String userName;
     private String accountID;
     private boolean isEmpty = false;
+
+
+    public NodesVO getClone(){
+        try { // call clone in Object.
+        return (NodesVO) super.clone();
+        } catch (CloneNotSupportedException e) {
+            System.out.println (" Cloning not allowed. " );
+            return this;
+        }
+    }
 
     public String getDateOfCell() {
         return dateOfCell;
     }
 
     public void setDateOfCell(String dateOfCell) {
-        this.dateOfCell = dateOfCell;
+            this.dateOfCell = dateOfCell;
     }
 
     private String dateOfCell = "";
@@ -511,4 +523,22 @@ public class NodesVO implements Comparable<NodesVO>
     public void setmEquipment(String mEquipment) {
         this.mEquipment = mEquipment;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getmArrival() {
+        return mArrival;
+    }
+
+    public void setmArrival(String mArrival) {
+        this.mArrival = mArrival;
+    }
+
+
 }

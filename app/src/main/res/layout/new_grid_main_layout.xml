@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/new_grid_main_ll"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/passangers_names_ll"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/DP34"
+        android:background="@color/hgb_blue"
+        android:orientation="horizontal" />
+
+    <ScrollView
+
+        android:id="@+id/scroll_view_scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbars="vertical"
+        android:fillViewport="false">
+
+
+        <LinearLayout
+            android:id="@+id/scroll_view_ll"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal" >
+
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="@dimen/DP150"-->
+                <!--android:layout_height="fill_parent"-->
+                <!--android:background="@color/azure"-->
+                <!--android:orientation="vertical"/>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="@dimen/DP150"-->
+                <!--android:layout_height="fill_parent"-->
+                <!--android:background="@color/red_money"-->
+                <!--android:orientation="vertical"/>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="@dimen/DP150"-->
+                <!--android:layout_height="fill_parent"-->
+                <!--android:background="@color/green_button_color"-->
+                <!--android:orientation="vertical"/>-->
+
+          <!--<include layout="@layout/new_grid_view_inner_flight_item"/>-->
+            <!--<include layout="@layout/new_grid_view_inner_flight_item"/>-->
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</LinearLayout>

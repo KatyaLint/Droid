@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/grid_flight_square_ll"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/DP10"
+    >
+
+
+
+    <LinearLayout
+        android:layout_width="@dimen/DP140"
+        android:layout_height="@dimen/DP90"
+        android:background="@drawable/rounded_corner"
+        android:layout_gravity="center"
+        android:padding="@dimen/DP8"
+        android:layout_marginTop="@dimen/DP6"
+        android:orientation="vertical">
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/grid_flight_destination_from"
+            style="@style/GridTextStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Toronto to"
+            android:textColor="@color/dark_teal"
+            app:fontName="dinnextltpro_medium.otf" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/grid_traveler_flight_price"
+            style="@style/GridTextStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="$100000"
+            android:textColor="@color/red_pink"
+            app:fontName="dinnextltpro_medium.otf" />
+
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/grid_traveler_flight_stops"
+            style="@style/GridTextStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/DP2"
+            android:layout_marginTop="@dimen/DP4"
+            android:text="YYZ-AMS-CPT"
+            android:textColor="@color/dark_teal"
+            app:fontName="dinnextltpro_medium.otf" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/grid_flight_operator"
+            style="@style/GridTextStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="AC222"
+            android:textColor="@color/greyish_brown"
+            app:fontName="dinnextltpro_regular.otf" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/grid_flight_time"
+            style="@style/GridTextStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="14:32"
+            android:textColor="@color/greyish_brown"
+            app:fontName="dinnextltpro_regular.otf" />
+
+    </LinearLayout>
+</LinearLayout>
+

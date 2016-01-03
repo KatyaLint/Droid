@@ -23,11 +23,9 @@ import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AcountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelVO;
-import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 
 public class Parser {
 
@@ -183,10 +181,10 @@ public class Parser {
 
 
     public static Object parseAirplaneData(String response) {
-        UserTravelVO airplaneDataVO = null;
+        UserTravelMainVO airplaneDataVO = null;
         try {
             Gson gson = new Gson();
-            Type type = new TypeToken<UserTravelVO>() {
+            Type type = new TypeToken<UserTravelMainVO>() {
             }.getType();
             airplaneDataVO = gson.fromJson(response, type);
 
