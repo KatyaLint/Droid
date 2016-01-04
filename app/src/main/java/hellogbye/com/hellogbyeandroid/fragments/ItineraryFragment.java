@@ -70,7 +70,7 @@ public class ItineraryFragment extends HGBAbtsractFragment{
             Gson gson = new Gson();
             Type type = new TypeToken<UserTravelMainVO>() {
             }.getType();
-            String strJson = HGBUtility.loadJSONFromAsset("flights_three_person.txt", getActivity());
+            String strJson = HGBUtility.loadJSONFromAsset("flights_one_person.txt", getActivity());
 
             airplaneDataVO = gson.fromJson(strJson, type);
 
@@ -462,9 +462,9 @@ private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO 
 
         LinearLayout itineraryLayout = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.scroll_view_ll);
 
-        UserTravelMainVO user = parseFlight();
+        //UserTravelMainVO user = parseFlight();
         //getActivityInterface().setTravelOrder(user);
-        //userOrder = getActivityInterface().getTravelOrder();
+        UserTravelMainVO  user = getActivityInterface().getTravelOrder();
         userOrder = user;
                 //getActivityInterface().setTravelOrder(userOrder);
         createPassengersName(scrollViewLinearLayout, userOrder);

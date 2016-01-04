@@ -20,17 +20,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.PaymentChild;
 import hellogbye.com.hellogbyeandroid.models.PaymnentGroup;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
@@ -85,8 +89,9 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
 
 
         //mArralistView = new ArrayList<>();
-
-        for (PassengersVO passengersVO : getActivityInterface().getTravelOrder().getPassengerses()) {
+        UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
+        ArrayList<PassengersVO> passangers = travelOrder.getPassengerses();
+        for (PassengersVO passengersVO : passangers) {
             View child = getActivity().getLayoutInflater().inflate(R.layout.payment_details_person_layout, null);
             mRootView.addView(child);
             ImageView imageView = (ImageView) child.findViewById(R.id.checkout_image_name_round_image_view);
@@ -98,7 +103,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
             nameFontText.setText(passengersVO.getmName());
             priceFontText.setText("$" + String.valueOf(passengersVO.getmTotalPrice()));
             TextDrawable drawable2 = TextDrawable.builder()
-                    .buildRound(passengersVO.getmDisplayName().substring(0, 1), Color.GRAY);
+                    .buildRound(passengersVO.getmName().substring(0, 1), Color.GRAY);
             imageView.setImageDrawable(drawable2);
 
             List<ArrayList<PaymentChild>> children = new ArrayList<>();
@@ -110,51 +115,81 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
             ArrayList<PaymentChild> hotelChildArray = null;
             Set<String> set = new HashSet<String>();
 
-            for (CellsVO cellsVO : passengersVO.getmCells()) {
-                for (NodesVO node : cellsVO.getmNodes()) {
-                    set.add(node.getmGuid());
-                    if (node.getmType().equals("hotel")) {
 
+            ArrayList<String> items = passengersVO.getmItineraryItems();
+            for(String item : items){
+                Map<String, NodesVO> hashMap = travelOrder.getItems();
+                NodesVO node = hashMap.get(item);
+                if(node != null){
+                    set.add(node.getmGuid());
+                    if(NodeTypeEnum.HOTEL.getType().equals(node.getmType())){
                         if (!isHotelAdded) {
                             hotelChildArray = new ArrayList<>();
                             groups.add(new PaymnentGroup("Hotel", "$" + String.valueOf(passengersVO.getmTotalHotelPrice()), true));
 
                             isHotelAdded = true;
                         }
-
-                    } else if (node.getmType().equals("flight")) {
+                    }else if(NodeTypeEnum.FLIGHT.getType().equals(node.getmType())){
                         if (!isFlightAdded) {
                             flightChildArray = new ArrayList<>();
                             groups.add(new PaymnentGroup("Flight", "$" + String.valueOf(passengersVO.getmTotalFlightPrice()), true));
                             isFlightAdded = true;
                         }
                     }
+
                 }
             }
 
 
-            for (String strGuid : set) {
-                double totalprice = 0;
-                ArrayList<NodesVO> list = getNodeWithGuidAndPaxID(strGuid, passengersVO.getmPaxguid());
+//            for (CellsVO cellsVO : passengersVO.getmCells()) {
+//                for (NodesVO node : cellsVO.getmNodes()) {
+//                    set.add(node.getmGuid());
+//                    if (node.getmType().equals("hotel")) {
+//
+//                        if (!isHotelAdded) {
+//                            hotelChildArray = new ArrayList<>();
+//                            groups.add(new PaymnentGroup("Hotel", "$" + String.valueOf(passengersVO.getmTotalHotelPrice()), true));
+//
+//                            isHotelAdded = true;
+//                        }
+//
+//                    } else if (node.getmType().equals("flight")) {
+//                        if (!isFlightAdded) {
+//                            flightChildArray = new ArrayList<>();
+//                            groups.add(new PaymnentGroup("Flight", "$" + String.valueOf(passengersVO.getmTotalFlightPrice()), true));
+//                            isFlightAdded = true;
+//                        }
+//                    }
+//                }
+//            }
 
-                if (list != null && list.size() > 0) {
-                    for (NodesVO n : list) {
-                        totalprice += n.getCost();
-                    }
-                    NodesVO nodesVO = list.get(0);
-                    if (list.get(0).getmType().equals("hotel")) {
-                        hotelChildArray.add(new PaymentChild(nodesVO.getmHotelName() +
+
+            for (String strGuid : set) {
+
+                NodesVO nodesVO = getNodeWithGuidAndPaxID(strGuid, passengersVO.getmPaxguid(), travelOrder);
+
+                if (nodesVO != null ){//&& list.size() > 0) {
+                   double totalprice = passengersVO.getmTotalPrice();
+//                    for (NodesVO n : list) {
+//                        totalprice += n.getCost();
+//                    }
+                  //  NodesVO nodesVO = list.get(0);
+                    PaymentChild paymentChild;
+                    if (NodeTypeEnum.HOTEL.getType().equals(nodesVO.getmType())){
+                         paymentChild = new PaymentChild(nodesVO.getmHotelName() +
                                 "\n" + HGBUtility.parseDateToddMMyyyyForPayment(nodesVO.getmCheckIn()) +
                                 "-" + HGBUtility.parseDateToddMMyyyyForPayment(nodesVO.getmCheckOut()) + "\n" +
                                 nodesVO.getRoomsVOs().get(0).getmRoomType() + " " +
                                 HGBUtility.getDateDiffString(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()),
-                                "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid()));
+                                "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid());
+                        hotelChildArray.add(paymentChild);
                         itenearySet.add(nodesVO.getmGuid());
-                    } else if (list.get(0).getmType().equals("flight")) {
-                        flightChildArray.add(new PaymentChild(nodesVO.getmOrigin() + "-" + nodesVO.getmDestination() + "\n" +
+                    }else if (NodeTypeEnum.FLIGHT.getType().equals(nodesVO.getmType())){
+                        paymentChild =  new PaymentChild(nodesVO.getmOrigin() + "-" + nodesVO.getmDestination() + "\n" +
                                 nodesVO.getmOperatorName() + "" + nodesVO.getmEquipment() +
                                 "\n" + HGBUtility.parseDateToddMMyyyyForPayment(nodesVO.getDateOfCell()),
-                                "$" + String.valueOf(totalprice), true, nodesVO.getmGuid()));
+                                "$" + String.valueOf(totalprice), true, nodesVO.getmGuid());
+                        flightChildArray.add(paymentChild);
                         itenearySet.add(nodesVO.getmGuid());
                     }
                 }
@@ -194,18 +229,18 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
     public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         private final LayoutInflater inf;
-        private ArrayList<PaymnentGroup> groupsList;
-        private List<ArrayList<PaymentChild>> childrenList;
+        private final ArrayList<PaymnentGroup> groupsList;
+        private  List<ArrayList<PaymentChild>> childrenList = new ArrayList<>();
 
         // Hashmap for keeping track of our checkbox check states
-        private HashMap<Integer, boolean[]> mChildCheckStates;
+        private final HashMap<Integer, boolean[]> mChildCheckStates;
 
         public ExpandableListAdapter(ArrayList<PaymnentGroup> groups, List<ArrayList<PaymentChild>> children) {
             this.groupsList = groups;
             this.childrenList = children;
-            inf = LayoutInflater.from(getActivity());
+            this.inf = LayoutInflater.from(getActivity());
             // Initialize our hashmap containing our check states here
-            mChildCheckStates = new HashMap<Integer, boolean[]>();
+            this.mChildCheckStates = new HashMap<Integer, boolean[]>();
 
 
         }
@@ -217,7 +252,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
 
         @Override
         public int getChildrenCount(int groupPosition) {
-            return childrenList.get(groupPosition).size();
+            return childrenList.size();
         }
 
         @Override
@@ -265,6 +300,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
             holder.childNametext.setText(child.getNameText());
             holder.childPricetext.setText(child.getTotalText());
 
+
             holder.childCheckBox.setOnCheckedChangeListener(null);
 
             if (mChildCheckStates.containsKey(groupPosition)) {
@@ -288,6 +324,9 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
 			 *  and set it's size to the total number of children associated with
 			 *  the parent group
 			*/
+
+
+
                 boolean getChecked[] = new boolean[getChildrenCount(groupPosition)];
                 Arrays.fill(getChecked, true);
 
@@ -306,6 +345,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
 
 
                     View nameHeaderPriceTextView = getNameHeaderPriceView(buttonView);
+
 
                     childrenList.get(groupPosition).get(childPosition).setSelected(isChecked);
                     if (isChecked) {
