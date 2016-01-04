@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.MyTripPinnedAdapter;
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
@@ -22,7 +24,7 @@ import hellogbye.com.hellogbyeandroid.views.PinnedHeaderListView;
 /**
  * Created by arisprung on 8/17/15.
  */
-public class MyTripsFragment extends Fragment {
+public class MyTripsFragment extends HGBAbtsractFragment {
 
     private PinnedHeaderListView stickyList;
     private  ArrayList<MyTripItem> mItemsList;
@@ -69,6 +71,7 @@ public class MyTripsFragment extends Fragment {
         stickyList.setOnItemClickListener(new PinnedHeaderListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int section, int position, long id) {
+                System.out.println("Kate clicked item");
 
                 if (section == 0) {
                     //TODO go to current itinerary
@@ -79,6 +82,9 @@ public class MyTripsFragment extends Fragment {
                     ConnectionManager.getInstance(getActivity()).getItinerary(solutionId, new ConnectionManager.ServerRequestListener() {
                         @Override
                         public void onSuccess(Object data) {
+                            UserTravelMainVO userTravelMainVO = (UserTravelMainVO)data;
+                            getActivityInterface().setTravelOrder(userTravelMainVO);
+                            getActivityInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(),null);
                           Log.d("","");
                             //TODO set Travel and got to current itenrary
                         }
