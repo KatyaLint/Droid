@@ -1,12 +1,15 @@
-package hellogbye.com.hellogbyeandroid.fragments;
+package hellogbye.com.hellogbyeandroid.fragments.preferences;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +17,7 @@ import android.widget.ImageButton;
 
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
@@ -21,6 +25,7 @@ import hellogbye.com.hellogbyeandroid.R;
 
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.PreferencesSettingsPreferencesCheckAdapter;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AcountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
@@ -42,7 +47,8 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
     private EditText input;
     private View popup_preferences_layout;
     private ImageButton edit_preferences;
-
+    private static int MIN_PREFERENCE_SIZE = 1;
+    private View preferences_at_least_one_preference;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new PreferenceSettingsFragment();
@@ -126,27 +132,42 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
         View rootView = inflater.inflate(R.layout.settings_list_layout, container, false);
         ((MainActivity) getActivity()).setEditClickCB(new OnItemClickListener(){
             @Override
-            public void onItemClick(String guid) {
-                mAdapter.setEditMode(true);
+            public void onItemClick(String option) {
+
+                if(option.equals("delete")){
+                    System.out.println("Kate preferences delete");
+
+
+
+                    List<AcountDefaultSettingsVO> accountAttributes = new ArrayList<AcountDefaultSettingsVO>();
+                    accountAttributes.addAll(accountDefaultSettings);
+                    for(AcountDefaultSettingsVO accountAttribute :accountAttributes){
+                        if(accountAttribute.isChecked()){
+                            if(accountDefaultSettings.size() <= MIN_PREFERENCE_SIZE){
+                                //popup
+                                atLeastOnePreference();
+                                break;
+                            }
+                            accountDefaultSettings.remove(accountAttribute);
+                            deletePreference(accountAttribute.getmId());
+                        }
+                    }
+                }
+                else if (option.equals("edit")){
+                    mAdapter.setEditMode(true);
+                }else if(option.equals("done")){
+                    mAdapter.setEditMode(false);
+                }
                 mAdapter.notifyDataSetChanged();
-                System.out.println("Kate preferences clicked");
             }
         });
 
 
-
-//        View toolbar_layout = inflater.inflate(R.layout.toolbar_layout, container, false);
-//
-//        edit_preferences = (ImageButton)toolbar_layout.findViewById(R.id.edit_preferences);
-//        edit_preferences.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                System.out.println("Kate edit_preferences 2");
-//            }
-//        });
-
         mDynamicListView = (DynamicListView) rootView.findViewById(R.id.settings_preferences_drag_list);
         popup_preferences_layout = inflater.inflate(R.layout.preferences_add_new_preference, null);
+        preferences_at_least_one_preference = inflater.inflate(R.layout.preferences_at_least_one_preference, null);
+
+
         Button addNewPreferencesButton = (Button) rootView.findViewById(R.id.add_preferences);
         input = (EditText) popup_preferences_layout.findViewById(R.id.editTextDialog);
 
@@ -176,6 +197,40 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
     }
 
 
+    private void deletePreference(String preferenceId){
+        ConnectionManager.getInstance(getActivity()).deletePreferenceProfileId(preferenceId,new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                System.out.println("Kate deleted");
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+            }
+        });
+
+    }
+
+
+    private void atLeastOnePreference(){
+
+        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+
+        alert.setTitle(R.string.preferences_at_least_one_preference)
+                .setView(preferences_at_least_one_preference)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        ((ViewGroup) preferences_at_least_one_preference.getParent()).removeView(popup_preferences_layout);
+                        dialog.cancel();
+                    }
+                })
+
+                .create().show();
+
+    }
+
+
     View.OnClickListener editPreferencesClick = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
@@ -185,7 +240,7 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
 
     private void editSettingsPreferencesPopUp() {
         final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-
+        alert.setCancelable(false);
         alert.setTitle(R.string.preferences_add_new_preferences)
                 .setView(popup_preferences_layout)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -196,9 +251,9 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
                         }
                         input.setText("");
                         ((ViewGroup) popup_preferences_layout.getParent()).removeView(popup_preferences_layout);
+                        IBinder token = input.getWindowToken();
+                        ( (InputMethodManager) getActivity().getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
                         dialog.cancel();
-
-
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -209,9 +264,9 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
                         input.setText("");
 
                         ((ViewGroup) popup_preferences_layout.getParent()).removeView(popup_preferences_layout);
+                        IBinder token = input.getWindowToken();
+                        ( (InputMethodManager) getActivity().getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
                         dialog.cancel();
-
-
                     }
                 })
                 .create().show();
@@ -223,13 +278,16 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
-                    List<AcountDefaultSettingsVO> accountDefault = (List<AcountDefaultSettingsVO>) data;
-                    accountDefaultSettings.add(accountDefault.get(0));
+                    AcountDefaultSettingsVO accountDefault = (AcountDefaultSettingsVO) data;
+                    System.out.println("Kate new account" + accountDefault.getmProfileName());
+                    accountDefaultSettings.add(accountDefault);
+                    mAdapter.notifyDataSetChanged();
                 }
             }
 
             @Override
             public void onError(Object data) {
+                System.out.println("Kate Parse error");
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
             }
         });

@@ -282,7 +282,7 @@ public class ConnectionManager {
                 jsonObject, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(Parser.getSettingsDefault(response));
+                listener.onSuccess(Parser.getSettingsAcount(response));
             }
         }, new Response.ErrorListener() {
             @Override

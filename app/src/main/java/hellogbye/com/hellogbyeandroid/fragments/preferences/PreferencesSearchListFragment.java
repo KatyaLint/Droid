@@ -1,10 +1,9 @@
-package hellogbye.com.hellogbyeandroid.fragments;
+package hellogbye.com.hellogbyeandroid.fragments.preferences;
 
 import android.app.Fragment;
 import android.os.Bundle;
 
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 
@@ -23,24 +22,18 @@ import android.widget.SearchView;
 
 
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
-import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.PreferenceSettingsAirlineCarriersAdapter;
-import hellogbye.com.hellogbyeandroid.adapters.PreferenceSettingsAttributeAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.PreferenceSettingsFlightTabsAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.PreferencesSettingsSearchCheckListAdapter;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
-import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 

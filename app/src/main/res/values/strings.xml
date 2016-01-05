@@ -90,6 +90,7 @@
 
     <string name="preferences_add_button">Add New Preferences</string>
     <string name="preferences_add_new_preferences">Add New Preferences</string>
+    <string name="preferences_at_least_one_preference">You must have at least one\ntravel preference.</string>
 
     <string name="preferences_preferred_cabin_class">Preferred Cabin Class</string>
     <string name="preferences_preferred_cabin_class_rank">Rank the importance of Cabin Class\nfrom most important to least important</string>

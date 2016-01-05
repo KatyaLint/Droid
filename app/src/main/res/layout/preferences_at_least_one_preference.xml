@@ -4,14 +4,8 @@
     android:layout_width="fill_parent" android:layout_height="fill_parent"
     android:paddingLeft="@dimen/DP20" android:paddingRight="@dimen/DP20" android:paddingBottom="@dimen/DP20" android:paddingTop="@dimen/DP14" android:layout_gravity="top">
     <TextView android:id="@+id/text" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:textColor="#FFF"
+        android:layout_height="wrap_content" android:textColor="@color/black"
+        android:layout_gravity="center"
         android:gravity="top" android:textSize="@dimen/SP16" android:paddingBottom="@dimen/DP20"/>
 
-    <EditText
-        android:id="@+id/editTextDialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/preferences_hint_add_name"
-        android:textColorHint="@color/light_grey">
-    </EditText>
 </LinearLayout>

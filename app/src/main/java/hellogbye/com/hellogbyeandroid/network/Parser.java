@@ -54,7 +54,20 @@ public class Parser {
 
 
 
+    public static Object getSettingsAcount(String response){
+        AcountDefaultSettingsVO acountDefaultSettings = null;
+        try {
+            Type listType = new TypeToken<AcountDefaultSettingsVO>() {
+            }.getType();
 
+            Gson gson = new Gson();
+
+            acountDefaultSettings = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return acountDefaultSettings;
+    }
 
     public static Object getSettingsDefault(String response){
         List<AcountDefaultSettingsVO> acountDefaultSettings = null;

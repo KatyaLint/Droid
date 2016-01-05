@@ -47,11 +47,11 @@ import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.MyTripsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.PaymentDetailsFragemnt;
-import hellogbye.com.hellogbyeandroid.fragments.PreferenceSettingsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.PreferencesCheckListFragment;
-import hellogbye.com.hellogbyeandroid.fragments.PreferencesDragListFragment;
-import hellogbye.com.hellogbyeandroid.fragments.PreferencesSearchListFragment;
-import hellogbye.com.hellogbyeandroid.fragments.PreferencesTabsFragmentSettings;
+import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesCheckListFragment;
+import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesDragListFragment;
+import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSearchListFragment;
+import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesTabsFragmentSettings;
 import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlerDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlersFragment;
@@ -223,16 +223,17 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 View checkButton = mToolbar.findViewById(R.id.check_preferences);
                 if(checkButton.getVisibility() == View.VISIBLE){
                     //delete
+                    editClickCB.onItemClick("delete");
                     //go to fragment and delete from list
                     //go to server
                    // http://cnc.hellogbye.com/cnc/REST/TravelPreference/Profiles/93dff933-d24b-4fef-ac42-f9fda820457e
 
 //                    mToolbar.findViewById(R.id.check_preferences).setVisibility(View.GONE);
 //                    edit_preferences.setBackgroundResource(R.drawable.edit_img);
-                }else {
+                }else if(checkButton.getVisibility() == View.GONE){
                     edit_preferences.setBackgroundResource(R.drawable.ic_delete);
                     mToolbar.findViewById(R.id.check_preferences).setVisibility(View.VISIBLE);
-                    editClickCB.onItemClick("");
+                    editClickCB.onItemClick("edit");
                 }
             }
         });
@@ -241,8 +242,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         check_preferences.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                System.out.println("Kate done editing");
                 mToolbar.findViewById(R.id.check_preferences).setVisibility(View.GONE);
                 edit_preferences.setBackgroundResource(R.drawable.edit_img);
+                editClickCB.onItemClick("done");
             }
         });
 
