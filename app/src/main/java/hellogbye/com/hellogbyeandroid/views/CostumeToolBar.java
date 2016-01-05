@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -23,6 +24,9 @@ public class CostumeToolBar extends Toolbar {
     private FontTextView titleText;
     private Toolbar mToolbar;
     private Context mContext;
+    private ImageButton edit_preferences;
+    private LinearLayout preferences_edit_mode;
+    private ImageButton check_preferences;
 
     public CostumeToolBar(Context context) {
         super(context);
@@ -61,6 +65,9 @@ public class CostumeToolBar extends Toolbar {
             favoriteButton = (ImageButton) findViewById(R.id.favority);
         }
         if (editPreferense == null) {
+            preferences_edit_mode = (LinearLayout)findViewById(R.id.preferences_edit_mode);
+            edit_preferences = (ImageButton)findViewById(R.id.edit_preferences);
+            check_preferences = (ImageButton)findViewById(R.id.check_preferences);
             editPreferense = (FontTextView) findViewById(R.id.editPreference);
         }
     }
@@ -76,6 +83,9 @@ public class CostumeToolBar extends Toolbar {
         purchaseButton.setVisibility(View.GONE);
         favoriteButton.setVisibility(View.GONE);
         editPreferense.setVisibility(View.GONE);
+        edit_preferences.setVisibility(View.GONE);
+        preferences_edit_mode.setVisibility(View.GONE);
+        check_preferences.setVisibility(View.GONE);
 
 
         switch (navBar) {
@@ -104,8 +114,11 @@ public class CostumeToolBar extends Toolbar {
                 break;
             case PREFERENCE:
                 titleText.setVisibility(View.VISIBLE);
-                editPreferense.setVisibility(View.VISIBLE);
-                keyBoardImage.setVisibility(View.INVISIBLE);
+         //       editPreferense.setVisibility(View.VISIBLE);
+        //        keyBoardImage.setVisibility(View.INVISIBLE);
+                check_preferences.setVisibility(View.GONE);
+                preferences_edit_mode.setVisibility(View.VISIBLE);
+                edit_preferences.setVisibility(View.VISIBLE);
                 break;
             case ACCOUNT:
                 titleText.setVisibility(View.VISIBLE);
@@ -120,6 +133,8 @@ public class CostumeToolBar extends Toolbar {
                 homeTitleImage.setVisibility(View.VISIBLE);
                 keyBoardImage.setVisibility(View.VISIBLE);
                 break;
+
+
 
 
         }

@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.nhaarman.listviewanimations.ArrayAdapter;
 import com.nhaarman.listviewanimations.util.Swappable;
@@ -24,18 +25,25 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by nyawka on 11/25/15.
  */
-public class PreferencesSettingsPreferencesDragAdapter extends ArrayAdapter<AcountDefaultSettingsVO> implements Swappable {
+public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<AcountDefaultSettingsVO> implements Swappable {
 
     private Context context;
     private List<AcountDefaultSettingsVO> items;
+    private boolean isEditMode = false;
 
-    public PreferencesSettingsPreferencesDragAdapter(Context context, List<AcountDefaultSettingsVO> accountAttributes) {
+    public PreferencesSettingsPreferencesCheckAdapter(Context context, List<AcountDefaultSettingsVO> accountAttributes) {
         super(accountAttributes);
         //  items = accountAttributes;
         this.context = context;
     }
 
 
+    public boolean getIsEditMode(){
+        return this.isEditMode;
+    }
+    public void setEditMode(boolean isEditMode){
+        this.isEditMode = isEditMode;
+    }
 
     @Override
     public boolean addAll(@NonNull Collection<? extends AcountDefaultSettingsVO> collection) {
@@ -59,20 +67,34 @@ public class PreferencesSettingsPreferencesDragAdapter extends ArrayAdapter<Acou
 
         if (v == null) {
             v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.settings_item_drag_layout, null);
+                    .inflate(R.layout.settings_item_check_layout, null);
         }
         AcountDefaultSettingsVO attribute = this.getItem(position);//items.get(position);
         if(attribute != null){
-            FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.setting_text_drag);
+            FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_check_name);
             if(settings_flight_title != null){
                 settings_flight_title.setText(attribute.getmProfileName());
                 settings_flight_title.setTag(attribute.getmId());
             }
-            FontTextView settings_text_drag = (FontTextView) v.findViewById(R.id.settings_place_number);
+//            FontTextView settings_text_drag = (FontTextView) v.findViewById(R.id.settings_place_number);
             //  settings_text_drag.setText();
             int correntPosition = position+1;
-            settings_text_drag.setText(""+correntPosition);
+//            settings_text_drag.setText(""+correntPosition);
             this.getItem(position).setRank("" + correntPosition);
+            ImageView image = (ImageView)v.findViewById(R.id.setting_check_image);
+            if(!isEditMode){
+                image.setVisibility(View.GONE);
+            }else{
+                image.setVisibility(View.VISIBLE);
+               // image.setBackgroundResource(R.drawable.check_off);
+                if(attribute.isChecked()){
+                    image.setBackgroundResource(R.drawable.check_on);
+                }else{
+                    image.setBackgroundResource(R.drawable.check_off);
+                }
+            }
+
+
         }
 
         return v;

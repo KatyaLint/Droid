@@ -8,6 +8,10 @@ import java.util.ArrayList;
  * Created by nyawka on 11/5/15.
  */
 public class SettingsAttributeParamVO {
+
+
+    private boolean isChecked = false;
+
     @SerializedName("id")
     private String mId;
 
@@ -61,5 +65,13 @@ public class SettingsAttributeParamVO {
 
     public void setAttributesVOs(ArrayList<SettingsAttributesVO> attributesVOs) {
         this.attributesVOs = attributesVOs;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

@@ -7,6 +7,8 @@ import com.google.gson.annotations.SerializedName;
  */
 public class AcountDefaultSettingsVO {
 
+    private boolean isChecked = false;
+
     private String rank;
 
     @SerializedName("id")
@@ -38,5 +40,13 @@ public class AcountDefaultSettingsVO {
 
     public void setRank(String rank) {
         this.rank = rank;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

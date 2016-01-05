@@ -116,6 +116,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private List<SettingsAttributesVO> hotelStarAttributes;
     private List<SettingsAttributesVO> flightCabinClassAttributes;
     private List<SettingsAttributesVO> hotelSmokingAttributes;
+    private PreferenceSettingsFragment.OnItemClickListener editClickCB;
+
 
 
     @Override
@@ -210,6 +212,39 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             }
         });
 
+
+
+
+        final ImageButton edit_preferences = (ImageButton) mToolbar.findViewById(R.id.edit_preferences);
+        edit_preferences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Kate clicked");
+                View checkButton = mToolbar.findViewById(R.id.check_preferences);
+                if(checkButton.getVisibility() == View.VISIBLE){
+                    //delete
+                    //go to fragment and delete from list
+                    //go to server
+                   // http://cnc.hellogbye.com/cnc/REST/TravelPreference/Profiles/93dff933-d24b-4fef-ac42-f9fda820457e
+
+//                    mToolbar.findViewById(R.id.check_preferences).setVisibility(View.GONE);
+//                    edit_preferences.setBackgroundResource(R.drawable.edit_img);
+                }else {
+                    edit_preferences.setBackgroundResource(R.drawable.ic_delete);
+                    mToolbar.findViewById(R.id.check_preferences).setVisibility(View.VISIBLE);
+                    editClickCB.onItemClick("");
+                }
+            }
+        });
+
+        final ImageButton check_preferences = (ImageButton) mToolbar.findViewById(R.id.check_preferences);
+        check_preferences.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                mToolbar.findViewById(R.id.check_preferences).setVisibility(View.GONE);
+                edit_preferences.setBackgroundResource(R.drawable.edit_img);
+            }
+        });
 
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -831,4 +866,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
+    public void setEditClickCB(PreferenceSettingsFragment.OnItemClickListener editClickCB) {
+        this.editClickCB = editClickCB;
+    }
 }

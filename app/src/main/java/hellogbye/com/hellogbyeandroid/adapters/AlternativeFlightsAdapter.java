@@ -112,7 +112,7 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
 
 
     public interface OnItemClickListener {
-        public void onItemClick(String guid);
+        void onItemClick(String guid);
     }
 
     public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {

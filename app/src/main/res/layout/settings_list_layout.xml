@@ -24,15 +24,14 @@
 
     <Button
         android:id="@+id/add_preferences"
-        android:background="@color/red_button_color"
+        android:background="@drawable/red_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/DP10"
-        android:padding="@dimen/DP10"
-        android:paddingLeft="@dimen/DP10"
-        android:paddingRight="@dimen/DP10"
+        android:paddingLeft="@dimen/DP20"
+        android:paddingRight="@dimen/DP20"
         android:textColor="@color/white"
         android:textAllCaps="false"
         android:text="@string/preferences_add_button" />

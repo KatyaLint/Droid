@@ -4,15 +4,13 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 
@@ -21,15 +19,14 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 
 
-import hellogbye.com.hellogbyeandroid.adapters.PreferencesSettingsPreferencesDragAdapter;
+import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+import hellogbye.com.hellogbyeandroid.adapters.PreferencesSettingsPreferencesCheckAdapter;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AcountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
-import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -39,11 +36,12 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
 
 
     private DynamicListView mDynamicListView;
-    private PreferencesSettingsPreferencesDragAdapter mAdapter;
+    private PreferencesSettingsPreferencesCheckAdapter mAdapter;
     private List<AcountDefaultSettingsVO> accountDefaultSettings;
     private List<SettingsAttributeParamVO> accountSettingsAttributes;
     private EditText input;
     private View popup_preferences_layout;
+    private ImageButton edit_preferences;
 
 
     public static Fragment newInstance(int position) {
@@ -66,13 +64,33 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
         mDynamicListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                FontTextView settings_flight_title = (FontTextView) view.findViewById(R.id.setting_text_drag);
-                String clickedItemID = settings_flight_title.getTag().toString();
-                getSettingsAttributes(clickedItemID);
+                if(mAdapter.getIsEditMode()){
+                    FontTextView settings_flight_title = (FontTextView) view.findViewById(R.id.settings_check_name);
+                    String clickedItemID = settings_flight_title.getTag().toString();
+
+                   // List<SettingsAttributeParamVO> accountAttributes = getActivityInterface().getAccountSettingsAttribute();
+                    for( AcountDefaultSettingsVO accountAttribute:accountDefaultSettings){
+                        if(accountAttribute.getmId().equals(clickedItemID)){
+                           if(accountAttribute.isChecked()){
+                               accountAttribute.setChecked(false);
+                           }else{
+                               accountAttribute.setChecked(true);
+                           }
+                            break;
+                        }
+
+                    }
+                    mAdapter.notifyDataSetChanged();
+                    System.out.println("Kate delete pref");
+                }else {
+                    FontTextView settings_flight_title = (FontTextView) view.findViewById(R.id.settings_check_name);
+                    String clickedItemID = settings_flight_title.getTag().toString();
+                    getSettingsAttributes(clickedItemID);
+                }
             }
         });
 
-        mAdapter = new PreferencesSettingsPreferencesDragAdapter(getActivity(), accountDefaultSettings);
+        mAdapter = new PreferencesSettingsPreferencesCheckAdapter(getActivity(), accountDefaultSettings);
         mDynamicListView.setAdapter(mAdapter);
 
     }
@@ -98,10 +116,35 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
         });
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(String guid);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.settings_list_layout, container, false);
+        ((MainActivity) getActivity()).setEditClickCB(new OnItemClickListener(){
+            @Override
+            public void onItemClick(String guid) {
+                mAdapter.setEditMode(true);
+                mAdapter.notifyDataSetChanged();
+                System.out.println("Kate preferences clicked");
+            }
+        });
+
+
+
+//        View toolbar_layout = inflater.inflate(R.layout.toolbar_layout, container, false);
+//
+//        edit_preferences = (ImageButton)toolbar_layout.findViewById(R.id.edit_preferences);
+//        edit_preferences.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                System.out.println("Kate edit_preferences 2");
+//            }
+//        });
+
         mDynamicListView = (DynamicListView) rootView.findViewById(R.id.settings_preferences_drag_list);
         popup_preferences_layout = inflater.inflate(R.layout.preferences_add_new_preference, null);
         Button addNewPreferencesButton = (Button) rootView.findViewById(R.id.add_preferences);
@@ -132,6 +175,13 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
         return rootView;
     }
 
+
+    View.OnClickListener editPreferencesClick = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            System.out.println("Kate edit preferences");
+        }
+    };
 
     private void editSettingsPreferencesPopUp() {
         final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());

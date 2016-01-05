@@ -50,12 +50,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/favority"
-
         android:layout_gravity="right"
         android:layout_marginRight="@dimen/DP34"
         android:visibility="gone"
         />
 
+
+
+
+    <LinearLayout
+        android:id="@+id/preferences_edit_mode"
+        android:layout_marginRight="@dimen/DP14"
+        android:visibility="gone"
+        android:layout_gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:orientation="horizontal">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_preferences"
+            android:background="@drawable/edit_img"
+            />
+
+        <ImageButton
+            android:visibility="gone"
+            android:layout_marginLeft="@dimen/DP20"
+            android:id="@+id/check_preferences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check"/>
+    </LinearLayout>
 
     <!--android:background="@drawable/star2"-->
 

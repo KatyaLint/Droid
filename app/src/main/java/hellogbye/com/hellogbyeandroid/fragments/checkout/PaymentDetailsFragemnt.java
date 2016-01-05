@@ -32,6 +32,7 @@ import hellogbye.com.hellogbyeandroid.models.PaymentChild;
 import hellogbye.com.hellogbyeandroid.models.PaymnentGroup;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
@@ -116,29 +117,37 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
             Set<String> set = new HashSet<String>();
 
 
-            ArrayList<String> items = passengersVO.getmItineraryItems();
-            for(String item : items){
-                Map<String, NodesVO> hashMap = travelOrder.getItems();
-                NodesVO node = hashMap.get(item);
-                if(node != null){
-                    set.add(node.getmGuid());
-                    if(NodeTypeEnum.HOTEL.getType().equals(node.getmType())){
-                        if (!isHotelAdded) {
-                            hotelChildArray = new ArrayList<>();
-                            groups.add(new PaymnentGroup("Hotel", "$" + String.valueOf(passengersVO.getmTotalHotelPrice()), true));
+            // passanger specific get id
+            // run for all id for current passanger
 
-                            isHotelAdded = true;
-                        }
-                    }else if(NodeTypeEnum.FLIGHT.getType().equals(node.getmType())){
-                        if (!isFlightAdded) {
-                            flightChildArray = new ArrayList<>();
-                            groups.add(new PaymnentGroup("Flight", "$" + String.valueOf(passengersVO.getmTotalFlightPrice()), true));
-                            isFlightAdded = true;
+
+            ArrayList<PassengersVO> passangersVOs = travelOrder.getPassengerses();
+            Map<String, NodesVO> hashMap = travelOrder.getItems();
+            for(PassengersVO passenger : passangersVOs){
+                ArrayList<String> passengerItems = passenger.getmItineraryItems();
+                for(String passengerItem: passengerItems){
+                    NodesVO passengerNode = hashMap.get(passengerItem);
+                    if(passengerNode != null){
+                        set.add(passengerNode.getmGuid());
+                        if(NodeTypeEnum.HOTEL.getType().equals(passengerNode.getmType())){
+                            if (!isHotelAdded) {
+                                hotelChildArray = new ArrayList<>();
+                                groups.add(new PaymnentGroup("Hotel", "$" + String.valueOf(passengersVO.getmTotalHotelPrice()), true));
+
+                                isHotelAdded = true;
+                            }
+                        }else if(NodeTypeEnum.FLIGHT.getType().equals(passengerNode.getmType())){
+                            if (!isFlightAdded) {
+                                flightChildArray = new ArrayList<>();
+                                groups.add(new PaymnentGroup("Flight", "$" + String.valueOf(passengersVO.getmTotalFlightPrice()), true));
+                                isFlightAdded = true;
+                            }
                         }
                     }
-
                 }
             }
+
+
 
 
 //            for (CellsVO cellsVO : passengersVO.getmCells()) {
@@ -252,7 +261,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
 
         @Override
         public int getChildrenCount(int groupPosition) {
-            return childrenList.size();
+            return childrenList.get(groupPosition).size();
         }
 
         @Override
