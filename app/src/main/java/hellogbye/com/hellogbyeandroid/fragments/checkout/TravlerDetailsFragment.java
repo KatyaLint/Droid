@@ -60,7 +60,7 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
 
    // private HashMap<String, ArrayList<ProvincesItem>> list = new HashMap<>();
 
-    private ArrayList<CountryItem> mEligabileCountryList = new ArrayList<>();
+
 
     private AlertDialog countryDialog;
 
@@ -189,7 +189,7 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
                     mUser.setCountry("US");
                 }
 
-                mUser.setState(mEligabileCountryList.get(countryPicker.getValue()).getProvinces().get(statePicker.getValue()).getCode());
+                mUser.setState(getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().get(statePicker.getValue()).getCode());
                 mUser.setPostalcode(mPostalCode.getText().toString());
                 mUser.setDob(mDOB.getText().toString());
                 mUser.setCity(mCity.getText().toString());
@@ -323,10 +323,10 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
 
         countryPicker = (NumberPicker) v1.findViewById(R.id.np);
         countryPicker.setMinValue(0);
-        countryPicker.setMaxValue(mEligabileCountryList.size() - 1);
-        final String[] countryarray = new String[mEligabileCountryList.size()];
-        for (int i = 0; i < mEligabileCountryList.size(); i++) {
-            countryarray[i] = mEligabileCountryList.get(i).getName();
+        countryPicker.setMaxValue(getActivityInterface().getEligabileCountries().size() - 1);
+        final String[] countryarray = new String[getActivityInterface().getEligabileCountries().size()];
+        for (int i = 0; i < getActivityInterface().getEligabileCountries().size(); i++) {
+            countryarray[i] = getActivityInterface().getEligabileCountries().get(i).getName();
         }
         countryPicker.setDisplayedValues(countryarray);
 
@@ -355,10 +355,10 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
         statePicker = (NumberPicker) v1.findViewById(R.id.np);
         statePicker.setMinValue(0);
 
-        statePicker.setMaxValue(mEligabileCountryList.get(countryPicker.getValue()).getProvinces().size() - 1);
-        final String[] stateArray = new String[mEligabileCountryList.get(countryPicker.getValue()).getProvinces().size()];
-        for (int i = 0; i < mEligabileCountryList.get(countryPicker.getValue()).getProvinces().size(); i++) {
-            stateArray[i] = mEligabileCountryList.get(countryPicker.getValue()).getProvinces().get(i).getName();
+        statePicker.setMaxValue(getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size() - 1);
+        final String[] stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size()];
+        for (int i = 0; i < getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size(); i++) {
+            stateArray[i] = getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().get(i).getName();
         }
         statePicker.setDisplayedValues(stateArray);
 
