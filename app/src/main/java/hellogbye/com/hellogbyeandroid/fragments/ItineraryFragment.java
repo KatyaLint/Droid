@@ -221,12 +221,10 @@ private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO 
 
     }
 
-    View.OnClickListener nodeClickListener = new View.OnClickListener() {
+   private View.OnClickListener nodeClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
            String nodeType =  view.getTag().toString();
-            System.out.println("Kate node clicked");
-
 
             //                NodeTypeEnum.FLIGHT.getType();
                 if (NodeTypeEnum.FLIGHT.getType().equals(nodeType)){

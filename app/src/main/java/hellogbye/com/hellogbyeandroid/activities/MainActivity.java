@@ -219,17 +219,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         edit_preferences.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Kate clicked");
                 View checkButton = mToolbar.findViewById(R.id.check_preferences);
                 if(checkButton.getVisibility() == View.VISIBLE){
                     //delete
                     editClickCB.onItemClick("delete");
-                    //go to fragment and delete from list
-                    //go to server
-                   // http://cnc.hellogbye.com/cnc/REST/TravelPreference/Profiles/93dff933-d24b-4fef-ac42-f9fda820457e
-
-//                    mToolbar.findViewById(R.id.check_preferences).setVisibility(View.GONE);
-//                    edit_preferences.setBackgroundResource(R.drawable.edit_img);
                 }else if(checkButton.getVisibility() == View.GONE){
                     edit_preferences.setBackgroundResource(R.drawable.ic_delete);
                     mToolbar.findViewById(R.id.check_preferences).setVisibility(View.VISIBLE);
@@ -242,7 +235,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         check_preferences.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                System.out.println("Kate done editing");
                 mToolbar.findViewById(R.id.check_preferences).setVisibility(View.GONE);
                 edit_preferences.setBackgroundResource(R.drawable.edit_img);
                 editClickCB.onItemClick("done");
@@ -294,23 +286,23 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         ((CNCFragment) currentFragment).initList();
     }
 
-    private void setHomeFragmentState(String id) {
-        try {
-            Fragment currentFragment = getFragmentManager().findFragmentByTag(HomeFragment.class.toString());
-
-            if (id.equals("keyboard")) {
-                ((HomeFragment) currentFragment).setKeyboardMode();
-            } else if (id.equals("mic")) {
-                ((HomeFragment) currentFragment).setMicMode();
-            }
-            setHomeImage(id);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            Crashlytics.logException(e);
-        }
-
-    }
+//    private void setHomeFragmentState(String id) {
+//        try {
+//            Fragment currentFragment = getFragmentManager().findFragmentByTag(HomeFragment.class.toString());
+//
+//            if (id.equals("keyboard")) {
+//                ((HomeFragment) currentFragment).setKeyboardMode();
+//            } else if (id.equals("mic")) {
+//                ((HomeFragment) currentFragment).setMicMode();
+//            }
+//            setHomeImage(id);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Crashlytics.logException(e);
+//        }
+//
+//    }
 
     private void loadNavItems() {
         mNavItemsList = new ArrayList<>();
@@ -552,7 +544,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     public void selectItem(int position, Bundle bundle) {
         // update the main content by replacing fragments
-
+        
         Fragment fragment = null;
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
         boolean stashToBack = true;

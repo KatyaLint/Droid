@@ -160,7 +160,7 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     public interface OnItemClickListener {
-        public void onItemClick(View view, int position);
+        void onItemClick(View view, int position);
     }
 
     public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
@@ -171,7 +171,7 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mArrayList.size();
+        return (null != mArrayList ? mArrayList.size() : 0);
     }
 
 

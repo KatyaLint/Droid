@@ -46,7 +46,6 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
     private List<SettingsAttributeParamVO> accountSettingsAttributes;
     private EditText input;
     private View popup_preferences_layout;
-    private ImageButton edit_preferences;
     private static int MIN_PREFERENCE_SIZE = 1;
     private View preferences_at_least_one_preference;
 
@@ -87,7 +86,7 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
 
                     }
                     mAdapter.notifyDataSetChanged();
-                    System.out.println("Kate delete pref");
+
                 }else {
                     FontTextView settings_flight_title = (FontTextView) view.findViewById(R.id.settings_check_name);
                     String clickedItemID = settings_flight_title.getTag().toString();
@@ -135,10 +134,6 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
             public void onItemClick(String option) {
 
                 if(option.equals("delete")){
-                    System.out.println("Kate preferences delete");
-
-
-
                     List<AcountDefaultSettingsVO> accountAttributes = new ArrayList<AcountDefaultSettingsVO>();
                     accountAttributes.addAll(accountDefaultSettings);
                     for(AcountDefaultSettingsVO accountAttribute :accountAttributes){
@@ -201,7 +196,6 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
         ConnectionManager.getInstance(getActivity()).deletePreferenceProfileId(preferenceId,new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                System.out.println("Kate deleted");
             }
 
             @Override
@@ -229,14 +223,6 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
                 .create().show();
 
     }
-
-
-    View.OnClickListener editPreferencesClick = new View.OnClickListener(){
-        @Override
-        public void onClick(View view) {
-            System.out.println("Kate edit preferences");
-        }
-    };
 
     private void editSettingsPreferencesPopUp() {
         final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
@@ -279,7 +265,6 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
             public void onSuccess(Object data) {
                 if (data != null) {
                     AcountDefaultSettingsVO accountDefault = (AcountDefaultSettingsVO) data;
-                    System.out.println("Kate new account" + accountDefault.getmProfileName());
                     accountDefaultSettings.add(accountDefault);
                     mAdapter.notifyDataSetChanged();
                 }
@@ -287,7 +272,6 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
 
             @Override
             public void onError(Object data) {
-                System.out.println("Kate Parse error");
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
             }
         });

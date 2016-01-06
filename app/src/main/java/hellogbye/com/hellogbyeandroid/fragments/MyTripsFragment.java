@@ -71,7 +71,6 @@ public class MyTripsFragment extends HGBAbtsractFragment {
         stickyList.setOnItemClickListener(new PinnedHeaderListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int section, int position, long id) {
-                System.out.println("Kate clicked item");
 
                 if (section == 0) {
                     //TODO go to current itinerary

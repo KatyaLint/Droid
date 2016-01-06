@@ -61,6 +61,7 @@ public class CNCFragment extends HGBAbtsractFragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         mHGBPrefrenceManager = HGBPreferencesManager.getInstance(getActivity().getApplicationContext());
         init(rootView);
+        loadCNCList();
         initList();
         getActivityInterface().getToolBar().updateToolBarView(ToolBarNavEnum.CNC.getNavNumber());
 
@@ -75,7 +76,7 @@ public class CNCFragment extends HGBAbtsractFragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 
-        loadCNCList();
+
         mAdapter = new CNCAdapter(getActivity().getApplicationContext(), getActivityInterface().getCNCItems());
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.SetOnItemClickListener(new CNCAdapter.OnItemClickListener() {
@@ -111,7 +112,6 @@ public class CNCFragment extends HGBAbtsractFragment {
 
 
         }
-
 
     }
 
