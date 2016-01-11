@@ -16,7 +16,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 
-import hellogbye.com.hellogbyeandroid.adapters.PreferencesSettingsDragListAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsDragListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;

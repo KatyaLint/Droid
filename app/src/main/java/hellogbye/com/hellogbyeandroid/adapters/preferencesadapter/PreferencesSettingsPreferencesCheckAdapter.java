@@ -1,4 +1,4 @@
-package hellogbye.com.hellogbyeandroid.adapters;
+package hellogbye.com.hellogbyeandroid.adapters.preferencesadapter;
 
 /**
  * Created by nyawka on 12/7/15.

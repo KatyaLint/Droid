@@ -42,17 +42,17 @@ import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HistoryFragment;
-import hellogbye.com.hellogbyeandroid.fragments.HomeFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.MyTripsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.PaymentDetailsFragemnt;
+import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesCheckListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesDragListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSearchListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesTabsFragmentSettings;
-import hellogbye.com.hellogbyeandroid.fragments.TravelCompanionsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlerDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlersFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
@@ -63,6 +63,7 @@ import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
@@ -117,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private List<SettingsAttributesVO> flightCabinClassAttributes;
     private List<SettingsAttributesVO> hotelSmokingAttributes;
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
-
+    private ArrayList<CompanionVO> companions;
 
 
     @Override
@@ -213,7 +214,13 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         });
 
 
-
+        final ImageButton my_trips = (ImageButton) mToolbar.findViewById(R.id.my_trips_button);
+        my_trips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToFragment(ToolBarNavEnum.HOME.getNavNumber(),null);
+            }
+        });
 
         final ImageButton edit_preferences = (ImageButton) mToolbar.findViewById(R.id.edit_preferences);
         edit_preferences.setOnClickListener(new View.OnClickListener() {
@@ -504,6 +511,16 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
+    public void setCompanions(ArrayList<CompanionVO> companions) {
+        this.companions = companions;
+    }
+
+    @Override
+    public ArrayList<CompanionVO> getCompanions() {
+        return companions;
+    }
+
+    @Override
     public ArrayList<UserData> getListUsers() {
         return mTravelList;
     }
@@ -544,7 +561,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     public void selectItem(int position, Bundle bundle) {
         // update the main content by replacing fragments
-        
+
         Fragment fragment = null;
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
         boolean stashToBack = true;
@@ -563,6 +580,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case COMPANIONS:
                 fragment = TravelCompanionsFragment.newInstance(navPosition);
+                break;
+            case COMPANIONS_DETAILS:
+                fragment = CompanionDetailsFragment.newInstance(navPosition);
                 break;
             case PREFERENCE:
                 fragment = PreferenceSettingsFragment.newInstance(navPosition);

@@ -465,13 +465,15 @@ private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO 
         UserTravelMainVO  user = getActivityInterface().getTravelOrder();
         userOrder = user;
                 //getActivityInterface().setTravelOrder(userOrder);
-        createPassengersName(scrollViewLinearLayout, userOrder);
-        createMainNodes(userOrder);
-        makeEqualAllNodes(userOrder);
-        View mainView = createGridView(userOrder);
+        if(userOrder != null) {
+            createPassengersName(scrollViewLinearLayout, userOrder);
+            createMainNodes(userOrder);
+            makeEqualAllNodes(userOrder);
+            View mainView = createGridView(userOrder);
+            itineraryLayout.addView(mainView);
+        }
 
 
-        itineraryLayout.addView(mainView);
 
     }
 

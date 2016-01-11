@@ -9,6 +9,7 @@ import hellogbye.com.hellogbyeandroid.models.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
@@ -98,5 +99,9 @@ public interface HGBMainInterface {
     void setAccountSettingsHotelBedTypeAttributes(List<SettingsAttributesVO> hotelBedTypeAttributes);
     List<SettingsAttributesVO> getAccountSettingsHotelBedTypeAttributes();
 
+
+    void setCompanions(ArrayList<CompanionVO> companions);
+
+    ArrayList<CompanionVO> getCompanions();
 
 }

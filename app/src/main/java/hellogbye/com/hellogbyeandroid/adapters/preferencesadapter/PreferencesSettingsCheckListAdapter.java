@@ -1,10 +1,12 @@
-package hellogbye.com.hellogbyeandroid.adapters;
+package hellogbye.com.hellogbyeandroid.adapters.preferencesadapter;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.nhaarman.listviewanimations.ArrayAdapter;
 import com.nhaarman.listviewanimations.util.Swappable;
@@ -20,9 +22,9 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by nyawka on 11/25/15.
  */
-public class PreferencesSettingsDragListAdapter extends ArrayAdapter<SettingsAttributesVO> implements Swappable {
+public class PreferencesSettingsCheckListAdapter extends ArrayAdapter<SettingsAttributesVO> implements Swappable{
 
-    public PreferencesSettingsDragListAdapter(Context context, List<SettingsAttributesVO> accountAttributes) {
+    public PreferencesSettingsCheckListAdapter(Context context, List<SettingsAttributesVO> accountAttributes) {
         super(accountAttributes);
     }
 
@@ -47,40 +49,28 @@ public class PreferencesSettingsDragListAdapter extends ArrayAdapter<SettingsAtt
 
         if (v == null) {
             v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.settings_preferences_item_drag_layout, null);
+                    .inflate(R.layout.settings_item_check_layout, null);
         }
         SettingsAttributesVO attribute = this.getItem(position);//items.get(position);
         if(attribute != null){
-            FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.setting_preferences_title_drag);
+            FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_check_name);
             if(settings_flight_title != null){
                 settings_flight_title.setText(attribute.getmDescription());
                 settings_flight_title.setTag(attribute.getmId());
             }
-            FontTextView settings_text_drag = (FontTextView) v.findViewById(R.id.settings_preferences_place_number);
-          //  settings_text_drag.setText();
-            int correntPosition = position+1;
-            settings_text_drag.setText(""+correntPosition);
-            this.getItem(position).setmRank(""+correntPosition);
-
-            List<SettingsValuesVO> attributes = attribute.getAttributesVOs();
-            String strAttributes = "";
-            for (int i = 0; i < attributes.size(); i++) {
-                SettingsValuesVO settingAttribute = attributes.get(i);
-                strAttributes = strAttributes + settingAttribute.getmDescription();
-                if (i < attributes.size() - 1) {
-                    strAttributes = strAttributes + ", ";
-                }
+            ImageView setting_check_image = (ImageView)v.findViewById(R.id.setting_check_image);
+            if(attribute.getmRank() != null){
+                setting_check_image.setBackgroundResource(R.drawable.check_on);
+            }else{
+                setting_check_image.setBackgroundResource(R.drawable.check_off);
             }
-            FontTextView settings_item_text_drag = (FontTextView) v.findViewById(R.id.setting_preferences_text_drag);
-            settings_item_text_drag.setVisibility(View.VISIBLE);
-            settings_item_text_drag.setText(strAttributes);
         }
-
-
-
 
         return v;
     }
+
+
+
 
     @Override
     public boolean hasStableIds() {
@@ -91,4 +81,6 @@ public class PreferencesSettingsDragListAdapter extends ArrayAdapter<SettingsAtt
     public void swapItems(int i, int i2) {
         super.swapItems(i,i2);
     }
+
+
 }

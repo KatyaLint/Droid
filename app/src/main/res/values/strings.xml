@@ -111,4 +111,12 @@
 
     <string name="my_settings_hotel">MY HOTELS</string>
     <string name="popular_settings_hotel">POPULAR HOTEL</string>
+
+
+    <string name="component_name">Name </string>
+    <string name="component_title">Title : </string>
+    <string name="component_first">First : </string>
+    <string name="component_second">Second : </string>
+    <string name="component_email">Email </string>
+
 </resources>

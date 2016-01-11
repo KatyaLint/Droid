@@ -32,8 +32,7 @@ public class UserTravelMainVO {
     @SerializedName("passengers")
     private ArrayList<PassengersVO> passengerses = new ArrayList<PassengersVO>();
 
-//    @SerializedName("items")
-//    private ItemsVO[] menu_fields;
+
     @SerializedName("items")
     private Map<String,NodesVO> items = new HashMap<String,NodesVO>();
 

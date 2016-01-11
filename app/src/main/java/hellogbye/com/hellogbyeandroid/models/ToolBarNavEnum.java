@@ -9,14 +9,15 @@ public enum ToolBarNavEnum {
     PREFERENCES_TAB_SETTINGS(13,"Preferences Tabs Settings"),PAYMENT_TRAVLERS(14,"Preferences Travelrs"),PAYMENT_TRAVLERS_DETAILS(15,"Preferences Travelrs Details"),
     PREFERENCES_SEARCH_LIST_SETTINGS(16,"Preferences Specific List Settings"), PREFERENCES_DRAG_LIST_SETTINGS(17,"Preferences Drag List Settings"),
     PREFERENCES_CHECK_LIST_SETTINGS(18,"Preferences check List Settings"),
-    PREFERENCES_SPECIFIC_LIST_SETTINGS(19,"Preferences Specific List Settings"), SELECT_CREDIT_CARD(20,"Select Credit Card"), ADD_CREDIT_CARD(21,"Add Credit Card");
+    PREFERENCES_SPECIFIC_LIST_SETTINGS(19,"Preferences Specific List Settings"), SELECT_CREDIT_CARD(20,"Select Credit Card"), ADD_CREDIT_CARD(21,"Add Credit Card"),
+    COMPANIONS_DETAILS(22,"Companions Details");
 
 
 
     private final int navNumber;
     private final String navTitle;
 
-    private ToolBarNavEnum(int navNumber, String title){
+    ToolBarNavEnum(int navNumber, String title){
         this.navNumber = navNumber;
         this.navTitle = title;
     }

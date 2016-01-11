@@ -724,6 +724,29 @@ public class ConnectionManager {
         });
     }
 
+
+    public void getCompanions(final ServerRequestListener listener) {
+
+        String url = getURL(Services.COMPANIONS);
+
+        JSONObject jsonObject = new JSONObject();
+
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseCompanionData(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, false);
+    }
+
+
     ////////////////////////////////
     // PUT
     ///////////////////////////////

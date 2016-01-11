@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/DP90"
+    android:padding="@dimen/DP10"
+    android:orientation="horizontal">
+
+  <ImageView
+      android:layout_centerVertical="true"
+      android:id="@+id/companion_image_view"
+      android:layout_width="@dimen/DP54"
+      android:layout_height="@dimen/DP54"
+      android:src="@drawable/adventurous_traveler_icn"
+       />
+
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/companion_image_view"
+        android:id="@+id/companion_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/companion_details_name_item"
+            android:text="Companion Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/companion_request"
+            android:text="Companion Request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        layout="@layout/layout_arrow"
+
+        android:layout_alignParentEnd="true"
+         />
+
+</RelativeLayout>

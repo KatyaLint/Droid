@@ -27,9 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.adapters.PreferenceSettingsAirlineCarriersAdapter;
-import hellogbye.com.hellogbyeandroid.adapters.PreferenceSettingsFlightTabsAdapter;
-import hellogbye.com.hellogbyeandroid.adapters.PreferencesSettingsSearchCheckListAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferenceSettingsAirlineCarriersAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferenceSettingsFlightTabsAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsSearchCheckListAdapter;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
