@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="settings_account">
+        <item>Personal Information</item>
+        <item>Emails</item>
+        <item>Manage Payment Cards</item>
+        <item>Help and Feedback</item>
+    </string-array>
+
+</resources>

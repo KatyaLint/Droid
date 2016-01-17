@@ -61,21 +61,20 @@ public class CNCFragment extends HGBAbtsractFragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         mHGBPrefrenceManager = HGBPreferencesManager.getInstance(getActivity().getApplicationContext());
         init(rootView);
-        loadCNCList();
         initList();
+
+
         getActivityInterface().getToolBar().updateToolBarView(ToolBarNavEnum.CNC.getNavNumber());
 
         return rootView;
     }
 
     public void initList() {
-
+        loadCNCList();
         mRecyclerView.setHasFixedSize(true);
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-
-
 
         mAdapter = new CNCAdapter(getActivity().getApplicationContext(), getActivityInterface().getCNCItems());
         mRecyclerView.setAdapter(mAdapter);
@@ -94,7 +93,12 @@ public class CNCFragment extends HGBAbtsractFragment {
 
     private void loadCNCList() {
         String strCNCList = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, "");
-        if ("".equals(strCNCList) && getActivityInterface().getCNCItems()== null) {
+
+
+//        if ("".equals(strCNCList) && getActivityInterface().getCNCItems()== null ||
+//                strCNCList==null && getActivityInterface().getCNCItems()== null) {
+        if (   (strCNCList.equals("") || strCNCList.equals("null")) && getActivityInterface().getCNCItems()== null ) {
+
             getActivityInterface().addCNCItem(new CNCItem(getResources().getString(R.string.default_cnc_message), CNCAdapter.HGB_ITEM));
         } else {
 
@@ -159,6 +163,7 @@ public class CNCFragment extends HGBAbtsractFragment {
     }
 
     public void handleMyMessage(String strMessage) {
+
         getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.ME_ITEM));
         addWaitingItem();
         mAdapter.notifyDataSetChanged();
@@ -167,6 +172,7 @@ public class CNCFragment extends HGBAbtsractFragment {
     }
 
     public void handleHGBMessage(String strMessage) {
+
         getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.HGB_ITEM));
         removeWaitingItem();
         mAdapter.notifyDataSetChanged();

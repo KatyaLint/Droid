@@ -43,8 +43,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         layout="@layout/layout_arrow"
-
-        android:layout_alignParentEnd="true"
-         />
+        android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>

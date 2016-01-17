@@ -1,7 +1,11 @@
 package hellogbye.com.hellogbyeandroid.fragments.companions;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +16,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 
 import java.util.ArrayList;
@@ -37,6 +44,8 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
     private ArrayList<CompanionVO> companionsVO;
     private CompanionAdapter searchListAdapter;
     private List<CompanionVO> itemCompanionTemp = new ArrayList<>();
+    private View popup_companion_new;
+    private EditText input;
 
 
     public TravelCompanionsFragment() {
@@ -73,19 +82,11 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
         });
 
 
-
-//        PreferencesSettingsSearchCheckListAdapter searchAdapter =  new PreferencesSettingsSearchCheckListAdapter(getActivity(), myAccountAttribute.getAttributesVOs());
-
         View rootView = inflater.inflate(R.layout.companion_search_list, container, false);
-        int i = getArguments().getInt(HGBConstants.ARG_NAV_NUMBER);
-       // String strFrag = getResources().getStringArray(R.array.nav_draw_array)[i];
-//        String strFrag = ToolBarNavEnum.getNavNameByPosition(i);
-//
-//        TextView textView = (TextView)rootView.findViewById(R.id.text);
-//        textView.setText(strFrag);
+
         searchListInitialization(rootView);
-     //   companions = getActivityInterface().getCompanions();
-        searchListAdapter = new CompanionAdapter(getActivityInterface().getCompanions());
+
+        searchListAdapter = new CompanionAdapter(getActivityInterface().getCompanions(), getActivity().getApplicationContext());
         searchRecyclerView.setAdapter(searchListAdapter);
 
         searchListAdapter.SetOnItemClickListener(new CompanionAdapter.OnItemClickListener() {
@@ -98,31 +99,60 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
                         getActivityInterface().goToFragment(ToolBarNavEnum.COMPANIONS_DETAILS.getNavNumber(),args);
                     }
                 }
-
-
-//                for (SettingsAttributesVO accountAttribute: accountAttributesTemp){
-//                    if(accountAttribute.getmId().equals(guid)){
-//                        List<SettingsValuesVO> myAccountAttributeVO = myAccountAttribute.getAttributesVOs();
-//                        int intRank = myAccountAttributeVO.size()+1;
-//                        SettingsValuesVO valuesVO = new SettingsValuesVO(accountAttribute.getmId(),accountAttribute.getmName(),accountAttribute.getmDescription(),""+intRank);
-//                        myAccountAttribute.getAttributesVOs().add(valuesVO);
-//                        //  changedAccountAttributes.add(valuesVO);
-//                        removeFromSearchList(guid);
-//
-//
-//                        preferenceSettingsListAdapter.notifyDataSetChanged();
-//                        break;
-//                    }
-//                }
-
             }
         });
 
 
-    //    getActivity().setTitle(strFrag);
+        popup_companion_new = inflater.inflate(R.layout.popup_companion_new, null);
+        input = (EditText) popup_companion_new.findViewById(R.id.companion_editTextDialog);
+
+
+        LinearLayout companion_invite_companion = (LinearLayout) rootView.findViewById(R.id.companion_invite_ll);
+        companion_invite_companion.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                addTravelCompanion();
+            }
+        });
+
         return rootView;
     }
 
+
+    private void addTravelCompanion() {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        alert.setCancelable(false);
+        alert.setTitle(R.string.component_invite_new_companion)
+                .setView(popup_companion_new)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String newName = input.getText().toString();
+
+//                        if (newName.length() != 0) {
+//                            popUpConnection(newName);
+//                        }
+                        input.setText("");
+                        ((ViewGroup) popup_companion_new.getParent()).removeView(popup_companion_new);
+                        IBinder token = input.getWindowToken();
+                        ( (InputMethodManager) getActivity().getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        input.setText("");
+
+                        ((ViewGroup) popup_companion_new.getParent()).removeView(popup_companion_new);
+                        IBinder token = input.getWindowToken();
+                        ( (InputMethodManager) getActivity().getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
+                        dialog.cancel();
+                    }
+                })
+                .create().show();
+    }
 
     private void searchListInitialization(View rootView){
         mSearchView = (SearchView)rootView.findViewById(R.id.companion_search_view);

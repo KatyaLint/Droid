@@ -1,6 +1,7 @@
 package hellogbye.com.hellogbyeandroid.adapters.companion;
 
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +24,9 @@ public class CompanionAdapter extends RecyclerView.Adapter<CompanionAdapter.View
 
     private OnItemClickListener mItemClickListener;
     private ArrayList<CompanionVO> itemsData;
-
-    public CompanionAdapter(List<CompanionVO> accountSettings) {
+    private Context context;
+    public CompanionAdapter(List<CompanionVO> accountSettings, Context context) {
+        this.context = context;
         if(accountSettings == null){
             itemsData = new ArrayList<>();
         }else {
@@ -54,7 +56,7 @@ public class CompanionAdapter extends RecyclerView.Adapter<CompanionAdapter.View
         holder.companion_name.setTag(item.getmCompanionid());
         holder.companion_request.setText(item.getmConfirmationstatus());
 
-       HGBUtility.loadRoundedImage(null, item.getCampanionUserProfile().getmAvatar(), holder.getCompanion_image_view());
+       HGBUtility.loadRoundedImage(context, item.getCampanionUserProfile().getmAvatar(), holder.getCompanion_image_view());
 
 
     }

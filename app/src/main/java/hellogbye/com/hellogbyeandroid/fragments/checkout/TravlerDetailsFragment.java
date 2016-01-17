@@ -21,6 +21,7 @@ import java.util.Calendar;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.CountryItem;
+import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
@@ -56,13 +57,19 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
     private NumberPicker statePicker;
     private NumberPicker genderPicker;
     private NumberPicker titlePicker;
-
+    private String SELECT_PROVINCE = "Select Province";
 
    // private HashMap<String, ArrayList<ProvincesItem>> list = new HashMap<>();
 
 
 
     private AlertDialog countryDialog;
+    private int maxValueForStateDialog;
+    private String[] stateArray;
+    private int countryMaxValueSize;
+    private String[] countryarray;
+    private String mCounterPicked = "0";
+    private String mStatePicked ="0";
 
 
     public static Fragment newInstance(int position) {
@@ -110,8 +117,26 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
 
         setSaveButton();
 
-        buildCountryDialog();
-        buildStateDialog();
+       // buildCountryDialog();
+
+
+
+
+        countryMaxValueSize = getActivityInterface().getEligabileCountries().size();
+        countryarray = new String[getActivityInterface().getEligabileCountries().size()];
+        for (int i = 0; i < getActivityInterface().getEligabileCountries().size(); i++) {
+            countryarray[i] = getActivityInterface().getEligabileCountries().get(i).getName();
+        }
+        mCountry.setTag(0);
+        mState.setTag(0);
+        selectStates("0");
+
+
+
+//        HGBUtility.buildStateDialog(mState, getActivity(), maxValueForStateDialog, stateArray, SELECT_PROVINCE);
+//        HGBUtility.buildStateDialog(mCountry, getActivity(), countryMaxValueSize, countryarray, SELECT_PROVINCE);
+
+      //  buildStateDialog();
         setClickListner();
 
 //TODO need to load provnices from API not file
@@ -133,21 +158,49 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
 //        });
 
     }
+    final String[] titleArray = {"Mr", "Mrs", "Miss"};
+    final String SLECT_TITLE ="Select Title";
+
+
+    private void selectStates(String countryPicked){
+        int countryPick = Integer.parseInt(countryPicked);
+        maxValueForStateDialog = getActivityInterface().getEligabileCountries().get(countryPick).getProvinces().size();
+        stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPick).getProvinces().size()];
+        ArrayList<ProvincesItem> provinces = getActivityInterface().getEligabileCountries().get(countryPick).getProvinces();
+        for (int i = 0; i < provinces.size(); i++) {
+            stateArray[i] = provinces.get(i).getName();
+        }
+    }
 
     private void setClickListner() {
 
         mCountry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                countryDialog.show();
+
+             //   HGBUtility.showPikerDialog(mCountry, getActivity(), SELECT_PROVINCE,stateArray, 0,maxValueForStateDialog);
+
+                HGBUtility.showPikerDialog(mCountry,getActivity(), SELECT_PROVINCE,
+                        countryarray, 0, countryMaxValueSize -1);
+                if(mCountry.getTag() != null) {
+                    mCounterPicked = mCountry.getTag().toString();
+                }
+               // countryDialog.show();
             }
         });
 
         mState.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                stateDialog.show();
+                if(mCountry.getTag() != null) {
+                    mCounterPicked = mCountry.getTag().toString();
+                    selectStates(mCounterPicked);
+                }
+                HGBUtility.showPikerDialog(mState, getActivity(), SELECT_PROVINCE, stateArray, 0,maxValueForStateDialog - 1);
+                if(mState.getTag() != null){
+                    mStatePicked = mState.getTag().toString();
+                }
+               // stateDialog.show();
             }
         });
 
@@ -155,7 +208,8 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
             @Override
             public void onClick(View v) {
 
-                showGenderDialog();
+              //  showGenderDialog();
+                HGBUtility.showPikerDialog(mTitle, getActivity(),GENDER_TITLE,genderArray,0,2);
             }
         });
 
@@ -163,7 +217,11 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
             @Override
             public void onClick(View v) {
 
-                showTitleDialog();
+                HGBUtility.showPikerDialog(mTitle, getActivity(),SLECT_TITLE,titleArray,0,1);
+
+
+
+               // showTitleDialog();
             }
         });
 
@@ -257,97 +315,111 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
     }
 
 
-    private void showTitleDialog() {
-        View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
+//    private void showTitleDialog() {
+//        View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
+//
+//        titlePicker = (NumberPicker) v1.findViewById(R.id.np);
+//        titlePicker.setMinValue(0);
+//
+//        titlePicker.setMaxValue(2);
+//        final String[] titleArray = {"Mr", "Mrs", "Miss"};
+//        titlePicker.setDisplayedValues(titleArray);
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        builder.setView(v1);
+//        builder.setTitle("Select Title");
+//        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int which) {
+//                mTitle.setText(titleArray[titlePicker.getValue()]);
+//                return;
+//            }
+//        });
+//        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int which) {
+//                return;
+//            }
+//        });
+//
+//
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
+//    }
 
-        titlePicker = (NumberPicker) v1.findViewById(R.id.np);
-        titlePicker.setMinValue(0);
+    final String[] genderArray = {"M", "F"};
+    final String GENDER_TITLE = "Select Gender";
 
-        titlePicker.setMaxValue(2);
-        final String[] titleArray = {"Mr", "Mrs", "Miss"};
-        titlePicker.setDisplayedValues(titleArray);
+//    private void showGenderDialog() {
+//
+//        View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
+//
+//        genderPicker = (NumberPicker) v1.findViewById(R.id.np);
+//        genderPicker.setMinValue(0);
+//
+//        genderPicker.setMaxValue(1);
+//        final String[] genderArray = {"M", "F"};
+//        genderPicker.setDisplayedValues(genderArray);
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        builder.setView(v1);
+//        builder.setTitle("Select Gender");
+//        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int which) {
+//                mGender.setText(genderArray[genderPicker.getValue()]);
+//                return;
+//            }
+//        });
+//        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int which) {
+//                return;
+//            }
+//        });
+//
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
+//
+//    }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setView(v1);
-        builder.setTitle("Select Title");
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                mTitle.setText(titleArray[titlePicker.getValue()]);
-                return;
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                return;
-            }
-        });
-
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
-    private void showGenderDialog() {
-
-        View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
-
-        genderPicker = (NumberPicker) v1.findViewById(R.id.np);
-        genderPicker.setMinValue(0);
-
-        genderPicker.setMaxValue(1);
-        final String[] genderArray = {"M", "F"};
-        genderPicker.setDisplayedValues(genderArray);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setView(v1);
-        builder.setTitle("Select Gender");
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                mGender.setText(genderArray[genderPicker.getValue()]);
-                return;
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                return;
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-    }
-
-    private void buildCountryDialog() {
-        View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
-
-        countryPicker = (NumberPicker) v1.findViewById(R.id.np);
-        countryPicker.setMinValue(0);
-        countryPicker.setMaxValue(getActivityInterface().getEligabileCountries().size() - 1);
-        final String[] countryarray = new String[getActivityInterface().getEligabileCountries().size()];
-        for (int i = 0; i < getActivityInterface().getEligabileCountries().size(); i++) {
-            countryarray[i] = getActivityInterface().getEligabileCountries().get(i).getName();
-        }
-        countryPicker.setDisplayedValues(countryarray);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setView(v1);
-        builder.setTitle("Select Country");
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                mCountry.setText(countryarray[countryPicker.getValue()]);
-                buildStateDialog();
-                return;
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                return;
-            }
-        });
-
-        countryDialog = builder.create();
-    }
+//    private void buildCountryDialog() {
+//        View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
+//
+//        countryPicker = (NumberPicker) v1.findViewById(R.id.np);
+//        countryPicker.setMinValue(0);
+//        countryPicker.setMaxValue(getActivityInterface().getEligabileCountries().size() - 1);
+//        final String[] countryarray = new String[getActivityInterface().getEligabileCountries().size()];
+//        for (int i = 0; i < getActivityInterface().getEligabileCountries().size(); i++) {
+//            countryarray[i] = getActivityInterface().getEligabileCountries().get(i).getName();
+//        }
+//        countryPicker.setDisplayedValues(countryarray);
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        builder.setView(v1);
+//        builder.setTitle("Select Country");
+//        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int which) {
+//                mCountry.setText(countryarray[countryPicker.getValue()]);
+//
+//
+//                maxValueForStateDialog = getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size();
+//                stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size()];
+//                for (int i = 0; i < getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size(); i++) {
+//                    stateArray[i] = getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().get(i).getName();
+//                }
+//
+//                HGBUtility.buildStateDialog(mState, getActivity(), maxValueForStateDialog, stateArray, SELECT_PROVINCE);
+//
+//
+////                buildStateDialog();
+//                return;
+//            }
+//        });
+//        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int which) {
+//                return;
+//            }
+//        });
+//
+//        countryDialog = builder.create();
+//    }
 
     private void buildStateDialog() {
         View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
@@ -379,7 +451,6 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
 
 
         stateDialog = builder.create();
-
 
     }
 

@@ -29,15 +29,17 @@ import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import hellogbye.com.hellogbyeandroid.HGBMainInterface;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
-import hellogbye.com.hellogbyeandroid.fragments.AccountSettingsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.settings.AccountSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.AddCreditCardFragment;
-import hellogbye.com.hellogbyeandroid.fragments.AlternativeFlightFragment;
-import hellogbye.com.hellogbyeandroid.fragments.AlternativeFlightsDetailsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
+import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightsDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
@@ -68,6 +70,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.network.Parser;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.SpeechRecognitionUtil;
@@ -167,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private void setNameInNavDraw() {
 
         String strName = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_NAME, "");
-
+        // For remember me
         if (strName.equals(hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_NAME, ""))) {
             ConnectionManager.getInstance(MainActivity.this).getUserProfile(new ConnectionManager.ServerRequestListener() {
                 @Override
@@ -175,6 +178,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
                     mCurrentUser = (UserData) data;
                     String name = mCurrentUser.getFirstname() + " " + mCurrentUser.getLastname();
+
                     hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_NAME, "");
                     mName.setText(name);
 
@@ -313,14 +317,17 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     private void loadNavItems() {
         mNavItemsList = new ArrayList<>();
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.HOME, true));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.ITINARERY, false));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.HISTORY, false));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.TRIPS, false));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.COMPANIONS, false));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.PREFERENCE, false));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.ACCOUNT, false));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.HELP, false));
+
+
+//        mNavItemsList.add(new NavItem(ToolBarNavEnum.HOME, true));
+//        mNavItemsList.add(new NavItem(ToolBarNavEnum.ITINARERY, false));
+//        mNavItemsList.add(new NavItem(ToolBarNavEnum.HISTORY, false));
+
 
     }
 
@@ -566,6 +573,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
         boolean stashToBack = true;
         int navPosition = position;//navBar.getNavNumber();
+        System.out.println("Kate nav navPosition =" + navPosition);
         switch (navBar) {
             case HOME:
                 //  fragment = HomeFragment.newInstance(navPosition);
@@ -598,7 +606,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case ALTERNATIVE_FLIGHT:
                 fragment = AlternativeFlightFragment.newInstance(navPosition);
-                stashToBack = false;
+               // stashToBack = false;
                 break;
             case HOTEL:
                 fragment = HotelFragment.newInstance(navPosition);
@@ -635,9 +643,14 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case ADD_CREDIT_CARD:
                 fragment = AddCreditCardFragment.newInstance(navPosition);
                 break;
+            case COMPANIONS_PERSONAL_DETAILS:
+                fragment = AccountPersonalInfoSettingsFragment.newInstance(navPosition);
+                break;
 
 
         }
+
+
         if (bundle != null) {
             fragment.setArguments(bundle);
         }
@@ -661,10 +674,21 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             return;
         }
 
-        if (!HGBUtility.clearBackStackAndGoToNextFragment(this)) {
+
+        if (HGBUtility.clearBackStackAndGoToNextFragment(this)) {
             // super.onBackPressed();
+            Stack<Fragment> fragmentStack = HGBUtility.getFragmentStack();
+            Fragment fragment = fragmentStack.peek();
+            Bundle arguments = fragment.getArguments();
+            int fragNumber = arguments.getInt(HGBConstants.ARG_NAV_NUMBER);
+            mToolbar.updateToolBarView(fragNumber);
         }
     }
+
+
+
+
+
 
     @Override
     public void setTitle(CharSequence title) {

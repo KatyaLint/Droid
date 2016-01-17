@@ -138,6 +138,9 @@ public class CostumeToolBar extends Toolbar {
                 homeTitleImage.setVisibility(View.VISIBLE);
                 keyBoardImage.setVisibility(View.VISIBLE);
                 break;
+            case COMPANIONS_PERSONAL_DETAILS:
+                titleText.setVisibility(View.VISIBLE);
+                break;
 
 
 

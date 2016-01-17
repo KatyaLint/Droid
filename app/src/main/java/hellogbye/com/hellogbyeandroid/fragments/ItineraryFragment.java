@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Set;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
@@ -166,8 +167,16 @@ private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO 
        // MainLinearLayout.setLayoutParams(LLParams);
         MainLinearLayout.setOrientation(LinearLayout.VERTICAL);
 
+
+
+
+        if(passengers.size() < 1){
+         return MainLinearLayout;
+        }
+
         HashMap<String, ArrayList<NodesVO>> hashMapPassangers = passengers.get(0).getHashMap();
         Set<String> dates = hashMapPassangers.keySet();
+
         ArrayList<String> list = new ArrayList(dates);
         Collections.sort(list);
 
@@ -497,6 +506,8 @@ private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO 
         View rootView = inflater.inflate(R.layout.new_grid_main_table, container, false);
         getDimenstions();
         createItinenaryView(rootView);
+
+        getActivityInterface().setAlternativeFlights(null);
 
         //  userOrder = getActivityInterface().getTravelOrder();
 

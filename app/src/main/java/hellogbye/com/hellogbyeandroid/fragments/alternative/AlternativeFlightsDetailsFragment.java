@@ -1,4 +1,4 @@
-package hellogbye.com.hellogbyeandroid.fragments;
+package hellogbye.com.hellogbyeandroid.fragments.alternative;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -18,6 +18,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.AlternativeFlightsAdapter;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
@@ -104,5 +105,9 @@ public class AlternativeFlightsDetailsFragment extends HGBAbtsractFragment {
         return airplaneDataVO;
     }
 
-
+    @Override
+    public void onDestroyView() {
+     //   getActivityInterface().setAlternativeFlights(null);
+        super.onDestroyView();
+    }
 }

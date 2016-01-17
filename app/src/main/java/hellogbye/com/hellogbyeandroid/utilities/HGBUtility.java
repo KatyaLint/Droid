@@ -1,11 +1,12 @@
 package hellogbye.com.hellogbyeandroid.utilities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,23 +17,24 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.android.volley.DefaultRetryPolicy;
 import com.crashlytics.android.Crashlytics;
+import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.process.BitmapProcessor;
 
@@ -47,14 +49,11 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import java.util.Stack;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
 /**
@@ -87,6 +86,19 @@ public class HGBUtility {
                     }
                 })
                 .build();
+
+
+//        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+//                context)
+//                .defaultDisplayImageOptions(options)
+//                .memoryCache(new WeakMemoryCache())
+//                .discCacheSize(100 * 1024 * 1024).build();
+//
+//        ImageLoader.getInstance().init(config);
+
+
+
+    //    ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(context));
         ImageLoader.getInstance().displayImage(imageUrl, imageView, options, new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String s, View view) {
@@ -130,6 +142,7 @@ public class HGBUtility {
                     }
                 })
                 .build();
+    //    ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(context));
         ImageLoader.getInstance().displayImage(imageUrl, imageView, options, new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String s, View view) {
@@ -189,7 +202,7 @@ public class HGBUtility {
 
             if (isAddToBackStack) {
                 transaction.addToBackStack(fragment.getClass().toString());
-                fragmentStack.push(fragment);
+                getFragmentStack().push(fragment);
             }
 
             transaction.commit();
@@ -209,7 +222,7 @@ public class HGBUtility {
             if (isAddToBackStack) {
                 transaction.addToBackStack(fragment.getClass().toString());
 
-                fragmentStack.push(fragment);
+                getFragmentStack().push(fragment);
             }
 
             transaction.commit();
@@ -234,11 +247,11 @@ public class HGBUtility {
 
     public static boolean clearBackStackAndGoToNextFragment(Activity activity) {
 
-        if(fragmentStack.size() >= 2){
+        if(getFragmentStack().size() >= 2){
             FragmentTransaction fragmentTransaction =  activity.getFragmentManager().beginTransaction();
-            fragmentTransaction.hide(fragmentStack.pop());
+            fragmentTransaction.hide(getFragmentStack().pop());
             //fragmentStack.pop();
-            Fragment fragmentTemp = fragmentStack.lastElement();
+            Fragment fragmentTemp = getFragmentStack().lastElement();
             goToNextFragmentIsAddToBackStack(activity,fragmentTemp,false);
             return true;
         }
@@ -287,6 +300,14 @@ public class HGBUtility {
     public static void removeLoader() {
         if (progressDialog != null && progressDialog.isShowing())
             progressDialog.dismiss();
+    }
+
+    public static Stack<Fragment> getFragmentStack() {
+        return fragmentStack;
+    }
+
+    public static void setFragmentStack(Stack<Fragment> fragmentStack) {
+        HGBUtility.fragmentStack = fragmentStack;
     }
 
     public Bitmap GetBitmapMarker(Context mContext, int resourceId,  String mText)
@@ -590,6 +611,115 @@ public static String formattDateToStringMonthDate(String dateInString) {
 
 
         return isValid;
+    }
+
+
+
+
+
+    public static void showPikerDialog(final FontTextView textView, Activity activity, String title,
+                                 final String[] titleArray, int minValue, int maxValue) {
+
+        View v1 = activity.getLayoutInflater().inflate(R.layout.picker_dialog, null);
+
+        final NumberPicker genderPicker = (NumberPicker) v1.findViewById(R.id.np);
+        genderPicker.setMinValue(minValue);
+
+        genderPicker.setMaxValue(maxValue);
+      //  final String[] genderArray = {"M", "F"};
+        genderPicker.setDisplayedValues(titleArray);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setView(v1);
+        builder.setTitle(title);
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                textView.setText(titleArray[genderPicker.getValue()]);
+                textView.setTag(genderPicker.getValue());
+                return;
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
+
+    private void buildCountryDialog(final FontTextView textView, Activity activity, int maxValue, final String[] countryarray) {
+        View v1 = activity.getLayoutInflater().inflate(R.layout.picker_dialog, null);
+
+        final NumberPicker countryPicker = (NumberPicker) v1.findViewById(R.id.np);
+        countryPicker.setMinValue(0);
+        countryPicker.setMaxValue(maxValue - 1);
+//        final String[] countryarray = new String[maxValue];
+//        for (int i = 0; i < getActivityInterface().getEligabileCountries().size(); i++) {
+//            countryarray[i] = getActivityInterface().getEligabileCountries().get(i).getName();
+//        }
+        countryPicker.setDisplayedValues(countryarray);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setView(v1);
+        builder.setTitle("Select Country");
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                textView.setText(countryarray[countryPicker.getValue()]);
+             //   buildStateDialog();
+                return;
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        //countryDialog = builder.create();
+    }
+
+
+    public static void buildStateDialog(final FontTextView textView, Activity activity, int maxValue, final String[] stateArray,
+                                        final String title) {
+        View v1 = activity.getLayoutInflater().inflate(R.layout.picker_dialog, null);
+
+        final NumberPicker statePicker = (NumberPicker) v1.findViewById(R.id.np);
+        statePicker.setMinValue(0);
+
+        statePicker.setMaxValue(maxValue - 1);
+//        final String[] stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size()];
+//        for (int i = 0; i < getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size(); i++) {
+//            stateArray[i] = getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().get(i).getName();
+//        }
+        statePicker.setDisplayedValues(stateArray);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setView(v1);
+        builder.setTitle(title);
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                textView.setText(stateArray[statePicker.getValue()]);
+                return;
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+     //   stateDialog = builder.create();
+
+
     }
 
 }

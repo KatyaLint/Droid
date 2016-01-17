@@ -118,5 +118,7 @@
     <string name="component_first">First : </string>
     <string name="component_second">Second : </string>
     <string name="component_email">Email </string>
-
+    <string name="component_invite">Invite Travel Companion</string>
+    <string name="component_invite_new_companion">Invite New Travel Comapanion</string>
+    <string name="component_invite_hint">Email Address</string>
 </resources>
