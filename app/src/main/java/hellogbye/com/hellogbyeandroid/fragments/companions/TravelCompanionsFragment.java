@@ -103,7 +103,7 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
         });
 
 
-        popup_companion_new = inflater.inflate(R.layout.popup_companion_new, null);
+        popup_companion_new = inflater.inflate(R.layout.popup_layout_with_edit_text_new, null);
         input = (EditText) popup_companion_new.findViewById(R.id.companion_editTextDialog);
 
 

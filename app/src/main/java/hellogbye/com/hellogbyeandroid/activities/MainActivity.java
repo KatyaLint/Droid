@@ -528,6 +528,14 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
+    public void gotToStartMenuActivity() {
+        HGBUtility.clearAllFragments(MainActivity.this);
+        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
+        Intent intent = new Intent(getApplicationContext(), StartingMenuActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
     public ArrayList<UserData> getListUsers() {
         return mTravelList;
     }
@@ -536,6 +544,12 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     public UserData getCurrentUser() {
         return mCurrentUser;
     }
+
+    @Override
+    public void setCurrentUser(UserData currentUser) {
+        this.mCurrentUser = currentUser;
+    }
+
 
     @Override
     public ArrayList<CountryItem> getEligabileCountries() {
@@ -573,7 +587,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
         boolean stashToBack = true;
         int navPosition = position;//navBar.getNavNumber();
-        System.out.println("Kate nav navPosition =" + navPosition);
         switch (navBar) {
             case HOME:
                 //  fragment = HomeFragment.newInstance(navPosition);

@@ -228,8 +228,8 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
         mDOB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                showDateDialog();
+                HGBUtility.showDateDialog(getActivity(),mDOB);
+              //  showDateDialog();
             }
         });
 
@@ -293,26 +293,26 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
 
     }
 
-    private void showDateDialog() {
-
-        final Calendar c = Calendar.getInstance();
-        int mYear = c.get(Calendar.YEAR);
-        int mMonth = c.get(Calendar.MONTH);
-        int mDay = c.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog dpd = new DatePickerDialog(getActivity(),
-                new DatePickerDialog.OnDateSetListener() {
-
-                    @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
-                        mDOB.setText(dayOfMonth + "/"
-                                + (monthOfYear + 1) + "/" + year);
-
-                    }
-                }, mYear, mMonth, mDay);
-        dpd.show();
-    }
+//    private void showDateDialog() {
+//
+//        final Calendar c = Calendar.getInstance();
+//        int mYear = c.get(Calendar.YEAR);
+//        int mMonth = c.get(Calendar.MONTH);
+//        int mDay = c.get(Calendar.DAY_OF_MONTH);
+//
+//        DatePickerDialog dpd = new DatePickerDialog(getActivity(),
+//                new DatePickerDialog.OnDateSetListener() {
+//
+//                    @Override
+//                    public void onDateSet(DatePicker view, int year,
+//                                          int monthOfYear, int dayOfMonth) {
+//                        mDOB.setText(dayOfMonth + "/"
+//                                + (monthOfYear + 1) + "/" + year);
+//
+//                    }
+//                }, mYear, mMonth, mDay);
+//        dpd.show();
+//    }
 
 
 //    private void showTitleDialog() {
@@ -421,38 +421,38 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
 //        countryDialog = builder.create();
 //    }
 
-    private void buildStateDialog() {
-        View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
-
-        statePicker = (NumberPicker) v1.findViewById(R.id.np);
-        statePicker.setMinValue(0);
-
-        statePicker.setMaxValue(getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size() - 1);
-        final String[] stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size()];
-        for (int i = 0; i < getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size(); i++) {
-            stateArray[i] = getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().get(i).getName();
-        }
-        statePicker.setDisplayedValues(stateArray);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setView(v1);
-        builder.setTitle("Select Province");
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                mState.setText(stateArray[statePicker.getValue()]);
-                return;
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                return;
-            }
-        });
-
-
-        stateDialog = builder.create();
-
-    }
+//    private void buildStateDialog() {
+//        View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
+//
+//        statePicker = (NumberPicker) v1.findViewById(R.id.np);
+//        statePicker.setMinValue(0);
+//
+//        statePicker.setMaxValue(getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size() - 1);
+//        final String[] stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size()];
+//        for (int i = 0; i < getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size(); i++) {
+//            stateArray[i] = getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().get(i).getName();
+//        }
+//        statePicker.setDisplayedValues(stateArray);
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        builder.setView(v1);
+//        builder.setTitle("Select Province");
+//        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int which) {
+//                mState.setText(stateArray[statePicker.getValue()]);
+//                return;
+//            }
+//        });
+//        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int which) {
+//                return;
+//            }
+//        });
+//
+//
+//        stateDialog = builder.create();
+//
+//    }
 
     private void initUser() {
 

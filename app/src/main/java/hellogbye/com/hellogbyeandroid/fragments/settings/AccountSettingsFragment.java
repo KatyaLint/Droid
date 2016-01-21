@@ -1,22 +1,29 @@
 package hellogbye.com.hellogbyeandroid.fragments.settings;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.settingaccount.AccountSettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -26,6 +33,10 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  */
 public class AccountSettingsFragment extends HGBAbtsractFragment {
 
+
+    private ImageView account_details_image;
+    private FontTextView account_settings_details_name;
+    private FontTextView account_settings_details_city;
 
     public AccountSettingsFragment() {
         // Empty constructor required for fragment subclasses
@@ -39,23 +50,90 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
         return fragment;
     }
 
+    private void getUserData(){
+        ConnectionManager.getInstance(getActivity()).getUserProfile(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+                UserData mCurrentUser = (UserData) data;
+                getActivityInterface().setCurrentUser(mCurrentUser);
+                initializeUserData();
+
+            }
+
+            @Override
+            public void onError(Object data) {
+
+            }
+        });
+}
+
+    private void initializeUserData(){
+        UserData currentUser = getActivityInterface().getCurrentUser();
+
+        HGBUtility.loadRoundedImage(getActivity().getApplicationContext(),currentUser.getAvatar(),account_details_image);
+
+        String userName = currentUser.getTitle() +" "+ currentUser.getFirstname() + " " + currentUser.getLastname();
+        account_settings_details_name.setText(userName);
+
+
+        String userCity = currentUser.getCity() + " " + currentUser.getAddress();
+        account_settings_details_city.setText(userCity);
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.account_settings_main_layout, container, false);
 
-        UserData currentUser = getActivityInterface().getCurrentUser();
+
 
         String[] account_settings = getResources().getStringArray(R.array.settings_account);
 
         RecyclerView account_settings_preferences_list = (RecyclerView)rootView.findViewById(R.id.account_settings_preferences_list);
+
+        LayoutInflater li = LayoutInflater.from(getActivity());
+        final View promptsView = li.inflate(R.layout.popup_layout_with_edit_text_new, null);
+        final EditText input = (EditText) promptsView
+                .findViewById(R.id.companion_editTextDialog);
+
+        final FontTextView text = (FontTextView) promptsView
+                .findViewById(R.id.component_popup_text);
+
+
+        FontTextView btn_account_logout_button = (FontTextView)rootView.findViewById(R.id.account_settings_logout);
+        btn_account_logout_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+             //logout
+                //popup
+                text.setVisibility(View.VISIBLE);
+                text.setText(getResources().getString(R.string.component_log_sure));
+                input.setVisibility(View.GONE);
+                HGBUtility.showAlertPopUp(getActivity(), input, promptsView, getResources().getString(R.string.component_log_out),
+                        new PopUpAlertStringCB() {
+                            @Override
+                            public void itemSelected(String inputItem) {
+                                getActivityInterface().gotToStartMenuActivity();
+                            }
+
+                            @Override
+                            public void itemCanceled() {
+
+                            }
+                        });
+            }
+
+        });
 
 
         AccountSettingsAdapter accountSettingsAdapter = new AccountSettingsAdapter(account_settings,getActivity());
         account_settings_preferences_list.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
-        account_settings_preferences_list.setHasFixedSize(true);
+        //account_settings_preferences_list.setHasFixedSize(true);
 
         // use a linear layout manager
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -63,24 +141,19 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
 
         account_settings_preferences_list.setAdapter(accountSettingsAdapter);
 
-        ImageView account_details_image = (ImageView) rootView.findViewById(R.id.account_details_image);
-        HGBUtility.loadRoundedImage(getActivity().getApplicationContext(),currentUser.getAvatar(),account_details_image);
+        account_details_image = (ImageView) rootView.findViewById(R.id.account_details_image);
 
 
-        FontTextView account_settings_details_name = (FontTextView) rootView.findViewById(R.id.account_settings_details_name);
-        String userName = currentUser.getTitle() +" "+ currentUser.getFirstname() + " " + currentUser.getLastname();
-        account_settings_details_name.setText(userName);
+        account_settings_details_name = (FontTextView) rootView.findViewById(R.id.account_settings_details_name);
 
+        account_settings_details_city = (FontTextView) rootView.findViewById(R.id.account_settings_details_city);
 
-        FontTextView account_settings_details_city = (FontTextView) rootView.findViewById(R.id.account_settings_details_city);
-        String userCity = currentUser.getCity() + " " + currentUser.getAddress();
-        account_settings_details_city.setText(userCity);
-
+        getUserData();
+      //  initializeUserData();
 
         accountSettingsAdapter.SetOnItemClickListener(new AccountSettingsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                System.out.println("Kate position =" + position);
 
                 switch (position){
                     case 0:

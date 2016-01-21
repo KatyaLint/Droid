@@ -2,6 +2,7 @@ package hellogbye.com.hellogbyeandroid.utilities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
@@ -20,10 +21,14 @@ import android.graphics.RectF;
 import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.IBinder;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TableRow;
@@ -52,6 +57,7 @@ import java.util.Locale;
 import java.util.Stack;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -63,6 +69,7 @@ public class HGBUtility {
 
 
     private static ProgressDialog progressDialog;
+    private static Stack<Fragment> fragmentStack = new Stack<Fragment>();
 
     public static void loadRoundedImage(Context context, String imageUrl, ImageView imageView) {
 
@@ -191,7 +198,7 @@ public class HGBUtility {
         return output;
     }
 
-    private static Stack<Fragment> fragmentStack = new Stack<Fragment>();
+
 
 
     public static void goToNextFragmentIsAddToBackStack(Activity activity, Fragment fragment, boolean isAddToBackStack){
@@ -244,6 +251,13 @@ public class HGBUtility {
     }
 
 
+    public static void clearAllFragments(Activity activity){
+        while(getFragmentStack().size() > 1){
+            FragmentTransaction fragmentTransaction =  activity.getFragmentManager().beginTransaction();
+            fragmentTransaction.hide(getFragmentStack().pop());
+        }
+
+    }
 
     public static boolean clearBackStackAndGoToNextFragment(Activity activity) {
 
@@ -651,76 +665,95 @@ public static String formattDateToStringMonthDate(String dateInString) {
     }
 
 
-    private void buildCountryDialog(final FontTextView textView, Activity activity, int maxValue, final String[] countryarray) {
-        View v1 = activity.getLayoutInflater().inflate(R.layout.picker_dialog, null);
+  public static void showAlertPopUp(final Activity activity, final EditText input, final View popupView ,
+                                    final String popupTitle, final PopUpAlertStringCB
+                                    alertCB){
+      final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+      alert.setCancelable(false);
+      alert.setTitle(popupTitle)
+              .setView(popupView)
+              .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                  public void onClick(DialogInterface dialog, int which) {
+                      String newName = input.getText().toString();
+                        if(alertCB != null){
+                            alertCB.itemSelected(newName);
+                        }
+//                        if (newName.length() != 0) {
+//                            popUpConnection(newName);
+//                        }
+                      input.setText("");
+                      ((ViewGroup) popupView.getParent()).removeView(popupView);
+                      IBinder token = input.getWindowToken();
+                      ( (InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
+                      dialog.cancel();
+                  }
+              })
+              .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
 
-        final NumberPicker countryPicker = (NumberPicker) v1.findViewById(R.id.np);
-        countryPicker.setMinValue(0);
-        countryPicker.setMaxValue(maxValue - 1);
-//        final String[] countryarray = new String[maxValue];
-//        for (int i = 0; i < getActivityInterface().getEligabileCountries().size(); i++) {
-//            countryarray[i] = getActivityInterface().getEligabileCountries().get(i).getName();
-//        }
-        countryPicker.setDisplayedValues(countryarray);
+                  @Override
+                  public void onClick(DialogInterface dialog, int which) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setView(v1);
-        builder.setTitle("Select Country");
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                textView.setText(countryarray[countryPicker.getValue()]);
-             //   buildStateDialog();
-                return;
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                return;
-            }
-        });
+                      input.setText("");
 
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        //countryDialog = builder.create();
+                      ((ViewGroup) popupView.getParent()).removeView(popupView);
+                      IBinder token = input.getWindowToken();
+                      ( (InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
+                      dialog.cancel();
+                  }
+              })
+              .create().show();
+  }
+
+
+    public static void showAlertPopUpOneButton(final Activity activity, final EditText input, final View popupView ,
+                                      final String popupTitle, final PopUpAlertStringCB
+                                              alertCB){
+        final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+        alert.setCancelable(false);
+        alert.setTitle(popupTitle)
+                .setView(popupView)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String newName = input.getText().toString();
+                        if(alertCB != null){
+                            alertCB.itemSelected(newName);
+                        }
+//                        if (newName.length() != 0) {
+//                            popUpConnection(newName);
+//                        }
+                        input.setText("");
+                        ((ViewGroup) popupView.getParent()).removeView(popupView);
+                        IBinder token = input.getWindowToken();
+                        ( (InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
+                        dialog.cancel();
+                    }
+                })
+
+                .create().show();
     }
 
 
-    public static void buildStateDialog(final FontTextView textView, Activity activity, int maxValue, final String[] stateArray,
-                                        final String title) {
-        View v1 = activity.getLayoutInflater().inflate(R.layout.picker_dialog, null);
+    public static void showDateDialog(Activity activity, final FontTextView textView) {
 
-        final NumberPicker statePicker = (NumberPicker) v1.findViewById(R.id.np);
-        statePicker.setMinValue(0);
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
 
-        statePicker.setMaxValue(maxValue - 1);
-//        final String[] stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size()];
-//        for (int i = 0; i < getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size(); i++) {
-//            stateArray[i] = getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().get(i).getName();
-//        }
-        statePicker.setDisplayedValues(stateArray);
+        DatePickerDialog dpd = new DatePickerDialog(activity,
+                new DatePickerDialog.OnDateSetListener() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setView(v1);
-        builder.setTitle(title);
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                textView.setText(stateArray[statePicker.getValue()]);
-                return;
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                return;
-            }
-        });
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        textView.setText(dayOfMonth + "/"
+                                + (monthOfYear + 1) + "/" + year);
 
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-     //   stateDialog = builder.create();
-
-
+                    }
+                }, mYear, mMonth, mDay);
+        dpd.show();
     }
+
 
 }
 

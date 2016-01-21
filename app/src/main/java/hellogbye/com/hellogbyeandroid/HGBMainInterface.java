@@ -63,6 +63,7 @@ public interface HGBMainInterface {
 
     ArrayList<UserData> getListUsers();
     UserData getCurrentUser();
+    void setCurrentUser(UserData currentUser);
 
     ArrayList<CountryItem> getEligabileCountries();
     void setEligabileCountries(ArrayList<CountryItem> mEligabileCountries);
@@ -104,4 +105,5 @@ public interface HGBMainInterface {
 
     ArrayList<CompanionVO> getCompanions();
 
+    void gotToStartMenuActivity();
 }

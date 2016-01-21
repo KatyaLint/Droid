@@ -121,4 +121,11 @@
     <string name="component_invite">Invite Travel Companion</string>
     <string name="component_invite_new_companion">Invite New Travel Comapanion</string>
     <string name="component_invite_hint">Email Address</string>
+    <string name="component_add_another_email">Add Another Email...</string>
+    <string name="component_add_new_email">Add New Email</string>
+    <string name="component_confirmation_email">will receive a\nconfirmation email shortly.</string>
+
+    <string name="component_log_out">Log Out</string>
+    <string name="component_log_sure">Are you sure you want to log out?</string>
+
 </resources>

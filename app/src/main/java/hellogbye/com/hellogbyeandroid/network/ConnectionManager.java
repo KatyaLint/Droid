@@ -261,6 +261,7 @@ public class ConnectionManager {
                 listener.onError(Parser.parseErrorMessage(error));
             }
         });
+
     }
 
     public void postPayItinerarForSolutionId(String profileId, ArrayList<String> items, final ServerRequestListener listener) {
@@ -794,6 +795,50 @@ public class ConnectionManager {
             }
         });
     }
+
+
+
+
+    //gender
+    //email
+    public void putUserSettings(UserData user, final ServerRequestListener listener){
+        String url = getURL(Services.USER_GET_PROFILE);
+        JSONObject json1 = new JSONObject();
+        try {
+
+            json1.put("state", user.getState());
+            json1.put("usercountry", user.getCountry());
+            json1.put("phone", user.getPhone());
+            json1.put("postalcode", user.getPostalcode());
+            json1.put("lastname",user.getLastname());
+            json1.put("dob", user.getDob());
+            json1.put("firstname", user.getFirstname());
+            json1.put("title", user.getTitle());
+            json1.put("address", user.getAddress());
+            json1.put("city", user.getCity());
+            json1.put("country", user.getCountry());
+            json1.put("avatar", user.getAvatar());
+            json1.put("userprofileid", user.getUserprofileid());
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
+                json1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
+
 
 
     private JSONArray createArrayToPut(List<SettingsValuesVO> putAttributesValues){
