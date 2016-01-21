@@ -15,14 +15,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.LoginTest;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.settingaccount.AccountSettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.models.BookingRequest;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
@@ -181,6 +184,33 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
         });
 
 
+        getActivityInterface().loadJSONFromAsset();
+        //getCountries();
+
         return rootView;
     }
+
+
+    private void getCountries(){
+        ConnectionManager.getInstance(getActivity()).getBookingOptions(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                //responceText.setText((String) data);
+                BookingRequest bookingrequest = (BookingRequest)data;
+                getActivityInterface().setEligabileCountries(bookingrequest.getCountries());
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                try {
+                    errorHelper.show(getFragmentManager(), (String) data);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+    }
+
 }

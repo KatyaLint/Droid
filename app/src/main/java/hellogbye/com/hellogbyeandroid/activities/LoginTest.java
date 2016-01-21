@@ -15,6 +15,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.BookingRequest;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.models.UserPreference;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
@@ -149,7 +150,7 @@ public class LoginTest extends ActionBarActivity {
                     @Override
                     public void onSuccess(Object data) {
                         responceText.setText((String) data);
-
+                        //BookingRequest bookingrequest = (BookingRequest)data;
                     }
 
                     @Override

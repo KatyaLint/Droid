@@ -11,7 +11,6 @@
         android:orientation="vertical">
 
         <LinearLayout
-
             android:background="@color/greyish_alternative_hotel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -21,8 +20,8 @@
                 android:layout_height="wrap_content"
                 app:fontName="dinnextltpro_regular.otf"
                 android:textColor="@color/warm_grey"
-                android:textSize="@dimen/SP12"
-                android:text="@string/component_name" />
+                android:text="@string/component_name"
+                android:textSize="@dimen/SP12" />
         </LinearLayout>
 
         <include layout="@layout/bottom_separator" />
@@ -37,8 +36,7 @@
             app:fontName="dinnextltpro_regular.otf"
             android:textColor="@color/dark_teal"
             android:textSize="@dimen/SP12"
-            android:layout_height="wrap_content"
-            android:text="Name" />
+            android:layout_height="wrap_content" />
 
         <hellogbye.com.hellogbyeandroid.views.FontEditTextView
             android:layout_width="match_parent"
@@ -47,8 +45,7 @@
             app:fontName="dinnextltpro_regular.otf"
             android:textColor="@color/dark_teal"
             android:textSize="@dimen/SP12"
-            android:layout_height="wrap_content"
-            android:text="Name" />
+            android:layout_height="wrap_content" />
 
         <hellogbye.com.hellogbyeandroid.views.FontEditTextView
             android:layout_width="match_parent"
@@ -57,8 +54,7 @@
             app:fontName="dinnextltpro_regular.otf"
             android:textColor="@color/dark_teal"
             android:textSize="@dimen/SP12"
-            android:layout_height="wrap_content"
-            android:text="Name" />
+            android:layout_height="wrap_content" />
 
 
         <include layout="@layout/bottom_separator" />
@@ -86,7 +82,7 @@
             android:background="@color/white"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/DP10"
 
@@ -94,8 +90,7 @@
                 android:id="@+id/companion_personal_settings_email"
                 app:fontName="dinnextltpro_regular.otf"
                 android:textColor="@color/dark_teal"
-                android:textSize="@dimen/SP12"
-                android:text="Email" />
+                android:textSize="@dimen/SP12" />
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:layout_width="match_parent"
@@ -125,7 +120,7 @@
                 android:textColor="@color/warm_grey"
                 android:textSize="@dimen/SP12"
                 android:layout_height="wrap_content"
-                android:text="Date OF BIRTH" />
+                android:text="@string/account_personal_date_of_birth" />
         </LinearLayout>
 
         <include layout="@layout/bottom_separator" />
@@ -144,8 +139,7 @@
                 android:id="@+id/companion_personal_settings_date_of_birth"
                 app:fontName="dinnextltpro_regular.otf"
                 android:textColor="@color/dark_teal"
-                android:textSize="@dimen/SP12"
-                android:text="Email" />
+                android:textSize="@dimen/SP12" />
 
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -158,7 +152,7 @@
                 app:fontName="dinnextltpro_regular.otf"
                 android:textColor="@color/dark_teal"
                 android:textSize="@dimen/SP12"
-                android:text="Gender" />
+                android:text="@string/account_personal_gender" />
 
 
         </LinearLayout>
@@ -172,7 +166,8 @@
 
             android:background="@color/greyish_alternative_hotel"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/DP10"
@@ -180,18 +175,9 @@
                 android:textColor="@color/warm_grey"
                 android:textSize="@dimen/SP12"
                 android:layout_height="wrap_content"
-                android:text="PHONE NUMBER" />
+                android:text="@string/account_personal_phone_number" />
 
-            <hellogbye.com.hellogbyeandroid.views.FontEditTextView
-                android:layout_width="wrap_content"
-                android:layout_margin="@dimen/DP10"
 
-                android:layout_height="wrap_content"
-                android:id="@+id/companion_personal_settings_location_country"
-                app:fontName="dinnextltpro_regular.otf"
-                android:textColor="@color/dark_teal"
-                android:textSize="@dimen/SP12"
-                android:text="Email" />
         </LinearLayout>
 
         <include layout="@layout/bottom_separator" />
@@ -230,7 +216,7 @@
                 android:textColor="@color/warm_grey"
                 android:textSize="@dimen/SP12"
                 android:layout_height="wrap_content"
-                android:text="LOCATION" />
+                android:text="@string/account_personal_location" />
         </LinearLayout>
 
         <include layout="@layout/bottom_separator" />
@@ -252,10 +238,31 @@
                 android:id="@+id/companion_personal_settings_location_street"
                 app:fontName="dinnextltpro_regular.otf"
                 android:textColor="@color/dark_teal"
-                android:textSize="@dimen/SP12"
-                android:text="Email" />
+                android:textSize="@dimen/SP12" />
+
+
 
             <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/DP10"
+
+                android:layout_height="wrap_content"
+                android:id="@+id/companion_personal_settings_location_post_code"
+                app:fontName="dinnextltpro_regular.otf"
+                android:textColor="@color/dark_teal"
+                android:textSize="@dimen/SP12" />
+
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/DP10"
+                android:layout_height="wrap_content"
+                android:id="@+id/companion_personal_settings_location_country"
+                app:fontName="dinnextltpro_regular.otf"
+                android:textColor="@color/dark_teal"
+                android:textSize="@dimen/SP12" />
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/DP10"
 
@@ -263,31 +270,7 @@
                 android:id="@+id/companion_personal_settings_location_city"
                 app:fontName="dinnextltpro_regular.otf"
                 android:textColor="@color/dark_teal"
-                android:textSize="@dimen/SP12"
-                android:text="Email" />
-
-            <hellogbye.com.hellogbyeandroid.views.FontEditTextView
-                android:layout_width="match_parent"
-                android:layout_margin="@dimen/DP10"
-
-                android:layout_height="wrap_content"
-                android:id="@+id/companion_personal_settings_location_mikud"
-                app:fontName="dinnextltpro_regular.otf"
-                android:textColor="@color/dark_teal"
-                android:textSize="@dimen/SP12"
-                android:text="Email" />
-
-
-            <hellogbye.com.hellogbyeandroid.views.FontTextView
-                android:layout_width="match_parent"
-                android:layout_margin="@dimen/DP10"
-
-                android:layout_height="wrap_content"
-                android:id="@+id/companion_personal_settings_location_provinze"
-                app:fontName="dinnextltpro_regular.otf"
-                android:textColor="@color/dark_teal"
-                android:textSize="@dimen/SP12"
-                android:text="Email" />
+                android:textSize="@dimen/SP12" />
 
 
         </LinearLayout>
@@ -307,7 +290,7 @@
                 android:textColor="@color/warm_grey"
                 android:textSize="@dimen/SP12"
                 android:layout_height="wrap_content"
-                android:text="PASSWORD" />
+                android:text="@string/account_personal_password" />
         </LinearLayout>
 
         <include layout="@layout/bottom_separator" />
@@ -329,13 +312,13 @@
                 app:fontName="dinnextltpro_regular.otf"
                 android:textColor="@color/dark_teal"
                 android:textSize="@dimen/SP12"
-                android:text="Change password" />
+                android:text="@string/account_personal_change_password" />
         </LinearLayout>
 
 
         <Button
-            android:id="@+id/account_done_editting"
-            android:text="Done"
+            android:id="@+id/account_done_editing"
+            android:text="@string/account_personal_done_editing"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
