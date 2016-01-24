@@ -2,17 +2,21 @@ package hellogbye.com.hellogbyeandroid.fragments.settings;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.LoginTest;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.models.BookingRequest;
+import hellogbye.com.hellogbyeandroid.models.CountryItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
+import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
@@ -35,21 +39,29 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
     final String SELECT_TITLE = "Select Title";
     final String[] genderArray = {"M", "F"};
     final String GENDER_TITLE = "Select Gender";
+
+    private String SELECT_PROVINCE = "Select Province";
+
     private FontTextView companion_personal_settings_title;
     private FontTextView companion_personal_settings_email_add_another;
     private FontEditTextView companion_personal_settings_name;
     private FontEditTextView companion_personal_settings_last;
     private FontTextView companion_personal_settings_date_of_birth;
-    private FontEditTextView companion_personal_settings_email;
+    private FontTextView companion_personal_settings_email;
     private FontTextView companion_personal_settings_gender;
     private FontEditTextView companion_personal_settings_phone_number;
     private FontEditTextView companion_personal_settings_location_street;
-    private FontEditTextView companion_personal_settings_location_city;
+    private FontTextView companion_personal_settings_location_city;
     private FontEditTextView companion_personal_settings_location_postcode;
-    private FontEditTextView companion_personal_settings_location_country;
+    private FontTextView companion_personal_settings_location_country;
     private UserData currentUser;
     private Button account_done_editting;
     private UserData newUser;
+    private int maxValueForStateDialog;
+    private String[] stateArray;
+    private int countryMaxValueSize;
+    private String[] countryarray;
+    private String mCounterPicked;
 
     public AccountPersonalInfoSettingsFragment() {
         // Empty constructor required for fragment subclasses
@@ -68,6 +80,8 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
+
         View rootView = inflater.inflate(R.layout.account_personal_info_list_layout, container, false);
 
         currentUser = getActivityInterface().getCurrentUser();
@@ -84,7 +98,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
         companion_personal_settings_last = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_last);
         companion_personal_settings_last.setText(currentUser.getLastname());
 
-        companion_personal_settings_email = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_email);
+        companion_personal_settings_email = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_email);
         companion_personal_settings_email.setText(currentUser.getEmailaddress());
 
         companion_personal_settings_date_of_birth = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_date_of_birth);
@@ -105,13 +119,13 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
         companion_personal_settings_location_street = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_location_street);
         companion_personal_settings_location_street.setText(currentUser.getAddress());
 
-        companion_personal_settings_location_city = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_location_city);
+        companion_personal_settings_location_city = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_location_city);
         companion_personal_settings_location_city.setText(currentUser.getCity());
 
-        companion_personal_settings_location_postcode = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_location_mikud);
+        companion_personal_settings_location_postcode = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_location_post_code);
         companion_personal_settings_location_postcode.setText(currentUser.getPostalcode());
 
-        companion_personal_settings_location_country = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_location_country);
+        companion_personal_settings_location_country = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_location_country);
         companion_personal_settings_location_country.setText(currentUser.getCountry());
 
 
@@ -171,7 +185,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
         });
 
 
-        account_done_editting = (Button) rootView.findViewById(R.id.account_done_editting);
+        account_done_editting = (Button) rootView.findViewById(R.id.account_done_editing);
         account_done_editting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -186,10 +200,70 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
 
         changeNewUser();
 
+
+        countryMaxValueSize = getActivityInterface().getEligabileCountries().size();
+        countryarray = new String[getActivityInterface().getEligabileCountries().size()];
+        for (int i = 0; i < getActivityInterface().getEligabileCountries().size(); i++) {
+            countryarray[i] = getActivityInterface().getEligabileCountries().get(i).getName();
+        }
+        companion_personal_settings_location_country.setTag(0);
+        companion_personal_settings_location_city.setTag(0);
+        selectStates("0");
+
+
+        setClickListner();
         return rootView;
     }
 
     boolean isDisable = false;
+
+
+    private void setClickListner() {
+
+        companion_personal_settings_location_country.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //   HGBUtility.showPikerDialog(mCountry, getActivity(), SELECT_PROVINCE,stateArray, 0,maxValueForStateDialog);
+
+                HGBUtility.showPikerDialog(companion_personal_settings_location_country, getActivity(), SELECT_PROVINCE,
+                        countryarray, 0, countryMaxValueSize - 1);
+                if (companion_personal_settings_location_country.getTag() != null) {
+                    mCounterPicked = companion_personal_settings_location_country.getTag().toString();
+                }
+                // countryDialog.show();
+            }
+        });
+
+        companion_personal_settings_location_city.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (companion_personal_settings_location_country.getTag() != null) {
+                    mCounterPicked = companion_personal_settings_location_country.getTag().toString();
+                    selectStates(mCounterPicked);
+                }
+                HGBUtility.showPikerDialog(companion_personal_settings_location_city, getActivity(), SELECT_PROVINCE, stateArray, 0, maxValueForStateDialog - 1);
+                if (companion_personal_settings_location_city.getTag() != null) {
+                  //  mStatePicked = companion_personal_settings_location_city.getTag().toString();
+                }
+                // stateDialog.show();
+            }
+        });
+    }
+
+    private void selectStates(String countryPicked){
+        int countryPick = Integer.parseInt(countryPicked);
+        ArrayList<CountryItem> countries = getActivityInterface().getEligabileCountries();
+        ArrayList<ProvincesItem> province = countries.get(countryPick).getProvinces();
+        maxValueForStateDialog = province.size();
+        stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPick).getProvinces().size()];
+        ArrayList<ProvincesItem> provinces = getActivityInterface().getEligabileCountries().get(countryPick).getProvinces();
+        for (int i = 0; i < provinces.size(); i++) {
+            stateArray[i] = provinces.get(i).getName();
+        }
+    }
+
+
 
     private void sendNewEmailToServer(final String newEmail) {
         //http://cnc.hellogbye.com/cnc/rest/UserProfile/Accounts
@@ -221,6 +295,28 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
         });
     }
 
+    private void getPersonalInfoBookingOptions(){
+       // http://cnc.hellogbye.com/cnc/rest/Statics/BookingOptions
+        ConnectionManager.getInstance(getActivity()).getBookingOptions(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+           //     responceText.setText((String) data);
+                BookingRequest bookingrequest = (BookingRequest)data;
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                try {
+                    errorHelper.show(getFragmentManager(), (String) data);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+    }
+
     private void changeNewUser() {
         newUser = new UserData(currentUser.getUserprofileid(), currentUser.getEmailaddress(), currentUser.getFirstname(),
                 currentUser.getLastname(), currentUser.getDob(), currentUser.getCountry(),
@@ -229,45 +325,6 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
                 currentUser.getTitle());
     }
 
-
-//    private void setTextListner() {
-//
-//        newUser.setFirstname(s.toString());
-//
-//        newUser.setLastname(s.toString());
-//
-//
-//        newUser.setEmailaddress(s.toString());
-//
-//
-//        newUser.setDob(s.toString());
-//
-//
-//
-//        newUser.setGender(s.toString());
-//
-//
-//
-//
-//        newUser.setPhone(s.toString());
-//
-//
-//
-//        newUser.setAddress(s.toString());
-//
-//
-//        newUser.setCity(s.toString());
-//
-//
-//        newUser.setPostalcode(s.toString());
-//
-//
-//        newUser.setCountry(s.toString());
-//
-//
-//        newUser.setTitle(s.toString());
-//
-//    }
 
 
 

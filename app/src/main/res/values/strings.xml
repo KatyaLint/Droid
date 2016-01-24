@@ -128,4 +128,12 @@
     <string name="component_log_out">Log Out</string>
     <string name="component_log_sure">Are you sure you want to log out?</string>
 
+    <string name="account_personal_date_of_birth">Date of Birth</string>
+    <string name="account_personal_gender">Gender</string>
+    <string name="account_personal_phone_number">Phone number</string>
+    <string name="account_personal_location">Location</string>
+    <string name="account_personal_password">Password</string>
+    <string name="account_personal_change_password">Change Password</string>
+    <string name="account_personal_done_editing">Done editing</string>
+
 </resources>

@@ -75,11 +75,11 @@ public class HGBUtility {
 
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .considerExifParams(true)
-//                .showImageForEmptyUri(R.drawable.new_action_profile_edit_large)
+                .showImageForEmptyUri(R.drawable.profile_image)
 //                .cacheInMemory(true)
-//                .showImageOnLoading(R.drawable.icon_placeholder)
-//                .showImageOnFail(R.drawable.icon_placeholder)
-//                .showImageForEmptyUri(R.drawable.icon_placeholder)
+                .showImageOnLoading(R.drawable.profile_image)
+                .showImageOnFail(R.drawable.profile_image)
+                .showImageForEmptyUri(R.drawable.profile_image)
                 .cacheOnDisk(true)
                 .postProcessor(new BitmapProcessor() {
                     @Override
@@ -638,9 +638,9 @@ public static String formattDateToStringMonthDate(String dateInString) {
 
         final NumberPicker genderPicker = (NumberPicker) v1.findViewById(R.id.np);
         genderPicker.setMinValue(minValue);
-
+        genderPicker.setWrapSelectorWheel(false);
         genderPicker.setMaxValue(maxValue);
-      //  final String[] genderArray = {"M", "F"};
+        genderPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
         genderPicker.setDisplayedValues(titleArray);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
