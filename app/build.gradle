@@ -28,7 +28,7 @@ android {
         minSdkVersion 20
         targetSdkVersion 22
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
         multiDexEnabled false
     }
     buildTypes {
@@ -43,12 +43,12 @@ android {
         dev {
             buildConfigField 'boolean', 'IS_DEV', 'true'
             applicationId "com.hellogbye.dev"
-            versionName "1.0-dev"
+            versionName "1.1-dev"
         }
         live {
             buildConfigField 'boolean', 'IS_DEV', 'false'
             applicationId "com.hellogbye"
-            versionName "1.0"
+            versionName "1.1"
 
         }
     }

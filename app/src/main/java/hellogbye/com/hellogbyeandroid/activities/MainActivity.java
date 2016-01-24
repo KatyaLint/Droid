@@ -321,7 +321,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mNavItemsList.add(new NavItem(ToolBarNavEnum.COMPANIONS, false));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.PREFERENCE, false));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.ACCOUNT, false));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.HELP, false));
+    //    mNavItemsList.add(new NavItem(ToolBarNavEnum.HELP, false));
 
 
 //        mNavItemsList.add(new NavItem(ToolBarNavEnum.HOME, true));
