@@ -1034,6 +1034,9 @@ public class ConnectionManager {
         });
     }
 
+
+
+
     private String getURL(Services type) {
         String url = "";
         switch (type) {
