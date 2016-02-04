@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -98,7 +99,7 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
         RecyclerView account_settings_preferences_list = (RecyclerView)rootView.findViewById(R.id.account_settings_preferences_list);
 
         LayoutInflater li = LayoutInflater.from(getActivity());
-        final View promptsView = li.inflate(R.layout.popup_layout_with_edit_text_new, null);
+        final View promptsView = li.inflate(R.layout.popup_layout_log_out, null);
         final EditText input = (EditText) promptsView
                 .findViewById(R.id.companion_editTextDialog);
 
@@ -106,7 +107,7 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
                 .findViewById(R.id.component_popup_text);
 
 
-        FontTextView btn_account_logout_button = (FontTextView)rootView.findViewById(R.id.account_settings_logout);
+        LinearLayout btn_account_logout_button = (LinearLayout)rootView.findViewById(R.id.account_logout_button);
         btn_account_logout_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -114,7 +115,7 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
                 //popup
                 text.setVisibility(View.VISIBLE);
                 text.setText(getResources().getString(R.string.component_log_sure));
-                input.setVisibility(View.GONE);
+
                 HGBUtility.showAlertPopUp(getActivity(), input, promptsView, getResources().getString(R.string.component_log_out),
                         new PopUpAlertStringCB() {
                             @Override

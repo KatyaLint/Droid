@@ -118,9 +118,12 @@
     <string name="component_first">First : </string>
     <string name="component_second">Second : </string>
     <string name="component_email">Email </string>
+    <string name="component_first_name">Name</string>
     <string name="component_invite">Invite Travel Companion</string>
     <string name="component_invite_new_companion">Invite New Travel Comapanion</string>
     <string name="component_invite_hint">Email Address</string>
+    <string name="component_invite_hint_name">First Name</string>
+    <string name="component_invite_hint_last_name">Last Name</string>
     <string name="component_add_another_email">Add Another Email...</string>
     <string name="component_add_new_email">Add New Email</string>
     <string name="component_confirmation_email">will receive a\nconfirmation email shortly.</string>
@@ -135,5 +138,7 @@
     <string name="account_personal_password">Password</string>
     <string name="account_personal_change_password">Change Password</string>
     <string name="account_personal_done_editing">Done editing</string>
+
+    <string name="itinerary_add_companion">Companion</string>
 
 </resources>

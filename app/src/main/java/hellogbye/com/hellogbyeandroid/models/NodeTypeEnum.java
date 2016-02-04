@@ -4,7 +4,7 @@ package hellogbye.com.hellogbyeandroid.models;
  * Created by nyawka on 11/16/15.
  */
 public enum NodeTypeEnum {
-    HOTEL("hotel"),FLIGHT("flight");
+    HOTEL("hotel"),FLIGHT("flight"),EMPTY("empty");
     private String mType;
 
     NodeTypeEnum(String type){

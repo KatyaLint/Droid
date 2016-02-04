@@ -73,6 +73,36 @@ public class ConnectionManager {
     ///////////////////////////////
 
 
+    public void postCompanions(String firstName,String lastName, String email,final ServerRequestListener listener) {
+
+        String url = getURL(Services.COMPANIONS);
+
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("firstname", firstName);
+            jsonObject.put("lastname", lastName);
+            jsonObject.put("emailaddress", email);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, false);
+    }
+
+
     public void ItinerarySearch(String query, String prefrenceid, final ServerRequestListener listener) {
         String url = getURL(Services.ITINERARY);
         JSONObject jsonObject = new JSONObject();
@@ -724,6 +754,9 @@ public class ConnectionManager {
             }
         });
     }
+
+
+
 
 
     public void getCompanions(final ServerRequestListener listener) {

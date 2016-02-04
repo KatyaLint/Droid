@@ -1,11 +1,7 @@
 package hellogbye.com.hellogbyeandroid.fragments.companions;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,8 +12,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
@@ -27,16 +21,16 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.companion.CompanionAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
+import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 
-/**
- * Created by arisprung on 8/17/15.
- */
 public class TravelCompanionsFragment extends HGBAbtsractFragment implements SearchView.OnQueryTextListener{
 
     private SearchView mSearchView;
@@ -45,8 +39,10 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
     private CompanionAdapter searchListAdapter;
     private List<CompanionVO> itemCompanionTemp = new ArrayList<>();
     private View popup_companion_new;
-    private EditText input;
-
+    private FontEditTextView[] inputs;
+    private FontEditTextView companion_editTextDialog_name;
+    private FontEditTextView companion_editTextDialog_last_name;
+    private FontEditTextView companion_editTextDialog;
 
     public TravelCompanionsFragment() {
         // Empty constructor required for fragment subclasses
@@ -60,11 +56,8 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
         return fragment;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
 
-
+    private void getCompanions(){
         ConnectionManager.getInstance(getActivity()).getCompanions(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
@@ -80,6 +73,14 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
             }
         });
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+
+        getCompanions();
 
 
         View rootView = inflater.inflate(R.layout.companion_search_list, container, false);
@@ -104,8 +105,11 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
 
 
         popup_companion_new = inflater.inflate(R.layout.popup_layout_with_edit_text_new, null);
-        input = (EditText) popup_companion_new.findViewById(R.id.companion_editTextDialog);
 
+        companion_editTextDialog_name = (FontEditTextView)popup_companion_new.findViewById(R.id.companion_editTextDialog_name);
+        companion_editTextDialog_last_name = (FontEditTextView)popup_companion_new.findViewById(R.id.companion_editTextDialog_last_name);
+        companion_editTextDialog = (FontEditTextView) popup_companion_new.findViewById(R.id.companion_editTextDialog);
+        inputs = new FontEditTextView[]{companion_editTextDialog_name, companion_editTextDialog_last_name, companion_editTextDialog };
 
         LinearLayout companion_invite_companion = (LinearLayout) rootView.findViewById(R.id.companion_invite_ll);
         companion_invite_companion.setOnClickListener(new View.OnClickListener(){
@@ -120,38 +124,35 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
 
 
     private void addTravelCompanion() {
-        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        alert.setCancelable(false);
-        alert.setTitle(R.string.component_invite_new_companion)
-                .setView(popup_companion_new)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        String newName = input.getText().toString();
 
-//                        if (newName.length() != 0) {
-//                            popUpConnection(newName);
-//                        }
-                        input.setText("");
-                        ((ViewGroup) popup_companion_new.getParent()).removeView(popup_companion_new);
-                        IBinder token = input.getWindowToken();
-                        ( (InputMethodManager) getActivity().getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
-                        dialog.cancel();
-                    }
-                })
-                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+        HGBUtility.showAlertPopAddCompanion(getActivity(),inputs,popup_companion_new,getResources().getString(R.string.component_invite_new_companion),
+              new PopUpAlertStringCB(){
 
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                  @Override
+                  public void itemSelected(String inputItem) {
+                      //go to server
+                      String[] parts = inputItem.split("&");
+                      ConnectionManager.getInstance(getActivity()).postCompanions(parts[0],parts[1],parts[2], new ConnectionManager.ServerRequestListener() {
+                          @Override
+                          public void onSuccess(Object data) {
+                              getCompanions();
+                          }
 
-                        input.setText("");
+                          @Override
+                          public void onError(Object data) {
+                              HGBErrorHelper errorHelper = new HGBErrorHelper();
+                              errorHelper.show(getFragmentManager(), (String) data);
+                          }
+                      });
 
-                        ((ViewGroup) popup_companion_new.getParent()).removeView(popup_companion_new);
-                        IBinder token = input.getWindowToken();
-                        ( (InputMethodManager) getActivity().getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
-                        dialog.cancel();
-                    }
-                })
-                .create().show();
+
+                  }
+
+                  @Override
+                  public void itemCanceled() {
+
+                  }
+              });
     }
 
     private void searchListInitialization(View rootView){

@@ -1,4 +1,4 @@
-package hellogbye.com.hellogbyeandroid.fragments;
+package hellogbye.com.hellogbyeandroid.fragments.itinerary;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -25,6 +25,8 @@ import java.util.Map;
 import java.util.Set;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -38,15 +40,13 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
-public class ItineraryFragment extends HGBAbtsractFragment{
+public class ItineraryFragment extends HGBAbtsractFragment {
 
 
     private UserTravelMainVO userOrder;
     private Activity activity;
-    private Typeface DINNextLTPro_Regular;
     private int iScreenSize;
 
-    // private UserTravelVO airplaneDataVO;
     public ItineraryFragment() {
         // Empty constructor required for fragment subclasses
     }
@@ -83,12 +83,18 @@ public class ItineraryFragment extends HGBAbtsractFragment{
         return airplaneDataVO;
     }
 
-
-private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO user){
+    /**
+     * Create passanger names layout
+     * @param scrollViewLinearLayout
+     * @param user
+     */
+    private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO user){
 
     LinearLayout passengersNames = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.passangers_names_ll);
     Typeface textFont = Typeface.createFromAsset(activity.getAssets(), "fonts/" + "dinnextltpro_regular.otf");
 
+    LayoutParams params = new LayoutParams((int) getResources().getDimension(R.dimen.DP150),LayoutParams.WRAP_CONTENT);
+    params.gravity = Gravity.CENTER_VERTICAL;
     ArrayList<PassengersVO> passengers = user.getPassengerses();
     for (PassengersVO passenger:passengers){
         FontTextView textView = new FontTextView(activity);
@@ -96,12 +102,25 @@ private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO 
         textView.setTextAppearance(activity, R.style.GridViewPassangersTextStyle);
         textView.setText(passenger.getmName());
         textView.setGravity(Gravity.CENTER);
-        LayoutParams params = new LayoutParams((int) getResources().getDimension(R.dimen.DP150),LayoutParams.WRAP_CONTENT); //width 150
-        params.gravity = Gravity.CENTER_VERTICAL;
+    //    LayoutParams params = new LayoutParams((int) getResources().getDimension(R.dimen.DP150),LayoutParams.WRAP_CONTENT); //width 150
+
         textView.setLayoutParams(params);
         textView.setTypeface(textFont);
         passengersNames.addView(textView);
     }
+
+        LayoutInflater li = LayoutInflater.from(activity);
+        View promptsView = li.inflate(R.layout.new_grid_add_companion, null);
+        LinearLayout new_grid_add_companion_ll = (LinearLayout) promptsView.findViewById(R.id.new_grid_add_companion_ll);
+        new_grid_add_companion_ll.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                getActivityInterface().goToFragment(ToolBarNavEnum.COMPANIONS.getNavNumber(), null);
+                System.out.println("Kate clicked add companion");
+                //go to companion fragment
+            }
+        });
+        passengersNames.addView(promptsView);
 
 }
 
@@ -186,7 +205,6 @@ private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO 
             DatesLinearLayout.setLayoutParams(LLParams);
             DatesLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
 
-
             for(int i=0;i<passengers.size();i++){
 
                 HashMap<String, ArrayList<NodesVO>> hashMap = passengers.get(i).getHashMap();
@@ -203,15 +221,15 @@ private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO 
                     View view;
                     if (node.isEmpty()) {
                         view = emptyLayout();
-                        view.setTag("empty");
+                        view.setTag(NodeTypeEnum.EMPTY.getType());
                     } else if (NodeTypeEnum.FLIGHT.getType().equals(node.getmType())) {
                         //create flight
                         view = flightLayout(node);
-                        view.setTag("flight");
+                        view.setTag(NodeTypeEnum.FLIGHT.getType());
                     } else {
                         //create hotel
                         view = hotelLayout(node);
-                        view.setTag("hotel");
+                        view.setTag(NodeTypeEnum.HOTEL.getType());
                     }
                     view.setOnClickListener(nodeClickListener);
                  //   view.setLayoutParams(nodeParams);
@@ -335,7 +353,11 @@ private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO 
         passangerNodesVOs.add(node.getClone());
     }
 
-
+    /**
+     * Add flight details to its layout
+     * @param node
+     * @return view of flight
+     */
     private View flightLayout(NodesVO node){
 
         View child = activity.getLayoutInflater().inflate(R.layout.new_grid_view_inner_flight_item, null);
@@ -374,6 +396,10 @@ private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO 
         return outer;
     }
 
+    /**
+     * Create empty layout, for dates when nothing is happening
+     * @return empty layout
+     */
     private View emptyLayout() {
         View child = activity.getLayoutInflater().inflate(R.layout.new_grid_view_inner_empty_item, null);
         LinearLayout outer = new LinearLayout(activity);
@@ -383,6 +409,11 @@ private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO 
         return outer;
     }
 
+    /**
+     * Create hotel layout, with node details
+     * @param node
+     * @return hotel layout
+     */
     private View hotelLayout(NodesVO node){
         View child = activity.getLayoutInflater().inflate(R.layout.new_grid_view_inner_hotel_item, null);
 
@@ -411,6 +442,11 @@ private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO 
 
     }
 
+    /**
+     * Create dates layout, the linear layout of dates
+     * @param date
+     * @return dates layout
+     */
     private LinearLayout dateLayout(String date){
         View child = activity.getLayoutInflater().inflate(R.layout.new_grid_view_inner_date_item, null);
 
@@ -481,13 +517,10 @@ private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO 
             View mainView = createGridView(userOrder);
             itineraryLayout.addView(mainView);
         }
-
-
-
     }
 
 
-    private void getDimenstions(){
+    private void getDimentions(){
         Display display = activity.getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -499,58 +532,13 @@ private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-//        View rootView = inflater.inflate(R.layout.itinerary_main_view, container, false);
-        //View rootView = inflater.inflate(R.layout.grid_view_table_main_layoutl, container, false);
-
         activity = getActivity();
         View rootView = inflater.inflate(R.layout.new_grid_main_table, container, false);
-        getDimenstions();
+        getDimentions();
         createItinenaryView(rootView);
 
         getActivityInterface().setAlternativeFlights(null);
 
-        //  userOrder = getActivityInterface().getTravelOrder();
-
-//        if (userOrder != null) {
-//            flightGridMainFragment.createGridView(getActivity(), rootView, userOrder, inflater);
-//        }
-
-
-//        FlightGridMainFragment flightGridMainFragment = new FlightGridMainFragment();
-//
-//
-//        flightGridMainFragment.initializeCB(new TravelerShowChoose() {
-//            @Override
-//            public void itemSelected(String guidSelectedItem, String itemType, String guidSelectedUser) {
-//                NodeTypeEnum.FLIGHT.getType();
-//                if (itemType.equals( NodeTypeEnum.FLIGHT.getType()) ) {
-//                    Fragment fragment = new AlternativeFlightFragment();
-//                    ((AlternativeFlightFragment) fragment).selectedItemGuidNumber(guidSelectedItem);
-//                    ((AlternativeFlightFragment) fragment).selectedUserGuidNumber(guidSelectedUser);
-//                    getActivityInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber(),null);
-//
-//                } else if (itemType.equals( NodeTypeEnum.HOTEL.getType())) {
-//                    Fragment fragment = new HotelFragment();
-//                    ((HotelFragment) fragment).selectedItemGuidNumber(guidSelectedItem);
-//                    ((HotelFragment) fragment).selectedUserGuidNumber(guidSelectedUser);
-//                    getActivityInterface().goToFragment(ToolBarNavEnum.HOTEL.getNavNumber(),null);
-//
-//                }
-//            }
-//        });
-//
-//        UserTravelMainVO user = parseFlight();
-//
-//
-//        //userOrder = getActivityInterface().getTravelOrder();
-//
-//        userOrder = user;
-//
-//        if (userOrder != null) {
-//           flightGridMainFragment.createGridView(getActivity(), rootView, userOrder, inflater);
-//        }
-//
-//        getActivityInterface().getToolBar().updateToolBarView(ToolBarNavEnum.ITINARERY.getNavNumber());
         return rootView;
     }
 

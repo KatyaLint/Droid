@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,11 +18,14 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 
+import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -35,6 +39,7 @@ public class LoginActivity extends FragmentActivity {
     private FontTextView mLoginTextView;
     private HGBPreferencesManager hgbPrefrenceManager;
     private FontTextView mForgotPasswordTextView;
+
 
 
     @Override
@@ -56,6 +61,8 @@ public class LoginActivity extends FragmentActivity {
         mRemmeberMeCheckbox = (CheckBox) findViewById(R.id.remmember_me_checkbox);
         mLoginTextView = (FontTextView) findViewById(R.id.user_login);
         mForgotPasswordTextView = (FontTextView) findViewById(R.id.forgotpassword);
+
+
 
         mForgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +97,7 @@ public class LoginActivity extends FragmentActivity {
             }
         });
     }
+
 
 
     private void goToMainActivity() {

@@ -11,7 +11,10 @@ import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.Toast;
 
+import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -25,6 +28,7 @@ public class StartingMenuActivity extends Activity {
     private FontTextView mLogin;
     private FontTextView mPrivacyPolicy;
     private HGBPreferencesManager hgbPrefrenceManager;
+    private FontTextView change_server_url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +78,39 @@ public class StartingMenuActivity extends Activity {
         mPrivacyPolicy.setMovementMethod(LinkMovementMethod.getInstance());
         // mPrivacyPolicy.setHighlightColor(Color.TRANSPARENT);
 
+        change_server_url = (FontTextView)findViewById(R.id.change_server_url);
+        change_server_url.setOnClickListener(changeServerUrlListener);
+
+        System.out.println("Kate BuildConfig.IS_DEV =" + BuildConfig.IS_DEV);
+        if (BuildConfig.IS_DEV) {
+            change_server_url.setVisibility(View.VISIBLE);
+        }else{
+            change_server_url.setVisibility(View.GONE);
+        }
 
     }
+
+    private  View.OnClickListener changeServerUrlListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            String[] account_settings = getResources().getStringArray(R.array.base_url);
+
+            HGBUtility.showPikerDialog(change_server_url, StartingMenuActivity.this, "Choose url",
+                    account_settings, 0, account_settings.length -1, new PopUpAlertStringCB(){
+
+                        @Override
+                        public void itemSelected(String inputItem) {
+                            System.out.println("Kate inputItem =" + inputItem);
+                            ConnectionManager.BASE_URL = inputItem;
+                        }
+
+                        @Override
+                        public void itemCanceled() {
+
+                        }
+                    });
+        }
+    };
 
     public class myClickableSpan extends ClickableSpan {
 
