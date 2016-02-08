@@ -118,6 +118,10 @@ public class CostumeToolBar extends Toolbar {
                 keyBoardImage.setVisibility(View.INVISIBLE);
                 break;
             case PREFERENCE:
+            case PREFERENCES_TAB_SETTINGS:
+            case PREFERENCES_SEARCH_LIST_SETTINGS:
+            case PREFERENCES_SPECIFIC_LIST_SETTINGS:
+
                 titleText.setVisibility(View.VISIBLE);
          //       editPreferense.setVisibility(View.VISIBLE);
         //        keyBoardImage.setVisibility(View.INVISIBLE);
@@ -141,8 +145,6 @@ public class CostumeToolBar extends Toolbar {
             case COMPANIONS_PERSONAL_DETAILS:
                 titleText.setVisibility(View.VISIBLE);
                 break;
-
-
 
 
         }

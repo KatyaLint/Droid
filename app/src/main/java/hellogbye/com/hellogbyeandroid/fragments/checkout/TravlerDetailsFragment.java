@@ -181,7 +181,7 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
              //   HGBUtility.showPikerDialog(mCountry, getActivity(), SELECT_PROVINCE,stateArray, 0,maxValueForStateDialog);
 
                 HGBUtility.showPikerDialog(mCountry,getActivity(), SELECT_PROVINCE,
-                        countryarray, 0, countryMaxValueSize -1);
+                        countryarray, 0, countryMaxValueSize -1,null);
                 if(mCountry.getTag() != null) {
                     mCounterPicked = mCountry.getTag().toString();
                 }
@@ -196,7 +196,7 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
                     mCounterPicked = mCountry.getTag().toString();
                     selectStates(mCounterPicked);
                 }
-                HGBUtility.showPikerDialog(mState, getActivity(), SELECT_PROVINCE, stateArray, 0,maxValueForStateDialog - 1);
+                HGBUtility.showPikerDialog(mState, getActivity(), SELECT_PROVINCE, stateArray, 0,maxValueForStateDialog - 1, null);
                 if(mState.getTag() != null){
                     mStatePicked = mState.getTag().toString();
                 }
@@ -209,7 +209,7 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
             public void onClick(View v) {
 
               //  showGenderDialog();
-                HGBUtility.showPikerDialog(mTitle, getActivity(),GENDER_TITLE,genderArray,0,2);
+                HGBUtility.showPikerDialog(mTitle, getActivity(),GENDER_TITLE,genderArray,0,2, null);
             }
         });
 
@@ -217,7 +217,7 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
             @Override
             public void onClick(View v) {
 
-                HGBUtility.showPikerDialog(mTitle, getActivity(),SLECT_TITLE,titleArray,0,1);
+                HGBUtility.showPikerDialog(mTitle, getActivity(),SLECT_TITLE,titleArray,0,1, null);
 
 
 
@@ -229,7 +229,6 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
             @Override
             public void onClick(View v) {
                 HGBUtility.showDateDialog(getActivity(),mDOB);
-              //  showDateDialog();
             }
         });
 

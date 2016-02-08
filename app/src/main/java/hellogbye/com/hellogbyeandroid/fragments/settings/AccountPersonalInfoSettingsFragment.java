@@ -69,6 +69,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new AccountPersonalInfoSettingsFragment();
+
         Bundle args = new Bundle();
         args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
         fragment.setArguments(args);
@@ -135,7 +136,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
             public void onClick(View v) {
 
                 HGBUtility.showPikerDialog(companion_personal_settings_title, getActivity(), SELECT_TITLE, titleArray,
-                        0, 2);
+                        0, 2, null);
             }
         });
 
@@ -144,7 +145,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void onClick(View v) {
 
-                HGBUtility.showPikerDialog(companion_personal_settings_gender, getActivity(), GENDER_TITLE, genderArray, 0, 1);
+                HGBUtility.showPikerDialog(companion_personal_settings_gender, getActivity(), GENDER_TITLE, genderArray, 0, 1, null);
             }
         });
 
@@ -189,7 +190,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
         account_done_editting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                System.out.println("Kate isDisable =" + isDisable);
                 if (!isDisable) {
                     onBackPressed();
                     isDisable = true;
@@ -227,7 +228,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
                 //   HGBUtility.showPikerDialog(mCountry, getActivity(), SELECT_PROVINCE,stateArray, 0,maxValueForStateDialog);
 
                 HGBUtility.showPikerDialog(companion_personal_settings_location_country, getActivity(), SELECT_PROVINCE,
-                        countryarray, 0, countryMaxValueSize - 1);
+                        countryarray, 0, countryMaxValueSize - 1, null);
                 if (companion_personal_settings_location_country.getTag() != null) {
                     mCounterPicked = companion_personal_settings_location_country.getTag().toString();
                 }
@@ -242,7 +243,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
                     mCounterPicked = companion_personal_settings_location_country.getTag().toString();
                     selectStates(mCounterPicked);
                 }
-                HGBUtility.showPikerDialog(companion_personal_settings_location_city, getActivity(), SELECT_PROVINCE, stateArray, 0, maxValueForStateDialog - 1);
+                HGBUtility.showPikerDialog(companion_personal_settings_location_city, getActivity(), SELECT_PROVINCE, stateArray, 0, maxValueForStateDialog - 1, null);
                 if (companion_personal_settings_location_city.getTag() != null) {
                   //  mStatePicked = companion_personal_settings_location_city.getTag().toString();
                 }
@@ -290,6 +291,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
 
             @Override
             public void onError(Object data) {
+                isDisable = false;
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
             }
         });
@@ -306,6 +308,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
 
             @Override
             public void onError(Object data) {
+
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 try {
                     errorHelper.show(getFragmentManager(), (String) data);
@@ -396,6 +399,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
 
             @Override
             public void onError(Object data) {
+                isDisable = false;
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.show(getFragmentManager(), (String) data);
             }

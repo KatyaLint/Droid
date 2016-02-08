@@ -54,6 +54,16 @@
         android:textColor="@android:color/white"
         android:textSize="12sp" />
 
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/change_server_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Change Server Url"
+        android:textColor="@color/red_button_color"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"/>
+
 </RelativeLayout>
 
 

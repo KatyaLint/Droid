@@ -9,4 +9,15 @@
         <item>Help and Feedback</item>
     </string-array>
 
+
+    <string-array name="base_url">
+        <item>http://alpha.hellogbye.com/gtarest/rest/</item>
+        <item>http://qa.hellogbye.com/qa/Rest/</item>
+        <item>http://dev.hellogbye.com/dev/Rest/</item>
+        <item>http://cnc.hellogbye.com/cnc/Rest/</item>
+        <item>http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/</item>
+    </string-array>
+
+
+
 </resources>

@@ -8,6 +8,7 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,15 +19,24 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.os.IBinder;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -70,6 +80,7 @@ public class HGBUtility {
 
     private static ProgressDialog progressDialog;
     private static Stack<Fragment> fragmentStack = new Stack<Fragment>();
+    private static LocationManager lm;
 
     public static void loadRoundedImage(Context context, String imageUrl, ImageView imageView) {
 
@@ -265,6 +276,8 @@ public class HGBUtility {
             FragmentTransaction fragmentTransaction =  activity.getFragmentManager().beginTransaction();
             fragmentTransaction.hide(getFragmentStack().pop());
             //fragmentStack.pop();
+
+
             Fragment fragmentTemp = getFragmentStack().lastElement();
             goToNextFragmentIsAddToBackStack(activity,fragmentTemp,false);
             return true;
@@ -632,7 +645,8 @@ public static String formattDateToStringMonthDate(String dateInString) {
 
 
     public static void showPikerDialog(final FontTextView textView, Activity activity, String title,
-                                 final String[] titleArray, int minValue, int maxValue) {
+                                 final String[] titleArray, int minValue, int maxValue, final PopUpAlertStringCB
+                                               alertCB) {
 
         View v1 = activity.getLayoutInflater().inflate(R.layout.picker_dialog, null);
 
@@ -648,8 +662,13 @@ public static String formattDateToStringMonthDate(String dateInString) {
         builder.setTitle(title);
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                textView.setText(titleArray[genderPicker.getValue()]);
-                textView.setTag(genderPicker.getValue());
+                if(textView != null) { //can be null if i don't want to show anything like in cnc fragment
+                    textView.setText(titleArray[genderPicker.getValue()]);
+                    textView.setTag(genderPicker.getValue());
+                }
+                if(alertCB != null) {
+                    alertCB.itemSelected(titleArray[genderPicker.getValue()]);
+                }
                 return;
             }
         });
@@ -665,6 +684,99 @@ public static String formattDateToStringMonthDate(String dateInString) {
     }
 
 
+    private static void clearText(final EditText[] input){
+        if(input == null){
+            return;
+        }
+        int arrLength = input.length;
+        for(int i=0;i<arrLength;i++){
+            input[i].setText("");
+        }
+    }
+
+    public static void showAlertPopAddCompanion(final Activity activity, final EditText[] input, final View popupView ,
+                                                final String popupTitle, final PopUpAlertStringCB
+                                              alertCB){
+        final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
+
+
+
+        alert.setCancelable(false);
+        alert.setTitle(popupTitle)
+                .setView(popupView)
+
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        int arrLength = 0;
+                        if(input != null){
+                            arrLength = input.length;
+                        }
+                        String newName="";
+                        for(int i=0;i<arrLength;i++){
+                            newName = newName + input[i].getText().toString() + "&";
+                            input[i].setText("");
+                        }
+                        if(alertCB != null){
+                            alertCB.itemSelected(newName);
+                        }
+
+                        clearText(input);
+                        ((ViewGroup) popupView.getParent()).removeView(popupView);
+                        IBinder token = input[0].getWindowToken();
+                        ( (InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                       // input.setText("");
+                        clearText(input);
+                        ((ViewGroup) popupView.getParent()).removeView(popupView);
+                        IBinder token = input[0].getWindowToken();
+                        ( (InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
+                        dialog.cancel();
+                    }
+                }).create();
+
+
+        final AlertDialog dialogAlert = alert.create();
+        dialogAlert.show();
+        dialogAlert.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+
+        input[2].addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (TextUtils.isEmpty(editable)) {
+                    // Disable ok button
+                    ((AlertDialog) dialogAlert).getButton(
+                            AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                } else {
+                    // Something into edit text. Enable the button.
+                    ((AlertDialog) dialogAlert).getButton(
+                            AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+                }
+
+            }
+        });
+
+    }
+
+
+
+
   public static void showAlertPopUp(final Activity activity, final EditText input, final View popupView ,
                                     final String popupTitle, final PopUpAlertStringCB
                                     alertCB){
@@ -678,9 +790,6 @@ public static String formattDateToStringMonthDate(String dateInString) {
                         if(alertCB != null){
                             alertCB.itemSelected(newName);
                         }
-//                        if (newName.length() != 0) {
-//                            popUpConnection(newName);
-//                        }
                       input.setText("");
                       ((ViewGroup) popupView.getParent()).removeView(popupView);
                       IBinder token = input.getWindowToken();
@@ -752,6 +861,110 @@ public static String formattDateToStringMonthDate(String dateInString) {
                     }
                 }, mYear, mMonth, mDay);
         dpd.show();
+    }
+
+
+    /**
+     * Check if Gps or network location available if not alert to user,
+     * if user agree go to activity that open gps
+     * @param activity
+     * @return String first latitude, '&', latitude
+     */
+    public static String getLocation(Activity activity ){
+
+        lm = (LocationManager)activity.getSystemService(Context.LOCATION_SERVICE);
+
+        boolean gps_enabled = false;
+        boolean network_enabled = false;
+        String strLocation = null;
+        //Criteria criteria = new Criteria();
+        //String bestProvider = lm.getBestProvider(criteria, false);
+
+       // lm.requestLocationUpdates(bestProvider, 100, 1, locationListener);
+        try {
+            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 1, locationListener);
+            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch(Exception ex) {}
+
+        try {
+            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 100, 1, locationListener);
+            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        } catch(Exception ex) {}
+
+        Location location = null;
+        if(!gps_enabled && !network_enabled){
+            showGPSDisabledAlertToUser(activity);
+        }else if(network_enabled){
+
+             location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+        }else if(gps_enabled){
+             location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        }
+
+        if(location != null) {
+            strLocation =location.getLatitude() + "&" + location.getLongitude();
+        }else{
+            strLocation =latitude + "&" + longitude;
+        }
+//        if(strLocation == null){
+//            showGPSDisabledAlertToUser(activity);
+//        }
+        return strLocation;
+    }
+
+    private static double latitude;
+    private static double longitude;
+
+    public static void removeGPSListener(){
+        if(lm != null){
+            lm.removeUpdates(locationListener);
+        }
+    }
+
+    private final static LocationListener locationListener = new LocationListener() {
+        public void onLocationChanged(Location location) {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+        }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String s) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String s) {
+
+        }
+    };
+
+
+        private static void showGPSDisabledAlertToUser(final Activity activity){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
+        alertDialogBuilder.setMessage("GPS is disabled in your device. Would you like to enable it?After enabling try to search again")
+                .setCancelable(false)
+                .setPositiveButton("Goto Settings Page To Enable GPS",
+                        new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int id){
+                                Intent callGPSSettingIntent = new Intent(
+                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                activity.startActivity(callGPSSettingIntent);
+                            }
+                        });
+        alertDialogBuilder.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int id){
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
     }
 
 
