@@ -14,18 +14,17 @@ public enum ToolBarNavEnum {
     HOTEL(10,"Hotel"),
     ALTERNATIVE_FLIGHT_DETAILS(11,"Alternative flight details"),
     PAYMENT_DETAILS(12,"Payment details"),
-    PREFERENCES_TAB_SETTINGS(13,"Preferences Tabs Settings"),
+    PREFERENCES_TAB_SETTINGS(13,"Preferences Settings"),
     PAYMENT_TRAVLERS(14,"Preferences Travelrs"),
     PAYMENT_TRAVLERS_DETAILS(15,"Preferences Travelrs Details"),
-    PREFERENCES_SEARCH_LIST_SETTINGS(16,"Preferences Specific List Settings"),
-    PREFERENCES_DRAG_LIST_SETTINGS(17,"Preferences Drag List Settings"),
-    PREFERENCES_CHECK_LIST_SETTINGS(18,"Preferences check List Settings"),
-    PREFERENCES_SPECIFIC_LIST_SETTINGS(19,"Preferences Specific List Settings"),
+    PREFERENCES_SEARCH_LIST_SETTINGS(16,"Preferences Settings"),
+    PREFERENCES_DRAG_LIST_SETTINGS(17,"Preferences Settings"),
+    PREFERENCES_CHECK_LIST_SETTINGS(18,"Preferences Settings"),
+    PREFERENCES_SPECIFIC_LIST_SETTINGS(19,"Preferences Settings"),
     SELECT_CREDIT_CARD(20,"Select Credit Card"),
     ADD_CREDIT_CARD(21,"Add Credit Card"),
     COMPANIONS_DETAILS(22,"Companions Details"),
     COMPANIONS_PERSONAL_DETAILS(26,"Personal Info");
-
 
 
     private final int navNumber;

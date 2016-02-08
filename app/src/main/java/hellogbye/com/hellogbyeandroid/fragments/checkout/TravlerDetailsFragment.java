@@ -229,7 +229,6 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
             @Override
             public void onClick(View v) {
                 HGBUtility.showDateDialog(getActivity(),mDOB);
-              //  showDateDialog();
             }
         });
 

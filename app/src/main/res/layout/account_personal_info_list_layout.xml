@@ -20,11 +20,11 @@
                 android:layout_height="wrap_content"
                 app:fontName="dinnextltpro_regular.otf"
                 android:textColor="@color/warm_grey"
-                android:text="@string/component_name"
+                android:text="@string/component_personal_information"
                 android:textSize="@dimen/SP12" />
         </LinearLayout>
 
-        <include layout="@layout/bottom_separator" />
+        <!--<include layout="@layout/bottom_separator" />-->
 
 
 

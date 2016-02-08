@@ -17,6 +17,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 
@@ -31,6 +32,10 @@ public class ConnectionManager {
 
 
        public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
+
+
+    //public static String BASE_URL =  "http://cnc.hellogbye.com/cnc/rest/itinerary?count=15&skip=30";
+    
   //  public static String BASE_URL = "http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/";
 
 
@@ -49,7 +54,8 @@ public class ConnectionManager {
         USER_FLIGHT_SOLUTIONS, USER_GET_TRAVELER_INFO, USER_GET_USER_PROFILE_ACCOUNTS,
         USER_POST_USER_PROFILE_EMAIL, USER_TRAVEL_PROFILES, USER_PROFILE_RESET_PASSWORD,
         USER_SOLUTION, ITINERARY, USER_GET_TRAVEL_PREFERENCES, ITINERARY_CNC,
-        USER_POST_TRAVEL_PREFERENCES, COMPANIONS,CARD_TOKEN,ITINERARY_MY_TRIP
+        USER_POST_TRAVEL_PREFERENCES, COMPANIONS,CARD_TOKEN,ITINERARY_MY_TRIP,
+        ITINERARY_HIGHLIGHT
 
     }
 
@@ -128,6 +134,9 @@ public class ConnectionManager {
             }
         }, false);
     }
+
+
+
 
     public void ItineraryCNCSearch(String query, String prefrenceid, String itineraryid, final ServerRequestListener listener) {
         String url = getURL(Services.ITINERARY_CNC);
@@ -323,10 +332,85 @@ public class ConnectionManager {
         });
     }
 
+    public void ItineraryCNCSearchPost(AirportSendValuesVO airportSendValuesVO, final ServerRequestListener listener) {
+        String url = getURL(Services.ITINERARY);
+        JSONObject jsonObjectMain = new JSONObject();
+        JSONObject jsonObjectSecond = new JSONObject();
+        JSONObject jsonObjectThird = new JSONObject();
+        try {
+            jsonObjectMain.put("query", airportSendValuesVO.getQuery());
+            jsonObjectMain.put("travelpreferenceprofileid", airportSendValuesVO.getTravelpreferenceprofileid());
+            jsonObjectMain.put("latitude", airportSendValuesVO.getLatitude());
+            jsonObjectMain.put("longitude", airportSendValuesVO.getLongitude());
+
+            JSONArray jsonArray = new JSONArray();
+
+            jsonObjectMain.put("token", jsonArray);
+
+            jsonObjectSecond.put("type",airportSendValuesVO.getType());
+
+            JSONArray jsonArrayPosition = new JSONArray();
+            jsonArrayPosition.put(jsonObjectThird);
+            jsonObjectSecond.put("positions",jsonArrayPosition);
+
+            jsonArray.put(jsonObjectSecond);
+
+            jsonObjectThird.put("id",airportSendValuesVO.getId());
+            jsonObjectThird.put("start",airportSendValuesVO.getStart());
+            jsonObjectThird.put("end",airportSendValuesVO.getEnd());
+            jsonObjectThird.put("value",airportSendValuesVO.getValue());
+
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObjectMain, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseAirplaneData(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
+
+    }
+
 
     ////////////////////////////////
     // GETS
     ///////////////////////////////
+
+
+    public void ItineraryCNCSearchGet(String query, final ServerRequestListener listener) {
+        String url = getURL(Services.ITINERARY_HIGHLIGHT);
+        JSONObject jsonObject = new JSONObject();
+        query = query.replaceAll(" ", "%20");
+
+        url = url + query;
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseAirportResult(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
+
+    }
 
 
     public void getMyTrips(final ServerRequestListener listener) {
@@ -1114,6 +1198,8 @@ public class ConnectionManager {
                 return BASE_URL + "Itinerary";
             case ITINERARY_CNC:
                 return BASE_URL + "Itinerary/"; //return BASE_URL + "Itinerary/CNC";
+            case ITINERARY_HIGHLIGHT:
+                return BASE_URL + "Highlight?input="; //return BASE_URL + "Itinerary/CNC";
             case COMPANIONS:
                 return BASE_URL + "Companions";
             case CARD_TOKEN:

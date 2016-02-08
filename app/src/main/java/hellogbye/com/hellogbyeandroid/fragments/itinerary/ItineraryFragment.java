@@ -116,7 +116,7 @@ public class ItineraryFragment extends HGBAbtsractFragment {
             @Override
             public void onClick(View view) {
                 getActivityInterface().goToFragment(ToolBarNavEnum.COMPANIONS.getNavNumber(), null);
-                System.out.println("Kate clicked add companion");
+
                 //go to companion fragment
             }
         });

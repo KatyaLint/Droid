@@ -102,6 +102,8 @@
     <string name="default_cnc_message">Where would you like to go? Tell us WHERE you\'re going, WHEN you\'re, and WHO you want to travel with. Here\'s how you can search...Fly me from Miami to Atlanta direct on November 15th in the morning.</string>
     <string name="iteinerary_created">Itinerary Created</string>
     <string name="grid_has_been_updated">OK, the grid has been updated</string>
+    <string name="iteinerary_try_again">Itinerary Try Again</string>
+
 
     <string name="settings_search_hunt">Search</string>
 
@@ -113,7 +115,8 @@
     <string name="popular_settings_hotel">POPULAR HOTEL</string>
 
 
-    <string name="component_name">Name </string>
+    <string name="component_name">NAME!! </string>
+    <string name="component_personal_information">PERSONAL INFORMATION </string>
     <string name="component_title">Title : </string>
     <string name="component_first">First : </string>
     <string name="component_second">Second : </string>
@@ -140,5 +143,8 @@
     <string name="account_personal_done_editing">Done editing</string>
 
     <string name="itinerary_add_companion">Companion</string>
+
+
+    <string name="cnc_choose_airport">Which airport in </string>
 
 </resources>

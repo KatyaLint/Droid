@@ -24,6 +24,7 @@ import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AcountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportServerResultVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
@@ -279,4 +280,19 @@ public class Parser {
         }
         return mMyTripslList;
     }
+
+
+    public static Object parseAirportResult(String response) {
+        AirportServerResultVO  airportServerResultVO = null;
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<AirportServerResultVO>() {
+            }.getType();
+            airportServerResultVO = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return airportServerResultVO;
+    }
+
 }

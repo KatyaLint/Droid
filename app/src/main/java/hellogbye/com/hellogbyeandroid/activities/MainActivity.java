@@ -587,6 +587,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
         boolean stashToBack = true;
         int navPosition = position;//navBar.getNavNumber();
+
+
+
         switch (navBar) {
             case HOME:
                 //  fragment = HomeFragment.newInstance(navPosition);
@@ -659,14 +662,13 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case COMPANIONS_PERSONAL_DETAILS:
                 fragment = AccountPersonalInfoSettingsFragment.newInstance(navPosition);
                 break;
-
-
         }
 
+//        if (bundle != null) {
+//            fragment.setArguments(bundle);
+//        }
 
-        if (bundle != null) {
-            fragment.setArguments(bundle);
-        }
+
         HGBUtility.goToNextFragmentIsAddToBackStack(this, fragment, stashToBack);
         mToolbar.initToolBarItems();
         mToolbar.updateToolBarView(position);
@@ -690,10 +692,12 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         if (HGBUtility.clearBackStackAndGoToNextFragment(this)) {
             // super.onBackPressed();
-            Stack<Fragment> fragmentStack = HGBUtility.getFragmentStack();
-            Fragment fragment = fragmentStack.peek();
-            Bundle arguments = fragment.getArguments();
+//            Stack<Fragment> fragmentStack = HGBUtility.getFragmentStack();
+            Fragment fragmentTemp = HGBUtility.getFragmentStack().lastElement();
+           // Fragment fragment = fragmentStack.peek();
+            Bundle arguments = fragmentTemp.getArguments();
             int fragNumber = arguments.getInt(HGBConstants.ARG_NAV_NUMBER);
+
             mToolbar.updateToolBarView(fragNumber);
         }
     }

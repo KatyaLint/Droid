@@ -84,7 +84,7 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
 
         ((MainActivity) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
             public void doBack() {
-                converSettingsAttributesVO();
+                convertSettingsAttributesVO();
                 if(noBack){
                     return;
                 }
@@ -106,7 +106,10 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
     }
 
 
-    private void converSettingsAttributesVO(){
+    private void convertSettingsAttributesVO(){
+        if(accountAttributes ==  null){
+            return;
+        }
         for(SettingsAttributesVO settingsAttributesVO :accountAttributes){
             for (SettingsValuesVO settingsValuesVO:choosedItems){
                 if(settingsValuesVO.getmID().equals(settingsAttributesVO.getmId())){
@@ -175,7 +178,7 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
 
             case "6":
 
-                accountAttributes  = correctCheckList(getActivityInterface().getAccountSettingsFlightCabinClassAttributes());
+                accountAttributes  = correctCheckList(getActivityInterface().getAccountSettingsHotelBedTypeAttributes());
                 settings_title_text.setText(getActivity().getResources().getText(R.string.preferences_bed_type));
                 settings_text.setText(getActivity().getResources().getText(R.string.preferences_bed_rank));
                 break;

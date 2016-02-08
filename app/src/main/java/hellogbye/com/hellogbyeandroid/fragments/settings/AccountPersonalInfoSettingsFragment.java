@@ -69,6 +69,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new AccountPersonalInfoSettingsFragment();
+
         Bundle args = new Bundle();
         args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
         fragment.setArguments(args);
@@ -189,7 +190,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
         account_done_editting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                System.out.println("Kate isDisable =" + isDisable);
                 if (!isDisable) {
                     onBackPressed();
                     isDisable = true;
@@ -290,6 +291,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
 
             @Override
             public void onError(Object data) {
+                isDisable = false;
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
             }
         });
@@ -306,6 +308,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
 
             @Override
             public void onError(Object data) {
+
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 try {
                     errorHelper.show(getFragmentManager(), (String) data);
@@ -396,6 +399,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
 
             @Override
             public void onError(Object data) {
+                isDisable = false;
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.show(getFragmentManager(), (String) data);
             }

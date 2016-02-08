@@ -81,7 +81,7 @@ public class StartingMenuActivity extends Activity {
         change_server_url = (FontTextView)findViewById(R.id.change_server_url);
         change_server_url.setOnClickListener(changeServerUrlListener);
 
-        System.out.println("Kate BuildConfig.IS_DEV =" + BuildConfig.IS_DEV);
+
         if (BuildConfig.IS_DEV) {
             change_server_url.setVisibility(View.VISIBLE);
         }else{
@@ -100,7 +100,7 @@ public class StartingMenuActivity extends Activity {
 
                         @Override
                         public void itemSelected(String inputItem) {
-                            System.out.println("Kate inputItem =" + inputItem);
+
                             ConnectionManager.BASE_URL = inputItem;
                         }
 
