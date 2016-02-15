@@ -108,7 +108,7 @@ public class StartingMenuActivity extends Activity {
                         public void itemCanceled() {
 
                         }
-                    });
+                    }, true);
         }
     };
 

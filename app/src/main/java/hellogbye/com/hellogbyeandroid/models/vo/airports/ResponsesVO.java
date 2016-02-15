@@ -15,8 +15,10 @@ public class ResponsesVO {
     @SerializedName("value")
     private String value;
 
-    @SerializedName("positions")
-    private ArrayList<String> positionss;
+    @SerializedName("position")
+    private PositionVO positionVO;
+    //private ArrayList<PositionVO> position = new ArrayList<PositionVO>();
+//    private ArrayList<String> positionss;
 
 
 
@@ -47,4 +49,11 @@ public class ResponsesVO {
         this.type = type;
     }
 
-  }
+    public PositionVO getPositionVO() {
+        return positionVO;
+    }
+
+    public void setPositionVO(PositionVO positionVO) {
+        this.positionVO = positionVO;
+    }
+}

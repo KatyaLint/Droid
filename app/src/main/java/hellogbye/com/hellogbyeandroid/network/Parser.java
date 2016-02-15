@@ -191,7 +191,6 @@ public class Parser {
             e.printStackTrace();
         }
         return user;
-        //hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
     }
 
     public static Object parseCompanionData(String response) {
