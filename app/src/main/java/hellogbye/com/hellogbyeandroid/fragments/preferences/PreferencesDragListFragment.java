@@ -136,7 +136,7 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
     }
 
     private List<SettingsAttributesVO> correctCheckList(List<SettingsAttributesVO> accountAttributes){
-        for (SettingsValuesVO settingsValuesVO:choosedItems){
+        for (SettingsValuesVO settingsValuesVO : choosedItems){
             for(SettingsAttributesVO accountAttributeVO :accountAttributes) {
                 if (settingsValuesVO.getmID().equals(accountAttributeVO.getmId())) {
                     accountAttributeVO.setmRank(settingsValuesVO.getmRank());
@@ -184,6 +184,7 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
                 break;
 
         }
+
     }
 
 }

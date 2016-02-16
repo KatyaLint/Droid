@@ -63,15 +63,15 @@ public class SettingsAttributeParamVO {
         return attributesVOs;
     }
 
-    public void setAttributesVOs(ArrayList<SettingsAttributesVO> attributesVOs) {
-        this.attributesVOs = attributesVOs;
-    }
-
-    public boolean isChecked() {
-        return isChecked;
-    }
-
-    public void setChecked(boolean checked) {
-        isChecked = checked;
-    }
+//    public void setAttributesVOs(ArrayList<SettingsAttributesVO> attributesVOs) {
+//        this.attributesVOs = attributesVOs;
+//    }
+//
+//    public boolean isChecked() {
+//        return isChecked;
+//    }
+//
+//    public void setChecked(boolean checked) {
+//        isChecked = checked;
+//    }
 }

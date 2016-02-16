@@ -62,22 +62,19 @@ public class PreferencesSettingsDragListAdapter extends ArrayAdapter<SettingsAtt
             settings_text_drag.setText(""+correntPosition);
             this.getItem(position).setmRank(""+correntPosition);
 
-            List<SettingsValuesVO> attributes = attribute.getAttributesVOs();
-            String strAttributes = "";
-            for (int i = 0; i < attributes.size(); i++) {
-                SettingsValuesVO settingAttribute = attributes.get(i);
-                strAttributes = strAttributes + settingAttribute.getmDescription();
-                if (i < attributes.size() - 1) {
-                    strAttributes = strAttributes + ", ";
-                }
-            }
-            FontTextView settings_item_text_drag = (FontTextView) v.findViewById(R.id.setting_preferences_text_drag);
-            settings_item_text_drag.setVisibility(View.VISIBLE);
-            settings_item_text_drag.setText(strAttributes);
+//            List<SettingsValuesVO> attributes = attribute.getAttributesVOs();
+//            String strAttributes = "";
+//            for (int i = 0; i < attributes.size(); i++) {
+//                SettingsValuesVO settingAttribute = attributes.get(i);
+//                strAttributes = strAttributes + settingAttribute.getmDescription();
+//                if (i < attributes.size() - 1) {
+//                    strAttributes = strAttributes + ", ";
+//                }
+//            }
+//            FontTextView settings_item_text_drag = (FontTextView) v.findViewById(R.id.setting_preferences_text_drag);
+//            settings_item_text_drag.setVisibility(View.VISIBLE);
+//            settings_item_text_drag.setText(strAttributes);
         }
-
-
-
 
         return v;
     }
