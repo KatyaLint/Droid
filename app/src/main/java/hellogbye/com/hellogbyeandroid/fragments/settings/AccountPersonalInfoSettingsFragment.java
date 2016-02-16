@@ -136,7 +136,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
             public void onClick(View v) {
 
                 HGBUtility.showPikerDialog(companion_personal_settings_title, getActivity(), SELECT_TITLE, titleArray,
-                        0, 2, null);
+                        0, 2, null,true);
             }
         });
 
@@ -145,7 +145,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void onClick(View v) {
 
-                HGBUtility.showPikerDialog(companion_personal_settings_gender, getActivity(), GENDER_TITLE, genderArray, 0, 1, null);
+                HGBUtility.showPikerDialog(companion_personal_settings_gender, getActivity(), GENDER_TITLE, genderArray, 0, 1, null,true);
             }
         });
 
@@ -190,7 +190,6 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
         account_done_editting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("Kate isDisable =" + isDisable);
                 if (!isDisable) {
                     onBackPressed();
                     isDisable = true;
@@ -228,7 +227,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
                 //   HGBUtility.showPikerDialog(mCountry, getActivity(), SELECT_PROVINCE,stateArray, 0,maxValueForStateDialog);
 
                 HGBUtility.showPikerDialog(companion_personal_settings_location_country, getActivity(), SELECT_PROVINCE,
-                        countryarray, 0, countryMaxValueSize - 1, null);
+                        countryarray, 0, countryMaxValueSize - 1, null,true);
                 if (companion_personal_settings_location_country.getTag() != null) {
                     mCounterPicked = companion_personal_settings_location_country.getTag().toString();
                 }
@@ -243,7 +242,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
                     mCounterPicked = companion_personal_settings_location_country.getTag().toString();
                     selectStates(mCounterPicked);
                 }
-                HGBUtility.showPikerDialog(companion_personal_settings_location_city, getActivity(), SELECT_PROVINCE, stateArray, 0, maxValueForStateDialog - 1, null);
+                HGBUtility.showPikerDialog(companion_personal_settings_location_city, getActivity(), SELECT_PROVINCE, stateArray, 0, maxValueForStateDialog - 1, null,true);
                 if (companion_personal_settings_location_city.getTag() != null) {
                   //  mStatePicked = companion_personal_settings_location_city.getTag().toString();
                 }

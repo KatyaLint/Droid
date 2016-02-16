@@ -332,39 +332,48 @@ public class ConnectionManager {
         });
     }
 
-    public void ItineraryCNCSearchPost(AirportSendValuesVO airportSendValuesVO, final ServerRequestListener listener) {
+    public void ItineraryCNCSearchPost(ArrayList<AirportSendValuesVO> airportSendValuesVOs, final ServerRequestListener listener) {
         String url = getURL(Services.ITINERARY);
         JSONObject jsonObjectMain = new JSONObject();
-        JSONObject jsonObjectSecond = new JSONObject();
-        JSONObject jsonObjectThird = new JSONObject();
-        try {
-            jsonObjectMain.put("query", airportSendValuesVO.getQuery());
-            jsonObjectMain.put("travelpreferenceprofileid", airportSendValuesVO.getTravelpreferenceprofileid());
-            jsonObjectMain.put("latitude", airportSendValuesVO.getLatitude());
-            jsonObjectMain.put("longitude", airportSendValuesVO.getLongitude());
 
-            JSONArray jsonArray = new JSONArray();
 
-            jsonObjectMain.put("token", jsonArray);
+        JSONArray jsonArray = new JSONArray();
 
-            jsonObjectSecond.put("type",airportSendValuesVO.getType());
+        for(AirportSendValuesVO airportSendValuesVO :airportSendValuesVOs) {
 
-            JSONArray jsonArrayPosition = new JSONArray();
-            jsonArrayPosition.put(jsonObjectThird);
-            jsonObjectSecond.put("positions",jsonArrayPosition);
+            try {
 
-            jsonArray.put(jsonObjectSecond);
-
-            jsonObjectThird.put("id",airportSendValuesVO.getId());
-            jsonObjectThird.put("start",airportSendValuesVO.getStart());
-            jsonObjectThird.put("end",airportSendValuesVO.getEnd());
-            jsonObjectThird.put("value",airportSendValuesVO.getValue());
+                //Main for all query request
+                jsonObjectMain.put("query", airportSendValuesVO.getQuery());
+                jsonObjectMain.put("travelpreferenceprofileid", airportSendValuesVO.getTravelpreferenceprofileid());
+                jsonObjectMain.put("latitude", airportSendValuesVO.getLatitude());
+                jsonObjectMain.put("longitude", airportSendValuesVO.getLongitude());
 
 
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
+                jsonObjectMain.put("token", jsonArray);
+
+                JSONObject jsonObjectSecond = new JSONObject();
+                //it's array of cities
+                jsonObjectSecond.put("type", airportSendValuesVO.getType());
+
+                JSONObject jsonObjectThird = new JSONObject();
+                JSONArray jsonArrayPosition = new JSONArray();
+                jsonArrayPosition.put(jsonObjectThird);
+                jsonObjectSecond.put("positions", jsonArrayPosition);
+
+                jsonArray.put(jsonObjectSecond);
+
+                jsonObjectThird.put("id", airportSendValuesVO.getId());
+                jsonObjectThird.put("start", airportSendValuesVO.getStart());
+                jsonObjectThird.put("end", airportSendValuesVO.getEnd());
+                jsonObjectThird.put("value", airportSendValuesVO.getValue());
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
@@ -378,7 +387,11 @@ public class ConnectionManager {
             public void onErrorResponse(VolleyError error) {
                 listener.onError(Parser.parseErrorMessage(error));
             }
+<<<<<<< HEAD
+        },false);
+=======
         }, false);
+>>>>>>> master
 
 
     }
@@ -390,6 +403,7 @@ public class ConnectionManager {
 
 
     public void ItineraryCNCSearchGet(String query, final ServerRequestListener listener) {
+
         String url = getURL(Services.ITINERARY_HIGHLIGHT);
         JSONObject jsonObject = new JSONObject();
         query = query.replaceAll(" ", "%20");
@@ -407,7 +421,11 @@ public class ConnectionManager {
             public void onErrorResponse(VolleyError error) {
                 listener.onError(Parser.parseErrorMessage(error));
             }
+<<<<<<< HEAD
+        },false);
+=======
         }, false);
+>>>>>>> master
 
 
     }

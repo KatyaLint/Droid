@@ -642,11 +642,9 @@ public static String formattDateToStringMonthDate(String dateInString) {
 
 
 
-
-
     public static void showPikerDialog(final FontTextView textView, Activity activity, String title,
                                  final String[] titleArray, int minValue, int maxValue, final PopUpAlertStringCB
-                                               alertCB) {
+                                               alertCB, boolean isNegativeButton) {
 
         View v1 = activity.getLayoutInflater().inflate(R.layout.picker_dialog, null);
 
@@ -672,11 +670,13 @@ public static String formattDateToStringMonthDate(String dateInString) {
                 return;
             }
         });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                return;
-            }
-        });
+        if(isNegativeButton) {
+            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    return;
+                }
+            });
+        }
 
         AlertDialog dialog = builder.create();
         dialog.show();

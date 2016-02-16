@@ -510,7 +510,7 @@ public class ItineraryFragment extends HGBAbtsractFragment {
         UserTravelMainVO  user = getActivityInterface().getTravelOrder();
         userOrder = user;
                 //getActivityInterface().setTravelOrder(userOrder);
-        if(userOrder != null) {
+        if(userOrder != null && !userOrder.getItems().isEmpty()) {
             createPassengersName(scrollViewLinearLayout, userOrder);
             createMainNodes(userOrder);
             makeEqualAllNodes(userOrder);
