@@ -1,8 +1,12 @@
 package hellogbye.com.hellogbyeandroid.network;
 
 
+import android.content.Context;
+import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
 import com.android.volley.ServerError;
@@ -11,10 +15,17 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.BookingRequest;
 import hellogbye.com.hellogbyeandroid.models.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
@@ -33,28 +44,74 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 public class Parser {
 
 
-    public static String parseErrorMessage(VolleyError error) {
 
-                try {
-                    if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                        return "Network timed out error " + error.networkResponse.statusCode;
-                    } else if (error instanceof AuthFailureError) {
-                        return "AuthFailureError error " + error.networkResponse.statusCode;
-                    } else if (error instanceof ServerError) {
-                        return "ServerError error " + error.networkResponse.statusCode;
-                    } else if (error instanceof NetworkError) {
-                        return "NetworkError error " + error.networkResponse.statusCode;
-                    } else if (error instanceof ParseError) {
-                        return "ParseError error " + error.networkResponse.statusCode;
-                    }
-                    return "Error " + error.networkResponse.statusCode;
-                } catch (Exception exception) {
-                    return "NetworkError error ";
-                }
+
+    public static String parseErrorMessage(VolleyError error) {
+        String message = onErrorResponse(error);
+        return message;
+//                try {
+//                    String body = new String(error.networkResponse.data, "UTF-8");
+//
+//                    if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+//                        return "Network timed out error " + error.networkResponse.statusCode;
+//                    } else if (error instanceof AuthFailureError) {
+//                        return "AuthFailureError error " + error.networkResponse.statusCode;
+//                    } else if (error instanceof ServerError) {
+//                        return "ServerError error " + error.networkResponse.statusCode;
+//                    } else if (error instanceof NetworkError) {
+//                        return "NetworkError error " + error.networkResponse.statusCode;
+//                    } else if (error instanceof ParseError) {
+//                        return "ParseError error " + error.networkResponse.statusCode;
+//                    }
+//                    return "Error " + error.networkResponse.statusCode;
+//                } catch (Exception exception) {
+//                    return "NetworkError error ";
+//                }
     }
 
 
+    public static  String onErrorResponse(VolleyError error) {
+        String json = null;
 
+        NetworkResponse response = error.networkResponse;
+        if(response != null && response.data != null){
+            switch(response.statusCode){
+                case 400:
+                    json = new String(response.data);
+                    json = trimMessage(json, "messageid");
+                    break;
+                default:
+                    json = new String(response.data);
+                    json = trimMessage(json, "messageid");
+                    break;
+            }
+            //Additional cases
+        }else{
+            json =  error.getMessage();
+        }
+        return json;
+    }
+
+
+    public static String trimMessage(String json, String key){
+        String trimmedString = null;
+
+        try{
+            JSONObject obj = new JSONObject(json);
+            JSONObject obj2 = obj.getJSONObject("errormessages");
+            JSONArray obj3 = obj2.getJSONArray("messagedtos");
+            JSONObject objtrimmedString = obj3.getJSONObject(0);
+            Object str = objtrimmedString.get("messageid");
+            trimmedString = (String) str;
+
+        } catch(JSONException e){
+            e.printStackTrace();
+            return null;
+        }
+
+        return trimmedString;
+    }
+    
 
     public static Object getSettingsAcount(String response){
         AcountDefaultSettingsVO acountDefaultSettings = null;

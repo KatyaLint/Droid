@@ -387,11 +387,8 @@ public class ConnectionManager {
             public void onErrorResponse(VolleyError error) {
                 listener.onError(Parser.parseErrorMessage(error));
             }
-<<<<<<< HEAD
+
         },false);
-=======
-        }, false);
->>>>>>> master
 
 
     }
@@ -421,12 +418,8 @@ public class ConnectionManager {
             public void onErrorResponse(VolleyError error) {
                 listener.onError(Parser.parseErrorMessage(error));
             }
-<<<<<<< HEAD
-        },false);
-=======
-        }, false);
->>>>>>> master
 
+        },false);
 
     }
 
@@ -817,6 +810,26 @@ public class ConnectionManager {
     // DELETE
     ///////////////////////////////
 
+
+    public void deleteUserCompanion(String companion_id, final ServerRequestListener listener) {
+        String url = getURL(Services.COMPANIONS);
+        url = url+"/" + companion_id;
+
+        HashMap<String, String> map = new HashMap<String, String>();
+
+        HGBStringRequest req = new HGBStringRequest(Request.Method.DELETE, url,
+                map, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
 
     public void deleteUserProfileAccountsWithEmail(String email, final ServerRequestListener listener) {
         String url = getURL(Services.USER_GET_USER_PROFILE_ACCOUNTS);

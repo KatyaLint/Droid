@@ -24,7 +24,7 @@ public class CompanionUserProfileVO {
     private String mCity;
     @SerializedName("state")
     private String mState;
-    @SerializedName("avatar")
+    @SerializedName("avatarurl")
     private String mAvatar;
     @SerializedName("ispremiumuser")
     private String mIsPremiumUser;

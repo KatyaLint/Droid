@@ -147,4 +147,9 @@
 
     <string name="cnc_choose_airport">Which airport in </string>
 
+    <string name="companion_undo">Undo</string>
+    <string name="timeout">Time Out</string>
+    <string name="generic_error">Generic Error</string>
+    <string name="nointernet">No Internet</string>
+
 </resources>

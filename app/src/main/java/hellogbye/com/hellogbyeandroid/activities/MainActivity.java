@@ -664,9 +664,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
         }
 
-//        if (bundle != null) {
-//            fragment.setArguments(bundle);
-//        }
+        if (bundle != null) {
+            fragment.setArguments(bundle);
+        }
 
 
         HGBUtility.goToNextFragmentIsAddToBackStack(this, fragment, stashToBack);

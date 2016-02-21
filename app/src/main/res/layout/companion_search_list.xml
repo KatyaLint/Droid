@@ -6,10 +6,20 @@
 
 
 
+
+
+
+    <SearchView
+        android:layout_width="fill_parent"
+        android:id="@+id/companion_search_view"
+        android:focusableInTouchMode="true"
+        android:layout_height="wrap_content"/>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/DP10"
+        android:paddingLeft="@dimen/DP10"
         android:id="@+id/companion_invite_ll">
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/companion_invite_companion"
@@ -20,13 +30,6 @@
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
-
-
-    <SearchView
-        android:layout_width="fill_parent"
-        android:id="@+id/companion_search_view"
-        android:focusableInTouchMode="true"
-        android:layout_height="wrap_content"/>
 
 
     <android.support.v7.widget.RecyclerView

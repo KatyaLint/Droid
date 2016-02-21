@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -56,6 +57,14 @@ public class CompanionAdapter extends RecyclerView.Adapter<CompanionAdapter.View
         holder.companion_name.setTag(item.getmCompanionid());
         holder.companion_request.setText(item.getmConfirmationstatus());
 
+        if(!item.getmConfirmationstatus().equals("Accepted")) {
+            holder.companion_arrow.setVisibility(View.GONE);
+            holder.companion_delete.setVisibility(View.VISIBLE);
+        }else{
+            holder.companion_arrow.setVisibility(View.VISIBLE);
+            holder.companion_delete.setVisibility(View.GONE);
+        }
+
        HGBUtility.loadRoundedImage(context, item.getCampanionUserProfile().getmAvatar(), holder.getCompanion_image_view());
 
 
@@ -68,28 +77,55 @@ public class CompanionAdapter extends RecyclerView.Adapter<CompanionAdapter.View
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private FontTextView companion_name;
         private FontTextView companion_request;
         private ImageView companion_image_view;
+        private View itemView;
+        private View companion_arrow;
+        private Button companion_delete;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
+            this.itemView = itemView;
+            companion_delete = (Button)itemView.findViewById(R.id.companion_delete);
             companion_name = (FontTextView) itemView.findViewById(R.id.companion_details_name_item);
             companion_request = (FontTextView) itemView.findViewById(R.id.companion_request);
+            companion_arrow = (View)itemView.findViewById(R.id.companion_arrow);
             setCompanion_image_view((ImageView) itemView.findViewById(R.id.companion_image_view));
 
-            itemView.setOnClickListener(this);
 
+//TODO remove click if !"confirmationstatus": "Accepted",
+            this.itemView.setOnClickListener(clickListener);
+            this.companion_delete.setOnClickListener(clickListener);
         }
 
-        @Override
-        public void onClick(View view) {
 
-            String userId = companion_name.getTag().toString();
-            mItemClickListener.onItemClick(userId,"");
-        }
+     public View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String request = companion_request.getText().toString();
+                if(request.equals("Accepted")){
+                    String userId = companion_name.getTag().toString();
+                    mItemClickListener.onItemClick(userId,"");
+                }
+                else if(view instanceof Button){
+                    String userId = companion_name.getTag().toString();
+                    mItemClickListener.onItemClick(userId,"");
+                }
+            }
+        };
+
+//        @Override
+//        public void onClick(View view) {
+//
+//            String userId = companion_name.getTag().toString();
+//
+//            mItemClickListener.onItemClick(userId,"");
+//        }
 
         public ImageView getCompanion_image_view() {
             return companion_image_view;
