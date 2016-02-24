@@ -137,7 +137,7 @@
     <string name="account_personal_date_of_birth">Date of Birth</string>
     <string name="account_personal_gender">Gender</string>
     <string name="account_personal_phone_number">Phone number</string>
-    <string name="account_personal_location">Location</string>
+    <string name="account_personal_location">ADDRESS</string>
     <string name="account_personal_password">Password</string>
     <string name="account_personal_change_password">Change Password</string>
     <string name="account_personal_done_editing">Done editing</string>
@@ -151,5 +151,8 @@
     <string name="timeout">Time Out</string>
     <string name="generic_error">Generic Error</string>
     <string name="nointernet">No Internet</string>
+
+    <string name="reset_password">Enter your email to reset password</string>
+    <string name="reset_your_password">Reset Password</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -44,7 +45,6 @@ public class LoginActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.login_layout);
@@ -117,46 +117,80 @@ public class LoginActivity extends FragmentActivity {
     private void resetPassword() {
 
         LayoutInflater li = LayoutInflater.from(getApplicationContext());
-        View promptsView = li.inflate(R.layout.forgotpassword_layout, null);
-
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                LoginActivity.this);
-
-        // set prompts.xml to alertdialog builder
-        alertDialogBuilder.setView(promptsView);
+        final  View promptsView = li.inflate(R.layout.forgotpassword_layout, null);
 
         final EditText userInput = (EditText) promptsView
                 .findViewById(R.id.editTextDialogUserInput);
 
-        // set dialog message
-        alertDialogBuilder
-                .setCancelable(false)
-                .setPositiveButton("OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                ConnectionManager.getInstance(LoginActivity.this).resetPasswordWithEmail(userInput.getText().toString(), new ConnectionManager.ServerRequestListener() {
-                                    @Override
-                                    public void onSuccess(Object data) {
-                                        Toast.makeText(getApplicationContext(), R.string.email_reset_succesfully, Toast.LENGTH_SHORT).show();
-                                    }
 
-                                    @Override
-                                    public void onError(Object data) {
-                                        HGBErrorHelper errorHelper = new HGBErrorHelper();
-                                        errorHelper.show(getFragmentManager(), (String) data);
-                                    }
-                                });
+        LayoutInflater linear = LayoutInflater.from(getApplicationContext());
+        final  View popupView = li.inflate(R.layout.popup_layout_log_out, null);
+
+
+
+        HGBUtility.showAlertPopUp(LoginActivity.this,  userInput, promptsView,
+                getResources().getString(R.string.reset_your_password), new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+                        ConnectionManager.getInstance(LoginActivity.this).resetPasswordWithEmail(userInput.getText().toString(), new ConnectionManager.ServerRequestListener() {
+                            @Override
+                            public void onSuccess(Object data) {
+                                Toast.makeText(getApplicationContext(), R.string.email_reset_succesfully, Toast.LENGTH_SHORT).show();
                             }
-                        })
-                .setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
+
+                            @Override
+                            public void onError(Object data) {
+                                HGBUtility.showAlertPopUpOneButton(LoginActivity.this,  null, popupView,
+                                        (String)data, null);
+
                             }
                         });
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        // show it
-        alertDialog.show();
+                    }
+
+                    @Override
+                    public void itemCanceled() {
+
+                    }
+                });
+
+
+
+//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+//                LoginActivity.this);
+//
+//        // set prompts.xml to alertdialog builder
+//        alertDialogBuilder.setView(promptsView);
+//
+//
+//        // set dialog message
+//        alertDialogBuilder
+//                .setCancelable(false)
+//                .setPositiveButton("OK",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                ConnectionManager.getInstance(LoginActivity.this).resetPasswordWithEmail(userInput.getText().toString(), new ConnectionManager.ServerRequestListener() {
+//                                    @Override
+//                                    public void onSuccess(Object data) {
+//                                        Toast.makeText(getApplicationContext(), R.string.email_reset_succesfully, Toast.LENGTH_SHORT).show();
+//                                    }
+//
+//                                    @Override
+//                                    public void onError(Object data) {
+//                                        HGBErrorHelper errorHelper = new HGBErrorHelper();
+//                                        errorHelper.show(getFragmentManager(), (String) data);
+//                                    }
+//                                });
+//                            }
+//                        })
+//                .setNegativeButton("Cancel",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                dialog.cancel();
+//                            }
+//                        });
+//        // create alert dialog
+//        AlertDialog alertDialog = alertDialogBuilder.create();
+//        // show it
+//        alertDialog.show();
     }
 }

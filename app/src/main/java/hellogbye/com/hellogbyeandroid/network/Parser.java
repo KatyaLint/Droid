@@ -80,6 +80,9 @@ public class Parser {
                     json = new String(response.data);
                     json = trimMessage(json, "messageid");
                     break;
+                case 401:
+                    json = "Session AuthFailureError";
+                    break;
                 default:
                     json = new String(response.data);
                     json = trimMessage(json, "messageid");
@@ -111,7 +114,7 @@ public class Parser {
 
         return trimmedString;
     }
-    
+
 
     public static Object getSettingsAcount(String response){
         AcountDefaultSettingsVO acountDefaultSettings = null;

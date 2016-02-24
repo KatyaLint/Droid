@@ -1,10 +1,21 @@
 package hellogbye.com.hellogbyeandroid.fragments.settings;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v4.content.CursorLoader;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +25,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.LoginTest;
@@ -41,7 +58,8 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
     private ImageView account_details_image;
     private FontTextView account_settings_details_name;
     private FontTextView account_settings_details_city;
-
+    private Activity activity;
+    private UserData currentUser;
     public AccountSettingsFragment() {
         // Empty constructor required for fragment subclasses
     }
@@ -70,10 +88,10 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
 
             }
         });
-}
+    }
 
     private void initializeUserData(){
-        UserData currentUser = getActivityInterface().getCurrentUser();
+        currentUser = getActivityInterface().getCurrentUser();
 
         HGBUtility.loadRoundedImage(getActivity().getApplicationContext(),currentUser.getAvatar(),account_details_image);
 
@@ -92,7 +110,7 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
 
         View rootView = inflater.inflate(R.layout.account_settings_main_layout, container, false);
 
-
+        activity = getActivity();
 
         String[] account_settings = getResources().getStringArray(R.array.settings_account);
 
@@ -188,9 +206,163 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
         getActivityInterface().loadJSONFromAsset();
         //getCountries();
 
+
+        account_details_image.setOnClickListener(imageClickListener);
+
+
         return rootView;
     }
 
+
+
+   private View.OnClickListener imageClickListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            selectImage();
+        }
+    };
+
+
+    private void selectImage() {
+        final CharSequence[] items = { "Take Photo", "Choose from Library", "Cancel" };
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Add Photo!");
+        builder.setCancelable(false);
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (items[item].equals("Take Photo")) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, REQUEST_CAMERA);
+                } else if (items[item].equals("Choose from Library")) {
+                    Intent intent = new Intent(
+                            Intent.ACTION_PICK,
+                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType("image/*");
+                    startActivityForResult(
+                            Intent.createChooser(intent, "Select File"),
+                           SELECT_FILE);
+                } else if (items[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    int REQUEST_CAMERA = 100;
+    int SELECT_FILE = 101;
+
+
+    private Bitmap compressBitmap(Bitmap thumbnail){
+       // Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.PNG, 90, bytes);
+        return  thumbnail;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == activity.RESULT_OK) {
+            if (requestCode == REQUEST_CAMERA) {
+                Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                thumbnail.compress(Bitmap.CompressFormat.PNG, 90, bytes);
+
+                byte[] b = bytes.toByteArray();
+                String encodedString = Base64.encodeToString(b, Base64.DEFAULT);
+
+                sendImageToServer(encodedString, currentUser.getUserprofileid());
+
+
+                Bitmap thumbnail2 = HGBUtility.getRoundedCornerBitmap(Bitmap.createScaledBitmap(thumbnail, HGBConstants.PROFILE_IMAGE_WIDTH, HGBConstants.PROFILE_IMAGE_HEIGHT, false), 90);
+
+                File destination = new File(Environment.getExternalStorageDirectory(),
+                        System.currentTimeMillis() + ".png");
+                FileOutputStream fo;
+                try {
+                    destination.createNewFile();
+                    fo = new FileOutputStream(destination);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                account_details_image.setImageBitmap(thumbnail2);
+            } else if (requestCode == SELECT_FILE) {
+                Uri selectedImage = data.getData();
+                try {
+                    Bitmap  yourSelectedImage  = decodeUri(selectedImage);
+                    Bitmap thumbnail2 = HGBUtility.getRoundedCornerBitmap(Bitmap.createScaledBitmap(yourSelectedImage, HGBConstants.PROFILE_IMAGE_WIDTH, HGBConstants.PROFILE_IMAGE_HEIGHT, false), 90);
+                    account_details_image.setImageBitmap(thumbnail2);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    yourSelectedImage.compress(Bitmap.CompressFormat.PNG, 90, baos); //bm is the bitmap object
+                    byte[] b = baos.toByteArray();
+                    String encodedString = Base64.encodeToString(b, Base64.DEFAULT);
+
+                    sendImageToServer(encodedString, currentUser.getUserprofileid());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
+
+    private void sendImageToServer(String image, String userProfile){
+        ConnectionManager.getInstance(getActivity()).postAvatar(userProfile, image,new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                getUserData();
+//                UserData mCurrentUser = (UserData) data;
+//                getActivityInterface().setCurrentUser(mCurrentUser);
+//                initializeUserData();
+
+            }
+
+            @Override
+            public void onError(Object data) {
+
+            }
+        });
+    }
+
+    /*
+    downsample your image to avoid OutOfMemory errors
+     */
+    private Bitmap decodeUri(Uri selectedImage) throws FileNotFoundException {
+
+        // Decode image size
+        BitmapFactory.Options o = new BitmapFactory.Options();
+        o.inJustDecodeBounds = true;
+        BitmapFactory.decodeStream(activity.getContentResolver().openInputStream(selectedImage), null, o);
+
+        // The new size we want to scale to
+        final int REQUIRED_SIZE = 90;
+
+        // Find the correct scale value. It should be the power of 2.
+        int width_tmp = o.outWidth, height_tmp = o.outHeight;
+        int scale = 1;
+        while (true) {
+            if (width_tmp / 2 < REQUIRED_SIZE
+                    || height_tmp / 2 < REQUIRED_SIZE) {
+                break;
+            }
+            width_tmp /= 2;
+            height_tmp /= 2;
+            scale *= 2;
+        }
+
+        // Decode with inSampleSize
+        BitmapFactory.Options o2 = new BitmapFactory.Options();
+        o2.inSampleSize = scale;
+        return BitmapFactory.decodeStream(activity.getContentResolver().openInputStream(selectedImage), null, o2);
+
+    }
 
     private void getCountries(){
         ConnectionManager.getInstance(getActivity()).getBookingOptions(new ConnectionManager.ServerRequestListener() {

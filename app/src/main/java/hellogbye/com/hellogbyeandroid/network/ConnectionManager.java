@@ -55,7 +55,7 @@ public class ConnectionManager {
         USER_POST_USER_PROFILE_EMAIL, USER_TRAVEL_PROFILES, USER_PROFILE_RESET_PASSWORD,
         USER_SOLUTION, ITINERARY, USER_GET_TRAVEL_PREFERENCES, ITINERARY_CNC,
         USER_POST_TRAVEL_PREFERENCES, COMPANIONS,CARD_TOKEN,ITINERARY_MY_TRIP,
-        ITINERARY_HIGHLIGHT
+        ITINERARY_HIGHLIGHT, USER_AVATAR
 
     }
 
@@ -89,6 +89,34 @@ public class ConnectionManager {
             jsonObject.put("firstname", firstName);
             jsonObject.put("lastname", lastName);
             jsonObject.put("emailaddress", email);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, false);
+    }
+
+    public void postAvatar(String userprofileid,String avatar, final ServerRequestListener listener) {
+        String url = getURL(Services.USER_AVATAR);
+
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("userprofileid", userprofileid);
+            jsonObject.put("mimetype", ".png");
+            jsonObject.put("avatar", avatar);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1238,7 +1266,8 @@ public class ConnectionManager {
                 return BASE_URL + "Companions";
             case CARD_TOKEN:
                 return BASE_URL + "Card/Token";
-
+            case USER_AVATAR:
+                return BASE_URL + "UserProfile/Avatar";
 
         }
         return url;

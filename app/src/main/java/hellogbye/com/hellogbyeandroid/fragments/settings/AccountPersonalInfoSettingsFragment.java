@@ -106,12 +106,12 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
         companion_personal_settings_date_of_birth.setText(HGBUtility.parseDateToddMMyyyyForPayment(currentUser.getDob()));
 
 
-        companion_personal_settings_gender = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_gender);
-
-        if(currentUser.getGender() != null && !currentUser.getGender().isEmpty()){
-            GENDER = currentUser.getGender();
-        }
-        companion_personal_settings_gender.setText(GENDER);
+//        companion_personal_settings_gender = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_gender);
+//
+//        if(currentUser.getGender() != null && !currentUser.getGender().isEmpty()){
+//            GENDER = currentUser.getGender();
+//        }
+//        companion_personal_settings_gender.setText(GENDER);
 
 
         companion_personal_settings_phone_number = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_phone_number);
@@ -141,13 +141,13 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
         });
 
 
-        companion_personal_settings_gender.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                HGBUtility.showPikerDialog(companion_personal_settings_gender, getActivity(), GENDER_TITLE, genderArray, 0, 1, null,true);
-            }
-        });
+//        companion_personal_settings_gender.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                HGBUtility.showPikerDialog(companion_personal_settings_gender, getActivity(), GENDER_TITLE, genderArray, 0, 1, null,true);
+//            }
+//        });
 
         companion_personal_settings_date_of_birth.setOnClickListener(new View.OnClickListener() {
             @Override

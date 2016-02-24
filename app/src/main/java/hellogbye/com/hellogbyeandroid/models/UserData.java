@@ -41,7 +41,7 @@ public class UserData {
     @SerializedName("postalcode")
     private String postalcode;
 
-    @SerializedName("avatar")
+    @SerializedName("avatarurl")
     private String avatar;
 
     @SerializedName("ispremiumuser")
