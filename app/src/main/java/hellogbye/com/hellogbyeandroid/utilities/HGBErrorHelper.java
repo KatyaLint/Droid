@@ -22,27 +22,40 @@ public class HGBErrorHelper extends android.app.DialogFragment {
     private String mMessage = "Please try again later";
     private String mMessageTitle = "Error";
 
+    public void setMessageForError(String mMessage){
+        this.mMessage = mMessage;
+    }
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        return new AlertDialog.Builder(getActivity())
 
-                        // Set Dialog Title
+
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+
+                // Set Dialog Title
                 .setTitle(mMessageTitle)
-                        // Set Dialog Message
+                // Set Dialog Message
                 .setMessage(mMessage)
 
-                        // Positive button
+                // Positive button
                 .setPositiveButton(OK, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Do something else
                     }
                 }).create();
+
+
+        return alertDialog;
     }
+
+
+
+
+
 
     @Override
     public int show(FragmentTransaction transaction, String tag) {
-
         if(tag != null){
             this.mMessage = tag;
         }

@@ -28,6 +28,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -51,6 +52,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.process.BitmapProcessor;
 
 import java.io.IOException;
@@ -84,6 +86,7 @@ public class HGBUtility {
 
     public static void loadRoundedImage(Context context, String imageUrl, ImageView imageView) {
 
+    //    imageUrl = imageUrl + ".png";
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .considerExifParams(true)
                 .showImageForEmptyUri(R.drawable.profile_image)
@@ -105,18 +108,6 @@ public class HGBUtility {
                 })
                 .build();
 
-
-//        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
-//                context)
-//                .defaultDisplayImageOptions(options)
-//                .memoryCache(new WeakMemoryCache())
-//                .discCacheSize(100 * 1024 * 1024).build();
-//
-//        ImageLoader.getInstance().init(config);
-
-
-
-    //    ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(context));
         ImageLoader.getInstance().displayImage(imageUrl, imageView, options, new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String s, View view) {
@@ -786,6 +777,7 @@ public static String formattDateToStringMonthDate(String dateInString) {
               .setView(popupView)
               .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                   public void onClick(DialogInterface dialog, int which) {
+
                       String newName = input.getText().toString();
                         if(alertCB != null){
                             alertCB.itemSelected(newName);
@@ -823,17 +815,22 @@ public static String formattDateToStringMonthDate(String dateInString) {
                 .setView(popupView)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        String newName = input.getText().toString();
+                        String newName = "";
+                        if(input != null) {
+                             newName = input.getText().toString();
+                            input.setText("");
+                            IBinder token = input.getWindowToken();
+                            ( (InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
+                        }
                         if(alertCB != null){
                             alertCB.itemSelected(newName);
                         }
 //                        if (newName.length() != 0) {
 //                            popUpConnection(newName);
 //                        }
-                        input.setText("");
+
                         ((ViewGroup) popupView.getParent()).removeView(popupView);
-                        IBinder token = input.getWindowToken();
-                        ( (InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
+
                         dialog.cancel();
                     }
                 })
@@ -967,6 +964,14 @@ public static String formattDateToStringMonthDate(String dateInString) {
         alert.show();
     }
 
+
+    public static final boolean isValidEmail(CharSequence target) {
+        if (TextUtils.isEmpty(target)) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        }
+    }
 
 }
 

@@ -230,6 +230,7 @@ public class CNCFragment extends HGBAbtsractFragment {
                                     AirportResultsVO choosenAirport = findChoosenAirport(inputItem, results);
                                     airportSendValuesVO.setId(choosenAirport.getId());
 
+                                    //Kate
                                     String location = HGBUtility.getLocation(getActivity());
 
                                     HGBUtility.removeGPSListener();
@@ -261,9 +262,6 @@ public class CNCFragment extends HGBAbtsractFragment {
 
     }
 
-    private void showPicker(){
-
-    }
 
     interface iAfterServer {
         void serverFinished(AirportServerResultVO airportResult);
@@ -272,6 +270,7 @@ public class CNCFragment extends HGBAbtsractFragment {
     public void handleHGBMessage(String strMessage) {
 
         getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.HGB_ITEM));
+
         removeWaitingItem();
         mAdapter.notifyDataSetChanged();
     }

@@ -9,6 +9,7 @@ import hellogbye.com.hellogbyeandroid.models.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelationshipTypesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
@@ -68,8 +69,6 @@ public interface HGBMainInterface {
     ArrayList<CountryItem> getEligabileCountries();
     void setEligabileCountries(ArrayList<CountryItem> mEligabileCountries);
 
-
-
     ArrayList<CreditCardItem> getCreditCards();
     void setCreditCards( ArrayList<CreditCardItem> mCreditCardsList);
 
@@ -106,4 +105,10 @@ public interface HGBMainInterface {
     ArrayList<CompanionVO> getCompanions();
 
     void gotToStartMenuActivity();
+
+
+    void setCompanionsStaticRelationshipTypes(ArrayList<CompanionStaticRelationshipTypesVO> componentsStaticRelationshipTypes);
+
+    ArrayList<CompanionStaticRelationshipTypesVO> getCompanionsStaticRelationshipTypes();
+
 }

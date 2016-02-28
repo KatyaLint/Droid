@@ -75,6 +75,23 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
         });
     }
 
+
+    private void deleteComapanion(String comapnion_id){
+
+            ConnectionManager.getInstance(getActivity()).deleteUserCompanion(comapnion_id, new ConnectionManager.ServerRequestListener() {
+                @Override
+                public void onSuccess(Object data) {
+                   getCompanions();
+                }
+
+                @Override
+                public void onError(Object data) {
+                    HGBErrorHelper errorHelper = new HGBErrorHelper();
+                }
+            });
+        }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -93,13 +110,31 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
         searchListAdapter.SetOnItemClickListener(new CompanionAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(final String guid, final String position) {
+
                 for(CompanionVO companion:companionsVO){
                     if(companion.getmCompanionid().equals(guid)){
-                        Bundle args = new Bundle();
-                        args.putString("user_id", guid);
-                        getActivityInterface().goToFragment(ToolBarNavEnum.COMPANIONS_DETAILS.getNavNumber(),args);
+                        if(companion.getmConfirmationstatus().equals("Accepted")) {
+                            Bundle args = new Bundle();
+                            args.putString("user_id", guid);
+                            getActivityInterface().goToFragment(ToolBarNavEnum.COMPANIONS_DETAILS.getNavNumber(), args);
+                        }else{
+                            deleteComapanion(guid);
+                        }
                     }
                 }
+
+
+//                Bundle args = new Bundle();
+//                args.putString("user_id", guid);
+//                getActivityInterface().goToFragment(ToolBarNavEnum.COMPANIONS_DETAILS.getNavNumber(),args);
+
+//                for(CompanionVO companion:companionsVO){
+//                    if(companion.getmCompanionid().equals(guid)){
+//                        Bundle args = new Bundle();
+//                        args.putString("user_id", guid);
+//                        getActivityInterface().goToFragment(ToolBarNavEnum.COMPANIONS_DETAILS.getNavNumber(),args);
+//                    }
+//                }
             }
         });
 
