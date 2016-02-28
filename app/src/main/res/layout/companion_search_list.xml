@@ -10,7 +10,8 @@
 
 
     <SearchView
-        android:layout_width="fill_parent"
+
+        android:layout_width="match_parent"
         android:id="@+id/companion_search_view"
         android:focusableInTouchMode="true"
         android:layout_height="wrap_content"/>

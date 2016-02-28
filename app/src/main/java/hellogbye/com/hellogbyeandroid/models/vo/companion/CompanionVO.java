@@ -10,6 +10,11 @@ import com.google.gson.annotations.SerializedName;
 public class CompanionVO {
     @SerializedName("confirmationstatus")
     private String mConfirmationstatus;
+    @SerializedName("relationshiptype")
+    private String relationshiptype;
+    @SerializedName("relationshiptypeid")
+    private String relationshiptypeid;
+
     @SerializedName("companionid")
     private String mCompanionid;
     @SerializedName("addedatetime")
@@ -42,5 +47,29 @@ public class CompanionVO {
 
     public void setmCompanionid(String mCompanionid) {
         this.mCompanionid = mCompanionid;
+    }
+
+    public String getRelationshiptypeid() {
+        return relationshiptypeid;
+    }
+
+    public void setRelationshiptypeid(String relationshiptypeid) {
+        this.relationshiptypeid = relationshiptypeid;
+    }
+
+    public String getRelationshiptype() {
+        return relationshiptype;
+    }
+
+    public void setRelationshiptype(String relationshiptype) {
+        this.relationshiptype = relationshiptype;
+    }
+
+    public String getmAddedatetime() {
+        return mAddedatetime;
+    }
+
+    public void setmAddedatetime(String mAddedatetime) {
+        this.mAddedatetime = mAddedatetime;
     }
 }

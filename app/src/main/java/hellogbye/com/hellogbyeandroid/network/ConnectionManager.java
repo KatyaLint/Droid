@@ -55,7 +55,7 @@ public class ConnectionManager {
         USER_POST_USER_PROFILE_EMAIL, USER_TRAVEL_PROFILES, USER_PROFILE_RESET_PASSWORD,
         USER_SOLUTION, ITINERARY, USER_GET_TRAVEL_PREFERENCES, ITINERARY_CNC,
         USER_POST_TRAVEL_PREFERENCES, COMPANIONS,CARD_TOKEN,ITINERARY_MY_TRIP,
-        ITINERARY_HIGHLIGHT, USER_AVATAR
+        ITINERARY_HIGHLIGHT, USER_AVATAR, RELATIONSHIP_TYPES
 
     }
 
@@ -474,6 +474,7 @@ public class ConnectionManager {
     }
 
 
+
     public void getCreditCards(final ServerRequestListener listener) {
         String url = getURL(Services.CARD_TOKEN);
 
@@ -834,6 +835,50 @@ public class ConnectionManager {
     }
 
 
+    public void getCompanions(final ServerRequestListener listener) {
+
+        String url = getURL(Services.COMPANIONS);
+
+        JSONObject jsonObject = new JSONObject();
+
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseCompanionData(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, false);
+    }
+
+
+
+    public void getStaticCompanionsRelationTypesVO(final ServerRequestListener listener) {
+
+        String url = getURL(Services.RELATIONSHIP_TYPES) ;
+        //  http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/itinerary?count=15&skip=0
+
+        JSONObject jsonObject = new JSONObject();
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseStaticRelationTypes(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, false);
+
+    }
+
     ////////////////////////////////
     // DELETE
     ///////////////////////////////
@@ -902,31 +947,45 @@ public class ConnectionManager {
 
 
 
-    public void getCompanions(final ServerRequestListener listener) {
 
+
+
+    ////////////////////////////////
+    // PUT
+    ///////////////////////////////
+
+
+
+    public void putCompanionRelationship(String companionid, int relationshiptypeId, final ServerRequestListener listener) {
         String url = getURL(Services.COMPANIONS);
+        JSONObject json1 = new JSONObject();
+        try {
 
-        JSONObject jsonObject = new JSONObject();
+            json1.put("companionid", companionid);
+            json1.put("relationshiptypeId", relationshiptypeId);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
-                jsonObject, new Response.Listener<String>() {
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
+                json1, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(Parser.parseCompanionData(response));
+                listener.onSuccess(response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 listener.onError(Parser.parseErrorMessage(error));
             }
-        }, false);
+        });
     }
 
 
-    ////////////////////////////////
-    // PUT
-    ///////////////////////////////
+
+
+
 
 
     public void putCompanion(String id, UserData user, final ServerRequestListener listener) {
@@ -1268,7 +1327,8 @@ public class ConnectionManager {
                 return BASE_URL + "Card/Token";
             case USER_AVATAR:
                 return BASE_URL + "UserProfile/Avatar";
-
+            case RELATIONSHIP_TYPES:
+                return BASE_URL + "Statics/RelationshipTypes";
         }
         return url;
     }

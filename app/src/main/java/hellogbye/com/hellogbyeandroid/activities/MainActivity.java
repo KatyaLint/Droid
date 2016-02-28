@@ -29,7 +29,6 @@ import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 import hellogbye.com.hellogbyeandroid.HGBMainInterface;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
@@ -66,6 +65,7 @@ import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
+import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelationshipTypesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private List<SettingsAttributesVO> hotelSmokingAttributes;
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
     private ArrayList<CompanionVO> companions;
+    private ArrayList<CompanionStaticRelationshipTypesVO> componionStaticDescriptionVOs;
 
 
     @Override
@@ -533,6 +534,16 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
         Intent intent = new Intent(getApplicationContext(), StartingMenuActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void setCompanionsStaticRelationshipTypes(ArrayList<CompanionStaticRelationshipTypesVO> componentsStaticRelationshipTypes) {
+        this.componionStaticDescriptionVOs = componentsStaticRelationshipTypes;
+    }
+
+    @Override
+    public ArrayList<CompanionStaticRelationshipTypesVO> getCompanionsStaticRelationshipTypes() {
+        return componionStaticDescriptionVOs;
     }
 
     @Override

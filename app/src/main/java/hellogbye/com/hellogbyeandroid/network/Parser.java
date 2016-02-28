@@ -36,6 +36,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AcountDefaultSett
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportServerResultVO;
+import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelationshipTypesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
@@ -340,6 +341,18 @@ public class Parser {
         return mMyTripslList;
     }
 
+    public static Object parseStaticRelationTypes(String response) {
+        ArrayList<CompanionStaticRelationshipTypesVO>  mCompanionRelationshipTypes= null;
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<CompanionStaticRelationshipTypesVO>>() {
+            }.getType();
+            mCompanionRelationshipTypes = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mCompanionRelationshipTypes;
+    }
 
     public static Object parseAirportResult(String response) {
         AirportServerResultVO  airportServerResultVO = null;

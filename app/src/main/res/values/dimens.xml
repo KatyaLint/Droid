@@ -55,7 +55,7 @@
     <dimen name="SP12">12sp</dimen>
     <dimen name="SP10">10sp</dimen>
     <dimen name="SP20">20sp</dimen>
-
+    <dimen name="fab_margin">16dp</dimen>
 
 
 </resources>

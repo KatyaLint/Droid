@@ -49,9 +49,6 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
-/**
- * Created by arisprung on 8/17/15.
- */
 public class AccountSettingsFragment extends HGBAbtsractFragment {
 
 
@@ -318,10 +315,6 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void onSuccess(Object data) {
                 getUserData();
-//                UserData mCurrentUser = (UserData) data;
-//                getActivityInterface().setCurrentUser(mCurrentUser);
-//                initializeUserData();
-
             }
 
             @Override
