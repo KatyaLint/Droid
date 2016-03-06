@@ -2,11 +2,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:padding="20dp"
+
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_centerVertical="true"
+        android:id="@+id/my_trip_delete"
+        android:layout_width="wrap_content"
+        android:background="@drawable/delete"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:paddingLeft="@dimen/DP10"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/my_trip_delete"
+        android:id="@+id/my_trip_user_image"
+        android:layout_width="@dimen/DP60"
+        android:layout_height="@dimen/DP60" />
 
     <LinearLayout
+        android:id="@+id/my_trips_details_ll"
+        android:gravity="center_vertical"
+        android:layout_toRightOf="@+id/my_trip_user_image"
+        android:layout_toLeftOf="@+id/my_trip_delete_forever"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -16,7 +34,7 @@
             android:textColor="@color/marine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
+            android:textSize="@dimen/SP16"
             android:text="Name"
             app:fontName="dinnextltpro_regular.otf" />
         <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -24,7 +42,7 @@
             android:textColor="@color/warm_grey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:textSize="@dimen/SP10"
             android:layout_marginTop="@dimen/DP2"
             android:text="dates"
             app:fontName="dinnextltpro_light.otf" />
@@ -34,17 +52,45 @@
             android:textColor="@android:color/holo_red_dark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:textSize="@dimen/SP10"
             android:text="Paid"
             app:fontName="dinnextltpro_light.otf" />
 
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/my_trip_arrow_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/chevron_right"
         android:layout_centerVertical="true"
+        android:layout_alignParentRight="true" />
+
+    <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:id="@+id/my_trip_delete_forever"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:textSize="@dimen/SP12"-->
+        <!--android:background="@color/red_button_color"-->
+        <!---->
+        <!--android:text="Delete"-->
+        <!--app:fontName="dinnextltpro_light.otf" />-->
+
+
+    <Button
         android:layout_alignParentRight="true"
-        />
+        android:id="@+id/my_trip_delete_forever"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/SP12"
+        android:background="@color/red_button_color"
+        android:visibility="gone"
+        android:text="Delete"
+      />
+
+
 </RelativeLayout>

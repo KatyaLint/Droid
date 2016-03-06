@@ -28,6 +28,7 @@ public class CostumeToolBar extends Toolbar {
     private LinearLayout preferences_edit_mode;
     private ImageButton check_preferences;
     private ImageButton my_trips_button;
+    private FontTextView my_trip_edit_button;
 
     public CostumeToolBar(Context context) {
         super(context);
@@ -74,6 +75,10 @@ public class CostumeToolBar extends Toolbar {
         if(my_trips_button == null){
             my_trips_button = (ImageButton)findViewById(R.id.my_trips_button);
         }
+        if(my_trip_edit_button == null){
+            my_trip_edit_button = (FontTextView) findViewById(R.id.my_trip_edit_button);
+        }
+
     }
 
 
@@ -91,6 +96,7 @@ public class CostumeToolBar extends Toolbar {
         preferences_edit_mode.setVisibility(View.GONE);
         check_preferences.setVisibility(View.GONE);
         my_trips_button.setVisibility(View.GONE);
+        my_trip_edit_button.setVisibility(View.GONE);
 
         switch (navBar) {
             case HOME:
@@ -109,6 +115,7 @@ public class CostumeToolBar extends Toolbar {
                 keyBoardImage.setVisibility(View.INVISIBLE);
                 break;
             case TRIPS:
+                my_trip_edit_button.setVisibility(View.VISIBLE);
                 titleText.setVisibility(View.VISIBLE);
                 keyBoardImage.setVisibility(View.INVISIBLE);
                 my_trips_button.setVisibility(View.VISIBLE);

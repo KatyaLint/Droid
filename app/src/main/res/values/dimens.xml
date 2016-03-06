@@ -37,6 +37,8 @@
     <dimen name="DP110">110dp</dimen>
     <dimen name="DP120">120dp</dimen>
     <dimen name="DP140">140dp</dimen>
+    <dimen name="DP60">60dp</dimen>
+
 
     <dimen name="item_border_width">1dp</dimen>
 

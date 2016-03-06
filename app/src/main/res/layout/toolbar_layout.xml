@@ -63,10 +63,21 @@
         android:id="@+id/favority"
         android:layout_gravity="right"
         android:layout_marginRight="@dimen/DP34"
-        android:visibility="gone"
+        android:visibility="gone" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/my_trip_edit_button"
+        android:layout_gravity="left"
+        android:textColor="@color/white"
+        android:text="@string/tool_bar"
+        android:layout_marginRight="@dimen/DP14"
+        android:visibility="visible"
+        android:paddingLeft="@dimen/DP10"
+
         />
-
-
 
 
     <LinearLayout

@@ -22,6 +22,7 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
 
     public static final int HGB_ITEM = 2;
+    public static final int HGB_ERROR_ITEM = 1;
     public static final int ME_ITEM = 0;
     public static final int WAITING_ITEM = 3;
 
@@ -121,18 +122,25 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        ViewHolderHGB hgbholder = (ViewHolderHGB) holder;
+        String strMessage = mArrayList.get(position).getText();
+
         switch (holder.getItemViewType()) {
 
             case ME_ITEM:
                 ViewHolderMe meholder = (ViewHolderMe) holder;
-                meholder.itemME.setText(mArrayList.get(position).getText());
+                meholder.itemME.setText(strMessage);
                 break;
+            case HGB_ERROR_ITEM:
 
+                hgbholder.itemHGB.setBackgroundResource(R.drawable.hgb_red_cnc_backround);
+                hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.black));
+                hgbholder.itemHGB.setPadding(30,30,30,30);
+            break;
             case HGB_ITEM:
-                ViewHolderHGB hgbholder = (ViewHolderHGB) holder;
-                String strMessage = mArrayList.get(position).getText();
+
                 if (mContext.getResources().getString(R.string.iteinerary_created).equals(strMessage)
-                        ||strMessage.contains("error")||mContext.getResources().getString(R.string.grid_has_been_updated).equals(strMessage)) {
+                   ||mContext.getResources().getString(R.string.grid_has_been_updated).equals(strMessage)) {
                     hgbholder.itemHGB.setBackgroundResource(R.drawable.hgb_red_cnc_backround);
                     hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.black));
                     hgbholder.itemHGB.setPadding(30,30,30,30);
@@ -142,7 +150,7 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.cnc_hgb_text));
                     hgbholder.itemHGB.setPadding(30,30,30,30);
                 }
-                hgbholder.itemHGB.setText(mArrayList.get(position).getText());
+                hgbholder.itemHGB.setText(strMessage);
                 break;
             case WAITING_ITEM:
                 ViewHolderWaiting hgbwaiting = (ViewHolderWaiting) holder;

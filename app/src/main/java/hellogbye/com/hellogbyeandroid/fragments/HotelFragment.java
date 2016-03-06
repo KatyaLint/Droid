@@ -1,5 +1,6 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -108,7 +109,9 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
     private NodesVO currentSelectedNode;
 
     private float PANEL_HIGHT = 0.4f;
+    private Activity activity;
 
+    public static boolean IS_MAIN_BACK_ALLOWED = true;
     public static Fragment newInstance(int position) {
         Fragment fragment = new HotelFragment();
         Bundle args = new Bundle();
@@ -121,6 +124,8 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        activity = getActivity();
         View rootView = inflater.inflate(R.layout.hotel_main_layout, container, false);
         mTableLayout = (TableLayout) rootView.findViewById(R.id.tableLayout1);
         mSlidingPanels = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout);
@@ -152,14 +157,18 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
             }
         });
 
-        ((MainActivity) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
+        ((MainActivity) activity).setOnBackPressedListener(new OnBackPressedListener() {
             public void doBack() {
+
                 if (mRecyclerView.getVisibility() != View.VISIBLE) {
                     if (getActivity() != null && getActivity().getFragmentManager() != null) {
-                        FragmentManager fm = getActivity().getFragmentManager();
-                        fm.popBackStack(HotelFragment.class.toString(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                        IS_MAIN_BACK_ALLOWED = true;
+                        //getFragmentManager().popBackStack();
+//                        FragmentManager fm = getActivity().getFragmentManager();
+//                        fm.popBackStack(HotelFragment.class.toString(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     }
                 } else {
+                    IS_MAIN_BACK_ALLOWED = false;
                     hideAlternativeHotels();
                 }
 
@@ -174,7 +183,7 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
 
 
 
-        ConnectionManager.getInstance(getActivity()).putAlternateHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
+        ConnectionManager.getInstance(activity).putAlternateHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
                 passengersVO.getmPaxguid(),
                 nodesVO.getmCheckIn(), nodesVO.getmCheckOut(), cnode.getmGuid(),
                 new ConnectionManager.ServerRequestListener() {
@@ -204,7 +213,7 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
         super.onActivityCreated(savedInstanceState);
         FragmentManager fm = getChildFragmentManager();
 
-        fragment = ((MapFragment) getActivity().getFragmentManager().findFragmentById(R.id.map));//(SupportMapFragment) fm.findFragmentById(R.id.map);
+        fragment = ((MapFragment) activity.getFragmentManager().findFragmentById(R.id.map));//(SupportMapFragment) fm.findFragmentById(R.id.map);
 
         if (fragment == null) {
             fragment = MapFragment.newInstance();
@@ -253,7 +262,7 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
     private void loadMap() {
 
         //GET ALL HOTEL NODES AND SET CURRENT ONE
-        ConnectionManager.getInstance(getActivity()).getAlternateHotelsWithHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
+        ConnectionManager.getInstance(activity).getAlternateHotelsWithHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
               passengersVO.getmPaxguid(),
                 nodesVO.getmCheckIn(), nodesVO.getmCheckOut(), new ConnectionManager.ServerRequestListener() {
                     @Override
@@ -277,7 +286,7 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
 
                                 Marker mark = mMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(Double.valueOf(node.getmLatitude()), Double.valueOf(node.getmLongitude())))
-                                        .icon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(getActivity(), String.valueOf((int) node.getmMinimumAmount()), R.drawable.other_location_blue))));
+                                        .icon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(activity, String.valueOf((int) node.getmMinimumAmount()), R.drawable.other_location_blue))));
                                 nodeMarkerMap.put(mark, node);
 
                             }
@@ -322,24 +331,24 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
 
 
         for (int i = 1; i <= 2; i++) {
-            TableRow row = new TableRow(getActivity());
+            TableRow row = new TableRow(activity);
             row.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
                     LayoutParams.WRAP_CONTENT));
             for (int j = 1; j <= cols; j++) {
-                LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 ImageView image = (ImageView) inflater.inflate(R.layout.hotel_gallery_imageview, null);
 
                 //  tv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
                 if (mImageList.size() > 0) {
                     String strValue = mImageList.remove(0);
-                    HGBUtility.loadHotelImage(getActivity().getApplicationContext(), strValue, image);
+                    HGBUtility.loadHotelImage(activity.getApplicationContext(), strValue, image);
                     image.setTag(iIndex++);
                     row.addView(image);
                     image.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(getActivity().getApplicationContext(), ImageGalleryActivity.class);
+                            Intent intent = new Intent(activity.getApplicationContext(), ImageGalleryActivity.class);
                             intent.putStringArrayListExtra("images", mListForGallery);
                             intent.putExtra("image_index", (Integer) v.getTag());
                             startActivity(intent);
@@ -393,13 +402,13 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
         mStart4ImageView = (ImageView) rootView.findViewById(R.id.star4);
         mStart5ImageView = (ImageView) rootView.findViewById(R.id.star5);
 
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL_LIST));
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager = new LinearLayoutManager(activity);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 

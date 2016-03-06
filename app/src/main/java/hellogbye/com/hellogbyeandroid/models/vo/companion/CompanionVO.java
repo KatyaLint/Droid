@@ -17,7 +17,7 @@ public class CompanionVO {
 
     @SerializedName("companionid")
     private String mCompanionid;
-    @SerializedName("addedatetime")
+    @SerializedName("addeddatetime")
     private String mAddedatetime;
 
     @SerializedName("companionuserprofile")

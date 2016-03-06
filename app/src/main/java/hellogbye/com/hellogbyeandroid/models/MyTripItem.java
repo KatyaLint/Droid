@@ -33,7 +33,7 @@ public class MyTripItem {
     private String startdate;
 
 
-
+    private boolean editDelete = false;
 
 
 
@@ -99,5 +99,13 @@ public class MyTripItem {
 
     public void setStartdate(String startdate) {
         this.startdate = startdate;
+    }
+
+    public boolean isEditDelete() {
+        return editDelete;
+    }
+
+    public void setEditDelete(boolean editDelete) {
+        this.editDelete = editDelete;
     }
 }

@@ -11,9 +11,11 @@ import android.widget.AdapterView;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.MyTripPinnedAdapter;
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
@@ -28,6 +30,8 @@ public class MyTripsFragment extends HGBAbtsractFragment {
 
     private PinnedHeaderListView stickyList;
     private  ArrayList<MyTripItem> mItemsList;
+    private OnItemClickListener editMyTripsClickCB;
+    private MyTripPinnedAdapter sectionedAdapter;
 
 
     public static Fragment newInstance(int position) {
@@ -46,6 +50,15 @@ public class MyTripsFragment extends HGBAbtsractFragment {
         return rootView;
     }
 
+    public void setEditMyTripsClickCB(OnItemClickListener editMyTripsClickCB) {
+        this.editMyTripsClickCB = editMyTripsClickCB;
+    }
+
+    public interface OnItemClickListener {
+        void onItemEditMyTripsClick(String guid);
+    }
+
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -54,9 +67,9 @@ public class MyTripsFragment extends HGBAbtsractFragment {
         ConnectionManager.getInstance(getActivity()).getMyTrips(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                mItemsList= (ArrayList<MyTripItem>) data;
+                mItemsList = (ArrayList<MyTripItem>) data;
 
-                MyTripPinnedAdapter sectionedAdapter = new MyTripPinnedAdapter(mItemsList);
+                sectionedAdapter = new MyTripPinnedAdapter(mItemsList);
                 stickyList.setAdapter(sectionedAdapter);
 
             }
@@ -72,6 +85,10 @@ public class MyTripsFragment extends HGBAbtsractFragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int section, int position, long id) {
 
+                if(sectionedAdapter.isEditMode()){
+                    return;
+                }
+
                 if (section == 0) {
                     //TODO go to current itinerary
 
@@ -81,10 +98,10 @@ public class MyTripsFragment extends HGBAbtsractFragment {
                     ConnectionManager.getInstance(getActivity()).getItinerary(solutionId, new ConnectionManager.ServerRequestListener() {
                         @Override
                         public void onSuccess(Object data) {
-                            UserTravelMainVO userTravelMainVO = (UserTravelMainVO)data;
+                            UserTravelMainVO userTravelMainVO = (UserTravelMainVO) data;
                             getActivityInterface().setTravelOrder(userTravelMainVO);
-                            getActivityInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(),null);
-                          Log.d("","");
+                            getActivityInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
+                            Log.d("", "");
                             //TODO set Travel and got to current itenrary
                         }
 
@@ -101,6 +118,23 @@ public class MyTripsFragment extends HGBAbtsractFragment {
             @Override
             public void onSectionClick(AdapterView<?> adapterView, View view, int section, long id) {
 
+            }
+        });
+
+
+        ((MainActivity) getActivity()).setEditMyTripsClickCB(new OnItemClickListener() {
+            @Override
+            public void onItemEditMyTripsClick(String option) {
+                System.out.println("Kate option = " + option);
+                if(sectionedAdapter == null){
+                    return;
+                }
+                if(option.equalsIgnoreCase("edit")) {
+                    sectionedAdapter.isEditMode(true);
+                }else{
+                    sectionedAdapter.isEditMode(false);
+                }
+                sectionedAdapter.notifyDataSetChanged();
             }
         });
 

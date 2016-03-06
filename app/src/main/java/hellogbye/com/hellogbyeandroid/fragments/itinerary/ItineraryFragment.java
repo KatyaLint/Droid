@@ -271,6 +271,7 @@ public class ItineraryFragment extends HGBAbtsractFragment {
                     getActivityInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber(),null);
 
                 }else if (NodeTypeEnum.HOTEL.getType().equals(nodeType)){
+
                     TextView grid_hotel_name = (TextView)view.findViewById(R.id.grid_hotel_name);
                     String guidSelectedUser = grid_hotel_name.getTag().toString();
 

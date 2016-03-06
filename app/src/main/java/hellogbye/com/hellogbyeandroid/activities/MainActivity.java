@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
     private ArrayList<CompanionVO> companions;
     private ArrayList<CompanionStaticRelationshipTypesVO> componionStaticDescriptionVOs;
+    private MyTripsFragment.OnItemClickListener editMyTripsClickCB;
 
 
     @Override
@@ -197,6 +198,52 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     }
 
+
+    private void editMyTrips(){
+        final FontTextView my_trip_edit_button = (FontTextView) mToolbar.findViewById(R.id.my_trip_edit_button);
+        my_trip_edit_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(my_trip_edit_button.getText().equals("Edit")) {
+                    editMyTripsClickCB.onItemEditMyTripsClick("edit");
+                    my_trip_edit_button.setText("Done");
+                }else{
+                    editMyTripsClickCB.onItemEditMyTripsClick("done");
+                    my_trip_edit_button.setText("Edit");
+                }
+            }
+        });
+
+    }
+
+
+    private void preferencesChanges(){
+        final ImageButton edit_preferences = (ImageButton) mToolbar.findViewById(R.id.edit_preferences);
+        edit_preferences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View checkButton = mToolbar.findViewById(R.id.check_preferences);
+                if(checkButton.getVisibility() == View.VISIBLE){
+                    //delete
+                    editClickCB.onItemClick("delete");
+                }else if(checkButton.getVisibility() == View.GONE){
+                    edit_preferences.setBackgroundResource(R.drawable.ic_delete);
+                    mToolbar.findViewById(R.id.check_preferences).setVisibility(View.VISIBLE);
+                    editClickCB.onItemClick("edit");
+                }
+            }
+        });
+
+        final ImageButton check_preferences = (ImageButton) mToolbar.findViewById(R.id.check_preferences);
+        check_preferences.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                mToolbar.findViewById(R.id.check_preferences).setVisibility(View.GONE);
+                edit_preferences.setBackgroundResource(R.drawable.edit_img);
+                editClickCB.onItemClick("done");
+            }
+        });
+    }
     private void initToolBar() {
 
         setSupportActionBar(mToolbar);
@@ -227,31 +274,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             }
         });
 
-        final ImageButton edit_preferences = (ImageButton) mToolbar.findViewById(R.id.edit_preferences);
-        edit_preferences.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View checkButton = mToolbar.findViewById(R.id.check_preferences);
-                if(checkButton.getVisibility() == View.VISIBLE){
-                    //delete
-                    editClickCB.onItemClick("delete");
-                }else if(checkButton.getVisibility() == View.GONE){
-                    edit_preferences.setBackgroundResource(R.drawable.ic_delete);
-                    mToolbar.findViewById(R.id.check_preferences).setVisibility(View.VISIBLE);
-                    editClickCB.onItemClick("edit");
-                }
-            }
-        });
+        editMyTrips();
 
-        final ImageButton check_preferences = (ImageButton) mToolbar.findViewById(R.id.check_preferences);
-        check_preferences.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                mToolbar.findViewById(R.id.check_preferences).setVisibility(View.GONE);
-                edit_preferences.setBackgroundResource(R.drawable.edit_img);
-                editClickCB.onItemClick("done");
-            }
-        });
+        preferencesChanges();
+
 
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -599,8 +625,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         boolean stashToBack = true;
         int navPosition = position;//navBar.getNavNumber();
 
-
-
         switch (navBar) {
             case HOME:
                 //  fragment = HomeFragment.newInstance(navPosition);
@@ -633,7 +657,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case ALTERNATIVE_FLIGHT:
                 fragment = AlternativeFlightFragment.newInstance(navPosition);
-               // stashToBack = false;
+                stashToBack = false;
                 break;
             case HOTEL:
                 fragment = HotelFragment.newInstance(navPosition);
@@ -692,11 +716,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         if (onBackPressedListener != null) {
             onBackPressedListener.doBack();
         }
-
         //TODO this is when I want the fragment to contorl the back -Kate I suggest we do this for all Fragments
         FragmentManager.BackStackEntry backEntry = getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1);
         String str = backEntry.getName();
-        if (str.equals(HotelFragment.class.toString())) {
+        if (str.equals(HotelFragment.class.toString()) &&  !HotelFragment.IS_MAIN_BACK_ALLOWED) {
             return;
         }
 
@@ -935,5 +958,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     public void setEditClickCB(PreferenceSettingsFragment.OnItemClickListener editClickCB) {
         this.editClickCB = editClickCB;
+    }
+
+
+    public void setEditMyTripsClickCB(MyTripsFragment.OnItemClickListener editMyTripsClickCB) {
+        this.editMyTripsClickCB = editMyTripsClickCB;
     }
 }
