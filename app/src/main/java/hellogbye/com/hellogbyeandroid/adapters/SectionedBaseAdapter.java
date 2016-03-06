@@ -207,4 +207,5 @@ public abstract class SectionedBaseAdapter extends BaseAdapter implements Pinned
         return mSectionCount;
     }
 
+
 }

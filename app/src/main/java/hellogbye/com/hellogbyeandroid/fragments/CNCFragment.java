@@ -230,7 +230,7 @@ public class CNCFragment extends HGBAbtsractFragment {
                                     AirportResultsVO choosenAirport = findChoosenAirport(inputItem, results);
                                     airportSendValuesVO.setId(choosenAirport.getId());
 
-                                    //Kate
+
                                     String location = HGBUtility.getLocation(getActivity());
 
                                     HGBUtility.removeGPSListener();
@@ -275,6 +275,15 @@ public class CNCFragment extends HGBAbtsractFragment {
         mAdapter.notifyDataSetChanged();
     }
 
+
+    public void handleErrorHGBMessage(String strMessage) {
+
+        getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.HGB_ERROR_ITEM));
+
+        removeWaitingItem();
+        mAdapter.notifyDataSetChanged();
+    }
+
     ArrayList<AirportSendValuesVO> airportSendValuesVOs = new ArrayList<AirportSendValuesVO>();
     int maxAirportSize = 0;
 
@@ -291,7 +300,8 @@ public class CNCFragment extends HGBAbtsractFragment {
                     @Override
                     public void onError(Object data) {
                         HGBUtility.removeGPSListener();
-                        handleHGBMessage((String) data);
+                        handleErrorHGBMessage( (String) data);
+                       // handleHGBMessage((String) data);
                     }
                 }
         );
@@ -319,7 +329,12 @@ public class CNCFragment extends HGBAbtsractFragment {
                 @Override
                 public void onError(Object data) {
                     airportSendValuesVOs.clear();
-                    handleHGBMessage((String) data );
+                    if(data != null) {
+                        handleErrorHGBMessage( (String) data);
+                       // handleHGBMessage((String) data);
+                    }else{
+                        handleErrorHGBMessage("CNC request failed");
+                    }
                 }
             });
     }

@@ -79,11 +79,10 @@
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:background="@color/white"
             android:id="@+id/companion_add_relationship"
-            android:layout_margin="@dimen/DP2"
+            android:layout_margin="@dimen/DP10"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/DP24"
-
+            android:layout_height="@dimen/DP34"
             app:fontName="dinnextltpro_light.otf"
             android:textColor="@color/black"
             android:textSize="@dimen/SP14"
@@ -122,32 +121,32 @@
     <include layout="@layout/bottom_separator" />
 
 
-    <LinearLayout
+    <!--<LinearLayout-->
 
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:layout_width="wrap_content"
-            android:layout_margin="@dimen/DP10"
-            app:fontName="dinnextltpro_regular.otf"
-            android:textColor="@color/warm_grey"
-            android:textSize="@dimen/SP12"
-            android:layout_height="wrap_content"
-            android:text="@string/component_title" />
+        <!--android:background="@color/white"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+        <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_margin="@dimen/DP10"-->
+            <!--app:fontName="dinnextltpro_regular.otf"-->
+            <!--android:textColor="@color/warm_grey"-->
+            <!--android:textSize="@dimen/SP12"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/component_title" />-->
 
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:layout_width="match_parent"
-            android:layout_margin="@dimen/DP10"
-            android:id="@+id/companion_title"
-            app:fontName="dinnextltpro_regular.otf"
-            android:textColor="@color/dark_teal"
-            android:textSize="@dimen/SP12"
-            android:layout_height="wrap_content"
-            android:text="Name" />
+        <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_margin="@dimen/DP10"-->
+            <!--android:id="@+id/companion_title"-->
+            <!--app:fontName="dinnextltpro_regular.otf"-->
+            <!--android:textColor="@color/dark_teal"-->
+            <!--android:textSize="@dimen/SP12"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Name" />-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
     <include layout="@layout/bottom_separator" />
 
 

@@ -71,8 +71,8 @@ public class CompanionDetailsFragment  extends HGBAbtsractFragment {
 
         CompanionUserProfileVO profileData = companionVO.getCampanionUserProfile();
 
-        FontTextView companion_title = (FontTextView) view.findViewById(R.id.companion_title);
-        companion_title.setText(profileData.getmTitle());
+//        FontTextView companion_title = (FontTextView) view.findViewById(R.id.companion_title);
+//        companion_title.setText(profileData.getmTitle());
 
         FontTextView companion_name_details = (FontTextView) view.findViewById(R.id.companion_name_details);
         companion_name_details.setText(profileData.getmFirstName());
@@ -89,7 +89,7 @@ public class CompanionDetailsFragment  extends HGBAbtsractFragment {
 
 
         FontTextView companion_added_date = (FontTextView) view.findViewById(R.id.companion_added_date);
-        companion_added_date.setText(companionVO.getmAddedatetime());
+        companion_added_date.setText("Added:" + HGBUtility.parseDateToddMMyyyyForPayment(companionVO.getmAddedatetime()));
 
 //       final Button companion_add_relationship = (Button) view.findViewById(R.id.companion_add_relationship);
 //        companion_add_relationship.setText(companionVO.getRelationshiptype());
@@ -156,10 +156,10 @@ public class CompanionDetailsFragment  extends HGBAbtsractFragment {
             addressTitle = profileData.getmCity();
         }
         if(profileData.getmCountry() != null){
-            addressTitle = "," + profileData.getmCountry();
+            addressTitle = addressTitle + ", " + profileData.getmCountry();
         }
         if(profileData.getmState() != null){
-            addressTitle = ", " + profileData.getmState();
+            addressTitle = addressTitle + ", " + profileData.getmState();
         }
         FontTextView companion_details_city = (FontTextView) view.findViewById(R.id.companion_details_city);
         companion_details_city.setText(addressTitle);
@@ -177,14 +177,12 @@ public class CompanionDetailsFragment  extends HGBAbtsractFragment {
         ConnectionManager.getInstance(getActivity()).putCompanionRelationship(paxID, relationshiptypeId,new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                System.out.println("Kate onSuccess");
             }
 
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.show(getFragmentManager(), (String) data);
-                System.out.println("Kate onError");
             }
         });
     }
