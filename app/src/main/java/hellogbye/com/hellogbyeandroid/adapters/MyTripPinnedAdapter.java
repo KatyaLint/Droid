@@ -183,7 +183,7 @@ public class MyTripPinnedAdapter extends SectionedBaseAdapter {
 //get city image
          //   cityURLBase = cityURLBase + "NYC.jpg";//item.getName();
         //    holder.my_trip_user_image.setBackgroundResource(R.drawable.cityavatar);
-            System.out.println("Kate  item.getUrlToCityView() =" +  item.getUrlToCityView());
+
             HGBUtility.loadRoundedImage( item.getUrlToCityView(),  holder.my_trip_user_image, R.drawable.cityavatar);
             holder.my_trip_name.setText(item.getName());
             holder.my_trip_dates.setText(HGBUtility.parseDateToddMMyyyyMyTrip(item.getStartdate())+" - "+HGBUtility.parseDateToddMMyyyyMyTrip(item.getEnddate()));

@@ -89,20 +89,12 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AcountDe
                 settings_flight_title.setText(attribute.getmProfileName());
                 settings_flight_title.setTag(attribute.getmId());
 
-            settings_flight_title.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    System.out.println("Kate clicked");
-                }
-            });
-
-
             LinearLayout settings_radio_button_ll = (LinearLayout)v.findViewById(R.id.settings_radio_button_ll);
             settings_radio_button_ll.setTag(attribute.getmId());
             settings_radio_button_ll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    System.out.println("Kate item clicked position =" + view.getTag().toString());
+
                     listLineClicked.clickedItem(view.getTag().toString());
 
                 }

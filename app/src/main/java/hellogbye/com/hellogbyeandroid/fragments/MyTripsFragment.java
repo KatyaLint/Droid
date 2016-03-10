@@ -134,7 +134,7 @@ public class MyTripsFragment extends HGBAbtsractFragment {
         ConnectionManager.getInstance(getActivity()).getMyTrips(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                System.out.println("Kate getActivity()).getMyTrips");
+
                 mItemsList = (ArrayList<MyTripItem>) data;
                 createCityImageUrl(mItemsList);
                 mCurrItemsList = new ArrayList<MyTripItem>(mItemsList);

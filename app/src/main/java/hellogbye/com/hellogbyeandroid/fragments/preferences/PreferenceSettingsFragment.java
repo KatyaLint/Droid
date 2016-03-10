@@ -91,23 +91,12 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
         }
     }
 
-    AdapterView.OnItemClickListener listClickedLiatener =  new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            System.out.println("Kate click adapter");
-
-        }
-    };
-
 
 public interface ListLineClicked{
     void clickedItem(String itemID);
 }
 
     private void createListAdapter() {
-        System.out.println("Kate createListAdapter");
-
-
 
         //Factory implementation :)
         Bundle args = getArguments();
