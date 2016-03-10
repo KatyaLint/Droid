@@ -49,7 +49,7 @@
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:background="@drawable/squere_field"
                 android:id="@+id/companion_personal_settings_name"
                 app:fontName="dinnextltpro_regular.otf"
                 android:text="Name"
@@ -60,7 +60,7 @@
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:background="@drawable/squere_field"
                 android:id="@+id/companion_personal_settings_last"
                 app:fontName="dinnextltpro_regular.otf"
                 android:textColor="@color/dark_teal"

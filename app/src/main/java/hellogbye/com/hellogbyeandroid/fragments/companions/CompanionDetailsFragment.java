@@ -166,7 +166,7 @@ public class CompanionDetailsFragment  extends HGBAbtsractFragment {
 
 
         ImageView companion_details_image = (ImageView) view.findViewById(R.id.companion_details_image);
-        HGBUtility.loadRoundedImage(getActivity().getApplicationContext(),profileData.getmAvatar(),companion_details_image);
+        HGBUtility.loadRoundedImage(profileData.getmAvatar(),companion_details_image, R.drawable.profile_image);
        // MyTripPinnedAdapter sectionedAdapter = new MyTripPinnedAdapter(mItemsList);
 
     }

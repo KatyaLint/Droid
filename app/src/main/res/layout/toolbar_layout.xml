@@ -10,21 +10,42 @@
     android:background="@color/hgb_toolbar_blue">
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/title_bar_logo"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:id="@+id/home_image" />
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/title_bar_logo"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:visibility="gone"-->
+        <!--android:id="@+id/home_image" />-->
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+
+    <LinearLayout
+        android:id="@+id/tool_bar_profile_name"
         android:layout_gravity="center"
-        android:id="@+id/titleBar"
-        android:textColor="@color/white"
-        android:visibility="gone"/>
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+        <hellogbye.com.hellogbyeandroid.views.RoundedImageView
+            android:layout_width="@dimen/DP44"
+            android:layout_height="@dimen/DP44"
+            android:visibility="visible"
+            android:layout_gravity="center"
+            android:id="@+id/my_trips_image_profile"
+            android:layout_marginRight="@dimen/DP10"/>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_trip_profile"
+            android:textColor="@color/white"
+            android:text="Default"
+            android:layout_gravity="center"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -53,7 +74,7 @@
         android:layout_marginRight="@dimen/DP14"
         android:background="@drawable/icon_shopping_cart_white"
         android:id="@+id/my_trips_button"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 
 
 
@@ -74,11 +95,18 @@
         android:textColor="@color/white"
         android:text="@string/tool_bar"
         android:layout_marginRight="@dimen/DP14"
-        android:visibility="visible"
+        android:visibility="gone"
         android:paddingLeft="@dimen/DP10"
 
         />
-
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/titleBar"
+        android:text="My Trips"
+        android:textColor="@color/white"
+        android:visibility="visible"/>
 
     <LinearLayout
         android:id="@+id/preferences_edit_mode"

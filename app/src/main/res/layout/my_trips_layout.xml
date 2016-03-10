@@ -6,6 +6,53 @@
     android:orientation="vertical">
 
 
+    <LinearLayout
+        android:background="@color/hgb_toolbar_blue"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DP34"
+        android:orientation="horizontal">
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/my_trips_all"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/SP16"
+            app:fontName="dinnextltpro_medium.otf"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/my_trips_all"/>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/my_trips_paid"
+            android:textSize="@dimen/SP16"
+            app:fontName="dinnextltpro_medium.otf"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/my_trips_paid"/>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/my_trips_favorites"
+            android:textSize="@dimen/SP16"
+            app:fontName="dinnextltpro_medium.otf"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/my_trips_favorites"/>
+    </LinearLayout>
+
+
+    <SearchView
+        android:layout_width="match_parent"
+        android:id="@+id/my_trip_search_view"
+        android:focusableInTouchMode="true"
+        android:layout_height="wrap_content"/>
+
     <hellogbye.com.hellogbyeandroid.views.PinnedHeaderListView
         android:id="@+id/pinnedListView"
         android:layout_width="match_parent"

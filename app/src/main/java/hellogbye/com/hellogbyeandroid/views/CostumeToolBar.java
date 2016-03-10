@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 public class CostumeToolBar extends Toolbar {
@@ -29,6 +30,8 @@ public class CostumeToolBar extends Toolbar {
     private ImageButton check_preferences;
     private ImageButton my_trips_button;
     private FontTextView my_trip_edit_button;
+    private ImageView my_trips_image_profile;
+    private FontTextView my_trip_profile;
 
     public CostumeToolBar(Context context) {
         super(context);
@@ -50,11 +53,16 @@ public class CostumeToolBar extends Toolbar {
     public void initToolBarItems() {
 
 
-        if (homeTitleImage == null) {
-            homeTitleImage = (ImageView) findViewById(R.id.home_image);
+//        if (homeTitleImage == null) {
+//            homeTitleImage = (ImageView) findViewById(R.id.home_image);
+//        }
+        if(my_trip_profile == null){
+            my_trip_profile = (FontTextView)findViewById(R.id.my_trip_profile);
         }
         if (titleText == null) {
             titleText = (FontTextView) findViewById(R.id.titleBar);
+        }if(my_trips_image_profile == null){
+            my_trips_image_profile = (ImageView)findViewById(R.id.my_trips_image_profile);
         }
         if (keyBoardImage == null) {
             keyBoardImage = (ImageButton) findViewById(R.id.keyboard);
@@ -86,7 +94,8 @@ public class CostumeToolBar extends Toolbar {
 
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
 
-        homeTitleImage.setVisibility(View.GONE);
+   //     homeTitleImage.setVisibility(View.GONE);
+        my_trip_profile.setVisibility(View.GONE);
         titleText.setVisibility(View.GONE);
         keyBoardImage.setVisibility(View.GONE);
         purchaseButton.setVisibility(View.GONE);
@@ -97,36 +106,35 @@ public class CostumeToolBar extends Toolbar {
         check_preferences.setVisibility(View.GONE);
         my_trips_button.setVisibility(View.GONE);
         my_trip_edit_button.setVisibility(View.GONE);
+        my_trips_image_profile.setVisibility(View.GONE);
 
         switch (navBar) {
-            case HOME:
-                homeTitleImage.setVisibility(View.VISIBLE);
-                keyBoardImage.setVisibility(View.VISIBLE);
-
-                break;
+//            case HOME:
+//             //   homeTitleImage.setVisibility(View.VISIBLE);
+//                my_trip_profile.setVisibility(View.VISIBLE);
+//                keyBoardImage.setVisibility(View.VISIBLE);
+//
+//                break;
             case ITINARERY:
                 titleText.setVisibility(View.VISIBLE);
                 purchaseButton.setVisibility(View.VISIBLE);
-                favoriteButton.setVisibility(View.GONE);
-                keyBoardImage.setVisibility(View.GONE);
+
                 break;
-            case HISTORY:
-                titleText.setVisibility(View.VISIBLE);
-                keyBoardImage.setVisibility(View.INVISIBLE);
-                break;
+//            case HISTORY:
+//                titleText.setVisibility(View.VISIBLE);
+//                keyBoardImage.setVisibility(View.INVISIBLE);
+//                break;
             case TRIPS:
                 my_trip_edit_button.setVisibility(View.VISIBLE);
                 titleText.setVisibility(View.VISIBLE);
-                keyBoardImage.setVisibility(View.INVISIBLE);
                 my_trips_button.setVisibility(View.VISIBLE);
+
                 break;
             case COMPANIONS:
                 titleText.setVisibility(View.VISIBLE);
-                keyBoardImage.setVisibility(View.INVISIBLE);
                 break;
             case PREFERENCE:
                 titleText.setVisibility(View.VISIBLE);
-                check_preferences.setVisibility(View.GONE);
                 preferences_edit_mode.setVisibility(View.VISIBLE);
                 edit_preferences.setVisibility(View.VISIBLE);
                 break;
@@ -136,19 +144,18 @@ public class CostumeToolBar extends Toolbar {
             case PREFERENCES_SPECIFIC_LIST_SETTINGS:
             case  PREFERENCES_DRAG_LIST_SETTINGS:
                 titleText.setVisibility(View.VISIBLE);
-                check_preferences.setVisibility(View.GONE);
                 break;
             case ACCOUNT:
                 titleText.setVisibility(View.VISIBLE);
-                keyBoardImage.setVisibility(View.INVISIBLE);
                 break;
             case HELP:
                 titleText.setVisibility(View.VISIBLE);
-                keyBoardImage.setVisibility(View.INVISIBLE);
                 break;
             case CNC:
-                titleText.setVisibility(View.INVISIBLE);
-                homeTitleImage.setVisibility(View.VISIBLE);
+                my_trips_image_profile.setImageBitmap(HGBUtility.getBitmapFromCache(mContext));
+                my_trips_image_profile.setVisibility(View.VISIBLE);
+                //homeTitleImage.setVisibility(View.VISIBLE);
+                my_trip_profile.setVisibility(View.VISIBLE);
                 keyBoardImage.setVisibility(View.VISIBLE);
                 break;
             case COMPANIONS_PERSONAL_DETAILS:

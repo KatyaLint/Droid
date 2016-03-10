@@ -12,7 +12,7 @@
         android:background="@drawable/delete"
         android:layout_height="wrap_content" />
 
-    <ImageView
+    <hellogbye.com.hellogbyeandroid.views.RoundedImageView
         android:paddingLeft="@dimen/DP10"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/my_trip_delete"

@@ -2,16 +2,21 @@ package hellogbye.com.hellogbyeandroid.fragments;
 
 import android.app.Fragment;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -38,6 +43,7 @@ import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -54,6 +60,7 @@ public class CNCFragment extends HGBAbtsractFragment {
     private HGBPreferencesManager mHGBPrefrenceManager;
 
     private String[] locationArr;
+    private Button cnc_fragment_trip_settings;
 
 
     public static Fragment newInstance(int position) {
@@ -67,8 +74,10 @@ public class CNCFragment extends HGBAbtsractFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+       // getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         View rootView = inflater.inflate(R.layout.cnc_fragment_layout, container, false);
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         mHGBPrefrenceManager = HGBPreferencesManager.getInstance(getActivity().getApplicationContext());
         init(rootView);
         initList();
@@ -93,7 +102,7 @@ public class CNCFragment extends HGBAbtsractFragment {
             public void onItemClick(View view, int position) {
                 String strText = getActivityInterface().getCNCItems().get(position).getText();
                 //TODO this logic needs to change once we get final api
-                if (getString(R.string.iteinerary_created).equals(strText)
+                if (getString(R.string.itinerary_created).equals(strText)
                         || getString(R.string.grid_has_been_updated).equals(strText)) {
                     getActivityInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(),null);
                 }
@@ -109,8 +118,15 @@ public class CNCFragment extends HGBAbtsractFragment {
 //        if ("".equals(strCNCList) && getActivityInterface().getCNCItems()== null ||
 //                strCNCList==null && getActivityInterface().getCNCItems()== null) {
         if (   (strCNCList.equals("") || strCNCList.equals("null")) && getActivityInterface().getCNCItems()== null ) {
+            Resources res = getResources();
+            String userName = "";
+           if( getActivityInterface().getCurrentUser() != null){
+               userName = getActivityInterface().getCurrentUser().getFirstname();
+           }
+            String text = String.format(res.getString(R.string.default_cnc_message),userName );
 
-            getActivityInterface().addCNCItem(new CNCItem(getResources().getString(R.string.default_cnc_message), CNCAdapter.HGB_ITEM));
+
+            getActivityInterface().addCNCItem(new CNCItem(text, CNCAdapter.HGB_ITEM));
         } else {
 
             if (getActivityInterface().getCNCItems() == null) {
@@ -125,14 +141,22 @@ public class CNCFragment extends HGBAbtsractFragment {
                 }
             }
 
-
         }
 
     }
 
     private void init(View view) {
+
+        cnc_fragment_trip_settings = (Button)view.findViewById(R.id.cnc_fragment_trip_settings);
+        cnc_fragment_trip_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCE.getNavNumber(), null);
+            }
+        });
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.cnc_recycler_view);
-        mEditText = (EditText) view.findViewById(R.id.cnc_edit_text);
+        mEditText = (FontEditTextView) view.findViewById(R.id.cnc_edit_text);
         mMicImageView = (ImageView) view.findViewById(R.id.cnc_mic);
         mSendTextView = (FontTextView) view.findViewById(R.id.cnc_send);
         mSendTextView.setOnClickListener(new View.OnClickListener() {
@@ -235,7 +259,7 @@ public class CNCFragment extends HGBAbtsractFragment {
 
                                     HGBUtility.removeGPSListener();
                                     if (location == null) { // no location found
-                                        handleHGBMessage(getString(R.string.iteinerary_try_again));
+                                        handleHGBMessage(getString(R.string.itinerary_try_again));
                                         return;
                                     }
                                     locationArr = location.split("&");
@@ -316,7 +340,7 @@ public class CNCFragment extends HGBAbtsractFragment {
                     HGBUtility.removeGPSListener();
                     UserTravelMainVO userTraveler = (UserTravelMainVO) data;
                     if (getActivityInterface().getSolutionID() == null) {
-                        handleHGBMessage(getString(R.string.iteinerary_created));
+                        handleHGBMessage(getString(R.string.itinerary_created));
                     }else{
                         handleHGBMessage(getString(R.string.grid_has_been_updated));
                     }

@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
 
-        <ImageView
+        <hellogbye.com.hellogbyeandroid.views.RoundedImageView
             android:id="@+id/account_details_image"
             android:layout_width="@dimen/DP100"
             android:layout_height="@dimen/DP100"

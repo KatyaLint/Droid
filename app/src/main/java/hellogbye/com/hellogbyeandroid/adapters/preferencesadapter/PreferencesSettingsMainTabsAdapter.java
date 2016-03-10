@@ -57,7 +57,7 @@ public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<Pre
             }
         }
       //  holder.setting_flight_text.setText(strAttributes);
-        holder.setting_flight_text.setTag(position);
+        holder.settings_item_check_ll.setTag(position);
         holder.settings_flight_title.setText(item.getmName());
         holder.settings_flight_title.setTag(item.getmId());
         holder.setting_check_image.setBackgroundResource(R.drawable.check_off);
@@ -73,12 +73,12 @@ public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<Pre
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private FontTextView settings_flight_title;
-        private LinearLayout setting_flight_text;
+        private LinearLayout settings_item_check_ll;
         private ImageView setting_check_image;
         public ViewHolder(View itemView) {
             super(itemView);
             settings_flight_title = (FontTextView) itemView.findViewById(R.id.settings_check_name);
-            setting_flight_text = (LinearLayout) itemView.findViewById(R.id.settings_chack_ll);
+            settings_item_check_ll = (LinearLayout) itemView.findViewById(R.id.settings_item_check_ll);
             setting_check_image = (ImageView) itemView.findViewById(R.id.setting_check_image);
 
             itemView.setOnClickListener(this);
@@ -89,8 +89,8 @@ public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<Pre
         public void onClick(View view) {
 
             FontTextView textView = (FontTextView) view.findViewById(R.id.settings_check_name);
-            LinearLayout textViewText = (LinearLayout) view.findViewById(R.id.settings_chack_ll);
-            mItemClickListener.onItemClick(textView.getTag().toString(), textViewText.getTag().toString());
+            LinearLayout settings_item_check_ll = (LinearLayout) view.findViewById(R.id.settings_item_check_ll);
+            mItemClickListener.onItemClick(textView.getTag().toString(), settings_item_check_ll.getTag().toString());
         }
     }
 

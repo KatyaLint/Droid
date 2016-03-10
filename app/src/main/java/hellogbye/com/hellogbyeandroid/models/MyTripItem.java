@@ -33,6 +33,8 @@ public class MyTripItem {
     private String startdate;
 
 
+    private String urlToCityView = "http://cnc.hellogbye.com/images/cities/";
+
     private boolean editDelete = false;
 
 
@@ -51,6 +53,7 @@ public class MyTripItem {
 
     public void setName(String name) {
         this.name = name;
+
     }
 
     public boolean isfavorite() {
@@ -107,5 +110,20 @@ public class MyTripItem {
 
     public void setEditDelete(boolean editDelete) {
         this.editDelete = editDelete;
+    }
+
+    public String getUrlToCityView() {
+        return urlToCityView;
+    }
+
+    public void setUrlToCityView(String urlToCitView) {
+
+        try {
+            String extensionRemoved = name.split(":")[1];
+            this.urlToCityView = urlToCityView + extensionRemoved.trim() + ".jpg";
+        }catch(Exception e){
+
+        }
+      //  this.urlToCityView = urlToCityView;
     }
 }

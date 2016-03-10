@@ -8,11 +8,11 @@
 
     android:orientation="horizontal">
 
-  <ImageView
+  <hellogbye.com.hellogbyeandroid.views.RoundedImageView
       android:layout_centerVertical="true"
       android:id="@+id/companion_image_view"
-      android:layout_width="@dimen/DP54"
-      android:layout_height="@dimen/DP54"
+      android:layout_width="@dimen/DP60"
+      android:layout_height="@dimen/DP60"
       android:src="@drawable/adventurous_traveler_icn"
        />
 

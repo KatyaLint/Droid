@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.crashlytics.android.Crashlytics;
@@ -71,6 +72,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.network.Parser;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.SpeechRecognitionUtil;
@@ -167,6 +169,29 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         initToolBar();
         setNameInNavDraw();
 
+
+        getUserData();
+    }
+
+
+
+    private void getUserData(){
+        ConnectionManager.getInstance(MainActivity.this).getUserProfile(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+                UserData mCurrentUser = (UserData) data;
+                setCurrentUser(mCurrentUser);
+                HGBUtility.getAndSaveUserImage(mCurrentUser.getAvatar(), new ImageView(MainActivity.this));
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
     }
 
     private void setNameInNavDraw() {
@@ -188,7 +213,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
                 @Override
                 public void onError(Object data) {
-
+                    HGBErrorHelper errorHelper = new HGBErrorHelper();
+                    errorHelper.show(getFragmentManager(), (String) data);
                 }
             });
         } else {
@@ -216,6 +242,23 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     }
 
+
+    private void toolBarProfileChnage(){
+
+        final LinearLayout tool_bar_profile_name = (LinearLayout) mToolbar.findViewById(R.id.tool_bar_profile_name);
+        tool_bar_profile_name.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                Bundle args = new Bundle();
+                args.putString("edit_mode", "true");
+                goToFragment(ToolBarNavEnum.PREFERENCE.getNavNumber(), args);
+                                LinearLayout edit_preferences = (LinearLayout) mToolbar.findViewById(R.id.preferences_edit_mode);
+                edit_preferences.setVisibility(View.GONE);
+            }
+        });
+
+    }
 
     private void preferencesChanges(){
         final ImageButton edit_preferences = (ImageButton) mToolbar.findViewById(R.id.edit_preferences);
@@ -278,6 +321,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         preferencesChanges();
 
+        toolBarProfileChnage();
 
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -310,7 +354,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
 
         //HGBUtility.loadHotelImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
-        selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null);
+        selectItem(ToolBarNavEnum.HOME.getNavNumber(), null);
 
     }
 
@@ -324,23 +368,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         ((CNCFragment) currentFragment).initList();
     }
 
-//    private void setHomeFragmentState(String id) {
-//        try {
-//            Fragment currentFragment = getFragmentManager().findFragmentByTag(HomeFragment.class.toString());
-//
-//            if (id.equals("keyboard")) {
-//                ((HomeFragment) currentFragment).setKeyboardMode();
-//            } else if (id.equals("mic")) {
-//                ((HomeFragment) currentFragment).setMicMode();
-//            }
-//            setHomeImage(id);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            Crashlytics.logException(e);
-//        }
-//
-//    }
+
 
     private void loadNavItems() {
         mNavItemsList = new ArrayList<>();
@@ -348,13 +376,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mNavItemsList.add(new NavItem(ToolBarNavEnum.COMPANIONS, false));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.PREFERENCE, false));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.ACCOUNT, false));
-    //    mNavItemsList.add(new NavItem(ToolBarNavEnum.HELP, false));
-
-
-//        mNavItemsList.add(new NavItem(ToolBarNavEnum.HOME, true));
-//        mNavItemsList.add(new NavItem(ToolBarNavEnum.ITINARERY, false));
-//        mNavItemsList.add(new NavItem(ToolBarNavEnum.HISTORY, false));
-
 
     }
 

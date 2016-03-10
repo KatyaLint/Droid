@@ -19,6 +19,8 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -26,7 +28,9 @@ import android.location.LocationManager;
 import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -44,6 +48,7 @@ import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
@@ -55,6 +60,8 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.process.BitmapProcessor;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -66,6 +73,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import java.util.Random;
 import java.util.Stack;
 
 import hellogbye.com.hellogbyeandroid.R;
@@ -84,28 +92,133 @@ public class HGBUtility {
     private static Stack<Fragment> fragmentStack = new Stack<Fragment>();
     private static LocationManager lm;
 
-    public static void loadRoundedImage(Context context, String imageUrl, ImageView imageView) {
+    public static void downloadImage(Bitmap showedImgae){
 
-    //    imageUrl = imageUrl + ".png";
+        String root = Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/DCIM/HGB");
+        myDir.mkdirs();
+
+        String fname = "mainusername.png";
+        File file = new File (myDir, fname);
+        if (file.exists ()) file.delete ();
+        try {
+            FileOutputStream out = new FileOutputStream(file); //
+         //   showedImgae = getRoundedCornerBitmap(showedImgae, 100);
+            showedImgae.compress(Bitmap.CompressFormat.PNG, 100, out); // may be save but not round
+          //  Toast.makeText(MyActivity.this, "Image Saved", Toast.LENGTH_SHORT).show();
+            out.flush();
+            out.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+//        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//        Uri contentUri = Uri.fromFile(file);
+//        mediaScanIntent.setData(contentUri);
+      //  getApplicationContext().sendBroadcast(mediaScanIntent);
+    }
+
+    public static Bitmap getBitmapFromCache(Context context){
+
+        File sd = Environment.getExternalStorageDirectory();
+        File image = new File(sd+"/DCIM/HGB/", "mainusername.png");
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(),bmOptions);
+        if(bitmap != null) {
+            bitmap = Bitmap.createScaledBitmap(bitmap, 60, 60, true);
+        }else{
+            Drawable myDrawable = context.getDrawable(R.drawable.profile_image);
+            bitmap = ((BitmapDrawable) myDrawable).getBitmap();
+        }
+
+
+        return bitmap;
+    }
+
+    public static void getAndSaveUserImage(String imageUrl, ImageView imageView){
+
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .considerExifParams(true)
                 .showImageForEmptyUri(R.drawable.profile_image)
-//                .cacheInMemory(true)
+                .cacheInMemory(true)
                 .showImageOnLoading(R.drawable.profile_image)
                 .showImageOnFail(R.drawable.profile_image)
                 .showImageForEmptyUri(R.drawable.profile_image)
                 .cacheOnDisk(true)
-                .postProcessor(new BitmapProcessor() {
-                    @Override
-                    public Bitmap process(Bitmap bmp) {
-                        try {
-                            return getRoundedCornerBitmap(Bitmap.createScaledBitmap(bmp, HGBConstants.PROFILE_IMAGE_WIDTH, HGBConstants.PROFILE_IMAGE_HEIGHT, false), 90);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        return null;
-                    }
-                })
+                .build();
+
+
+        ImageLoader imageLoader = ImageLoader.getInstance();
+
+
+        imageLoader.displayImage( imageUrl,imageView, options, new SimpleImageLoadingListener() {
+            @Override
+            public void onLoadingStarted(String imageUri, View view) {
+
+            }
+
+            @Override
+            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                String message = null;
+                switch (failReason.getType()) {
+                    case IO_ERROR:
+                        message = "Input/Output error";
+                        break;
+                    case DECODING_ERROR:
+                        message = "Image can't be decoded";
+                        break;
+                    case NETWORK_DENIED:
+                        message = "Downloads are denied";
+                        break;
+                    case OUT_OF_MEMORY:
+                        message = "Out Of Memory error";
+                        break;
+                    case UNKNOWN:
+                        message = "Unknown error";
+                        break;
+                }
+
+
+            }
+
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                downloadImage( loadedImage);
+
+
+            }
+        });
+    }
+
+
+
+
+
+
+
+    public static void loadRoundedImage(String imageUrl,final ImageView imageView, int tempAvatar) {
+
+    //    imageUrl = imageUrl + ".png";
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+               // .considerExifParams(true)
+                .showImageForEmptyUri(tempAvatar)
+                .cacheInMemory(true)
+                .showImageOnLoading(tempAvatar)
+                .showImageOnFail(tempAvatar) //R.drawable.profile_image
+                .showImageForEmptyUri(tempAvatar)
+                .cacheOnDisk(false)
+//                .postProcessor(new BitmapProcessor() {
+//                    @Override
+//                    public Bitmap process(Bitmap bmp) {
+//                        try {
+//                        //    return Bitmap.createScaledBitmap(bmp,  bmp.getWidth()/2,bmp.getHeight()/2, false);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                        return null;
+//                    }
+//                })
                 .build();
 
         ImageLoader.getInstance().displayImage(imageUrl, imageView, options, new ImageLoadingListener() {
@@ -176,6 +289,8 @@ public class HGBUtility {
         });
 
     }
+
+
 
     public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels) {
         Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap

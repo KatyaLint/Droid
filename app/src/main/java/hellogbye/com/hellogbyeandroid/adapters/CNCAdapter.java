@@ -5,11 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import pl.tajchert.sample.DotsTextView;
 
@@ -35,12 +37,12 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     class ViewHolderMe extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
         public FontTextView itemME;
-
+        private ImageView cnc_image_view_user;
 
         public ViewHolderMe(View itemLayoutView) {
             super(itemLayoutView);
             itemME = (FontTextView) itemLayoutView.findViewById(R.id.cnc_input);
-
+            cnc_image_view_user = (ImageView) itemLayoutView.findViewById(R.id.cnc_image_view_user);
             itemLayoutView.setOnClickListener(this);
 
         }
@@ -122,7 +124,7 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ViewHolderHGB hgbholder = (ViewHolderHGB) holder;
+
         String strMessage = mArrayList.get(position).getText();
 
         switch (holder.getItemViewType()) {
@@ -130,16 +132,17 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case ME_ITEM:
                 ViewHolderMe meholder = (ViewHolderMe) holder;
                 meholder.itemME.setText(strMessage);
+                meholder.cnc_image_view_user.setImageBitmap(HGBUtility.getBitmapFromCache(mContext));
                 break;
             case HGB_ERROR_ITEM:
-
-                hgbholder.itemHGB.setBackgroundResource(R.drawable.hgb_red_cnc_backround);
-                hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.black));
-                hgbholder.itemHGB.setPadding(30,30,30,30);
+                ViewHolderHGB hgbholderError = (ViewHolderHGB) holder;
+                hgbholderError.itemHGB.setBackgroundResource(R.drawable.hgb_red_cnc_backround);
+                hgbholderError.itemHGB.setTextColor(mContext.getResources().getColor(R.color.black));
+                hgbholderError.itemHGB.setPadding(30,30,30,30);
             break;
             case HGB_ITEM:
-
-                if (mContext.getResources().getString(R.string.iteinerary_created).equals(strMessage)
+                ViewHolderHGB hgbholder = (ViewHolderHGB) holder;
+                if (mContext.getResources().getString(R.string.itinerary_created).equals(strMessage)
                    ||mContext.getResources().getString(R.string.grid_has_been_updated).equals(strMessage)) {
                     hgbholder.itemHGB.setBackgroundResource(R.drawable.hgb_red_cnc_backround);
                     hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.black));
@@ -147,7 +150,7 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
                 else {
                     hgbholder.itemHGB.setBackgroundResource(R.drawable.hgb_cnc_backround);
-                    hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.cnc_hgb_text));
+                    hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.cnc_main_message_blue));
                     hgbholder.itemHGB.setPadding(30,30,30,30);
                 }
                 hgbholder.itemHGB.setText(strMessage);

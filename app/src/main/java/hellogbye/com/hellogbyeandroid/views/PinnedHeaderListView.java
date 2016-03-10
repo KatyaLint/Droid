@@ -14,16 +14,16 @@ public class PinnedHeaderListView extends ListView implements OnScrollListener {
 
     private OnScrollListener mOnScrollListener;
 
-    public static interface PinnedSectionedHeaderAdapter {
-        public boolean isSectionHeader(int position);
+    public  interface PinnedSectionedHeaderAdapter {
+         boolean isSectionHeader(int position);
 
-        public int getSectionForPosition(int position);
+         int getSectionForPosition(int position);
 
-        public View getSectionHeaderView(int section, View convertView, ViewGroup parent);
+         View getSectionHeaderView(int section, View convertView, ViewGroup parent);
 
-        public int getSectionHeaderViewType(int section);
+         int getSectionHeaderViewType(int section);
 
-        public int getCount();
+         int getCount();
 
 
     }

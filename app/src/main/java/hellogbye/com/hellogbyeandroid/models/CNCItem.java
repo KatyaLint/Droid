@@ -8,6 +8,7 @@ public class CNCItem {
     private String text;
     private int type;
 
+
     public CNCItem(){
 
     }
