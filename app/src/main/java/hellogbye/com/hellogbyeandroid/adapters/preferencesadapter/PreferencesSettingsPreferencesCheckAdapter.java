@@ -20,20 +20,20 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AcountDefaultSettingsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
 /**
  * Created by nyawka on 11/25/15.
  */
-public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<AcountDefaultSettingsVO> implements Swappable, SettingsAdapter {
+public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<AccountDefaultSettingsVO> implements Swappable, SettingsAdapter {
 
     private Context context;
-    private List<AcountDefaultSettingsVO> items;
+    private List<AccountDefaultSettingsVO> items;
     private boolean isEditMode = false;
     private PreferenceSettingsFragment.ListLineClicked listLineClicked;
-    public PreferencesSettingsPreferencesCheckAdapter(Context context, List<AcountDefaultSettingsVO> accountAttributes) {
+    public PreferencesSettingsPreferencesCheckAdapter(Context context, List<AccountDefaultSettingsVO> accountAttributes) {
         super(accountAttributes);
         //  items = accountAttributes;
         this.context = context;
@@ -49,18 +49,28 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Aco
         this.listLineClicked = listLineClicked;
     }
 
+    @Override
+    public void setSelectedRadioButtonListener(PreferenceSettingsFragment.ListRadioButtonClicked listRadioButtonClicked) {
+
+    }
+
+    @Override
+    public void selectedItemID(String id) {
+
+    }
+
     public void setEditMode(boolean isEditMode){
         this.isEditMode = isEditMode;
     }
 
     @Override
-    public boolean addAll(@NonNull Collection<? extends AcountDefaultSettingsVO> collection) {
+    public boolean addAll(@NonNull Collection<? extends AccountDefaultSettingsVO> collection) {
         // this.items = (List<SettingsValuesVO>) collection;
         return super.addAll(collection);
     }
 
     @Override
-    public boolean add(@NonNull AcountDefaultSettingsVO object) {
+    public boolean add(@NonNull AccountDefaultSettingsVO object) {
         return super.add(object);
     }
 
@@ -77,7 +87,7 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Aco
             v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.settings_item_check_layout, null);
         }
-        AcountDefaultSettingsVO attribute = this.getItem(position);//items.get(position);
+        AccountDefaultSettingsVO attribute = this.getItem(position);//items.get(position);
         if(attribute != null){
             FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_check_name);
 

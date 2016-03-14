@@ -9,7 +9,6 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
@@ -21,24 +20,22 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AcountDefaultSettingsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
 /**
  * Created by nyawka on 11/25/15.
  */
-public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AcountDefaultSettingsVO> implements Swappable, SettingsAdapter {
+public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountDefaultSettingsVO> implements Swappable, SettingsAdapter {
 
-    private Context context;
-    private List<AcountDefaultSettingsVO> items;
+
     private boolean isEditMode = false;
     private PreferenceSettingsFragment.ListLineClicked listLineClicked;
-
-    public PreferencesSettingsRadioButtonAdapter(Context context, List<AcountDefaultSettingsVO> accountAttributes) {
+    private PreferenceSettingsFragment.ListRadioButtonClicked listRadioButtonClickedClicked;
+    public PreferencesSettingsRadioButtonAdapter(Context context, List<AccountDefaultSettingsVO> accountAttributes) {
         super(accountAttributes);
-        //  items = accountAttributes;
-        this.context = context;
+
     }
 
 
@@ -51,18 +48,28 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AcountDe
         this.listLineClicked = listLineClicked;
     }
 
+    @Override
+    public void setSelectedRadioButtonListener(PreferenceSettingsFragment.ListRadioButtonClicked listRadioButtonClicked) {
+        this.listRadioButtonClickedClicked = listRadioButtonClicked;
+    }
+
+    @Override
+    public void selectedItemID(String id) {
+        this.selectedPreferebcesID = id;
+    }
+
     public void setEditMode(boolean isEditMode){
         this.isEditMode = isEditMode;
     }
 
     @Override
-    public boolean addAll(@NonNull Collection<? extends AcountDefaultSettingsVO> collection) {
+    public boolean addAll(@NonNull Collection<? extends AccountDefaultSettingsVO> collection) {
         // this.items = (List<SettingsValuesVO>) collection;
         return super.addAll(collection);
     }
 
     @Override
-    public boolean add(@NonNull AcountDefaultSettingsVO object) {
+    public boolean add(@NonNull AccountDefaultSettingsVO object) {
         return super.add(object);
     }
 
@@ -74,6 +81,11 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AcountDe
 
     int selectedPosition = 0;
 
+    public String selectedPreferebcesID="";
+
+
+
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View v = convertView;
@@ -82,12 +94,11 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AcountDe
             v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.settings_item_radio_button_layout, null);
         }
-        AcountDefaultSettingsVO attribute = this.getItem(position);//items.get(position);
+        AccountDefaultSettingsVO attribute = this.getItem(position);//items.get(position);
         if(attribute != null){
             FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_radio_name);
-
-                settings_flight_title.setText(attribute.getmProfileName());
-                settings_flight_title.setTag(attribute.getmId());
+            settings_flight_title.setText(attribute.getmProfileName());
+          //  settings_flight_title.setTag(attribute.getmId());
 
             LinearLayout settings_radio_button_ll = (LinearLayout)v.findViewById(R.id.settings_radio_button_ll);
             settings_radio_button_ll.setTag(attribute.getmId());
@@ -105,18 +116,21 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AcountDe
 //            settings_text_drag.setText(""+correntPosition);
             this.getItem(position).setRank("" + correntPosition);
 
-
-
-
+            if(selectedPreferebcesID.equals(attribute.getmId())){
+                selectedPosition = position;
+                selectedPreferebcesID = "";
+            }
 
             RadioButton r = (RadioButton)v.findViewById(R.id.setting_radio_image);
             r.setChecked(position == selectedPosition);
             r.setTag(position);
+
             r.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
                     selectedPosition = (Integer)view.getTag();
+                    listRadioButtonClickedClicked.clickedItem(selectedPosition);
                     notifyDataSetChanged();
 
                 }

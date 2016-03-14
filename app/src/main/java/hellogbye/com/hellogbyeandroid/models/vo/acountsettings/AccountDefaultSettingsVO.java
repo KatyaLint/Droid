@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by nyawka on 11/4/15.
  */
-public class AcountDefaultSettingsVO {
+public class AccountDefaultSettingsVO {
 
     private boolean isChecked = false;
 
@@ -16,6 +16,8 @@ public class AcountDefaultSettingsVO {
 
     @SerializedName("profilename")
     private String mProfileName;
+
+
 
     public String getmId() {
         return mId;
@@ -49,4 +51,5 @@ public class AcountDefaultSettingsVO {
     public void setChecked(boolean checked) {
         isChecked = checked;
     }
+
 }

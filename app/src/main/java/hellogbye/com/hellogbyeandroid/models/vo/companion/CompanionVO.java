@@ -21,8 +21,7 @@ public class CompanionVO {
     private String mAddedatetime;
 
     @SerializedName("companionuserprofile")
-    private
-    CompanionUserProfileVO campanionUserProfile ;
+    private CompanionUserProfileVO companionUserProfile;
 
 
     public String getmConfirmationstatus() {
@@ -33,12 +32,12 @@ public class CompanionVO {
         this.mConfirmationstatus = mConfirmationstatus;
     }
 
-    public CompanionUserProfileVO getCampanionUserProfile() {
-        return campanionUserProfile;
+    public CompanionUserProfileVO getCompanionUserProfile() {
+        return companionUserProfile;
     }
 
-    public void setCampanionUserProfile(CompanionUserProfileVO campanionUserProfile) {
-        this.campanionUserProfile = campanionUserProfile;
+    public void setCompanionUserProfile(CompanionUserProfileVO companionUserProfile) {
+        this.companionUserProfile = companionUserProfile;
     }
 
     public String getmCompanionid() {

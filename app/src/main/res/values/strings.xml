@@ -154,4 +154,6 @@
     <string name="my_trips_paid">Paid</string>
     <string name="my_trips_favorites">Favorites</string>
 
+    <string name="account_relationship">Relationship:</string>
+
 </resources>

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.TravlerAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
-import hellogbye.com.hellogbyeandroid.models.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;

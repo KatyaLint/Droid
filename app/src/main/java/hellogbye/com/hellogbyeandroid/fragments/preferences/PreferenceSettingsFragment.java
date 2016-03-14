@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -20,6 +19,7 @@ import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 
 
@@ -29,13 +29,13 @@ import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSet
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.SettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AcountDefaultSettingsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
-import hellogbye.com.hellogbyeandroid.views.PinnedHeaderListView;
 
 /**
  * Created by arisprung on 8/17/15.
@@ -45,7 +45,7 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
 
     private DynamicListView mDynamicListView;
     private SettingsAdapter mAdapter;
-    private List<AcountDefaultSettingsVO> accountDefaultSettings;
+    private List<AccountDefaultSettingsVO> accountDefaultSettings;
     private List<SettingsAttributeParamVO> accountSettingsAttributes;
     private EditText input;
     private View popup_preferences_layout;
@@ -63,6 +63,30 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
     }
 
 
+    private void onBackPressed(){
+        ((MainActivity) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
+            public void doBack() {
+                if(radioButtonSelected != -1) {
+                    AccountDefaultSettingsVO selected = accountDefaultSettings.get(radioButtonSelected);
+                    String userEmail = getActivityInterface().getCurrentUser().getEmailaddress();
+                    ConnectionManager.getInstance(getActivity()).putAccountsPreferences(userEmail, selected.getmId(), new ConnectionManager.ServerRequestListener() {
+                        @Override
+                        public void onSuccess(Object data) {
+                            //getAccountsProfiles();
+                        }
+
+                        @Override
+                        public void onError(Object data) {
+                            HGBErrorHelper errorHelper = new HGBErrorHelper();
+                            errorHelper.setMessageForError((String)data);
+                        }
+                    });
+                }
+            }
+        });
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,10 +94,7 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
 
     private void adapterClicked(String clickedItemID){
         if(mAdapter.getIsEditMode()){
-
-
-            // List<SettingsAttributeParamVO> accountAttributes = getActivityInterface().getAccountSettingsAttribute();
-            for( AcountDefaultSettingsVO accountAttribute:accountDefaultSettings){
+            for( AccountDefaultSettingsVO accountAttribute : accountDefaultSettings){
                 if(accountAttribute.getmId().equals(clickedItemID)){
                     if(accountAttribute.isChecked()){
                         accountAttribute.setChecked(false);
@@ -91,10 +112,30 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
         }
     }
 
+    private int radioButtonSelected = -1;
 
-public interface ListLineClicked{
-    void clickedItem(String itemID);
-}
+    public interface ListLineClicked{
+        void clickedItem(String itemID);
+    }
+
+    public interface ListRadioButtonClicked{
+        void clickedItem(int slectedPosition);
+    }
+
+    private ListLineClicked listLineClicked = new ListLineClicked() {
+        @Override
+        public void clickedItem(String itemID) {
+            adapterClicked(itemID);
+        }
+    };
+
+    private void selectedRadioPreference(){
+        FontTextView my_trip_profile = ((MainActivity) getActivity()).my_trip_profile;
+        if(my_trip_profile != null && mAdapter != null){
+            String selectedTag = my_trip_profile.getTag().toString();
+            mAdapter.selectedItemID(selectedTag);
+        }
+    }
 
     private void createListAdapter() {
 
@@ -104,28 +145,21 @@ public interface ListLineClicked{
             edit_mode = args.getString("edit_mode");
             if (edit_mode != null && edit_mode.equals("true")) {
                 mAdapter = new PreferencesSettingsRadioButtonAdapter(getActivity(), accountDefaultSettings);
-                mAdapter.setClickedLineCB(new ListLineClicked(){
+                mAdapter.setSelectedRadioButtonListener(new ListRadioButtonClicked(){
 
                     @Override
-                    public void clickedItem(String itemID) {
-                        adapterClicked(itemID);
+                    public void clickedItem(int slectedPosition) {
+                        radioButtonSelected = slectedPosition;
                     }
                 });
                 mDynamicListView.setAdapter((PreferencesSettingsRadioButtonAdapter)mAdapter);
-
+                selectedRadioPreference();
             }else{
                 mAdapter = new PreferencesSettingsPreferencesCheckAdapter(getActivity(), accountDefaultSettings);
                 mDynamicListView.setAdapter((PreferencesSettingsPreferencesCheckAdapter)mAdapter);
-                mAdapter.setClickedLineCB(new ListLineClicked(){
-
-                    @Override
-                    public void clickedItem(String itemID) {
-                        adapterClicked(itemID);
-                    }
-                });
             }
+            mAdapter.setClickedLineCB(listLineClicked);
         }
-
     }
 
     private void getSettingsAttributes(final String clickedAttributeID) {
@@ -156,6 +190,8 @@ public interface ListLineClicked{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        onBackPressed();
+
         View rootView = inflater.inflate(R.layout.settings_list_layout, container, false);
 
         ((MainActivity) getActivity()).setEditClickCB(new OnItemClickListener(){
@@ -163,9 +199,9 @@ public interface ListLineClicked{
             public void onItemClick(String option) {
 
                 if(option.equals("delete")){
-                    List<AcountDefaultSettingsVO> accountAttributes = new ArrayList<AcountDefaultSettingsVO>();
+                    List<AccountDefaultSettingsVO> accountAttributes = new ArrayList<AccountDefaultSettingsVO>();
                     accountAttributes.addAll(accountDefaultSettings);
-                    for(AcountDefaultSettingsVO accountAttribute :accountAttributes){
+                    for(AccountDefaultSettingsVO accountAttribute :accountAttributes){
                         if(accountAttribute.isChecked()){
                             if(accountDefaultSettings.size() <= MIN_PREFERENCE_SIZE){
                                 //popup
@@ -208,20 +244,15 @@ public interface ListLineClicked{
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
-
-                    accountDefaultSettings = (List<AcountDefaultSettingsVO>) data;
+                    accountDefaultSettings = (List<AccountDefaultSettingsVO>) data;
                     createListAdapter();
-
                 }
             }
-
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
             }
         });
-
-
 
 
         return rootView;
@@ -300,7 +331,7 @@ public interface ListLineClicked{
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
-                    AcountDefaultSettingsVO accountDefault = (AcountDefaultSettingsVO) data;
+                    AccountDefaultSettingsVO accountDefault = (AccountDefaultSettingsVO) data;
                     accountDefaultSettings.add(accountDefault);
                     mAdapter.notifyDataSetChanged();
                 }

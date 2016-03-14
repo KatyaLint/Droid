@@ -14,5 +14,7 @@ public interface SettingsAdapter {
 
     void setClickedLineCB(PreferenceSettingsFragment.ListLineClicked listLineClicked);
 
+    void setSelectedRadioButtonListener(PreferenceSettingsFragment.ListRadioButtonClicked listRadioButtonClicked);
 
+    void selectedItemID(String id);
 }

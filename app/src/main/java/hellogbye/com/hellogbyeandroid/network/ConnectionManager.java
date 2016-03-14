@@ -55,7 +55,7 @@ public class ConnectionManager {
         USER_POST_USER_PROFILE_EMAIL, USER_TRAVEL_PROFILES, USER_PROFILE_RESET_PASSWORD,
         USER_SOLUTION, ITINERARY, USER_GET_TRAVEL_PREFERENCES, ITINERARY_CNC,
         USER_POST_TRAVEL_PREFERENCES, COMPANIONS,CARD_TOKEN,ITINERARY_MY_TRIP,
-        ITINERARY_HIGHLIGHT, USER_AVATAR, RELATIONSHIP_TYPES
+        ITINERARY_HIGHLIGHT, USER_AVATAR, RELATIONSHIP_TYPES, ACCOUNTS_PREFERENCES
 
     }
 
@@ -863,7 +863,7 @@ public class ConnectionManager {
                 jsonObject, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(response);
+                listener.onSuccess(Parser.getAccounts(response));
             }
         }, new Response.ErrorListener() {
             @Override
@@ -996,6 +996,36 @@ public class ConnectionManager {
 
 
 
+    public void putAccountsPreferences(String email, String travelpreferenceprofileid, final ServerRequestListener listener) {
+        String url = getURL(Services.ACCOUNTS_PREFERENCES);
+
+        JSONObject json1 = new JSONObject();
+        try {
+            json1.put("email", email);
+            json1.put("travelpreferenceprofileid", travelpreferenceprofileid);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
+                json1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
+
+
+
+
+
     public void putCompanionRelationship(String companionid, int relationshiptypeId, final ServerRequestListener listener) {
         String url = getURL(Services.COMPANIONS);
         JSONObject json1 = new JSONObject();
@@ -1021,12 +1051,6 @@ public class ConnectionManager {
             }
         });
     }
-
-
-
-
-
-
 
     public void putCompanion(String id, UserData user, final ServerRequestListener listener) {
         String url = getURL(Services.COMPANIONS);
@@ -1369,9 +1393,12 @@ public class ConnectionManager {
                 return BASE_URL + "UserProfile/Avatar";
             case RELATIONSHIP_TYPES:
                 return BASE_URL + "Statics/RelationshipTypes";
+            case ACCOUNTS_PREFERENCES:
+                return BASE_URL + "UserProfile/Accounts/TravelPreference";
+
         }
         return url;
     }
-
+  //  http://cnc.hellogbye.com/cnc/rest/UserProfile/Accounts/TravelPreference
 
 }

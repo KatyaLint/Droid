@@ -29,10 +29,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.CNCAdapter;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportResultsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportServerResultVO;
@@ -41,6 +43,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
@@ -85,7 +88,28 @@ public class CNCFragment extends HGBAbtsractFragment {
 
         getActivityInterface().getToolBar().updateToolBarView(ToolBarNavEnum.CNC.getNavNumber());
 
+
+        getAccountsProfiles();
+
         return rootView;
+    }
+
+
+    private void getAccountsProfiles(){
+        ConnectionManager.getInstance(getActivity()).getUserProfileAccounts(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                ArrayList<AccountsVO> accounts = ( ArrayList<AccountsVO> )data;
+                getActivityInterface().setAccounts(accounts);
+                ((MainActivity) getActivity()).editProfileTipeMainToolBar();
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
     }
 
     public void initList() {

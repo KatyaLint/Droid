@@ -1,20 +1,18 @@
-package hellogbye.com.hellogbyeandroid.models;
+package hellogbye.com.hellogbyeandroid.models.vo.creditcard;
 
 /**
  * Created by arisprung on 11/15/15.
  */
-public class PaymentChild {
+public class PaymnentGroup {
 
     private String nameText;
     private String totalText;
     private boolean selected;
-    private String guid;
 
-    public PaymentChild(String nameText, String totalText, boolean selected,String guid) {
+    public PaymnentGroup(String nameText, String totalText, boolean selected) {
         this.nameText = nameText;
         this.totalText = totalText;
         this.selected = selected;
-        this.guid = guid;
     }
 
     public String getNameText() {
@@ -29,10 +27,6 @@ public class PaymentChild {
         return totalText;
     }
 
-    public void setTotalText(String totalText) {
-        this.totalText = totalText;
-    }
-
     public boolean isSelected() {
         return selected;
     }
@@ -41,11 +35,7 @@ public class PaymentChild {
         this.selected = selected;
     }
 
-    public String getGuid() {
-        return guid;
-    }
-
-    public void setGuid(String guid) {
-        this.guid = guid;
+    public void setTotalText(String totalText) {
+        this.totalText = totalText;
     }
 }

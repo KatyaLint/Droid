@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +53,7 @@ public class CompanionAdapter extends RecyclerView.Adapter<CompanionAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         CompanionVO item = itemsData.get(position);
-        holder.companion_name.setText(item.getCampanionUserProfile().getmFirstName());
+        holder.companion_name.setText(item.getCompanionUserProfile().getmFirstName());
         holder.companion_name.setTag(item.getmCompanionid());
         holder.companion_request.setText(item.getmConfirmationstatus());
 
@@ -66,7 +65,7 @@ public class CompanionAdapter extends RecyclerView.Adapter<CompanionAdapter.View
             holder.companion_delete.setVisibility(View.GONE);
         }
 
-       HGBUtility.loadRoundedImage(item.getCampanionUserProfile().getmAvatar(), holder.companion_image_view, R.drawable.profile_image);
+       HGBUtility.loadRoundedImage(item.getCompanionUserProfile().getmAvatar(), holder.companion_image_view, R.drawable.profile_image);
 
 
     }

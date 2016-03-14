@@ -10,14 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
-
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.models.BookingRequest;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
-import hellogbye.com.hellogbyeandroid.models.UserPreference;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;

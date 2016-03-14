@@ -156,6 +156,7 @@ public class CostumeToolBar extends Toolbar {
                 my_trips_image_profile.setVisibility(View.VISIBLE);
                 //homeTitleImage.setVisibility(View.VISIBLE);
                 my_trip_profile.setVisibility(View.VISIBLE);
+
                 keyBoardImage.setVisibility(View.VISIBLE);
                 break;
             case COMPANIONS_PERSONAL_DETAILS:
