@@ -6,17 +6,13 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.StartingMenuActivity;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
-import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportResultsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionUserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelationshipTypesVO;
@@ -69,7 +65,7 @@ public class CompanionDetailsFragment  extends HGBAbtsractFragment {
             }
         }
 
-        CompanionUserProfileVO profileData = companionVO.getCampanionUserProfile();
+        CompanionUserProfileVO profileData = companionVO.getCompanionUserProfile();
 
 //        FontTextView companion_title = (FontTextView) view.findViewById(R.id.companion_title);
 //        companion_title.setText(profileData.getmTitle());
@@ -166,7 +162,7 @@ public class CompanionDetailsFragment  extends HGBAbtsractFragment {
 
 
         ImageView companion_details_image = (ImageView) view.findViewById(R.id.companion_details_image);
-        HGBUtility.loadRoundedImage(getActivity().getApplicationContext(),profileData.getmAvatar(),companion_details_image);
+        HGBUtility.loadRoundedImage(profileData.getmAvatar(),companion_details_image, R.drawable.profile_image);
        // MyTripPinnedAdapter sectionedAdapter = new MyTripPinnedAdapter(mItemsList);
 
     }

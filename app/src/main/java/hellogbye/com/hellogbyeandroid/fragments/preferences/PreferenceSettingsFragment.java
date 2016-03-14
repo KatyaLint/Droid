@@ -10,23 +10,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 
 
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsPreferencesCheckAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsRadioButtonAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.SettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AcountDefaultSettingsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
@@ -40,13 +44,15 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
 
 
     private DynamicListView mDynamicListView;
-    private PreferencesSettingsPreferencesCheckAdapter mAdapter;
-    private List<AcountDefaultSettingsVO> accountDefaultSettings;
+    private SettingsAdapter mAdapter;
+    private List<AccountDefaultSettingsVO> accountDefaultSettings;
     private List<SettingsAttributeParamVO> accountSettingsAttributes;
     private EditText input;
     private View popup_preferences_layout;
     private static int MIN_PREFERENCE_SIZE = 1;
     private View preferences_at_least_one_preference;
+    private String edit_mode;
+    private ListView tempListView;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new PreferenceSettingsFragment();
@@ -57,46 +63,103 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
     }
 
 
+    private void onBackPressed(){
+        ((MainActivity) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
+            public void doBack() {
+                if(radioButtonSelected != -1) {
+                    AccountDefaultSettingsVO selected = accountDefaultSettings.get(radioButtonSelected);
+                    String userEmail = getActivityInterface().getCurrentUser().getEmailaddress();
+                    ConnectionManager.getInstance(getActivity()).putAccountsPreferences(userEmail, selected.getmId(), new ConnectionManager.ServerRequestListener() {
+                        @Override
+                        public void onSuccess(Object data) {
+                            //getAccountsProfiles();
+                        }
+
+                        @Override
+                        public void onError(Object data) {
+                            HGBErrorHelper errorHelper = new HGBErrorHelper();
+                            errorHelper.setMessageForError((String)data);
+                        }
+                    });
+                }
+            }
+        });
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    private void adapterClicked(String clickedItemID){
+        if(mAdapter.getIsEditMode()){
+            for( AccountDefaultSettingsVO accountAttribute : accountDefaultSettings){
+                if(accountAttribute.getmId().equals(clickedItemID)){
+                    if(accountAttribute.isChecked()){
+                        accountAttribute.setChecked(false);
+                    }else{
+                        accountAttribute.setChecked(true);
+                    }
+                    break;
+                }
+
+            }
+            mAdapter.notifyDataSetChanged();
+
+        }else {
+            getSettingsAttributes(clickedItemID);
+        }
+    }
+
+    private int radioButtonSelected = -1;
+
+    public interface ListLineClicked{
+        void clickedItem(String itemID);
+    }
+
+    public interface ListRadioButtonClicked{
+        void clickedItem(int slectedPosition);
+    }
+
+    private ListLineClicked listLineClicked = new ListLineClicked() {
+        @Override
+        public void clickedItem(String itemID) {
+            adapterClicked(itemID);
+        }
+    };
+
+    private void selectedRadioPreference(){
+        FontTextView my_trip_profile = ((MainActivity) getActivity()).my_trip_profile;
+        if(my_trip_profile != null && mAdapter != null){
+            String selectedTag = my_trip_profile.getTag().toString();
+            mAdapter.selectedItemID(selectedTag);
+        }
+    }
 
     private void createListAdapter() {
 
-        mDynamicListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(mAdapter.getIsEditMode()){
-                    FontTextView settings_flight_title = (FontTextView) view.findViewById(R.id.settings_check_name);
-                    String clickedItemID = settings_flight_title.getTag().toString();
+        //Factory implementation :)
+        Bundle args = getArguments();
+        if (args != null) {
+            edit_mode = args.getString("edit_mode");
+            if (edit_mode != null && edit_mode.equals("true")) {
+                mAdapter = new PreferencesSettingsRadioButtonAdapter(getActivity(), accountDefaultSettings);
+                mAdapter.setSelectedRadioButtonListener(new ListRadioButtonClicked(){
 
-                   // List<SettingsAttributeParamVO> accountAttributes = getActivityInterface().getAccountSettingsAttribute();
-                    for( AcountDefaultSettingsVO accountAttribute:accountDefaultSettings){
-                        if(accountAttribute.getmId().equals(clickedItemID)){
-                           if(accountAttribute.isChecked()){
-                               accountAttribute.setChecked(false);
-                           }else{
-                               accountAttribute.setChecked(true);
-                           }
-                            break;
-                        }
-
+                    @Override
+                    public void clickedItem(int slectedPosition) {
+                        radioButtonSelected = slectedPosition;
                     }
-                    mAdapter.notifyDataSetChanged();
-
-                }else {
-                    FontTextView settings_flight_title = (FontTextView) view.findViewById(R.id.settings_check_name);
-                    String clickedItemID = settings_flight_title.getTag().toString();
-                    getSettingsAttributes(clickedItemID);
-                }
+                });
+                mDynamicListView.setAdapter((PreferencesSettingsRadioButtonAdapter)mAdapter);
+                selectedRadioPreference();
+            }else{
+                mAdapter = new PreferencesSettingsPreferencesCheckAdapter(getActivity(), accountDefaultSettings);
+                mDynamicListView.setAdapter((PreferencesSettingsPreferencesCheckAdapter)mAdapter);
             }
-        });
-
-        mAdapter = new PreferencesSettingsPreferencesCheckAdapter(getActivity(), accountDefaultSettings);
-        mDynamicListView.setAdapter(mAdapter);
-
+            mAdapter.setClickedLineCB(listLineClicked);
+        }
     }
 
     private void getSettingsAttributes(final String clickedAttributeID) {
@@ -127,15 +190,18 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        onBackPressed();
+
         View rootView = inflater.inflate(R.layout.settings_list_layout, container, false);
+
         ((MainActivity) getActivity()).setEditClickCB(new OnItemClickListener(){
             @Override
             public void onItemClick(String option) {
 
                 if(option.equals("delete")){
-                    List<AcountDefaultSettingsVO> accountAttributes = new ArrayList<AcountDefaultSettingsVO>();
+                    List<AccountDefaultSettingsVO> accountAttributes = new ArrayList<AccountDefaultSettingsVO>();
                     accountAttributes.addAll(accountDefaultSettings);
-                    for(AcountDefaultSettingsVO accountAttribute :accountAttributes){
+                    for(AccountDefaultSettingsVO accountAttribute :accountAttributes){
                         if(accountAttribute.isChecked()){
                             if(accountDefaultSettings.size() <= MIN_PREFERENCE_SIZE){
                                 //popup
@@ -162,6 +228,8 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
         preferences_at_least_one_preference = inflater.inflate(R.layout.preferences_at_least_one_preference, null);
 
 
+        tempListView = (ListView)rootView.findViewById(R.id.tempListView);
+
         Button addNewPreferencesButton = (Button) rootView.findViewById(R.id.add_preferences);
         input = (EditText) popup_preferences_layout.findViewById(R.id.editTextDialog);
 
@@ -176,16 +244,16 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
-                    accountDefaultSettings = (List<AcountDefaultSettingsVO>) data;
+                    accountDefaultSettings = (List<AccountDefaultSettingsVO>) data;
                     createListAdapter();
                 }
             }
-
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
             }
         });
+
 
         return rootView;
     }
@@ -263,7 +331,7 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
-                    AcountDefaultSettingsVO accountDefault = (AcountDefaultSettingsVO) data;
+                    AccountDefaultSettingsVO accountDefault = (AccountDefaultSettingsVO) data;
                     accountDefaultSettings.add(accountDefault);
                     mAdapter.notifyDataSetChanged();
                 }

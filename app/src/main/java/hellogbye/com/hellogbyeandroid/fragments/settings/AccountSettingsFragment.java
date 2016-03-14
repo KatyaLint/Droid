@@ -2,6 +2,7 @@ package hellogbye.com.hellogbyeandroid.fragments.settings;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -48,6 +49,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
+import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
 public class AccountSettingsFragment extends HGBAbtsractFragment {
 
@@ -90,7 +92,8 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
     private void initializeUserData(){
         currentUser = getActivityInterface().getCurrentUser();
 
-        HGBUtility.loadRoundedImage(getActivity().getApplicationContext(),currentUser.getAvatar(),account_details_image);
+        HGBUtility.getAndSaveUserImage(currentUser.getAvatar(),account_details_image);
+       // HGBUtility.loadRoundedImage(getActivity().getApplicationContext(),currentUser.getAvatar(),account_details_image);
 
         String userName = currentUser.getTitle().trim() +" "+ currentUser.getFirstname() + " " + currentUser.getLastname();
         account_settings_details_name.setText(userName);
@@ -160,7 +163,7 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
 
         account_settings_preferences_list.setAdapter(accountSettingsAdapter);
 
-        account_details_image = (ImageView) rootView.findViewById(R.id.account_details_image);
+        account_details_image = (RoundedImageView) rootView.findViewById(R.id.account_details_image);
 
 
         account_settings_details_name = (FontTextView) rootView.findViewById(R.id.account_settings_details_name);
@@ -266,7 +269,7 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
                 Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
 
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                thumbnail.compress(Bitmap.CompressFormat.PNG, 90, bytes);
+                thumbnail.compress(Bitmap.CompressFormat.PNG, 300, bytes);
 
                 byte[] b = bytes.toByteArray();
                 String encodedString = Base64.encodeToString(b, Base64.DEFAULT);
@@ -274,7 +277,7 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
                 sendImageToServer(encodedString, currentUser.getUserprofileid());
 
 
-                Bitmap thumbnail2 = HGBUtility.getRoundedCornerBitmap(Bitmap.createScaledBitmap(thumbnail, HGBConstants.PROFILE_IMAGE_WIDTH, HGBConstants.PROFILE_IMAGE_HEIGHT, false), 90);
+              //  Bitmap thumbnail2 = HGBUtility.getRoundedCornerBitmap(Bitmap.createScaledBitmap(thumbnail, HGBConstants.PROFILE_IMAGE_WIDTH, HGBConstants.PROFILE_IMAGE_HEIGHT, false), 90);
 
                 File destination = new File(Environment.getExternalStorageDirectory(),
                         System.currentTimeMillis() + ".png");
@@ -289,7 +292,7 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                account_details_image.setImageBitmap(thumbnail2);
+                account_details_image.setImageBitmap(thumbnail);
             } else if (requestCode == SELECT_FILE) {
                 Uri selectedImage = data.getData();
                 try {

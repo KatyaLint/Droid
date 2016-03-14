@@ -9,8 +9,8 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 
 import com.nhaarman.listviewanimations.ArrayAdapter;
 import com.nhaarman.listviewanimations.util.Swappable;
@@ -27,16 +27,15 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by nyawka on 11/25/15.
  */
-public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<AccountDefaultSettingsVO> implements Swappable, SettingsAdapter {
+public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountDefaultSettingsVO> implements Swappable, SettingsAdapter {
 
-    private Context context;
-    private List<AccountDefaultSettingsVO> items;
+
     private boolean isEditMode = false;
     private PreferenceSettingsFragment.ListLineClicked listLineClicked;
-    public PreferencesSettingsPreferencesCheckAdapter(Context context, List<AccountDefaultSettingsVO> accountAttributes) {
+    private PreferenceSettingsFragment.ListRadioButtonClicked listRadioButtonClickedClicked;
+    public PreferencesSettingsRadioButtonAdapter(Context context, List<AccountDefaultSettingsVO> accountAttributes) {
         super(accountAttributes);
-        //  items = accountAttributes;
-        this.context = context;
+
     }
 
 
@@ -51,12 +50,12 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
 
     @Override
     public void setSelectedRadioButtonListener(PreferenceSettingsFragment.ListRadioButtonClicked listRadioButtonClicked) {
-
+        this.listRadioButtonClickedClicked = listRadioButtonClicked;
     }
 
     @Override
     public void selectedItemID(String id) {
-
+        this.selectedPreferebcesID = id;
     }
 
     public void setEditMode(boolean isEditMode){
@@ -79,26 +78,36 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
         return getItem(position).hashCode();
     }
 
+
+    int selectedPosition = 0;
+
+    public String selectedPreferebcesID="";
+
+
+
+
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View v = convertView;
 
         if (v == null) {
             v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.settings_item_check_layout, null);
+                    .inflate(R.layout.settings_item_radio_button_layout, null);
         }
         AccountDefaultSettingsVO attribute = this.getItem(position);//items.get(position);
         if(attribute != null){
-            FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_check_name);
+            FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_radio_name);
+            settings_flight_title.setText(attribute.getmProfileName());
+          //  settings_flight_title.setTag(attribute.getmId());
 
-                settings_flight_title.setText(attribute.getmProfileName());
-                settings_flight_title.setTag(attribute.getmId());
-            LinearLayout settings_item_check_ll = (LinearLayout)v.findViewById(R.id.settings_item_check_ll);
-            settings_item_check_ll.setTag(attribute.getmId());
-            settings_item_check_ll.setOnClickListener(new View.OnClickListener() {
+            LinearLayout settings_radio_button_ll = (LinearLayout)v.findViewById(R.id.settings_radio_button_ll);
+            settings_radio_button_ll.setTag(attribute.getmId());
+            settings_radio_button_ll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     listLineClicked.clickedItem(view.getTag().toString());
+
                 }
             });
 //            FontTextView settings_text_drag = (FontTextView) v.findViewById(R.id.settings_place_number);
@@ -106,18 +115,27 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
             int correntPosition = position+1;
 //            settings_text_drag.setText(""+correntPosition);
             this.getItem(position).setRank("" + correntPosition);
-            ImageView image = (ImageView)v.findViewById(R.id.setting_check_image);
-            if(!isEditMode){
-                image.setVisibility(View.GONE);
-            }else{
-                image.setVisibility(View.VISIBLE);
-               // image.setBackgroundResource(R.drawable.check_off);
-                if(attribute.isChecked()){
-                    image.setBackgroundResource(R.drawable.check_on);
-                }else{
-                    image.setBackgroundResource(R.drawable.check_off);
-                }
+
+            if(selectedPreferebcesID.equals(attribute.getmId())){
+                selectedPosition = position;
+                selectedPreferebcesID = "";
             }
+
+            RadioButton r = (RadioButton)v.findViewById(R.id.setting_radio_image);
+            r.setChecked(position == selectedPosition);
+            r.setTag(position);
+
+            r.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    selectedPosition = (Integer)view.getTag();
+                    listRadioButtonClickedClicked.clickedItem(selectedPosition);
+                    notifyDataSetChanged();
+
+                }
+            });
+
         }
 
         return v;

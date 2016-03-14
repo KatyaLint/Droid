@@ -73,7 +73,7 @@
             app:fontName="dinnextltpro_light.otf"
             android:textColor="@color/white"
             android:textSize="@dimen/SP14"
-            android:text="Relationship:" />
+            android:text="@string/account_relationship" />
 
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -86,7 +86,7 @@
             app:fontName="dinnextltpro_light.otf"
             android:textColor="@color/black"
             android:textSize="@dimen/SP14"
-            android:text="Relationship:" />
+            android:text="@string/account_relationship" />
 
         <!--<Button-->
             <!--android:layout_width="match_parent"-->

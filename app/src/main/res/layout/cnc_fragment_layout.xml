@@ -2,8 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/b_g_android"
+    android:background="@color/grey_very_light"
     android:orientation="vertical">
+
+    <!--android:background="@drawable/b_g_android"-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cnc_recycler_view"
@@ -13,36 +15,44 @@
         android:scrollbars="vertical" />
 
     <RelativeLayout
+
         android:id="@+id/cnc_message_rl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/item_pressed_color"
+        android:padding="5dp"
         android:layout_alignParentBottom="true">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentTop="true"
-            android:background="@color/warm_grey_line" />
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:background="@color/warm_grey_line" />-->
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp">
+         <Button
+             android:id="@+id/cnc_fragment_trip_settings"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Set"
+             android:background="@color/red_button_color"/>
 
-            <EditText
+            <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+                android:layout_toRightOf="@+id/cnc_fragment_trip_settings"
                 android:id="@+id/cnc_edit_text"
                 android:layout_width="@dimen/DP300"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:gravity="center_vertical"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-
+                android:textColor="@color/warm_grey"
+                android:textColorHint="@color/warm_grey"
                 android:hint="@string/type_message"
-                android:minHeight="40dp" />
+                android:focusableInTouchMode="true"
+
+                android:minHeight="@dimen/DP44" />
+
             <!--android:text="Fly with Roy and Steve to New York for one week"-->
             <!--android:text="Fly Sam from NYC to Vegas on Nov 15th for 3 nights in the morning then back to NYC. Fly Warren from Miami to Vegas on Nov 15th before 5PM for 3 nights then on to Toronto for a 1 night then back to Miami. Fly me from Toronto to Vegas, on the earliest flight available for 3 nights on Nov 15th then back to Toronto."-->
+
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/cnc_send"
                 android:layout_width="wrap_content"
@@ -66,9 +76,5 @@
 
 
         </RelativeLayout>
-
-
-    </RelativeLayout>
-
 
 </RelativeLayout>

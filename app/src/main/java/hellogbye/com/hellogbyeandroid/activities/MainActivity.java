@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.crashlytics.android.Crashlytics;
@@ -58,7 +59,8 @@ import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlerDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlersFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.CountryItem;
-import hellogbye.com.hellogbyeandroid.models.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserData;
@@ -71,6 +73,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.network.Parser;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.SpeechRecognitionUtil;
@@ -124,7 +127,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private ArrayList<CompanionVO> companions;
     private ArrayList<CompanionStaticRelationshipTypesVO> componionStaticDescriptionVOs;
     private MyTripsFragment.OnItemClickListener editMyTripsClickCB;
-
+    private ArrayList<AccountsVO> accounts;
+    public FontTextView my_trip_profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,6 +171,79 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         initToolBar();
         setNameInNavDraw();
 
+
+        getUserData();
+        getCompanionsFromServer();
+
+     //   getAccountsProfiles();
+    }
+
+
+    private void getAccountsProfiles(){
+        ConnectionManager.getInstance(MainActivity.this).getUserProfileAccounts(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                ArrayList<AccountsVO> accounts = ( ArrayList<AccountsVO> )data;
+                setAccounts(accounts);
+                //TODO , now getting first account from list
+                AccountsVO account = accounts.get(0);
+                getCurrentUser().setEmailaddress(account.getEmail());
+                editProfileTipeMainToolBar();
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
+    }
+
+
+    public void editProfileTipeMainToolBar(){
+        AccountsVO account = getAccounts().get(0);
+        System.out.println("Kate account.getTravelpreferenceprofile().getProfilename() = " + account.getTravelpreferenceprofile().getProfilename());
+        my_trip_profile = (FontTextView)findViewById(R.id.my_trip_profile);
+        my_trip_profile.setText(account.getTravelpreferenceprofile().getProfilename());
+        my_trip_profile.setTag(account.getTravelpreferenceprofile().getId());
+    }
+
+    private void getCompanionsFromServer(){
+
+            ConnectionManager.getInstance(MainActivity.this).getCompanions(new ConnectionManager.ServerRequestListener() {
+                @Override
+                public void onSuccess(Object data) {
+                    ArrayList<CompanionVO> companions =(ArrayList<CompanionVO>)data;
+                    setCompanions(companions);
+                }
+
+                @Override
+                public void onError(Object data) {
+                    HGBErrorHelper errorHelper = new HGBErrorHelper();
+                    errorHelper.show(getFragmentManager(), (String) data);
+                }
+            });
+        }
+
+    private void getUserData(){
+        ConnectionManager.getInstance(MainActivity.this).getUserProfile(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+                UserData mCurrentUser = (UserData) data;
+                setCurrentUser(mCurrentUser);
+                ImageView my_trips_image_profile = (ImageView)findViewById(R.id.my_trips_image_profile);
+                HGBUtility.getAndSaveUserImage(mCurrentUser.getAvatar(), my_trips_image_profile);
+                getAccountsProfiles();
+                selectItem(ToolBarNavEnum.HOME.getNavNumber(), null);
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
     }
 
     private void setNameInNavDraw() {
@@ -188,7 +265,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
                 @Override
                 public void onError(Object data) {
-
+                    HGBErrorHelper errorHelper = new HGBErrorHelper();
+                    errorHelper.show(getFragmentManager(), (String) data);
                 }
             });
         } else {
@@ -216,6 +294,23 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     }
 
+
+    private void toolBarProfileChnage(){
+
+        final LinearLayout tool_bar_profile_name = (LinearLayout) mToolbar.findViewById(R.id.tool_bar_profile_name);
+        tool_bar_profile_name.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                Bundle args = new Bundle();
+                args.putString("edit_mode", "true");
+                goToFragment(ToolBarNavEnum.PREFERENCE.getNavNumber(), args);
+                                LinearLayout edit_preferences = (LinearLayout) mToolbar.findViewById(R.id.preferences_edit_mode);
+                edit_preferences.setVisibility(View.GONE);
+            }
+        });
+
+    }
 
     private void preferencesChanges(){
         final ImageButton edit_preferences = (ImageButton) mToolbar.findViewById(R.id.edit_preferences);
@@ -278,6 +373,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         preferencesChanges();
 
+        toolBarProfileChnage();
 
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -310,7 +406,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
 
         //HGBUtility.loadHotelImage(getApplicationContext(), "http://a.abcnews.com/images/Technology/HT_ari_sprung_jef_140715_16x9_992.jpg", mProfileImage);
-        selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null);
+        //selectItem(ToolBarNavEnum.HOME.getNavNumber(), null);
 
     }
 
@@ -324,23 +420,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         ((CNCFragment) currentFragment).initList();
     }
 
-//    private void setHomeFragmentState(String id) {
-//        try {
-//            Fragment currentFragment = getFragmentManager().findFragmentByTag(HomeFragment.class.toString());
-//
-//            if (id.equals("keyboard")) {
-//                ((HomeFragment) currentFragment).setKeyboardMode();
-//            } else if (id.equals("mic")) {
-//                ((HomeFragment) currentFragment).setMicMode();
-//            }
-//            setHomeImage(id);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            Crashlytics.logException(e);
-//        }
-//
-//    }
+
 
     private void loadNavItems() {
         mNavItemsList = new ArrayList<>();
@@ -348,13 +428,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mNavItemsList.add(new NavItem(ToolBarNavEnum.COMPANIONS, false));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.PREFERENCE, false));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.ACCOUNT, false));
-    //    mNavItemsList.add(new NavItem(ToolBarNavEnum.HELP, false));
-
-
-//        mNavItemsList.add(new NavItem(ToolBarNavEnum.HOME, true));
-//        mNavItemsList.add(new NavItem(ToolBarNavEnum.ITINARERY, false));
-//        mNavItemsList.add(new NavItem(ToolBarNavEnum.HISTORY, false));
-
 
     }
 
@@ -573,6 +646,16 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
+    public void setAccounts(ArrayList<AccountsVO> accounts) {
+        this.accounts = accounts;
+    }
+
+    @Override
+    public ArrayList<AccountsVO> getAccounts() {
+        return this.accounts;
+    }
+
+    @Override
     public ArrayList<UserData> getListUsers() {
         return mTravelList;
     }
@@ -713,9 +796,12 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     @Override
     public void onBackPressed() {
+
         if (onBackPressedListener != null) {
             onBackPressedListener.doBack();
         }
+
+        System.out.println("Kate on Back Main");
         //TODO this is when I want the fragment to contorl the back -Kate I suggest we do this for all Fragments
         FragmentManager.BackStackEntry backEntry = getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1);
         String str = backEntry.getName();
@@ -733,6 +819,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             int fragNumber = arguments.getInt(HGBConstants.ARG_NAV_NUMBER);
 
             mToolbar.updateToolBarView(fragNumber);
+
+           // editProfileTipeMainToolBar();
         }
     }
 

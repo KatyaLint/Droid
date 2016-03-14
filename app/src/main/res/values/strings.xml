@@ -6,15 +6,6 @@
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
 
-    <!--<string-array name="nav_draw_array">-->
-    <!--<item>Home</item>-->
-    <!--<item>History</item>-->
-    <!--<item>My Trips</item>-->
-    <!--<item>Travel Companions</item>-->
-    <!--<item>Prefrence Settings</item>-->
-    <!--<item>Account Settings</item>-->
-    <!--<item>Help  Feedback</item>-->
-    <!--</string-array>-->
 
     <string name="tool_bar">Edit</string>
     <string name="remmeber_me">Remmember Me</string>
@@ -96,12 +87,13 @@
 
     <string name="closeDrawer">Navigation View</string>
     <string name="openDrawer">Navigation View Closed</string>
-    <string name="type_message">Type Message</string>
+    <string name="type_message">New Message</string>
     <string name="send">Send</string>
-    <string name="default_cnc_message">Where would you like to go? Tell us WHERE you\'re going, WHEN you\'re, and WHO you want to travel with. Here\'s how you can search...Fly me from Miami to Atlanta direct on November 15th in the morning.</string>
-    <string name="iteinerary_created">Itinerary Created</string>
+    <!--<string name="default_cnc_message"> welcome to\nHelloGbye. Tell us in your own words where and when you'd\nlike to go.</string>-->
+    <string name="default_cnc_message">Hello %1$s welcome to\nHelloGbye. Tell us in your own words where and when you would\n like to go.</string>
+    <string name="itinerary_created">Itinerary Created</string>
     <string name="grid_has_been_updated">OK, the grid has been updated</string>
-    <string name="iteinerary_try_again">Itinerary Try Again</string>
+    <string name="itinerary_try_again">Itinerary Try Again</string>
 
 
     <string name="settings_search_hunt">Looking for someone?</string>
@@ -156,5 +148,12 @@
     <string name="reset_password">Enter your email to reset password</string>
     <string name="reset_your_password">Reset Password</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
+
+
+    <string name="my_trips_all">All</string>
+    <string name="my_trips_paid">Paid</string>
+    <string name="my_trips_favorites">Favorites</string>
+
+    <string name="account_relationship">Relationship:</string>
 
 </resources>

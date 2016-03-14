@@ -1,4 +1,4 @@
-package hellogbye.com.hellogbyeandroid.models;
+package hellogbye.com.hellogbyeandroid.models.vo.accounts;
 
 import com.google.gson.annotations.SerializedName;
 

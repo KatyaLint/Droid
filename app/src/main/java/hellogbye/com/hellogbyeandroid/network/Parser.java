@@ -1,16 +1,7 @@
 package hellogbye.com.hellogbyeandroid.network;
 
 
-import android.content.Context;
-import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkError;
 import com.android.volley.NetworkResponse;
-import com.android.volley.NoConnectionError;
-import com.android.volley.ParseError;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -21,18 +12,16 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.BookingRequest;
-import hellogbye.com.hellogbyeandroid.models.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.TravelPreference;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AcountDefaultSettingsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportServerResultVO;
@@ -118,9 +107,9 @@ public class Parser {
 
 
     public static Object getSettingsAcount(String response){
-        AcountDefaultSettingsVO acountDefaultSettings = null;
+        AccountDefaultSettingsVO acountDefaultSettings = null;
         try {
-            Type listType = new TypeToken<AcountDefaultSettingsVO>() {
+            Type listType = new TypeToken<AccountDefaultSettingsVO>() {
             }.getType();
 
             Gson gson = new Gson();
@@ -133,9 +122,9 @@ public class Parser {
     }
 
     public static Object getSettingsDefault(String response){
-        List<AcountDefaultSettingsVO> acountDefaultSettings = null;
+        List<AccountDefaultSettingsVO> acountDefaultSettings = null;
         try {
-            Type listType = new TypeToken<List<AcountDefaultSettingsVO>>() {
+            Type listType = new TypeToken<List<AccountDefaultSettingsVO>>() {
             }.getType();
 
             Gson gson = new Gson();
@@ -239,6 +228,19 @@ public class Parser {
             e.printStackTrace();
         }
         return mTravelList;
+    }
+
+    public static Object getAccounts(String response){
+        ArrayList<AccountsVO>  mResponseData = null;
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<AccountsVO>>() {
+            }.getType();
+            mResponseData = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mResponseData;
     }
 
     public static Object loginData(String response){

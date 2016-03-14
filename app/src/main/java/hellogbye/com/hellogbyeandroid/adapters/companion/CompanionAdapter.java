@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +15,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
+import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
 
 /**
@@ -53,7 +53,7 @@ public class CompanionAdapter extends RecyclerView.Adapter<CompanionAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         CompanionVO item = itemsData.get(position);
-        holder.companion_name.setText(item.getCampanionUserProfile().getmFirstName());
+        holder.companion_name.setText(item.getCompanionUserProfile().getmFirstName());
         holder.companion_name.setTag(item.getmCompanionid());
         holder.companion_request.setText(item.getmConfirmationstatus());
 
@@ -65,7 +65,7 @@ public class CompanionAdapter extends RecyclerView.Adapter<CompanionAdapter.View
             holder.companion_delete.setVisibility(View.GONE);
         }
 
-       HGBUtility.loadRoundedImage(context, item.getCampanionUserProfile().getmAvatar(), holder.getCompanion_image_view());
+       HGBUtility.loadRoundedImage(item.getCompanionUserProfile().getmAvatar(), holder.companion_image_view, R.drawable.profile_image);
 
 
     }
@@ -81,7 +81,7 @@ public class CompanionAdapter extends RecyclerView.Adapter<CompanionAdapter.View
 
         private FontTextView companion_name;
         private FontTextView companion_request;
-        private ImageView companion_image_view;
+        private RoundedImageView companion_image_view;
         private View itemView;
         private View companion_arrow;
         private Button companion_delete;
@@ -94,7 +94,7 @@ public class CompanionAdapter extends RecyclerView.Adapter<CompanionAdapter.View
             companion_name = (FontTextView) itemView.findViewById(R.id.companion_details_name_item);
             companion_request = (FontTextView) itemView.findViewById(R.id.companion_request);
             companion_arrow = (View)itemView.findViewById(R.id.companion_arrow);
-            setCompanion_image_view((ImageView) itemView.findViewById(R.id.companion_image_view));
+            companion_image_view = (RoundedImageView) itemView.findViewById(R.id.companion_image_view);
 
 
 //TODO remove click if !"confirmationstatus": "Accepted",
@@ -119,21 +119,7 @@ public class CompanionAdapter extends RecyclerView.Adapter<CompanionAdapter.View
             }
         };
 
-//        @Override
-//        public void onClick(View view) {
-//
-//            String userId = companion_name.getTag().toString();
-//
-//            mItemClickListener.onItemClick(userId,"");
-//        }
 
-        public ImageView getCompanion_image_view() {
-            return companion_image_view;
-        }
-
-        public void setCompanion_image_view(ImageView companion_image_view) {
-            this.companion_image_view = companion_image_view;
-        }
     }
 
     public interface OnItemClickListener {

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="right"
     android:layout_margin="10dp">
 
 
@@ -17,4 +19,9 @@
         android:background="@drawable/cnc_backround"
         android:layout_alignParentRight="true"/>
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/cnc_image_view_user"
+        android:layout_width="@dimen/DP34"
+        android:layout_height="@dimen/DP34" />
+
+</LinearLayout>

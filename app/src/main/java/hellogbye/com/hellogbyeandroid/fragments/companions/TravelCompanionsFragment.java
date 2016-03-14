@@ -97,9 +97,9 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
                              Bundle savedInstanceState) {
 
 
-        getCompanions();
+       // getCompanions();
 
-
+        companionsVO = getActivityInterface().getCompanions();
         View rootView = inflater.inflate(R.layout.companion_search_list, container, false);
 
         searchListInitialization(rootView);
@@ -247,7 +247,7 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
 
         final List<CompanionVO> filteredModelList = new ArrayList<>();
         for (CompanionVO model : models) {
-            final String text = model.getCampanionUserProfile().getmFirstName().toLowerCase();
+            final String text = model.getCompanionUserProfile().getmFirstName().toLowerCase();
             if (text.contains(query)) {
                 filteredModelList.add(model);
             }
