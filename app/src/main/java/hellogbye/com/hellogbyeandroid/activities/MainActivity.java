@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main_activity_layout);
+
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
 
         //check if we have travelitinery in db
@@ -236,6 +237,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 HGBUtility.getAndSaveUserImage(mCurrentUser.getAvatar(), my_trips_image_profile);
                 getAccountsProfiles();
                 selectItem(ToolBarNavEnum.HOME.getNavNumber(), null);
+
             }
 
             @Override

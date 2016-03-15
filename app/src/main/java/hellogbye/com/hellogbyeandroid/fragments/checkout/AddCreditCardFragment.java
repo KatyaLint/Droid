@@ -2,22 +2,34 @@ package hellogbye.com.hellogbyeandroid.fragments.checkout;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
+import com.google.android.gms.auth.TokenData;
+
+import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.views.CreditCardEditText;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import io.card.payment.CardIOActivity;
 import io.card.payment.CreditCard;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.XML;
 
 /**
  * Created by arisprung on 11/24/15.
@@ -26,7 +38,7 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
 
     private CreditCardEditText mCardNumber;
     private FontEditTextView mCardExpiry;
-    private FontEditTextView  mCardCCV;
+    private FontEditTextView mCardCCV;
     private FontEditTextView mCardFirstName;
     private FontEditTextView mCardLastName;
     private FontEditTextView mCardStreet;
@@ -42,7 +54,10 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
     private AlertDialog countryDialog;
     private AlertDialog stateDialog;
 
+    private ArrayList<String> listOfPattern;
     private final int MY_SCAN_REQUEST_CODE = 123;
+
+    private ProgressDialog progressDialog;
 
 
     public static Fragment newInstance(int position) {
@@ -63,10 +78,26 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        progressDialog = new ProgressDialog(getActivity());
         getActivityInterface().loadJSONFromAsset();
         init(view);
         buildCountryDialog();
         buildStateDialog();
+        listOfPattern = new ArrayList<String>();
+        String ptAmeExp = "^3[47][0-9]{5,}$";
+        listOfPattern.add(ptAmeExp);
+        String ptDiscover = "^6(?:011|5[0-9]{2})[0-9]{3,}$";
+        listOfPattern.add(ptDiscover);
+        String ptMasterCard = "^5[1-5][0-9]{5,}$";
+        listOfPattern.add(ptMasterCard);
+        String ptVisa = "^4[0-9]{6,}$";
+        listOfPattern.add(ptVisa);
+
+//        String ptDinClb = "^3(?:0[0-5]|[68][0-9])[0-9]{4,}$";
+//        listOfPattern.add(ptDinClb);
+//
+//        String ptJcb = "^(?:2131|1800|35[0-9]{3})[0-9]{3,}$";
+//        listOfPattern.add(ptJcb);
 
         mScan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +117,7 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sendCCToServer();
 
             }
         });
@@ -107,17 +139,17 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
 
     private void init(View view) {
         mCardNumber = (CreditCardEditText) view.findViewById(R.id.cc_number);
-        mCardExpiry  = (FontEditTextView)view.findViewById(R.id.cc_expiry);
-        mCardCCV  = (FontEditTextView)view.findViewById(R.id.cc_ccv);
-        mCardFirstName  = (FontEditTextView)view.findViewById(R.id.cc_first_name);
-        mCardLastName  = (FontEditTextView)view.findViewById(R.id.cc_last_name);
-        mCardStreet  = (FontEditTextView)view.findViewById(R.id.cc_billint_st);
-        mCardCountry  = (FontTextView)view.findViewById(R.id.cc_country);
-        mCardCity  = (FontEditTextView)view.findViewById(R.id.cc_billing_city);
-        mCardProvince  = (FontTextView)view.findViewById(R.id.cc_billing_province);
-        mCardPostal  = (FontEditTextView)view.findViewById(R.id.cc_billing_postal);
-        mSave = (FontTextView)view.findViewById(R.id.cc_save);
-        mScan = (FontTextView)view.findViewById(R.id.cc_scan);
+        mCardExpiry = (FontEditTextView) view.findViewById(R.id.cc_expiry);
+        mCardCCV = (FontEditTextView) view.findViewById(R.id.cc_ccv);
+        mCardFirstName = (FontEditTextView) view.findViewById(R.id.cc_first_name);
+        mCardLastName = (FontEditTextView) view.findViewById(R.id.cc_last_name);
+        mCardStreet = (FontEditTextView) view.findViewById(R.id.cc_billint_st);
+        mCardCountry = (FontTextView) view.findViewById(R.id.cc_country);
+        mCardCity = (FontEditTextView) view.findViewById(R.id.cc_billing_city);
+        mCardProvince = (FontTextView) view.findViewById(R.id.cc_billing_province);
+        mCardPostal = (FontEditTextView) view.findViewById(R.id.cc_billing_postal);
+        mSave = (FontTextView) view.findViewById(R.id.cc_save);
+        mScan = (FontTextView) view.findViewById(R.id.cc_scan);
     }
 
     private void buildCountryDialog() {
@@ -216,8 +248,7 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
                     resultDisplayStr += "Postal Code: " + scanResult.postalCode + "\n";
                     mCardPostal.setText(scanResult.postalCode);
                 }
-            }
-            else {
+            } else {
                 resultDisplayStr = "Scan was canceled.";
             }
             // do something with resultDisplayStr, maybe display it in a textView
@@ -225,4 +256,87 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
         }
         // else handle other activity results
     }
+
+
+    private void sendCCToServer() {
+        progressDialog = ProgressDialog.show(getActivity(), "", "Adding Credit Card");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+
+        CreditCardItem creditCardItem = new CreditCardItem();
+        creditCardItem.setBuyerfirstname(mCardFirstName.getText().toString());
+        creditCardItem.setBuyerlastname(mCardLastName.getText().toString());
+        creditCardItem.setBuyerzip(mCardPostal.getText().toString());
+        creditCardItem.setBuyeraddress(mCardStreet.getText().toString());
+        creditCardItem.setCardtypeid(getCCType());
+
+        String expDate = mCardExpiry.getText().toString();
+        if(expDate.contains("/")){
+            String[] parts = expDate.split("/");
+            String partMonth = parts[0];
+            String partYear = parts[1];
+            creditCardItem.setExpmonth(partMonth);
+            creditCardItem.setExpyear(partYear);
+        }
+
+
+        String last4 = mCardNumber.getText().toString();
+        last4 = last4.substring(last4.length() - 4, last4.length());
+        creditCardItem.setLast4(last4);
+        creditCardItem.setToken(mCardCCV.getText().toString());
+        creditCardItem.setCardNumber(mCardNumber.getText().toString());
+
+
+        ConnectionManager.getInstance(getActivity()).addCreditCard(creditCardItem,new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+                //TODO parse xml and add credit card to server
+
+                JSONObject jsonObj = null;
+                try {
+                    jsonObj = XML.toJSONObject((String)data);
+                    JSONObject json1 = jsonObj.getJSONObject("soap:Envelope");
+                    JSONObject json2 = json1.getJSONObject("soap:Body");
+                    JSONObject json3 = json2.getJSONObject("AddCOF_SoapResponse");
+                    JSONObject json4 = json3.getJSONObject("AddCOF_SoapResult");
+                    JSONObject json5 = json4.getJSONObject("TokenData");
+                    String strToken = json5.getString("Token");
+                    String strNickName = json5.getString("NickName");
+                    Log.d("","");
+
+
+
+
+                } catch (JSONException e) {
+                    Log.e("JSON exception", e.getMessage());
+                    e.printStackTrace();
+                }
+
+
+
+
+                Log.d("JSON", jsonObj.toString());
+            }
+
+            @Override
+            public void onError(Object data) {
+                Log.e("", "");
+                progressDialog.hide();
+                Toast.makeText(getActivity().getApplicationContext(),"There was a problem please try again",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+    private String getCCType() {
+            for (int i = 0; i < listOfPattern.size(); i++) {
+                if (mCardNumber.getText().toString().matches(listOfPattern.get(i))) {
+                    return String.valueOf(i+1);
+                }
+            }
+        return "0";
+    }
+
+
 }

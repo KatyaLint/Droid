@@ -130,7 +130,6 @@ public class HGBJsonRequest extends Request<String> {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         setService(url);
-        setService(url);
         send();
     }
 

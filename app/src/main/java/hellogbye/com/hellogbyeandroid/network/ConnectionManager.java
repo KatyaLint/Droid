@@ -14,10 +14,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 
@@ -30,13 +30,12 @@ public class ConnectionManager {
     }
 
 
-
-       public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
+    public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
 
 
     //public static String BASE_URL =  "http://cnc.hellogbye.com/cnc/rest/itinerary?count=15&skip=30";
-    
-  //  public static String BASE_URL = "http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/";
+
+    //  public static String BASE_URL = "http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/";
 
 
     private static ConnectionManager _instance;
@@ -54,7 +53,7 @@ public class ConnectionManager {
         USER_FLIGHT_SOLUTIONS, USER_GET_TRAVELER_INFO, USER_GET_USER_PROFILE_ACCOUNTS,
         USER_POST_USER_PROFILE_EMAIL, USER_TRAVEL_PROFILES, USER_PROFILE_RESET_PASSWORD,
         USER_SOLUTION, ITINERARY, USER_GET_TRAVEL_PREFERENCES, ITINERARY_CNC,
-        USER_POST_TRAVEL_PREFERENCES, COMPANIONS,CARD_TOKEN,ITINERARY_MY_TRIP,
+        USER_POST_TRAVEL_PREFERENCES, COMPANIONS, CARD_TOKEN, ITINERARY_MY_TRIP,
         ITINERARY_HIGHLIGHT, USER_AVATAR, RELATIONSHIP_TYPES, ACCOUNTS_PREFERENCES
 
     }
@@ -70,6 +69,7 @@ public class ConnectionManager {
         _instance.mContext = context;
         HGBStringRequest.setContext(context);
         HGBJsonRequest.setContext(context);
+        HGBStringXMLRequest.setContext(context);
         return _instance;
     }
 
@@ -79,7 +79,7 @@ public class ConnectionManager {
     ///////////////////////////////
 
 
-    public void postCompanions(String firstName,String lastName, String email,final ServerRequestListener listener) {
+    public void postCompanions(String firstName, String lastName, String email, final ServerRequestListener listener) {
 
         String url = getURL(Services.COMPANIONS);
 
@@ -108,7 +108,7 @@ public class ConnectionManager {
         }, false);
     }
 
-    public void postAvatar(String userprofileid,String avatar, final ServerRequestListener listener) {
+    public void postAvatar(String userprofileid, String avatar, final ServerRequestListener listener) {
         String url = getURL(Services.USER_AVATAR);
 
         JSONObject jsonObject = new JSONObject();
@@ -162,8 +162,6 @@ public class ConnectionManager {
             }
         }, false);
     }
-
-
 
 
     public void ItineraryCNCSearch(String query, String prefrenceid, String itineraryid, final ServerRequestListener listener) {
@@ -367,7 +365,7 @@ public class ConnectionManager {
 
         JSONArray jsonArray = new JSONArray();
 
-        for(AirportSendValuesVO airportSendValuesVO :airportSendValuesVOs) {
+        for (AirportSendValuesVO airportSendValuesVO : airportSendValuesVOs) {
 
             try {
 
@@ -376,8 +374,6 @@ public class ConnectionManager {
                 jsonObjectMain.put("travelpreferenceprofileid", airportSendValuesVO.getTravelpreferenceprofileid());
                 jsonObjectMain.put("latitude", airportSendValuesVO.getLatitude());
                 jsonObjectMain.put("longitude", airportSendValuesVO.getLongitude());
-
-
 
 
                 jsonObjectMain.put("token", jsonArray);
@@ -416,7 +412,7 @@ public class ConnectionManager {
                 listener.onError(Parser.parseErrorMessage(error));
             }
 
-        },false);
+        }, false);
 
 
     }
@@ -447,7 +443,7 @@ public class ConnectionManager {
                 listener.onError(Parser.parseErrorMessage(error));
             }
 
-        },false);
+        }, false);
 
     }
 
@@ -455,7 +451,7 @@ public class ConnectionManager {
     public void getMyTrips(final ServerRequestListener listener) {
 
         String url = getURL(Services.ITINERARY_MY_TRIP) + "?count=15&skip=0";
-      //  http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/itinerary?count=15&skip=0
+        //  http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/itinerary?count=15&skip=0
 
         JSONObject jsonObject = new JSONObject();
         HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
@@ -735,7 +731,6 @@ public class ConnectionManager {
         url = url + "/" + PREFERENCES + "/" + type + "/" + "Attributes/" + attributesId + "/Values";
 
 
-
         HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
                 jsonObject, new Response.Listener<String>() {
             @Override
@@ -897,10 +892,9 @@ public class ConnectionManager {
     }
 
 
-
     public void getStaticCompanionsRelationTypesVO(final ServerRequestListener listener) {
 
-        String url = getURL(Services.RELATIONSHIP_TYPES) ;
+        String url = getURL(Services.RELATIONSHIP_TYPES);
         //  http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/itinerary?count=15&skip=0
 
         JSONObject jsonObject = new JSONObject();
@@ -926,7 +920,7 @@ public class ConnectionManager {
 
     public void deleteUserCompanion(String companion_id, final ServerRequestListener listener) {
         String url = getURL(Services.COMPANIONS);
-        url = url+"/" + companion_id;
+        url = url + "/" + companion_id;
 
         HashMap<String, String> map = new HashMap<String, String>();
 
@@ -984,16 +978,9 @@ public class ConnectionManager {
     }
 
 
-
-
-
-
-
-
     ////////////////////////////////
     // PUT
     ///////////////////////////////
-
 
 
     public void putAccountsPreferences(String email, String travelpreferenceprofileid, final ServerRequestListener listener) {
@@ -1021,9 +1008,6 @@ public class ConnectionManager {
             }
         });
     }
-
-
-
 
 
     public void putCompanionRelationship(String companionid, int relationshiptypeId, final ServerRequestListener listener) {
@@ -1064,7 +1048,7 @@ public class ConnectionManager {
             json2.put("emailaddress", user.getEmailaddress());
             json2.put("phone", user.getPhone());
             json2.put("postalcode", user.getPostalcode());
-            json2.put("lastname",user.getLastname());
+            json2.put("lastname", user.getLastname());
             json2.put("dob", HGBUtility.parseDateToServertime(user.getDob()));
             json2.put("firstname", user.getFirstname());
             json2.put("title", user.getTitle());
@@ -1095,12 +1079,28 @@ public class ConnectionManager {
         });
     }
 
+    public void addCreditCard(CreditCardItem creditCardItem, final ServerRequestListener listener) {
 
+        //AddCreditCard addCreditCard = new AddCreditCard();
+
+        HGBStringXMLRequest req = new HGBStringXMLRequest(Request.Method.POST, "https://beta.mycardstorage.com/api/api.asmx",creditCardItem,
+                 new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        },false);
+    }
 
 
     //gender
     //email
-    public void putUserSettings(UserData user, final ServerRequestListener listener){
+    public void putUserSettings(UserData user, final ServerRequestListener listener) {
         String url = getURL(Services.USER_GET_PROFILE);
         JSONObject json1 = new JSONObject();
         try {
@@ -1109,7 +1109,7 @@ public class ConnectionManager {
             json1.put("usercountry", user.getCountry());
             json1.put("phone", user.getPhone());
             json1.put("postalcode", user.getPostalcode());
-            json1.put("lastname",user.getLastname());
+            json1.put("lastname", user.getLastname());
             json1.put("dob", user.getDob());
             json1.put("firstname", user.getFirstname());
             json1.put("title", user.getTitle());
@@ -1139,8 +1139,7 @@ public class ConnectionManager {
     }
 
 
-
-    private JSONArray createArrayToPut(List<SettingsValuesVO> putAttributesValues){
+    private JSONArray createArrayToPut(List<SettingsValuesVO> putAttributesValues) {
         JSONArray array = new JSONArray();
 
         try {
@@ -1158,7 +1157,7 @@ public class ConnectionManager {
                 jsonObject.put("name", name);
                 array.put(jsonObject);
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return array;
@@ -1184,8 +1183,6 @@ public class ConnectionManager {
             }
         });
     }
-
-
 
 
     public void putAlternateHotel(String solutionid, String paxid, String checkin, String checkout, String hotelid, final ServerRequestListener listener) {
@@ -1334,8 +1331,6 @@ public class ConnectionManager {
     }
 
 
-
-
     private String getURL(Services type) {
         String url = "";
         switch (type) {
@@ -1399,6 +1394,6 @@ public class ConnectionManager {
         }
         return url;
     }
-  //  http://cnc.hellogbye.com/cnc/rest/UserProfile/Accounts/TravelPreference
+    //  http://cnc.hellogbye.com/cnc/rest/UserProfile/Accounts/TravelPreference
 
 }
