@@ -57,7 +57,8 @@ public class CostumeToolBar extends Toolbar {
         }
         if (titleText == null) {
             titleText = (FontTextView) findViewById(R.id.titleBar);
-        }if(my_trips_image_profile == null){
+        }
+        if(my_trips_image_profile == null){
             my_trips_image_profile = (ImageView)findViewById(R.id.my_trips_image_profile);
         }
         if (keyBoardImage == null) {

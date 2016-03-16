@@ -42,7 +42,7 @@ import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightsDe
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
-import hellogbye.com.hellogbyeandroid.fragments.HistoryFragment;
+
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.MyTripsFragment;
@@ -332,7 +332,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         purchaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
+                System.out.println("Kate favorites");
+               // goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
             }
         });
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -514,9 +515,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 fragment = CNCFragment.newInstance(navPosition);
 
                 break;
-            case HISTORY:
-                fragment = HistoryFragment.newInstance(navPosition);
-                break;
+//            case HISTORY:
+//                fragment = HistoryFragment.newInstance(navPosition);
+//                break;
             case TRIPS:
                 fragment = MyTripsFragment.newInstance(navPosition);
                 break;
@@ -593,6 +594,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mDrawerLayout.closeDrawer(mNavDrawerLinearLayout);
     }
 
+
+    private void setOnClickListenerForItineraryTopBar(){
+        FontTextView titleText = (FontTextView)findViewById(R.id.titleBar);
+    }
 
     @Override
     public void onBackPressed() {

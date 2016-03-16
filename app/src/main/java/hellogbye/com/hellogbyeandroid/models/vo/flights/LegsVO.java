@@ -2,6 +2,8 @@ package hellogbye.com.hellogbyeandroid.models.vo.flights;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 /**
  * Created by nyawka on 9/9/15.
  */
@@ -53,6 +55,7 @@ public class LegsVO {
     private String mCarrierBadgeUrl;
     @SerializedName("carrierlogourl")
     private String mCarrierLogoUrl;
+
     @SerializedName("fareclass")
     private String mFareClass;
     @SerializedName("farepreference")
@@ -74,6 +77,22 @@ public class LegsVO {
     private String mAirportCode;
     @SerializedName("arrivaltime")
     private String mArrivalTime;
+
+
+    @SerializedName("availablefareclasses")
+    private ArrayList<String> mAvailablefareclasses;
+
+    @SerializedName("availablefarepreferences")
+    private ArrayList<String> mAvailablefarepreferences;
+
+    @SerializedName("availablemealpreferences")
+    private ArrayList<String> mAvailablemealpreferences;
+
+    @SerializedName("availablebaggagepreferences")
+    private ArrayList<String> mAvailablebaggagepreferences;
+
+//    @SerializedName("availableseatnumbers")
+//    private ArrayList<String> mAvailableseatnumbers;
 
     public double getmNormalizedDuration() {
         return mNormalizedDuration;
