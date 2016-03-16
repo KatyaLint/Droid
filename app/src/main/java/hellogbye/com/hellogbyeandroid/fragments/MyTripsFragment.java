@@ -234,7 +234,7 @@ public class MyTripsFragment extends HGBAbtsractFragment {
                         public void onSuccess(Object data) {
                             UserTravelMainVO userTravelMainVO = (UserTravelMainVO) data;
                             getActivityInterface().setTravelOrder(userTravelMainVO);
-                            getActivityInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
+                            getFlowInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
                             Log.d("", "");
                             //TODO set Travel and got to current itenrary
                         }

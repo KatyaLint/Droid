@@ -2,17 +2,14 @@ package hellogbye.com.hellogbyeandroid.fragments.settings;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.content.CursorLoader;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,12 +17,9 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -34,18 +28,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.LoginTest;
-import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.settingaccount.AccountSettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
-import hellogbye.com.hellogbyeandroid.models.BookingRequest;
+import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
-import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -138,7 +129,7 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
                         new PopUpAlertStringCB() {
                             @Override
                             public void itemSelected(String inputItem) {
-                                getActivityInterface().gotToStartMenuActivity();
+                                getFlowInterface().gotToStartMenuActivity();
                             }
 
                             @Override
@@ -179,7 +170,7 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
 
                 switch (position){
                     case 0:
-                        getActivityInterface().goToFragment(ToolBarNavEnum.COMPANIONS_PERSONAL_DETAILS.getNavNumber(), null);
+                        getFlowInterface().goToFragment(ToolBarNavEnum.COMPANIONS_PERSONAL_DETAILS.getNavNumber(), null);
                         //AccountPersonalInfoSettingsFragment
                         //personal information
                         break;
@@ -203,7 +194,7 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
         });
 
 
-        getActivityInterface().loadJSONFromAsset();
+        getFlowInterface().loadJSONFromAsset();
         //getCountries();
 
 
@@ -365,7 +356,7 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void onSuccess(Object data) {
                 //responceText.setText((String) data);
-                BookingRequest bookingrequest = (BookingRequest)data;
+                BookingRequestVO bookingrequest = (BookingRequestVO)data;
                 getActivityInterface().setEligabileCountries(bookingrequest.getCountries());
             }
 

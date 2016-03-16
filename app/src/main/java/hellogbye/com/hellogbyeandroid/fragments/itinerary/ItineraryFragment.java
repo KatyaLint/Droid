@@ -115,7 +115,7 @@ public class ItineraryFragment extends HGBAbtsractFragment {
         new_grid_add_companion_ll.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                getActivityInterface().goToFragment(ToolBarNavEnum.COMPANIONS.getNavNumber(), null);
+                getFlowInterface().goToFragment(ToolBarNavEnum.COMPANIONS.getNavNumber(), null);
 
                 //go to companion fragment
             }
@@ -268,7 +268,7 @@ public class ItineraryFragment extends HGBAbtsractFragment {
 
                     ((AlternativeFlightFragment) fragment).selectedItemGuidNumber(guidSelectedItem);
                     ((AlternativeFlightFragment) fragment).selectedUserGuidNumber(guidSelectedUser);
-                    getActivityInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber(),null);
+                    getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber(),null);
 
                 }else if (NodeTypeEnum.HOTEL.getType().equals(nodeType)){
 
@@ -281,7 +281,7 @@ public class ItineraryFragment extends HGBAbtsractFragment {
                     Fragment fragment = new HotelFragment();
                     ((HotelFragment) fragment).selectedItemGuidNumber(guidSelectedItem);
                     ((HotelFragment) fragment).selectedUserGuidNumber(guidSelectedUser);
-                    getActivityInterface().goToFragment(ToolBarNavEnum.HOTEL.getNavNumber(),null);
+                    getFlowInterface().goToFragment(ToolBarNavEnum.HOTEL.getNavNumber(),null);
                 }
 
         }

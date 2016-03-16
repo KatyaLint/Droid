@@ -1,22 +1,23 @@
-package hellogbye.com.hellogbyeandroid.models;
+package hellogbye.com.hellogbyeandroid.models.vo.statics;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-/**
- * Created by arisprung on 11/24/15.
- */
-public class BookingRequest {
+import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
+
+
+public class BookingRequestVO {
 
     @SerializedName("titles")
     private ArrayList<String> titles;
 
     @SerializedName("countries")
-    private ArrayList<CountryItem> countries;
+    private ArrayList<CountryItemVO> countries;
 
 
-
+//    @SerializedName("cardtypes")
+//    private ArrayList<String> cardtypes;
 
     public ArrayList<String> getTitles() {
         return titles;
@@ -26,11 +27,11 @@ public class BookingRequest {
         this.titles = titles;
     }
 
-    public ArrayList<CountryItem> getCountries() {
+    public ArrayList<CountryItemVO> getCountries() {
         return countries;
     }
 
-    public void setCountries(ArrayList<CountryItem> countries) {
+    public void setCountries(ArrayList<CountryItemVO> countries) {
         this.countries = countries;
     }
 }

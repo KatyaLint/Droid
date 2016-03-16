@@ -116,7 +116,7 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
                         if(companion.getmConfirmationstatus().equals("Accepted")) {
                             Bundle args = new Bundle();
                             args.putString("user_id", guid);
-                            getActivityInterface().goToFragment(ToolBarNavEnum.COMPANIONS_DETAILS.getNavNumber(), args);
+                            getFlowInterface().goToFragment(ToolBarNavEnum.COMPANIONS_DETAILS.getNavNumber(), args);
                         }else{
                             deleteComapanion(guid);
                         }

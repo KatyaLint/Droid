@@ -69,7 +69,7 @@ public class AlternativeFlightsDetailsFragment extends HGBAbtsractFragment {
             public void onItemClick(String guid) {
                 Fragment fragment = new AlternativeFlightFragment();
                 ((AlternativeFlightFragment)fragment).selectedItemGuidNumber(guid);
-                getActivityInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber(),null);
+                getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber(),null);
             }
         });
 

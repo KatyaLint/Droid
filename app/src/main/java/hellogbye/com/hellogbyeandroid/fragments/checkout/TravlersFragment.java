@@ -83,7 +83,7 @@ public class TravlersFragment extends HGBAbtsractFragment {
 
                         Bundle args = new Bundle();
                         args.putInt("user_json_position", position);
-                        getActivityInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS_DETAILS.getNavNumber(),args);
+                        getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS_DETAILS.getNavNumber(),args);
                     }
                 });
             }
@@ -103,7 +103,7 @@ public class TravlersFragment extends HGBAbtsractFragment {
                     @Override
                     public void onSuccess(Object data) {
                         getActivityInterface().setCreditCards((ArrayList<CreditCardItem>) data);
-                        getActivityInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(),null);
+                        getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(),null);
 
                     }
 

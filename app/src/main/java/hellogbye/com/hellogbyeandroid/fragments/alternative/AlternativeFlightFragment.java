@@ -129,7 +129,7 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
             @Override
             public void showAlternative() {
 
-                getActivityInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_DETAILS.getNavNumber(),null);
+                getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_DETAILS.getNavNumber(),null);
 
             }
 
@@ -164,7 +164,7 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment {
                     @Override
                     public void onSuccess(Object data) {
                         getActivityInterface().setAlternativeFlights(null);
-                        getActivityInterface().callRefreshItinerary(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber());
+                        getFlowInterface().callRefreshItinerary(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber());
                         //TODO clean nodeVO, go to iternarary screen
 
                     }

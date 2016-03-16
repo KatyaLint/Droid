@@ -250,16 +250,16 @@ public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
             case "1":
             case "2":
             case "9":
-                getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_SEARCH_LIST_SETTINGS.getNavNumber(), args);
+                getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCES_SEARCH_LIST_SETTINGS.getNavNumber(), args);
                 break;
             case "5":
             case "8":
             case "7":
-                getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_CHECK_LIST_SETTINGS.getNavNumber(), args);
+                getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCES_CHECK_LIST_SETTINGS.getNavNumber(), args);
                 break;
             case "3":
             case "6":
-                getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_DRAG_LIST_SETTINGS.getNavNumber(), args);
+                getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCES_DRAG_LIST_SETTINGS.getNavNumber(), args);
                 break;
 
 

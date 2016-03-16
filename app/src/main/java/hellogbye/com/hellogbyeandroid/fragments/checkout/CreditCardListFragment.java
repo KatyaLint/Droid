@@ -80,7 +80,7 @@ public class CreditCardListFragment extends HGBAbtsractFragment {
         mAddCCLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivityInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(),null);
+                getFlowInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(),null);
             }
         });
 

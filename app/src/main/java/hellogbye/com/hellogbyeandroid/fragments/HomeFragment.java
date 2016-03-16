@@ -100,7 +100,7 @@ public class HomeFragment extends HGBAbtsractFragment {
                 // getActivityInterface().openVoiceToTextControl();
 
 
-                getActivityInterface().openVoiceToTextControl();
+                getVoiceInterface().openVoiceToTextControl();
 
 
             }
@@ -158,14 +158,14 @@ public class HomeFragment extends HGBAbtsractFragment {
         HOME_FRAGMENT_STATE = KEYBOARD_STATE;
         mSpeechLayout.setVisibility(View.INVISIBLE);
         mKeyBoardLayout.setVisibility(View.VISIBLE);
-        getActivityInterface().setHomeImage("keyboard");
+        getFlowInterface().setHomeImage("keyboard");
     }
 
     public void setMicMode() {
         HOME_FRAGMENT_STATE = MIC_STATE;
         mSpeechLayout.setVisibility(View.VISIBLE);
         mKeyBoardLayout.setVisibility(View.INVISIBLE);
-        getActivityInterface().setHomeImage("mic");
+        getFlowInterface().setHomeImage("mic");
     }
 
 
@@ -181,7 +181,7 @@ public class HomeFragment extends HGBAbtsractFragment {
 
 //                    ItineraryFragment fragemnt = new ItineraryFragment();
 //                    HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack
-                  getActivityInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(),null);
+                  getFlowInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(),null);
 
                     checkState();
 //                    HotelFragment fragemnt = new HotelFragment();

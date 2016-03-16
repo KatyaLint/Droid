@@ -51,6 +51,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -65,18 +67,23 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 
 import java.util.Random;
 import java.util.Stack;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.SignUpActivity;
+import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -393,6 +400,7 @@ public class HGBUtility {
         //TODO change the action bar relative to current fragment
         return false;
     }
+
 
 
     public static String loadJSONFromAsset(String fileName, Activity activity) {
@@ -1087,6 +1095,7 @@ public static String formattDateToStringMonthDate(String dateInString) {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
         }
     }
+
 
 }
 

@@ -86,7 +86,7 @@ public class CNCFragment extends HGBAbtsractFragment {
         initList();
 
 
-        getActivityInterface().getToolBar().updateToolBarView(ToolBarNavEnum.CNC.getNavNumber());
+        getFlowInterface().getToolBar().updateToolBarView(ToolBarNavEnum.CNC.getNavNumber());
 
 
         getAccountsProfiles();
@@ -128,7 +128,7 @@ public class CNCFragment extends HGBAbtsractFragment {
                 //TODO this logic needs to change once we get final api
                 if (getString(R.string.itinerary_created).equals(strText)
                         || getString(R.string.grid_has_been_updated).equals(strText)) {
-                    getActivityInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(),null);
+                    getFlowInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(),null);
                 }
             }
         });
@@ -175,7 +175,7 @@ public class CNCFragment extends HGBAbtsractFragment {
         cnc_fragment_trip_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCE.getNavNumber(), null);
+                getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCE.getNavNumber(), null);
             }
         });
 
@@ -215,7 +215,7 @@ public class CNCFragment extends HGBAbtsractFragment {
         mMicImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivityInterface().openVoiceToTextControl();
+                getVoiceInterface().openVoiceToTextControl();
             }
         });
 

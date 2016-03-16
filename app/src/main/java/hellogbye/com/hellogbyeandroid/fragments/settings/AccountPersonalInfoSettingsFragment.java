@@ -11,10 +11,9 @@ import android.widget.EditText;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.LoginTest;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
-import hellogbye.com.hellogbyeandroid.models.BookingRequest;
-import hellogbye.com.hellogbyeandroid.models.CountryItem;
+import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
+import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
 import hellogbye.com.hellogbyeandroid.models.UserData;
@@ -253,7 +252,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
 
     private void selectStates(String countryPicked){
         int countryPick = Integer.parseInt(countryPicked);
-        ArrayList<CountryItem> countries = getActivityInterface().getEligabileCountries();
+        ArrayList<CountryItemVO> countries = getActivityInterface().getEligabileCountries();
         ArrayList<ProvincesItem> province = countries.get(countryPick).getProvinces();
         maxValueForStateDialog = province.size();
         stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPick).getProvinces().size()];
@@ -302,7 +301,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void onSuccess(Object data) {
            //     responceText.setText((String) data);
-                BookingRequest bookingrequest = (BookingRequest)data;
+                BookingRequestVO bookingrequest = (BookingRequestVO)data;
             }
 
             @Override
