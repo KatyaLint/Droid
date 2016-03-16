@@ -1,26 +1,21 @@
 package hellogbye.com.hellogbyeandroid.fragments.checkout;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
-import hellogbye.com.hellogbyeandroid.models.CountryItem;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
@@ -90,7 +85,7 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivityInterface().loadJSONFromAsset();
+        getFlowInterface().loadJSONFromAsset();
         mTitle = (FontTextView) view.findViewById(R.id.travel_detail_title);
         mFirstName = (EditText) view.findViewById(R.id.travel_detail_first_name);
         mLastName = (EditText) view.findViewById(R.id.travel_detail_last_name);

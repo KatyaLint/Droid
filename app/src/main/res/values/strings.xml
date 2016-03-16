@@ -156,4 +156,14 @@
 
     <string name="account_relationship">Relationship:</string>
 
+    <string name="sign_up_account">Create Account</string>
+    <string name="sign_up_email">Email</string>
+    <string name="sign_up_name">Name</string>
+    <string name="sign_up_location">Location</string>
+    <string name="sign_up_city">City</string>
+    <string name="sign_up_city_name">City Name</string>
+    <string name="sign_up_province_name">Province Name</string>
+    <string name="sign_up_password">Password</string>
+    <string name="sign_up_confirm_password">Confirm Password</string>
+
 </resources>

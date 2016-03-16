@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import hellogbye.com.hellogbyeandroid.HGBMainInterface;
+import hellogbye.com.hellogbyeandroid.activities.HGBFlowInterface;
+import hellogbye.com.hellogbyeandroid.activities.HGBMainInterface;
+import hellogbye.com.hellogbyeandroid.activities.HGBVoiceInterface;
+import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
@@ -25,6 +28,8 @@ import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 public class HGBAbtsractFragment extends Fragment {
 
     private HGBMainInterface mActivityInterface;
+    private HGBFlowInterface mHGBFlowInterface;
+    private HGBVoiceInterface mHGBVoiceInterface;
     private static String selectedItemGuid;
     private static String selectedUserGuid;
     private CostumeToolBar mToolBar;
@@ -36,24 +41,37 @@ public class HGBAbtsractFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mActivityInterface = (HGBMainInterface) getActivity();
+            mHGBFlowInterface  = (HGBFlowInterface) getActivity();
+            mHGBVoiceInterface  = (HGBVoiceInterface) getActivity();
+
+            mActivityInterface = ((MainActivity) activity).getHGBSaveDataClass();
+
         } catch (ClassCastException e) {
-            throw new ClassCastException(getActivity().toString() + " must implement HostingActivityInterface");
+            throw new ClassCastException(getActivity().toString() + "must implement HostingActivityInterface");
         }
 
      //   mActivityInterface.getToolBar().updateToolBarView(getArguments().getInt(HGBConstants.ARG_NAV_NUMBER));
     }
 
+    protected HGBVoiceInterface getVoiceInterface() {
+        if (mHGBVoiceInterface != null) {
+            return mHGBVoiceInterface;
+        }
+        return  null;
+    }
 
-
+    protected HGBFlowInterface getFlowInterface() {
+        if (mHGBFlowInterface != null) {
+            return mHGBFlowInterface;
+        }
+        return  null;
+    }
 
     protected HGBMainInterface getActivityInterface() {
         if (mActivityInterface != null) {
             return mActivityInterface;
         }
         return  null;
-
-
     }
 
     public NodesVO getLegWithGuid(UserTravelMainVO userOrder){

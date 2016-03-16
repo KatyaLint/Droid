@@ -31,7 +31,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import hellogbye.com.hellogbyeandroid.HGBMainInterface;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
@@ -58,7 +57,7 @@ import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionsFragm
 import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlerDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlersFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
-import hellogbye.com.hellogbyeandroid.models.CountryItem;
+import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
@@ -81,14 +80,14 @@ import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
-public class MainActivity extends AppCompatActivity implements NavListAdapter.OnItemClickListener, HGBMainInterface, ActionBar.OnMenuVisibilityListener {
+public class MainActivity extends AppCompatActivity implements NavListAdapter.OnItemClickListener, HGBVoiceInterface, HGBFlowInterface, ActionBar.OnMenuVisibilityListener {
     private DrawerLayout mDrawerLayout;
     private RecyclerView mDrawerList;
     private LinearLayout mNavDrawerLinearLayout;
     private android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-    private String[] mNavTitles;
+
     private RoundedImageView mProfileImage;
     private NavListAdapter mAdapter;
     private ArrayList<NavItem> mNavItemsList;
@@ -97,51 +96,35 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private HGBPreferencesManager hgbPrefrenceManager;
     private ImageButton imageButton;
     private ImageButton purchaseButton;
-    private ArrayList<CNCItem> mCNCItems;
-    private UserTravelMainVO mUserTravelOrder;
-    private List<NodesVO> alternativeFlights;
-    private NavigationView navigationView;
-    private DrawerLayout drawerLayout;
+
     protected OnBackPressedListener onBackPressedListener;
-    private String solutionID;
-    private ActionBar actionBar;
-    private List<SettingsAttributeParamVO> mSettingsAttribute;
-    private ArrayList<CountryItem> mEligabileCountryList = new ArrayList<>();
-
-    private String mTotalPrice;
-
-    private ArrayList<UserData> mTravelList;
-    private ArrayList<CreditCardItem> mCreditCardList;
 
     private UserData mCurrentUser;
 
-    private List<SettingsAttributesVO> settingsAttribute;
-    private List<SettingsAttributesVO> flightCarrierAttributes;
-    private List<SettingsAttributesVO> hotelBedTypeAttributes;
-    private List<SettingsAttributesVO> flightAircraftAttributes;
-    private List<SettingsAttributesVO> hotelChainAttributes;
-    private List<SettingsAttributesVO> hotelStarAttributes;
-    private List<SettingsAttributesVO> flightCabinClassAttributes;
-    private List<SettingsAttributesVO> hotelSmokingAttributes;
-    private PreferenceSettingsFragment.OnItemClickListener editClickCB;
-    private ArrayList<CompanionVO> companions;
-    private ArrayList<CompanionStaticRelationshipTypesVO> componionStaticDescriptionVOs;
-    private MyTripsFragment.OnItemClickListener editMyTripsClickCB;
-    private ArrayList<AccountsVO> accounts;
     public FontTextView my_trip_profile;
+    private HGBSaveDataClass hgbSaveDataClass;
+    private PreferenceSettingsFragment.OnItemClickListener editClickCB;
+    private MyTripsFragment.OnItemClickListener editMyTripsClickCB;
+
+
+    public HGBSaveDataClass getHGBSaveDataClass(){
+        return hgbSaveDataClass;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main_activity_layout);
+
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
+        hgbSaveDataClass = new HGBSaveDataClass(this, hgbPrefrenceManager);
 
         //check if we have travelitinery in db
         String strTravel = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO, "");
         if (!"".equals(strTravel)) {
             UserTravelMainVO userTravelVO = (UserTravelMainVO) Parser.parseAirplaneData(strTravel);
-            setTravelOrder(userTravelVO);
+            hgbSaveDataClass.setTravelOrder(userTravelVO);
         }
 
 
@@ -175,6 +158,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         getUserData();
         getCompanionsFromServer();
 
+
+
+
      //   getAccountsProfiles();
     }
 
@@ -184,10 +170,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             @Override
             public void onSuccess(Object data) {
                 ArrayList<AccountsVO> accounts = ( ArrayList<AccountsVO> )data;
-                setAccounts(accounts);
+                hgbSaveDataClass.setAccounts(accounts);
                 //TODO , now getting first account from list
                 AccountsVO account = accounts.get(0);
-                getCurrentUser().setEmailaddress(account.getEmail());
+                hgbSaveDataClass.getCurrentUser().setEmailaddress(account.getEmail());
                 editProfileTipeMainToolBar();
             }
 
@@ -201,8 +187,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
 
     public void editProfileTipeMainToolBar(){
-        AccountsVO account = getAccounts().get(0);
-        System.out.println("Kate account.getTravelpreferenceprofile().getProfilename() = " + account.getTravelpreferenceprofile().getProfilename());
+        AccountsVO account = hgbSaveDataClass.getAccounts().get(0);
         my_trip_profile = (FontTextView)findViewById(R.id.my_trip_profile);
         my_trip_profile.setText(account.getTravelpreferenceprofile().getProfilename());
         my_trip_profile.setTag(account.getTravelpreferenceprofile().getId());
@@ -214,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 @Override
                 public void onSuccess(Object data) {
                     ArrayList<CompanionVO> companions =(ArrayList<CompanionVO>)data;
-                    setCompanions(companions);
+                    hgbSaveDataClass.setCompanions(companions);
                 }
 
                 @Override
@@ -231,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             public void onSuccess(Object data) {
 
                 UserData mCurrentUser = (UserData) data;
-                setCurrentUser(mCurrentUser);
+                hgbSaveDataClass.setCurrentUser(mCurrentUser);
                 ImageView my_trips_image_profile = (ImageView)findViewById(R.id.my_trips_image_profile);
                 HGBUtility.getAndSaveUserImage(mCurrentUser.getAvatar(), my_trips_image_profile);
                 getAccountsProfiles();
@@ -412,8 +397,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     private void clearCNCItems() {
 
-        setCNCItems(null);
-        setTravelOrder(null);
+        hgbSaveDataClass.setCNCItems(null);
+        hgbSaveDataClass.setTravelOrder(null);
         hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
         hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
         Fragment currentFragment = getFragmentManager().findFragmentByTag(CNCFragment.class.toString());
@@ -488,144 +473,22 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
-    public void setTotalPrice(String totalPrice) {
-
-        mTotalPrice = totalPrice;
-
-    }
-
-    @Override
-    public String getTotalPrice() {
-        return mTotalPrice;
-    }
-
-    @Override
     public void loadJSONFromAsset() {
 
-        if (mEligabileCountryList.size() > 0) {
+        if (hgbSaveDataClass.getEligabileCountries().size() > 0) {
             return;
         }
-        String json = null;
-        try {
 
-            InputStream is = getAssets().open("countrieswithprovinces.txt");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-            Gson gson = new Gson();
-            Type listType = new TypeToken<List<CountryItem>>() {
-            }.getType();
-            ArrayList<CountryItem> list = (ArrayList<CountryItem>) gson.fromJson(json, listType);
-            setEligabileCountries(list);
+        String json = HGBUtility.loadJSONFromAsset("countrieswithprovinces.txt", this);
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<CountryItemVO>>() {
+        }.getType();
+        ArrayList<CountryItemVO> list = (ArrayList<CountryItemVO>) gson.fromJson(json, listType);
+        hgbSaveDataClass.setEligabileCountries(list);
 
     }
 
-    @Override
-    public void setAccountSettingsAttribute(List<SettingsAttributeParamVO> settingsAttribute) {
-        this.mSettingsAttribute = settingsAttribute;
-    }
-
-    @Override
-    public List<SettingsAttributeParamVO> getAccountSettingsAttribute() {
-        return mSettingsAttribute;
-    }
-
-
-    @Override
-    public void setAccountSettingsFlightStopAttributes(List<SettingsAttributesVO> settingsAttribute) {
-        this.settingsAttribute = settingsAttribute;
-    }
-
-    @Override
-    public List<SettingsAttributesVO> getAccountSettingsFlightStopAttributes() {
-        return settingsAttribute;
-    }
-
-    @Override
-    public void setAccountSettingsFlightCarrierAttributes(List<SettingsAttributesVO> flightCarrierAttributes) {
-        this.flightCarrierAttributes = flightCarrierAttributes;
-    }
-
-    @Override
-    public List<SettingsAttributesVO> getAccountSettingsFlightCarrierAttributes() {
-        return flightCarrierAttributes;
-    }
-
-    @Override
-    public void setAccountSettingsFlightCabinClassAttributes(List<SettingsAttributesVO> flightCabinClassAttributes) {
-        this.flightCabinClassAttributes = flightCabinClassAttributes;
-    }
-
-    @Override
-    public List<SettingsAttributesVO> getAccountSettingsFlightCabinClassAttributes() {
-        return flightCabinClassAttributes;
-    }
-
-    @Override
-    public void setAccountSettingsFlightAircraftAttributes(List<SettingsAttributesVO> flightAircraftAttributes) {
-        this.flightAircraftAttributes = flightAircraftAttributes;
-    }
-
-    @Override
-    public List<SettingsAttributesVO> getAccountSettingsFlightAircraftAttributes() {
-        return flightAircraftAttributes;
-    }
-
-    @Override
-    public void setAccountSettingsHotelStarAttributes(List<SettingsAttributesVO> hotelStarAttributes) {
-        this.hotelStarAttributes = hotelStarAttributes;
-    }
-
-    @Override
-    public List<SettingsAttributesVO> getAccountSettingsHotelStarAttributes() {
-        return hotelStarAttributes;
-    }
-
-    @Override
-    public void setAccountSettingsHotelChainAttributes(List<SettingsAttributesVO> hotelChainAttributes) {
-        this.hotelChainAttributes = hotelChainAttributes;
-    }
-
-    @Override
-    public List<SettingsAttributesVO> getAccountSettingsHotelChainAttributes() {
-        return hotelChainAttributes;
-    }
-
-    @Override
-    public void setAccountSettingsHotelSmokingAttributes(List<SettingsAttributesVO> hotelSmokingAttributes) {
-        this.hotelSmokingAttributes = hotelSmokingAttributes;
-    }
-
-    @Override
-    public List<SettingsAttributesVO> getAccountSettingsHotelSmokingClassAttributes() {
-        return hotelSmokingAttributes;
-    }
-
-    @Override
-    public void setAccountSettingsHotelBedTypeAttributes(List<SettingsAttributesVO> hotelBedTypeAttributes) {
-        this.hotelBedTypeAttributes = hotelBedTypeAttributes;
-    }
-
-    @Override
-    public List<SettingsAttributesVO> getAccountSettingsHotelBedTypeAttributes() {
-        return hotelBedTypeAttributes;
-    }
-
-    @Override
-    public void setCompanions(ArrayList<CompanionVO> companions) {
-        this.companions = companions;
-    }
-
-    @Override
-    public ArrayList<CompanionVO> getCompanions() {
-        return companions;
-    }
 
     @Override
     public void gotToStartMenuActivity() {
@@ -635,69 +498,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         startActivity(intent);
     }
 
-    @Override
-    public void setCompanionsStaticRelationshipTypes(ArrayList<CompanionStaticRelationshipTypesVO> componentsStaticRelationshipTypes) {
-        this.componionStaticDescriptionVOs = componentsStaticRelationshipTypes;
-    }
-
-    @Override
-    public ArrayList<CompanionStaticRelationshipTypesVO> getCompanionsStaticRelationshipTypes() {
-        return componionStaticDescriptionVOs;
-    }
-
-    @Override
-    public void setAccounts(ArrayList<AccountsVO> accounts) {
-        this.accounts = accounts;
-    }
-
-    @Override
-    public ArrayList<AccountsVO> getAccounts() {
-        return this.accounts;
-    }
-
-    @Override
-    public ArrayList<UserData> getListUsers() {
-        return mTravelList;
-    }
-
-    @Override
-    public UserData getCurrentUser() {
-        return mCurrentUser;
-    }
-
-    @Override
-    public void setCurrentUser(UserData currentUser) {
-        this.mCurrentUser = currentUser;
-    }
-
-
-    @Override
-    public ArrayList<CountryItem> getEligabileCountries() {
-        return mEligabileCountryList;
-    }
-
-    @Override
-    public void setEligabileCountries(ArrayList<CountryItem> list) {
-        mEligabileCountryList = list;
-
-    }
-
-    @Override
-    public ArrayList<CreditCardItem> getCreditCards() {
-        return mCreditCardList;
-    }
-
-    @Override
-    public void setCreditCards(ArrayList<CreditCardItem> mCreditCardList) {
-
-        this.mCreditCardList = mCreditCardList;
-
-    }
-
-    @Override
-    public void setListUsers(ArrayList<UserData> mTravelList) {
-        this.mTravelList = mTravelList;
-    }
 
 
     public void selectItem(int position, Bundle bundle) {
@@ -801,7 +601,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             onBackPressedListener.doBack();
         }
 
-        System.out.println("Kate on Back Main");
         //TODO this is when I want the fragment to contorl the back -Kate I suggest we do this for all Fragments
         FragmentManager.BackStackEntry backEntry = getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1);
         String str = backEntry.getName();
@@ -885,75 +684,74 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         }
     }
 
-    @Override
-    public void setTravelOrder(UserTravelMainVO travelorder) {
-        mUserTravelOrder = travelorder;
-        if (travelorder == null) {
-            setSolutionID(null);
-        } else {
-            setSolutionID(mUserTravelOrder.getmSolutionID());
-            Gson gson = new Gson();
-            String json = gson.toJson(travelorder);
-            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO, json);
-        }
+//    @Override
+//    public void setTravelOrder(UserTravelMainVO travelorder) {
+//        mUserTravelOrder = travelorder;
+//        if (travelorder == null) {
+//            setSolutionID(null);
+//        } else {
+//            setSolutionID(mUserTravelOrder.getmSolutionID());
+//            Gson gson = new Gson();
+//            String json = gson.toJson(travelorder);
+//            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO, json);
+//        }
+//
+//    }
 
-    }
+//    @Override
+//    public void setCNCItems(ArrayList<CNCItem> cncItemArrayList) {
+//        this.mCNCItems = cncItemArrayList;
+//    }
 
-    @Override
-    public void setCNCItems(ArrayList<CNCItem> cncItemArrayList) {
-        this.mCNCItems = cncItemArrayList;
-    }
+//    @Override
+//    public void setSolutionID(String solutionID) {
+//        this.solutionID = solutionID;
+//    }
+//
+//    @Override
+//    public String getSolutionID() {
+//        return solutionID;
+//    }
 
-    @Override
-    public void setSolutionID(String solutionID) {
-        this.solutionID = solutionID;
-    }
-
-    @Override
-    public String getSolutionID() {
-        return solutionID;
-    }
-
-    @Override
-    public void setAlternativeFlights(List<NodesVO> alternativeFlightsVO) {
-        this.alternativeFlights = alternativeFlightsVO;
-    }
-
-
-    @Override
-    public UserTravelMainVO getTravelOrder() {
-        return mUserTravelOrder;
-    }
-
-    @Override
-    public ArrayList<CNCItem> getCNCItems() {
-        return mCNCItems;
-    }
-
-    @Override
-    public List<NodesVO> getAlternativeFlights() {
-        return alternativeFlights;
-    }
-
-    @Override
-    public void addCNCItem(CNCItem cncitem) {
-
-        if (mCNCItems == null) {
-            mCNCItems = new ArrayList<>();
-        }
-
-        mCNCItems.add(cncitem);
+//    @Override
+//    public void setAlternativeFlights(List<NodesVO> alternativeFlightsVO) {
+//        this.alternativeFlights = alternativeFlightsVO;
+//    }
 
 
-    }
+//    @Override
+//    public UserTravelMainVO getTravelOrder() {
+//        return mUserTravelOrder;
+//    }
+
+//    @Override
+//    public ArrayList<CNCItem> getCNCItems() {
+//        return mCNCItems;
+//    }
+
+//    @Override
+//    public List<NodesVO> getAlternativeFlights() {
+//        return alternativeFlights;
+//    }
+
+//    @Override
+//    public void addCNCItem(CNCItem cncitem) {
+//
+//        if (mCNCItems == null) {
+//            mCNCItems = new ArrayList<>();
+//        }
+//
+//        mCNCItems.add(cncitem);
+//
+//    }
 
     @Override
     public void callRefreshItinerary(final int fragment) {
 
-        ConnectionManager.getInstance(MainActivity.this).getItinerary(solutionID, new ConnectionManager.ServerRequestListener() {
+        ConnectionManager.getInstance(MainActivity.this).getItinerary(hgbSaveDataClass.getSolutionID(), new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                setTravelOrder((UserTravelMainVO) data);
+                hgbSaveDataClass.setTravelOrder((UserTravelMainVO) data);
                 continueFlow(fragment);
             }
 
@@ -974,6 +772,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     public void goToFragment(int fragmentname, Bundle bundle) {
         selectItem(fragmentname, bundle);
     }
+
+
+
 
 
     @Override
@@ -1035,7 +836,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
         try {
             Gson gsonback = new Gson();
-            String json = gsonback.toJson(mCNCItems);
+            String json = gsonback.toJson(hgbSaveDataClass.getCNCItems());
             hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, json);
 
         } catch (Exception e) {

@@ -63,7 +63,7 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivityInterface().loadJSONFromAsset();
+        getFlowInterface().loadJSONFromAsset();
         init(view);
         buildCountryDialog();
         buildStateDialog();

@@ -14,7 +14,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import hellogbye.com.hellogbyeandroid.models.BookingRequest;
+import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
@@ -316,10 +316,10 @@ public class Parser {
     }
 
     public static Object parseBookingOptions(String response) {
-        BookingRequest bookingrequest = new BookingRequest();
+        BookingRequestVO bookingrequest = new BookingRequestVO();
         try {
             Gson gson = new Gson();
-            Type type = new TypeToken<BookingRequest>() {
+            Type type = new TypeToken<BookingRequestVO>() {
             }.getType();
             bookingrequest = gson.fromJson(response, type);
 

@@ -219,7 +219,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
                     @Override
                     public void onSuccess(Object data) {
                         getActivityInterface().setTotalPrice(mTotalPrice.getText().toString());
-                        getActivityInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS.getNavNumber(), null);
+                        getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS.getNavNumber(), null);
                     }
 
                     @Override

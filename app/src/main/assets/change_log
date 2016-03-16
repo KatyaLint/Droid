@@ -31,3 +31,5 @@ Code changing:
   - Click on user avater : transfer to preference settings
   - changes on preference settings affect on cnc screen upper line
   - On CNC Message, user name
+  - Sign up screen - still need server response
+  - refactoring of MainActivity class
