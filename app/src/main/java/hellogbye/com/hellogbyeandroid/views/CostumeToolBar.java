@@ -32,6 +32,7 @@ public class CostumeToolBar extends Toolbar {
     private FontTextView my_trip_edit_button;
     private ImageView my_trips_image_profile;
     private FontTextView my_trip_profile;
+    private FontTextView itirnarary_title_Bar;
 
     public CostumeToolBar(Context context) {
         super(context);
@@ -82,6 +83,8 @@ public class CostumeToolBar extends Toolbar {
         }
         if(my_trip_edit_button == null){
             my_trip_edit_button = (FontTextView) findViewById(R.id.my_trip_edit_button);
+        }if(itirnarary_title_Bar == null){
+            itirnarary_title_Bar = (FontTextView)findViewById(R.id.itirnarary_title_Bar);
         }
 
     }
@@ -90,7 +93,7 @@ public class CostumeToolBar extends Toolbar {
     public void updateToolBarView(int position) {
 
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
-
+        String selectedItem = navBar.getNavTitle();
    //     homeTitleImage.setVisibility(View.GONE);
         my_trip_profile.setVisibility(View.GONE);
         titleText.setVisibility(View.GONE);
@@ -104,7 +107,7 @@ public class CostumeToolBar extends Toolbar {
         my_trips_button.setVisibility(View.GONE);
         my_trip_edit_button.setVisibility(View.GONE);
         my_trips_image_profile.setVisibility(View.GONE);
-
+        itirnarary_title_Bar.setVisibility(View.GONE);
         switch (navBar) {
 //            case HOME:
 //             //   homeTitleImage.setVisibility(View.VISIBLE);
@@ -113,9 +116,10 @@ public class CostumeToolBar extends Toolbar {
 //
 //                break;
             case ITINARERY:
-                titleText.setVisibility(View.VISIBLE);
+               // titleText.setVisibility(View.VISIBLE);
                 purchaseButton.setVisibility(View.VISIBLE);
-
+                itirnarary_title_Bar.setVisibility(View.VISIBLE);
+            //    itirnarary_title_Bar.setText(selectedItem);
                 break;
 //            case HISTORY:
 //                titleText.setVisibility(View.VISIBLE);
@@ -162,7 +166,7 @@ public class CostumeToolBar extends Toolbar {
 
 
         }
-        String selectedItem = navBar.getNavTitle();
+
         titleText.setText(selectedItem);
     }
 

@@ -33,3 +33,5 @@ Code changing:
   - On CNC Message, user name
   - Sign up screen - still need server response
   - refactoring of MainActivity class
+  - New make payment button
+  - Refactoring itinerary VO

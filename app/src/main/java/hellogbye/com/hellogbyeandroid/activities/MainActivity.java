@@ -15,9 +15,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -58,6 +60,7 @@ import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlerDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlersFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
@@ -105,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private HGBSaveDataClass hgbSaveDataClass;
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
     private MyTripsFragment.OnItemClickListener editMyTripsClickCB;
+    private FontTextView itirnarary_title_Bar;
 
 
     public HGBSaveDataClass getHGBSaveDataClass(){
@@ -324,18 +328,12 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             }
         });
     }
+
     private void initToolBar() {
 
         setSupportActionBar(mToolbar);
         imageButton = (ImageButton) mToolbar.findViewById(R.id.keyboard);
-        purchaseButton = (ImageButton) mToolbar.findViewById(R.id.purchaseButton);
-        purchaseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("Kate favorites");
-               // goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
-            }
-        });
+
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -345,6 +343,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 clearCNCItems();
             }
         });
+
 
 
         final ImageButton my_trips = (ImageButton) mToolbar.findViewById(R.id.my_trips_button);
@@ -360,6 +359,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         preferencesChanges();
 
         toolBarProfileChnage();
+        setOnClickListenerForItineraryTopBar();
 
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -538,6 +538,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case ITINARERY:
                 fragment = ItineraryFragment.newInstance(navPosition);
+                System.out.println("Kate hgbSaveDataClass.getTravelOrder(); =" + hgbSaveDataClass.getTravelOrder().getmSolutionName());
+                itirnarary_title_Bar.setText(hgbSaveDataClass.getTravelOrder().getmSolutionName());
                 break;
             case ALTERNATIVE_FLIGHT:
                 fragment = AlternativeFlightFragment.newInstance(navPosition);
@@ -596,7 +598,46 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
 
     private void setOnClickListenerForItineraryTopBar(){
-        FontTextView titleText = (FontTextView)findViewById(R.id.titleBar);
+        purchaseButton = (ImageButton) mToolbar.findViewById(R.id.purchaseButton);
+        purchaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Kate favorites");
+                // goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
+            }
+        });
+        //Kate
+        itirnarary_title_Bar = (FontTextView)findViewById(R.id.itirnarary_title_Bar);
+
+
+
+        LayoutInflater li = LayoutInflater.from(MainActivity.this);
+       final View promptsView = li.inflate(R.layout.popup_layout_change_iteinarary_name, null);
+       final EditText input = (EditText) promptsView
+                .findViewById(R.id.change_iteinarary_name);
+
+        itirnarary_title_Bar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                HGBUtility.showAlertPopUp(MainActivity.this, input, promptsView, getResources().getString(R.string.edit_trip_name),
+                        new PopUpAlertStringCB() {
+                            @Override
+                            public void itemSelected(String inputItem) {
+                                System.out.println("Kate change inputItem =" + inputItem);
+                               // sendNewEmailToServer(inputItem.trim());
+                            }
+
+                            @Override
+                            public void itemCanceled() {
+
+                            }
+                        });
+            }
+        });
+
+
     }
 
     @Override

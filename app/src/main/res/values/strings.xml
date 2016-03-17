@@ -167,5 +167,6 @@
     <string name="sign_up_confirm_password">Confirm Password</string>
 
     <string name="itinerary_make_payment">Make Payment</string>
+    <string name="edit_trip_name">Edit Trip Name</string>
 
 </resources>
