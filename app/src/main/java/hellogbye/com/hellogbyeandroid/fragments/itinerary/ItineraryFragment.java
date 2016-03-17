@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
@@ -535,6 +536,15 @@ public class ItineraryFragment extends HGBAbtsractFragment {
 
         activity = getActivity();
         View rootView = inflater.inflate(R.layout.new_grid_main_table, container, false);
+
+        Button grid_make_payment = (Button)rootView.findViewById(R.id.grid_make_payment);
+        grid_make_payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
+            }
+        });
+
         getDimentions();
         createItinenaryView(rootView);
 

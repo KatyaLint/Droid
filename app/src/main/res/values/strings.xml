@@ -166,4 +166,6 @@
     <string name="sign_up_password">Password</string>
     <string name="sign_up_confirm_password">Confirm Password</string>
 
+    <string name="itinerary_make_payment">Make Payment</string>
+
 </resources>
