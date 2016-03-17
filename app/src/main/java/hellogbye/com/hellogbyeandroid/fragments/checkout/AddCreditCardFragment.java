@@ -13,23 +13,24 @@ import android.view.ViewGroup;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.TokenData;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.XML;
 
 import java.util.ArrayList;
+
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.models.CreditCardSessionItem;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.views.CreditCardEditText;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import io.card.payment.CardIOActivity;
 import io.card.payment.CreditCard;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.XML;
 
 /**
  * Created by arisprung on 11/24/15.
@@ -58,6 +59,7 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
     private final int MY_SCAN_REQUEST_CODE = 123;
 
     private ProgressDialog progressDialog;
+    private CreditCardSessionItem creditCardItemSession;
 
 
     public static Fragment newInstance(int position) {
@@ -263,7 +265,7 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
 
-        CreditCardItem creditCardItem = new CreditCardItem();
+        final CreditCardItem creditCardItem = new CreditCardItem();
         creditCardItem.setBuyerfirstname(mCardFirstName.getText().toString());
         creditCardItem.setBuyerlastname(mCardLastName.getText().toString());
         creditCardItem.setBuyerzip(mCardPostal.getText().toString());
@@ -271,7 +273,7 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
         creditCardItem.setCardtypeid(getCCType());
 
         String expDate = mCardExpiry.getText().toString();
-        if(expDate.contains("/")){
+        if (expDate.contains("/")) {
             String[] parts = expDate.split("/");
             String partMonth = parts[0];
             String partYear = parts[1];
@@ -286,55 +288,103 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
         creditCardItem.setToken(mCardCCV.getText().toString());
         creditCardItem.setCardNumber(mCardNumber.getText().toString());
 
-
-        ConnectionManager.getInstance(getActivity()).addCreditCard(creditCardItem,new ConnectionManager.ServerRequestListener() {
+        ConnectionManager.getInstance(getActivity()).getCCSession(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-
-                //TODO parse xml and add credit card to server
-
-                JSONObject jsonObj = null;
-                try {
-                    jsonObj = XML.toJSONObject((String)data);
-                    JSONObject json1 = jsonObj.getJSONObject("soap:Envelope");
-                    JSONObject json2 = json1.getJSONObject("soap:Body");
-                    JSONObject json3 = json2.getJSONObject("AddCOF_SoapResponse");
-                    JSONObject json4 = json3.getJSONObject("AddCOF_SoapResult");
-                    JSONObject json5 = json4.getJSONObject("TokenData");
-                    String strToken = json5.getString("Token");
-                    String strNickName = json5.getString("NickName");
-                    Log.d("","");
+                creditCardItemSession = (CreditCardSessionItem) data;
 
 
-
-
-                } catch (JSONException e) {
-                    Log.e("JSON exception", e.getMessage());
-                    e.printStackTrace();
+                if (creditCardItemSession == null) {
+                    HGBErrorHelper errorHelper = new HGBErrorHelper();
+                    errorHelper.show(getFragmentManager(), "There was a probelm please try again");
+                    return;
                 }
 
+                creditCardItem.setNickname(creditCardItemSession.getNickname());
 
 
+                ConnectionManager.getInstance(getActivity()).addCreditCard(creditCardItem, new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
 
-                Log.d("JSON", jsonObj.toString());
+
+                        JSONObject jsonObj = null;
+                        try {
+                            jsonObj = XML.toJSONObject((String) data);
+                            JSONObject json1 = jsonObj.getJSONObject("soap:Envelope");
+                            JSONObject json2 = json1.getJSONObject("soap:Body");
+                            JSONObject json3 = json2.getJSONObject("AddCOF_SoapResponse");
+                            JSONObject json4 = json3.getJSONObject("AddCOF_SoapResult");
+                            JSONObject json5 = json4.getJSONObject("TokenData");
+                            String strToken = json5.getString("Token");
+                            String strNickName = json5.getString("NickName");
+                            String strLast4 = json5.getString("Last4");
+
+                            JSONObject json = new JSONObject();
+                            json.put("Last4", strLast4);
+                            json.put("NickName", strNickName);
+                            json.put("Token", strToken);
+
+
+                            ConnectionManager.getInstance(getActivity()).AddCreditCardHelloGbye(json, new ConnectionManager.ServerRequestListener() {
+                                @Override
+                                public void onSuccess(Object data) {
+                                    progressDialog.hide();
+                                    getFragmentManager().popBackStack();
+
+                                }
+
+                                @Override
+                                public void onError(Object data) {
+
+                                    progressDialog.hide();
+                                    HGBErrorHelper errorHelper = new HGBErrorHelper();
+                                    errorHelper.show(getFragmentManager(), (String) data);
+
+                                }
+                            });
+
+
+                        } catch (JSONException e) {
+                            Log.e("JSON exception", e.getMessage());
+                            e.printStackTrace();
+                            progressDialog.hide();
+                            HGBErrorHelper errorHelper = new HGBErrorHelper();
+                            errorHelper.show(getFragmentManager(), e.getMessage());
+                        }
+                        Log.d("JSON", jsonObj.toString());
+                    }
+
+                    @Override
+                    public void onError(Object data) {
+                        Log.e("", "");
+                        progressDialog.hide();
+                        HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.show(getFragmentManager(), (String) data);
+
+                    }
+                });
+
+
             }
 
             @Override
             public void onError(Object data) {
-                Log.e("", "");
-                progressDialog.hide();
-                Toast.makeText(getActivity().getApplicationContext(),"There was a problem please try again",Toast.LENGTH_SHORT).show();
 
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.show(getFragmentManager(), (String) data);
             }
         });
+
+
     }
 
     private String getCCType() {
-            for (int i = 0; i < listOfPattern.size(); i++) {
-                if (mCardNumber.getText().toString().matches(listOfPattern.get(i))) {
-                    return String.valueOf(i+1);
-                }
+        for (int i = 0; i < listOfPattern.size(); i++) {
+            if (mCardNumber.getText().toString().matches(listOfPattern.get(i))) {
+                return String.valueOf(i + 1);
             }
+        }
         return "0";
     }
 

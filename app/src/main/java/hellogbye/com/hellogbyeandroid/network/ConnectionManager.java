@@ -23,6 +23,8 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 public class ConnectionManager {
 
+
+
     public interface ServerRequestListener {
         void onSuccess(Object data);
 
@@ -54,7 +56,7 @@ public class ConnectionManager {
         USER_POST_USER_PROFILE_EMAIL, USER_TRAVEL_PROFILES, USER_PROFILE_RESET_PASSWORD,
         USER_SOLUTION, ITINERARY, USER_GET_TRAVEL_PREFERENCES, ITINERARY_CNC,
         USER_POST_TRAVEL_PREFERENCES, COMPANIONS, CARD_TOKEN, ITINERARY_MY_TRIP,
-        ITINERARY_HIGHLIGHT, USER_AVATAR, RELATIONSHIP_TYPES, ACCOUNTS_PREFERENCES
+        ITINERARY_HIGHLIGHT, USER_AVATAR, RELATIONSHIP_TYPES, ACCOUNTS_PREFERENCES,CARD_SESSION
 
     }
 
@@ -490,6 +492,26 @@ public class ConnectionManager {
 
     }
 
+    public void getCCSession(final ServerRequestListener listener) {
+
+        String url = getURL(Services.CARD_SESSION);
+
+        JSONObject jsonObject = new JSONObject();
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseCCSession(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
+    }
+
     public void getMyTripsFavorite(final ServerRequestListener listener) {
 
         String url = getURL(Services.ITINERARY_MY_TRIP) + "?count=15&skip=0&isFavorite=true";
@@ -529,6 +551,26 @@ public class ConnectionManager {
         });
 
     }
+
+    public void AddCreditCardHelloGbye(JSONObject json,final ServerRequestListener listener) {
+        String url = getURL(Services.CARD_TOKEN);
+
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                json, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseCreditCardList(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
+    }
+
 
 
     public void getPreferenceProfiles(final ServerRequestListener listener) {
@@ -1384,6 +1426,8 @@ public class ConnectionManager {
                 return BASE_URL + "Companions";
             case CARD_TOKEN:
                 return BASE_URL + "Card/Token";
+            case CARD_SESSION:
+                return BASE_URL + "Card/Session";
             case USER_AVATAR:
                 return BASE_URL + "UserProfile/Avatar";
             case RELATIONSHIP_TYPES:

@@ -4,17 +4,21 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
+
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.CreditCardAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -49,10 +53,26 @@ public class CreditCardListFragment extends HGBAbtsractFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView = (RecyclerView)view.findViewById(R.id.select_cc_recyclerView);
-        mProceed = (FontTextView)view.findViewById(R.id.cc_proceed);
-        mTotalPrice = (FontTextView)view.findViewById(R.id.cc_total_price);
-        mAddCCLinearLayout = (LinearLayout)view.findViewById(R.id.select_cc_header);
+
+        ConnectionManager.getInstance(getActivity()).getCreditCards(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                ((ArrayList<CreditCardItem>) data).get(0).setSelected(true);
+                mAdapter = new CreditCardAdapter((ArrayList<CreditCardItem>) data, getActivity().getApplicationContext());
+                mRecyclerView.setAdapter(mAdapter);
+                getActivityInterface().setCreditCards((ArrayList<CreditCardItem>) data);
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.select_cc_recyclerView);
+        mProceed = (FontTextView) view.findViewById(R.id.cc_proceed);
+        mTotalPrice = (FontTextView) view.findViewById(R.id.cc_total_price);
+        mAddCCLinearLayout = (LinearLayout) view.findViewById(R.id.select_cc_header);
 
         mTotalPrice.setText(getActivityInterface().getTotalPrice());
 
@@ -65,9 +85,6 @@ public class CreditCardListFragment extends HGBAbtsractFragment {
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        getActivityInterface().getCreditCards().get(0).setSelected(true);
-        mAdapter = new CreditCardAdapter(getActivityInterface().getCreditCards(),getActivity().getApplicationContext());
-        mRecyclerView.setAdapter(mAdapter);
 
 
         mProceed.setOnClickListener(new View.OnClickListener() {
@@ -80,9 +97,11 @@ public class CreditCardListFragment extends HGBAbtsractFragment {
         mAddCCLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivityInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(),null);
+                getActivityInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(), null);
             }
         });
 
     }
+
+
 }

@@ -83,8 +83,7 @@ public class HGBStringXMLRequest extends Request<String> {
 
     @Override
     public byte[] getBody() throws AuthFailureError {
-        HGBPreferencesManager sharedPreferences = HGBPreferencesManager.getInstance(mContext);
-        String token = sharedPreferences.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
+
         String strResponce = "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
                 " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Header>" +
                 " <AuthHeader xmlns=\"https://MyCardStorage.com/\"><UserName>HelloGByeUser</UserName><Password>bWapRT#ayLJYN5S!</Password></AuthHeader> " +
@@ -94,7 +93,7 @@ public class HGBStringXMLRequest extends Request<String> {
                 "<CardType>"+creditCardItem.getCardtypeid()+"</CardType>" +
                 "<ExpirationMonth>"+creditCardItem.getExpmonth()+"</ExpirationMonth>" +
                 "<ExpirationYear>"+creditCardItem.getExpyear()+"</ExpirationYear>" +
-                "<NickName>"+token+"</NickName>" +
+                "<NickName>"+creditCardItem.getNickname()+"</NickName>" +
                 "<FirstName>"+creditCardItem.getBuyerfirstname()+"</FirstName>" +
                 "<LastName>"+creditCardItem.getBuyerlastname()+"</LastName>" +
                 "<StreetAddress>"+creditCardItem.getBuyeraddress()+"</StreetAddress>" +
