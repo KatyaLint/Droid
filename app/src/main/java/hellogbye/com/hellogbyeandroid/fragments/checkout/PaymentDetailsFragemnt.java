@@ -158,8 +158,8 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
                     PaymentChild paymentChild;
                     if (NodeTypeEnum.HOTEL.getType().equals(nodesVO.getmType())) {
                         paymentChild = new PaymentChild(nodesVO.getmHotelName() +
-                                "\n" + HGBUtility.parseDateToddMMyyyyForPayment(nodesVO.getmCheckIn()) +
-                                "-" + HGBUtility.parseDateToddMMyyyyForPayment(nodesVO.getmCheckOut()) + "\n" +
+                                "\n" +nodesVO.getmCheckIn() +
+                                "-" + nodesVO.getmCheckOut() + "\n" +
                                 nodesVO.getRoomsVOs().get(0).getmRoomType() + " " +
                                 HGBUtility.getDateDiffString(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()),
                                 "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid());
@@ -168,7 +168,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
                     } else if (NodeTypeEnum.FLIGHT.getType().equals(nodesVO.getmType())) {
                         paymentChild = new PaymentChild(nodesVO.getmOrigin() + "-" + nodesVO.getmDestination() + "\n" +
                                 nodesVO.getmOperatorName() + "" + nodesVO.getmEquipment() +
-                                "\n" + HGBUtility.parseDateToddMMyyyyForPayment(nodesVO.getDateOfCell()),
+                                "\n" + nodesVO.getDateOfCell(),
                                 "$" + String.valueOf(totalprice), true, nodesVO.getmGuid());
                         flightChildArray.add(paymentChild);
                         itenearySet.add(nodesVO.getmGuid());
@@ -189,6 +189,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
         mPaymentSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getActivityInterface().setItenerayItems(itenearySet);
 
                 ConnectionManager.getInstance(getActivity()).checkoutSolutionId(getActivityInterface().getSolutionID(), itenearySet, new ConnectionManager.ServerRequestListener() {
                     @Override

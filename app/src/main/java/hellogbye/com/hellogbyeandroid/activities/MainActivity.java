@@ -29,6 +29,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.HGBMainInterface;
@@ -129,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private MyTripsFragment.OnItemClickListener editMyTripsClickCB;
     private ArrayList<AccountsVO> accounts;
     public FontTextView my_trip_profile;
+
+    private HashSet<String> itenearySet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -655,6 +658,16 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public ArrayList<AccountsVO> getAccounts() {
         return this.accounts;
+    }
+
+    @Override
+    public void setItenerayItems(HashSet<String> set) {
+        itenearySet = set;
+    }
+
+    @Override
+    public HashSet<String> getItenerayItems() {
+        return itenearySet;
     }
 
     @Override

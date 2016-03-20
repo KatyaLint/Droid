@@ -144,7 +144,11 @@ public class CreditCardAdapter extends RecyclerView.Adapter<CreditCardAdapter.Vi
         return mArrayList.size();
     }
 
+    public  int getLastCheckedPos() {
+        return lastCheckedPos;
+    }
 
-
-
+    public static void setLastCheckedPos(int lastCheckedPos) {
+        CreditCardAdapter.lastCheckedPos = lastCheckedPos;
+    }
 }

@@ -2,6 +2,7 @@ package hellogbye.com.hellogbyeandroid;
 
 import android.os.Bundle;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.CountryItem;
@@ -115,4 +116,8 @@ public interface HGBMainInterface {
     void setAccounts(ArrayList<AccountsVO> accounts);
 
     ArrayList<AccountsVO> getAccounts();
+
+    void setItenerayItems(HashSet<String> itenearySet);
+
+    HashSet<String> getItenerayItems();
 }

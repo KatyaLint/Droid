@@ -56,7 +56,7 @@ public class ConnectionManager {
         USER_POST_USER_PROFILE_EMAIL, USER_TRAVEL_PROFILES, USER_PROFILE_RESET_PASSWORD,
         USER_SOLUTION, ITINERARY, USER_GET_TRAVEL_PREFERENCES, ITINERARY_CNC,
         USER_POST_TRAVEL_PREFERENCES, COMPANIONS, CARD_TOKEN, ITINERARY_MY_TRIP,
-        ITINERARY_HIGHLIGHT, USER_AVATAR, RELATIONSHIP_TYPES, ACCOUNTS_PREFERENCES,CARD_SESSION
+        ITINERARY_HIGHLIGHT, USER_AVATAR, RELATIONSHIP_TYPES, ACCOUNTS_PREFERENCES,CARD_SESSION,BOOKING_PAY
 
     }
 
@@ -108,6 +108,36 @@ public class ConnectionManager {
                 listener.onError(Parser.parseErrorMessage(error));
             }
         }, false);
+    }
+
+
+
+    public void pay(JSONObject json ,final ServerRequestListener listener) {
+        String url = getURL(Services.BOOKING_PAY);
+
+//        JSONObject jsonObject = new JSONObject();
+//
+//        try {
+//            jsonObject.put("userprofileid", userprofileid);
+//            jsonObject.put("mimetype", ".png");
+//            jsonObject.put("avatar", avatar);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                json, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, true);
     }
 
     public void postAvatar(String userprofileid, String avatar, final ServerRequestListener listener) {
@@ -1432,6 +1462,8 @@ public class ConnectionManager {
                 return BASE_URL + "UserProfile/Avatar";
             case RELATIONSHIP_TYPES:
                 return BASE_URL + "Statics/RelationshipTypes";
+            case BOOKING_PAY:
+                return BASE_URL + "Booking/pay";
             case ACCOUNTS_PREFERENCES:
                 return BASE_URL + "UserProfile/Accounts/TravelPreference";
 
