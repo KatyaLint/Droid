@@ -36,6 +36,7 @@ import hellogbye.com.hellogbyeandroid.HGBMainInterface;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.NewPaymentDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.AddCreditCardFragment;
@@ -765,7 +766,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 stashToBack = false;
                 break;
             case PAYMENT_DETAILS:
-                fragment = PaymentDetailsFragemnt.newInstance(navPosition);
+                fragment = NewPaymentDetailsFragment.newInstance(navPosition);
                 break;
             case PREFERENCES_TAB_SETTINGS:
                 fragment = PreferencesTabsFragmentSettings.newInstance(navPosition);

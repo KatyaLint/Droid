@@ -1,7 +1,6 @@
 package hellogbye.com.hellogbyeandroid.fragments.checkout;
 
 import android.app.Fragment;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,50 +12,37 @@ import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
-import com.amulyakhare.textdrawable.TextDrawable;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
-import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymentChild;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymnentGroup;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
-import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
- * Created by arisprung on 11/15/15.
+ * Created by arisprung on 3/22/16.
  */
-public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
+public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
 
-
-
-
+   // private View rootView;
+    private LinearLayout mRootView;
     private FontTextView mTotalPrice;
     private FontTextView mPaymentSubmit;
-    private HashSet<String> itenearySet = new HashSet<String>();
-
-
-    // private ArrayList<FontTextView> mArralistView;
+    private ExpandableListView lv;
 
 
     public static Fragment newInstance(int position) {
-        Fragment fragment = new PaymentDetailsFragemnt();
+        Fragment fragment = new NewPaymentDetailsFragment();
         Bundle args = new Bundle();
         args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
         fragment.setArguments(args);
@@ -71,140 +57,69 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.payment_details_layout, container, false);
+        View rootView = inflater.inflate(R.layout.payment_details_layout, container, false);
 
-        return v;
+
+        return rootView;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+       // mRootView = (LinearLayout) view.findViewById(R.id.payment_details_root);
         mTotalPrice = (FontTextView) view.findViewById(R.id.payment_total_price);
         mPaymentSubmit = (FontTextView) view.findViewById(R.id.payment_submit);
-
-
+        lv = (ExpandableListView) view.findViewById(R.id.ex_list);
         UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
         ArrayList<PassengersVO> passangers = travelOrder.getPassengerses();
+        List<ArrayList<PaymentChild>> children = new ArrayList<>();
+        ArrayList<PaymnentGroup> groups = new ArrayList<>();
+
         for (PassengersVO passengersVO : passangers) {
-            View child = getActivity().getLayoutInflater().inflate(R.layout.payment_details_person_layout, null);
-            //mRootView.addView(child);
-            ImageView imageView = (ImageView) child.findViewById(R.id.checkout_image_name_round_image_view);
-            FontTextView nameFontText = (FontTextView) child.findViewById(R.id.checkout_name_text);
-            FontTextView priceFontText = (FontTextView) child.findViewById(R.id.checkout_name_price);
-
-            ExpandableListView lv = (ExpandableListView) child.findViewById(R.id.ex_list);
-
-            nameFontText.setText(passengersVO.getmName());
-            priceFontText.setText("$" + String.valueOf(passengersVO.getmTotalPrice()));
-            TextDrawable drawable2 = TextDrawable.builder()
-                    .buildRound(passengersVO.getmName().substring(0, 1), Color.GRAY);
-            imageView.setImageDrawable(drawable2);
-
-            List<ArrayList<PaymentChild>> children = new ArrayList<>();
-            ArrayList<PaymnentGroup> groups = new ArrayList<>();
-
-            boolean isHotelAdded = false;
-            boolean isFlightAdded = false;
-            ArrayList<PaymentChild> flightChildArray = null;
-            ArrayList<PaymentChild> hotelChildArray = null;
-            Set<String> set = new HashSet<String>();
+//            View child = getActivity().getLayoutInflater().inflate(R.layout.payment_details_person_layout, null);
+//            mRootView.addView(child);
+            ArrayList<PaymentChild> passengerChildArray = new ArrayList<>();
 
 
-            // passanger specific get id
-            // run for all id for current passanger
-
-
-            ArrayList<PassengersVO> passangersVOs = travelOrder.getPassengerses();
             Map<String, NodesVO> hashMap = travelOrder.getItems();
-            for (PassengersVO passenger : passangersVOs) {
-                ArrayList<String> passengerItems = passenger.getmItineraryItems();
-                for (String passengerItem : passengerItems) {
-                    NodesVO passengerNode = hashMap.get(passengerItem);
-                    if (passengerNode != null) {
-                        set.add(passengerNode.getmGuid());
-                        if (NodeTypeEnum.HOTEL.getType().equals(passengerNode.getmType())) {
-                            if (!isHotelAdded) {
-                                hotelChildArray = new ArrayList<>();
-                                groups.add(new PaymnentGroup("Hotel", "$" + String.valueOf(passengersVO.getmTotalHotelPrice()), true));
+            groups.add(new PaymnentGroup(passengersVO.getmName(), "$" + String.valueOf(passengersVO.getmTotalPrice()), true));
 
-                                isHotelAdded = true;
-                            }
-                        } else if (NodeTypeEnum.FLIGHT.getType().equals(passengerNode.getmType())) {
-                            if (!isFlightAdded) {
-                                flightChildArray = new ArrayList<>();
-                                groups.add(new PaymnentGroup("Flight", "$" + String.valueOf(passengersVO.getmTotalFlightPrice()), true));
-                                isFlightAdded = true;
-                            }
+            ArrayList<String> passengerItems = passengersVO.getmItineraryItems();
+            for (String passengerItem : passengerItems) {
+                NodesVO nodesVO = hashMap.get(passengerItem);
+                if (nodesVO != null) {
+                    if (nodesVO != null) {//&& list.size() > 0) {
+                        double totalprice = passengersVO.getmTotalPrice();
+                        PaymentChild paymentChild;
+                        if (NodeTypeEnum.HOTEL.getType().equals(nodesVO.getmType())) {
+                            paymentChild = new PaymentChild(nodesVO.getmHotelName() +
+                                    "\n" + nodesVO.getmCheckIn() +
+                                    "-" + nodesVO.getmCheckOut() + "\n" +
+                                    nodesVO.getRoomsVOs().get(0).getmRoomType() + " " +
+                                    HGBUtility.getDateDiffString(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()),
+                                    "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid());
+                            passengerChildArray.add(paymentChild);
+                            //  itenearySet.add(nodesVO.getmGuid());
+                        } else if (NodeTypeEnum.FLIGHT.getType().equals(nodesVO.getmType())) {
+                            paymentChild = new PaymentChild(nodesVO.getmOrigin() + "-" + nodesVO.getmDestination() + "\n" +
+                                    nodesVO.getmOperatorName() + "" + nodesVO.getmEquipment() +
+                                    "\n" + nodesVO.getDateOfCell(),
+                                    "$" + String.valueOf(totalprice), true, nodesVO.getmGuid());
+                            passengerChildArray.add(paymentChild);
+                            //  itenearySet.add(nodesVO.getmGuid());
                         }
                     }
+
                 }
             }
+            children.add(passengerChildArray);
 
-
-
-            for (String strGuid : set) {
-
-                NodesVO nodesVO = getNodeWithGuidAndPaxID(strGuid, passengersVO.getmPaxguid(), travelOrder);
-
-                if (nodesVO != null) {//&& list.size() > 0) {
-                    double totalprice = passengersVO.getmTotalPrice();
-//                    for (NodesVO n : list) {
-//                        totalprice += n.getCost();
-//                    }
-                    //  NodesVO nodesVO = list.get(0);
-                    PaymentChild paymentChild;
-                    if (NodeTypeEnum.HOTEL.getType().equals(nodesVO.getmType())) {
-                        paymentChild = new PaymentChild(nodesVO.getmHotelName() +
-                                "\n" +nodesVO.getmCheckIn() +
-                                "-" + nodesVO.getmCheckOut() + "\n" +
-                                nodesVO.getRoomsVOs().get(0).getmRoomType() + " " +
-                                HGBUtility.getDateDiffString(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()),
-                                "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid());
-                        hotelChildArray.add(paymentChild);
-                        itenearySet.add(nodesVO.getmGuid());
-                    } else if (NodeTypeEnum.FLIGHT.getType().equals(nodesVO.getmType())) {
-                        paymentChild = new PaymentChild(nodesVO.getmOrigin() + "-" + nodesVO.getmDestination() + "\n" +
-                                nodesVO.getmOperatorName() + "" + nodesVO.getmEquipment() +
-                                "\n" + nodesVO.getDateOfCell(),
-                                "$" + String.valueOf(totalprice), true, nodesVO.getmGuid());
-                        flightChildArray.add(paymentChild);
-                        itenearySet.add(nodesVO.getmGuid());
-                    }
-                }
-            }
-            children.add(flightChildArray);
-            children.add(hotelChildArray);
-
-            lv.setAdapter(new ExpandableListAdapter(groups, children));
-            lv.setGroupIndicator(null);
 
         }
-
-
-        mTotalPrice.setText("$" + getActivityInterface().getTravelOrder().getmTotalPrice());
-
-        mPaymentSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivityInterface().setItenerayItems(itenearySet);
-
-                ConnectionManager.getInstance(getActivity()).checkoutSolutionId(getActivityInterface().getSolutionID(), itenearySet, new ConnectionManager.ServerRequestListener() {
-                    @Override
-                    public void onSuccess(Object data) {
-                        getActivityInterface().setTotalPrice(mTotalPrice.getText().toString());
-                        getActivityInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS.getNavNumber(), null);
-                    }
-
-                    @Override
-                    public void onError(Object data) {
-                        HGBErrorHelper errorHelper = new HGBErrorHelper();
-                        errorHelper.show(getFragmentManager(), (String) data);
-                    }
-                });
-            }
-        });
+        lv.setAdapter(new ExpandableListAdapter(groups, children));
+        lv.setGroupIndicator(null);
     }
+
 
     public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
@@ -333,7 +248,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
                         getChecked[childPosition] = isChecked;
                         mChildCheckStates.put(groupPosition, getChecked);
 
-                        itenearySet.add(childrenList.get(groupPosition).get(childPosition).getGuid());
+                        //  itenearySet.add(childrenList.get(groupPosition).get(childPosition).getGuid());
 
 
                         //TODO this is a bug we need to deselct/select parent
@@ -355,7 +270,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
                         setGroupPrice(false, groupPosition, holder.childPricetext);
                         setHeaderPrice(false, nameHeaderPriceTextView, holder.childPricetext.getText().toString());
                         setTotalPrice(false, holder.childPricetext.getText().toString());
-                        itenearySet.remove(childrenList.get(groupPosition).get(childPosition).getGuid());
+                        //itenearySet.remove(childrenList.get(groupPosition).get(childPosition).getGuid());
                     }
                     notifyDataSetChanged();
                 }
@@ -393,7 +308,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
                 holder = new GroupViewHolder();
                 holder.groupNametext = (FontTextView) convertView.findViewById(R.id.payment_group_name);
                 holder.groupPricetext = (FontTextView) convertView.findViewById(R.id.payment_group_price);
-//                holder.groupCheckBox = (CheckBox) convertView.findViewById(R.id.payment_group_checkbox);
+               // holder.groupCheckBox = (CheckBox) convertView.findViewById(R.id.payment_group_checkbox);
                 holder.groupImageView = (ImageView) convertView.findViewById(R.id.payment_group_image);
 
 
@@ -437,47 +352,47 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
             holder.groupPricetext.setText(group.getTotalText());
 
 
-            holder.groupCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    View nameHeaderPriceTextView = getNameHeaderPriceView(buttonView);
-                    if (isChecked) {
-                        double iSum = 0;
-                        for (PaymentChild child : childrenList.get(groupPosition)) {
-                            iSum += Double.valueOf(child.getTotalText().substring(1));
-                            itenearySet.add(child.getGuid());
-                        }
-                        boolean getChecked[] = mChildCheckStates.get(groupPosition);
-                        if (getChecked != null) {
-                            Arrays.fill(getChecked, true);
-                            mChildCheckStates.put(groupPosition, getChecked);
-                        }
-
-
-                        groupsList.get(groupPosition).setTotalText("$" + String.valueOf(iSum));
-                        setHeaderPrice(true, nameHeaderPriceTextView, String.valueOf(iSum));
-
-                        setTotalPrice(true, String.valueOf(iSum));
-
-                    } else {
-                        boolean getChecked[] = mChildCheckStates.get(groupPosition);
-                        if (getChecked != null) {
-                            Arrays.fill(getChecked, false);
-                            mChildCheckStates.put(groupPosition, getChecked);
-                        }
-
-                        groupsList.get(groupPosition).setTotalText("$0.0");
-                        setHeaderPrice(false, nameHeaderPriceTextView, holder.groupPricetext.getText().toString());
-                        setTotalPrice(false, holder.groupPricetext.getText().toString());
-                        for (PaymentChild child : childrenList.get(groupPosition)) {
-
-                            itenearySet.remove(child.getGuid());
-                        }
-                    }
-                    notifyDataSetChanged();
-                }
-            });
+//            holder.groupCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//
+//                @Override
+//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                    View nameHeaderPriceTextView = getNameHeaderPriceView(buttonView);
+//                    if (isChecked) {
+//                        double iSum = 0;
+//                        for (PaymentChild child : childrenList.get(groupPosition)) {
+//                            iSum += Double.valueOf(child.getTotalText().substring(1));
+//                            // itenearySet.add(child.getGuid());
+//                        }
+//                        boolean getChecked[] = mChildCheckStates.get(groupPosition);
+//                        if (getChecked != null) {
+//                            Arrays.fill(getChecked, true);
+//                            mChildCheckStates.put(groupPosition, getChecked);
+//                        }
+//
+//
+//                        groupsList.get(groupPosition).setTotalText("$" + String.valueOf(iSum));
+//                        setHeaderPrice(true, nameHeaderPriceTextView, String.valueOf(iSum));
+//
+//                        setTotalPrice(true, String.valueOf(iSum));
+//
+//                    } else {
+//                        boolean getChecked[] = mChildCheckStates.get(groupPosition);
+//                        if (getChecked != null) {
+//                            Arrays.fill(getChecked, false);
+//                            mChildCheckStates.put(groupPosition, getChecked);
+//                        }
+//
+//                        groupsList.get(groupPosition).setTotalText("$0.0");
+//                        setHeaderPrice(false, nameHeaderPriceTextView, holder.groupPricetext.getText().toString());
+//                        setTotalPrice(false, holder.groupPricetext.getText().toString());
+//                        for (PaymentChild child : childrenList.get(groupPosition)) {
+//
+//                            // itenearySet.remove(child.getGuid());
+//                        }
+//                    }
+//                    notifyDataSetChanged();
+//                }
+//            });
 
 
             return convertView;
@@ -491,7 +406,7 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
         private class GroupViewHolder {
             FontTextView groupNametext;
             FontTextView groupPricetext;
-            CheckBox groupCheckBox;
+            //CheckBox groupCheckBox;
             ImageView groupImageView;
 
         }
@@ -556,5 +471,6 @@ public class PaymentDetailsFragemnt extends HGBAbtsractFragment {
             mTotalPrice.setText("$" + String.format("%.2f", d));
         }
     }
+
 
 }
