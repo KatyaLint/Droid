@@ -48,8 +48,15 @@
         android:id="@+id/payment_group_price"
         style="@style/PaymentItemStyle"
         app:fontName="dinnextltpro_light.otf"
-        android:layout_alignParentRight="true"
+        android:layout_toLeftOf="@+id/passenger_select_cc"
+
 
         />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/passenger_select_cc"
+        style="@style/PaymentSelectCCStyle"
+        app:fontName="dinnextltpro_regular.otf"
+        android:layout_alignParentRight="true"/>
 
 </RelativeLayout>

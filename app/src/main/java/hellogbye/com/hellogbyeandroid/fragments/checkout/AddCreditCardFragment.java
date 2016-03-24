@@ -62,6 +62,7 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
     private CreditCardSessionItem creditCardItemSession;
 
 
+
     public static Fragment newInstance(int position) {
         Fragment fragment = new AddCreditCardFragment();
         Bundle args = new Bundle();

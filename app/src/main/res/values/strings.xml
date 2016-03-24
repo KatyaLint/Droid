@@ -155,5 +155,9 @@
     <string name="my_trips_favorites">Favorites</string>
 
     <string name="account_relationship">Relationship:</string>
+    <string name="add_card">Add Card</string>
+    <string name="remove_card">Remove Card</string>
+    <string name="cancel">Cancel</string>
+    <string name="select_card">Select Card</string>
 
 </resources>
