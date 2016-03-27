@@ -2,8 +2,10 @@ package hellogbye.com.hellogbyeandroid;
 
 import android.os.Bundle;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.CountryItem;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
@@ -117,7 +119,16 @@ public interface HGBMainInterface {
 
     ArrayList<AccountsVO> getAccounts();
 
-    void setItenerayItems(HashSet<String> itenearySet);
 
-    HashSet<String> getItenerayItems();
+
+    void setCreditCardsSelected(HashSet<CreditCardItem> cardsList);
+
+    HashSet<CreditCardItem> getCreditCardsSelected();
+
+
+    void setBookingHashMap(HashMap<String,String> bookigItems);
+
+    HashMap<String,String> getBookingHashMap();
+
+
 }

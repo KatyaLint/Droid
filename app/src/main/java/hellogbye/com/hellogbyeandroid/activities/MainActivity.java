@@ -29,6 +29,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -132,6 +133,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     public FontTextView my_trip_profile;
 
     private HashSet<String> itenearySet;
+
+    private HashSet<CreditCardItem> mSelectedCreditCards = new HashSet<>();
+
+    private HashMap<String,String> mBookingHashMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -660,15 +665,27 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         return this.accounts;
     }
 
+
     @Override
-    public void setItenerayItems(HashSet<String> set) {
-        itenearySet = set;
+    public void setCreditCardsSelected(HashSet<CreditCardItem> cardsList) {
+        mSelectedCreditCards = cardsList;
     }
 
     @Override
-    public HashSet<String> getItenerayItems() {
-        return itenearySet;
+    public  HashSet<CreditCardItem>  getCreditCardsSelected() {
+        return mSelectedCreditCards;
     }
+
+    @Override
+    public void setBookingHashMap(HashMap<String, String> bookigItems) {
+        mBookingHashMap = bookigItems;
+    }
+
+    @Override
+    public HashMap<String, String> getBookingHashMap() {
+        return mBookingHashMap;
+    }
+
 
     @Override
     public ArrayList<UserData> getListUsers() {
@@ -710,8 +727,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
-    public void setListUsers(ArrayList<UserData> mTravelList) {
-        this.mTravelList = mTravelList;
+    public void setListUsers(ArrayList<UserData> travellist) {
+        mTravelList = travellist;
     }
 
 

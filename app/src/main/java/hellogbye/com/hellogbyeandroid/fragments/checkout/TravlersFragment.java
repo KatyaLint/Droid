@@ -79,7 +79,6 @@ public class TravlersFragment extends HGBAbtsractFragment {
 
                     @Override
                     public void onItemClick(View v, int position) {
-
                         Bundle args = new Bundle();
                         args.putInt("user_json_position", position);
                         getActivityInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS_DETAILS.getNavNumber(), args);
@@ -98,13 +97,8 @@ public class TravlersFragment extends HGBAbtsractFragment {
             @Override
             public void onClick(View v) {
                 getActivityInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
-
-
-
             }
         });
-
-
     }
 
     private void setNextButtonBackround(boolean isEnabled) {

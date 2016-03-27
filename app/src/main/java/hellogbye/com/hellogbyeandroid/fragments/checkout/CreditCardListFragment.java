@@ -138,9 +138,9 @@ public class CreditCardListFragment extends HGBAbtsractFragment {
                         //TODO this need to change once we switch new design
                         JSONArray bookingArray = new JSONArray();
 
-                        for (String s : getActivityInterface().getItenerayItems()) {
-                            bookingArray.put(s);
-                        }
+//                        for (String s : getActivityInterface().getItenerayItems()) {
+//                            bookingArray.put(s);
+//                        }
 
                         jsonUser.put("bookingitems", bookingArray);
                         jsonArray.put(jsonUser);
@@ -157,9 +157,9 @@ public class CreditCardListFragment extends HGBAbtsractFragment {
                     //Booking Items
                     JSONObject bookingItems = new JSONObject();
                     JSONArray bookingArray = new JSONArray();
-                    for (String s : getActivityInterface().getItenerayItems()) {
-                        bookingArray.put(s);
-                    }
+//                    for (String s : getActivityInterface().getItenerayItems()) {
+//                        bookingArray.put(s);
+//                    }
                     bookingItems.put(selectedCreditCard.getToken(), bookingArray);
                     jsonObject.put("bookingitems", bookingItems);
 

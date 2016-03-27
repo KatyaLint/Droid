@@ -303,12 +303,12 @@ public class ConnectionManager {
     }
 
 
-    public void checkoutSolutionId(String profileId, HashSet<String> items, final ServerRequestListener listener) {
+    public void checkoutSolutionId(String solutionid, HashSet<String> items, final ServerRequestListener listener) {
         String url = getURL(Services.USER_POST_CHECKOUT);
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("itineraryid", profileId);
+            jsonObject.put("itineraryid", solutionid);
 
             JSONArray jsonArray = new JSONArray();
             for (String s : items) {
@@ -331,7 +331,7 @@ public class ConnectionManager {
             public void onErrorResponse(VolleyError error) {
                 listener.onError(Parser.parseErrorMessage(error));
             }
-        });
+        },true);
     }
 
     public void postUserProfileAccountsWithEmail(String email, final ServerRequestListener listener) {

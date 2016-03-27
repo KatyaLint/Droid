@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * Created by nyawka on 9/9/15.
@@ -38,6 +39,8 @@ public class PassengersVO {
 
     @SerializedName("cells")
     private ArrayList<CellsVO> mCells = new ArrayList<CellsVO>();
+
+    private HashSet<String> mBookingItems = new HashSet<>();
 
 
     public ArrayList<CellsVO> getmCells() {
@@ -129,6 +132,14 @@ public class PassengersVO {
         return mTotalHotelPrice;
     }
 
+    public HashSet<String> getmBookingItems() {
+        return mBookingItems;
+    }
+
+    public void setmBookingItems(HashSet<String> mBookingItems) {
+        this.mBookingItems = mBookingItems;
+    }
+
     public void setmTotalHotelPrice(double mTotalHotelPrice) {
         this.mTotalHotelPrice = mTotalHotelPrice;
     }
@@ -140,4 +151,6 @@ public class PassengersVO {
     public void setmItineraryItems(ArrayList<String> mItineraryItems) {
         this.mItineraryItems = mItineraryItems;
     }
+
+
 }
