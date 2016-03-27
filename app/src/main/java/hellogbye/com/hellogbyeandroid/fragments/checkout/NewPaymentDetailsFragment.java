@@ -22,11 +22,9 @@ import java.util.List;
 import java.util.Map;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.adapters.TravlerAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymentChild;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymnentGroup;
@@ -54,6 +52,9 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
     private ArrayList<String> itemsList;
     private FontTextView mSelectedView;
     private ArrayList<PassengersVO> passangers;
+    private ExpandableListAdapter mAdapter;
+    private ArrayList<PaymnentGroup> groups;
+    private List<ArrayList<PaymentChild>> children;
     private HashSet<CreditCardItem> mCreditCardHashSet = new HashSet<>();
 
 
@@ -68,8 +69,6 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initSelectCCDialog();
-
-
     }
 
 
@@ -108,12 +107,11 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
                 HashSet<String> set = new HashSet<String>();
 
 
-
                 for (String key : getActivityInterface().getBookingHashMap().keySet()) {
                     set.add(key);
                 }
 
-                ConnectionManager.getInstance(getActivity()).checkoutSolutionId(getActivityInterface().getSolutionID(),set, new ConnectionManager.ServerRequestListener() {
+                ConnectionManager.getInstance(getActivity()).checkoutSolutionId(getActivityInterface().getSolutionID(), set, new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
                         getActivityInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS.getNavNumber(), null);
@@ -130,8 +128,8 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
         });
 
 
-        List<ArrayList<PaymentChild>> children = new ArrayList<>();
-        ArrayList<PaymnentGroup> groups = new ArrayList<>();
+         children = new ArrayList<>();
+         groups = new ArrayList<>();
 
         for (PassengersVO passengersVO : passangers) {
 //            View child = getActivity().getLayoutInflater().inflate(R.layout.payment_details_person_layout, null);
@@ -140,7 +138,7 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
 
 
             Map<String, NodesVO> hashMap = travelOrder.getItems();
-            groups.add(new PaymnentGroup(passengersVO.getmName(), "$" + String.valueOf(passengersVO.getmTotalPrice()), true, passengersVO.getmItineraryItems()));
+            groups.add(new PaymnentGroup(passengersVO.getmName(), "$" + String.valueOf(passengersVO.getmTotalPrice()), true, passengersVO.getmItineraryItems(),getString(R.string.select_card)));
 
             ArrayList<String> passengerItems = passengersVO.getmItineraryItems();
             for (String passengerItem : passengerItems) {
@@ -155,14 +153,14 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
                                     "-" + nodesVO.getmCheckOut() + "\n" +
                                     nodesVO.getRoomsVOs().get(0).getmRoomType() + " " +
                                     HGBUtility.getDateDiffString(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()),
-                                    "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid());
+                                    "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(),getString(R.string.select_card));
                             passengerChildArray.add(paymentChild);
                             //  itenearySet.add(nodesVO.getmGuid());
                         } else if (NodeTypeEnum.FLIGHT.getType().equals(nodesVO.getmType())) {
                             paymentChild = new PaymentChild(nodesVO.getmOrigin() + "-" + nodesVO.getmDestination() + "\n" +
                                     nodesVO.getmOperatorName() + "" + nodesVO.getmEquipment() +
                                     "\n" + nodesVO.getDateOfCell(),
-                                    "$" + String.valueOf(nodesVO.getCost()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid());
+                                    "$" + String.valueOf(nodesVO.getCost()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(),getString(R.string.select_card));
                             passengerChildArray.add(paymentChild);
                             //  itenearySet.add(nodesVO.getmGuid());
                         }
@@ -174,7 +172,9 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
 
 
         }
-        lv.setAdapter(new ExpandableListAdapter(groups, children));
+
+        mAdapter =  new ExpandableListAdapter(groups, children);
+        lv.setAdapter(mAdapter);
         lv.setGroupIndicator(null);
     }
 
@@ -209,67 +209,20 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
 
 
                         Log.d("", getActivityInterface().getCreditCardsSelected().toString());
-
                         if (selectedText.equals(getString(R.string.cancel))) {
 
-                        } else if (selectedText.equals(getString(R.string.add_card))) {
+                        }
+                        else if (selectedText.equals(getString(R.string.add_card))) {
                             getActivityInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(), null);
                         } else if (selectedText.equals(getString(R.string.remove_card))) {
-                            // getActivityInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(), null);
+
                             mSelectedView.setText(R.string.select_card);
+                            calculateRemovedCard(selectedCreditCard, mSelectedView);
+
                         } else {
                             if (mSelectedView != null) {
-                                mSelectedView.setText(selectedText);
 
-
-                                if (mSelectedView.getTag() instanceof PaymnentGroup) {
-                                    PaymnentGroup paymentGroup = (PaymnentGroup) mSelectedView.getTag();
-                                    //This is to set bookingitem to each user in final json for payment
-                                    for (PassengersVO passenger : passangers) {
-                                        if (passenger.getmName().equals(paymentGroup.getNameText())) {
-                                            passenger.getmBookingItems().addAll(paymentGroup.getItems());
-                                        }
-                                    }
-
-                                    //This is to set bookingitem array  final json for payment
-                                    for (String strItem : paymentGroup.getItems()) {
-                                        getActivityInterface().getBookingHashMap().put(strItem,selectedCreditCard.getToken() );
-                                    }
-
-
-                                } else if (mSelectedView.getTag() instanceof PaymentChild) {
-                                    PaymentChild paymentchild = (PaymentChild) mSelectedView.getTag();
-
-                                    //This is to set bookingitem to each user in final json for payment
-                                    for (PassengersVO passenger : passangers) {
-                                        if (passenger.getmPaxguid().equals(paymentchild.getPaxguid())) {
-                                            passenger.getmBookingItems().add(paymentchild.getGuid());
-                                        }
-                                    }
-
-                                    //This is to set bookingitem array  final json for payment
-                                    getActivityInterface().getBookingHashMap().put(paymentchild.getGuid(),selectedCreditCard.getToken());
-
-
-                                } else {
-
-
-                                    PassengersVO currentPassenger = getCurrentPassengerByName(getActivityInterface().getCurrentUser().getFirstname());
-
-                                    for (PassengersVO passenger : passangers) {
-
-                                        for (String passengerItem : passenger.getmItineraryItems()) {
-                                            getActivityInterface().getBookingHashMap().put(passengerItem,selectedCreditCard.getToken());
-                                        }
-
-
-                                        currentPassenger.getmBookingItems().addAll(passenger.getmItineraryItems());
-
-
-                                    }
-
-                                }
-
+                                calculateSelectedCard(selectedCreditCard, mSelectedView);
 
                             }
 
@@ -292,6 +245,94 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
         });
 
 
+    }
+
+    private void calculateRemovedCard(CreditCardItem selectedCreditCard, FontTextView mSelectedView) {
+
+
+
+
+
+    }
+
+    private void calculateSelectedCard(CreditCardItem selectedCreditCard, FontTextView mSelectedView) {
+        if (mSelectedView.getTag() instanceof PaymnentGroup) {
+            PaymnentGroup paymentGroup = (PaymnentGroup) mSelectedView.getTag();
+
+            //This is to set bookingitem to each user in final json for payment
+            for (int i = 0; i < passangers.size(); i++) {
+                if (passangers.get(i).getmName().equals(paymentGroup.getNameText())) {
+                    passangers.get(i).getmBookingItems().addAll(paymentGroup.getItems());
+                    groups.get(i).setCreditcard(selectedCreditCard.getLast4());
+                    for (int z = 0; z <children.get(i).size() ; z++) {
+                        children.get(i).get(z).setCreditcard(selectedCreditCard.getLast4());
+                    }
+                }
+
+            }
+
+
+
+            //This is to set bookingitem array  final json for payment
+            for (String strItem : paymentGroup.getItems()) {
+                getActivityInterface().getBookingHashMap().put(strItem, selectedCreditCard.getToken());
+            }
+
+
+        } else if (mSelectedView.getTag() instanceof PaymentChild) {
+
+            PaymentChild paymentchild = (PaymentChild) mSelectedView.getTag();
+
+            //This is to set bookingitem to each user in final json for payment
+            for (int i = 0; i < passangers.size(); i++) {
+                if (passangers.get(i).getmPaxguid().equals(paymentchild.getPaxguid())) {
+                    passangers.get(i).getmBookingItems().add(paymentchild.getGuid());
+
+                    if(groups.get(i).getNameText().equals(passangers.get(i).getmName())){
+                        groups.get(i).setCreditcard(getString(R.string.select_card));
+                        for (int z = 0; z <children.get(i).size() ; z++) {
+                            if(paymentchild.getGuid().equals(children.get(i).get(z).getGuid())){
+                                children.get(i).get(z).setCreditcard(selectedCreditCard.getLast4());
+                                break;
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            for (PassengersVO passenger : passangers) {
+
+            }
+
+            //This is to set bookingitem array  final json for payment
+            getActivityInterface().getBookingHashMap().put(paymentchild.getGuid(), selectedCreditCard.getToken());
+
+
+        } else {
+
+
+            PassengersVO currentPassenger = getCurrentPassengerByName(getActivityInterface().getCurrentUser().getFirstname());
+
+            for (PassengersVO passenger : passangers) {
+
+                for (String passengerItem : passenger.getmItineraryItems()) {
+                    getActivityInterface().getBookingHashMap().put(passengerItem, selectedCreditCard.getToken());
+                }
+
+                currentPassenger.getmBookingItems().addAll(passenger.getmItineraryItems());
+
+            }
+
+            for (int i = 0; i < groups.size(); i++) {
+                groups.get(i).setCreditcard(selectedCreditCard.getLast4());
+                for (int z = 0; z < children.size(); z++) {
+                    PaymentChild child = children.get(i).get(z);
+                    child.setCreditcard(selectedCreditCard.getLast4());
+                }
+            }
+        }
+        mAdapter.notifyDataSetChanged();
     }
 
     private PassengersVO getCurrentPassengerByName(String firstname) {
@@ -389,6 +430,8 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
             final PaymentChild child = (PaymentChild) getChild(groupPosition, childPosition);
             holder.childNametext.setText(child.getNameText());
             holder.childPricetext.setText(child.getTotalText());
+            holder.childSelectCC.setText(child.getCreditcard()
+            );
             holder.childSelectCC.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -540,7 +583,7 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
             final PaymnentGroup group = (PaymnentGroup) getGroup(groupPosition);
             holder.groupNametext.setText(group.getNameText());
             holder.groupPricetext.setText(group.getTotalText());
-
+            holder.groupSelectCC.setText(group.getCreditcard());
             holder.groupSelectCC.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

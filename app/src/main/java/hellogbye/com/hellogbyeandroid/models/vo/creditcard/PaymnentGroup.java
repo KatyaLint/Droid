@@ -11,12 +11,14 @@ public class PaymnentGroup {
     private String totalText;
     private boolean selected;
     private ArrayList<String> items;
+    private String creditcard;
 
-    public PaymnentGroup(String nameText, String totalText, boolean selected, ArrayList<String> items) {
+    public PaymnentGroup(String nameText, String totalText, boolean selected, ArrayList<String> items,String creditcard) {
         this.nameText = nameText;
         this.totalText = totalText;
         this.selected = selected;
         this.items = items;
+        this.creditcard = creditcard;
     }
 
     public String getNameText() {
@@ -49,5 +51,13 @@ public class PaymnentGroup {
 
     public void setItems(ArrayList<String> items) {
         this.items = items;
+    }
+
+    public String getCreditcard() {
+        return creditcard;
+    }
+
+    public void setCreditcard(String creditcard) {
+        this.creditcard = creditcard;
     }
 }

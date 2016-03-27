@@ -10,13 +10,15 @@ public class PaymentChild {
     private boolean selected;
     private String guid;
     private String paxguid;
+    private String creditcard;
 
-    public PaymentChild(String nameText, String totalText, boolean selected,String guid,String paxguid) {
+    public PaymentChild(String nameText, String totalText, boolean selected,String guid,String paxguid,String creditcard) {
         this.nameText = nameText;
         this.totalText = totalText;
         this.selected = selected;
         this.guid = guid;
         this.paxguid = paxguid;
+        this.creditcard = creditcard;
     }
 
     public String getNameText() {
@@ -57,5 +59,13 @@ public class PaymentChild {
 
     public void setPaxguid(String paxguid) {
         this.paxguid = paxguid;
+    }
+
+    public String getCreditcard() {
+        return creditcard;
+    }
+
+    public void setCreditcard(String creditcard) {
+        this.creditcard = creditcard;
     }
 }
