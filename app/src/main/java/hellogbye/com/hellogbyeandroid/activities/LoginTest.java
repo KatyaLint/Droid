@@ -75,7 +75,8 @@ public class LoginTest extends ActionBarActivity {
                     @Override
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
-                        errorHelper.show(getFragmentManager(), (String)data);
+                        errorHelper.setMessageForError((String) data);
+                        errorHelper.show(getFragmentManager(), (String) data);
                     }
                 });
 
@@ -103,6 +104,7 @@ public class LoginTest extends ActionBarActivity {
                     @Override
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.setMessageForError((String) data);
                         errorHelper.show(getFragmentManager(), (String) data);
                     }
                 });
@@ -131,6 +133,7 @@ public class LoginTest extends ActionBarActivity {
                     @Override
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.setMessageForError((String) data);
                         errorHelper.show(getFragmentManager(), (String) data);
                     }
                 });
@@ -150,11 +153,8 @@ public class LoginTest extends ActionBarActivity {
                     @Override
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
-                        try {
-                            errorHelper.show(getFragmentManager(), (String) data);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        errorHelper.setMessageForError((String) data);
+                        errorHelper.show(getFragmentManager(), (String) data);
 
                     }
                 });

@@ -92,6 +92,7 @@
     <!--<string name="default_cnc_message"> welcome to\nHelloGbye. Tell us in your own words where and when you'd\nlike to go.</string>-->
     <string name="default_cnc_message">Hello %1$s welcome to\nHelloGbye. Tell us in your own words where and when you would\n like to go.</string>
     <string name="itinerary_created">Itinerary Created</string>
+    <string name="itinerary_no_items">No items</string>
     <string name="grid_has_been_updated">OK, the grid has been updated</string>
     <string name="itinerary_try_again">Itinerary Try Again</string>
 
@@ -167,5 +168,6 @@
     <string name="sign_up_confirm_password">Confirm Password</string>
 
     <string name="itinerary_make_payment">Make Payment</string>
+    <string name="edit_trip_name">Edit Trip Name</string>
 
 </resources>

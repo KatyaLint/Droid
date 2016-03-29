@@ -96,6 +96,7 @@
             android:layout_weight="1"
             android:id="@+id/sign_up_province_name"
             android:hint="@string/sign_up_province_name"
+            android:visibility="gone"
             android:textColor="@color/black"
             android:background="@color/white"
             android:layout_width="match_parent"
@@ -115,7 +116,8 @@
         android:id="@+id/sign_up_password"
         android:textColor="@color/black"
         android:background="@color/white"
-        android:text="@string/sign_up_password"
+        android:hint="@string/sign_up_password"
+        android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -128,6 +130,7 @@
 
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:layout_marginTop="@dimen/DP10"
+        android:inputType="textPassword"
         android:id="@+id/sign_up_confirm_password"
         android:textColor="@color/black"
         android:hint="@string/sign_up_confirm_password"

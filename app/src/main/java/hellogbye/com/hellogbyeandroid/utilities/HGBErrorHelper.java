@@ -24,6 +24,7 @@ public class HGBErrorHelper extends android.app.DialogFragment {
 
     public void setMessageForError(String mMessage){
         this.mMessage = mMessage;
+
     }
 
 

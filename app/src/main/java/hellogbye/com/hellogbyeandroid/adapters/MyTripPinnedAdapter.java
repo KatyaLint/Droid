@@ -34,10 +34,11 @@ public class MyTripPinnedAdapter extends SectionedBaseAdapter {
 
     public MyTripPinnedAdapter (ArrayList<MyTripItem> items, Activity acitivity){
         this.items = items;
-
-
     }
 
+    public void addItems(ArrayList<MyTripItem> items ){
+        this.items = items;
+    }
 
 
 
@@ -126,9 +127,8 @@ public class MyTripPinnedAdapter extends SectionedBaseAdapter {
     @Override
     public View getItemView(int section, int position, View convertView, ViewGroup parent) {
 
-         ViewHolderItem holder;
+        ViewHolderItem holder;
         View itemView = convertView;
-
 
         if (convertView == null) {
             LayoutInflater inflator = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -163,26 +163,23 @@ public class MyTripPinnedAdapter extends SectionedBaseAdapter {
         }
 
 
-
         if(section == 0 ){
-            holder.my_trip_name.setText("Current");
-            holder.my_trip_dates.setText("Current");
+            HGBUtility.loadRoundedImage( item.getUrlToCityView(),  holder.my_trip_user_image, R.drawable.cityavatar);
+            holder.my_trip_name.setText(item.getName());
+            holder.my_trip_dates.setText(HGBUtility.parseDateToddMMyyyyMyTrip(item.getStartdate())+" - "+HGBUtility.parseDateToddMMyyyyMyTrip(item.getEnddate()));
             if(item.getPaymentstatus().equals("UPD")){
                 holder.my_trip_paid.setText("UNPAID");
             }else{
                 holder.my_trip_paid.setText("PAID");
             }
 
-        }else{
+        }else {
 
             if(item.isEditDelete()){
                 holder.my_trip_delete_forever.setVisibility(View.VISIBLE);
             }else{
                 holder.my_trip_delete_forever.setVisibility(View.GONE);
             }
-//get city image
-         //   cityURLBase = cityURLBase + "NYC.jpg";//item.getName();
-        //    holder.my_trip_user_image.setBackgroundResource(R.drawable.cityavatar);
 
             HGBUtility.loadRoundedImage( item.getUrlToCityView(),  holder.my_trip_user_image, R.drawable.cityavatar);
             holder.my_trip_name.setText(item.getName());
@@ -198,34 +195,52 @@ public class MyTripPinnedAdapter extends SectionedBaseAdapter {
         return itemView;
     }
 
+
+    public static class ViewHolderMainSectionItem {
+
+
+        private final FontTextView header_text;
+
+        public ViewHolderMainSectionItem(View view) {
+
+            header_text = (FontTextView) view.findViewById(R.id.header_text);
+        }
+
+
+    }
+
+
     @Override
     public View getSectionHeaderView(int section, View convertView, ViewGroup parent) {
-        LinearLayout layout = null;
+
+        ViewHolderMainSectionItem holder;
+        View itemView = convertView;
+
         if (convertView == null) {
             LayoutInflater inflator = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            layout = (LinearLayout) inflator.inflate(R.layout.mytrip_header, null);
+            itemView =  inflator.inflate(R.layout.mytrip_header, null);
+            holder = new ViewHolderMainSectionItem(itemView);
+            itemView.setTag(holder);
         } else {
-            layout = (LinearLayout) convertView;
+            holder = (ViewHolderMainSectionItem)itemView.getTag();
         }
 
 
 
-            layout.setVisibility(View.VISIBLE);
-
             if(section == 0){
                 if(getMaxCurrentInitialization() == 0){
-                    ((FontTextView) layout.findViewById(R.id.header_text)).setVisibility(View.GONE);
+                    holder.header_text.setVisibility(View.GONE);
                 }else {
-                    ((FontTextView) layout.findViewById(R.id.header_text)).setText("Current Itinerary");
+                    holder.header_text.setText("Current Itinerary");
                 }
             }else if (section == 1){
-                ((FontTextView) layout.findViewById(R.id.header_text)).setText("My Trips");
+                holder.header_text.setText("My Trips");
             }
 
 
 
 
-        return layout;
+        return itemView;
     }
 
 

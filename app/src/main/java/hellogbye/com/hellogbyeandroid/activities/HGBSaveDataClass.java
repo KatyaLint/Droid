@@ -9,7 +9,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
-import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
@@ -39,17 +39,21 @@ public class HGBSaveDataClass implements HGBMainInterface {
     private ArrayList<CompanionVO> companions;
     private ArrayList<CompanionStaticRelationshipTypesVO> componionStaticDescriptionVOs;
     private ArrayList<AccountsVO> accounts;
-    private UserData mCurrentUser;
+    private UserDataVO mCurrentUser;
     private ArrayList<CountryItemVO> mEligabileCountryList;
     private ArrayList<CreditCardItem> mCreditCardList;
-    private ArrayList<UserData> mTravelList;
+    private ArrayList<UserDataVO> mTravelList;
     private UserTravelMainVO mUserTravelOrder;
     private ArrayList<CNCItem> mCNCItems;
     private String solutionID;
     private List<NodesVO> alternativeFlights;
     private HGBPreferencesManager hgbPrefrenceManager;
 
-    public HGBSaveDataClass(MainActivity mainActivity ,HGBPreferencesManager hgbPrefrenceManager) {
+//    public HGBSaveDataClass(MainActivity mainActivity ,HGBPreferencesManager hgbPrefrenceManager) {
+//        this.hgbPrefrenceManager = hgbPrefrenceManager;
+//    }
+
+    public void setPreferenceManager(HGBPreferencesManager hgbPrefrenceManager){
         this.hgbPrefrenceManager = hgbPrefrenceManager;
     }
 
@@ -131,22 +135,22 @@ public class HGBSaveDataClass implements HGBMainInterface {
     }
 
     @Override
-    public void setListUsers(ArrayList<UserData> mTravelList) {
+    public void setListUsers(ArrayList<UserDataVO> mTravelList) {
         this.mTravelList = mTravelList;
     }
 
     @Override
-    public ArrayList<UserData> getListUsers() {
+    public ArrayList<UserDataVO> getListUsers() {
         return mTravelList;
     }
 
     @Override
-    public UserData getCurrentUser() {
+    public UserDataVO getCurrentUser() {
         return mCurrentUser;
     }
 
     @Override
-    public void setCurrentUser(UserData currentUser) {
+    public void setCurrentUser(UserDataVO currentUser) {
         this.mCurrentUser = currentUser;
     }
 

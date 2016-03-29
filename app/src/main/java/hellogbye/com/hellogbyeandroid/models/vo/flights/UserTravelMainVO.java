@@ -58,4 +58,20 @@ public class UserTravelMainVO {
     public void setItems(Map<String, NodesVO> items) {
         this.items = items;
     }
+
+    public String getmSolutionName() {
+        return mSolutionName;
+    }
+
+    public void setmSolutionName(String mSolutionName) {
+        this.mSolutionName = mSolutionName;
+    }
+
+    public boolean ismIsFavorite() {
+        return mIsFavorite;
+    }
+
+    public void setmIsFavorite(boolean mIsFavorite) {
+        this.mIsFavorite = mIsFavorite;
+    }
 }

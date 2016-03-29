@@ -9,20 +9,24 @@ HEL-442 - query that stops the app
 HEL-505 - forgot password
 HEL-504 - on the first page of the app (where the creat account and login are)
 
+
 Code changing:
 --------------
  - Iternarary fix, for flights with two destination
  - HEL-496 - undo button for companion
  - HEL-499 - avatar photo
  - Companion relationship
+ - HEL-558 - photos for trips on my trips aren't uploaded
 
  ------------------------------------------
  Version 1.4
  ------------------------------------------
  Fixed Bugs:
  -----------
-
-
+ HEL-428 - App stops when adding a companion
+ HEL-497 - create filtering between trips(paid,favorite and all)
+ HEL-503 - add change password option in personal info which is in settings
+ HEL-559 - can't make a trip as favorite trip
 
  Code changing:
  --------------
@@ -33,3 +37,6 @@ Code changing:
   - On CNC Message, user name
   - Sign up screen - still need server response
   - refactoring of MainActivity class
+  - New make payment button
+  - Refactoring itinerary VO
+  - Current trip update

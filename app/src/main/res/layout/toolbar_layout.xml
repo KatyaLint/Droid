@@ -107,6 +107,14 @@
         android:textColor="@color/white"
         android:visibility="visible"/>
 
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/itirnarary_title_Bar"
+        android:textColor="@color/white"
+        android:visibility="visible"/>
+
     <LinearLayout
         android:id="@+id/preferences_edit_mode"
         android:layout_marginRight="@dimen/DP14"

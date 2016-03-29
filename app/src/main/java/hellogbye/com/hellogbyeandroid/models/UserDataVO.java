@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by arisprung on 10/29/15.
  */
-public class UserData {
+public class UserDataVO {
 
 
     @SerializedName("userprofileid")
@@ -60,11 +60,11 @@ public class UserData {
     private String gender;
 
 
-    public UserData() {
+    public UserDataVO() {
     }
 
 
-    public UserData(String userprofileid, String emailaddress, String firstname, String lastname, String dob, String country, String address, String city, String state, String postalcode, String avatar, boolean ispremiumuser, String paxid, String phone, String title) {
+    public UserDataVO(String userprofileid, String emailaddress, String firstname, String lastname, String dob, String country, String address, String city, String state, String postalcode, String avatar, boolean ispremiumuser, String paxid, String phone, String title) {
         this.userprofileid = userprofileid;
         this.emailaddress = emailaddress;
         this.firstname = firstname;

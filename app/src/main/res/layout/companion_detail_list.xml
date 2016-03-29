@@ -23,7 +23,7 @@
         android:orientation="vertical">
 
 
-        <ImageView
+        <hellogbye.com.hellogbyeandroid.views.RoundedImageView
             android:id="@+id/companion_details_image"
             android:gravity="center_horizontal"
             android:layout_width="@dimen/DP100"

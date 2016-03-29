@@ -7,11 +7,12 @@ public class UserSignUpDataVO {
     private String city;
     private String confirmPassword;
     private String country;
+    private String countryProvince;
     private String countryID;
     private String firstName;
     private String lastName;
     private String password;
-    private String state;
+    private String state="";
     private String username;
     private String userEmail;
 
@@ -93,5 +94,13 @@ public class UserSignUpDataVO {
 
     public void setCountryID(String countryID) {
         this.countryID = countryID;
+    }
+
+    public String getCountryProvince() {
+        return countryProvince;
+    }
+
+    public void setCountryProvince(String countryProvince) {
+        this.countryProvince = countryProvince;
     }
 }
