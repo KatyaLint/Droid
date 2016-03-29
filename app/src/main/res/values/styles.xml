@@ -72,6 +72,10 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@drawable/red_button</item>
     </style>
+    <style name="RedCustomButtonDisableStyle" parent="CustomButtonTextStyle">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/red_disable_button</item>
+    </style>
 
     <style name="GreenCustomButtonStyle" parent="CustomButtonTextStyle">
         <item name="android:textColor">@android:color/white</item>
