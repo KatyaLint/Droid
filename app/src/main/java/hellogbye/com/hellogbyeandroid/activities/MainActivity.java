@@ -44,7 +44,7 @@ import hellogbye.com.hellogbyeandroid.fragments.checkout.AddCreditCardFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightsDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
-import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.SummaryPaymentFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HistoryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
@@ -804,7 +804,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 fragment = TravlerDetailsFragment.newInstance(navPosition);
                 break;
             case SELECT_CREDIT_CARD:
-                fragment = CreditCardListFragment.newInstance(navPosition);
+                fragment = SummaryPaymentFragment.newInstance(navPosition);
                 break;
             case ADD_CREDIT_CARD:
                 fragment = AddCreditCardFragment.newInstance(navPosition);

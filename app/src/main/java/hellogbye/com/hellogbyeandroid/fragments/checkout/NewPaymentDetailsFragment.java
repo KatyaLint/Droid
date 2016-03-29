@@ -646,8 +646,6 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
                 public void onClick(View v) {
                     selectCCDialog.show();
                     mSelectedView = (FontTextView) v;
-
-
                     mSelectedView.setTag(group);
 
                 }
@@ -661,9 +659,6 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
             holder.groupImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO need to fix this up not good
-
-
                     if (lv.isGroupExpanded(groupPosition)) {
                         lv.collapseGroup(groupPosition);
                         v.setBackgroundResource(R.drawable.expand);

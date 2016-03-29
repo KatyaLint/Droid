@@ -10,10 +10,10 @@
     <LinearLayout
         android:id="@+id/select_cc_header"
         android:layout_width="match_parent"
-        android:layout_alignParentTop="true"
         android:layout_height="@dimen/DP38"
-        android:gravity="center_horizontal"
-        android:background="@color/white">
+        android:layout_alignParentTop="true"
+        android:background="@color/white"
+        android:gravity="center_horizontal">
 
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -21,29 +21,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:fontName="dinnextltpro_medium.otf"
             android:drawableLeft="@drawable/expand"
             android:drawablePadding="10dp"
+            android:text="Itenerary and Payment"
             android:textColor="@color/warm_grey_line"
-            android:text="Add Credit/Debit Card" />
-
-
-
-
+            app:fontName="dinnextltpro_medium.otf" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/select_cc_recyclerView"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/select_cc_rl"
-        android:layout_below="@+id/select_cc_header"
-        android:layout_height="wrap_content">
+        android:layout_below="@+id/select_cc_header">
 
 
     </android.support.v7.widget.RecyclerView>
-
-
-
 
 
     <RelativeLayout
@@ -56,41 +49,42 @@
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/cc_proceed"
             style="@style/RedCustomButtonStyle"
-            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
-            android:layout_marginRight="20dp"
             android:layout_alignParentRight="true"
-            android:paddingRight="50dp"
-            android:paddingLeft="50dp"
-            app:fontName="dinnextltpro_medium.otf"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
             android:background="@drawable/red_button"
-            android:text="Proceed" />
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="Proceed"
+            app:fontName="dinnextltpro_medium.otf" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
             android:orientation="vertical">
+
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:fontName="dinnextltpro_medium.otf"
-                android:textSize="15sp"
+                android:text="Total"
                 android:textColor="@color/white"
-                android:text="Total"/>
+                android:textSize="15sp"
+                app:fontName="dinnextltpro_medium.otf" />
+
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/cc_total_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:fontName="dinnextltpro_mediumcond.ttf"
-                android:textSize="30sp"
+                android:text="$1234"
                 android:textColor="@color/white"
-                android:text="$1234"/>
+                android:textSize="30sp"
+                app:fontName="dinnextltpro_mediumcond.ttf" />
 
 
         </LinearLayout>
-
 
 
     </RelativeLayout>
