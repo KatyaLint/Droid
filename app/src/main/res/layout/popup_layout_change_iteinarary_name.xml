@@ -10,9 +10,8 @@
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/change_iteinarary_name"
         android:layout_width="match_parent"
+        android:text="prrrr"
         android:layout_height="wrap_content"
-        android:hint="@string/edit_trip_name"
-
         android:textColorHint="@color/light_grey"/>
 
 </LinearLayout>

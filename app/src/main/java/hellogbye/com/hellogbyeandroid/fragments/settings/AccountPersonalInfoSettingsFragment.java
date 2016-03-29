@@ -1,5 +1,6 @@
 package hellogbye.com.hellogbyeandroid.fragments.settings;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
@@ -16,7 +18,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
-import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
@@ -53,14 +55,18 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
     private FontTextView companion_personal_settings_location_city;
     private FontEditTextView companion_personal_settings_location_postcode;
     private FontTextView companion_personal_settings_location_country;
-    private UserData currentUser;
+    private UserDataVO currentUser;
     private Button account_done_editting;
-    private UserData newUser;
+    private UserDataVO newUser;
     private int maxValueForStateDialog;
     private String[] stateArray;
     private int countryMaxValueSize;
     private String[] countryarray;
     private String mCounterPicked;
+    private LinearLayout personal_settings_change_password_ll;
+    private FontEditTextView change_pswd_current_pswd;
+    private FontEditTextView change_pswd_new_pswd;
+    private FontEditTextView change_pswd_confirm_new_pswd;
 
     public AccountPersonalInfoSettingsFragment() {
         // Empty constructor required for fragment subclasses
@@ -128,7 +134,58 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
         companion_personal_settings_location_country = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_location_country);
         companion_personal_settings_location_country.setText(currentUser.getCountry());
 
+        personal_settings_change_password_ll = (LinearLayout)rootView.findViewById(R.id.personal_settings_change_password_ll);
 
+        LayoutInflater li = LayoutInflater.from(getActivity());
+        promptsView = li.inflate(R.layout.change_password_layout, null);
+
+        change_pswd_current_pswd = (FontEditTextView)promptsView.findViewById(R.id.change_pswd_current_pswd);
+        change_pswd_new_pswd = (FontEditTextView)promptsView.findViewById(R.id.change_pswd_new_pswd);
+        change_pswd_confirm_new_pswd = (FontEditTextView) promptsView.findViewById(R.id.change_pswd_confirm_new_pswd);
+        final FontEditTextView[] inputs = new FontEditTextView[]{change_pswd_current_pswd, change_pswd_new_pswd, change_pswd_confirm_new_pswd};
+
+
+
+
+        text = (FontTextView) promptsView
+                .findViewById(R.id.component_popup_text);
+
+        personal_settings_change_password_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                HGBUtility.showAlertPopAddCompanion(getActivity(), inputs, promptsView, "", new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+                        String[] parts = inputItem.split("&");
+                        String userName = getActivityInterface().getAccounts().get(0).getEmail();
+                        String prevpassword = parts[0];
+                        String password = parts[1];
+                        String confirmpassword = parts[2];
+
+
+                        ConnectionManager.getInstance(getActivity()).postChangePasswordWithOldPassword( userName, confirmpassword, prevpassword,  password, new ConnectionManager.ServerRequestListener() {
+                            @Override
+                            public void onSuccess(Object data) {
+
+                            }
+
+                            @Override
+                            public void onError(Object data) {
+                                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                                errorHelper.setMessageForError((String) data);
+                                errorHelper.show(getFragmentManager(), (String) data);                            }
+                        });
+                    }
+
+                    @Override
+                    public void itemCanceled() {
+
+                    }
+                });
+
+            }
+        });
 
         companion_personal_settings_title.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,8 +213,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
             }
         });
 
-        LayoutInflater li = LayoutInflater.from(getActivity());
-        promptsView = li.inflate(R.layout.popup_layout_with_edit_text_new, null);
+
         input = (EditText) promptsView
                 .findViewById(R.id.companion_editTextDialog);
 
@@ -208,7 +264,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
         }
         companion_personal_settings_location_country.setTag(0);
         companion_personal_settings_location_city.setTag(0);
-        selectStates("0");
+       // selectStates("0");
 
 
         setClickListner();
@@ -259,7 +315,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
         stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPick).getProvinces().size()];
         ArrayList<ProvincesItem> provinces = getActivityInterface().getEligabileCountries().get(countryPick).getProvinces();
         for (int i = 0; i < provinces.size(); i++) {
-            stateArray[i] = provinces.get(i).getName();
+            stateArray[i] = provinces.get(i).getProvincename();
         }
     }
 
@@ -292,6 +348,8 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
             public void onError(Object data) {
                 isDisable = false;
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
             }
         });
     }
@@ -309,18 +367,15 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
             public void onError(Object data) {
 
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
-                try {
-                    errorHelper.show(getFragmentManager(), (String) data);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
 
             }
         });
     }
 
     private void changeNewUser() {
-        newUser = new UserData(currentUser.getUserprofileid(), currentUser.getEmailaddress(), currentUser.getFirstname(),
+        newUser = new UserDataVO(currentUser.getUserprofileid(), currentUser.getEmailaddress(), currentUser.getFirstname(),
                 currentUser.getLastname(), currentUser.getDob(), currentUser.getCountry(),
                 currentUser.getAddress(), currentUser.getCity(), currentUser.getState(),
                 currentUser.getPostalcode(), currentUser.getAvatar(), currentUser.ispremiumuser(), currentUser.getPaxid(), currentUser.getPhone(),
@@ -400,6 +455,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
             public void onError(Object data) {
                 isDisable = false;
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
                 errorHelper.show(getFragmentManager(), (String) data);
             }
         });

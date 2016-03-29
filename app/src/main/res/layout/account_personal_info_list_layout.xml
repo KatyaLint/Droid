@@ -326,6 +326,7 @@
 
 
         <LinearLayout
+            android:id="@+id/personal_settings_change_password_ll"
             android:layout_width="match_parent"
             android:background="@color/white"
             android:layout_height="wrap_content"

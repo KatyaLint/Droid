@@ -16,7 +16,7 @@ import hellogbye.com.hellogbyeandroid.adapters.TravlerAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
@@ -73,7 +73,7 @@ public class TravlersFragment extends HGBAbtsractFragment {
             @Override
             public void onSuccess(Object data) {
 
-                getActivityInterface().setListUsers((ArrayList<UserData>) data);
+                getActivityInterface().setListUsers((ArrayList<UserDataVO>) data);
                 mAdapter = new TravlerAdapter(getActivityInterface().getListUsers(),getActivity().getApplicationContext(),TravlersFragment.this);
                 mRecyclerView.setAdapter(mAdapter);
                 mAdapter.SetOnItemClickListener(new TravlerAdapter.OnItemClickListener() {
@@ -91,6 +91,7 @@ public class TravlersFragment extends HGBAbtsractFragment {
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
                 errorHelper.show(getFragmentManager(), (String) data);
             }
         });
@@ -110,6 +111,7 @@ public class TravlersFragment extends HGBAbtsractFragment {
                     @Override
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.setMessageForError((String) data);
                         errorHelper.show(getFragmentManager(), (String) data);
                     }
                 });

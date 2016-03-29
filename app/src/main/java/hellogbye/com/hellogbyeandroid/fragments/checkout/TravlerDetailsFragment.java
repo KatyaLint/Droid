@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
-import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
@@ -44,7 +44,7 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
     private FontTextView mCountry;
     private EditText mPostalCode;
     private FontTextView mState;
-    private UserData mUser;
+    private UserDataVO mUser;
     private AlertDialog mCountryDialog;
     private AlertDialog stateDialog;
 
@@ -85,7 +85,7 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getFlowInterface().loadJSONFromAsset();
+      //  getFlowInterface().loadJSONFromAsset();
         mTitle = (FontTextView) view.findViewById(R.id.travel_detail_title);
         mFirstName = (EditText) view.findViewById(R.id.travel_detail_first_name);
         mLastName = (EditText) view.findViewById(R.id.travel_detail_last_name);
@@ -163,7 +163,7 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
         stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPick).getProvinces().size()];
         ArrayList<ProvincesItem> provinces = getActivityInterface().getEligabileCountries().get(countryPick).getProvinces();
         for (int i = 0; i < provinces.size(); i++) {
-            stateArray[i] = provinces.get(i).getName();
+            stateArray[i] = provinces.get(i).getProvincename();
         }
     }
 
@@ -241,7 +241,7 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
                     mUser.setCountry("US");
                 }
 
-                mUser.setState(getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().get(statePicker.getValue()).getCode());
+                mUser.setState(getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().get(statePicker.getValue()).getProvincecode());
                 mUser.setPostalcode(mPostalCode.getText().toString());
                 mUser.setDob(mDOB.getText().toString());
                 mUser.setCity(mCity.getText().toString());
@@ -265,6 +265,7 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
                         public void onError(Object data) {
                             Toast.makeText(getActivity().getApplicationContext(), "There was a problem saving your information please try again", Toast.LENGTH_SHORT).show();
                             HGBErrorHelper errorHelper = new HGBErrorHelper();
+                            errorHelper.setMessageForError((String) data);
                             errorHelper.show(getFragmentManager(), (String) data);
                         }
                     });

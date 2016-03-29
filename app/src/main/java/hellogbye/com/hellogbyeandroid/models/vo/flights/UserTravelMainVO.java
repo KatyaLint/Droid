@@ -66,4 +66,12 @@ public class UserTravelMainVO {
     public void setmSolutionName(String mSolutionName) {
         this.mSolutionName = mSolutionName;
     }
+
+    public boolean ismIsFavorite() {
+        return mIsFavorite;
+    }
+
+    public void setmIsFavorite(boolean mIsFavorite) {
+        this.mIsFavorite = mIsFavorite;
+    }
 }

@@ -67,7 +67,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.3'
     compile 'com.viewpagerindicator:library:2.4.1@aar'
     compile 'com.google.android.gms:play-services-maps:8.1.0'
-
     compile 'com.sothree.slidinguppanel:library:3.2.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
     compile 'pl.tajchert:waitingdots:0.2.0'
@@ -83,5 +82,5 @@ dependencies {
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
     compile 'io.card:android-sdk:5.1.2'
 
-
+    compile files('libs/AndroidSwipeLayout-v1.1.8.jar')
 }

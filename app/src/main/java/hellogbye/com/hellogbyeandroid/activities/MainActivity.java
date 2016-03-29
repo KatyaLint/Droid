@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,7 +27,6 @@ import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +34,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
+import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalEmailSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.AddCreditCardFragment;
@@ -58,19 +57,13 @@ import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesTabsFragm
 import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlerDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlersFragment;
-import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
-import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.UserData;
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
+import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
-import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelationshipTypesVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.network.Parser;
@@ -102,10 +95,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     protected OnBackPressedListener onBackPressedListener;
 
-    private UserData mCurrentUser;
+    private UserDataVO mCurrentUser;
 
     public FontTextView my_trip_profile;
-    private HGBSaveDataClass hgbSaveDataClass;
+    private  HGBSaveDataClass hgbSaveDataClass = new HGBSaveDataClass();
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
     private MyTripsFragment.OnItemClickListener editMyTripsClickCB;
     private FontTextView itirnarary_title_Bar;
@@ -122,7 +115,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         setContentView(R.layout.main_activity_layout);
 
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
-        hgbSaveDataClass = new HGBSaveDataClass(this, hgbPrefrenceManager);
+        hgbSaveDataClass.setPreferenceManager(hgbPrefrenceManager); //= new HGBSaveDataClass(this, hgbPrefrenceManager);
+
 
         //check if we have travelitinery in db
         String strTravel = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO, "");
@@ -184,6 +178,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
                 errorHelper.show(getFragmentManager(), (String) data);
             }
         });
@@ -209,6 +204,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 @Override
                 public void onError(Object data) {
                     HGBErrorHelper errorHelper = new HGBErrorHelper();
+                    errorHelper.setMessageForError((String) data);
                     errorHelper.show(getFragmentManager(), (String) data);
                 }
             });
@@ -219,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             @Override
             public void onSuccess(Object data) {
 
-                UserData mCurrentUser = (UserData) data;
+                UserDataVO mCurrentUser = (UserDataVO) data;
                 hgbSaveDataClass.setCurrentUser(mCurrentUser);
                 ImageView my_trips_image_profile = (ImageView)findViewById(R.id.my_trips_image_profile);
                 HGBUtility.getAndSaveUserImage(mCurrentUser.getAvatar(), my_trips_image_profile);
@@ -230,6 +226,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
                 errorHelper.show(getFragmentManager(), (String) data);
             }
         });
@@ -244,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 @Override
                 public void onSuccess(Object data) {
 
-                    mCurrentUser = (UserData) data;
+                    mCurrentUser = (UserDataVO) data;
                     String name = mCurrentUser.getFirstname() + " " + mCurrentUser.getLastname();
 
                     hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_NAME, "");
@@ -255,6 +252,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 @Override
                 public void onError(Object data) {
                     HGBErrorHelper errorHelper = new HGBErrorHelper();
+                    errorHelper.setMessageForError((String) data);
                     errorHelper.show(getFragmentManager(), (String) data);
                 }
             });
@@ -476,17 +474,17 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public void loadJSONFromAsset() {
 
-        if (hgbSaveDataClass.getEligabileCountries().size() > 0) {
-            return;
-        }
-
-        String json = HGBUtility.loadJSONFromAsset("countrieswithprovinces.txt", this);
-
-        Gson gson = new Gson();
-        Type listType = new TypeToken<List<CountryItemVO>>() {
-        }.getType();
-        ArrayList<CountryItemVO> list = (ArrayList<CountryItemVO>) gson.fromJson(json, listType);
-        hgbSaveDataClass.setEligabileCountries(list);
+//        if (hgbSaveDataClass.getEligabileCountries().size() > 0) {
+//            return;
+//        }
+//
+//        String json = HGBUtility.loadJSONFromAsset("countrieswithprovinces.txt", this);
+//
+//        Gson gson = new Gson();
+//        Type listType = new TypeToken<List<CountryItemVO>>() {
+//        }.getType();
+//        ArrayList<CountryItemVO> list = gson.fromJson(json, listType);
+//        hgbSaveDataClass.setEligabileCountries(list);
 
     }
 
@@ -538,7 +536,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case ITINARERY:
                 fragment = ItineraryFragment.newInstance(navPosition);
-                System.out.println("Kate hgbSaveDataClass.getTravelOrder(); =" + hgbSaveDataClass.getTravelOrder().getmSolutionName());
                 itirnarary_title_Bar.setText(hgbSaveDataClass.getTravelOrder().getmSolutionName());
                 break;
             case ALTERNATIVE_FLIGHT:
@@ -583,6 +580,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case COMPANIONS_PERSONAL_DETAILS:
                 fragment = AccountPersonalInfoSettingsFragment.newInstance(navPosition);
                 break;
+            case COMPANIONS_PERSONAL_EMAILS:
+                fragment = AccountPersonalEmailSettingsFragment.newInstance(navPosition);
+                break;
         }
 
         if (bundle != null) {
@@ -602,7 +602,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         purchaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Kate favorites");
+                setFavorityItinerary();
                 // goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
             }
         });
@@ -616,17 +616,17 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
        final EditText input = (EditText) promptsView
                 .findViewById(R.id.change_iteinarary_name);
 
+
         itirnarary_title_Bar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
+                input.setText(itirnarary_title_Bar.getText());
                 HGBUtility.showAlertPopUp(MainActivity.this, input, promptsView, getResources().getString(R.string.edit_trip_name),
                         new PopUpAlertStringCB() {
                             @Override
                             public void itemSelected(String inputItem) {
-                                System.out.println("Kate change inputItem =" + inputItem);
-                               // sendNewEmailToServer(inputItem.trim());
+                                itirnarary_title_Bar.setText(inputItem);
                             }
 
                             @Override
@@ -791,6 +791,26 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 //
 //    }
 
+
+    private void setFavorityItinerary(){
+        UserTravelMainVO travelOrder = hgbSaveDataClass.getTravelOrder();
+        String solutionID = travelOrder.getmSolutionID();
+        boolean isFavorite = travelOrder.ismIsFavorite();
+        ConnectionManager.getInstance(MainActivity.this).putFavorityItenarary(isFavorite,solutionID, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                System.out.println("Kate setFavorityItinerary cool");
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
+    }
+
     @Override
     public void callRefreshItinerary(final int fragment) {
 
@@ -803,7 +823,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
             @Override
             public void onError(Object data) {
-                Log.e("MainActivity", "Problem updating grid  " + data);
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), "Problem updating grid ");
             }
         });
 

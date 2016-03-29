@@ -14,12 +14,13 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.TravelPreference;
-import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
@@ -218,10 +219,10 @@ public class Parser {
     }
 
     public static Object getTravels(String response){
-        ArrayList<UserData>  mTravelList = null;
+        ArrayList<UserDataVO>  mTravelList = null;
         try {
             Gson gson = new Gson();
-            Type listType = new TypeToken<List<UserData>>() {
+            Type listType = new TypeToken<List<UserDataVO>>() {
             }.getType();
             mTravelList = gson.fromJson((String) response, listType);
         } catch (Exception e) {
@@ -293,7 +294,7 @@ public class Parser {
             Gson gson = new Gson();
             Type listType = new TypeToken<List<NodesVO>>() {
             }.getType();
-            List<NodesVO> posts = (List<NodesVO>) gson.fromJson(response, listType);
+            List<NodesVO> posts = gson.fromJson(response, listType);
             cell.setmNodes((ArrayList) posts);
         } catch (Exception e) {
             e.printStackTrace();
@@ -302,10 +303,10 @@ public class Parser {
     }
 
     public static Object parseUser(String response) {
-        UserData userdata = new UserData();
+        UserDataVO userdata = new UserDataVO();
         try {
             Gson gson = new Gson();
-            Type type = new TypeToken<UserData>() {
+            Type type = new TypeToken<UserDataVO>() {
             }.getType();
             userdata = gson.fromJson(response, type);
 
@@ -328,6 +329,22 @@ public class Parser {
         }
         return bookingrequest;
     }
+
+
+    public static Object parseBookingProvinceOptions(String response) {
+        List<ProvincesItem> bookingrequest = new  ArrayList<ProvincesItem>();
+        try {
+            Gson gson = new Gson();
+            Type type = new TypeToken< List<ProvincesItem>>() {
+            }.getType();
+            bookingrequest = gson.fromJson(response, type);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bookingrequest;
+    }
+
 
 
     public static Object parseMyTrips(String response) {

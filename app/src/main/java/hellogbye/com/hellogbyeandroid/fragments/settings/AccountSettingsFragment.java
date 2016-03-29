@@ -33,7 +33,7 @@ import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
@@ -49,7 +49,7 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
     private FontTextView account_settings_details_name;
     private FontTextView account_settings_details_city;
     private Activity activity;
-    private UserData currentUser;
+    private UserDataVO currentUser;
     public AccountSettingsFragment() {
         // Empty constructor required for fragment subclasses
     }
@@ -67,7 +67,7 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void onSuccess(Object data) {
 
-                UserData mCurrentUser = (UserData) data;
+                UserDataVO mCurrentUser = (UserDataVO) data;
                 getActivityInterface().setCurrentUser(mCurrentUser);
                 initializeUserData();
 
@@ -75,7 +75,9 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
 
             @Override
             public void onError(Object data) {
-
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
             }
         });
     }
@@ -175,6 +177,7 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
                         //personal information
                         break;
                     case 1:
+                        getFlowInterface().goToFragment(ToolBarNavEnum.COMPANIONS_PERSONAL_EMAILS.getNavNumber(), null);
                         //emails
                         break;
                     case 2:
@@ -194,8 +197,8 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
         });
 
 
-        getFlowInterface().loadJSONFromAsset();
-        //getCountries();
+     //   getFlowInterface().loadJSONFromAsset();
+        getCountries();
 
 
         account_details_image.setOnClickListener(imageClickListener);
@@ -313,7 +316,9 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
 
             @Override
             public void onError(Object data) {
-
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
             }
         });
     }
@@ -363,11 +368,8 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
-                try {
-                    errorHelper.show(getFragmentManager(), (String) data);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
 
             }
         });

@@ -112,7 +112,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:id="@+id/itirnarary_title_Bar"
-
         android:textColor="@color/white"
         android:visibility="visible"/>
 

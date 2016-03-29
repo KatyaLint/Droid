@@ -148,6 +148,7 @@ public class MyTripsFragment extends HGBAbtsractFragment {
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
                 errorHelper.show(getFragmentManager(), (String) data);
             }
         });
@@ -159,9 +160,11 @@ public class MyTripsFragment extends HGBAbtsractFragment {
             ConnectionManager.getInstance(getActivity()).getMyTripsFavorite(new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
+
                     mItemsList.clear();
                     mItemsList = (ArrayList<MyTripItem>) data;
-                 //   mCurrItemsList = new ArrayList<MyTripItem>(mItemsList);
+
+                    sectionedAdapter.addItems(mItemsList);
                     sectionedAdapter.setMaxCurrentInitialization(0);
                     sectionedAdapter.notifyDataSetChanged();
 
@@ -170,6 +173,7 @@ public class MyTripsFragment extends HGBAbtsractFragment {
                 @Override
                 public void onError(Object data) {
                     HGBErrorHelper errorHelper = new HGBErrorHelper();
+                    errorHelper.setMessageForError( (String) data);
                     errorHelper.show(getFragmentManager(), (String) data);
                 }
             });
@@ -191,6 +195,7 @@ public class MyTripsFragment extends HGBAbtsractFragment {
                 public void onSuccess(Object data) {
                     mItemsList.clear();
                     mItemsList = (ArrayList<MyTripItem>) data;
+                    sectionedAdapter.addItems(mItemsList);
                    // mCurrItemsList = new ArrayList<MyTripItem>(mItemsList);
                     sectionedAdapter.setMaxCurrentInitialization(0);
                     sectionedAdapter.notifyDataSetChanged();
@@ -200,6 +205,7 @@ public class MyTripsFragment extends HGBAbtsractFragment {
                 @Override
                 public void onError(Object data) {
                     HGBErrorHelper errorHelper = new HGBErrorHelper();
+                    errorHelper.setMessageForError((String) data);
                     errorHelper.show(getFragmentManager(), (String) data);
                 }
             });
@@ -241,6 +247,9 @@ public class MyTripsFragment extends HGBAbtsractFragment {
 
                         @Override
                         public void onError(Object data) {
+                            HGBErrorHelper errorHelper = new HGBErrorHelper();
+                            errorHelper.setMessageForError((String) data);
+                            errorHelper.show(getFragmentManager(), (String) data);
                             Log.e("MainActivity", "Problem updating grid  " + data);
                         }
                     });

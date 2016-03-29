@@ -4,17 +4,17 @@ package hellogbye.com.hellogbyeandroid.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
-import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
 import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
@@ -100,6 +100,7 @@ public class SignUpActivity extends AppCompatActivity {
                 ConnectionManager.getInstance(SignUpActivity.this).postUserCreateAccount(userData,new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
+                        System.out.println("Kate succes");
                       //  bookingResponse = (BookingRequestVO)data;
                         //BookingRequest bookingrequest = (BookingRequest)data;
                     }
@@ -107,11 +108,8 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
-                        try {
-                            errorHelper.show(getFragmentManager(), (String) data);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        errorHelper.setMessageForError((String) data);
+                        errorHelper.show(getFragmentManager(), (String) data);
 
                     }
                 });
@@ -137,8 +135,9 @@ public class SignUpActivity extends AppCompatActivity {
                                 for (CountryItemVO countrie: countries) {
                                     if(countrie.getName().equals(inputItem)){
                                         userData.setCountry(countrie.getCode());
+                                        getStaticProvince();
                                         //userData.setCountryID();
-                                        sign_up_province_name.setOnClickListener(provinceClicked);
+                                    //    sign_up_province_name.setOnClickListener(provinceClicked);
 
                                         break;
                                     }
@@ -160,6 +159,8 @@ public class SignUpActivity extends AppCompatActivity {
 
 
 
+
+
     private View.OnClickListener provinceClicked = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
@@ -178,11 +179,8 @@ public class SignUpActivity extends AppCompatActivity {
                 @Override
                 public void onError(Object data) {
                     HGBErrorHelper errorHelper = new HGBErrorHelper();
-                    try {
-                        errorHelper.show(getFragmentManager(), (String) data);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    errorHelper.setMessageForError((String) data);
+                    errorHelper.show(getFragmentManager(), (String) data);
 
                 }
             });
@@ -193,6 +191,13 @@ public class SignUpActivity extends AppCompatActivity {
         ConnectionManager.getInstance(SignUpActivity.this).getStaticBookingProvince(countryID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
+                List<ProvincesItem> provinceItems = (List<ProvincesItem>)data;
+                if(provinceItems.size() > 0){
+                    setDropDownItems(provinceItems);
+                    sign_up_province_name.setVisibility(View.VISIBLE);
+                }else{
+                    sign_up_province_name.setVisibility(View.GONE);
+                }
             //    bookingResponse = (BookingRequestVO)data;
                 //BookingRequest bookingrequest = (BookingRequest)data;
             }
@@ -200,15 +205,39 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
-                try {
-                    errorHelper.show(getFragmentManager(), (String) data);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
             }
         });
     }
 
+
+    private void setDropDownItems(final List<ProvincesItem> provinceItems){
+      //  final ArrayList<CountryItemVO> countries = bookingResponse.getCountries();
+        String[] countryarray = new String[provinceItems.size()];
+        for (int i = 0; i < provinceItems.size(); i++) {
+            countryarray[i] = provinceItems.get(i).getProvincename();
+        }
+
+        HGBUtility.showPikerDialog(sign_up_province_name, SignUpActivity.this, "Choose province",
+                countryarray, 0, provinceItems.size() - 1, new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+                        for (ProvincesItem province: provinceItems) {
+                            if(province.getProvincename().equals(inputItem)){
+                                userData.setCountryProvince(province.getProvincecode());
+                                break;
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void itemCanceled() {
+
+                    }
+                }, false);
+
+    }
 
 }

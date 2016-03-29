@@ -15,9 +15,8 @@ import java.util.HashSet;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
-import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
@@ -82,7 +81,7 @@ public class ConnectionManager {
             jsonObject.put("lastname", userData.getLastName());
             jsonObject.put("password", userData.getPassword());
             jsonObject.put("state", userData.getState());
-            jsonObject.put("username", userData.getUsername());
+            jsonObject.put("username", userData.getUserEmail());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -244,11 +243,24 @@ public class ConnectionManager {
     }
 
 
-    public void postChangePasswordWithOldPassword(String prevpassword, String password, final ServerRequestListener listener) {
+    public void postChangePasswordWithOldPassword(String userName,String confirmpassword,String prevpassword, String password, final ServerRequestListener listener) {
         String url = getURL(Services.USER_POST_CHANGE_PASSWORD);
-
+//                        ConfirmPassword
+//                        :
+//                        "12345678"
+//                        Username
+//                        :
+//                        "michael.gorlik@amginetech.com"
+//                        password
+//                        :
+//                        "12345678"
+//                        previouspassword
+//                        :
+//                        "Mg140989"
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("Username", userName);
+            jsonObject.put("ConfirmPassword", confirmpassword);
             jsonObject.put("previouspassword", prevpassword);
             jsonObject.put("password", password);
 
@@ -845,7 +857,7 @@ public class ConnectionManager {
     public void getStaticBookingProvince(String countryCode, final ServerRequestListener listener) {
 
         //ka
-        String url = getURL(Services.USER_GET_BOOKING_OPTIONS);
+        String url = getURL(Services.STATIC_PROVINCE_BY_COUNTRY_CODE);
         url = url + countryCode;
         JSONObject jsonObject = new JSONObject();
 
@@ -853,7 +865,7 @@ public class ConnectionManager {
                 jsonObject, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(Parser.parseBookingOptions(response));
+                listener.onSuccess(Parser.parseBookingProvinceOptions(response));
             }
         }, new Response.ErrorListener() {
             @Override
@@ -1043,6 +1055,31 @@ public class ConnectionManager {
     // PUT
     ///////////////////////////////
 
+    public void putFavorityItenarary(boolean isFavority,String itineraryID, final ServerRequestListener listener) {
+        String url = getURL(Services.ITINERARY);
+        url = url + itineraryID;
+        JSONObject json1 = new JSONObject();
+        try {
+            json1.put("isfavorite", isFavority);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
+                json1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
 
 
     public void putAccountsPreferences(String email, String travelpreferenceprofileid, final ServerRequestListener listener) {
@@ -1101,7 +1138,7 @@ public class ConnectionManager {
         });
     }
 
-    public void putCompanion(String id, UserData user, final ServerRequestListener listener) {
+    public void putCompanion(String id, UserDataVO user, final ServerRequestListener listener) {
         String url = getURL(Services.COMPANIONS);
         JSONObject json1 = new JSONObject();
         try {
@@ -1149,7 +1186,7 @@ public class ConnectionManager {
 
     //gender
     //email
-    public void putUserSettings(UserData user, final ServerRequestListener listener){
+    public void putUserSettings(UserDataVO user, final ServerRequestListener listener){
         String url = getURL(Services.USER_GET_PROFILE);
         JSONObject json1 = new JSONObject();
         try {
@@ -1411,7 +1448,7 @@ public class ConnectionManager {
         ITINERARY_MY_TRIP("Itinerary"),
         ITINERARY_HIGHLIGHT("Highlight?input="),
         USER_AVATAR("UserProfile/Avatar"),
-        RELATIONSHIP_TYPES("Statics/RelationshipType"),
+        RELATIONSHIP_TYPES("Statics/RelationshipTypes"),
         ACCOUNTS_PREFERENCES("UserProfile/Accounts/TravelPreference"),
         USER_PROFILE_REGISTER("UserProfile/Register"),
         STATIC_PROVINCE_BY_COUNTRY_CODE("Statics/GetProvinceByCountryCode?countryCode=");
@@ -1430,72 +1467,7 @@ public class ConnectionManager {
     }
 
     private String getURL(Services type) {
-        String url = "";
         System.out.println("Kate type.getURL() =" + type.getURL());
        return type.getURL();
-//        switch (type) {
-//            case USER_POST_LOGIN:
-//                return type.getURL();
-//            case USER_GET_PROFILE:
-//                return type.getURL();
-//            case USER_POST_CHANGE_PASSWORD:
-//                return type.getURL();
-//            case USER_GET_TRAVEL_PROFILES_DEFAULT:
-//                return type.getURL();
-//            case USER_GET_TRAVEL_PROFILES:
-//                return type.getURL();
-//            case USER_GET_TRAVEL_PREFERENCES:
-//                return type.getURL();
-//            case USER_POST_CHECKOUT:
-//                return type.getURL();
-//            case USER_GET_SEARCH_QUERY:
-//                return type.getURL();
-//            case USER_GET_HOTEL_ALTERNATIVE:
-//                return type.getURL();
-//            case USER_HOTEL_ROOM_ALTERNATIVE:
-//                return type.getURL();
-//            case USER_PUT_HOTEL:
-//                return type.getURL();
-//            case USER_GET_BOOKING_OPTIONS:
-//                return type.getURL();
-//            case USER_FLIGHT_SOLUTIONS:
-//                return type.getURL();
-//            case USER_GET_TRAVELER_INFO:
-//                return type.getURL();
-//            case USER_GET_USER_PROFILE_ACCOUNTS:
-//                return type.getURL();
-//            case USER_POST_USER_PROFILE_EMAIL:
-//                return type.getURL();
-//            case USER_TRAVEL_PROFILES:
-//                return type.getURL();
-//            case USER_PROFILE_RESET_PASSWORD:
-//                return type.getURL();
-//            case USER_SOLUTION:
-//                return type.getURL();
-//            case ITINERARY:
-//                return type.getURL();
-//            case ITINERARY_MY_TRIP:
-//                return type.getURL();
-//            case ITINERARY_CNC:
-//                return type.getURL();
-//            case ITINERARY_HIGHLIGHT:
-//                return type.getURL();
-//            case COMPANIONS:
-//                return type.getURL();
-//            case CARD_TOKEN:
-//                return type.getURL();
-//            case USER_AVATAR:
-//                return type.getURL();
-//            case RELATIONSHIP_TYPES:
-//                return type.getURL();
-//            case ACCOUNTS_PREFERENCES:
-//                return type.getURL();
-//            case USER_PROFILE_REGISTER:
-//                return type.getURL();
-//
-//        }
-//        return url;
     }
-  //  http://cnc.hellogbye.com/cnc/rest/UserProfile/Accounts/TravelPreference
-
 }
