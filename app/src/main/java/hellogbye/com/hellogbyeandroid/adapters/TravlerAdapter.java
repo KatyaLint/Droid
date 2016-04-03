@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlersFragment;
-import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -19,9 +19,14 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  * Created by arisprung on 10/27/15.
  */
 public class TravlerAdapter extends RecyclerView.Adapter<TravlerAdapter.ViewHolder> {
-    private ArrayList<UserData> mArrayList;
-    OnItemClickListener  mItemClickListner;
+
+
     private Fragment travelFragment;
+
+    private ArrayList<UserDataVO> mArrayList;
+    private OnItemClickListener  mItemClickListner;
+
+
     private Context mContext;
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -65,7 +70,9 @@ public class TravlerAdapter extends RecyclerView.Adapter<TravlerAdapter.ViewHold
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public TravlerAdapter(ArrayList<UserData> myDataset,Context context) {
+
+    public TravlerAdapter(ArrayList<UserDataVO> myDataset,Context context) {
+
         mArrayList = myDataset;
         mContext = context;
 
@@ -90,7 +97,7 @@ public class TravlerAdapter extends RecyclerView.Adapter<TravlerAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        UserData user = mArrayList.get(position);
+        UserDataVO user = mArrayList.get(position);
         holder.mTravlerName.setText(user.getFirstname());
         if(HGBUtility.isUserDataValid(user)){
             holder.mTravlerText.setText(user.getPhone()+"\n\n"+user.getAddress()+"\n"+user.getCity()+","+user.getState()+","+user.getCountry());

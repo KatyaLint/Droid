@@ -21,53 +21,36 @@ public class PassengersVO {
     @SerializedName("totalhotelprice")
     private double mTotalHotelPrice;
 
-    //OLD
-    @SerializedName("accountid")
-    private String mAccountID;
-    @SerializedName("displayname")
-    private String mDisplayName;
-    @SerializedName("paxstatus")
-    private String mPaxStatus;
+    @SerializedName("avatarurl")
+    private String avatarurl;
+
 
 
 
     @SerializedName("itineraryitems")
     private ArrayList<String> mItineraryItems = new ArrayList<String>();
-
-
-
-
-    @SerializedName("cells")
-    private ArrayList<CellsVO> mCells = new ArrayList<CellsVO>();
-
     private HashSet<String> mBookingItems = new HashSet<>();
 
 
-    public ArrayList<CellsVO> getmCells() {
-        return mCells;
-    }
+//<<<<<<< HEAD
+//    @SerializedName("cells")
+//    private ArrayList<CellsVO> mCells = new ArrayList<CellsVO>();
+//
+//    private HashSet<String> mBookingItems = new HashSet<>();
+//
+//=======
+////    @SerializedName("cells")
+////    private ArrayList<CellsVO> mCells = new ArrayList<CellsVO>();
+//>>>>>>> master
 
-    public void setmCells(ArrayList<CellsVO> mCells) {
-        this.mCells = mCells;
-    }
+//
+//    public ArrayList<CellsVO> getmCells() {
+//        return mCells;
+//    }
 
     public String getmPaxguid() {
         return mPaxguid;
     }
-
-    public void setmPaxguid(String mPaxguid) {
-        this.mPaxguid = mPaxguid;
-    }
-
-    public String getmDisplayName() {
-        return mDisplayName;
-    }
-
-    public void setmDisplayName(String mDisplayName) {
-        this.mDisplayName = mDisplayName;
-    }
-
-
 
 
     public ArrayList<NodesVO> passengerNodes = new ArrayList<>();

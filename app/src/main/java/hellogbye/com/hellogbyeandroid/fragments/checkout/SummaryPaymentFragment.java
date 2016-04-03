@@ -24,7 +24,7 @@ import hellogbye.com.hellogbyeandroid.adapters.TravlerAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.PaymentSummaryItem;
-import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
@@ -96,7 +96,7 @@ public class SummaryPaymentFragment extends HGBAbtsractFragment {
                 try {
 
                     JSONArray jsonArray = new JSONArray();
-                    for (UserData userData : getActivityInterface().getListUsers()) {
+                    for (UserDataVO userData : getFlowInterface().getListUsers()) {
                         JSONObject jsonUser = new JSONObject();
                         jsonUser.put("dateofbirth", userData.getDob());
                         jsonUser.put("lastname", userData.getLastname());
@@ -179,7 +179,7 @@ public class SummaryPaymentFragment extends HGBAbtsractFragment {
 
                     JSONObject creditObject = new JSONObject();
 
-                    for (CreditCardItem selectedCreditCard : getActivityInterface().getCreditCardsSelected()) {
+                    for (CreditCardItem selectedCreditCard : getFlowInterface().getCreditCardsSelected()) {
                         creditObject.put("cardnumber", selectedCreditCard.getToken());
                         creditObject.put("expirymonth", selectedCreditCard.getExpmonth());
                         creditObject.put("cvv", "123");//TODO this is hard coded needed to fix
@@ -234,25 +234,7 @@ public class SummaryPaymentFragment extends HGBAbtsractFragment {
     }
 
 
-    private void loadBookingItemsToPaasenger() {
 
-        UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
-        ArrayList<PassengersVO> passangers = travelOrder.getPassengerses();
-
-        for (int i = 0; i < passangers.size(); i++) {
-
-            for (int z = 0; z < getActivityInterface().getListUsers().size(); z++) {
-
-                if (getActivityInterface().getListUsers().get(z).getPaxid().equals(passangers.get(i).getmPaxguid())) {
-                    getActivityInterface().getListUsers().get(z).setBookingItems(passangers.get(i).getmBookingItems());
-
-                }
-            }
-
-        }
-
-
-    }
 
     private void loadTravlerList(View v) {
 
@@ -275,7 +257,7 @@ public class SummaryPaymentFragment extends HGBAbtsractFragment {
 
         mBookingItems = new HashMap<>();
 
-        for (Map.Entry<String, String> entry : getActivityInterface().getBookingHashMap().entrySet()) {
+        for (Map.Entry<String, String> entry : getFlowInterface().getBookingHashMap().entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
 

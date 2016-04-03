@@ -81,8 +81,12 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         progressDialog = new ProgressDialog(getActivity());
-        getActivityInterface().loadJSONFromAsset();
+       // getActivityInterface().loadJSONFromAsset();
+
+        getFlowInterface().loadJSONFromAsset();
+
         init(view);
         buildCountryDialog();
         buildStateDialog();
@@ -195,7 +199,7 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
         statePicker.setMaxValue(getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size() - 1);
         final String[] stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size()];
         for (int i = 0; i < getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size(); i++) {
-            stateArray[i] = getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().get(i).getName();
+            stateArray[i] = getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().get(i).getProvincename();
         }
         statePicker.setDisplayedValues(stateArray);
 

@@ -8,7 +8,7 @@ import java.util.HashSet;
 /**
  * Created by arisprung on 10/29/15.
  */
-public class UserData {
+public class UserDataVO {
 
 
     @SerializedName("userprofileid")
@@ -65,11 +65,11 @@ public class UserData {
     private HashSet<String> bookingItems;
 
 
-    public UserData() {
+    public UserDataVO() {
     }
 
 
-    public UserData(String userprofileid, String emailaddress, String firstname, String lastname, String dob, String country, String address, String city, String state, String postalcode, String avatar, boolean ispremiumuser, String paxid, String phone, String title) {
+    public UserDataVO(String userprofileid, String emailaddress, String firstname, String lastname, String dob, String country, String address, String city, String state, String postalcode, String avatar, boolean ispremiumuser, String paxid, String phone, String title) {
         this.userprofileid = userprofileid;
         this.emailaddress = emailaddress;
         this.firstname = firstname;

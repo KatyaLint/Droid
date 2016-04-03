@@ -32,6 +32,7 @@ public class CostumeToolBar extends Toolbar {
     private FontTextView my_trip_edit_button;
     private ImageView my_trips_image_profile;
     private FontTextView my_trip_profile;
+    private FontTextView itirnarary_title_Bar;
 
     public CostumeToolBar(Context context) {
         super(context);
@@ -52,16 +53,13 @@ public class CostumeToolBar extends Toolbar {
 
     public void initToolBarItems() {
 
-
-//        if (homeTitleImage == null) {
-//            homeTitleImage = (ImageView) findViewById(R.id.home_image);
-//        }
         if(my_trip_profile == null){
             my_trip_profile = (FontTextView)findViewById(R.id.my_trip_profile);
         }
         if (titleText == null) {
             titleText = (FontTextView) findViewById(R.id.titleBar);
-        }if(my_trips_image_profile == null){
+        }
+        if(my_trips_image_profile == null){
             my_trips_image_profile = (ImageView)findViewById(R.id.my_trips_image_profile);
         }
         if (keyBoardImage == null) {
@@ -85,6 +83,8 @@ public class CostumeToolBar extends Toolbar {
         }
         if(my_trip_edit_button == null){
             my_trip_edit_button = (FontTextView) findViewById(R.id.my_trip_edit_button);
+        }if(itirnarary_title_Bar == null){
+            itirnarary_title_Bar = (FontTextView)findViewById(R.id.itirnarary_title_Bar);
         }
 
     }
@@ -93,7 +93,7 @@ public class CostumeToolBar extends Toolbar {
     public void updateToolBarView(int position) {
 
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
-
+        String selectedItem = navBar.getNavTitle();
    //     homeTitleImage.setVisibility(View.GONE);
         my_trip_profile.setVisibility(View.GONE);
         titleText.setVisibility(View.GONE);
@@ -107,7 +107,7 @@ public class CostumeToolBar extends Toolbar {
         my_trips_button.setVisibility(View.GONE);
         my_trip_edit_button.setVisibility(View.GONE);
         my_trips_image_profile.setVisibility(View.GONE);
-
+        itirnarary_title_Bar.setVisibility(View.GONE);
         switch (navBar) {
 //            case HOME:
 //             //   homeTitleImage.setVisibility(View.VISIBLE);
@@ -116,9 +116,10 @@ public class CostumeToolBar extends Toolbar {
 //
 //                break;
             case ITINARERY:
-                titleText.setVisibility(View.VISIBLE);
+               // titleText.setVisibility(View.VISIBLE);
                 purchaseButton.setVisibility(View.VISIBLE);
-
+                itirnarary_title_Bar.setVisibility(View.VISIBLE);
+            //    itirnarary_title_Bar.setText(selectedItem);
                 break;
 //            case HISTORY:
 //                titleText.setVisibility(View.VISIBLE);
@@ -165,36 +166,8 @@ public class CostumeToolBar extends Toolbar {
 
 
         }
-        String selectedItem = navBar.getNavTitle();
-        //setTitle(selectedItem);
+
         titleText.setText(selectedItem);
-
-//        keyBoardImage.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                String id = (String) v.getTag();
-//
-//                if (id.equals("keyboard")) {
-//                    Intent intent2 = new Intent(HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION);
-//                    intent2.putExtra(HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION, HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION_KEYBOARD_ACTION);
-//                    mContext.sendBroadcast(intent2);
-//                    keyBoardImage.setBackgroundResource(R.drawable.app_bar_microphone_icn);
-//                    keyBoardImage.setTag("mic");
-//                } else if (id.equals("mic")) {
-//                    Intent intent1 = new Intent(HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION);
-//                    intent1.putExtra(HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION, HGBConstants.HOME_FRAGMENT_TOOLBAR_ACTION_MIC_ACTION);
-//                    mContext.sendBroadcast(intent1);
-//                    keyBoardImage.setBackgroundResource(R.drawable.keyboard_icon);
-//                    keyBoardImage.setTag("keyboard");
-//
-//                }
-//
-//
-//
-//            }
-//        });
-
     }
 
 

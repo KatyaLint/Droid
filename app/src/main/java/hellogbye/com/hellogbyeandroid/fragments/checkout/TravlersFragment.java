@@ -15,7 +15,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.TravlerAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
@@ -72,8 +72,10 @@ public class TravlersFragment extends HGBAbtsractFragment {
             @Override
             public void onSuccess(Object data) {
 
-                getActivityInterface().setListUsers((ArrayList<UserData>) data);
+
+                getActivityInterface().setListUsers((ArrayList<UserDataVO>) data);
                 mAdapter = new TravlerAdapter(getActivityInterface().getListUsers(), getActivity().getApplicationContext());
+
                 mRecyclerView.setAdapter(mAdapter);
                 mAdapter.SetOnItemClickListener(new TravlerAdapter.OnItemClickListener() {
 
@@ -81,7 +83,7 @@ public class TravlersFragment extends HGBAbtsractFragment {
                     public void onItemClick(View v, int position) {
                         Bundle args = new Bundle();
                         args.putInt("user_json_position", position);
-                        getActivityInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS_DETAILS.getNavNumber(), args);
+                        getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS_DETAILS.getNavNumber(), args);
                     }
                 });
             }
@@ -89,6 +91,7 @@ public class TravlersFragment extends HGBAbtsractFragment {
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
                 errorHelper.show(getFragmentManager(), (String) data);
             }
         });
@@ -96,7 +99,24 @@ public class TravlersFragment extends HGBAbtsractFragment {
         mNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivityInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
+
+                ConnectionManager.getInstance(getActivity()).getCreditCards(new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        getActivityInterface().setCreditCards((ArrayList<CreditCardItem>) data);
+                        getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
+
+                    }
+
+                    @Override
+                    public void onError(Object data) {
+                        HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.setMessageForError((String) data);
+                        errorHelper.show(getFragmentManager(), (String) data);
+                    }
+                });
+
+
             }
         });
     }

@@ -167,14 +167,14 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
     private void sendPaymentSolution() {
 
         HashSet<String> set = new HashSet<String>();
-        for (String key : getActivityInterface().getBookingHashMap().keySet()) {
+        for (String key : getFlowInterface().getBookingHashMap().keySet()) {
             set.add(key);
         }
 
         ConnectionManager.getInstance(getActivity()).checkoutSolutionId(getActivityInterface().getSolutionID(), set, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                getActivityInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS.getNavNumber(), null);
+                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS.getNavNumber(), null);
             }
 
             @Override
@@ -193,7 +193,7 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
 
                 itemsList = new ArrayList<String>();
 
-                getActivityInterface().setCreditCards((ArrayList<CreditCardItem>) data);
+                getFlowInterface().setCreditCards((ArrayList<CreditCardItem>) data);
                 for (CreditCardItem item : (ArrayList<CreditCardItem>) data) {
                     itemsList.add(item.getLast4());
                 }
@@ -209,31 +209,27 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
                     public void onClick(DialogInterface dialog, int item) {
 
                         String selectedText = list[item].toString();
-
-
                         //This is to set creditcard  array  final json for payment
 
-
-                        Log.d("", getActivityInterface().getCreditCardsSelected().toString());
                         if (selectedText.equals(getString(R.string.cancel))) {
 
                         } else if (selectedText.equals(getString(R.string.add_card))) {
-                            getActivityInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(), null);
+                            getFlowInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(), null);
                         } else if (selectedText.equals(getString(R.string.remove_card))) {
                             if (!mSelectedView.getText().toString().equals(getString(R.string.select_card))) {
                                 CreditCardItem selectedCreditCard = getCardByNumber(mSelectedView.getText().toString());
-                                getActivityInterface().getCreditCardsSelected().remove(selectedCreditCard);
+                                getFlowInterface().getCreditCardsSelected().remove(selectedCreditCard);
                                 calculateCard(selectedCreditCard, mSelectedView, false);
                             }
 
                         } else {
                             CreditCardItem selectedCreditCard = getCardByNumber(selectedText);
-                            getActivityInterface().getCreditCardsSelected().add(selectedCreditCard);
+                            getFlowInterface().getCreditCardsSelected().add(selectedCreditCard);
                             calculateCard(selectedCreditCard, mSelectedView, true);
                         }
                         mSelectedView = null;
 
-                        if (getActivityInterface().getCreditCardsSelected().size() == 0) {
+                        if (getFlowInterface().getCreditCardsSelected().size() == 0) {
                             disablePaymentSolution();
                         } else {
                             enablePaymentSelection();
@@ -300,9 +296,9 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
             //This is to set bookingitem array  final json for payment
             for (String strItem : paymentGroup.getItems()) {
                 if (add) {
-                    getActivityInterface().getBookingHashMap().put(strItem, selectedCreditCard.getToken());
+                    getFlowInterface().getBookingHashMap().put(strItem, selectedCreditCard.getToken());
                 } else {
-                    getActivityInterface().getBookingHashMap().remove(strItem);
+                    getFlowInterface().getBookingHashMap().remove(strItem);
                 }
 
             }
@@ -345,9 +341,9 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
 
             //This is to set bookingitem array  final json for payment
             if (add) {
-                getActivityInterface().getBookingHashMap().put(paymentchild.getGuid(), selectedCreditCard.getToken());
+                getFlowInterface().getBookingHashMap().put(paymentchild.getGuid(), selectedCreditCard.getToken());
             } else {
-                getActivityInterface().getBookingHashMap().remove(paymentchild.getGuid());
+                getFlowInterface().getBookingHashMap().remove(paymentchild.getGuid());
             }
 
 
@@ -356,19 +352,19 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
                 mTotalSelectCC.setText(selectedCreditCard.getLast4());
             } else {
                 mTotalSelectCC.setText(getString(R.string.select_card));
-                getActivityInterface().getCreditCardsSelected().clear();
+                getFlowInterface().getCreditCardsSelected().clear();
             }
 
 
-            PassengersVO currentPassenger = getCurrentPassengerByName(getActivityInterface().getCurrentUser().getFirstname());
+            PassengersVO currentPassenger = getCurrentPassengerByName(getFlowInterface().getCurrentUser().getFirstname());
 
             for (PassengersVO passenger : passangers) {
 
                 for (String passengerItem : passenger.getmItineraryItems()) {
                     if (add) {
-                        getActivityInterface().getBookingHashMap().put(passengerItem, selectedCreditCard.getToken());
+                        getFlowInterface().getBookingHashMap().put(passengerItem, selectedCreditCard.getToken());
                     } else {
-                        getActivityInterface().getBookingHashMap().remove(passengerItem);
+                        getFlowInterface().getBookingHashMap().remove(passengerItem);
                     }
 
                 }
@@ -425,7 +421,7 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
 
 
     private CreditCardItem getCardByNumber(String selectedText) {
-        for (CreditCardItem credit : getActivityInterface().getCreditCards()) {
+        for (CreditCardItem credit : getFlowInterface().getCreditCards()) {
             if (credit.getLast4().equals(selectedText)) {
                 return credit;
             }

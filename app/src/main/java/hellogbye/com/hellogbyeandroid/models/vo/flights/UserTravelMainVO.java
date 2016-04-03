@@ -26,8 +26,7 @@ public class UserTravelMainVO {
     private String mTotalPrice;
 
     //OLD
-    @SerializedName("parsermessage")
-    private String mParseMessage;
+
 
     @SerializedName("passengers")
     private ArrayList<PassengersVO> passengerses = new ArrayList<PassengersVO>();
@@ -47,9 +46,25 @@ public class UserTravelMainVO {
     public String getmSolutionID() {
         return mSolutionID;
     }
+    public String getmTotalPrice() {
+        return mTotalPrice;
+    }
+    public ArrayList<PassengersVO> getPassengerses() {
+        return passengerses;
+    }
+    public Map<String, NodesVO> getItems() {
+        return items;
+    }
+    public void setItems(Map<String, NodesVO> items) {
+        this.items = items;
+    }
 
-    public void setmSolutionID(String mSolutionID) {
-        this.mSolutionID = mSolutionID;
+    public String getmSolutionName() {
+        return mSolutionName;
+    }
+
+    public void setmSolutionName(String mSolutionName) {
+        this.mSolutionName = mSolutionName;
     }
 
     public boolean ismIsFavorite() {
@@ -58,37 +73,5 @@ public class UserTravelMainVO {
 
     public void setmIsFavorite(boolean mIsFavorite) {
         this.mIsFavorite = mIsFavorite;
-    }
-
-    public String getmTotalPrice() {
-        return mTotalPrice;
-    }
-
-    public void setmTotalPrice(String mTotalPrice) {
-        this.mTotalPrice = mTotalPrice;
-    }
-
-    public String getmParseMessage() {
-        return mParseMessage;
-    }
-
-    public void setmParseMessage(String mParseMessage) {
-        this.mParseMessage = mParseMessage;
-    }
-
-    public ArrayList<PassengersVO> getPassengerses() {
-        return passengerses;
-    }
-
-    public void setPassengerses(ArrayList<PassengersVO> passengerses) {
-        this.passengerses = passengerses;
-    }
-
-    public Map<String, NodesVO> getItems() {
-        return items;
-    }
-
-    public void setItems(Map<String, NodesVO> items) {
-        this.items = items;
     }
 }

@@ -4,10 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-/**
- * Created by arisprung on 11/24/15.
- */
-public class CountryItem {
+public class CountryItemVO {
 
 
     @SerializedName("code")
@@ -20,7 +17,7 @@ public class CountryItem {
     private ArrayList<ProvincesItem> provinces;
 
 
-    public CountryItem(String code, String name, ArrayList<ProvincesItem> provinces) {
+    public CountryItemVO(String code, String name, ArrayList<ProvincesItem> provinces) {
         this.code = code;
         this.name = name;
         this.provinces = provinces;

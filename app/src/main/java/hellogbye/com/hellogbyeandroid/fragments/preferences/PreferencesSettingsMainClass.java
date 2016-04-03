@@ -34,6 +34,8 @@ public class PreferencesSettingsMainClass extends HGBAbtsractFragment {
                             @Override
                             public void onError(Object data) {
                                 HGBErrorHelper errorHelper = new HGBErrorHelper();
+                                errorHelper.setMessageForError((String) data);
+                                errorHelper.show(getFragmentManager(), (String) data);
                             }
                         });
             }

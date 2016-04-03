@@ -175,7 +175,7 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
             }
         });
 
-        getActivityInterface().getToolBar().updateToolBarView(ToolBarNavEnum.HOTEL.getNavNumber());
+        getFlowInterface().getToolBar().updateToolBarView(ToolBarNavEnum.HOTEL.getNavNumber());
         return rootView;
     }
 
@@ -189,7 +189,7 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
                 new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
-                        getActivityInterface().callRefreshItinerary(ToolBarNavEnum.HOTEL.getNavNumber());
+                        getFlowInterface().callRefreshItinerary(ToolBarNavEnum.HOTEL.getNavNumber());
                         //GET ALL HOTEL NODES AND SET CURRENT ONE
                         nodesVO = currentSelectedNode;
                         //TODO set hotel locall and call server
@@ -202,6 +202,7 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
                     @Override
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.setMessageForError((String) data);
                         errorHelper.show(getFragmentManager(), (String) data);
                     }
                 });
@@ -315,6 +316,7 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
                     @Override
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.setMessageForError((String) data);
                         errorHelper.show(getFragmentManager(), (String) data);
                     }
                 });

@@ -7,31 +7,37 @@ import com.google.gson.annotations.SerializedName;
  */
 public class ProvincesItem {
 
-    @SerializedName("name")
-    private String name;
+    @SerializedName("provincecode")
+    private String provincecode;
 
-    @SerializedName("code")
-    private String code;
+    @SerializedName("countrycode")
+    private String countrycode;
+
+    @SerializedName("provincename")
+    private String provincename;
 
 
-    public ProvincesItem(String name, String code) {
-        this.name = name;
-        this.code = code;
+    public String getProvincename() {
+        return provincename;
     }
 
-    public String getName() {
-        return name;
+    public void setProvincename(String provincename) {
+        this.provincename = provincename;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getCountrycode() {
+        return countrycode;
     }
 
-    public String getCode() {
-        return code;
+    public void setCountrycode(String countrycode) {
+        this.countrycode = countrycode;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public String getProvincecode() {
+        return provincecode;
+    }
+
+    public void setProvincecode(String provincecode) {
+        this.provincecode = provincecode;
     }
 }

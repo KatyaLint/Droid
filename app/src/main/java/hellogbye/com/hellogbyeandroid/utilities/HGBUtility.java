@@ -21,18 +21,14 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
-import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -41,20 +37,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
-import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
@@ -73,12 +65,11 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-import java.util.Random;
 import java.util.Stack;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
-import hellogbye.com.hellogbyeandroid.models.UserData;
+import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
@@ -136,7 +127,7 @@ public class HGBUtility {
         return bitmap;
     }
 
-    public static void getAndSaveUserImage(String imageUrl, ImageView imageView){
+    public static void getAndSaveUserImage(String imageUrl, ImageView imageView,final ImageView imageViewSec){
 
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .considerExifParams(true)
@@ -178,15 +169,14 @@ public class HGBUtility {
                         message = "Unknown error";
                         break;
                 }
-
-
             }
 
             @Override
             public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                if(imageViewSec != null) { //can be null if from account screen changed picture
+                    imageViewSec.setImageBitmap(loadedImage);
+                }
                 downloadImage( loadedImage);
-
-
             }
         });
     }
@@ -292,29 +282,29 @@ public class HGBUtility {
 
 
 
-    public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels) {
-        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap
-                .getHeight(), Bitmap.Config.ARGB_8888);
-
-        Canvas canvas = new Canvas(output);
-
-        final int color = 0xff424242;
-        final Paint paint = new Paint();
-        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-        final RectF rectF = new RectF(rect);
-        final float roundPx = pixels;
-
-        paint.setAntiAlias(true);
-        canvas.drawARGB(0, 0, 0, 0);
-        paint.setColor(color);
-        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rect, rect, paint);
-
-        return output;
-    }
-
+//    public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels) {
+//        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap
+//                .getHeight(), Bitmap.Config.ARGB_8888);
+//
+//        Canvas canvas = new Canvas(output);
+//
+//        final int color = 0xff424242;
+//        final Paint paint = new Paint();
+//        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+//        final RectF rectF = new RectF(rect);
+//        final float roundPx = pixels;
+//
+//        paint.setAntiAlias(true);
+//        canvas.drawARGB(0, 0, 0, 0);
+//        paint.setColor(color);
+//        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+//
+//        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+//        canvas.drawBitmap(bitmap, rect, rect, paint);
+//
+//        return output;
+//    }
+//
 
 
 
@@ -393,6 +383,7 @@ public class HGBUtility {
         //TODO change the action bar relative to current fragment
         return false;
     }
+
 
 
     public static String loadJSONFromAsset(String fileName, Activity activity) {
@@ -714,7 +705,7 @@ public static String formattDateToStringMonthDate(String dateInString) {
         return haveConnectedWifi || haveConnectedMobile;
     }
 
-    public static boolean isUserDataValid(UserData user){
+    public static boolean isUserDataValid(UserDataVO user){
         boolean isValid = true;
         if(user.getFirstname().length()== 0){
             return false;
@@ -1087,6 +1078,7 @@ public static String formattDateToStringMonthDate(String dateInString) {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
         }
     }
+
 
 }
 

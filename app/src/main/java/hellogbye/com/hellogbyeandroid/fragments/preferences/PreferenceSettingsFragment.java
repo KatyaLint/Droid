@@ -78,7 +78,8 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
                         @Override
                         public void onError(Object data) {
                             HGBErrorHelper errorHelper = new HGBErrorHelper();
-                            errorHelper.setMessageForError((String)data);
+                            errorHelper.setMessageForError((String) data);
+                            errorHelper.show(getFragmentManager(), (String) data);
                         }
                     });
                 }
@@ -172,13 +173,15 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
                     getActivityInterface().setAccountSettingsAttribute(accountSettingsAttributes);
                     Bundle args = new Bundle();
                     args.putString("setting_att_id", clickedAttributeID);
-                    getActivityInterface().goToFragment(ToolBarNavEnum.PREFERENCES_TAB_SETTINGS.getNavNumber(), args);
+                    getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCES_TAB_SETTINGS.getNavNumber(), args);
                 }
             }
 
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);;
             }
         });
     }
@@ -251,6 +254,8 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
             }
         });
 
@@ -268,6 +273,8 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
             }
         });
 
@@ -340,6 +347,8 @@ public class PreferenceSettingsFragment extends HGBAbtsractFragment {
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
             }
         });
 

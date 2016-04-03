@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-
-import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
+import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -47,18 +47,7 @@ public class ConnectionManager {
     private String PREFERENCES = "Preferences";
 
 
-    public enum Services {
-        USER_POST_LOGIN, USER_GET_PROFILE, USER_POST_CHANGE_PASSWORD,
-        USER_GET_TRAVEL_PROFILES, USER_GET_TRAVEL_PROFILES_DEFAULT, USER_POST_CHECKOUT,
-        USER_GET_SEARCH_QUERY, USER_GET_HOTEL_ALTERNATIVE,
-        USER_HOTEL_ROOM_ALTERNATIVE, USER_PUT_HOTEL, USER_GET_BOOKING_OPTIONS,
-        USER_FLIGHT_SOLUTIONS, USER_GET_TRAVELER_INFO, USER_GET_USER_PROFILE_ACCOUNTS,
-        USER_POST_USER_PROFILE_EMAIL, USER_TRAVEL_PROFILES, USER_PROFILE_RESET_PASSWORD,
-        USER_SOLUTION, ITINERARY, USER_GET_TRAVEL_PREFERENCES, ITINERARY_CNC,
-        USER_POST_TRAVEL_PREFERENCES, COMPANIONS, CARD_TOKEN, ITINERARY_MY_TRIP,
-        ITINERARY_HIGHLIGHT, USER_AVATAR, RELATIONSHIP_TYPES, ACCOUNTS_PREFERENCES,CARD_SESSION,BOOKING_PAY
 
-    }
 
     private ConnectionManager() {
 
@@ -79,6 +68,40 @@ public class ConnectionManager {
     ////////////////////////////////
     // POST
     ///////////////////////////////
+
+    public void postUserCreateAccount(UserSignUpDataVO userData, final ServerRequestListener listener) {
+
+        String url = getURL(Services.USER_PROFILE_REGISTER);
+
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("city", userData.getCity());
+            jsonObject.put("confirmPassword", userData.getConfirmPassword());
+            jsonObject.put("country", userData.getCountry());
+            jsonObject.put("firstname", userData.getFirstName());
+            jsonObject.put("lastname", userData.getLastName());
+            jsonObject.put("password", userData.getPassword());
+            jsonObject.put("state", userData.getState());
+            jsonObject.put("username", userData.getUserEmail());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, false);
+    }
 
 
     public void postCompanions(String firstName, String lastName, String email, final ServerRequestListener listener) {
@@ -250,11 +273,24 @@ public class ConnectionManager {
     }
 
 
-    public void postChangePasswordWithOldPassword(String prevpassword, String password, final ServerRequestListener listener) {
+    public void postChangePasswordWithOldPassword(String userName,String confirmpassword,String prevpassword, String password, final ServerRequestListener listener) {
         String url = getURL(Services.USER_POST_CHANGE_PASSWORD);
-
+//                        ConfirmPassword
+//                        :
+//                        "12345678"
+//                        Username
+//                        :
+//                        "michael.gorlik@amginetech.com"
+//                        password
+//                        :
+//                        "12345678"
+//                        previouspassword
+//                        :
+//                        "Mg140989"
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("Username", userName);
+            jsonObject.put("ConfirmPassword", confirmpassword);
             jsonObject.put("previouspassword", prevpassword);
             jsonObject.put("password", password);
 
@@ -404,8 +440,10 @@ public class ConnectionManager {
                 //Main for all query request
                 jsonObjectMain.put("query", airportSendValuesVO.getQuery());
                 jsonObjectMain.put("travelpreferenceprofileid", airportSendValuesVO.getTravelpreferenceprofileid());
-                jsonObjectMain.put("latitude", airportSendValuesVO.getLatitude());
-                jsonObjectMain.put("longitude", airportSendValuesVO.getLongitude());
+
+                //TODO need to remove
+                jsonObjectMain.put("latitude", "32.063064499999996");
+                jsonObjectMain.put("longitude", "34.7716091");
 
 
                 jsonObjectMain.put("token", jsonArray);
@@ -883,6 +921,31 @@ public class ConnectionManager {
         }, false);
     }
 
+  //  http://cnc.hellogbye.com/cnc/rest/Statics/GetProvinceByCountryCode?countryCode=ID
+
+    public void getStaticBookingProvince(String countryCode, final ServerRequestListener listener) {
+
+        //ka
+        String url = getURL(Services.STATIC_PROVINCE_BY_COUNTRY_CODE);
+        url = url + countryCode;
+        JSONObject jsonObject = new JSONObject();
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseBookingProvinceOptions(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, false);
+    }
+
+
+
     public void getBookingOptions(final ServerRequestListener listener) {
 
         String url = getURL(Services.USER_GET_BOOKING_OPTIONS);
@@ -900,7 +963,7 @@ public class ConnectionManager {
             public void onErrorResponse(VolleyError error) {
                 listener.onError(Parser.parseErrorMessage(error));
             }
-        });
+        }, false);
     }
 
     public void getTravellersInforWithSolutionId(String solutionid, final ServerRequestListener listener) {
@@ -1054,6 +1117,31 @@ public class ConnectionManager {
     // PUT
     ///////////////////////////////
 
+    public void putFavorityItenarary(boolean isFavority,String itineraryID, final ServerRequestListener listener) {
+        String url = getURL(Services.ITINERARY);
+        url = url + itineraryID;
+        JSONObject json1 = new JSONObject();
+        try {
+            json1.put("isfavorite", isFavority);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
+                json1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
 
     public void putAccountsPreferences(String email, String travelpreferenceprofileid, final ServerRequestListener listener) {
         String url = getURL(Services.ACCOUNTS_PREFERENCES);
@@ -1108,7 +1196,7 @@ public class ConnectionManager {
         });
     }
 
-    public void putCompanion(String id, UserData user, final ServerRequestListener listener) {
+    public void putCompanion(String id, UserDataVO user, final ServerRequestListener listener) {
         String url = getURL(Services.COMPANIONS);
         JSONObject json1 = new JSONObject();
         try {
@@ -1170,9 +1258,10 @@ public class ConnectionManager {
     }
 
 
-    //gender
-    //email
-    public void putUserSettings(UserData user, final ServerRequestListener listener) {
+
+
+    public void putUserSettings(UserDataVO user, final ServerRequestListener listener){
+
         String url = getURL(Services.USER_GET_PROFILE);
         JSONObject json1 = new JSONObject();
         try {
@@ -1403,73 +1492,57 @@ public class ConnectionManager {
     }
 
 
-    private String getURL(Services type) {
-        String url = "";
-        switch (type) {
-            case USER_POST_LOGIN:
-                return BASE_URL + "Session";
-            case USER_GET_PROFILE:
-                return BASE_URL + "UserProfile";
-            case USER_POST_CHANGE_PASSWORD:
-                return BASE_URL + "UserProfile/Password";
-            case USER_GET_TRAVEL_PROFILES_DEFAULT:
-                return BASE_URL + "TravelPreference/Profiles/Defaults";
-            case USER_GET_TRAVEL_PROFILES:
-                return BASE_URL + "TravelPreference/Profiles";
-            case USER_GET_TRAVEL_PREFERENCES:
-                return BASE_URL + "TravelPreference";
-            case USER_POST_CHECKOUT:
-                return BASE_URL + "CheckOut";
-            case USER_GET_SEARCH_QUERY:
-                return BASE_URL + "Solution/Primarysearch?query=";
-            case USER_GET_HOTEL_ALTERNATIVE:
-                return BASE_URL + "Hotel";
-            case USER_HOTEL_ROOM_ALTERNATIVE:
-                return BASE_URL + "HotelRoom";
-            case USER_PUT_HOTEL:
-                return BASE_URL + "Hotel";
-            case USER_GET_BOOKING_OPTIONS:
-                return BASE_URL + "Statics/BookingOptions";
-            case USER_FLIGHT_SOLUTIONS:
-                return BASE_URL + "Flight";
-            case USER_GET_TRAVELER_INFO:
-                return BASE_URL + "Traveler/Get/";
-            case USER_GET_USER_PROFILE_ACCOUNTS:
-                return BASE_URL + "UserProfile/Accounts";
-            case USER_POST_USER_PROFILE_EMAIL:
-                return BASE_URL + "UserProfile/ResetPassword?email=";
-            case USER_TRAVEL_PROFILES:
-                return BASE_URL + "TravelPreference/Profiles/";
-            case USER_PROFILE_RESET_PASSWORD:
-                return BASE_URL + "UserProfile/ResetPassword?email=";
-            case USER_SOLUTION:
-                return BASE_URL + "Solution/";
-            case ITINERARY:
-                return BASE_URL + "Itinerary/";
-            case ITINERARY_MY_TRIP:
-                return BASE_URL + "Itinerary";
-            case ITINERARY_CNC:
-                return BASE_URL + "Itinerary/"; //return BASE_URL + "Itinerary/CNC";
-            case ITINERARY_HIGHLIGHT:
-                return BASE_URL + "Highlight?input="; //return BASE_URL + "Itinerary/CNC";
-            case COMPANIONS:
-                return BASE_URL + "Companions";
-            case CARD_TOKEN:
-                return BASE_URL + "Card/Token";
-            case CARD_SESSION:
-                return BASE_URL + "Card/Session";
-            case USER_AVATAR:
-                return BASE_URL + "UserProfile/Avatar";
-            case RELATIONSHIP_TYPES:
-                return BASE_URL + "Statics/RelationshipTypes";
-            case BOOKING_PAY:
-                return BASE_URL + "Booking/pay";
-            case ACCOUNTS_PREFERENCES:
-                return BASE_URL + "UserProfile/Accounts/TravelPreference";
 
-        }
-        return url;
-    }
-    //  http://cnc.hellogbye.com/cnc/rest/UserProfile/Accounts/TravelPreference
+            public enum Services {
+                // http://cnc.hellogbye.com/cnc/rest/Statics/GetProvinceByCountryCode?countryCode=ID
+                USER_POST_LOGIN("Session"),
+                USER_GET_PROFILE("UserProfile"),
+                USER_POST_CHANGE_PASSWORD("UserProfile/Password"),
+                USER_GET_TRAVEL_PROFILES("TravelPreference/Profiles"),
+                USER_GET_TRAVEL_PROFILES_DEFAULT("TravelPreference/Profiles/Defaults"),
+                USER_POST_CHECKOUT("CheckOut"),
+                USER_GET_SEARCH_QUERY("Solution/Primarysearch?query="),
+                USER_GET_HOTEL_ALTERNATIVE("Hotel"),
+                USER_HOTEL_ROOM_ALTERNATIVE("HotelRoom"),
+                USER_PUT_HOTEL("Hotel"),
+                USER_GET_BOOKING_OPTIONS("Statics/BookingOptions"),
+                USER_FLIGHT_SOLUTIONS("Flight"),
+                USER_GET_TRAVELER_INFO("Traveler/Get/"),
+                USER_GET_USER_PROFILE_ACCOUNTS("UserProfile/Accounts"),
+                USER_POST_USER_PROFILE_EMAIL("UserProfile/ResetPassword?email="),
+                USER_TRAVEL_PROFILES("TravelPreference/Profiles/"),
+                USER_PROFILE_RESET_PASSWORD("UserProfile/ResetPassword?email="),
+                USER_SOLUTION("Solution/"),
+                ITINERARY("Itinerary/"),
+                USER_GET_TRAVEL_PREFERENCES("TravelPreference"),
+                ITINERARY_CNC("Itinerary/"),
+                COMPANIONS("Companions"),
+                CARD_TOKEN("Card/Token"),
+                ITINERARY_MY_TRIP("Itinerary"),
+                ITINERARY_HIGHLIGHT("Highlight?input="),
+                USER_AVATAR("UserProfile/Avatar"),
+                RELATIONSHIP_TYPES("Statics/RelationshipTypes"),
+                ACCOUNTS_PREFERENCES("UserProfile/Accounts/TravelPreference"),
+                USER_PROFILE_REGISTER("UserProfile/Register"),
+                STATIC_PROVINCE_BY_COUNTRY_CODE("Statics/GetProvinceByCountryCode?countryCode="),
+                CARD_SESSION("Card/Token"),
+                BOOKING_PAY("booking/pay");
 
+
+
+                String url;
+                Services(String url){
+                    this.url = BASE_URL + url;
+                }
+
+                public String getURL(){
+                    return url;
+                }
+
+            }
+
+            private String getURL(Services type) {
+                System.out.println("Kate type.getURL() =" + type.getURL());
+                return type.getURL();
+            }
 }

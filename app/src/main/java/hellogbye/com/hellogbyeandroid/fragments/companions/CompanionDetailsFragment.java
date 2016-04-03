@@ -21,6 +21,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
+import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
 /**
  * Created by nyawka on 1/7/16.
@@ -161,7 +162,7 @@ public class CompanionDetailsFragment  extends HGBAbtsractFragment {
         companion_details_city.setText(addressTitle);
 
 
-        ImageView companion_details_image = (ImageView) view.findViewById(R.id.companion_details_image);
+        RoundedImageView companion_details_image = (RoundedImageView) view.findViewById(R.id.companion_details_image);
         HGBUtility.loadRoundedImage(profileData.getmAvatar(),companion_details_image, R.drawable.profile_image);
        // MyTripPinnedAdapter sectionedAdapter = new MyTripPinnedAdapter(mItemsList);
 
@@ -178,6 +179,7 @@ public class CompanionDetailsFragment  extends HGBAbtsractFragment {
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
                 errorHelper.show(getFragmentManager(), (String) data);
             }
         });
@@ -193,6 +195,7 @@ public class CompanionDetailsFragment  extends HGBAbtsractFragment {
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
                 errorHelper.show(getFragmentManager(), (String) data);
             }
         });
