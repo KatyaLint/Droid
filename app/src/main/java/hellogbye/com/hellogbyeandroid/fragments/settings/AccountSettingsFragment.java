@@ -45,7 +45,7 @@ import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 public class AccountSettingsFragment extends HGBAbtsractFragment {
 
 
-    private ImageView account_details_image;
+    private RoundedImageView account_details_image;
     private FontTextView account_settings_details_name;
     private FontTextView account_settings_details_city;
     private Activity activity;
@@ -85,7 +85,7 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
     private void initializeUserData(){
         currentUser = getActivityInterface().getCurrentUser();
 
-        HGBUtility.getAndSaveUserImage(currentUser.getAvatar(),account_details_image);
+        HGBUtility.getAndSaveUserImage(currentUser.getAvatar(),account_details_image, null);
        // HGBUtility.loadRoundedImage(getActivity().getApplicationContext(),currentUser.getAvatar(),account_details_image);
 
         String userName = currentUser.getTitle().trim() +" "+ currentUser.getFirstname() + " " + currentUser.getLastname();
@@ -291,9 +291,10 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
                 Uri selectedImage = data.getData();
                 try {
                     Bitmap  yourSelectedImage  = decodeUri(selectedImage);
-                    Bitmap thumbnail2 = HGBUtility.getRoundedCornerBitmap(Bitmap.createScaledBitmap(yourSelectedImage, HGBConstants.PROFILE_IMAGE_WIDTH, HGBConstants.PROFILE_IMAGE_HEIGHT, false), 90);
-                    account_details_image.setImageBitmap(thumbnail2);
+                 //   Bitmap thumbnail2 = HGBUtility.getRoundedCornerBitmap(Bitmap.createScaledBitmap(yourSelectedImage, HGBConstants.PROFILE_IMAGE_WIDTH, HGBConstants.PROFILE_IMAGE_HEIGHT, false), 90);
+                    account_details_image.setImageBitmap(yourSelectedImage);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    //TODO check compress or can i put width height
                     yourSelectedImage.compress(Bitmap.CompressFormat.PNG, 90, baos); //bm is the bitmap object
                     byte[] b = baos.toByteArray();
                     String encodedString = Base64.encodeToString(b, Base64.DEFAULT);

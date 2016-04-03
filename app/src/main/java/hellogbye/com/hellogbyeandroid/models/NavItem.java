@@ -7,10 +7,14 @@ public class NavItem {
 
     private ToolBarNavEnum name;
     private boolean isSelected;
+    private int iconEnable;
+    private int iconDisable;
 
-    public NavItem(ToolBarNavEnum name, boolean isSelected) {
+    public NavItem(ToolBarNavEnum name, boolean isSelected, int iconEnable, int iconDisable) {
         this.name = name;
         this.isSelected = isSelected;
+        this.iconEnable = iconEnable;
+        this.iconDisable = iconDisable;
     }
 
     public String getName() {
@@ -32,5 +36,13 @@ public class NavItem {
     public void setIsSelected(boolean isSelected) {
         this.isSelected = isSelected;
     }
+
+    public int getIconEnable() {
+        return iconEnable;
+    }
+    public int getIconDisable() {
+        return iconDisable;
+    }
+
 }
 

@@ -50,7 +50,6 @@ public class HGBAbtsractFragment extends Fragment {
             throw new ClassCastException(getActivity().toString() + "must implement HostingActivityInterface");
         }
 
-     //   mActivityInterface.getToolBar().updateToolBarView(getArguments().getInt(HGBConstants.ARG_NAV_NUMBER));
     }
 
     protected HGBVoiceInterface getVoiceInterface() {
@@ -78,44 +77,8 @@ public class HGBAbtsractFragment extends Fragment {
         String guid = getSelectedGuid();
         Map<String, NodesVO> itemsMap = userOrder.getItems();
         NodesVO userNode = itemsMap.get(guid);
-
-//        ArrayList<PassengersVO> passengers = userOrder.getPassengerses();
-//        for (PassengersVO passenger :passengers){
-//            ArrayList<CellsVO> cells = passenger.getmCells();
-//            for (CellsVO cell : cells){
-//                ArrayList<NodesVO> nodes = cell.getmNodes();
-//                for (NodesVO node: nodes){
-//                    if(node.getmGuid()!= null && node.getmGuid().equals(guid)){
-//                        node.setAccountID(passenger.getmPaxguid());
-//                        return node;
-//                    }
-//                }
-//            }
-//        }
-
         return userNode;
     }
-
-//    public NodesVO getLegWithGuid(UserTravelMainVO userOrder){
-//        String guid = getSelectedGuid();
-//
-//        ArrayList<PassengersVO> passengers = userOrder.getPassengerses();
-//        for (PassengersVO passenger :passengers){
-//            ArrayList<CellsVO> cells = passenger.getmCells();
-//            for (CellsVO cell : cells){
-//                ArrayList<NodesVO> nodes = cell.getmNodes();
-//                for (NodesVO node: nodes){
-//                    if(node.getmGuid()!= null && node.getmGuid().equals(guid)){
-//                        node.setAccountID(passenger.getmPaxguid());
-//                        return node;
-//                    }
-//                }
-//            }
-//        }
-//
-//        return null;
-//    }
-
 
 
     public NodesVO getNodeWithGuidAndPaxID(String selectedItemGuid, String paxid, UserTravelMainVO travelOrder){
@@ -123,49 +86,8 @@ public class HGBAbtsractFragment extends Fragment {
         ArrayList<NodesVO> listVo = new ArrayList<>();
         Map<String, NodesVO> items = travelOrder.getItems();
         NodesVO node = items.get(selectedItemGuid);
-//        ArrayList<PassengersVO> passengers = getActivityInterface().getTravelOrder().getPassengerses();
-//        for (PassengersVO passenger :passengers){
-//            if(passenger.getmPaxguid().equals(paxid)){
-//                ArrayList<CellsVO> cells = passenger.getmCells();
-//                for (CellsVO cell : cells){
-//                    ArrayList<NodesVO> nodes = cell.getmNodes();
-//                    for (NodesVO node: nodes){
-//                        if(node.getmGuid()!= null && node.getmGuid().equals(selectedItemGuid)){
-//                            listVo.add(node);
-//                        }
-//                    }
-//                }
-//            }
-//
-//        }
-
         return node;
     }
-
-
-//    public ArrayList<NodesVO> getNodeWithGuidAndPaxID(String selectedItemGuid,String paxid){
-//
-//        ArrayList<NodesVO> listVo = new ArrayList<>();
-//        ArrayList<PassengersVO> passengers = getActivityInterface().getTravelOrder().getPassengerses();
-//        for (PassengersVO passenger :passengers){
-//            if(passenger.getmPaxguid().equals(paxid)){
-//                ArrayList<CellsVO> cells = passenger.getmCells();
-//                for (CellsVO cell : cells){
-//                    ArrayList<NodesVO> nodes = cell.getmNodes();
-//                    for (NodesVO node: nodes){
-//                        if(node.getmGuid()!= null && node.getmGuid().equals(selectedItemGuid)){
-//                            listVo.add(node);
-//                        }
-//                    }
-//                }
-//            }
-//
-//        }
-//
-//        return listVo;
-//    }
-
-
 
     public String getPrimaryGuid(String guiSelected, List<NodesVO> alternative){
 
@@ -177,24 +99,6 @@ public class HGBAbtsractFragment extends Fragment {
         return null;
     }
 
-//    public CellsVO getCellWitGuid(UserTravelMainVO userOrder){
-//        String guid = getSelectedGuid();
-//
-//        ArrayList<PassengersVO> passengers = userOrder.getPassengerses();
-//        for (PassengersVO passenger :passengers){
-//            ArrayList<CellsVO> cells = passenger.getmCells();
-//            for (CellsVO cell : cells){
-//                ArrayList<NodesVO> nodes = cell.getmNodes();
-//                for (NodesVO node: nodes){
-//                    if(node.getmGuid()!= null && node.getmGuid().equals(guid)){
-//                        node.setAccountID(passenger.getmPaxguid());
-//                        return cell;
-//                    }
-//                }
-//            }
-//        }
-//        return null;
-//    }
 
     public PassengersVO getTravellerWitGuid(UserTravelMainVO userOrder){
         String guid = getSelectedUserGuid();
@@ -233,16 +137,6 @@ public class HGBAbtsractFragment extends Fragment {
         super.onPause();
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
-
-//    private void restartApp() {
-////        Intent intent = new Intent(getActivity().getApplicationContext(), PickerFragmentActivity.class);
-////        getActivity().startActivity(intent);
-//
-//        Intent i = getActivity().getBaseContext().getPackageManager()
-//                .getLaunchIntentForPackage( getActivity().getBaseContext().getPackageName() );
-//        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(i);
-//    }
 
     protected void handleRequestFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
         error.printStackTrace();
