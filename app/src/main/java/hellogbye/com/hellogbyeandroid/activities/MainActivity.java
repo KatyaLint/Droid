@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
     private MyTripsFragment.OnItemClickListener editMyTripsClickCB;
     private FontTextView itirnarary_title_Bar;
+    private FontTextView mProfileName;
 
 
     public HGBSaveDataClass getHGBSaveDataClass(){
@@ -131,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (RecyclerView) findViewById(R.id.left_drawer_rv);
         mName = (FontTextView) findViewById(R.id.nav_profile_name);
+        mProfileName = (FontTextView)findViewById(R.id.nav_profile_type);
         mNavDrawerLinearLayout = (LinearLayout) findViewById(R.id.drawer);
         mProfileImage = (RoundedImageView) findViewById(R.id.nav_profile_image);
 
@@ -218,7 +220,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 UserDataVO mCurrentUser = (UserDataVO) data;
                 hgbSaveDataClass.setCurrentUser(mCurrentUser);
                 ImageView my_trips_image_profile = (ImageView)findViewById(R.id.my_trips_image_profile);
-                HGBUtility.getAndSaveUserImage(mCurrentUser.getAvatar(), my_trips_image_profile);
+                HGBUtility.getAndSaveUserImage(mCurrentUser.getAvatar(), mProfileImage, my_trips_image_profile);
+                //my_trips_image_profile.setImageBitmap(HGBUtility.getBitmapFromCache(getBaseContext()));
                 getAccountsProfiles();
                 selectItem(ToolBarNavEnum.HOME.getNavNumber(), null);
             }
@@ -408,10 +411,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     private void loadNavItems() {
         mNavItemsList = new ArrayList<>();
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.TRIPS, false));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.COMPANIONS, false));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.PREFERENCE, false));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.ACCOUNT, false));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.TRIPS, false, R.drawable.my_trips_icon_enable, R.drawable.my_trips_icon_disable));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.COMPANIONS, false, R.drawable.companions_icon_enable,  R.drawable.companions_icon_disable));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.PREFERENCE, false, R.drawable.notifications_enable, R.drawable.notifications_disable));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.ACCOUNT, false, R.drawable.my_account_enable, R.drawable.my_account_disable));
 
     }
 
@@ -730,67 +733,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         }
     }
 
-//    @Override
-//    public void setTravelOrder(UserTravelMainVO travelorder) {
-//        mUserTravelOrder = travelorder;
-//        if (travelorder == null) {
-//            setSolutionID(null);
-//        } else {
-//            setSolutionID(mUserTravelOrder.getmSolutionID());
-//            Gson gson = new Gson();
-//            String json = gson.toJson(travelorder);
-//            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO, json);
-//        }
-//
-//    }
-
-//    @Override
-//    public void setCNCItems(ArrayList<CNCItem> cncItemArrayList) {
-//        this.mCNCItems = cncItemArrayList;
-//    }
-
-//    @Override
-//    public void setSolutionID(String solutionID) {
-//        this.solutionID = solutionID;
-//    }
-//
-//    @Override
-//    public String getSolutionID() {
-//        return solutionID;
-//    }
-
-//    @Override
-//    public void setAlternativeFlights(List<NodesVO> alternativeFlightsVO) {
-//        this.alternativeFlights = alternativeFlightsVO;
-//    }
-
-
-//    @Override
-//    public UserTravelMainVO getTravelOrder() {
-//        return mUserTravelOrder;
-//    }
-
-//    @Override
-//    public ArrayList<CNCItem> getCNCItems() {
-//        return mCNCItems;
-//    }
-
-//    @Override
-//    public List<NodesVO> getAlternativeFlights() {
-//        return alternativeFlights;
-//    }
-
-//    @Override
-//    public void addCNCItem(CNCItem cncitem) {
-//
-//        if (mCNCItems == null) {
-//            mCNCItems = new ArrayList<>();
-//        }
-//
-//        mCNCItems.add(cncitem);
-//
-//    }
-
 
     private void setFavorityItinerary(){
         UserTravelMainVO travelOrder = hgbSaveDataClass.getTravelOrder();
@@ -818,6 +760,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             @Override
             public void onSuccess(Object data) {
                 hgbSaveDataClass.setTravelOrder((UserTravelMainVO) data);
+                mProfileName.setText(hgbSaveDataClass.getTravelOrder().getmSolutionName());
                 continueFlow(fragment);
             }
 

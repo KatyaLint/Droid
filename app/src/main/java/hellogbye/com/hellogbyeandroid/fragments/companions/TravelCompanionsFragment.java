@@ -1,7 +1,9 @@
 package hellogbye.com.hellogbyeandroid.fragments.companions;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.companion.CompanionAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
@@ -110,6 +113,16 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
 
         searchListAdapter = new CompanionAdapter(getActivityInterface().getCompanions(), getActivity().getApplicationContext());
         searchRecyclerView.setAdapter(searchListAdapter);
+
+
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Click action
+                System.out.println("Kate clicked");
+            }
+        });
 
         searchListAdapter.SetOnItemClickListener(new CompanionAdapter.OnItemClickListener() {
             @Override

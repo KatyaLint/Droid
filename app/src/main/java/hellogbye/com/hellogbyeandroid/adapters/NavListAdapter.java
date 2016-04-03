@@ -46,19 +46,20 @@ public class NavListAdapter extends RecyclerView.Adapter<NavListAdapter.ViewHold
      * Interface for receiving click events from cells.
      */
     public interface OnItemClickListener {
-        public void onClick(View view, int position);
+        void onClick(View view, int position);
     }
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public final FontTextView mTextView;
-        public final ImageView mSelectedImage;
-
+        public FontTextView mTextView;
+        public ImageView mSelectedImage;
+        public ImageView nav_item_view_image;
 
         public ViewHolder(View v) {
             super(v);
             mTextView = (FontTextView)v.findViewById(R.id.nav_item_text);
             mSelectedImage = (ImageView)v.findViewById(R.id.nav_item_selected_image);
+            nav_item_view_image = (ImageView)v.findViewById(R.id.nav_item_view_image);
         }
     }
 
@@ -87,10 +88,12 @@ public class NavListAdapter extends RecyclerView.Adapter<NavListAdapter.ViewHold
 
             holder.mTextView.setTextColor(mContext.getResources().getColor(R.color.brown_blue));
             holder.mSelectedImage.setVisibility(View.VISIBLE);
+            holder.nav_item_view_image.setImageResource(item.getIconEnable());
         }else{
 
             holder.mTextView.setTextColor(mContext.getResources().getColor(R.color.hgb_nav_font_unselected));
             holder.mSelectedImage.setVisibility(View.INVISIBLE);
+            holder.nav_item_view_image.setImageResource(item.getIconDisable());
         }
         holder.mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,9 +108,10 @@ public class NavListAdapter extends RecyclerView.Adapter<NavListAdapter.ViewHold
 
             }
         });
-
-
     }
+
+
+
 
     @Override
     public int getItemCount() {
