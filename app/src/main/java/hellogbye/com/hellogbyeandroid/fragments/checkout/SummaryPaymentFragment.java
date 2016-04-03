@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -18,13 +20,15 @@ import java.util.Map;
 
 import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.adapters.CreditCardAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.TravlerAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.PaymentSummaryItem;
 import hellogbye.com.hellogbyeandroid.models.UserData;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
@@ -36,13 +40,18 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  */
 public class SummaryPaymentFragment extends HGBAbtsractFragment {
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private CreditCardAdapter mAdapter;
+    private ListView mListViewCC;
+
+    private SummeryPaymentCCAdapter mAdapter;
     private ArrayList<PaymentSummaryItem> mArrayList;
 
     private FontTextView mProceed;
     private FontTextView mTotalPrice;
+    private TravlerAdapter mTravlerAdapter;
+
+
+    private RecyclerView mRecyclerViewTravlers;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     private HashMap<String, ArrayList<String>> mBookingItems;
 
@@ -66,47 +75,23 @@ public class SummaryPaymentFragment extends HGBAbtsractFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        ConnectionManager.getInstance(getActivity()).getCreditCards(new ConnectionManager.ServerRequestListener() {
-//            @Override
-//            public void onSuccess(Object data) {
-//                mCreditCardList = ((ArrayList<CreditCardItem>) data);
-//                mCreditCardList.get(0).setSelected(true);
-//                mAdapter = new CreditCardAdapter(mCreditCardList, getActivity().getApplicationContext());
-//                mRecyclerView.setAdapter(mAdapter);
-//                getActivityInterface().setCreditCards((ArrayList<CreditCardItem>) data);
-//            }
-//
-//            @Override
-//            public void onError(Object data) {
-//                HGBErrorHelper errorHelper = new HGBErrorHelper();
-//                errorHelper.show(getFragmentManager(), (String) data);
-//            }
-//        });
 
-
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.select_cc_recyclerView);
+        mListViewCC = (ListView) view.findViewById(R.id.select_cc_recyclerView);
         mProceed = (FontTextView) view.findViewById(R.id.cc_proceed);
         mTotalPrice = (FontTextView) view.findViewById(R.id.cc_total_price);
 
 
         mTotalPrice.setText(getActivityInterface().getTotalPrice());
 
-
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
         loadBookingItemList();
 
         mProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 JSONObject jsonObject = new JSONObject();
-              //  CreditCardItem selectedCreditCard = getSelectedCreditCrad();
+                //  CreditCardItem selectedCreditCard = getSelectedCreditCrad();
 
                 try {
 
@@ -142,13 +127,24 @@ public class SummaryPaymentFragment extends HGBAbtsractFragment {
 
 
                         //TODO this need to change once we switch new design
-                        JSONArray bookingArray = new JSONArray();
 
-//                        for (String s : getActivityInterface().getItenerayItems()) {
-//                            bookingArray.put(s);
-//                        }
 
-                        jsonUser.put("bookingitems", bookingArray);
+                        UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
+                        ArrayList<PassengersVO> passangers = travelOrder.getPassengerses();
+                        JSONArray array = new JSONArray();
+                        for (int i = 0; i < passangers.size(); i++) {
+
+                            if (userData.getPaxid().equals(passangers.get(i).getmPaxguid())) {
+                                for(String strItem :passangers.get(i).getmBookingItems()){
+                                    array.put(strItem);
+                                }
+                            }
+                        }
+
+
+
+
+                        jsonUser.put("bookingitems", array);
                         jsonArray.put(jsonUser);
 
 
@@ -162,38 +158,49 @@ public class SummaryPaymentFragment extends HGBAbtsractFragment {
 
                     //Booking Items
                     JSONObject bookingItems = new JSONObject();
-                    JSONArray bookingArray = new JSONArray();
-//                    for (String s : getActivityInterface().getItenerayItems()) {
-//                        bookingArray.put(s);
-//                    }
-                   // bookingItems.put(selectedCreditCard.getToken(), bookingArray);
+                    for (Map.Entry<String, ArrayList<String>> entry : mBookingItems.entrySet()) {
+                        JSONArray bookingLocalArray = new JSONArray();
+                        String strKey = entry.getKey();
+
+                        for (String s : entry.getValue()) {
+                            bookingLocalArray.put(s);
+                        }
+                        bookingItems.put(strKey, bookingLocalArray);
+
+
+                    }
+
+
+                    // bookingItems.put(selectedCreditCard.getToken(), bookingArray);
                     jsonObject.put("bookingitems", bookingItems);
 
 
                     JSONArray creditJsonArray = new JSONArray();
 
-                    //TODO we neeed to add more if when we support multiple cards
-
                     JSONObject creditObject = new JSONObject();
 
-//                    creditObject.put("cardnumber", selectedCreditCard.getToken());
-//                    creditObject.put("expirymonth", selectedCreditCard.getExpmonth());
-//                    creditObject.put("cvv", "123");//TODO this is hard coded needed to fix
-//                    creditObject.put("firstname", selectedCreditCard.getBuyerfirstname());
-//                    creditObject.put("lastname", selectedCreditCard.getBuyerlastname());
-//                    creditObject.put("cardtype", selectedCreditCard.getCardtypeid());
-//                    creditObject.put("expiryyear", selectedCreditCard.getExpyear());
-//
-//                    JSONObject creditAddressObject = new JSONObject();
-//                    creditAddressObject.put("postalcode", selectedCreditCard.getBuyerzip());
-//                    creditAddressObject.put("country", getActivityInterface().getCurrentUser().getCountry());
-//                    creditAddressObject.put("suite_apt", "");
-//                    creditAddressObject.put("city", getActivityInterface().getCurrentUser().getCity());
-//                    creditAddressObject.put("province", getActivityInterface().getCurrentUser().getState());
-//                    creditAddressObject.put("address", selectedCreditCard.getBuyeraddress());
-//                    creditObject.put("billingaddress", creditAddressObject);
+                    for (CreditCardItem selectedCreditCard : getActivityInterface().getCreditCardsSelected()) {
+                        creditObject.put("cardnumber", selectedCreditCard.getToken());
+                        creditObject.put("expirymonth", selectedCreditCard.getExpmonth());
+                        creditObject.put("cvv", "123");//TODO this is hard coded needed to fix
+                        creditObject.put("firstname", selectedCreditCard.getBuyerfirstname());
+                        creditObject.put("lastname", selectedCreditCard.getBuyerlastname());
+                        creditObject.put("cardtype", selectedCreditCard.getCardtypeid());
+                        creditObject.put("expiryyear", selectedCreditCard.getExpyear());
 
-                    creditJsonArray.put(creditObject);
+                        JSONObject creditAddressObject = new JSONObject();
+                        creditAddressObject.put("postalcode", selectedCreditCard.getBuyerzip());
+                        creditAddressObject.put("country", getActivityInterface().getCurrentUser().getCountry());
+                        creditAddressObject.put("suite_apt", "");
+                        creditAddressObject.put("city", getActivityInterface().getCurrentUser().getCity());
+                        creditAddressObject.put("province", getActivityInterface().getCurrentUser().getState());
+                        creditAddressObject.put("address", selectedCreditCard.getBuyeraddress());
+                        creditObject.put("billingaddress", creditAddressObject);
+
+                        creditJsonArray.put(creditObject);
+
+                    }
+
 
                     jsonObject.put("carddetails", creditJsonArray);
 
@@ -206,8 +213,8 @@ public class SummaryPaymentFragment extends HGBAbtsractFragment {
                 ConnectionManager.getInstance(getActivity()).pay(jsonObject, new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
-                        Log.d("", "");
-                        //TODO need to go back to HOME
+                        Toast.makeText(getActivity().getApplicationContext(),"Trip Booked",Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override
@@ -221,7 +228,47 @@ public class SummaryPaymentFragment extends HGBAbtsractFragment {
             }
         });
 
+        loadTravlerList(view);
 
+
+    }
+
+
+    private void loadBookingItemsToPaasenger() {
+
+        UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
+        ArrayList<PassengersVO> passangers = travelOrder.getPassengerses();
+
+        for (int i = 0; i < passangers.size(); i++) {
+
+            for (int z = 0; z < getActivityInterface().getListUsers().size(); z++) {
+
+                if (getActivityInterface().getListUsers().get(z).getPaxid().equals(passangers.get(i).getmPaxguid())) {
+                    getActivityInterface().getListUsers().get(z).setBookingItems(passangers.get(i).getmBookingItems());
+
+                }
+            }
+
+        }
+
+
+    }
+
+    private void loadTravlerList(View v) {
+
+        mRecyclerViewTravlers = (RecyclerView) v.findViewById(R.id.summary_traveler_recyclerView);
+
+        mRecyclerViewTravlers.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerViewTravlers.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerViewTravlers.setLayoutManager(mLayoutManager);
+
+        mTravlerAdapter = new TravlerAdapter(getActivityInterface().getListUsers(), getActivity().getApplicationContext());
+        mRecyclerViewTravlers.setAdapter(mTravlerAdapter);
     }
 
     private void loadBookingItemList() {
@@ -236,7 +283,6 @@ public class SummaryPaymentFragment extends HGBAbtsractFragment {
                 ArrayList<String> array = new ArrayList<>();
                 array.add(key);
                 mBookingItems.put(value, array);
-
 
 
             } else {
@@ -256,11 +302,10 @@ public class SummaryPaymentFragment extends HGBAbtsractFragment {
     private void getCCAndTotal() {
 
 
-
-        for (Map.Entry<String, ArrayList<String>> entry : mBookingItems.entrySet()){
+        for (Map.Entry<String, ArrayList<String>> entry : mBookingItems.entrySet()) {
             PaymentSummaryItem paymentItem = new PaymentSummaryItem();
 
-            CreditCardItem  item  = getCreditCard(entry.getKey());
+            CreditCardItem item = getCreditCard(entry.getKey());
 
             paymentItem.setName(item.getBuyerfirstname());
             paymentItem.setLast4(item.getLast4());
@@ -270,9 +315,9 @@ public class SummaryPaymentFragment extends HGBAbtsractFragment {
 
             for (String s : entry.getValue()) {
                 NodesVO node = getNodeWithGuidAndPaxID(s);
-                if(NodeTypeEnum.HOTEL.getType().equals(node.getmType())){
+                if (NodeTypeEnum.HOTEL.getType().equals(node.getmType())) {
                     iTotal += node.getmMinimumAmount();
-                }else if(NodeTypeEnum.FLIGHT.getType().equals(node.getmType())){
+                } else if (NodeTypeEnum.FLIGHT.getType().equals(node.getmType())) {
                     iTotal += node.getCost();
                 }
             }
@@ -281,23 +326,11 @@ public class SummaryPaymentFragment extends HGBAbtsractFragment {
         }
 
         Log.i("", "" + mArrayList);
-        mAdapter = new CreditCardAdapter(mArrayList, getActivity().getApplicationContext());
-        mRecyclerView.setAdapter(mAdapter);
+        mAdapter = new SummeryPaymentCCAdapter(mArrayList, R.layout.payment_summary_item, getActivity().getApplicationContext());
+        mListViewCC.setAdapter(mAdapter);
 
 
     }
-
-
-
-//
-//    private class PaymentSummaryCostAndCC {
-//        // Start stepping through the array from the beginning
-//        private CreditCardItem creditCard;
-//        private String total;
-//
-//    }
-
-
 
 
 }

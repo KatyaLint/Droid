@@ -373,9 +373,15 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
 
                 }
                 if (add) {
-                    currentPassenger.getmBookingItems().addAll(passenger.getmItineraryItems());
+                    if(passenger.getmPaxguid().equals(currentPassenger.getmPaxguid())){
+                        passenger.getmBookingItems().addAll(passenger.getmItineraryItems());
+                    }
+
                 } else {
-                    currentPassenger.getmBookingItems().removeAll(passenger.getmItineraryItems());
+                    if(passenger.getmPaxguid().equals(currentPassenger.getmPaxguid())){
+                        currentPassenger.getmBookingItems().removeAll(passenger.getmItineraryItems());
+                    }
+
                 }
 
 
@@ -507,9 +513,13 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
             holder.childSelectCC.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    selectCCDialog.show();
-                    mSelectedView = (FontTextView) v;
-                    mSelectedView.setTag(child);
+
+                    if(selectCCDialog != null){
+                        selectCCDialog.show();
+                        mSelectedView = (FontTextView) v;
+                        mSelectedView.setTag(child);
+                    }
+
 
                 }
             });
@@ -644,9 +654,12 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
             holder.groupSelectCC.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    selectCCDialog.show();
-                    mSelectedView = (FontTextView) v;
-                    mSelectedView.setTag(group);
+                    if(selectCCDialog != null){
+                        selectCCDialog.show();
+                        mSelectedView = (FontTextView) v;
+                        mSelectedView.setTag(group);
+                    }
+
 
                 }
             });

@@ -1,6 +1,7 @@
 package hellogbye.com.hellogbyeandroid.adapters;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 public class TravlerAdapter extends RecyclerView.Adapter<TravlerAdapter.ViewHolder> {
     private ArrayList<UserData> mArrayList;
     OnItemClickListener  mItemClickListner;
-    private TravlersFragment travelFragment;
+    private Fragment travelFragment;
     private Context mContext;
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -64,10 +65,10 @@ public class TravlerAdapter extends RecyclerView.Adapter<TravlerAdapter.ViewHold
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public TravlerAdapter(ArrayList<UserData> myDataset,Context context,TravlersFragment fragment) {
+    public TravlerAdapter(ArrayList<UserData> myDataset,Context context) {
         mArrayList = myDataset;
         mContext = context;
-        travelFragment = fragment;
+
     }
 
     // Create new views (invoked by the layout manager)
@@ -99,7 +100,7 @@ public class TravlerAdapter extends RecyclerView.Adapter<TravlerAdapter.ViewHold
 
             holder.mTravlerText.setText("~ More information required ~");
             holder.mTravlerText.setTextColor(mContext.getResources().getColor(R.color.red_button_color));
-            travelFragment.deselectNext();
+
         }
      //   holder.mTravlerText.setText("$"+String.valueOf((int) nodesVO.getmMinimumAmount()));
 
