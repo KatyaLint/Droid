@@ -48,7 +48,7 @@
                 android:textColorHint="@color/warm_grey"
                 android:hint="@string/type_message"
                 android:focusableInTouchMode="true"
-                android:text="Fly to New York for 3 days with Sam"
+                android:text="Fly from Miami to New York for 3 days with Eric"
                 android:minHeight="@dimen/DP44" />
 
             <!--android:text="Fly with Roy and Steve to New York for one week"-->

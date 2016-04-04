@@ -28,6 +28,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+import hellogbye.com.hellogbyeandroid.application.HGBApplication;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 
@@ -71,7 +72,7 @@ public class HGBStringXMLRequest extends Request<String> {
       //  this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
         this.url = url;
         setRetryPolicy((new DefaultRetryPolicy(
-                        10000,
+                HGBApplication.TIMEOUT_TIME,
                         DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                         DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)));
         showLoader = true;

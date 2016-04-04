@@ -24,6 +24,7 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
+import hellogbye.com.hellogbyeandroid.application.HGBApplication;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 
 
@@ -86,7 +87,7 @@ public class HGBStringRequest extends Request<String> {
        // this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
         this.url = url;
         setRetryPolicy((new DefaultRetryPolicy(
-                10000,
+                HGBApplication.TIMEOUT_TIME,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)));
         setService(url);

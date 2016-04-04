@@ -24,6 +24,7 @@ import hellogbye.com.hellogbyeandroid.adapters.TravlerAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.PaymentSummaryItem;
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
@@ -135,13 +136,11 @@ public class SummaryPaymentFragment extends HGBAbtsractFragment {
                         for (int i = 0; i < passangers.size(); i++) {
 
                             if (userData.getPaxid().equals(passangers.get(i).getmPaxguid())) {
-                                for(String strItem :passangers.get(i).getmBookingItems()){
+                                for (String strItem : passangers.get(i).getmBookingItems()) {
                                     array.put(strItem);
                                 }
                             }
                         }
-
-
 
 
                         jsonUser.put("bookingitems", array);
@@ -183,8 +182,16 @@ public class SummaryPaymentFragment extends HGBAbtsractFragment {
                         creditObject.put("cardnumber", selectedCreditCard.getToken());
                         creditObject.put("expirymonth", selectedCreditCard.getExpmonth());
                         creditObject.put("cvv", "123");//TODO this is hard coded needed to fix
-                        creditObject.put("firstname", selectedCreditCard.getBuyerfirstname());
-                        creditObject.put("lastname", selectedCreditCard.getBuyerlastname());
+
+                        if (BuildConfig.IS_DEV) {
+                            creditObject.put("firstname", "Roofus");
+                            creditObject.put("lastname", "Summers");
+                        } else {
+                            creditObject.put("firstname", selectedCreditCard.getBuyerfirstname());
+                            creditObject.put("lastname", selectedCreditCard.getBuyerlastname());
+                        }
+
+
                         creditObject.put("cardtype", selectedCreditCard.getCardtypeid());
                         creditObject.put("expiryyear", selectedCreditCard.getExpyear());
 
@@ -213,7 +220,8 @@ public class SummaryPaymentFragment extends HGBAbtsractFragment {
                 ConnectionManager.getInstance(getActivity()).pay(jsonObject, new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
-                        Toast.makeText(getActivity().getApplicationContext(),"Trip Booked",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "Trip Booked", Toast.LENGTH_SHORT).show();
+                        getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), null);
 
                     }
 
@@ -234,8 +242,6 @@ public class SummaryPaymentFragment extends HGBAbtsractFragment {
     }
 
 
-
-
     private void loadTravlerList(View v) {
 
         mRecyclerViewTravlers = (RecyclerView) v.findViewById(R.id.summary_traveler_recyclerView);
@@ -249,7 +255,7 @@ public class SummaryPaymentFragment extends HGBAbtsractFragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerViewTravlers.setLayoutManager(mLayoutManager);
 
-        mTravlerAdapter = new TravlerAdapter(getActivityInterface().getListUsers(), getActivity().getApplicationContext());
+        mTravlerAdapter = new TravlerAdapter(getFlowInterface().getListUsers(), getActivity().getApplicationContext());
         mRecyclerViewTravlers.setAdapter(mTravlerAdapter);
     }
 

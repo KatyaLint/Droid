@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -366,15 +365,10 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
                     } else {
                         getFlowInterface().getBookingHashMap().remove(passengerItem);
                     }
+                    if (add) {
+                        currentPassenger.getmBookingItems().addAll(passenger.getmItineraryItems());
 
-                }
-                if (add) {
-                    if(passenger.getmPaxguid().equals(currentPassenger.getmPaxguid())){
-                        passenger.getmBookingItems().addAll(passenger.getmItineraryItems());
-                    }
-
-                } else {
-                    if(passenger.getmPaxguid().equals(currentPassenger.getmPaxguid())){
+                    } else {
                         currentPassenger.getmBookingItems().removeAll(passenger.getmItineraryItems());
                     }
 
@@ -510,7 +504,7 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
                 @Override
                 public void onClick(View v) {
 
-                    if(selectCCDialog != null){
+                    if (selectCCDialog != null) {
                         selectCCDialog.show();
                         mSelectedView = (FontTextView) v;
                         mSelectedView.setTag(child);
@@ -650,7 +644,7 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
             holder.groupSelectCC.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(selectCCDialog != null){
+                    if (selectCCDialog != null) {
                         selectCCDialog.show();
                         mSelectedView = (FontTextView) v;
                         mSelectedView.setTag(group);
@@ -660,9 +654,9 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
                 }
             });
 
-            if(group.isSelected()){
+            if (group.isSelected()) {
                 holder.groupImageView.setBackgroundResource(R.drawable.expand);
-            }else{
+            } else {
                 holder.groupImageView.setBackgroundResource(R.drawable.collapse);
             }
             holder.groupImageView.setOnClickListener(new View.OnClickListener() {

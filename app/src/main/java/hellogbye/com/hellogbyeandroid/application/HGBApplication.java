@@ -23,6 +23,7 @@ import io.fabric.sdk.android.Fabric;
  */
 public class HGBApplication extends Application {
     private static HGBApplication instance;
+    public final static int TIMEOUT_TIME = 60000;
 
     @Override
     public void onCreate() {

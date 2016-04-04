@@ -73,8 +73,8 @@ public class TravlersFragment extends HGBAbtsractFragment {
             public void onSuccess(Object data) {
 
 
-                getActivityInterface().setListUsers((ArrayList<UserDataVO>) data);
-                mAdapter = new TravlerAdapter(getActivityInterface().getListUsers(), getActivity().getApplicationContext());
+                getFlowInterface().setListUsers((ArrayList<UserDataVO>) data);
+                mAdapter = new TravlerAdapter(getFlowInterface().getListUsers(), getActivity().getApplicationContext());
 
                 mRecyclerView.setAdapter(mAdapter);
                 mAdapter.SetOnItemClickListener(new TravlerAdapter.OnItemClickListener() {
