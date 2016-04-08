@@ -96,9 +96,13 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
         mTotalSelectCC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectCCDialog.show();
-                mSelectedView = (FontTextView) v;
-                mSelectedView.setTag("total");
+
+                if(selectCCDialog !=null){
+                    selectCCDialog.show();
+                    mSelectedView = (FontTextView) v;
+                    mSelectedView.setTag("total");
+                }
+
             }
         });
 

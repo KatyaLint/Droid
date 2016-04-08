@@ -18,14 +18,20 @@ import org.json.JSONObject;
 import org.json.XML;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.CreditCardSessionItem;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
+import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.CreditCardEditText;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -60,6 +66,7 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
 
     private ProgressDialog progressDialog;
     private CreditCardSessionItem creditCardItemSession;
+    private BookingRequestVO bookingResponse;
 
 
 
@@ -83,13 +90,10 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
         super.onViewCreated(view, savedInstanceState);
 
         progressDialog = new ProgressDialog(getActivity());
-       // getActivityInterface().loadJSONFromAsset();
-
-        getFlowInterface().loadJSONFromAsset();
+        getStaticBooking();
 
         init(view);
-        buildCountryDialog();
-        buildStateDialog();
+
         listOfPattern = new ArrayList<String>();
         String ptAmeExp = "^3[47][0-9]{5,}$";
         listOfPattern.add(ptAmeExp);
@@ -132,16 +136,46 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
         mCardCountry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                countryDialog.show();
+
+                final ArrayList<CountryItemVO> countries = bookingResponse.getCountries();
+                String[] countryarray = new String[countries.size()];
+                for (int i = 0; i < countries.size(); i++) {
+                    countryarray[i] = countries.get(i).getName();
+                }
+
+                HGBUtility.showPikerDialog(mCardCountry, getActivity(), "Choose country",
+                        countryarray, 0, countries.size() - 1, new PopUpAlertStringCB() {
+                            @Override
+                            public void itemSelected(String inputItem) {
+                                for (CountryItemVO countrie : countries) {
+                                    if (countrie.getName().equals(inputItem)) {
+                                        mCardCountry.setTag(countrie.getCode());
+                                        getStaticProvince();
+
+                                        break;
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void itemCanceled() {
+
+                            }
+                        }, false);
+
+
             }
         });
 
         mCardProvince.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stateDialog.show();
+                getStaticProvince();
             }
         });
+
+
     }
 
     private void init(View view) {
@@ -159,70 +193,7 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
         mScan = (FontTextView) view.findViewById(R.id.cc_scan);
     }
 
-    private void buildCountryDialog() {
-        View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
 
-        countryPicker = (NumberPicker) v1.findViewById(R.id.np);
-        countryPicker.setMinValue(0);
-        countryPicker.setMaxValue(getActivityInterface().getEligabileCountries().size() - 1);
-        final String[] countryarray = new String[getActivityInterface().getEligabileCountries().size()];
-        for (int i = 0; i < getActivityInterface().getEligabileCountries().size(); i++) {
-            countryarray[i] = getActivityInterface().getEligabileCountries().get(i).getName();
-        }
-        countryPicker.setDisplayedValues(countryarray);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setView(v1);
-        builder.setTitle("Select Country");
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                mCardCountry.setText(countryarray[countryPicker.getValue()]);
-                buildStateDialog();
-                return;
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                return;
-            }
-        });
-
-        countryDialog = builder.create();
-    }
-
-    private void buildStateDialog() {
-        View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
-
-        statePicker = (NumberPicker) v1.findViewById(R.id.np);
-        statePicker.setMinValue(0);
-
-        statePicker.setMaxValue(getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size() - 1);
-        final String[] stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size()];
-        for (int i = 0; i < getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size(); i++) {
-            stateArray[i] = getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().get(i).getProvincename();
-        }
-        statePicker.setDisplayedValues(stateArray);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setView(v1);
-        builder.setTitle("Select Province");
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                mCardProvince.setText(stateArray[statePicker.getValue()]);
-                return;
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                return;
-            }
-        });
-
-
-        stateDialog = builder.create();
-
-
-    }
 
 
     @Override
@@ -391,6 +362,88 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
             }
         }
         return "0";
+    }
+
+    private void getStaticBooking() {
+
+        ConnectionManager.getInstance(getActivity()).getBookingOptions(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                bookingResponse = (BookingRequestVO) data;
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+
+            }
+        });
+    }
+
+    private void getStaticProvince() {
+        String countryID;
+        if( mCardCountry.getTag() == null){
+            countryID =  mCardCountry.getText().toString();
+            if (countryID.equals("Canada")) {
+                countryID = "CA";
+            } else if (countryID.equals("UnitedStates")) {
+                countryID = "US";
+            }
+        }else{
+            countryID = (String) mCardCountry.getTag();
+        }
+
+        ConnectionManager.getInstance(getActivity()).getStaticBookingProvince(countryID, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                List<ProvincesItem> provinceItems = (List<ProvincesItem>) data;
+                if (provinceItems.size() > 0) {
+                    setDropDownItems(provinceItems);
+                    mCardProvince.setVisibility(View.VISIBLE);
+                } else {
+                    mCardProvince.setVisibility(View.GONE);
+                }
+                //    bookingResponse = (BookingRequestVO)data;
+                //BookingRequest bookingrequest = (BookingRequest)data;
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
+    }
+    private void setDropDownItems(final List<ProvincesItem> provinceItems) {
+        String[] countryarray = new String[provinceItems.size()];
+        for (int i = 0; i < provinceItems.size(); i++) {
+            countryarray[i] = provinceItems.get(i).getProvincename();
+        }
+
+        HGBUtility.showPikerDialog(mCardProvince, getActivity(), "Choose province",
+                countryarray, 0, provinceItems.size() - 1, new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+                        for (ProvincesItem province : provinceItems) {
+                            if (province.getProvincename().equals(inputItem)) {
+                                mCardProvince.setText(province.getProvincename());
+                                mCardProvince.setTag(province.getProvincecode());
+                                break;
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void itemCanceled() {
+
+                    }
+                }, false);
+
     }
 
 
