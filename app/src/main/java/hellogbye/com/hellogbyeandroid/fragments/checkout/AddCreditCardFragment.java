@@ -273,73 +273,75 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
                 if (creditCardItemSession == null) {
                     HGBErrorHelper errorHelper = new HGBErrorHelper();
                     errorHelper.show(getFragmentManager(), "There was a probelm please try again");
-                    return;
-                }
 
-                creditCardItem.setNickname(creditCardItemSession.getNickname());
+                }else{
 
 
-                ConnectionManager.getInstance(getActivity()).addCreditCard(creditCardItem, new ConnectionManager.ServerRequestListener() {
-                    @Override
-                    public void onSuccess(Object data) {
+
+                    ConnectionManager.getInstance(getActivity()).addCreditCard(creditCardItem, new ConnectionManager.ServerRequestListener() {
+                        @Override
+                        public void onSuccess(Object data) {
 
 
-                        JSONObject jsonObj = null;
-                        try {
-                            jsonObj = XML.toJSONObject((String) data);
-                            JSONObject json1 = jsonObj.getJSONObject("soap:Envelope");
-                            JSONObject json2 = json1.getJSONObject("soap:Body");
-                            JSONObject json3 = json2.getJSONObject("AddCOF_SoapResponse");
-                            JSONObject json4 = json3.getJSONObject("AddCOF_SoapResult");
-                            JSONObject json5 = json4.getJSONObject("TokenData");
-                            String strToken = json5.getString("Token");
-                            String strNickName = json5.getString("NickName");
-                            String strLast4 = json5.getString("Last4");
+                            JSONObject jsonObj = null;
+                            try {
+                                jsonObj = XML.toJSONObject((String) data);
+                                JSONObject json1 = jsonObj.getJSONObject("soap:Envelope");
+                                JSONObject json2 = json1.getJSONObject("soap:Body");
+                                JSONObject json3 = json2.getJSONObject("AddCOF_SoapResponse");
+                                JSONObject json4 = json3.getJSONObject("AddCOF_SoapResult");
+                                JSONObject json5 = json4.getJSONObject("TokenData");
+                                String strToken = json5.getString("Token");
+                                String strNickName = json5.getString("NickName");
+                                String strLast4 = json5.getString("Last4");
 
-                            JSONObject json = new JSONObject();
-                            json.put("Last4", strLast4);
-                            json.put("NickName", strNickName);
-                            json.put("Token", strToken);
-
-
-                            ConnectionManager.getInstance(getActivity()).AddCreditCardHelloGbye(json, new ConnectionManager.ServerRequestListener() {
-                                @Override
-                                public void onSuccess(Object data) {
-                                    progressDialog.hide();
-                                    getFragmentManager().popBackStack();
-
-                                }
-
-                                @Override
-                                public void onError(Object data) {
-
-                                    progressDialog.hide();
-                                    HGBErrorHelper errorHelper = new HGBErrorHelper();
-                                    errorHelper.show(getFragmentManager(), (String) data);
-
-                                }
-                            });
+                                JSONObject json = new JSONObject();
+                                json.put("Last4", strLast4);
+                                json.put("NickName", strNickName);
+                                json.put("Token", strToken);
 
 
-                        } catch (JSONException e) {
-                            Log.e("JSON exception", e.getMessage());
-                            e.printStackTrace();
+                                ConnectionManager.getInstance(getActivity()).AddCreditCardHelloGbye(json, new ConnectionManager.ServerRequestListener() {
+                                    @Override
+                                    public void onSuccess(Object data) {
+                                        progressDialog.hide();
+                                        getFragmentManager().popBackStack();
+
+                                    }
+
+                                    @Override
+                                    public void onError(Object data) {
+
+                                        progressDialog.hide();
+                                        HGBErrorHelper errorHelper = new HGBErrorHelper();
+                                        errorHelper.show(getFragmentManager(), (String) data);
+
+                                    }
+                                });
+
+
+                            } catch (JSONException e) {
+                                Log.e("JSON exception", e.getMessage());
+                                e.printStackTrace();
+                                progressDialog.hide();
+                                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                                errorHelper.show(getFragmentManager(), e.getMessage());
+                            }
+                            Log.d("JSON", jsonObj.toString());
+                        }
+
+                        @Override
+                        public void onError(Object data) {
+                            Log.e("", "");
                             progressDialog.hide();
                             HGBErrorHelper errorHelper = new HGBErrorHelper();
-                            errorHelper.show(getFragmentManager(), e.getMessage());
+                            errorHelper.show(getFragmentManager(), (String) data);
+
                         }
-                        Log.d("JSON", jsonObj.toString());
-                    }
+                    });
 
-                    @Override
-                    public void onError(Object data) {
-                        Log.e("", "");
-                        progressDialog.hide();
-                        HGBErrorHelper errorHelper = new HGBErrorHelper();
-                        errorHelper.show(getFragmentManager(), (String) data);
+                }
 
-                    }
-                });
 
 
             }
