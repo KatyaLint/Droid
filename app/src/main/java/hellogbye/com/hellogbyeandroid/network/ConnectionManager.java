@@ -32,17 +32,9 @@ public class ConnectionManager {
     }
 
 
-
-//       public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
-
-//    public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
-
-
-
        public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
-
-
 //    public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
+
 
 
     private static ConnectionManager _instance;
@@ -1516,7 +1508,6 @@ public class ConnectionManager {
             }
         });
     }
-
 
             public enum Services {
                 USER_POST_LOGIN("Session"),
