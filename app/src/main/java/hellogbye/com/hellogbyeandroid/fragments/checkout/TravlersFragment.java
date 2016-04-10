@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.TravlerAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
-import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
@@ -29,7 +29,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 public class TravlersFragment extends HGBAbtsractFragment {
 
 
-    private  FontTextView mNext;
+    private FontTextView mNext;
 
     private TravlerAdapter mAdapter;
 
@@ -46,7 +46,7 @@ public class TravlersFragment extends HGBAbtsractFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       View rootView = inflater.inflate(R.layout.payment_travlers_layout, container, false);
+        View rootView = inflater.inflate(R.layout.payment_travlers_layout, container, false);
 
         return rootView;
     }
@@ -68,22 +68,22 @@ public class TravlersFragment extends HGBAbtsractFragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 
-
         ConnectionManager.getInstance(getActivity()).getTravellersInforWithSolutionId(getActivityInterface().getSolutionID(), new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
 
-                getActivityInterface().setListUsers((ArrayList<UserDataVO>) data);
-                mAdapter = new TravlerAdapter(getActivityInterface().getListUsers(),getActivity().getApplicationContext(),TravlersFragment.this);
+
+                getFlowInterface().setListUsers((ArrayList<UserDataVO>) data);
+                mAdapter = new TravlerAdapter(getFlowInterface().getListUsers(), getActivity().getApplicationContext());
+
                 mRecyclerView.setAdapter(mAdapter);
                 mAdapter.SetOnItemClickListener(new TravlerAdapter.OnItemClickListener() {
 
                     @Override
                     public void onItemClick(View v, int position) {
-
                         Bundle args = new Bundle();
                         args.putInt("user_json_position", position);
-                        getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS_DETAILS.getNavNumber(),args);
+                        getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS_DETAILS.getNavNumber(), args);
                     }
                 });
             }
@@ -104,7 +104,7 @@ public class TravlersFragment extends HGBAbtsractFragment {
                     @Override
                     public void onSuccess(Object data) {
                         getActivityInterface().setCreditCards((ArrayList<CreditCardItem>) data);
-                        getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(),null);
+                        getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
 
                     }
 
@@ -116,24 +116,20 @@ public class TravlersFragment extends HGBAbtsractFragment {
                     }
                 });
 
+
             }
         });
-
-
     }
 
     private void setNextButtonBackround(boolean isEnabled) {
         mNext.setEnabled(isEnabled);
-        if(isEnabled){
+        if (isEnabled) {
             mNext.setBackgroundResource(R.drawable.red_button);
 
-        }else{
+        } else {
             mNext.setBackgroundResource(R.drawable.red_disable_button);
         }
     }
 
-    public void deselectNext() {
-        setNextButtonBackround(false);
 
-    }
 }

@@ -2,6 +2,9 @@ package hellogbye.com.hellogbyeandroid.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 /**
  * Created by arisprung on 10/29/15.
  */
@@ -58,6 +61,8 @@ public class UserDataVO {
 
     @SerializedName("gender")
     private String gender;
+
+    private HashSet<String> bookingItems;
 
 
     public UserDataVO() {
@@ -214,4 +219,14 @@ public class UserDataVO {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
+    public HashSet<String> getBookingItems() {
+        return bookingItems;
+    }
+
+    public void setBookingItems(HashSet<String> bookingItems) {
+        this.bookingItems = bookingItems;
+    }
+
+
 }

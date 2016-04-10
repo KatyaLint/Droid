@@ -4,6 +4,8 @@ package hellogbye.com.hellogbyeandroid.activities;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -282,5 +284,25 @@ public class HGBSaveDataClass implements HGBMainInterface {
     @Override
     public ArrayList<AccountsVO> getAccounts() {
         return accounts;
+    }
+
+    @Override
+    public void setCreditCardsSelected(HashSet<CreditCardItem> cardsList) {
+
+    }
+
+    @Override
+    public HashSet<CreditCardItem> getCreditCardsSelected() {
+        return null;
+    }
+
+    @Override
+    public void setBookingHashMap(HashMap<String, String> bookigItems) {
+
+    }
+
+    @Override
+    public HashMap<String, String> getBookingHashMap() {
+        return null;
     }
 }

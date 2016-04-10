@@ -28,6 +28,7 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
+import hellogbye.com.hellogbyeandroid.application.HGBApplication;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
@@ -75,7 +76,11 @@ public class HGBJsonRequest extends Request<String> {
         progressDialog = new ProgressDialog(mContext);
         loading = "Loading...";
         setRetryPolicy(new DefaultRetryPolicy(
+<<<<<<< HEAD
                 timeOutParam,
+=======
+                HGBApplication.TIMEOUT_TIME,
+>>>>>>> master
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         setService(url);
@@ -130,7 +135,6 @@ public class HGBJsonRequest extends Request<String> {
                 timeOutParam,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        setService(url);
         setService(url);
         send();
     }

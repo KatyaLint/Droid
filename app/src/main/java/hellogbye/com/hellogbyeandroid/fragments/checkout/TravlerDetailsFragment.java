@@ -13,11 +13,15 @@ import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
 import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
@@ -54,17 +58,17 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
     private NumberPicker titlePicker;
     private String SELECT_PROVINCE = "Select Province";
 
-   // private HashMap<String, ArrayList<ProvincesItem>> list = new HashMap<>();
-
+    // private HashMap<String, ArrayList<ProvincesItem>> list = new HashMap<>();
 
 
     private AlertDialog countryDialog;
     private int maxValueForStateDialog;
     private String[] stateArray;
-    private int countryMaxValueSize;
+    // private int countryMaxValueSize;
     private String[] countryarray;
     private String mCounterPicked = "0";
-    private String mStatePicked ="0";
+    private String mStatePicked = "0";
+    private BookingRequestVO bookingResponse;
 
 
     public static Fragment newInstance(int position) {
@@ -85,7 +89,7 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-      //  getFlowInterface().loadJSONFromAsset();
+        //  getFlowInterface().loadJSONFromAsset();
         mTitle = (FontTextView) view.findViewById(R.id.travel_detail_title);
         mFirstName = (EditText) view.findViewById(R.id.travel_detail_first_name);
         mLastName = (EditText) view.findViewById(R.id.travel_detail_last_name);
@@ -100,10 +104,12 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
         mState = (FontTextView) view.findViewById(R.id.travel_detail_province);
         mSave = (FontTextView) view.findViewById(R.id.travler_detail_save);
 
+        getStaticBooking();
+
         Bundle args = getArguments();
         if (args != null) {
             int position = args.getInt("user_json_position");
-            mUser = getActivityInterface().getListUsers().get(position);
+            mUser = getFlowInterface().getListUsers().get(position);
         }
 
         if (mUser != null) {
@@ -112,26 +118,23 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
 
         setSaveButton();
 
-       // buildCountryDialog();
+        // buildCountryDialog();
 
 
-
-
-        countryMaxValueSize = getActivityInterface().getEligabileCountries().size();
-        countryarray = new String[getActivityInterface().getEligabileCountries().size()];
-        for (int i = 0; i < getActivityInterface().getEligabileCountries().size(); i++) {
-            countryarray[i] = getActivityInterface().getEligabileCountries().get(i).getName();
-        }
-        mCountry.setTag(0);
-        mState.setTag(0);
-        selectStates("0");
-
+//        countryMaxValueSize = getActivityInterface().getEligabileCountries().size();
+//        countryarray = new String[getActivityInterface().getEligabileCountries().size()];
+//        for (int i = 0; i < getActivityInterface().getEligabileCountries().size(); i++) {
+//            countryarray[i] = getActivityInterface().getEligabileCountries().get(i).getName();
+//        }
+//        mCountry.setTag(0);
+//        mState.setTag(0);
+//        selectStates("0");
 
 
 //        HGBUtility.buildStateDialog(mState, getActivity(), maxValueForStateDialog, stateArray, SELECT_PROVINCE);
 //        HGBUtility.buildStateDialog(mCountry, getActivity(), countryMaxValueSize, countryarray, SELECT_PROVINCE);
 
-      //  buildStateDialog();
+        //  buildStateDialog();
         setClickListner();
 
 //TODO need to load provnices from API not file
@@ -153,11 +156,12 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
 //        });
 
     }
+
     final String[] titleArray = {"Mr", "Mrs", "Miss"};
-    final String SLECT_TITLE ="Select Title";
+    final String SLECT_TITLE = "Select Title";
 
 
-    private void selectStates(String countryPicked){
+    private void selectStates(String countryPicked) {
         int countryPick = Integer.parseInt(countryPicked);
         maxValueForStateDialog = getActivityInterface().getEligabileCountries().get(countryPick).getProvinces().size();
         stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPick).getProvinces().size()];
@@ -173,29 +177,41 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
             @Override
             public void onClick(View v) {
 
-             //   HGBUtility.showPikerDialog(mCountry, getActivity(), SELECT_PROVINCE,stateArray, 0,maxValueForStateDialog);
-
-                HGBUtility.showPikerDialog(mCountry,getActivity(), SELECT_PROVINCE,
-                        countryarray, 0, countryMaxValueSize -1,null, true);
-                if(mCountry.getTag() != null) {
-                    mCounterPicked = mCountry.getTag().toString();
+                final ArrayList<CountryItemVO> countries = bookingResponse.getCountries();
+                String[] countryarray = new String[countries.size()];
+                for (int i = 0; i < countries.size(); i++) {
+                    countryarray[i] = countries.get(i).getName();
                 }
-               // countryDialog.show();
+
+                HGBUtility.showPikerDialog(mCountry, getActivity(), "Choose country",
+                        countryarray, 0, countries.size() - 1, new PopUpAlertStringCB() {
+                            @Override
+                            public void itemSelected(String inputItem) {
+                                for (CountryItemVO countrie : countries) {
+                                    if (countrie.getName().equals(inputItem)) {
+                                        mCountry.setTag(countrie.getCode());
+                                        getStaticProvince();
+
+                                        break;
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void itemCanceled() {
+
+                            }
+                        }, false);
+
+
             }
         });
 
         mState.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mCountry.getTag() != null) {
-                    mCounterPicked = mCountry.getTag().toString();
-                    selectStates(mCounterPicked);
-                }
-                HGBUtility.showPikerDialog(mState, getActivity(), SELECT_PROVINCE, stateArray, 0,maxValueForStateDialog - 1, null, true);
-                if(mState.getTag() != null){
-                    mStatePicked = mState.getTag().toString();
-                }
-               // stateDialog.show();
+                getStaticProvince();
             }
         });
 
@@ -203,8 +219,8 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
             @Override
             public void onClick(View v) {
 
-              //  showGenderDialog();
-                HGBUtility.showPikerDialog(mTitle, getActivity(),GENDER_TITLE,genderArray,0,2, null, true);
+                //  showGenderDialog();
+                HGBUtility.showPikerDialog(mTitle, getActivity(), GENDER_TITLE, genderArray, 0, 2, null, true);
             }
         });
 
@@ -212,18 +228,17 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
             @Override
             public void onClick(View v) {
 
-                HGBUtility.showPikerDialog(mTitle, getActivity(),SLECT_TITLE,titleArray,0,1, null, true);
+                HGBUtility.showPikerDialog(mTitle, getActivity(), SLECT_TITLE, titleArray, 0, 1, null, true);
 
 
-
-               // showTitleDialog();
+                // showTitleDialog();
             }
         });
 
         mDOB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HGBUtility.showDateDialog(getActivity(),mDOB);
+                HGBUtility.showDateDialog(getActivity(), mDOB);
             }
         });
 
@@ -241,7 +256,7 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
                     mUser.setCountry("US");
                 }
 
-                mUser.setState(getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().get(statePicker.getValue()).getProvincecode());
+                mUser.setState(mState.getTag().toString());
                 mUser.setPostalcode(mPostalCode.getText().toString());
                 mUser.setDob(mDOB.getText().toString());
                 mUser.setCity(mCity.getText().toString());
@@ -591,6 +606,91 @@ public class TravlerDetailsFragment extends HGBAbtsractFragment {
             }
         });
 
+
+    }
+
+    private void getStaticBooking() {
+
+        ConnectionManager.getInstance(getActivity()).getBookingOptions(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                bookingResponse = (BookingRequestVO) data;
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+
+            }
+        });
+    }
+
+    private void getStaticProvince() {
+        String countryID;
+        if( mCountry.getTag() == null){
+             countryID =  mCountry.getText().toString();
+            if (countryID.equals("Canada")) {
+                countryID = "CA";
+            } else if (countryID.equals("UnitedStates")) {
+                countryID = "US";
+            }
+        }else{
+            countryID = (String) mCountry.getTag();
+        }
+
+        ConnectionManager.getInstance(getActivity()).getStaticBookingProvince(countryID, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                List<ProvincesItem> provinceItems = (List<ProvincesItem>) data;
+                if (provinceItems.size() > 0) {
+                    setDropDownItems(provinceItems);
+                    mState.setVisibility(View.VISIBLE);
+                } else {
+                    mState.setVisibility(View.GONE);
+                }
+                //    bookingResponse = (BookingRequestVO)data;
+                //BookingRequest bookingrequest = (BookingRequest)data;
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
+    }
+
+
+    private void setDropDownItems(final List<ProvincesItem> provinceItems) {
+        //  final ArrayList<CountryItemVO> countries = bookingResponse.getCountries();
+        String[] countryarray = new String[provinceItems.size()];
+        for (int i = 0; i < provinceItems.size(); i++) {
+            countryarray[i] = provinceItems.get(i).getProvincename();
+        }
+
+        HGBUtility.showPikerDialog(mState, getActivity(), "Choose province",
+                countryarray, 0, provinceItems.size() - 1, new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+                        for (ProvincesItem province : provinceItems) {
+                            if (province.getProvincename().equals(inputItem)) {
+                                mState.setText(province.getProvincename());
+                                mState.setTag(province.getProvincecode());
+                                break;
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void itemCanceled() {
+
+                    }
+                }, false);
 
     }
 

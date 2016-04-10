@@ -14,6 +14,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.models.CreditCardSessionItem;
+
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
@@ -398,4 +400,17 @@ public class Parser {
         return airportServerResultVO;
     }
 
+    public static Object parseCCSession(String response) {
+        CreditCardSessionItem ccItem = null;
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<CreditCardSessionItem>() {
+            }.getType();
+            ccItem = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ccItem;
+
+    }
 }

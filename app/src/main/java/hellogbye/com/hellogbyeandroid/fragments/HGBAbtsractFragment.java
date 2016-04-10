@@ -12,11 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+
 import hellogbye.com.hellogbyeandroid.activities.HGBFlowInterface;
 import hellogbye.com.hellogbyeandroid.activities.HGBMainInterface;
 import hellogbye.com.hellogbyeandroid.activities.HGBVoiceInterface;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
@@ -81,13 +82,47 @@ public class HGBAbtsractFragment extends Fragment {
     }
 
 
-    public NodesVO getNodeWithGuidAndPaxID(String selectedItemGuid, String paxid, UserTravelMainVO travelOrder){
-
-        ArrayList<NodesVO> listVo = new ArrayList<>();
-        Map<String, NodesVO> items = travelOrder.getItems();
+    public NodesVO getNodeWithGuidAndPaxID(String selectedItemGuid){
+        Map<String, NodesVO> items = getActivityInterface().getTravelOrder().getItems();
         NodesVO node = items.get(selectedItemGuid);
         return node;
     }
+
+
+    public CreditCardItem getCreditCard(String token){
+
+        for(CreditCardItem card:getActivityInterface().getCreditCards())
+        {
+            if(card.getToken().equals(token)){
+                return card;
+            }
+        }
+        return null;
+    }
+
+
+//    public ArrayList<NodesVO> getNodeWithGuidAndPaxID(String selectedItemGuid,String paxid){
+//
+//        ArrayList<NodesVO> listVo = new ArrayList<>();
+//        ArrayList<PassengersVO> passengers = getActivityInterface().getTravelOrder().getPassengerses();
+//        for (PassengersVO passenger :passengers){
+//            if(passenger.getmPaxguid().equals(paxid)){
+//                ArrayList<CellsVO> cells = passenger.getmCells();
+//                for (CellsVO cell : cells){
+//                    ArrayList<NodesVO> nodes = cell.getmNodes();
+//                    for (NodesVO node: nodes){
+//                        if(node.getmGuid()!= null && node.getmGuid().equals(selectedItemGuid)){
+//                            listVo.add(node);
+//                        }
+//                    }
+//                }
+//            }
+//
+//        }
+//
+//        return listVo;
+//    }
+
 
     public String getPrimaryGuid(String guiSelected, List<NodesVO> alternative){
 

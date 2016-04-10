@@ -10,6 +10,7 @@
     <CheckBox
         android:id="@+id/payment_child_checkbox"
         style="@style/PaymentCheckBoxStyle"
+        android:visibility="gone"
         android:layout_alignParentLeft="true"
         />
 
@@ -18,14 +19,24 @@
         android:id="@+id/payment_child_name"
         style="@style/PaymentItemStyle"
         android:textSize="14sp"
-        android:layout_toRightOf="@+id/payment_child_checkbox"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/payment_child_price"
+        android:layout_centerVertical="true"
         app:fontName="dinnextltpro_light.otf" />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/payment_child_price"
         style="@style/PaymentItemStyle"
         android:textSize="14sp"
-        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/passenger_item_select_cc"
         app:fontName="dinnextltpro_light.otf" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/passenger_item_select_cc"
+        style="@style/PaymentSelectCCStyle"
+        app:fontName="dinnextltpro_regular.otf"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentRight="true"/>
 
 </RelativeLayout>

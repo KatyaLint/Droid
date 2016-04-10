@@ -12,6 +12,7 @@ import android.widget.RadioButton;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.PaymentSummaryItem;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -19,7 +20,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  * Created by arisprung on 10/27/15.
  */
 public class CreditCardAdapter extends RecyclerView.Adapter<CreditCardAdapter.ViewHolder> {
-    private ArrayList<CreditCardItem> mArrayList;
+    private ArrayList<PaymentSummaryItem> mArrayList;
     OnItemClickListener  mItemClickListner;
 
     private static RadioButton lastChecked = null;
@@ -34,16 +35,16 @@ public class CreditCardAdapter extends RecyclerView.Adapter<CreditCardAdapter.Vi
     public  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
         public FontTextView mCardNumberText;
-        public ImageView mCardImage;
-        public RadioButton mCardRadioButton;
+        public FontTextView mNameText;
+        public FontTextView mTotalText;
 
 
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
-            mCardNumberText = (FontTextView)itemLayoutView.findViewById(R.id.cc_number);
-            mCardImage = (ImageView)itemLayoutView.findViewById(R.id.cc_image);
-            mCardRadioButton = (RadioButton)itemLayoutView.findViewById(R.id.cc_radio_button);
+            mCardNumberText = (FontTextView)itemLayoutView.findViewById(R.id.summary_passenger_cc);
+            mNameText = (FontTextView)itemLayoutView.findViewById(R.id.summary_passenger_name);
+            mTotalText = (FontTextView)itemLayoutView.findViewById(R.id.summary_passenger_total);
 
             itemLayoutView.setOnClickListener(this);
 
@@ -70,7 +71,7 @@ public class CreditCardAdapter extends RecyclerView.Adapter<CreditCardAdapter.Vi
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public CreditCardAdapter(ArrayList<CreditCardItem> myDataset, Context context) {
+    public CreditCardAdapter(ArrayList<PaymentSummaryItem> myDataset, Context context) {
         mArrayList = myDataset;
         mContext = context;
 
@@ -82,59 +83,20 @@ public class CreditCardAdapter extends RecyclerView.Adapter<CreditCardAdapter.Vi
                                                            int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.credit_card_layout, parent, false);
+                .inflate(R.layout.payment_summary_item, parent, false);
 
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
 
 
-
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
 
-
-
-
-        CreditCardItem cc = mArrayList.get(position);
+        PaymentSummaryItem cc = mArrayList.get(position);
         holder.mCardNumberText.setText(cc.getLast4());
-        holder.mCardRadioButton.setChecked(cc.isSelected());
-        holder.mCardRadioButton.setTag(new Integer(position));
-
-        if(position == 0 && mArrayList.get(0).isSelected() && holder.mCardRadioButton.isChecked())
-        {
-            lastChecked = holder.mCardRadioButton;
-            lastCheckedPos = 0;
-        }
-
-        holder.mCardRadioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                RadioButton cb = (RadioButton)buttonView;
-                int clickedPos = ((Integer)cb.getTag()).intValue();
-
-                if(cb.isChecked())
-                {
-                    if(lastChecked != null)
-                    {
-                        lastChecked.setChecked(false);
-                        mArrayList.get(lastCheckedPos).setSelected(false);
-
-                    }
-
-                    lastChecked = cb;
-                    lastCheckedPos = clickedPos;
-                }
-                else
-                    lastChecked = null;
-
-                mArrayList.get(clickedPos).setSelected(cb.isSelected());
-
-            }
-        });
+        holder.mNameText.setText(cc.getName());
+        holder.mTotalText.setText("$"+cc.getTotal());
 
     }
 
@@ -144,7 +106,11 @@ public class CreditCardAdapter extends RecyclerView.Adapter<CreditCardAdapter.Vi
         return mArrayList.size();
     }
 
+    public  int getLastCheckedPos() {
+        return lastCheckedPos;
+    }
 
-
-
+    public static void setLastCheckedPos(int lastCheckedPos) {
+        CreditCardAdapter.lastCheckedPos = lastCheckedPos;
+    }
 }

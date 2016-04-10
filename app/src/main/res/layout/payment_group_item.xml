@@ -2,40 +2,61 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/payment_group_root"
     android:paddingLeft="@dimen/DP10"
     android:paddingRight="@dimen/DP10"
     android:clickable="true"
     >
 
-    <CheckBox
-        android:id="@+id/payment_group_checkbox"
-        style="@style/PaymentCheckBoxStyle"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        />
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/payment_group_name"
-        style="@style/PaymentItemStyle"
-        app:fontName="dinnextltpro_light.otf"
-        android:layout_centerInParent="true"
-        android:layout_toRightOf="@+id/payment_group_checkbox"/>
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/payment_group_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/expand"/>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/payment_group_name"
+            style="@style/PaymentItemStyle"
+            android:text="dd"
+            app:fontName="dinnextltpro_light.otf"
+            android:layout_gravity="center_vertical"
+
+            android:layout_toRightOf="@+id/payment_group_image"/>
+
+
+
+
+
+    </LinearLayout>
+
+    <!--<CheckBox-->
+        <!--android:id="@+id/payment_group_checkbox"-->
+        <!--style="@style/PaymentCheckBoxStyle"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--/>-->
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/payment_group_price"
         style="@style/PaymentItemStyle"
         app:fontName="dinnextltpro_light.otf"
-        android:layout_centerInParent="true"
-        android:layout_toLeftOf="@+id/payment_group_image"
+        android:layout_toLeftOf="@+id/passenger_select_cc"
+
+
         />
 
-    <ImageView
-        android:id="@+id/payment_group_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/passenger_select_cc"
+        style="@style/PaymentSelectCCStyle"
+        app:fontName="dinnextltpro_regular.otf"
+        android:layout_alignParentRight="true"/>
 
-        android:background="@drawable/expand"/>
 </RelativeLayout>

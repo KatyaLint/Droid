@@ -1,5 +1,7 @@
 package hellogbye.com.hellogbyeandroid.models.vo.creditcard;
 
+import java.util.ArrayList;
+
 /**
  * Created by arisprung on 11/15/15.
  */
@@ -8,11 +10,15 @@ public class PaymnentGroup {
     private String nameText;
     private String totalText;
     private boolean selected;
+    private ArrayList<String> items;
+    private String creditcard;
 
-    public PaymnentGroup(String nameText, String totalText, boolean selected) {
+    public PaymnentGroup(String nameText, String totalText, boolean selected, ArrayList<String> items,String creditcard) {
         this.nameText = nameText;
         this.totalText = totalText;
         this.selected = selected;
+        this.items = items;
+        this.creditcard = creditcard;
     }
 
     public String getNameText() {
@@ -37,5 +43,21 @@ public class PaymnentGroup {
 
     public void setTotalText(String totalText) {
         this.totalText = totalText;
+    }
+
+    public ArrayList<String> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<String> items) {
+        this.items = items;
+    }
+
+    public String getCreditcard() {
+        return creditcard;
+    }
+
+    public void setCreditcard(String creditcard) {
+        this.creditcard = creditcard;
     }
 }

@@ -22,18 +22,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashMap;
+import java.util.HashSet;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.NewPaymentDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalEmailSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountSettingsFragment;
@@ -41,13 +38,11 @@ import hellogbye.com.hellogbyeandroid.fragments.checkout.AddCreditCardFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightsDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
-import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.SummaryPaymentFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
-
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.MyTripsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.checkout.PaymentDetailsFragemnt;
 import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesCheckListFragment;
@@ -63,7 +58,9 @@ import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelationshipTypesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.network.Parser;
@@ -102,10 +99,24 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
     private MyTripsFragment.OnItemClickListener editMyTripsClickCB;
     private FontTextView itirnarary_title_Bar;
+<<<<<<< HEAD
+=======
+    private FontTextView mProfileName;
+    private ArrayList<UserDataVO> mTravelList = new ArrayList<>();
+    private ArrayList<CountryItemVO> mEligabileCountryList = new ArrayList<>();
+    private ArrayList<CreditCardItem> mCreditCardList = new ArrayList<>();
+
+>>>>>>> master
 
     public HGBSaveDataClass getHGBSaveDataClass(){
         return hgbSaveDataClass;
     }
+
+    private HashSet<String> itenearySet;
+
+    private HashSet<CreditCardItem> mSelectedCreditCards = new HashSet<>();
+
+    private HashMap<String,String> mBookingHashMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -222,6 +233,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 //my_trips_image_profile.setImageBitmap(HGBUtility.getBitmapFromCache(getBaseContext()));
                 getAccountsProfiles();
                 selectItem(ToolBarNavEnum.HOME.getNavNumber(), null);
+
             }
 
             @Override
@@ -482,6 +494,93 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         startActivity(intent);
     }
 
+//
+//    @Override
+//    public void setCompanionsStaticRelationshipTypes(ArrayList<CompanionStaticRelationshipTypesVO> componentsStaticRelationshipTypes) {
+//        this.componionStaticDescriptionVOs = componentsStaticRelationshipTypes;
+//    }
+//
+//    @Override
+//    public ArrayList<CompanionStaticRelationshipTypesVO> getCompanionsStaticRelationshipTypes() {
+//        return componionStaticDescriptionVOs;
+//    }
+//
+//    @Override
+//    public void setAccounts(ArrayList<AccountsVO> accounts) {
+//        this.accounts = accounts;
+//    }
+//
+//    @Override
+//    public ArrayList<AccountsVO> getAccounts() {
+//        return this.accounts;
+//    }
+
+
+    @Override
+    public void setCreditCardsSelected(HashSet<CreditCardItem> cardsList) {
+        mSelectedCreditCards = cardsList;
+    }
+
+    @Override
+    public  HashSet<CreditCardItem>  getCreditCardsSelected() {
+        return mSelectedCreditCards;
+    }
+
+    @Override
+    public void setBookingHashMap(HashMap<String, String> bookigItems) {
+        mBookingHashMap = bookigItems;
+    }
+
+    @Override
+    public HashMap<String, String> getBookingHashMap() {
+        return mBookingHashMap;
+    }
+
+
+    @Override
+    public ArrayList<UserDataVO> getListUsers() {
+        return mTravelList;
+    }
+
+    @Override
+    public UserDataVO getCurrentUser() {
+        return mCurrentUser;
+    }
+
+    @Override
+    public void setCurrentUser(UserDataVO currentUser) {
+        this.mCurrentUser = currentUser;
+    }
+
+
+    @Override
+    public ArrayList<CountryItemVO> getEligabileCountries() {
+        return mEligabileCountryList;
+    }
+
+    @Override
+    public void setEligabileCountries(ArrayList<CountryItemVO> list) {
+        mEligabileCountryList = list;
+
+    }
+
+    @Override
+    public ArrayList<CreditCardItem> getCreditCards() {
+        return mCreditCardList;
+    }
+
+    @Override
+    public void setCreditCards(ArrayList<CreditCardItem> mCreditCardList) {
+
+        this.mCreditCardList = mCreditCardList;
+
+    }
+
+    @Override
+    public void setListUsers(ArrayList<UserDataVO> travellist) {
+        mTravelList = travellist;
+    }
+
 
 
     public void selectItem(int position, Bundle bundle) {
@@ -535,7 +634,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 stashToBack = false;
                 break;
             case PAYMENT_DETAILS:
-                fragment = PaymentDetailsFragemnt.newInstance(navPosition);
+                fragment = NewPaymentDetailsFragment.newInstance(navPosition);
                 break;
             case PREFERENCES_TAB_SETTINGS:
                 fragment = PreferencesTabsFragmentSettings.newInstance(navPosition);
@@ -557,7 +656,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 fragment = TravlerDetailsFragment.newInstance(navPosition);
                 break;
             case SELECT_CREDIT_CARD:
-                fragment = CreditCardListFragment.newInstance(navPosition);
+                fragment = SummaryPaymentFragment.newInstance(navPosition);
                 break;
             case ADD_CREDIT_CARD:
                 fragment = AddCreditCardFragment.newInstance(navPosition);
@@ -803,6 +902,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             imageButton.setTag("keyboard");
         }
     }
+
 
     @Override
     public void onMenuVisibilityChanged(boolean isVisible) {

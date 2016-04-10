@@ -49,6 +49,12 @@ public class CreditCardItem {
 
     private boolean isSelected;
 
+    private String cardNumber;
+
+    public CreditCardItem(){
+
+    }
+
     public CreditCardItem(String cardtypeid, String expmonth, String expyear, String buyerfirstname, String buyerlastname, String buyeraddress, String buyerzip, String token, String userid, String nickname, String last4, String addeddatetime, String modifieddatetime, boolean isSelected) {
         this.cardtypeid = cardtypeid;
         this.expmonth = expmonth;
@@ -177,4 +183,14 @@ public class CreditCardItem {
     public void setSelected(boolean selected) {
         isSelected = selected;
     }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+
 }
