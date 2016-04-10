@@ -89,7 +89,7 @@ public class HGBStringXMLRequest extends Request<String> {
                 " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Header>" +
                 " <AuthHeader xmlns=\"https://MyCardStorage.com/\"><UserName>HelloGByeUser</UserName><Password>bWapRT#ayLJYN5S!</Password></AuthHeader> " +
                 "</soap:Header> <soap:Body><AddCOF_Soap xmlns=\"https://MyCardStorage.com/\"> <addToken><ServiceSecurity><ServiceUserName>HelloGBye</ServiceUserName><ServicePassword>NQbhm#KNDqO2X</ServicePassword>" +
-                "<MCSAccountID>1</MCSAccountID><SessionID>x3p3z8?h</SessionID></ServiceSecurity>" +
+                "<MCSAccountID>1</MCSAccountID><SessionID>"+creditCardItem.getToken()+"</SessionID></ServiceSecurity>" +
                 "<TokenData><CardNumber>"+creditCardItem.getCardNumber()+"</CardNumber>" +
                 "<CardType>"+creditCardItem.getCardtypeid()+"</CardType>" +
                 "<ExpirationMonth>"+creditCardItem.getExpmonth()+"</ExpirationMonth>" +
@@ -99,10 +99,27 @@ public class HGBStringXMLRequest extends Request<String> {
                 "<LastName>"+creditCardItem.getBuyerlastname()+"</LastName>" +
                 "<StreetAddress>"+creditCardItem.getBuyeraddress()+"</StreetAddress>" +
                 "<ZipCode>"+creditCardItem.getBuyerzip()+"</ZipCode>" +
-                "<CVV>"+creditCardItem.getToken()+"</CVV>" +
+                "<CVV>"+creditCardItem.getCvv()+"</CVV>" +
                 "<Last4>"+creditCardItem.getLast4()+"</Last4>" +
                 "</TokenData></addToken>" +
                 " </AddCOF_Soap> </soap:Body> </soap:Envelope>";
+
+        String strResponce2 = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
+                "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"" +
+                " xmlns=\"https://MyCardStorage.com/\">    <soap:Header><AuthHeader xmlns=\"https://MyCardStorage.com/\">" +
+                "<UserName>HelloGByeUser</UserName><Password>bWapRT#ayLJYN5S!</Password></AuthHeader>  </soap:Header> " +
+                " <soap:Body><AddCOF><xml><Request><ServiceLogin><ServiceUserName>HelloGBye</ServiceUserName>" +
+                "<ServicePassword>NQbhm#KNDqO2X</ServicePassword><MCSAccountID>1</MCSAccountID></ServiceLogin>" +
+                "<AddCOF><SessionID>62zmfVg9</SessionID><CardNumber>4500000000000122</CardNumber>" +
+                "<ExpirationMonth>01</ExpirationMonth><ExpirationYear>2017</ExpirationYear>    " +
+                "    <NickName>a90397ed-3386-40dc-b3a8-a5d600894150635959037308400825</NickName>" +
+                "<CardType>4</CardType>        <FirstName>Ari</FirstName>        <LastName>Sprung</LastName> " +
+                "       <ZipCode>90731</ZipCode>        <StreetAddress>123 Fake St.</StreetAddress>  " +
+                "  </AddCOF></Request></xml>    </AddCOF>  </soap:Body></soap:Envelope>";
+
+        String strResponce3 = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns=\"https://MyCardStorage.com/\">    <soap:Header><AuthHeader xmlns=\"https://MyCardStorage.com/\"><UserName>HelloGByeUser</UserName><Password>bWapRT#ayLJYN5S!</Password></AuthHeader>  </soap:Header>  <soap:Body><AddCOF><xml>&lt;Request&gt;&lt;ServiceLogin&gt;&lt;ServiceUserName&gt;HelloGBye&lt;/ServiceUserName&gt;&lt;ServicePassword&gt;NQbhm#KNDqO2X&lt;/ServicePassword&gt;&lt;MCSAccountID&gt;1&lt;/MCSAccountID&gt;&lt;/ServiceLogin&gt;&lt;AddCOF&gt;&lt;SessionID&gt;yw!dS6LC&lt;/SessionID&gt;&lt;CardNumber&gt;4500000000000000123&lt;/CardNumber&gt;&lt;ExpirationMonth&gt;01&lt;/ExpirationMonth&gt;&lt;ExpirationYear&gt;2018&lt;/ExpirationYear&gt;        &lt;NickName&gt;a90397ed-3386-40dc-b3a8-a5d600894150635959022235479727&lt;/NickName&gt;&lt;CardType&gt;4&lt;/CardType&gt;        &lt;FirstName&gt;Ari&lt;/FirstName&gt;        &lt;LastName&gt;Sprung&lt;/LastName&gt;        &lt;ZipCode&gt;90731&lt;/ZipCode&gt;        &lt;StreetAddress&gt;123 Fake St.&lt;/StreetAddress&gt;    &lt;/AddCOF&gt;&lt;/Request&gt;</xml>    </AddCOF>  </soap:Body></soap:Envelope>";
+
+
 
         return strResponce.getBytes();
     }

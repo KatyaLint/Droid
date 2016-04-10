@@ -96,8 +96,8 @@ public class HGBSaveDataClass implements HGBMainInterface {
         } else {
             setSolutionID(mUserTravelOrder.getmSolutionID());
             Gson gson = new Gson();
-            String json = gson.toJson(travelorder);
-            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO, json);
+//            String json = gson.toJson(travelorder);
+ //          hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO, json);
         }
     }
 
