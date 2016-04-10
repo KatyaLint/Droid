@@ -103,7 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
                 ConnectionManager.getInstance(SignUpActivity.this).postUserCreateAccount(userData,new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
-                        System.out.println("Kate succes");
+
                       //  bookingResponse = (BookingRequestVO)data;
                         //BookingRequest bookingrequest = (BookingRequest)data;
                     }
