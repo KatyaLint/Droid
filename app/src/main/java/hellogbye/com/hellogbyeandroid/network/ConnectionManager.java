@@ -32,12 +32,11 @@ public class ConnectionManager {
     }
 
 
-<<<<<<< HEAD
 
-       public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
-=======
+//       public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
+
     public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
->>>>>>> master
+
 
 
     //public static String BASE_URL =  "http://cnc.hellogbye.com/cnc/rest/itinerary?count=15&skip=30";
@@ -1518,48 +1517,7 @@ public class ConnectionManager {
     }
 
 
-<<<<<<< HEAD
-    public enum Services {
-       // http://cnc.hellogbye.com/cnc/rest/Statics/GetProvinceByCountryCode?countryCode=ID
-        USER_POST_LOGIN("Session"),
-        USER_GET_PROFILE("UserProfile"),
-        USER_POST_CHANGE_PASSWORD("UserProfile/Password"),
-        USER_GET_TRAVEL_PROFILES("TravelPreference/Profiles"),
-        USER_GET_TRAVEL_PROFILES_DEFAULT("TravelPreference/Profiles/Defaults"),
-        USER_POST_CHECKOUT("CheckOut"),
-        USER_GET_SEARCH_QUERY("Solution/Primarysearch?query="),
-        USER_GET_HOTEL_ALTERNATIVE("Hotel"),
-        USER_HOTEL_ROOM_ALTERNATIVE("HotelRoom"),
-        USER_PUT_HOTEL("Hotel"),
-        USER_GET_BOOKING_OPTIONS("Statics/BookingOptions"),
-        USER_FLIGHT_SOLUTIONS("Flight"),
-        USER_GET_TRAVELER_INFO("Traveler/Get/"),
-        USER_GET_USER_PROFILE_ACCOUNTS("UserProfile/Accounts"),
-        USER_POST_USER_PROFILE_EMAIL("UserProfile/ResetPassword?email="),
-        USER_TRAVEL_PROFILES("TravelPreference/Profiles/"),
-        USER_PROFILE_RESET_PASSWORD("UserProfile/ResetPassword?email="),
-        USER_SOLUTION("Solution/"),
-        ITINERARY("Itinerary/"),
-        USER_GET_TRAVEL_PREFERENCES("TravelPreference"),
-        ITINERARY_CNC("Itinerary/"),
-        COMPANIONS("Companions"),
-        CARD_TOKEN("Card/Token"),
-        ITINERARY_MY_TRIP("Itinerary"),
-        ITINERARY_HIGHLIGHT("Highlight?input="),
-        USER_AVATAR("UserProfile/Avatar"),
-        RELATIONSHIP_TYPES("Statics/RelationshipTypes"),
-        ACCOUNTS_PREFERENCES("UserProfile/Accounts/TravelPreference"),
-        USER_PROFILE_REGISTER("UserProfile/Register"),
-        STATIC_PROVINCE_BY_COUNTRY_CODE("Statics/GetProvinceByCountryCode?countryCode="),
-        USER_PROFILE_DEVICE_AUTHENTICATION("UserProfile/DeviceAuthentication");
 
-
-        String url;
-        Services(String url){
-            this.url = BASE_URL + url;
-        }
-=======
->>>>>>> master
 
             public enum Services {
                 // http://cnc.hellogbye.com/cnc/rest/Statics/GetProvinceByCountryCode?countryCode=ID
@@ -1594,7 +1552,8 @@ public class ConnectionManager {
                 USER_PROFILE_REGISTER("UserProfile/Register"),
                 STATIC_PROVINCE_BY_COUNTRY_CODE("Statics/GetProvinceByCountryCode?countryCode="),
                 CARD_SESSION("Card/Token"),
-                BOOKING_PAY("booking/pay");
+                BOOKING_PAY("booking/pay"),
+                USER_PROFILE_DEVICE_AUTHENTICATION("UserProfile/DeviceAuthentication");
 
 
 

@@ -52,9 +52,9 @@ public class HGBJsonRequest extends Request<String> {
     private JSONObject jsonParams;
     private static String token;
     private boolean showLoader;
-    ProgressDialog progressDialog;
-    String loading;
-    private int timeOutParam = 60000;
+    private ProgressDialog progressDialog;
+    private String loading;
+
 
 
     public HGBJsonRequest(int method, String url, JSONArray params, Listener<String> listener, ErrorListener errorListener) {
@@ -76,11 +76,8 @@ public class HGBJsonRequest extends Request<String> {
         progressDialog = new ProgressDialog(mContext);
         loading = "Loading...";
         setRetryPolicy(new DefaultRetryPolicy(
-<<<<<<< HEAD
-                timeOutParam,
-=======
                 HGBApplication.TIMEOUT_TIME,
->>>>>>> master
+
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         setService(url);
@@ -106,7 +103,7 @@ public class HGBJsonRequest extends Request<String> {
         progressDialog = new ProgressDialog(mContext);
         loading = "Loading...";
         setRetryPolicy(new DefaultRetryPolicy(
-                timeOutParam,
+                HGBApplication.TIMEOUT_TIME,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         setService(url);
@@ -132,7 +129,7 @@ public class HGBJsonRequest extends Request<String> {
         progressDialog = new ProgressDialog(mContext);
         loading = "Loading...";
         setRetryPolicy(new DefaultRetryPolicy(
-                timeOutParam,
+                HGBApplication.TIMEOUT_TIME,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         setService(url);

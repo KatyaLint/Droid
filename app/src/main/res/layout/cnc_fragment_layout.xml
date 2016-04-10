@@ -59,15 +59,15 @@
                 android:textColorHint="@color/cnc_user_message_color"
                 android:hint="@string/type_message"
                 android:focusableInTouchMode="true"
-<<<<<<< HEAD
+
                 android:layout_marginLeft="@dimen/DP4"
                 android:layout_toStartOf="@+id/cnc_mic"
                 android:minHeight="@dimen/DP44"
                 android:layout_toEndOf="@+id/cnc_fragment_trip_settings" />
-=======
-                android:text="Fly from Miami to New York"
-                android:minHeight="@dimen/DP44" />
->>>>>>> master
+
+                <!--android:text="Fly from Miami to New York"-->
+                <!--android:minHeight="@dimen/DP44" />-->
+
 
             <!--android:text="Fly with Roy and Steve to New York for one week"-->
             <!--android:text="Fly Sam from NYC to Vegas on Nov 15th for 3 nights in the morning then back to NYC. Fly Warren from Miami to Vegas on Nov 15th before 5PM for 3 nights then on to Toronto for a 1 night then back to Miami. Fly me from Toronto to Vegas, on the earliest flight available for 3 nights on Nov 15th then back to Toronto."-->

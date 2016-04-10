@@ -99,14 +99,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
     private MyTripsFragment.OnItemClickListener editMyTripsClickCB;
     private FontTextView itirnarary_title_Bar;
-<<<<<<< HEAD
-=======
-    private FontTextView mProfileName;
+
     private ArrayList<UserDataVO> mTravelList = new ArrayList<>();
     private ArrayList<CountryItemVO> mEligabileCountryList = new ArrayList<>();
     private ArrayList<CreditCardItem> mCreditCardList = new ArrayList<>();
-
->>>>>>> master
 
     public HGBSaveDataClass getHGBSaveDataClass(){
         return hgbSaveDataClass;

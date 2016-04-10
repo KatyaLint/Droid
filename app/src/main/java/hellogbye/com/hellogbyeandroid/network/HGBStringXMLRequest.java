@@ -121,7 +121,7 @@ public class HGBStringXMLRequest extends Request<String> {
         // this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
         this.url = url;
         setRetryPolicy((new DefaultRetryPolicy(
-                10000,
+                HGBApplication.TIMEOUT_TIME,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)));
         setService(url);
