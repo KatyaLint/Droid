@@ -5,6 +5,7 @@
 
     <dimen name="DP24">24dp</dimen>
     <dimen name="DP14">14dp</dimen>
+    <dimen name="DP18">18dp</dimen>
     <dimen name="DP34">34dp</dimen>
     <dimen name="DP38">38dp</dimen>
 
@@ -20,6 +21,7 @@
     <dimen name="DP4">4dp</dimen>
     <dimen name="DP1">1dp</dimen>
     <dimen name="DP10">10dp</dimen>
+    <dimen name="DP22">22dp</dimen>
     <dimen name="DP16">16dp</dimen>
     <dimen name="DP20">20dp</dimen>
     <dimen name="DP8">8dp</dimen>

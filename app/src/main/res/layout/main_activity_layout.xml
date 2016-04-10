@@ -57,9 +57,10 @@
                 android:background="@color/white"
                 android:orientation="vertical">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:background="@drawable/profile_b_g">
 
                     <hellogbye.com.hellogbyeandroid.views.RoundedImageView
@@ -68,38 +69,21 @@
                         android:layout_height="@dimen/DP80"
                         android:layout_marginTop="@dimen/DP10"
                         android:layout_marginLeft="@dimen/DP34"
-                        android:visibility="visible" />
+                         />
 
                     <hellogbye.com.hellogbyeandroid.views.FontTextView
                         android:id="@+id/nav_profile_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
-                        android:layout_marginTop="@dimen/DP20"
-                        android:layout_centerHorizontal="true"
-
-                        android:layout_toEndOf="@+id/nav_profile_image"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:layout_marginStart="@dimen/DP6"
                         android:textSize="@dimen/SP20"
                         android:textColor="@color/white"
                         app:fontName="dinnextltpro_medium.otf" />
 
-
-                    <hellogbye.com.hellogbyeandroid.views.FontTextView
-                        android:id="@+id/nav_profile_type"
-                        android:text="profile"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:singleLine="true"
-                        android:layout_below="@+id/nav_profile_name"
-                        android:layout_toEndOf="@+id/nav_profile_image"
-                        android:layout_marginStart="@dimen/DP6"
-                        android:textSize="@dimen/SP16"
-                        android:textColor="@color/white"
-                        app:fontName="dinnextltpro_medium.otf" />
-
-
-                </RelativeLayout>
+                </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/left_drawer_rv"

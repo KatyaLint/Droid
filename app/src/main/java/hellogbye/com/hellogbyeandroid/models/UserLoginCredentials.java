@@ -20,12 +20,15 @@ public class UserLoginCredentials {
     @SerializedName("addeddatetime")
     private String addeddatetime;
 
+    @SerializedName("isanonymous")
+    private boolean isanonymous;
 
-    public UserLoginCredentials(String token, String userprofileid, String modifieddatetime, String addeddatetime) {
+    public UserLoginCredentials(String token, String userprofileid, String modifieddatetime, String addeddatetime, boolean  isanonymous ) {
         this.token = token;
         this.userprofileid = userprofileid;
         this.modifieddatetime = modifieddatetime;
         this.addeddatetime = addeddatetime;
+        this.isanonymous = isanonymous;
     }
 
     public String getToken() {
@@ -67,6 +70,7 @@ public class UserLoginCredentials {
                 ", userprofileid='" + userprofileid + '\'' +
                 ", modifieddatetime='" + modifieddatetime + '\'' +
                 ", addeddatetime='" + addeddatetime + '\'' +
+                ", isanonymous='" + isanonymous + '\'' +
                 '}';
     }
 }

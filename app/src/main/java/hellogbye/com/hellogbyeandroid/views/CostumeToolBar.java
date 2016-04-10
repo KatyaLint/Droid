@@ -33,6 +33,7 @@ public class CostumeToolBar extends Toolbar {
     private ImageView my_trips_image_profile;
     private FontTextView my_trip_profile;
     private FontTextView itirnarary_title_Bar;
+    private LinearLayout tool_bar_profile_name;
 
     public CostumeToolBar(Context context) {
         super(context);
@@ -85,6 +86,8 @@ public class CostumeToolBar extends Toolbar {
             my_trip_edit_button = (FontTextView) findViewById(R.id.my_trip_edit_button);
         }if(itirnarary_title_Bar == null){
             itirnarary_title_Bar = (FontTextView)findViewById(R.id.itirnarary_title_Bar);
+        }if(tool_bar_profile_name == null){
+            tool_bar_profile_name = (LinearLayout)findViewById(R.id.tool_bar_profile_name);
         }
 
     }
@@ -94,8 +97,9 @@ public class CostumeToolBar extends Toolbar {
 
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
         String selectedItem = navBar.getNavTitle();
+        tool_bar_profile_name.setVisibility(View.GONE);
    //     homeTitleImage.setVisibility(View.GONE);
-        my_trip_profile.setVisibility(View.GONE);
+     //   my_trip_profile.setVisibility(View.GONE);
         titleText.setVisibility(View.GONE);
         keyBoardImage.setVisibility(View.GONE);
         purchaseButton.setVisibility(View.GONE);
@@ -106,7 +110,7 @@ public class CostumeToolBar extends Toolbar {
         check_preferences.setVisibility(View.GONE);
         my_trips_button.setVisibility(View.GONE);
         my_trip_edit_button.setVisibility(View.GONE);
-        my_trips_image_profile.setVisibility(View.GONE);
+     //   my_trips_image_profile.setVisibility(View.GONE);
         itirnarary_title_Bar.setVisibility(View.GONE);
         switch (navBar) {
 //            case HOME:
@@ -153,12 +157,13 @@ public class CostumeToolBar extends Toolbar {
                 titleText.setVisibility(View.VISIBLE);
                 break;
             case CNC:
-                my_trips_image_profile.setImageBitmap(HGBUtility.getBitmapFromCache(mContext));
-                my_trips_image_profile.setVisibility(View.VISIBLE);
+              //  my_trips_image_profile.setImageBitmap(HGBUtility.getBitmapFromCache(mContext));
+          //      my_trips_image_profile.setVisibility(View.VISIBLE);
                 //homeTitleImage.setVisibility(View.VISIBLE);
-                my_trip_profile.setVisibility(View.VISIBLE);
+              //  my_trip_profile.setVisibility(View.VISIBLE);
 
                 keyBoardImage.setVisibility(View.VISIBLE);
+                tool_bar_profile_name.setVisibility(View.VISIBLE);
                 break;
             case COMPANIONS_PERSONAL_DETAILS:
                 titleText.setVisibility(View.VISIBLE);

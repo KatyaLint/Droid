@@ -499,7 +499,7 @@
 //        linarLayoutDate[counter] = (LinearLayout) childFlight[counter].findViewById(R.id.grid_date_ll);
 //
 //        grid_flight_square_ll[counter] = (LinearLayout) childFlight[counter].findViewById(R.id.grid_flight_square_ll);
-//        grid_flight_square_ll[counter].setBackgroundResource(R.drawable.rounded_corner);
+//
 //
 //
 //        if(colomnNumber%2 == 0){ //even colum lightgray color
@@ -567,7 +567,7 @@
 //        linarLayoutDateHotel[counter] = (LinearLayout)childHotel[counter].findViewById(R.id.grid_date_ll_hotel);
 //
 //        grid_main_hotel_square_ll[counter] = (LinearLayout)childHotel[counter].findViewById(R.id.grid_main_hotel_square_ll);
-//        grid_main_hotel_square_ll[counter].setBackgroundResource(R.drawable.rounded_corner);
+//
 //
 //
 //        if(colomnNumber%2 == 0){ //even colum lightgray color

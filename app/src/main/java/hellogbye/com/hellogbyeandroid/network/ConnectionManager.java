@@ -31,7 +31,7 @@ public class ConnectionManager {
 
 
 
-       public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
+       public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
 
 
     //public static String BASE_URL =  "http://cnc.hellogbye.com/cnc/rest/itinerary?count=15&skip=30";
@@ -215,6 +215,27 @@ public class ConnectionManager {
         }, false);
     }
 
+    public void deviceAuthentication(String deviceID,final ServerRequestListener listener){
+        String url = getURL(Services.USER_PROFILE_DEVICE_AUTHENTICATION);
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id", deviceID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.authenticationData(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
 
     public void login(String email, String password, final ServerRequestListener listener) {
         String url = getURL(Services.USER_POST_LOGIN);
@@ -1451,8 +1472,8 @@ public class ConnectionManager {
         RELATIONSHIP_TYPES("Statics/RelationshipTypes"),
         ACCOUNTS_PREFERENCES("UserProfile/Accounts/TravelPreference"),
         USER_PROFILE_REGISTER("UserProfile/Register"),
-        STATIC_PROVINCE_BY_COUNTRY_CODE("Statics/GetProvinceByCountryCode?countryCode=");
-
+        STATIC_PROVINCE_BY_COUNTRY_CODE("Statics/GetProvinceByCountryCode?countryCode="),
+        USER_PROFILE_DEVICE_AUTHENTICATION("UserProfile/DeviceAuthentication");
 
 
         String url;

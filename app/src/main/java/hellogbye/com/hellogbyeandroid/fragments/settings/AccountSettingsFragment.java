@@ -88,7 +88,12 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
         HGBUtility.getAndSaveUserImage(currentUser.getAvatar(),account_details_image, null);
        // HGBUtility.loadRoundedImage(getActivity().getApplicationContext(),currentUser.getAvatar(),account_details_image);
 
-        String userName = currentUser.getTitle().trim() +" "+ currentUser.getFirstname() + " " + currentUser.getLastname();
+        String title = currentUser.getTitle();
+        //TODO remove when server change the title without spaces
+        if(title != null){
+            title = title.trim();
+        }
+        String userName = title +" "+ currentUser.getFirstname() + " " + currentUser.getLastname();
         account_settings_details_name.setText(userName);
 
 
