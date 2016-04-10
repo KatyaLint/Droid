@@ -20,7 +20,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
@@ -100,10 +99,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private MyTripsFragment.OnItemClickListener editMyTripsClickCB;
     private FontTextView itirnarary_title_Bar;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> master
     private ArrayList<UserDataVO> mTravelList = new ArrayList<>();
     private ArrayList<CountryItemVO> mEligabileCountryList = new ArrayList<>();
     private ArrayList<CreditCardItem> mCreditCardList = new ArrayList<>();
@@ -124,14 +120,12 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         hgbSaveDataClass.setPreferenceManager(hgbPrefrenceManager); //= new HGBSaveDataClass(this, hgbPrefrenceManager);
 
-
         //check if we have travelitinery in db
         String strTravel = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO, "");
         if (!"".equals(strTravel)) {
             UserTravelMainVO userTravelVO = (UserTravelMainVO) Parser.parseAirplaneData(strTravel);
             hgbSaveDataClass.setTravelOrder(userTravelVO);
         }
-
 
         mTitle = mDrawerTitle = getTitle();
         // mNavTitles = getResources().getStringArray(R.array.nav_draw_array);
