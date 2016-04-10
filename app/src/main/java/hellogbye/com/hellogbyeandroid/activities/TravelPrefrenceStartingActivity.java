@@ -15,30 +15,32 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 public class TravelPrefrenceStartingActivity extends Activity {
 
 
-    FontTextView mButtonTextView;
-    FontTextView mSkip;
+    private FontTextView mButtonTextView;
+    private FontTextView mSkip;
     private HGBPreferencesManager hgbPrefrenceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.onboarding_starting_layout);
+        //TODO remove layout
+     //   setContentView(R.layout.onboarding_starting_layout);
+        setContentView(R.layout.onboarding_layout);
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY,true);
 
 
         mButtonTextView = (FontTextView)findViewById(R.id.travel_pref_but);
-        mSkip = (FontTextView)findViewById(R.id.skip);
+//        mSkip = (FontTextView)findViewById(R.id.skip);
+
+//        mButtonTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(),OnBoardingActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         mButtonTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),OnBoardingActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        mSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);

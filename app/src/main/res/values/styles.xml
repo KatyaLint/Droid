@@ -40,7 +40,7 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textCursorDrawable">@null</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">@dimen/SP20</item>
         <item name="android:textColorHint">@color/hgb_edit_text_color</item>
         <item name="android:textColor">@color/hgb_edit_text_color</item>
         <item name="android:background">@drawable/edit_text_border</item>
@@ -50,8 +50,8 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textCursorDrawable">@null</item>
-        <item name="android:textSize">15sp</item>
-        <item name="android:paddingBottom">10sp</item>
+        <item name="android:textSize">@dimen/SP16</item>
+        <item name="android:paddingBottom">@dimen/DP10</item>
         <item name="android:textColorHint">@color/cc_edit_text</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:background">@drawable/cc_edit_text_border</item>
@@ -61,9 +61,9 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="fontName">dinnextltpro_light.otf</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:paddingBottom">10sp</item>
-        <item name="android:paddingTop">10sp</item>
+        <item name="android:textSize">@dimen/SP20</item>
+        <item name="android:paddingBottom">@dimen/DP10</item>
+        <item name="android:paddingTop">@dimen/DP10</item>
         <item name="android:gravity">center</item>
     </style>
 
@@ -79,7 +79,7 @@
 
     <style name="GreenCustomButtonStyle" parent="CustomButtonTextStyle">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">@drawable/green_button</item>
+        <item name="android:background">@drawable/rounded_corner_opacity</item>
     </style>
 
     <style name="CNCStyle">

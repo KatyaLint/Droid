@@ -66,6 +66,9 @@ public class SignUpActivity extends AppCompatActivity {
         sign_up_province_name = (FontTextView)findViewById(R.id.sign_up_province_name);
 
 
+
+
+
         sign_up_confirm_password.addTextChangedListener(new TextWatcher(){
             public void afterTextChanged(Editable s) {
                 String password = sign_up_password.getText().toString();

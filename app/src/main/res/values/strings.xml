@@ -11,11 +11,12 @@
     <string name="remmeber_me">Remmember Me</string>
     <string name="password">Password</string>
     <string name="email_address">Email Address</string>
-    <string name="login">Login</string>
+    <string name="login">Sign In</string>
     <string name="forgot_password"><u>Forgot password?</u></string>
     <string name="password_reset">Password Reset</string>
     <string name="email_reset_succesfully">Email rest succesfully! Go check email</string>
-    <string name="create_account">Create an Account</string>
+    <string name="create_account">Create a new Account</string>
+    <string name="try_it_now">Try it Now</string>
     <string name="already_have_account">Already have a HellGbye account?</string>
     <string name="terms">By clicking pre-register. You agree to HelloGbye\nUser Agreement and Privacy Policy.</string>
     <string name="url_user_agreement">http://www.hellogbye.com/assets/docs/tos.pdf</string>
@@ -174,4 +175,6 @@
     <string name="itinerary_make_payment">Make Payment</string>
     <string name="edit_trip_name">Edit Trip Name</string>
 
+    <string name="onBoarding_just_type">Just type or say\nsomething like:</string>
+    <string name="onBoarding_search_flight_example">&quot;I want to fly to Rome on Friday with\nLauren and Jesse and return home on\nJune 5th&quot;</string>
 </resources>

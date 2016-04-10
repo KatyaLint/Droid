@@ -10,9 +10,10 @@
 
     <ImageView
         android:id="@+id/cnc_image_view"
-        android:layout_width="@dimen/DP34"
-        android:layout_height="@dimen/DP34"
-        android:background="@drawable/suitcase_loader"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/hello_gbye_icon_r_g_b_red"/>
+
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/cnc_hgb_input"
         style="@style/CNCStyle"

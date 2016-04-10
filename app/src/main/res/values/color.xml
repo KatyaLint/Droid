@@ -5,6 +5,7 @@
     <color name="hgb_toolbar_blue">#00374B</color>
     <color name="hgb_nav_font_unselected">#7FA5B4</color>
     <color name="white">#ffffff</color>
+    <color name="white_opacity">#22ffffff</color>
     <color name="hgb_edit_text_color">#5D808E</color>
     <color name="green_button_color">#36B784</color>
     <color name="red_button_color">#EE3A3C</color>
@@ -54,7 +55,7 @@
 
     <color name="cnc_main_message_blue">#376888</color>
     <color name="cnc_user_message">#419ADD</color>
-
+    <color name="cnc_user_message_color">#0f3d4d</color>
 
 
 

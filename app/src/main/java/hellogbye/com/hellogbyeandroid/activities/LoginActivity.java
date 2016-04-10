@@ -1,25 +1,15 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-
-import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
@@ -40,7 +30,7 @@ public class LoginActivity extends FragmentActivity {
     private FontTextView mLoginTextView;
     private HGBPreferencesManager hgbPrefrenceManager;
     private FontTextView mForgotPasswordTextView;
-
+    private FontTextView try_now;
 
 
     @Override
@@ -63,7 +53,6 @@ public class LoginActivity extends FragmentActivity {
         mForgotPasswordTextView = (FontTextView) findViewById(R.id.forgotpassword);
 
 
-
         mForgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,6 +60,7 @@ public class LoginActivity extends FragmentActivity {
                 resetPassword();
             }
         });
+
 
 
         mLoginTextView.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +75,6 @@ public class LoginActivity extends FragmentActivity {
                         UserLoginCredentials user = (UserLoginCredentials) data;
                         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
                         goToMainActivity();
-
                     }
 
                     @Override

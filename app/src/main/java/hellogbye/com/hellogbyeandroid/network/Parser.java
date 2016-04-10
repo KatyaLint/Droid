@@ -245,6 +245,18 @@ public class Parser {
         }
         return mResponseData;
     }
+    public static Object authenticationData(String response){
+        UserLoginCredentials user = null;
+        try {
+            Gson gson = new Gson();
+            Type type = new TypeToken<UserLoginCredentials>() {
+            }.getType();
+            user = gson.fromJson((String) response, type);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 
     public static Object loginData(String response){
         UserLoginCredentials user = null;

@@ -164,7 +164,7 @@ public class MyTripPinnedAdapter extends SectionedBaseAdapter {
 
 
         if(section == 0 ){
-            HGBUtility.loadRoundedImage( item.getUrlToCityView(),  holder.my_trip_user_image, R.drawable.cityavatar);
+            HGBUtility.loadRoundedImage( item.getUrlToCityView(),  holder.my_trip_user_image, R.drawable.city_avatar_a_2);
             holder.my_trip_name.setText(item.getName());
             holder.my_trip_dates.setText(HGBUtility.parseDateToddMMyyyyMyTrip(item.getStartdate())+" - "+HGBUtility.parseDateToddMMyyyyMyTrip(item.getEnddate()));
             if(item.getPaymentstatus().equals("UPD")){
@@ -181,7 +181,7 @@ public class MyTripPinnedAdapter extends SectionedBaseAdapter {
                 holder.my_trip_delete_forever.setVisibility(View.GONE);
             }
 
-            HGBUtility.loadRoundedImage( item.getUrlToCityView(),  holder.my_trip_user_image, R.drawable.cityavatar);
+            HGBUtility.loadRoundedImage( item.getUrlToCityView(),  holder.my_trip_user_image, R.drawable.city_avatar_a_2);
             holder.my_trip_name.setText(item.getName());
             holder.my_trip_dates.setText(HGBUtility.parseDateToddMMyyyyMyTrip(item.getStartdate())+" - "+HGBUtility.parseDateToddMMyyyyMyTrip(item.getEnddate()));
             if(item.getPaymentstatus().equals("UPD")){

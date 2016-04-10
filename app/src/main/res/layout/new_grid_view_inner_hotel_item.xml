@@ -14,7 +14,7 @@
         android:orientation="vertical"
         android:layout_width="@dimen/DP140"
         android:layout_height="@dimen/DP90"
-        android:background="@drawable/rounded_corner"
+        android:background="@drawable/rounded_corner_white"
         android:padding="@dimen/DP4"
         android:layout_marginTop="@dimen/DP6"
         android:layout_gravity="center"

@@ -28,6 +28,7 @@ Code changing:
  HEL-503 - add change password option in personal info which is in settings
  HEL-559 - can't make a trip as favorite trip
 
+
  Code changing:
  --------------
   - My trips, new options - All, Paid, Favorites
@@ -40,3 +41,5 @@ Code changing:
   - New make payment button
   - Refactoring itinerary VO
   - Current trip update
+  - New icons for menu
+  - Anonymous

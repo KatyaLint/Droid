@@ -4,55 +4,82 @@
     android:layout_height="match_parent"
     android:background="@drawable/b_g_android"
     android:orientation="vertical"
-    android:paddingLeft="50dp"
-    android:paddingRight="50dp">
+    android:paddingLeft="@dimen/DP34"
+    android:paddingRight="@dimen/DP34">
 
     <ImageView
         android:id="@+id/large_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/create_account"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/large_logo" />
+        android:src="@drawable/large_logo"
+        android:layout_marginBottom="@dimen/DP20"
+        android:layout_above="@+id/flight_hotel_icon"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout="@+id/create_account"
+        android:src="@drawable/flight_hotel_icon"
+        android:id="@+id/flight_hotel_icon"
+        android:layout_above="@+id/try_now"
+        android:layout_marginBottom="@dimen/DP20"
+        android:layout_centerHorizontal="true" />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/create_account"
+        android:id="@+id/try_now"
         style="@style/RedCustomButtonStyle"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="50dp"
         android:background="@drawable/red_button"
-        android:text="@string/create_account" />
+        android:text="@string/try_it_now"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/forgotpassword" />
 
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/forgotpassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/create_account"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
+        android:textSize="@dimen/SP18"
         android:gravity="center"
         android:text="@string/already_have_account"
-        android:textColor="@color/hgb_edit_text_color"
-        app:fontName="dinnextltpro_light.otf" />
+        android:textColor="@color/white"
+        app:fontName="dinnextltpro_regular.otf"
+        android:layout_above="@+id/login_button"
+        android:layout_marginBottom="@dimen/DP20"
+        android:layout_alignStart="@+id/login_button" />
+
+
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/login_button"
+        style="@style/RedCustomButtonStyle"
+        android:background="@drawable/round_azure_button_shape"
+        android:text="@string/login"
+        android:layout_above="@+id/create_account"
+        android:layout_alignStart="@+id/create_account"
+        android:layout_marginBottom="@dimen/DP20" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+        android:id="@+id/create_account"
         style="@style/GreenCustomButtonStyle"
-        android:layout_below="@id/forgotpassword"
-        android:layout_marginTop="10dp"
-        android:text="@string/login" />
+        android:text="@string/create_account"
+        android:layout_marginBottom="@dimen/DP20"
+        android:layout_above="@+id/terms_conditions"
+        android:layout_alignStart="@+id/terms_conditions" />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/terms_conditions"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="@dimen/DP10"
         android:gravity="center"
+        android:text="sdfsdf"
         app:fontName="dinnextltpro_light.otf"
         android:textColor="@android:color/white"
-        android:textSize="12sp" />
+        android:textSize="@dimen/SP10" />
 
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -60,6 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Change Server Url"
+
         android:textColor="@color/red_button_color"
         android:visibility="gone"/>
 

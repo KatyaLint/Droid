@@ -99,11 +99,14 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
     private MyTripsFragment.OnItemClickListener editMyTripsClickCB;
     private FontTextView itirnarary_title_Bar;
+<<<<<<< HEAD
+=======
     private FontTextView mProfileName;
     private ArrayList<UserDataVO> mTravelList = new ArrayList<>();
     private ArrayList<CountryItemVO> mEligabileCountryList = new ArrayList<>();
     private ArrayList<CreditCardItem> mCreditCardList = new ArrayList<>();
 
+>>>>>>> master
 
     public HGBSaveDataClass getHGBSaveDataClass(){
         return hgbSaveDataClass;
@@ -137,8 +140,11 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         // mNavTitles = getResources().getStringArray(R.array.nav_draw_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (RecyclerView) findViewById(R.id.left_drawer_rv);
+
         mName = (FontTextView) findViewById(R.id.nav_profile_name);
-        mProfileName = (FontTextView)findViewById(R.id.nav_profile_type);
+
+
+
         mNavDrawerLinearLayout = (LinearLayout) findViewById(R.id.drawer);
         mProfileImage = (RoundedImageView) findViewById(R.id.nav_profile_image);
 
@@ -165,9 +171,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         getCompanionsFromServer();
 
 
-
-
-     //   getAccountsProfiles();
     }
 
 
@@ -225,8 +228,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
                 UserDataVO mCurrentUser = (UserDataVO) data;
                 hgbSaveDataClass.setCurrentUser(mCurrentUser);
-                ImageView my_trips_image_profile = (ImageView)findViewById(R.id.my_trips_image_profile);
-                HGBUtility.getAndSaveUserImage(mCurrentUser.getAvatar(), mProfileImage, my_trips_image_profile);
+           //     ImageView my_trips_image_profile = (ImageView)findViewById(R.id.my_trips_image_profile);
+                HGBUtility.getAndSaveUserImage(mCurrentUser.getAvatar(), mProfileImage, null);
                 //my_trips_image_profile.setImageBitmap(HGBUtility.getBitmapFromCache(getBaseContext()));
                 getAccountsProfiles();
                 selectItem(ToolBarNavEnum.HOME.getNavNumber(), null);
@@ -250,13 +253,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             ConnectionManager.getInstance(MainActivity.this).getUserProfile(new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
-
                     mCurrentUser = (UserDataVO) data;
                     String name = mCurrentUser.getFirstname() + " " + mCurrentUser.getLastname();
-
                     hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_NAME, "");
                     mName.setText(name);
-
                 }
 
                 @Override
@@ -269,8 +269,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         } else {
             mName.setText(strName);
         }
-
-
     }
 
 
@@ -345,9 +343,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String id = (String) v.getTag();
-//                setHomeFragmentState(id);
-
                 clearCNCItems();
             }
         });
@@ -424,14 +419,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mNavItemsList.add(new NavItem(ToolBarNavEnum.ACCOUNT, false, R.drawable.my_account_enable, R.drawable.my_account_disable));
 
     }
-
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//      //  getMenuInflater().inflate(R.menu.navigation_drawer, menu);
-//        return true;
-//    }
 
     /* Called whenever we call invalidateOptionsMenu() */
     @Override
@@ -854,7 +841,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             @Override
             public void onSuccess(Object data) {
                 hgbSaveDataClass.setTravelOrder((UserTravelMainVO) data);
-                mProfileName.setText(hgbSaveDataClass.getTravelOrder().getmSolutionName());
+
                 continueFlow(fragment);
             }
 
