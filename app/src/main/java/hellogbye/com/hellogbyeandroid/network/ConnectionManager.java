@@ -32,23 +32,9 @@ public class ConnectionManager {
     }
 
 
-
-<<<<<<< HEAD
        public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
-
-//       public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
-=======
-//       public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
-
 //    public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
 
-
-
-       public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
-
-
-//    public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
->>>>>>> kate_brunch
 
 
     private static ConnectionManager _instance;
