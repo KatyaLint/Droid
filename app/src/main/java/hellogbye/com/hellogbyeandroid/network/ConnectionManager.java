@@ -33,9 +33,22 @@ public class ConnectionManager {
 
 
 
+<<<<<<< HEAD
        public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
 
 //       public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
+=======
+//       public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
+
+//    public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
+
+
+
+       public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
+
+
+//    public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
+>>>>>>> kate_brunch
 
 
     private static ConnectionManager _instance;
@@ -1511,7 +1524,6 @@ public class ConnectionManager {
     }
 
             public enum Services {
-                // http://cnc.hellogbye.com/cnc/rest/Statics/GetProvinceByCountryCode?countryCode=ID
                 USER_POST_LOGIN("Session"),
                 USER_GET_PROFILE("UserProfile"),
                 USER_POST_CHANGE_PASSWORD("UserProfile/Password"),
@@ -1545,8 +1557,6 @@ public class ConnectionManager {
                 CARD_SESSION("Card/Token"),
                 BOOKING_PAY("booking/pay"),
                 USER_PROFILE_DEVICE_AUTHENTICATION("UserProfile/DeviceAuthentication");
-
-
 
                 String url;
                 Services(String url){

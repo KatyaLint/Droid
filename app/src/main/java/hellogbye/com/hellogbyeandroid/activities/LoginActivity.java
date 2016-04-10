@@ -30,7 +30,7 @@ public class LoginActivity extends FragmentActivity {
     private FontTextView mLoginTextView;
     private HGBPreferencesManager hgbPrefrenceManager;
     private FontTextView mForgotPasswordTextView;
-    private FontTextView try_now;
+
 
 
     @Override
@@ -60,7 +60,6 @@ public class LoginActivity extends FragmentActivity {
                 resetPassword();
             }
         });
-
 
 
         mLoginTextView.setOnClickListener(new View.OnClickListener() {
