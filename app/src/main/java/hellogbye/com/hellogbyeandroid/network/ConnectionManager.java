@@ -32,16 +32,18 @@ public class ConnectionManager {
     }
 
 
+<<<<<<< HEAD
 
 //       public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
 
     public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
 
 
+=======
+       public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
+>>>>>>> master
 
-    //public static String BASE_URL =  "http://cnc.hellogbye.com/cnc/rest/itinerary?count=15&skip=30";
-
-    //  public static String BASE_URL = "http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/";
+//    public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
 
 
     private static ConnectionManager _instance;
@@ -1517,8 +1519,11 @@ public class ConnectionManager {
     }
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> master
             public enum Services {
                 // http://cnc.hellogbye.com/cnc/rest/Statics/GetProvinceByCountryCode?countryCode=ID
                 USER_POST_LOGIN("Session"),
@@ -1565,11 +1570,9 @@ public class ConnectionManager {
                 public String getURL(){
                     return url;
                 }
-
             }
 
-            private String getURL(Services type) {
-                System.out.println("Kate type.getURL() =" + type.getURL());
-                return type.getURL();
-            }
+    private String getURL(Services type) {
+        return type.getURL();
+    }
 }

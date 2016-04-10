@@ -100,6 +100,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private MyTripsFragment.OnItemClickListener editMyTripsClickCB;
     private FontTextView itirnarary_title_Bar;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     private ArrayList<UserDataVO> mTravelList = new ArrayList<>();
     private ArrayList<CountryItemVO> mEligabileCountryList = new ArrayList<>();
     private ArrayList<CreditCardItem> mCreditCardList = new ArrayList<>();
@@ -107,9 +111,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     public HGBSaveDataClass getHGBSaveDataClass(){
         return hgbSaveDataClass;
     }
-
-    private HashSet<String> itenearySet;
-
     private HashSet<CreditCardItem> mSelectedCreditCards = new HashSet<>();
 
     private HashMap<String,String> mBookingHashMap = new HashMap<>();
