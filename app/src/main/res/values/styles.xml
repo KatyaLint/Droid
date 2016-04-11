@@ -121,10 +121,10 @@
     <style name="PaymentSelectCCStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">10dp</item>
+        <item name="android:textSize">@dimen/SP10</item>
         <item name="android:text">Select Card</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:padding">5dp</item>
+        <item name="android:padding">@dimen/DP6</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:background">@drawable/select_cc_border</item>
@@ -152,5 +152,15 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="Sign_up_text_color">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/COLOR_73929E</item>
+        <item name="android:textSize">@dimen/SP16</item>
+        <item name="android:textColorHighlight">@color/white</item>
+        <item name="fontName">dinnextltpro_regular.otf</item>
+        <item name="android:padding">@dimen/DP10</item>
+    </style>
 
 </resources>

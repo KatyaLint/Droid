@@ -18,7 +18,7 @@
     <string name="create_account">Create a new Account</string>
     <string name="try_it_now">Try it Now</string>
     <string name="already_have_account">Already have a HellGbye account?</string>
-    <string name="terms">By clicking pre-register. You agree to HelloGbye\nUser Agreement and Privacy Policy.</string>
+
     <string name="url_user_agreement">http://www.hellogbye.com/assets/docs/tos.pdf</string>
     <string name="url_pp">http://www.hellogbye.com/assets/docs/pp.pdf</string>
     <string name="tell_us">Tell us in your own words where you\nwant to go, when and with who.</string>
@@ -162,7 +162,7 @@
     <string name="cancel">Cancel</string>
     <string name="select_card">Select Card</string>
 
-    <string name="sign_up_account">Create Account</string>
+    <string name="sign_up_account">Create an account</string>
     <string name="sign_up_email">Email</string>
     <string name="sign_up_name">Name</string>
     <string name="sign_up_location">Location</string>
@@ -171,6 +171,13 @@
     <string name="sign_up_province_name">Province Name</string>
     <string name="sign_up_password">Password</string>
     <string name="sign_up_confirm_password">Confirm Password</string>
+    <string name="sign_up_personal_details">Personal Details</string>
+    <string name="sign_up_contact_details">Contact Details</string>
+    <string name="sign_up_phone_number">Phone Number</string>
+    <!--<string name="sign_up_term_of_use">By creating an account I herebye agree to the <a href="http://dev.hellogbye.com/#/document/user-agreement">privacy policy</a> and <a href="http://dev.hellogbye.com/#/document/privacy">terms and conditions</a> </string>-->
+    <string name="sign_up_term_of_use">By creating an account I herebye agree to HelloGbye Agreement and Privacy Policy. </string>
+    <!--<string name="terms">By clicking pre-register. You agree to HelloGbye\nUser Agreement and Privacy Policy.</string>-->
+    <string name="sign_up_done">Done!</string>
 
     <string name="itinerary_make_payment">Make Payment</string>
     <string name="edit_trip_name">Edit Trip Name</string>
