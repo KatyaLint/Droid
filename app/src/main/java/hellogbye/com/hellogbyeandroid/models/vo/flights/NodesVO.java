@@ -35,6 +35,9 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
 
     private String dateOfCell = "";
 
+    @SerializedName("totalpenalty")
+    private double totalpenalty;
+
     @SerializedName("skip")
     private boolean mSkip;
 

@@ -15,11 +15,14 @@ public class PassengersVO {
     @SerializedName("name")
     private String mName;
     @SerializedName("totalprice")
-    private double mTotalPrice;
+    private double mTotalPrice = 0;
     @SerializedName("totalflightprice")
-    private double mTotalFlightPrice;
+    private double mTotalFlightPrice = 0;
     @SerializedName("totalhotelprice")
-    private double mTotalHotelPrice;
+    private double mTotalHotelPrice = 0;
+
+    @SerializedName("totalpenalty")
+    private double totalpenalty;
 
     @SerializedName("avatarurl")
     private String avatarurl;
@@ -32,21 +35,6 @@ public class PassengersVO {
     private HashSet<String> mBookingItems = new HashSet<>();
 
 
-//<<<<<<< HEAD
-//    @SerializedName("cells")
-//    private ArrayList<CellsVO> mCells = new ArrayList<CellsVO>();
-//
-//    private HashSet<String> mBookingItems = new HashSet<>();
-//
-//=======
-////    @SerializedName("cells")
-////    private ArrayList<CellsVO> mCells = new ArrayList<CellsVO>();
-//>>>>>>> master
-
-//
-//    public ArrayList<CellsVO> getmCells() {
-//        return mCells;
-//    }
 
     public String getmPaxguid() {
         return mPaxguid;

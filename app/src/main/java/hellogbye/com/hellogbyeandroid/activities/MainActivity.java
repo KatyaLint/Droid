@@ -3,6 +3,7 @@ package hellogbye.com.hellogbyeandroid.activities;
 
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -217,6 +218,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             public void onSuccess(Object data) {
 
                 UserDataVO mCurrentUser = (UserDataVO) data;
+
                 hgbSaveDataClass.setCurrentUser(mCurrentUser);
            //     ImageView my_trips_image_profile = (ImageView)findViewById(R.id.my_trips_image_profile);
                 HGBUtility.getAndSaveUserImage(mCurrentUser.getAvatar(), mProfileImage, null);
@@ -478,7 +480,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     @Override
     public void gotToStartMenuActivity() {
-        HGBUtility.clearAllFragments(MainActivity.this);
+        HGBUtility.removeAllFragments(MainActivity.this);
+        hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
         Intent intent = new Intent(getApplicationContext(), StartingMenuActivity.class);
         startActivity(intent);
@@ -920,7 +923,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         try {
             Gson gsonback = new Gson();
             String json = gsonback.toJson(hgbSaveDataClass.getCNCItems());
-            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, json);
+            //TODO understand why is here??
+         //   hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, json);
 
         } catch (Exception e) {
             e.printStackTrace();

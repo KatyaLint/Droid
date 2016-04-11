@@ -89,7 +89,6 @@ public class CNCFragment extends HGBAbtsractFragment {
 
         getFlowInterface().getToolBar().updateToolBarView(ToolBarNavEnum.CNC.getNavNumber());
 
-
         getAccountsProfiles();
 
 
@@ -141,15 +140,16 @@ public class CNCFragment extends HGBAbtsractFragment {
     private void loadCNCList() {
         String strCNCList = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, "");
 
-
 //        if ("".equals(strCNCList) && getActivityInterface().getCNCItems()== null ||
 //                strCNCList==null && getActivityInterface().getCNCItems()== null) {
-        if (   (strCNCList.equals("") || strCNCList.equals("null")) && getActivityInterface().getCNCItems()== null ) {
+        if ( (strCNCList.equals("") || strCNCList.equals("null")) && getActivityInterface().getCNCItems()== null ) {
             Resources res = getResources();
             String userName = "";
            if( getActivityInterface().getCurrentUser() != null){
+
                userName = getActivityInterface().getCurrentUser().getFirstname();
            }
+
             String text = String.format(res.getString(R.string.default_cnc_message),userName );
 
 
