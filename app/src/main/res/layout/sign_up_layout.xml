@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/DP10"
     android:background="@drawable/b_g_android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/b_g_android" >
 
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -13,137 +18,146 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:gravity="center"
+        android:padding="@dimen/DP10"
+        android:textSize="@dimen/SP16"
         android:text="@string/sign_up_account"/>
 
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/DP10"
+        android:background="@color/COLOR_2C5466"
         android:textColor="@color/white"
-        android:text="@string/sign_up_email"/>
+        android:textSize="@dimen/SP12"
+        android:text="@string/sign_up_personal_details"/>
+
 
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
-        android:id="@+id/sign_up_email"
-        android:textColor="@color/black"
-        android:hint="@string/email_address"
-        android:background="@color/white"
+        android:padding="@dimen/DP10"
+        android:id="@+id/sign_up_first_name"
+        android:hint="@string/component_invite_hint_name"
+        style="@style/Sign_up_text_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+
+        android:hint="@string/component_invite_hint_last_name"
+        android:id="@+id/sign_up_last_name"
+        style="@style/Sign_up_text_color"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="@string/sign_up_name"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:orientation="horizontal">
-        <hellogbye.com.hellogbyeandroid.views.FontEditTextView
-            android:layout_weight="1"
-            android:id="@+id/sign_up_first_name"
-            android:hint="@string/component_invite_hint_name"
-            android:textColor="@color/black"
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/DP10"/>
+        android:layout_height="wrap_content" />
 
 
-        <hellogbye.com.hellogbyeandroid.views.FontEditTextView
-
-            android:layout_weight="1"
-            android:hint="@string/component_invite_hint_last_name"
-            android:id="@+id/sign_up_last_name"
-            android:textColor="@color/black"
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:layout_width="match_parent"
-        android:textColor="@color/white"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_up_location"/>
 
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/sign_up_city"
-        android:textColor="@color/black"
-        android:background="@color/white"
+        style="@style/Sign_up_text_color"
         android:hint="@string/sign_up_city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
 
-    <LinearLayout
-        android:layout_marginTop="@dimen/DP10"
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        style="@style/Sign_up_text_color"
+        android:id="@+id/sign_up_country"
+        android:hint="@string/sign_up_city_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:layout_marginRight="@dimen/DP10"
-            android:layout_weight="1"
-            android:id="@+id/sign_up_country"
-            android:hint="@string/sign_up_city_name"
-            android:textColor="@color/black"
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" />
 
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:layout_weight="1"
-            android:id="@+id/sign_up_province_name"
-            android:hint="@string/sign_up_province_name"
-            android:visibility="gone"
-            android:textColor="@color/black"
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        style="@style/Sign_up_text_color"
+        android:id="@+id/sign_up_province_name"
+        android:hint="@string/sign_up_province_name"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/DP10"
+        android:background="@color/COLOR_2C5466"
         android:textColor="@color/white"
+        android:textSize="@dimen/SP12"
+        android:text="@string/sign_up_contact_details"/>
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+        android:id="@+id/sign_up_email"
+        style="@style/Sign_up_text_color"
+        android:hint="@string/email_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+        android:id="@+id/sign_up_phone_number"
+        style="@style/Sign_up_text_color"
+        android:hint="@string/sign_up_phone_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/DP10"
+        android:background="@color/COLOR_2C5466"
+        android:textColor="@color/white"
+        android:textSize="@dimen/SP12"
         android:text="@string/sign_up_password"/>
+
+
 
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/sign_up_password"
-        android:textColor="@color/black"
-        android:background="@color/white"
+        style="@style/Sign_up_text_color"
         android:hint="@string/sign_up_password"
         android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="@string/sign_up_confirm_password"/>
-
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
-        android:layout_marginTop="@dimen/DP10"
+        style="@style/Sign_up_text_color"
         android:inputType="textPassword"
         android:id="@+id/sign_up_confirm_password"
-        android:textColor="@color/black"
         android:hint="@string/sign_up_confirm_password"
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/sign_up_hyperlink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/DP10"
+        android:autoLink="all"
+        android:linksClickable="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/SP14"
+        android:text="@string/sign_up_term_of_use"/>
+
+
+
 <Button
     android:id="@+id/sign_up_button"
-    android:text="@string/sign_up_account"
+    android:text="@string/sign_up_done"
     android:textColor="@color/white"
     android:background="@drawable/red_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/DP20"/>
 </LinearLayout>
+</ScrollView>

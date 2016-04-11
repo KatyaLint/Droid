@@ -1,12 +1,19 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +43,7 @@ public class SignUpActivity extends AppCompatActivity {
     private FontTextView sign_up_province_name;
     private BookingRequestVO bookingResponse;
     private UserSignUpDataVO userData;
+    private FontTextView sign_up_hyperlink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +74,21 @@ public class SignUpActivity extends AppCompatActivity {
         sign_up_province_name = (FontTextView)findViewById(R.id.sign_up_province_name);
 
 
+        SpannableString ss = new SpannableString(getResources().getString(R.string.sign_up_term_of_use));
+        ss.setSpan(new myClickableSpan(1), 52, 61, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss.setSpan(new myClickableSpan(2), 66, 80, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // ss.setSpan(termClickableSpan, 3, 11, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+//        mPrivacyPolicy = (FontTextView) findViewById(R.id.terms_conditions);
+//        mPrivacyPolicy.setText(ss);
+//        mPrivacyPolicy.setMovementMethod(LinkMovementMethod.getInstance());
+        // mPrivacyPolicy.setHighlightColor(Color.TRANSPARENT);
+
+         sign_up_hyperlink = (FontTextView) findViewById(R.id.sign_up_hyperlink);
+        sign_up_hyperlink.setText(ss);
+        sign_up_hyperlink.setMovementMethod(LinkMovementMethod.getInstance());
 
 
 
@@ -160,6 +183,33 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+    public class myClickableSpan extends ClickableSpan {
+
+        int pos;
+
+        public myClickableSpan(int position) {
+            this.pos = position;
+        }
+
+        @Override
+        public void onClick(View widget) {
+            String url = "";
+            switch (pos) {
+                case 1:
+                    url = getString(R.string.url_user_agreement);
+                    break;
+                case 2:
+                    url = getString(R.string.url_pp);
+                    break;
+
+            }
+
+
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(browserIntent);
+        }
+
+    }
 
 
 

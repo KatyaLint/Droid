@@ -43,3 +43,4 @@ Code changing:
   - Current trip update
   - New icons for menu
   - Anonymous
+  - Sign up new style
