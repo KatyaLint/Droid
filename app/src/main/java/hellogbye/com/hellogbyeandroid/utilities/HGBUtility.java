@@ -363,9 +363,28 @@ public class HGBUtility {
             FragmentTransaction fragmentTransaction =  activity.getFragmentManager().beginTransaction();
             fragmentTransaction.hide(getFragmentStack().pop());
         }
-
     }
 
+    public static void removeAllFragments(Activity activity){
+        Stack<Fragment> fragments = getFragmentStack();
+        if (fragments == null) {
+           return;
+        }
+        for (Fragment fragment:fragments){
+            // To save any of the fragments, add this check.
+            // A tag can be added as a third parameter to the fragment when you commit it
+//            if (fragment.getTag().equals(fragment.getTag())) {
+//                continue;
+//            }
+
+            activity.getFragmentManager().beginTransaction().remove(fragment).commit();
+        }
+        setFragmentsClear();
+    }
+
+    private static void setFragmentsClear(){
+        fragmentStack.clear();
+    }
     public static boolean clearBackStackAndGoToNextFragment(Activity activity) {
 
         if(getFragmentStack().size() >= 2){

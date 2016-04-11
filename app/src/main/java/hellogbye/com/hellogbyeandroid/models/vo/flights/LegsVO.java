@@ -78,6 +78,14 @@ public class LegsVO {
     @SerializedName("arrivaltime")
     private String mArrivalTime;
 
+    @SerializedName("originairportcoordinates")
+    private AirportCoordinatesVO originairportcoordinates = new AirportCoordinatesVO();
+
+    @SerializedName("destinationairportcoordinates")
+    private AirportCoordinatesVO destinationairportcoordinates = new AirportCoordinatesVO();
+
+    @SerializedName("airportcoordinates")
+    private AirportCoordinatesVO airportcoordinates = new AirportCoordinatesVO();
 
     @SerializedName("availablefareclasses")
     private ArrayList<String> mAvailablefareclasses;

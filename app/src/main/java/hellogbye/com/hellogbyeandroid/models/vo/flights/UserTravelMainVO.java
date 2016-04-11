@@ -25,6 +25,8 @@ public class UserTravelMainVO {
     @SerializedName("totalprice")
     private String mTotalPrice;
 
+    @SerializedName("totalpenalty")
+    private double totalpenalty;
     //OLD
 
 
@@ -49,6 +51,7 @@ public class UserTravelMainVO {
     public String getmTotalPrice() {
         return mTotalPrice;
     }
+
     public ArrayList<PassengersVO> getPassengerses() {
         return passengerses;
     }

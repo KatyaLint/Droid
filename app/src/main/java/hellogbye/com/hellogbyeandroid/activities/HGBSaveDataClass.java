@@ -2,6 +2,7 @@ package hellogbye.com.hellogbyeandroid.activities;
 
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -95,9 +96,12 @@ public class HGBSaveDataClass implements HGBMainInterface {
             setSolutionID(null);
         } else {
             setSolutionID(mUserTravelOrder.getmSolutionID());
-            Gson gson = new Gson();
-//            String json = gson.toJson(travelorder);
- //          hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO, json);
+
+            GsonBuilder gsonBuilder = new GsonBuilder().serializeSpecialFloatingPointValues();
+            Gson gson = gsonBuilder.create();
+           // Gson gson = new Gson();
+            String json = gson.toJson(travelorder);
+            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO, json);
         }
     }
 
