@@ -96,6 +96,7 @@ public class HGBSaveDataClass implements HGBMainInterface {
             setSolutionID(null);
         } else {
             setSolutionID(mUserTravelOrder.getmSolutionID());
+
             GsonBuilder gsonBuilder = new GsonBuilder().serializeSpecialFloatingPointValues();
             Gson gson = gsonBuilder.create();
            // Gson gson = new Gson();

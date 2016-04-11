@@ -47,6 +47,8 @@ public class CreditCardItem {
     @SerializedName("modifieddatetime")
     private String modifieddatetime;
 
+    private String cvv;
+
     private boolean isSelected;
 
     private String cardNumber;
@@ -192,5 +194,11 @@ public class CreditCardItem {
         this.cardNumber = cardNumber;
     }
 
+    public String getCvv() {
+        return cvv;
+    }
 
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
+    }
 }

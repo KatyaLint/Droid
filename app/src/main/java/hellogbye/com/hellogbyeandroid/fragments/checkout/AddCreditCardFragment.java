@@ -261,7 +261,7 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
         String last4 = mCardNumber.getText().toString();
         last4 = last4.substring(last4.length() - 4, last4.length());
         creditCardItem.setLast4(last4);
-        creditCardItem.setToken(mCardCCV.getText().toString());
+        creditCardItem.setCvv(mCardCCV.getText().toString());
         creditCardItem.setCardNumber(mCardNumber.getText().toString());
 
         ConnectionManager.getInstance(getActivity()).getCCSession(new ConnectionManager.ServerRequestListener() {
@@ -270,11 +270,14 @@ public class AddCreditCardFragment extends HGBAbtsractFragment {
                 creditCardItemSession = (CreditCardSessionItem) data;
 
 
+
                 if (creditCardItemSession == null) {
                     HGBErrorHelper errorHelper = new HGBErrorHelper();
                     errorHelper.show(getFragmentManager(), "There was a probelm please try again");
 
                 }else{
+                    creditCardItem.setNickname(creditCardItemSession.getNickname());
+                    creditCardItem.setToken(creditCardItemSession.getToken());
 
 
 

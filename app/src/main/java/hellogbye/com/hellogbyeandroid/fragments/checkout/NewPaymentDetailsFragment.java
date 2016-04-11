@@ -69,7 +69,7 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initSelectCCDialog();
+
     }
 
 
@@ -77,7 +77,7 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.payment_details_layout, container, false);
 
-
+        initSelectCCDialog();
         return rootView;
     }
 

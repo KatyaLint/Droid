@@ -1543,7 +1543,7 @@ public class ConnectionManager {
                 ACCOUNTS_PREFERENCES("UserProfile/Accounts/TravelPreference"),
                 USER_PROFILE_REGISTER("UserProfile/Register"),
                 STATIC_PROVINCE_BY_COUNTRY_CODE("Statics/GetProvinceByCountryCode?countryCode="),
-                CARD_SESSION("Card/Token"),
+                CARD_SESSION("Card/Session"),
                 BOOKING_PAY("booking/pay"),
                 USER_PROFILE_DEVICE_AUTHENTICATION("UserProfile/DeviceAuthentication");
 
