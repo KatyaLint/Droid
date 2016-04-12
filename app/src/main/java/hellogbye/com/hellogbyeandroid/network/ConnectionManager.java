@@ -460,11 +460,11 @@ public class ConnectionManager {
                 jsonObjectMain.put("travelpreferenceprofileid", airportSendValuesVO.getTravelpreferenceprofileid());
 
                 //TODO need to remove
-                jsonObjectMain.put("latitude", "32.063064499999996");
-                jsonObjectMain.put("longitude", "34.7716091");
+//                jsonObjectMain.put("latitude", "32.063064499999996");
+//                jsonObjectMain.put("longitude", "34.7716091");
 
-//                jsonObjectMain.put("latitude", airportSendValuesVO.getLatitude());
-//                jsonObjectMain.put("longitude", airportSendValuesVO.getLongitude());
+                jsonObjectMain.put("latitude", airportSendValuesVO.getLatitude());
+                jsonObjectMain.put("longitude", airportSendValuesVO.getLongitude());
 
 
                 jsonObjectMain.put("token", jsonArray);
