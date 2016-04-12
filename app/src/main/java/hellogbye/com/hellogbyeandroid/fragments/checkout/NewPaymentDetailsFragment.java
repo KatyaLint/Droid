@@ -309,6 +309,7 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
 
         } else if (mSelectedView.getTag() instanceof PaymentChild) {
             mTotalSelectCC.setText(getString(R.string.select_card));
+            mTotalSelectCC.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
 
             PaymentChild paymentchild = (PaymentChild) mSelectedView.getTag();
 
@@ -353,8 +354,10 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
         } else {
             if (add) {
                 mTotalSelectCC.setText(selectedCreditCard.getLast4());
+                setCCIcon(mTotalSelectCC,selectedCreditCard);
             } else {
                 mTotalSelectCC.setText(getString(R.string.select_card));
+                mTotalSelectCC.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                 getFlowInterface().getCreditCardsSelected().clear();
             }
 
@@ -405,6 +408,25 @@ public class NewPaymentDetailsFragment extends HGBAbtsractFragment {
             }
         }
         mAdapter.notifyDataSetChanged();
+    }
+
+    private void setCCIcon(FontTextView view, CreditCardItem selectedCreditCard) {
+        if(selectedCreditCard.getCardtypeid().equals("1")){
+           // view.setCompoundDrawablesWithIntrinsicBounds(R.drawable.amex, 0, 0, 0);
+
+        }else if(selectedCreditCard.getCardtypeid().equals("2")){
+            //TODO need DISCOVERY card
+           // view.setCompoundDrawablesWithIntrinsicBounds(R.drawable.amex, 0, 0, 0);
+
+        }else if(selectedCreditCard.getCardtypeid().equals("3")){
+           // view.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mastercard, 0, 0, 0);
+
+        }else if(selectedCreditCard.getCardtypeid().equals("4")){
+          //  view.setCompoundDrawablesWithIntrinsicBounds(R.drawable.visa, 0, 0, 0);
+
+        }
+
+
     }
 
     private PassengersVO getCurrentPassengerByName(String firstname) {
