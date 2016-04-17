@@ -66,7 +66,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             viewHolder.flightNumber.setText(legFlightVO.getmCarrierCode() + legFlightVO.getmFlightNumber());
             viewHolder.flight_airport_text.setText(legFlightVO.getmOrigin() + " - " + legFlightVO.getmDestination());
             viewHolder.flight_boarding_text.setText(legFlightVO.getmDepartureTime());
-            viewHolder.flight_duration_text.setText(legFlightVO.getmDepartureTime());
+            viewHolder.flight_duration_text.setText(legFlightVO.getmFlightTime());
             viewHolder.flight_class_text.setText(legFlightVO.getmFareClass());
             viewHolder.stop_over_include_layout.setVisibility(View.GONE);
 

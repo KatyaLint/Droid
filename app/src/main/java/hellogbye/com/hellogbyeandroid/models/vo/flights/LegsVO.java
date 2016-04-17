@@ -222,4 +222,28 @@ public class LegsVO {
     public void setmGuid(String mGuid) {
         this.mGuid = mGuid;
     }
+
+    public AirportCoordinatesVO getOriginairportcoordinates() {
+        return originairportcoordinates;
+    }
+
+    public void setOriginairportcoordinates(AirportCoordinatesVO originairportcoordinates) {
+        this.originairportcoordinates = originairportcoordinates;
+    }
+
+    public AirportCoordinatesVO getDestinationairportcoordinates() {
+        return destinationairportcoordinates;
+    }
+
+    public void setDestinationairportcoordinates(AirportCoordinatesVO destinationairportcoordinates) {
+        this.destinationairportcoordinates = destinationairportcoordinates;
+    }
+
+    public String getmFlightTime() {
+        return mFlightTime;
+    }
+
+    public void setmFlightTime(String mFlightTime) {
+        this.mFlightTime = mFlightTime;
+    }
 }

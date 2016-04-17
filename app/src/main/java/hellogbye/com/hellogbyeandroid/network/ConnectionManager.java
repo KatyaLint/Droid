@@ -790,7 +790,9 @@ public class ConnectionManager {
     public void getAlternateHotelsWithHotel(String solutioid, String paxid, String checkin, String checkout, final ServerRequestListener listener) {
         // http://gtaqa-1141527982.us-east-1.elb.amazonaws.com/GTAREST/REST/Hotel?solution=e977aac6-0fd7-4321-8e1f-44cb597cfbb2&paxid=9d2c85f5-d295-4064-a8c6-a4d0015b52e4&checkin=2015-09-02&checkout=2015-09-04
         String url = getURL(Services.USER_GET_HOTEL_ALTERNATIVE);
-        url = url + SOLUTION + solutioid + "&paxid=" + paxid + "&checkin=" + checkin + "&checkout=" + checkout;
+        String [] chekinArray = checkin.split("T");
+        String [] chekoutArray = checkout.split("T");
+        url = url + SOLUTION + solutioid + "&paxid=" + paxid + "&checkin=" + chekinArray[0] + "&checkout=" + chekoutArray[0];
         JSONObject jsonObject = new JSONObject();
 
 

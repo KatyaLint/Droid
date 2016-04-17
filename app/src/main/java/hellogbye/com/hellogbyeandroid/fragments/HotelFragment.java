@@ -107,6 +107,7 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
     private HashMap<Marker, NodesVO> nodeMarkerMap;
     private PassengersVO passengersVO;
     private NodesVO currentSelectedNode;
+    private ImageView mConfirmBadge;
 
     private float PANEL_HIGHT = 0.4f;
     private Activity activity;
@@ -280,6 +281,7 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
 
                         for (NodesVO node : cellsVO.getmNodes()) {
                             if (nodesVO.getmHotelCode().equals(node.getmHotelCode())) {
+
                                 initHotel(node, null);
                                 //  nodeMarkerMap.put(marker, node);
                             } else {
@@ -395,7 +397,8 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
         mMyHotelText = (FontTextView) rootView.findViewById(R.id.text_my_hotel);
         mSelectHotelText = (FontTextView) rootView.findViewById(R.id.text_select_hotel);
         mPullDOwnRelativeLayout = (RelativeLayout) rootView.findViewById(R.id.pull_down);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.alt_hotel_recycler_view);
+        mRecyclerView  = (RecyclerView) rootView.findViewById(R.id.alt_hotel_recycler_view);
+        mConfirmBadge = (ImageView)rootView.findViewById(R.id.cofirm_badge);
 
 
         mStart1ImageView = (ImageView) rootView.findViewById(R.id.star1);
@@ -469,17 +472,29 @@ public class HotelFragment extends HGBAbtsractFragment implements GoogleMap.OnMa
             mMyHotelText.setVisibility(View.VISIBLE);
             mMyHotelImage.setVisibility(View.VISIBLE);
             mSelectHotelText.setVisibility(View.GONE);
+            mConfirmBadge.setVisibility(View.VISIBLE);
+            if(node.getmPaymentProcessingState().equals("PAID")){
+                mConfirmBadge.setBackgroundResource(R.drawable.paid_badge);
+            }else{
+                mConfirmBadge.setBackgroundResource(R.drawable.cofirm_badge);
+            }
 
         } else {
             mSelectHotelText.setVisibility(View.VISIBLE);
             mMyHotelText.setVisibility(View.GONE);
             mMyHotelImage.setVisibility(View.GONE);
+            mConfirmBadge.setVisibility(View.GONE);
         }
 
         mHotelNameFullFontTextView.setText(node.getmAddress1() + "," + node.getmCityName() + "\n" + node.getmPostalCode() + "," + node.getmStateProvince() + "," + node.getmCountry());
-        mHotelAmnitiesFontTextView.setText(Html.fromHtml(node.getmAmenities()));
+       if(node.getmAmenities() != null){
+           mHotelAmnitiesFontTextView.setText(Html.fromHtml(node.getmAmenities()));
+       }
+
         mHotelContactFontTextView.setText(node.getmPhone());
-        mHotelNearbyAttrictionsFontTextView.setText(Html.fromHtml(node.getmShortDescription()));
+        if(node.getmShortDescription() != null){
+            mHotelNearbyAttrictionsFontTextView.setText(Html.fromHtml(node.getmShortDescription()));
+        }
         setStarRating(node.getmStarRating());
         mImageList = new ArrayList<>();
         for (AllImagesVO image : node.getAllImagesVOs()) {
