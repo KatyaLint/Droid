@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
+    android:layout_margin="@dimen/DP10"
     android:orientation="horizontal">
 
 
@@ -12,6 +12,7 @@
         android:id="@+id/cnc_image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/DP10"
         android:background="@drawable/hello_gbye_icon_r_g_b_red"/>
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -19,8 +20,9 @@
         style="@style/CNCStyle"
         android:text="HGB"
         android:gravity="left"
-        app:fontName="dinnextltpro_light.otf"
-        android:textColor="@color/white"
+        android:textSize="@dimen/SP16"
+        app:fontName="dinnextltpro_regular.otf"
+        android:textColor="@color/COLOR_0E587D"
         android:background="@drawable/hgb_cnc_backround"
         android:layout_alignParentLeft="true"/>
 

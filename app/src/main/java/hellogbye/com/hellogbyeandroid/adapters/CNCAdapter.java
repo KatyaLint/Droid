@@ -27,11 +27,12 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int HGB_ERROR_ITEM = 1;
     public static final int ME_ITEM = 0;
     public static final int WAITING_ITEM = 3;
-
+    private int padding_integer;
     // Provide a suitable constructor (depends on the kind of dataset)
     public CNCAdapter(Context context, ArrayList<CNCItem> myDataset) {
         mArrayList = myDataset;
         mContext = context;
+        padding_integer = (int) context.getResources().getDimension(R.dimen.DP10);
     }
 
     class ViewHolderMe extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -138,21 +139,22 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 ViewHolderHGB hgbholderError = (ViewHolderHGB) holder;
                 hgbholderError.itemHGB.setBackgroundResource(R.drawable.hgb_red_cnc_backround);
                 hgbholderError.itemHGB.setTextColor(mContext.getResources().getColor(R.color.black));
-                hgbholderError.itemHGB.setPadding(30,30,30,30);
+                hgbholderError.itemHGB.setPadding(padding_integer,padding_integer,padding_integer,padding_integer);
             break;
             case HGB_ITEM:
                 ViewHolderHGB hgbholder = (ViewHolderHGB) holder;
                 if (mContext.getResources().getString(R.string.itinerary_created).equals(strMessage)
                    ||mContext.getResources().getString(R.string.grid_has_been_updated).equals(strMessage)) {
-                    hgbholder.itemHGB.setBackgroundResource(R.drawable.hgb_red_cnc_backround);
-                    hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.black));
-                    hgbholder.itemHGB.setPadding(30,30,30,30);
+                    hgbholder.itemHGB.setBackgroundResource(R.drawable.hgb_cnc_backround);
+                    hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_0E587D));
+                    hgbholder.itemHGB.setPadding(padding_integer,padding_integer,padding_integer,padding_integer);
                 }
                 else {
                     hgbholder.itemHGB.setBackgroundResource(R.drawable.hgb_cnc_backround);
-                    hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.cnc_main_message_blue));
-                    hgbholder.itemHGB.setPadding(30,30,30,30);
+                    hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_0E587D));
+                    hgbholder.itemHGB.setPadding(padding_integer,padding_integer,padding_integer,padding_integer);
                 }
+
                 hgbholder.itemHGB.setText(strMessage);
                 break;
             case WAITING_ITEM:
