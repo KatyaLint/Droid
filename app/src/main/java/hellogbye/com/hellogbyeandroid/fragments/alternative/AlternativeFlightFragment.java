@@ -20,6 +20,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
@@ -212,9 +213,21 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment implements Go
                                 new LatLng(airportDestinCoordinatesVO.getLatitude(), airportDestinCoordinatesVO.getLongitude()))
                         .width(5).color(Color.RED).geodesic(true));
 
-                    bc.include(new LatLng(airportOrginCoordinatesVO.getLatitude(), airportOrginCoordinatesVO.getLongitude()));
+                if(i!=0 || i != legsFlights.size() - 1){
+                    mMap.addMarker(new MarkerOptions().
+                            position(new LatLng(leg.getDestinationairportcoordinates().getLatitude(), leg.getDestinationairportcoordinates().getLongitude())));
+                }
+
+
+
             }
         }
+        bc.include(new LatLng(currentNode.getOriginairportcoordinates().getLatitude(), currentNode.getOriginairportcoordinates().getLongitude()));
+        bc.include(new LatLng(currentNode.getDestinationairportcoordinates().getLatitude(), currentNode.getDestinationairportcoordinates().getLongitude()));
+        mMap.addMarker(new MarkerOptions().
+                position(new LatLng(currentNode.getOriginairportcoordinates().getLatitude(), currentNode.getOriginairportcoordinates().getLongitude())));
+        mMap.addMarker(new MarkerOptions().
+                position(new LatLng(currentNode.getDestinationairportcoordinates().getLatitude(), currentNode.getDestinationairportcoordinates().getLongitude())));
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bc.build(), 50));
 
 
