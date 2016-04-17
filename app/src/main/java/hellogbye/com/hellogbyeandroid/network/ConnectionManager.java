@@ -944,6 +944,8 @@ public class ConnectionManager {
         }, false);
     }
 
+
+
   //  http://cnc.hellogbye.com/cnc/rest/Statics/GetProvinceByCountryCode?countryCode=ID
 
     public void getStaticBookingProvince(String countryCode, final ServerRequestListener listener) {
@@ -1075,6 +1077,27 @@ public class ConnectionManager {
     // DELETE
     ///////////////////////////////
 
+    public void deleteItinerary(String solutionid, final ServerRequestListener listener) {
+
+        String url = getURL(Services.ITINERARY);
+        url = url + solutionid;
+        JSONObject jsonObject = new JSONObject();
+
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.DELETE, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, false);
+    }
+
 
     public void deleteUserCompanion(String companion_id, final ServerRequestListener listener) {
         String url = getURL(Services.COMPANIONS);
@@ -1095,6 +1118,7 @@ public class ConnectionManager {
             }
         });
     }
+
 
     public void deleteUserProfileAccountsWithEmail(String email, final ServerRequestListener listener) {
         String url = getURL(Services.USER_GET_USER_PROFILE_ACCOUNTS);

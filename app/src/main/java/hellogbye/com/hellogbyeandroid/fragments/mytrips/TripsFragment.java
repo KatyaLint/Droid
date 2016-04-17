@@ -2,6 +2,7 @@ package hellogbye.com.hellogbyeandroid.fragments.mytrips;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,18 +21,14 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.MyTripPinnedAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.myTripsSwipeAdapter.TripsSwipeItemsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
-import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalEmailSettingsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.settings.SwipeItemsAdapter;
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
-import hellogbye.com.hellogbyeandroid.views.PinnedHeaderListView;
 
 /**
  * Created by nyawka on 4/14/16.
@@ -63,7 +60,7 @@ public class TripsFragment  extends HGBAbtsractFragment {
 
     public interface ISwipeAdapterExecution{
         void clickedItem(int position);
-        void deleteClicked();
+        void deleteClicked(int position);
 
     }
 
@@ -104,17 +101,38 @@ public class TripsFragment  extends HGBAbtsractFragment {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
                         errorHelper.setMessageForError((String) data);
                         errorHelper.show(getFragmentManager(), (String) data);
-                        Log.e("MainActivity", "Problem updating grid  " + data);
+
                     }
                 });
 
             }
 
             @Override
-            public void deleteClicked() {
+            public void deleteClicked(final int position) {
+                String solutionId = mItemsList.get(position).getSolutionid();
 
+
+                ConnectionManager.getInstance(getActivity()).deleteItinerary(solutionId, new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+
+                        mAdapter.notifyItemRemoved(position);
+                        mAdapter.notifyItemRangeChanged(position, mItemsList.size());
+
+                        //TODO set Travel and got to current itenrary
+                    }
+
+                    @Override
+                    public void onError(Object data) {
+                        HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.setMessageForError((String) data);
+                        errorHelper.show(getFragmentManager(), (String) data);
+
+                    }
+                });
             }
         });
+
         upcomigTrips();
         ((TripsSwipeItemsAdapter) mAdapter).setMode(Attributes.Mode.Single);
         mRecyclerView.setAdapter(mAdapter);
@@ -125,9 +143,20 @@ public class TripsFragment  extends HGBAbtsractFragment {
         initialize(rootView);
         my_trips_empty_view = (LinearLayout)rootView.findViewById(R.id.my_trips_empty_view);
 
-
+        goToCNCView(rootView);
         return rootView;
     }
+
+    private void goToCNCView(View rootView){
+        FloatingActionButton my_trips_go_to_cnc = (FloatingActionButton) rootView.findViewById(R.id.my_trips_go_to_cnc);
+        my_trips_go_to_cnc.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                getFlowInterface().goToFragment(ToolBarNavEnum.HOME.getNavNumber(), null);
+            }
+        });
+    }
+
 
 
     private void setupSearchView() {
@@ -236,22 +265,18 @@ public class TripsFragment  extends HGBAbtsractFragment {
 
 
     private void setListsVisability(){
-        mAdapter.updateDataSet(mItemsList);
-        mAdapter.notifyDataSetChanged();
-        mCurrItemsList = new ArrayList<MyTripItem>(mItemsList);
-//        if(mItemsList.isEmpty()){
-//            my_trips_empty_view.setVisibility(View.VISIBLE);
-//       //     stickyList.setVisibility(View.GONE);
-//        }else {
-//
-//            my_trips_empty_view.setVisibility(View.GONE);
-//       //     stickyList.setVisibility(View.VISIBLE);
-//
-//            createCityImageUrl(mItemsList);
-//            sectionedAdapter.addItems(mItemsList);
-//            sectionedAdapter.setMaxCurrentInitialization(0);
-//            sectionedAdapter.notifyDataSetChanged();
-//        }
+
+
+        if(mItemsList.isEmpty()){
+            my_trips_empty_view.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+        }else{
+            mCurrItemsList = new ArrayList<MyTripItem>(mItemsList);
+            my_trips_empty_view.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mAdapter.updateDataSet(mItemsList);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     private void upcomigTrips(){
