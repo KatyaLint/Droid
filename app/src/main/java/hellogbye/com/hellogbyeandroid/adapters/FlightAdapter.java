@@ -23,6 +23,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
     private String destinationFlights;
     private boolean mIsMyFlight;
     private boolean alternativeButtonDisable;
+    private String paid;
 
     public FlightAdapter(NodesVO currentNode, ArrayList<LegsVO> itemsData) {
         this.itemsData = itemsData;
@@ -53,6 +54,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             viewHolder.flight_ticket_details_layout.setVisibility(View.GONE);
         } else {
             viewHolder.flight_cost.setText("$" + getFlightCost());
+
             viewHolder.flight_direction.setText(destinationFlights);
             viewHolder.flight_ticket_details_layout.setVisibility(View.VISIBLE);
         }
@@ -81,11 +83,20 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             viewHolder.image_my_flight.setVisibility(View.VISIBLE);
             viewHolder.text_my_flight.setVisibility(View.VISIBLE);
             viewHolder.select_flight.setVisibility(View.GONE);
+            viewHolder.mBadgeImageView.setVisibility(View.VISIBLE);
+            if(paid.equals("PAID")){
+                viewHolder.mBadgeImageView.setBackgroundResource(R.drawable.paid_badge);
+
+            }else{
+                viewHolder.mBadgeImageView.setBackgroundResource(R.drawable.cofirm_badge);
+
+            }
 
         } else {
             viewHolder.image_my_flight.setVisibility(View.GONE);
             viewHolder.text_my_flight.setVisibility(View.GONE);
             viewHolder.select_flight.setVisibility(View.VISIBLE);
+            viewHolder.mBadgeImageView.setVisibility(View.GONE);
         }
 
         if (alternativeButtonDisable) {
@@ -127,6 +138,10 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         this.alternativeButtonDisable = alternativeButtonDisable;
     }
 
+    public void setPaid(String paid) {
+        this.paid = paid;
+    }
+
     // inner class to hold a reference to each item of RecyclerView
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -151,6 +166,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         private ImageView image_my_flight;
         private FontTextView text_my_flight;
         private FontTextView select_flight;
+        private  ImageView mBadgeImageView;
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
@@ -188,6 +204,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             flight_ticket_details_layout = mainView.findViewById(R.id.flight_ticket_details_layout);
             flight_direction = (FontTextView) flight_ticket_details_layout.findViewById(R.id.flight_direction);
             flight_cost = (FontTextView) flight_ticket_details_layout.findViewById(R.id.flight_cost);
+            mBadgeImageView = (ImageView)flight_ticket_details_layout.findViewById(R.id.flight_confirm_badge);
             initializeSelecteOrMyFlight(flight_ticket_details_layout);
         }
 

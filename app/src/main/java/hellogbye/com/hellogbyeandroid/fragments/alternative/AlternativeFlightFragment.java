@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -112,7 +113,7 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment implements Go
 
 
         View rootView = inflater.inflate(R.layout.flight_layout_details, container, false);
-         recyclerView = (RecyclerView) rootView.findViewById(R.id.flightRecyclerView);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.flightRecyclerView);
 
 
 
@@ -217,6 +218,8 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment implements Go
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bc.build(), 50));
 
 
+
+
         // 2. set layoutManger
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         // 3. create an adapter
@@ -226,6 +229,7 @@ public class AlternativeFlightFragment extends HGBAbtsractFragment implements Go
         // 5. set item animator to DefaultAnimator
         //  recyclerView.setItemAnimator(new DefaultItemAnimator());
         mAdapter.setFlightCost(currentNode.getCost());
+        mAdapter.setPaid(currentNode.getmPaymentProcessingState());
         mAdapter.setDestinationFlights(allFlights);
         mAdapter.updateMyFlight(isMyFlight);
         mAdapter.setAlternativeButtonDisable(false);
