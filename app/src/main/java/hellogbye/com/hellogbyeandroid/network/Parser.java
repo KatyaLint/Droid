@@ -73,6 +73,9 @@ public class Parser {
                     json = new String(response.data);
                     json = trimMessage(json, "messageid");
                     break;
+                case 405:
+                    json = new String(response.data);
+                    break;
                 case 401:
                     json = "Session AuthFailureError";
                     break;

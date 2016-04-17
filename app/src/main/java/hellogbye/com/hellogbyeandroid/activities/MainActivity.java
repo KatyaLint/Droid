@@ -42,7 +42,7 @@ import hellogbye.com.hellogbyeandroid.fragments.checkout.SummaryPaymentFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragment;
-import hellogbye.com.hellogbyeandroid.fragments.MyTripsFragment;
+
 import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesCheckListFragment;
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     public FontTextView my_trip_profile;
     private  HGBSaveDataClass hgbSaveDataClass = new HGBSaveDataClass();
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
-    private MyTripsFragment.OnItemClickListener editMyTripsClickCB;
+    //private MyTripsFragment.OnItemClickListener editMyTripsClickCB;
     private FontTextView itirnarary_title_Bar;
 
     private ArrayList<UserDataVO> mTravelList = new ArrayList<>();
@@ -485,26 +485,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         startActivity(intent);
     }
 
-//
-//    @Override
-//    public void setCompanionsStaticRelationshipTypes(ArrayList<CompanionStaticRelationshipTypesVO> componentsStaticRelationshipTypes) {
-//        this.componionStaticDescriptionVOs = componentsStaticRelationshipTypes;
-//    }
-//
-//    @Override
-//    public ArrayList<CompanionStaticRelationshipTypesVO> getCompanionsStaticRelationshipTypes() {
-//        return componionStaticDescriptionVOs;
-//    }
-//
-//    @Override
-//    public void setAccounts(ArrayList<AccountsVO> accounts) {
-//        this.accounts = accounts;
-//    }
-//
-//    @Override
-//    public ArrayList<AccountsVO> getAccounts() {
-//        return this.accounts;
-//    }
 
 
     @Override
@@ -945,7 +925,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
-    public void setEditMyTripsClickCB(MyTripsFragment.OnItemClickListener editMyTripsClickCB) {
-        this.editMyTripsClickCB = editMyTripsClickCB;
-    }
+//    public void setEditMyTripsClickCB(MyTripsFragment.OnItemClickListener editMyTripsClickCB) {
+//        this.editMyTripsClickCB = editMyTripsClickCB;
+//    }
 }

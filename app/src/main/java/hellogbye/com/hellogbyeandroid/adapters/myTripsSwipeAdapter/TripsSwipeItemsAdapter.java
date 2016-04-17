@@ -34,21 +34,22 @@ import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItemsAdapter.SimpleViewHolder> {
 
     private static TripsFragment.ISwipeAdapterExecution swipeAdapterExecution;
+    private Context mContext;
+    private ArrayList<MyTripItem> mDataset;
+
     public void addClickeListeners(TripsFragment.ISwipeAdapterExecution swipeAdapterExecution) {
         this.swipeAdapterExecution = swipeAdapterExecution;
     }
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {
-        SwipeLayout swipeLayout;
-//        TextView textViewPos;
-//        TextView textViewData;
-        Button buttonDelete;
+        private final SwipeLayout swipeLayout;
+        private final Button buttonDelete;
 
         private final FontTextView my_trip_name;
         private final FontTextView my_trip_dates;
         private final FontTextView my_trip_paid;
-        private RoundedImageView my_trip_user_image;
-        private RelativeLayout mytrips_rl;
+        private final RoundedImageView my_trip_user_image;
+        private final RelativeLayout mytrips_rl;
 
         public SimpleViewHolder(View itemView) {
             super(itemView);
@@ -70,24 +71,8 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
 
                 }
             });
-
-//            swipeLayout.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    int position = (int) view.getTag();
-//                    swipeAdapterExecution.clickedItem(position);
-//                    System.out.println("Kate item clicked");
-////                    Log.d(getClass().getSimpleName(), "onItemSelected: " + textViewData.getText().toString());
-////                    Toast.makeText(view.getContext(), "onItemSelected: " + textViewData.getText().toString(), Toast.LENGTH_SHORT).show();
-//                }
-//            });
         }
     }
-
-    private Context mContext;
-    private ArrayList<MyTripItem> mDataset;
-
-    //protected SwipeItemRecyclerMangerImpl mItemManger = new SwipeItemRecyclerMangerImpl(this);
 
     public TripsSwipeItemsAdapter(Context context, ArrayList objects) {
         this.mContext = context;
@@ -117,22 +102,19 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
             }
         });
 
-        viewHolder.swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
-            @Override
-            public void onDoubleClick(SwipeLayout layout, boolean surface) {
-                //Toast.makeText(mContext, "DoubleClick", Toast.LENGTH_SHORT).show();
-                System.out.println("Kate DoubleClick");
-            }
-        });
+
         viewHolder.buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("Kate delete");
+
+               int position =  (int)view.getTag();
+                System.out.println("Kate delete = " + position);
                 mItemManger.removeShownLayouts(viewHolder.swipeLayout);
-                mDataset.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, mDataset.size());
+           //     mDataset.remove(position);
+//                notifyItemRemoved(position);
+//                notifyItemRangeChanged(position, mDataset.size());
                 mItemManger.closeAllItems();
+                swipeAdapterExecution.deleteClicked(position);
                 //Toast.makeText(view.getContext(), "Deleted " + viewHolder.textViewData.getText().toString() + "!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -147,6 +129,7 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
             viewHolder.my_trip_paid.setText("PAID");
         }
         viewHolder.mytrips_rl.setTag(position);
+        viewHolder.buttonDelete.setTag(position);
 //        viewHolder.textViewPos.setText((position + 1) + ".");
 //        viewHolder.textViewData.setText(item);
        // mItemManger.bind(viewHolder.itemView, position);

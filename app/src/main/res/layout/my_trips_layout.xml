@@ -57,16 +57,12 @@
         android:focusableInTouchMode="true"
         android:layout_height="wrap_content"/>
 
+
     <hellogbye.com.hellogbyeandroid.views.PinnedHeaderListView
         android:id="@+id/pinnedListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/my_trips_swap_listview"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:paddingTop="@dimen/DP20"
@@ -105,6 +101,37 @@
     </LinearLayout>
 
 
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.CoordinatorLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_trips_swap_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    </android.support.design.widget.CoordinatorLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/my_trips_go_to_cnc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:src="@drawable/fab_plus"
+        app:layout_anchor="@id/companion_search_view"
+        app:layout_anchorGravity="bottom|right|end"
+        app:backgroundTint="@color/COLOR_00516f"
+        app:rippleColor="@android:color/transparent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/DP16"
+        android:layout_marginBottom="@dimen/DP16" />
+
+    </RelativeLayout>
 
 
 </LinearLayout>
