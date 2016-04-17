@@ -5,21 +5,24 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:gravity="right"
-    android:layout_margin="10dp">
+    android:layout_margin="@dimen/DP10">
 
 
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/cnc_input"
         style="@style/CNCStyle"
+        android:layout_marginRight="@dimen/DP10"
         android:text="HGB"
+        android:textSize="@dimen/SP16"
         android:gravity="center"
-        app:fontName="dinnextltpro_light.otf"
+        app:fontName="dinnextltpro_regular.otf"
         android:textColor="@color/white"
         android:background="@drawable/cnc_backround"
         android:layout_alignParentRight="true"/>
 
     <ImageView
+
         android:id="@+id/cnc_image_view_user"
         android:layout_width="@dimen/DP18"
         android:layout_height="@dimen/DP18" />
