@@ -47,6 +47,7 @@ public class ItineraryFragment extends HGBAbtsractFragment {
     private UserTravelMainVO userOrder;
     private Activity activity;
     private int iScreenSize;
+    private Button grid_make_payment;
 
     public ItineraryFragment() {
         // Empty constructor required for fragment subclasses
@@ -186,8 +187,6 @@ public class ItineraryFragment extends HGBAbtsractFragment {
 
        // MainLinearLayout.setLayoutParams(LLParams);
         MainLinearLayout.setOrientation(LinearLayout.VERTICAL);
-
-
 
 
         if(passengers.size() < 1){
@@ -506,18 +505,26 @@ public class ItineraryFragment extends HGBAbtsractFragment {
 
 
         LinearLayout itineraryLayout = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.scroll_view_ll);
-
+    LinearLayout cnc_empty_view = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.cnc_empty_view);
         //UserTravelMainVO user = parseFlight();
         //getActivityInterface().setTravelOrder(user);
         UserTravelMainVO  user = getActivityInterface().getTravelOrder();
         userOrder = user;
                 //getActivityInterface().setTravelOrder(userOrder);
+
         if(userOrder != null && !userOrder.getItems().isEmpty()) {
+            itineraryLayout.setVisibility(View.VISIBLE);
             createPassengersName(scrollViewLinearLayout, userOrder);
             createMainNodes(userOrder);
             makeEqualAllNodes(userOrder);
             View mainView = createGridView(userOrder);
             itineraryLayout.addView(mainView);
+            cnc_empty_view.setVisibility(View.GONE);
+            grid_make_payment.setEnabled(true);
+        }else{  // server returning wrong data
+            itineraryLayout.setVisibility(View.GONE);
+            cnc_empty_view.setVisibility(View.VISIBLE);
+            grid_make_payment.setEnabled(false);
         }
     }
 
@@ -537,7 +544,7 @@ public class ItineraryFragment extends HGBAbtsractFragment {
         activity = getActivity();
         View rootView = inflater.inflate(R.layout.new_grid_main_table, container, false);
 
-        Button grid_make_payment = (Button)rootView.findViewById(R.id.grid_make_payment);
+        grid_make_payment = (Button)rootView.findViewById(R.id.grid_make_payment);
         grid_make_payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

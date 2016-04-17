@@ -3,7 +3,6 @@ package hellogbye.com.hellogbyeandroid.activities;
 
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -31,6 +30,7 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.NewPaymentDetailsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalEmailSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountSettingsFragment;
@@ -58,7 +58,6 @@ import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserDataVO;
-import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelationshipTypesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
@@ -88,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private FontTextView mName;
     private HGBPreferencesManager hgbPrefrenceManager;
     private ImageButton imageButton;
-    private ImageButton purchaseButton;
+    private ImageButton up_bar_favorite;
 
     protected OnBackPressedListener onBackPressedListener;
 
@@ -264,22 +263,21 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
-    private void editMyTrips(){
-        final FontTextView my_trip_edit_button = (FontTextView) mToolbar.findViewById(R.id.my_trip_edit_button);
-        my_trip_edit_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(my_trip_edit_button.getText().equals("Edit")) {
-                    editMyTripsClickCB.onItemEditMyTripsClick("edit");
-                    my_trip_edit_button.setText("Done");
-                }else{
-                    editMyTripsClickCB.onItemEditMyTripsClick("done");
-                    my_trip_edit_button.setText("Edit");
-                }
-            }
-        });
-
-    }
+//    private void editMyTrips(){
+//        final FontTextView my_trip_edit_button = (FontTextView) mToolbar.findViewById(R.id.my_trip_edit_button);
+//        my_trip_edit_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(my_trip_edit_button.getText().equals("Edit")) {
+//                    editMyTripsClickCB.onItemEditMyTripsClick("edit");
+//                    my_trip_edit_button.setText("Done");
+//                }else{
+//                    editMyTripsClickCB.onItemEditMyTripsClick("done");
+//                    my_trip_edit_button.setText("Edit");
+//                }
+//            }
+//        });
+//    }
 
 
     private void toolBarProfileChnage(){
@@ -340,16 +338,16 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         });
 
 
+        //TODO my_trips_button check why
+//        final ImageButton my_trips = (ImageButton) mToolbar.findViewById(R.id.my_trips_button);
+//        my_trips.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                goToFragment(ToolBarNavEnum.HOME.getNavNumber(),null);
+//            }
+//        });
 
-        final ImageButton my_trips = (ImageButton) mToolbar.findViewById(R.id.my_trips_button);
-        my_trips.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToFragment(ToolBarNavEnum.HOME.getNavNumber(),null);
-            }
-        });
-
-        editMyTrips();
+        //editMyTrips();
 
         preferencesChanges();
 
@@ -594,7 +592,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 //                fragment = HistoryFragment.newInstance(navPosition);
 //                break;
             case TRIPS:
-                fragment = MyTripsFragment.newInstance(navPosition);
+                //fragment = MyTripsFragment.newInstance(navPosition);
+                fragment = TripsFragment.newInstance(navPosition);
                 break;
             case COMPANIONS:
                 fragment = TravelCompanionsFragment.newInstance(navPosition);
@@ -675,10 +674,11 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
 
     private void setOnClickListenerForItineraryTopBar(){
-        purchaseButton = (ImageButton) mToolbar.findViewById(R.id.purchaseButton);
-        purchaseButton.setOnClickListener(new View.OnClickListener() {
+        up_bar_favorite = (ImageButton) mToolbar.findViewById(R.id.up_bar_favorite);
+        up_bar_favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("Kate setOnClickListenerForItineraryTopBar");
                 setFavorityItinerary();
                 // goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
             }
@@ -687,8 +687,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         itirnarary_title_Bar = (FontTextView)findViewById(R.id.itirnarary_title_Bar);
 
 
-
-        LayoutInflater li = LayoutInflater.from(MainActivity.this);
+       LayoutInflater li = LayoutInflater.from(MainActivity.this);
        final View promptsView = li.inflate(R.layout.popup_layout_change_iteinarary_name, null);
        final EditText input = (EditText) promptsView
                 .findViewById(R.id.change_iteinarary_name);
@@ -815,6 +814,15 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         ConnectionManager.getInstance(MainActivity.this).putFavorityItenarary(isFavorite,solutionID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
+                if(hgbSaveDataClass.getTravelOrder().ismIsFavorite()){
+                    hgbSaveDataClass.getTravelOrder().setmIsFavorite(false);
+                    up_bar_favorite.setBackgroundResource(R.drawable.thin_0651_star_favorite_rating);
+                }else{
+                    hgbSaveDataClass.getTravelOrder().setmIsFavorite(true);
+                    up_bar_favorite.setBackgroundResource(R.drawable.star_in_favorite);
+                }
+
+
                 System.out.println("Kate setFavorityItinerary cool");
             }
 

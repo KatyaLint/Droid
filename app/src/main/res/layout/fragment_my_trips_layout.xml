@@ -8,5 +8,5 @@
     android:background="@android:color/black"
     android:gravity="center"
     android:textColor="@android:color/white"
-    android:textSize="32dp" />
+    android:textSize="@dimen/SP32" />
 

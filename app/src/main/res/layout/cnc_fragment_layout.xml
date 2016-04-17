@@ -44,7 +44,7 @@
             android:id="@+id/cnc_mic"
             android:layout_width="@dimen/DP44"
             android:layout_height="@dimen/DP44"
-            android:background="@drawable/mic_button_active" />
+            android:background="@drawable/microphone_icon" />
 
 
         <hellogbye.com.hellogbyeandroid.views.FontEditTextView

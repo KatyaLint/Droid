@@ -29,7 +29,7 @@ public class MyTripPinnedAdapter extends SectionedBaseAdapter {
 
 
     private ArrayList<MyTripItem> items;
-    private boolean isEditMode = false;
+  //  private boolean isEditMode = false;
     private int maxCurrentInitialization = 0;
 
     public MyTripPinnedAdapter (ArrayList<MyTripItem> items, Activity acitivity){
@@ -74,13 +74,13 @@ public class MyTripPinnedAdapter extends SectionedBaseAdapter {
         }
     }
 
-    public void isEditMode(boolean b) {
-        this.isEditMode = b;
-    }
-
-    public boolean isEditMode(){
-        return this.isEditMode;
-    }
+//    public void isEditMode(boolean b) {
+//        this.isEditMode = b;
+//    }
+//
+//    public boolean isEditMode(){
+//        return this.isEditMode;
+//    }
 
     public int getMaxCurrentInitialization() {
         return maxCurrentInitialization;
@@ -97,16 +97,15 @@ public class MyTripPinnedAdapter extends SectionedBaseAdapter {
         private final FontTextView my_trip_dates;
         private final FontTextView my_trip_paid;
         private final ImageView my_trip_arrow_next;
-        private ImageView imageEditTrips;
+
 //        private FontTextView my_trip_delete_forever;
-        private Button my_trip_delete_forever;
+   //     private Button my_trip_delete_forever;
         private RoundedImageView my_trip_user_image;
         private boolean isDeleteItemClicked = false;
 
         public ViewHolderItem(View view) {
-            imageEditTrips = (ImageView) view.findViewById(R.id.my_trip_delete);
 
-            my_trip_delete_forever = (Button)view.findViewById(R.id.my_trip_delete_forever);
+   //         my_trip_delete_forever = (Button)view.findViewById(R.id.my_trip_delete_forever);
             my_trip_user_image = (RoundedImageView) view.findViewById(R.id.my_trip_user_image);
             my_trip_name = (FontTextView) view.findViewById(R.id.my_trip_name);
             my_trip_dates = (FontTextView) view.findViewById(R.id.my_trip_dates);
@@ -114,8 +113,6 @@ public class MyTripPinnedAdapter extends SectionedBaseAdapter {
             my_trip_arrow_next = (ImageView) view.findViewById(R.id.my_trip_arrow_next);
 
         }
-
-
     }
 
 //    public static class ViewHolderHeaderItem {
@@ -145,23 +142,6 @@ public class MyTripPinnedAdapter extends SectionedBaseAdapter {
 
         final MyTripItem item = items.get(position);
 
-        if(isEditMode) {
-            holder.imageEditTrips.setVisibility(View.VISIBLE);
-            holder.imageEditTrips.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    item.setEditDelete(true);
-                    notifyDataSetChanged();
-                }
-            });
-            holder.my_trip_arrow_next.setVisibility(View.GONE);
-        }else{
-            item.setEditDelete(false);
-            holder.imageEditTrips.setVisibility(View.GONE);
-            holder.my_trip_arrow_next.setVisibility(View.VISIBLE);
-            holder.my_trip_delete_forever.setVisibility(View.GONE);
-        }
-
 
         if(section == 0 ){
             HGBUtility.loadRoundedImage( item.getUrlToCityView(),  holder.my_trip_user_image, R.drawable.city_avatar_a_2);
@@ -174,12 +154,6 @@ public class MyTripPinnedAdapter extends SectionedBaseAdapter {
             }
 
         }else {
-
-            if(item.isEditDelete()){
-                holder.my_trip_delete_forever.setVisibility(View.VISIBLE);
-            }else{
-                holder.my_trip_delete_forever.setVisibility(View.GONE);
-            }
 
             HGBUtility.loadRoundedImage( item.getUrlToCityView(),  holder.my_trip_user_image, R.drawable.city_avatar_a_2);
             holder.my_trip_name.setText(item.getName());
@@ -281,7 +255,7 @@ public class MyTripPinnedAdapter extends SectionedBaseAdapter {
 
     public List<MyTripItem> removeItem(int position) {
         final MyTripItem model = items.remove(position);
-       notifyDataSetChanged();
+        notifyDataSetChanged();
         return items;
     }
 
