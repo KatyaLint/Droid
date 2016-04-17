@@ -80,6 +80,8 @@ dependencies {
     compile 'io.card:android-sdk:5.1.2'
 
     compile files('libs/AndroidSwipeLayout-v1.1.8.jar')
+    compile 'com.hudomju:swipe-to-dismiss-undo:1.0'
+
 
     compile 'com.android.support:multidex:1.0.1'
 }

@@ -5,7 +5,7 @@ public enum ToolBarNavEnum {
     ITINARERY(24,"Current Itinerary"),
     HISTORY(25,"History"),
     TRIPS (0,"My Trips"),
-    COMPANIONS(1,"Travel Companions"),
+    COMPANIONS(1,"My Companions"),
     PREFERENCE(2,"Preference Settings"),
     ACCOUNT(3,"Account Settings"),
     HELP(4,"Help & Feedback"),

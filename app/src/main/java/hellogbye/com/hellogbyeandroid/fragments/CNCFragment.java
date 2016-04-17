@@ -62,7 +62,6 @@ public class CNCFragment extends HGBAbtsractFragment {
     private ImageView mMicImageView;
     private FontTextView mSendTextView;
     private HGBPreferencesManager mHGBPrefrenceManager;
-
     private String[] locationArr;
     private Button cnc_fragment_trip_settings;
 

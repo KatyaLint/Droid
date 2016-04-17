@@ -25,7 +25,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 /**
  * Created by nyawka on 3/23/16.
  */
-public class SwipeItemsAdapter   extends RecyclerSwipeAdapter<SwipeItemsAdapter.SimpleViewHolder> {
+public class SwipeItemsAdapter extends RecyclerSwipeAdapter<SwipeItemsAdapter.SimpleViewHolder> {
 
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {

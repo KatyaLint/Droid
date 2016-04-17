@@ -1,7 +1,6 @@
 package hellogbye.com.hellogbyeandroid.views;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
@@ -11,14 +10,11 @@ import android.widget.LinearLayout;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
-import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 public class CostumeToolBar extends Toolbar {
 
     private ImageButton keyBoardImage;
-    private ImageButton purchaseButton;
+    private ImageButton up_bar_favorite;
     private ImageButton favoriteButton;
     private FontTextView editPreferense;
     private ImageView homeTitleImage;
@@ -28,8 +24,8 @@ public class CostumeToolBar extends Toolbar {
     private ImageButton edit_preferences;
     private LinearLayout preferences_edit_mode;
     private ImageButton check_preferences;
-    private ImageButton my_trips_button;
-    private FontTextView my_trip_edit_button;
+    //private ImageButton my_trips_button;
+   // private FontTextView my_trip_edit_button;
     private ImageView my_trips_image_profile;
     private FontTextView my_trip_profile;
     private FontTextView itirnarary_title_Bar;
@@ -66,8 +62,8 @@ public class CostumeToolBar extends Toolbar {
         if (keyBoardImage == null) {
             keyBoardImage = (ImageButton) findViewById(R.id.keyboard);
         }
-        if (purchaseButton == null) {
-            purchaseButton = (ImageButton) findViewById(R.id.purchaseButton);
+        if (up_bar_favorite == null) {
+            up_bar_favorite = (ImageButton) findViewById(R.id.up_bar_favorite);
 
         }
         if (favoriteButton == null) {
@@ -79,12 +75,13 @@ public class CostumeToolBar extends Toolbar {
             check_preferences = (ImageButton)findViewById(R.id.check_preferences);
             editPreferense = (FontTextView) findViewById(R.id.editPreference);
         }
-        if(my_trips_button == null){
-            my_trips_button = (ImageButton)findViewById(R.id.my_trips_button);
-        }
-        if(my_trip_edit_button == null){
-            my_trip_edit_button = (FontTextView) findViewById(R.id.my_trip_edit_button);
-        }if(itirnarary_title_Bar == null){
+//        if(my_trips_button == null){
+//            my_trips_button = (ImageButton)findViewById(R.id.my_trips_button);
+//        }
+//        if(my_trip_edit_button == null){
+//            my_trip_edit_button = (FontTextView) findViewById(R.id.my_trip_edit_button);
+//        }
+        if(itirnarary_title_Bar == null){
             itirnarary_title_Bar = (FontTextView)findViewById(R.id.itirnarary_title_Bar);
         }if(tool_bar_profile_name == null){
             tool_bar_profile_name = (LinearLayout)findViewById(R.id.tool_bar_profile_name);
@@ -102,14 +99,14 @@ public class CostumeToolBar extends Toolbar {
      //   my_trip_profile.setVisibility(View.GONE);
         titleText.setVisibility(View.GONE);
         keyBoardImage.setVisibility(View.GONE);
-        purchaseButton.setVisibility(View.GONE);
+        up_bar_favorite.setVisibility(View.GONE);
         favoriteButton.setVisibility(View.GONE);
         editPreferense.setVisibility(View.GONE);
         edit_preferences.setVisibility(View.GONE);
         preferences_edit_mode.setVisibility(View.GONE);
         check_preferences.setVisibility(View.GONE);
-        my_trips_button.setVisibility(View.GONE);
-        my_trip_edit_button.setVisibility(View.GONE);
+//        my_trips_button.setVisibility(View.GONE);
+       // my_trip_edit_button.setVisibility(View.GONE);
      //   my_trips_image_profile.setVisibility(View.GONE);
         itirnarary_title_Bar.setVisibility(View.GONE);
         switch (navBar) {
@@ -121,7 +118,8 @@ public class CostumeToolBar extends Toolbar {
 //                break;
             case ITINARERY:
                // titleText.setVisibility(View.VISIBLE);
-                purchaseButton.setVisibility(View.VISIBLE);
+            //    up_bar_favorite.setVisibility(View.VISIBLE);
+                up_bar_favorite.setVisibility(View.VISIBLE);
                 itirnarary_title_Bar.setVisibility(View.VISIBLE);
             //    itirnarary_title_Bar.setText(selectedItem);
                 break;
@@ -130,9 +128,10 @@ public class CostumeToolBar extends Toolbar {
 //                keyBoardImage.setVisibility(View.INVISIBLE);
 //                break;
             case TRIPS:
-                my_trip_edit_button.setVisibility(View.VISIBLE);
+      //          my_trip_edit_button.setVisibility(View.VISIBLE);
                 titleText.setVisibility(View.VISIBLE);
-                my_trips_button.setVisibility(View.VISIBLE);
+         //       my_trips_button.setVisibility(View.VISIBLE);
+
 
                 break;
             case COMPANIONS:

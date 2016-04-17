@@ -46,6 +46,7 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
     private FontEditTextView companion_editTextDialog_name;
     private FontEditTextView companion_editTextDialog_last_name;
     private FontEditTextView companion_editTextDialog;
+    private LinearLayout companion_empty_view;
 
     public TravelCompanionsFragment() {
         // Empty constructor required for fragment subclasses
@@ -109,7 +110,20 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
         companionsVO = getActivityInterface().getCompanions();
         View rootView = inflater.inflate(R.layout.companion_search_list, container, false);
 
-        searchListInitialization(rootView);
+        companion_empty_view = (LinearLayout)rootView.findViewById(R.id.companion_empty_view);
+        searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.companion_search_recycle_list);
+
+        if(companionsVO == null || companionsVO.isEmpty()){
+            companion_empty_view.setVisibility(View.VISIBLE);
+            searchRecyclerView.setVisibility(View.GONE);
+        }else{
+            searchRecyclerView.setVisibility(View.VISIBLE);
+            companion_empty_view.setVisibility(View.GONE);
+            searchListInitialization(rootView);
+        }
+
+
+
 
         searchListAdapter = new CompanionAdapter(getActivityInterface().getCompanions(), getActivity().getApplicationContext());
         searchRecyclerView.setAdapter(searchListAdapter);
@@ -139,19 +153,6 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
                         }
                     }
                 }
-
-
-//                Bundle args = new Bundle();
-//                args.putString("user_id", guid);
-//                getActivityInterface().goToFragment(ToolBarNavEnum.COMPANIONS_DETAILS.getNavNumber(),args);
-
-//                for(CompanionVO companion:companionsVO){
-//                    if(companion.getmCompanionid().equals(guid)){
-//                        Bundle args = new Bundle();
-//                        args.putString("user_id", guid);
-//                        getActivityInterface().goToFragment(ToolBarNavEnum.COMPANIONS_DETAILS.getNavNumber(),args);
-//                    }
-//                }
             }
         });
 
@@ -163,7 +164,7 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
         companion_editTextDialog = (FontEditTextView) popup_companion_new.findViewById(R.id.companion_editTextDialog);
         inputs = new FontEditTextView[]{companion_editTextDialog_name, companion_editTextDialog_last_name, companion_editTextDialog };
 
-        LinearLayout companion_invite_companion = (LinearLayout) rootView.findViewById(R.id.companion_invite_ll);
+        FloatingActionButton companion_invite_companion = (FloatingActionButton) rootView.findViewById(R.id.fab);
         companion_invite_companion.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -212,7 +213,7 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
         mSearchView = (SearchView)rootView.findViewById(R.id.companion_search_view);
         // mSearchView.setVisibility(View.GONE);
         setupSearchView();
-        searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.companion_search_list);
+
         searchRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         // 5. set item animator to DefaultAnimator
         searchRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -222,10 +223,10 @@ public class TravelCompanionsFragment extends HGBAbtsractFragment implements Sea
     }
 
     private void setupSearchView() {
-        mSearchView.setIconifiedByDefault(false);
+       // mSearchView.setIconifiedByDefault(true);
         mSearchView.setOnQueryTextListener(this);
-        mSearchView.setSubmitButtonEnabled(false);
-        mSearchView.setQueryHint(getString(R.string.settings_search_hunt));
+    //    mSearchView.setSubmitButtonEnabled(false);
+       // mSearchView.setQueryHint(getString(R.string.settings_search_hunt));
     }
 
 
