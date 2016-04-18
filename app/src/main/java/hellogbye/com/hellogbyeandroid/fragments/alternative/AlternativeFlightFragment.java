@@ -45,7 +45,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
  */
 
 public class AlternativeFlightFragment extends HGBAbstractFragment implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback {
-    
+
     private ArrayList<AlternativeFlightsVO> airplaneDataVO;
     private UserTravelMainVO userOrder;
     private Button showAlternativeFlight;
