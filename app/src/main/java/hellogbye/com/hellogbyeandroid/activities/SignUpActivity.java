@@ -26,6 +26,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
+import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -44,13 +45,14 @@ public class SignUpActivity extends AppCompatActivity {
     private BookingRequestVO bookingResponse;
     private UserSignUpDataVO userData;
     private FontTextView sign_up_hyperlink;
+    private HGBPreferencesManager hgbPrefrenceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up_layout);
 
-
+        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         userData = new UserSignUpDataVO();
 
         getStaticBooking();
@@ -126,7 +128,7 @@ public class SignUpActivity extends AppCompatActivity {
                 ConnectionManager.getInstance(SignUpActivity.this).postUserCreateAccount(userData,new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
-
+                        hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER,false);
                       //  bookingResponse = (BookingRequestVO)data;
                         //BookingRequest bookingrequest = (BookingRequest)data;
                     }

@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         hgbSaveDataClass.setPreferenceManager(hgbPrefrenceManager); //= new HGBSaveDataClass(this, hgbPrefrenceManager);
         isFreeUser = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
-        System.out.println("Kate isFreeUser =" + isFreeUser);
+
         //check if we have travelitinery in db
         String strTravel = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO, "");
         if (!"".equals(strTravel)) {
