@@ -30,6 +30,7 @@ import java.util.HashSet;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.NewPaymentDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalEmailSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
@@ -659,6 +660,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case COMPANIONS_PERSONAL_EMAILS:
                 fragment = AccountPersonalEmailSettingsFragment.newInstance(navPosition);
+                break;
+            case CREDIT_CARD_LIST:
+                fragment = CreditCardListFragment.newInstance(navPosition);
                 break;
         }
 

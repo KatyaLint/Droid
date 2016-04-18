@@ -186,7 +186,7 @@ public class AccountSettingsFragment extends HGBAbtsractFragment {
                         //emails
                         break;
                     case 2:
-                        //manage payment cards
+                        getFlowInterface().goToFragment(ToolBarNavEnum.CREDIT_CARD_LIST.getNavNumber(), null);
                         break;
                     case 3:
                         //membership
