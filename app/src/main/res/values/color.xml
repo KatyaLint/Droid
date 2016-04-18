@@ -57,6 +57,7 @@
     <color name="cnc_user_message">#419ADD</color>
     <color name="cnc_user_message_color">#0f3d4d</color>
 
+
     <color name="COLOR_2C5466">#2C5466</color>
     <color name="COLOR_73929E">#73929E</color>
 
@@ -66,4 +67,8 @@
     <color name="COLOR_079DE0">#079DE0</color>
     <color name="COLOR_0E587D">#0E587D</color>
     <color name="COLOR_00475e">#00475e</color>
+
+    <!--<color name="no_payment_color">#0e587d</color>-->
+
+
 </resources>

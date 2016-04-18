@@ -20,11 +20,9 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  * Created by arisprung on 10/27/15.
  */
 public class CreditCardAdapter extends RecyclerView.Adapter<CreditCardAdapter.ViewHolder> {
-    private ArrayList<PaymentSummaryItem> mArrayList;
+    private ArrayList<CreditCardItem> mArrayList;
     OnItemClickListener  mItemClickListner;
 
-    private static RadioButton lastChecked = null;
-    private static int lastCheckedPos = 0;
 
     private Context mContext;
     // Provide a reference to the views for each data item
@@ -34,18 +32,17 @@ public class CreditCardAdapter extends RecyclerView.Adapter<CreditCardAdapter.Vi
 
     public  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
+        public ImageView mCardImage;
         public FontTextView mCardNumberText;
-        public FontTextView mNameText;
-        public FontTextView mTotalText;
+        public ImageView mNext;
 
 
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
-            mCardNumberText = (FontTextView)itemLayoutView.findViewById(R.id.summary_passenger_cc);
-            mNameText = (FontTextView)itemLayoutView.findViewById(R.id.summary_passenger_name);
-            mTotalText = (FontTextView)itemLayoutView.findViewById(R.id.summary_passenger_total);
-
+            mCardImage= (ImageView)itemLayoutView.findViewById(R.id.cc_image);
+            mCardNumberText = (FontTextView)itemLayoutView.findViewById(R.id.cc_number);
+            mNext = (ImageView)itemLayoutView.findViewById(R.id.cc_image_next);
             itemLayoutView.setOnClickListener(this);
 
         }
@@ -71,7 +68,7 @@ public class CreditCardAdapter extends RecyclerView.Adapter<CreditCardAdapter.Vi
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public CreditCardAdapter(ArrayList<PaymentSummaryItem> myDataset, Context context) {
+    public CreditCardAdapter(ArrayList<CreditCardItem> myDataset, Context context) {
         mArrayList = myDataset;
         mContext = context;
 
@@ -83,7 +80,7 @@ public class CreditCardAdapter extends RecyclerView.Adapter<CreditCardAdapter.Vi
                                                            int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.payment_summary_item, parent, false);
+                .inflate(R.layout.credit_card_layout, parent, false);
 
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -93,10 +90,8 @@ public class CreditCardAdapter extends RecyclerView.Adapter<CreditCardAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        PaymentSummaryItem cc = mArrayList.get(position);
+        CreditCardItem cc = mArrayList.get(position);
         holder.mCardNumberText.setText(cc.getLast4());
-        holder.mNameText.setText(cc.getName());
-        holder.mTotalText.setText("$"+cc.getTotal());
 
     }
 
@@ -106,11 +101,5 @@ public class CreditCardAdapter extends RecyclerView.Adapter<CreditCardAdapter.Vi
         return mArrayList.size();
     }
 
-    public  int getLastCheckedPos() {
-        return lastCheckedPos;
-    }
 
-    public static void setLastCheckedPos(int lastCheckedPos) {
-        CreditCardAdapter.lastCheckedPos = lastCheckedPos;
-    }
 }
