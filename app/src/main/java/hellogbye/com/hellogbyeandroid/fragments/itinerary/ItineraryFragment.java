@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.Set;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
@@ -41,7 +41,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
-public class ItineraryFragment extends HGBAbtsractFragment {
+public class ItineraryFragment extends HGBAbstractFragment {
 
 
     private UserTravelMainVO userOrder;

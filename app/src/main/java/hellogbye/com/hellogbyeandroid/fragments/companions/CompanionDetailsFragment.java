@@ -6,12 +6,11 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionUserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
@@ -26,7 +25,7 @@ import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 /**
  * Created by nyawka on 1/7/16.
  */
-public class CompanionDetailsFragment  extends HGBAbtsractFragment {
+public class CompanionDetailsFragment  extends HGBAbstractFragment {
 
 
     private CompanionVO companionVO;

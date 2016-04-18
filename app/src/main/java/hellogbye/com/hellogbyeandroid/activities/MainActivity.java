@@ -30,6 +30,7 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.NewPaymentDetailsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.freeuser.FreeUserFragment;
 import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalEmailSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private ArrayList<UserDataVO> mTravelList = new ArrayList<>();
     private ArrayList<CountryItemVO> mEligabileCountryList = new ArrayList<>();
     private ArrayList<CreditCardItem> mCreditCardList = new ArrayList<>();
+    private boolean isFreeUser;
 
     public HGBSaveDataClass getHGBSaveDataClass(){
         return hgbSaveDataClass;
@@ -118,7 +120,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         hgbSaveDataClass.setPreferenceManager(hgbPrefrenceManager); //= new HGBSaveDataClass(this, hgbPrefrenceManager);
-
+        isFreeUser = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
+        System.out.println("Kate isFreeUser =" + isFreeUser);
         //check if we have travelitinery in db
         String strTravel = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO, "");
         if (!"".equals(strTravel)) {
@@ -552,7 +555,16 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mTravelList = travellist;
     }
 
+    private Fragment isFreeUser(Fragment fragment , int navPosition){
 
+        if(isFreeUser){
+            fragment = FreeUserFragment.newInstance(navPosition);
+            mToolbar.setVisibility(View.GONE);
+        }else{
+            mToolbar.setVisibility(View.VISIBLE);
+        }
+        return fragment;
+    }
 
     public void selectItem(int position, Bundle bundle) {
         // update the main content by replacing fragments
@@ -561,7 +573,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
         boolean stashToBack = true;
         int navPosition = position;//navBar.getNavNumber();
-
+        boolean isAddAnimation = false;
         switch (navBar) {
             case HOME:
                 //  fragment = HomeFragment.newInstance(navPosition);
@@ -577,6 +589,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case COMPANIONS:
                 fragment = TravelCompanionsFragment.newInstance(navPosition);
+             //   fragment = isFreeUser(fragment , navPosition);
                 break;
             case COMPANIONS_DETAILS:
                 fragment = CompanionDetailsFragment.newInstance(navPosition);
@@ -607,6 +620,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case PAYMENT_DETAILS:
                 fragment = NewPaymentDetailsFragment.newInstance(navPosition);
+           //     fragment = isFreeUser( fragment , navPosition);
                 break;
             case PREFERENCES_TAB_SETTINGS:
                 fragment = PreferencesTabsFragmentSettings.newInstance(navPosition);
@@ -623,6 +637,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
             case PAYMENT_TRAVLERS:
                 fragment = TravlersFragment.newInstance(navPosition);
+
                 break;
             case PAYMENT_TRAVLERS_DETAILS:
                 fragment = TravlerDetailsFragment.newInstance(navPosition);
@@ -635,18 +650,26 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case COMPANIONS_PERSONAL_DETAILS:
                 fragment = AccountPersonalInfoSettingsFragment.newInstance(navPosition);
+           //     fragment = isFreeUser(fragment, navPosition);
                 break;
             case COMPANIONS_PERSONAL_EMAILS:
                 fragment = AccountPersonalEmailSettingsFragment.newInstance(navPosition);
                 break;
         }
 
+
+
         if (bundle != null) {
             fragment.setArguments(bundle);
         }
 
+        if(isFreeUser && (navBar.equals(ToolBarNavEnum.COMPANIONS_PERSONAL_DETAILS) || navBar.equals(ToolBarNavEnum.PAYMENT_DETAILS) || navBar.equals(ToolBarNavEnum.COMPANIONS) )){
+            isAddAnimation = true;
+            fragment = isFreeUser(fragment, navPosition);
+        }
 
-        HGBUtility.goToNextFragmentIsAddToBackStack(this, fragment, stashToBack);
+
+        HGBUtility.goToNextFragmentIsAddToBackStack(this, fragment, stashToBack, isAddAnimation);
         mToolbar.initToolBarItems();
         mToolbar.updateToolBarView(position);
         mDrawerLayout.closeDrawer(mNavDrawerLinearLayout);
@@ -658,7 +681,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         up_bar_favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Kate setOnClickListenerForItineraryTopBar");
                 setFavorityItinerary();
                 // goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
             }
@@ -698,7 +720,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     @Override
     public void onBackPressed() {
-
+        mToolbar.setVisibility(View.VISIBLE);
         if (onBackPressedListener != null) {
             onBackPressedListener.doBack();
         }
@@ -801,9 +823,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                     hgbSaveDataClass.getTravelOrder().setmIsFavorite(true);
                     up_bar_favorite.setBackgroundResource(R.drawable.star_in_favorite);
                 }
-
-
-                System.out.println("Kate setFavorityItinerary cool");
             }
 
             @Override

@@ -6,21 +6,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.util.Attributes;
 
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
@@ -28,7 +22,7 @@ import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 /**
  * Created by nyawka on 3/22/16.
  */
-public class AccountPersonalEmailSettingsFragment extends HGBAbtsractFragment {
+public class AccountPersonalEmailSettingsFragment extends HGBAbstractFragment {
 
     private RecyclerView mRecyclerView;
 

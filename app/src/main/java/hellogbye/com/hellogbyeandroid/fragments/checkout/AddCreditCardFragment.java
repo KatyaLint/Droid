@@ -3,7 +3,6 @@ package hellogbye.com.hellogbyeandroid.fragments.checkout;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.NumberPicker;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.CreditCardSessionItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
@@ -41,7 +39,7 @@ import io.card.payment.CreditCard;
 /**
  * Created by arisprung on 11/24/15.
  */
-public class AddCreditCardFragment extends HGBAbtsractFragment {
+public class AddCreditCardFragment extends HGBAbstractFragment {
 
     private CreditCardEditText mCardNumber;
     private FontEditTextView mCardExpiry;

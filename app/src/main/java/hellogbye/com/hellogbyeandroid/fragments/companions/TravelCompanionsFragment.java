@@ -1,7 +1,6 @@
 package hellogbye.com.hellogbyeandroid.fragments.companions;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
@@ -21,9 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.companion.CompanionAdapter;
-import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
@@ -34,7 +32,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 
-public class TravelCompanionsFragment extends HGBAbtsractFragment implements SearchView.OnQueryTextListener{
+public class TravelCompanionsFragment extends HGBAbstractFragment implements SearchView.OnQueryTextListener{
 
     private SearchView mSearchView;
     private RecyclerView searchRecyclerView;

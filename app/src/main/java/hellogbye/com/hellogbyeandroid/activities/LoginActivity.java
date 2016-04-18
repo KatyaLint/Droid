@@ -73,6 +73,7 @@ public class LoginActivity extends FragmentActivity {
                     public void onSuccess(Object data) {
                         UserLoginCredentials user = (UserLoginCredentials) data;
                         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
+                        hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER,false);
                         goToMainActivity();
                     }
 

@@ -62,7 +62,7 @@ public class StartingMenuActivity extends Activity {
             @Override
             public void onClick(View view) {
                 //TODO start Create Acount page
-
+                System.out.println("Kate mSignUp");
 
                 Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(intent);
@@ -73,6 +73,8 @@ public class StartingMenuActivity extends Activity {
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("Kate login");
+
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             }
@@ -111,6 +113,7 @@ public class StartingMenuActivity extends Activity {
                     public void onSuccess(Object data) {
                         UserLoginCredentials user = (UserLoginCredentials) data;
                         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
+                        hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER,true);
 //                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
                         goToMainActivity();
 

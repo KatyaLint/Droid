@@ -86,7 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
 //        mPrivacyPolicy.setMovementMethod(LinkMovementMethod.getInstance());
         // mPrivacyPolicy.setHighlightColor(Color.TRANSPARENT);
 
-         sign_up_hyperlink = (FontTextView) findViewById(R.id.sign_up_hyperlink);
+        sign_up_hyperlink = (FontTextView) findViewById(R.id.sign_up_hyperlink);
         sign_up_hyperlink.setText(ss);
         sign_up_hyperlink.setMovementMethod(LinkMovementMethod.getInstance());
 

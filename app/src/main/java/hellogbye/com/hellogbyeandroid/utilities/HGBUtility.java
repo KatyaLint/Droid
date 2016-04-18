@@ -15,10 +15,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
@@ -308,10 +305,14 @@ public class HGBUtility {
 
 
 
-    public static void goToNextFragmentIsAddToBackStack(Activity activity, Fragment fragment, boolean isAddToBackStack){
+    public static void goToNextFragmentIsAddToBackStack(Activity activity, Fragment fragment, boolean isAddToBackStack, boolean isAddAnimation){
 
         try{
             FragmentTransaction transaction = activity.getFragmentManager().beginTransaction();
+            if(isAddAnimation){
+                transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_right,R.anim.slide_in_left,R.anim.slide_out_right);
+
+            }
             transaction.replace(R.id.content_frame, fragment, fragment.getClass().toString());
 
             if (isAddToBackStack) {
@@ -385,6 +386,7 @@ public class HGBUtility {
     private static void setFragmentsClear(){
         fragmentStack.clear();
     }
+
     public static boolean clearBackStackAndGoToNextFragment(Activity activity) {
 
         if(getFragmentStack().size() >= 2){
@@ -394,7 +396,7 @@ public class HGBUtility {
 
 
             Fragment fragmentTemp = getFragmentStack().lastElement();
-            goToNextFragmentIsAddToBackStack(activity,fragmentTemp,false);
+            goToNextFragmentIsAddToBackStack(activity,fragmentTemp,false,false);
             return true;
         }
 
