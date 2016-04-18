@@ -57,7 +57,7 @@
             style="@style/cc_edit_text"
             android:layout_width="match_parent"
             android:hint="Card Number"
-            android:inputType=""
+            android:inputType="phone"
             app:fontName="dinnextltpro_regular.otf" />
 
 
@@ -73,7 +73,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:hint="Expiry Date"
-                android:inputType="text"
+                android:inputType="datetime"
                 app:fontName="dinnextltpro_regular.otf" />
 
             <hellogbye.com.hellogbyeandroid.views.FontEditTextView

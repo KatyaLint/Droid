@@ -164,6 +164,12 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     private boolean mIsAlternative;
     @SerializedName("amenities")
     private String mAmenities;
+    @SerializedName("originairportcoordinates")
+    private AirportCoordinatesVO originairportcoordinates = new AirportCoordinatesVO();
+
+    @SerializedName("destinationairportcoordinates")
+    private AirportCoordinatesVO destinationairportcoordinates = new AirportCoordinatesVO();
+
 
 
     public float getmStarRating() {
@@ -543,5 +549,27 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
         this.mArrival = mArrival;
     }
 
+    public String getmPaymentProcessingState() {
+        return mPaymentProcessingState;
+    }
 
+    public void setmPaymentProcessingState(String mPaymentProcessingState) {
+        this.mPaymentProcessingState = mPaymentProcessingState;
+    }
+
+    public AirportCoordinatesVO getOriginairportcoordinates() {
+        return originairportcoordinates;
+    }
+
+    public void setOriginairportcoordinates(AirportCoordinatesVO originairportcoordinates) {
+        this.originairportcoordinates = originairportcoordinates;
+    }
+
+    public AirportCoordinatesVO getDestinationairportcoordinates() {
+        return destinationairportcoordinates;
+    }
+
+    public void setDestinationairportcoordinates(AirportCoordinatesVO destinationairportcoordinates) {
+        this.destinationairportcoordinates = destinationairportcoordinates;
+    }
 }
