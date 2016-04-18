@@ -4,9 +4,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
-import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
@@ -14,7 +12,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 /**
  * Created by nyawka on 12/2/15.
  */
-public class PreferencesSettingsMainClass extends HGBAbtsractFragment {
+public class PreferencesSettingsMainClass extends HGBAbstractFragment {
 
     public boolean noBack = false;
     public void backOnListClicked(final String strType,final String strId,final List<SettingsValuesVO> accountAttributesVO) {

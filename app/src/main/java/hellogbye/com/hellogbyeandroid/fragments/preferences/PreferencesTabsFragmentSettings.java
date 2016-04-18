@@ -17,7 +17,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsDragListAdapter;
-import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
@@ -31,7 +31,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by nyawka on 11/8/15.
  */
-public class PreferencesTabsFragmentSettings extends HGBAbtsractFragment {
+public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
     private DynamicListView mFlightDynamicListView;
     private DynamicListView mHotelDynamicListView;
     private boolean mIsFlightViewShown = true;

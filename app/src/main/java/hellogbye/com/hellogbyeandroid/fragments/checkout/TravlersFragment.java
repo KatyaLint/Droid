@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.TravlerAdapter;
-import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
@@ -26,7 +26,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by arisprung on 11/23/15.
  */
-public class TravlersFragment extends HGBAbtsractFragment {
+public class TravlersFragment extends HGBAbstractFragment {
 
 
     private FontTextView mNext;

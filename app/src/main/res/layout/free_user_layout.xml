@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_margin="@dimen/DP10">
+
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/free_user_premium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/DP10"
+        android:text="Get premium"
+        android:textSize="@dimen/SP16"
+        android:gravity="center"
+        android:layout_margin="@dimen/DP20"
+        app:fontName="dinnextltpro_regular.otf"
+
+        android:layout_alignParentRight="true"/>
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/free_user_free"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/DP10"
+        android:text="get free membership"
+        android:textSize="@dimen/SP16"
+        android:gravity="center"
+        app:fontName="dinnextltpro_regular.otf"
+        android:layout_margin="@dimen/DP20"
+        android:layout_alignParentRight="true"/>
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/free_user_already_a_member"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/DP10"
+        android:text="Already a member"
+        android:textSize="@dimen/SP16"
+        android:gravity="center"
+        app:fontName="dinnextltpro_regular.otf"
+        android:layout_margin="@dimen/DP20"
+        android:layout_alignParentRight="true"/>
+
+</LinearLayout>

@@ -15,7 +15,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.FlightAdapter;
 
-import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
@@ -28,7 +28,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 /**
  * Created by kate on 8/17/15.
  */
-public class AlternativeFlightFragment extends HGBAbtsractFragment {
+public class AlternativeFlightFragment extends HGBAbstractFragment {
 
 
     private ArrayList<AlternativeFlightsVO> airplaneDataVO;

@@ -21,7 +21,7 @@ import java.util.Map;
 import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.TravlerAdapter;
-import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.PaymentSummaryItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -39,7 +39,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by arisprung on 12/2/15.
  */
-public class SummaryPaymentFragment extends HGBAbtsractFragment {
+public class SummaryPaymentFragment extends HGBAbstractFragment {
 
     private ListView mListViewCC;
 

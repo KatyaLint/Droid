@@ -1,6 +1,5 @@
 package hellogbye.com.hellogbyeandroid.fragments.settings;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,7 +12,7 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.fragments.HGBAbtsractFragment;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
@@ -29,7 +28,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by arisprung on 8/17/15.
  */
-public class AccountPersonalInfoSettingsFragment extends HGBAbtsractFragment {
+public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
 
     private EditText input;

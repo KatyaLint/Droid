@@ -26,7 +26,7 @@ import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 /**
  * Created by arisprung on 9/20/15.
  */
-public class HGBAbtsractFragment extends Fragment {
+public class HGBAbstractFragment extends Fragment {
 
     private HGBMainInterface mActivityInterface;
     private HGBFlowInterface mHGBFlowInterface;
