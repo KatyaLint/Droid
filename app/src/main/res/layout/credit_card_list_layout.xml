@@ -38,7 +38,11 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="You don't have any\nPayment card"
+<<<<<<< HEAD
                 android:textColor="@color/COLOR_0E587D"
+=======
+                android:textColor="@color/no_payment_color"
+>>>>>>> origin/master
                 android:textSize="25sp" />
         </LinearLayout>
 
