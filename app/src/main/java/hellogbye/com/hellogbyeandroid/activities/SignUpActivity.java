@@ -1,9 +1,13 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.SpannableString;
@@ -11,7 +15,10 @@ import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -116,6 +123,7 @@ public class SignUpActivity extends AppCompatActivity {
         sign_up_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //TODO we need to check if user didnt fill in all mandatory data
 
                 userData.setUserEmail(sign_up_email.getText().toString());
                 userData.setFirstName(sign_up_first_name.getText().toString());
@@ -131,6 +139,20 @@ public class SignUpActivity extends AppCompatActivity {
                         hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER,false);
                       //  bookingResponse = (BookingRequestVO)data;
                         //BookingRequest bookingrequest = (BookingRequest)data;
+
+                        final AlertDialog.Builder alert = new AlertDialog.Builder(SignUpActivity.this);
+                        alert.setCancelable(false);
+                        alert.setMessage("A confirmation code was sent to your email. Please verify then login");
+                        alert.setTitle("Confirmation Email")
+                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(getApplicationContext(), StartingMenuActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                })
+                                .create().show();
+
                     }
 
                     @Override
@@ -229,6 +251,7 @@ public class SignUpActivity extends AppCompatActivity {
                 public void onSuccess(Object data) {
                      bookingResponse = (BookingRequestVO)data;
                     //BookingRequest bookingrequest = (BookingRequest)data;
+
                 }
 
                 @Override
