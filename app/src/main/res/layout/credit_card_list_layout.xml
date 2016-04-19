@@ -1,54 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <RelativeLayout
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/credit_card_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
+
+
+    <LinearLayout
+        android:id="@+id/payment_missing_ll"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
 
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/credit_card_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" />
-
-
-        <LinearLayout
-            android:id="@+id/payment_missing_ll"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:background="@drawable/thin_0421_money_credit_card_coins_payment" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:visibility="gone"
-            android:orientation="vertical">
+            android:text="You don't have any\nPayment card"
+            android:textColor="@color/COLOR_0E587D"
+            android:textSize="25sp" />
+    </LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/thin_0421_money_credit_card_coins_payment" />
 
-            <hellogbye.com.hellogbyeandroid.views.FontTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="You don't have any\nPayment card"
-                android:textColor="@color/COLOR_0E587D"
-                android:textSize="25sp" />
-        </LinearLayout>
-
-    </RelativeLayout>
-
-    <ImageView
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/plus" />
-</android.support.design.widget.CoordinatorLayout>
+        android:clickable="true"
+        android:src="@drawable/fab_plus"
+        app:layout_anchor="@id/companion_search_view"
+        app:layout_anchorGravity="bottom|right|end"
+        app:backgroundTint="@color/COLOR_00516f"
+        app:rippleColor="@android:color/transparent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/DP16"
+        android:layout_marginBottom="@dimen/DP16" />
+</RelativeLayout>

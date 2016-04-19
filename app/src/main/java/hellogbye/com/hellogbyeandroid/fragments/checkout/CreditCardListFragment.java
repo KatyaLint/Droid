@@ -1,20 +1,15 @@
 package hellogbye.com.hellogbyeandroid.fragments.checkout;
 
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import java.util.ArrayList;
-
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.CreditCardAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
@@ -24,7 +19,6 @@ import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
-import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by arisprung on 12/2/15.
@@ -34,7 +28,7 @@ public class CreditCardListFragment extends HGBAbstractFragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private CreditCardAdapter mAdapter;
-    private ImageView mAddImageView;
+    private FloatingActionButton mAddImageView;
     private LinearLayout mMissingLinearLayout;
 
     public static Fragment newInstance(int position) {
@@ -56,7 +50,7 @@ public class CreditCardListFragment extends HGBAbstractFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = (RecyclerView)view.findViewById(R.id.credit_card_recycler_view);
-        mAddImageView = (ImageView)view.findViewById(R.id.add_fab);
+        mAddImageView = (FloatingActionButton) view.findViewById(R.id.add_fab);
         mMissingLinearLayout = (LinearLayout)view.findViewById(R.id.payment_missing_ll);
 
 
