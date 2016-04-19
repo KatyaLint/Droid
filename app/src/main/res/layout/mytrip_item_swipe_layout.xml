@@ -50,7 +50,7 @@
 
     <hellogbye.com.hellogbyeandroid.views.RoundedImageView
         android:layout_weight="0"
-        android:paddingLeft="@dimen/DP10"
+        android:layout_margin="@dimen/DP10"
         android:layout_centerVertical="true"
         android:id="@+id/my_trip_user_image"
         android:layout_width="@dimen/DP60"
@@ -89,13 +89,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/SP10"
-            android:text="Paid"
+
             app:fontName="dinnextltpro_light.otf" />
 
     </LinearLayout>
 
     <ImageView
         android:layout_weight="0"
+        android:layout_margin="@dimen/DP8"
         android:id="@+id/my_trip_arrow_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
