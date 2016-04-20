@@ -29,6 +29,7 @@ import java.util.HashSet;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.CheckoutConfirmationFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.NewPaymentDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.freeuser.FreeUserFragment;
@@ -634,6 +635,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case PREFERENCES_DRAG_LIST_SETTINGS:
                 fragment = PreferencesDragListFragment.newInstance(navPosition);
+                break;
+            case CHECKOUT_CONFIRMATION:
+                fragment = CheckoutConfirmationFragment.newInstance(navPosition);
                 break;
 
             case PAYMENT_TRAVLERS:

@@ -125,8 +125,10 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
         viewHolder.my_trip_dates.setText(HGBUtility.parseDateToddMMyyyyMyTrip(item.getStartdate())+" - "+HGBUtility.parseDateToddMMyyyyMyTrip(item.getEnddate()));
         if(item.getPaymentstatus().equals("UPD")){
             viewHolder.my_trip_paid.setText("UNPAID");
+            viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.red_button_color));
         }else{
             viewHolder.my_trip_paid.setText("PAID");
+            viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.paid_green));
         }
         viewHolder.mytrips_rl.setTag(position);
         viewHolder.buttonDelete.setTag(position);

@@ -220,8 +220,8 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
                 ConnectionManager.getInstance(getActivity()).pay(jsonObject, new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Trip Booked", Toast.LENGTH_SHORT).show();
-                        getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), null);
+                       // Toast.makeText(getActivity().getApplicationContext(), "Trip Booked", Toast.LENGTH_SHORT).show();
+                        getFlowInterface().goToFragment(ToolBarNavEnum.CHECKOUT_CONFIRMATION.getNavNumber(), null);
 
                     }
 
