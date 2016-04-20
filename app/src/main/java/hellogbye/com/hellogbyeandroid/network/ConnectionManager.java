@@ -1398,13 +1398,15 @@ public class ConnectionManager {
     public void putAlternateHotel(String solutionid, String paxid, String checkin, String checkout, String hotelid, final ServerRequestListener listener) {
         String url = getURL(Services.USER_PUT_HOTEL);
         JSONObject jsonObjectWrapper = new JSONObject();
+        String [] chekinArray = checkin.split("T");
+        String [] chekoutArray = checkout.split("T");
         try {
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("solution", solutionid);
             jsonObject.put("paxid", paxid);
-            jsonObject.put("checkin", checkin);
-            jsonObject.put("checkout", checkout);
+            jsonObject.put("checkin", chekinArray[0]);
+            jsonObject.put("checkout", chekoutArray[0]);
             jsonObjectWrapper.put("parameters", jsonObject);
             jsonObjectWrapper.put("hotel", hotelid);
 
