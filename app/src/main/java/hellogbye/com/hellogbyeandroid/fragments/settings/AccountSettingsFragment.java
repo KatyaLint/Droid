@@ -89,9 +89,9 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
 
         String title = currentUser.getTitle();
         //TODO remove when server change the title without spaces
-        if(title != null){
+        if(title != null) {
             title = title.trim();
-        }else{
+        } else{
             title = "";
         }
         String userName = title +" "+ currentUser.getFirstname() + " " + currentUser.getLastname();
