@@ -1,10 +1,11 @@
 package hellogbye.com.hellogbyeandroid.fragments.checkout;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -278,7 +279,8 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
 
                 if (creditCardItemSession == null) {
                     HGBErrorHelper errorHelper = new HGBErrorHelper();
-                    errorHelper.show(getFragmentManager(), "There was a probelm please try again");
+                    errorHelper.setMessageForError((String) data);
+                    errorHelper.show(getActivity().getFragmentManager(), "There was a probelm please try again");
 
                 }else{
                     creditCardItem.setNickname(creditCardItemSession.getNickname());
@@ -322,7 +324,8 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
 
                                         progressDialog.hide();
                                         HGBErrorHelper errorHelper = new HGBErrorHelper();
-                                        errorHelper.show(getFragmentManager(), (String) data);
+                                        errorHelper.setMessageForError((String) data);
+                                        errorHelper.show(getActivity().getFragmentManager(), (String) data);
 
                                     }
                                 });
@@ -333,7 +336,8 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
                                 e.printStackTrace();
                                 progressDialog.hide();
                                 HGBErrorHelper errorHelper = new HGBErrorHelper();
-                                errorHelper.show(getFragmentManager(), e.getMessage());
+                                errorHelper.setMessageForError((String) data);
+                                errorHelper.show(getActivity().getFragmentManager(), e.getMessage());
                             }
                             Log.d("JSON", jsonObj.toString());
                         }
@@ -343,7 +347,8 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
                             Log.e("", "");
                             progressDialog.hide();
                             HGBErrorHelper errorHelper = new HGBErrorHelper();
-                            errorHelper.show(getFragmentManager(), (String) data);
+                            errorHelper.setMessageForError((String) data);
+                            errorHelper.show(getActivity().getFragmentManager(), (String) data);
 
                         }
                     });
@@ -358,7 +363,8 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
             public void onError(Object data) {
 
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
             }
         });
 
@@ -387,7 +393,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
 
             }
         });
@@ -424,7 +430,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
             }
         });
     }

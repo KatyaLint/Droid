@@ -1,8 +1,9 @@
 package hellogbye.com.hellogbyeandroid.fragments.companions;
 
-import android.app.Fragment;
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -74,7 +75,7 @@ public class TravelCompanionsFragment extends HGBAbstractFragment implements Sea
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
             }
         });
     }
@@ -92,7 +93,7 @@ public class TravelCompanionsFragment extends HGBAbstractFragment implements Sea
                 public void onError(Object data) {
                     HGBErrorHelper errorHelper = new HGBErrorHelper();
                     errorHelper.setMessageForError((String) data);
-                    errorHelper.show(getFragmentManager(), (String) data);
+                    errorHelper.show(getActivity().getFragmentManager(), (String) data);
                 }
             });
         }
@@ -193,7 +194,7 @@ public class TravelCompanionsFragment extends HGBAbstractFragment implements Sea
                           public void onError(Object data) {
                               HGBErrorHelper errorHelper = new HGBErrorHelper();
                               errorHelper.setMessageForError((String) data);
-                              errorHelper.show(getFragmentManager(), (String) data);
+                              errorHelper.show(getActivity().getFragmentManager(), (String) data);
                           }
                       });
 

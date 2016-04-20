@@ -1,8 +1,9 @@
 package hellogbye.com.hellogbyeandroid.fragments.checkout;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -31,7 +32,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by arisprung on 11/24/15.
  */
-public class TravlerDetailsFragment extends HGBAbstractFragment {
+public class TravelerDetailsFragment extends HGBAbstractFragment {
 
 
     private FontTextView mTitle;
@@ -72,7 +73,7 @@ public class TravlerDetailsFragment extends HGBAbstractFragment {
 
 
     public static Fragment newInstance(int position) {
-        Fragment fragment = new TravlerDetailsFragment();
+        Fragment fragment = new TravelerDetailsFragment();
         Bundle args = new Bundle();
         args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
         fragment.setArguments(args);
@@ -281,7 +282,7 @@ public class TravlerDetailsFragment extends HGBAbstractFragment {
                             Toast.makeText(getActivity().getApplicationContext(), "There was a problem saving your information please try again", Toast.LENGTH_SHORT).show();
                             HGBErrorHelper errorHelper = new HGBErrorHelper();
                             errorHelper.setMessageForError((String) data);
-                            errorHelper.show(getFragmentManager(), (String) data);
+                            errorHelper.show(getActivity().getFragmentManager(), (String) data);
                         }
                     });
                 }
@@ -622,7 +623,7 @@ public class TravlerDetailsFragment extends HGBAbstractFragment {
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
 
             }
         });
@@ -659,7 +660,7 @@ public class TravlerDetailsFragment extends HGBAbstractFragment {
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
             }
         });
     }

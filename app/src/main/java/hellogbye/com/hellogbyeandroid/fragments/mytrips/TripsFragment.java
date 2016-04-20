@@ -1,8 +1,9 @@
 package hellogbye.com.hellogbyeandroid.fragments.mytrips;
 
-import android.app.Fragment;
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -100,7 +101,7 @@ public class TripsFragment  extends HGBAbstractFragment {
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
                         errorHelper.setMessageForError((String) data);
-                        errorHelper.show(getFragmentManager(), (String) data);
+                        errorHelper.show(getActivity().getFragmentManager(), (String) data);
 
                     }
                 });
@@ -126,7 +127,7 @@ public class TripsFragment  extends HGBAbstractFragment {
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
                         errorHelper.setMessageForError((String) data);
-                        errorHelper.show(getFragmentManager(), (String) data);
+                        errorHelper.show(getActivity().getFragmentManager(), (String) data);
 
                     }
                 });
@@ -234,7 +235,7 @@ public class TripsFragment  extends HGBAbstractFragment {
                 public void onError(Object data) {
                     HGBErrorHelper errorHelper = new HGBErrorHelper();
                     errorHelper.setMessageForError( (String) data);
-                    errorHelper.show(getFragmentManager(), (String) data);
+                    errorHelper.show(getActivity().getFragmentManager(), (String) data);
                 }
             });
         }
@@ -255,7 +256,7 @@ public class TripsFragment  extends HGBAbstractFragment {
                 public void onError(Object data) {
                     HGBErrorHelper errorHelper = new HGBErrorHelper();
                     errorHelper.setMessageForError((String) data);
-                    errorHelper.show(getFragmentManager(), (String) data);
+                    errorHelper.show(getActivity().getFragmentManager(), (String) data);
                 }
             });
 
@@ -293,7 +294,7 @@ public class TripsFragment  extends HGBAbstractFragment {
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
             }
         });
     }

@@ -1,13 +1,16 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
+
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -29,6 +32,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -62,7 +66,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  */
 public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback {
 
-    private MapFragment fragment;
+    private SupportMapFragment fragment;
     private GoogleMap mMap;
     private TableLayout mTableLayout;
     private ArrayList<String> mImageList;
@@ -113,6 +117,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private Activity activity;
 
     public static boolean IS_MAIN_BACK_ALLOWED = true;
+
     public static Fragment newInstance(int position) {
         Fragment fragment = new HotelFragment();
         Bundle args = new Bundle();
@@ -204,7 +209,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
                         errorHelper.setMessageForError((String) data);
-                        errorHelper.show(getFragmentManager(), (String) data);
+                        errorHelper.show(getActivity().getFragmentManager(), (String) data);
                     }
                 });
     }
@@ -215,10 +220,10 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         super.onActivityCreated(savedInstanceState);
         FragmentManager fm = getChildFragmentManager();
 
-        fragment = ((MapFragment) activity.getFragmentManager().findFragmentById(R.id.map));//(SupportMapFragment) fm.findFragmentById(R.id.map);
+        fragment = (SupportMapFragment)fm.findFragmentById(R.id.map); //((SupportMapFragment) activity.getFragmentManager().findFragmentById(R.id.map));//(SupportMapFragment) fm.findFragmentById(R.id.map);
 
         if (fragment == null) {
-            fragment = MapFragment.newInstance();
+            fragment = SupportMapFragment.newInstance();
             fm.beginTransaction().replace(R.id.map, fragment).commit();
             fragment.getMapAsync(this);
         }
@@ -319,7 +324,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
                         errorHelper.setMessageForError((String) data);
-                        errorHelper.show(getFragmentManager(), (String) data);
+                        errorHelper.show(getActivity().getFragmentManager(), (String) data);
                     }
                 });
     }

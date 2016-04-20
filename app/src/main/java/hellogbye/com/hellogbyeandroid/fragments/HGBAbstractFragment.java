@@ -2,8 +2,9 @@ package hellogbye.com.hellogbyeandroid.fragments;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
+
 import android.content.DialogInterface;
+import android.support.v4.app.Fragment;
 import android.view.WindowManager;
 
 import org.apache.http.Header;

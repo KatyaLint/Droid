@@ -1,8 +1,9 @@
 package hellogbye.com.hellogbyeandroid.fragments.checkout;
 
-import android.app.Fragment;
+
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -183,7 +184,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
             }
         });
     }
@@ -204,6 +206,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 itemsList.add(getString(R.string.remove_card));
                 itemsList.add(getString(R.string.cancel));
 
+
+                //TODO kate
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
                 dialogBuilder.setTitle("Select Payment Method");
 
@@ -249,7 +253,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
             }
         });
 

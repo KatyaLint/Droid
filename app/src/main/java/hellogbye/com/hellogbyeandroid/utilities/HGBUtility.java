@@ -3,8 +3,12 @@ package hellogbye.com.hellogbyeandroid.utilities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+
+
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,6 +30,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
+
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -68,6 +73,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
+
 
 
 /**
@@ -305,10 +311,12 @@ public class HGBUtility {
 
 
 
-    public static void goToNextFragmentIsAddToBackStack(Activity activity, Fragment fragment, boolean isAddToBackStack, boolean isAddAnimation){
+    public static void goToNextFragmentIsAddToBackStack(FragmentManager manager, Fragment fragment, boolean isAddToBackStack, boolean isAddAnimation){
 
         try{
-            FragmentTransaction transaction = activity.getFragmentManager().beginTransaction();
+
+        //    FragmentManager manager = activity.getFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction(); //beginTransaction();
             if(isAddAnimation){
                 transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_right,R.anim.slide_in_left,R.anim.slide_out_right);
 
@@ -328,25 +336,25 @@ public class HGBUtility {
 
     }
 
-    public static void goToNextFragmentIsAddToBackStackWithAnimation(Activity activity, Fragment fragment, boolean isAddToBackStack){
-
-        try{
-            FragmentTransaction transaction = activity.getFragmentManager().beginTransaction();
-            transaction.replace(R.id.content_frame, fragment, fragment.getClass().toString());
-            transaction.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_down);
-            if (isAddToBackStack) {
-                transaction.addToBackStack(fragment.getClass().toString());
-
-                getFragmentStack().push(fragment);
-            }
-
-            transaction.commit();
-        }catch (Exception e){
-            e.printStackTrace();
-            Crashlytics.logException(e);
-        }
-
-    }
+//    public static void goToNextFragmentIsAddToBackStackWithAnimation(Activity activity, Fragment fragment, boolean isAddToBackStack){
+//
+//        try{
+//            FragmentTransaction transaction = activity.getFragmentManager().beginTransaction();
+//            transaction.replace(R.id.content_frame, fragment, fragment.getClass().toString());
+//            transaction.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_down);
+//            if (isAddToBackStack) {
+//                transaction.addToBackStack(fragment.getClass().toString());
+//
+//                getFragmentStack().push(fragment);
+//            }
+//
+//            transaction.commit();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            Crashlytics.logException(e);
+//        }
+//
+//    }
 
     public static long dayDifference(String startDay, String endDate){
         Date date1 = getDateFromServer(startDay);
@@ -359,14 +367,14 @@ public class HGBUtility {
     }
 
 
-    public static void clearAllFragments(Activity activity){
-        while(getFragmentStack().size() > 1){
-            FragmentTransaction fragmentTransaction =  activity.getFragmentManager().beginTransaction();
-            fragmentTransaction.hide(getFragmentStack().pop());
-        }
-    }
+//    public static void clearAllFragments(Activity activity){
+//        while(getFragmentStack().size() > 1){
+//            FragmentTransaction fragmentTransaction =  activity.getFragmentManager().beginTransaction();
+//            fragmentTransaction.hide(getFragmentStack().pop());
+//        }
+//    }
 
-    public static void removeAllFragments(Activity activity){
+    public static void removeAllFragments(FragmentManager manager){
         Stack<Fragment> fragments = getFragmentStack();
         if (fragments == null) {
            return;
@@ -378,7 +386,7 @@ public class HGBUtility {
 //                continue;
 //            }
 
-            activity.getFragmentManager().beginTransaction().remove(fragment).commit();
+            manager.beginTransaction().remove(fragment).commit();
         }
         setFragmentsClear();
     }
@@ -387,16 +395,16 @@ public class HGBUtility {
         fragmentStack.clear();
     }
 
-    public static boolean clearBackStackAndGoToNextFragment(Activity activity) {
+    public static boolean clearBackStackAndGoToNextFragment(FragmentManager manager) {
 
         if(getFragmentStack().size() >= 2){
-            FragmentTransaction fragmentTransaction =  activity.getFragmentManager().beginTransaction();
+            FragmentTransaction fragmentTransaction =  manager.beginTransaction();
             fragmentTransaction.hide(getFragmentStack().pop());
             //fragmentStack.pop();
 
 
             Fragment fragmentTemp = getFragmentStack().lastElement();
-            goToNextFragmentIsAddToBackStack(activity,fragmentTemp,false,false);
+            goToNextFragmentIsAddToBackStack(manager,fragmentTemp,false,false);
             return true;
         }
 

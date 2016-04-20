@@ -1,10 +1,11 @@
 package hellogbye.com.hellogbyeandroid.fragments.itinerary;
 
 import android.app.Activity;
-import android.app.Fragment;
+
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;

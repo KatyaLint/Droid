@@ -1,9 +1,11 @@
 package hellogbye.com.hellogbyeandroid.fragments.alternative;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
+
+
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,6 +19,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -49,7 +52,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
     private ArrayList<AlternativeFlightsVO> airplaneDataVO;
     private UserTravelMainVO userOrder;
     private Button showAlternativeFlight;
-    private MapFragment fragment;
+    private SupportMapFragment fragment;
     private GoogleMap mMap;
     private RecyclerView recyclerView;
     private NodesVO nodeFromAlternative;
@@ -73,10 +76,11 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         super.onActivityCreated(savedInstanceState);
         FragmentManager fm = getChildFragmentManager();
 
-        fragment = ((MapFragment) getActivity().getFragmentManager().findFragmentById(R.id.map));//(SupportMapFragment) fm.findFragmentById(R.id.map);
+
+        fragment = (SupportMapFragment)fm.findFragmentById(R.id.map); //((SupportMapFragment) activity.getFragmentManager().findFragmentById(R.id.map));//(SupportMapFragment) fm.findFragmentById(R.id.map);
 
         if (fragment == null) {
-            fragment = MapFragment.newInstance();
+            fragment = SupportMapFragment.newInstance();
             fm.beginTransaction().replace(R.id.map, fragment).commit();
             fragment.getMapAsync(this);
         }
@@ -102,7 +106,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
             }
         });
     }
@@ -158,7 +162,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
                         errorHelper.setMessageForError((String) data);
-                        errorHelper.show(getFragmentManager(), (String) data);
+                        errorHelper.show(getActivity().getFragmentManager(), (String) data);
                     }
                 });
     }

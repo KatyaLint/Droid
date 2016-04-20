@@ -1,6 +1,7 @@
 package hellogbye.com.hellogbyeandroid.views;
 
 import android.content.Context;
+
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;

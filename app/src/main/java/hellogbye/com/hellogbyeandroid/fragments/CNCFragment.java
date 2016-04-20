@@ -1,10 +1,10 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
-import android.app.Fragment;
 
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -101,12 +101,13 @@ public class CNCFragment extends HGBAbstractFragment {
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.setMessageForError( (String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
             }
         });
     }
 
     public void initList() {
+
         loadCNCList();
         mRecyclerView.setHasFixedSize(true);
         // use a linear layout manager
@@ -345,7 +346,7 @@ public class CNCFragment extends HGBAbstractFragment {
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
                         errorHelper.setMessageForError((String) data);
-                        errorHelper.show(getFragmentManager(), (String) data);
+                        errorHelper.show(getActivity().getFragmentManager(), (String) data);
                     }
                 }
         );
@@ -378,7 +379,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
                     HGBErrorHelper errorHelper = new HGBErrorHelper();
                     errorHelper.setMessageForError((String) data);
-                    errorHelper.show(getFragmentManager(), (String) data);
+                    errorHelper.show(getActivity().getFragmentManager(), (String) data);
                     airportSendValuesVOs.clear();
                 }
             });
