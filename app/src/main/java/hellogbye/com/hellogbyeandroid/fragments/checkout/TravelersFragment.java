@@ -1,8 +1,9 @@
 package hellogbye.com.hellogbyeandroid.fragments.checkout;
 
 
-import android.app.Fragment;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,7 +27,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by arisprung on 11/23/15.
  */
-public class TravlersFragment extends HGBAbstractFragment {
+public class TravelersFragment extends HGBAbstractFragment {
 
 
     private FontTextView mNext;
@@ -37,7 +38,7 @@ public class TravlersFragment extends HGBAbstractFragment {
     private RecyclerView.LayoutManager mLayoutManager;
 
     public static Fragment newInstance(int position) {
-        Fragment fragment = new TravlersFragment();
+        Fragment fragment = new TravelersFragment();
         Bundle args = new Bundle();
         args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
         fragment.setArguments(args);
@@ -92,7 +93,7 @@ public class TravlersFragment extends HGBAbstractFragment {
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
             }
         });
 
@@ -112,7 +113,7 @@ public class TravlersFragment extends HGBAbstractFragment {
                     public void onError(Object data) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
                         errorHelper.setMessageForError((String) data);
-                        errorHelper.show(getFragmentManager(), (String) data);
+                        errorHelper.show(getActivity().getFragmentManager(), (String) data);
                     }
                 });
 

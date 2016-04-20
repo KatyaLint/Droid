@@ -1,7 +1,7 @@
 package hellogbye.com.hellogbyeandroid.fragments.settings;
 
 import android.app.Activity;
-import android.app.Fragment;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -76,7 +77,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
             }
         });
     }
@@ -325,7 +326,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
             }
         });
     }
@@ -376,7 +377,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
 
             }
         });

@@ -1,8 +1,9 @@
 package hellogbye.com.hellogbyeandroid.fragments.checkout;
 
-import android.app.Fragment;
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -91,7 +92,8 @@ public class CreditCardListFragment extends HGBAbstractFragment {
             @Override
             public void onError(Object data) {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
             }
         });
 

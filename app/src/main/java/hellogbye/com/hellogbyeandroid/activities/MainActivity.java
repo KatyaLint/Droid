@@ -3,12 +3,19 @@ package hellogbye.com.hellogbyeandroid.activities;
 
 
 import android.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentManager;
+
+
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+
+
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -53,8 +60,8 @@ import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesDragListF
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSearchListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesTabsFragmentSettings;
 import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlerDetailsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.checkout.TravlersFragment;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.TravelerDetailsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.TravelersFragment;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
@@ -400,7 +407,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         hgbSaveDataClass.setTravelOrder(null);
         hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
         hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
-        Fragment currentFragment = getFragmentManager().findFragmentByTag(CNCFragment.class.toString());
+        Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(CNCFragment.class.toString());
         ((CNCFragment) currentFragment).initList();
     }
 
@@ -483,7 +490,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     @Override
     public void gotToStartMenuActivity() {
-        HGBUtility.removeAllFragments(MainActivity.this);
+        HGBUtility.removeAllFragments(getSupportFragmentManager());
         hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
         Intent intent = new Intent(getApplicationContext(), StartingMenuActivity.class);
@@ -641,11 +648,11 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
 
             case PAYMENT_TRAVLERS:
-                fragment = TravlersFragment.newInstance(navPosition);
+                fragment = TravelersFragment.newInstance(navPosition);
 
                 break;
             case PAYMENT_TRAVLERS_DETAILS:
-                fragment = TravlerDetailsFragment.newInstance(navPosition);
+                fragment = TravelerDetailsFragment.newInstance(navPosition);
                 break;
             case SELECT_CREDIT_CARD:
                 fragment = SummaryPaymentFragment.newInstance(navPosition);
@@ -677,7 +684,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         }
 
 
-        HGBUtility.goToNextFragmentIsAddToBackStack(this, fragment, stashToBack, isAddAnimation);
+        HGBUtility.goToNextFragmentIsAddToBackStack(getSupportFragmentManager(), fragment, stashToBack, isAddAnimation);
         mToolbar.initToolBarItems();
         mToolbar.updateToolBarView(position);
         mDrawerLayout.closeDrawer(mNavDrawerLinearLayout);
@@ -734,14 +741,14 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         }
 
         //TODO this is when I want the fragment to contorl the back -Kate I suggest we do this for all Fragments
-        FragmentManager.BackStackEntry backEntry = getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1);
+        FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1);
         String str = backEntry.getName();
         if (str.equals(HotelFragment.class.toString()) &&  !HotelFragment.IS_MAIN_BACK_ALLOWED) {
             return;
         }
 
 
-        if (HGBUtility.clearBackStackAndGoToNextFragment(this)) {
+        if (HGBUtility.clearBackStackAndGoToNextFragment(getSupportFragmentManager())) {
             // super.onBackPressed();
 //            Stack<Fragment> fragmentStack = HGBUtility.getFragmentStack();
             Fragment fragmentTemp = HGBUtility.getFragmentStack().lastElement();
@@ -884,7 +891,11 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
             //   String fragmentTag = getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1).getName();
-            Fragment currentFragment = getFragmentManager().findFragmentByTag(CNCFragment.class.toString());
+         //   Fragment currentFragment = getFragmentManager().findFragmentByTag(CNCFragment.class.toString());
+
+
+            Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(CNCFragment.class.toString());
+
             ((CNCFragment) currentFragment).handleMyMessage(matches.get(0));
 //            if (currentFragment instanceof CNCFragment) {
 //                ((CNCFragment) currentFragment).handleMyMessage(matches.get(0));

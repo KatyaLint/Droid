@@ -1,7 +1,8 @@
 package hellogbye.com.hellogbyeandroid.fragments.settings;
 
-import android.app.Fragment;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -173,7 +174,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
                             public void onError(Object data) {
                                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                                 errorHelper.setMessageForError((String) data);
-                                errorHelper.show(getFragmentManager(), (String) data);                            }
+                                errorHelper.show(getActivity().getFragmentManager(), (String) data);                            }
                         });
                     }
 
@@ -348,7 +349,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
                 isDisable = false;
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
             }
         });
     }
@@ -367,7 +368,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
 
             }
         });
@@ -455,7 +456,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
                 isDisable = false;
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
             }
         });
     }

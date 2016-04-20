@@ -41,6 +41,7 @@ public class ImageGalleryActivity extends FragmentActivity {
         SparseArray<ImageFragment> registeredFragments = new SparseArray<ImageFragment>();
 
         public ImagePagerAdapter(FragmentManager fragmentManager) {
+
             super(fragmentManager);
         }
 
