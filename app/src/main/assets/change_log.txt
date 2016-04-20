@@ -36,7 +36,7 @@ Code changing:
   - Click on user avater : transfer to preference settings
   - changes on preference settings affect on cnc screen upper line
   - On CNC Message, user name
-  - Sign up screen - still need server response
+  - Sign up screen
   - refactoring of MainActivity class
   - New make payment button
   - Refactoring itinerary VO
@@ -44,3 +44,8 @@ Code changing:
   - New icons for menu
   - Anonymous
   - Sign up new style
+  - Credit card flow
+  - Credit card view in preferences
+  - Payment management
+  - Swap logic for delete trip
+  - Maps in flight view

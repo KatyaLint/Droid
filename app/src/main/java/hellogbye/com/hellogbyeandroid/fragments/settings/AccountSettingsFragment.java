@@ -92,7 +92,11 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
         if(title != null){
             title = title.trim();
 <<<<<<< HEAD
+<<<<<<< HEAD
         }else {
+=======
+        }else{
+>>>>>>> master
 =======
         }else{
 >>>>>>> master
