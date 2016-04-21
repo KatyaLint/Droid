@@ -93,8 +93,6 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
 
 
                 JSONObject jsonObject = new JSONObject();
-                //  CreditCardItem selectedCreditCard = getSelectedCreditCrad();
-
                 try {
 
                     JSONArray jsonArray = new JSONArray();
@@ -143,16 +141,11 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
                             }
                         }
 
-
                         jsonUser.put("bookingitems", array);
                         jsonArray.put(jsonUser);
 
-
                     }
-
                     jsonObject.put("paxdetails", jsonArray);
-
-
                     jsonObject.put("itineraryid", getActivityInterface().getSolutionID());
 
 
@@ -166,17 +159,9 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
                             bookingLocalArray.put(s);
                         }
                         bookingItems.put(strKey, bookingLocalArray);
-
-
                     }
-
-
-                    // bookingItems.put(selectedCreditCard.getToken(), bookingArray);
                     jsonObject.put("bookingitems", bookingItems);
-
-
                     JSONArray creditJsonArray = new JSONArray();
-
                     JSONObject creditObject = new JSONObject();
 
                     for (CreditCardItem selectedCreditCard : getFlowInterface().getCreditCardsSelected()) {

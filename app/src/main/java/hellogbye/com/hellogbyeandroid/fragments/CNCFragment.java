@@ -1,6 +1,7 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -25,6 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.CNCTutorialActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.CNCAdapter;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
@@ -57,6 +60,7 @@ public class CNCFragment extends HGBAbstractFragment {
     private ImageView mMicImageView;
     private FontTextView mSendTextView;
     private HGBPreferencesManager mHGBPrefrenceManager;
+
     private String[] locationArr;
     private Button cnc_fragment_trip_settings;
 
@@ -75,6 +79,7 @@ public class CNCFragment extends HGBAbstractFragment {
        // getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         View rootView = inflater.inflate(R.layout.cnc_fragment_layout, container, false);
+
         mHGBPrefrenceManager = HGBPreferencesManager.getInstance(getActivity().getApplicationContext());
         init(rootView);
         initList();
@@ -83,8 +88,18 @@ public class CNCFragment extends HGBAbstractFragment {
 
         getAccountsProfiles();
 
+        startTutorial();
+
 
         return rootView;
+    }
+
+    private void startTutorial() {
+
+        if(mHGBPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.HGB_CNC_FIRST_TIME,true)){
+            mHGBPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_CNC_FIRST_TIME,false);
+            startActivity(new Intent(getActivity().getApplicationContext(), CNCTutorialActivity.class));
+        }
     }
 
 
