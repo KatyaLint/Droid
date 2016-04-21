@@ -13,45 +13,46 @@
         android:focusableInTouchMode="true"
         android:layout_height="wrap_content"/>
 
+    <include layout="@layout/companion_empty_view"/>
 
-<LinearLayout
-    android:paddingTop="@dimen/DP20"
-    android:id="@+id/companion_empty_view"
-    android:visibility="gone"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="center"
-   android:layout_below="@+id/companion_search_view">
+<!--<LinearLayout-->
+    <!--android:paddingTop="@dimen/DP20"-->
+    <!--android:id="@+id/companion_empty_view"-->
+    <!--android:visibility="gone"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical"-->
+    <!--android:gravity="center"-->
+   <!--android:layout_below="@+id/companion_search_view">-->
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/profil_icon_copy"/>
-<hellogbye.com.hellogbyeandroid.views.FontTextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textSize="@dimen/SP32"
-    android:textColor="@color/COLOR_005077"
-    android:gravity="center"
-    app:fontName="dinnextltpro_mediumcond.ttf"
-    android:text="@string/companion_empty_view_text"
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/profil_icon_copy"/>-->
+<!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textSize="@dimen/SP32"-->
+    <!--android:textColor="@color/COLOR_005077"-->
+    <!--android:gravity="center"-->
+    <!--app:fontName="dinnextltpro_mediumcond.ttf"-->
+    <!--android:text="@string/companion_empty_view_text"-->
 
-    android:padding="@dimen/DP20"/>
+    <!--android:padding="@dimen/DP20"/>-->
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
+    <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/SP18"
-        android:gravity="center"
-        app:fontName="dinnextltpro_light.otf"
-        android:textColor="@color/warm_grey"
-        android:text="@string/companion_empty_search"
-        />
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textSize="@dimen/SP18"-->
+        <!--android:gravity="center"-->
+        <!--app:fontName="dinnextltpro_light.otf"-->
+        <!--android:textColor="@color/warm_grey"-->
+        <!--android:text="@string/companion_empty_search"-->
+        <!--/>-->
 
-</LinearLayout>
+<!--</LinearLayout>-->
 
 
 

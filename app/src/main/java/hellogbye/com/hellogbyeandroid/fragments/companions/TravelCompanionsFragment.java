@@ -128,14 +128,6 @@ public class TravelCompanionsFragment extends HGBAbstractFragment implements Sea
         searchRecyclerView.setAdapter(searchListAdapter);
 
 
-//        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // Click action
-//                System.out.println("Kate clicked");
-//            }
-//        });
 
         searchListAdapter.SetOnItemClickListener(new CompanionAdapter.OnItemClickListener() {
             @Override

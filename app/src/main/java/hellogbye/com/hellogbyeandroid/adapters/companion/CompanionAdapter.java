@@ -119,7 +119,6 @@ public class CompanionAdapter extends RecyclerView.Adapter<CompanionAdapter.View
             }
         };
 
-
     }
 
     public interface OnItemClickListener {

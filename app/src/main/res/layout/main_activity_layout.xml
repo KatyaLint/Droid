@@ -44,7 +44,7 @@
         <LinearLayout
             android:id="@+id/drawer"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="start"
             android:background="@color/hgb_toolbar_blue"
             android:divider="@android:color/transparent"

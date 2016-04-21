@@ -39,6 +39,7 @@ import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CheckoutConfirmationFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.NewPaymentDetailsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionTabsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.freeuser.FreeUserFragment;
 import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalEmailSettingsFragment;
@@ -597,7 +598,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 fragment = TripsFragment.newInstance(navPosition);
                 break;
             case COMPANIONS:
-                fragment = TravelCompanionsFragment.newInstance(navPosition);
+                //fragment = TravelCompanionsFragment.newInstance(navPosition);
+                fragment = TravelCompanionTabsFragment.newInstance(navPosition);
+
              //   fragment = isFreeUser(fragment , navPosition);
                 break;
             case COMPANIONS_DETAILS:
@@ -741,6 +744,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         }
 
         //TODO this is when I want the fragment to contorl the back -Kate I suggest we do this for all Fragments
+        int count = getFragmentManager().getBackStackEntryCount();
         FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1);
         String str = backEntry.getName();
         if (str.equals(HotelFragment.class.toString()) &&  !HotelFragment.IS_MAIN_BACK_ALLOWED) {
