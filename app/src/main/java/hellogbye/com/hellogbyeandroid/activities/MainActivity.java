@@ -36,7 +36,6 @@ import java.util.HashSet;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
-import hellogbye.com.hellogbyeandroid.fragments.TutorialFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CheckoutConfirmationFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.NewPaymentDetailsFragment;
@@ -671,9 +670,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case CREDIT_CARD_LIST:
                 fragment = CreditCardListFragment.newInstance(navPosition);
                 break;
-            case CNC_TUTORAL:
-                fragment = TutorialFragment.newInstance(navPosition);
-                break;
+
         }
 
 
