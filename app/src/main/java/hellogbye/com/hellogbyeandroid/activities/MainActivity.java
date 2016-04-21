@@ -742,6 +742,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         }
 
         //TODO this is when I want the fragment to contorl the back -Kate I suggest we do this for all Fragments
+        //TODO getBackStackEntryAt sometimes equels 0
         FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1);
         String str = backEntry.getName();
         if (str.equals(HotelFragment.class.toString()) &&  !HotelFragment.IS_MAIN_BACK_ALLOWED) {

@@ -462,8 +462,11 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
         mListForGallery = new ArrayList<>();
         mHotelNameFontTextView.setText(node.getmHotelName());
-        mHotelPriceFontTextView.setText("$" + String.valueOf((int) node.getmMinimumAmount()));
-        mHotelDaysFontTextView.setText(HGBUtility.getDateDiffString(node.getmCheckIn(), node.getmCheckOut()));
+        long diff = HGBUtility.getDateDiff(node.getmCheckIn(), node.getmCheckOut());
+        double iCharge = node.getmMinimumAmount()/diff;
+        String result = String.format("%.2f", iCharge);
+        mHotelPriceFontTextView.setText("$" + result);
+        mHotelDaysFontTextView.setText(R.string.avreage_per_night);
         mHotelAddressFontTextView.setText(node.getmAddress1());
         //TODO we need to check if size is more then 1 show option to change
         mHotelRoomNameFontTextView.setText(node.getRoomsVOs().get(0).getmRoomType());

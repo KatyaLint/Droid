@@ -642,6 +642,27 @@ public class HGBUtility {
         }
     }
 
+    public static long getDateDiff(String strDate1, String strDate2)
+    {
+
+        Date date1 = getDateFromServer(strDate1);
+        Date date2 = getDateFromServer(strDate2);
+        long timeOne = date1.getTime();
+        long timeTwo = date2.getTime();
+        long oneDay = 1000 * 60 * 60 * 24;
+        long delta = (timeTwo - timeOne) / oneDay;
+        return delta+1;
+
+//        if (delta > 0) {
+//            return delta ;
+//        }
+//        else {
+//            delta *= -1;
+//            return delta ;
+//        }
+
+    }
+
 
 
     public static Date getDateFromServer(String time){
