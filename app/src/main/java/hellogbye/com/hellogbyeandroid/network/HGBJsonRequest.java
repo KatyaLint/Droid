@@ -234,6 +234,7 @@ public class HGBJsonRequest extends Request<String> {
         try {
             jsonString = new String(response.data,
                     HttpHeaderParser.parseCharset(response.headers));
+            Log.d("HGBJsonRequest",jsonString);
         } catch (UnsupportedEncodingException e) {
             jsonString = new String(response.data);
         }

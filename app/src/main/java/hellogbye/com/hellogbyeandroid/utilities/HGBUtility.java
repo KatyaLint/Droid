@@ -653,13 +653,6 @@ public class HGBUtility {
         long delta = (timeTwo - timeOne) / oneDay;
         return delta+1;
 
-//        if (delta > 0) {
-//            return delta ;
-//        }
-//        else {
-//            delta *= -1;
-//            return delta ;
-//        }
 
     }
 
