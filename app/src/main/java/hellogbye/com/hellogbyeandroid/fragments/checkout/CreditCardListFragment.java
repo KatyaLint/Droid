@@ -81,12 +81,8 @@ public class CreditCardListFragment extends HGBAbstractFragment {
                     mAdapter = new CreditCardAdapter(getFlowInterface().getCreditCards(),getActivity().getApplicationContext());
                     mRecyclerView.setAdapter(mAdapter);
                 }else{
-
                     mMissingLinearLayout.setVisibility(View.VISIBLE);
                 }
-
-
-
             }
 
             @Override
@@ -96,11 +92,6 @@ public class CreditCardListFragment extends HGBAbstractFragment {
                 errorHelper.show(getActivity().getFragmentManager(), (String) data);
             }
         });
-
-
-
-
-
 
     }
 }

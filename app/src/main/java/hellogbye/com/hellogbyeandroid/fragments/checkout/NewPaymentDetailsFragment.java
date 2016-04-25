@@ -14,7 +14,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -42,8 +41,6 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  */
 public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
-    // private View rootView;
-    private LinearLayout mRootView;
     private FontTextView mTotalPrice;
     private FontTextView mPaymentSubmit;
     private FontTextView mPaymentDisableSubmit;
@@ -56,8 +53,6 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
     private ExpandableListAdapter mAdapter;
     private ArrayList<PaymnentGroup> groups;
     private List<ArrayList<PaymentChild>> children;
-    private HashSet<CreditCardItem> mCreditCardHashSet = new HashSet<>();
-    private String mLastCC;
 
 
     public static Fragment newInstance(int position) {
@@ -85,7 +80,6 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // mRootView = (LinearLayout) view.findViewById(R.id.payment_details_root);
         mTotalPrice = (FontTextView) view.findViewById(R.id.payment_total_price);
         mPaymentSubmit = (FontTextView) view.findViewById(R.id.payment_submit);
         mPaymentDisableSubmit = (FontTextView) view.findViewById(R.id.payment_submit_disable);
@@ -98,7 +92,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             @Override
             public void onClick(View v) {
 
-                if(selectCCDialog !=null){
+                if (selectCCDialog != null) {
                     selectCCDialog.show();
                     mSelectedView = (FontTextView) v;
                     mSelectedView.setTag("total");
@@ -122,8 +116,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         groups = new ArrayList<>();
 
         for (PassengersVO passengersVO : passangers) {
-//            View child = getActivity().getLayoutInflater().inflate(R.layout.payment_details_person_layout, null);
-//            mRootView.addView(child);
+
             ArrayList<PaymentChild> passengerChildArray = new ArrayList<>();
 
 
@@ -135,7 +128,6 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 NodesVO nodesVO = hashMap.get(passengerItem);
                 if (nodesVO != null) {
                     if (nodesVO != null) {//&& list.size() > 0) {
-                        double totalprice = passengersVO.getmTotalPrice();
                         PaymentChild paymentChild;
                         if (NodeTypeEnum.HOTEL.getType().equals(nodesVO.getmType())) {
                             paymentChild = new PaymentChild(nodesVO.getmHotelName() +
@@ -145,14 +137,12 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                                     HGBUtility.getDateDiffString(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()),
                                     "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card));
                             passengerChildArray.add(paymentChild);
-                            //  itenearySet.add(nodesVO.getmGuid());
                         } else if (NodeTypeEnum.FLIGHT.getType().equals(nodesVO.getmType())) {
                             paymentChild = new PaymentChild(nodesVO.getmOrigin() + "-" + nodesVO.getmDestination() + "\n" +
                                     nodesVO.getmOperatorName() + "" + nodesVO.getmEquipment() +
                                     "\n" + nodesVO.getDateOfCell(),
                                     "$" + String.valueOf(nodesVO.getCost()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card));
                             passengerChildArray.add(paymentChild);
-                            //  itenearySet.add(nodesVO.getmGuid());
                         }
                     }
 
@@ -261,10 +251,6 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
     }
 
-    private void calculateRemovedCard(CreditCardItem selectedCreditCard, FontTextView mSelectedView) {
-
-
-    }
 
     private void calculateCard(CreditCardItem selectedCreditCard, FontTextView mSelectedView, boolean add) {
 
@@ -359,7 +345,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         } else {
             if (add) {
                 mTotalSelectCC.setText(selectedCreditCard.getLast4());
-                setCCIcon(mTotalSelectCC,selectedCreditCard);
+                setCCIcon(mTotalSelectCC, selectedCreditCard);
             } else {
                 mTotalSelectCC.setText(getString(R.string.select_card));
                 mTotalSelectCC.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
@@ -416,18 +402,18 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
     }
 
     private void setCCIcon(FontTextView view, CreditCardItem selectedCreditCard) {
-        if(selectedCreditCard.getCardtypeid().equals("1")){
-           // view.setCompoundDrawablesWithIntrinsicBounds(R.drawable.amex, 0, 0, 0);
+        if (selectedCreditCard.getCardtypeid().equals("1")) {
+            // view.setCompoundDrawablesWithIntrinsicBounds(R.drawable.amex, 0, 0, 0);
 
-        }else if(selectedCreditCard.getCardtypeid().equals("2")){
+        } else if (selectedCreditCard.getCardtypeid().equals("2")) {
             //TODO need DISCOVERY card
-           // view.setCompoundDrawablesWithIntrinsicBounds(R.drawable.amex, 0, 0, 0);
+            // view.setCompoundDrawablesWithIntrinsicBounds(R.drawable.amex, 0, 0, 0);
 
-        }else if(selectedCreditCard.getCardtypeid().equals("3")){
-           // view.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mastercard, 0, 0, 0);
+        } else if (selectedCreditCard.getCardtypeid().equals("3")) {
+            // view.setCompoundDrawablesWithIntrinsicBounds(R.drawable.mastercard, 0, 0, 0);
 
-        }else if(selectedCreditCard.getCardtypeid().equals("4")){
-          //  view.setCompoundDrawablesWithIntrinsicBounds(R.drawable.visa, 0, 0, 0);
+        } else if (selectedCreditCard.getCardtypeid().equals("4")) {
+            //  view.setCompoundDrawablesWithIntrinsicBounds(R.drawable.visa, 0, 0, 0);
 
         }
 
@@ -461,8 +447,6 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         private final ArrayList<PaymnentGroup> groupsList;
         private List<ArrayList<PaymentChild>> childrenList = new ArrayList<>();
 
-        // Hashmap for keeping track of our checkbox check states
-        // private final HashMap<Integer, boolean[]> mChildCheckStates;
 
         public ExpandableListAdapter(ArrayList<PaymnentGroup> groups, List<ArrayList<PaymentChild>> children) {
             this.groupsList = groups;

@@ -90,7 +90,6 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //  getFlowInterface().loadJSONFromAsset();
         mTitle = (FontTextView) view.findViewById(R.id.travel_detail_title);
         mFirstName = (EditText) view.findViewById(R.id.travel_detail_first_name);
         mLastName = (EditText) view.findViewById(R.id.travel_detail_last_name);
@@ -471,7 +470,6 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
         mFirstName.setText(mUser.getFirstname());
         mLastName.setText(mUser.getLastname());
         mDOB.setText(HGBUtility.parseDateToddMMyyyyForPayment(mUser.getDob()));
-//        mGender.setText(mUser.());
         mEmail.setText(mUser.getEmailaddress());
         mPhone.setText(mUser.getPhone());
         mAddress.setText(mUser.getAddress());
@@ -652,8 +650,6 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
                 } else {
                     mState.setVisibility(View.GONE);
                 }
-                //    bookingResponse = (BookingRequestVO)data;
-                //BookingRequest bookingrequest = (BookingRequest)data;
             }
 
             @Override
@@ -667,7 +663,6 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
 
     private void setDropDownItems(final List<ProvincesItem> provinceItems) {
-        //  final ArrayList<CountryItemVO> countries = bookingResponse.getCountries();
         String[] countryarray = new String[provinceItems.size()];
         for (int i = 0; i < provinceItems.size(); i++) {
             countryarray[i] = provinceItems.get(i).getProvincename();

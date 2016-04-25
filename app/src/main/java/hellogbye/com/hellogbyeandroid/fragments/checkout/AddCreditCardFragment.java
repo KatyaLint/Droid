@@ -14,14 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.NumberPicker;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
@@ -123,7 +120,6 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
                 scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, true); // default: false
                 scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_POSTAL_CODE, true); // default: false
 
-                // MY_SCAN_REQUEST_CODE is arbitrary and is only used within this activity.
                 startActivityForResult(scanIntent, MY_SCAN_REQUEST_CODE);
             }
         });
@@ -214,8 +210,6 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
                 // Never log a raw card number. Avoid displaying it, but if necessary use getFormattedCardNumber()
                 resultDisplayStr = "Card Number: " + scanResult.getRedactedCardNumber() + "\n";
                 mCardNumber.setText(scanResult.getRedactedCardNumber());
-                // Do something with the raw number, e.g.:
-                // myService.setCardNumber( scanResult.cardNumber );
 
                 if (scanResult.isExpiryValid()) {
                     resultDisplayStr += "Expiration Date: " + scanResult.expiryMonth + "/" + scanResult.expiryYear + "\n";
@@ -235,10 +229,8 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
             } else {
                 resultDisplayStr = "Scan was canceled.";
             }
-            // do something with resultDisplayStr, maybe display it in a textView
-            // resultTextView.setText(resultStr);
+
         }
-        // else handle other activity results
     }
 
 
@@ -274,8 +266,6 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
             @Override
             public void onSuccess(Object data) {
                 creditCardItemSession = (CreditCardSessionItem) data;
-
-
 
                 if (creditCardItemSession == null) {
                     HGBErrorHelper errorHelper = new HGBErrorHelper();
@@ -422,8 +412,6 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
                 } else {
                     mCardProvince.setVisibility(View.GONE);
                 }
-                //    bookingResponse = (BookingRequestVO)data;
-                //BookingRequest bookingrequest = (BookingRequest)data;
             }
 
             @Override
@@ -497,8 +485,5 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
             }
         }
     }
-
-
-
 
 }
