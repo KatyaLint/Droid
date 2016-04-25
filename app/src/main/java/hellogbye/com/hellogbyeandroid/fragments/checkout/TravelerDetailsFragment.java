@@ -1,7 +1,5 @@
 package hellogbye.com.hellogbyeandroid.fragments.checkout;
 
-import android.app.AlertDialog;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -10,12 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
@@ -50,25 +45,9 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
     private EditText mPostalCode;
     private FontTextView mState;
     private UserDataVO mUser;
-    private AlertDialog mCountryDialog;
-    private AlertDialog stateDialog;
 
-    private NumberPicker countryPicker;
-    private NumberPicker statePicker;
-    private NumberPicker genderPicker;
-    private NumberPicker titlePicker;
-    private String SELECT_PROVINCE = "Select Province";
-
-    // private HashMap<String, ArrayList<ProvincesItem>> list = new HashMap<>();
-
-
-    private AlertDialog countryDialog;
-    private int maxValueForStateDialog;
     private String[] stateArray;
-    // private int countryMaxValueSize;
-    private String[] countryarray;
-    private String mCounterPicked = "0";
-    private String mStatePicked = "0";
+
     private BookingRequestVO bookingResponse;
 
 
@@ -117,43 +96,8 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
         }
 
         setSaveButton();
-
-        // buildCountryDialog();
-
-
-//        countryMaxValueSize = getActivityInterface().getEligabileCountries().size();
-//        countryarray = new String[getActivityInterface().getEligabileCountries().size()];
-//        for (int i = 0; i < getActivityInterface().getEligabileCountries().size(); i++) {
-//            countryarray[i] = getActivityInterface().getEligabileCountries().get(i).getName();
-//        }
-//        mCountry.setTag(0);
-//        mState.setTag(0);
-//        selectStates("0");
-
-
-//        HGBUtility.buildStateDialog(mState, getActivity(), maxValueForStateDialog, stateArray, SELECT_PROVINCE);
-//        HGBUtility.buildStateDialog(mCountry, getActivity(), countryMaxValueSize, countryarray, SELECT_PROVINCE);
-
-        //  buildStateDialog();
         setClickListner();
 
-//TODO need to load provnices from API not file
-//        ConnectionManager.getInstance(getActivity()).getBookingOptions(new ConnectionManager.ServerRequestListener() {
-//            @Override
-//            public void onSuccess(Object data) {
-//
-//
-//
-//
-//
-//            }
-//
-//            @Override
-//            public void onError(Object data) {
-//                HGBErrorHelper errorHelper = new HGBErrorHelper();
-//                errorHelper.show(getFragmentManager(), (String) data);
-//            }
-//        });
 
     }
 
@@ -163,7 +107,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
     private void selectStates(String countryPicked) {
         int countryPick = Integer.parseInt(countryPicked);
-        maxValueForStateDialog = getActivityInterface().getEligabileCountries().get(countryPick).getProvinces().size();
+
         stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPick).getProvinces().size()];
         ArrayList<ProvincesItem> provinces = getActivityInterface().getEligabileCountries().get(countryPick).getProvinces();
         for (int i = 0; i < provinces.size(); i++) {
@@ -195,7 +139,6 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
                                         break;
                                     }
                                 }
-
                             }
 
                             @Override
@@ -303,166 +246,10 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
     }
 
-//    private void showDateDialog() {
-//
-//        final Calendar c = Calendar.getInstance();
-//        int mYear = c.get(Calendar.YEAR);
-//        int mMonth = c.get(Calendar.MONTH);
-//        int mDay = c.get(Calendar.DAY_OF_MONTH);
-//
-//        DatePickerDialog dpd = new DatePickerDialog(getActivity(),
-//                new DatePickerDialog.OnDateSetListener() {
-//
-//                    @Override
-//                    public void onDateSet(DatePicker view, int year,
-//                                          int monthOfYear, int dayOfMonth) {
-//                        mDOB.setText(dayOfMonth + "/"
-//                                + (monthOfYear + 1) + "/" + year);
-//
-//                    }
-//                }, mYear, mMonth, mDay);
-//        dpd.show();
-//    }
-
-
-//    private void showTitleDialog() {
-//        View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
-//
-//        titlePicker = (NumberPicker) v1.findViewById(R.id.np);
-//        titlePicker.setMinValue(0);
-//
-//        titlePicker.setMaxValue(2);
-//        final String[] titleArray = {"Mr", "Mrs", "Miss"};
-//        titlePicker.setDisplayedValues(titleArray);
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//        builder.setView(v1);
-//        builder.setTitle("Select Title");
-//        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int which) {
-//                mTitle.setText(titleArray[titlePicker.getValue()]);
-//                return;
-//            }
-//        });
-//        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int which) {
-//                return;
-//            }
-//        });
-//
-//
-//        AlertDialog dialog = builder.create();
-//        dialog.show();
-//    }
 
     final String[] genderArray = {"M", "F"};
     final String GENDER_TITLE = "Select Gender";
 
-//    private void showGenderDialog() {
-//
-//        View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
-//
-//        genderPicker = (NumberPicker) v1.findViewById(R.id.np);
-//        genderPicker.setMinValue(0);
-//
-//        genderPicker.setMaxValue(1);
-//        final String[] genderArray = {"M", "F"};
-//        genderPicker.setDisplayedValues(genderArray);
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//        builder.setView(v1);
-//        builder.setTitle("Select Gender");
-//        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int which) {
-//                mGender.setText(genderArray[genderPicker.getValue()]);
-//                return;
-//            }
-//        });
-//        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int which) {
-//                return;
-//            }
-//        });
-//
-//        AlertDialog dialog = builder.create();
-//        dialog.show();
-//
-//    }
-
-//    private void buildCountryDialog() {
-//        View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
-//
-//        countryPicker = (NumberPicker) v1.findViewById(R.id.np);
-//        countryPicker.setMinValue(0);
-//        countryPicker.setMaxValue(getActivityInterface().getEligabileCountries().size() - 1);
-//        final String[] countryarray = new String[getActivityInterface().getEligabileCountries().size()];
-//        for (int i = 0; i < getActivityInterface().getEligabileCountries().size(); i++) {
-//            countryarray[i] = getActivityInterface().getEligabileCountries().get(i).getName();
-//        }
-//        countryPicker.setDisplayedValues(countryarray);
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//        builder.setView(v1);
-//        builder.setTitle("Select Country");
-//        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int which) {
-//                mCountry.setText(countryarray[countryPicker.getValue()]);
-//
-//
-//                maxValueForStateDialog = getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size();
-//                stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size()];
-//                for (int i = 0; i < getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size(); i++) {
-//                    stateArray[i] = getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().get(i).getName();
-//                }
-//
-//                HGBUtility.buildStateDialog(mState, getActivity(), maxValueForStateDialog, stateArray, SELECT_PROVINCE);
-//
-//
-////                buildStateDialog();
-//                return;
-//            }
-//        });
-//        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int which) {
-//                return;
-//            }
-//        });
-//
-//        countryDialog = builder.create();
-//    }
-
-//    private void buildStateDialog() {
-//        View v1 = getActivity().getLayoutInflater().inflate(R.layout.picker_dialog, null);
-//
-//        statePicker = (NumberPicker) v1.findViewById(R.id.np);
-//        statePicker.setMinValue(0);
-//
-//        statePicker.setMaxValue(getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size() - 1);
-//        final String[] stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size()];
-//        for (int i = 0; i < getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().size(); i++) {
-//            stateArray[i] = getActivityInterface().getEligabileCountries().get(countryPicker.getValue()).getProvinces().get(i).getName();
-//        }
-//        statePicker.setDisplayedValues(stateArray);
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//        builder.setView(v1);
-//        builder.setTitle("Select Province");
-//        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int which) {
-//                mState.setText(stateArray[statePicker.getValue()]);
-//                return;
-//            }
-//        });
-//        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int which) {
-//                return;
-//            }
-//        });
-//
-//
-//        stateDialog = builder.create();
-//
-//    }
 
     private void initUser() {
 
@@ -629,14 +416,14 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
     private void getStaticProvince() {
         String countryID;
-        if( mCountry.getTag() == null){
-             countryID =  mCountry.getText().toString();
+        if (mCountry.getTag() == null) {
+            countryID = mCountry.getText().toString();
             if (countryID.equals("Canada")) {
                 countryID = "CA";
             } else if (countryID.equals("UnitedStates")) {
                 countryID = "US";
             }
-        }else{
+        } else {
             countryID = (String) mCountry.getTag();
         }
 
