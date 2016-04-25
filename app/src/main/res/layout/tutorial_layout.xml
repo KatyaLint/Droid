@@ -33,6 +33,7 @@
         android:layout_above="@+id/bottom_arrow"
         android:layout_centerHorizontal="true"
         android:text="Tap to type"
+        android:layout_marginBottom="@dimen/DP4"
         android:textColor="@color/white" />
 
 
@@ -42,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottom_rectangle"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/DP4"
         android:background="@drawable/arrow" />
 
     <ImageView
@@ -50,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/DP6"
+        android:layout_marginBottom="@dimen/DP8"
         android:background="@drawable/rectangle" />
 
 
