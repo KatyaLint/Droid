@@ -84,7 +84,8 @@ public class CNCFragment extends HGBAbstractFragment {
 
         getAccountsProfiles();
 
-        startTutorial();
+        //This is to ckeck and display tutorial this version was cancelled waiting for new one 
+       // startTutorial();
 
 
         return rootView;
