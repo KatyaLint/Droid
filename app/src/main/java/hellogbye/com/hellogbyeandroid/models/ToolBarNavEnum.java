@@ -27,7 +27,8 @@ public enum ToolBarNavEnum {
     COMPANIONS_PERSONAL_DETAILS(26,"Personal Info"),
     COMPANIONS_PERSONAL_EMAILS(27,"Personal Emails"),
     CREDIT_CARD_LIST(28,"Credit Card list"),
-    CHECKOUT_CONFIRMATION(29,"Checkout confirmation");
+    CHECKOUT_CONFIRMATION(29,"Checkout confirmation"),
+    CNC_TUTORAL(30,"CNC Tutorial");
 
 
 

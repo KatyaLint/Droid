@@ -430,7 +430,10 @@ public class ItineraryFragment extends HGBAbstractFragment {
         grid_hotel_place.setTag(node.getmGuid());
 
         TextView grid_hotel_price = (TextView)child.findViewById(R.id.grid_hotel_price);
-        grid_hotel_price.setText("$" + node.getmMaximumAmount());
+        long diff = HGBUtility.getDateDiff(node.getmCheckIn(), node.getmCheckOut());
+        double iCharge = node.getmMinimumAmount()/diff;
+        String result = String.format("%.2f", iCharge);
+        grid_hotel_price.setText("$" + result);
 
         //type
         grid_hotel_price.setTag(node.getmType());

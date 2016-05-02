@@ -191,4 +191,5 @@
     <string name="trip_no_trips_title">You don’t have any Trips</string>
     <string name="trip_no_trips_explanation">Start planning your trip below.\nAnytime you create a trip you can\naccess it from here</string>
     <string name="done">done</string>
+    <string name="avreage_per_night">Average per night</string>
 </resources>

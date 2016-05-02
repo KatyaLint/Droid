@@ -55,6 +55,12 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
         <activity
+            android:name=".activities.CNCTutorialActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/TutAppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity
             android:name=".activities.LoginActivity"
             android:label="@string/app_name"/>
         <!--<activity-->

@@ -14,14 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.NumberPicker;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
@@ -123,7 +120,6 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
                 scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, true); // default: false
                 scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_POSTAL_CODE, true); // default: false
 
-                // MY_SCAN_REQUEST_CODE is arbitrary and is only used within this activity.
                 startActivityForResult(scanIntent, MY_SCAN_REQUEST_CODE);
             }
         });
@@ -214,8 +210,6 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
                 // Never log a raw card number. Avoid displaying it, but if necessary use getFormattedCardNumber()
                 resultDisplayStr = "Card Number: " + scanResult.getRedactedCardNumber() + "\n";
                 mCardNumber.setText(scanResult.getRedactedCardNumber());
-                // Do something with the raw number, e.g.:
-                // myService.setCardNumber( scanResult.cardNumber );
 
                 if (scanResult.isExpiryValid()) {
                     resultDisplayStr += "Expiration Date: " + scanResult.expiryMonth + "/" + scanResult.expiryYear + "\n";
@@ -235,10 +229,8 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
             } else {
                 resultDisplayStr = "Scan was canceled.";
             }
-            // do something with resultDisplayStr, maybe display it in a textView
-            // resultTextView.setText(resultStr);
+
         }
-        // else handle other activity results
     }
 
 
@@ -270,103 +262,110 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
         creditCardItem.setCvv(mCardCCV.getText().toString());
         creditCardItem.setCardNumber(mCardNumber.getText().toString());
 
-        ConnectionManager.getInstance(getActivity()).getCCSession(new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
-                creditCardItemSession = (CreditCardSessionItem) data;
+        if(verifyValidCCNumber(creditCardItem))
+        {
+            ConnectionManager.getInstance(getActivity()).getCCSession(new ConnectionManager.ServerRequestListener() {
+                @Override
+                public void onSuccess(Object data) {
+                    creditCardItemSession = (CreditCardSessionItem) data;
+
+                    if (creditCardItemSession == null) {
+                        HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.setMessageForError((String) data);
+                        errorHelper.show(getActivity().getFragmentManager(), "There was a probelm please try again");
+
+                    }else{
+                        creditCardItem.setNickname(creditCardItemSession.getNickname());
+                        creditCardItem.setToken(creditCardItemSession.getToken());
 
 
 
-                if (creditCardItemSession == null) {
-                    HGBErrorHelper errorHelper = new HGBErrorHelper();
-                    errorHelper.setMessageForError((String) data);
-                    errorHelper.show(getActivity().getFragmentManager(), "There was a probelm please try again");
-
-                }else{
-                    creditCardItem.setNickname(creditCardItemSession.getNickname());
-                    creditCardItem.setToken(creditCardItemSession.getToken());
+                        ConnectionManager.getInstance(getActivity()).addCreditCard(creditCardItem, new ConnectionManager.ServerRequestListener() {
+                            @Override
+                            public void onSuccess(Object data) {
 
 
+                                JSONObject jsonObj = null;
+                                try {
+                                    jsonObj = XML.toJSONObject((String) data);
+                                    JSONObject json1 = jsonObj.getJSONObject("soap:Envelope");
+                                    JSONObject json2 = json1.getJSONObject("soap:Body");
+                                    JSONObject json3 = json2.getJSONObject("AddCOF_SoapResponse");
+                                    JSONObject json4 = json3.getJSONObject("AddCOF_SoapResult");
+                                    JSONObject json5 = json4.getJSONObject("TokenData");
+                                    String strToken = json5.getString("Token");
+                                    String strNickName = json5.getString("NickName");
+                                    String strLast4 = json5.getString("Last4");
 
-                    ConnectionManager.getInstance(getActivity()).addCreditCard(creditCardItem, new ConnectionManager.ServerRequestListener() {
-                        @Override
-                        public void onSuccess(Object data) {
-
-
-                            JSONObject jsonObj = null;
-                            try {
-                                jsonObj = XML.toJSONObject((String) data);
-                                JSONObject json1 = jsonObj.getJSONObject("soap:Envelope");
-                                JSONObject json2 = json1.getJSONObject("soap:Body");
-                                JSONObject json3 = json2.getJSONObject("AddCOF_SoapResponse");
-                                JSONObject json4 = json3.getJSONObject("AddCOF_SoapResult");
-                                JSONObject json5 = json4.getJSONObject("TokenData");
-                                String strToken = json5.getString("Token");
-                                String strNickName = json5.getString("NickName");
-                                String strLast4 = json5.getString("Last4");
-
-                                JSONObject json = new JSONObject();
-                                json.put("Last4", strLast4);
-                                json.put("NickName", strNickName);
-                                json.put("Token", strToken);
+                                    JSONObject json = new JSONObject();
+                                    json.put("Last4", strLast4);
+                                    json.put("NickName", strNickName);
+                                    json.put("Token", strToken);
 
 
-                                ConnectionManager.getInstance(getActivity()).AddCreditCardHelloGbye(json, new ConnectionManager.ServerRequestListener() {
-                                    @Override
-                                    public void onSuccess(Object data) {
-                                        progressDialog.hide();
-                                        getFragmentManager().popBackStack();
+                                    ConnectionManager.getInstance(getActivity()).AddCreditCardHelloGbye(json, new ConnectionManager.ServerRequestListener() {
+                                        @Override
+                                        public void onSuccess(Object data) {
+                                            progressDialog.hide();
+                                            getFragmentManager().popBackStack();
 
-                                    }
+                                        }
 
-                                    @Override
-                                    public void onError(Object data) {
+                                        @Override
+                                        public void onError(Object data) {
 
-                                        progressDialog.hide();
-                                        HGBErrorHelper errorHelper = new HGBErrorHelper();
-                                        errorHelper.setMessageForError((String) data);
-                                        errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                                            progressDialog.hide();
+                                            HGBErrorHelper errorHelper = new HGBErrorHelper();
+                                            errorHelper.setMessageForError((String) data);
+                                            errorHelper.show(getActivity().getFragmentManager(), (String) data);
 
-                                    }
-                                });
+                                        }
+                                    });
 
 
-                            } catch (JSONException e) {
-                                Log.e("JSON exception", e.getMessage());
-                                e.printStackTrace();
+                                } catch (JSONException e) {
+                                    Log.e("JSON exception", e.getMessage());
+                                    e.printStackTrace();
+                                    progressDialog.hide();
+                                    HGBErrorHelper errorHelper = new HGBErrorHelper();
+                                    errorHelper.setMessageForError((String) data);
+                                    errorHelper.show(getActivity().getFragmentManager(), e.getMessage());
+                                }
+                                Log.d("JSON", jsonObj.toString());
+                            }
+
+                            @Override
+                            public void onError(Object data) {
+                                Log.e("", "");
                                 progressDialog.hide();
                                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                                 errorHelper.setMessageForError((String) data);
-                                errorHelper.show(getActivity().getFragmentManager(), e.getMessage());
+                                errorHelper.show(getActivity().getFragmentManager(), (String) data);
+
                             }
-                            Log.d("JSON", jsonObj.toString());
-                        }
+                        });
 
-                        @Override
-                        public void onError(Object data) {
-                            Log.e("", "");
-                            progressDialog.hide();
-                            HGBErrorHelper errorHelper = new HGBErrorHelper();
-                            errorHelper.setMessageForError((String) data);
-                            errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                    }
 
-                        }
-                    });
+
 
                 }
 
+                @Override
+                public void onError(Object data) {
+
+                    HGBErrorHelper errorHelper = new HGBErrorHelper();
+                    errorHelper.setMessageForError((String) data);
+                    errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                }
+            });
+        }else{
+            HGBErrorHelper errorHelper = new HGBErrorHelper();
+            errorHelper.setMessageForError("The Credit Card number is not valid please try again");
+            errorHelper.show(getActivity().getFragmentManager(), "Problem with Credit Card");
+        }
 
 
-            }
-
-            @Override
-            public void onError(Object data) {
-
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getActivity().getFragmentManager(), (String) data);
-            }
-        });
 
 
     }
@@ -422,8 +421,6 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
                 } else {
                     mCardProvince.setVisibility(View.GONE);
                 }
-                //    bookingResponse = (BookingRequestVO)data;
-                //BookingRequest bookingrequest = (BookingRequest)data;
             }
 
             @Override
@@ -498,5 +495,40 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
         }
     }
 
+
+    private boolean verifyValidCCNumber(CreditCardItem creditCardItem){
+        
+        //American Express
+        if(creditCardItem.getCardtypeid().equals("1")){
+            if(mCardNumber.getText().length()==15){
+                return true;
+            }else{
+                return false;
+            }
+
+        }
+        //Discover
+        else if (creditCardItem.getCardtypeid().equals("2")){
+
+        }
+        //MasterCard
+        else if (creditCardItem.getCardtypeid().equals("3")){
+            if(mCardNumber.getText().length()==16){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        //Visa
+        else if (creditCardItem.getCardtypeid().equals("4")){
+            if(mCardNumber.getText().length()==13 || mCardNumber.getText().length()==16){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        return false;
+    }
 
 }
