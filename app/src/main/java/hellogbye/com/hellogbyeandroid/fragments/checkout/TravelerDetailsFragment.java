@@ -163,7 +163,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             public void onClick(View v) {
 
                 //  showGenderDialog();
-                HGBUtility.showPikerDialog(mTitle, getActivity(), GENDER_TITLE, genderArray, 0, 2, null, true);
+                HGBUtility.showPikerDialog(mTitle, getActivity(), GENDER_TITLE, genderArray, 0, 1, null, true);
             }
         });
 
