@@ -68,6 +68,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import java.util.Stack;
+import java.util.concurrent.Exchanger;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
@@ -666,7 +667,7 @@ public class HGBUtility {
         try {
             date = inputFormat.parse(time);
 
-        } catch (ParseException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return date;
