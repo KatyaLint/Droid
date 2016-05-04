@@ -163,7 +163,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             public void onClick(View v) {
 
                 //  showGenderDialog();
-                HGBUtility.showPikerDialog(mTitle, getActivity(), GENDER_TITLE, genderArray, 0, 2, null, true);
+                HGBUtility.showPikerDialog(mGender, getActivity(), GENDER_TITLE, genderArray, 0, 1, null, true);
             }
         });
 
@@ -197,6 +197,8 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
                     mUser.setCountry("CN");
                 } else if (mCountry.getText().toString().equals("UnitedStates")) {
                     mUser.setCountry("US");
+                }else{
+                    mUser.setCountry(mCountry.getText().toString());
                 }
 
                 mUser.setState(mState.getTag().toString());
@@ -266,6 +268,8 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             mCountry.setText("Canada");
         } else if (mUser.getCountry().equals("US")) {
             mCountry.setText("UnitedStates");
+        }else{
+            mCountry.setText(mUser.getCountry());
         }
 
         mPostalCode.setText(mUser.getPostalcode());
