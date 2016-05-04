@@ -14,18 +14,24 @@
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabslayout"
-            android:background="@color/red_button_color"
+            android:textAllCaps = "false"
+            android:background="@color/hgb_toolbar_blue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabMode="fixed"
-            app:tabGravity="fill"/>
+            app:tabGravity="fill"
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+            app:tabIndicatorColor="@color/red_button_color"
+            android:fillViewport="false" />
 
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
+    <hellogbye.com.hellogbyeandroid.views.CustomViewPager
+
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
+
 </android.support.design.widget.CoordinatorLayout>

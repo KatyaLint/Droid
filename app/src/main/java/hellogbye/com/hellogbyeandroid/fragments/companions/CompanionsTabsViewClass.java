@@ -11,6 +11,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,12 +24,15 @@ import android.widget.SearchView;
 import java.util.ArrayList;
 import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.adapters.companion.CompanionAdapter;
+
+import hellogbye.com.hellogbyeandroid.adapters.companion.CompanionsSwipeItemsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -44,7 +48,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
     private SearchView mSearchView;
     private RecyclerView searchRecyclerView;
  //   private ArrayList<CompanionVO> companionsVO;
-    private CompanionAdapter searchListAdapter;
+    private CompanionsSwipeItemsAdapter searchListAdapter;
     private List<CompanionVO> itemCompanionTemp = new ArrayList<>();
     private View popup_companion_new;
     private FontEditTextView[] inputs;
@@ -53,14 +57,16 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
     private FontEditTextView companion_editTextDialog;
     private LinearLayout companion_empty_view;
     private View rootView;
+    private ArrayList<CompanionVO> companionsVOPending;
+    private  static boolean isPending;
 
-    public CompanionsTabsViewClass() {
+    public void isPendingTabs(boolean isPending){
+        System.out.println("Kate isPendingTabs " + isPending);
+        this.isPending = isPending;
     }
 
-    private ArrayList<CompanionVO> companionsVOPending;
-
     private void searchListInitialization(View rootView){
-        mSearchView = (SearchView)rootView.findViewById(R.id.companion_search_view);
+
         // mSearchView.setVisibility(View.GONE);
         mSearchView.setOnQueryTextListener(this);
 
@@ -73,24 +79,27 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
     }
 
     private void pendingCompanions(ArrayList<CompanionVO>  companionsVO){
-        for (CompanionVO companionVO:companionsVO) {
+        companionsVOPending.clear();
+        for (CompanionVO companionVO : companionsVO) {
             if(companionVO.getmConfirmationstatus().equals("Pending")){
                 companionsVOPending.add(companionVO);
             }
         }
-        System.out.println("Kate pendingCompanions = " + companionsVOPending.size());
+
     }
 
     private void acceptedCompanions(ArrayList<CompanionVO>  companionsVO){
+        companionsVOPending.clear();
         for (CompanionVO companionVO:companionsVO) {
             if(companionVO.getmConfirmationstatus().equals("Accepted")){
                 companionsVOPending.add(companionVO);
             }
         }
-        System.out.println("Kate acceptedCompanions = " + companionsVOPending.size());
+
     }
 
-    boolean isPending;
+
+
 
     public View createViewForTab(int layoutID, Context context, boolean isPending){
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -98,18 +107,6 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
         companionsVOPending = new ArrayList<>();
         this.isPending = isPending;
         ArrayList<CompanionVO>  companionsVO = getActivityInterface().getCompanions();
-        System.out.println("Kate companionsVO = " + companionsVO.size());
-      //  searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.companion_search_recycle_list);
-
-//        if(companionsVO == null || companionsVO.isEmpty()){
-//            companion_empty_view.setVisibility(View.VISIBLE);
-//            searchRecyclerView.setVisibility(View.GONE);
-//        }else{
-//            searchRecyclerView.setVisibility(View.VISIBLE);
-//            companion_empty_view.setVisibility(View.GONE);
-//            searchListInitialization(rootView);
-//        }
-
 
         if(isPending){
             pendingCompanions(companionsVO);
@@ -138,58 +135,85 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
     }
 
 
-    public void setSearchView(RecyclerView searchRecyclerView, LinearLayout companion_empty_view){
+    public void setSearchView(RecyclerView searchRecyclerView, LinearLayout companion_empty_view, SearchView searchView){
+        this.mSearchView = searchView;
         this.searchRecyclerView = searchRecyclerView;
-        System.out.println("Kate setSearchView companionsVOPending = " + companionsVOPending.size());
+
         if(companionsVOPending == null || companionsVOPending.isEmpty()){
             companion_empty_view.setVisibility(View.VISIBLE);
             searchRecyclerView.setVisibility(View.GONE);
         }else{
             searchRecyclerView.setVisibility(View.VISIBLE);
             companion_empty_view.setVisibility(View.GONE);
-            searchListInitialization(rootView);
         }
 
+        searchListInitialization(rootView);
+        searchListAdapter = new CompanionsSwipeItemsAdapter(getActivity().getApplicationContext(), companionsVOPending);
 
-        searchListAdapter = new CompanionAdapter(companionsVOPending, getActivity().getApplicationContext());
         searchRecyclerView.setAdapter(searchListAdapter);
 
 
+        searchListAdapter.addClickeListeners(new ISwipeAdapterExecution(){
 
-        searchListAdapter.SetOnItemClickListener(new CompanionAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(final String guid, final String position) {
+            public void clickedItem(final String guid) {
+              //  String guid = companionsVOPending.get(position).getmCompanionid();
+                System.out.println("Kate clickedItem guid =" + guid);
+                Bundle args = new Bundle();
+                args.putString("user_id", guid);
+                getFlowInterface().goToFragment(ToolBarNavEnum.COMPANIONS_DETAILS.getNavNumber(), args);
 
-                for(CompanionVO companion:companionsVOPending){
-                    if(companion.getmCompanionid().equals(guid)){
-                        if(companion.getmConfirmationstatus().equals("Accepted")) {
-                            Bundle args = new Bundle();
-                            args.putString("user_id", guid);
-                            getFlowInterface().goToFragment(ToolBarNavEnum.COMPANIONS_DETAILS.getNavNumber(), args);
-                        }else{
-                            deleteComapanion(guid);
-                        }
+            }
+
+            @Override
+            public void deleteClicked(final String companionID) {
+                System.out.println("Kate deleteClicked companionID =" + companionID);
+               // deleteComapanion(companionID);
+            //    String guid = companionsVOPending.get(position).getmCompanionid();
+
+//                for(int i=0;i<companionsVOPending.size();i++){
+//                    CompanionVO companionVO = companionsVOPending.get(i);
+//                    if(companionVO.getmCompanionid().equals(companionID)){
+//                        deletedPosition = i;
+//                        deleteComapanion(companionVO.getmCompanionid());
+//                        break;
+//                    }
+//                }
+
+                for (CompanionVO companionVO:
+                companionsVOPending ) {
+                    if(companionVO.getmCompanionid().equals(companionID)){
+                        deleteComapanion(companionVO.getmCompanionid());
                     }
                 }
+
+
             }
         });
     }
+
+    int deletedPosition = 0;
+
 
     private void getCompanions(){
         ConnectionManager.getInstance(getActivity()).getCompanions(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 ArrayList<CompanionVO> companions =(ArrayList<CompanionVO>)data;
+                System.out.println("Kate companions1 = " + companions.size());
                // companionsVOPending = companions;
                 getActivityInterface().setCompanions(companions);
+                System.out.println("Kate pending isPending2 =" + isPending);
                 if(isPending){
                     pendingCompanions(companions);
                 }else{
                     acceptedCompanions(companions);
                 }
-                System.out.println("Kate getCompanions companionsVOPending =" + companionsVOPending.size());
+
+                System.out.println("Kate companions2 = " + companionsVOPending.size());
                 searchListAdapter.updateItems(companionsVOPending);
-                searchListAdapter.notifyDataSetChanged();
+              //  searchListAdapter.notifyAll();
+                //searchListAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -207,6 +231,8 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
         ConnectionManager.getInstance(getActivity()).deleteUserCompanion(comapnion_id, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
+                System.out.println("Kate deletedPosition =" + deletedPosition);
+                searchListAdapter.removeItem(deletedPosition);
                 getCompanions();
             }
 
@@ -258,7 +284,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
         inflater.inflate(R.menu.menu_main, menu);
         final MenuItem item = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        searchView.setOnQueryTextListener(this);;
+        searchView.setOnQueryTextListener(this);
     }
 
 

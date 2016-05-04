@@ -18,6 +18,7 @@ import com.daimajia.swipe.util.Attributes;
 import java.util.ArrayList;
 import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.MyTripPinnedAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.myTripsSwipeAdapter.TripsSwipeItemsAdapter;
@@ -59,11 +60,11 @@ public class TripsFragment  extends HGBAbstractFragment {
         return fragment;
     }
 
-    public interface ISwipeAdapterExecution{
-        void clickedItem(int position);
-        void deleteClicked(int position);
-
-    }
+//    public interface ISwipeAdapterExecution{
+//        void clickedItem(int position);
+//        void deleteClicked(int position);
+//
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,8 +86,15 @@ public class TripsFragment  extends HGBAbstractFragment {
         mAdapter.addClickeListeners(new ISwipeAdapterExecution(){
 
             @Override
-            public void clickedItem(int position) {
-                String solutionId = mItemsList.get(position).getSolutionid();
+            public void clickedItem(String solutionId) {
+                //TODO check solotunion id
+//                String solutionId = "";
+//                for (MyTripItem myTripItem : mItemsList){
+//                    if(myTripItem.getSolutionid().equals(guid)){
+//                        solutionId = myTripItem.getSolutionid();
+//                    }
+//                }
+           //     String solutionId = mItemsList.get(position).getSolutionid();
                 ConnectionManager.getInstance(getActivity()).getItinerary(solutionId, new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
@@ -109,16 +117,16 @@ public class TripsFragment  extends HGBAbstractFragment {
             }
 
             @Override
-            public void deleteClicked(final int position) {
-                String solutionId = mItemsList.get(position).getSolutionid();
+            public void deleteClicked(final String solutionId) {
+             //   String solutionId = mItemsList.get(position).getSolutionid();
 
 
                 ConnectionManager.getInstance(getActivity()).deleteItinerary(solutionId, new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
 
-                        mAdapter.notifyItemRemoved(position);
-                        mAdapter.notifyItemRangeChanged(position, mItemsList.size());
+//                        mAdapter.notifyItemRemoved(position);
+//                        mAdapter.notifyItemRangeChanged(position, mItemsList.size());
 
                         //TODO set Travel and got to current itenrary
                     }

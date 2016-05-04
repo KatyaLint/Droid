@@ -1,31 +1,43 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent" >
 
     <SearchView
-        android:layout_width="match_parent"
-        android:id="@+id/companion_search_view"
         android:background="@color/light_grey"
+        android:layout_width="match_parent"
+        android:id="@+id/companion_search_pending_view"
         android:layout_margin="@dimen/DP10"
         android:queryHint="@string/settings_search_hunt"
         android:focusableInTouchMode="true"
         android:layout_height="wrap_content"/>
 
-    <include layout="@layout/companion_empty_view"/>
+    <include layout="@layout/companion_empty_view"
+        android:layout_below="@+id/companion_search_pending_view"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"/>
 
     <android.support.design.widget.CoordinatorLayout
-        android:layout_below="@+id/companion_search_view"
+        android:layout_below="@+id/companion_search_pending_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <android.support.v7.widget.RecyclerView
-            android:visibility="gone"
-            android:background="@color/white"
-            android:id="@+id/companion_search_recycle_list_pending"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
 
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/COLOR_777776"
+            android:id="@+id/companion_title_text"
+            android:textSize="@dimen/SP14"
+            app:fontName="dinnextltpro_medium.otf"
+            android:text="Companions Pending"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/companion_search_recycle_list_pending"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </android.support.design.widget.CoordinatorLayout>
 

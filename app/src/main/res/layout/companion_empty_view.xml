@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingTop="@dimen/DP20"
     android:id="@+id/companion_empty_view"
-    android:visibility="gone"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:gravity="center"
-    android:layout_below="@+id/companion_search_view">
+    android:layout_gravity="center"
+    android:gravity="center">
 
 
     <ImageView

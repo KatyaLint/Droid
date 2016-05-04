@@ -10,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.adapters.companion.CompanionsSwipeItemsAdapter;
 
 /**
  * Created by nyawka on 4/20/16.
@@ -33,10 +35,13 @@ public class CompanionsPendingFragment extends CompanionsTabsViewClass {
 
 
         View rootView = createViewForTab(R.layout.companions_pending, getContext(), true);
-
+        SearchView searchView = (SearchView)rootView.findViewById(R.id.companion_search_pending_view);
         RecyclerView searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.companion_search_recycle_list_pending);
         LinearLayout companion_empty_view = (LinearLayout) rootView.findViewById(R.id.companion_empty_view);
-        setSearchView(searchRecyclerView, companion_empty_view);
+
+
+
+        setSearchView(searchRecyclerView, companion_empty_view, searchView);
 
         return rootView;
     }

@@ -60,7 +60,7 @@ import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesCheckList
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesDragListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSearchListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesTabsFragmentSettings;
-import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionsFragment;
+
 import hellogbye.com.hellogbyeandroid.fragments.checkout.TravelerDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.TravelersFragment;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
@@ -745,12 +745,12 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         }
 
         //TODO this is when I want the fragment to contorl the back -Kate I suggest we do this for all Fragments
-<<<<<<< HEAD
-        int count = getFragmentManager().getBackStackEntryCount();
-=======
+
+        int count = HGBUtility.getFragmentStack().size(); //  getFragmentManager().getBackStackEntryCount();
+
         //TODO getBackStackEntryAt sometimes equels 0
->>>>>>> master
-        FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1);
+
+        FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(count - 1);
         String str = backEntry.getName();
         if (str.equals(HotelFragment.class.toString()) &&  !HotelFragment.IS_MAIN_BACK_ALLOWED) {
             return;
