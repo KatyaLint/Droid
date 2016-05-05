@@ -22,14 +22,17 @@ import android.widget.SearchView;
 import java.util.ArrayList;
 import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.companion.CompanionsSwipeItemsAdapter;
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 
 
 /**
  * Created by nyawka on 4/20/16.
  */
 public class CompanionsTravelers extends CompanionsTabsViewClass {
+
 
 
 
@@ -44,11 +47,10 @@ public class CompanionsTravelers extends CompanionsTabsViewClass {
         View rootView = createViewForTab(R.layout.companions_travel, getContext(),false);
 
         SearchView searchView = (SearchView)rootView.findViewById(R.id.companion_search_view);
-        RecyclerView searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.companion_search_recycle_list);
+        RecyclerView searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.companion_travel_recycle_list);
         LinearLayout companion_empty_view = (LinearLayout)rootView.findViewById(R.id.companion_empty_view);
-        CompanionsSwipeItemsAdapter searchListAdapter = new CompanionsSwipeItemsAdapter(getActivity().getApplicationContext(), null);
 
-        setSearchView(searchRecyclerView, companion_empty_view, searchView, searchListAdapter);
+        setSearchView(searchRecyclerView, companion_empty_view, searchView);
 
 
         return rootView;

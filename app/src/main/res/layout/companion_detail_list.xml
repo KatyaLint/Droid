@@ -13,8 +13,6 @@
 
 
 
-
-
     <LinearLayout
         android:background="@color/hgb_toolbar_blue"
         android:gravity="center_horizontal"
