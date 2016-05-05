@@ -135,17 +135,20 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
     }
 
 
-    public void setSearchView(RecyclerView searchRecyclerView, LinearLayout companion_empty_view, SearchView searchView){
+    public void setSearchView(RecyclerView searchRecyclerView, LinearLayout companion_empty_view, SearchView searchView, CompanionsSwipeItemsAdapter coop){
         this.mSearchView = searchView;
         this.searchRecyclerView = searchRecyclerView;
+        this.companion_empty_view = companion_empty_view;
 
-        if(companionsVOPending == null || companionsVOPending.isEmpty()){
-            companion_empty_view.setVisibility(View.VISIBLE);
-            searchRecyclerView.setVisibility(View.GONE);
-        }else{
-            searchRecyclerView.setVisibility(View.VISIBLE);
-            companion_empty_view.setVisibility(View.GONE);
-        }
+        emptyCompanionsView();
+
+//        if(companionsVOPending == null || companionsVOPending.isEmpty()){
+//            companion_empty_view.setVisibility(View.VISIBLE);
+//            searchRecyclerView.setVisibility(View.GONE);
+//        }else{
+//            searchRecyclerView.setVisibility(View.VISIBLE);
+//            companion_empty_view.setVisibility(View.GONE);
+//        }
 
         searchListInitialization(rootView);
         searchListAdapter = new CompanionsSwipeItemsAdapter(getActivity().getApplicationContext(), companionsVOPending);
@@ -168,52 +171,43 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
             @Override
             public void deleteClicked(final String companionID) {
                 System.out.println("Kate deleteClicked companionID =" + companionID);
-               // deleteComapanion(companionID);
-            //    String guid = companionsVOPending.get(position).getmCompanionid();
-
-//                for(int i=0;i<companionsVOPending.size();i++){
-//                    CompanionVO companionVO = companionsVOPending.get(i);
-//                    if(companionVO.getmCompanionid().equals(companionID)){
-//                        deletedPosition = i;
-//                        deleteComapanion(companionVO.getmCompanionid());
-//                        break;
-//                    }
-//                }
-
-                for (CompanionVO companionVO:
-                companionsVOPending ) {
-                    if(companionVO.getmCompanionid().equals(companionID)){
-                        deleteComapanion(companionVO.getmCompanionid());
-                    }
-                }
-
+                deleteComapanion(companionID);
 
             }
         });
     }
 
-    int deletedPosition = 0;
 
+    private void emptyCompanionsView(){
+        if(companionsVOPending == null || companionsVOPending.isEmpty()){
+            companion_empty_view.setVisibility(View.VISIBLE);
+            searchRecyclerView.setVisibility(View.GONE);
+        }else{
+            searchRecyclerView.setVisibility(View.VISIBLE);
+            companion_empty_view.setVisibility(View.GONE);
+        }
+    }
 
     private void getCompanions(){
         ConnectionManager.getInstance(getActivity()).getCompanions(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 ArrayList<CompanionVO> companions =(ArrayList<CompanionVO>)data;
-                System.out.println("Kate companions1 = " + companions.size());
-               // companionsVOPending = companions;
                 getActivityInterface().setCompanions(companions);
-                System.out.println("Kate pending isPending2 =" + isPending);
+
+
+
                 if(isPending){
                     pendingCompanions(companions);
                 }else{
                     acceptedCompanions(companions);
                 }
 
+                emptyCompanionsView();
+
                 System.out.println("Kate companions2 = " + companionsVOPending.size());
                 searchListAdapter.updateItems(companionsVOPending);
-              //  searchListAdapter.notifyAll();
-                //searchListAdapter.notifyDataSetChanged();
+
             }
 
             @Override
@@ -231,8 +225,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
         ConnectionManager.getInstance(getActivity()).deleteUserCompanion(comapnion_id, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                System.out.println("Kate deletedPosition =" + deletedPosition);
-                searchListAdapter.removeItem(deletedPosition);
+
                 getCompanions();
             }
 
