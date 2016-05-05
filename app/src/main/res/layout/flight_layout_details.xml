@@ -3,6 +3,15 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
 
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout
+        xmlns:sothree="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/sliding_layout_flight"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        sothree:umanoPanelHeight="100dp"
+        sothree:umanoScrollableView="@+id/flightRecyclerView">
+
     <FrameLayout
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -16,5 +25,5 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/map" />
-
+    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 </RelativeLayout>

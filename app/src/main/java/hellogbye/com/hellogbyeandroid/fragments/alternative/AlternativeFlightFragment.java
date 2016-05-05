@@ -25,6 +25,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.FlightAdapter;
 
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.AirportCoordinatesVO;
@@ -42,6 +44,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
+
 
 /**
  * Created by kate on 8/17/15.
@@ -57,7 +60,8 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
     private RecyclerView recyclerView;
     private NodesVO nodeFromAlternative;
     private boolean isMyFlight = true;
-
+    private SlidingUpPanelLayout mSlidingPanels;
+    public final  float PANEL_HIGHT = 0.5f;
 
     public AlternativeFlightFragment() {
         // Empty constructor required for fragment subclasses
@@ -119,7 +123,12 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
         View rootView = inflater.inflate(R.layout.flight_layout_details, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.flightRecyclerView);
+        mSlidingPanels = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout_flight);
 
+
+        mSlidingPanels.setCoveredFadeColor(Color.TRANSPARENT);
+        mSlidingPanels.setAnchorPoint(PANEL_HIGHT);
+        mSlidingPanels.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
 
 
         return rootView;
@@ -241,6 +250,10 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         // 3. create an adapter
         final FlightAdapter mAdapter = new FlightAdapter(currentNode,legsFlights);
+
+
+
+
         // 4. set adapter
         recyclerView.setAdapter(mAdapter);
         // 5. set item animator to DefaultAnimator
