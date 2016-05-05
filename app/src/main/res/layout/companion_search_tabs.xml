@@ -1,37 +1,37 @@
-<android.support.design.widget.CoordinatorLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-
         <android.support.design.widget.TabLayout
             android:id="@+id/tabslayout"
-            android:textAllCaps = "false"
             android:background="@color/hgb_toolbar_blue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabMode="fixed"
             app:tabGravity="fill"
+            app:tabTextColor="@color/COLOR_c3cad3"
+            app:tabSelectedTextColor="@color/white"
             app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
             app:tabIndicatorColor="@color/red_button_color"
-            android:fillViewport="false" />
+            android:fillViewport="false"
+            app:fontName="dinnextltpro_medium.otf"/>
 
 
-    </android.support.design.widget.AppBarLayout>
 
     <hellogbye.com.hellogbyeandroid.views.CustomViewPager
-
+        android:layout_below="@id/tabslayout"
         android:id="@+id/viewpager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
+        android:layout_height="match_parent" />
 
-</android.support.design.widget.CoordinatorLayout>
+
+</RelativeLayout>
+
+
+
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+

@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
@@ -18,8 +17,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsFragment;
-import hellogbye.com.hellogbyeandroid.models.MyTripItem;
+
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -34,10 +32,11 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
 
     private Context mContext;
     private ArrayList<CompanionVO> mDataset;
-    private static ISwipeAdapterExecution swipeAdapterExecution;
+    private ISwipeAdapterExecution swipeAdapterExecution;
 
     public void addClickeListeners(ISwipeAdapterExecution swipeAdapterExecution) {
         this.swipeAdapterExecution = swipeAdapterExecution;
+
     }
 
     public void updateItems(ArrayList<CompanionVO> accountSettings){
@@ -55,6 +54,7 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
         private RoundedImageView companion_image_view;
         private View companion_arrow;
 
+
         public SimpleViewHolder(View itemView) {
             super(itemView);
             swipe_my_companions = (SwipeLayout) itemView.findViewById(R.id.swipe_my_companions);
@@ -70,13 +70,6 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
 //            my_trip_paid = (FontTextView) itemView.findViewById(R.id.my_trip_paid);
 
 
-            companion_rl.setOnClickListener(new SwipeLayout.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    swipeAdapterExecution.clickedItem((String)v.getTag());
-
-                }
-            });
         }
     }
 
@@ -91,6 +84,8 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.companion_search_item, parent, false);
         return new SimpleViewHolder(view);
     }
+
+
 
     @Override
     public void onBindViewHolder(final SimpleViewHolder viewHolder, final int position) {
@@ -113,10 +108,16 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
         HGBUtility.loadRoundedImage(item.getCompanionUserProfile().getmAvatar(), viewHolder.companion_image_view, R.drawable.profile_image);
 
 
-        viewHolder.swipe_my_companions.setShowMode(SwipeLayout.ShowMode.LayDown);
+        viewHolder.swipe_my_companions.setShowMode(SwipeLayout.ShowMode.PullOut);
         viewHolder.swipe_my_companions.addSwipeListener(new SimpleSwipeListener() {
             @Override
             public void onOpen(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onStartOpen(SwipeLayout layout) {
+
 
             }
         });
@@ -127,7 +128,6 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
             public void onClick(View view) {
 
                String guid =  (String)view.getTag();
-                System.out.println("Kate delete companion_delete_item guid =" + guid);
                 mItemManger.removeShownLayouts(viewHolder.swipe_my_companions);
 
                 mItemManger.closeAllItems();
@@ -137,10 +137,17 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
 
 
         viewHolder.companion_rl.setTag(item.getmCompanionid());
-        System.out.println("Kate position = " + position);
-
-        System.out.println("Kate comapanionId = " + item.getmCompanionid());
         viewHolder.companion_delete_item.setTag(item.getmCompanionid());
+
+
+        viewHolder.companion_rl.setOnClickListener(new SwipeLayout.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                swipeAdapterExecution.clickedItem((String)v.getTag());
+
+            }
+        });
 
     }
 
