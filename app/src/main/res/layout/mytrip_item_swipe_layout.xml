@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:id="@+id/mytrips_rl"
+
     android:layout_height="match_parent">
 
     <com.daimajia.swipe.SwipeLayout
@@ -12,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             android:gravity="center"
             android:tag="Bottom3"
@@ -20,16 +21,16 @@
 
 
 
-            <hellogbye.com.hellogbyeandroid.views.FontTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:text="Delete Item?"
-                android:textColor="#fff"
-                android:textSize="@dimen/SP16" />
+            <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="5"-->
+                <!--android:text="Delete Item?"-->
+                <!--android:textColor="#fff"-->
+                <!--android:textSize="@dimen/SP16" />-->
 
             <Button
-                android:id="@+id/delete"
+                android:id="@+id/trip_delete"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
@@ -94,15 +95,24 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:layout_weight="0"
-        android:layout_margin="@dimen/DP8"
-        android:id="@+id/my_trip_arrow_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/chevron_right"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true" />
+
+        <include
+
+            layout="@layout/layout_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:id="@+id/my_trip_arrow_next" />
+
+    <!--<ImageView-->
+        <!--android:layout_weight="0"-->
+        <!--android:layout_margin="@dimen/DP8"-->
+        <!--android:id="@+id/my_trip_arrow_next"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/chevron_right"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_alignParentRight="true" />-->
 
     </LinearLayout>
 </com.daimajia.swipe.SwipeLayout>

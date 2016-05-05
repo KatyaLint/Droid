@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent" >
 
     <SearchView
         android:layout_width="match_parent"
@@ -13,19 +12,30 @@
         android:focusableInTouchMode="true"
         android:layout_height="wrap_content"/>
 
-    <include layout="@layout/companion_empty_view"/>
-
+    <include layout="@layout/companion_empty_view"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/companion_search_view"
+        android:layout_centerHorizontal="true" />
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_below="@+id/companion_search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <android.support.v7.widget.RecyclerView
-        android:visibility="gone"
-        android:background="@color/white"
-        android:id="@+id/companion_search_recycle_list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/COLOR_777776"
+            android:id="@+id/companion_title_text"
+            android:textSize="@dimen/SP14"
+            app:fontName="dinnextltpro_medium.otf"
+            android:text="Companions"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/companion_search_recycle_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
 
     </android.support.design.widget.CoordinatorLayout>
@@ -44,6 +54,5 @@
         android:layout_marginEnd="@dimen/DP16"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
-
 
 </RelativeLayout>

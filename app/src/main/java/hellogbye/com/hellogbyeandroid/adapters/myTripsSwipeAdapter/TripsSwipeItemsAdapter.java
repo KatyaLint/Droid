@@ -19,6 +19,7 @@ import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsFragment;
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
@@ -33,11 +34,11 @@ import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
  */
 public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItemsAdapter.SimpleViewHolder> {
 
-    private static TripsFragment.ISwipeAdapterExecution swipeAdapterExecution;
+    private static ISwipeAdapterExecution swipeAdapterExecution;
     private Context mContext;
     private ArrayList<MyTripItem> mDataset;
 
-    public void addClickeListeners(TripsFragment.ISwipeAdapterExecution swipeAdapterExecution) {
+    public void addClickeListeners(ISwipeAdapterExecution swipeAdapterExecution) {
         this.swipeAdapterExecution = swipeAdapterExecution;
     }
 
@@ -54,9 +55,7 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
         public SimpleViewHolder(View itemView) {
             super(itemView);
             swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipe_my_trip);
-//            textViewPos = (TextView) itemView.findViewById(R.id.position);
-//            textViewData = (TextView) itemView.findViewById(R.id.text_data);
-            buttonDelete = (Button) itemView.findViewById(R.id.delete);
+            buttonDelete = (Button) itemView.findViewById(R.id.trip_delete);
             mytrips_rl = (RelativeLayout)itemView.findViewById(R.id.mytrips_rl);
             my_trip_user_image = (RoundedImageView) itemView.findViewById(R.id.my_trip_user_image);
             my_trip_name = (FontTextView) itemView.findViewById(R.id.my_trip_name);
@@ -67,7 +66,7 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
             mytrips_rl.setOnClickListener(new SwipeLayout.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    swipeAdapterExecution.clickedItem((int)v.getTag());
+                    swipeAdapterExecution.clickedItem((String)v.getTag());
 
                 }
             });
@@ -97,8 +96,7 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
         viewHolder.swipeLayout.addSwipeListener(new SimpleSwipeListener() {
             @Override
             public void onOpen(SwipeLayout layout) {
-                System.out.println("Kate onOpen");
-              //  YoYo.with(Techniques.Tada).duration(500).delay(100).playOn(layout.findViewById(R.id.trash));
+
             }
         });
 
@@ -107,8 +105,8 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
             @Override
             public void onClick(View view) {
 
-               int position =  (int)view.getTag();
-                System.out.println("Kate delete = " + position);
+               String position =  (String)view.getTag();
+
                 mItemManger.removeShownLayouts(viewHolder.swipeLayout);
            //     mDataset.remove(position);
 //                notifyItemRemoved(position);

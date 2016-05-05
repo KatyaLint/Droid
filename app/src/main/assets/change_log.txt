@@ -49,3 +49,18 @@ Code changing:
   - Payment management
   - Swap logic for delete trip
   - Maps in flight view
+
+
+   ------------------------------------------
+   Version 1.5
+   ------------------------------------------
+   Fixed Bugs:
+   -----------
+
+
+
+   Code changing:
+   --------------
+    - Fixed back flow
+    - Tabs in Companions screen
+    - Removed com.hudomju:swipe-to-dismiss-undo:1.0.jar

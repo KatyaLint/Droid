@@ -42,6 +42,7 @@ public class HGBAbstractFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
         try {
             mHGBFlowInterface  = (HGBFlowInterface) getActivity();
             mHGBVoiceInterface  = (HGBVoiceInterface) getActivity();
