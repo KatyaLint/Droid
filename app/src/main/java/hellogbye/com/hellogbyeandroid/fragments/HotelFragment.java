@@ -113,7 +113,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private NodesVO currentSelectedNode;
     private ImageView mConfirmBadge;
 
-    private float PANEL_HIGHT = 0.4f;
+    public final  float PANEL_HIGHT = 0.4f;
     private Activity activity;
 
     public static boolean IS_MAIN_BACK_ALLOWED = true;
