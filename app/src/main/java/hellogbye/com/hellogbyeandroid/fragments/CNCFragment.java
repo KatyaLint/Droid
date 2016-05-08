@@ -4,6 +4,7 @@ package hellogbye.com.hellogbyeandroid.fragments;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -56,9 +57,11 @@ public class CNCFragment extends HGBAbstractFragment {
     private ImageView mMicImageView;
     private FontTextView mSendTextView;
     private HGBPreferencesManager mHGBPrefrenceManager;
+    private FontTextView mProfileTutorialText;
 
     private String[] locationArr;
     private Button cnc_fragment_trip_settings;
+    private static int SPLASH_TIME_OUT = 5000;
 
 
     public static Fragment newInstance(int position) {
@@ -85,7 +88,7 @@ public class CNCFragment extends HGBAbstractFragment {
         getAccountsProfiles();
 
         //This is to ckeck and display tutorial this version was cancelled waiting for new one
-       // startTutorial();
+        startTutorial();
 
 
         return rootView;
@@ -93,10 +96,19 @@ public class CNCFragment extends HGBAbstractFragment {
 
     private void startTutorial() {
 
-        if(mHGBPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.HGB_CNC_FIRST_TIME,true)){
+        if(true){
             mHGBPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_CNC_FIRST_TIME,false);
-            startActivity(new Intent(getActivity().getApplicationContext(), CNCTutorialActivity.class));
+            mProfileTutorialText.setVisibility(View.VISIBLE);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mProfileTutorialText.setVisibility(View.GONE);
+                }
+            }, SPLASH_TIME_OUT);
         }
+
+
     }
 
 
@@ -198,6 +210,8 @@ public class CNCFragment extends HGBAbstractFragment {
                 handleMyMessage(strMessage);
             }
         });
+
+        mProfileTutorialText = (FontTextView)view.findViewById(R.id.profile_tutorial);
 
         mEditText.addTextChangedListener(new TextWatcher() {
             @Override
