@@ -11,12 +11,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
@@ -58,6 +62,7 @@ public class CNCFragment extends HGBAbstractFragment {
     private FontTextView mSendTextView;
     private HGBPreferencesManager mHGBPrefrenceManager;
     private FontTextView mProfileTutorialText;
+    private FontTextView mSpeechTutorialText;
 
     private String[] locationArr;
     private Button cnc_fragment_trip_settings;
@@ -90,8 +95,35 @@ public class CNCFragment extends HGBAbstractFragment {
         //This is to ckeck and display tutorial this version was cancelled waiting for new one
         startTutorial();
 
+//        int density= getResources().getDisplayMetrics().densityDpi;
+//       // Toast.makeText(getActivity(), density, Toast.LENGTH_SHORT).show();
+//        Log.d("","***** "+density);
+//        switch(density) {
+//
+//            case DisplayMetrics.DENSITY_LOW:
+//                Toast.makeText(getActivity(), "LDPI", Toast.LENGTH_SHORT).show();
+//                break;
+//            case DisplayMetrics.DENSITY_MEDIUM:
+//                Toast.makeText(getActivity(), "MDPI", Toast.LENGTH_SHORT).show();
+//                break;
+//            case DisplayMetrics.DENSITY_HIGH:
+//                Toast.makeText(getActivity(), "HDPI", Toast.LENGTH_SHORT).show();
+//                break;
+//            case DisplayMetrics.DENSITY_XHIGH:
+//                Toast.makeText(getActivity(), "XHDPI", Toast.LENGTH_SHORT).show();
+//
+//                break;
+//            case DisplayMetrics.DENSITY_XXHIGH:
+//                Toast.makeText(getActivity(), "XX", Toast.LENGTH_SHORT).show();
+//
+//                break;
+//            case DisplayMetrics.DENSITY_XXXHIGH:
+//                Toast.makeText(getActivity(), "XXX", Toast.LENGTH_SHORT).show();
+//
+//                break;
+//        }
 
-        return rootView;
+                return rootView;
     }
 
     private void startTutorial() {
@@ -99,11 +131,13 @@ public class CNCFragment extends HGBAbstractFragment {
         if(mHGBPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.HGB_CNC_FIRST_TIME,true)){
             mHGBPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_CNC_FIRST_TIME,false);
             mProfileTutorialText.setVisibility(View.VISIBLE);
+            mSpeechTutorialText.setVisibility(View.VISIBLE);
 
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     mProfileTutorialText.setVisibility(View.GONE);
+                    mSpeechTutorialText.setVisibility(View.GONE);
                 }
             }, SPLASH_TIME_OUT);
         }
@@ -212,6 +246,8 @@ public class CNCFragment extends HGBAbstractFragment {
         });
 
         mProfileTutorialText = (FontTextView)view.findViewById(R.id.profile_tutorial);
+        mSpeechTutorialText = (FontTextView)view.findViewById(R.id.speak_tutorial);
+
 
         mEditText.addTextChangedListener(new TextWatcher() {
             @Override

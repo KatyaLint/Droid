@@ -15,10 +15,10 @@
         android:layout_centerHorizontal="true"
         app:fontName="dinnextltpro_medium.otf"
         android:text="Tap to choose/create profile"
-        android:visibility="gone"
+        android:visibility="visible"
         android:gravity="center"
         android:paddingTop="10dp"
-        android:background="@drawable/combined_shape"
+        android:background="@drawable/combined_shape_01"
         android:textSize="15sp"/>
 
     <!--android:background="@drawable/b_g_android"-->
@@ -30,6 +30,21 @@
         android:layout_below="@+id/profile_tutorial"
         android:layout_above="@+id/cnc_message_rl"
         android:scrollbars="vertical" />
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/speak_tutorial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        app:fontName="dinnextltpro_medium.otf"
+        android:text="Press to speak"
+        android:visibility="visible"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_above="@+id/cnc_message_rl"
+        android:layout_alignRight="@+id/cnc_message_rl"
+        android:background="@drawable/combined_shape_02"
+        android:textSize="15sp"/>
 
     <RelativeLayout
         android:id="@+id/cnc_message_rl"
@@ -81,6 +96,9 @@
 
         <!--android:text="Fly with Roy and Steve to New York for one week"-->
         <!--android:text="Fly Sam from NYC to Vegas on Nov 15th for 3 nights in the morning then back to NYC. Fly Warren from Miami to Vegas on Nov 15th before 5PM for 3 nights then on to Toronto for a 1 night then back to Miami. Fly me from Toronto to Vegas, on the earliest flight available for 3 nights on Nov 15th then back to Toronto."-->
+
+
+
 
         <LinearLayout
             android:id="@+id/send_ll"
