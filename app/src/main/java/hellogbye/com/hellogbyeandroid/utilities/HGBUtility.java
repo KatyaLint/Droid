@@ -320,8 +320,8 @@ public class HGBUtility {
             FragmentTransaction transaction = manager.beginTransaction(); //beginTransaction();
             if(isAddAnimation){
                 transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_right,R.anim.slide_in_left,R.anim.slide_out_right);
-
             }
+
             transaction.replace(R.id.content_frame, fragment, fragment.getClass().toString());
 
             if (isAddToBackStack) {

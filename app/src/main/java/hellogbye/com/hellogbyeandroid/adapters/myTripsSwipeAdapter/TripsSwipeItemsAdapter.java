@@ -34,7 +34,7 @@ import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
  */
 public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItemsAdapter.SimpleViewHolder> {
 
-    private static ISwipeAdapterExecution swipeAdapterExecution;
+    private ISwipeAdapterExecution swipeAdapterExecution;
     private Context mContext;
     private ArrayList<MyTripItem> mDataset;
 
@@ -44,7 +44,7 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {
         private final SwipeLayout swipeLayout;
-        private final Button buttonDelete;
+
 
         private final FontTextView my_trip_name;
         private final FontTextView my_trip_dates;
@@ -55,7 +55,7 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
         public SimpleViewHolder(View itemView) {
             super(itemView);
             swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipe_my_trip);
-            buttonDelete = (Button) itemView.findViewById(R.id.trip_delete);
+
             mytrips_rl = (RelativeLayout)itemView.findViewById(R.id.mytrips_rl);
             my_trip_user_image = (RoundedImageView) itemView.findViewById(R.id.my_trip_user_image);
             my_trip_name = (FontTextView) itemView.findViewById(R.id.my_trip_name);
@@ -63,13 +63,6 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
             my_trip_paid = (FontTextView) itemView.findViewById(R.id.my_trip_paid);
 
 
-            mytrips_rl.setOnClickListener(new SwipeLayout.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    swipeAdapterExecution.clickedItem((String)v.getTag());
-
-                }
-            });
         }
     }
 
@@ -101,7 +94,7 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
         });
 
 
-        viewHolder.buttonDelete.setOnClickListener(new View.OnClickListener() {
+/*        viewHolder.buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -115,10 +108,10 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
                 swipeAdapterExecution.deleteClicked(position);
                 //Toast.makeText(view.getContext(), "Deleted " + viewHolder.textViewData.getText().toString() + "!", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
 
-        HGBUtility.loadRoundedImage( item.getUrlToCityView(),  viewHolder.my_trip_user_image, R.drawable.city_avatar_a_2);
+    //    HGBUtility.loadRoundedImage( item.getUrlToCityView(),  viewHolder.my_trip_user_image, R.drawable.city_avatar_a_2);
         viewHolder.my_trip_name.setText(item.getName());
         viewHolder.my_trip_dates.setText(HGBUtility.parseDateToddMMyyyyMyTrip(item.getStartdate())+" - "+HGBUtility.parseDateToddMMyyyyMyTrip(item.getEnddate()));
         if(item.getPaymentstatus().equals("UPD")){
@@ -128,8 +121,16 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
             viewHolder.my_trip_paid.setText("PAID");
             viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.paid_green));
         }
-        viewHolder.mytrips_rl.setTag(position);
-        viewHolder.buttonDelete.setTag(position);
+        viewHolder.mytrips_rl.setTag(item.getSolutionid());
+
+        viewHolder.mytrips_rl.setOnClickListener(new SwipeLayout.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                swipeAdapterExecution.clickedItem((String)v.getTag());
+
+            }
+        });
+
 //        viewHolder.textViewPos.setText((position + 1) + ".");
 //        viewHolder.textViewData.setText(item);
        // mItemManger.bind(viewHolder.itemView, position);

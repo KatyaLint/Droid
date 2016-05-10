@@ -41,6 +41,7 @@ import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.NewPaymentDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionTabsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.freeuser.FreeUserFragment;
+import hellogbye.com.hellogbyeandroid.fragments.mytrips.MyTripsTabsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalEmailSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
@@ -584,6 +585,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         boolean stashToBack = true;
         int navPosition = position;//navBar.getNavNumber();
         boolean isAddAnimation = false;
+        System.out.println("Kate navBar =" + navBar);
         switch (navBar) {
             case HOME:
                 //  fragment = HomeFragment.newInstance(navPosition);
@@ -595,7 +597,12 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 //                break;
             case TRIPS:
                 //fragment = MyTripsFragment.newInstance(navPosition);
-                fragment = TripsFragment.newInstance(navPosition);
+            //    fragment = TripsFragment.newInstance(navPosition);
+
+
+                System.out.println("Kate MyTripsTabsFragment");
+                fragment = MyTripsTabsFragment.newInstance(navPosition);
+
                 break;
             case COMPANIONS:
                 //fragment = TravelCompanionsFragment.newInstance(navPosition);
@@ -744,6 +751,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             onBackPressedListener.doBack();
         }
 
+        System.out.println("Kate onBack");
         //TODO this is when I want the fragment to contorl the back -Kate I suggest we do this for all Fragments
 
         int count = HGBUtility.getFragmentStack().size(); //  getFragmentManager().getBackStackEntryCount();

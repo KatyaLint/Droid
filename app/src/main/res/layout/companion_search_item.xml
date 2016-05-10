@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/DP104"
-    android:id="@+id/companion_rl"
-    android:orientation="horizontal">
+    android:id="@+id/companion_rl">
 
 
     <com.daimajia.swipe.SwipeLayout

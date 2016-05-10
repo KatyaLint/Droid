@@ -6,7 +6,7 @@
 
     <SearchView
         android:layout_width="match_parent"
-        android:id="@+id/companion_search_view"
+        android:id="@+id/my_trips_search_view"
         android:background="@color/cc_add_backround"
         android:layout_margin="@dimen/DP10"
         android:queryHint="@string/settings_search_hunt"
@@ -16,28 +16,26 @@
     <include layout="@layout/companion_empty_view"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_below="@+id/companion_search_view"
+        android:layout_below="@+id/my_trips_search_view"
         android:layout_centerHorizontal="true" />
 
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/companion_travel_recycle_list"
+            android:id="@+id/my_trips_recycle_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/companion_search_view" />
+            android:layout_below="@+id/my_trips_search_view" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/my_trips_add_trip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-
             app:backgroundTint="@color/COLOR_00516f"
             android:src="@drawable/fab_plus"
             android:layout_margin="@dimen/DP10"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            />
+            android:layout_alignParentRight="true" />
 
 
 </RelativeLayout>

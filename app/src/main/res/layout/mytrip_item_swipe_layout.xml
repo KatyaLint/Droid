@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:id="@+id/mytrips_rl"
-
-    android:layout_height="match_parent">
+    android:layout_height="@dimen/DP104">
 
     <com.daimajia.swipe.SwipeLayout
         android:id="@+id/swipe_my_trip"
@@ -12,31 +11,24 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/my_trips_drag_layout"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:gravity="center"
-            android:tag="Bottom3"
+            android:layout_width="@dimen/DP120"
+            android:gravity="left"
             android:weightSum="10">
 
 
 
-            <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="5"-->
-                <!--android:text="Delete Item?"-->
-                <!--android:textColor="#fff"-->
-                <!--android:textSize="@dimen/SP16" />-->
-
-            <Button
-                android:id="@+id/trip_delete"
-                android:layout_width="0dp"
+            <ImageButton
+                android:layout_weight="1"
+                android:gravity="center"
+                android:clickable="true"
+                android:id="@+id/companion_delete_item"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@color/white"
-                android:text="Yes,Delete"
-                android:textColor="@color/black" />
+                android:background="@color/red_button_color"
+                android:src="@drawable/close_icon_a_1" />
+
         </LinearLayout>
 
     <LinearLayout
@@ -46,23 +38,22 @@
         android:gravity="center"
         android:background="@color/white"
         android:orientation="horizontal">
-        <!--android:elevation="5dp"-->
-        <!--android:tag="Hover"-->
+
 
     <hellogbye.com.hellogbyeandroid.views.RoundedImageView
         android:layout_weight="0"
         android:layout_margin="@dimen/DP10"
-        android:layout_centerVertical="true"
         android:id="@+id/my_trip_user_image"
         android:layout_width="@dimen/DP60"
         android:layout_height="@dimen/DP60" />
 
     <LinearLayout
+        android:layout_margin="@dimen/DP10"
         android:layout_weight="2"
         android:id="@+id/my_trips_details_ll"
         android:gravity="center_vertical"
         android:layout_toRightOf="@+id/my_trip_user_image"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
@@ -74,6 +65,7 @@
             android:textSize="@dimen/SP16"
             android:text="Name"
             app:fontName="dinnextltpro_regular.otf" />
+
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/my_trip_dates"
             android:textColor="@color/warm_grey"
@@ -103,16 +95,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:id="@+id/my_trip_arrow_next" />
-
-    <!--<ImageView-->
-        <!--android:layout_weight="0"-->
-        <!--android:layout_margin="@dimen/DP8"-->
-        <!--android:id="@+id/my_trip_arrow_next"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@drawable/chevron_right"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_alignParentRight="true" />-->
 
     </LinearLayout>
 </com.daimajia.swipe.SwipeLayout>

@@ -69,8 +69,6 @@ public class TravelCompanionTabsFragment extends HGBAbstractFragment {
 
         adapterPager = new PagerAdapterCostume(getActivity().getSupportFragmentManager(), tabLayout.getTabCount()) ;
 
-
-
         viewPager.setAdapter(adapterPager);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
