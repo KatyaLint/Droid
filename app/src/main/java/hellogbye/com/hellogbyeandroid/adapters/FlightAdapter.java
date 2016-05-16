@@ -6,11 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+
 import java.util.ArrayList;
+
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -70,6 +74,9 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             viewHolder.flight_boarding_text.setText(legFlightVO.getmDepartureTime());
             viewHolder.flight_duration_text.setText(legFlightVO.getmFlightTime());
             viewHolder.flight_class_text.setText(legFlightVO.getmFareClass());
+            viewHolder.flight_details.setText(legFlightVO.getmOriginCityName()+", "+legFlightVO.getmOriginAirPortName()+"\n"
+            +legFlightVO.getmDestinationCityName()+", "+legFlightVO.getmDestinationAirportName()+"\n"
+                    + HGBUtility.parseDateToddMMyyyyMyTrip(legFlightVO.getmDeparture()));
             viewHolder.stop_over_include_layout.setVisibility(View.GONE);
 
         } else if (legFlightVO.getmType().equals("StopOver")) {
@@ -84,12 +91,13 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             viewHolder.text_my_flight.setVisibility(View.VISIBLE);
             viewHolder.select_flight.setVisibility(View.GONE);
             viewHolder.mBadgeImageView.setVisibility(View.VISIBLE);
-            if(paid.equals("PAID")){
+            if (paid.equals("PAID")) {
                 viewHolder.mBadgeImageView.setBackgroundResource(R.drawable.paid_badge);
+                viewHolder.press_here_ll.setVisibility(View.VISIBLE);
 
-            }else{
+            } else {
                 viewHolder.mBadgeImageView.setBackgroundResource(R.drawable.cofirm_badge);
-
+                viewHolder.press_here_ll.setVisibility(View.GONE);
             }
 
         } else {
@@ -108,6 +116,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         }
 
         viewHolder.select_flight.setTag(legFlightVO.getmParentguid());
+        viewHolder.press_here.setTag(legFlightVO.getmParentguid());
 
     }
 
@@ -166,7 +175,12 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         private ImageView image_my_flight;
         private FontTextView text_my_flight;
         private FontTextView select_flight;
-        private  ImageView mBadgeImageView;
+        private FontTextView flight_details;
+        private FontTextView press_here;
+        private LinearLayout press_here_ll;
+
+        private ImageView mBadgeImageView;
+
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
@@ -191,6 +205,14 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
                 }
             });
 
+            press_here.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String guid = view.getTag().toString();
+                    alternativeButtonCB.selectedPressEticket(guid);
+                }
+            });
+
         }
 
 
@@ -198,13 +220,18 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             image_my_flight = (ImageView) mainView.findViewById(R.id.image_my_flight);
             text_my_flight = (FontTextView) mainView.findViewById(R.id.text_my_flight);
             select_flight = (FontTextView) mainView.findViewById(R.id.select_flight);
+            flight_details = (FontTextView) mainView.findViewById(R.id.flight_details);
+
+            press_here_ll = (LinearLayout) mainView.findViewById(R.id.select_tix_ll);
+            press_here = (FontTextView) mainView.findViewById(R.id.select_tix_press_here);
+
         }
 
         private void flightMainCostInitialization(View mainView) {
             flight_ticket_details_layout = mainView.findViewById(R.id.flight_ticket_details_layout);
             flight_direction = (FontTextView) flight_ticket_details_layout.findViewById(R.id.flight_direction);
             flight_cost = (FontTextView) flight_ticket_details_layout.findViewById(R.id.flight_cost);
-            mBadgeImageView = (ImageView)flight_ticket_details_layout.findViewById(R.id.flight_confirm_badge);
+            mBadgeImageView = (ImageView) flight_ticket_details_layout.findViewById(R.id.flight_confirm_badge);
             initializeSelecteOrMyFlight(flight_ticket_details_layout);
         }
 

@@ -246,4 +246,24 @@ public class LegsVO {
     public void setmFlightTime(String mFlightTime) {
         this.mFlightTime = mFlightTime;
     }
+
+    public String getmOriginAirPortName() {
+        return mOriginAirPortName;
+    }
+
+    public String getmDestinationAirportName() {
+        return mDestinationAirportName;
+    }
+
+    public void setmDestinationAirportName(String mDestinationAirportName) {
+        this.mDestinationAirportName = mDestinationAirportName;
+    }
+
+    public String getmDeparture() {
+        return mDeparture;
+    }
+
+    public void setmDeparture(String mDeparture) {
+        this.mDeparture = mDeparture;
+    }
 }

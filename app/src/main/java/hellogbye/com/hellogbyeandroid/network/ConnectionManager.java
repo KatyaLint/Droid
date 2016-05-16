@@ -539,6 +539,28 @@ public class ConnectionManager {
     }
 
 
+    public void getConfirmationBooking(String iteneraryid,String itemGuid, final ServerRequestListener listener) {
+
+        String url = getURL(Services.BOOKING_CONFIRMATION) + "itineraryId="+iteneraryid+"&itemGuid="+itemGuid;
+        //  http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/itinerary?count=15&skip=0
+
+        JSONObject jsonObject = new JSONObject();
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
+    }
+
+
     public void getMyTrips(final ServerRequestListener listener) {
 
         String url = getURL(Services.ITINERARY_MY_TRIP) + "?count=15&skip=0&upcomingtrips=true";
@@ -1575,7 +1597,8 @@ public class ConnectionManager {
                 STATIC_PROVINCE_BY_COUNTRY_CODE("Statics/GetProvinceByCountryCode?countryCode="),
                 CARD_SESSION("Card/Session"),
                 BOOKING_PAY("booking/pay"),
-                USER_PROFILE_DEVICE_AUTHENTICATION("UserProfile/DeviceAuthentication");
+                USER_PROFILE_DEVICE_AUTHENTICATION("UserProfile/DeviceAuthentication"),
+                BOOKING_CONFIRMATION("Booking/flight/confirmation/pdf?");
 
                 String url;
                 Services(String url){
@@ -1587,7 +1610,7 @@ public class ConnectionManager {
                 }
             }
 
-    private String getURL(Services type) {
+    public static String getURL(Services type) {
         return type.getURL();
     }
 }

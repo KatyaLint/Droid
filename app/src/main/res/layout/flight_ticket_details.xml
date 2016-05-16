@@ -19,7 +19,12 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
-            <hellogbye.com.hellogbyeandroid.views.FontTextView
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical">
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/flight_direction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -28,6 +33,46 @@
                 android:textColor="@color/dark_teal"
                 android:textSize="@dimen/SP30"
                 app:fontName="dinnextltpro_medium.otf" />
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+                    android:id="@+id/flight_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New York \n Toronto \n Nov 20"
+                    android:textColor="@color/filight_details_grey"
+                    android:textSize="@dimen/SP13"
+                    app:fontName="dinnextltpro_regular.otf" />
+
+                <LinearLayout
+                    android:id="@+id/select_tix_ll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/DP4"
+                    android:background="@drawable/grey_button"
+                    android:padding="@dimen/DP2"
+                    android:orientation="horizontal">
+                    <hellogbye.com.hellogbyeandroid.views.FontTextView
+                        android:id="@+id/select_tix"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/electronic_ticket"
+                        android:textColor="@color/electric_tix_blue"
+                        android:textSize="@dimen/SP13"
+                        app:fontName="dinnextltpro_bold.otf" />
+
+                    <hellogbye.com.hellogbyeandroid.views.FontTextView
+                        android:id="@+id/select_tix_press_here"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/press_here"
+                        android:textColor="@color/electric_tix_blue_press"
+                        android:textSize="@dimen/SP13"
+                        app:fontName="dinnextltpro_bold.otf" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
 
             <ImageView
                 android:id="@+id/flight_confirm_badge"

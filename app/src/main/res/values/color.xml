@@ -40,6 +40,13 @@
     <color name="cnc_hgb_text">#cae2eb</color>
     <color name="odd_grey">#E5E5E5</color>
     <color name="profile_blue">#053c4b</color>
+    <color name="electric_tix_blue">#0f3d4b</color>
+    <color name="electric_tix_blue_press">#0a5c80</color>
+    <color name="electric_tix_grey_press_backround">#0e3d4b</color>
+
+
+
+
 
 
 
@@ -56,6 +63,7 @@
     <color name="cnc_main_message_blue">#376888</color>
     <color name="cnc_user_message">#419ADD</color>
     <color name="cnc_user_message_color">#0f3d4d</color>
+    <color name="filight_details_grey">#8d8e91</color>
 
     <color name="no_payment_color">#0e587d</color>
 

@@ -2,7 +2,11 @@ package hellogbye.com.hellogbyeandroid.fragments.alternative;
 
 
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,10 +32,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.WebViewActivity;
 import hellogbye.com.hellogbyeandroid.adapters.FlightAdapter;
 
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
@@ -44,6 +51,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
+import hellogbye.com.hellogbyeandroid.utilities.ViewPDFManager;
 
 
 /**
@@ -62,6 +70,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
     private boolean isMyFlight = true;
     private SlidingUpPanelLayout mSlidingPanels;
     public final  float PANEL_HIGHT = 0.5f;
+    private ProgressDialog progressDialog;
 
     public AlternativeFlightFragment() {
         // Empty constructor required for fragment subclasses
@@ -129,7 +138,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         mSlidingPanels.setCoveredFadeColor(Color.TRANSPARENT);
         mSlidingPanels.setAnchorPoint(PANEL_HIGHT);
         mSlidingPanels.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
-
+        progressDialog = new ProgressDialog(getActivity());
 
         return rootView;
     }
@@ -144,7 +153,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
             //SET UP MAP
             mMap.getUiSettings().setCompassEnabled(true);
             mMap.getUiSettings().setZoomControlsEnabled(false);
-            mMap.setMyLocationEnabled(true);
+           // mMap.setMyLocationEnabled(true);
             mMap.setOnMarkerClickListener(this);
         } else {
             Log.d("DEBUG", "map is null");
@@ -280,6 +289,14 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
                 sendServerNewFlightOrder(guidSelected);
 
             }
+
+            @Override
+            public void selectedPressEticket(String guid) {
+
+                String url = ConnectionManager.getURL(ConnectionManager.Services.BOOKING_CONFIRMATION) + "itineraryId="+getActivityInterface().getSolutionID()+"&itemGuid="+guid;
+                new BackgroundTask().execute(url);
+
+            }
         });
 
 
@@ -301,6 +318,41 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
     public interface AlternativeButtonCB{
         void showAlternative();
         void selectCurrentFlight( String guid);
+        void selectedPressEticket( String guid);
+    }
+
+    public class BackgroundTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(getActivity(), "", "loading");
+            progressDialog.setCancelable(false);
+            progressDialog.setCanceledOnTouchOutside(false);
+        }
+
+        @Override
+        protected String doInBackground(String... ulr) {
+            ViewPDFManager viewPDFManager = new ViewPDFManager(getActivity().getApplicationContext());
+            return  viewPDFManager.starDownloadPDF(ulr[0]);
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            progressDialog.dismiss();
+            if(result != null)
+            {
+                File file = new File(result);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setDataAndType(Uri.fromFile(file), "application/pdf");
+                startActivity(intent);
+            }else{
+                Toast.makeText(getActivity().getApplicationContext(),"There was a problem loading PDF",Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
 
 

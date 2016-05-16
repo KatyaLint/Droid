@@ -549,6 +549,8 @@ public class HGBUtility {
     }
 
 
+
+
     public static String parseDateFromddMMyyyyToddmmYYYY(String time) {
         String outputPattern = "EEE, MM dd, yyyy";
         String inputPattern = "MM/dd/yyyy";
@@ -1121,6 +1123,23 @@ public static String formattDateToStringMonthDate(String dateInString) {
         } else {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
         }
+    }
+
+    public static String  createFolder(String folderName){
+        String extFolName = Environment.getExternalStorageDirectory().toString();
+        File f = null;
+        String path = "";
+        f = new File(extFolName + "/" + folderName + "/");
+        if (f.exists()) {
+            path = f.getAbsolutePath();
+            return path;
+        } else {
+            if (f.mkdir()) {
+                path = f.getAbsolutePath();
+                return path;
+            }
+        }
+        return path;
     }
 
 
