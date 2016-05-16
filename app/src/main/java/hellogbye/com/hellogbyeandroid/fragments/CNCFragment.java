@@ -1,10 +1,7 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
 
-import android.content.Intent;
 import android.content.res.Resources;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -13,31 +10,23 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.CNCTutorialActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
-import hellogbye.com.hellogbyeandroid.activities.WebViewActivity;
 import hellogbye.com.hellogbyeandroid.adapters.CNCAdapter;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
@@ -49,12 +38,10 @@ import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportServerResultVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.ResponsesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
-
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
-import hellogbye.com.hellogbyeandroid.utilities.ViewPDFManager;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -137,16 +124,41 @@ public class CNCFragment extends HGBAbstractFragment {
 
     private void startTutorial() {
 
-        if(mHGBPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.HGB_CNC_FIRST_TIME,true)){
+        if(true){
             mHGBPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_CNC_FIRST_TIME,false);
             mProfileTutorialText.setVisibility(View.VISIBLE);
             mSpeechTutorialText.setVisibility(View.VISIBLE);
+            final Animation fadeOut = new AlphaAnimation(1, 0);
+            fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
+            fadeOut.setDuration(500);
+
+            fadeOut.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+
+                    mProfileTutorialText.setVisibility(View.GONE);
+                    mSpeechTutorialText.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
 
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    mProfileTutorialText.setVisibility(View.GONE);
-                    mSpeechTutorialText.setVisibility(View.GONE);
+
+                    mProfileTutorialText.startAnimation(fadeOut);
+                    mSpeechTutorialText.startAnimation(fadeOut);
+
+
                 }
             }, SPLASH_TIME_OUT);
         }

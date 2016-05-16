@@ -31,17 +31,12 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.WebViewActivity;
 import hellogbye.com.hellogbyeandroid.adapters.FlightAdapter;
-
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
-import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.AirportCoordinatesVO;
