@@ -124,7 +124,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
     private void startTutorial() {
 
-        if(true){
+        if(mHGBPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.HGB_CNC_FIRST_TIME,true)){
             mHGBPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_CNC_FIRST_TIME,false);
             mProfileTutorialText.setVisibility(View.VISIBLE);
             mSpeechTutorialText.setVisibility(View.VISIBLE);
