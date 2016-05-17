@@ -73,6 +73,7 @@ import java.util.concurrent.Exchanger;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
@@ -783,6 +784,47 @@ public static String formattDateToStringMonthDate(String dateInString) {
         return isValid;
     }
 
+    public static void showPikerDialogEditText(final FontEditTextView textView, Activity activity, String title,
+                                       final String[] titleArray, int minValue, int maxValue, final PopUpAlertStringCB
+                                               alertCB, boolean isNegativeButton) {
+
+        View v1 = activity.getLayoutInflater().inflate(R.layout.picker_dialog, null);
+
+        final NumberPicker genderPicker = (NumberPicker) v1.findViewById(R.id.np);
+        genderPicker.setMinValue(minValue);
+        genderPicker.setWrapSelectorWheel(false);
+        genderPicker.setMaxValue(maxValue);
+        genderPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        genderPicker.setDisplayedValues(titleArray);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setView(v1);
+        builder.setTitle(title);
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                if(textView != null) { //can be null if i don't want to show anything like in cnc fragment
+                    textView.setText(titleArray[genderPicker.getValue()]);
+                    textView.setTag(genderPicker.getValue());
+                }
+                if(alertCB != null) {
+                    alertCB.itemSelected(titleArray[genderPicker.getValue()]);
+                }
+                return;
+            }
+        });
+        if(isNegativeButton) {
+            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    return;
+                }
+            });
+        }
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
 
 
     public static void showPikerDialog(final FontTextView textView, Activity activity, String title,
@@ -990,6 +1032,27 @@ public static String formattDateToStringMonthDate(String dateInString) {
                 .create().show();
     }
 
+
+    public static void showDateDialog(Activity activity, final FontEditTextView textView) {
+
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dpd = new DatePickerDialog(activity,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        textView.setText(dayOfMonth + "/"
+                                + (monthOfYear + 1) + "/" + year);
+
+                    }
+                }, mYear, mMonth, mDay);
+        dpd.show();
+    }
 
     public static void showDateDialog(Activity activity, final FontTextView textView) {
 

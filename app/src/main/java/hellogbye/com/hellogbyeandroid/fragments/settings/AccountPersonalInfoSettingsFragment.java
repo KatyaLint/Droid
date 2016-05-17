@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
@@ -43,18 +44,18 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
     private String SELECT_PROVINCE = "Select Province";
 
-    private FontTextView companion_personal_settings_title;
-    private FontTextView companion_personal_settings_email_add_another;
+
+    private LinearLayout companion_personal_settings_email_add_another;
     private FontEditTextView companion_personal_settings_name;
     private FontEditTextView companion_personal_settings_last;
-    private FontTextView companion_personal_settings_date_of_birth;
-    private FontTextView companion_personal_settings_email;
+    private FontEditTextView companion_personal_settings_date_of_birth;
+    private FontEditTextView companion_personal_settings_email;
     private FontTextView companion_personal_settings_gender;
     private FontEditTextView companion_personal_settings_phone_number;
     private FontEditTextView companion_personal_settings_location_street;
-    private FontTextView companion_personal_settings_location_city;
+    private FontEditTextView companion_personal_settings_location_city;
     private FontEditTextView companion_personal_settings_location_postcode;
-    private FontTextView companion_personal_settings_location_country;
+    private FontEditTextView companion_personal_settings_location_country;
     private UserDataVO currentUser;
     private Button account_done_editting;
     private UserDataVO newUser;
@@ -92,11 +93,10 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
         currentUser = getActivityInterface().getCurrentUser();
 
-        companion_personal_settings_title = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_status);
-        companion_personal_settings_title.setText(currentUser.getTitle());
 
 
-        companion_personal_settings_email_add_another = (FontTextView) rootView.findViewById(R.id.companion_personal_settings_email_add_another);
+
+        companion_personal_settings_email_add_another = (LinearLayout) rootView.findViewById(R.id.companion_personal_add_email_ll);
 
         companion_personal_settings_name = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_name);
         companion_personal_settings_name.setText(currentUser.getFirstname());
@@ -104,10 +104,12 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         companion_personal_settings_last = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_last);
         companion_personal_settings_last.setText(currentUser.getLastname());
 
-        companion_personal_settings_email = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_email);
-        companion_personal_settings_email.setText(currentUser.getEmailaddress());
+        companion_personal_settings_email = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_email);
+        AccountsVO account = getActivityInterface().getAccounts().get(0);
+        String strEmail = account.getEmail();
+        companion_personal_settings_email.setText(strEmail);
 
-        companion_personal_settings_date_of_birth = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_date_of_birth);
+        companion_personal_settings_date_of_birth = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_date_of_birth);
         companion_personal_settings_date_of_birth.setText(HGBUtility.parseDateToddMMyyyyForPayment(currentUser.getDob()));
 
 
@@ -125,13 +127,13 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         companion_personal_settings_location_street = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_location_street);
         companion_personal_settings_location_street.setText(currentUser.getAddress());
 
-        companion_personal_settings_location_city = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_location_city);
+        companion_personal_settings_location_city = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_location_city);
         companion_personal_settings_location_city.setText(currentUser.getCity());
 
         companion_personal_settings_location_postcode = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_location_post_code);
         companion_personal_settings_location_postcode.setText(currentUser.getPostalcode());
 
-        companion_personal_settings_location_country = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_location_country);
+        companion_personal_settings_location_country = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_location_country);
         companion_personal_settings_location_country.setText(currentUser.getCountry());
 
         personal_settings_change_password_ll = (LinearLayout)rootView.findViewById(R.id.personal_settings_change_password_ll);
@@ -187,14 +189,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
             }
         });
 
-        companion_personal_settings_title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                HGBUtility.showPikerDialog(companion_personal_settings_title, getActivity(), SELECT_TITLE, titleArray,
-                        0, 2, null,true);
-            }
-        });
 
 
 //        companion_personal_settings_gender.setOnClickListener(new View.OnClickListener() {
@@ -282,7 +277,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
                 //   HGBUtility.showPikerDialog(mCountry, getActivity(), SELECT_PROVINCE,stateArray, 0,maxValueForStateDialog);
 
-                HGBUtility.showPikerDialog(companion_personal_settings_location_country, getActivity(), SELECT_PROVINCE,
+                HGBUtility.showPikerDialogEditText(companion_personal_settings_location_country, getActivity(), SELECT_PROVINCE,
                         countryarray, 0, countryMaxValueSize - 1, null,true);
                 if (companion_personal_settings_location_country.getTag() != null) {
                     mCounterPicked = companion_personal_settings_location_country.getTag().toString();
@@ -298,7 +293,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
                     mCounterPicked = companion_personal_settings_location_country.getTag().toString();
                     selectStates(mCounterPicked);
                 }
-                HGBUtility.showPikerDialog(companion_personal_settings_location_city, getActivity(), SELECT_PROVINCE, stateArray, 0, maxValueForStateDialog - 1, null,true);
+                HGBUtility.showPikerDialogEditText(companion_personal_settings_location_city, getActivity(), SELECT_PROVINCE, stateArray, 0, maxValueForStateDialog - 1, null,true);
                 if (companion_personal_settings_location_city.getTag() != null) {
                   //  mStatePicked = companion_personal_settings_location_city.getTag().toString();
                 }
@@ -390,10 +385,6 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         //get all user information and send to server
 
 
-        String str_companion_personal_settings_status = companion_personal_settings_title.getText().toString();
-        if (!str_companion_personal_settings_status.isEmpty()) {
-            newUser.setTitle(str_companion_personal_settings_status);
-        }
 
         String str_companion_personal_settings_name = companion_personal_settings_name.getText().toString();
         if (!str_companion_personal_settings_name.isEmpty()) {

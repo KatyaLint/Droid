@@ -141,12 +141,21 @@
 
 
     <style name="GridViewPassangersTextStyle">
-        <item name="android:textSize">@dimen/SP12</item>
-        <item name="android:fontFamily">dinnextltpro_regular.otf</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:gravity">center</item>
-        <item name="android:weightSum">1</item>
+    <item name="android:textSize">@dimen/SP12</item>
+    <item name="android:fontFamily">dinnextltpro_regular.otf</item>
+    <item name="android:textColor">@color/white</item>
+    <item name="android:gravity">center</item>
+    <item name="android:weightSum">1</item>
 
+</style>
+
+    <style name="PersonalInformationEditText">
+        <item name="android:textSize">@dimen/SP16</item>
+        <item name="android:textColor">@color/dark_teal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginTop">@dimen/DP8</item>
+        <item name="android:layout_marginBottom">@dimen/DP8</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

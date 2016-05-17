@@ -251,9 +251,7 @@ public class HGBJsonRequest extends Request<String> {
     public void send() {
         Log.d(TAG, service + "\nURL: " + url + "\nPARAMS: " + returnParams());
         Log.d(TAG, "TOKEN: " + token);
-//        DataStore.getInstance(mContext).showLoader();
         showLoader();
-
         queue.add(this);
     }
 
