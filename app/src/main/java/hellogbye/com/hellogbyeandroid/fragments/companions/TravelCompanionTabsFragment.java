@@ -1,3 +1,4 @@
+/*
 package hellogbye.com.hellogbyeandroid.fragments.companions;
 
 import android.os.Bundle;
@@ -24,9 +25,11 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.views.CustomViewPager;
 
 
+*/
 /**
  * Created by nyawka on 4/20/16.
- */
+ *//*
+
 public class TravelCompanionTabsFragment extends HGBAbstractFragment {
 
     private CustomViewPager viewPager;
@@ -105,3 +108,4 @@ public class TravelCompanionTabsFragment extends HGBAbstractFragment {
     }
 
 }
+*/

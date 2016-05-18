@@ -21,7 +21,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsFragment;
+/*import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsFragment;*/
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;

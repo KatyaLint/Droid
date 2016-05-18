@@ -1,3 +1,4 @@
+/*
 package hellogbye.com.hellogbyeandroid.fragments.mytrips;
 
 import android.os.Bundle;
@@ -5,8 +6,10 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTabHost;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,14 +18,20 @@ import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.views.CustomViewPager;
 
+*/
 /**
  * Created by nyawka on 5/8/16.
- */
+ *//*
+
 public class MyTripsTabsFragment extends HGBAbstractFragment {
 
     private TabLayout tabLayout;
     private CustomViewPager viewPager;
     private MyTripsPagerAdapter adapterPager;
+    Fragment tabUpcomingTripsView = new TabUpcomingTripsView();
+    TabHistoryView tabHistoryView = new TabHistoryView();
+    TabFavoritesView tabFavoritesView = new TabFavoritesView();
+    private FragmentTabHost mTabHost;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new MyTripsTabsFragment();
@@ -39,10 +48,15 @@ public class MyTripsTabsFragment extends HGBAbstractFragment {
 
         System.out.println("Kate onCreateView getActivity = " + getActivity());
         System.out.println("Kate onCreateView getContext = " + getContext());
+
+
         View rootView = inflater.inflate(R.layout.my_trips_main_tabs_layout, container, false);
 
 
-        tabLayout = (TabLayout)rootView.findViewById(R.id.my_trips_tabs_layout);
+
+
+       */
+/* tabLayout = (TabLayout)rootView.findViewById(R.id.my_trips_tabs_layout);
         tabLayout.addTab(tabLayout.newTab().setText(getContext().getString(R.string.my_trips_upcoming)));
         tabLayout.addTab(tabLayout.newTab().setText(getContext().getString(R.string.my_trips_history)));
         tabLayout.addTab(tabLayout.newTab().setText(getContext().getString(R.string.my_trips_favorites)));
@@ -51,22 +65,27 @@ public class MyTripsTabsFragment extends HGBAbstractFragment {
         viewPager.setPagingEnabled(false);
 
 
-        setupViewPager();
+        setupViewPager();*//*
+
 
 
         return rootView;
     }
 
 
+
     private void setupViewPager() {
         adapterPager = new MyTripsPagerAdapter(getActivity().getSupportFragmentManager(), tabLayout.getTabCount()) ;
 
         viewPager.setAdapter(adapterPager);
+        viewPager.getAdapter().notifyDataSetChanged();
+        
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                System.out.println("Kate tab selected");
                 viewPager.setCurrentItem(tab.getPosition());
                 int position = tab.getPosition();
 
@@ -96,16 +115,21 @@ public class MyTripsTabsFragment extends HGBAbstractFragment {
     public void onDestroyView() {
         System.out.println("Kate onDestroy");
         super.onDestroyView();
+
         adapterPager.onDestroyFragments(getActivity().getSupportFragmentManager());
 
-        adapterPager = null;
+
+     */
+/*   adapterPager = null;
 
         viewPager.removeAllViews();
         viewPager = null;
 
         tabLayout.removeAllViews();
         tabLayout.removeAllTabs();
-        tabLayout = null;
+        tabLayout = null;*//*
+
 
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package hellogbye.com.hellogbyeandroid.fragments.mytrips;
 
 
@@ -32,9 +33,11 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
+*/
 /**
  * Created by nyawka on 4/14/16.
- */
+ *//*
+
 public class TripsFragment  extends HGBAbstractFragment {
 
     private RecyclerView mRecyclerView;
@@ -314,3 +317,4 @@ public class TripsFragment  extends HGBAbstractFragment {
         }
     };
 }
+*/

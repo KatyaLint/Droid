@@ -29,6 +29,7 @@ import hellogbye.com.hellogbyeandroid.R;
 
 import hellogbye.com.hellogbyeandroid.adapters.companion.CompanionsSwipeItemsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
@@ -56,6 +57,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
     private LinearLayout companion_empty_view;
     private View rootView;
     private ArrayList<CompanionVO> companionsVOPending;
+    private  ArrayList mCurrItemsSearchList ;
     public  static boolean isPending;
 
     public void isPendingTabs(boolean isPending){
@@ -169,6 +171,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
             companion_empty_view.setVisibility(View.VISIBLE);
             searchRecyclerView.setVisibility(View.GONE);
         }else{
+            mCurrItemsSearchList = new ArrayList<CompanionVO>(companionsVOPending);
             searchRecyclerView.setVisibility(View.VISIBLE);
             companion_empty_view.setVisibility(View.GONE);
         }
@@ -266,9 +269,11 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
 
     @Override
     public boolean onQueryTextChange(String query) {
-
+        if(mCurrItemsSearchList == null){ //list empty
+            return false;
+        }
         // Here is where we are going to implement our filter logic
-        final List<CompanionVO> filteredModelList = filter(companionsVOPending, query);
+        final List<CompanionVO> filteredModelList = filter(mCurrItemsSearchList, query);
         searchListAdapter.animateTo(filteredModelList);
         searchRecyclerView.scrollToPosition(0);
         return true;
