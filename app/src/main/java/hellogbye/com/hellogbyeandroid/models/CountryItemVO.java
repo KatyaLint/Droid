@@ -47,4 +47,13 @@ public class CountryItemVO {
     public void setProvinces(ArrayList<ProvincesItem> provinces) {
         this.provinces = provinces;
     }
+
+    @Override
+    public String toString() {
+        return "CountryItemVO{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", provinces=" + provinces +
+                '}';
+    }
 }

@@ -3,6 +3,7 @@ package hellogbye.com.hellogbyeandroid.fragments.settings;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
@@ -56,8 +58,10 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
     private FontEditTextView companion_personal_settings_location_city;
     private FontEditTextView companion_personal_settings_location_postcode;
     private FontEditTextView companion_personal_settings_location_country;
+    private FontEditTextView companion_personal_settings_location_province;
+
     private UserDataVO currentUser;
-    private Button account_done_editting;
+    private FontTextView account_done_editting;
     private UserDataVO newUser;
     private int maxValueForStateDialog;
     private String[] stateArray;
@@ -68,6 +72,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
     private FontEditTextView change_pswd_current_pswd;
     private FontEditTextView change_pswd_new_pswd;
     private FontEditTextView change_pswd_confirm_new_pswd;
+    private BookingRequestVO bookingResponse;
 
     public AccountPersonalInfoSettingsFragment() {
         // Empty constructor required for fragment subclasses
@@ -111,6 +116,8 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
         companion_personal_settings_date_of_birth = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_date_of_birth);
         companion_personal_settings_date_of_birth.setText(HGBUtility.parseDateToddMMyyyyForPayment(currentUser.getDob()));
+        companion_personal_settings_location_province = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_state);
+        companion_personal_settings_location_province.setText(currentUser.getState());
 
 
 //        companion_personal_settings_gender = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_gender);
@@ -146,7 +153,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         change_pswd_confirm_new_pswd = (FontEditTextView) promptsView.findViewById(R.id.change_pswd_confirm_new_pswd);
         final FontEditTextView[] inputs = new FontEditTextView[]{change_pswd_current_pswd, change_pswd_new_pswd, change_pswd_confirm_new_pswd};
 
-
+        getStaticBooking();
 
 
         text = (FontTextView) promptsView
@@ -237,7 +244,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         });
 
 
-        account_done_editting = (Button) rootView.findViewById(R.id.account_done_editing);
+        account_done_editting = (FontTextView) rootView.findViewById(R.id.account_done_editing);
         account_done_editting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -257,8 +264,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         for (int i = 0; i < getActivityInterface().getEligabileCountries().size(); i++) {
             countryarray[i] = getActivityInterface().getEligabileCountries().get(i).getName();
         }
-        companion_personal_settings_location_country.setTag(0);
-        companion_personal_settings_location_city.setTag(0);
+
        // selectStates("0");
 
 
@@ -271,35 +277,63 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
     private void setClickListner() {
 
+
         companion_personal_settings_location_country.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //   HGBUtility.showPikerDialog(mCountry, getActivity(), SELECT_PROVINCE,stateArray, 0,maxValueForStateDialog);
-
-                HGBUtility.showPikerDialogEditText(companion_personal_settings_location_country, getActivity(), SELECT_PROVINCE,
-                        countryarray, 0, countryMaxValueSize - 1, null,true);
-                if (companion_personal_settings_location_country.getTag() != null) {
-                    mCounterPicked = companion_personal_settings_location_country.getTag().toString();
+                final ArrayList<CountryItemVO> countries = bookingResponse.getCountries();
+                String[] countryarray = new String[countries.size()];
+                for (int i = 0; i < countries.size(); i++) {
+                    countryarray[i] = countries.get(i).getName();
                 }
-                // countryDialog.show();
+
+                HGBUtility.showPikerDialogEditText(companion_personal_settings_location_country, getActivity(), "Choose country",
+                        countryarray, 0, countries.size() - 1, new PopUpAlertStringCB() {
+                            @Override
+                            public void itemSelected(String inputItem) {
+                                for (CountryItemVO countrie : countries) {
+                                    if (countrie.getName().equals(inputItem)) {
+                                        companion_personal_settings_location_country.setTag(countrie.getCode());
+                                        getStaticProvince();
+
+                                        break;
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void itemCanceled() {
+
+                            }
+                        }, false);
+
+
             }
         });
 
-        companion_personal_settings_location_city.setOnClickListener(new View.OnClickListener() {
+        companion_personal_settings_location_province.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (companion_personal_settings_location_country.getTag() != null) {
-                    mCounterPicked = companion_personal_settings_location_country.getTag().toString();
-                    selectStates(mCounterPicked);
-                }
-                HGBUtility.showPikerDialogEditText(companion_personal_settings_location_city, getActivity(), SELECT_PROVINCE, stateArray, 0, maxValueForStateDialog - 1, null,true);
-                if (companion_personal_settings_location_city.getTag() != null) {
-                  //  mStatePicked = companion_personal_settings_location_city.getTag().toString();
-                }
-                // stateDialog.show();
+                getStaticProvince();
             }
         });
+
+//        companion_personal_settings_location_city.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (companion_personal_settings_location_country.getTag() != null) {
+//                    mCounterPicked = companion_personal_settings_location_country.getTag().toString();
+//                    selectStates(mCounterPicked);
+//                }
+//                HGBUtility.showPikerDialogEditText(companion_personal_settings_location_city, getActivity(), SELECT_PROVINCE, stateArray, 0, maxValueForStateDialog - 1, null,true);
+//                if (companion_personal_settings_location_city.getTag() != null) {
+//                  //  mStatePicked = companion_personal_settings_location_city.getTag().toString();
+//                }
+//                // stateDialog.show();
+//            }
+//        });
     }
 
     private void selectStates(String countryPicked){
@@ -397,6 +431,11 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         }
 
 
+        String str_companion_personal_settings_postal= companion_personal_settings_location_postcode.getText().toString();
+        if (!str_companion_personal_settings_postal.isEmpty()) {
+            newUser.setPostalcode(str_companion_personal_settings_postal);
+        }
+
         String str_companion_personal_settings_date_of_birth = companion_personal_settings_date_of_birth.getText().toString();
         if (!str_companion_personal_settings_date_of_birth.isEmpty()) {
             newUser.setDob(str_companion_personal_settings_date_of_birth);
@@ -408,10 +447,10 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         }
 
 
-        String str_companion_personal_settings_gender = companion_personal_settings_gender.getText().toString();
-        if (!str_companion_personal_settings_gender.isEmpty()) {
-            newUser.setGender(str_companion_personal_settings_gender);
-        }
+//        String str_companion_personal_settings_gender = companion_personal_settings_gender.getText().toString();
+//        if (!str_companion_personal_settings_gender.isEmpty()) {
+//            newUser.setGender(str_companion_personal_settings_gender);
+//        }
 
 
         String str_companion_personal_settings_phone_number = companion_personal_settings_phone_number.getText().toString();
@@ -430,10 +469,19 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         }
 
 
-        String str_companion_personal_settings_location_country = companion_personal_settings_location_country.getText().toString();
+        String str_companion_personal_settings_location_country = companion_personal_settings_location_country.getTag().toString();
         if (!str_companion_personal_settings_location_country.isEmpty()) {
             newUser.setCountry(str_companion_personal_settings_location_country);
         }
+
+        String str_companion_personal_settings_location_province = companion_personal_settings_location_province.getTag().toString();
+        if (!str_companion_personal_settings_location_province.isEmpty()) {
+            newUser.setState(str_companion_personal_settings_location_province);
+        }
+        //AccountsVO account = getActivityInterface().getAccounts().get(0);
+        newUser.setTitle(currentUser.getTitle());
+
+
 
 
         ConnectionManager.getInstance(getActivity()).putUserSettings(newUser, new ConnectionManager.ServerRequestListener() {
@@ -450,6 +498,135 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
                 errorHelper.show(getActivity().getFragmentManager(), (String) data);
             }
         });
+    }
+
+
+    private void getStaticBooking() {
+
+        ConnectionManager.getInstance(getActivity()).getBookingOptions(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                bookingResponse = (BookingRequestVO) data;
+                Log.i("",bookingResponse.toString());
+
+                setCountryAndState();
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
+
+            }
+        });
+    }
+
+    private void setCountryAndState() {
+
+        for( CountryItemVO country:bookingResponse.getCountries()){
+
+            if(country.getCode().equals(currentUser.getCountry())){
+                companion_personal_settings_location_country.setText(country.getName());
+                companion_personal_settings_location_country.setTag(country.getCode());
+                String countryID;
+                if( companion_personal_settings_location_country.getTag() == null){
+                    countryID =  companion_personal_settings_location_country.getText().toString();
+                    companion_personal_settings_location_country.setTag(countryID);
+                    if (countryID.equals("Canada")) {
+                        countryID = "CA";
+                    } else if (countryID.equals("UnitedStates")) {
+                        countryID = "US";
+                    }
+                }else{
+                    countryID = (String) companion_personal_settings_location_country.getTag();
+                }
+
+                ConnectionManager.getInstance(getActivity()).getStaticBookingProvince(countryID, new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        List<ProvincesItem> provinceItems = (List<ProvincesItem>) data;
+                        for(ProvincesItem province: provinceItems){
+                            if(currentUser.getState().equals(province.getProvincecode())){
+                                companion_personal_settings_location_province.setText(province.getProvincename());
+                                companion_personal_settings_location_province.setTag(province.getProvincecode());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Object data) {
+                        HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.setMessageForError((String) data);
+                        errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                    }
+                });
+
+            }
+        }
+    }
+
+    private void getStaticProvince() {
+        String countryID;
+        if( companion_personal_settings_location_country.getTag() == null){
+            countryID =  companion_personal_settings_location_country.getText().toString();
+            if (countryID.equals("Canada")) {
+                countryID = "CA";
+            } else if (countryID.equals("UnitedStates")) {
+                countryID = "US";
+            }
+        }else{
+            countryID = (String) companion_personal_settings_location_country.getTag();
+        }
+
+        ConnectionManager.getInstance(getActivity()).getStaticBookingProvince(countryID, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                List<ProvincesItem> provinceItems = (List<ProvincesItem>) data;
+                if (provinceItems.size() > 0) {
+                    setDropDownItems(provinceItems);
+                    companion_personal_settings_location_province.setVisibility(View.VISIBLE);
+                } else {
+                    companion_personal_settings_location_province.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getActivity().getFragmentManager(), (String) data);
+            }
+        });
+    }
+
+    private void setDropDownItems(final List<ProvincesItem> provinceItems) {
+        String[] countryarray = new String[provinceItems.size()];
+        for (int i = 0; i < provinceItems.size(); i++) {
+            countryarray[i] = provinceItems.get(i).getProvincename();
+        }
+
+        HGBUtility.showPikerDialogEditText(companion_personal_settings_location_province, getActivity(), "Choose province",
+                countryarray, 0, provinceItems.size() - 1, new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+                        for (ProvincesItem province : provinceItems) {
+                            if (province.getProvincename().equals(inputItem)) {
+                                companion_personal_settings_location_province.setText(province.getProvincename());
+                                companion_personal_settings_location_province.setTag(province.getProvincecode());
+                                break;
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void itemCanceled() {
+
+                    }
+                }, false);
+
     }
 
 

@@ -34,4 +34,12 @@ public class BookingRequestVO {
     public void setCountries(ArrayList<CountryItemVO> countries) {
         this.countries = countries;
     }
+
+    @Override
+    public String toString() {
+        return "BookingRequestVO{" +
+                "titles=" + titles +
+                ", countries=" + countries +
+                '}';
+    }
 }

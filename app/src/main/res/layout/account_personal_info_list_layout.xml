@@ -50,6 +50,7 @@
                 android:id="@+id/companion_personal_settings_date_of_birth"
                 style="@style/PersonalInformationEditText"
                 android:hint="Date of birth"
+                android:inputType="datetime"
                 app:fontName="dinnextltpro_regular.otf" />
 
             <LinearLayout
@@ -75,17 +76,15 @@
             <LinearLayout
                 android:id="@+id/companion_personal_add_email_ll"
                 android:layout_width="match_parent"
+
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
                     android:id="@+id/companion_personal_add_email"
                     style="@style/PersonalInformationEditText"
                     android:text="Another email"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
+
                     app:fontName="dinnextltpro_regular.otf" />
 
             </LinearLayout>
@@ -113,10 +112,6 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:hint="City"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
                     app:fontName="dinnextltpro_regular.otf" />
 
                 <hellogbye.com.hellogbyeandroid.views.FontEditTextView
