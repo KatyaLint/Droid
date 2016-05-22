@@ -35,6 +35,7 @@ import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
@@ -134,7 +135,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
     }
 
 
-    public void setSearchView(RecyclerView searchRecyclerView, LinearLayout companion_empty_view, SearchView searchView){
+    public void setSearchView(RecyclerView searchRecyclerView, LinearLayout companion_empty_view, SearchView searchView,final boolean addCompanionsToCNCScreen){
 
         this.mSearchView = searchView;
         this.searchRecyclerView = searchRecyclerView;
@@ -149,8 +150,28 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
             @Override
             public void clickedItem(final String guid) {
                 Bundle args = new Bundle();
-                args.putString("user_id", guid);
-                getFlowInterface().goToFragment(ToolBarNavEnum.COMPANIONS_DETAILS.getNavNumber(), args);
+                if(addCompanionsToCNCScreen){
+
+
+                    args.putString(HGBConstants.BUNDLE_ADD_COMPANION_ID, guid);
+                    getFlowInterface().goToFragment(ToolBarNavEnum.HOME.getNavNumber(), args);
+
+/*
+                    {
+                        ItineraryId = "611b6520-a566-49a7-b95d-78adb2501a42";
+                        Query = "Join Vlad Kirillov to the trip";
+                        latitude = 0;
+                        longitude = 0;
+                        token =     (
+                                );
+                        travelpreferenceprofileid = "eb9b38e7-10dc-4f2d-a619-3bec93a1cdf4";*/
+
+
+                }else {
+
+                    args.putString(HGBConstants.USER_ID, guid);
+                    getFlowInterface().goToFragment(ToolBarNavEnum.COMPANIONS_DETAILS.getNavNumber(), args);
+                }
 
             }
 

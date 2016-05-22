@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:id="@+id/mytrips_rl"
-    android:layout_height="@dimen/DP104">
+    android:layout_centerVertical="true"
+    android:layout_margin="@dimen/DP10"
+    android:layout_height="wrap_content">
 
     <com.daimajia.swipe.SwipeLayout
         android:id="@+id/swipe_my_trip"
@@ -42,13 +44,13 @@
 
     <hellogbye.com.hellogbyeandroid.views.RoundedImageView
         android:layout_weight="0"
-        android:layout_margin="@dimen/DP10"
+        android:layout_marginRight="@dimen/DP10"
         android:id="@+id/my_trip_user_image"
         android:layout_width="@dimen/DP60"
         android:layout_height="@dimen/DP60" />
 
     <LinearLayout
-        android:layout_margin="@dimen/DP10"
+        android:layout_marginLeft="@dimen/DP10"
         android:layout_weight="2"
         android:id="@+id/my_trips_details_ll"
         android:gravity="center_vertical"
@@ -89,11 +91,11 @@
 
 
         <include
-
             layout="@layout/layout_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
+            android:layout_marginLeft="@dimen/DP4"
             android:id="@+id/my_trip_arrow_next" />
 
     </LinearLayout>

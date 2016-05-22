@@ -38,6 +38,7 @@ import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CheckoutConfirmationFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.NewPaymentDetailsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionsTravelers;
 import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionTabsWidgetFragment;
 import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsTabsView;
 /*import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionTabsFragment;*/
@@ -596,16 +597,21 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case TRIPS:
                 fragment = TripsTabsView.newInstance(navPosition);
                 break;
+            case ALL_COMPANIONS_VIEW:
+                fragment = CompanionsTravelers.newInstance(navPosition);
+                break;
             case COMPANIONS:
-                //fragment = TravelCompanionsFragment.newInstance(navPosition);
-
                 fragment = TravelCompanionTabsWidgetFragment.newInstance(navPosition);
-
-
-             //   fragment = isFreeUser(fragment , navPosition);
                 break;
             case COMPANIONS_DETAILS:
                 fragment = CompanionDetailsFragment.newInstance(navPosition);
+                break;
+            case COMPANIONS_PERSONAL_DETAILS:
+                fragment = AccountPersonalInfoSettingsFragment.newInstance(navPosition);
+                //     fragment = isFreeUser(fragment, navPosition);
+                break;
+            case COMPANIONS_PERSONAL_EMAILS:
+                fragment = AccountPersonalEmailSettingsFragment.newInstance(navPosition);
                 break;
             case PREFERENCE:
                 fragment = PreferenceSettingsFragment.newInstance(navPosition);
@@ -664,13 +670,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case ADD_CREDIT_CARD:
                 fragment = AddCreditCardFragment.newInstance(navPosition);
                 break;
-            case COMPANIONS_PERSONAL_DETAILS:
-                fragment = AccountPersonalInfoSettingsFragment.newInstance(navPosition);
-           //     fragment = isFreeUser(fragment, navPosition);
-                break;
-            case COMPANIONS_PERSONAL_EMAILS:
-                fragment = AccountPersonalEmailSettingsFragment.newInstance(navPosition);
-                break;
+
             case CREDIT_CARD_LIST:
                 fragment = CreditCardListFragment.newInstance(navPosition);
                 break;
@@ -705,7 +705,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 // goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
             }
         });
-        //Kate
+
         itirnarary_title_Bar = (FontTextView)findViewById(R.id.itirnarary_title_Bar);
 
 

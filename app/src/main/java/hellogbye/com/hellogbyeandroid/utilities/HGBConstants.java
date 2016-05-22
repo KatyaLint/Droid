@@ -12,6 +12,8 @@ public class HGBConstants {
     public static final String HOME_FRAGMENT_TOOLBAR_ACTION_KEYBOARD_ACTION = "toolbar_action_keyboard";
     public static final String HOME_FRAGMENT_TOOLBAR_ACTION_MIC_ACTION = "toolbar_action_mic";
 
+    public static final String BUNDLE_ADD_COMPANION_ID = "user_companion_id";
+    public static final String USER_ID = "user_id";
 
 
 }

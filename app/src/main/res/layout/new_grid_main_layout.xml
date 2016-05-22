@@ -10,9 +10,11 @@
         android:layout_weight="0.2"
         android:id="@+id/passangers_names_ll"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/DP34"
-        android:background="@color/hgb_blue"
+        android:layout_height="wrap_content"
+        android:background="@color/hgb_toolbar_blue"
         android:orientation="horizontal" />
+
+    <!--android:layout_height="@dimen/DP34"-->
 
     <LinearLayout
         android:paddingTop="@dimen/DP20"
@@ -70,13 +72,14 @@
 
     </ScrollView>
 
-    <Button
+ <!--   <Button
         android:id="@+id/grid_make_payment"
         android:layout_weight="0.1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/red_button_color"
         android:textColor="@color/white"
-        android:text="@string/itinerary_make_payment"/>
+        android:gravity="center"
+        android:text="@string/itinerary_make_payment"/>-->
 
 </LinearLayout>

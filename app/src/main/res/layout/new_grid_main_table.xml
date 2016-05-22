@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
+<RelativeLayout     android:layout_width="match_parent"
+    android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
 <HorizontalScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_above="@+id/grid_make_payment"
     android:id="@+id/table_scroll"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:fillViewport="true"
     android:scrollbars="horizontal">
 
@@ -15,3 +16,14 @@
 
 
 </HorizontalScrollView>
+<Button
+android:id="@+id/grid_make_payment"
+android:layout_weight="0.1"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:background="@color/red_button_color"
+android:textColor="@color/white"
+android:gravity="center"
+android:text="@string/itinerary_make_payment"
+    android:layout_alignParentBottom="true"/>
+</RelativeLayout>

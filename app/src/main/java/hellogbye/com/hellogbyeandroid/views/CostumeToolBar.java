@@ -128,21 +128,13 @@ public class CostumeToolBar extends Toolbar {
 //                titleText.setVisibility(View.VISIBLE);
 //                keyBoardImage.setVisibility(View.INVISIBLE);
 //                break;
+
             case TRIPS:
-      //          my_trip_edit_button.setVisibility(View.VISIBLE);
-                titleText.setVisibility(View.VISIBLE);
-         //       my_trips_button.setVisibility(View.VISIBLE);
-
-
-                break;
             case COMPANIONS:
-                titleText.setVisibility(View.VISIBLE);
-                break;
-            case PREFERENCE:
-                titleText.setVisibility(View.VISIBLE);
-                preferences_edit_mode.setVisibility(View.VISIBLE);
-                edit_preferences.setVisibility(View.VISIBLE);
-                break;
+            case ALL_COMPANIONS_VIEW:
+            case COMPANIONS_PERSONAL_DETAILS:
+            case HELP:
+            case ACCOUNT:
             case PREFERENCES_TAB_SETTINGS:
             case PREFERENCES_CHECK_LIST_SETTINGS:
             case PREFERENCES_SEARCH_LIST_SETTINGS:
@@ -150,12 +142,12 @@ public class CostumeToolBar extends Toolbar {
             case  PREFERENCES_DRAG_LIST_SETTINGS:
                 titleText.setVisibility(View.VISIBLE);
                 break;
-            case ACCOUNT:
+            case PREFERENCE:
                 titleText.setVisibility(View.VISIBLE);
+                preferences_edit_mode.setVisibility(View.VISIBLE);
+                edit_preferences.setVisibility(View.VISIBLE);
                 break;
-            case HELP:
-                titleText.setVisibility(View.VISIBLE);
-                break;
+
             case CNC:
               //  my_trips_image_profile.setImageBitmap(HGBUtility.getBitmapFromCache(mContext));
           //      my_trips_image_profile.setVisibility(View.VISIBLE);
@@ -165,10 +157,6 @@ public class CostumeToolBar extends Toolbar {
                 keyBoardImage.setVisibility(View.VISIBLE);
                 tool_bar_profile_name.setVisibility(View.VISIBLE);
                 break;
-            case COMPANIONS_PERSONAL_DETAILS:
-                titleText.setVisibility(View.VISIBLE);
-                break;
-
 
         }
 

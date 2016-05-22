@@ -32,8 +32,8 @@ public class ConnectionManager {
     }
 
 
-    //   public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
-    public static String BASE_URL = "http://apiuat.hellogbye.com/uat/rest/";
+       public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
+ //   public static String BASE_URL = "http://apiuat.hellogbye.com/uat/rest/";
 //    public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
 
 
@@ -218,7 +218,7 @@ public class ConnectionManager {
 
 
     public void ItineraryCNCSearch(String query, String prefrenceid, String itineraryid, final ServerRequestListener listener) {
-        String url = getURL(Services.ITINERARY_CNC);
+        String url = getURL(Services.ITINERARY);
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("query", query);
@@ -505,8 +505,48 @@ public class ConnectionManager {
             }
 
         }, false);
+    }
 
 
+    public void ItineraryCNCAddCompanionPost(ArrayList<AirportSendValuesVO> airportSendValuesVOs, final ServerRequestListener listener) {
+        String url = getURL(Services.ITINERARY);
+        url = url +"CNC";
+        JSONObject jsonObjectMain = new JSONObject();
+
+
+        JSONArray jsonArray = new JSONArray();
+
+        for (AirportSendValuesVO airportSendValuesVO : airportSendValuesVOs) {
+
+            try {
+
+                jsonObjectMain.put("ItineraryId", airportSendValuesVO.getId());
+                //Main for all query request
+                jsonObjectMain.put("query", airportSendValuesVO.getQuery());
+                //TODO need to remove
+                jsonObjectMain.put("latitude", "0");
+                jsonObjectMain.put("longitude", "0");
+                jsonObjectMain.put("travelpreferenceprofileid", airportSendValuesVO.getTravelpreferenceprofileid());
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObjectMain, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseAirplaneData(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+
+        }, false);
     }
 
 
@@ -1586,7 +1626,7 @@ public class ConnectionManager {
                 USER_SOLUTION("Solution/"),
                 ITINERARY("Itinerary/"),
                 USER_GET_TRAVEL_PREFERENCES("TravelPreference"),
-                ITINERARY_CNC("Itinerary/"),
+
                 COMPANIONS("Companions"),
                 CARD_TOKEN("Card/Token"),
                 ITINERARY_MY_TRIP("Itinerary"),

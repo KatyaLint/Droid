@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.mytrips.TabFavoritesView;
 import hellogbye.com.hellogbyeandroid.fragments.mytrips.TabUpcomingTripsView;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
@@ -58,6 +59,9 @@ public class TravelCompanionTabsWidgetFragment extends HGBAbstractFragment {
         }
     }
 
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -99,9 +103,6 @@ public class TravelCompanionTabsWidgetFragment extends HGBAbstractFragment {
 
             }
         });
-
-
-
 
         return rootView;
     }

@@ -36,6 +36,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -114,13 +115,16 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
         LayoutInflater li = LayoutInflater.from(activity);
         View promptsView = li.inflate(R.layout.new_grid_add_companion, null);
+
         LinearLayout new_grid_add_companion_ll = (LinearLayout) promptsView.findViewById(R.id.new_grid_add_companion_ll);
         new_grid_add_companion_ll.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                getFlowInterface().goToFragment(ToolBarNavEnum.COMPANIONS.getNavNumber(), null);
 
-                //go to companion fragment
+                Bundle args = new Bundle();
+
+                args.putString("class_name", ItineraryFragment.class.toString());
+                getFlowInterface().goToFragment(ToolBarNavEnum.ALL_COMPANIONS_VIEW.getNavNumber(), args);
             }
         });
         passengersNames.addView(promptsView);
@@ -171,6 +175,12 @@ public class ItineraryFragment extends HGBAbstractFragment {
                 }
 
             }
+
+            if(passengerNodesVOs.get(0) == null){
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError("Bad Case Scenario");
+            }
+
             passenger.setDateHashMap(passengerNodesVOs.get(0).getDateOfCell(), passengerNodesVOs);
         }
     }
@@ -466,7 +476,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
         return outer;
     }
 
-    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+   private LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT);
 
