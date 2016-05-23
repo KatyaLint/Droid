@@ -112,16 +112,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
         companionsVOPending = new ArrayList<>();
         this.isPending = isPending;
         getCompanions();
-        ArrayList<CompanionVO>  companionsVO = getActivityInterface().getCompanions();
-
-        if(isPending){
-            pendingCompanions(companionsVO);
-            addInvitationsToPanding(getActivityInterface().getCompanionsInvintation());
-        }else{
-            acceptedCompanions(companionsVO);
-        }
-
-
+        
         popup_companion_new = inflater.inflate(R.layout.popup_layout_with_edit_text_new, null);
 
         companion_editTextDialog_name = (FontEditTextView)popup_companion_new.findViewById(R.id.companion_editTextDialog_name);
