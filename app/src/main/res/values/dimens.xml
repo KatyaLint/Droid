@@ -8,7 +8,6 @@
     <dimen name="DP18">18dp</dimen>
     <dimen name="DP34">34dp</dimen>
     <dimen name="DP38">38dp</dimen>
-
     <dimen name="DP144">144dp</dimen>
     <dimen name="DP115">115dp</dimen>
     <dimen name="DP340">340dp</dimen>
@@ -28,14 +27,11 @@
     <dimen name="DP6">6dp</dimen>
     <dimen name="DP82">82dp</dimen>
     <dimen name="DP54">54dp</dimen>
-
     <dimen name="DP100">100dp</dimen>
     <dimen name="DP150">150dp</dimen>
     <dimen name="DP130">130dp</dimen>
-
     <dimen name="DP160">160dp</dimen>
     <dimen name="DP180">180dp</dimen>
-
     <dimen name="DP90">90dp</dimen>
     <dimen name="DP110">110dp</dimen>
     <dimen name="DP120">120dp</dimen>
@@ -43,8 +39,6 @@
     <dimen name="DP60">60dp</dimen>
     <dimen name="DP80">80dp</dimen>
     <dimen name="DP_64">-64dp</dimen>
-
-
 
     <dimen name="SP32">32sp</dimen>
     <dimen name="SP30">30sp</dimen>
