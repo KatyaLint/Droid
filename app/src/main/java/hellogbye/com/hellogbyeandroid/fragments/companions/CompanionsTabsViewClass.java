@@ -259,9 +259,10 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
                     getCompanionsInvitation();
                 }else{
                     acceptedCompanions(companions);
+                    emptyCompanionsView();
                 }
 
-                emptyCompanionsView();
+
 
                 searchListAdapter.updateItems(companionsVOPending);
 
@@ -301,9 +302,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getActivity().getFragmentManager(), (String) data);
+              ErrorMessage(data);
             }
         });
     }
