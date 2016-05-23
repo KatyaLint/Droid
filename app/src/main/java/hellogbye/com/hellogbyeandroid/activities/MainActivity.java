@@ -693,9 +693,11 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         switch (navBar) {
             case HOME:
                 //  fragment = HomeFragment.newInstance(navPosition);
-                fragment = CNCFragment.newInstance(navPosition);
+                //fragment = CNCFragment.newInstance(navPosition);
+                openRightPane();
+                clearCNCItems();
+                return;
 
-                break;
 //            case HISTORY:
 //                fragment = HistoryFragment.newInstance(navPosition);
 //                break;
