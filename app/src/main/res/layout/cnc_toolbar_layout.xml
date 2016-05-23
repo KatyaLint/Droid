@@ -130,14 +130,6 @@
         android:layout_marginRight="@dimen/DP14"
         android:visibility="gone"
         />
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cnc_dissmis"
-        android:background="@drawable/close_icon_a_1"
-        android:layout_gravity="left"
-        android:layout_marginLeft="@dimen/DP14"
-        android:visibility="gone" />
 
 
 </hellogbye.com.hellogbyeandroid.views.CostumeToolBar>

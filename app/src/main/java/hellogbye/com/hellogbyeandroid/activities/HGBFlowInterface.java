@@ -37,6 +37,8 @@ public interface HGBFlowInterface {
     ArrayList<CreditCardItem> getCreditCards();
     void setCreditCards(ArrayList<CreditCardItem> mCreditCardList);
     void setListUsers(ArrayList<UserDataVO> travellist);
+    void closeRightPane();
+    void openRightPane();
 
 
 

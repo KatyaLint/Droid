@@ -3,18 +3,13 @@ package hellogbye.com.hellogbyeandroid.activities;
 
 
 import android.app.ActionBar;
-
-
-
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-
-
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,51 +19,55 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
+import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
+import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
+import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
+import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
+import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightsDetailsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.AddCreditCardFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CheckoutConfirmationFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.NewPaymentDetailsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionTabsWidgetFragment;
-import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsTabsView;
-/*import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionTabsFragment;*/
-import hellogbye.com.hellogbyeandroid.fragments.freeuser.FreeUserFragment;
-import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalEmailSettingsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.settings.AccountSettingsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.checkout.AddCreditCardFragment;
-import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
-import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightsDetailsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.SummaryPaymentFragment;
-import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
-import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
-import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragment;
-
+import hellogbye.com.hellogbyeandroid.fragments.checkout.TravelerDetailsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.TravelersFragment;
 import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionDetailsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionTabsWidgetFragment;
+import hellogbye.com.hellogbyeandroid.fragments.freeuser.FreeUserFragment;
+import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragment;
+import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsTabsView;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesCheckListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesDragListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSearchListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesTabsFragmentSettings;
-
-import hellogbye.com.hellogbyeandroid.fragments.checkout.TravelerDetailsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.checkout.TravelersFragment;
+import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalEmailSettingsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.settings.AccountSettingsFragment;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
-import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
-import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
@@ -83,10 +82,14 @@ import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
+/*import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionTabsFragment;*/
+
 public class MainActivity extends AppCompatActivity implements NavListAdapter.OnItemClickListener, HGBVoiceInterface, HGBFlowInterface, ActionBar.OnMenuVisibilityListener {
     private DrawerLayout mDrawerLayout;
     private RecyclerView mDrawerList;
     private LinearLayout mNavDrawerLinearLayout;
+    private LinearLayout mNavDrawerRightLinearLayout;
+
     private android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -105,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private UserDataVO mCurrentUser;
 
     public FontTextView my_trip_profile;
-    private  HGBSaveDataClass hgbSaveDataClass = new HGBSaveDataClass();
+    private HGBSaveDataClass hgbSaveDataClass = new HGBSaveDataClass();
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
     //private MyTripsFragment.OnItemClickListener editMyTripsClickCB;
     private FontTextView itirnarary_title_Bar;
@@ -115,16 +118,24 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private ArrayList<CreditCardItem> mCreditCardList = new ArrayList<>();
     private boolean isFreeUser;
 
-    public HGBSaveDataClass getHGBSaveDataClass(){
+    private FrameLayout frameLayout;
+
+    public HGBSaveDataClass getHGBSaveDataClass() {
         return hgbSaveDataClass;
     }
+
     private HashSet<CreditCardItem> mSelectedCreditCards = new HashSet<>();
 
-    private HashMap<String,String> mBookingHashMap = new HashMap<>();
+    private HashMap<String, String> mBookingHashMap = new HashMap<>();
+
+    private ImageView mRightPaneImageView;
+
+    private final static int RIGHT_PANE_ANIMATION_TIME = 300;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         setContentView(R.layout.main_activity_layout);
 
@@ -147,8 +158,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mName = (FontTextView) findViewById(R.id.nav_profile_name);
 
 
-
         mNavDrawerLinearLayout = (LinearLayout) findViewById(R.id.drawer);
+        // mNavDrawerRightLinearLayout = (LinearLayout) findViewById(R.id.right_drawer);
+
         mProfileImage = (RoundedImageView) findViewById(R.id.nav_profile_image);
 
         // set a custom shadow that overlays the main content when the drawer opens
@@ -172,16 +184,17 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         getUserData();
         getCompanionsFromServer();
+        initRightPane();
 
 
     }
 
 
-    private void getAccountsProfiles(){
+    private void getAccountsProfiles() {
         ConnectionManager.getInstance(MainActivity.this).getUserProfileAccounts(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                ArrayList<AccountsVO> accounts = ( ArrayList<AccountsVO> )data;
+                ArrayList<AccountsVO> accounts = (ArrayList<AccountsVO>) data;
                 hgbSaveDataClass.setAccounts(accounts);
                 //TODO , now getting first account from list
                 AccountsVO account = accounts.get(0);
@@ -199,32 +212,32 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
-    public void editProfileTipeMainToolBar(){
+    public void editProfileTipeMainToolBar() {
         AccountsVO account = hgbSaveDataClass.getAccounts().get(0);
-        my_trip_profile = (FontTextView)findViewById(R.id.my_trip_profile);
+        my_trip_profile = (FontTextView) findViewById(R.id.my_trip_profile);
         my_trip_profile.setText(account.getTravelpreferenceprofile().getProfilename());
         my_trip_profile.setTag(account.getTravelpreferenceprofile().getId());
     }
 
-    private void getCompanionsFromServer(){
+    private void getCompanionsFromServer() {
 
-            ConnectionManager.getInstance(MainActivity.this).getCompanions(new ConnectionManager.ServerRequestListener() {
-                @Override
-                public void onSuccess(Object data) {
-                    ArrayList<CompanionVO> companions =(ArrayList<CompanionVO>)data;
-                    hgbSaveDataClass.setCompanions(companions);
-                }
+        ConnectionManager.getInstance(MainActivity.this).getCompanions(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                ArrayList<CompanionVO> companions = (ArrayList<CompanionVO>) data;
+                hgbSaveDataClass.setCompanions(companions);
+            }
 
-                @Override
-                public void onError(Object data) {
-                    HGBErrorHelper errorHelper = new HGBErrorHelper();
-                    errorHelper.setMessageForError((String) data);
-                    errorHelper.show(getFragmentManager(), (String) data);
-                }
-            });
-        }
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
+    }
 
-    private void getUserData(){
+    private void getUserData() {
         ConnectionManager.getInstance(MainActivity.this).getUserProfile(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
@@ -232,11 +245,11 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 UserDataVO mCurrentUser = (UserDataVO) data;
 
                 hgbSaveDataClass.setCurrentUser(mCurrentUser);
-           //     ImageView my_trips_image_profile = (ImageView)findViewById(R.id.my_trips_image_profile);
+                //     ImageView my_trips_image_profile = (ImageView)findViewById(R.id.my_trips_image_profile);
                 HGBUtility.getAndSaveUserImage(mCurrentUser.getAvatar(), mProfileImage, null);
                 //my_trips_image_profile.setImageBitmap(HGBUtility.getBitmapFromCache(getBaseContext()));
                 getAccountsProfiles();
-                selectItem(ToolBarNavEnum.HOME.getNavNumber(), null);
+                selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null);
 
             }
 
@@ -293,33 +306,33 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 //    }
 
 
-    private void toolBarProfileChnage(){
+    private void toolBarProfileChnage() {
 
         final LinearLayout tool_bar_profile_name = (LinearLayout) mToolbar.findViewById(R.id.tool_bar_profile_name);
-        tool_bar_profile_name.setOnClickListener(new View.OnClickListener(){
+        tool_bar_profile_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Bundle args = new Bundle();
                 args.putString("edit_mode", "true");
                 goToFragment(ToolBarNavEnum.PREFERENCE.getNavNumber(), args);
-                                LinearLayout edit_preferences = (LinearLayout) mToolbar.findViewById(R.id.preferences_edit_mode);
+                LinearLayout edit_preferences = (LinearLayout) mToolbar.findViewById(R.id.preferences_edit_mode);
                 edit_preferences.setVisibility(View.GONE);
             }
         });
 
     }
 
-    private void preferencesChanges(){
+    private void preferencesChanges() {
         final ImageButton edit_preferences = (ImageButton) mToolbar.findViewById(R.id.edit_preferences);
         edit_preferences.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 View checkButton = mToolbar.findViewById(R.id.check_preferences);
-                if(checkButton.getVisibility() == View.VISIBLE){
+                if (checkButton.getVisibility() == View.VISIBLE) {
                     //delete
                     editClickCB.onItemClick("delete");
-                }else if(checkButton.getVisibility() == View.GONE){
+                } else if (checkButton.getVisibility() == View.GONE) {
                     edit_preferences.setBackgroundResource(R.drawable.ic_delete);
                     mToolbar.findViewById(R.id.check_preferences).setVisibility(View.VISIBLE);
                     editClickCB.onItemClick("edit");
@@ -328,7 +341,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         });
 
         final ImageButton check_preferences = (ImageButton) mToolbar.findViewById(R.id.check_preferences);
-        check_preferences.setOnClickListener(new View.OnClickListener(){
+        check_preferences.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mToolbar.findViewById(R.id.check_preferences).setVisibility(View.GONE);
@@ -346,7 +359,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearCNCItems();
+                 clearCNCItems();
+
+
+
             }
         });
 
@@ -385,8 +401,14 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+                super.onDrawerSlide(drawerView, 0); // this disables the arrow @ completed state
                 HGBUtility.hideKeyboard(getApplicationContext(), drawerView);
 
+            }
+
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                super.onDrawerSlide(drawerView, 0); // this disables the animation
             }
         };
 
@@ -412,12 +434,56 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         ((CNCFragment) currentFragment).initList();
     }
 
+    private void initRightPane() {
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction(); //beginTransaction();
+//                if(isAddAnimation){
+//                    transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_right,R.anim.slide_in_left,R.anim.slide_out_right);
+//                }
+        Fragment fragment = CNCFragment.newInstance(ToolBarNavEnum.CNC.getNavNumber());
+        transaction.replace(R.id.right_content_frame, fragment, fragment.getClass().toString());
+
+//                if (isAddToBackStack) {
+//                    transaction.addToBackStack(fragment.getClass().toString());
+//                    getFragmentStack().push(fragment);
+//                }
+
+        transaction.commit();
+        frameLayout = (FrameLayout) findViewById(R.id.right_content_frame);
+        mRightPaneImageView = (ImageView)findViewById(R.id.right_pane_button);
+
+        mRightPaneImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRightPane();
+
+
+            }
+        });
+
+    }
+
+    private void animateRightPaneOpened() {
+        Animation fadeOut = new AlphaAnimation(1, 0);
+        fadeOut.setDuration(RIGHT_PANE_ANIMATION_TIME);
+        fadeOut.setFillAfter(true);
+        mRightPaneImageView.startAnimation(fadeOut);
+    }
+
+
+    private void animateRightPaneClosed() {
+        Animation fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setDuration(RIGHT_PANE_ANIMATION_TIME);
+        fadeIn.setFillAfter(true);
+        mRightPaneImageView.startAnimation(fadeIn);
+
+    }
 
 
     private void loadNavItems() {
         mNavItemsList = new ArrayList<>();
         mNavItemsList.add(new NavItem(ToolBarNavEnum.TRIPS, false, R.drawable.my_trips_icon_enable, R.drawable.my_trips_icon_disable));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.COMPANIONS, false, R.drawable.companions_icon_enable,  R.drawable.companions_icon_disable));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.COMPANIONS, false, R.drawable.companions_icon_enable, R.drawable.companions_icon_disable));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.PREFERENCE, false, R.drawable.notifications_enable, R.drawable.notifications_disable));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.ACCOUNT, false, R.drawable.my_account_enable, R.drawable.my_account_disable));
 
@@ -499,14 +565,13 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
-
     @Override
     public void setCreditCardsSelected(HashSet<CreditCardItem> cardsList) {
         mSelectedCreditCards = cardsList;
     }
 
     @Override
-    public  HashSet<CreditCardItem>  getCreditCardsSelected() {
+    public HashSet<CreditCardItem> getCreditCardsSelected() {
         return mSelectedCreditCards;
     }
 
@@ -565,12 +630,28 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mTravelList = travellist;
     }
 
-    private Fragment isFreeUser(Fragment fragment , int navPosition){
+    @Override
+    public void closeRightPane() {
+        mDrawerLayout.closeDrawer(frameLayout);
+        animateRightPaneClosed();
+    }
 
-        if(isFreeUser){
+
+
+    @Override
+    public void openRightPane() {
+
+        mDrawerLayout.openDrawer(frameLayout);
+
+        animateRightPaneOpened();
+    }
+
+    private Fragment isFreeUser(Fragment fragment, int navPosition) {
+
+        if (isFreeUser) {
             fragment = FreeUserFragment.newInstance(navPosition);
             mToolbar.setVisibility(View.GONE);
-        }else{
+        } else {
             mToolbar.setVisibility(View.VISIBLE);
         }
         return fragment;
@@ -602,7 +683,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 fragment = TravelCompanionTabsWidgetFragment.newInstance(navPosition);
 
 
-             //   fragment = isFreeUser(fragment , navPosition);
+                //   fragment = isFreeUser(fragment , navPosition);
                 break;
             case COMPANIONS_DETAILS:
                 fragment = CompanionDetailsFragment.newInstance(navPosition);
@@ -633,7 +714,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case PAYMENT_DETAILS:
                 fragment = NewPaymentDetailsFragment.newInstance(navPosition);
-           //     fragment = isFreeUser( fragment , navPosition);
+                //     fragment = isFreeUser( fragment , navPosition);
                 break;
             case PREFERENCES_TAB_SETTINGS:
                 fragment = PreferencesTabsFragmentSettings.newInstance(navPosition);
@@ -666,7 +747,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case COMPANIONS_PERSONAL_DETAILS:
                 fragment = AccountPersonalInfoSettingsFragment.newInstance(navPosition);
-           //     fragment = isFreeUser(fragment, navPosition);
+                //     fragment = isFreeUser(fragment, navPosition);
                 break;
             case COMPANIONS_PERSONAL_EMAILS:
                 fragment = AccountPersonalEmailSettingsFragment.newInstance(navPosition);
@@ -678,12 +759,11 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         }
 
 
-
         if (bundle != null) {
             fragment.setArguments(bundle);
         }
 
-        if(isFreeUser && (navBar.equals(ToolBarNavEnum.COMPANIONS_PERSONAL_DETAILS) || navBar.equals(ToolBarNavEnum.PAYMENT_DETAILS) || navBar.equals(ToolBarNavEnum.COMPANIONS) )){
+        if (isFreeUser && (navBar.equals(ToolBarNavEnum.COMPANIONS_PERSONAL_DETAILS) || navBar.equals(ToolBarNavEnum.PAYMENT_DETAILS) || navBar.equals(ToolBarNavEnum.COMPANIONS))) {
             isAddAnimation = true;
             fragment = isFreeUser(fragment, navPosition);
         }
@@ -696,7 +776,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
-    private void setOnClickListenerForItineraryTopBar(){
+    private void setOnClickListenerForItineraryTopBar() {
         up_bar_favorite = (ImageButton) mToolbar.findViewById(R.id.up_bar_favorite);
         up_bar_favorite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -706,12 +786,12 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             }
         });
         //Kate
-        itirnarary_title_Bar = (FontTextView)findViewById(R.id.itirnarary_title_Bar);
+        itirnarary_title_Bar = (FontTextView) findViewById(R.id.itirnarary_title_Bar);
 
 
-       LayoutInflater li = LayoutInflater.from(MainActivity.this);
-       final View promptsView = li.inflate(R.layout.popup_layout_change_iteinarary_name, null);
-       final EditText input = (EditText) promptsView
+        LayoutInflater li = LayoutInflater.from(MainActivity.this);
+        final View promptsView = li.inflate(R.layout.popup_layout_change_iteinarary_name, null);
+        final EditText input = (EditText) promptsView
                 .findViewById(R.id.change_iteinarary_name);
 
 
@@ -753,7 +833,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         FragmentManager.BackStackEntry backEntry = getSupportFragmentManager().getBackStackEntryAt(count - 1);
         String str = backEntry.getName();
-        if (str.equals(HotelFragment.class.toString()) &&  !HotelFragment.IS_MAIN_BACK_ALLOWED) {
+        if (str.equals(HotelFragment.class.toString()) && !HotelFragment.IS_MAIN_BACK_ALLOWED) {
             return;
         }
 
@@ -762,19 +842,15 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             // super.onBackPressed();
 //            Stack<Fragment> fragmentStack = HGBUtility.getFragmentStack();
             Fragment fragmentTemp = HGBUtility.getFragmentStack().lastElement();
-           // Fragment fragment = fragmentStack.peek();
+            // Fragment fragment = fragmentStack.peek();
             Bundle arguments = fragmentTemp.getArguments();
             int fragNumber = arguments.getInt(HGBConstants.ARG_NAV_NUMBER);
 
             mToolbar.updateToolBarView(fragNumber);
 
-           // editProfileTipeMainToolBar();
+            // editProfileTipeMainToolBar();
         }
     }
-
-
-
-
 
 
     @Override
@@ -834,17 +910,17 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
-    private void setFavorityItinerary(){
+    private void setFavorityItinerary() {
         UserTravelMainVO travelOrder = hgbSaveDataClass.getTravelOrder();
         String solutionID = travelOrder.getmSolutionID();
         boolean isFavorite = travelOrder.ismIsFavorite();
-        ConnectionManager.getInstance(MainActivity.this).putFavorityItenarary(isFavorite,solutionID, new ConnectionManager.ServerRequestListener() {
+        ConnectionManager.getInstance(MainActivity.this).putFavorityItenarary(isFavorite, solutionID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                if(hgbSaveDataClass.getTravelOrder().ismIsFavorite()){
+                if (hgbSaveDataClass.getTravelOrder().ismIsFavorite()) {
                     hgbSaveDataClass.getTravelOrder().setmIsFavorite(false);
                     up_bar_favorite.setBackgroundResource(R.drawable.thin_0651_star_favorite_rating);
-                }else{
+                } else {
                     hgbSaveDataClass.getTravelOrder().setmIsFavorite(true);
                     up_bar_favorite.setBackgroundResource(R.drawable.star_in_favorite);
                 }
@@ -891,9 +967,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
-
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -901,7 +974,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
             //   String fragmentTag = getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1).getName();
-         //   Fragment currentFragment = getFragmentManager().findFragmentByTag(CNCFragment.class.toString());
+            //   Fragment currentFragment = getFragmentManager().findFragmentByTag(CNCFragment.class.toString());
 
 
             Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(CNCFragment.class.toString());
@@ -960,7 +1033,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             Gson gsonback = new Gson();
             String json = gsonback.toJson(hgbSaveDataClass.getCNCItems());
             //TODO understand why is here??
-         //   hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, json);
+            //   hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, json);
 
         } catch (Exception e) {
             e.printStackTrace();

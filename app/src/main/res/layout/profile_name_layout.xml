@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tool_bar_profile_name"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+        <hellogbye.com.hellogbyeandroid.views.RoundedImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:layout_gravity="center"
+            android:id="@+id/my_trips_image_profile"
+            android:background="@drawable/oval_8"
+            android:layout_marginRight="@dimen/DP10"/>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_trip_profile"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:visibility="visible" />
+
+        <ImageView
+            android:layout_marginLeft="@dimen/DP4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_copy"/>
+
+    </LinearLayout>
+
