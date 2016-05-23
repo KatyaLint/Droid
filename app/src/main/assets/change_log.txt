@@ -64,3 +64,4 @@ Code changing:
     - Fixed back flow
     - Tabs in Companions screen
     - Removed com.hudomju:swipe-to-dismiss-undo:1.0.jar
+    - Nav draw

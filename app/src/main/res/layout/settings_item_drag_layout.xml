@@ -27,7 +27,7 @@
         android:text="dfsdfsdf"
         android:layout_toRightOf="@+id/settings_place_number"
         app:fontName="dinnextltpro_regular.otf"
-        android:textColor="@color/greyish_brown"
+        android:textColor="@color/COLOR_555555"
         android:lines="1"/>
 
 </RelativeLayout>

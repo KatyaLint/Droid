@@ -224,9 +224,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
                         @Override
                         public void onError(Object data) {
                             Toast.makeText(getActivity().getApplicationContext(), "There was a problem saving your information please try again", Toast.LENGTH_SHORT).show();
-                            HGBErrorHelper errorHelper = new HGBErrorHelper();
-                            errorHelper.setMessageForError((String) data);
-                            errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                            ErrorMessage(data);
                         }
                     });
                 }
@@ -410,9 +408,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                ErrorMessage(data);
 
             }
         });
@@ -445,9 +441,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                ErrorMessage(data);
             }
         });
     }

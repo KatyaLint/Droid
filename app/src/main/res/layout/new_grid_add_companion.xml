@@ -3,13 +3,20 @@
     android:layout_width="match_parent"
     android:id="@+id/new_grid_add_companion_ll"
     android:gravity="center"
-    android:layout_gravity="center"
+    android:paddingLeft="@dimen/DP20"
+    android:layout_marginTop="0dp"
+    android:orientation="horizontal"
     android:layout_height="match_parent">
 
-
+    <ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/icon_dd_trip"/>
     <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_marginLeft="@dimen/DP10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/disable_tab"
         style="@style/GridViewPassangersTextStyle"
         android:text="@string/itinerary_add_companion" />
 

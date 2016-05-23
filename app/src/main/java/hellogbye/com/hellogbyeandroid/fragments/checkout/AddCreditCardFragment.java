@@ -315,9 +315,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
                                         public void onError(Object data) {
 
                                             progressDialog.hide();
-                                            HGBErrorHelper errorHelper = new HGBErrorHelper();
-                                            errorHelper.setMessageForError((String) data);
-                                            errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                                            ErrorMessage(data);
 
                                         }
                                     });
@@ -338,9 +336,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
                             public void onError(Object data) {
                                 Log.e("", "");
                                 progressDialog.hide();
-                                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                                errorHelper.setMessageForError((String) data);
-                                errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                                ErrorMessage(data);
 
                             }
                         });
@@ -353,10 +349,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
 
                 @Override
                 public void onError(Object data) {
-
-                    HGBErrorHelper errorHelper = new HGBErrorHelper();
-                    errorHelper.setMessageForError((String) data);
-                    errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                    ErrorMessage(data);
                 }
             });
         }else{
@@ -390,9 +383,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                ErrorMessage(data);
 
             }
         });
@@ -425,9 +416,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                ErrorMessage(data);
             }
         });
     }

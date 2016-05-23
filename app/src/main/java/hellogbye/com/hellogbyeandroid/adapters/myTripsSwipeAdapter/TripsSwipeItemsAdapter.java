@@ -55,7 +55,7 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
         public SimpleViewHolder(View itemView) {
             super(itemView);
             swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipe_my_trip);
-
+            swipeLayout.setSwipeEnabled(false);
             mytrips_rl = (RelativeLayout)itemView.findViewById(R.id.mytrips_rl);
             my_trip_user_image = (RoundedImageView) itemView.findViewById(R.id.my_trip_user_image);
             my_trip_name = (FontTextView) itemView.findViewById(R.id.my_trip_name);
@@ -111,7 +111,7 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
         });*/
 
 
-    //    HGBUtility.loadRoundedImage( item.getUrlToCityView(),  viewHolder.my_trip_user_image, R.drawable.city_avatar_a_2);
+        HGBUtility.loadRoundedImage( item.getUrlToCityView(),  viewHolder.my_trip_user_image, R.drawable.city_avatar_a_2);
         viewHolder.my_trip_name.setText(item.getName());
         viewHolder.my_trip_dates.setText(HGBUtility.parseDateToddMMyyyyMyTrip(item.getStartdate())+" - "+HGBUtility.parseDateToddMMyyyyMyTrip(item.getEnddate()));
         if(item.getPaymentstatus().equals("UPD")){

@@ -1,15 +1,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   >
+    >
+
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <!--
       Copyright 2014 The Android Open Source Project
@@ -125,14 +126,15 @@
 
 
 
-    </android.support.v4.widget.DrawerLayout>
+
+</android.support.v4.widget.DrawerLayout>
+
     <ImageView
         android:id="@+id/right_pane_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/c_n_c_side_tub"
         android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-
-        android:background="@drawable/c_n_c_side_tub"/>
+        android:layout_alignParentRight="true"/>
 
 </RelativeLayout>

@@ -50,6 +50,7 @@ import hellogbye.com.hellogbyeandroid.fragments.checkout.SummaryPaymentFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.TravelerDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.TravelersFragment;
 import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionDetailsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionsTravelers;
 import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionTabsWidgetFragment;
 import hellogbye.com.hellogbyeandroid.fragments.freeuser.FreeUserFragment;
 import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragment;
@@ -221,11 +222,33 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     private void getCompanionsFromServer() {
 
-        ConnectionManager.getInstance(MainActivity.this).getCompanions(new ConnectionManager.ServerRequestListener() {
+
+            ConnectionManager.getInstance(MainActivity.this).getCompanions(new ConnectionManager.ServerRequestListener() {
+                @Override
+                public void onSuccess(Object data) {
+                    ArrayList<CompanionVO> companions =(ArrayList<CompanionVO>)data;
+                    hgbSaveDataClass.setCompanions(companions);
+                    getCompanionsInvitation();
+                }
+
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
+    }
+
+
+
+    private void getCompanionsInvitation(){
+        ConnectionManager.getInstance(MainActivity.this).getCompanionInvitation(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                ArrayList<CompanionVO> companions = (ArrayList<CompanionVO>) data;
-                hgbSaveDataClass.setCompanions(companions);
+                ArrayList<CompanionVO> companionsInvitation =(ArrayList<CompanionVO>)data;
+                hgbSaveDataClass.addInvitationCompanionsToCompanions(companionsInvitation);
             }
 
             @Override
@@ -237,7 +260,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         });
     }
 
-    private void getUserData() {
+
+    private void getUserData(){
+
         ConnectionManager.getInstance(MainActivity.this).getUserProfile(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
@@ -677,16 +702,22 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case TRIPS:
                 fragment = TripsTabsView.newInstance(navPosition);
                 break;
+            case ALL_COMPANIONS_VIEW:
+                fragment = CompanionsTravelers.newInstance(navPosition);
+                break;
             case COMPANIONS:
-                //fragment = TravelCompanionsFragment.newInstance(navPosition);
-
                 fragment = TravelCompanionTabsWidgetFragment.newInstance(navPosition);
 
-
-                //   fragment = isFreeUser(fragment , navPosition);
                 break;
             case COMPANIONS_DETAILS:
                 fragment = CompanionDetailsFragment.newInstance(navPosition);
+                break;
+            case COMPANIONS_PERSONAL_DETAILS:
+                fragment = AccountPersonalInfoSettingsFragment.newInstance(navPosition);
+                //     fragment = isFreeUser(fragment, navPosition);
+                break;
+            case COMPANIONS_PERSONAL_EMAILS:
+                fragment = AccountPersonalEmailSettingsFragment.newInstance(navPosition);
                 break;
             case PREFERENCE:
                 fragment = PreferenceSettingsFragment.newInstance(navPosition);
@@ -745,13 +776,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case ADD_CREDIT_CARD:
                 fragment = AddCreditCardFragment.newInstance(navPosition);
                 break;
-            case COMPANIONS_PERSONAL_DETAILS:
-                fragment = AccountPersonalInfoSettingsFragment.newInstance(navPosition);
-                //     fragment = isFreeUser(fragment, navPosition);
-                break;
-            case COMPANIONS_PERSONAL_EMAILS:
-                fragment = AccountPersonalEmailSettingsFragment.newInstance(navPosition);
-                break;
             case CREDIT_CARD_LIST:
                 fragment = CreditCardListFragment.newInstance(navPosition);
                 break;
@@ -785,8 +809,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 // goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
             }
         });
-        //Kate
+
         itirnarary_title_Bar = (FontTextView) findViewById(R.id.itirnarary_title_Bar);
+
 
 
         LayoutInflater li = LayoutInflater.from(MainActivity.this);

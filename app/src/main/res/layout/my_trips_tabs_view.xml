@@ -24,6 +24,7 @@
             android:id="@+id/my_trips_recycle_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="@dimen/DP10"
             android:layout_below="@+id/my_trips_search_view" />
 
         <android.support.design.widget.FloatingActionButton

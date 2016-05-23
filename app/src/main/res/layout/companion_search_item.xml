@@ -75,7 +75,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-
+        <LinearLayout
+            android:id="@+id/companion_confirmation_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1">
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/companion_confirm_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/SP14"
+                android:layout_marginRight="@dimen/DP10"
+            app:fontName="dinnextltpro_regular.otf"
+                android:textColor="@color/COLOR_005278"
+            android:text="@string/companion_confirm"/>
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/companion_delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+                android:textSize="@dimen/SP14"
+                android:textColor="@color/light_grey"
+                app:fontName="dinnextltpro_regular.otf"
+            android:text="@string/companion_delete"/>
+        </LinearLayout>
     </LinearLayout>
 
 

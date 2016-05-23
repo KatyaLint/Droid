@@ -114,7 +114,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     style="@style/GridTextStyle"
-                    android:textColor="@color/brown_blue"
+                    android:textColor="@color/COLOR_063345"
                     app:fontName="dinnextltpro_medium.otf"
                     android:text="/Night"/>
 

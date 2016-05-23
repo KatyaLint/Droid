@@ -34,7 +34,7 @@
         android:textSize="@dimen/SP14"
         android:text="zdfsfsfsdf"
         app:fontName="dinnextltpro_regular.otf"
-        android:textColor="@color/greyish_brown"
+        android:textColor="@color/COLOR_555555"
 
         android:lines="1"/>
 
@@ -47,7 +47,7 @@
         android:text="uderrere sfsdf"
         android:visibility="gone"
         app:fontName="dinnextltpro_regular.otf"
-        android:textColor="@color/greyish_brown"
+        android:textColor="@color/COLOR_555555"
         android:lines="1"/>
 
     </LinearLayout>

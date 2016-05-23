@@ -55,7 +55,7 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
         String user_id = "";
         Bundle args = getArguments();
         if (args != null) {
-            user_id = args.getString("user_id");
+            user_id = args.getString(HGBConstants.USER_ID);
         }
 
         ArrayList<CompanionVO> companions = getActivityInterface().getCompanions();
@@ -178,9 +178,7 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                ErrorMessage(data);
             }
         });
     }
@@ -194,9 +192,7 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                ErrorMessage(data);
             }
         });
     }

@@ -23,6 +23,11 @@ public class CompanionVO {
     @SerializedName("companionuserprofile")
     private CompanionUserProfileVO companionUserProfile;
 
+    @SerializedName("invitoruserprofile")
+    private CompanionInviteUserProfileVO companionInviteUserProfileVO;
+
+    @SerializedName("invitationtoken")
+    private String mInvitationtoken;
 
     public String getmConfirmationstatus() {
         return mConfirmationstatus;
@@ -70,5 +75,21 @@ public class CompanionVO {
 
     public void setmAddedatetime(String mAddedatetime) {
         this.mAddedatetime = mAddedatetime;
+    }
+
+    public CompanionInviteUserProfileVO getCompanionInviteUserProfileVO() {
+        return companionInviteUserProfileVO;
+    }
+
+    public void setCompanionInviteUserProfileVO(CompanionInviteUserProfileVO companionInviteUserProfileVO) {
+        this.companionInviteUserProfileVO = companionInviteUserProfileVO;
+    }
+
+    public String getmInvitationtoken() {
+        return mInvitationtoken;
+    }
+
+    public void setmInvitationtoken(String mInvitationtoken) {
+        this.mInvitationtoken = mInvitationtoken;
     }
 }

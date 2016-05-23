@@ -77,9 +77,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
 
                         @Override
                         public void onError(Object data) {
-                            HGBErrorHelper errorHelper = new HGBErrorHelper();
-                            errorHelper.setMessageForError((String) data);
-                            errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                            ErrorMessage(data);
                         }
                     });
                 }
@@ -179,9 +177,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getActivity().getFragmentManager(), (String) data);;
+                ErrorMessage(data);
             }
         });
     }
@@ -253,9 +249,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
             }
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                ErrorMessage(data);
             }
         });
 
@@ -272,9 +266,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                ErrorMessage(data);
             }
         });
 
@@ -346,9 +338,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                ErrorMessage(data);
             }
         });
 

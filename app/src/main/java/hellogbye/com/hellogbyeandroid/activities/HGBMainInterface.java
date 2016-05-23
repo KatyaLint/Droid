@@ -84,6 +84,12 @@ public interface HGBMainInterface {
     void setCompanions(ArrayList<CompanionVO> companions);
     ArrayList<CompanionVO> getCompanions();
 
+    void setCompanionsInvintation(ArrayList<CompanionVO> companions);
+    ArrayList<CompanionVO> getCompanionsInvintation();
+
+    void addInvitationCompanionsToCompanions(ArrayList<CompanionVO> companions);
+
+
     void setCompanionsStaticRelationshipTypes(ArrayList<CompanionStaticRelationshipTypesVO> componentsStaticRelationshipTypes);
     ArrayList<CompanionStaticRelationshipTypesVO> getCompanionsStaticRelationshipTypes();
 

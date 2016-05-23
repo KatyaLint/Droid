@@ -189,6 +189,8 @@
     <string name="companion_empty_search">Search for travel companions  \nin the HelloGbye system above,\nor Invite a new travel companion\nto HelloGbye</string>
     <string name="companion_pending">Pending Companions</string>
     <string name="companion_travel">Travel Companions</string>
+    <string name="companion_delete">DELETE</string>
+    <string name="companion_confirm">CONFIRM</string>
 
     <string name="trip_no_trips_title">You don’t have any Trips</string>
     <string name="trip_no_trips_explanation">Start planning your trip below.\nAnytime you create a trip you can\naccess it from here</string>

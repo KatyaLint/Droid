@@ -25,7 +25,9 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.companion.CompanionsSwipeItemsAdapter;
+import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 
 
 /**
@@ -35,6 +37,13 @@ public class CompanionsTravelers extends CompanionsTabsViewClass {
 
 
 
+    public static Fragment newInstance(int position) {
+        Fragment fragment = new CompanionsTravelers();
+        Bundle args = new Bundle();
+        args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     public CompanionsTravelers() {
         // Required empty public constructor
@@ -50,9 +59,31 @@ public class CompanionsTravelers extends CompanionsTabsViewClass {
         RecyclerView searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.companion_travel_recycle_list);
         LinearLayout companion_empty_view = (LinearLayout)rootView.findViewById(R.id.companion_empty_view);
 
-        setSearchView(searchRecyclerView, companion_empty_view, searchView);
+
+        /*View rootView = createViewForTab(R.layout.companions_pending, getContext(), true);
+        SearchView searchView = (SearchView)rootView.findViewById(R.id.companion_search_pending_view);
+        RecyclerView searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.companion_search_recycle_list_pending);
+        LinearLayout companion_empty_view = (LinearLayout) rootView.findViewById(R.id.companion_empty_view);*/
+
+        boolean addCompanionsToCNCScreen = addingCompanionsToCNCView();
+        setSearchView(searchRecyclerView, companion_empty_view, searchView, addCompanionsToCNCScreen);
 
 
         return rootView;
     }
+
+    private boolean addingCompanionsToCNCView() {
+        Bundle args = getArguments();
+        if (args != null) {
+            String className = args.getString("class_name");
+            if (ItineraryFragment.class.toString().equals(className)) {
+
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+
 }

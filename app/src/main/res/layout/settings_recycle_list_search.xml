@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/DP10"
             app:fontName="dinnextltpro_light.otf"
-            android:textColor="@color/greyish_brown"
+            android:textColor="@color/COLOR_555555"
             android:layout_centerInParent="true"
             android:lines="1"
             />

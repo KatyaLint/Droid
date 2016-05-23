@@ -55,7 +55,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="AC222"
-            android:textColor="@color/greyish_brown"
+            android:textColor="@color/COLOR_555555"
             app:fontName="dinnextltpro_regular.otf" />
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -64,7 +64,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="14:32"
-            android:textColor="@color/greyish_brown"
+            android:textColor="@color/COLOR_555555"
             app:fontName="dinnextltpro_regular.otf" />
 
     </LinearLayout>

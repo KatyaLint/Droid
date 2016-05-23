@@ -6,5 +6,7 @@ package hellogbye.com.hellogbyeandroid;
 public interface ISwipeAdapterExecution{
     void clickedItem(String companionId);
     void deleteClicked(String companionId);
+    void confirmItem(String companionId);
+    void rejectItem(String companionId);
 
 }

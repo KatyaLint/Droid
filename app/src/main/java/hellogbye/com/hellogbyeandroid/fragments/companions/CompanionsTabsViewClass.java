@@ -35,6 +35,7 @@ import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
@@ -56,7 +57,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
     private FontEditTextView companion_editTextDialog;
     private LinearLayout companion_empty_view;
     private View rootView;
-    private ArrayList<CompanionVO> companionsVOPending;
+    private ArrayList<CompanionVO> companionsVOPending = new ArrayList<>();
     private  ArrayList mCurrItemsSearchList ;
     public  static boolean isPending;
 
@@ -77,16 +78,21 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
 
     }
 
-    private void pendingCompanions(ArrayList<CompanionVO>  companionsVO){
+    private void pendingCompanions(ArrayList<CompanionVO> companionsVO){
         companionsVOPending.clear();
         for (CompanionVO companionVO : companionsVO) {
             if(companionVO.getmConfirmationstatus().equals("Pending")){
                 companionsVOPending.add(companionVO);
             }
         }
-
     }
 
+    private void addInvitationsToPanding(ArrayList<CompanionVO> companionsVO){
+        if(companionsVO == null){
+            return;
+        }
+        companionsVOPending.addAll(companionsVO);
+    }
     private void acceptedCompanions(ArrayList<CompanionVO>  companionsVO){
         companionsVOPending.clear();
         for (CompanionVO companionVO:companionsVO) {
@@ -105,10 +111,12 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
         rootView = inflater.inflate(layoutID,null, false);
         companionsVOPending = new ArrayList<>();
         this.isPending = isPending;
+        getCompanions();
         ArrayList<CompanionVO>  companionsVO = getActivityInterface().getCompanions();
 
         if(isPending){
             pendingCompanions(companionsVO);
+            addInvitationsToPanding(getActivityInterface().getCompanionsInvintation());
         }else{
             acceptedCompanions(companionsVO);
         }
@@ -134,7 +142,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
     }
 
 
-    public void setSearchView(RecyclerView searchRecyclerView, LinearLayout companion_empty_view, SearchView searchView){
+    public void setSearchView(RecyclerView searchRecyclerView, LinearLayout companion_empty_view, SearchView searchView,final boolean addCompanionsToCNCScreen){
 
         this.mSearchView = searchView;
         this.searchRecyclerView = searchRecyclerView;
@@ -149,8 +157,14 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
             @Override
             public void clickedItem(final String guid) {
                 Bundle args = new Bundle();
-                args.putString("user_id", guid);
-                getFlowInterface().goToFragment(ToolBarNavEnum.COMPANIONS_DETAILS.getNavNumber(), args);
+                if(addCompanionsToCNCScreen){
+                    args.putString(HGBConstants.BUNDLE_ADD_COMPANION_ID, guid);
+                    getFlowInterface().goToFragment(ToolBarNavEnum.HOME.getNavNumber(), args);
+
+                }else {
+                    args.putString(HGBConstants.USER_ID, guid);
+                    getFlowInterface().goToFragment(ToolBarNavEnum.COMPANIONS_DETAILS.getNavNumber(), args);
+                }
 
             }
 
@@ -160,9 +174,34 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
                 deleteComapanion(companionID);
 
             }
+
+            @Override
+            public void confirmItem(String companionId) {
+                confirmCompanion(companionId);
+            }
+
+            @Override
+            public void rejectItem(String companionId) {
+                rejectComapanion(companionId);
+            }
         });
         searchRecyclerView.setAdapter(searchListAdapter);
 
+    }
+
+    private void rejectComapanion(String companionId) {
+
+        ConnectionManager.getInstance(getActivity()).rejectUserCompanion(companionId, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                getCompanions();
+            }
+
+            @Override
+            public void onError(Object data) {
+               ErrorMessage(data);
+            }
+        });
     }
 
 
@@ -177,6 +216,36 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
         }
     }
 
+
+    private void getCompanionsInvitation(){
+        ConnectionManager.getInstance(getActivity()).getCompanionInvitation(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                if(data == null){
+                    return;
+                }
+                ArrayList<CompanionVO> companionsInvitation =(ArrayList<CompanionVO>)data;
+                getActivityInterface().setCompanionsInvintation(companionsInvitation);
+                addInvitationsToPanding(companionsInvitation);
+                /*if(isPending){
+                    pendingCompanions(companionsInvitation);
+                }*/
+
+                emptyCompanionsView();
+
+                searchListAdapter.updateItems(companionsVOPending);
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
+
+
+
     private void getCompanions(){
         ConnectionManager.getInstance(getActivity()).getCompanions(new ConnectionManager.ServerRequestListener() {
             @Override
@@ -187,6 +256,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
 
                 if(isPending){
                     pendingCompanions(companions);
+                    getCompanionsInvitation();
                 }else{
                     acceptedCompanions(companions);
                 }
@@ -199,22 +269,34 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                ErrorMessage(data);
             }
         });
     }
 
-
-    public void deleteComapanion(String comapnion_id){
-
-        ConnectionManager.getInstance(getActivity()).deleteUserCompanion(comapnion_id, new ConnectionManager.ServerRequestListener() {
+    public void confirmCompanion(String companion_id){
+        ConnectionManager.getInstance(getActivity()).confirmCompanion(companion_id, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
+                System.out.println("Kate onSuccess");
                 getCompanions();
                 //deleteCompanion.companionDeleted();
 
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
+
+    public void deleteComapanion(String companion_id){
+
+        ConnectionManager.getInstance(getActivity()).deleteUserCompanion(companion_id, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                getCompanions();
             }
 
             @Override
@@ -239,13 +321,12 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
                             @Override
                             public void onSuccess(Object data) {
                                 getCompanions();
+
                             }
 
                             @Override
                             public void onError(Object data) {
-                                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                                errorHelper.setMessageForError((String) data);
-                                errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                                ErrorMessage(data);
                             }
                         });
                     }
