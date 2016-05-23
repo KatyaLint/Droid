@@ -40,16 +40,16 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
     private List<MyTripItem> mCurrItemsList;
     private Activity activity;
     private RecyclerView mRecyclerView;
-    private LinearLayout my_trips_empty_view;
+    private LinearLayout my_trip_empty_view_ll;
 
     public void initFragmentTabsView(View rootView){
         this.activity = getActivity();
 
          mRecyclerView = (RecyclerView) rootView.findViewById(R.id.my_trips_recycle_list);
 
-        SearchView   my_trip_search_view=(SearchView) rootView.findViewById(R.id.my_trips_search_view);
+        SearchView  my_trip_search_view=(SearchView) rootView.findViewById(R.id.my_trips_search_view);
 
-         my_trips_empty_view = (LinearLayout) rootView.findViewById(R.id.companion_empty_view);
+        my_trip_empty_view_ll = (LinearLayout) rootView.findViewById(R.id.my_trip_empty_view_ll);
 
         // Layout Managers:
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -214,11 +214,11 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
     private void setListsVisability(){
 
         if(mItemsList.isEmpty()){
-            my_trips_empty_view.setVisibility(View.VISIBLE);
+            my_trip_empty_view_ll.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
         }else{
             mCurrItemsList = new ArrayList<MyTripItem>(mItemsList);
-            my_trips_empty_view.setVisibility(View.GONE);
+            my_trip_empty_view_ll.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.VISIBLE);
             mAdapter.updateDataSet(mItemsList);
             mAdapter.notifyDataSetChanged();
@@ -258,8 +258,7 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
             return filteredModelList;
         }
         query = query.toLowerCase();
-
-
+        
         for (MyTripItem model : models) {
             final String text = model.getName().toLowerCase();
             if (text.contains(query)) {

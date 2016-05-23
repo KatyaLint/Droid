@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingTop="@dimen/DP20"
-    android:id="@+id/companion_empty_view"
+    android:id="@+id/my_trip_empty_view_ll"
     android:visibility="gone"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,7 +15,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/profil_icon_copy"/>
+        android:src="@drawable/earth_icon"/>
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,7 +23,7 @@
         android:textColor="@color/COLOR_005077"
         android:gravity="center"
         app:fontName="dinnextltpro_mediumcond.ttf"
-        android:text="@string/companion_empty_view_text"
+        android:text="@string/my_trip_empty_title"
         android:padding="@dimen/DP20"/>
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -33,7 +34,7 @@
         android:gravity="center"
         app:fontName="dinnextltpro_light.otf"
         android:textColor="@color/warm_grey"
-        android:text="@string/companion_empty_search"
+        android:text="@string/my_trip_empty_text"
         />
 
 </LinearLayout>

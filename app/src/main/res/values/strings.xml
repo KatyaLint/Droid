@@ -198,4 +198,7 @@
     <string name="avreage_per_night">Average per night</string>
     <string name="electronic_ticket">Electronic Ticket:</string>
     <string name="press_here"> Press here</string>
+
+    <string name="my_trip_empty_title">You don’t have any Trips</string>
+    <string name="my_trip_empty_text">Start planning your trip below.\nAnytime you create a trip you can\naccess it from here</string>
 </resources>
