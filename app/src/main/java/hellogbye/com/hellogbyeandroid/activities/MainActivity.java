@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private DrawerLayout mDrawerLayout;
     private RecyclerView mDrawerList;
     private LinearLayout mNavDrawerLinearLayout;
-    private LinearLayout mNavDrawerRightLinearLayout;
 
     private android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
@@ -133,6 +132,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     private final static int RIGHT_PANE_ANIMATION_TIME = 300;
 
+    private boolean isRightPaneOpened;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,7 +161,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
 
         mNavDrawerLinearLayout = (LinearLayout) findViewById(R.id.drawer);
-        // mNavDrawerRightLinearLayout = (LinearLayout) findViewById(R.id.right_drawer);
 
         mProfileImage = (RoundedImageView) findViewById(R.id.nav_profile_image);
 
@@ -659,6 +659,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     public void closeRightPane() {
         mDrawerLayout.closeDrawer(frameLayout);
         animateRightPaneClosed();
+        isRightPaneOpened = false;
     }
 
 
@@ -669,6 +670,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mDrawerLayout.openDrawer(frameLayout);
 
         animateRightPaneOpened();
+        isRightPaneOpened = true;
     }
 
     private Fragment isFreeUser(Fragment fragment, int navPosition) {
@@ -850,6 +852,11 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mToolbar.setVisibility(View.VISIBLE);
         if (onBackPressedListener != null) {
             onBackPressedListener.doBack();
+        }
+
+        if(isRightPaneOpened){
+            closeRightPane();
+            return;
         }
 
         //TODO this is when I want the fragment to contorl the back -Kate I suggest we do this for all Fragments
