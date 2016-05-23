@@ -105,9 +105,7 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
 
                     @Override
                     public void onError(Object data) {
-                        HGBErrorHelper errorHelper = new HGBErrorHelper();
-                        errorHelper.setMessageForError((String) data);
-                        errorHelper.show(activity.getFragmentManager(), (String) data);
+                        ErrorMessage(data);
 
                     }
                 });
@@ -129,12 +127,19 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
 
                     @Override
                     public void onError(Object data) {
-                        HGBErrorHelper errorHelper = new HGBErrorHelper();
-                        errorHelper.setMessageForError((String) data);
-                        errorHelper.show(activity.getFragmentManager(), (String) data);
-
+                        ErrorMessage(data);
                     }
                 });
+            }
+
+            @Override
+            public void confirmItem(String companionId) {
+
+            }
+
+            @Override
+            public void rejectItem(String companionId) {
+
             }
         });
 
@@ -168,9 +173,7 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(activity.getFragmentManager(), (String) data);
+                ErrorMessage(data);
             }
         });
     }
@@ -187,9 +190,7 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(activity.getFragmentManager(), (String) data);
+                ErrorMessage(data);
             }
         });
     }
@@ -205,9 +206,7 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError( (String) data);
-                errorHelper.show(activity.getFragmentManager(), (String) data);
+                ErrorMessage(data);
             }
         });
     }
@@ -269,5 +268,8 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
         }
         return filteredModelList;
     }
+
+
+
 
 }

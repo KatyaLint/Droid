@@ -424,7 +424,7 @@
                     android:layout_marginTop="10dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:textColor="@color/greyish_brown"
+                    android:textColor="@color/COLOR_555555"
                     android:textSize="16sp"
                     app:fontName="dinnextltpro_light.otf" />
 
@@ -449,7 +449,7 @@
                     android:layout_marginTop="10dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:textColor="@color/greyish_brown"
+                    android:textColor="@color/COLOR_555555"
                     android:textSize="16sp"
                     app:fontName="dinnextltpro_light.otf" />
 
@@ -501,7 +501,7 @@
                     android:layout_marginTop="10dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:textColor="@color/greyish_brown"
+                    android:textColor="@color/COLOR_555555"
                     android:textSize="16sp"
                     app:fontName="dinnextltpro_light.otf" />
 
@@ -524,7 +524,7 @@
                     android:layout_marginTop="10dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:textColor="@color/greyish_brown"
+                    android:textColor="@color/COLOR_555555"
                     android:textSize="16sp"
                     app:fontName="dinnextltpro_light.otf" />
             </LinearLayout>

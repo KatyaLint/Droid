@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="/Night"
-            android:textColor="@color/brown_blue"
+            android:textColor="@color/COLOR_063345"
             app:fontName="dinnextltpro_medium.otf" />
 
     </LinearLayout>

@@ -207,9 +207,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
                     @Override
                     public void onError(Object data) {
-                        HGBErrorHelper errorHelper = new HGBErrorHelper();
-                        errorHelper.setMessageForError((String) data);
-                        errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                        ErrorMessage(data);
                     }
                 });
     }
@@ -322,9 +320,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
                     @Override
                     public void onError(Object data) {
-                        HGBErrorHelper errorHelper = new HGBErrorHelper();
-                        errorHelper.setMessageForError((String) data);
-                        errorHelper.show(getActivity().getFragmentManager(), (String) data);
+                        ErrorMessage(data);
                     }
                 });
     }

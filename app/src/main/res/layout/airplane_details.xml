@@ -38,7 +38,7 @@
            android:layout_height="wrap_content"
            android:layout_below="@+id/operatored_by"
            android:text="Air Canada"
-           android:textColor="@color/dark_blue"
+           android:textColor="@color/COLOR_555555"
            android:textSize="16sp"
            app:fontName="dinnextltpro_light.otf"  />
     </LinearLayout>
@@ -76,7 +76,7 @@
            android:text="AC222"
            android:textSize="@dimen/SP16"
            app:fontName="dinnextltpro_light.otf"
-           android:textColor="@color/dark_blue"
+           android:textColor="@color/COLOR_555555"
            />
 
        </LinearLayout>
@@ -128,7 +128,7 @@
             android:text="AMS-CPT"
             android:textSize="@dimen/SP16"
             app:fontName="dinnextltpro_light.otf"
-            android:textColor="@color/dark_blue"
+            android:textColor="@color/COLOR_555555"
             />
 
     </LinearLayout>
@@ -166,7 +166,7 @@
             android:text="07:30"
             android:textSize="@dimen/SP16"
             app:fontName="dinnextltpro_light.otf"
-            android:textColor="@color/dark_blue"
+            android:textColor="@color/COLOR_555555"
             />
         </LinearLayout>
 
@@ -204,7 +204,7 @@
             android:text="06h 30m"
             android:textSize="@dimen/SP16"
             app:fontName="dinnextltpro_light.otf"
-            android:textColor="@color/dark_blue"
+            android:textColor="@color/COLOR_555555"
             />
     </LinearLayout>
 
@@ -358,7 +358,7 @@
             android:text="N/A"
             android:textSize="@dimen/SP16"
             app:fontName="dinnextltpro_light.otf"
-            android:textColor="@color/dark_blue"/>
+            android:textColor="@color/COLOR_555555"/>
         </LinearLayout>
 
 

@@ -22,6 +22,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 
 /**
@@ -55,6 +56,7 @@ public class HGBAbstractFragment extends Fragment {
 
     }
 
+
     protected HGBVoiceInterface getVoiceInterface() {
         if (mHGBVoiceInterface != null) {
             return mHGBVoiceInterface;
@@ -74,6 +76,13 @@ public class HGBAbstractFragment extends Fragment {
             return mActivityInterface;
         }
         return  null;
+    }
+
+
+    public void ErrorMessage(Object message){
+        HGBErrorHelper errorHelper = new HGBErrorHelper();
+        errorHelper.setMessageForError((String) message);
+        errorHelper.show(getActivity().getFragmentManager(), (String) message);
     }
 
     public NodesVO getLegWithGuid(UserTravelMainVO userOrder){

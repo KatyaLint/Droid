@@ -40,6 +40,7 @@ public class HGBSaveDataClass implements HGBMainInterface {
     private List<SettingsAttributesVO> hotelChainAttributes;
     private List<SettingsAttributesVO> hotelBedTypeAttributes;
     private ArrayList<CompanionVO> companions;
+    private ArrayList<CompanionVO> companionsInvintation;
     private ArrayList<CompanionStaticRelationshipTypesVO> componionStaticDescriptionVOs;
     private ArrayList<AccountsVO> accounts;
     private UserDataVO mCurrentUser;
@@ -268,6 +269,21 @@ public class HGBSaveDataClass implements HGBMainInterface {
     @Override
     public ArrayList<CompanionVO> getCompanions() {
         return companions;
+    }
+
+    @Override
+    public void setCompanionsInvintation(ArrayList<CompanionVO> companionsInvintation) {
+        this.companionsInvintation = companionsInvintation;
+    }
+
+    @Override
+    public ArrayList<CompanionVO> getCompanionsInvintation() {
+        return companionsInvintation;
+    }
+
+    @Override
+    public void addInvitationCompanionsToCompanions(ArrayList<CompanionVO> companions) {
+        this.companions.addAll(companions);
     }
 
     @Override

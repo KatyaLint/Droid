@@ -214,6 +214,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 public void onSuccess(Object data) {
                     ArrayList<CompanionVO> companions =(ArrayList<CompanionVO>)data;
                     hgbSaveDataClass.setCompanions(companions);
+                    getCompanionsInvitation();
                 }
 
                 @Override
@@ -224,6 +225,25 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 }
             });
         }
+
+
+    private void getCompanionsInvitation(){
+        ConnectionManager.getInstance(MainActivity.this).getCompanionInvitation(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                ArrayList<CompanionVO> companionsInvitation =(ArrayList<CompanionVO>)data;
+                hgbSaveDataClass.addInvitationCompanionsToCompanions(companionsInvitation);
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
+    }
+
 
     private void getUserData(){
         ConnectionManager.getInstance(MainActivity.this).getUserProfile(new ConnectionManager.ServerRequestListener() {

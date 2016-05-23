@@ -17,14 +17,11 @@
 package hellogbye.com.hellogbyeandroid.adapters;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -86,7 +83,7 @@ public class NavListAdapter extends RecyclerView.Adapter<NavListAdapter.ViewHold
         holder.mTextView.setText(item.getName());
         if(item.isSelected()){
 
-            holder.mTextView.setTextColor(mContext.getResources().getColor(R.color.brown_blue));
+            holder.mTextView.setTextColor(mContext.getResources().getColor(R.color.COLOR_063345));
             holder.mSelectedImage.setVisibility(View.VISIBLE);
             holder.nav_item_view_image.setImageResource(item.getIconEnable());
         }else{

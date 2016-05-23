@@ -32,8 +32,8 @@ public class ConnectionManager {
     }
 
 
-       public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
- //   public static String BASE_URL = "http://apiuat.hellogbye.com/uat/rest/";
+       //public static String BASE_URL = "http://dev.hellogbye.com/dev/rest/";
+    public static String BASE_URL = "http://apiuat.hellogbye.com/uat/rest/";
 //    public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
 
 
@@ -100,6 +100,8 @@ public class ConnectionManager {
             }
         }, true);
     }
+
+
 
 
     public void postCompanions(String firstName, String lastName, String email, final ServerRequestListener listener) {
@@ -461,11 +463,11 @@ public class ConnectionManager {
                 jsonObjectMain.put("travelpreferenceprofileid", airportSendValuesVO.getTravelpreferenceprofileid());
 
                 //TODO need to remove
-                jsonObjectMain.put("latitude", "32.063064499999996");
-                jsonObjectMain.put("longitude", "34.7716091");
+/*                jsonObjectMain.put("latitude", "32.063064499999996");
+                jsonObjectMain.put("longitude", "34.7716091");*/
 
-//                jsonObjectMain.put("latitude", airportSendValuesVO.getLatitude());
-//                jsonObjectMain.put("longitude", airportSendValuesVO.getLongitude());
+                jsonObjectMain.put("latitude", airportSendValuesVO.getLatitude());
+                jsonObjectMain.put("longitude", airportSendValuesVO.getLongitude());
 
 
                 jsonObjectMain.put("token", jsonArray);
@@ -1094,6 +1096,26 @@ public class ConnectionManager {
 
     }
 
+    public void getCompanionInvitation(final ServerRequestListener listener){
+
+        String url = getURL(Services.COMPANIONS_INVITATION);
+
+        JSONObject jsonObject = new JSONObject();
+
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseCompanionData(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, false);
+    }
 
     public void getCompanions(final ServerRequestListener listener) {
 
@@ -1184,6 +1206,25 @@ public class ConnectionManager {
         });
     }
 
+    public void rejectUserCompanion(String companion_id, final ServerRequestListener listener) {
+        String url = getURL(Services.COMPANIONS);
+        url = url + "/" + companion_id+"/Invite";
+
+        HashMap<String, String> map = new HashMap<String, String>();
+
+        HGBStringRequest req = new HGBStringRequest(Request.Method.DELETE, url,
+                map, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
 
     public void deleteUserProfileAccountsWithEmail(String email, final ServerRequestListener listener) {
         String url = getURL(Services.USER_GET_USER_PROFILE_ACCOUNTS);
@@ -1228,6 +1269,30 @@ public class ConnectionManager {
     ////////////////////////////////
     // PUT
     ///////////////////////////////
+
+
+    public void confirmCompanion(String companion_id, final ServerRequestListener listener){
+//Kate
+        String url = getURL(Services.COMPANIONS_CONFIRM);
+        url = url + companion_id;
+        JSONObject json1 = new JSONObject();
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
+                json1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
+
+    }
+
 
     public void putFavorityItenarary(boolean isFavority,String itineraryID, final ServerRequestListener listener) {
         String url = getURL(Services.ITINERARY);
@@ -1628,6 +1693,8 @@ public class ConnectionManager {
                 USER_GET_TRAVEL_PREFERENCES("TravelPreference"),
 
                 COMPANIONS("Companions"),
+                COMPANIONS_CONFIRM("Companions/Confirm/"),
+                COMPANIONS_INVITATION("Companions/Invitations"),
                 CARD_TOKEN("Card/Token"),
                 ITINERARY_MY_TRIP("Itinerary"),
                 ITINERARY_HIGHLIGHT("Highlight?input="),

@@ -113,7 +113,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             style="@style/GridTextStyle"
-            android:textColor="@color/greyish_brown"
+            android:textColor="@color/COLOR_555555"
             app:fontName="dinnextltpro_regular.otf"
             android:text="AC222"/>
 
@@ -122,7 +122,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             style="@style/GridTextStyle"
-            android:textColor="@color/greyish_brown"
+            android:textColor="@color/COLOR_555555"
             app:fontName="dinnextltpro_regular.otf"
             android:text="14:32"/>
 
