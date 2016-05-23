@@ -42,14 +42,8 @@
     <dimen name="DP140">140dp</dimen>
     <dimen name="DP60">60dp</dimen>
     <dimen name="DP80">80dp</dimen>
+    <dimen name="DP_64">-64dp</dimen>
 
-
-    <dimen name="item_border_width">1dp</dimen>
-
-    <dimen name="staggered_child_small">120dp</dimen>
-    <dimen name="staggered_child_medium">242dp</dimen>
-    <dimen name="staggered_child_large">310dp</dimen>
-    <dimen name="staggered_child_xlarge">400dp</dimen>
 
 
     <dimen name="SP32">32sp</dimen>
@@ -61,7 +55,6 @@
     <dimen name="SP12">12sp</dimen>
     <dimen name="SP10">10sp</dimen>
     <dimen name="SP20">20sp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
 
 
 </resources>

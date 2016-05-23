@@ -258,7 +258,7 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
             return filteredModelList;
         }
         query = query.toLowerCase();
-        
+
         for (MyTripItem model : models) {
             final String text = model.getName().toLowerCase();
             if (text.contains(query)) {
