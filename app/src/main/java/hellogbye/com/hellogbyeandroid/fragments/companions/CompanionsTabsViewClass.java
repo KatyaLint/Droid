@@ -58,12 +58,8 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
     private LinearLayout companion_empty_view;
     private View rootView;
     private ArrayList<CompanionVO> companionsVOPending = new ArrayList<>();
-    private  ArrayList mCurrItemsSearchList ;
-    public  static boolean isPending;
-
-    public void isPendingTabs(boolean isPending){
-        this.isPending = isPending;
-    }
+    private ArrayList mCurrItemsSearchList ;
+    public static boolean isPending;
 
     private void searchListInitialization(){
 
@@ -105,14 +101,13 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
 
 
 
-
     public View createViewForTab(int layoutID, Context context, boolean isPending){
         LayoutInflater inflater = LayoutInflater.from(context);
         rootView = inflater.inflate(layoutID,null, false);
         companionsVOPending = new ArrayList<>();
         this.isPending = isPending;
         getCompanions();
-        
+
         popup_companion_new = inflater.inflate(R.layout.popup_layout_with_edit_text_new, null);
 
         companion_editTextDialog_name = (FontEditTextView)popup_companion_new.findViewById(R.id.companion_editTextDialog_name);
