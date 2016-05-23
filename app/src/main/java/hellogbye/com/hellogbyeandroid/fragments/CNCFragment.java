@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,10 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
@@ -29,6 +33,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.HGBSaveDataClass;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.CNCAdapter;
+import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -43,6 +48,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -64,8 +70,17 @@ public class CNCFragment extends HGBAbstractFragment {
     private String[] locationArr;
     private Button cnc_fragment_trip_settings;
     private static int SPLASH_TIME_OUT = 5000;
+    private CostumeToolBar mToolbar;
+
+    private PreferenceSettingsFragment.OnItemClickListener editClickCB;
+    private ImageButton imageButton;
+    private ImageButton cncDissmissImageButton;
+
+
+
     private ArrayList<AirportSendValuesVO> airportSendValuesVOs = new ArrayList<AirportSendValuesVO>();
     private int maxAirportSize = 0;
+
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new CNCFragment();
@@ -81,13 +96,15 @@ public class CNCFragment extends HGBAbstractFragment {
        // getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         View rootView = inflater.inflate(R.layout.cnc_fragment_layout, container, false);
+        mToolbar = (CostumeToolBar)rootView.findViewById(R.id.toolbar_cnc);
 
         mHGBPrefrenceManager = HGBPreferencesManager.getInstance(getActivity().getApplicationContext());
         init(rootView);
         initList();
 
-        //TODO WTF why here???
-        getFlowInterface().getToolBar().updateToolBarView(ToolBarNavEnum.CNC.getNavNumber());
+
+        updateToolBarView();
+
 
         getAccountsProfiles();
 
@@ -130,6 +147,32 @@ public class CNCFragment extends HGBAbstractFragment {
 
                 return rootView;
     }
+
+
+    private void updateToolBarView() {
+        imageButton = (ImageButton) mToolbar.findViewById(R.id.keyboard);
+        imageButton.setVisibility(View.VISIBLE);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("","");
+            }
+        });
+
+        cncDissmissImageButton = (ImageButton) mToolbar.findViewById(R.id.cnc_dissmis);
+        cncDissmissImageButton.setVisibility(View.VISIBLE);
+        cncDissmissImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFlowInterface().closeRightPane();
+            }
+        });
+
+        preferencesChanges();
+        toolBarProfileChnage();
+
+    }
+
 
 
     private void joinCompanionToTravel(){
@@ -201,6 +244,7 @@ public class CNCFragment extends HGBAbstractFragment {
             }
         });
     }
+
 
 
     private void startTutorial() {
@@ -282,6 +326,7 @@ public class CNCFragment extends HGBAbstractFragment {
                 if (getString(R.string.itinerary_created).equals(strText)
                         || getString(R.string.grid_has_been_updated).equals(strText)) {
                     getFlowInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(),null);
+                    getFlowInterface().closeRightPane();
                 }
             }
         });
@@ -584,5 +629,53 @@ public class CNCFragment extends HGBAbstractFragment {
         }
     }
 
+    private void preferencesChanges() {
+        final ImageButton edit_preferences = (ImageButton) mToolbar.findViewById(R.id.edit_preferences);
+        edit_preferences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View checkButton = mToolbar.findViewById(R.id.check_preferences);
+                if (checkButton.getVisibility() == View.VISIBLE) {
+                    //delete
+                    editClickCB.onItemClick("delete");
+                } else if (checkButton.getVisibility() == View.GONE) {
+                    edit_preferences.setBackgroundResource(R.drawable.ic_delete);
+                    mToolbar.findViewById(R.id.check_preferences).setVisibility(View.VISIBLE);
+                    editClickCB.onItemClick("edit");
+                }
+            }
+        });
+
+        final ImageButton check_preferences = (ImageButton) mToolbar.findViewById(R.id.check_preferences);
+        check_preferences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mToolbar.findViewById(R.id.check_preferences).setVisibility(View.GONE);
+                edit_preferences.setBackgroundResource(R.drawable.edit_img);
+                editClickCB.onItemClick("done");
+            }
+        });
+    }
+
+    public void setEditClickCB(PreferenceSettingsFragment.OnItemClickListener editClickCB) {
+        this.editClickCB = editClickCB;
+    }
+
+    private void toolBarProfileChnage() {
+
+        final LinearLayout tool_bar_profile_name = (LinearLayout) mToolbar.findViewById(R.id.tool_bar_profile_name);
+        tool_bar_profile_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFlowInterface().closeRightPane();
+                Bundle args = new Bundle();
+                args.putString("edit_mode", "true");
+                getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCE.getNavNumber(), args);
+                LinearLayout edit_preferences = (LinearLayout) mToolbar.findViewById(R.id.preferences_edit_mode);
+                edit_preferences.setVisibility(View.GONE);
+            }
+        });
+
+    }
 
 }

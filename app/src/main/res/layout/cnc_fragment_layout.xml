@@ -6,12 +6,17 @@
     android:background="@color/grey_very_light"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/toolbar_cnc"
+        layout="@layout/toolbar_layout"
+        />
+
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/profile_tutorial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/toolbar_cnc"
         android:layout_centerHorizontal="true"
         app:fontName="dinnextltpro_medium.otf"
         android:text="Tap to choose/create profile"
