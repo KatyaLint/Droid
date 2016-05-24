@@ -368,6 +368,19 @@ public class HGBUtility {
         return delta;
     }
 
+    public static long getDateDiff(String strDate1, String strDate2)
+    {
+
+        Date date1 = getDateFromServer(strDate1);
+        Date date2 = getDateFromServer(strDate2);
+        long timeOne = date1.getTime();
+        long timeTwo = date2.getTime();
+        long oneDay = 1000 * 60 * 60 * 24;
+        long oneHour = 1000*60*60;
+        long delta = (timeTwo - timeOne) / oneDay;
+        return delta+1;
+
+    }
 
 //    public static void clearAllFragments(Activity activity){
 //        while(getFragmentStack().size() > 1){
@@ -509,7 +522,6 @@ public class HGBUtility {
         String inputPattern = "dd/MM/yyyy";
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
 
-
         String str = null;
 
         try {
@@ -646,19 +658,7 @@ public class HGBUtility {
         }
     }
 
-    public static long getDateDiff(String strDate1, String strDate2)
-    {
 
-        Date date1 = getDateFromServer(strDate1);
-        Date date2 = getDateFromServer(strDate2);
-        long timeOne = date1.getTime();
-        long timeTwo = date2.getTime();
-        long oneDay = 1000 * 60 * 60 * 24;
-        long delta = (timeTwo - timeOne) / oneDay;
-        return delta+1;
-
-
-    }
 
 
 

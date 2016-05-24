@@ -17,6 +17,8 @@ public class HGBPreferencesManager
 	public static final String HGB_CNC_LIST = "cnc_list";
 	public static final String HGB_CNC_FIRST_TIME= "cnc_first_time";
 	public static final String HGB_FREE_USER = "free_user";
+	public static final String HGB_USER_LAST_PSWD = "user_last_pswd";
+	public static final String HGB_USER_LAST_EMAIL = "user_last_email";
 
 	private SharedPreferences mSharedPreferencesFile;
 	private static HGBPreferencesManager mHomeSharedPreferences = null;

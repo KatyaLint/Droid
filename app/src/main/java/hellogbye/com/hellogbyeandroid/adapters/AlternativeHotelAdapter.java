@@ -132,7 +132,6 @@ public class AlternativeHotelAdapter extends RecyclerView.Adapter<AlternativeHot
         } else if ("2.5".equals(String.valueOf(star))) {
             starHolder(holder,R.drawable.full_star,R.drawable.full_star,
                     R.drawable.half_star, R.drawable.empty_star,R.drawable.empty_star);
-
         } else if ("3.0".equals(String.valueOf(star))) {
             starHolder(holder,R.drawable.full_star,R.drawable.full_star,
                     R.drawable.full_star, R.drawable.empty_star,R.drawable.empty_star);

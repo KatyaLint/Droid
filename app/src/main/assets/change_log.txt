@@ -79,3 +79,4 @@ Code changing:
         - Companion accept and reject
         - My trips new empty view
         - Nav User picture in the center
+        - Remember me
