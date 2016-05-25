@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.HGBSaveDataClass;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.CNCAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
@@ -45,7 +44,6 @@ import hellogbye.com.hellogbyeandroid.models.vo.airports.ResponsesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
@@ -73,7 +71,7 @@ public class CNCFragment extends HGBAbstractFragment {
     private CostumeToolBar mToolbar;
 
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
-    private ImageButton imageButton;
+    private ImageButton toolbar_go_to_iternerary;
     private ImageButton cncDissmissImageButton;
 
 
@@ -150,12 +148,15 @@ public class CNCFragment extends HGBAbstractFragment {
 
 
     private void updateToolBarView() {
-        imageButton = (ImageButton) mToolbar.findViewById(R.id.keyboard);
-        imageButton.setVisibility(View.VISIBLE);
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        toolbar_go_to_iternerary = (ImageButton) mToolbar.findViewById(R.id.toolbar_go_to_iternerary);
+        toolbar_go_to_iternerary.setVisibility(View.VISIBLE);
+        toolbar_go_to_iternerary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("","");
+                getFlowInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(),null);
+                getFlowInterface().closeRightPane();
+
             }
         });
 
@@ -240,6 +241,7 @@ public class CNCFragment extends HGBAbstractFragment {
             @Override
             public void onError(Object data) {
                 ErrorMessage(data);
+                removeWaitingItem();
                 CNCFragment.this.airportSendValuesVOs.clear();
             }
         });
@@ -304,6 +306,7 @@ public class CNCFragment extends HGBAbstractFragment {
             @Override
             public void onError(Object data) {
                 ErrorMessage(data);
+                removeWaitingItem();
             }
         });
     }
@@ -551,7 +554,9 @@ public class CNCFragment extends HGBAbstractFragment {
 
                     @Override
                     public void onError(Object data) {
+                        removeWaitingItem();
                         ErrorMessage(data);
+
                     }
                 }
         );
@@ -582,6 +587,7 @@ public class CNCFragment extends HGBAbstractFragment {
                 @Override
                 public void onError(Object data) {
                     ErrorMessage(data);
+                    removeWaitingItem();
                     airportSendValuesVOs.clear();
                 }
             });

@@ -22,9 +22,9 @@
         android:text="Tap to choose/create profile"
         android:visibility="gone"
         android:gravity="center"
-        android:paddingTop="10dp"
+        android:paddingTop="@dimen/DP10"
         android:background="@drawable/combined_shape_01"
-        android:textSize="15sp"/>
+        android:textSize="@dimen/SP16"/>
 
     <!--android:background="@drawable/b_g_android"-->
 
@@ -44,12 +44,12 @@
         android:text="Press to speak"
         android:visibility="gone"
         android:gravity="center"
-        android:paddingTop="10dp"
-        android:layout_marginRight="5dp"
+        android:paddingTop="@dimen/DP10"
+        android:layout_marginRight="@dimen/DP6"
         android:layout_above="@+id/cnc_message_rl"
         android:layout_alignRight="@+id/cnc_message_rl"
         android:background="@drawable/combined_shape_02"
-        android:textSize="15sp"/>
+        android:textSize="@dimen/SP16"/>
 
     <RelativeLayout
         android:id="@+id/cnc_message_rl"
@@ -109,7 +109,7 @@
             android:id="@+id/send_ll"
             android:layout_width="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="@dimen/DP6"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_height="wrap_content">
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/grey_button"
                 android:gravity="center"
-                android:padding="7dp"
+                android:padding="@dimen/DP8"
                 android:text="@string/send"
                 android:textColor="@color/cnc_user_message_color"
                 android:visibility="gone" />

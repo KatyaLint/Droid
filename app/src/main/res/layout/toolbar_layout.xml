@@ -21,8 +21,7 @@
 
     <include
         android:id="@+id/tool_bar_profile_name"
-        layout="@layout/profile_name_layout"
-        />
+        layout="@layout/profile_name_layout" />
 
 
 
@@ -30,7 +29,7 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/keyboard"
+        android:id="@+id/toolbar_go_to_iternerary"
         android:tag="keyboard"
         android:background="@drawable/group_7"
         android:layout_gravity="right"

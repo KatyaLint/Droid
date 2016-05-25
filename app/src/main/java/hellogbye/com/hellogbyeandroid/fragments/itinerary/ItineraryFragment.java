@@ -128,8 +128,11 @@ public class ItineraryFragment extends HGBAbstractFragment {
             }
         });
         passengersNames.addView(promptsView);
+    }
 
-}
+
+
+
 
     private void createMainNodes(UserTravelMainVO user){
         Map<String, NodesVO> items = user.getItems();
@@ -156,8 +159,17 @@ public class ItineraryFragment extends HGBAbstractFragment {
                 }
 
                 long difference = HGBUtility.dayDifference(departure,arrival) ;
-                departure = HGBUtility.parseDateToddMMyyyyForPayment(departure);
-                node.setDateOfCell(departure);
+
+
+           //     departure = HGBUtility.parseDateToddMMyyyyForPayment(departure); //parse return 23 is 2 different scenario need time not just date
+
+                 if(node.getmType().equals("hotel")){
+                     String time = HGBUtility.addDayHourToDate(departure);
+                     node.setDateOfCell(time);
+                 }else {
+                     node.setDateOfCell(departure);
+                 }
+               //  node.setDateOfCell(departure);
                 node.setUserName(passenger.getmName());
                 node.setAccountID(passenger.getmPaxguid());
                 nodesVOs.add(node);
@@ -165,13 +177,15 @@ public class ItineraryFragment extends HGBAbstractFragment {
                 correctPassangerNodes(node, passengerNodesVOs,  passenger);
 
 
-                for(int i=1;i<=difference;i++){ //adding days, if hotel is 3 day, adding another 2
+                for(int i=1;i<difference;i++){ //adding days, if hotel is 3 day, adding another 2
+                 //   String time = HGBUtility.parseDateToddMMyyyyForPayment(departure);
                     departure =  HGBUtility.addDayToDate(departure);
 
                     node.setUserName(passenger.getmName());
                     node.setDateOfCell(departure);
                     correctPassangerNodes(node, passengerNodesVOs,  passenger);
                     nodesVOs.add(node);
+
                 }
 
             }
@@ -180,10 +194,26 @@ public class ItineraryFragment extends HGBAbstractFragment {
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.setMessageForError("Bad Case Scenario");
             }
+           // passenger.addToPassengerNodeVOS(nodesVOs);
 
             passenger.setDateHashMap(passengerNodesVOs.get(0).getDateOfCell(), passengerNodesVOs);
         }
     }
+
+
+    private ArrayList<NodesVO>  getNodesWithSameDate(String date,ArrayList<NodesVO> passengerNodes){
+        ArrayList<NodesVO> sameDateNodes = new ArrayList<>();
+        String formattedDate = HGBUtility.parseDateToddMMyyyyForPayment(date);
+        for (NodesVO passengerNode : passengerNodes){
+            String passengerDate = HGBUtility.parseDateToddMMyyyyForPayment(passengerNode.getDateOfCell());
+            if(passengerDate.equals(formattedDate)){
+                sameDateNodes.add(passengerNode);
+            }
+        }
+        return sameDateNodes;
+    }
+
+
 
 
     private LinearLayout createGridView(UserTravelMainVO user){
@@ -196,12 +226,11 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
         LayoutParams MarginLLParams = new LayoutParams((int) getResources().getDimension(R.dimen.DP160),LayoutParams.MATCH_PARENT);
 
-       // MainLinearLayout.setLayoutParams(LLParams);
+        // MainLinearLayout.setLayoutParams(LLParams);
         MainLinearLayout.setOrientation(LinearLayout.VERTICAL);
 
-
         if(passengers.size() < 1){
-         return MainLinearLayout;
+            return MainLinearLayout;
         }
 
         HashMap<String, ArrayList<NodesVO>> hashMapPassangers = passengers.get(0).getHashMap();
@@ -210,16 +239,27 @@ public class ItineraryFragment extends HGBAbstractFragment {
         ArrayList<String> list = new ArrayList(dates);
         Collections.sort(list);
 
+        String priviouseDate="";
+        String currentDate="";
+
         for(String date : list) { //run for dates insteadof for users
             //new horizontal
             LinearLayout DatesLinearLayout = new LinearLayout(activity);
             DatesLinearLayout.setLayoutParams(LLParams);
             DatesLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
 
+            currentDate = HGBUtility.parseDateToddMMyyyyForPayment(date);
+
             for(int i=0;i<passengers.size();i++){
 
                 HashMap<String, ArrayList<NodesVO>> hashMap = passengers.get(i).getHashMap();
                 ArrayList<NodesVO> passengerNode = hashMap.get(date);
+
+
+            /*    ArrayList<NodesVO> passengerNodes = passengers.get(i).getPassengerNodes();
+                passengerNode = getNodesWithSameDate(date,passengerNodes);*/
+
+
                 LinearLayout NodeLinearLayout = new LinearLayout(activity);
                 NodeLinearLayout.setLayoutParams(MarginLLParams);
                 NodeLinearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -243,21 +283,35 @@ public class ItineraryFragment extends HGBAbstractFragment {
                         view.setTag(NodeTypeEnum.HOTEL.getType());
                     }
                     view.setOnClickListener(nodeClickListener);
-                 //   view.setLayoutParams(nodeParams);
+                    //   view.setLayoutParams(nodeParams);
 
                     NodeLinearLayout.addView(view); //add node view
                 }
                 DatesLinearLayout.addView(NodeLinearLayout);
+
             }
-            View dateView = dateLayout(date);
-    //        dateView.setLayoutParams(LLParams);
-            MainLinearLayout.addView(dateView);
+
+
+            if(!priviouseDate.equals(currentDate)){
+                View dateView = dateLayout(currentDate);
+                //        dateView.setLayoutParams(LLParams);
+                MainLinearLayout.addView(dateView);
+                priviouseDate = currentDate;
+            }
+
+      /*      View dateView = dateLayout(date);
+            //        dateView.setLayoutParams(LLParams);
+            MainLinearLayout.addView(dateView);*/
+
             //new date
             MainLinearLayout.addView(DatesLinearLayout); //add all date row
         }
         return MainLinearLayout;
 
     }
+
+
+
 
    private View.OnClickListener nodeClickListener = new View.OnClickListener() {
         @Override
@@ -356,12 +410,18 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
 
     private void correctPassangerNodes(NodesVO node, ArrayList<NodesVO> passangerNodesVOs, PassengersVO passanger){
-        if(!passangerNodesVOs.isEmpty() && !node.getDateOfCell().equals(passangerNodesVOs.get(0).getDateOfCell())){
-            ArrayList<NodesVO> passangerNodesVOsTemp = new ArrayList<>();
-            passangerNodesVOsTemp.addAll(passangerNodesVOs);
-            passanger.setDateHashMap(passangerNodesVOs.get(0).getDateOfCell(),passangerNodesVOsTemp);
-            passangerNodesVOs.clear();
+
+        if(!passangerNodesVOs.isEmpty() ){    //&& !node.getDateOfCell().equals(passangerNodesVOs.get(0).getDateOfCell())){
+            String dateOfCell = passangerNodesVOs.get(0).getDateOfCell();
+            if(!node.getDateOfCell().equals(dateOfCell)) {
+                ArrayList<NodesVO> passangerNodesVOsTemp = new ArrayList<>();
+                passangerNodesVOsTemp.addAll(passangerNodesVOs);
+                passanger.setDateHashMap(passangerNodesVOs.get(0).getDateOfCell(), passangerNodesVOsTemp);
+
+                passangerNodesVOs.clear();
+            }
         }
+
         passangerNodesVOs.add(node.getClone());
     }
 
@@ -466,8 +526,8 @@ public class ItineraryFragment extends HGBAbstractFragment {
         View child = activity.getLayoutInflater().inflate(R.layout.new_grid_view_inner_date_item, null);
 
         TextView date_text_layout = (TextView)child.findViewById(R.id.date_text_layout);
-        String correctDate = HGBUtility.parseDateFromddMMyyyyToddmmYYYY(date);
-        date_text_layout.setText(correctDate);
+      //  String correctDate = HGBUtility.parseDateFromddMMyyyyToddmmYYYY(date);
+        date_text_layout.setText(date);
         LinearLayout outer = new LinearLayout(activity);
         outer.setOrientation(LinearLayout.VERTICAL);
         outer.setLayoutParams(layoutParams);
@@ -520,8 +580,8 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
         LinearLayout itineraryLayout = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.scroll_view_ll);
     LinearLayout cnc_empty_view = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.cnc_empty_view);
-        //UserTravelMainVO user = parseFlight();
-        //getActivityInterface().setTravelOrder(user);
+      //  UserTravelMainVO user = parseFlight();
+      //  getActivityInterface().setTravelOrder(user);
         UserTravelMainVO  user = getActivityInterface().getTravelOrder();
         userOrder = user;
                 //getActivityInterface().setTravelOrder(userOrder);

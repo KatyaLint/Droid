@@ -379,17 +379,17 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private void initToolBar() {
 
         setSupportActionBar(mToolbar);
-        imageButton = (ImageButton) mToolbar.findViewById(R.id.keyboard);
+   /*     imageButton = (ImageButton) mToolbar.findViewById(R.id.keyboard);
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 clearCNCItems();
-
-
+                System.out.println("Kate keybord click");
+                goToFragment(ToolBarNavEnum.HOME.getNavNumber(), null);
+                 //clearCNCItems();
 
             }
-        });
+        });*/
 
 
         //TODO my_trips_button check why
@@ -697,7 +697,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 //  fragment = HomeFragment.newInstance(navPosition);
                 //fragment = CNCFragment.newInstance(navPosition);
                 openRightPane();
-                clearCNCItems();
+             //   clearCNCItems();
                 return;
 
 //            case HISTORY:
@@ -1030,13 +1030,13 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     @Override
     public void setHomeImage(String id) {
-        if (id.equals("keyboard")) {
+    /*    if (id.equals("keyboard")) {
             imageButton.setBackgroundResource(R.drawable.app_bar_microphone_icn);
             imageButton.setTag("mic");
         } else if (id.equals("mic")) {
-            imageButton.setBackgroundResource(R.drawable.keyboard_icon);
+            imageButton.setBackgroundResource(R.drawable.group_7);
             imageButton.setTag("keyboard");
-        }
+        }*/
     }
 
 

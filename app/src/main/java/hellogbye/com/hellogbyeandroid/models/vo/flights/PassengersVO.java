@@ -61,6 +61,11 @@ public class PassengersVO {
         passengerNodes.add(node);
     }
 
+    public void addToPassengerNodeVOS(ArrayList<NodesVO> node){
+        passengerNodes.addAll(node);
+    }
+
+
     public HashMap<String,ArrayList<NodesVO> > getHashMap(){
         return hashMap;
     }

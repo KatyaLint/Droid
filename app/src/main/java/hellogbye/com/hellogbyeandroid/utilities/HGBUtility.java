@@ -376,11 +376,23 @@ public class HGBUtility {
         long timeOne = date1.getTime();
         long timeTwo = date2.getTime();
         long oneDay = 1000 * 60 * 60 * 24;
-        long oneHour = 1000*60*60;
+
         long delta = (timeTwo - timeOne) / oneDay;
         return delta+1;
 
     }
+
+
+/*    public static String ConvertMilliSecondsToFormattedDate(String milliSeconds){
+        String dateFormat = "dd-MM-yyyy hh:mm";
+        System.out.println("Kate milliSeconds =" + milliSeconds);
+         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Long.parseLong(milliSeconds));
+        return simpleDateFormat.format(calendar.getTime());
+    }*/
+
+
 
 //    public static void clearAllFragments(Activity activity){
 //        while(getFragmentStack().size() > 1){
@@ -566,7 +578,7 @@ public class HGBUtility {
 
     public static String parseDateFromddMMyyyyToddmmYYYY(String time) {
         String outputPattern = "EEE, MM dd, yyyy";
-        String inputPattern = "MM/dd/yyyy";
+        String inputPattern = "yyyy-MM-dd'T'HH:mm:ss";
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
 
 
@@ -604,10 +616,57 @@ public class HGBUtility {
     }
 
 
+    public static String addDayTo(String sourceDate){
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date myDate = null;
+        try {
+            myDate = format.parse(sourceDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(myDate);
+        cal.add(Calendar.DATE, 1); //minus number would decrement the days
+        myDate = cal.getTime();
+
+
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+// Using DateFormat format method we can create a string
+// representation of a date with the defined format.
+        String reportDate = df.format(myDate);
+
+
+       return reportDate;
+        //DateUtil.addDays(myDate, 1);
+
+    }
+
+    public static String addDayHourToDate(String dateToIncr) {
+        String newDate="";
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        String outputPattern = "yyyy-MM-dd'T'HH:mm:ss";
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+        Date date ;
+        try {
+            date = df.parse(dateToIncr);
+            Date dayAfter = new Date(date.getTime() + 23*3600*1000);
+
+            newDate = outputFormat.format(dayAfter);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+        return newDate;
+    }
+
+
+
     public static String addDayToDate(String dateToIncr) {
         String newDate="";
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-        String outputPattern = "MM/dd/yyyy";
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        String outputPattern = "yyyy-MM-dd'T'HH:mm:ss";
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
         Date date ;
         try {
