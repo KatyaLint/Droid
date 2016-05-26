@@ -376,6 +376,7 @@ public class CNCFragment extends HGBAbstractFragment {
         cnc_fragment_trip_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getFlowInterface().closeRightPane();
                 getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCE.getNavNumber(), null);
             }
         });
