@@ -419,6 +419,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
+                if(view.getId()== R.id.right_content_frame){
+                    animateRightPaneClosed();
+                }
                 super.onDrawerClosed(view);
 
             }
@@ -428,6 +431,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 super.onDrawerOpened(drawerView);
                 super.onDrawerSlide(drawerView, 0); // this disables the arrow @ completed state
                 HGBUtility.hideKeyboard(getApplicationContext(), drawerView);
+                if(drawerView.getId()== R.id.right_content_frame){
+                    animateRightPaneOpened();
+                }
 
             }
 
@@ -485,6 +491,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
             }
         });
+
+
 
     }
 
@@ -658,7 +666,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public void closeRightPane() {
         mDrawerLayout.closeDrawer(frameLayout);
-        animateRightPaneClosed();
+
         isRightPaneOpened = false;
     }
 
@@ -669,7 +677,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         mDrawerLayout.openDrawer(frameLayout);
 
-        animateRightPaneOpened();
         isRightPaneOpened = true;
 
         FragmentManager fm = getSupportFragmentManager();
