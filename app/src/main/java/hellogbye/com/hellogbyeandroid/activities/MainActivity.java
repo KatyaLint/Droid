@@ -433,6 +433,12 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 HGBUtility.hideKeyboard(getApplicationContext(), drawerView);
                 if(drawerView.getId()== R.id.right_content_frame){
                     animateRightPaneOpened();
+
+                    FragmentManager fm = getSupportFragmentManager();
+                    //if you added fragment CNCFragment layout xml
+                    CNCFragment fragment = (CNCFragment)fm.findFragmentById(R.id.right_content_frame);
+                    fragment.requestFocusOnMessage();
+                    fragment.startTutorialText();
                 }
 
             }
@@ -679,10 +685,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         isRightPaneOpened = true;
 
-        FragmentManager fm = getSupportFragmentManager();
-        //if you added fragment CNCFragment layout xml
-        CNCFragment fragment = (CNCFragment)fm.findFragmentById(R.id.right_content_frame);
-        fragment.requestFocusOnMessage();
+
     }
 
     private Fragment isFreeUser(Fragment fragment, int navPosition) {

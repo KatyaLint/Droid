@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -75,7 +76,19 @@ public class CNCFragment extends HGBAbstractFragment {
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
     private ImageButton imageButton;
     private ImageButton cncDissmissImageButton;
+    private LinearLayout mTextTutorialLinearLayout;
+    private FontTextView mTextTutoralBody;
+    private  Handler tutorailTexthandler = new Handler();
 
+
+    String[] TUTORIAL_TEXT = {
+            "I want to fly to Vancouver on December 17th for 10 days, staying in a 4 star hotel",
+            "I would like to edit my trip",
+            "I would like to add a travel companion",
+
+    };
+
+    private int mTutorialTextNumber = 0;
 
 
     private ArrayList<AirportSendValuesVO> airportSendValuesVOs = new ArrayList<AirportSendValuesVO>();
@@ -352,6 +365,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
 
             getActivityInterface().addCNCItem(new CNCItem(text, CNCAdapter.HGB_ITEM));
+            mTextTutorialLinearLayout.setVisibility(View.VISIBLE);
         } else {
 
             if (getActivityInterface().getCNCItems() == null) {
@@ -385,6 +399,9 @@ public class CNCFragment extends HGBAbstractFragment {
         mEditText = (FontEditTextView) view.findViewById(R.id.cnc_edit_text);
         mMicImageView = (ImageView) view.findViewById(R.id.cnc_mic);
         mSendTextView = (FontTextView) view.findViewById(R.id.cnc_send);
+
+        mTextTutorialLinearLayout = (LinearLayout)view.findViewById(R.id.text_tutorial_ll);
+        mTextTutoralBody = (FontTextView)view.findViewById(R.id.text_tutorial_body);
         mSendTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -429,7 +446,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
 
     public void handleMyMessage(final String strMessage) {
-
+        mTextTutorialLinearLayout.setVisibility(View.GONE);
         getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.ME_ITEM));
         addWaitingItem();
         mAdapter.notifyDataSetChanged();
@@ -681,6 +698,56 @@ public class CNCFragment extends HGBAbstractFragment {
 
     public void requestFocusOnMessage(){
         mEditText.requestFocus();
+    }
+
+    public void  startTutorialText(){
+
+        tutorailTexthandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                changeTutorialText();
+                tutorailTexthandler.postDelayed(this, 2000);
+            }
+        }, 1500);
+    }
+
+    private void changeTutorialText() {
+
+        Animation fadeOut = new AlphaAnimation(1, 0);
+        final Animation fadeIn = new AlphaAnimation(0, 1);
+
+        fadeOut.setDuration(200);
+        fadeIn.setDuration(200);
+        mTextTutoralBody.startAnimation(fadeOut);
+        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                if(TUTORIAL_TEXT.length ==mTutorialTextNumber){
+                    mTutorialTextNumber = 0;
+                }
+                mTextTutoralBody.setText(TUTORIAL_TEXT[mTutorialTextNumber]);
+                mTextTutoralBody.startAnimation(fadeIn);
+
+                mTutorialTextNumber++;
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+
+    }
+
+    public void stopTextTutorial(){
+        //tutorailTexthandler.removeCallbacks();
     }
 
 }
