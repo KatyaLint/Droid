@@ -671,6 +671,11 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         animateRightPaneOpened();
         isRightPaneOpened = true;
+
+        FragmentManager fm = getSupportFragmentManager();
+        //if you added fragment CNCFragment layout xml
+        CNCFragment fragment = (CNCFragment)fm.findFragmentById(R.id.right_content_frame);
+        fragment.requestFocusOnMessage();
     }
 
     private Fragment isFreeUser(Fragment fragment, int navPosition) {

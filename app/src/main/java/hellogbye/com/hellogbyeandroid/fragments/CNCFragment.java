@@ -678,4 +678,8 @@ public class CNCFragment extends HGBAbstractFragment {
 
     }
 
+    public void requestFocusOnMessage(){
+        mEditText.requestFocus();
+    }
+
 }
