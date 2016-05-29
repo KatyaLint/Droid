@@ -65,3 +65,20 @@ Code changing:
     - Tabs in Companions screen
     - Removed com.hudomju:swipe-to-dismiss-undo:1.0.jar
     - Nav draw
+
+    ------------------------------------------
+       Version 1.5.1
+    ------------------------------------------
+      Fixed Bugs:
+    -----------
+
+
+     Code changing:
+    --------------
+        - Nav Draw from the side
+        - Companion accept and reject
+        - My trips new empty view
+        - Nav User picture in the center
+        - Remember me
+        - Iternerary Fix
+        - CNC Fragment, up right fragment go to Itirnerary

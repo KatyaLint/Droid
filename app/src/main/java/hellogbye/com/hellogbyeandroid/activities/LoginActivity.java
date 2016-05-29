@@ -30,7 +30,7 @@ public class LoginActivity extends FragmentActivity {
     private FontTextView mLoginTextView;
     private HGBPreferencesManager hgbPrefrenceManager;
     private FontTextView mForgotPasswordTextView;
-
+    private boolean remember_me;
 
 
     @Override
@@ -53,6 +53,19 @@ public class LoginActivity extends FragmentActivity {
         mForgotPasswordTextView = (FontTextView) findViewById(R.id.forgotpassword);
 
 
+
+        remember_me = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME,false);
+        String email = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, null);
+
+        if(remember_me && email != null){
+            mEmailEditText.setText(email);
+            String pswd = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, null);
+            if(pswd != null){
+                mPasswordEditText.setText(pswd);
+            }
+        }
+
+
         mForgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,6 +86,8 @@ public class LoginActivity extends FragmentActivity {
                     public void onSuccess(Object data) {
                         UserLoginCredentials user = (UserLoginCredentials) data;
                         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
+                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, mEmailEditText.getText().toString());
+                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, mPasswordEditText.getText().toString());
                         hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER,false);
                         goToMainActivity();
                     }

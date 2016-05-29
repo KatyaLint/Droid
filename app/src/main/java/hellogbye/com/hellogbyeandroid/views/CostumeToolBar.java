@@ -14,7 +14,7 @@ import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 
 public class CostumeToolBar extends Toolbar {
 
-    private ImageButton keyBoardImage;
+  //  private ImageButton keyBoardImage;
     private ImageButton up_bar_favorite;
     private ImageButton favoriteButton;
     private FontTextView editPreferense;
@@ -60,9 +60,9 @@ public class CostumeToolBar extends Toolbar {
         if(my_trips_image_profile == null){
             my_trips_image_profile = (ImageView)findViewById(R.id.my_trips_image_profile);
         }
-        if (keyBoardImage == null) {
+        /*if (keyBoardImage == null) {
             keyBoardImage = (ImageButton) findViewById(R.id.keyboard);
-        }
+        }*/
         if (up_bar_favorite == null) {
             up_bar_favorite = (ImageButton) findViewById(R.id.up_bar_favorite);
 
@@ -99,7 +99,7 @@ public class CostumeToolBar extends Toolbar {
    //     homeTitleImage.setVisibility(View.GONE);
      //   my_trip_profile.setVisibility(View.GONE);
         titleText.setVisibility(View.GONE);
-        keyBoardImage.setVisibility(View.GONE);
+    //    keyBoardImage.setVisibility(View.GONE);
         up_bar_favorite.setVisibility(View.GONE);
         favoriteButton.setVisibility(View.GONE);
         editPreferense.setVisibility(View.GONE);
@@ -154,7 +154,7 @@ public class CostumeToolBar extends Toolbar {
                 //homeTitleImage.setVisibility(View.VISIBLE);
               //  my_trip_profile.setVisibility(View.VISIBLE);
 
-                keyBoardImage.setVisibility(View.VISIBLE);
+           //     keyBoardImage.setVisibility(View.VISIBLE);
                 tool_bar_profile_name.setVisibility(View.VISIBLE);
                 break;
 

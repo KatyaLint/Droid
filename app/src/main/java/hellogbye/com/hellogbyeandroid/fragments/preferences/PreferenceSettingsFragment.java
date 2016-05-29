@@ -86,11 +86,6 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
 
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     private void adapterClicked(String clickedItemID){
         if(mAdapter.getIsEditMode()){
             for( AccountDefaultSettingsVO accountAttribute : accountDefaultSettings){

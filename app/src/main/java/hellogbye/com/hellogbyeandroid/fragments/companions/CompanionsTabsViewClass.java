@@ -265,10 +265,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
         ConnectionManager.getInstance(getActivity()).confirmCompanion(companion_id, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                System.out.println("Kate onSuccess");
                 getCompanions();
-                //deleteCompanion.companionDeleted();
-
             }
 
             @Override

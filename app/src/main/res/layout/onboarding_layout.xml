@@ -53,7 +53,7 @@
         android:layout_marginLeft="@dimen/DP54"
         android:layout_marginRight="@dimen/DP54"
         android:background="@drawable/red_button"
-        android:text="Go it" />
+        android:text="@string/onBoarding_got_it_button" />
 
 
 </RelativeLayout>

@@ -8,13 +8,13 @@
 
 
     <string name="tool_bar">Edit</string>
-    <string name="remmeber_me">Remmember Me</string>
+    <string name="remmeber_me">Remember Me</string>
     <string name="password">Password</string>
     <string name="email_address">Email Address</string>
     <string name="login">Sign In</string>
     <string name="forgot_password"><u>Forgot password?</u></string>
     <string name="password_reset">Password Reset</string>
-    <string name="email_reset_succesfully">Email rest succesfully! Go check email</string>
+    <string name="email_reset_succesfully">Email rest successfully! Go check email</string>
     <string name="create_account">Create a new Account</string>
     <string name="try_it_now">Try it Now</string>
     <string name="already_have_account">Already have a HellGbye account?</string>
@@ -155,6 +155,8 @@
     <string name="my_trips_upcoming">Upcoming Trips</string>
     <string name="my_trips_history">History</string>
     <string name="my_trips_favorites">Favorites</string>
+    <string name="my_trip_empty_title">You don’t have any Trips</string>
+    <string name="my_trip_empty_text">Start planning your trip below.\nAnytime you create a trip you can\naccess it from here</string>
 
     <string name="account_relationship">Relationship:</string>
     <string name="add_card">Add Card</string>
@@ -184,6 +186,7 @@
 
     <string name="onBoarding_just_type">Just type or say\nsomething like:</string>
     <string name="onBoarding_search_flight_example">&quot;I want to fly to Rome on Friday with\nLauren and Jesse and return home on\nJune 5th&quot;</string>
+    <string name="onBoarding_got_it_button">Got it</string>
 
     <string name="companion_empty_view_text">You dont have any\nTravel Companions</string>
     <string name="companion_empty_search">Search for travel companions  \nin the HelloGbye system above,\nor Invite a new travel companion\nto HelloGbye</string>
@@ -197,9 +200,9 @@
     <string name="done">done</string>
     <string name="avreage_per_night">Average per night</string>
     <string name="electronic_ticket">Electronic Ticket:</string>
-    <string name="press_here"> Press here</string>
+    <string name="press_here">Press here</string>
 
-    <string name="my_trip_empty_title">You don’t have any Trips</string>
-    <string name="my_trip_empty_text">Start planning your trip below.\nAnytime you create a trip you can\naccess it from here</string>
+
     <string name="you_can_say_things_like">You can say things like:</string>
+
 </resources>
