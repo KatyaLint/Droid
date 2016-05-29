@@ -421,6 +421,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             public void onDrawerClosed(View view) {
                 if(view.getId()== R.id.right_content_frame){
                     animateRightPaneClosed();
+                    FragmentManager fm = getSupportFragmentManager();
+                    //if you added fragment CNCFragment layout xml
+                    CNCFragment fragment = (CNCFragment)fm.findFragmentById(R.id.right_content_frame);
+                    fragment.stopTextTutorial();
                 }
                 super.onDrawerClosed(view);
 
