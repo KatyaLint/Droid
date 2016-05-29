@@ -123,46 +123,16 @@ public class CNCFragment extends HGBAbstractFragment {
         startTutorial();
 
         joinCompanionToTravel();
-
-
-        /*sendVOForIternarary(ArrayList<AirportSendValuesVO> airportSendValuesVO)*/
-
-
-//        int density= getResources().getDisplayMetrics().densityDpi;
-//       // Toast.makeText(getActivity(), density, Toast.LENGTH_SHORT).show();
-//        Log.d("","***** "+density);
-//        switch(density) {
-//
-//            case DisplayMetrics.DENSITY_LOW:
-//                Toast.makeText(getActivity(), "LDPI", Toast.LENGTH_SHORT).show();
-//                break;
-//            case DisplayMetrics.DENSITY_MEDIUM:
-//                Toast.makeText(getActivity(), "MDPI", Toast.LENGTH_SHORT).show();
-//                break;
-//            case DisplayMetrics.DENSITY_HIGH:
-//                Toast.makeText(getActivity(), "HDPI", Toast.LENGTH_SHORT).show();
-//                break;
-//            case DisplayMetrics.DENSITY_XHIGH:
-//                Toast.makeText(getActivity(), "XHDPI", Toast.LENGTH_SHORT).show();
-//
-//                break;
-//            case DisplayMetrics.DENSITY_XXHIGH:
-//                Toast.makeText(getActivity(), "XX", Toast.LENGTH_SHORT).show();
-//
-//                break;
-//            case DisplayMetrics.DENSITY_XXXHIGH:
-//                Toast.makeText(getActivity(), "XXX", Toast.LENGTH_SHORT).show();
-//
-//                break;
-//        }
-
-                return rootView;
+         return rootView;
     }
 
 
     private void updateToolBarView() {
         toolbar_go_to_iternerary = (ImageButton) mToolbar.findViewById(R.id.toolbar_go_to_iternerary);
         toolbar_go_to_iternerary.setVisibility(View.VISIBLE);
+        if(getActivityInterface().getTravelOrder() == null){
+            toolbar_go_to_iternerary.setEnabled(false);
+        }
         toolbar_go_to_iternerary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

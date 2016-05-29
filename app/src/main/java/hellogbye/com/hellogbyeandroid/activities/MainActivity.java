@@ -749,8 +749,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case ITINARERY:
                 fragment = ItineraryFragment.newInstance(navPosition);
-
-                setItineraryTitleName();
+                itirnarary_title_Bar.setText(hgbSaveDataClass.getTravelOrder().getmSolutionName());
+               // setItineraryTitleName();
                 break;
             case ALTERNATIVE_FLIGHT:
                 fragment = AlternativeFlightFragment.newInstance(navPosition);
@@ -968,9 +968,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     private void setFavorityItinerary() {
         UserTravelMainVO travelOrder = hgbSaveDataClass.getTravelOrder();
-        if(travelOrder == null){ // there no requests
-            return;
-        }
         String solutionID = travelOrder.getmSolutionID();
         boolean isFavorite = travelOrder.ismIsFavorite();
         ConnectionManager.getInstance(MainActivity.this).putFavorityItenarary(isFavorite, solutionID, new ConnectionManager.ServerRequestListener() {
