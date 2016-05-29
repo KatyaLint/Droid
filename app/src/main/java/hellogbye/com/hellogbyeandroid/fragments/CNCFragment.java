@@ -415,7 +415,7 @@ public class CNCFragment extends HGBAbstractFragment {
         mMicImageView = (ImageView) view.findViewById(R.id.cnc_mic);
         mSendTextView = (FontTextView) view.findViewById(R.id.cnc_send);
 
-        mTextTutoralHeader = (FontTextView) view.findViewById(R.id.text_tutorial_body);
+        mTextTutoralHeader = (FontTextView) view.findViewById(R.id.text_tutorial_header);
         mTextTutoralBody = (FontTextView)view.findViewById(R.id.text_tutorial_body);
         mSendTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -461,6 +461,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
 
     public void handleMyMessage(final String strMessage) {
+        stopTextTutorial();
         mTextTutoralHeader.setVisibility(View.GONE);
         mTextTutoralBody.setVisibility(View.GONE);
         getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.ME_ITEM));
