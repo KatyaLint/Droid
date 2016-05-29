@@ -80,3 +80,5 @@ Code changing:
         - My trips new empty view
         - Nav User picture in the center
         - Remember me
+        - Iternerary Fix
+        - CNC Fragment, up right fragment go to Itirnerary

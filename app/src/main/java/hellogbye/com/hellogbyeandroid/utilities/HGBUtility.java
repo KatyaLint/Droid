@@ -87,6 +87,7 @@ public class HGBUtility {
     private static ProgressDialog progressDialog;
     private static Stack<Fragment> fragmentStack = new Stack<Fragment>();
     private static LocationManager lm;
+    private static String BASE_SERVER_TIME_ZONE = "yyyy-MM-dd'T'HH:mm:ss";
 
     public static void downloadImage(Bitmap showedImgae){
 
@@ -530,9 +531,9 @@ public class HGBUtility {
     }
 
     public static String parseDateToServertime(String time) {
-        String outputPattern = "yyyy-MM-dd'T'HH:mm:ss";
+
         String inputPattern = "dd/MM/yyyy";
-        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(BASE_SERVER_TIME_ZONE);
 
         String str = null;
 
@@ -556,9 +557,9 @@ public class HGBUtility {
 
 
     public static String parseDateToddMMyyyy(String time) {
-        String inputPattern = "yyyy-MM-dd'T'HH:mm:ss";
+
         String outputPattern = "EEE,MM dd,yyyy";
-        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat inputFormat = new SimpleDateFormat(BASE_SERVER_TIME_ZONE);
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
 
         Date date = null;
@@ -578,15 +579,11 @@ public class HGBUtility {
 
     public static String parseDateFromddMMyyyyToddmmYYYY(String time) {
         String outputPattern = "EEE, MM dd, yyyy";
-        String inputPattern = "yyyy-MM-dd'T'HH:mm:ss";
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
-
 
         String str = null;
 
-
-
-            SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+            SimpleDateFormat inputFormat = new SimpleDateFormat(BASE_SERVER_TIME_ZONE);
             Date date = null;
             try {
                 date = inputFormat.parse(time);
@@ -597,9 +594,8 @@ public class HGBUtility {
         return str;
         }
     public static String parseDateToddMMyyyyMyTrip(String time) {
-        String inputPattern = "yyyy-MM-dd'T'HH:mm:ss";
         String outputPattern = "MMM dd,yyyy";
-        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat inputFormat = new SimpleDateFormat(BASE_SERVER_TIME_ZONE);
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
 
         Date date = null;
@@ -645,9 +641,9 @@ public class HGBUtility {
 
     public static String addDayHourToDate(String dateToIncr) {
         String newDate="";
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        String outputPattern = "yyyy-MM-dd'T'HH:mm:ss";
-        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+        DateFormat df = new SimpleDateFormat(BASE_SERVER_TIME_ZONE);
+
+        SimpleDateFormat outputFormat = new SimpleDateFormat(BASE_SERVER_TIME_ZONE);
         Date date ;
         try {
             date = df.parse(dateToIncr);
@@ -665,9 +661,9 @@ public class HGBUtility {
 
     public static String addDayToDate(String dateToIncr) {
         String newDate="";
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        String outputPattern = "yyyy-MM-dd'T'HH:mm:ss";
-        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+        DateFormat df = new SimpleDateFormat(BASE_SERVER_TIME_ZONE);
+
+        SimpleDateFormat outputFormat = new SimpleDateFormat(BASE_SERVER_TIME_ZONE);
         Date date ;
         try {
             date = df.parse(dateToIncr);
@@ -681,9 +677,9 @@ public class HGBUtility {
     }
 
     public static String parseDateToddMMyyyyForPayment(String time) {
-        String inputPattern = "yyyy-MM-dd'T'HH:mm:ss";
+
         String outputPattern = "MM/dd/yyyy";
-        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat inputFormat = new SimpleDateFormat(BASE_SERVER_TIME_ZONE);
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
 
         Date date = null;
@@ -722,9 +718,7 @@ public class HGBUtility {
 
 
     public static Date getDateFromServer(String time){
-
-        String inputPattern = "yyyy-MM-dd'T'HH:mm:ss";
-        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat inputFormat = new SimpleDateFormat(BASE_SERVER_TIME_ZONE);
         Date date = null;
         try {
             date = inputFormat.parse(time);
