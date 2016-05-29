@@ -248,8 +248,6 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
                     emptyCompanionsView();
                 }
 
-
-
                 searchListAdapter.updateItems(companionsVOPending);
 
             }

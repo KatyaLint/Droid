@@ -30,6 +30,8 @@ public class UserTravelMainVO {
     //OLD
 
 
+    private String[] location;
+
     @SerializedName("passengers")
     private ArrayList<PassengersVO> passengerses = new ArrayList<PassengersVO>();
 
@@ -76,5 +78,13 @@ public class UserTravelMainVO {
 
     public void setmIsFavorite(boolean mIsFavorite) {
         this.mIsFavorite = mIsFavorite;
+    }
+
+    public String[] getLocation() {
+        return location;
+    }
+
+    public void setLocation(String[] location) {
+        this.location = location;
     }
 }

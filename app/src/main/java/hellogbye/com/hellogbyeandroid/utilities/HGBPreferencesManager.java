@@ -19,6 +19,7 @@ public class HGBPreferencesManager
 	public static final String HGB_FREE_USER = "free_user";
 	public static final String HGB_USER_LAST_PSWD = "user_last_pswd";
 	public static final String HGB_USER_LAST_EMAIL = "user_last_email";
+	public static final String HGB_LOCATION_TOKEN = "location_token";
 
 	private SharedPreferences mSharedPreferencesFile;
 	private static HGBPreferencesManager mHomeSharedPreferences = null;

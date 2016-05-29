@@ -187,6 +187,13 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         getCompanionsFromServer();
         initRightPane();
 
+        boolean locationToken = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.HGB_LOCATION_TOKEN, true);
+        String location = HGBUtility.getLocation(MainActivity.this, locationToken);
+        if(location != null){
+            String[] locationArr = location.split("&");
+            hgbSaveDataClass.getTravelOrder().setLocation(locationArr);
+            hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_LOCATION_TOKEN, false);
+        }
 
     }
 
@@ -478,16 +485,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private void initRightPane() {
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction(); //beginTransaction();
-//                if(isAddAnimation){
-//                    transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_right,R.anim.slide_in_left,R.anim.slide_out_right);
-//                }
+
         Fragment fragment = CNCFragment.newInstance(ToolBarNavEnum.CNC.getNavNumber());
         transaction.replace(R.id.right_content_frame, fragment, fragment.getClass().toString());
-
-//                if (isAddToBackStack) {
-//                    transaction.addToBackStack(fragment.getClass().toString());
-//                    getFragmentStack().push(fragment);
-//                }
 
         transaction.commit();
         frameLayout = (FrameLayout) findViewById(R.id.right_content_frame);
@@ -501,8 +501,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
             }
         });
-
-
 
     }
 
@@ -686,9 +684,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     public void openRightPane() {
 
         mDrawerLayout.openDrawer(frameLayout);
-
         isRightPaneOpened = true;
-
 
     }
 
@@ -899,16 +895,11 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
 
         if (HGBUtility.clearBackStackAndGoToNextFragment(getSupportFragmentManager())) {
-            // super.onBackPressed();
-//            Stack<Fragment> fragmentStack = HGBUtility.getFragmentStack();
             Fragment fragmentTemp = HGBUtility.getFragmentStack().lastElement();
-            // Fragment fragment = fragmentStack.peek();
             Bundle arguments = fragmentTemp.getArguments();
             int fragNumber = arguments.getInt(HGBConstants.ARG_NAV_NUMBER);
 
             mToolbar.updateToolBarView(fragNumber);
-
-            // editProfileTipeMainToolBar();
         }
     }
 
@@ -1002,7 +993,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             @Override
             public void onSuccess(Object data) {
                 hgbSaveDataClass.setTravelOrder((UserTravelMainVO) data);
-
                 continueFlow(fragment);
             }
 

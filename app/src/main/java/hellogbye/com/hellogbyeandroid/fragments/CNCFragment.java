@@ -22,7 +22,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -123,9 +122,9 @@ public class CNCFragment extends HGBAbstractFragment {
 
         //This is to ckeck and display tutorial this version was cancelled waiting for new one
         startTutorial();
-
         joinCompanionToTravel();
-         return rootView;
+
+        return rootView;
     }
 
 
@@ -161,6 +160,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
 
 
+
     private void joinCompanionToTravel(){
 
         Bundle args = getArguments();
@@ -172,8 +172,8 @@ public class CNCFragment extends HGBAbstractFragment {
         if(user_id == null){
             return;
         }
-        String tripSolutionId = getActivityInterface().getTravelOrder().getmSolutionID(); //getActivityInterface().getSolutionID();
 
+        String tripSolutionId = getActivityInterface().getTravelOrder().getmSolutionID(); //getActivityInterface().getSolutionID();
 
         String userName = "";
         String joinQuery = "Join ";
@@ -204,22 +204,13 @@ public class CNCFragment extends HGBAbstractFragment {
     }
 
     private void addCompanionToQuery(ArrayList<AirportSendValuesVO> airportSendValuesVOs){
+
         ConnectionManager.getInstance(getActivity()).ItineraryCNCAddCompanionPost(airportSendValuesVOs,  new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                HGBUtility.removeGPSListener();
+
                 UserTravelMainVO userTraveler = (UserTravelMainVO) data;
-                if(userTraveler.getItems().size() <=0){
-                    handleHGBMessage(getString(R.string.itinerary_no_items));
-                }
-                else if (getActivityInterface().getSolutionID() == null) {
-                    handleHGBMessage(getString(R.string.itinerary_created));
-                }else{
-                    handleHGBMessage(getString(R.string.grid_has_been_updated));
-                }
-
-                CNCFragment.this.airportSendValuesVOs.clear();
-
+                handleHGBMessagesViews(userTraveler);
                 getActivityInterface().setTravelOrder(userTraveler);
 
             }
@@ -387,11 +378,14 @@ public class CNCFragment extends HGBAbstractFragment {
 
         mTextTutoralHeader = (FontTextView) view.findViewById(R.id.text_tutorial_header);
         mTextTutoralBody = (FontTextView)view.findViewById(R.id.text_tutorial_body);
+
         mSendTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String strMessage = mEditText.getText().toString();
+
                 handleMyMessage(strMessage);
+
             }
         });
 
@@ -486,14 +480,20 @@ public class CNCFragment extends HGBAbstractFragment {
                                         airportSendValuesVO.setId(choosenAirport.getId());
 
 
-                                        String location = HGBUtility.getLocation(getActivity());
+                                        String location = HGBUtility.getLocation(getActivity(),false);
 
-                                        HGBUtility.removeGPSListener();
+                                 /*       HGBUtility.removeGPSListener();
                                         if (location == null) { // no location found
                                             handleHGBMessage(getString(R.string.itinerary_try_again));
                                             return;
+                                        }*/
+
+                                        if(location != null){
+                                            String[] locationArr = location.split("&");
+                                            getActivityInterface().getTravelOrder().setLocation(locationArr);
                                         }
-                                        locationArr = location.split("&");
+
+                                        locationArr = getActivityInterface().getTravelOrder().getLocation();
                                         airportSendValuesVO.setLatitude(locationArr[0]);
                                         airportSendValuesVO.setLongitude(locationArr[1]);
                                         airportSendValuesVOs.add(airportSendValuesVO);
@@ -526,22 +526,10 @@ public class CNCFragment extends HGBAbstractFragment {
     }
 
     public void handleHGBMessage(String strMessage) {
-
         getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.HGB_ITEM));
-
         removeWaitingItem();
         mAdapter.notifyDataSetChanged();
     }
-
-
-    public void handleErrorHGBMessage(String strMessage) {
-
-        getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.HGB_ERROR_ITEM));
-
-        removeWaitingItem();
-      //  mAdapter.notifyDataSetChanged();
-    }
-
 
 
     private void sendMessageToServer(final String strMessage,final iAfterServer iserverFinished) {
@@ -556,8 +544,40 @@ public class CNCFragment extends HGBAbstractFragment {
 
                     @Override
                     public void onError(Object data) {
-                        removeWaitingItem();
-                        ErrorMessage(data);
+                        ArrayList<AirportSendValuesVO> airportSendValuesVOsTemp = new ArrayList<AirportSendValuesVO>();
+                        AirportSendValuesVO airportSendValuesVO = new AirportSendValuesVO();
+                        ArrayList<CNCItem> cncItems = getActivityInterface().getCNCItems();
+                        if(!cncItems.isEmpty() && cncItems.size()>1){
+
+
+                            String solutionId = getActivityInterface().getTravelOrder().getmSolutionID();
+                            airportSendValuesVO.setQuery(strMessage);
+                            airportSendValuesVO.setId(solutionId);
+                            airportSendValuesVO.setTravelpreferenceprofileid(getActivityInterface().getCurrentUser().getUserprofileid());
+
+                            airportSendValuesVOsTemp.add(airportSendValuesVO);
+
+                            ConnectionManager.getInstance(getActivity()).ItineraryCNCAddCompanionPost(airportSendValuesVOsTemp,  new ConnectionManager.ServerRequestListener() {
+                                @Override
+                                public void onSuccess(Object data) {
+                                    UserTravelMainVO userTraveler = (UserTravelMainVO) data;
+
+                                    handleHGBMessagesViews(userTraveler);
+
+                                    getActivityInterface().setTravelOrder(userTraveler);
+
+                                }
+                                @Override
+                                public void onError(Object data) {
+                                    ErrorMessage(data);
+                                    removeWaitingItem();
+                                    CNCFragment.this.airportSendValuesVOs.clear();
+                                }
+                            });
+                        }else{
+                            removeWaitingItem();
+                            ErrorMessage(data);
+                        }
 
                     }
                 }
@@ -565,23 +585,27 @@ public class CNCFragment extends HGBAbstractFragment {
     }
 
 
+    private void handleHGBMessagesViews(UserTravelMainVO userTraveler){
+        if(userTraveler.getItems().size() <=0){
+            handleHGBMessage(getString(R.string.itinerary_no_items));
+        }
+        else if (getActivityInterface().getSolutionID() == null) {
+            handleHGBMessage(getString(R.string.itinerary_created));
+        }else{
+            handleHGBMessage(getString(R.string.grid_has_been_updated));
+        }
+
+        airportSendValuesVOs.clear();
+    }
+
     private void sendVOForIternarary(ArrayList<AirportSendValuesVO> airportSendValuesVO){
 
         ConnectionManager.getInstance(getActivity()).ItineraryCNCSearchPost(airportSendValuesVO,  new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
-                    HGBUtility.removeGPSListener();
-                    UserTravelMainVO userTraveler = (UserTravelMainVO) data;
-                    if(userTraveler.getItems().size() <=0){
-                        handleHGBMessage(getString(R.string.itinerary_no_items));
-                    }
-                    else if (getActivityInterface().getSolutionID() == null) {
-                        handleHGBMessage(getString(R.string.itinerary_created));
-                    }else{
-                        handleHGBMessage(getString(R.string.grid_has_been_updated));
-                    }
 
-                    airportSendValuesVOs.clear();
+                    UserTravelMainVO userTraveler = (UserTravelMainVO) data;
+                    handleHGBMessagesViews(userTraveler);
 
                     getActivityInterface().setTravelOrder(userTraveler);
 

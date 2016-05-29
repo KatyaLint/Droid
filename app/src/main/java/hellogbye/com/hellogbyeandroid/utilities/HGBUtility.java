@@ -1135,7 +1135,7 @@ public static String formattDateToStringMonthDate(String dateInString) {
      * @param activity
      * @return String first latitude, '&', latitude
      */
-    public static String getLocation(Activity activity ){
+    public static String getLocation(Activity activity, boolean isAlertEnable ){
 
         lm = (LocationManager)activity.getSystemService(Context.LOCATION_SERVICE);
 
@@ -1157,7 +1157,7 @@ public static String formattDateToStringMonthDate(String dateInString) {
         } catch(Exception ex) {}
 
         Location location = null;
-        if(!gps_enabled && !network_enabled){
+        if(isAlertEnable && !gps_enabled && !network_enabled){
             showGPSDisabledAlertToUser(activity);
         }else if(network_enabled){
 
@@ -1172,9 +1172,6 @@ public static String formattDateToStringMonthDate(String dateInString) {
         }else{
             strLocation =latitude + "&" + longitude;
         }
-//        if(strLocation == null){
-//            showGPSDisabledAlertToUser(activity);
-//        }
         return strLocation;
     }
 
@@ -1210,9 +1207,9 @@ public static String formattDateToStringMonthDate(String dateInString) {
     };
 
 
-        private static void showGPSDisabledAlertToUser(final Activity activity){
+        private static void showGPSDisabledAlertToUser(final Activity activity) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
-        alertDialogBuilder.setMessage("GPS is disabled in your device. Would you like to enable it?After enabling try to search again")
+        alertDialogBuilder.setMessage("GPS is disabled in your device. Would you like to enable it?")
                 .setCancelable(false)
                 .setPositiveButton("Goto Settings Page To Enable GPS",
                         new DialogInterface.OnClickListener(){
@@ -1227,9 +1224,9 @@ public static String formattDateToStringMonthDate(String dateInString) {
                     public void onClick(DialogInterface dialog, int id){
                         dialog.cancel();
                     }
-                });
-        AlertDialog alert = alertDialogBuilder.create();
-        alert.show();
+                }).create().show();
+        /*AlertDialog alert = alertDialogBuilder.create();
+        alert.show();*/
     }
 
 

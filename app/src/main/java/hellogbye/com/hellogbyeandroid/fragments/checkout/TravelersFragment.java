@@ -69,7 +69,7 @@ public class TravelersFragment extends HGBAbstractFragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 
-        ConnectionManager.getInstance(getActivity()).getTravellersInforWithSolutionId(getActivityInterface().getSolutionID(), new ConnectionManager.ServerRequestListener() {
+        ConnectionManager.getInstance(getActivity()).getTravellersInforWithSolutionId(getActivityInterface().getTravelOrder().getmSolutionID(), new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
 

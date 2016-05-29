@@ -86,6 +86,7 @@
     <string name="preferences_preferred_cabin_class">Preferred Cabin Class</string>
     <string name="preferences_preferred_cabin_class_rank">Rank the importance of Cabin Class\nfrom most important to least important</string>
 
+    <string name="preferences_relationship_choose">Choose relationship</string>
     <string name="closeDrawer">Navigation View</string>
     <string name="openDrawer">Navigation View Closed</string>
     <string name="type_message">New Message</string>

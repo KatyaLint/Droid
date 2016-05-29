@@ -71,7 +71,7 @@ Code changing:
     ------------------------------------------
       Fixed Bugs:
     -----------
-
+    HEL-879 relationship list titl
 
      Code changing:
     --------------
@@ -82,3 +82,5 @@ Code changing:
         - Remember me
         - Iternerary Fix
         - CNC Fragment, up right fragment go to Itirnerary
+        - GPS only when app start
+        - Iternerary can add to queries

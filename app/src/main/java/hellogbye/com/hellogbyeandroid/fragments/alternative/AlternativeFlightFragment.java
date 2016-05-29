@@ -98,7 +98,8 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
     private void getAlternativeFlights(NodesVO currentNode){
 
-        String solutionID =getActivityInterface().getSolutionID();
+        String solutionID = getActivityInterface().getTravelOrder().getmSolutionID();
+
         String paxId = currentNode.getAccountID();
         String flightID =   currentNode.getmGuid();
 
