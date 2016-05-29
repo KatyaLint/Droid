@@ -5,52 +5,87 @@
     android:layout_height="match_parent"
     android:background="@color/grey_very_light"
     android:orientation="vertical">
-
+    ​
     <include
         android:id="@+id/toolbar_cnc"
-        layout="@layout/toolbar_layout"
-        />
-
+        layout="@layout/toolbar_layout" />
+    ​
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/profile_tutorial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
         android:layout_below="@+id/toolbar_cnc"
         android:layout_centerHorizontal="true"
-        app:fontName="dinnextltpro_medium.otf"
-        android:text="Tap to choose/create profile"
-        android:visibility="gone"
+        android:background="@drawable/combined_shape_02"
         android:gravity="center"
         android:paddingTop="@dimen/DP10"
-        android:background="@drawable/combined_shape_01"
-        android:textSize="@dimen/SP16"/>
-
+        android:text="Tap to choose/create profile"
+        android:textColor="@color/white"
+        android:textSize="@dimen/SP16"
+        android:visibility="gone"
+        app:fontName="dinnextltpro_medium.otf" />
+    ​
+    <LinearLayout
+        android:id="@+id/text_tutorial_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/DP54"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:visibility="visible"
+        android:orientation="vertical">
+        ​
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/text_tutorial_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/you_can_say_things_like"
+            android:textColor="@color/light_grey"
+            android:textSize="@dimen/SP14"
+            app:fontName="dinnextltpro_medium.otf" />
+        ​
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/text_tutorial_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/DP16"
+            android:text="I would like to edit my trip"
+            android:textColor="@color/light_grey"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/SP14"
+            app:fontName="dinnextltpro_medium.otf" />
+        ​
+        ​
+    </LinearLayout>
+    ​
     <!--android:background="@drawable/b_g_android"-->
-
+    ​
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cnc_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/profile_tutorial"
         android:layout_above="@+id/cnc_message_rl"
+        android:layout_below="@+id/profile_tutorial"
         android:scrollbars="vertical" />
+    ​
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/speak_tutorial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        app:fontName="dinnextltpro_medium.otf"
-        android:text="Press to speak"
-        android:visibility="gone"
-        android:gravity="center"
-        android:paddingTop="@dimen/DP10"
-        android:layout_marginRight="@dimen/DP6"
         android:layout_above="@+id/cnc_message_rl"
         android:layout_alignRight="@+id/cnc_message_rl"
+        android:layout_marginRight="@dimen/DP6"
         android:background="@drawable/combined_shape_02"
-        android:textSize="@dimen/SP16"/>
-
+        android:gravity="center"
+        android:paddingTop="@dimen/DP10"
+        android:text="Press to speak"
+        android:textColor="@color/white"
+        android:textSize="@dimen/SP16"
+        android:visibility="gone"
+        app:fontName="dinnextltpro_medium.otf" />
+    ​
+    ​
     <RelativeLayout
         android:id="@+id/cnc_message_rl"
         android:layout_width="match_parent"
@@ -58,13 +93,13 @@
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:orientation="horizontal">
-
+        ​
         <!--<View-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="1dp"-->
         <!--android:layout_alignParentTop="true"-->
         <!--android:background="@color/warm_grey_line" />-->
-
+        ​
         <Button
             android:id="@+id/cnc_fragment_trip_settings"
             android:layout_width="@dimen/DP22"
@@ -72,47 +107,62 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/DP10"
             android:background="@drawable/edit_icon" />
-
-
-
+        ​
 
         <hellogbye.com.hellogbyeandroid.views.FontEditTextView
-
             android:id="@+id/cnc_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/DP4"
             android:layout_toEndOf="@+id/cnc_fragment_trip_settings"
+            android:layout_toLeftOf="@+id/send_ll"
             android:layout_toStartOf="@+id/send_ll"
             android:focusableInTouchMode="true"
             android:gravity="center_vertical"
             android:hint="@string/type_message"
             android:minHeight="@dimen/DP44"
-
             android:textColor="@color/cnc_user_message_color"
             android:textColorHint="@color/cnc_user_message_color"
             android:textSize="@dimen/SP16"
-            android:layout_toLeftOf="@+id/send_ll"
             app:fontName="dinnextltpro_medium.otf" />
 
+        ​
+
+        ​
+  <!--      android:id="@+id/cnc_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/DP4"
+        android:layout_toEndOf="@+id/cnc_fragment_trip_settings"
+        android:layout_toLeftOf="@+id/send_ll"
+        android:layout_toStartOf="@+id/send_ll"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical"
+        android:hint="@string/type_message"
+        ​
+        android:minHeight="@dimen/DP44"
+        android:textColor="@color/cnc_user_message_color"
+        android:textColorHint="@color/cnc_user_message_color"
+        android:textSize="@dimen/SP16"
+        app:fontName="dinnextltpro_medium.otf" />-->
+        ​
         <!--android:text="Fly from Miami to New York"-->
         <!--android:minHeight="@dimen/DP44" />-->
-
-
+        ​
+        ​
         <!--android:text="Fly with Roy and Steve to New York for one week"-->
         <!--android:text="Fly Sam from NYC to Vegas on Nov 15th for 3 nights in the morning then back to NYC. Fly Warren from Miami to Vegas on Nov 15th before 5PM for 3 nights then on to Toronto for a 1 night then back to Miami. Fly me from Toronto to Vegas, on the earliest flight available for 3 nights on Nov 15th then back to Toronto."-->
-
-
-
-
+        ​
+        ​
         <LinearLayout
             android:id="@+id/send_ll"
             android:layout_width="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginRight="@dimen/DP6"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_height="wrap_content">
+            android:layout_marginRight="@dimen/DP6"
+            android:orientation="horizontal">
+            ​
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/cnc_send"
                 android:layout_width="wrap_content"
@@ -123,19 +173,18 @@
                 android:text="@string/send"
                 android:textColor="@color/cnc_user_message_color"
                 android:visibility="gone" />
+            ​
             <ImageView
                 android:id="@+id/cnc_mic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/microphone_icon"
                 android:visibility="visible" />
-
+            ​
         </LinearLayout>
-
-
-
+        ​
+        ​
     </RelativeLayout>
-
-
-
+    ​
+    ​
 </RelativeLayout>

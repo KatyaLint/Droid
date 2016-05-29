@@ -419,6 +419,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
+                if(view.getId()== R.id.right_content_frame){
+                    animateRightPaneClosed();
+                }
                 super.onDrawerClosed(view);
 
             }
@@ -428,6 +431,15 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 super.onDrawerOpened(drawerView);
                 super.onDrawerSlide(drawerView, 0); // this disables the arrow @ completed state
                 HGBUtility.hideKeyboard(getApplicationContext(), drawerView);
+                if(drawerView.getId()== R.id.right_content_frame){
+                    animateRightPaneOpened();
+
+                    FragmentManager fm = getSupportFragmentManager();
+                    //if you added fragment CNCFragment layout xml
+                    CNCFragment fragment = (CNCFragment)fm.findFragmentById(R.id.right_content_frame);
+                    fragment.requestFocusOnMessage();
+                    fragment.startTutorialText();
+                }
 
             }
 
@@ -485,6 +497,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
             }
         });
+
+
 
     }
 
@@ -658,7 +672,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public void closeRightPane() {
         mDrawerLayout.closeDrawer(frameLayout);
-        animateRightPaneClosed();
+
         isRightPaneOpened = false;
     }
 
@@ -669,8 +683,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         mDrawerLayout.openDrawer(frameLayout);
 
-        animateRightPaneOpened();
         isRightPaneOpened = true;
+
+
     }
 
     private Fragment isFreeUser(Fragment fragment, int navPosition) {
@@ -734,7 +749,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case ITINARERY:
                 fragment = ItineraryFragment.newInstance(navPosition);
-                itirnarary_title_Bar.setText(hgbSaveDataClass.getTravelOrder().getmSolutionName());
+
+                setItineraryTitleName();
                 break;
             case ALTERNATIVE_FLIGHT:
                 fragment = AlternativeFlightFragment.newInstance(navPosition);
@@ -801,6 +817,12 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mToolbar.initToolBarItems();
         mToolbar.updateToolBarView(position);
         mDrawerLayout.closeDrawer(mNavDrawerLinearLayout);
+    }
+
+    private void setItineraryTitleName() {
+        if(hgbSaveDataClass.getTravelOrder() != null) {
+            itirnarary_title_Bar.setText(hgbSaveDataClass.getTravelOrder().getmSolutionName());
+        }
     }
 
 
@@ -946,6 +968,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     private void setFavorityItinerary() {
         UserTravelMainVO travelOrder = hgbSaveDataClass.getTravelOrder();
+        if(travelOrder == null){ // there no requests
+            return;
+        }
         String solutionID = travelOrder.getmSolutionID();
         boolean isFavorite = travelOrder.ismIsFavorite();
         ConnectionManager.getInstance(MainActivity.this).putFavorityItenarary(isFavorite, solutionID, new ConnectionManager.ServerRequestListener() {
