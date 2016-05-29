@@ -76,9 +76,11 @@ public class CNCFragment extends HGBAbstractFragment {
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
     private ImageButton imageButton;
     private ImageButton cncDissmissImageButton;
-    private LinearLayout mTextTutorialLinearLayout;
+
     private FontTextView mTextTutoralBody;
+    private FontTextView mTextTutoralHeader;
     private  Handler tutorailTexthandler = new Handler();
+    private   Runnable mRunnable;
 
 
     String[] TUTORIAL_TEXT = {
@@ -301,6 +303,15 @@ public class CNCFragment extends HGBAbstractFragment {
             }, SPLASH_TIME_OUT);
         }
 
+        mRunnable = new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                changeTutorialText();
+                tutorailTexthandler.postDelayed(mRunnable, 2000);
+            }
+        };
+
 
     }
 
@@ -365,7 +376,8 @@ public class CNCFragment extends HGBAbstractFragment {
 
 
             getActivityInterface().addCNCItem(new CNCItem(text, CNCAdapter.HGB_ITEM));
-            mTextTutorialLinearLayout.setVisibility(View.VISIBLE);
+            mTextTutoralHeader.setVisibility(View.VISIBLE);
+            mTextTutoralBody.setVisibility(View.VISIBLE);
         } else {
 
             if (getActivityInterface().getCNCItems() == null) {
@@ -400,7 +412,7 @@ public class CNCFragment extends HGBAbstractFragment {
         mMicImageView = (ImageView) view.findViewById(R.id.cnc_mic);
         mSendTextView = (FontTextView) view.findViewById(R.id.cnc_send);
 
-        mTextTutorialLinearLayout = (LinearLayout)view.findViewById(R.id.text_tutorial_ll);
+        mTextTutoralHeader = (FontTextView) view.findViewById(R.id.text_tutorial_body);
         mTextTutoralBody = (FontTextView)view.findViewById(R.id.text_tutorial_body);
         mSendTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -446,7 +458,8 @@ public class CNCFragment extends HGBAbstractFragment {
 
 
     public void handleMyMessage(final String strMessage) {
-        mTextTutorialLinearLayout.setVisibility(View.GONE);
+        mTextTutoralHeader.setVisibility(View.GONE);
+        mTextTutoralBody.setVisibility(View.GONE);
         getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.ME_ITEM));
         addWaitingItem();
         mAdapter.notifyDataSetChanged();
@@ -702,14 +715,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
     public void  startTutorialText(){
 
-        tutorailTexthandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //Do something after 100ms
-                changeTutorialText();
-                tutorailTexthandler.postDelayed(this, 2000);
-            }
-        }, 1500);
+        tutorailTexthandler.postDelayed(mRunnable,2000);
     }
 
     private void changeTutorialText() {
@@ -747,7 +753,10 @@ public class CNCFragment extends HGBAbstractFragment {
     }
 
     public void stopTextTutorial(){
-        //tutorailTexthandler.removeCallbacks();
+        tutorailTexthandler.removeCallbacks(mRunnable);
+        //TODO need to fix
     }
+
+
 
 }

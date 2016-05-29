@@ -25,15 +25,6 @@
         android:visibility="gone"
         app:fontName="dinnextltpro_medium.otf" />
 
-    <LinearLayout
-        android:id="@+id/text_tutorial_ll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/DP54"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:visibility="visible"
-        android:orientation="vertical">
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/text_tutorial_header"
@@ -50,14 +41,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/DP16"
+            android:layout_below="@+id/text_tutorial_header"
+            android:paddingLeft="@dimen/DP54"
+            android:paddingRight="@dimen/DP54"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
             android:text="I would like to edit my trip"
             android:textColor="@color/light_grey"
-            android:layout_centerInParent="true"
             android:textSize="14sp"
             app:fontName="dinnextltpro_medium.otf" />
 
 
-    </LinearLayout>
 
     <!--android:background="@drawable/b_g_android"-->
 
