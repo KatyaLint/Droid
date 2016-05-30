@@ -20,4 +20,12 @@
     </string-array>
 
 
+    <string-array name="tutorial_arr">
+        <item>I want to fly to Vancouver on December 17th for 10 days, staying in a 4 star hotel</item>
+        <item>"I would like to edit my trip"</item>
+        <item>"I would like to add a travel companion"</item>
+
+    </string-array>
+
+
 </resources>

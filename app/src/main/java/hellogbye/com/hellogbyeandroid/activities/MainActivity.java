@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     private HashMap<String, String> mBookingHashMap = new HashMap<>();
 
-    private ImageView mRightPaneImageView;
+   // private ImageView mRightPaneImageView;
 
     private final static int RIGHT_PANE_ANIMATION_TIME = 300;
 
@@ -185,11 +185,11 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         getUserData();
         getCompanionsFromServer();
-        initRightPane();
+   //     initRightPane();
 
         boolean locationToken = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.HGB_LOCATION_TOKEN, true);
         String location = HGBUtility.getLocation(MainActivity.this, locationToken);
-        if(location != null){
+        if(location != null && hgbSaveDataClass.getTravelOrder()!= null){
             String[] locationArr = location.split("&");
             hgbSaveDataClass.getTravelOrder().setLocation(locationArr);
             hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_LOCATION_TOKEN, false);
@@ -320,24 +320,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         }
     }
 
-
-//    private void editMyTrips(){
-//        final FontTextView my_trip_edit_button = (FontTextView) mToolbar.findViewById(R.id.my_trip_edit_button);
-//        my_trip_edit_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(my_trip_edit_button.getText().equals("Edit")) {
-//                    editMyTripsClickCB.onItemEditMyTripsClick("edit");
-//                    my_trip_edit_button.setText("Done");
-//                }else{
-//                    editMyTripsClickCB.onItemEditMyTripsClick("done");
-//                    my_trip_edit_button.setText("Edit");
-//                }
-//            }
-//        });
-//    }
-
-
     private void toolBarProfileChnage() {
 
         final LinearLayout tool_bar_profile_name = (LinearLayout) mToolbar.findViewById(R.id.tool_bar_profile_name);
@@ -350,6 +332,19 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 goToFragment(ToolBarNavEnum.PREFERENCE.getNavNumber(), args);
                 LinearLayout edit_preferences = (LinearLayout) mToolbar.findViewById(R.id.preferences_edit_mode);
                 edit_preferences.setVisibility(View.GONE);
+            }
+        });
+
+
+        final ImageButton toolbar_go_to_iternerary = (ImageButton)mToolbar.findViewById(R.id.toolbar_go_to_iternerary);
+        toolbar_go_to_iternerary.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if(hgbSaveDataClass.getTravelOrder() == null){
+                    toolbar_go_to_iternerary.setEnabled(false);
+                }else {
+                    goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
+                }
             }
         });
 
@@ -382,6 +377,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             }
         });
     }
+
 
     private void initToolBar() {
 
@@ -471,16 +467,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         //selectItem(ToolBarNavEnum.HOME.getNavNumber(), null);
 
     }
-
-    private void clearCNCItems() {
-
-        hgbSaveDataClass.setCNCItems(null);
-        hgbSaveDataClass.setTravelOrder(null);
-        hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
-        hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
-        Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(CNCFragment.class.toString());
-        ((CNCFragment) currentFragment).initList();
-    }
+/*
 
     private void initRightPane() {
 
@@ -491,24 +478,25 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         transaction.commit();
         frameLayout = (FrameLayout) findViewById(R.id.right_content_frame);
-        mRightPaneImageView = (ImageView)findViewById(R.id.right_pane_button);
+*/
+/*        mRightPaneImageView = (ImageView)findViewById(R.id.right_pane_button);
 
         mRightPaneImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openRightPane();
-
-
             }
-        });
+        });*//*
+
 
     }
+*/
 
     private void animateRightPaneOpened() {
         Animation fadeOut = new AlphaAnimation(1, 0);
         fadeOut.setDuration(RIGHT_PANE_ANIMATION_TIME);
         fadeOut.setFillAfter(true);
-        mRightPaneImageView.startAnimation(fadeOut);
+      //  mRightPaneImageView.startAnimation(fadeOut);
     }
 
 
@@ -516,7 +504,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         Animation fadeIn = new AlphaAnimation(0, 1);
         fadeIn.setDuration(RIGHT_PANE_ANIMATION_TIME);
         fadeIn.setFillAfter(true);
-        mRightPaneImageView.startAnimation(fadeIn);
+     //   mRightPaneImageView.startAnimation(fadeIn);
 
     }
 
@@ -577,24 +565,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             selectItem(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
         }
     }
-
-    @Override
-    public void loadJSONFromAsset() {
-
-//        if (hgbSaveDataClass.getEligabileCountries().size() > 0) {
-//            return;
-//        }
-//
-//        String json = HGBUtility.loadJSONFromAsset("countrieswithprovinces.txt", this);
-//
-//        Gson gson = new Gson();
-//        Type listType = new TypeToken<List<CountryItemVO>>() {
-//        }.getType();
-//        ArrayList<CountryItemVO> list = gson.fromJson(json, listType);
-//        hgbSaveDataClass.setEligabileCountries(list);
-
-    }
-
 
     @Override
     public void gotToStartMenuActivity() {
@@ -673,9 +643,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     @Override
     public void closeRightPane() {
-        mDrawerLayout.closeDrawer(frameLayout);
+      /*  mDrawerLayout.closeDrawer(frameLayout);
 
-        isRightPaneOpened = false;
+        isRightPaneOpened = false;*/
     }
 
 
@@ -683,8 +653,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public void openRightPane() {
 
-        mDrawerLayout.openDrawer(frameLayout);
-        isRightPaneOpened = true;
+    /*    mDrawerLayout.openDrawer(frameLayout);
+        isRightPaneOpened = true;*/
 
     }
 
@@ -710,11 +680,13 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         switch (navBar) {
             case HOME:
                 //  fragment = HomeFragment.newInstance(navPosition);
-                //fragment = CNCFragment.newInstance(navPosition);
-                openRightPane();
-             //   clearCNCItems();
-                return;
+                //openRightPane();
+              //  clearCNCItems();
+                break;
+            case CNC:
+                fragment = CNCFragment.newInstance(navPosition);
 
+                break;
 //            case HISTORY:
 //                fragment = HistoryFragment.newInstance(navPosition);
 //                break;
@@ -815,6 +787,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         HGBUtility.goToNextFragmentIsAddToBackStack(getSupportFragmentManager(), fragment, stashToBack, isAddAnimation);
         mToolbar.initToolBarItems();
+        System.out.println("Kate position =" + position);
         mToolbar.updateToolBarView(position);
         mDrawerLayout.closeDrawer(mNavDrawerLinearLayout);
     }
@@ -876,10 +849,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             onBackPressedListener.doBack();
         }
 
-        if(isRightPaneOpened){
+  /*      if(isRightPaneOpened){
             closeRightPane();
             return;
-        }
+        }*/
 
         //TODO this is when I want the fragment to contorl the back -Kate I suggest we do this for all Fragments
 

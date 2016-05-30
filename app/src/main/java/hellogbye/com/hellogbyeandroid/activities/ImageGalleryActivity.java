@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.ImageFragment;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 
 /**
  * Created by arisprung on 10/20/15.
@@ -61,9 +62,9 @@ public class ImageGalleryActivity extends FragmentActivity {
         @Override
         public Fragment getItem(int position) {
             final Bundle bundle = new Bundle();
-            bundle.putInt(ImageFragment.EXTRA_POSITION, position);
-            bundle.putString(ImageFragment.EXTRA_IMAGE_URL, listImages.get(position));
-            bundle.putInt(ImageFragment.EXTRA_IMAGE_URL_SIZE, listImages.size());
+            bundle.putInt(HGBConstants.EXTRA_POSITION, position);
+            bundle.putString(HGBConstants.EXTRA_IMAGE_URL, listImages.get(position));
+            bundle.putInt(HGBConstants.EXTRA_IMAGE_URL_SIZE, listImages.size());
             final ImageFragment fragment = new ImageFragment();
             fragment.setArguments(bundle);
             return fragment;

@@ -19,16 +19,12 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.process.BitmapProcessor;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 
 /**
  * Created by arisprung on 10/20/15.
  */
 public class ImageFragment extends Fragment {
-
-    public static final String EXTRA_POSITION = "extra_position";
-    public static final String EXTRA_IMAGE_URL = "extra_image_url";
-    public static final String EXTRA_IMAGE_URL_SIZE = "extra_image_size";
-
 
 
     @Override
@@ -40,9 +36,9 @@ public class ImageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final int position = getArguments().getInt(EXTRA_POSITION);
-        final String imageurl = getArguments().getString(EXTRA_IMAGE_URL);
-        final int size =getArguments().getInt(EXTRA_IMAGE_URL_SIZE);
+        final int position = getArguments().getInt(HGBConstants.EXTRA_POSITION);
+        final String imageurl = getArguments().getString(HGBConstants.EXTRA_IMAGE_URL);
+        final int size =getArguments().getInt(HGBConstants.EXTRA_IMAGE_URL_SIZE);
 
         View view = inflater.inflate(R.layout.image_gallery_fragment_layout, container, false);
         ImageView imageView = (ImageView)view.findViewById(R.id.gallery_image);

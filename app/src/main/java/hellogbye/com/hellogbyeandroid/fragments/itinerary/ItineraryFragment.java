@@ -201,21 +201,6 @@ public class ItineraryFragment extends HGBAbstractFragment {
     }
 
 
-    private ArrayList<NodesVO>  getNodesWithSameDate(String date,ArrayList<NodesVO> passengerNodes){
-        ArrayList<NodesVO> sameDateNodes = new ArrayList<>();
-        String formattedDate = HGBUtility.parseDateToddMMyyyyForPayment(date);
-        for (NodesVO passengerNode : passengerNodes){
-            String passengerDate = HGBUtility.parseDateToddMMyyyyForPayment(passengerNode.getDateOfCell());
-            if(passengerDate.equals(formattedDate)){
-                sameDateNodes.add(passengerNode);
-            }
-        }
-        return sameDateNodes;
-    }
-
-
-
-
     private LinearLayout createGridView(UserTravelMainVO user){
 
         ArrayList<PassengersVO> passengers = user.getPassengerses();

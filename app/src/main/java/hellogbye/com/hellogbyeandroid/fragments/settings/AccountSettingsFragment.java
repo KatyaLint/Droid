@@ -96,8 +96,11 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
         String userName = title +" "+ currentUser.getFirstname() + " " + currentUser.getLastname();
         account_settings_details_name.setText(userName);
 
-
-        String userCity = currentUser.getCity() + " " + currentUser.getAddress();
+        String address = currentUser.getAddress();
+        if(address == null){
+            address = "";
+        }
+        String userCity = currentUser.getCity() + " " + address;
         account_settings_details_city.setText(userCity);
     }
 

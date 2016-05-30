@@ -15,5 +15,11 @@ public class HGBConstants {
     public static final String BUNDLE_ADD_COMPANION_ID = "user_companion_id";
     public static final String USER_ID = "user_id";
 
+    public static final String EXTRA_POSITION = "extra_position";
+    public static final String EXTRA_IMAGE_URL = "extra_image_url";
+    public static final String EXTRA_IMAGE_URL_SIZE = "extra_image_size";
+
+    public static final String CNC_CLEAR_CHAT = "cnc_clear_chat";
+
 
 }

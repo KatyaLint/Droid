@@ -1,6 +1,7 @@
 package hellogbye.com.hellogbyeandroid.fragments.mytrips;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -28,7 +29,7 @@ import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 
 /**
@@ -80,7 +81,10 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
         my_trips_go_to_cnc.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                getFlowInterface().goToFragment(ToolBarNavEnum.HOME.getNavNumber(), null);
+
+                final Bundle bundle = new Bundle();
+                bundle.putBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
+                getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), bundle);
             }
         });
     }
@@ -91,16 +95,12 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
 
             @Override
             public void clickedItem(String solutionId) {
-                //TODO check solotunion id
-
                 ConnectionManager.getInstance(activity).getItinerary(solutionId, new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
                         UserTravelMainVO userTravelMainVO = (UserTravelMainVO) data;
                         getActivityInterface().setTravelOrder(userTravelMainVO);
                         getFlowInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
-                        Log.d("", "");
-                        //TODO set Travel and got to current itenrary
                     }
 
                     @Override

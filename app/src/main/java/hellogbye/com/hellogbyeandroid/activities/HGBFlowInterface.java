@@ -22,7 +22,6 @@ public interface HGBFlowInterface {
     void goToFragment(int fragment, Bundle bundle);
 
     void continueFlow(int fragment);
-    void loadJSONFromAsset();
     void gotToStartMenuActivity();
     void setHomeImage(String id);
     void setCreditCardsSelected(HashSet<CreditCardItem> cardsList);

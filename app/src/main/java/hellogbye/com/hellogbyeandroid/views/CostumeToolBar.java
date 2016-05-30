@@ -31,6 +31,7 @@ public class CostumeToolBar extends Toolbar {
     private FontTextView my_trip_profile;
     private FontTextView itirnarary_title_Bar;
     private LinearLayout tool_bar_profile_name;
+    private ImageButton toolbar_go_to_iternerary;
 
     public CostumeToolBar(Context context) {
         super(context);
@@ -87,6 +88,9 @@ public class CostumeToolBar extends Toolbar {
         }if(tool_bar_profile_name == null){
             tool_bar_profile_name = (LinearLayout)findViewById(R.id.tool_bar_profile_name);
         }
+        if(toolbar_go_to_iternerary == null){
+            toolbar_go_to_iternerary = (ImageButton) findViewById(R.id.toolbar_go_to_iternerary);
+        }
 
     }
 
@@ -110,13 +114,21 @@ public class CostumeToolBar extends Toolbar {
        // my_trip_edit_button.setVisibility(View.GONE);
      //   my_trips_image_profile.setVisibility(View.GONE);
         itirnarary_title_Bar.setVisibility(View.GONE);
+        toolbar_go_to_iternerary.setVisibility(View.GONE);
+
         switch (navBar) {
-//            case HOME:
+         //   case HOME:
+     /*           tool_bar_profile_name.setVisibility(View.VISIBLE);
+                toolbar_go_to_iternerary.setVisibility(View.VISIBLE);*/
 //             //   homeTitleImage.setVisibility(View.VISIBLE);
 //                my_trip_profile.setVisibility(View.VISIBLE);
 //                keyBoardImage.setVisibility(View.VISIBLE);
 //
-//                break;
+         //       break;
+            case CNC:
+                tool_bar_profile_name.setVisibility(View.VISIBLE);
+                toolbar_go_to_iternerary.setVisibility(View.VISIBLE);
+                break;
             case ITINARERY:
                // titleText.setVisibility(View.VISIBLE);
             //    up_bar_favorite.setVisibility(View.VISIBLE);
@@ -139,23 +151,14 @@ public class CostumeToolBar extends Toolbar {
             case PREFERENCES_CHECK_LIST_SETTINGS:
             case PREFERENCES_SEARCH_LIST_SETTINGS:
             case PREFERENCES_SPECIFIC_LIST_SETTINGS:
-            case  PREFERENCES_DRAG_LIST_SETTINGS:
+            case PREFERENCES_DRAG_LIST_SETTINGS:
+
                 titleText.setVisibility(View.VISIBLE);
                 break;
             case PREFERENCE:
                 titleText.setVisibility(View.VISIBLE);
                 preferences_edit_mode.setVisibility(View.VISIBLE);
                 edit_preferences.setVisibility(View.VISIBLE);
-                break;
-
-            case CNC:
-              //  my_trips_image_profile.setImageBitmap(HGBUtility.getBitmapFromCache(mContext));
-          //      my_trips_image_profile.setVisibility(View.VISIBLE);
-                //homeTitleImage.setVisibility(View.VISIBLE);
-              //  my_trip_profile.setVisibility(View.VISIBLE);
-
-           //     keyBoardImage.setVisibility(View.VISIBLE);
-                tool_bar_profile_name.setVisibility(View.VISIBLE);
                 break;
 
         }

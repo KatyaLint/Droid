@@ -9,7 +9,7 @@ public enum ToolBarNavEnum {
     PREFERENCE(2,"Preference Settings"),
     ACCOUNT(3,"Account Settings"),
     HELP(4,"Help & Feedback"),
-    CNC(8,"cnc"),
+    CNC(8,"CNC"),
     ALTERNATIVE_FLIGHT(9,"Alternative Flight"),
     HOTEL(10,"Hotel"),
     ALTERNATIVE_FLIGHT_DETAILS(11,"Alternative flight details"),

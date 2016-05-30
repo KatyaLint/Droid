@@ -6,15 +6,16 @@
     android:background="@color/grey_very_light"
     android:orientation="vertical">
     ​
-    <include
+ <!--   <include
         android:id="@+id/toolbar_cnc"
-        layout="@layout/toolbar_layout" />
+        android:visibility="gone"
+        layout="@layout/toolbar_layout" />-->
     ​
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/profile_tutorial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar_cnc"
+
         android:layout_centerHorizontal="true"
         android:background="@drawable/combined_shape_02"
         android:gravity="center"
@@ -24,7 +25,7 @@
         android:textSize="@dimen/SP16"
         android:visibility="gone"
         app:fontName="dinnextltpro_medium.otf" />
-
+ <!--   android:layout_below="@+id/toolbar_cnc"-->
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/text_tutorial_header"
@@ -34,6 +35,7 @@
             android:text="@string/you_can_say_things_like"
             android:textColor="@color/light_grey"
             android:textSize="@dimen/SP14"
+            android:visibility="gone"
             app:fontName="dinnextltpro_medium.otf" />
         ​
         <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -46,9 +48,8 @@
             android:paddingRight="@dimen/DP54"
             android:gravity="center"
             android:layout_centerHorizontal="true"
-            android:text="I would like to edit my trip"
             android:textColor="@color/light_grey"
-
+            android:visibility="gone"
             android:textSize="14sp"
             app:fontName="dinnextltpro_medium.otf" />
 

@@ -6,18 +6,15 @@ package hellogbye.com.hellogbyeandroid.fragments.companions;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
@@ -29,14 +26,11 @@ import hellogbye.com.hellogbyeandroid.R;
 
 import hellogbye.com.hellogbyeandroid.adapters.companion.CompanionsSwipeItemsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
-import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
@@ -145,7 +139,8 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
                 Bundle args = new Bundle();
                 if(addCompanionsToCNCScreen){
                     args.putString(HGBConstants.BUNDLE_ADD_COMPANION_ID, guid);
-                    getFlowInterface().goToFragment(ToolBarNavEnum.HOME.getNavNumber(), args);
+                    args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, false);
+                    getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), args);
 
                 }else {
                     args.putString(HGBConstants.USER_ID, guid);

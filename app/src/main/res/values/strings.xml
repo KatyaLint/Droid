@@ -205,5 +205,6 @@
 
 
     <string name="you_can_say_things_like">You can say things like:</string>
+    <string name="cnc_error">You received error, please try again.</string>
 
 </resources>

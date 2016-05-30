@@ -75,16 +75,16 @@ public class UserDataVO {
         this.firstname = firstname;
         this.lastname = lastname;
         this.dob = dob;
-        this.country = country;
-        this.address = address;
-        this.city = city;
-        this.state = state;
+        setCountry(country);
+        setAddress(address);
+        setCity(city);
+      setState(state);
         this.postalcode = postalcode;
         this.avatar = avatar;
         this.ispremiumuser = ispremiumuser;
         this.paxid = paxid;
         this.phone = phone;
-        this.title = title;
+        setTitle(title);
     }
 
 
@@ -136,8 +136,11 @@ public class UserDataVO {
 
     public void setCountry(String country) {
 
-
-        this.country = country;
+        if(country == null){ //can be from parser
+            this.country = "";
+        }else {
+            this.country = country;
+        }
     }
 
     public String getAddress() {
@@ -153,7 +156,11 @@ public class UserDataVO {
     }
 
     public void setCity(String city) {
-        this.city = city;
+        if(city == null){ //can be from parser
+            this.city = "";
+        }else {
+            this.city = city;
+        }
     }
 
     public String getState() {
@@ -161,7 +168,11 @@ public class UserDataVO {
     }
 
     public void setState(String state) {
-        this.state = state;
+        if(state == null){ //can be from parser
+            this.state = "";
+        }else {
+            this.state = state;
+        }
     }
 
     public String getPostalcode() {
@@ -209,7 +220,11 @@ public class UserDataVO {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        if(title != null) {
+            this.title = title.trim();
+        } else{
+            this.title = "";
+        }
     }
 
     public String getGender() {

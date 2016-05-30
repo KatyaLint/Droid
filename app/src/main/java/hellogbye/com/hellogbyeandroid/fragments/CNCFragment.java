@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -41,12 +39,12 @@ import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportResultsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportServerResultVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.ResponsesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
-import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -68,7 +66,7 @@ public class CNCFragment extends HGBAbstractFragment {
     private String[] locationArr;
     private Button cnc_fragment_trip_settings;
     private static int SPLASH_TIME_OUT = 5000;
-    private CostumeToolBar mToolbar;
+  //  private CostumeToolBar mToolbar;
 
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
     private ImageButton toolbar_go_to_iternerary;
@@ -78,14 +76,16 @@ public class CNCFragment extends HGBAbstractFragment {
     private FontTextView mTextTutoralHeader;
     private  Handler tutorailTexthandler = new Handler();
     private   Runnable mRunnable;
+    private String[] account_settings;
 
 
-    String[] TUTORIAL_TEXT = {
+
+/*    String[] TUTORIAL_TEXT = {
             "I want to fly to Vancouver on December 17th for 10 days, staying in a 4 star hotel",
             "I would like to edit my trip",
             "I would like to add a travel companion",
 
-    };
+    };*/
 
     private int mTutorialTextNumber = 0;
 
@@ -107,15 +107,18 @@ public class CNCFragment extends HGBAbstractFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
        // getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
+        account_settings = getResources().getStringArray(R.array.tutorial_arr);
+
         View rootView = inflater.inflate(R.layout.cnc_fragment_layout, container, false);
-        mToolbar = (CostumeToolBar)rootView.findViewById(R.id.toolbar_cnc);
+     //   mToolbar = (CostumeToolBar)rootView.findViewById(R.id.toolbar_cnc);
 
         mHGBPrefrenceManager = HGBPreferencesManager.getInstance(getActivity().getApplicationContext());
+
         init(rootView);
         initList();
 
 
-        updateToolBarView();
+    //    updateToolBarView();
 
 
         getAccountsProfiles();
@@ -124,9 +127,38 @@ public class CNCFragment extends HGBAbstractFragment {
         startTutorial();
         joinCompanionToTravel();
 
+        Bundle args = getArguments();
+        boolean clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT);
+
+        if(clearCNCscreen){
+            startTutorialText();
+            clearCNCItems();
+            args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, false);
+            mTextTutoralHeader.setVisibility(View.VISIBLE);
+            mTextTutoralBody.setVisibility(View.VISIBLE);
+        }else{
+            mTextTutoralHeader.setVisibility(View.GONE);
+            mTextTutoralBody.setVisibility(View.GONE);
+        }
+
+
+
+
         return rootView;
     }
 
+
+    private void clearCNCItems() {
+
+        getActivityInterface().setCNCItems(null);
+        getActivityInterface().setTravelOrder(null);
+        mHGBPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
+        mHGBPrefrenceManager.removeKey(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
+        initList();
+    }
+
+
+/*
 
     private void updateToolBarView() {
         toolbar_go_to_iternerary = (ImageButton) mToolbar.findViewById(R.id.toolbar_go_to_iternerary);
@@ -157,6 +189,7 @@ public class CNCFragment extends HGBAbstractFragment {
         toolBarProfileChnage();
 
     }
+*/
 
 
 
@@ -179,13 +212,22 @@ public class CNCFragment extends HGBAbstractFragment {
         String joinQuery = "Join ";
 
         ArrayList<AccountsVO> accounts = getActivityInterface().getAccounts();
-        for(AccountsVO account:accounts){
+        ArrayList<CompanionVO> companions = getActivityInterface().getCompanions();
+
+        for(CompanionVO companionVO : companions){
+            if(companionVO.getmCompanionid().equals(user_id)){
+                userName = companionVO.getCompanionUserProfile().getmFirstName();
+                break;
+            }
+        }
+
+       /* for(AccountsVO account:accounts){
             if(account.getTravelpreferenceprofile().getId().equals(user_id)){
 
                 userName = account.getTravelpreferenceprofile().getProfilename();
                 break;
             }
-        }
+        }*/
 
         joinQuery = joinQuery + userName + " to the trip";
 
@@ -216,8 +258,9 @@ public class CNCFragment extends HGBAbstractFragment {
             }
             @Override
             public void onError(Object data) {
+
                 ErrorMessage(data);
-                removeWaitingItem();
+                handleHGBMessage(getResources().getString(R.string.cnc_error));
                 CNCFragment.this.airportSendValuesVOs.clear();
             }
         });
@@ -291,7 +334,6 @@ public class CNCFragment extends HGBAbstractFragment {
             @Override
             public void onError(Object data) {
                 ErrorMessage(data);
-                removeWaitingItem();
             }
         });
     }
@@ -314,7 +356,7 @@ public class CNCFragment extends HGBAbstractFragment {
                 if (getString(R.string.itinerary_created).equals(strText)
                         || getString(R.string.grid_has_been_updated).equals(strText)) {
                     getFlowInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(),null);
-                    getFlowInterface().closeRightPane();
+                   /* getFlowInterface().closeRightPane();*/
                 }
             }
         });
@@ -366,7 +408,7 @@ public class CNCFragment extends HGBAbstractFragment {
         cnc_fragment_trip_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFlowInterface().closeRightPane();
+               /* getFlowInterface().closeRightPane();*/
                 getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCE.getNavNumber(), null);
             }
         });
@@ -376,8 +418,10 @@ public class CNCFragment extends HGBAbstractFragment {
         mMicImageView = (ImageView) view.findViewById(R.id.cnc_mic);
         mSendTextView = (FontTextView) view.findViewById(R.id.cnc_send);
 
+
         mTextTutoralHeader = (FontTextView) view.findViewById(R.id.text_tutorial_header);
         mTextTutoralBody = (FontTextView)view.findViewById(R.id.text_tutorial_body);
+
 
         mSendTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -488,12 +532,12 @@ public class CNCFragment extends HGBAbstractFragment {
                                             return;
                                         }*/
 
-                                        if(location != null){
+                                        if(location != null && getActivityInterface().getTravelOrder()!= null){
                                             String[] locationArr = location.split("&");
                                             getActivityInterface().getTravelOrder().setLocation(locationArr);
                                         }
 
-                                        locationArr = getActivityInterface().getTravelOrder().getLocation();
+                                        locationArr = location.split("&");
                                         airportSendValuesVO.setLatitude(locationArr[0]);
                                         airportSendValuesVO.setLongitude(locationArr[1]);
                                         airportSendValuesVOs.add(airportSendValuesVO);
@@ -528,7 +572,6 @@ public class CNCFragment extends HGBAbstractFragment {
     public void handleHGBMessage(String strMessage) {
         getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.HGB_ITEM));
         removeWaitingItem();
-        mAdapter.notifyDataSetChanged();
     }
 
 
@@ -544,6 +587,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
                     @Override
                     public void onError(Object data) {
+                        System.out.println("Kate error sendMessageToServer");
                         ArrayList<AirportSendValuesVO> airportSendValuesVOsTemp = new ArrayList<AirportSendValuesVO>();
                         AirportSendValuesVO airportSendValuesVO = new AirportSendValuesVO();
                         ArrayList<CNCItem> cncItems = getActivityInterface().getCNCItems();
@@ -561,21 +605,19 @@ public class CNCFragment extends HGBAbstractFragment {
                                 @Override
                                 public void onSuccess(Object data) {
                                     UserTravelMainVO userTraveler = (UserTravelMainVO) data;
-
                                     handleHGBMessagesViews(userTraveler);
-
                                     getActivityInterface().setTravelOrder(userTraveler);
 
                                 }
                                 @Override
                                 public void onError(Object data) {
                                     ErrorMessage(data);
-                                    removeWaitingItem();
+                                    handleHGBMessage(getResources().getString(R.string.cnc_error));
                                     CNCFragment.this.airportSendValuesVOs.clear();
                                 }
                             });
                         }else{
-                            removeWaitingItem();
+                            handleHGBMessage(getResources().getString(R.string.cnc_error));
                             ErrorMessage(data);
                         }
 
@@ -606,14 +648,13 @@ public class CNCFragment extends HGBAbstractFragment {
 
                     UserTravelMainVO userTraveler = (UserTravelMainVO) data;
                     handleHGBMessagesViews(userTraveler);
-
                     getActivityInterface().setTravelOrder(userTraveler);
 
                 }
                 @Override
                 public void onError(Object data) {
                     ErrorMessage(data);
-                    removeWaitingItem();
+                    handleHGBMessage(getResources().getString(R.string.cnc_error));
                     airportSendValuesVOs.clear();
                 }
             });
@@ -659,9 +700,10 @@ public class CNCFragment extends HGBAbstractFragment {
                 iter.remove();
             }
         }
+        mAdapter.notifyDataSetChanged();
     }
 
-    private void preferencesChanges() {
+   /* private void preferencesChanges() {
         final ImageButton edit_preferences = (ImageButton) mToolbar.findViewById(R.id.edit_preferences);
         edit_preferences.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -687,12 +729,11 @@ public class CNCFragment extends HGBAbstractFragment {
                 editClickCB.onItemClick("done");
             }
         });
-    }
+    }*/
 
-    public void setEditClickCB(PreferenceSettingsFragment.OnItemClickListener editClickCB) {
-        this.editClickCB = editClickCB;
-    }
 
+
+/*
     private void toolBarProfileChnage() {
 
         final LinearLayout tool_bar_profile_name = (LinearLayout) mToolbar.findViewById(R.id.tool_bar_profile_name);
@@ -708,7 +749,7 @@ public class CNCFragment extends HGBAbstractFragment {
             }
         });
 
-    }
+    }*/
 
     public void requestFocusOnMessage(){
         mEditText.requestFocus();
@@ -727,6 +768,7 @@ public class CNCFragment extends HGBAbstractFragment {
         fadeOut.setDuration(200);
         fadeIn.setDuration(200);
         mTextTutoralBody.startAnimation(fadeOut);
+
         fadeOut.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -735,10 +777,11 @@ public class CNCFragment extends HGBAbstractFragment {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                if(TUTORIAL_TEXT.length ==mTutorialTextNumber){
+
+                if(account_settings.length ==mTutorialTextNumber){
                     mTutorialTextNumber = 0;
                 }
-                mTextTutoralBody.setText(TUTORIAL_TEXT[mTutorialTextNumber]);
+                mTextTutoralBody.setText(account_settings[mTutorialTextNumber]);
                 mTextTutoralBody.startAnimation(fadeIn);
 
                 mTutorialTextNumber++;
@@ -755,7 +798,6 @@ public class CNCFragment extends HGBAbstractFragment {
 
     public void stopTextTutorial(){
         tutorailTexthandler.removeCallbacks(mRunnable);
-        //TODO need to fix
     }
 
 

@@ -130,12 +130,12 @@
 
 </android.support.v4.widget.DrawerLayout>
 
-    <ImageView
+<!--    <ImageView
         android:id="@+id/right_pane_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/c_n_c_side_tub"
         android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"/>-->
 
 </RelativeLayout>
