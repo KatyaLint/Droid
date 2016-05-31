@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="10sp"
-        android:text="Card Information"
+        android:text="CARD INFORMATION"
         app:fontName="dinnextltpro_regular.otf" />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -68,19 +68,38 @@
             android:orientation="horizontal">
 
             <hellogbye.com.hellogbyeandroid.views.FontEditTextView
-                android:id="@+id/cc_expiry"
+                android:id="@+id/cc_expiry_month"
                 style="@style/cc_edit_text"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:hint="Expiry Date"
-                android:inputType="datetime"
+                android:hint="Exp. Month"
+                android:gravity="center"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                app:fontName="dinnextltpro_regular.otf" />
+
+
+            <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+                android:id="@+id/cc_expiry_year"
+                style="@style/cc_edit_text"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:hint="Exp. Year"
+                android:layout_marginLeft="@dimen/DP24"
+                android:clickable="false"
+                android:gravity="center"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 app:fontName="dinnextltpro_regular.otf" />
 
             <hellogbye.com.hellogbyeandroid.views.FontEditTextView
                 android:id="@+id/cc_ccv"
                 style="@style/cc_edit_text"
                 android:layout_width="0dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="@dimen/DP24"
                 android:layout_weight="1"
                 android:hint="CCV"
                 android:inputType="number"
@@ -89,11 +108,41 @@
 
         </LinearLayout>
 
-        <LinearLayout
+
+    </LinearLayout>
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/cc_billing_address"
+        android:padding="15dp"
+        android:layout_below="@+id/cc_details_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:text="BILLING INFORMATION"
+        app:fontName="dinnextltpro_regular.otf" />
+
+
+    <LinearLayout
+        android:id="@+id/cc_billing_adress_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cc_billing_address"
+
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding='@dimen/DP24'>
+
+        <CheckBox
+            android:id="@+id/add_cc_checkboox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/DP24"
+            android:textSize="16sp"
+            android:text="Use my home address as billing adress"/>
 
+        <LinearLayout
+            android:layout_marginTop="@dimen/DP24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <hellogbye.com.hellogbyeandroid.views.FontEditTextView
@@ -117,34 +166,13 @@
 
 
         </LinearLayout>
-    </LinearLayout>
-
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/cc_billing_address"
-        android:padding="15dp"
-        android:layout_below="@+id/cc_details_ll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="10sp"
-        android:text="Billing Address"
-        app:fontName="dinnextltpro_regular.otf" />
-
-
-    <LinearLayout
-        android:id="@+id/cc_billing_adress_ll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cc_billing_address"
-
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:padding='@dimen/DP24'>
 
         <hellogbye.com.hellogbyeandroid.views.FontEditTextView
             android:id="@+id/cc_billint_st"
             style="@style/cc_edit_text"
             android:layout_width="match_parent"
             android:hint="Street"
+            android:layout_marginTop="@dimen/DP24"
             android:inputType="text"
             app:fontName="dinnextltpro_regular.otf" />
 
@@ -199,7 +227,8 @@
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/cc_save"
         style="@style/RedCustomButtonStyle"
-
+        android:background="@drawable/red_disable_button"
+        android:clickable="false"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_marginLeft="40dp"

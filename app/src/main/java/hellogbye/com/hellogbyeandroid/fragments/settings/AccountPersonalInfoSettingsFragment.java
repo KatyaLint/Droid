@@ -202,7 +202,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 //            @Override
 //            public void onClick(View v) {
 //
-//                HGBUtility.showPikerDialog(companion_personal_settings_gender, getActivity(), GENDER_TITLE, genderArray, 0, 1, null,true);
+            HGBUtility.showPikerDialog(companion_personal_settings_gender, getActivity(), GENDER_TITLE, genderArray, 0, 1, null,true);
 //            }
 //        });
 

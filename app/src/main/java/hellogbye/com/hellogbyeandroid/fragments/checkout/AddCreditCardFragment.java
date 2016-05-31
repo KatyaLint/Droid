@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.NumberPicker;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +27,7 @@ import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.CreditCardSessionItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
+import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
@@ -41,10 +44,11 @@ import io.card.payment.CreditCard;
 /**
  * Created by arisprung on 11/24/15.
  */
-public class AddCreditCardFragment extends HGBAbstractFragment {
+public class AddCreditCardFragment extends HGBAbstractFragment implements TextWatcher{
 
     private CreditCardEditText mCardNumber;
-    private FontEditTextView mCardExpiry;
+    private FontEditTextView mCardExpiryMonth;
+    private FontEditTextView mCardExpiryYear;
     private FontEditTextView mCardCCV;
     private FontEditTextView mCardFirstName;
     private FontEditTextView mCardLastName;
@@ -55,6 +59,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
     private FontEditTextView mCardPostal;
     private FontTextView mSave;
     private FontTextView mScan;
+    private CheckBox mBillingCheckbox;
 
     private NumberPicker countryPicker;
     private NumberPicker statePicker;
@@ -68,7 +73,9 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
     private CreditCardSessionItem creditCardItemSession;
     private BookingRequestVO bookingResponse;
 
+    final String[] monthArray = {"1", "2", "4","5","6","7","8","9","10","11","12"};
 
+    final String[] yearArray = {"2016", "2017", "2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030"};
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new AddCreditCardFragment();
@@ -132,6 +139,8 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
             }
         });
 
+
+
         mCardCountry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,12 +183,87 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
             }
         });
 
+        mCardExpiryMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HGBUtility.showPikerDialogEditText(mCardExpiryMonth, getActivity(), "Choose Month",
+                        monthArray, 0, 10, new PopUpAlertStringCB() {
+                            @Override
+                            public void itemSelected(String inputItem) {
 
+                                mCardExpiryMonth.setText(inputItem);
+                            }
+
+                            @Override
+                            public void itemCanceled() {
+
+                            }
+                        }, false);
+            }
+        });
+
+        mCardExpiryYear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HGBUtility.showPikerDialogEditText(mCardExpiryYear, getActivity(), "Choose Year",
+                        yearArray, 0, 13, new PopUpAlertStringCB() {
+                            @Override
+                            public void itemSelected(String inputItem) {
+
+                                mCardExpiryYear.setText(inputItem);
+                            }
+
+                            @Override
+                            public void itemCanceled() {
+
+                            }
+                        }, false);
+            }
+        });
+
+
+        mBillingCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    addFields();
+
+                }else{
+                    clearFields();
+                }
+            }
+        });
+
+    }
+
+    private void addFields() {
+
+       UserDataVO currentUser = getActivityInterface().getCurrentUser();
+
+
+        mCardStreet.setText(currentUser.getAddress());
+        mCardCountry.setText(currentUser.getCountry());
+        mCardFirstName.setText(currentUser.getFirstname());
+        mCardLastName.setText(currentUser.getLastname());
+        mCardProvince.setText(currentUser.getState());
+        mCardPostal.setText(currentUser.getPostalcode());
+        mCardCity.setText(currentUser.getCity());
+    }
+
+    private void clearFields() {
+        mCardStreet.setText("");
+        mCardCountry.setText("");
+        mCardFirstName.setText("");
+        mCardLastName.setText("");
+        mCardProvince.setText("");
+        mCardPostal.setText("");
+        mCardCity.setText("");
     }
 
     private void init(View view) {
         mCardNumber = (CreditCardEditText) view.findViewById(R.id.cc_number);
-        mCardExpiry = (FontEditTextView) view.findViewById(R.id.cc_expiry);
+        mCardExpiryMonth = (FontEditTextView) view.findViewById(R.id.cc_expiry_month);
+        mCardExpiryYear= (FontEditTextView) view.findViewById(R.id.cc_expiry_year);
         mCardCCV = (FontEditTextView) view.findViewById(R.id.cc_ccv);
         mCardFirstName = (FontEditTextView) view.findViewById(R.id.cc_first_name);
         mCardLastName = (FontEditTextView) view.findViewById(R.id.cc_last_name);
@@ -191,7 +275,20 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
         mSave = (FontTextView) view.findViewById(R.id.cc_save);
         mScan = (FontTextView) view.findViewById(R.id.cc_scan);
         mCardNumber.addTextChangedListener(new FourDigitCardFormatWatcher());
-        mCardExpiry.addTextChangedListener(new TwoDigitsCardTextWatcher(mCardExpiry));
+        mBillingCheckbox = (CheckBox)view.findViewById(R.id.add_cc_checkboox);
+       // mCardExpiry.addTextChangedListener(new TwoDigitsCardTextWatcher(mCardExpiry));
+
+      //  mCardNumber.addTextChangedListener(this);
+        mCardExpiryMonth.addTextChangedListener(this);
+        mCardExpiryYear.addTextChangedListener(this);
+        mCardCCV.addTextChangedListener(this);
+        mCardFirstName.addTextChangedListener(this);
+        mCardLastName.addTextChangedListener(this);
+        mCardStreet.addTextChangedListener(this);
+        mCardCountry.addTextChangedListener(this);
+        mCardCity.addTextChangedListener(this);
+        mCardProvince.addTextChangedListener(this);
+        mCardPostal.addTextChangedListener(this);
 
     }
 
@@ -213,7 +310,8 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
 
                 if (scanResult.isExpiryValid()) {
                     resultDisplayStr += "Expiration Date: " + scanResult.expiryMonth + "/" + scanResult.expiryYear + "\n";
-                    mCardExpiry.setText(scanResult.expiryMonth + "/" + scanResult.expiryYear);
+                    mCardExpiryMonth.setText(scanResult.expiryMonth);
+                    mCardExpiryYear.setText(scanResult.expiryYear);
                 }
 
                 if (scanResult.cvv != null) {
@@ -246,15 +344,17 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
         creditCardItem.setBuyeraddress(mCardStreet.getText().toString());
         creditCardItem.setCardtypeid(getCCType());
 
-        String expDate = mCardExpiry.getText().toString();
-        if (expDate.contains("/")) {
-            String[] parts = expDate.split("/");
-            String partMonth = parts[0];
-            String partYear = parts[1];
-            creditCardItem.setExpmonth(partMonth);
-            creditCardItem.setExpyear(partYear);
-        }
+//        String expDate = mCardExpiry.getText().toString();
+//        if (expDate.contains("/")) {
+//            String[] parts = expDate.split("/");
+//            String partMonth = parts[0];
+//            String partYear = parts[1];
+//            creditCardItem.setExpmonth(partMonth);
+//            creditCardItem.setExpyear(partYear);
+//        }
 
+        creditCardItem.setExpmonth(mCardExpiryMonth.getText().toString());
+        creditCardItem.setExpyear(mCardExpiryYear.getText().toString());
 
         String last4 = mCardNumber.getText().toString();
         last4 = last4.substring(last4.length() - 4, last4.length());
@@ -272,7 +372,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
                     if (creditCardItemSession == null) {
                         HGBErrorHelper errorHelper = new HGBErrorHelper();
                         errorHelper.setMessageForError((String) data);
-                        errorHelper.show(getActivity().getFragmentManager(), "There was a probelm please try again");
+                        errorHelper.show(getActivity().getFragmentManager(), "There was a problem please try again");
 
                     }else{
                         creditCardItem.setNickname(creditCardItemSession.getNickname());
@@ -445,6 +545,59 @@ public class AddCreditCardFragment extends HGBAbstractFragment {
 
                     }
                 }, false);
+
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+        if( checkAddCardEnabled()){
+            mSave.setBackgroundResource(R.drawable.red_button);
+            mSave.setClickable(true);
+        }else{
+            mSave.setBackgroundResource(R.drawable.red_disable_button);
+            mSave.setClickable(false);
+        }
+        mSave.setPadding(0, 30, 0, 30);
+    }
+
+    private boolean checkAddCardEnabled() {
+
+
+        if(mCardStreet.getText().toString().equals("")){
+            return false;
+        }else if (mCardCountry.getText().toString().equals("")){
+            return false;
+        }else if (mCardFirstName.getText().toString().equals("")){
+            return false;
+        }else if (mCardLastName.getText().toString().equals("")){
+            return false;
+        }else if (mCardProvince.getText().toString().equals("")){
+            return false;
+        }else if (mCardPostal.getText().toString().equals("")){
+            return false;
+        }else if (mCardCity.getText().toString().equals("")){
+            return false;
+        }else if (mCardNumber.getText().toString().equals("")){
+            return false;
+        }else if (mCardExpiryMonth.getText().toString().equals("")){
+            return false;
+        }else if (mCardExpiryYear.getText().toString().equals("")){
+            return false;
+        }else if (mCardCCV.getText().toString().equals("")){
+            return false;
+        }
+
+        return true;
 
     }
 
