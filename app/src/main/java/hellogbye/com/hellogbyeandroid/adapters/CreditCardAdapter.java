@@ -93,6 +93,19 @@ public class CreditCardAdapter extends RecyclerView.Adapter<CreditCardAdapter.Vi
         CreditCardItem cc = mArrayList.get(position);
         holder.mCardNumberText.setText(cc.getLast4());
 
+        if(cc.getCardtypeid().equals("1")){
+            //holder.mCardImage.setBackgroundResource(R.drawable.visa);
+        }else if (cc.getCardtypeid().equals("2")){
+           // holder.mCardImage.setBackgroundResource(R.drawable.master_card);
+        }else if (cc.getCardtypeid().equals("3")){
+            holder.mCardImage.setBackgroundResource(R.drawable.master_card);
+        }else if (cc.getCardtypeid().equals("4")){
+            holder.mCardImage.setBackgroundResource(R.drawable.visa);
+        }else {
+            holder.mCardImage.setBackgroundResource(R.drawable.visa);
+        }
+
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
