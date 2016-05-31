@@ -67,11 +67,11 @@ Code changing:
     - Nav draw
 
     ------------------------------------------
-       Version 1.5.1
+       Version 1.5.2
     ------------------------------------------
       Fixed Bugs:
     -----------
-    HEL-879 relationship list titl
+    HEL-879 relationship list title
 
      Code changing:
     --------------
@@ -84,3 +84,13 @@ Code changing:
         - CNC Fragment, up right fragment go to Itirnerary
         - GPS only when app start
         - Iternerary can add to queries
+        
+    ------------------------------------------
+       Version 1.5.3
+    ------------------------------------------
+      Fixed Bugs:
+    -----------
+
+
+     Code changing:
+    --------------
