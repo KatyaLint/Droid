@@ -15,7 +15,7 @@
         android:layout_marginRight="@dimen/DP10"
         android:text="HGB"
         android:textSize="@dimen/SP16"
-        android:gravity="center"
+        android:gravity="left"
         app:fontName="dinnextltpro_regular.otf"
         android:textColor="@color/white"
         android:background="@drawable/cnc_backround"

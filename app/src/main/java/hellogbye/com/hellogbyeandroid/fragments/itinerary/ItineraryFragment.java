@@ -190,7 +190,8 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
             }
 
-            if(passengerNodesVOs.get(0) == null){
+            if(passengerNodesVOs == null || passengerNodesVOs.get(0) == null){
+                //TODO chack why!!!!!
                 HGBErrorHelper errorHelper = new HGBErrorHelper();
                 errorHelper.setMessageForError("Bad Case Scenario");
             }

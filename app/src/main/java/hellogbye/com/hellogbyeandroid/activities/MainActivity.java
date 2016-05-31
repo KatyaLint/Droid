@@ -776,7 +776,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
 
         if (bundle != null) {
-            fragment.setArguments(bundle);
+            Bundle arguments = fragment.getArguments();
+            arguments.putAll(bundle);
+            fragment.setArguments(arguments);
         }
 
         if (isFreeUser && (navBar.equals(ToolBarNavEnum.COMPANIONS_PERSONAL_DETAILS) || navBar.equals(ToolBarNavEnum.PAYMENT_DETAILS) || navBar.equals(ToolBarNavEnum.COMPANIONS))) {
