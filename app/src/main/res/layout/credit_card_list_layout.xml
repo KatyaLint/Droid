@@ -31,26 +31,21 @@
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/DP10"
             android:gravity="center"
             android:text="You don't have any\nPayment card"
             android:textColor="@color/COLOR_0E587D"
-            android:textSize="25sp" />
+            android:textSize="@dimen/SP26" />
     </LinearLayout>
 
-
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/add_fab"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:src="@drawable/fab_plus"
-        app:layout_anchor="@id/companion_search_view"
-        app:layout_anchorGravity="bottom|right|end"
         app:backgroundTint="@color/COLOR_00516f"
-        app:rippleColor="@android:color/transparent"
+        android:src="@drawable/fab_plus"
+        android:layout_margin="@dimen/DP10"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/DP16"
-        android:layout_marginBottom="@dimen/DP16" />
+        android:layout_alignParentRight="true" />
 </RelativeLayout>

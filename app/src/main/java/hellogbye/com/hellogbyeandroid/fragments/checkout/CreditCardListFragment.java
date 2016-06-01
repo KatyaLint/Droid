@@ -51,7 +51,7 @@ public class CreditCardListFragment extends HGBAbstractFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = (RecyclerView)view.findViewById(R.id.credit_card_recycler_view);
-        mAddImageView = (FloatingActionButton) view.findViewById(R.id.add_fab);
+        mAddImageView = (FloatingActionButton) view.findViewById(R.id.fab);
         mMissingLinearLayout = (LinearLayout)view.findViewById(R.id.payment_missing_ll);
 
 

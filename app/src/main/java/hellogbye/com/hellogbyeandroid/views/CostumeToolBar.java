@@ -152,6 +152,8 @@ public class CostumeToolBar extends Toolbar {
             case PREFERENCES_SEARCH_LIST_SETTINGS:
             case PREFERENCES_SPECIFIC_LIST_SETTINGS:
             case PREFERENCES_DRAG_LIST_SETTINGS:
+            case ALTERNATIVE_FLIGHT:
+            case HOTEL:
 
                 titleText.setVisibility(View.VISIBLE);
                 break;

@@ -52,7 +52,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
     private static int MIN_PREFERENCE_SIZE = 1;
     private View preferences_at_least_one_preference;
     private String edit_mode;
-    private ListView tempListView;
+ //   private ListView tempListView;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new PreferenceSettingsFragment();
@@ -222,7 +222,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
         preferences_at_least_one_preference = inflater.inflate(R.layout.preferences_at_least_one_preference, null);
 
 
-        tempListView = (ListView)rootView.findViewById(R.id.tempListView);
+    //    tempListView = (ListView)rootView.findViewById(R.id.tempListView);
 
         Button addNewPreferencesButton = (Button) rootView.findViewById(R.id.add_preferences);
         input = (EditText) popup_preferences_layout.findViewById(R.id.editTextDialog);
@@ -288,7 +288,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
     private void editSettingsPreferencesPopUp() {
         final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
         alert.setCancelable(false);
-        alert.setTitle(R.string.preferences_add_new_preferences)
+        alert.setTitle(R.string.preferences_add_button)
                 .setView(popup_preferences_layout)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {

@@ -21,5 +21,9 @@ public class HGBConstants {
 
     public static final String CNC_CLEAR_CHAT = "cnc_clear_chat";
 
+    /* GPS Constant Permission */
+    public static final int MY_PERMISSION_ACCESS_COARSE_LOCATION = 11;
+    public static final int MY_PERMISSION_ACCESS_FINE_LOCATION = 12;
+
 
 }

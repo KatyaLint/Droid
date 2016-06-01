@@ -1,10 +1,12 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
+import android.Manifest;
 import android.app.Activity;
 
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -71,9 +73,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private TableLayout mTableLayout;
     private ArrayList<String> mImageList;
     private SlidingUpPanelLayout mSlidingPanels;
-    private static final String TAG = "HotelFragment";
 
-    private ScrollView mScrollView;
     private FontTextView mHotelNameFontTextView;
     private FontTextView mHotelPriceFontTextView;
     private FontTextView mHotelDaysFontTextView;
@@ -103,9 +103,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private AlternativeHotelAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView mRecyclerView;
-
-    //    PassengersVO passengersVO;
-//    CellsVO cellsVO;
     private NodesVO nodesVO;
     private ArrayList<String> mListForGallery;
     private HashMap<Marker, NodesVO> nodeMarkerMap;
@@ -123,7 +120,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         Bundle args = new Bundle();
         args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
         fragment.setArguments(args);
-
         return fragment;
     }
 
@@ -181,13 +177,37 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
             }
         });
 
-        getFlowInterface().getToolBar().updateToolBarView(ToolBarNavEnum.HOTEL.getNavNumber());
+        HGBUtility.checkPermissions(getActivity());
+
         return rootView;
     }
 
+    private void initializeMap(){
+        mMap = fragment.getMap();
+
+        if (mMap != null) {
+
+            //SET UP MAP
+            mMap.getUiSettings().setCompassEnabled(true);
+            mMap.getUiSettings().setZoomControlsEnabled(false);
+            //  if(!permissionDenied) {
+            //    HGBUtility.checkPermissions(get);
+            //   }
+            /*if(!permissionDenied) {
+                HGBUtility.checkPermissions(getActivity());
+            }*/
+
+
+
+            //  mMap.setMyLocationEnabled(true);
+            mMap.setOnMarkerClickListener(this);
+        } else {
+            Log.d("DEBUG", "map is null");
+        }
+    }
+
+
     private void sendServerNewHotelOrder(NodesVO cnode) {
-
-
 
         ConnectionManager.getInstance(activity).putAlternateHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
                 passengersVO.getmPaxguid(),
@@ -227,22 +247,56 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         }
     }
 
+    boolean permissionDenied = true;
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == HGBConstants.MY_PERMISSION_ACCESS_COARSE_LOCATION ) {
+            if (permissions.length == 1 &&
+                    permissions[0] == Manifest.permission.ACCESS_FINE_LOCATION &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                mMap.setMyLocationEnabled(true);
+                permissionDenied = false;
+            } else {
+                permissionDenied = true;
+            }
+                // Permission was denied. Display an error message.
+            }
+        }
+
+
+
 
     @Override
     public void onResume() {
         super.onResume();
-        mMap = fragment.getMap();
+        initializeMap();
+        System.out.println("Kate permisssion =" + permissionDenied);
+        if(!permissionDenied){
+            mMap.setMyLocationEnabled(true);
+        }
+
+       /* mMap = fragment.getMap();
 
         if (mMap != null) {
 
             //SET UP MAP
             mMap.getUiSettings().setCompassEnabled(true);
             mMap.getUiSettings().setZoomControlsEnabled(false);
-            mMap.setMyLocationEnabled(true);
+          //  if(!permissionDenied) {
+            //    HGBUtility.checkPermissions(get);
+         //   }
+            if(!permissionDenied) {
+                HGBUtility.checkPermissions(getActivity());
+            }
+            System.out.println("Kate permissionDenied =" + permissionDenied);
+
+
+          //  mMap.setMyLocationEnabled(true);
             mMap.setOnMarkerClickListener(this);
         } else {
             Log.d("DEBUG", "map is null");
-        }
+        }*/
     }
 
     @Override
@@ -329,7 +383,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private void buildHotelGalleryTable(int cols) {
         // outer for loop
         int iIndex = 0;
-        int count = mTableLayout.getChildCount();
+
         if (mTableLayout.getChildCount() > 0) {
             mTableLayout.removeAllViews();
         }
@@ -379,7 +433,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
     private View initRootView(View rootView) {
 
-        mScrollView = (ScrollView) rootView.findViewById(R.id.detail_scroll_view);
+    //    mScrollView = (ScrollView) rootView.findViewById(R.id.detail_scroll_view);
         mHotelNameFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_name);
         mHotelPriceFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_price);
         mHotelDaysFontTextView = (FontTextView) rootView.findViewById(R.id.days);

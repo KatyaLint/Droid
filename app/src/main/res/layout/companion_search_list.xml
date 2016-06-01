@@ -31,20 +31,16 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:src="@drawable/fab_plus"
-        app:layout_anchor="@id/companion_search_view"
-        app:layout_anchorGravity="bottom|right|end"
         app:backgroundTint="@color/COLOR_00516f"
-        app:rippleColor="@android:color/transparent"
-        android:layout_marginBottom="@dimen/DP16"
-        android:layout_marginEnd="@dimen/DP16"
+        android:src="@drawable/fab_plus"
+        android:layout_margin="@dimen/DP10"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
-
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>

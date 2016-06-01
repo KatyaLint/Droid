@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -66,6 +67,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
     private SlidingUpPanelLayout mSlidingPanels;
     public final  float PANEL_HIGHT = 0.5f;
     private ProgressDialog progressDialog;
+    private RelativeLayout pull_down;
 
     public AlternativeFlightFragment() {
         // Empty constructor required for fragment subclasses
@@ -127,11 +129,37 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         View rootView = inflater.inflate(R.layout.flight_layout_details, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.flightRecyclerView);
         mSlidingPanels = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout_flight);
-
+        pull_down = (RelativeLayout) rootView.findViewById(R.id.pull_down);
 
         mSlidingPanels.setCoveredFadeColor(Color.TRANSPARENT);
         mSlidingPanels.setAnchorPoint(PANEL_HIGHT);
         mSlidingPanels.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
+        mSlidingPanels.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+            @Override
+            public void onPanelSlide(View panel, float slideOffset) {
+                pull_down.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onPanelCollapsed(View panel) {
+
+            }
+
+            @Override
+            public void onPanelExpanded(View panel) {
+
+            }
+
+            @Override
+            public void onPanelAnchored(View panel) {
+
+            }
+
+            @Override
+            public void onPanelHidden(View panel) {
+
+            }
+        });
         progressDialog = new ProgressDialog(getActivity());
 
         return rootView;

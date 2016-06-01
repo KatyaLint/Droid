@@ -1,10 +1,16 @@
 package hellogbye.com.hellogbyeandroid.utilities;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 
 
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.provider.Settings;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.Fragment;
@@ -31,6 +37,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
 
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -45,6 +52,7 @@ import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -82,7 +90,6 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  * Created by arisprung on 8/17/15.
  */
 public class HGBUtility {
-
 
     private static ProgressDialog progressDialog;
     private static Stack<Fragment> fragmentStack = new Stack<Fragment>();
@@ -1129,6 +1136,11 @@ public static String formattDateToStringMonthDate(String dateInString) {
     }
 
 
+
+
+
+
+
     /**
      * Check if Gps or network location available if not alert to user,
      * if user agree go to activity that open gps
@@ -1184,7 +1196,9 @@ public static String formattDateToStringMonthDate(String dateInString) {
         }
     }
 
-    private final static LocationListener locationListener = new LocationListener() {
+
+
+    private static LocationListener locationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
             latitude = location.getLatitude();
             longitude = location.getLongitude();
@@ -1254,6 +1268,99 @@ public static String formattDateToStringMonthDate(String dateInString) {
         }
         return path;
     }
+
+
+
+
+/*    public static void checkPermissionsIfGranted(Activity activity){
+        if(!checkPermission(activity.getApplicationContext())) {
+            requestPermission(activity);
+        }
+
+    }
+    public static final int PERMISSION_REQUEST_CODE = 1;
+
+    private static boolean checkPermission(Context context){
+        int result = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION);
+        if (result == PackageManager.PERMISSION_GRANTED){
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+    }
+
+    private static void requestPermission(Activity activity){
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity,Manifest.permission.ACCESS_FINE_LOCATION)){
+
+            Toast.makeText(activity,"GPS permission allows us to access location data. Please allow in App Settings for additional functionality.",Toast.LENGTH_LONG).show();
+
+        } else {
+
+            ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},PERMISSION_REQUEST_CODE);
+        }
+    }*/
+
+    /* Position */
+    private static final long MINIMUM_TIME = 10000;  // 10s
+    private static final float MINIMUM_DISTANCE = 50; // 50m
+
+    public static void checkPermissions(Activity context){
+      lm  = (LocationManager) context.getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+
+        // Get the best provider between gps, network and passive
+        Criteria criteria = new Criteria();
+        String mProviderName = lm.getBestProvider(criteria, true);
+        // API 23: we have to check if ACCESS_FINE_LOCATION and/or ACCESS_COARSE_LOCATION permission are granted
+        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+            // No one provider activated: prompt GPS
+            System.out.println("Kate mProviderName =" + mProviderName);
+            if (mProviderName == null || mProviderName.equals("")) {
+                context.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            }
+
+            // At least one provider activated. Get the coordinates
+            switch (mProviderName) {
+                case "passive":
+                    lm.requestLocationUpdates(mProviderName, MINIMUM_TIME, MINIMUM_DISTANCE, locationListener);
+                    Location location = lm.getLastKnownLocation(mProviderName);
+                    break;
+
+                case "network":
+                    break;
+
+                case "gps":
+                    break;
+
+            }
+
+            // One or both permissions are denied.
+        } else {
+
+            // The ACCESS_COARSE_LOCATION is denied, then I request it and manage the result in
+            // onRequestPermissionsResult() using the constant MY_PERMISSION_ACCESS_FINE_LOCATION
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions(context,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                        HGBConstants.MY_PERMISSION_ACCESS_COARSE_LOCATION);
+            }
+            // The ACCESS_FINE_LOCATION is denied, then I request it and manage the result in
+            // onRequestPermissionsResult() using the constant MY_PERMISSION_ACCESS_FINE_LOCATION
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions(context,
+                        new String[] { Manifest.permission.ACCESS_FINE_LOCATION },
+                        HGBConstants.MY_PERMISSION_ACCESS_FINE_LOCATION);
+            }
+
+        }
+    }
+
 
 
 }

@@ -33,6 +33,9 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountD
     private boolean isEditMode = false;
     private PreferenceSettingsFragment.ListLineClicked listLineClicked;
     private PreferenceSettingsFragment.ListRadioButtonClicked listRadioButtonClickedClicked;
+    private int selectedPosition = 0;
+    public String selectedPreferebcesID="";
+
     public PreferencesSettingsRadioButtonAdapter(Context context, List<AccountDefaultSettingsVO> accountAttributes) {
         super(accountAttributes);
 
@@ -77,13 +80,6 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountD
     public long getItemId(final int position) {
         return getItem(position).hashCode();
     }
-
-
-    int selectedPosition = 0;
-
-    public String selectedPreferebcesID="";
-
-
 
 
     @Override

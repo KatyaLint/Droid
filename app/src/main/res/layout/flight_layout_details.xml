@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.sothree.slidinguppanel.SlidingUpPanelLayout
         xmlns:sothree="http://schemas.android.com/apk/res-auto"
@@ -9,22 +10,61 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
-        sothree:umanoPanelHeight="100dp"
+        sothree:umanoPanelHeight="@dimen/DP100"
         sothree:umanoScrollableView="@+id/flightRecyclerView">
 
     <FrameLayout
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/DP200"
         android:layout_alignParentTop="true"
         android:gravity="center" />
+
+
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/map">
+
+    <RelativeLayout
+        android:id="@+id/pull_down"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/DP10"
+        android:layout_marginRight="@dimen/DP10"
+        android:padding="@dimen/DP10"
+        android:layout_marginBottom="@dimen/DP10"
+        android:background="@color/hgb_blue"
+        >
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="Pull down to see more"
+            android:textColor="@color/white"
+            app:fontName="dinnextltpro_regular.otf" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/arrow_forward"/>
+
+
+    </RelativeLayout>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/flightRecyclerView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/map" />
+        android:layout_below="@+id/pull_down"
+       />
+
+</RelativeLayout>
+
     </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 
 </RelativeLayout>
