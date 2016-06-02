@@ -789,7 +789,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         HGBUtility.goToNextFragmentIsAddToBackStack(getSupportFragmentManager(), fragment, stashToBack, isAddAnimation);
         mToolbar.initToolBarItems();
-        System.out.println("Kate position =" + position);
         mToolbar.updateToolBarView(position);
         mDrawerLayout.closeDrawer(mNavDrawerLinearLayout);
     }

@@ -190,6 +190,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
             //SET UP MAP
             mMap.getUiSettings().setCompassEnabled(true);
             mMap.getUiSettings().setZoomControlsEnabled(false);
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);
             //  if(!permissionDenied) {
             //    HGBUtility.checkPermissions(get);
             //   }
@@ -251,6 +252,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
         if (requestCode == HGBConstants.MY_PERMISSION_ACCESS_COARSE_LOCATION ) {
             if (permissions.length == 1 &&
                     permissions[0] == Manifest.permission.ACCESS_FINE_LOCATION &&
@@ -271,7 +273,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     public void onResume() {
         super.onResume();
         initializeMap();
-        System.out.println("Kate permisssion =" + permissionDenied);
         if(!permissionDenied){
             mMap.setMyLocationEnabled(true);
         }

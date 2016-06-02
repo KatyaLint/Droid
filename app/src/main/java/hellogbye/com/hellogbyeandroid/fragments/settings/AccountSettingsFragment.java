@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -220,12 +221,34 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
    private View.OnClickListener imageClickListener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            selectImage();
+
+            boolean permissionGainedStorage = HGBUtility.isStoragePermissionGranted(getActivity());
+            boolean permissionGainedCamera = HGBUtility.isCameraPermissionGranted(getActivity());
+
+            if(permissionGainedStorage && permissionGainedCamera){
+                selectImage();
+            }
+
         }
     };
 
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(grantResults[0]== PackageManager.PERMISSION_GRANTED ){
+            selectImage();
+       //     permissionGained = true;
+
+          //  Log.v(TAG,"Permission: "+permissions[0]+ "was "+grantResults[0]);
+            //resume tasks needing this permission
+        }
+    }
+
     private void selectImage() {
+
         final CharSequence[] items = { "Take Photo", "Choose from Library", "Cancel" };
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Add Photo!");

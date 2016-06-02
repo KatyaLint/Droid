@@ -8,6 +8,7 @@ import android.app.DatePickerDialog;
 
 import android.content.pm.PackageManager;
 import android.location.Criteria;
+import android.os.Build;
 import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -1305,6 +1306,51 @@ public static String formattDateToStringMonthDate(String dateInString) {
         }
     }*/
 
+
+
+    public static boolean isCameraPermissionGranted(Activity activity) {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission(activity,android.Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_GRANTED) {
+                // Log.v(TAG,"Permission is granted");
+                return true;
+            } else {
+
+                //   Log.v(TAG,"Permission is revoked");
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CAMERA}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            //    Log.v(TAG,"Permission is granted");
+            return true;
+        }
+
+    }
+
+
+    public static boolean isStoragePermissionGranted(Activity activity) {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission(activity,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+               // Log.v(TAG,"Permission is granted");
+                return true;
+            } else {
+
+             //   Log.v(TAG,"Permission is revoked");
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+        //    Log.v(TAG,"Permission is granted");
+            return true;
+        }
+    }
+
+
+
+
     /* Position */
     private static final long MINIMUM_TIME = 10000;  // 10s
     private static final float MINIMUM_DISTANCE = 50; // 50m
@@ -1316,52 +1362,56 @@ public static String formattDateToStringMonthDate(String dateInString) {
         Criteria criteria = new Criteria();
         String mProviderName = lm.getBestProvider(criteria, true);
         // API 23: we have to check if ACCESS_FINE_LOCATION and/or ACCESS_COARSE_LOCATION permission are granted
-        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
-            // No one provider activated: prompt GPS
-            System.out.println("Kate mProviderName =" + mProviderName);
-            if (mProviderName == null || mProviderName.equals("")) {
-                context.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+        if (Build.VERSION.SDK_INT >= 23) {
+
+            if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+                // No one provider activated: prompt GPS
+
+                if (mProviderName == null || mProviderName.equals("")) {
+                    context.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                }
+
+                // At least one provider activated. Get the coordinates
+                switch (mProviderName) {
+                    case "passive":
+                        lm.requestLocationUpdates(mProviderName, MINIMUM_TIME, MINIMUM_DISTANCE, locationListener);
+                        Location location = lm.getLastKnownLocation(mProviderName);
+                        break;
+
+                    case "network":
+                        break;
+
+                    case "gps":
+                        break;
+
+                }
+
+                // One or both permissions are denied.
+            } else {
+
+                // The ACCESS_COARSE_LOCATION is denied, then I request it and manage the result in
+                // onRequestPermissionsResult() using the constant MY_PERMISSION_ACCESS_FINE_LOCATION
+                if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(context,
+                            new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                            HGBConstants.MY_PERMISSION_ACCESS_COARSE_LOCATION);
+                }
+                // The ACCESS_FINE_LOCATION is denied, then I request it and manage the result in
+                // onRequestPermissionsResult() using the constant MY_PERMISSION_ACCESS_FINE_LOCATION
+                if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(context,
+                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                            HGBConstants.MY_PERMISSION_ACCESS_FINE_LOCATION);
+                }
+
             }
-
-            // At least one provider activated. Get the coordinates
-            switch (mProviderName) {
-                case "passive":
-                    lm.requestLocationUpdates(mProviderName, MINIMUM_TIME, MINIMUM_DISTANCE, locationListener);
-                    Location location = lm.getLastKnownLocation(mProviderName);
-                    break;
-
-                case "network":
-                    break;
-
-                case "gps":
-                    break;
-
-            }
-
-            // One or both permissions are denied.
-        } else {
-
-            // The ACCESS_COARSE_LOCATION is denied, then I request it and manage the result in
-            // onRequestPermissionsResult() using the constant MY_PERMISSION_ACCESS_FINE_LOCATION
-            if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
-                ActivityCompat.requestPermissions(context,
-                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                        HGBConstants.MY_PERMISSION_ACCESS_COARSE_LOCATION);
-            }
-            // The ACCESS_FINE_LOCATION is denied, then I request it and manage the result in
-            // onRequestPermissionsResult() using the constant MY_PERMISSION_ACCESS_FINE_LOCATION
-            if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
-                ActivityCompat.requestPermissions(context,
-                        new String[] { Manifest.permission.ACCESS_FINE_LOCATION },
-                        HGBConstants.MY_PERMISSION_ACCESS_FINE_LOCATION);
-            }
-
+        }else{
+            lm.requestLocationUpdates(mProviderName, MINIMUM_TIME, MINIMUM_DISTANCE, locationListener);
         }
     }
-
-
 
 }
 
