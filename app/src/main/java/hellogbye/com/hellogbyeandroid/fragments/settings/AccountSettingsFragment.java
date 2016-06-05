@@ -136,7 +136,8 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
                 text.setVisibility(View.VISIBLE);
                 text.setText(getResources().getString(R.string.component_log_sure));
 
-                HGBUtility.showAlertPopUp(getActivity(), input, promptsView, getResources().getString(R.string.component_log_out),
+                HGBUtility.showAlertPopUp(getActivity(), input, promptsView,
+                        getResources().getString(R.string.component_log_out),getResources().getString(R.string.save_button),
                         new PopUpAlertStringCB() {
                             @Override
                             public void itemSelected(String inputItem) {

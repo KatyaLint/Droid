@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:layout_width="fill_parent" android:layout_height="fill_parent">
 
 
-    <include android:id="@+id/title_instraction" layout="@layout/settings_layout_title" android:layout_width="fill_parent"
+    <include android:id="@+id/title_instraction"
+        layout="@layout/settings_layout_title"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"/>
 
 
@@ -16,7 +19,7 @@
         android:layout_height="wrap_content"/>
 
 
-    <LinearLayout
+<!--    <LinearLayout
         android:layout_below="@+id/settings_search"
         android:layout_width="fill_parent"
         android:id="@+id/search_my_title_text"
@@ -33,14 +36,30 @@
             app:fontName="dinnextltpro_regular.otf"
             android:layout_height="wrap_content"
             android:text="my flights\hotels"/>
-    </LinearLayout>
+    </LinearLayout>-->
+
+    <!--<ScrollView-->
+        <!--android:layout_below="@+id/search_my_title_text"-->
+        <!--android:id="@+id/settings_scroll_view"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <include     android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/DP10"
+            android:layout_below="@+id/settings_search"
+            layout="@layout/settings_serach_layout"/>
+
+
+        <!--<LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
     <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
-
-        android:layout_below="@+id/search_my_title_text"
         android:id="@+id/settings_drag_drop_list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DP200" />
 
     <LinearLayout
         android:layout_below="@+id/settings_drag_drop_list"
@@ -64,8 +83,8 @@
         android:layout_below="@+id/settings_popular_title_text"
         android:background="@color/white"
         android:id="@+id/settings_search_list"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-
+        </LinearLayout>-->
+<!--    </ScrollView>-->
 </RelativeLayout>

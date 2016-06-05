@@ -1024,23 +1024,26 @@ public static String formattDateToStringMonthDate(String dateInString) {
 
 
   public static void showAlertPopUp(final Activity activity, final EditText input, final View popupView ,
-                                    final String popupTitle, final PopUpAlertStringCB
+                                    final String popupTitle, String positiveButton, final PopUpAlertStringCB
                                     alertCB){
       final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
       alert.setCancelable(false);
       alert.setTitle(popupTitle)
               .setView(popupView)
-              .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+              .setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
                   public void onClick(DialogInterface dialog, int which) {
-
-                      String newName = input.getText().toString();
-                        if(alertCB != null){
-                            alertCB.itemSelected(newName);
-                        }
-                      input.setText("");
+                      String newName ="";
+                    if(input != null){
+                        newName = input.getText().toString();
+                        input.setText("");
+                        IBinder token = input.getWindowToken();
+                        ( (InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
+                    }
+                      if(alertCB != null){
+                          alertCB.itemSelected(newName);
+                      }
                       ((ViewGroup) popupView.getParent()).removeView(popupView);
-                      IBinder token = input.getWindowToken();
-                      ( (InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
+
                       dialog.cancel();
                   }
               })
@@ -1048,12 +1051,13 @@ public static String formattDateToStringMonthDate(String dateInString) {
 
                   @Override
                   public void onClick(DialogInterface dialog, int which) {
-
-                      input.setText("");
+                    if(input != null) {
+                        input.setText("");
+                        IBinder token = input.getWindowToken();
+                        ( (InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
+                    }
 
                       ((ViewGroup) popupView.getParent()).removeView(popupView);
-                      IBinder token = input.getWindowToken();
-                      ( (InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
                       dialog.cancel();
                   }
               })

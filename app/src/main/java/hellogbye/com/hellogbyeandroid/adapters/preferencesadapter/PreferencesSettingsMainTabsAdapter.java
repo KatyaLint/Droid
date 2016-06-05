@@ -60,7 +60,11 @@ public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<Pre
         holder.settings_item_check_ll.setTag(position);
         holder.settings_flight_title.setText(item.getmName());
         holder.settings_flight_title.setTag(item.getmId());
-        holder.setting_check_image.setBackgroundResource(R.drawable.check_off);
+        if(item.isChecked()){
+            holder.setting_check_image.setBackgroundResource(R.drawable.check_on);
+        }else {
+            holder.setting_check_image.setBackgroundResource(R.drawable.check_off);
+        }
     }
 
 

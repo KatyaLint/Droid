@@ -134,7 +134,7 @@ public class LoginActivity extends FragmentActivity {
 
 
         HGBUtility.showAlertPopUp(LoginActivity.this,  userInput, promptsView,
-                getResources().getString(R.string.reset_your_password), new PopUpAlertStringCB() {
+                getResources().getString(R.string.reset_your_password),getResources().getString(R.string.save_button), new PopUpAlertStringCB() {
                     @Override
                     public void itemSelected(String inputItem) {
                         ConnectionManager.getInstance(LoginActivity.this).resetPasswordWithEmail(userInput.getText().toString(), new ConnectionManager.ServerRequestListener() {

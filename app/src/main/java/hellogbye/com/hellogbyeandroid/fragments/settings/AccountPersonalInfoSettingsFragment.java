@@ -227,7 +227,8 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
                 input.setVisibility(View.VISIBLE);
                 text.setVisibility(View.VISIBLE);
 
-                HGBUtility.showAlertPopUp(getActivity(), input, promptsView, getResources().getString(R.string.component_add_new_email),
+                HGBUtility.showAlertPopUp(getActivity(), input, promptsView,
+                        getResources().getString(R.string.component_add_new_email),getResources().getString(R.string.save_button),
                         new PopUpAlertStringCB() {
                             @Override
                             public void itemSelected(String inputItem) {

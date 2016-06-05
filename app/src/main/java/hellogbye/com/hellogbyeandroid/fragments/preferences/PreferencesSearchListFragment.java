@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ScrollView;
 import android.widget.SearchView;
 
 
@@ -49,13 +50,16 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
     private PreferenceSettingsAirlineCarriersAdapter searchListAdapter;
     private SettingsAttributesVO myAccountAttribute;
     private PreferencesSettingsSearchCheckListAdapter preferenceSettingsListAdapter;
-    private String strJson;
-    private String strType;
-    private List<SettingsValuesVO> myAccountAttributeList;
-    private FontTextView my_settings;
-    private FontTextView popular_settings;
+
+   // private String strJson;
+//    private String strType;
+  //  private List<SettingsValuesVO> myAccountAttributeList;
+
+//    private FontTextView my_settings;
+  //  private FontTextView popular_settings;
     private FontTextView settings_item_title;
     private FontTextView settings_item_text;
+
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new PreferencesSearchListFragment();
@@ -68,6 +72,14 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
 
     private void searchListInitialization(View rootView){
         mSearchView = (SearchView)rootView.findViewById(R.id.settings_search);
+        mSearchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchRecyclerView.setVisibility(View.VISIBLE);
+                mDynamicListView.setVisibility(View.GONE);
+
+            }
+        });
        // mSearchView.setVisibility(View.GONE);
         setupSearchView();
         searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.settings_search_list);
@@ -77,12 +89,13 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         // 2. set layoutManger
         searchRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+
     }
 
 
     private void dragDropListInitialization(View rootView){
         mDynamicListView = (DynamicListView) rootView.findViewById(R.id.settings_drag_drop_list);
-        mDynamicListView.setVisibility(View.GONE);
+     //   mDynamicListView.setVisibility(View.GONE);
         mDynamicListView.enableDragAndDrop();
 
         mDynamicListView.setOnItemLongClickListener(
@@ -120,12 +133,12 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         final View rootView = inflater.inflate(R.layout.settings_search_drag_list, container, false);
         Bundle args = getArguments();
         if (args != null) {
-            strJson = args.getString("setting_att_id");
+            strId = args.getString("setting_att_id");
             strType = args.getString("setting_type");
         }
         noBack = false;
-        my_settings = (FontTextView)rootView.findViewById(R.id.my_flights_settings);
-        popular_settings = (FontTextView)rootView.findViewById(R.id.popular_settings);
+    //    my_settings = (FontTextView)rootView.findViewById(R.id.my_flights_settings);
+       // popular_settings = (FontTextView)rootView.findViewById(R.id.popular_settings);
 
         settings_item_title = (FontTextView)rootView.findViewById(R.id.settings_item_title);
         settings_item_text = (FontTextView)rootView.findViewById(R.id.settings_item_text);
@@ -138,12 +151,14 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
 
 
         accountAttributesTemp = new ArrayList<>(accountAttributes);
-        myAccountAttributeList = myAccountAttribute.getAttributesVOs();
+        selectedItem = myAccountAttribute.getAttributesVOs();
 
-        for (SettingsValuesVO myAccount : myAccountAttributeList) {
+        for (SettingsValuesVO myAccount : selectedItem) {
             for (SettingsAttributesVO accountAttribute : accountAttributes) {
                 if (accountAttribute.getmId().equals(myAccount.getmID())) {
-                    accountAttributesTemp.remove(accountAttribute);
+                   // accountAttributesTemp.remove(accountAttribute);
+                    accountAttribute.setChecked(true);
+
                 }
             }
         }
@@ -165,6 +180,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
 
 
                         preferenceSettingsListAdapter.notifyDataSetChanged();
+
                         break;
                     }
                 }
@@ -172,35 +188,50 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
             }
         });
 
-        backOnListClicked(strType,strJson,myAccountAttribute.getAttributesVOs());
+        backOnListClicked();
 
 
-
-
+        searchRecyclerView.setVisibility(View.GONE);
+        mDynamicListView.setVisibility(View.VISIBLE);
 
         return rootView;
 
     }
 
     private void addToSearchList(SettingsValuesVO item ){
-        SettingsAttributesVO settingsAttributesVO = new SettingsAttributesVO();
+     /*   SettingsAttributesVO settingsAttributesVO = new SettingsAttributesVO();
         settingsAttributesVO.setmId(item.getmID());
         settingsAttributesVO.setmDescription(item.getmDescription());
         settingsAttributesVO.setmName(item.getmName());
         settingsAttributesVO.setmRank(item.getmRank());
+        settingsAttributesVO.setChecked(false);
         accountAttributesTemp.add(settingsAttributesVO);
+        */
+
+        for (SettingsAttributesVO settingsAttributeVO:accountAttributesTemp){
+            if(settingsAttributeVO.getmId().equals(item.getmID())){
+                settingsAttributeVO.setChecked(false);
+            }
+        }
+
+
         searchListAdapter.updateItems(accountAttributesTemp);
     }
 
     private void removeFromSearchList(String itemId){
         for(SettingsAttributesVO accountAttribute:accountAttributesTemp){
             if(accountAttribute.getmId().equals(itemId)){
-                accountAttributesTemp.remove(accountAttribute);
+                if(accountAttribute.isChecked()) {
+                    accountAttribute.setChecked(false);
+                }else{
+                    accountAttribute.setChecked(true);
+                }
+           //     accountAttributesTemp.remove(accountAttribute);
                 break;
             }
         }
-        searchListAdapter.updateItems(accountAttributesTemp);
-        //searchListAdapter.notifyDataSetChanged();
+        //searchListAdapter.updateItems(accountAttributesTemp);
+        searchListAdapter.notifyDataSetChanged();
     }
 
 
@@ -222,22 +253,22 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         switch (guid){
             case "9":
                 accountAttributes = getActivityInterface().getAccountSettingsHotelChainAttributes();
-                my_settings.setText(R.string.my_settings_hotel);
-                popular_settings.setText(R.string.popular_settings_hotel);
+          //      my_settings.setText(R.string.my_settings_hotel);
+        //        popular_settings.setText(R.string.popular_settings_hotel);
                 settings_item_title.setText(R.string.preferences_prefered_hotel_chain);
                 settings_item_text.setText(R.string.preferences_prefered_hotel_favorite);
                 break;
             case "2":
                 accountAttributes = getActivityInterface().getAccountSettingsFlightAircraftAttributes();
-                my_settings.setText(R.string.my_settings_flight);
-                popular_settings.setText(R.string.popular_settings_flight);
+           //     my_settings.setText(R.string.my_settings_flight);
+         //       popular_settings.setText(R.string.popular_settings_flight);
                 settings_item_title.setText(R.string.preferences_prefered_aircraft);
                 settings_item_text.setText(R.string.preferences_prefered_aircraft_favorite);
                 break;
             case "1":
                 accountAttributes = getActivityInterface().getAccountSettingsFlightCarrierAttributes();
-                my_settings.setText(R.string.my_settings_flight);
-                popular_settings.setText(R.string.popular_settings_flight);
+      //          my_settings.setText(R.string.my_settings_flight);
+          //      popular_settings.setText(R.string.popular_settings_flight);
                 settings_item_title.setText(R.string.preferences_prefered_flight_carrier);
                 settings_item_text.setText(R.string.preferences_prefered_flight_carrier_favorite);
                 break;

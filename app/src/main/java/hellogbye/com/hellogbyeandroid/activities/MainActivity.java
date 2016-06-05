@@ -59,6 +59,7 @@ import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFr
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesCheckListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesDragListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSearchListFragment;
+import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSettingsMainClass;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesTabsFragmentSettings;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalEmailSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
@@ -119,6 +120,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private boolean isFreeUser;
 
     private FrameLayout frameLayout;
+    private FontTextView preference_save_changes;
+    private PreferencesSettingsMainClass.saveButtonClicked onSavePreferencesButtonClicked;
 
     public HGBSaveDataClass getHGBSaveDataClass() {
         return hgbSaveDataClass;
@@ -410,6 +413,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         toolBarProfileChnage();
         setOnClickListenerForItineraryTopBar();
+        setOnClickListenerForSavePreferences();
 
         DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -467,6 +471,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         //selectItem(ToolBarNavEnum.HOME.getNavNumber(), null);
 
     }
+
+
 /*
 
     private void initRightPane() {
@@ -798,7 +804,17 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             itirnarary_title_Bar.setText(hgbSaveDataClass.getTravelOrder().getmSolutionName());
         }
     }
+    private void setOnClickListenerForSavePreferences() {
+        preference_save_changes = (FontTextView)mToolbar.findViewById(R.id.preference_save_changes);
+        preference_save_changes.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                System.out.println("Kate Preferrences");
+                onSavePreferencesButtonClicked.onSaveClicked();
 
+            }
+        });
+    }
 
     private void setOnClickListenerForItineraryTopBar() {
         up_bar_favorite = (ImageButton) mToolbar.findViewById(R.id.up_bar_favorite);
@@ -825,7 +841,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             public void onClick(View view) {
 
                 input.setText(itirnarary_title_Bar.getText());
-                HGBUtility.showAlertPopUp(MainActivity.this, input, promptsView, getResources().getString(R.string.edit_trip_name),
+                HGBUtility.showAlertPopUp(MainActivity.this, input, promptsView, getResources().getString(R.string.edit_trip_name)
+                        ,getResources().getString(R.string.save_button),
                         new PopUpAlertStringCB() {
                             @Override
                             public void itemSelected(String inputItem) {
@@ -1067,6 +1084,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     public void setEditClickCB(PreferenceSettingsFragment.OnItemClickListener editClickCB) {
         this.editClickCB = editClickCB;
+    }
+
+    public void setOnSavePreferencesButtonClicked(PreferencesSettingsMainClass.saveButtonClicked onSavePreferencesButtonClicked) {
+        this.onSavePreferencesButtonClicked = onSavePreferencesButtonClicked;
     }
 
 

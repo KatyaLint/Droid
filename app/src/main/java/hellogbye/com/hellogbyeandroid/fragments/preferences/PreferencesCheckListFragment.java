@@ -30,11 +30,11 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 public class PreferencesCheckListFragment extends PreferencesSettingsMainClass {
 
     private DynamicListView mDynamicListView;
-    private String strJson;
-    private String strType;
+  /*  private String strJson;
+    private String strType;*/
     private PreferencesSettingsCheckListAdapter preferenceSettingsListAdapter;
     private List<SettingsValuesVO> choosedItems;
-    private List<SettingsValuesVO> selectedItem;
+   // private List<SettingsValuesVO> selectedItem;
     private List<SettingsAttributesVO> accountAttributes;
     private FontTextView settings_title_text;
     private FontTextView settings_text;
@@ -55,7 +55,7 @@ public class PreferencesCheckListFragment extends PreferencesSettingsMainClass {
         final View rootView = inflater.inflate(R.layout.settings_drag_list, container, false);
         Bundle args = getArguments();
         if (args != null) {
-            strJson = args.getString("setting_att_id");
+            strId = args.getString("setting_att_id");
             strType = args.getString("setting_type");
 
         }
@@ -69,7 +69,7 @@ public class PreferencesCheckListFragment extends PreferencesSettingsMainClass {
 
         dragDropListInitialization(rootView);
 
-        backOnListClicked(strType,strJson,selectedItem);
+        backOnListClicked();
 
         return rootView;
     }

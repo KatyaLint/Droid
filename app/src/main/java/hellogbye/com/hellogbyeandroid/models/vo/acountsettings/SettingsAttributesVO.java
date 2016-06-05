@@ -23,6 +23,8 @@ public class SettingsAttributesVO {
     @SerializedName("description")
     private String mDescription;
 
+    private boolean isChecked = false;
+
     public List<SettingsValuesVO> getAttributesVOs() {
         return attributesVOs;
     }
@@ -78,5 +80,13 @@ public class SettingsAttributesVO {
 
     public void setmDescription(String mDescription) {
         this.mDescription = mDescription;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

@@ -32,6 +32,7 @@ public class CostumeToolBar extends Toolbar {
     private FontTextView itirnarary_title_Bar;
     private LinearLayout tool_bar_profile_name;
     private ImageButton toolbar_go_to_iternerary;
+    private FontTextView preference_save_changes;
 
     public CostumeToolBar(Context context) {
         super(context);
@@ -77,6 +78,9 @@ public class CostumeToolBar extends Toolbar {
             check_preferences = (ImageButton)findViewById(R.id.check_preferences);
             editPreferense = (FontTextView) findViewById(R.id.editPreference);
         }
+        if(preference_save_changes == null) {
+            preference_save_changes = (FontTextView)findViewById(R.id.preference_save_changes);
+        }
 //        if(my_trips_button == null){
 //            my_trips_button = (ImageButton)findViewById(R.id.my_trips_button);
 //        }
@@ -115,6 +119,7 @@ public class CostumeToolBar extends Toolbar {
      //   my_trips_image_profile.setVisibility(View.GONE);
         itirnarary_title_Bar.setVisibility(View.GONE);
         toolbar_go_to_iternerary.setVisibility(View.GONE);
+        preference_save_changes.setVisibility(View.GONE);
 
         switch (navBar) {
          //   case HOME:
@@ -141,6 +146,13 @@ public class CostumeToolBar extends Toolbar {
 //                keyBoardImage.setVisibility(View.INVISIBLE);
 //                break;
 
+            case PREFERENCES_CHECK_LIST_SETTINGS:
+            case PREFERENCES_SEARCH_LIST_SETTINGS:
+            case PREFERENCES_SPECIFIC_LIST_SETTINGS:
+            case PREFERENCES_DRAG_LIST_SETTINGS:
+                preference_save_changes.setVisibility(View.VISIBLE);
+                titleText.setVisibility(View.VISIBLE);
+            break;
             case TRIPS:
             case COMPANIONS:
             case ALL_COMPANIONS_VIEW:
@@ -148,10 +160,6 @@ public class CostumeToolBar extends Toolbar {
             case HELP:
             case ACCOUNT:
             case PREFERENCES_TAB_SETTINGS:
-            case PREFERENCES_CHECK_LIST_SETTINGS:
-            case PREFERENCES_SEARCH_LIST_SETTINGS:
-            case PREFERENCES_SPECIFIC_LIST_SETTINGS:
-            case PREFERENCES_DRAG_LIST_SETTINGS:
             case ALTERNATIVE_FLIGHT:
             case HOTEL:
 

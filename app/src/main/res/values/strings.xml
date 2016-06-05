@@ -8,6 +8,7 @@
 
 
     <string name="tool_bar">Edit</string>
+    <string name="tool_bar_preferences_save_button">Save</string>
     <string name="remmeber_me">Remember Me</string>
     <string name="password">Password</string>
     <string name="email_address">Email Address</string>
@@ -72,7 +73,7 @@
     <string name="preferences_prefered_hotel_favorite">Do you have any favorite Hotels? Add\nthem here to make sure HelloGbye\nalwayes finds you the right Hotel!</string>
 
     <string name="preferences_prefered_aircraft">Preferred Aircraft</string>
-    <string name="preferences_prefered_aircraft_favorite">Do you have any favorite Aircraft? Add\nthem here to make sure HelloGbye\nalwayes finds you the right Aircraft!</string>
+    <string name="preferences_prefered_aircraft_favorite">Tell us where you like to stay\nwhen you travel</string>
 
     <string name="preferences_prefered_flight_carrier">Preferred Aircraft</string>
     <string name="preferences_prefered_flight_carrier_favorite">Do you have any favorite Aircraft? Add\nthem here to make sure HelloGbye\nalwayes finds you the right Aircraft!</string>
@@ -87,6 +88,10 @@
     <string name="preferences_preferred_cabin_class_rank">Rank the importance of Cabin Class\nfrom most important to least important</string>
 
     <string name="preferences_relationship_choose">Choose relationship</string>
+
+    <string name="preferences_save_pop_up">Save or discard changes?</string>
+
+
     <string name="closeDrawer">Navigation View</string>
     <string name="openDrawer">Navigation View Closed</string>
     <string name="type_message">New Message</string>
@@ -203,6 +208,7 @@
     <string name="electronic_ticket">Electronic Ticket:</string>
     <string name="press_here">Press here</string>
 
+    <string name="save_button">Save</string>
 
     <string name="you_can_say_things_like">You can say things like:</string>
     <string name="cnc_error">You received error, please try again.</string>
