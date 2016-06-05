@@ -49,6 +49,7 @@
                     android:layout_marginTop="@dimen/DP4"
                     android:background="@drawable/grey_button"
                     android:padding="@dimen/DP2"
+                    android:visibility="gone"
                     android:orientation="horizontal">
                     <hellogbye.com.hellogbyeandroid.views.FontTextView
                         android:id="@+id/select_tix"
