@@ -1056,7 +1056,9 @@ public static String formattDateToStringMonthDate(String dateInString) {
                         IBinder token = input.getWindowToken();
                         ( (InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
                     }
-
+                      if(alertCB != null){
+                          alertCB.itemCanceled();
+                      }
                       ((ViewGroup) popupView.getParent()).removeView(popupView);
                       dialog.cancel();
                   }

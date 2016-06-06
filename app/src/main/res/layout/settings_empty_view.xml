@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:id="@+id/settings_empty_view_layout"
+    android:visibility="gone">
+
+
+    <View android:background="#ffffff"
+        android:layout_width = "fill_parent"
+        android:layout_height="1dip"
+        android:layout_centerVertical ="true" />
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/big_star"
+        android:layout_marginBottom="@dimen/DP30"/>
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_empty_view"
+
+        android:gravity="center"/>
+
+</LinearLayout>

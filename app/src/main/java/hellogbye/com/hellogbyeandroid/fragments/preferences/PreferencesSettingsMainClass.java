@@ -13,6 +13,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
@@ -28,7 +29,9 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
     protected String strType;
     protected  String strId;
     protected  List<SettingsValuesVO> selectedItem;
-    protected List<SettingsValuesVO> choosedItems;
+    protected List<SettingsValuesVO> firstItems;
+    protected SettingsAttributesVO myAccountAttribute;
+
     public interface saveButtonClicked{
         void onSaveClicked();
     }
@@ -66,6 +69,10 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
         LayoutInflater li = LayoutInflater.from(getActivity());
         View promptsView = li.inflate(R.layout.settings_save_popup, null);
 
+        if(firstItems.isEmpty() && myAccountAttribute.getAttributesVOs().isEmpty()){
+            return;
+        }
+
         HGBUtility.showAlertPopUp(getActivity(), null, promptsView,
                 getResources().getString(R.string.preferences_save_pop_up),
                 getResources().getString(R.string.save_button),
@@ -78,6 +85,8 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
                     @Override
                     public void itemCanceled() {
 
+                        myAccountAttribute.getAttributesVOs().clear();
+                        myAccountAttribute.setAttributesVOs(firstItems);
                         noBack = true;
                     }
                 });

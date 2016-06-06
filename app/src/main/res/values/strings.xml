@@ -105,7 +105,7 @@
 
 
     <string name="settings_search_hunt">Looking for someone?</string>
-
+    <string name="settings_empty_view">No favorite hotel chains selected…\nUse the search bar t…</string>
 
     <string name="my_settings_flight">MY FLIGHTS</string>
     <string name="popular_settings_flight">POPULAR FLIGHTS</string>

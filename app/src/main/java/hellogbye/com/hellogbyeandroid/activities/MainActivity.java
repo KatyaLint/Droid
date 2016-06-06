@@ -809,7 +809,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         preference_save_changes.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                System.out.println("Kate Preferrences");
                 onSavePreferencesButtonClicked.onSaveClicked();
 
             }

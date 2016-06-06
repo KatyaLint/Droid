@@ -18,6 +18,14 @@
         android:id="@+id/settings_search"
         android:layout_height="wrap_content"/>
 
+    <include
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        layout="@layout/settings_empty_view"
+        android:layout_marginTop="@dimen/DP80"
+        android:layout_below="@+id/include"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 <!--    <LinearLayout
         android:layout_below="@+id/settings_search"
@@ -48,7 +56,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/DP10"
             android:layout_below="@+id/settings_search"
-            layout="@layout/settings_serach_layout"/>
+            layout="@layout/settings_serach_layout"
+            android:id="@+id/include" />
 
 
         <!--<LinearLayout
