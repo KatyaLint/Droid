@@ -90,7 +90,15 @@ Code changing:
     ------------------------------------------
       Fixed Bugs:
     -----------
-    - Preferences List align to top
+    HEL-592 - limit the chosen list for aircraft, airline and hotel chain - for 10
+
 
      Code changing:
     --------------
+    - Preferences List align to top
+
+
+
+    ------------------------------------------
+           Version 1.5.4
+    ------------------------------------------

@@ -27,10 +27,12 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
 
     public boolean noBack = false;
     protected String strType;
-    protected  String strId;
-    protected  List<SettingsValuesVO> selectedItem;
+    protected String strId;
+    protected List<SettingsValuesVO> selectedItem;
     protected List<SettingsValuesVO> firstItems;
     protected SettingsAttributesVO myAccountAttribute;
+    protected static int MAX_CHOOSEN_NUMBER = 10;
+    protected List<SettingsAttributesVO> accountAttributesTemp;
 
     public interface saveButtonClicked{
         void onSaveClicked();
@@ -63,8 +65,6 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
         });
     }
 
-
-
     private void savePreferenceAlert(){
         LayoutInflater li = LayoutInflater.from(getActivity());
         View promptsView = li.inflate(R.layout.settings_save_popup, null);
@@ -87,10 +87,33 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
 
                         myAccountAttribute.getAttributesVOs().clear();
                         myAccountAttribute.setAttributesVOs(firstItems);
+                        checkSlectedList();
                         noBack = true;
                     }
                 });
 
+    }
+
+
+    private void checkSlectedList(){
+        if(accountAttributesTemp.size() != firstItems.size()){
+            if(firstItems.isEmpty()){
+                for (SettingsAttributesVO settingsAttributeVO : accountAttributesTemp){
+                    settingsAttributeVO.setChecked(false);
+                }
+            }else{
+                for (SettingsAttributesVO settingsAttributeVO : accountAttributesTemp) {
+                    for (SettingsValuesVO settingsValuesVO : firstItems){
+                        if(settingsAttributeVO.getmId().equals(settingsValuesVO.getmID())){
+                           settingsAttributeVO.setChecked(true);
+                        }else{
+                            settingsAttributeVO.setChecked(false);
+                        }
+                    }
+
+                }
+            }
+        }
     }
 
     private void savePreferencesData(){

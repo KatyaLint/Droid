@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.SearchView;
@@ -33,10 +34,12 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferenceSettingsAirlineCarriersAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferenceSettingsFlightTabsAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsSearchCheckListAdapter;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -59,7 +62,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
   //  private FontTextView popular_settings;
     private FontTextView settings_item_title;
     private FontTextView settings_item_text;
-    private List<SettingsAttributesVO> accountAttributesTemp;
+
     private LinearLayout settings_empty_view_layout;
 
 
@@ -182,6 +185,13 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
             @Override
             public void onItemClick(String guid, final String position) {
 
+                if(myAccountAttribute.getAttributesVOs().size() > MAX_CHOOSEN_NUMBER){
+                    maxChoosenNumberAlert();
+                    return;
+                }
+
+
+
                 if(!itemAlreadyAdded(guid)){
 
                     for (SettingsAttributesVO accountAttribute: accountAttributesTemp){
@@ -217,6 +227,37 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         }
 
         return rootView;
+
+    }
+
+    private void maxChoosenNumberAlert() {
+        LayoutInflater li = LayoutInflater.from(getActivity());
+        final View promptsView = li.inflate(R.layout.popup_layout_log_out, null);
+        final EditText input = (EditText) promptsView
+                .findViewById(R.id.companion_editTextDialog);
+        input.setVisibility(View.GONE);
+        final FontTextView text = (FontTextView) promptsView
+                .findViewById(R.id.component_popup_text);
+
+
+        text.setVisibility(View.VISIBLE);
+        text.setText(getResources().getString(R.string.settings_more_then_allowed_selected));
+
+        HGBUtility.showAlertPopUpOneButton(getActivity(), input, promptsView, getResources().getString(R.string.settings_more_then_allowed_selected_title),
+                new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+
+                    }
+
+                    @Override
+                    public void itemCanceled() {
+
+                    }
+                });
+
+
+
 
     }
 

@@ -106,6 +106,8 @@
 
     <string name="settings_search_hunt">Looking for someone?</string>
     <string name="settings_empty_view">No favorite hotel chains selected…\nUse the search bar t…</string>
+    <string name="settings_more_then_allowed_selected_title">Error</string>
+    <string name="settings_more_then_allowed_selected">Can not have more than 10 selected</string>
 
     <string name="my_settings_flight">MY FLIGHTS</string>
     <string name="popular_settings_flight">POPULAR FLIGHTS</string>
