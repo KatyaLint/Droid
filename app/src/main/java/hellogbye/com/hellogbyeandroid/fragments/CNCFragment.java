@@ -501,7 +501,7 @@ public class CNCFragment extends HGBAbstractFragment {
                         ResponsesVO response = responses.get(i);
                         if (responses.get(i).getType().equals("City")) {
                             String airport = getResources().getString(R.string.cnc_choose_airport);
-                            airport = airport + response.getValue();
+                            airport = airport + " " +response.getValue() + "?";
                             final AirportSendValuesVO airportSendValuesVO = new AirportSendValuesVO();
                             airportSendValuesVO.setQuery(strMessage);
                             airportSendValuesVO.setTravelpreferenceprofileid(getActivityInterface().getCurrentUser().getUserprofileid());
