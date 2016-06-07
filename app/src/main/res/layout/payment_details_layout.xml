@@ -3,15 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f4f4f4"
-    android:orientation="vertical">
+    android:background="@color/greyish_alternative_hotel"
+    >
+    <include
+        android:id="@+id/steps_layout"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/credit_card_steps"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"/>
+
+    <View
+        android:id="@+id/steps_layout_seprator"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/DP1"
+        android:layout_below="@+id/steps_layout"
+        android:background="#979797" />
 
 
     <RelativeLayout
         android:id="@+id/total_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/steps_layout_seprator"
         android:padding="5dp"
+        android:background="@color/white"
         android:layout_marginLeft="5dp"
         >
 
@@ -26,19 +43,18 @@
                 android:id="@+id/payment_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pay for entire trip"
-                android:textColor="@color/black"
+                android:text="Pay for trip"
+                android:textColor="@color/hgb_blue"
                 android:textSize="15sp"
-                app:fontName="dinnextltpro_light.otf" />
+                app:fontName="dinnextltpro_medium.otf" />
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/payment_total_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="25sp"
-                android:textColor="@color/black"
-                android:text="$1234"
-                app:fontName="dinnextltpro_bold.otf" />
+                android:textColor="@color/hgb_blue"
+                app:fontName="dinnextltpro_light.otf" />
 
 
         </LinearLayout>
@@ -53,12 +69,29 @@
 
     </RelativeLayout>
 
+    <LinearLayout
+        android:id="@+id/payment_border"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/total_ll"
+        android:background="@color/greyish_alternative_hotel">
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/DP10"
+            android:text="SELECT ITINERARY PAYMENT"
+            android:textColor="@color/warm_grey"
+            android:textSize="@dimen/SP10"
+            app:fontName="dinnextltpro_regular.otf" />
+    </LinearLayout>
+
 
     <ExpandableListView
         android:id="@+id/ex_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/total_ll"/>
+        android:layout_below="@+id/payment_border"/>
 
 
 

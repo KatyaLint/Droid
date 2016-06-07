@@ -2,26 +2,32 @@ package hellogbye.com.hellogbyeandroid.fragments.checkout;
 
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.BaseExpandableListAdapter;
+import android.widget.CheckBox;
+import android.widget.ExpandableListView;
+import android.widget.ImageView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-
+import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.adapters.TravlerAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelationshipTypesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymentChild;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymnentGroup;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
-import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -31,11 +37,18 @@ public class TravelersFragment extends HGBAbstractFragment {
 
 
     private FontTextView mNext;
+    private ArrayList<PaymnentGroup> mGroups;
+    private TravlerExpandableAdapter mAdapter;
 
-    private TravlerAdapter mAdapter;
+    private ExpandableListView mRecyclerView;
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private FontTextView mPaymentTextView;
+    private FontTextView mTravlerTextView;
+    private FontTextView mReviewTextView;
+
+    private ImageView mPaymentImageView;
+    private ImageView mTravlerImageView;
+    private ImageView mReviewImageView;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new TravelersFragment();
@@ -56,37 +69,58 @@ public class TravelersFragment extends HGBAbstractFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Bundle args = getArguments();
+        if (args != null) {
+            String groups = args.getString("parent_list");
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<PaymnentGroup>>() {
+            }.getType();
+            mGroups = gson.fromJson((String) groups, listType);
+        }
         mNext = (FontTextView) view.findViewById(R.id.traveler_next);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.traveler_recyclerView);
+        mRecyclerView = (ExpandableListView) view.findViewById(R.id.traveler_recyclerView);
+        mPaymentTextView = (FontTextView) view.findViewById(R.id.steps_checkout_payment_text);
+        mTravlerTextView = (FontTextView) view.findViewById(R.id.steps_checkout_travler_text);
+        mReviewTextView = (FontTextView) view.findViewById(R.id.steps_checkout_review_text);
 
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
+        mPaymentImageView = (ImageView) view.findViewById(R.id.steps_checkout_payment_image);
+        mTravlerImageView= (ImageView) view.findViewById(R.id.steps_checkout_travler_image);
+        mReviewImageView= (ImageView) view.findViewById(R.id.steps_checkout_review_image);
 
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
+//        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+//        // use this setting to improve performance if you know that changes
+//        // in content do not change the layout size of the RecyclerView
+//        mRecyclerView.setHasFixedSize(true);
+//
+//        // use a linear layout manager
+//        mLayoutManager = new LinearLayoutManager(getActivity());
+//        mRecyclerView.setLayoutManager(mLayoutManager);
 
 
         ConnectionManager.getInstance(getActivity()).getTravellersInforWithSolutionId(getActivityInterface().getTravelOrder().getmSolutionID(), new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-
+                 List<ArrayList<UserDataVO>> children = new ArrayList<ArrayList<UserDataVO>>();
 
                 getFlowInterface().setListUsers((ArrayList<UserDataVO>) data);
-                mAdapter = new TravlerAdapter(getFlowInterface().getListUsers(), getActivity().getApplicationContext());
+                for(UserDataVO user :getFlowInterface().getListUsers() ){
+                    ArrayList<UserDataVO> passengerChildArray = new ArrayList<>();
+                    passengerChildArray.add(user);
+                    children.add(passengerChildArray);
+                }
+
+                mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(),mGroups,children);
 
                 mRecyclerView.setAdapter(mAdapter);
-                mAdapter.SetOnItemClickListener(new TravlerAdapter.OnItemClickListener() {
-
-                    @Override
-                    public void onItemClick(View v, int position) {
-                        Bundle args = new Bundle();
-                        args.putInt("user_json_position", position);
-                        getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS_DETAILS.getNavNumber(), args);
-                    }
-                });
+//                mAdapter.SetOnItemClickListener(new TravlerAdapter.OnItemClickListener() {
+//
+//                    @Override
+//                    public void onItemClick(View v, int position) {
+//                        Bundle args = new Bundle();
+//                        args.putInt("user_json_position", position);
+//                        getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS_DETAILS.getNavNumber(), args);
+//                    }
+//                });
             }
 
             @Override
@@ -116,6 +150,8 @@ public class TravelersFragment extends HGBAbstractFragment {
 
             }
         });
+
+        initCheckoutSteps();
     }
 
     private void setNextButtonBackround(boolean isEnabled) {
@@ -127,6 +163,174 @@ public class TravelersFragment extends HGBAbstractFragment {
             mNext.setBackgroundResource(R.drawable.red_disable_button);
         }
     }
+    public class TravlerExpandableAdapter extends BaseExpandableListAdapter {
+
+        private final LayoutInflater inf;
+        private final ArrayList<PaymnentGroup> groupsList;
+        private List<ArrayList<UserDataVO>> childrenList = new ArrayList<>();
+
+
+        public TravlerExpandableAdapter(Context context, ArrayList<PaymnentGroup> groups, List<ArrayList<UserDataVO>> children) {
+            this.groupsList = groups;
+            this.childrenList = children;
+            this.inf = LayoutInflater.from(context);
+
+        }
+
+        @Override
+        public int getGroupCount() {
+            return groupsList.size();
+        }
+
+        @Override
+        public int getChildrenCount(int groupPosition) {
+            return childrenList.get(groupPosition).size();
+        }
+
+        @Override
+        public Object getGroup(int groupPosition) {
+            return groupsList.get(groupPosition);
+        }
+
+        @Override
+        public Object getChild(int groupPosition, int childPosition) {
+            return childrenList.get(groupPosition).get(childPosition);
+        }
+
+        @Override
+        public long getGroupId(int groupPosition) {
+            return groupPosition;
+        }
+
+        @Override
+        public long getChildId(int groupPosition, int childPosition) {
+            return childPosition;
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return true;
+        }
+
+        @Override
+        public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+
+            final ChildViewHolder holder;
+            if (convertView == null) {
+                convertView = inf.inflate(R.layout.payment_child_travler_item, parent, false);
+                holder = new ChildViewHolder();
+
+                holder.childNametext = (FontTextView) convertView.findViewById(R.id.travler_name_entry);
+                holder.childDOB = (FontTextView) convertView.findViewById(R.id.travler_dob_entry);
+                holder.childPhone = (FontTextView) convertView.findViewById(R.id.travler_phone_entry);
+                holder.childAddress = (FontTextView) convertView.findViewById(R.id.travler_address_entry);
+                holder.childEmail = (FontTextView) convertView.findViewById(R.id.travler_email_entry);
+
+                convertView.setTag(holder);
+            } else {
+                holder = (ChildViewHolder) convertView.getTag();
+            }
+            final UserDataVO child = (UserDataVO) getChild(groupPosition, childPosition);
+
+            holder.childNametext.setText(child.getFirstname()+" "+child.getLastname());
+            holder.childDOB.setText(child.getDob());
+            holder.childPhone.setText(child.getPhone());
+            holder.childAddress.setText(child.getAddress()+"\n"+child.getCity()+","+child.getState()+"\n"+child.getPostalcode());
+            holder.childEmail.setText(child.getEmailaddress());
+
+
+            return convertView;
+        }
+
+
+        @Override
+        public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+            final GroupViewHolder holder;
+
+            if (convertView == null) {
+                convertView = inf.inflate(R.layout.payment_group_travlers_item, parent, false);
+
+                holder = new GroupViewHolder();
+                holder.groupNametext = (FontTextView) convertView.findViewById(R.id.payment_group_name);
+                holder.groupPricetext = (FontTextView) convertView.findViewById(R.id.payment_group_price);
+               // holder.groupSelectCC = (FontTextView) convertView.findViewById(R.id.passenger_select_cc);
+                // holder.groupCheckBox = (CheckBox) convertView.findViewById(R.id.payment_group_checkbox);
+                holder.groupImageView = (ImageView) convertView.findViewById(R.id.payment_group_image);
+
+                convertView.setTag(holder);
+            } else {
+                holder = (GroupViewHolder) convertView.getTag();
+
+            }
+
+            final PaymnentGroup group = (PaymnentGroup) getGroup(groupPosition);
+            holder.groupNametext.setText(group.getNameText());
+            holder.groupPricetext.setText(group.getTotalText());
+
+
+            if (group.isSelected()) {
+                holder.groupImageView.setBackgroundResource(R.drawable.expand_copy_3);
+            } else {
+                holder.groupImageView.setBackgroundResource(R.drawable.minimize);
+            }
+            holder.groupImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mRecyclerView.isGroupExpanded(groupPosition)) {
+                        mRecyclerView.collapseGroup(groupPosition);
+                        v.setBackgroundResource(R.drawable.expand_copy_3);
+                        group.setSelected(true);
+                    } else {
+                        mRecyclerView.expandGroup(groupPosition);
+                        group.setSelected(false);
+                        v.setBackgroundResource(R.drawable.minimize);
+                    }
+                }
+            });
+
+
+            return convertView;
+        }
+
+        @Override
+        public boolean isChildSelectable(int groupPosition, int childPosition) {
+            return true;
+        }
+
+        private class GroupViewHolder {
+            FontTextView groupNametext;
+            FontTextView groupPricetext;
+            //CheckBox groupCheckBox;
+            ImageView groupImageView;
+
+
+        }
+
+        private class ChildViewHolder {
+
+            FontTextView childNametext;
+            FontTextView childDOB;
+            FontTextView childEmail;
+            FontTextView childPhone;
+            FontTextView childAddress;
+
+        }
+
+
+    }
+
+
+    private void initCheckoutSteps(){
+
+        mPaymentTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_063345));
+        mTravlerTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_063345));
+        mReviewTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_777776));
+        mPaymentImageView.setBackgroundResource(R.drawable.step_menu_blue_stand);
+        mTravlerImageView.setBackgroundResource(R.drawable.step_menu_blue_on);
+        mReviewImageView.setBackgroundResource(R.drawable.step_menu_gray);
+
+    }
+
 
 
 }

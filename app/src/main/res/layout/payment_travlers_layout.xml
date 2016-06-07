@@ -6,15 +6,23 @@
     android:background="#f4f4f4"
     android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
+    <include
+        android:id="@+id/steps_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/credit_card_steps"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"/>
+
+    <ExpandableListView
         android:id="@+id/traveler_recyclerView"
         android:layout_width="match_parent"
         android:layout_above="@+id/traveler_next_rl"
+        android:layout_below="@+id/steps_layout"
         android:layout_height="match_parent">
 
 
-    </android.support.v7.widget.RecyclerView>
-
+    </ExpandableListView>
 
 
 

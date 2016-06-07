@@ -4,6 +4,7 @@ package hellogbye.com.hellogbyeandroid.fragments.checkout;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -54,6 +57,13 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
     private ArrayList<PaymnentGroup> groups;
     private List<ArrayList<PaymentChild>> children;
 
+    private FontTextView mPaymentTextView;
+    private FontTextView mTravlerTextView;
+    private FontTextView mReviewTextView;
+
+    private ImageView mPaymentImageView;
+    private ImageView mTravlerImageView;
+    private ImageView mReviewImageView;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new NewPaymentDetailsFragment();
@@ -65,6 +75,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
     }
 
@@ -83,10 +94,22 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         mTotalPrice = (FontTextView) view.findViewById(R.id.payment_total_price);
         mPaymentSubmit = (FontTextView) view.findViewById(R.id.payment_submit);
         mPaymentDisableSubmit = (FontTextView) view.findViewById(R.id.payment_submit_disable);
+        mPaymentTextView = (FontTextView) view.findViewById(R.id.steps_checkout_payment_text);
+        mTravlerTextView = (FontTextView) view.findViewById(R.id.steps_checkout_travler_text);
+        mReviewTextView = (FontTextView) view.findViewById(R.id.steps_checkout_review_text);
+
+        mPaymentImageView = (ImageView) view.findViewById(R.id.steps_checkout_payment_image);
+        mTravlerImageView= (ImageView) view.findViewById(R.id.steps_checkout_travler_image);
+        mReviewImageView= (ImageView) view.findViewById(R.id.steps_checkout_review_image);
+
+
+
+
+
         lv = (ExpandableListView) view.findViewById(R.id.ex_list);
         UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
         passangers = travelOrder.getPassengerses();
-        mTotalPrice.setText("$" + travelOrder.getmTotalPrice());
+        mTotalPrice.setText("Total: $" + travelOrder.getmTotalPrice());
         mTotalSelectCC = (FontTextView) view.findViewById(R.id.total_select_cc);
         mTotalSelectCC.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,6 +179,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         mAdapter = new ExpandableListAdapter(groups, children);
         lv.setAdapter(mAdapter);
         lv.setGroupIndicator(null);
+        initCheckoutSteps();
     }
 
     private void sendPaymentSolution() {
@@ -168,7 +192,10 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         ConnectionManager.getInstance(getActivity()).checkoutSolutionId(getActivityInterface().getSolutionID(), set, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS.getNavNumber(), null);
+                Bundle args = new Bundle();
+                Gson gson = new Gson();
+                args.putString("parent_list", gson.toJson(groups));
+                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS.getNavNumber(), args);
             }
 
             @Override
@@ -666,21 +693,21 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             });
 
             if (group.isSelected()) {
-                holder.groupImageView.setBackgroundResource(R.drawable.expand);
+                holder.groupImageView.setBackgroundResource(R.drawable.expand_copy_3);
             } else {
-                holder.groupImageView.setBackgroundResource(R.drawable.collapse);
+                holder.groupImageView.setBackgroundResource(R.drawable.minimize);
             }
             holder.groupImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (lv.isGroupExpanded(groupPosition)) {
                         lv.collapseGroup(groupPosition);
-                        v.setBackgroundResource(R.drawable.expand);
+                        v.setBackgroundResource(R.drawable.expand_copy_3);
                         group.setSelected(true);
                     } else {
                         lv.expandGroup(groupPosition);
                         group.setSelected(false);
-                        v.setBackgroundResource(R.drawable.collapse);
+                        v.setBackgroundResource(R.drawable.minimize);
                     }
                 }
             });
@@ -816,6 +843,18 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
     private void disablePaymentSolution() {
         mPaymentDisableSubmit.setVisibility(View.VISIBLE);
         mPaymentSubmit.setVisibility(View.GONE);
+    }
+
+
+    private void initCheckoutSteps(){
+
+        mPaymentTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_063345));
+        mTravlerTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_777776));
+        mReviewTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_777776));
+        mPaymentImageView.setBackgroundResource(R.drawable.step_menu_blue_on);
+        mTravlerImageView.setBackgroundResource(R.drawable.step_menu_gray);
+        mReviewImageView.setBackgroundResource(R.drawable.step_menu_gray);
+
     }
 
 

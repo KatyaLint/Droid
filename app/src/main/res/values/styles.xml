@@ -92,6 +92,15 @@
 
     </style>
 
+    <style name="TextViewTravlerCheckoutDetails">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+
+
+
+    </style>
+
     <style name="PaymentItemStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -123,12 +132,12 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/SP10</item>
         <item name="android:text">Select Card</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:padding">@dimen/DP6</item>
+        <item name="android:textColor">@color/hgb_blue</item>
+        <item name="android:padding">@dimen/DP16</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:background">@drawable/select_cc_border</item>
-        <item name="android:drawableRight">@android:drawable/arrow_down_float</item>
+        <item name="android:drawableRight">@drawable/expand_more_a_1</item>
     </style>
 
     <style name="TravelerDetailsTextStyle">

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/header_travel_data"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_marginLeft="@dimen/DP44"
+        android:text="Travel Information" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_name"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_travel_data"
+        android:layout_alignLeft="@+id/header_travel_data"
+        android:text="Name :" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_name_entry"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_below="@+id/header_travel_data"
+        android:layout_marginLeft="@dimen/DP200" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_dob"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_below="@+id/travler_name"
+        android:layout_alignLeft="@+id/travler_name"
+        android:text="Date of birth :" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_dob_entry"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_alignLeft="@+id/travler_name_entry"
+        android:layout_below="@+id/travler_name_entry" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_email"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_below="@+id/travler_dob"
+        android:layout_alignLeft="@+id/travler_dob"
+        android:text="Email :" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_email_entry"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_alignLeft="@+id/travler_dob_entry"
+        android:layout_below="@+id/travler_dob_entry" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_phone"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_below="@+id/travler_email"
+        android:layout_alignLeft="@+id/travler_email"
+        android:text="Phone :" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_phone_entry"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_alignLeft="@+id/travler_email_entry"
+        android:layout_below="@+id/travler_email_entry" />
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_address"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_below="@+id/travler_phone"
+        android:layout_alignLeft="@+id/travler_phone"
+        android:text="Address :" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_address_entry"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_alignLeft="@+id/travler_phone_entry"
+        android:layout_below="@+id/travler_phone_entry" />
+
+
+
+
+
+
+    <View
+        android:id="@+id/travler_line"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/DP1"
+        android:layout_below="@+id/travler_address_entry"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="@dimen/DP54"
+        android:layout_marginTop="@dimen/DP20"
+        android:layout_marginLeft="@dimen/DP54"
+        android:layout_centerVertical="true"
+        android:background="#979797" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_below="@+id/travler_line"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/DP16"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:textColor="@color/COLOR_555555"
+        android:text="The billing addres is the one you entered\non your payment card details" />
+
+</RelativeLayout>
