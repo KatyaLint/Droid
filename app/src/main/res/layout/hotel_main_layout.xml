@@ -70,8 +70,8 @@
                     android:id="@+id/rl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp">
+                    android:paddingLeft="@dimen/DP10"
+                    android:paddingRight="@dimen/DP10">
 
 
                     <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -79,9 +79,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:maxWidth="250dp"
+                        android:maxWidth="@dimen/DP250"
                         android:textColor="@color/dark_teal"
-                        android:textSize="18sp"
+                        android:textSize="@dimen/SP18"
                         app:fontName="dinnextltpro_medium.otf" />
 
                     <LinearLayout
@@ -101,7 +101,7 @@
                             android:layout_height="wrap_content"
 
                             android:textColor="@color/dark_teal"
-                            android:textSize="32sp"
+                            android:textSize="@dimen/SP32"
                             app:fontName="dinnextltpro_medium.otf" />
 
                     </LinearLayout>

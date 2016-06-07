@@ -40,6 +40,7 @@
     <dimen name="DP60">60dp</dimen>
     <dimen name="DP80">80dp</dimen>
     <dimen name="DP200">200dp</dimen>
+    <dimen name="DP250">250dp</dimen>
     <dimen name="DP_64">-64dp</dimen>
 
     <dimen name="SP32">32sp</dimen>
