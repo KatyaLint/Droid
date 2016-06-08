@@ -59,8 +59,8 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
 
         Bundle args = getArguments();
         if (args != null) {
-            strJson = args.getString("setting_att_id");
-            strType = args.getString("setting_type");
+            strJson = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
+            strType = args.getString(HGBConstants.BUNDLE_SETTINGS_TYPE);
 
         }
 

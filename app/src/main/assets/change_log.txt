@@ -92,6 +92,7 @@ Code changing:
     -----------
     HEL-592 - limit the chosen list for aircraft, airline and hotel chain - for 10
     HEL-882 - can't enter hotel details app crashes 1.5
+    HEL-872 - star rating preference 1.5
 
      Code changing:
     --------------

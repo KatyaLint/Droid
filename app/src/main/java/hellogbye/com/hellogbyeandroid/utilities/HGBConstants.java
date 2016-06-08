@@ -21,6 +21,11 @@ public class HGBConstants {
 
     public static final String CNC_CLEAR_CHAT = "cnc_clear_chat";
 
+
+    public static final String BUNDLE_SETTINGS_ATT_ID = "setting_att_id";
+    public static final String BUNDLE_SETTINGS_TYPE = "setting_type";
+
+
     /* GPS Constant Permission */
     public static final int MY_PERMISSION_ACCESS_COARSE_LOCATION = 11;
     public static final int MY_PERMISSION_ACCESS_FINE_LOCATION = 12;

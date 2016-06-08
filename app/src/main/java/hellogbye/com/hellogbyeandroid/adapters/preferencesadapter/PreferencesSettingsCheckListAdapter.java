@@ -59,11 +59,19 @@ public class PreferencesSettingsCheckListAdapter extends ArrayAdapter<SettingsAt
                 settings_flight_title.setTag(attribute.getmId());
             }
             ImageView setting_check_image = (ImageView)v.findViewById(R.id.setting_check_image);
-            if(attribute.getmRank() != null){
+
+            if(attribute.isChecked()){
                 setting_check_image.setBackgroundResource(R.drawable.check_on);
             }else{
                 setting_check_image.setBackgroundResource(R.drawable.check_off);
             }
+
+
+           /* if(attribute.getmRank() != null){
+                setting_check_image.setBackgroundResource(R.drawable.check_on);
+            }else{
+                setting_check_image.setBackgroundResource(R.drawable.check_off);
+            }*/
         }
 
         return v;

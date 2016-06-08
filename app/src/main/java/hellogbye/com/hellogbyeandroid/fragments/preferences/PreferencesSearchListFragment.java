@@ -145,8 +145,8 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         final View rootView = inflater.inflate(R.layout.settings_search_drag_list, container, false);
         Bundle args = getArguments();
         if (args != null) {
-            strId = args.getString("setting_att_id");
-            strType = args.getString("setting_type");
+            strId = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
+            strType = args.getString(HGBConstants.BUNDLE_SETTINGS_TYPE);
         }
         noBack = false;
     //    my_settings = (FontTextView)rootView.findViewById(R.id.my_flights_settings);

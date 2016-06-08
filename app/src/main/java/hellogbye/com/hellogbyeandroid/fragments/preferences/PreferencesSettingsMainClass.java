@@ -33,6 +33,8 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
     protected SettingsAttributesVO myAccountAttribute;
     protected static int MAX_CHOOSEN_NUMBER = 10;
     protected List<SettingsAttributesVO> accountAttributesTemp;
+    protected List<SettingsAttributesVO> settingsAttributesVO;
+
 
     public interface saveButtonClicked{
         void onSaveClicked();
@@ -41,6 +43,7 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         ((MainActivity) getActivity()).setOnSavePreferencesButtonClicked(new saveButtonClicked(){
             @Override
             public void onSaveClicked() {
@@ -69,7 +72,12 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
         LayoutInflater li = LayoutInflater.from(getActivity());
         View promptsView = li.inflate(R.layout.settings_save_popup, null);
 
-        if(firstItems.isEmpty() && myAccountAttribute.getAttributesVOs().isEmpty()){
+
+
+
+        if(this.getClass().toString().equals(PreferencesSearchListFragment.class.toString())
+            && firstItems.isEmpty()
+            && myAccountAttribute.getAttributesVOs().isEmpty()){
             return;
         }
 
@@ -79,19 +87,32 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
                 new PopUpAlertStringCB() {
                     @Override
                     public void itemSelected(String inputItem) {
+                        convertData();
                         savePreferencesData();
                     }
 
                     @Override
                     public void itemCanceled() {
 
-                        myAccountAttribute.getAttributesVOs().clear();
-                        myAccountAttribute.setAttributesVOs(firstItems);
-                        checkSlectedList();
+                        if(this.getClass().toString().equals(PreferencesSearchListFragment.class.toString())){
+                            myAccountAttribute.getAttributesVOs().clear();
+                            myAccountAttribute.setAttributesVOs(firstItems);
+                            checkSlectedList();
+                        }else{
+                            canceledItems();
+                        }
                         noBack = true;
                     }
                 });
 
+    }
+
+
+
+    private void canceledItems(){
+        for(SettingsAttributesVO settingsAttributeVO:settingsAttributesVO){
+            settingsAttributeVO.setChecked(false);
+        }
     }
 
 
@@ -116,8 +137,38 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
         }
     }
 
+    private void selectedItemForServer(){
+
+        selectedItem.clear();
+        for(SettingsAttributesVO settingsAttributeVO :settingsAttributesVO) {
+
+            if(settingsAttributeVO.isChecked()) {
+                SettingsValuesVO selectedValue = new SettingsValuesVO(settingsAttributeVO.getmId(),
+                        settingsAttributeVO.getmName(),
+                        settingsAttributeVO.getmDescription(),
+                        settingsAttributeVO.getmRank());
+                selectedItem.add(selectedValue);
+            }
+        }
+        myAccountAttribute = new SettingsAttributesVO();
+        myAccountAttribute.setAttributesVOs(selectedItem);
+    }
+
+    private void convertData(){
+        if(this.getClass().toString().equals(PreferencesCheckListFragment.class.toString())){
+            selectedItemForServer();
+        }
+        /*else if(this.getClass().toString().equals(PreferencesSearchListFragment.class.toString())){
+            myAccountAttribute.getAttributesVOs().clear();
+            myAccountAttribute.setAttributesVOs(firstItems);
+            checkSlectedList();
+        }*/
+    }
+
+
     private void savePreferencesData(){
         String guid = getSettingGuidSelected();
+
         ConnectionManager.getInstance(getActivity()).putAttributesValues(
                 strId, strType, guid, selectedItem, new ConnectionManager.ServerRequestListener() {
                     @Override

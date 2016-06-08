@@ -33,9 +33,9 @@ public class PreferencesCheckListFragment extends PreferencesSettingsMainClass {
   /*  private String strJson;
     private String strType;*/
     private PreferencesSettingsCheckListAdapter preferenceSettingsListAdapter;
-    private List<SettingsValuesVO> choosedItems;
+   // private List<SettingsValuesVO> choosedItems;
    // private List<SettingsValuesVO> selectedItem;
-    private List<SettingsAttributesVO> accountAttributes;
+
     private FontTextView settings_title_text;
     private FontTextView settings_text;
 
@@ -55,8 +55,8 @@ public class PreferencesCheckListFragment extends PreferencesSettingsMainClass {
         final View rootView = inflater.inflate(R.layout.settings_drag_list, container, false);
         Bundle args = getArguments();
         if (args != null) {
-            strId = args.getString("setting_att_id");
-            strType = args.getString("setting_type");
+            strId = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
+            strType = args.getString(HGBConstants.BUNDLE_SETTINGS_TYPE);
 
         }
 
@@ -65,7 +65,8 @@ public class PreferencesCheckListFragment extends PreferencesSettingsMainClass {
         noBack = false;
 
         selectedItem = new ArrayList<>();
-        choosedItems = getMyAccountAttributes();
+        firstItems = getMyAccountAttributes();
+        settingsAttributesVO = new ArrayList<>();
 
         dragDropListInitialization(rootView);
 
@@ -90,10 +91,12 @@ public class PreferencesCheckListFragment extends PreferencesSettingsMainClass {
     }
 
     private List<SettingsAttributesVO> correctCheckList(List<SettingsAttributesVO> accountAttributes){
-        for (SettingsValuesVO settingsValuesVO:choosedItems){
+        for (SettingsValuesVO settingsValuesVO : firstItems){
             for(SettingsAttributesVO accountAttributeVO :accountAttributes) {
                 if (settingsValuesVO.getmID().equals(accountAttributeVO.getmId())) {
                     accountAttributeVO.setmRank(settingsValuesVO.getmRank());
+                    accountAttributeVO.setChecked(true);
+                    settingsValuesVO.setChecked(true);
                     break;
                 }
             }
@@ -102,38 +105,43 @@ public class PreferencesCheckListFragment extends PreferencesSettingsMainClass {
     }
 
 
-    private void selectedItemForServer(SettingsAttributesVO accountAttribute){
-        selectedItem.clear();
-        SettingsValuesVO selectedValue = new SettingsValuesVO(accountAttribute.getmId(),
-                accountAttribute.getmName(),
-                accountAttribute.getmDescription(),
-                accountAttribute.getmRank());
-        selectedItem.add(selectedValue);
-        choosedItems.clear();
-        choosedItems.add(selectedValue);
-    }
+
 
 
     private void dragDropListInitialization(View rootView){
         mDynamicListView = (DynamicListView) rootView.findViewById(R.id.settings_drag_list);
+
         mDynamicListView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 FontTextView settings_flight_title = (FontTextView) view.findViewById(R.id.settings_check_name);
                 String clickedItemID = settings_flight_title.getTag().toString();
-                for(SettingsAttributesVO accountAttribute : accountAttributes){
+                for(SettingsAttributesVO accountAttribute : accountAttributesTemp){
                     if(accountAttribute.getmId().equals(clickedItemID)){
+
+                        if(accountAttribute.isChecked()){
+                            accountAttribute.setChecked(false);
+                            settingsAttributesVO.remove(accountAttribute);
+
+                        }else{
+                            accountAttribute.setChecked(true);
+                            settingsAttributesVO.add(accountAttribute);
+
+                        }
                         accountAttribute.setmRank("0");
-                        selectedItemForServer(accountAttribute);
-                    }else{
-                        accountAttribute.setmRank(null);
+                       // selectedItemForServer(accountAttribute);
                     }
+                    /*else{
+                        accountAttribute.setChecked(false);
+                        accountAttribute.setmRank(null);
+                    }*/
                 }
                 preferenceSettingsListAdapter.notifyDataSetChanged();
             }
         });
 
 
+/*
         mDynamicListView.setOnItemLongClickListener(
                 new AdapterView.OnItemLongClickListener() {
                     @Override
@@ -144,13 +152,16 @@ public class PreferencesCheckListFragment extends PreferencesSettingsMainClass {
                     }
                 }
         );
+*/
 
 
-        getCorrectAccountAtribute(rootView);
-        preferenceSettingsListAdapter = new PreferencesSettingsCheckListAdapter(getActivity(), accountAttributes);
+
+        getCorrectAccountAtribute();
+
+        preferenceSettingsListAdapter = new PreferencesSettingsCheckListAdapter(getActivity(), accountAttributesTemp);
         mDynamicListView.setAdapter(preferenceSettingsListAdapter);
 
-        mDynamicListView.enableSwipeToDismiss(
+    /*    mDynamicListView.enableSwipeToDismiss(
                 new OnDismissCallback() {
                     @Override
                     public void onDismiss(@NonNull final ViewGroup listView, @NonNull final int[] reverseSortedPositions) {
@@ -162,7 +173,27 @@ public class PreferencesCheckListFragment extends PreferencesSettingsMainClass {
                         }
                     }
                 }
-        );
+        );*/
+    }
+
+
+    private void getCorrectAccountAtribute(){
+        String guid = getSettingGuidSelected();
+        switch (guid){
+            case "5":
+                addStopsText();
+                accountAttributesTemp  = correctCheckList(getActivityInterface().getAccountSettingsFlightStopAttributes());
+                break;
+            case "8":
+                addSmokingText();
+                accountAttributesTemp  = correctCheckList(getActivityInterface().getAccountSettingsHotelSmokingClassAttributes());
+                break;
+            case "7":
+                addStarPreferenceText();
+                accountAttributesTemp  = correctCheckList(getActivityInterface().getAccountSettingsHotelStarAttributes());
+                break;
+
+        }
     }
 
     private void addSmokingText(){
@@ -175,28 +206,6 @@ public class PreferencesCheckListFragment extends PreferencesSettingsMainClass {
         settings_title_text.setText(getActivity().getResources().getText(R.string.preferences_stops));
         settings_text.setText(getActivity().getResources().getText(R.string.preferences_stops_prefer));
     }
-
-
-
-    private void getCorrectAccountAtribute(View rootView){
-        String guid = getSettingGuidSelected();
-        switch (guid){
-            case "5":
-                addStopsText();
-                accountAttributes  = correctCheckList(getActivityInterface().getAccountSettingsFlightStopAttributes());
-                break;
-            case "8":
-                addSmokingText();
-                accountAttributes  = correctCheckList(getActivityInterface().getAccountSettingsHotelSmokingClassAttributes());
-                break;
-            case "7":
-                addStarPreferenceText();
-                accountAttributes  = correctCheckList(getActivityInterface().getAccountSettingsHotelStarAttributes());
-                break;
-
-        }
-    }
-
     private void addStarPreferenceText() {
         settings_title_text.setText(getActivity().getResources().getText(R.string.preferences_stars));
         settings_text.setText(getActivity().getResources().getText(R.string.preferences_stars_prefer));

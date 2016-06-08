@@ -107,7 +107,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
 
         Bundle args = getArguments();
         if (args != null) {
-            strJson = args.getString("setting_att_id");
+            strJson = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
         }
         initializeFontText(flight_tab_view, hotel_tab_view);
         showCorrectView();
@@ -245,8 +245,8 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
 
 
     private void gotToSelectedFragment(String guid, String type){
-        args.putString("setting_att_id", strJson);
-        args.putString("setting_type", type);
+        args.putString(HGBConstants.BUNDLE_SETTINGS_ATT_ID, strJson);
+        args.putString(HGBConstants.BUNDLE_SETTINGS_TYPE, type);
         switch (guid){
             case "1":
             case "2":

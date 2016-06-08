@@ -828,7 +828,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         itirnarary_title_Bar = (FontTextView) findViewById(R.id.itirnarary_title_Bar);
 
 
-
         LayoutInflater li = LayoutInflater.from(MainActivity.this);
         final View promptsView = li.inflate(R.layout.popup_layout_change_iteinarary_name, null);
         final EditText input = (EditText) promptsView
