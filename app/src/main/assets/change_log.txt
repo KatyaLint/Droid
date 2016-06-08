@@ -97,6 +97,8 @@ Code changing:
     HEL-870 - my companions 1.5
     HEL-865 - add companion in itinerary isn't working 1.5
     HEL-864 - add companion in itinerary
+    HEL-857 - cnc page list for profile preferences 1.5
+
      Code changing:
     --------------
     - Preferences List align to top
