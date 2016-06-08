@@ -41,4 +41,12 @@ public class CompanionInviteUserProfileVO {
     public void setmFirstName(String mFirstName) {
         this.mFirstName = mFirstName;
     }
+
+    public String getmEmailAddress() {
+        return mEmailAddress;
+    }
+
+    public void setmEmailAddress(String mEmailAddress) {
+        this.mEmailAddress = mEmailAddress;
+    }
 }

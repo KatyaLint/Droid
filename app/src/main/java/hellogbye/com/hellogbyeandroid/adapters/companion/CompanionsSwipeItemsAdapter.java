@@ -103,18 +103,22 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
 
         if(item.getmConfirmationstatus().equals("Pending")) {
 
+            String firstName = item.getCompanionInviteUserProfileVO().getmFirstName();
+            if(firstName.isEmpty()){
+                firstName = item.getCompanionInviteUserProfileVO().getmEmailAddress();
+            }
+
+            viewHolder.companion_details_name_item.setText(firstName);
+            viewHolder.companion_details_name_item.setTag(item.getmCompanionid());
+            viewHolder.companion_arrow.setVisibility(View.GONE);
+
             if(item.getCompanionInviteUserProfileVO() != null) {
-                viewHolder.companion_details_name_item.setText(item.getCompanionInviteUserProfileVO().getmFirstName());
-                viewHolder.companion_details_name_item.setTag(item.getmCompanionid());
-                viewHolder.companion_arrow.setVisibility(View.GONE);
+
                 viewHolder.companion_confirm_button.setTag(item.getmInvitationtoken());
                 viewHolder.companion_delete_button.setTag(item.getmInvitationtoken());
                 viewHolder.companion_confirmation_layout.setVisibility(View.VISIBLE);
             }else {
 
-                viewHolder.companion_details_name_item.setText(item.getCompanionUserProfile().getmFirstName());
-                viewHolder.companion_details_name_item.setTag(item.getmCompanionid());
-                viewHolder.companion_arrow.setVisibility(View.GONE);
                 viewHolder.companion_request.setText(item.getmConfirmationstatus());
                 viewHolder.companion_confirmation_layout.setVisibility(View.GONE);
             }
@@ -128,7 +132,6 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
         }
 
         HGBUtility.loadRoundedImage(item.getCompanionUserProfile().getmAvatar(), viewHolder.companion_image_view, R.drawable.profile_image);
-
 
         viewHolder.swipe_my_companions.setShowMode(SwipeLayout.ShowMode.PullOut);
         viewHolder.swipe_my_companions.addSwipeListener(new SimpleSwipeListener() {
