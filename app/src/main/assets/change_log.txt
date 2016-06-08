@@ -96,6 +96,7 @@ Code changing:
     HEL-868 - pending request 1.5
     HEL-870 - my companions 1.5
     HEL-865 - add companion in itinerary isn't working 1.5
+    HEL-864 - add companion in itinerary
      Code changing:
     --------------
     - Preferences List align to top
