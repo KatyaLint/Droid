@@ -151,9 +151,11 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         change_pswd_current_pswd = (FontEditTextView)promptsView.findViewById(R.id.change_pswd_current_pswd);
         change_pswd_new_pswd = (FontEditTextView)promptsView.findViewById(R.id.change_pswd_new_pswd);
         change_pswd_confirm_new_pswd = (FontEditTextView) promptsView.findViewById(R.id.change_pswd_confirm_new_pswd);
+
         final FontEditTextView[] inputs = new FontEditTextView[]{change_pswd_current_pswd, change_pswd_new_pswd, change_pswd_confirm_new_pswd};
 
         getStaticBooking();
+
 
 
         text = (FontTextView) promptsView
@@ -215,20 +217,20 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         });
 
 
-        input = (EditText) promptsView
-                .findViewById(R.id.companion_editTextDialog);
 
-        text = (FontTextView) promptsView
-                .findViewById(R.id.component_popup_text);
+       final View popup_layout_change_email = li.inflate(R.layout.popup_layout_change_email, null);
+
+
+        input = (EditText) popup_layout_change_email
+                .findViewById(R.id.account_email_edit_text);
 
         companion_personal_settings_email_add_another.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 input.setVisibility(View.VISIBLE);
-                text.setVisibility(View.VISIBLE);
 
-                HGBUtility.showAlertPopUp(getActivity(), input, promptsView,
-                        getResources().getString(R.string.component_add_new_email),getResources().getString(R.string.save_button),
+                HGBUtility.showAlertPopUp(getActivity(), input, popup_layout_change_email,
+                        getResources().getString(R.string.component_add_new_email), getResources().getString(R.string.save_button),
                         new PopUpAlertStringCB() {
                             @Override
                             public void itemSelected(String inputItem) {

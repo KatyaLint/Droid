@@ -4,6 +4,7 @@
     android:id="@+id/new_grid_add_companion_ll"
     android:gravity="center"
     android:paddingLeft="@dimen/DP20"
+    android:paddingRight="@dimen/DP20"
     android:layout_marginTop="0dp"
     android:orientation="horizontal"
     android:layout_height="match_parent">
