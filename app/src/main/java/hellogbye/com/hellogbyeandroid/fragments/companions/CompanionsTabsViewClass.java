@@ -128,7 +128,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
         this.searchRecyclerView = searchRecyclerView;
         this.companion_empty_view = companion_empty_view;
 
-        emptyCompanionsView();
+        //emptyCompanionsView();
         searchListInitialization();
 
         searchListAdapter = new CompanionsSwipeItemsAdapter(getActivity().getApplicationContext(), companionsVOPending);
