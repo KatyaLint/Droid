@@ -102,14 +102,10 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
 
 
         if(item.getmConfirmationstatus().equals("Pending")) {
-
-            String firstName = item.getCompanionInviteUserProfileVO().getmFirstName();
-            if(firstName.isEmpty()){
-                firstName = item.getCompanionInviteUserProfileVO().getmEmailAddress();
-            }
-
-            viewHolder.companion_details_name_item.setText(firstName);
+            
+            viewHolder.companion_details_name_item.setText(item.getCompanionInviteUserProfileVO().getmFirstName());
             viewHolder.companion_details_name_item.setTag(item.getmCompanionid());
+            viewHolder.companion_request.setText(item.getCompanionUserProfile().getmEmailAddress());
             viewHolder.companion_arrow.setVisibility(View.GONE);
 
             if(item.getCompanionInviteUserProfileVO() != null) {
