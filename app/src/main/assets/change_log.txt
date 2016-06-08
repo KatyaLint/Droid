@@ -98,6 +98,7 @@ Code changing:
     HEL-865 - add companion in itinerary isn't working 1.5
     HEL-864 - add companion in itinerary
     HEL-857 - cnc page list for profile preferences 1.5
+    HEL-854 - add a new email doesn't work 1.5
 
      Code changing:
     --------------
