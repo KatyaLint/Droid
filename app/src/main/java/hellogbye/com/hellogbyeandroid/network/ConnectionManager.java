@@ -247,12 +247,13 @@ public class ConnectionManager {
 
     public void deviceAuthentication(String deviceID,final ServerRequestListener listener){
         String url = getURL(Services.USER_PROFILE_DEVICE_AUTHENTICATION);
+        url = url + deviceID;
         JSONObject jsonObject = new JSONObject();
-        try {
+       /* try {
             jsonObject.put("id", deviceID);
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
                 jsonObject, new Response.Listener<String>() {
             @Override
@@ -1706,7 +1707,7 @@ public class ConnectionManager {
                 STATIC_PROVINCE_BY_COUNTRY_CODE("Statics/GetProvinceByCountryCode?countryCode="),
                 CARD_SESSION("Card/Session"),
                 BOOKING_PAY("booking/pay"),
-                USER_PROFILE_DEVICE_AUTHENTICATION("UserProfile/DeviceAuthentication"),
+                USER_PROFILE_DEVICE_AUTHENTICATION("Session/Anonymous/"),
                 BOOKING_CONFIRMATION("Booking/flight/confirmation/pdf?");
 
                 String url;

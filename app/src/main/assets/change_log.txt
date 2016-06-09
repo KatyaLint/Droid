@@ -100,6 +100,9 @@ Code changing:
     HEL-857 - cnc page list for profile preferences 1.5
     HEL-854 - add a new email doesn't work 1.5
     HEL-853 - payment cards layout is huge
+    HEL-852 - app crashes on change picture 1.5
+    HEL-851 - add companion through itinirary doesn't work 1.5
+    HEL-855 - can't enter anonymous 1.5
 
      Code changing:
     --------------

@@ -56,18 +56,17 @@ import hellogbye.com.hellogbyeandroid.utilities.ViewPDFManager;
 
 public class AlternativeFlightFragment extends HGBAbstractFragment implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback {
 
-    private ArrayList<AlternativeFlightsVO> airplaneDataVO;
+
     private UserTravelMainVO userOrder;
-    private Button showAlternativeFlight;
     private SupportMapFragment fragment;
     private GoogleMap mMap;
     private RecyclerView recyclerView;
-    private NodesVO nodeFromAlternative;
     private boolean isMyFlight = true;
     private SlidingUpPanelLayout mSlidingPanels;
-    public final  float PANEL_HIGHT = 0.5f;
+    public final float PANEL_HIGHT = 0.5f;
     private ProgressDialog progressDialog;
     private RelativeLayout pull_down;
+    private FlightAdapter mAdapter;
 
     public AlternativeFlightFragment() {
         // Empty constructor required for fragment subclasses
@@ -109,6 +108,12 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
             @Override
             public void onSuccess(Object data) {
                     List<NodesVO> alternativeFlightsVOs = (List<NodesVO>)data;//gson.fromJson((String) data, listType);
+
+                    if(alternativeFlightsVOs.isEmpty()){
+                        mAdapter.setAlternativeButtonDisable(false);
+                    }else{
+                        mAdapter.setAlternativeButtonDisable(true);
+                    }
 
                     getActivityInterface().setAlternativeFlights(alternativeFlightsVOs);
             }
@@ -278,7 +283,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         // 2. set layoutManger
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         // 3. create an adapter
-        final FlightAdapter mAdapter = new FlightAdapter(currentNode,legsFlights);
+        mAdapter = new FlightAdapter(currentNode,legsFlights);
 
 
 
