@@ -99,6 +99,7 @@ Code changing:
     HEL-864 - add companion in itinerary
     HEL-857 - cnc page list for profile preferences 1.5
     HEL-854 - add a new email doesn't work 1.5
+    HEL-853 - payment cards layout is huge
 
      Code changing:
     --------------

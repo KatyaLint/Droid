@@ -127,8 +127,6 @@ public class LoginActivity extends FragmentActivity {
         final EditText userInput = (EditText) promptsView
                 .findViewById(R.id.editTextDialogUserInput);
 
-
-        LayoutInflater linear = LayoutInflater.from(getApplicationContext());
         final  View popupView = li.inflate(R.layout.popup_layout_log_out, null);
 
 
