@@ -16,6 +16,7 @@
         <item>http://dev.hellogbye.com/dev/Rest/</item>
         <item>http://cnc.hellogbye.com/cnc/Rest/</item>
         <item>http://apiuat.hellogbye.com/uat/rest/</item>
+        <item>http://demo.hellogbye.com/dev/rest/</item>
         <item>http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/</item>
     </string-array>
 
