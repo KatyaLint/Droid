@@ -103,6 +103,8 @@ Code changing:
     HEL-852 - app crashes on change picture 1.5
     HEL-851 - add companion through itinirary doesn't work 1.5
     HEL-855 - can't enter anonymous 1.5
+    HEL-847 - pressing on preferences in cnc page 1.5
+    HEL-843 - create account change city name to country 1.5
 
      Code changing:
     --------------
