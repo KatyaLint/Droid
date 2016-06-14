@@ -34,15 +34,21 @@ public class TravlerAdapter extends RecyclerView.Adapter<TravlerAdapter.ViewHold
 
     public  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
-        public FontTextView mTravlerName;
-        public FontTextView mTravlerText;
+        public FontTextView childNametext;
+        public FontTextView childDOB;
+        public FontTextView childPhone;
+        public FontTextView childAddress;
+        public FontTextView childEmail;
 
 
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
-            mTravlerName = (FontTextView)itemLayoutView.findViewById(R.id.travler_name);
-            mTravlerText = (FontTextView)itemLayoutView.findViewById(R.id.travler_text);
+            childNametext = (FontTextView) itemLayoutView.findViewById(R.id.travler_name_entry);
+            childDOB = (FontTextView) itemLayoutView.findViewById(R.id.travler_dob_entry);
+            childPhone = (FontTextView) itemLayoutView.findViewById(R.id.travler_phone_entry);
+            childAddress = (FontTextView) itemLayoutView.findViewById(R.id.travler_address_entry);
+            childEmail = (FontTextView) itemLayoutView.findViewById(R.id.travler_email_entry);
 
             itemLayoutView.setOnClickListener(this);
 
@@ -83,7 +89,7 @@ public class TravlerAdapter extends RecyclerView.Adapter<TravlerAdapter.ViewHold
                                                                  int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.travler_layout, parent, false);
+                .inflate(R.layout.travler_items_layout, parent, false);
 
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -96,21 +102,27 @@ public class TravlerAdapter extends RecyclerView.Adapter<TravlerAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        UserDataVO user = mArrayList.get(position);
-        holder.mTravlerName.setText(user.getFirstname());
-        if(HGBUtility.isUserDataValid(user)){
-            holder.mTravlerText.setText(user.getPhone()+"\n\n"+user.getAddress()+"\n"+user.getCity()+","+user.getState()+","+user.getCountry());
-            holder.mTravlerText.setTextColor(mContext.getResources().getColor(R.color.hgb_blue));
+        UserDataVO child = mArrayList.get(position);
 
-        }else{
 
-            holder.mTravlerText.setText("~ More information required ~");
-            holder.mTravlerText.setTextColor(mContext.getResources().getColor(R.color.red_button_color));
+        holder.childNametext.setText(child.getFirstname() + " " + child.getLastname());
+        holder.childDOB.setText(child.getDob());
+        holder.childPhone.setText(child.getPhone());
+        holder.childAddress.setText(child.getAddress() + "\n" + child.getCity() + "," + child.getState() + "\n" + child.getPostalcode());
+        holder.childEmail.setText(child.getEmailaddress());
+//        if(HGBUtility.isUserDataValid(user)){
+//            holder.mTravlerText.setText(user.getPhone()+"\n\n"+user.getAddress()+"\n"+user.getCity()+","+user.getState()+","+user.getCountry());
+//            holder.mTravlerText.setTextColor(mContext.getResources().getColor(R.color.hgb_blue));
+//
+//        }else{
+//
+//            holder.mTravlerText.setText("~ More information required ~");
+//            holder.mTravlerText.setTextColor(mContext.getResources().getColor(R.color.red_button_color));
 
         }
      //   holder.mTravlerText.setText("$"+String.valueOf((int) nodesVO.getmMinimumAmount()));
 
-    }
+
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override

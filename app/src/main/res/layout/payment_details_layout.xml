@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/greyish_alternative_hotel"
-    >
+    android:background="@color/greyish_alternative_hotel">
+
     <include
         android:id="@+id/steps_layout"
 
+        layout="@layout/credit_card_steps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout="@layout/credit_card_steps"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <View
         android:id="@+id/steps_layout_seprator"
@@ -27,10 +27,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/steps_layout_seprator"
-        android:padding="5dp"
-        android:background="@color/white"
         android:layout_marginLeft="5dp"
-        >
+        android:background="@color/white"
+        android:padding="5dp">
 
 
         <LinearLayout
@@ -52,19 +51,21 @@
                 android:id="@+id/payment_total_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="25sp"
                 android:textColor="@color/hgb_blue"
+                android:textSize="25sp"
                 app:fontName="dinnextltpro_light.otf" />
 
 
         </LinearLayout>
 
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:id="@+id/total_select_cc"
-            style="@style/PaymentSelectCCStyle"
-            app:fontName="dinnextltpro_regular.otf" />
+        <include
+            layout="@layout/cc_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
 
-
+            />
 
 
     </RelativeLayout>
@@ -91,43 +92,34 @@
         android:id="@+id/ex_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/payment_border"/>
-
-
+        android:layout_above="@+id/bottom_rl"
+        android:groupIndicator="@null"
+        android:layout_below="@+id/payment_border" />
 
 
     <RelativeLayout
+        android:id="@+id/bottom_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/hgb_blue">
-
+        >
 
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/payment_submit"
-            style="@style/RedCustomButtonStyle"
-            android:layout_centerHorizontal="true"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:paddingLeft="40dp"
-            android:visibility="gone"
-            android:paddingRight="40dp"
+            style="@style/RedCheckoutCustomButtonStyle"
             android:layout_below="@+id/remmember_me_checkbox"
-            android:text="Next" />
+            android:text="Next"
+            app:fontName="dinnextltpro_medium.otf"
+            android:visibility="gone" />
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/payment_submit_disable"
-            style="@style/RedCustomButtonDisableStyle"
-            android:layout_centerHorizontal="true"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
+            style="@style/RedCheckoutCustomButtonDisableStyle"
             android:layout_below="@+id/remmember_me_checkbox"
-            android:text="Next" />
+            app:fontName="dinnextltpro_medium.otf"
+            android:text="Next"
+            />
 
 
     </RelativeLayout>

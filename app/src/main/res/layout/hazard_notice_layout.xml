@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/odd_grey"
+    android:orientation="vertical"
+    >
+
+
+
+
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/hazard_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/DP10"
+            android:layout_marginLeft="@dimen/DP20"
+            android:text="Itenerary and Payment"
+            android:textColor="@color/COLOR_555555"
+            android:textSize="@dimen/SP10"
+            app:fontName="dinnextltpro_regular.otf" />
+
+
+
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/hazard_text"
+        android:layout_width="wrap_content"
+        android:background="@color/white"
+        android:layout_height="@dimen/DP450"
+        android:layout_above="@+id/confirm_read"
+        android:layout_below="@+id/hazard_header"
+        android:lineSpacingExtra="@dimen/SP10"
+        android:maxLines="200"
+        android:padding="@dimen/DP20"
+        android:scrollbars="vertical"
+        android:text="@string/some_everyday_products_such_as_aerosol_spray_starch_can_be_dangerous_when_transported_on_the_aircraft_in_carry_on_and_or_checked_baggage_changes_in_temperature_or_pressure_can_cause_some_items_to_leak_generate_toxic_fumes_or_start_a_fire_carriage_of_prohibited_items_may_result_in_fines_or_in_certain_cases_imprisonment_please_ensure_there_are_no_forbidden_hazardous_materials_in_your_baggage_such_as_some_lithium_batteries_eg_spares_in_checked_baggage_batteries_over_a_certain_size_explosives_fireworks_strike_anywhere_matches_lighter_fluid_compressed_gases_aerosols_oxygen_bottles_liquid_oxygen_flammable_liquids_pesticide_poison_corrosive_material_there_are_special_exceptions_for_small_quantities_up_to_70_ounces_total_of_medicinal_and_toilet_articles_carried_in_your_luggage_spare_lithium_batteries_for_most_consumer_electronic_devices_in_carry_on_baggage_and_certain_smoking_materials_carried_on_your_person_certain_items_are_required_to_be_carried_with_you_onboard_the_aircraft_for_example_spare_lithium_batteries_for_portable_electronic_devices_and_cigarette_lighters_must_be_removed_from_checked_or_gate_checked_baggage_and_carried_onboard_the_aircraft_traveling_with_medical_oxygen_liquid_oxygen_mobility_aids_and_other_assistive_devices_may_require_airline_pre_approval_or_be_restricted_from_carriage_entirely_passengers_requiring_these_items_should_contact_the_airline_operator_for_information_on_use_of_such_devices"
+        android:textColor="@color/dark_grey"
+        android:textSize="@dimen/DP14"
+        app:fontName="dinnextltpro_mediumcond.ttf" />
+
+
+    <Button
+        android:id="@+id/confirm_read"
+        style="@style/RedCustomButtonStyle"
+        android:layout_margin="@dimen/DP20"
+        android:text="@string/i_understand"
+        android:textColor="@color/white" />
+
+
+</LinearLayout>

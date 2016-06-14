@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/steps_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/credit_card_steps"
         android:layout_centerHorizontal="true"
@@ -19,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_above="@+id/traveler_next_rl"
         android:layout_below="@+id/steps_layout"
+        android:groupIndicator="@null"
         android:layout_height="match_parent">
 
 
@@ -27,25 +28,28 @@
 
 
 
-    <RelativeLayout
+
+
+    <LinearLayout
         android:id="@+id/traveler_next_rl"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:padding="10dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/hgb_blue">
-
+        android:layout_height="wrap_content">
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/traveler_next"
-            style="@style/RedCustomButtonStyle"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:layout_centerInParent="true"
-            android:background="@drawable/red_button"
-            android:text="Next" />
+            style="@style/RedCheckoutCustomButtonStyle"
+            android:text="Next"
+            app:fontName="dinnextltpro_medium.otf"
+            android:visibility="gone" />
 
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/traveler_next_disable"
+            style="@style/RedCheckoutCustomButtonDisableStyle"
+            android:text="Next"
+            app:fontName="dinnextltpro_medium.otf"
+            />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>
