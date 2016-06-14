@@ -151,7 +151,7 @@ public class StartingMenuActivity extends Activity {
         }
     };
 
-    public class myClickableSpan extends ClickableSpan {
+ /*   public class myClickableSpan extends ClickableSpan {
 
         int pos;
 
@@ -177,7 +177,7 @@ public class StartingMenuActivity extends Activity {
             startActivity(browserIntent);
         }
 
-    }
+    }*/
 
     private void goToMainActivity() {
 

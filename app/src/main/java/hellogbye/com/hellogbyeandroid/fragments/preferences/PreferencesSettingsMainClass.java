@@ -73,8 +73,6 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
         View promptsView = li.inflate(R.layout.settings_save_popup, null);
 
 
-
-
         if(this.getClass().toString().equals(PreferencesSearchListFragment.class.toString())
             && firstItems.isEmpty()
             && myAccountAttribute.getAttributesVOs().isEmpty()){

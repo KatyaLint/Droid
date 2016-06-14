@@ -81,6 +81,7 @@
     <string name="preferences_hint_add_name">Add new preference name</string>
 
     <string name="preferences_add_button">Add New Preferences</string>
+    <string name="preferences_remove_email">Remove Email Address</string>
     <string name="preferences_add_new_preferences">Add New Preferences</string>
     <string name="preferences_at_least_one_preference">You must have at least one\ntravel preference.</string>
 
@@ -108,6 +109,7 @@
     <string name="settings_empty_view">No favorite hotel chains selected…\nUse the search bar t…</string>
     <string name="settings_more_then_allowed_selected_title">Error</string>
     <string name="settings_more_then_allowed_selected">Can not have more than 10 selected</string>
+    <string name="settings_choose_profile">Choose profile</string>
 
     <string name="my_settings_flight">MY FLIGHTS</string>
     <string name="popular_settings_flight">POPULAR FLIGHTS</string>

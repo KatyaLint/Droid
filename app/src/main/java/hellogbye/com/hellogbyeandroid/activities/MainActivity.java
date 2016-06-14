@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,7 +23,6 @@ import android.view.animation.Animation;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.crashlytics.android.Crashlytics;
@@ -61,7 +59,7 @@ import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesDragListF
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSearchListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSettingsMainClass;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesTabsFragmentSettings;
-import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalEmailSettingsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.settings.PreferenceSettingsEmailFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountSettingsFragment;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
@@ -201,16 +199,15 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
-    private void getAccountsProfiles() {
+    public void getAccountsProfiles() {
         ConnectionManager.getInstance(MainActivity.this).getUserProfileAccounts(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 ArrayList<AccountsVO> accounts = (ArrayList<AccountsVO>) data;
                 hgbSaveDataClass.setAccounts(accounts);
-                //TODO , now getting first account from list
                 AccountsVO account = accounts.get(0);
                 hgbSaveDataClass.getCurrentUser().setEmailaddress(account.getEmail());
-                editProfileTipeMainToolBar();
+                editProfileTypeMainToolBar();
             }
 
             @Override
@@ -223,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
-    public void editProfileTipeMainToolBar() {
+    public void editProfileTypeMainToolBar() {
         AccountsVO account = hgbSaveDataClass.getAccounts().get(0);
         my_trip_profile = (FontTextView) findViewById(R.id.my_trip_profile);
         my_trip_profile.setText(account.getTravelpreferenceprofile().getProfilename());
@@ -713,8 +710,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 fragment = AccountPersonalInfoSettingsFragment.newInstance(navPosition);
                 //     fragment = isFreeUser(fragment, navPosition);
                 break;
-            case COMPANIONS_PERSONAL_EMAILS:
-                fragment = AccountPersonalEmailSettingsFragment.newInstance(navPosition);
+            case PREFERENCE_SETTINGS_EMAILS:
+                fragment = PreferenceSettingsEmailFragment.newInstance(navPosition);
                 break;
             case PREFERENCE:
                 fragment = PreferenceSettingsFragment.newInstance(navPosition);
@@ -809,7 +806,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         preference_save_changes.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                onSavePreferencesButtonClicked.onSaveClicked();
+                if(onSavePreferencesButtonClicked != null) {
+                    onSavePreferencesButtonClicked.onSaveClicked();
+                }
 
             }
         });

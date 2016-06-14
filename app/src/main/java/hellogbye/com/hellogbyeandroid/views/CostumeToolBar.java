@@ -150,9 +150,12 @@ public class CostumeToolBar extends Toolbar {
             case PREFERENCES_SEARCH_LIST_SETTINGS:
             case PREFERENCES_SPECIFIC_LIST_SETTINGS:
             case PREFERENCES_DRAG_LIST_SETTINGS:
+            case PREFERENCE_SETTINGS_EMAILS:
                 preference_save_changes.setVisibility(View.VISIBLE);
                 titleText.setVisibility(View.VISIBLE);
+                edit_preferences.setVisibility(View.GONE);
             break;
+
             case TRIPS:
             case COMPANIONS:
             case ALL_COMPANIONS_VIEW:

@@ -22,7 +22,7 @@
                 android:layout_margin="@dimen/DP10"
                 android:text="YOUR DETAILS"
                 android:textColor="@color/warm_grey"
-                android:textSize="11sp"
+                android:textSize="@dimen/SP12"
                 app:fontName="dinnextltpro_regular.otf" />
         </LinearLayout>
 
@@ -53,17 +53,20 @@
                 android:inputType="datetime"
                 app:fontName="dinnextltpro_regular.otf" />
 
+
+
+
+
+
             <LinearLayout
                 android:id="@+id/companion_personal_email_ll"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
                     android:id="@+id/companion_personal_settings_email"
                     style="@style/PersonalInformationEditText"
-                    android:clickable="false"
                     android:cursorVisible="false"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
@@ -83,8 +86,7 @@
                 <hellogbye.com.hellogbyeandroid.views.FontTextView
                     android:id="@+id/companion_personal_add_email"
                     style="@style/PersonalInformationEditText"
-                    android:text="Another email"
-
+                    android:text="Add Another email"
                     app:fontName="dinnextltpro_regular.otf" />
 
             </LinearLayout>

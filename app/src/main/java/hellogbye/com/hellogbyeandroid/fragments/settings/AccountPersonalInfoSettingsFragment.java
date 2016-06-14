@@ -16,6 +16,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
@@ -51,7 +52,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
     private FontEditTextView companion_personal_settings_name;
     private FontEditTextView companion_personal_settings_last;
     private FontEditTextView companion_personal_settings_date_of_birth;
-    private FontEditTextView companion_personal_settings_email;
+    private FontTextView companion_personal_settings_email;
     private FontTextView companion_personal_settings_gender;
     private FontEditTextView companion_personal_settings_phone_number;
     private FontEditTextView companion_personal_settings_location_street;
@@ -109,7 +110,13 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         companion_personal_settings_last = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_last);
         companion_personal_settings_last.setText(currentUser.getLastname());
 
-        companion_personal_settings_email = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_email);
+        companion_personal_settings_email = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_email);
+        companion_personal_settings_email.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCE_SETTINGS_EMAILS.getNavNumber(), null);
+            }
+        });
         AccountsVO account = getActivityInterface().getAccounts().get(0);
         String strEmail = account.getEmail();
         companion_personal_settings_email.setText(strEmail);
@@ -218,30 +225,13 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
 
 
-       final View popup_layout_change_email = li.inflate(R.layout.popup_layout_change_email, null);
-
-
-        input = (EditText) popup_layout_change_email
-                .findViewById(R.id.account_email_edit_text);
-
         companion_personal_settings_email_add_another.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                input.setVisibility(View.VISIBLE);
 
-                HGBUtility.showAlertPopUp(getActivity(), input, popup_layout_change_email,
-                        getResources().getString(R.string.component_add_new_email), getResources().getString(R.string.save_button),
-                        new PopUpAlertStringCB() {
-                            @Override
-                            public void itemSelected(String inputItem) {
-                                sendNewEmailToServer(inputItem.trim());
-                            }
 
-                            @Override
-                            public void itemCanceled() {
+                getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCE_SETTINGS_EMAILS.getNavNumber(), null);
 
-                            }
-                        });
             }
         });
 
@@ -294,9 +284,9 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
                         countryarray, 0, countries.size() - 1, new PopUpAlertStringCB() {
                             @Override
                             public void itemSelected(String inputItem) {
-                                for (CountryItemVO countrie : countries) {
-                                    if (countrie.getName().equals(inputItem)) {
-                                        companion_personal_settings_location_country.setTag(countrie.getCode());
+                                for (CountryItemVO country : countries) {
+                                    if (country.getName().equals(inputItem)) {
+                                        companion_personal_settings_location_country.setTag(country.getCode());
                                         getStaticProvince();
 
                                         break;

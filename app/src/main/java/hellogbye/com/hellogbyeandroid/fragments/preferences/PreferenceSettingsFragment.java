@@ -1,5 +1,6 @@
 package hellogbye.com.hellogbyeandroid.fragments.preferences;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 
 import android.content.Context;
@@ -29,12 +30,14 @@ import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSet
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsRadioButtonAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.SettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -52,7 +55,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
     private static int MIN_PREFERENCE_SIZE = 1;
     private View preferences_at_least_one_preference;
     private String edit_mode;
- //   private ListView tempListView;
+    private int radioButtonSelected = -1;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new PreferenceSettingsFragment();
@@ -106,7 +109,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
         }
     }
 
-    private int radioButtonSelected = -1;
+
 
     public interface ListLineClicked{
         void clickedItem(String itemID);
@@ -142,8 +145,8 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
                 mAdapter.setSelectedRadioButtonListener(new ListRadioButtonClicked(){
 
                     @Override
-                    public void clickedItem(int slectedPosition) {
-                        radioButtonSelected = slectedPosition;
+                    public void clickedItem(int selectedPosition) {
+                        radioButtonSelected = selectedPosition;
                     }
                 });
                 mDynamicListView.setAdapter((PreferencesSettingsRadioButtonAdapter)mAdapter);
@@ -286,7 +289,24 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
     }
 
     private void editSettingsPreferencesPopUp() {
-        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+
+        HGBUtility.showAlertPopUp(getActivity(), input, popup_preferences_layout, getString(R.string.preferences_add_button),
+               getString(R.string.ok_button), new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+                        if (inputItem.length() != 0) {
+                            popUpConnection(inputItem);
+                        }
+                    }
+
+                    @Override
+                    public void itemCanceled() {
+
+                    }
+                });
+
+
+ /*       final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
         alert.setCancelable(false);
         alert.setTitle(R.string.preferences_add_button)
                 .setView(popup_preferences_layout)
@@ -316,7 +336,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
                         dialog.cancel();
                     }
                 })
-                .create().show();
+                .create().show();*/
     }
 
 

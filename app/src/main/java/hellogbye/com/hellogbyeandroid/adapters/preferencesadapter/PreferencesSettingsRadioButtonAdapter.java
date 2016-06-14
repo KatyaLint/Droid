@@ -108,9 +108,9 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountD
             });
 //            FontTextView settings_text_drag = (FontTextView) v.findViewById(R.id.settings_place_number);
             //  settings_text_drag.setText();
-            int correntPosition = position+1;
+            int currentPosition = position+1;
 //            settings_text_drag.setText(""+correntPosition);
-            this.getItem(position).setRank("" + correntPosition);
+            this.getItem(position).setRank("" + currentPosition);
 
             if(selectedPreferebcesID.equals(attribute.getmId())){
                 selectedPosition = position;

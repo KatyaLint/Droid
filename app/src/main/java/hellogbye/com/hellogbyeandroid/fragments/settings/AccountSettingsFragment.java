@@ -37,7 +37,6 @@ import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -187,7 +186,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
                         //personal information
                         break;
                     case 1:
-                        getFlowInterface().goToFragment(ToolBarNavEnum.COMPANIONS_PERSONAL_EMAILS.getNavNumber(), null);
+                        getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCE_SETTINGS_EMAILS.getNavNumber(), null);
                         //emails
                         break;
                     case 2:

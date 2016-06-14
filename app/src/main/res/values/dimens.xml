@@ -3,6 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="DP0">0dp</dimen>
     <dimen name="DP24">24dp</dimen>
     <dimen name="DP14">14dp</dimen>
     <dimen name="DP18">18dp</dimen>
@@ -38,6 +39,7 @@
     <dimen name="DP120">120dp</dimen>
     <dimen name="DP140">140dp</dimen>
     <dimen name="DP60">60dp</dimen>
+    <dimen name="DP50">50dp</dimen>
     <dimen name="DP80">80dp</dimen>
     <dimen name="DP200">200dp</dimen>
     <dimen name="DP250">250dp</dimen>

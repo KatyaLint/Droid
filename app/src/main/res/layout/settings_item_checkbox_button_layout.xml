@@ -6,14 +6,11 @@
     android:id="@+id/settings_radio_button_ll"
     android:orientation="horizontal">
 
-    <RadioButton
-        android:id="@+id/setting_radio_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
 
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/settings_radio_name"
+        android:id="@+id/settings_checkbox_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/DP10"
@@ -22,6 +19,9 @@
         android:textSize="@dimen/SP16"
         app:fontName="dinnextltpro_medium.otf" />
 
-
+    <CheckBox
+        android:id="@+id/setting_checkbox_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

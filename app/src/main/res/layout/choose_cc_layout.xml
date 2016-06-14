@@ -19,7 +19,7 @@
             android:layout_gravity="center"
             android:text="Itenerary and Payment"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="@dimen/SP20"
             app:fontName="dinnextltpro_medium.otf" />
 
 
@@ -35,7 +35,7 @@
             android:layout_gravity="center"
             android:text="Travler Information"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="@dimen/SP20"
             app:fontName="dinnextltpro_medium.otf" />
 
 
@@ -64,10 +64,10 @@
             android:layout_width="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="@dimen/DP20"
             android:background="@drawable/red_button"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
+            android:paddingLeft="@dimen/DP50"
+            android:paddingRight="@dimen/DP50"
             android:text="Proceed"
             app:fontName="dinnextltpro_medium.otf" />
 
@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="@dimen/DP20"
             android:orientation="vertical">
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:text="Total"
                 android:textColor="@color/white"
-                android:textSize="15sp"
+                android:textSize="@dimen/SP16"
                 app:fontName="dinnextltpro_medium.otf" />
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:text="$1234"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="@dimen/SP30"
                 app:fontName="dinnextltpro_mediumcond.ttf" />
 
 

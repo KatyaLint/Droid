@@ -6,6 +6,11 @@ import com.google.gson.annotations.SerializedName;
  * Created by nyawka on 3/13/16.
  */
 public class AccountsVO {
+
+
+
+
+
     @SerializedName("email")
     private String email;
 

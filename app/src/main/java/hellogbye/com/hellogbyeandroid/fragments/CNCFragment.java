@@ -330,7 +330,7 @@ public class CNCFragment extends HGBAbstractFragment {
             public void onSuccess(Object data) {
                 ArrayList<AccountsVO> accounts = ( ArrayList<AccountsVO> )data;
                 getActivityInterface().setAccounts(accounts);
-                ((MainActivity) getActivity()).editProfileTipeMainToolBar();
+                ((MainActivity) getActivity()).editProfileTypeMainToolBar();
             }
 
             @Override
