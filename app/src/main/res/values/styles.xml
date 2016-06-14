@@ -77,6 +77,40 @@
         <item name="android:background">@drawable/red_disable_button</item>
     </style>
 
+
+
+    android:id="@+id/payment_submit_disable"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/remmember_me_checkbox"
+    android:background="@drawable/red_button_no_radius"
+    android:gravity="center"
+    android:padding="@dimen/DP16"
+    android:text="Next"
+    android:textColor="@color/white"
+    android:textSize="@dimen/SP16"
+
+
+    <style name="RedCheckoutCustomButtonStyle" parent="CustomButtonTextStyle">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/DP16</item>
+        <item name="android:textSize">@dimen/SP16</item>
+
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/red_button_no_radius</item>
+    </style>
+    <style name="RedCheckoutCustomButtonDisableStyle" parent="CustomButtonTextStyle">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/DP16</item>
+        <item name="android:textSize">@dimen/SP16</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/red_disable_button_no_radius</item>
+    </style>
+
     <style name="GreenCustomButtonStyle" parent="CustomButtonTextStyle">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@drawable/rounded_corner_opacity</item>
@@ -138,6 +172,18 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:background">@drawable/select_cc_border</item>
         <item name="android:drawableRight">@drawable/expand_more_a_1</item>
+    </style>
+
+    <style name="NewPaymentSelectCCStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/SP10</item>
+        <item name="android:text">Select Card</item>
+        <item name="android:textColor">@color/hgb_blue</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+
+
     </style>
 
     <style name="TravelerDetailsTextStyle">

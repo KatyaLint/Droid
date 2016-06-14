@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/payment_group_root"
-    android:paddingLeft="@dimen/DP10"
-    android:paddingRight="@dimen/DP10"
+    android:padding="@dimen/DP10"
     android:background="@color/white"
     android:clickable="true"
     >
@@ -63,12 +62,17 @@
         <!--/>-->
 
 
+    <include
+        layout="@layout/cc_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/passenger_select_cc"
-        style="@style/PaymentSelectCCStyle"
-        app:fontName="dinnextltpro_regular.otf"
+        />
 
-        android:layout_alignParentRight="true"/>
+
+
+
 
 </RelativeLayout>

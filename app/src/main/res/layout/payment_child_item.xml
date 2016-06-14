@@ -29,14 +29,17 @@
         style="@style/PaymentItemStyle"
         android:textSize="14sp"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/passenger_item_select_cc"
+        android:layout_toLeftOf="@+id/passenger_select_cc_ll"
         app:fontName="dinnextltpro_light.otf" />
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/passenger_item_select_cc"
-        style="@style/PaymentSelectCCStyle"
-        app:fontName="dinnextltpro_regular.otf"
-        android:layout_marginRight="5dp"
-        android:layout_alignParentRight="true"/>
+    <include
+        layout="@layout/cc_layout"
+        android:layout_marginRight="@dimen/SP10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+
+        />
 
 </RelativeLayout>

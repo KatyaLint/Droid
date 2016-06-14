@@ -1,7 +1,6 @@
 package hellogbye.com.hellogbyeandroid.fragments.checkout;
 
 
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,21 +9,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserDataVO;
-import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelationshipTypesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
-import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymentChild;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymnentGroup;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
@@ -37,6 +36,8 @@ public class TravelersFragment extends HGBAbstractFragment {
 
 
     private FontTextView mNext;
+    private FontTextView mNextDisable;
+
     private ArrayList<PaymnentGroup> mGroups;
     private TravlerExpandableAdapter mAdapter;
 
@@ -78,14 +79,16 @@ public class TravelersFragment extends HGBAbstractFragment {
             mGroups = gson.fromJson((String) groups, listType);
         }
         mNext = (FontTextView) view.findViewById(R.id.traveler_next);
+        mNextDisable = (FontTextView) view.findViewById(R.id.traveler_next_disable);
+
         mRecyclerView = (ExpandableListView) view.findViewById(R.id.traveler_recyclerView);
         mPaymentTextView = (FontTextView) view.findViewById(R.id.steps_checkout_payment_text);
         mTravlerTextView = (FontTextView) view.findViewById(R.id.steps_checkout_travler_text);
         mReviewTextView = (FontTextView) view.findViewById(R.id.steps_checkout_review_text);
 
         mPaymentImageView = (ImageView) view.findViewById(R.id.steps_checkout_payment_image);
-        mTravlerImageView= (ImageView) view.findViewById(R.id.steps_checkout_travler_image);
-        mReviewImageView= (ImageView) view.findViewById(R.id.steps_checkout_review_image);
+        mTravlerImageView = (ImageView) view.findViewById(R.id.steps_checkout_travler_image);
+        mReviewImageView = (ImageView) view.findViewById(R.id.steps_checkout_review_image);
 
 //        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
 //        // use this setting to improve performance if you know that changes
@@ -100,16 +103,28 @@ public class TravelersFragment extends HGBAbstractFragment {
         ConnectionManager.getInstance(getActivity()).getTravellersInforWithSolutionId(getActivityInterface().getTravelOrder().getmSolutionID(), new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                 List<ArrayList<UserDataVO>> children = new ArrayList<ArrayList<UserDataVO>>();
+                List<ArrayList<UserDataVO>> children = new ArrayList<ArrayList<UserDataVO>>();
 
                 getFlowInterface().setListUsers((ArrayList<UserDataVO>) data);
-                for(UserDataVO user :getFlowInterface().getListUsers() ){
+
+
+                for (int i = 0; i < getFlowInterface().getListUsers().size(); i++) {
                     ArrayList<UserDataVO> passengerChildArray = new ArrayList<>();
-                    passengerChildArray.add(user);
+                    passengerChildArray.add(getFlowInterface().getListUsers().get(i));
                     children.add(passengerChildArray);
+                    boolean isMissing = checkIfMissing(getFlowInterface().getListUsers().get(i));
+                    mGroups.get(i).setmChildDataMissing(isMissing);
+                    if(isMissing){
+                        mNext.setVisibility(View.GONE);
+                        mNextDisable.setVisibility(View.VISIBLE);
+                    }else{
+                        mNext.setVisibility(View.VISIBLE);
+                        mNextDisable.setVisibility(View.GONE);
+                    }
                 }
 
-                mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(),mGroups,children);
+
+                mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), mGroups, children);
 
                 mRecyclerView.setAdapter(mAdapter);
 //                mAdapter.SetOnItemClickListener(new TravlerAdapter.OnItemClickListener() {
@@ -154,6 +169,26 @@ public class TravelersFragment extends HGBAbstractFragment {
         initCheckoutSteps();
     }
 
+    private boolean checkIfMissing(UserDataVO child) {
+        if (child.getFirstname() == null || child.getFirstname().equals("")) {
+            return true;
+        } else if (child.getPostalcode() == null || child.getPostalcode().equals("")) {
+            return true;
+        }
+        if (child.getEmailaddress() == null || child.getEmailaddress().equals("")) {
+            return true;
+        }
+        if (child.getPhone() == null || child.getPhone().equals("")) {
+            return true;
+        }
+        if (child.getDob() == null || child.getDob().equals("")) {
+            return true;
+        }
+        return false;
+
+
+    }
+
     private void setNextButtonBackround(boolean isEnabled) {
         mNext.setEnabled(isEnabled);
         if (isEnabled) {
@@ -163,6 +198,7 @@ public class TravelersFragment extends HGBAbstractFragment {
             mNext.setBackgroundResource(R.drawable.red_disable_button);
         }
     }
+
     public class TravlerExpandableAdapter extends BaseExpandableListAdapter {
 
         private final LayoutInflater inf;
@@ -226,20 +262,47 @@ public class TravelersFragment extends HGBAbstractFragment {
                 holder.childAddress = (FontTextView) convertView.findViewById(R.id.travler_address_entry);
                 holder.childEmail = (FontTextView) convertView.findViewById(R.id.travler_email_entry);
 
+                holder.childNametextLabel = (FontTextView) convertView.findViewById(R.id.travler_name);
+                holder.childDOBLabel = (FontTextView) convertView.findViewById(R.id.travler_dob);
+                holder.childPhoneLabel = (FontTextView) convertView.findViewById(R.id.travler_phone);
+                holder.childAddressLabel = (FontTextView) convertView.findViewById(R.id.travler_address);
+                holder.childEmailLabel = (FontTextView) convertView.findViewById(R.id.travler_email);
+
                 convertView.setTag(holder);
             } else {
                 holder = (ChildViewHolder) convertView.getTag();
             }
             final UserDataVO child = (UserDataVO) getChild(groupPosition, childPosition);
 
-            holder.childNametext.setText(child.getFirstname()+" "+child.getLastname());
+            holder.childNametext.setText(child.getFirstname() + " " + child.getLastname());
             holder.childDOB.setText(child.getDob());
             holder.childPhone.setText(child.getPhone());
-            holder.childAddress.setText(child.getAddress()+"\n"+child.getCity()+","+child.getState()+"\n"+child.getPostalcode());
+            holder.childAddress.setText(child.getAddress() + "\n" + child.getCity() + "," + child.getState() + "\n" + child.getPostalcode());
             holder.childEmail.setText(child.getEmailaddress());
 
-
+            findMissingElemnts(holder, child);
             return convertView;
+        }
+
+        private void findMissingElemnts(ChildViewHolder holder, UserDataVO child) {
+
+            if (child.getFirstname() == null || child.getFirstname().equals("")) {
+                holder.childNametextLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.red_button_color));
+
+            }
+            if (child.getPostalcode() == null || child.getPostalcode().equals("")) {
+                holder.childAddressLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.red_button_color));
+            }
+            if (child.getEmailaddress() == null || child.getEmailaddress().equals("")) {
+                holder.childEmailLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.red_button_color));
+            }
+            if (child.getPhone() == null || child.getPhone().equals("")) {
+                holder.childPhoneLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.red_button_color));
+            }
+            if (child.getDob() == null || child.getDob().equals("")) {
+                holder.childDOBLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.red_button_color));
+            }
+
         }
 
 
@@ -252,8 +315,12 @@ public class TravelersFragment extends HGBAbstractFragment {
 
                 holder = new GroupViewHolder();
                 holder.groupNametext = (FontTextView) convertView.findViewById(R.id.payment_group_name);
+                holder.groupEdittext = (FontTextView) convertView.findViewById(R.id.payment_group_edit);
+                holder.groupMissing = (FontTextView) convertView.findViewById(R.id.payment_group_missing);
+
+
                 holder.groupPricetext = (FontTextView) convertView.findViewById(R.id.payment_group_price);
-               // holder.groupSelectCC = (FontTextView) convertView.findViewById(R.id.passenger_select_cc);
+                // holder.groupSelectCC = (FontTextView) convertView.findViewById(R.id.passenger_select_cc);
                 // holder.groupCheckBox = (CheckBox) convertView.findViewById(R.id.payment_group_checkbox);
                 holder.groupImageView = (ImageView) convertView.findViewById(R.id.payment_group_image);
 
@@ -287,6 +354,20 @@ public class TravelersFragment extends HGBAbstractFragment {
                     }
                 }
             });
+            holder.groupEdittext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle args = new Bundle();
+                    args.putInt("user_json_position", groupPosition);
+                    getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS_DETAILS.getNavNumber(), args);
+                }
+            });
+
+            if(group.ismChildDataMissing()){
+                holder.groupMissing.setVisibility(View.VISIBLE);
+            }else{
+                holder.groupMissing.setVisibility(View.GONE);
+            }
 
 
             return convertView;
@@ -300,6 +381,8 @@ public class TravelersFragment extends HGBAbstractFragment {
         private class GroupViewHolder {
             FontTextView groupNametext;
             FontTextView groupPricetext;
+            FontTextView groupEdittext;
+            FontTextView groupMissing;
             //CheckBox groupCheckBox;
             ImageView groupImageView;
 
@@ -307,6 +390,13 @@ public class TravelersFragment extends HGBAbstractFragment {
         }
 
         private class ChildViewHolder {
+
+
+            FontTextView childNametextLabel;
+            FontTextView childDOBLabel;
+            FontTextView childEmailLabel;
+            FontTextView childPhoneLabel;
+            FontTextView childAddressLabel;
 
             FontTextView childNametext;
             FontTextView childDOB;
@@ -320,7 +410,7 @@ public class TravelersFragment extends HGBAbstractFragment {
     }
 
 
-    private void initCheckoutSteps(){
+    private void initCheckoutSteps() {
 
         mPaymentTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_063345));
         mTravlerTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_063345));
@@ -330,7 +420,6 @@ public class TravelersFragment extends HGBAbstractFragment {
         mReviewImageView.setBackgroundResource(R.drawable.step_menu_gray);
 
     }
-
 
 
 }

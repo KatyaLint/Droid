@@ -45,6 +45,7 @@ import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightsDe
 import hellogbye.com.hellogbyeandroid.fragments.checkout.AddCreditCardFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CheckoutConfirmationFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.HazardousNoticeFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.NewPaymentDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.SummaryPaymentFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.TravelerDetailsFragment;
@@ -777,6 +778,11 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case CREDIT_CARD_LIST:
                 fragment = CreditCardListFragment.newInstance(navPosition);
                 break;
+            case HAZARDOUS_NOTICE:
+                fragment = HazardousNoticeFragment.newInstance(navPosition);
+                break;
+
+
 
         }
 

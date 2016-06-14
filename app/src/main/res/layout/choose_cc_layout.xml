@@ -5,11 +5,19 @@
     android:layout_height="match_parent"
     >
 
+    <include
+        android:id="@+id/steps_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/credit_card_steps"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/select_cc_rl"
+        android:layout_below="@id/steps_layout"
+        android:layout_above="@+id/warning_check_ll"
         android:orientation="vertical">
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -17,88 +25,102 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:padding="@dimen/DP10"
             android:text="Itenerary and Payment"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:fontName="dinnextltpro_medium.otf" />
+            android:textColor="@color/COLOR_555555"
+            android:textSize="@dimen/SP10"
+            app:fontName="dinnextltpro_regular.otf" />
 
 
-        <ListView
+        <include
             android:id="@+id/select_cc_recyclerView"
+            layout="@layout/payment_summary_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        </ListView>
+        </include>
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:padding="@dimen/DP10"
             android:text="Travler Information"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:fontName="dinnextltpro_medium.otf" />
+            android:textColor="@color/COLOR_555555"
+            android:textSize="@dimen/SP10"
+            app:fontName="dinnextltpro_regular.otf" />
 
 
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/summary_traveler_recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
 
         </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 
-
-    <RelativeLayout
-        android:id="@+id/select_cc_rl"
+    <LinearLayout
+        android:id="@+id/warning_check_ll"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/DP82"
+        android:background="@color/white"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cc_proceed_ll"
+        android:padding="@dimen/DP10"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/hazerdus_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/hazerdus_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/DP10"
+            android:layout_gravity="center"
+            android:text="@string/i_have_read_and_understood_the_hazardous_nmaterial_notice"
+            android:textColor="@color/COLOR_555555"
+            android:textSize="@dimen/SP14"
+            app:fontName="dinnextltpro_regular.otf" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cc_proceed_ll"
+        android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
-        android:background="@color/hgb_blue">
+        android:layout_height="wrap_content">
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/cc_proceed"
-            style="@style/RedCustomButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/red_button"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:text="Proceed"
-            app:fontName="dinnextltpro_medium.otf" />
+            style="@style/RedCheckoutCustomButtonStyle"
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:orientation="vertical">
+            android:text="Continue to Checkout"
+            app:fontName="dinnextltpro_medium.otf"
+            android:visibility="gone" />
 
-            <hellogbye.com.hellogbyeandroid.views.FontTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                app:fontName="dinnextltpro_medium.otf" />
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/cc_proceed_disable"
+            style="@style/RedCheckoutCustomButtonDisableStyle"
+            android:text="Continue to Checkout"
+            app:fontName="dinnextltpro_medium.otf"
+            />
 
-            <hellogbye.com.hellogbyeandroid.views.FontTextView
-                android:id="@+id/cc_total_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="$1234"
-                android:textColor="@color/white"
-                android:textSize="30sp"
-                app:fontName="dinnextltpro_mediumcond.ttf" />
+    </LinearLayout>
 
 
-        </LinearLayout>
 
 
-    </RelativeLayout>
+
+
+
+
 
 </RelativeLayout>

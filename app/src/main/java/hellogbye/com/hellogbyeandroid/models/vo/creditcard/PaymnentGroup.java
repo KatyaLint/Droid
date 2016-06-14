@@ -12,6 +12,8 @@ public class PaymnentGroup {
     private boolean selected;
     private ArrayList<String> items;
     private String creditcard;
+    private String creditcardid;
+    private boolean mChildDataMissing;
 
     public PaymnentGroup(String nameText, String totalText, boolean selected, ArrayList<String> items,String creditcard) {
         this.nameText = nameText;
@@ -59,5 +61,21 @@ public class PaymnentGroup {
 
     public void setCreditcard(String creditcard) {
         this.creditcard = creditcard;
+    }
+
+    public boolean ismChildDataMissing() {
+        return mChildDataMissing;
+    }
+
+    public void setmChildDataMissing(boolean mChildDataMissing) {
+        this.mChildDataMissing = mChildDataMissing;
+    }
+
+    public String getCreditcardid() {
+        return creditcardid;
+    }
+
+    public void setCreditcardid(String creditcardid) {
+        this.creditcardid = creditcardid;
     }
 }

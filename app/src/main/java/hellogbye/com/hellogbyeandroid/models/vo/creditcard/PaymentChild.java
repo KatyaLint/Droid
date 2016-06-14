@@ -11,6 +11,7 @@ public class PaymentChild {
     private String guid;
     private String paxguid;
     private String creditcard;
+    private String creditcardid;
 
     public PaymentChild(String nameText, String totalText, boolean selected,String guid,String paxguid,String creditcard) {
         this.nameText = nameText;
@@ -67,5 +68,13 @@ public class PaymentChild {
 
     public void setCreditcard(String creditcard) {
         this.creditcard = creditcard;
+    }
+
+    public String getCreditcardid() {
+        return creditcardid;
+    }
+
+    public void setCreditcardid(String creditcardid) {
+        this.creditcardid = creditcardid;
     }
 }

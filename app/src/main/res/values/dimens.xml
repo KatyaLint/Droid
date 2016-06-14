@@ -14,6 +14,8 @@
     <dimen name="DP104">104dp</dimen>
     <dimen name="DP26">26dp</dimen>
     <dimen name="DP300">300dp</dimen>
+    <dimen name="DP400">400dp</dimen>
+    <dimen name="DP450">450dp</dimen>
     <dimen name="DP280">280dp</dimen>
     <dimen name="DP44">44dp</dimen>
     <dimen name="DP2">2dp</dimen>

@@ -29,7 +29,8 @@ public enum ToolBarNavEnum {
     CREDIT_CARD_LIST(28,"Credit Card list"),
     CHECKOUT_CONFIRMATION(29,"Checkout confirmation"),
     CNC_TUTORAL(30,"CNC Tutorial"),
-    ALL_COMPANIONS_VIEW(31,"My Companions"),;
+    HAZARDOUS_NOTICE(31,"Hazard Notice"),
+    ALL_COMPANIONS_VIEW(32,"My Companions"),;
 
 
 

@@ -18,6 +18,7 @@
     <color name="COLOR_555555">#555555</color>
     <color name="greyish_alternative_hotel">#F2F2F2</color>
     <color name="grey_title_preferese_settings">#F1F1F1</color>
+    <color name="cvv_red">#FDF5F6</color>
 
     <color name="item_border_color">#666666</color>
     <color name="item_default_color">#EEEEEE</color>

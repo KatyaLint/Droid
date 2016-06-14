@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/DP10"
+    android:background="@color/white"
      >
 
     <LinearLayout
@@ -22,20 +23,13 @@
             android:id="@+id/travler_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:text="More info required"
             android:layout_centerVertical="true"/>
     </LinearLayout>
 
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/chevron_right"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        />
+
 
 
 
