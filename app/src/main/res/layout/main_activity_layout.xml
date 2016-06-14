@@ -61,7 +61,7 @@
         android:layout_gravity="start"
         android:background="@color/hgb_toolbar_blue"
         android:divider="@android:color/transparent"
-        android:dividerHeight="0dp"
+        android:dividerHeight="@dimen/DP0"
         android:orientation="vertical">
 
         <LinearLayout

@@ -16,7 +16,7 @@
         android:id="@+id/image_text"
         android:layout_below="@+id/gallery_image"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/DP20"
         android:textColor="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

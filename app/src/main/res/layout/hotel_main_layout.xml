@@ -10,7 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="bottom"
-    sothree:umanoPanelHeight="100dp"
+    sothree:umanoPanelHeight="@dimen/DP100"
     sothree:umanoScrollableView="@+id/detail_scroll_view">
 
     <FrameLayout
@@ -346,7 +346,7 @@
 
                     <View
                         android:id="@+id/footer_third_separator"
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/DP0"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/DP20"
                         android:layout_marginRight="@dimen/DP20"
@@ -355,7 +355,7 @@
                         android:background="@color/warm_grey" />
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/DP0"
                         android:layout_height="match_parent"
                         android:layout_weight="120"
                         android:orientation="vertical">
@@ -388,7 +388,7 @@
                 <View
                     android:id="@+id/bottom_view"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="@dimen/DP1"
                     android:layout_marginTop="@dimen/DP10"
                     android:background="@color/warm_grey_line" />
 

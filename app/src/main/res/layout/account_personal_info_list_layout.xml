@@ -55,9 +55,6 @@
 
 
 
-
-
-
             <LinearLayout
                 android:id="@+id/companion_personal_email_ll"
                 android:layout_width="match_parent"

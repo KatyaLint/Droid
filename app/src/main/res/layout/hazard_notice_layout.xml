@@ -4,12 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/odd_grey"
-    android:orientation="vertical"
-    >
-
-
-
-
+    android:orientation="vertical">
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/hazard_header"
@@ -21,9 +16,6 @@
             android:textColor="@color/COLOR_555555"
             android:textSize="@dimen/SP10"
             app:fontName="dinnextltpro_regular.otf" />
-
-
-
 
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
