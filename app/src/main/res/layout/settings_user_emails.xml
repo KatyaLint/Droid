@@ -7,6 +7,7 @@
 
 
 <LinearLayout
+    android:id="@+id/settings_user_ll"
     android:layout_alignParentTop="true"
     android:layout_above="@+id/settings_remove_email_address"
     android:orientation="vertical"
@@ -18,7 +19,7 @@
         android:layout_height="wrap_content"
         android:text="@string/component_email"/>
 
-    <EditText
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
 
         android:id="@+id/settings_email_edit"
         android:layout_width="match_parent"
@@ -46,7 +47,6 @@
         android:layout_margin="@dimen/DP10"
         android:layout_alignParentBottom="true"
         android:textColor="@color/white"
-        android:textAllCaps="false"
         android:textSize="@dimen/SP20"
         android:gravity="center"
         app:fontName="dinnextltpro_medium.otf"

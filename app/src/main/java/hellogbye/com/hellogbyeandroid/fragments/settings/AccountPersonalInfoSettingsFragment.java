@@ -3,11 +3,12 @@ package hellogbye.com.hellogbyeandroid.fragments.settings;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.adapters.settingaccount.AccountSettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
@@ -25,8 +27,8 @@ import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
 import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -52,7 +54,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
     private FontEditTextView companion_personal_settings_name;
     private FontEditTextView companion_personal_settings_last;
     private FontEditTextView companion_personal_settings_date_of_birth;
-    private FontTextView companion_personal_settings_email;
+ //   private FontTextView companion_personal_settings_email;
     private FontTextView companion_personal_settings_gender;
     private FontEditTextView companion_personal_settings_phone_number;
     private FontEditTextView companion_personal_settings_location_street;
@@ -74,6 +76,8 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
     private FontEditTextView change_pswd_new_pswd;
     private FontEditTextView change_pswd_confirm_new_pswd;
     private BookingRequestVO bookingResponse;
+    private RecyclerView account_settings_email_list;
+    private Bundle bundle;
 
     public AccountPersonalInfoSettingsFragment() {
         // Empty constructor required for fragment subclasses
@@ -94,11 +98,10 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
                              Bundle savedInstanceState) {
 
 
-
+        bundle = new Bundle();
         View rootView = inflater.inflate(R.layout.account_personal_info_list_layout, container, false);
 
         currentUser = getActivityInterface().getCurrentUser();
-
 
 
 
@@ -110,16 +113,42 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         companion_personal_settings_last = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_last);
         companion_personal_settings_last.setText(currentUser.getLastname());
 
-        companion_personal_settings_email = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_email);
+
+        account_settings_email_list = (RecyclerView)rootView.findViewById(R.id.account_settings_email_list);
+        account_settings_email_list.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        account_settings_email_list.setLayoutManager(mLayoutManager);
+
+
+        ArrayList<AccountsVO> accounts = getActivityInterface().getAccounts();
+       final String[] account_settings = new String[accounts.size()];
+        for(int i=0;i<accounts.size();i++){
+            account_settings[i] = accounts.get(i).getEmail();
+        }
+
+
+        AccountSettingsAdapter accountSettingsAdapter = new AccountSettingsAdapter(account_settings,getActivity());
+        account_settings_email_list.setAdapter(accountSettingsAdapter);
+
+      /*  companion_personal_settings_email = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_email);
         companion_personal_settings_email.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCE_SETTINGS_EMAILS.getNavNumber(), null);
             }
-        });
-        AccountsVO account = getActivityInterface().getAccounts().get(0);
-        String strEmail = account.getEmail();
-        companion_personal_settings_email.setText(strEmail);
+        });*/
+
+
+
+        accountSettingsAdapter.SetOnItemClickListener(new AccountSettingsAdapter.OnItemClickListener() {
+                                                          @Override
+                                                          public void onItemClick(View view, int position) {
+                                                              String account_setting = account_settings[position];
+                                                              bundle.putString(HGBConstants.PERSONAL_INFO_EMAIL, account_setting);
+                                                              getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCE_SETTINGS_EMAILS.getNavNumber(), bundle);
+                                                          }
+                                                      });
 
         companion_personal_settings_date_of_birth = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_date_of_birth);
         companion_personal_settings_date_of_birth.setText(HGBUtility.parseDateToddMMyyyyForPayment(currentUser.getDob()));
@@ -127,12 +156,12 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         companion_personal_settings_location_province.setText(currentUser.getState());
 
 
-//        companion_personal_settings_gender = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_gender);
-//
-//        if(currentUser.getGender() != null && !currentUser.getGender().isEmpty()){
-//            GENDER = currentUser.getGender();
-//        }
-//        companion_personal_settings_gender.setText(GENDER);
+        companion_personal_settings_gender = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_gender);
+
+       if(currentUser.getGender() != null && !currentUser.getGender().isEmpty()){
+            GENDER = currentUser.getGender();
+        }
+        companion_personal_settings_gender.setText(GENDER);
 
 
         companion_personal_settings_phone_number = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_phone_number);
@@ -153,7 +182,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         personal_settings_change_password_ll = (LinearLayout)rootView.findViewById(R.id.personal_settings_change_password_ll);
 
         LayoutInflater li = LayoutInflater.from(getActivity());
-        promptsView = li.inflate(R.layout.change_password_layout, null);
+        promptsView = li.inflate(R.layout.popup_change_password_layout, null);
 
         change_pswd_current_pswd = (FontEditTextView)promptsView.findViewById(R.id.change_pswd_current_pswd);
         change_pswd_new_pswd = (FontEditTextView)promptsView.findViewById(R.id.change_pswd_new_pswd);
@@ -207,13 +236,15 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
 
 
-//        companion_personal_settings_gender.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
+        companion_personal_settings_gender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             HGBUtility.showPikerDialog(companion_personal_settings_gender, getActivity(), GENDER_TITLE, genderArray, 0, 1, null,true);
-//            }
-//        });
+            }
+        });
+
+
 
         companion_personal_settings_date_of_birth.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -228,8 +259,6 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         companion_personal_settings_email_add_another.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCE_SETTINGS_EMAILS.getNavNumber(), null);
 
             }
@@ -428,16 +457,16 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
             newUser.setDob(str_companion_personal_settings_date_of_birth);
         }
 
-        String str_companion_personal_settings_email = companion_personal_settings_email.getText().toString();
+       /* String str_companion_personal_settings_email = companion_personal_settings_email.getText().toString();
         if (!str_companion_personal_settings_email.isEmpty()) {
             newUser.setEmailaddress(str_companion_personal_settings_email);
+        }*/
+
+
+        String str_companion_personal_settings_gender = companion_personal_settings_gender.getText().toString();
+        if (!str_companion_personal_settings_gender.isEmpty()) {
+            newUser.setGender(str_companion_personal_settings_gender);
         }
-
-
-//        String str_companion_personal_settings_gender = companion_personal_settings_gender.getText().toString();
-//        if (!str_companion_personal_settings_gender.isEmpty()) {
-//            newUser.setGender(str_companion_personal_settings_gender);
-//        }
 
 
         String str_companion_personal_settings_phone_number = companion_personal_settings_phone_number.getText().toString();

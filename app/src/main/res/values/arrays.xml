@@ -4,8 +4,9 @@
 
     <string-array name="settings_account">
         <item>Personal Information</item>
-        <item>Emails</item>
         <item>Manage Payment Cards</item>
+        <item>Travel Profiles</item>
+        <item>Membership</item>
         <item>Help and Feedback</item>
     </string-array>
 

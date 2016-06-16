@@ -60,6 +60,7 @@ import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesDragListF
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSearchListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSettingsMainClass;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesTabsFragmentSettings;
+import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoHelpAndFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.PreferenceSettingsEmailFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountSettingsFragment;
@@ -383,29 +384,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private void initToolBar() {
 
         setSupportActionBar(mToolbar);
-   /*     imageButton = (ImageButton) mToolbar.findViewById(R.id.keyboard);
-
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("Kate keybord click");
-                goToFragment(ToolBarNavEnum.HOME.getNavNumber(), null);
-                 //clearCNCItems();
-
-            }
-        });*/
-
-
-        //TODO my_trips_button check why
-//        final ImageButton my_trips = (ImageButton) mToolbar.findViewById(R.id.my_trips_button);
-//        my_trips.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                goToFragment(ToolBarNavEnum.HOME.getNavNumber(),null);
-//            }
-//        });
-
-        //editMyTrips();
 
         preferencesChanges();
 
@@ -702,7 +680,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case COMPANIONS:
                 fragment = TravelCompanionTabsWidgetFragment.newInstance(navPosition);
-
                 break;
             case COMPANIONS_DETAILS:
                 fragment = CompanionDetailsFragment.newInstance(navPosition);
@@ -710,6 +687,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case COMPANIONS_PERSONAL_DETAILS:
                 fragment = AccountPersonalInfoSettingsFragment.newInstance(navPosition);
                 //     fragment = isFreeUser(fragment, navPosition);
+                break;
+            case COMPANION_HELP_FEEDBACK:
+                fragment = AccountPersonalInfoHelpAndFeedbackFragment.newInstance(navPosition);
                 break;
             case PREFERENCE_SETTINGS_EMAILS:
                 fragment = PreferenceSettingsEmailFragment.newInstance(navPosition);

@@ -32,8 +32,8 @@ public class ConnectionManager {
     }
 
 
-     //public static String BASE_URL = "http://apidev.hellogbye.com/dev/rest/";
-    public static String BASE_URL = "http://demo.hellogbye.com/dev/rest/";
+     public static String BASE_URL = "http://apidev.hellogbye.com/dev/rest/";
+ //   public static String BASE_URL = "http://demo.hellogbye.com/dev/rest/";
    // public static String BASE_URL = "http://apiuat.hellogbye.com/uat/rest/";
 //    public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
 
@@ -1275,7 +1275,6 @@ public class ConnectionManager {
 
 
     public void confirmCompanion(String companion_id, final ServerRequestListener listener){
-//Kate
         String url = getURL(Services.COMPANIONS_CONFIRM);
         url = url + companion_id;
         JSONObject json1 = new JSONObject();
@@ -1292,8 +1291,6 @@ public class ConnectionManager {
                 listener.onError(Parser.parseErrorMessage(error));
             }
         });
-
-
     }
 
 

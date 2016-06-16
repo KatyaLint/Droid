@@ -19,10 +19,10 @@
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/cc_info"
         android:layout_alignParentTop="true"
-        android:padding="10dp"
+        android:padding="@dimen/DP10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10sp"
+        android:textSize="@dimen/SP10"
         android:text="CARD INFORMATION"
         app:fontName="dinnextltpro_regular.otf" />
 

@@ -57,7 +57,7 @@
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/travel_detail_gender"
             style="@style/TravelerDetailsTextStyle"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/DP0"
             android:layout_weight="1"
             android:hint="Gender"
             app:fontName="dinnextltpro_light.otf" />

@@ -7,7 +7,7 @@ public enum ToolBarNavEnum {
     TRIPS (0,"My Trips"),
     COMPANIONS(1,"My Companions"),
     PREFERENCE(2,"Preference Settings"),
-    ACCOUNT(3,"Account Settings"),
+    ACCOUNT(3,"My Account"),
     HELP(4,"Help & Feedback"),
     CNC(8,"CNC"),
     ALTERNATIVE_FLIGHT(9,"Alternative Flight"),
@@ -30,7 +30,8 @@ public enum ToolBarNavEnum {
     CHECKOUT_CONFIRMATION(29,"Checkout confirmation"),
     CNC_TUTORAL(30,"CNC Tutorial"),
     HAZARDOUS_NOTICE(31,"Hazard Notice"),
-    ALL_COMPANIONS_VIEW(32,"My Companions"),;
+    ALL_COMPANIONS_VIEW(32,"My Companions"),
+    COMPANION_HELP_FEEDBACK(33,"Help and Feedback");
 
 
 

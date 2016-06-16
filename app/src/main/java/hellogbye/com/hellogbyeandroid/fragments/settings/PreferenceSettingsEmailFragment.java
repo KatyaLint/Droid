@@ -3,11 +3,10 @@ package hellogbye.com.hellogbyeandroid.fragments.settings;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 
@@ -20,7 +19,6 @@ import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsPreferencesCheckAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSearchListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSettingsMainClass;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
@@ -28,6 +26,8 @@ import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSet
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
+import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by nyawka on 3/22/16.
@@ -41,6 +41,9 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
     private String accountAttributeCheckedID;
     private String accountAttributeCheckedFirstID;
     private boolean noBack;
+    private FontEditTextView settings_email_edit;
+    private FontTextView settings_remove_email_address;
+    private String personalEmail = null;
 
 
     public static Fragment newInstance(int position) {
@@ -54,7 +57,42 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         View rootView = inflater.inflate(R.layout.settings_user_emails, container, false);
+
+        Bundle args = getArguments();
+        //may be should be id, and not email
+        personalEmail = args.getString(HGBConstants.PERSONAL_INFO_EMAIL);
+
+        settings_email_edit = (FontEditTextView)rootView.findViewById(R.id.settings_email_edit);
+
+        settings_remove_email_address = (FontTextView)rootView.findViewById(R.id.settings_remove_email_address);
+
+        if(personalEmail != null && !personalEmail.isEmpty()){
+            settings_email_edit.setText(personalEmail);
+            settings_email_edit.setClickable(false);
+            settings_email_edit.setFocusable(false);
+        }else{
+            settings_remove_email_address.setVisibility(View.GONE);
+            settings_remove_email_address.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ConnectionManager.getInstance(getActivity()).deleteUserProfileAccountsWithEmail(personalEmail,new ConnectionManager.ServerRequestListener() {
+                        @Override
+                        public void onSuccess(Object data) {
+
+                        }
+
+                        @Override
+                        public void onError(Object data) {
+                            ErrorMessage(data);
+                        }
+                    });
+                }
+            });
+        }
 
 
 
@@ -83,6 +121,37 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
 
         return rootView;
     }
+
+
+    private void sendNewEmailToServer(final String newEmail) {
+        //http://cnc.hellogbye.com/cnc/rest/UserProfile/Accounts
+
+        LayoutInflater li = LayoutInflater.from(getActivity());
+        promptsView = li.inflate(R.layout.popup_alert_layout, null);
+
+        ConnectionManager.getInstance(getActivity()).postUserProfileAccountsWithEmail(newEmail, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+                String titleString = newEmail + " " + getResources().getString(R.string.component_confirmation_email);
+                HGBUtility.showAlertPopUpOneButton(getActivity(), null, promptsView, titleString,
+                        new PopUpAlertStringCB() {
+                            @Override
+                            public void itemSelected(String inputItem) {
+                            }
+                            @Override
+                            public void itemCanceled() {
+                            }
+                        });
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
+
 
     public void backOnListClicked() {
 
@@ -117,31 +186,48 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
 
     private void onSavePopup(){
 
-
-        if(accountAttributeCheckedID == null || accountAttributeCheckedID.isEmpty()
-                || accountAttributeCheckedID.equals(accountAttributeCheckedFirstID)){
-            return;
+        if(personalEmail == null){ //on add new email scree
+            String newUserEmail = settings_email_edit.getText().toString();
+            boolean isEmailValid = HGBUtility.isValidEmail(newUserEmail);
+            if(isEmailValid){
+                saveDataAlert();
+            }
         }
+        else if(accountAttributeCheckedID != null && !accountAttributeCheckedID.isEmpty()
+                && !accountAttributeCheckedID.equals(accountAttributeCheckedFirstID)){ //preferences were changed
+            saveDataAlert();
+        }
+    }
 
+
+    private void putNewPreferencesForUser(){
+        ConnectionManager.getInstance(getActivity()).putAccountsPreferences(personalEmail, accountAttributeCheckedID, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                ((MainActivity)getActivity()).getAccountsProfiles();
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
+
+    private void saveDataAlert(){
         HGBUtility.showAlertPopUp(getActivity(), null, promptsView,
                 getResources().getString(R.string.preferences_save_pop_up),
                 getResources().getString(R.string.save_button),
                 new PopUpAlertStringCB() {
                     @Override
                     public void itemSelected(String inputItem) {
+                        if(personalEmail ==  null){
+                            String newUserEmail = settings_email_edit.getText().toString();
 
-                        String userEmail = getActivityInterface().getAccounts().get(0).getEmail();
-                        ConnectionManager.getInstance(getActivity()).putAccountsPreferences(userEmail, accountAttributeCheckedID, new ConnectionManager.ServerRequestListener() {
-                            @Override
-                            public void onSuccess(Object data) {
-                                ((MainActivity)getActivity()).getAccountsProfiles();
-                            }
-
-                            @Override
-                            public void onError(Object data) {
-                                ErrorMessage(data);
-                            }
-                        });
+                            sendNewEmailToServer(newUserEmail);
+                        }else{
+                            putNewPreferencesForUser();
+                        }
                     }
 
                     @Override
@@ -150,10 +236,21 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
                 });
     }
 
-
     private void setFirstProfileChecked(){
-        AccountsVO account = getActivityInterface().getAccounts().get(0);
-        String id = account.getTravelpreferenceprofile().getId();
+
+        String id = null;
+        //personalEmail
+        ArrayList<AccountsVO> accounts = getActivityInterface().getAccounts();
+        for(AccountsVO account:accounts){
+            if(account.getEmail().equals(personalEmail)){
+                id = account.getTravelpreferenceprofile().getId();
+                break;
+            }
+        }
+       /* if(id == null){
+            return;
+        }*/
+      //  String id = account.getTravelpreferenceprofile().getId();
         for( AccountDefaultSettingsVO accountAttribute : accountDefaultSettings) {
             if (accountAttribute.getmId().equals(id)) {
                 accountAttribute.setChecked(true);

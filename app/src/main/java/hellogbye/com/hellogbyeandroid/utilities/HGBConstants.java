@@ -19,6 +19,8 @@ public class HGBConstants {
     public static final String EXTRA_IMAGE_URL = "extra_image_url";
     public static final String EXTRA_IMAGE_URL_SIZE = "extra_image_size";
 
+    public static final String PERSONAL_INFO_EMAIL = "personal_info_email";
+
     public static final String CNC_CLEAR_CHAT = "cnc_clear_chat";
 
 

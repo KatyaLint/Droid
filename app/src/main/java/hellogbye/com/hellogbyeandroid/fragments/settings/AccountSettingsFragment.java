@@ -185,17 +185,18 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
                         //AccountPersonalInfoSettingsFragment
                         //personal information
                         break;
-                    case 1:
+               /*     case 1:
                         getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCE_SETTINGS_EMAILS.getNavNumber(), null);
                         //emails
-                        break;
-                    case 2:
+                        break;*/
+                    case 1:
                         getFlowInterface().goToFragment(ToolBarNavEnum.CREDIT_CARD_LIST.getNavNumber(), null);
                         break;
                     case 3:
                         //membership
                         break;
                     case 4:
+                        getFlowInterface().goToFragment(ToolBarNavEnum.COMPANION_HELP_FEEDBACK.getNavNumber(), null);
                         //help & feedback
                         break;
                 }
