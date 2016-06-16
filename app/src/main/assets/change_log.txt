@@ -109,8 +109,9 @@ Code changing:
      Code changing:
     --------------
     - Preferences List align to top
-    - New Emails Fragment
+    - New Add\Remove Emails Fragment
     - New Feedback and help view(only view, without logic)
+    - New Payment view
 
 
     ------------------------------------------
