@@ -362,7 +362,8 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         creditCardItem.setCvv(mCardCCV.getText().toString());
         creditCardItem.setCardNumber(mCardNumber.getText().toString());
 
-        if(verifyValidCCNumber(creditCardItem))
+      //  if(verifyValidCCNumber(creditCardItem))
+        if(true)
         {
             ConnectionManager.getInstance(getActivity()).getCCSession(new ConnectionManager.ServerRequestListener() {
                 @Override
@@ -453,6 +454,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
                 }
             });
         }else{
+            progressDialog.hide();
             HGBErrorHelper errorHelper = new HGBErrorHelper();
             errorHelper.setMessageForError("The Credit Card number is not valid please try again");
             errorHelper.show(getActivity().getFragmentManager(), "Problem with Credit Card");

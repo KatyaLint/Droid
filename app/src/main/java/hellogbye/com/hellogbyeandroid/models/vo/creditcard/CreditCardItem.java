@@ -57,6 +57,10 @@ public class CreditCardItem {
 
     }
 
+    public CreditCardItem(String last4){
+        this.last4 = last4;
+    }
+
     public CreditCardItem(String cardtypeid, String expmonth, String expyear, String buyerfirstname, String buyerlastname, String buyeraddress, String buyerzip, String token, String userid, String nickname, String last4, String addeddatetime, String modifieddatetime, boolean isSelected) {
         this.cardtypeid = cardtypeid;
         this.expmonth = expmonth;

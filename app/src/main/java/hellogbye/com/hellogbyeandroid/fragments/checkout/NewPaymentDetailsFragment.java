@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.adapters.AlertCheckoutAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -234,16 +235,23 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 }
                 itemsList.add(getString(R.string.add_card));
                 itemsList.add(getString(R.string.remove_card));
-                itemsList.add(getString(R.string.cancel));
+
 
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
                 dialogBuilder.setTitle(getResources().getString(R.string.payment_select_payment_method));
 
-                final CharSequence[] list = itemsList.toArray(new String[itemsList.size()]);
-                dialogBuilder.setItems(list, new DialogInterface.OnClickListener() {
+                dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                    } });
+
+               // final CharSequence[] list = itemsList.toArray(new String[itemsList.size()]);
+                AlertCheckoutAdapter adapter = new AlertCheckoutAdapter(itemsList,getActivity().getApplicationContext());
+                dialogBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
 
-                        String selectedText = list[item].toString();
+                        String selectedText = itemsList.get(item);
                         //This is to set creditcard  array  final json for payment
 
                         if (selectedText.equals(getString(R.string.cancel))) {

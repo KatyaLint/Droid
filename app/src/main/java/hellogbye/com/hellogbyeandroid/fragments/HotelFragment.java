@@ -454,7 +454,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         mSelectHotelText = (FontTextView) rootView.findViewById(R.id.text_select_hotel);
         mPullDOwnRelativeLayout = (RelativeLayout) rootView.findViewById(R.id.pull_down);
         mRecyclerView  = (RecyclerView) rootView.findViewById(R.id.alt_hotel_recycler_view);
-        mConfirmBadge = (ImageView)rootView.findViewById(R.id.cofirm_badge);
+    //    mConfirmBadge = (ImageView)rootView.findViewById(R.id.cofirm_badge);
 
 
         mStart1ImageView = (ImageView) rootView.findViewById(R.id.star1);
@@ -531,18 +531,18 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
             mMyHotelText.setVisibility(View.VISIBLE);
             mMyHotelImage.setVisibility(View.VISIBLE);
             mSelectHotelText.setVisibility(View.GONE);
-            mConfirmBadge.setVisibility(View.VISIBLE);
-            if(node.getmPaymentProcessingState().equals("PAID")){
-                mConfirmBadge.setBackgroundResource(R.drawable.paid_badge);
-            }else{
-                mConfirmBadge.setBackgroundResource(R.drawable.cofirm_badge);
-            }
+//            mConfirmBadge.setVisibility(View.VISIBLE);
+//            if(node.getmPaymentProcessingState().equals("PAID")){
+//                mConfirmBadge.setBackgroundResource(R.drawable.paid_badge);
+//            }else{
+//                mConfirmBadge.setBackgroundResource(R.drawable.cofirm_badge);
+//            }
 
         } else {
             mSelectHotelText.setVisibility(View.VISIBLE);
             mMyHotelText.setVisibility(View.GONE);
             mMyHotelImage.setVisibility(View.GONE);
-            mConfirmBadge.setVisibility(View.GONE);
+         //   mConfirmBadge.setVisibility(View.GONE);
         }
 
         mHotelNameFullFontTextView.setText(node.getmAddress1() + "," + node.getmCityName() + "\n" + node.getmPostalCode() + "," + node.getmStateProvince() + "," + node.getmCountry());
