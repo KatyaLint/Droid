@@ -236,10 +236,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 itemsList.add(getString(R.string.remove_card));
                 itemsList.add(getString(R.string.cancel));
 
-
-                //TODO kate
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-                dialogBuilder.setTitle("Select Payment Method");
+                dialogBuilder.setTitle(getResources().getString(R.string.payment_select_payment_method));
 
                 final CharSequence[] list = itemsList.toArray(new String[itemsList.size()]);
                 dialogBuilder.setItems(list, new DialogInterface.OnClickListener() {
