@@ -449,36 +449,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
 
-/*
-
-    private void initRightPane() {
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction(); //beginTransaction();
-
-        Fragment fragment = CNCFragment.newInstance(ToolBarNavEnum.CNC.getNavNumber());
-        transaction.replace(R.id.right_content_frame, fragment, fragment.getClass().toString());
-
-        transaction.commit();
-        frameLayout = (FrameLayout) findViewById(R.id.right_content_frame);
-*/
-/*        mRightPaneImageView = (ImageView)findViewById(R.id.right_pane_button);
-
-        mRightPaneImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openRightPane();
-            }
-        });*//*
-
-
-    }
-*/
-
     private void animateRightPaneOpened() {
         Animation fadeOut = new AlphaAnimation(1, 0);
         fadeOut.setDuration(RIGHT_PANE_ANIMATION_TIME);
         fadeOut.setFillAfter(true);
-      //  mRightPaneImageView.startAnimation(fadeOut);
     }
 
 
@@ -486,8 +460,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         Animation fadeIn = new AlphaAnimation(0, 1);
         fadeIn.setDuration(RIGHT_PANE_ANIMATION_TIME);
         fadeIn.setFillAfter(true);
-     //   mRightPaneImageView.startAnimation(fadeIn);
-
     }
 
 

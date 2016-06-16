@@ -146,6 +146,7 @@
     <string name="account_personal_password">Password</string>
     <string name="account_personal_change_password">Change Password</string>
     <string name="account_personal_done_editing">Done editing</string>
+    <string name="account_personal_your_details">YOUR DETAILS</string>
 
     <string name="account_submit_feedback">Submit Feedback</string>
     <string name="account_submit_feedback_tell_us">Tell us what’s wrong in the box below:</string>

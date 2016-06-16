@@ -60,7 +60,7 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-        View rootView = inflater.inflate(R.layout.settings_user_emails, container, false);
+        View rootView = inflater.inflate(R.layout.account_settings_user_emails, container, false);
 
         Bundle args = getArguments();
         //may be should be id, and not email
@@ -74,6 +74,7 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
             settings_email_edit.setText(personalEmail);
             settings_email_edit.setClickable(false);
             settings_email_edit.setFocusable(false);
+
         }else{
             settings_remove_email_address.setVisibility(View.GONE);
             settings_remove_email_address.setOnClickListener(new View.OnClickListener() {

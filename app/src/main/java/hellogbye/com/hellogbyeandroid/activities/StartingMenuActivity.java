@@ -54,6 +54,7 @@ public class StartingMenuActivity extends Activity {
             goToMainActivity();
             finish();
         }
+
         setContentView(R.layout.starting_menu_layout);
         mSignUp = (FontTextView) findViewById(R.id.create_account);
         mLogin = (FontTextView) findViewById(R.id.login_button);

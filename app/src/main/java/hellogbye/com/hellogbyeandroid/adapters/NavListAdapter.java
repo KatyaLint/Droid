@@ -54,7 +54,7 @@ public class NavListAdapter extends RecyclerView.Adapter<NavListAdapter.ViewHold
 
         public ViewHolder(View v) {
             super(v);
-            mTextView = (FontTextView)v.findViewById(R.id.nav_item_text);
+            mTextView = (FontTextView)v.findViewById(R.id.nav_item_text_main);
             mSelectedImage = (ImageView)v.findViewById(R.id.nav_item_selected_image);
             nav_item_view_image = (ImageView)v.findViewById(R.id.nav_item_view_image);
         }

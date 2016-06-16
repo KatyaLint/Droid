@@ -3,37 +3,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/greyish_alternative_hotel">
 
 
 <LinearLayout
+    android:background="@color/greyish_alternative_hotel"
     android:id="@+id/settings_user_ll"
     android:layout_alignParentTop="true"
     android:layout_above="@+id/settings_remove_email_address"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+
+    <LinearLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/greyish_alternative_hotel">
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_margin="@dimen/DP10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/component_email"/>
+        </LinearLayout>
 
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
 
         android:id="@+id/settings_email_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/DP10"
         android:hint="@string/component_email"/>
 
+    <LinearLayout
 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/greyish_alternative_hotel">
     <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_margin="@dimen/DP10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/settings_choose_profile"/>
+        </LinearLayout>
 
     <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
         android:id="@+id/settings_choose_profile"
+        android:background="@color/greyish_alternative_hotel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />

@@ -21,7 +21,7 @@
         android:layout_height="wrap_content" />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/nav_item_text"
+        android:id="@+id/nav_item_text_main"
         android:layout_marginLeft="@dimen/DP10"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
