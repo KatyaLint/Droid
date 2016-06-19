@@ -123,10 +123,13 @@ public class TravelersFragment extends HGBAbstractFragment {
                     }
                 }
 
+                if(mGroups.size() != 0 && children.size() != 0){
 
-                mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), mGroups, children);
+                    mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), mGroups, children);
+                    mRecyclerView.setAdapter(mAdapter);
+                }
 
-                mRecyclerView.setAdapter(mAdapter);
+
 //                mAdapter.SetOnItemClickListener(new TravlerAdapter.OnItemClickListener() {
 //
 //                    @Override
