@@ -77,7 +77,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private FontTextView mHotelNameFontTextView;
     private FontTextView mHotelPriceFontTextView;
     private FontTextView mHotelDaysFontTextView;
-    private FontTextView mHotelAddressFontTextView;
+    //private FontTextView mHotelAddressFontTextView;
     private RelativeLayout mPullDOwnRelativeLayout;
 
     private FontTextView mHotelRoomNameFontTextView;
@@ -438,7 +438,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         mHotelNameFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_name);
         mHotelPriceFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_price);
         mHotelDaysFontTextView = (FontTextView) rootView.findViewById(R.id.days);
-        mHotelAddressFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_address);
+    //    mHotelAddressFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_address);
         mHotelRoomNameFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_room_name);
         mHotelGuestNumberFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_guest_number);
         mHotelCheckInFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_dates_checkin_name);
@@ -513,12 +513,12 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
         mListForGallery = new ArrayList<>();
         mHotelNameFontTextView.setText(node.getmHotelName());
-        long diff = HGBUtility.getDateDiff(node.getmCheckIn(), node.getmCheckOut());
+        long diff = HGBUtility.dayDifference(node.getmCheckIn(), node.getmCheckOut());
         double iCharge = node.getmMinimumAmount()/diff;
         String result = String.format("%.2f", iCharge);
-        mHotelPriceFontTextView.setText("$" + result);
-        mHotelDaysFontTextView.setText(R.string.avreage_per_night);
-        mHotelAddressFontTextView.setText(node.getmAddress1());
+        mHotelPriceFontTextView.setText("$" + node.getmMinimumAmount());
+        mHotelDaysFontTextView.setText(diff+" Nights");
+       // mHotelAddressFontTextView.setText(node.getmAddress1());
         //TODO we need to check if size is more then 1 show option to change
         mHotelRoomNameFontTextView.setText(node.getRoomsVOs().get(0).getmRoomType());
         // mHotelGuestNumberFontTextView.setText(mTravelDetails.getPassengerses().get(1).getmCells().get(0).getmNodes().get(0).getm());
