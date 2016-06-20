@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+
 
 /**
  * Created by nyawka on 9/9/15.
@@ -34,6 +36,7 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     }
 
     private String dateOfCell = "";
+    private String calenderDay = "";
 
     @SerializedName("totalpenalty")
     private double totalpenalty;
@@ -571,5 +574,13 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
 
     public void setDestinationairportcoordinates(AirportCoordinatesVO destinationairportcoordinates) {
         this.destinationairportcoordinates = destinationairportcoordinates;
+    }
+
+    public String getCalenderDay() {
+        return calenderDay;
+    }
+
+    public void setCalenderDay(String calenderDay) {
+        this.calenderDay = calenderDay;
     }
 }

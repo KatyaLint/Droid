@@ -647,6 +647,29 @@ public class HGBUtility {
 
     }
 
+
+/*    public static String addDayHourToDate(String dateToIncr) {
+        String newDate="";
+        String outputPattern = "MM/dd/yyyy";
+        DateFormat df = new SimpleDateFormat(outputPattern);
+
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+        Date date ;
+        try {
+            date = df.parse(dateToIncr);
+            Date dayAfter = new Date(date.getTime() + 23*3600*1000);
+
+            newDate = outputFormat.format(dayAfter);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+        return newDate;
+    }*/
+
+
+
+
     public static String addDayHourToDate(String dateToIncr) {
         String newDate="";
         DateFormat df = new SimpleDateFormat(BASE_SERVER_TIME_ZONE);
@@ -664,6 +687,7 @@ public class HGBUtility {
 
         return newDate;
     }
+
 
 
 

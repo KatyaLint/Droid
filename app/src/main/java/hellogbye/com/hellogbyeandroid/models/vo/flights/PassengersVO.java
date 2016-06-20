@@ -49,6 +49,7 @@ public class PassengersVO {
 
     public void setDateHashMap(String date,ArrayList<NodesVO> nodes){
         hashMap.put(date,nodes);
+
     }
 
 

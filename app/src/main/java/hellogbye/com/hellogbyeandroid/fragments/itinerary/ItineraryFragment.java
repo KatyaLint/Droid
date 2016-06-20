@@ -161,8 +161,8 @@ public class ItineraryFragment extends HGBAbstractFragment {
                 long difference = HGBUtility.dayDifference(departure,arrival) ;
 
 
-           //     departure = HGBUtility.parseDateToddMMyyyyForPayment(departure); //parse return 23 is 2 different scenario need time not just date
-
+            //    departure = HGBUtility.parseDateToddMMyyyyForPayment(departure); //parse return 23 is 2 different scenario need time not just date
+           //      HGBUtility.parseDateToddMMyyyyMyTrip(departure);
                  if(node.getmType().equals("hotel")){
                      String time = HGBUtility.addDayHourToDate(departure);
                      node.setDateOfCell(time);
@@ -177,7 +177,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
                 correctPassangerNodes(node, passengerNodesVOs,  passenger);
 
 
-                for(int i=1;i<difference;i++){ //adding days, if hotel is 3 day, adding another 2
+                for(int i=1;i<=difference;i++){ //adding days, if hotel is 3 day, adding another 2
                  //   String time = HGBUtility.parseDateToddMMyyyyForPayment(departure);
                     departure =  HGBUtility.addDayToDate(departure);
 
@@ -347,7 +347,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
             for (String date:dates) {
                 ArrayList<NodesVO> nodes = hashMap.get(date);
                 int nodesSize = nodes.size();
-                int maxNodeSize = runForPassangers(passangers, nodesSize, date);
+                int maxNodeSize = runForPassangers(passangers, nodesSize, date); //get Maximum size of nodes to add to another users
               //  if(nodesSize < maxNodeSize){
                 addToPassangersAllNodes(passangers, maxNodeSize, date);
                // }
@@ -565,9 +565,9 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
 
         LinearLayout itineraryLayout = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.scroll_view_ll);
-    LinearLayout cnc_empty_view = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.cnc_empty_view);
-      //  UserTravelMainVO user = parseFlight();
-      //  getActivityInterface().setTravelOrder(user);
+        LinearLayout cnc_empty_view = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.cnc_empty_view);
+     //   UserTravelMainVO user = parseFlight();
+       // getActivityInterface().setTravelOrder(user);
         UserTravelMainVO  user = getActivityInterface().getTravelOrder();
         userOrder = user;
                 //getActivityInterface().setTravelOrder(userOrder);

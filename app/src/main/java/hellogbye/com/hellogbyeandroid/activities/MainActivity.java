@@ -342,6 +342,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         toolbar_go_to_iternerary.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
+
+             //   goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
+
                 if(hgbSaveDataClass.getTravelOrder() == null){
                     toolbar_go_to_iternerary.setEnabled(false);
                 }else {
@@ -677,7 +681,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case ITINARERY:
                 fragment = ItineraryFragment.newInstance(navPosition);
-                itirnarary_title_Bar.setText(hgbSaveDataClass.getTravelOrder().getmSolutionName());
+                if(hgbSaveDataClass.getTravelOrder() != null) {
+                    itirnarary_title_Bar.setText(hgbSaveDataClass.getTravelOrder().getmSolutionName());
+                }
                // setItineraryTitleName();
                 break;
             case ALTERNATIVE_FLIGHT:

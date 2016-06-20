@@ -77,16 +77,6 @@ public class CNCFragment extends HGBAbstractFragment {
     private  Handler tutorailTexthandler = new Handler();
     private   Runnable mRunnable;
     private String[] account_settings;
-
-
-
-/*    String[] TUTORIAL_TEXT = {
-            "I want to fly to Vancouver on December 17th for 10 days, staying in a 4 star hotel",
-            "I would like to edit my trip",
-            "I would like to add a travel companion",
-
-    };*/
-
     private int mTutorialTextNumber = 0;
 
 
@@ -256,6 +246,7 @@ public class CNCFragment extends HGBAbstractFragment {
                 UserTravelMainVO userTraveler = (UserTravelMainVO) data;
                 handleHGBMessagesViews(userTraveler);
                 getActivityInterface().setTravelOrder(userTraveler);
+                clearCNCscreen = false;
 
             }
             @Override
@@ -358,7 +349,6 @@ public class CNCFragment extends HGBAbstractFragment {
                 if (getString(R.string.itinerary_created).equals(strText)
                         || getString(R.string.grid_has_been_updated).equals(strText)) {
                     getFlowInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(),null);
-                   /* getFlowInterface().closeRightPane();*/
                 }
             }
         });
@@ -381,7 +371,6 @@ public class CNCFragment extends HGBAbstractFragment {
            }
 
             String text = String.format(res.getString(R.string.default_cnc_message),userName );
-
 
             getActivityInterface().addCNCItem(new CNCItem(text, CNCAdapter.HGB_ITEM));
             mTextTutoralHeader.setVisibility(View.VISIBLE);
@@ -527,6 +516,7 @@ public class CNCFragment extends HGBAbstractFragment {
                                         @Override
                                         public void itemSelected(String inputItem) {
 
+                                            clearCNCscreen = false;
                                             AirportResultsVO choosenAirport = findChoosenAirport(inputItem, results);
                                             airportSendValuesVO.setId(choosenAirport.getId());
 
@@ -720,53 +710,6 @@ public class CNCFragment extends HGBAbstractFragment {
         mAdapter.notifyDataSetChanged();
     }
 
-   /* private void preferencesChanges() {
-        final ImageButton edit_preferences = (ImageButton) mToolbar.findViewById(R.id.edit_preferences);
-        edit_preferences.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View checkButton = mToolbar.findViewById(R.id.check_preferences);
-                if (checkButton.getVisibility() == View.VISIBLE) {
-                    //delete
-                    editClickCB.onItemClick("delete");
-                } else if (checkButton.getVisibility() == View.GONE) {
-                    edit_preferences.setBackgroundResource(R.drawable.ic_delete);
-                    mToolbar.findViewById(R.id.check_preferences).setVisibility(View.VISIBLE);
-                    editClickCB.onItemClick("edit");
-                }
-            }
-        });
-
-        final ImageButton check_preferences = (ImageButton) mToolbar.findViewById(R.id.check_preferences);
-        check_preferences.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mToolbar.findViewById(R.id.check_preferences).setVisibility(View.GONE);
-                edit_preferences.setBackgroundResource(R.drawable.edit_img);
-                editClickCB.onItemClick("done");
-            }
-        });
-    }*/
-
-
-
-/*
-    private void toolBarProfileChnage() {
-
-        final LinearLayout tool_bar_profile_name = (LinearLayout) mToolbar.findViewById(R.id.tool_bar_profile_name);
-        tool_bar_profile_name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getFlowInterface().closeRightPane();
-                Bundle args = new Bundle();
-                args.putString("edit_mode", "true");
-                getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCE.getNavNumber(), args);
-                LinearLayout edit_preferences = (LinearLayout) mToolbar.findViewById(R.id.preferences_edit_mode);
-                edit_preferences.setVisibility(View.GONE);
-            }
-        });
-
-    }*/
 
     public void requestFocusOnMessage(){
         mEditText.requestFocus();

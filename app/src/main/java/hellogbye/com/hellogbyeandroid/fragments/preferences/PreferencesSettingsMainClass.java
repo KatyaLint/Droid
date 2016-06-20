@@ -108,6 +108,11 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
 
 
     private void canceledItems(){
+
+        if(settingsAttributesVO == null){ //no changes
+            return;
+        }
+
         for(SettingsAttributesVO settingsAttributeVO:settingsAttributesVO){
             settingsAttributeVO.setChecked(false);
         }
