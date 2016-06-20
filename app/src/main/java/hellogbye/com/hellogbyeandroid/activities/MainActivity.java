@@ -529,7 +529,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         HGBUtility.removeAllFragments(getSupportFragmentManager());
         hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
+        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER,"");
         Intent intent = new Intent(getApplicationContext(), StartingMenuActivity.class);
+
         startActivity(intent);
     }
 

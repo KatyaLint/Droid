@@ -140,8 +140,9 @@ public class StartingMenuActivity extends Activity {
 
                         @Override
                         public void itemSelected(String inputItem) {
-
-                            ConnectionManager.BASE_URL = inputItem;
+                            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER, inputItem);
+                      //      ConnectionManager.getInstance(StartingMenuActivity.this).BASE_URL = inputItem;
+                            //ConnectionManager.BASE_URL = inputItem;
                         }
 
                         @Override

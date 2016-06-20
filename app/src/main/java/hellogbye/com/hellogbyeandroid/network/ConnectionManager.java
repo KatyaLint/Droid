@@ -18,11 +18,14 @@ import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
 import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 
 public class ConnectionManager {
 
+
+    private static HGBPreferencesManager mHGBPrefrenceManager;
 
 
     public interface ServerRequestListener {
@@ -32,7 +35,7 @@ public class ConnectionManager {
     }
 
 
-     public static String BASE_URL = "http://apidev.hellogbye.com/dev/rest/";
+     public static String BASE_URL;// = "http://apidev.hellogbye.com/dev/rest/";
 
     //public static String BASE_URL = "http://demo.hellogbye.com/dev/rest/";
    // public static String BASE_URL = "http://apiuat.hellogbye.com/uat/rest/";
@@ -49,21 +52,36 @@ public class ConnectionManager {
 
 
 
-    private ConnectionManager() {
-
+    private ConnectionManager(Context context) {
+         mHGBPrefrenceManager = HGBPreferencesManager.getInstance(context.getApplicationContext());
     }
 
     public static ConnectionManager getInstance(Context context) {
         if (_instance == null) {
-            _instance = new ConnectionManager();
+            _instance = new ConnectionManager(context);
         }
         _instance.mContext = context;
         HGBStringRequest.setContext(context);
         HGBJsonRequest.setContext(context);
         HGBStringXMLRequest.setContext(context);
+
         return _instance;
     }
 
+
+    private static String changeServerURL(){
+
+        String choosenServer = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER,"");
+
+        if(choosenServer == null || choosenServer.isEmpty()){
+            BASE_URL =  "http://apidev.hellogbye.com/dev/rest/";
+        }else{
+            BASE_URL = choosenServer;
+        }
+
+
+        return BASE_URL;
+    }
 
     ////////////////////////////////
     // POST
@@ -72,7 +90,6 @@ public class ConnectionManager {
     public void postUserCreateAccount(UserSignUpDataVO userData, final ServerRequestListener listener) {
 
         String url = getURL(Services.USER_PROFILE_REGISTER);
-
         JSONObject jsonObject = new JSONObject();
 
         try {
@@ -1711,11 +1728,13 @@ public class ConnectionManager {
 
                 String url;
                 Services(String url){
-                    this.url = BASE_URL + url;
+                    this.url =  url;
                 }
 
                 public String getURL(){
-                    return url;
+                    String baseUrl = changeServerURL();
+                    baseUrl = baseUrl + url;
+                    return baseUrl;
                 }
             }
 

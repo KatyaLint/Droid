@@ -23,7 +23,6 @@ public class HGBConstants {
 
     public static final String CNC_CLEAR_CHAT = "cnc_clear_chat";
 
-
     public static final String BUNDLE_SETTINGS_ATT_ID = "setting_att_id";
     public static final String BUNDLE_SETTINGS_TYPE = "setting_type";
 
