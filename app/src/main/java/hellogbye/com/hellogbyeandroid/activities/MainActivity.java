@@ -36,7 +36,7 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
-import hellogbye.com.hellogbyeandroid.fragments.HelpFeedbackFragment;
+
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightsDetailsFragment;
@@ -678,9 +678,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case ACCOUNT:
                 fragment = AccountSettingsFragment.newInstance(navPosition);
                 break;
-            case HELP:
+/*            case HELP:
                 fragment = HelpFeedbackFragment.newInstance(navPosition);
-                break;
+                break;*/
             case ITINARERY:
                 fragment = ItineraryFragment.newInstance(navPosition);
                 if(hgbSaveDataClass.getTravelOrder() != null) {

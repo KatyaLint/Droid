@@ -33,7 +33,7 @@
         android:layout_margin="@dimen/DP60"/>
 
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
+<!--    <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/account_submit_feedback"
         style="@style/RedCustomButtonStyle"
         android:layout_marginLeft="@dimen/DP54"
@@ -41,7 +41,22 @@
         android:layout_marginTop="@dimen/DP20"
         android:layout_marginRight="@dimen/DP54"
         app:fontName="dinnextltpro_mediumcond.ttf"
-        android:text="@string/account_submit_feedback_submit" />
+        android:text="@string/account_submit_feedback_submit" />-->
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:id="@+id/account_submit_feedback"
+        style="@style/RedCustomButtonStyle"
+        android:layout_marginLeft="@dimen/DP54"
+        android:layout_marginBottom="@dimen/DP20"
+        android:layout_marginTop="@dimen/DP20"
+        android:layout_marginRight="@dimen/DP54"
+        app:fontName="dinnextltpro_mediumcond.ttf"
+        android:text="@string/account_submit_feedback_submit"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+
 
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView

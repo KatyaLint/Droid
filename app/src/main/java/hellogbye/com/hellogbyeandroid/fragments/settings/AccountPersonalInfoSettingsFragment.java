@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -37,18 +36,12 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  */
 public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
-
-    private EditText input;
+    private boolean isDisable = false;
     private View promptsView;
     private FontTextView text;
     private String GENDER = "Gender";
-    /*final String[] titleArray = {"Mr", "Mrs", "Miss"};*/
+
     final String SELECT_TITLE = "Select Title";
-    /*final String[] genderArray = {"M", "F"};*/
-    /*final String GENDER_TITLE = "Select Gender";*/
-
-    private String SELECT_PROVINCE = "Select Province";
-
 
     private LinearLayout companion_personal_settings_email_add_another;
     private FontEditTextView companion_personal_settings_name;
@@ -93,6 +86,45 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
     }
 
 
+    private void getUserData(){
+
+        ConnectionManager.getInstance(getActivity()).getUserProfile(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+                UserDataVO mCurrentUser = (UserDataVO) data;
+
+                getActivityInterface().setCurrentUser(mCurrentUser);
+                getAccountsProfiles();
+           /*     HGBUtility.getAndSaveUserImage(mCurrentUser.getAvatar(), mProfileImage, null);
+                getAccountsProfiles();
+                selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null);*/
+
+            }
+
+            @Override
+            public void onError(Object data) {
+               ErrorMessage(data);
+            }
+        });
+    }
+
+
+    public void getAccountsProfiles() {
+        ConnectionManager.getInstance(getActivity()).getUserProfileAccounts(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                ArrayList<AccountsVO> accounts = (ArrayList<AccountsVO>) data;
+                getActivityInterface().setAccounts(accounts);
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -104,6 +136,8 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         currentUser = getActivityInterface().getCurrentUser();
 
 
+
+        HGBConnectionManagerRequest.
 
         companion_personal_settings_email_add_another = (LinearLayout) rootView.findViewById(R.id.companion_personal_add_email_ll);
 
@@ -293,7 +327,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         return rootView;
     }
 
-    boolean isDisable = false;
+
 
 
     private void setClickListner() {
@@ -371,36 +405,6 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
 
 
-    private void sendNewEmailToServer(final String newEmail) {
-        //http://cnc.hellogbye.com/cnc/rest/UserProfile/Accounts
-
-        ConnectionManager.getInstance(getActivity()).postUserProfileAccountsWithEmail(newEmail, new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
-                input.setVisibility(View.GONE);
-                text.setVisibility(View.GONE);
-                String titleString = newEmail + " " + getResources().getString(R.string.component_confirmation_email);
-                HGBUtility.showAlertPopUpOneButton(getActivity(), input, promptsView, titleString,
-                        new PopUpAlertStringCB() {
-                            @Override
-                            public void itemSelected(String inputItem) {
-
-                            }
-
-                            @Override
-                            public void itemCanceled() {
-
-                            }
-                        });
-            }
-
-            @Override
-            public void onError(Object data) {
-                isDisable = false;
-                ErrorMessage(data);
-            }
-        });
-    }
 
     private void getPersonalInfoBookingOptions(){
        // http://cnc.hellogbye.com/cnc/rest/Statics/BookingOptions

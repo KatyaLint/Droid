@@ -1,3 +1,4 @@
+/*
 package hellogbye.com.hellogbyeandroid.fragments;
 
 
@@ -12,9 +13,11 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 
+*/
 /**
  * Created by arisprung on 8/17/15.
- */
+ *//*
+
 public class HelpFeedbackFragment extends HGBAbstractFragment {
 
 
@@ -44,4 +47,4 @@ public class HelpFeedbackFragment extends HGBAbstractFragment {
         getActivity().setTitle(strFrag);
         return rootView;
     }
-}
+}*/

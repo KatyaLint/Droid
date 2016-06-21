@@ -58,7 +58,7 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+       // getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         View rootView = inflater.inflate(R.layout.account_settings_user_emails, container, false);
 
@@ -75,8 +75,7 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
             settings_email_edit.setClickable(false);
             settings_email_edit.setFocusable(false);
 
-        }else{
-            settings_remove_email_address.setVisibility(View.GONE);
+
             settings_remove_email_address.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -89,11 +88,37 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
                         @Override
                         public void onError(Object data) {
                             ErrorMessage(data);
+
                         }
                     });
                 }
             });
+
+        }else{
+            settings_remove_email_address.setVisibility(View.GONE);
         }
+      /*  else{
+            System.out.println("Kate remove");
+            settings_remove_email_address.setVisibility(View.GONE);
+            settings_remove_email_address.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ConnectionManager.getInstance(getActivity()).deleteUserProfileAccountsWithEmail(personalEmail,new ConnectionManager.ServerRequestListener() {
+                        @Override
+                        public void onSuccess(Object data) {
+                            System.out.println("Kate onSuccess = " + personalEmail);
+
+                        }
+
+                        @Override
+                        public void onError(Object data) {
+                            ErrorMessage(data);
+                            System.out.println("Kate onError");
+                        }
+                    });
+                }
+            });
+        }*/
 
 
 

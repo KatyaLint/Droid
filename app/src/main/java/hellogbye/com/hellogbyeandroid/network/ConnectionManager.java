@@ -7,6 +7,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -1249,11 +1250,19 @@ public class ConnectionManager {
 
     public void deleteUserProfileAccountsWithEmail(String email, final ServerRequestListener listener) {
         String url = getURL(Services.USER_GET_USER_PROFILE_ACCOUNTS);
-        HashMap<String, String> map = new HashMap<String, String>();
-        map.put("username", email);
 
-        HGBStringRequest req = new HGBStringRequest(Request.Method.DELETE, url,
-                map, new Response.Listener<String>() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("username", email);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        /*HashMap<String, String> map = new HashMap<String, String>();
+        map.put("username", email);*/
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.DELETE, url,
+                jsonObject, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 listener.onSuccess(response);
@@ -1264,6 +1273,19 @@ public class ConnectionManager {
                 listener.onError(Parser.parseErrorMessage(error));
             }
         });
+
+  /*      HGBStringRequest req = new HGBStringRequest(Request.Method.DELETE, url,
+                map, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });*/
     }
 
 
