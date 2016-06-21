@@ -75,7 +75,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
             Gson gson = new Gson();
             Type type = new TypeToken<UserTravelMainVO>() {
             }.getType();
-            String strJson = HGBUtility.loadJSONFromAsset("flights_one_person.txt", getActivity());
+            String strJson = HGBUtility.loadJSONFromAsset("flights_three_person.txt", getActivity());
 
             airplaneDataVO = gson.fromJson(strJson, type);
 
@@ -161,7 +161,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
                 long difference = HGBUtility.dayDifference(departure,arrival) ;
 
 
-            //    departure = HGBUtility.parseDateToddMMyyyyForPayment(departure); //parse return 23 is 2 different scenario need time not just date
+                departure = HGBUtility.parseDateToddMMyyyyForPayment(departure); //parse return 23 is 2 different scenario need time not just date
            //      HGBUtility.parseDateToddMMyyyyMyTrip(departure);
                  if(node.getmType().equals("hotel")){
                      String time = HGBUtility.addDayHourToDate(departure);
@@ -234,7 +234,8 @@ public class ItineraryFragment extends HGBAbstractFragment {
             DatesLinearLayout.setLayoutParams(LLParams);
             DatesLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
 
-            currentDate = HGBUtility.parseDateToddMMyyyyForPayment(date);
+            currentDate = date;
+        //    currentDate = HGBUtility.parseDateToddMMyyyyForPayment(date);
 
             for(int i=0;i<passengers.size();i++){
 
@@ -566,11 +567,11 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
         LinearLayout itineraryLayout = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.scroll_view_ll);
         LinearLayout cnc_empty_view = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.cnc_empty_view);
-     //   UserTravelMainVO user = parseFlight();
-       // getActivityInterface().setTravelOrder(user);
+    //    UserTravelMainVO user = parseFlight();
+     //   getActivityInterface().setTravelOrder(user);
         UserTravelMainVO  user = getActivityInterface().getTravelOrder();
         userOrder = user;
-                //getActivityInterface().setTravelOrder(userOrder);
+
 
         if(userOrder != null && !userOrder.getItems().isEmpty()) {
             itineraryLayout.setVisibility(View.VISIBLE);

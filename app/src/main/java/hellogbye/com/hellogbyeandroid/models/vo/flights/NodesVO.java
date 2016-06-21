@@ -145,8 +145,10 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     private String mStateProvince;
     @SerializedName("defaultroomguid")
     private String mDefaultRoomGuid;
+
     @SerializedName("rooms")
     private ArrayList<RoomsVO> roomsVOs = new ArrayList<RoomsVO>();
+
     @SerializedName("hasalternative")
     private boolean mHasAlternative;
 

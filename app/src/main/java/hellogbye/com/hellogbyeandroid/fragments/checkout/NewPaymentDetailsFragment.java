@@ -210,7 +210,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             public void onSuccess(Object data) {
                 Bundle args = new Bundle();
                 Gson gson = new Gson();
-                args.putString("parent_list", gson.toJson(groups));
+                args.putString(HGBConstants.BUNDLE_PARENT_LIST, gson.toJson(groups));
                 getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS.getNavNumber(), args);
             }
 

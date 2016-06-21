@@ -344,7 +344,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             public void onClick(View v) {
 
 
-             //   goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
+          //      goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
 
                 if(hgbSaveDataClass.getTravelOrder() == null){
                     toolbar_go_to_iternerary.setEnabled(false);

@@ -103,13 +103,13 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
 
         if(item.getmConfirmationstatus().equals("Pending")) {
 
-            viewHolder.companion_details_name_item.setText(item.getCompanionInviteUserProfileVO().getmFirstName());
+            viewHolder.companion_details_name_item.setText(item.getCompanionUserProfile().getmFirstName());
             viewHolder.companion_details_name_item.setTag(item.getmCompanionid());
             viewHolder.companion_request.setText(item.getCompanionUserProfile().getmEmailAddress());
             viewHolder.companion_arrow.setVisibility(View.GONE);
 
             if(item.getCompanionInviteUserProfileVO() != null) {
-
+                viewHolder.companion_details_name_item.setText(item.getCompanionInviteUserProfileVO().getmFirstName());
                 viewHolder.companion_confirm_button.setTag(item.getmInvitationtoken());
                 viewHolder.companion_delete_button.setTag(item.getmInvitationtoken());
                 viewHolder.companion_confirmation_layout.setVisibility(View.VISIBLE);

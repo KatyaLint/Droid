@@ -119,7 +119,6 @@
 
 
     <string name="component_name">NAME</string>
-    <string name="component_personal_information">PERSONAL INFORMATION </string>
     <string name="component_title">Title : </string>
     <string name="component_first">First : </string>
     <string name="component_second">Second : </string>
@@ -140,7 +139,7 @@
     <string name="component_log_sure">Are you sure you want to log out?</string>
 
     <string name="account_personal_date_of_birth">Date of Birth</string>
-    <string name="account_personal_gender">Gender</string>
+    <string name="account_personal_gender">Title</string>
     <string name="account_personal_phone_number">Phone number</string>
     <string name="account_personal_location">ADDRESS</string>
     <string name="account_personal_password">Password</string>
@@ -229,4 +228,5 @@
 
     <string name = "payment_select_payment_method">Select Payment Method"</string>
 
+    <string name="select_gender">Select Gender</string>
 </resources>

@@ -77,7 +77,9 @@
         <item name="android:background">@drawable/red_disable_button</item>
     </style>
 
-
+    <style name="MyRadioButtonStyle" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/custom_radio_button</item>
+    </style>
 
     android:id="@+id/payment_submit_disable"
     android:layout_width="match_parent"

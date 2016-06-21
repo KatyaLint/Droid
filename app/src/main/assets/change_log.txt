@@ -122,6 +122,8 @@ Code changing:
     -----------
     HEL-960 - enter preferences and go out without changes crashes app 1.5.3
     HEL-964 - app crashed when going out of a preference without saving
+    HEL-966 - running query crashes app 1.5.3
+    HEL-968 - pending request app crashes 1.5.3
 
     Code changing:
     --------------

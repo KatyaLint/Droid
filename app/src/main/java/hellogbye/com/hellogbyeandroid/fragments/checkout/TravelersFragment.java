@@ -72,7 +72,7 @@ public class TravelersFragment extends HGBAbstractFragment {
 
         Bundle args = getArguments();
         if (args != null) {
-            String groups = args.getString("parent_list");
+            String groups = args.getString(HGBConstants.BUNDLE_PARENT_LIST);
             Gson gson = new Gson();
             Type listType = new TypeToken<List<PaymnentGroup>>() {
             }.getType();
@@ -361,7 +361,7 @@ public class TravelersFragment extends HGBAbstractFragment {
                 @Override
                 public void onClick(View view) {
                     Bundle args = new Bundle();
-                    args.putInt("user_json_position", groupPosition);
+                    args.putInt(HGBConstants.BUNDLE_USER_JSON_POSITION, groupPosition);
                     getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS_DETAILS.getNavNumber(), args);
                 }
             });

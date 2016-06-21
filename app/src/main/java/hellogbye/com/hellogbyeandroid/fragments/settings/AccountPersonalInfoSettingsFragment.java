@@ -42,10 +42,10 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
     private View promptsView;
     private FontTextView text;
     private String GENDER = "Gender";
-    final String[] titleArray = {"Mr", "Mrs", "Miss"};
+    /*final String[] titleArray = {"Mr", "Mrs", "Miss"};*/
     final String SELECT_TITLE = "Select Title";
-    final String[] genderArray = {"M", "F"};
-    final String GENDER_TITLE = "Select Gender";
+    /*final String[] genderArray = {"M", "F"};*/
+    /*final String GENDER_TITLE = "Select Gender";*/
 
     private String SELECT_PROVINCE = "Select Province";
 
@@ -240,7 +240,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
             @Override
             public void onClick(View v) {
 
-            HGBUtility.showPikerDialog(companion_personal_settings_gender, getActivity(), GENDER_TITLE, genderArray, 0, 1, null,true);
+            HGBUtility.showPikerDialog(companion_personal_settings_gender, getActivity(), getResources().getString(R.string.select_gender), getResources().getStringArray(R.array.gender_array), 0, 1, null,true);
             }
         });
 

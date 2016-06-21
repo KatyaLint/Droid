@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 
 import com.nhaarman.listviewanimations.ArrayAdapter;
 import com.nhaarman.listviewanimations.util.Swappable;
@@ -33,7 +34,7 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountD
     private boolean isEditMode = false;
     private PreferenceSettingsFragment.ListLineClicked listLineClicked;
     private PreferenceSettingsFragment.ListRadioButtonClicked listRadioButtonClickedClicked;
-    private int selectedPosition = 0;
+    private int selectedPosition = -1;
     public String selectedPreferebcesID="";
 
     public PreferencesSettingsRadioButtonAdapter(Context context, List<AccountDefaultSettingsVO> accountAttributes) {
@@ -96,7 +97,7 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountD
             settings_flight_title.setText(attribute.getmProfileName());
           //  settings_flight_title.setTag(attribute.getmId());
 
-            LinearLayout settings_radio_button_ll = (LinearLayout)v.findViewById(R.id.settings_radio_button_ll);
+            RelativeLayout settings_radio_button_ll = (RelativeLayout)v.findViewById(R.id.settings_radio_button_ll);
             settings_radio_button_ll.setTag(attribute.getmId());
             settings_radio_button_ll.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -112,12 +113,19 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountD
 //            settings_text_drag.setText(""+correntPosition);
             this.getItem(position).setRank("" + currentPosition);
 
+
+            RadioButton r = (RadioButton)v.findViewById(R.id.setting_radio_image);
+
+
+
             if(selectedPreferebcesID.equals(attribute.getmId())){
                 selectedPosition = position;
                 selectedPreferebcesID = "";
+
             }
 
-            RadioButton r = (RadioButton)v.findViewById(R.id.setting_radio_image);
+
+
             r.setChecked(position == selectedPosition);
             r.setTag(position);
 

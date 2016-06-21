@@ -20,7 +20,9 @@ public class RoomsVO {
     private String mSmoking;
 
     @SerializedName("bedtypes")
-    private ArrayList<BedTypesVO> mBedTypesVOs = new ArrayList<BedTypesVO>();
+    private ArrayList<String> mBedTypesVOs = new ArrayList<String>();
+
+
     @SerializedName("cost")
     private double mCost;
     @SerializedName("nightlyrate")
@@ -30,8 +32,13 @@ public class RoomsVO {
     private double mAverageRate;
     @SerializedName("surchargertotal")
     private double mSurchargerTotal;
+
     @SerializedName("isalternative")
     private boolean mIsAlternative;
+    @SerializedName("hasalternative")
+    private boolean mHasalternative;
+
+
     @SerializedName("type")
     private String mType;
     @SerializedName("dateorder")

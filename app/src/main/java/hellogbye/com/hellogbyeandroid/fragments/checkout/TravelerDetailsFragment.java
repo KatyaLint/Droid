@@ -87,7 +87,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
         Bundle args = getArguments();
         if (args != null) {
-            int position = args.getInt("user_json_position");
+            int position = args.getInt(HGBConstants.BUNDLE_USER_JSON_POSITION);
             mUser = getFlowInterface().getListUsers().get(position);
         }
 
@@ -101,7 +101,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
     }
 
-    final String[] titleArray = {"Mr", "Mrs", "Miss"};
+/*    final String[] titleArray = {"Mr", "Mrs", "Miss"};*/
     final String SLECT_TITLE = "Select Title";
 
 
@@ -163,7 +163,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             public void onClick(View v) {
 
                 //  showGenderDialog();
-                HGBUtility.showPikerDialog(mGender, getActivity(), GENDER_TITLE, genderArray, 0, 1, null, true);
+                HGBUtility.showPikerDialog(mGender, getActivity(), getResources().getString(R.string.select_gender), getResources().getStringArray(R.array.gender_array), 0, 1, null, true);
             }
         });
 
@@ -171,7 +171,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             @Override
             public void onClick(View v) {
 
-                HGBUtility.showPikerDialog(mTitle, getActivity(), SLECT_TITLE, titleArray, 0, 1, null, true);
+                HGBUtility.showPikerDialog(mTitle, getActivity(), SLECT_TITLE, getResources().getStringArray(R.array.title_array), 0, 1, null, true);
 
 
                 // showTitleDialog();
@@ -247,8 +247,8 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
     }
 
 
-    final String[] genderArray = {"M", "F"};
-    final String GENDER_TITLE = "Select Gender";
+    /*final String[] genderArray = {"M", "F"};*/
+    /*final String GENDER_TITLE = "Select Gender";*/
 
 
     private void initUser() {

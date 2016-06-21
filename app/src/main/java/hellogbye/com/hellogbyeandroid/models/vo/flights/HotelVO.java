@@ -1,12 +1,15 @@
+/*
 package hellogbye.com.hellogbyeandroid.models.vo.flights;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+*/
 /**
  * Created by arisprung on 10/20/15.
- */
+ *//*
+
 public class HotelVO {
 
     @SerializedName("paymentprocessingstate")
@@ -59,3 +62,4 @@ public class HotelVO {
 
 
 }
+*/
