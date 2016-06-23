@@ -107,27 +107,50 @@ public class TravelersFragment extends HGBAbstractFragment {
 
                 getFlowInterface().setListUsers((ArrayList<UserDataVO>) data);
 
-
-                for (int i = 0; i < getFlowInterface().getListUsers().size(); i++) {
-                    ArrayList<UserDataVO> passengerChildArray = new ArrayList<>();
-                    passengerChildArray.add(getFlowInterface().getListUsers().get(i));
-                    children.add(passengerChildArray);
-                    boolean isMissing = checkIfMissing(getFlowInterface().getListUsers().get(i));
-                    mGroups.get(i).setmChildDataMissing(isMissing);
-                    if(isMissing){
-                        mNext.setVisibility(View.GONE);
-                        mNextDisable.setVisibility(View.VISIBLE);
-                    }else{
-                        mNext.setVisibility(View.VISIBLE);
-                        mNextDisable.setVisibility(View.GONE);
+                if(getFlowInterface().getListUsers().size() !=0 ){
+                    for (int i = 0; i < getFlowInterface().getListUsers().size(); i++) {
+                        ArrayList<UserDataVO> passengerChildArray = new ArrayList<>();
+                        passengerChildArray.add(getFlowInterface().getListUsers().get(i));
+                        children.add(passengerChildArray);
+                        boolean isMissing = checkIfMissing(getFlowInterface().getListUsers().get(i));
+                        mGroups.get(i).setmChildDataMissing(isMissing);
+                        if(isMissing){
+                            mNext.setVisibility(View.GONE);
+                            mNextDisable.setVisibility(View.VISIBLE);
+                        }else{
+                            mNext.setVisibility(View.VISIBLE);
+                            mNextDisable.setVisibility(View.GONE);
+                        }
                     }
-                }
 
-                if(mGroups.size() != 0 && children.size() != 0){
+                    mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), mGroups, children);
+                    mRecyclerView.setAdapter(mAdapter);
+                }else{
+
+                    for (int i = 0; i < mGroups.size(); i++) {
+                        ArrayList<UserDataVO> passengerChildArray = new ArrayList<>();
+                        passengerChildArray.add(new UserDataVO());
+                        children.add(passengerChildArray);
+                        mGroups.get(i).setmChildDataMissing(true);
+                    }
+
 
                     mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), mGroups, children);
                     mRecyclerView.setAdapter(mAdapter);
                 }
+
+
+//                mAdapter.SetOnItemClickListener(new TravlerAdapter.OnItemClickListener() {
+//
+//                    @Override
+//                    public void onItemClick(View v, int position) {
+//                        Bundle args = new Bundle();
+//                        args.putInt("user_json_position", position);
+//                        getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS_DETAILS.getNavNumber(), args);
+//                    }
+//                });
+                
+
             }
 
             @Override
@@ -266,11 +289,18 @@ public class TravelersFragment extends HGBAbstractFragment {
             }
             final UserDataVO child = (UserDataVO) getChild(groupPosition, childPosition);
 
+
             holder.childNametext.setText(child.getFirstname() + " " + child.getLastname());
             holder.childDOB.setText(child.getDob());
             holder.childPhone.setText(child.getPhone());
             holder.childAddress.setText(child.getAddress() + "\n" + child.getCity() + "," + child.getState() + "\n" + child.getPostalcode());
             holder.childEmail.setText(child.getEmailaddress());
+            if(child.getFirstname() == null){
+                holder.childNametext.setText("");
+            }
+            if(child.getAddress()  == null){
+                holder.childAddress.setText("");
+            }
 
             findMissingElemnts(holder, child);
             return convertView;
