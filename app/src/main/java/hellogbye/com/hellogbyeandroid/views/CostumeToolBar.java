@@ -151,7 +151,7 @@ public class CostumeToolBar extends Toolbar {
             case PREFERENCES_SPECIFIC_LIST_SETTINGS:
             case PREFERENCES_DRAG_LIST_SETTINGS:
             case PREFERENCE_SETTINGS_EMAILS:
-
+            case PREFERENCES_CHECK_AS_RADIO_SETTINGS:
                 preference_save_changes.setVisibility(View.VISIBLE);
                 titleText.setVisibility(View.VISIBLE);
                 edit_preferences.setVisibility(View.GONE);
@@ -170,6 +170,7 @@ public class CostumeToolBar extends Toolbar {
                 titleText.setVisibility(View.VISIBLE);
                 break;
             case PREFERENCE:
+
                 titleText.setVisibility(View.VISIBLE);
                 preferences_edit_mode.setVisibility(View.VISIBLE);
                 edit_preferences.setVisibility(View.VISIBLE);

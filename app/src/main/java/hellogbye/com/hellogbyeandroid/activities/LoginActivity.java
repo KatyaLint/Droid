@@ -2,7 +2,6 @@ package hellogbye.com.hellogbyeandroid.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -122,7 +121,7 @@ public class LoginActivity extends FragmentActivity {
     private void resetPassword() {
 
         LayoutInflater li = LayoutInflater.from(getApplicationContext());
-        final  View promptsView = li.inflate(R.layout.forgotpassword_layout, null);
+        final  View promptsView = li.inflate(R.layout.popup_forgotpassword_layout, null);
 
         final EditText userInput = (EditText) promptsView
                 .findViewById(R.id.editTextDialogUserInput);

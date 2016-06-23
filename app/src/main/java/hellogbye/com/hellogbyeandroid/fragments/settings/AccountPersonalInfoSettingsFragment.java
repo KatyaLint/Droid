@@ -134,7 +134,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         View rootView = inflater.inflate(R.layout.account_personal_info_list_layout, container, false);
 
         currentUser = getActivityInterface().getCurrentUser();
-        
+
 
         companion_personal_settings_email_add_another = (LinearLayout) rootView.findViewById(R.id.companion_personal_add_email_ll);
 

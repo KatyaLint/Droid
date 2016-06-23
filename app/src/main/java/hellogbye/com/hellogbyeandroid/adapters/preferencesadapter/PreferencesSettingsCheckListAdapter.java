@@ -52,7 +52,7 @@ public class PreferencesSettingsCheckListAdapter extends ArrayAdapter<SettingsAt
                     .inflate(R.layout.settings_item_check_layout, null);
         }
         SettingsAttributesVO attribute = this.getItem(position);//items.get(position);
-        if(attribute != null){
+        /*if(attribute != null){*/
             FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_check_name);
             if(settings_flight_title != null){
                 settings_flight_title.setText(attribute.getmDescription());
@@ -66,13 +66,7 @@ public class PreferencesSettingsCheckListAdapter extends ArrayAdapter<SettingsAt
                 setting_check_image.setBackgroundResource(R.drawable.check_off);
             }
 
-
-           /* if(attribute.getmRank() != null){
-                setting_check_image.setBackgroundResource(R.drawable.check_on);
-            }else{
-                setting_check_image.setBackgroundResource(R.drawable.check_off);
-            }*/
-        }
+     /*   }*/
 
         return v;
     }

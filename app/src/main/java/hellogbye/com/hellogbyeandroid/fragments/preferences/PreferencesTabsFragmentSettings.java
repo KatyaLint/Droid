@@ -255,6 +255,8 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
                 break;
             case "5":
             case "8":
+                getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCES_CHECK_AS_RADIO_SETTINGS.getNavNumber(), args);
+                break;
             case "7":
                 getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCES_CHECK_LIST_SETTINGS.getNavNumber(), args);
                 break;

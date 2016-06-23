@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/black"
     android:gravity="center"
+    android:text="Coming Soon"
     android:textColor="@android:color/white"
     android:textSize="32dp" />
 

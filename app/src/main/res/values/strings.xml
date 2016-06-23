@@ -164,6 +164,7 @@
     <string name="reset_password">Enter your email to reset password</string>
     <string name="reset_your_password">Reset Password</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="main_exit_application">Are you sure you want to exit application?</string>
 
 
     <string name="my_trips_upcoming">Upcoming Trips</string>

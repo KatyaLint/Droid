@@ -32,8 +32,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
 
     private DynamicListView mDynamicListView;
-    private String strJson;
-    private String strType;
+
     private PreferencesSettingsDragListAdapter preferenceSettingsListAdapter;
     private List<SettingsValuesVO> choosedItems;
     private List<SettingsValuesVO> selectedItem;
@@ -59,7 +58,7 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
 
         Bundle args = getArguments();
         if (args != null) {
-            strJson = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
+            strId = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
             strType = args.getString(HGBConstants.BUNDLE_SETTINGS_TYPE);
 
         }
@@ -74,7 +73,7 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
 
         dragDropListInitialization(rootView);
 
-        backOnListClicked(strType,strJson,selectedItem);
+        backOnListClicked(strType,strId,selectedItem);
 
         return rootView;
     }

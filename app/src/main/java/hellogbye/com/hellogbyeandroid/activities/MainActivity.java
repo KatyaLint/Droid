@@ -38,6 +38,7 @@ import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
 
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
+import hellogbye.com.hellogbyeandroid.fragments.NotificationFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightsDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.AddCreditCardFragment;
@@ -55,6 +56,7 @@ import hellogbye.com.hellogbyeandroid.fragments.freeuser.FreeUserFragment;
 import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsTabsView;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsRadioCheckFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesCheckListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesDragListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSearchListFragment;
@@ -471,8 +473,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mNavItemsList = new ArrayList<>();
         mNavItemsList.add(new NavItem(ToolBarNavEnum.TRIPS, false, R.drawable.my_trips_icon_enable, R.drawable.my_trips_icon_disable));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.COMPANIONS, false, R.drawable.companions_icon_enable, R.drawable.companions_icon_disable));
-        mNavItemsList.add(new NavItem(ToolBarNavEnum.PREFERENCE, false, R.drawable.notifications_enable, R.drawable.notifications_disable));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.ACCOUNT, false, R.drawable.my_account_enable, R.drawable.my_account_disable));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.NOTIFICATIONS, false, R.drawable.notifications_enable, R.drawable.notifications_disable));
 
     }
 
@@ -678,9 +680,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case ACCOUNT:
                 fragment = AccountSettingsFragment.newInstance(navPosition);
                 break;
-/*            case HELP:
-                fragment = HelpFeedbackFragment.newInstance(navPosition);
-                break;*/
+            case NOTIFICATIONS:
+                fragment = NotificationFragment.newInstance(navPosition);
+                break;
             case ITINARERY:
                 fragment = ItineraryFragment.newInstance(navPosition);
                 if(hgbSaveDataClass.getTravelOrder() != null) {
@@ -712,6 +714,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case PREFERENCES_CHECK_LIST_SETTINGS:
                 fragment = PreferencesCheckListFragment.newInstance(navPosition);
                 break;
+            case PREFERENCES_CHECK_AS_RADIO_SETTINGS:
+                fragment = PreferenceSettingsRadioCheckFragment.newInstance(navPosition);
+                break;
             case PREFERENCES_DRAG_LIST_SETTINGS:
                 fragment = PreferencesDragListFragment.newInstance(navPosition);
                 break;
@@ -719,11 +724,11 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 fragment = CheckoutConfirmationFragment.newInstance(navPosition);
                 break;
 
-            case PAYMENT_TRAVLERS:
+            case PAYMENT_TRAVELERS:
                 fragment = TravelersFragment.newInstance(navPosition);
 
                 break;
-            case PAYMENT_TRAVLERS_DETAILS:
+            case PAYMENT_TRAVELERS_DETAILS:
                 fragment = TravelerDetailsFragment.newInstance(navPosition);
                 break;
             case SELECT_CREDIT_CARD:
@@ -819,8 +824,23 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                         });
             }
         });
+    }
 
+    private void LogOutPopup(){
+        LayoutInflater li = LayoutInflater.from(getApplicationContext());
+        final  View popupView = li.inflate(R.layout.popup_alert_layout, null);
+        HGBUtility.showAlertPopUp(MainActivity.this,  null, popupView,
+                getResources().getString(R.string.main_exit_application),getResources().getString(R.string.ok_button), new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+                        gotToStartMenuActivity();
+                    }
 
+                    @Override
+                    public void itemCanceled() {
+
+                    }
+                });
     }
 
     @Override
@@ -847,14 +867,19 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             return;
         }
 
+        if(count == 1 && str.equals(TripsTabsView.class.toString())){
+            LogOutPopup();
+            return;
+        }
 
         if (HGBUtility.clearBackStackAndGoToNextFragment(getSupportFragmentManager())) {
             Fragment fragmentTemp = HGBUtility.getFragmentStack().lastElement();
             Bundle arguments = fragmentTemp.getArguments();
             int fragNumber = arguments.getInt(HGBConstants.ARG_NAV_NUMBER);
-
             mToolbar.updateToolBarView(fragNumber);
+            return;
         }
+
     }
 
 

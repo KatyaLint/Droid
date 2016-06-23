@@ -13,9 +13,12 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -34,6 +37,7 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
     protected static int MAX_CHOOSEN_NUMBER = 10;
     protected List<SettingsAttributesVO> accountAttributesTemp;
     protected List<SettingsAttributesVO> settingsAttributesVO;
+    private String guid;
 
 
     public interface saveButtonClicked{
@@ -51,6 +55,8 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
                 ((MainActivity) getActivity()).onBackPressed();
             }
         });
+
+        guid = getSettingGuidSelected();
     }
 
 
@@ -73,9 +79,9 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
         View promptsView = li.inflate(R.layout.settings_save_popup, null);
 
 
-        if(this.getClass().toString().equals(PreferencesSearchListFragment.class.toString())
+        if( guid.equals("7")
             && firstItems.isEmpty()
-            && myAccountAttribute.getAttributesVOs().isEmpty()){
+            && myAccountAttribute.getAttributesVOs().isEmpty() || settingsAttributesVO.isEmpty()){
             return;
         }
 
@@ -150,6 +156,7 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
                         settingsAttributeVO.getmName(),
                         settingsAttributeVO.getmDescription(),
                         settingsAttributeVO.getmRank());
+            //    selectedValue.setChecked(settingsAttributeVO.isChecked());
                 selectedItem.add(selectedValue);
             }
         }
@@ -158,8 +165,14 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
     }
 
     private void convertData(){
-        if(this.getClass().toString().equals(PreferencesCheckListFragment.class.toString())){
+        /*if(this.getClass().toString().equals(PreferencesCheckListFragment.class.toString())){
             selectedItemForServer();
+        }*/
+
+        if(guid.equals("5") || guid.equals("8") ||  guid.equals("7")){
+            //savePreferencesData();
+            selectedItemForServer();
+
         }
         /*else if(this.getClass().toString().equals(PreferencesSearchListFragment.class.toString())){
             myAccountAttribute.getAttributesVOs().clear();
@@ -170,12 +183,12 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
 
 
     private void savePreferencesData(){
-        String guid = getSettingGuidSelected();
 
         ConnectionManager.getInstance(getActivity()).putAttributesValues(
                 strId, strType, guid, selectedItem, new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
+
                     }
 
                     @Override
@@ -184,6 +197,7 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
                     }
                 });
     }
+
 
     @Override
     public void onDestroyView() {

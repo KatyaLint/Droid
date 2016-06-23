@@ -1,4 +1,3 @@
-/*
 package hellogbye.com.hellogbyeandroid.fragments;
 
 
@@ -13,20 +12,15 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 
-*/
-/**
- * Created by arisprung on 8/17/15.
- *//*
-
-public class HelpFeedbackFragment extends HGBAbstractFragment {
+public class NotificationFragment extends HGBAbstractFragment {
 
 
-    public HelpFeedbackFragment() {
+    public NotificationFragment() {
         // Empty constructor required for fragment subclasses
     }
 
     public static Fragment newInstance(int position) {
-        Fragment fragment = new HelpFeedbackFragment();
+        Fragment fragment = new NotificationFragment();
         Bundle args = new Bundle();
         args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
         fragment.setArguments(args);
@@ -36,7 +30,7 @@ public class HelpFeedbackFragment extends HGBAbstractFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_help_layout, container, false);
+        View rootView = inflater.inflate(R.layout.notification_layout, container, false);
         int i = getArguments().getInt(HGBConstants.ARG_NAV_NUMBER);
 
         String strFrag = ToolBarNavEnum.getNavNameByPosition(i);
@@ -47,4 +41,4 @@ public class HelpFeedbackFragment extends HGBAbstractFragment {
         getActivity().setTitle(strFrag);
         return rootView;
     }
-}*/
+}

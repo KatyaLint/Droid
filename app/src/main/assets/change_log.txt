@@ -124,6 +124,12 @@ Code changing:
     HEL-964 - app crashed when going out of a preference without saving
     HEL-966 - running query crashes app 1.5.3
     HEL-968 - pending request app crashes 1.5.3
+    HEL-987 - Can't exit app.
+    HEL-975 - My Account - Travel Profiles
+    HEL-976 - Preference Settings - Flight - flight stops preference
+    HEL-962 - Preference settings - Flight preferences - Stop number preferences
+    HEL-699 - app crashes
 
     Code changing:
     --------------
+    - Empty Notification screen

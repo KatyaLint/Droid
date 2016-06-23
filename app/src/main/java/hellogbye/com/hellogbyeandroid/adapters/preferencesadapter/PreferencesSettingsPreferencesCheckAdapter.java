@@ -29,14 +29,11 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  */
 public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<AccountDefaultSettingsVO> implements Swappable, SettingsAdapter {
 
-    private Context context;
-    private List<AccountDefaultSettingsVO> items;
     private boolean isEditMode = false;
     private PreferenceSettingsFragment.ListLineClicked listLineClicked;
+
     public PreferencesSettingsPreferencesCheckAdapter(Context context, List<AccountDefaultSettingsVO> accountAttributes) {
         super(accountAttributes);
-        //  items = accountAttributes;
-        this.context = context;
     }
 
 
@@ -87,6 +84,7 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
             v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.settings_item_check_layout, null);
         }
+
         AccountDefaultSettingsVO attribute = this.getItem(position);//items.get(position);
         if(attribute != null){
             FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_check_name);

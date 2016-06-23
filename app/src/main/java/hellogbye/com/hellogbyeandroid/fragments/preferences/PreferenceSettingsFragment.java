@@ -152,6 +152,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
                 mDynamicListView.setAdapter((PreferencesSettingsRadioButtonAdapter)mAdapter);
                 selectedRadioPreference();
             }else{
+
                 mAdapter = new PreferencesSettingsPreferencesCheckAdapter(getActivity(), accountDefaultSettings);
                 mDynamicListView.setAdapter((PreferencesSettingsPreferencesCheckAdapter)mAdapter);
             }

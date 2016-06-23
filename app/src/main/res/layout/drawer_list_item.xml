@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/DP10"
+    android:padding="@dimen/DP10"
     android:background="@color/white"
     android:orientation="horizontal" >
 
@@ -11,7 +11,7 @@
         android:id="@+id/nav_item_selected_image"
         android:layout_width="wrap_content"
         android:background="@drawable/selected_item"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
     <ImageView
         android:id="@+id/nav_item_view_image"
@@ -26,7 +26,7 @@
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="@dimen/SP18"
         android:textColor="@color/hgb_nav_font_unselected"
         app:fontName="dinnextltpro_regular.otf" />
 

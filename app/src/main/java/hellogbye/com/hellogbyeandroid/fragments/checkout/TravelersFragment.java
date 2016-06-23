@@ -128,17 +128,6 @@ public class TravelersFragment extends HGBAbstractFragment {
                     mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), mGroups, children);
                     mRecyclerView.setAdapter(mAdapter);
                 }
-
-
-//                mAdapter.SetOnItemClickListener(new TravlerAdapter.OnItemClickListener() {
-//
-//                    @Override
-//                    public void onItemClick(View v, int position) {
-//                        Bundle args = new Bundle();
-//                        args.putInt("user_json_position", position);
-//                        getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS_DETAILS.getNavNumber(), args);
-//                    }
-//                });
             }
 
             @Override
@@ -362,7 +351,7 @@ public class TravelersFragment extends HGBAbstractFragment {
                 public void onClick(View view) {
                     Bundle args = new Bundle();
                     args.putInt(HGBConstants.BUNDLE_USER_JSON_POSITION, groupPosition);
-                    getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS_DETAILS.getNavNumber(), args);
+                    getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS_DETAILS.getNavNumber(), args);
                 }
             });
 

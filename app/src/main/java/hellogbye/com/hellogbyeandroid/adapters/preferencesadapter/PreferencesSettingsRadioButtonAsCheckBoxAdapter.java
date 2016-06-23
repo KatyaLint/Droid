@@ -9,7 +9,6 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
@@ -22,23 +21,24 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
 /**
  * Created by nyawka on 11/25/15.
  */
-public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountDefaultSettingsVO> implements Swappable, SettingsAdapter {
+public class PreferencesSettingsRadioButtonAsCheckBoxAdapter extends ArrayAdapter<SettingsAttributesVO>  implements Swappable, SettingsAdapter
+{
 
 
     private boolean isEditMode = false;
     private PreferenceSettingsFragment.ListLineClicked listLineClicked;
     private PreferenceSettingsFragment.ListRadioButtonClicked listRadioButtonClickedClicked;
-    private int selectedPosition = -1;
-    private String selectedPreferebcesID="";
+    public int selectedPosition = -1;
+    public String selectedPreferebcesID="";
 
-
-    public PreferencesSettingsRadioButtonAdapter(Context context, List<AccountDefaultSettingsVO> accountAttributes) {
+    public PreferencesSettingsRadioButtonAsCheckBoxAdapter(Context context, List<SettingsAttributesVO> accountAttributes) {
         super(accountAttributes);
 
     }
@@ -67,16 +67,7 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountD
         this.isEditMode = isEditMode;
     }
 
-    @Override
-    public boolean addAll(@NonNull Collection<? extends AccountDefaultSettingsVO> collection) {
-        // this.items = (List<SettingsValuesVO>) collection;
-        return super.addAll(collection);
-    }
 
-    @Override
-    public boolean add(@NonNull AccountDefaultSettingsVO object) {
-        return super.add(object);
-    }
 
     @Override
     public long getItemId(final int position) {
@@ -90,12 +81,12 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountD
 
         if (v == null) {
             v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.settings_item_radio_button_layout, null);
+                    .inflate(R.layout.settings_item_radio_check_button_layout, null);
         }
-        AccountDefaultSettingsVO attribute = this.getItem(position);//items.get(position);
+        SettingsAttributesVO attribute = this.getItem(position);//items.get(position);
         if(attribute != null){
             FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_radio_name);
-            settings_flight_title.setText(attribute.getmProfileName());
+            settings_flight_title.setText(attribute.getmDescription());
           //  settings_flight_title.setTag(attribute.getmId());
 
             RelativeLayout settings_radio_button_ll = (RelativeLayout)v.findViewById(R.id.settings_radio_button_ll);
@@ -114,7 +105,7 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountD
             //  settings_text_drag.setText();
             int currentPosition = position+1;
 //            settings_text_drag.setText(""+correntPosition);
-            this.getItem(position).setRank("" + currentPosition);
+         //   this.getItem(position).setRank("" + currentPosition);
 
 
             RadioButton r = (RadioButton)v.findViewById(R.id.setting_radio_image);
@@ -124,9 +115,7 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountD
             if(selectedPreferebcesID.equals(attribute.getmId())){
                 selectedPosition = position;
                 selectedPreferebcesID = "";
-
             }
-
 
 
             r.setChecked(position == selectedPosition);

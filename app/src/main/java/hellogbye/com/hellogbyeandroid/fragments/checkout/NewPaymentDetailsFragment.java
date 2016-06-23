@@ -37,7 +37,6 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -211,7 +210,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 Bundle args = new Bundle();
                 Gson gson = new Gson();
                 args.putString(HGBConstants.BUNDLE_PARENT_LIST, gson.toJson(groups));
-                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS.getNavNumber(), args);
+                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS.getNavNumber(), args);
             }
 
             @Override

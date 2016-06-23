@@ -17,6 +17,7 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsPreferencesCheckAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsRadioButtonAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSettingsMainClass;
@@ -36,7 +37,7 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
 
     private DynamicListView mRecyclerView;
     private List<AccountDefaultSettingsVO> accountDefaultSettings;
-    private PreferencesSettingsPreferencesCheckAdapter preferenceSettingsListAdapter;
+    private PreferencesSettingsRadioButtonAdapter preferenceSettingsListAdapter;
     private View promptsView;
     private String accountAttributeCheckedID;
     private String accountAttributeCheckedFirstID;
@@ -97,37 +98,27 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
         }else{
             settings_remove_email_address.setVisibility(View.GONE);
         }
-      /*  else{
-            System.out.println("Kate remove");
-            settings_remove_email_address.setVisibility(View.GONE);
-            settings_remove_email_address.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ConnectionManager.getInstance(getActivity()).deleteUserProfileAccountsWithEmail(personalEmail,new ConnectionManager.ServerRequestListener() {
-                        @Override
-                        public void onSuccess(Object data) {
-                            System.out.println("Kate onSuccess = " + personalEmail);
-
-                        }
-
-                        @Override
-                        public void onError(Object data) {
-                            ErrorMessage(data);
-                            System.out.println("Kate onError");
-                        }
-                    });
-                }
-            });
-        }*/
 
 
 
         mRecyclerView = (DynamicListView) rootView.findViewById(R.id.settings_choose_profile);
 
-        preferenceSettingsListAdapter = new PreferencesSettingsPreferencesCheckAdapter(getActivity(), accountDefaultSettings);
-        preferenceSettingsListAdapter.setEditMode(true);
+        preferenceSettingsListAdapter = new PreferencesSettingsRadioButtonAdapter(getActivity(), accountDefaultSettings);
+        preferenceSettingsListAdapter.setSelectedRadioButtonListener(new PreferenceSettingsFragment.ListRadioButtonClicked(){
+
+            @Override
+            public void clickedItem(int selectedPosition) {
+                AccountDefaultSettingsVO selected = accountDefaultSettings.get(selectedPosition);
+                selected.setChecked(true);
+
+                //radioButtonSelected = selectedPosition;
+            }
+        });
+
+        //preferenceSettingsListAdapter = new PreferencesSettingsPreferencesCheckAdapter(getActivity(), accountDefaultSettings);
+       // preferenceSettingsListAdapter.setEditMode(true);
         mRecyclerView.setAdapter(preferenceSettingsListAdapter);
-        preferenceSettingsListAdapter.setClickedLineCB(listLineClicked);
+     //   preferenceSettingsListAdapter.setClickedLineCB(listLineClicked);
 
         LayoutInflater li = LayoutInflater.from(getActivity());
         promptsView = li.inflate(R.layout.settings_save_popup, null);

@@ -81,17 +81,9 @@
         <item name="android:button">@drawable/custom_radio_button</item>
     </style>
 
-    android:id="@+id/payment_submit_disable"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/remmember_me_checkbox"
-    android:background="@drawable/red_button_no_radius"
-    android:gravity="center"
-    android:padding="@dimen/DP16"
-    android:text="Next"
-    android:textColor="@color/white"
-    android:textSize="@dimen/SP16"
-
+    <style name="MyRadioCheckButtonStyle" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/custom_radio_check_button</item>
+    </style>
 
     <style name="RedCheckoutCustomButtonStyle" parent="CustomButtonTextStyle">
         <item name="android:textColor">@android:color/white</item>
