@@ -357,10 +357,13 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         creditCardItem.setExpyear(mCardExpiryYear.getText().toString());
 
         String last4 = mCardNumber.getText().toString();
-        last4 = last4.substring(last4.length() - 4, last4.length());
+        last4 = last4.substring(last4.length() - 5, last4.length());
+
+        last4= last4.replaceAll("\\s+","");
         creditCardItem.setLast4(last4);
         creditCardItem.setCvv(mCardCCV.getText().toString());
-        creditCardItem.setCardNumber(mCardNumber.getText().toString());
+       final String strCardNumber= mCardNumber.getText().toString().replaceAll("\\s+","");
+        creditCardItem.setCardNumber(strCardNumber);
 
       //  if(verifyValidCCNumber(creditCardItem))
         if(true)
@@ -402,6 +405,19 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
                                     json.put("Last4", strLast4);
                                     json.put("NickName", strNickName);
                                     json.put("Token", strToken);
+                                    json.put("CardNumber", strCardNumber);
+                                    json.put("ExpirationMonth", creditCardItem.getExpmonth());
+                                    json.put("ExpirationYear", creditCardItem.getExpyear());
+                                    json.put("CardType", creditCardItem.getCardtypeid());
+                                    json.put("FirstName", creditCardItem.getBuyerfirstname());
+                                    json.put("LastName", creditCardItem.getBuyerlastname());
+                                    json.put("StreetAddress", creditCardItem.getBuyeraddress());
+                                    json.put("ZipCode", creditCardItem.getBuyerzip());
+                                    json.put("BillingCity",mCardCity.getText().toString());
+                                    json.put("BillingCountry", mCardCountry.getText().toString());
+                                    json.put("BillingSuite", "");
+                                    json.put("BillingProvince", mCardProvince.getText().toString());
+
 
 
                                     ConnectionManager.getInstance(getActivity()).AddCreditCardHelloGbye(json, new ConnectionManager.ServerRequestListener() {
