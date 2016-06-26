@@ -22,7 +22,7 @@
         android:id="@+id/hazard_text"
         android:layout_width="wrap_content"
         android:background="@color/white"
-        android:layout_height="@dimen/DP450"
+        android:layout_height="@dimen/DP340"
         android:layout_above="@+id/confirm_read"
         android:layout_below="@+id/hazard_header"
         android:lineSpacingExtra="@dimen/SP10"
