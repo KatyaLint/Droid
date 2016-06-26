@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -102,6 +103,7 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.choose_cc_layout, container, false);
         return rootView;
     }
@@ -110,7 +112,7 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         mProceed = (FontTextView) view.findViewById(R.id.cc_proceed);
         mProceedDisable = (FontTextView) view.findViewById(R.id.cc_proceed_disable);
 
@@ -429,4 +431,9 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
 
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+    }
 }
