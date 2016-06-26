@@ -44,6 +44,8 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
+import hellogbye.com.hellogbyeandroid.utilities.HGBTranslate;
+import hellogbye.com.hellogbyeandroid.utilities.HGBTranslateInterface;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -66,7 +68,7 @@ public class CNCFragment extends HGBAbstractFragment {
     private String[] locationArr;
     private Button cnc_fragment_trip_settings;
     private static int SPLASH_TIME_OUT = 5000;
-  //  private CostumeToolBar mToolbar;
+    //  private CostumeToolBar mToolbar;
 
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
     private ImageButton toolbar_go_to_iternerary;
@@ -96,12 +98,12 @@ public class CNCFragment extends HGBAbstractFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       // getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        // getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         account_settings = getResources().getStringArray(R.array.tutorial_arr);
 
         View rootView = inflater.inflate(R.layout.cnc_fragment_layout, container, false);
-     //   mToolbar = (CostumeToolBar)rootView.findViewById(R.id.toolbar_cnc);
+        //   mToolbar = (CostumeToolBar)rootView.findViewById(R.id.toolbar_cnc);
 
         mHGBPrefrenceManager = HGBPreferencesManager.getInstance(getActivity().getApplicationContext());
 
@@ -109,7 +111,7 @@ public class CNCFragment extends HGBAbstractFragment {
         initList();
 
 
-    //    updateToolBarView();
+        //    updateToolBarView();
 
 
         getAccountsProfiles();
@@ -365,10 +367,10 @@ public class CNCFragment extends HGBAbstractFragment {
         if ( (strCNCList.equals("") || strCNCList.equals("null")) && getActivityInterface().getCNCItems()== null ) {
             Resources res = getResources();
             String userName = "";
-           if( getActivityInterface().getCurrentUser() != null){
+            if( getActivityInterface().getCurrentUser() != null){
 
-               userName = getActivityInterface().getCurrentUser().getFirstname();
-           }
+                userName = getActivityInterface().getCurrentUser().getFirstname();
+            }
 
             String text = String.format(res.getString(R.string.default_cnc_message),userName );
 
@@ -459,7 +461,7 @@ public class CNCFragment extends HGBAbstractFragment {
     }
 
 
-    public void handleMyMessage(final String strMessage) {
+    public void handleMyMessage( final String strMessage) {
         stopTextTutorial();
         mTextTutoralHeader.setVisibility(View.GONE);
         mTextTutoralBody.setVisibility(View.GONE);
@@ -467,6 +469,31 @@ public class CNCFragment extends HGBAbstractFragment {
         addWaitingItem();
         mAdapter.notifyDataSetChanged();
         resetMessageEditText();
+     //   enterCNCMessage(strMessage);
+
+        HGBTranslate.translateQueary(strMessage, new HGBTranslateInterface() {
+            @Override
+            public void onSuccess(String message) {
+                enterCNCMessage(message);
+            }
+
+            @Override
+            public void onError(String error) {
+                enterCNCMessage(strMessage);
+            }
+        });
+
+
+
+
+
+
+
+    }
+
+    private void enterCNCMessage(final String strMessage) {
+
+
 
         if(!clearCNCscreen) {
             sendCNCMessageToServer(strMessage);
@@ -558,8 +585,6 @@ public class CNCFragment extends HGBAbstractFragment {
 
             });
         }
-
-
     }
 
 
@@ -650,21 +675,21 @@ public class CNCFragment extends HGBAbstractFragment {
     private void sendVOForIternarary(ArrayList<AirportSendValuesVO> airportSendValuesVO){
 
         ConnectionManager.getInstance(getActivity()).ItineraryCNCSearchPost(airportSendValuesVO,  new ConnectionManager.ServerRequestListener() {
-                @Override
-                public void onSuccess(Object data) {
+            @Override
+            public void onSuccess(Object data) {
 
-                    UserTravelMainVO userTraveler = (UserTravelMainVO) data;
-                    handleHGBMessagesViews(userTraveler);
-                    getActivityInterface().setTravelOrder(userTraveler);
+                UserTravelMainVO userTraveler = (UserTravelMainVO) data;
+                handleHGBMessagesViews(userTraveler);
+                getActivityInterface().setTravelOrder(userTraveler);
 
-                }
-                @Override
-                public void onError(Object data) {
-                    ErrorMessage(data);
-                    handleHGBMessage(getResources().getString(R.string.cnc_error));
-                    airportSendValuesVOs.clear();
-                }
-            });
+            }
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+                handleHGBMessage(getResources().getString(R.string.cnc_error));
+                airportSendValuesVOs.clear();
+            }
+        });
     }
 
 
