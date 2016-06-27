@@ -8,7 +8,7 @@
     android:layout_height="wrap_content">
 
 
-    <EditText
+   <!-- <EditText
         android:id="@+id/grid_hotel_guid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" android:visibility="gone"/>
@@ -84,14 +84,14 @@
                 android:text="Cape Town"/>
 
 
-            <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
-                <!--android:id="@+id/grid_hotel_price"-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:textSize="@dimen/SP10"-->
-                <!--android:textColor="@color/red_pink"-->
-                <!--app:fontName="dinnextltpro_medium.otf"-->
-                <!--android:text="$100000"/>-->
+            &lt;!&ndash;<hellogbye.com.hellogbyeandroid.views.FontTextView&ndash;&gt;
+                &lt;!&ndash;android:id="@+id/grid_hotel_price"&ndash;&gt;
+                &lt;!&ndash;android:layout_width="fill_parent"&ndash;&gt;
+                &lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;
+                &lt;!&ndash;android:textSize="@dimen/SP10"&ndash;&gt;
+                &lt;!&ndash;android:textColor="@color/red_pink"&ndash;&gt;
+                &lt;!&ndash;app:fontName="dinnextltpro_medium.otf"&ndash;&gt;
+                &lt;!&ndash;android:text="$100000"/>&ndash;&gt;
 
 
             <LinearLayout
@@ -122,6 +122,6 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 </LinearLayout>

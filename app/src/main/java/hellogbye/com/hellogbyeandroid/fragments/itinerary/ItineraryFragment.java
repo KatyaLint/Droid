@@ -2,10 +2,13 @@ package hellogbye.com.hellogbyeandroid.fragments.itinerary;
 
 import android.app.Activity;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
@@ -41,6 +45,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class ItineraryFragment extends HGBAbstractFragment {
@@ -48,8 +53,9 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
     private UserTravelMainVO userOrder;
     private Activity activity;
-    private int iScreenSize;
+    private float iScreenSize;
     private Button grid_make_payment;
+    private int cellHieght;
 
     public ItineraryFragment() {
         // Empty constructor required for fragment subclasses
@@ -97,7 +103,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
     LinearLayout passengersNames = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.passangers_names_ll);
     Typeface textFont = Typeface.createFromAsset(activity.getAssets(), "fonts/" + "dinnextltpro_regular.otf");
 
-    LayoutParams params = new LayoutParams((int) getResources().getDimension(R.dimen.DP150),LayoutParams.WRAP_CONTENT);
+    LayoutParams params = new LayoutParams((int) iScreenSize,LayoutParams.WRAP_CONTENT);
     params.gravity = Gravity.CENTER_VERTICAL;
     ArrayList<PassengersVO> passengers = user.getPassengerses();
     for (PassengersVO passenger:passengers){
@@ -163,7 +169,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
                 departure = HGBUtility.parseDateToddMMyyyyForPayment(departure); //parse return 23 is 2 different scenario need time not just date
            //      HGBUtility.parseDateToddMMyyyyMyTrip(departure);
-                 if(node.getmType().equals("hotel")){
+                 if(node.getmType().equals(NodeTypeEnum.HOTEL.getType())){
                      String time = HGBUtility.addDayHourToDate(departure);
                      node.setDateOfCell(time);
                  }else {
@@ -208,9 +214,12 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
 
         LinearLayout MainLinearLayout = new LinearLayout(activity);
-        LayoutParams LLParams = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
+        LayoutParams LLParams = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.MATCH_PARENT);
 
-        LayoutParams MarginLLParams = new LayoutParams((int) getResources().getDimension(R.dimen.DP160),LayoutParams.MATCH_PARENT);
+//        LayoutParams MarginLLParams = new LayoutParams((int) getResources().getDimension(R.dimen.DP250),LayoutParams.MATCH_PARENT);
+
+        LayoutParams MarginLLParams = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
+
 
         // MainLinearLayout.setLayoutParams(LLParams);
         MainLinearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -227,6 +236,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
         String priviouseDate="";
         String currentDate="";
+        int counter =0 ;
 
         for(String date : list) { //run for dates insteadof for users
             //new horizontal
@@ -262,22 +272,29 @@ public class ItineraryFragment extends HGBAbstractFragment {
                         view.setTag(NodeTypeEnum.EMPTY.getType());
                     } else if (NodeTypeEnum.FLIGHT.getType().equals(node.getmType())) {
                         //create flight
-                        view = flightLayout(node);
+                        view = flightLayout(node, counter);
                         view.setTag(NodeTypeEnum.FLIGHT.getType());
                     } else {
                         //create hotel
-                        view = hotelLayout(node);
+                        view = hotelLayout(node,counter);
                         view.setTag(NodeTypeEnum.HOTEL.getType());
                     }
                     view.setOnClickListener(nodeClickListener);
                     //   view.setLayoutParams(nodeParams);
 
                     NodeLinearLayout.addView(view); //add node view
+
+                    view.setPadding(
+                            (int) getResources().getDimension(R.dimen.DP6),
+                            (int) getResources().getDimension(R.dimen.DP6),
+                            (int) getResources().getDimension(R.dimen.DP6),
+                            (int) getResources().getDimension(R.dimen.DP6));
+
                 }
                 DatesLinearLayout.addView(NodeLinearLayout);
 
             }
-
+            counter ++;
 
             if(!priviouseDate.equals(currentDate)){
                 View dateView = dateLayout(currentDate);
@@ -417,13 +434,19 @@ public class ItineraryFragment extends HGBAbstractFragment {
      * @param node
      * @return view of flight
      */
-    private View flightLayout(NodesVO node){
+    private View flightLayout(NodesVO node, int counter){
 
         View child = activity.getLayoutInflater().inflate(R.layout.new_grid_view_inner_flight_item, null);
 
         TextView grid_flight_destination_from = (TextView)child.findViewById(R.id.grid_flight_destination_from);
         grid_flight_destination_from.setText(node.getmOriginCityName() + " to " + node.getmDestinationCityName());
 
+        ImageView flight_image = (ImageView)child.findViewById(R.id.flight_image);
+        if(counter == 0){
+            flight_image.setImageResource(R.drawable.dlight_b_icon);
+        }else{
+            flight_image.setImageResource(R.drawable.flight_g_icon);
+        }
         //accountID
         grid_flight_destination_from.setTag(node.getAccountID());
 
@@ -448,12 +471,22 @@ public class ItineraryFragment extends HGBAbstractFragment {
         grid_flight_time.setText(node.getmTravelTime());
 
 
+        LayoutParams outerLayoutParams = new LayoutParams((int)iScreenSize,cellHieght);
+        RelativeLayout innerWhiteFlightLayout = (RelativeLayout)child.findViewById(R.id.innerWhiteFlightLayout);
+        innerWhiteFlightLayout.setLayoutParams(outerLayoutParams);
+
         LinearLayout outer = new LinearLayout(activity);
+
+      //  outer.setLayoutParams(outerLayoutParams);
+
         outer.setOrientation(LinearLayout.VERTICAL);
         outer.addView(child);
 
         return outer;
     }
+
+
+
 
     /**
      * Create empty layout, for dates when nothing is happening
@@ -461,6 +494,12 @@ public class ItineraryFragment extends HGBAbstractFragment {
      */
     private View emptyLayout() {
         View child = activity.getLayoutInflater().inflate(R.layout.new_grid_view_inner_empty_item, null);
+
+
+        LayoutParams outerLayoutParams = new LayoutParams((int)iScreenSize,cellHieght);
+        LinearLayout innerWhiteLayout = (LinearLayout)child.findViewById(R.id.white_squer_ll);
+        innerWhiteLayout.setLayoutParams(outerLayoutParams);
+
         LinearLayout outer = new LinearLayout(activity);
         outer.setOrientation(LinearLayout.VERTICAL);
         outer.addView(child);
@@ -473,9 +512,14 @@ public class ItineraryFragment extends HGBAbstractFragment {
      * @param node
      * @return hotel layout
      */
-    private View hotelLayout(NodesVO node){
+    private View hotelLayout(NodesVO node,int counter){
         View child = activity.getLayoutInflater().inflate(R.layout.new_grid_view_inner_hotel_item, null);
-
+        ImageView hotel_bad_image = (ImageView)child.findViewById(R.id.hotel_bad_image);
+        if(counter == 0){
+            hotel_bad_image.setImageResource(R.drawable.group_2);
+        }else{
+            hotel_bad_image.setImageResource(R.drawable.group_2_copy);
+        }
         TextView grid_hotel_name = (TextView)child.findViewById(R.id.grid_hotel_name);
         grid_hotel_name.setText(node.getmHotelName());
 
@@ -495,8 +539,15 @@ public class ItineraryFragment extends HGBAbstractFragment {
         //type
         grid_hotel_price.setTag(node.getmType());
 
+        LayoutParams outerLayoutParams = new LayoutParams((int)iScreenSize,cellHieght);
+        RelativeLayout innerWhiteLayout = (RelativeLayout)child.findViewById(R.id.innerWhiteHotelLayout);
+        innerWhiteLayout.setLayoutParams(outerLayoutParams);
+
+
 
         LinearLayout outer = new LinearLayout(activity);
+
+       // outer.setLayoutParams(outerLayoutParams);
         outer.setOrientation(LinearLayout.VERTICAL);
         outer.addView(child);
 
@@ -567,8 +618,8 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
         LinearLayout itineraryLayout = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.scroll_view_ll);
         LinearLayout cnc_empty_view = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.cnc_empty_view);
-    //    UserTravelMainVO user = parseFlight();
-     //   getActivityInterface().setTravelOrder(user);
+      //  UserTravelMainVO user = parseFlight();
+     //  getActivityInterface().setTravelOrder(user);
         UserTravelMainVO  user = getActivityInterface().getTravelOrder();
         userOrder = user;
 
@@ -594,14 +645,18 @@ public class ItineraryFragment extends HGBAbstractFragment {
         Display display = activity.getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        iScreenSize = size.x - (int)activity.getResources().getDimension(R.dimen.DP34);
+        float dp =  HGBUtility.convertPixelsToDp(size.x,activity);//convertPixelsToDp(size.x, activity);
+        iScreenSize = dp + activity.getResources().getDimension(R.dimen.DP50);
     }
+
+
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        cellHieght = (int) getResources().getDimension(R.dimen.DP120);
         activity = getActivity();
         View rootView = inflater.inflate(R.layout.new_grid_main_table, container, false);
 
@@ -617,6 +672,8 @@ public class ItineraryFragment extends HGBAbstractFragment {
         createItinenaryView(rootView);
 
         getActivityInterface().setAlternativeFlights(null);
+
+
 
         return rootView;
     }

@@ -1061,7 +1061,12 @@ public static String formattDateToStringMonthDate(String dateInString) {
     }
 
 
-
+    public static float convertPixelsToDp(float px, Context context){
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        float dp = px / ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+        return dp;
+    }
 
   public static void showAlertPopUp(final Activity activity, final EditText input, final View popupView ,
                                     final String popupTitle, String positiveButton, final PopUpAlertStringCB

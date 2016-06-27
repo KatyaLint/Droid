@@ -3,22 +3,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/grid_main_hotel_square_ll"
-    android:layout_width="@dimen/DP180"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/DP10" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
 
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="@dimen/DP140"
-        android:layout_height="@dimen/DP90"
-        android:background="@drawable/rounded_corner_white"
-        android:padding="@dimen/DP4"
-        android:layout_marginTop="@dimen/DP6"
+    <RelativeLayout
+        android:id="@+id/innerWhiteHotelLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
         android:layout_gravity="center"
-        >
+        android:padding="@dimen/DP6"
+        android:layout_margin="@dimen/DP6"
+        android:orientation="vertical" >
+
+        <!--android:background="@drawable/rounded_corner_white"-->
+
         <!--android:layout_width="@dimen/DP150"-->
         <!--android:layout_height="@dimen/DP150"-->
 
@@ -32,7 +33,16 @@
         android:textColor="@color/dark_teal"
         app:fontName="dinnextltpro_medium.otf" />
 
+
+        <ImageView
+            android:id="@+id/hotel_bad_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/group_2"
+            android:layout_alignParentRight="true"/>
+
     <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_below="@+id/grid_hotel_name"
         android:id="@+id/grid_hotel_place"
         style="@style/GridTextStyle"
         android:layout_width="match_parent"
@@ -42,6 +52,7 @@
         app:fontName="dinnextltpro_medium.otf" />
 
     <LinearLayout
+        android:layout_below="@+id/grid_hotel_place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -50,7 +61,7 @@
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/grid_hotel_price"
             style="@style/GridTextStyle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="$100000"
             android:textColor="@color/red_pink"
@@ -66,7 +77,7 @@
             app:fontName="dinnextltpro_medium.otf" />
 
     </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>
 
 

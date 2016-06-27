@@ -418,9 +418,7 @@ public class CNCFragment extends HGBAbstractFragment {
             @Override
             public void onClick(View v) {
                 String strMessage = mEditText.getText().toString();
-
                 handleMyMessage(strMessage);
-
             }
         });
 

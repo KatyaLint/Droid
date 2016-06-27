@@ -9,7 +9,7 @@
     android:layout_height="wrap_content">
 
 
-    <EditText
+<!--    <EditText
         android:id="@+id/nodeGuIdNumberFlight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" android:visibility="gone"/>
@@ -127,6 +127,6 @@
             android:text="14:32"/>
 
     </LinearLayout>
-    </LinearLayout>
+    </LinearLayout>-->
 
 </LinearLayout>

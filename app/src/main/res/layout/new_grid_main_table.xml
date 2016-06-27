@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout     android:layout_width="match_parent"
-    android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 <HorizontalScrollView
 android:layout_above="@+id/grid_make_payment"
     android:id="@+id/table_scroll"
@@ -16,14 +19,15 @@ android:layout_above="@+id/grid_make_payment"
 
 
 </HorizontalScrollView>
-<Button
+<hellogbye.com.hellogbyeandroid.views.FontButtonView
 android:id="@+id/grid_make_payment"
-android:layout_weight="0.1"
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
 android:background="@color/red_button_color"
 android:textColor="@color/white"
 android:gravity="center"
-android:text="@string/itinerary_make_payment"
-    android:layout_alignParentBottom="true"/>
+    app:fontName="dinnextltpro_medium.otf"
+android:textAllCaps="false"
+android:text="@string/continue_to_checkout"
+     android:layout_alignParentBottom="true"/>
 </RelativeLayout>

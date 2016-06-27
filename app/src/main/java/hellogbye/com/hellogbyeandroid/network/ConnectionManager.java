@@ -491,7 +491,6 @@ public class ConnectionManager {
                 jsonObjectMain.put("latitude", airportSendValuesVO.getLatitude());
                 jsonObjectMain.put("longitude", airportSendValuesVO.getLongitude());
 
-
                 jsonObjectMain.put("token", jsonArray);
 
                 JSONObject jsonObjectSecond = new JSONObject();

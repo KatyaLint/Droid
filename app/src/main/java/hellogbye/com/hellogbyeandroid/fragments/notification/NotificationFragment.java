@@ -1,5 +1,4 @@
-package hellogbye.com.hellogbyeandroid.fragments;
-
+package hellogbye.com.hellogbyeandroid.fragments.notification;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 

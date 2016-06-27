@@ -31,7 +31,7 @@
 
 
     <style name="GridTextStyle">
-        <item name="android:textSize">@dimen/SP12</item>
+        <item name="android:textSize">@dimen/SP16</item>
         <!--<item name="android:paddingLeft">@dimen/DP4</item>-->
         <item name="android:maxLines">1</item>
     </style>

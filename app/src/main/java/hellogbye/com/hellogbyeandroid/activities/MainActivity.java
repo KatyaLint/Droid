@@ -38,7 +38,7 @@ import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
 
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
-import hellogbye.com.hellogbyeandroid.fragments.NotificationFragment;
+
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightsDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.AddCreditCardFragment;
@@ -55,6 +55,7 @@ import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionTabsWi
 import hellogbye.com.hellogbyeandroid.fragments.freeuser.FreeUserFragment;
 import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsTabsView;
+import hellogbye.com.hellogbyeandroid.fragments.notification.NotificationFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsRadioCheckFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesCheckListFragment;
@@ -330,7 +331,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         tool_bar_profile_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Bundle args = new Bundle();
                 args.putString("edit_mode", "true");
                 goToFragment(ToolBarNavEnum.PREFERENCE.getNavNumber(), args);
@@ -345,14 +345,16 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             @Override
             public void onClick(View v) {
 
+               // goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
 
-          //      goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
 
                 if(hgbSaveDataClass.getTravelOrder() == null){
                     toolbar_go_to_iternerary.setEnabled(false);
                 }else {
                     goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
                 }
+
+
             }
         });
 
