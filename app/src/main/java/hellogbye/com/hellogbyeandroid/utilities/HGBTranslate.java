@@ -32,35 +32,44 @@ public class HGBTranslate {
                     JSONArray array1 = array.getJSONArray(0);
                     JSONObject langJson = array1.getJSONObject(0);
                     String strLang = langJson.getString("language");
-                    HGBJsonRequest req2 = new HGBJsonRequest(Request.Method.GET, "https://www.googleapis.com/language/translate/v2?key=AIzaSyANMrd66GHfMu43HBJMAxvxSyB4W5rTk-E&q=" + strQuery + "&source=" + strLang + "&target=en",
-                            new JSONObject(), new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
 
-                            try{
-                                JSONObject jsonObject = new JSONObject(response);
-                                JSONObject json1 = jsonObject.getJSONObject("data");
-                                JSONArray array = json1.getJSONArray("translations");
-                                JSONObject array1 = array.getJSONObject(0);
-                                String strText = array1.getString("translatedText");
-                                if(tranlsateinterface != null){
-                                    tranlsateinterface.onSuccess(strText);
+                    if("en".equalsIgnoreCase(strLang)){
+                        if(tranlsateinterface != null){
+                             String strQueryResult = strQuery.replaceAll("%20"," " );
+                            tranlsateinterface.onSuccess(strQueryResult);
+                        }
+                    }else{
+                        HGBJsonRequest req2 = new HGBJsonRequest(Request.Method.GET, "https://www.googleapis.com/language/translate/v2?key=AIzaSyANMrd66GHfMu43HBJMAxvxSyB4W5rTk-E&q=" + strQuery + "&source=" + strLang + "&target=en",
+                                new JSONObject(), new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try{
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    JSONObject json1 = jsonObject.getJSONObject("data");
+                                    JSONArray array = json1.getJSONArray("translations");
+                                    JSONObject array1 = array.getJSONObject(0);
+                                    String strText = array1.getString("translatedText");
+                                    if(tranlsateinterface != null){
+                                        tranlsateinterface.onSuccess(strText);
+                                    }
+                                }catch (Exception e){
+                                    e.printStackTrace();
                                 }
-                            }catch (Exception e){
-                                e.printStackTrace();
+
+
+
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                error.printStackTrace();
+                                tranlsateinterface.onError(error.toString());
                             }
 
+                        }, false);
+                    }
 
-
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            error.printStackTrace();
-                            tranlsateinterface.onError(error.toString());
-                        }
-
-                    }, false);
 
                 } catch (Exception e) {
                     e.printStackTrace();
