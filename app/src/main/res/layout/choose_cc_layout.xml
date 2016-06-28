@@ -100,9 +100,7 @@
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/cc_proceed"
-
-            style="@style/RedCustomButtonStyle"
-
+            style="@style/RedCheckoutCustomButtonStyle"
             android:text="@string/continue_to_checkout"
             app:fontName="dinnextltpro_medium.otf"
             android:visibility="gone"/>
