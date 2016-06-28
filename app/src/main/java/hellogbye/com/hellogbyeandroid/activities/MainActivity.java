@@ -3,6 +3,9 @@ package hellogbye.com.hellogbyeandroid.activities;
 
 
 import android.app.ActionBar;
+import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -31,6 +34,8 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
 
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
@@ -919,20 +924,25 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public void openVoiceToTextControl() {
         try {
-            boolean recognizerIntent =
-                    SpeechRecognitionUtil.isSpeechAvailable(this);
-            if (recognizerIntent) {
-                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-                //intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
-                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US");
-                intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak Now...");
-                startActivityForResult(intent, 0);
-            } else {
-                Crashlytics.logException(new Exception("Speech not avaibale"));
-                Log.e("MainActvity", "Speeach not avaiable");
-            }
+
+            Intent detailsIntent =  new Intent(RecognizerIntent.ACTION_GET_LANGUAGE_DETAILS);
+            sendOrderedBroadcast(
+                    detailsIntent, null, new LanguageDetailsChecker(), null, Activity.RESULT_OK, null, null);
+
+//            boolean recognizerIntent =
+//                    SpeechRecognitionUtil.isSpeechAvailable(this);
+//            if (recognizerIntent) {
+//                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+//                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+//                        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+//                //intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
+//                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US");
+//                intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak Now...");
+//                startActivityForResult(intent, 0);
+//            } else {
+//                Crashlytics.logException(new Exception("Speech not avaibale"));
+//                Log.e("MainActvity", "Speeach not avaiable");
+//            }
 
         } catch (Exception e) {
             Log.v("Speech", "Could not find any Speech Recognition Actions");
@@ -1076,6 +1086,50 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     public void setOnSavePreferencesButtonClicked(PreferencesSettingsMainClass.saveButtonClicked onSavePreferencesButtonClicked) {
         this.onSavePreferencesButtonClicked = onSavePreferencesButtonClicked;
+    }
+
+    public class LanguageDetailsChecker extends BroadcastReceiver
+    {
+        private List<String> supportedLanguages;
+
+        private String languagePreference;
+
+        @Override
+        public void onReceive(Context context, Intent i)
+        {
+            Bundle results = getResultExtras(true);
+            if (results.containsKey(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE))
+            {
+                languagePreference =
+                        results.getString(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE);
+            }
+            if (results.containsKey(RecognizerIntent.EXTRA_SUPPORTED_LANGUAGES))
+            {
+                supportedLanguages =
+                        results.getStringArrayList(
+                                RecognizerIntent.EXTRA_SUPPORTED_LANGUAGES);
+            }
+            try {
+
+                boolean recognizerIntent =
+                        SpeechRecognitionUtil.isSpeechAvailable(MainActivity.this);
+                if (recognizerIntent) {
+                    Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                    //intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
+                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, languagePreference);
+                    intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak Now...");
+                    startActivityForResult(intent, 0);
+                } else {
+                    Crashlytics.logException(new Exception("Speech not avaibale"));
+                    Log.e("MainActvity", "Speeach not avaiable");
+                }
+
+            } catch (Exception e) {
+                Log.v("Speech", "Could not find any Speech Recognition Actions");
+            }
+        }
     }
 
 
