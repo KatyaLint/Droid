@@ -1,5 +1,7 @@
 package hellogbye.com.hellogbyeandroid.utilities;
 
+import android.content.Context;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -7,6 +9,7 @@ import com.android.volley.VolleyError;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.network.HGBJsonRequest;
 import hellogbye.com.hellogbyeandroid.network.Parser;
 
@@ -15,12 +18,16 @@ import hellogbye.com.hellogbyeandroid.network.Parser;
  */
 public class HGBTranslate {
 
-    public static void translateQueary(String message, final HGBTranslateInterface tranlsateinterface){
+    public static final String MAIN_LANGUAGE = "en";
+
+    public static void translateQueary(Context context,String message, final HGBTranslateInterface tranlsateinterface){
         String strResponce = "";
+
         final String strQuery = message.replaceAll(" ", "%20");
+        final String api= context.getResources().getString(R.string.google_maps_key);//AIzaSyANMrd66GHfMu43HBJMAxvxSyB4W5rTk-E&q=
 
 
-        HGBJsonRequest req1 = new HGBJsonRequest(Request.Method.GET, "https://www.googleapis.com/language/translate/v2/detect?key=AIzaSyANMrd66GHfMu43HBJMAxvxSyB4W5rTk-E&q=" + strQuery,
+        HGBJsonRequest req1 = new HGBJsonRequest(Request.Method.GET, "https://www.googleapis.com/language/translate/v2/detect?key="+api+"&q="+ strQuery,
                 new JSONObject(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -33,13 +40,13 @@ public class HGBTranslate {
                     JSONObject langJson = array1.getJSONObject(0);
                     String strLang = langJson.getString("language");
 
-                    if("en".equalsIgnoreCase(strLang)){
+                    if(MAIN_LANGUAGE.equalsIgnoreCase(strLang)){
                         if(tranlsateinterface != null){
                              String strQueryResult = strQuery.replaceAll("%20"," " );
                             tranlsateinterface.onSuccess(strQueryResult);
                         }
                     }else{
-                        HGBJsonRequest req2 = new HGBJsonRequest(Request.Method.GET, "https://www.googleapis.com/language/translate/v2?key=AIzaSyANMrd66GHfMu43HBJMAxvxSyB4W5rTk-E&q=" + strQuery + "&source=" + strLang + "&target=en",
+                        HGBJsonRequest req2 = new HGBJsonRequest(Request.Method.GET, "https://www.googleapis.com/language/translate/v2?key="+api+"&q=" + strQuery + "&source=" + strLang + "&target="+MAIN_LANGUAGE,
                                 new JSONObject(), new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
@@ -82,6 +89,7 @@ public class HGBTranslate {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                tranlsateinterface.onSuccess(error.getMessage());
             }
 
         }, false);

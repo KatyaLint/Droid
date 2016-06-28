@@ -469,7 +469,7 @@ public class CNCFragment extends HGBAbstractFragment {
         resetMessageEditText();
      //   enterCNCMessage(strMessage);
 
-        HGBTranslate.translateQueary(strMessage, new HGBTranslateInterface() {
+        HGBTranslate.translateQueary(getActivity().getApplicationContext(),strMessage, new HGBTranslateInterface() {
             @Override
             public void onSuccess(String message) {
                 enterCNCMessage(message);
