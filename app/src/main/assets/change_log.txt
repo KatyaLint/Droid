@@ -133,8 +133,6 @@ Code changing:
     HEL-646 - add duration time
     HEL-628 - make airport codes not highlighted
 
-
-
     Code changing:
     --------------
     - Empty Notification screen
