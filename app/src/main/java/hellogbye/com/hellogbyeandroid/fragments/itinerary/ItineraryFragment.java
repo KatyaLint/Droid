@@ -274,6 +274,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
                         //create flight
                         view = flightLayout(node, counter);
                         view.setTag(NodeTypeEnum.FLIGHT.getType());
+
                     } else {
                         //create hotel
                         view = hotelLayout(node,counter);

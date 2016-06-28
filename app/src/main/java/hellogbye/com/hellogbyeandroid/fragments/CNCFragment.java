@@ -474,9 +474,9 @@ public class CNCFragment extends HGBAbstractFragment {
                     ArrayList<ResponsesVO> responses = airportResult.getResponses();
                     maxAirportSize = 0;//responses.size();
                     for (ResponsesVO response : responses) {
-                        if (response.getType().equals("City") || response.getType().equals("AirportCode") ) {
+                   //     if (response.getType().equals("City") || response.getType().equals("AirportCode") || response.getType().equals("AirportName") ) {
                             maxAirportSize = maxAirportSize + 1;
-                        }
+                     //   }
                     }
 
 
@@ -502,7 +502,7 @@ public class CNCFragment extends HGBAbstractFragment {
                             //   boolean isDefaultFound = false;
 
 
-                            if (response.getType().equals("City")) {
+                            if (response.getType().equals("City") || response.getType().equals("AirportName")  ) {
                                 String[] titleArray = new String[results.size()];
                                 for (int j = 0; j < results.size(); j++) {
                                     titleArray[j] = results.get(j).getAirportname();
