@@ -294,34 +294,6 @@ public class HGBUtility {
 
     }
 
-
-
-//    public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels) {
-//        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap
-//                .getHeight(), Bitmap.Config.ARGB_8888);
-//
-//        Canvas canvas = new Canvas(output);
-//
-//        final int color = 0xff424242;
-//        final Paint paint = new Paint();
-//        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-//        final RectF rectF = new RectF(rect);
-//        final float roundPx = pixels;
-//
-//        paint.setAntiAlias(true);
-//        canvas.drawARGB(0, 0, 0, 0);
-//        paint.setColor(color);
-//        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-//
-//        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-//        canvas.drawBitmap(bitmap, rect, rect, paint);
-//
-//        return output;
-//    }
-//
-
-
-
     public static void goToNextFragmentIsAddToBackStack(FragmentManager manager, Fragment fragment, boolean isAddToBackStack, boolean isAddAnimation){
 
         try{
@@ -347,26 +319,6 @@ public class HGBUtility {
 
     }
 
-//    public static void goToNextFragmentIsAddToBackStackWithAnimation(Activity activity, Fragment fragment, boolean isAddToBackStack){
-//
-//        try{
-//            FragmentTransaction transaction = activity.getFragmentManager().beginTransaction();
-//            transaction.replace(R.id.content_frame, fragment, fragment.getClass().toString());
-//            transaction.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_down);
-//            if (isAddToBackStack) {
-//                transaction.addToBackStack(fragment.getClass().toString());
-//
-//                getFragmentStack().push(fragment);
-//            }
-//
-//            transaction.commit();
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            Crashlytics.logException(e);
-//        }
-//
-//    }
-
     public static long dayDifference(String startDay, String endDate){
         Date date1 = getDateFromServer(startDay);
         Date date2 = getDateFromServer(endDate);
@@ -377,7 +329,7 @@ public class HGBUtility {
         return delta;
     }
 
-    public static long getDateDiff(String strDate1, String strDate2)
+  /*  public static long getDateDiff(String strDate1, String strDate2)
     {
 
         Date date1 = getDateFromServer(strDate1);
@@ -389,26 +341,10 @@ public class HGBUtility {
         long delta = (timeTwo - timeOne) / oneDay;
         return delta+1;
 
-    }
-
-
-/*    public static String ConvertMilliSecondsToFormattedDate(String milliSeconds){
-        String dateFormat = "dd-MM-yyyy hh:mm";
-        System.out.println("Kate milliSeconds =" + milliSeconds);
-         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(Long.parseLong(milliSeconds));
-        return simpleDateFormat.format(calendar.getTime());
     }*/
 
 
 
-//    public static void clearAllFragments(Activity activity){
-//        while(getFragmentStack().size() > 1){
-//            FragmentTransaction fragmentTransaction =  activity.getFragmentManager().beginTransaction();
-//            fragmentTransaction.hide(getFragmentStack().pop());
-//        }
-//    }
 
     public static void removeAllFragments(FragmentManager manager){
         Stack<Fragment> fragments = getFragmentStack();
@@ -741,6 +677,25 @@ public class HGBUtility {
         }
         return str;
     }
+
+
+    public static String parseDateToHHmm(String time) {
+
+        String outputPattern = "HH:mm a";
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+        Date date = null;
+        String str = null;
+
+        try {
+            date = getDateFromServer(time);
+            str = outputFormat.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
+
 
     public static String getDateDiffString(String strDate1, String strDate2)
     {
@@ -1481,6 +1436,9 @@ public static String formattDateToStringMonthDate(String dateInString) {
         }
 
     }
+
+
+
 
 }
 

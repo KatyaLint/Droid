@@ -32,6 +32,7 @@ import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.SettingsAdapte
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
@@ -72,10 +73,10 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
                 if(radioButtonSelected != -1) {
                     AccountDefaultSettingsVO selected = accountDefaultSettings.get(radioButtonSelected);
                     String userEmail = getActivityInterface().getCurrentUser().getEmailaddress();
+
                     ConnectionManager.getInstance(getActivity()).putAccountsPreferences(userEmail, selected.getmId(), new ConnectionManager.ServerRequestListener() {
                         @Override
                         public void onSuccess(Object data) {
-                            //getAccountsProfiles();
                         }
 
                         @Override
@@ -88,6 +89,8 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
         });
 
     }
+
+
 
     private void adapterClicked(String clickedItemID){
         if(mAdapter.getIsEditMode()){
@@ -306,38 +309,6 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
                     }
                 });
 
-
- /*       final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        alert.setCancelable(false);
-        alert.setTitle(R.string.preferences_add_button)
-                .setView(popup_preferences_layout)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        String newName = input.getText().toString();
-                        if (newName.length() != 0) {
-                            popUpConnection(newName);
-                        }
-                        input.setText("");
-                        ((ViewGroup) popup_preferences_layout.getParent()).removeView(popup_preferences_layout);
-                        IBinder token = input.getWindowToken();
-                        ( (InputMethodManager) getActivity().getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
-                        dialog.cancel();
-                    }
-                })
-                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        input.setText("");
-
-                        ((ViewGroup) popup_preferences_layout.getParent()).removeView(popup_preferences_layout);
-                        IBinder token = input.getWindowToken();
-                        ( (InputMethodManager) getActivity().getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
-                        dialog.cancel();
-                    }
-                })
-                .create().show();*/
     }
 
 

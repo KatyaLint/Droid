@@ -129,6 +129,7 @@ Code changing:
     HEL-976 - Preference Settings - Flight - flight stops preference
     HEL-962 - Preference settings - Flight preferences - Stop number preferences
     HEL-699 - app crashes
+    HEL-647 - can't see alternative flights duration time
 
     Code changing:
     --------------

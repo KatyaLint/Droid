@@ -85,6 +85,7 @@ public class CNCFragment extends HGBAbstractFragment {
     private ArrayList<AirportSendValuesVO> airportSendValuesVOs = new ArrayList<AirportSendValuesVO>();
     private int maxAirportSize = 0;
     private boolean clearCNCscreen;
+    private Bundle args;
 
 
     public static Fragment newInstance(int position) {
@@ -120,13 +121,13 @@ public class CNCFragment extends HGBAbstractFragment {
         startTutorial();
         joinCompanionToTravel();
 
-        Bundle args = getArguments();
+         args = getArguments();
         clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT);
 
         if(clearCNCscreen){
             startTutorialText();
             clearCNCItems();
-            args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, false);
+
             mTextTutoralHeader.setVisibility(View.VISIBLE);
             mTextTutoralBody.setVisibility(View.VISIBLE);
         }else{
@@ -148,41 +149,6 @@ public class CNCFragment extends HGBAbstractFragment {
         mHGBPrefrenceManager.removeKey(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
         initList();
     }
-
-
-/*
-
-    private void updateToolBarView() {
-        toolbar_go_to_iternerary = (ImageButton) mToolbar.findViewById(R.id.toolbar_go_to_iternerary);
-        toolbar_go_to_iternerary.setVisibility(View.VISIBLE);
-        if(getActivityInterface().getTravelOrder() == null){
-            toolbar_go_to_iternerary.setEnabled(false);
-        }
-        toolbar_go_to_iternerary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("","");
-                getFlowInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(),null);
-                getFlowInterface().closeRightPane();
-
-            }
-        });
-
-        cncDissmissImageButton = (ImageButton) mToolbar.findViewById(R.id.cnc_dissmis);
-        cncDissmissImageButton.setVisibility(View.VISIBLE);
-        cncDissmissImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getFlowInterface().closeRightPane();
-            }
-        });
-
-        preferencesChanges();
-        toolBarProfileChnage();
-
-    }
-*/
-
 
 
 
@@ -248,7 +214,8 @@ public class CNCFragment extends HGBAbstractFragment {
                 UserTravelMainVO userTraveler = (UserTravelMainVO) data;
                 handleHGBMessagesViews(userTraveler);
                 getActivityInterface().setTravelOrder(userTraveler);
-                clearCNCscreen = false;
+             //   clearCNCscreen = false;
+                args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, false);
 
             }
             @Override
@@ -493,6 +460,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
 
 
+        clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT, false);
         if(!clearCNCscreen) {
             sendCNCMessageToServer(strMessage);
         } else {
@@ -518,7 +486,8 @@ public class CNCFragment extends HGBAbstractFragment {
                             airport = airport + " " +response.getValue() + "?";
                             final AirportSendValuesVO airportSendValuesVO = new AirportSendValuesVO();
                             airportSendValuesVO.setQuery(strMessage);
-                            airportSendValuesVO.setTravelpreferenceprofileid(getActivityInterface().getCurrentUser().getUserprofileid());
+
+                            airportSendValuesVO.setTravelpreferenceprofileid(getActivityInterface().getCurrentUser().getmTravelPreferencesProfileId());
                             airportSendValuesVO.setType(response.getType());
                             airportSendValuesVO.setStart(response.getPositionVO().getStart());
                             airportSendValuesVO.setEnd(response.getPositionVO().getEnd());
@@ -540,8 +509,8 @@ public class CNCFragment extends HGBAbstractFragment {
 
                                         @Override
                                         public void itemSelected(String inputItem) {
-
-                                            clearCNCscreen = false;
+                                            args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, false);
+                           //                 clearCNCscreen = false;
                                             AirportResultsVO choosenAirport = findChoosenAirport(inputItem, results);
                                             airportSendValuesVO.setId(choosenAirport.getId());
 
@@ -628,10 +597,12 @@ public class CNCFragment extends HGBAbstractFragment {
         ArrayList<AirportSendValuesVO> airportSendValuesVOsTemp = new ArrayList<AirportSendValuesVO>();
         AirportSendValuesVO airportSendValuesVO = new AirportSendValuesVO();
         ArrayList<CNCItem> cncItems = getActivityInterface().getCNCItems();
+
+
         if(!cncItems.isEmpty() && cncItems.size()>1){
 
-
-            String solutionId = getActivityInterface().getTravelOrder().getmSolutionID();
+            UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
+            String solutionId = travelOrder.getmSolutionID();
             airportSendValuesVO.setQuery(strMessage);
             airportSendValuesVO.setId(solutionId);
             airportSendValuesVO.setTravelpreferenceprofileid(getActivityInterface().getCurrentUser().getUserprofileid());

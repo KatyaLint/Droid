@@ -112,28 +112,6 @@ public class HGBAbstractFragment extends Fragment {
     }
 
 
-//    public ArrayList<NodesVO> getNodeWithGuidAndPaxID(String selectedItemGuid,String paxid){
-//
-//        ArrayList<NodesVO> listVo = new ArrayList<>();
-//        ArrayList<PassengersVO> passengers = getActivityInterface().getTravelOrder().getPassengerses();
-//        for (PassengersVO passenger :passengers){
-//            if(passenger.getmPaxguid().equals(paxid)){
-//                ArrayList<CellsVO> cells = passenger.getmCells();
-//                for (CellsVO cell : cells){
-//                    ArrayList<NodesVO> nodes = cell.getmNodes();
-//                    for (NodesVO node: nodes){
-//                        if(node.getmGuid()!= null && node.getmGuid().equals(selectedItemGuid)){
-//                            listVo.add(node);
-//                        }
-//                    }
-//                }
-//            }
-//
-//        }
-//
-//        return listVo;
-//    }
-
 
     public String getPrimaryGuid(String guiSelected, List<NodesVO> alternative){
 
@@ -235,8 +213,6 @@ public class HGBAbstractFragment extends Fragment {
     }
 
     protected void handleRequestFailure(String error) {
-
-
         errorDialog("Error", error);
     }
 
@@ -248,4 +224,5 @@ public class HGBAbstractFragment extends Fragment {
     public void setSettingGuidSelected(final String settingGuidSelected) {
         this.settingGuidSelected = settingGuidSelected;
     }
+
 }

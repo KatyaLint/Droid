@@ -35,20 +35,7 @@
         layout="@layout/flight_stop_over"/>
 
 
-    <Button
-        android:id="@+id/show_alternative_flights"
-        android:layout_below="@+id/stop_over_include_layout"
-        android:layout_margin="@dimen/DP16"
-        android:layout_centerHorizontal="true"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/round_azure_button_shape"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/flight_show_alternate_flights"
-        android:textColor="@color/white"
-        android:textAlignment="center"
-        android:textSize="@dimen/SP16"
-        android:textAllCaps="false" />
+
 
     <!--<include-->
         <!--android:layout_width="fill_parent"-->

@@ -215,8 +215,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             public void onSuccess(Object data) {
                 ArrayList<AccountsVO> accounts = (ArrayList<AccountsVO>) data;
                 hgbSaveDataClass.setAccounts(accounts);
-                AccountsVO account = accounts.get(0);
-                hgbSaveDataClass.getCurrentUser().setEmailaddress(account.getEmail());
+              //  AccountsVO account = accounts.get(0);
+              //  hgbSaveDataClass.getCurrentUser().setEmailaddress(account.getEmail());
                 editProfileTypeMainToolBar();
             }
 
@@ -231,15 +231,22 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
 
     public void editProfileTypeMainToolBar() {
-        AccountsVO account = hgbSaveDataClass.getAccounts().get(0);
+        ArrayList<AccountsVO> accounts = hgbSaveDataClass.getAccounts();
         my_trip_profile = (FontTextView) findViewById(R.id.my_trip_profile);
-        my_trip_profile.setText(account.getTravelpreferenceprofile().getProfilename());
-        my_trip_profile.setTag(account.getTravelpreferenceprofile().getId());
+
+        for(AccountsVO account: accounts){
+            String currentUserEmailAdd = hgbSaveDataClass.getCurrentUser().getEmailaddress();
+            if(account.getEmail().equals(currentUserEmailAdd)){
+                my_trip_profile.setText(account.getTravelpreferenceprofile().getProfilename());
+                my_trip_profile.setTag(account.getTravelpreferenceprofile().getId());
+                hgbSaveDataClass.getCurrentUser().setmTravelPreferencesProfileId(account.getTravelpreferenceprofile().getId());
+                break;
+            }
+        }
     }
 
+
     private void getCompanionsFromServer() {
-
-
             ConnectionManager.getInstance(MainActivity.this).getCompanions(new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
@@ -285,7 +292,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             public void onSuccess(Object data) {
 
                 UserDataVO mCurrentUser = (UserDataVO) data;
-
+                String logInEmail = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL,"");
+                mCurrentUser.setEmailaddress(logInEmail);
                 hgbSaveDataClass.setCurrentUser(mCurrentUser);
                 //     ImageView my_trips_image_profile = (ImageView)findViewById(R.id.my_trips_image_profile);
                 HGBUtility.getAndSaveUserImage(mCurrentUser.getAvatar(), mProfileImage, null);
@@ -750,8 +758,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case HAZARDOUS_NOTICE:
                 fragment = HazardousNoticeFragment.newInstance(navPosition);
                 break;
-
-
 
         }
 

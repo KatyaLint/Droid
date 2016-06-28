@@ -460,15 +460,15 @@ public class ItineraryFragment extends HGBAbstractFragment {
         TextView grid_traveler_flight_stops = (TextView)child.findViewById(R.id.grid_traveler_flight_stops);
         grid_traveler_flight_stops.setText(node.getmOrigin() + " - " + node.getmDestination());
 
-        TextView grid_flight_operator = (TextView)child.findViewById(R.id.grid_flight_operator);
+     /*   TextView grid_flight_operator = (TextView)child.findViewById(R.id.grid_flight_operator);
         grid_flight_operator.setText(node.getmOperatorName() + " " + node.getmEquipment());
 
         //type
-        grid_flight_operator.setTag(node.getmType());
+        grid_flight_operator.setTag(node.getmType());*/
 
 
-        TextView grid_flight_time = (TextView)child.findViewById(R.id.grid_flight_time);
-        grid_flight_time.setText(node.getmTravelTime());
+     /*   TextView grid_flight_time = (TextView)child.findViewById(R.id.grid_flight_time);
+        grid_flight_time.setText(node.getmTravelTime());*/
 
 
         LayoutParams outerLayoutParams = new LayoutParams((int)iScreenSize,cellHieght);
@@ -531,8 +531,8 @@ public class ItineraryFragment extends HGBAbstractFragment {
         grid_hotel_place.setTag(node.getmGuid());
 
         TextView grid_hotel_price = (TextView)child.findViewById(R.id.grid_hotel_price);
-        long diff = HGBUtility.getDateDiff(node.getmCheckIn(), node.getmCheckOut());
-        double iCharge = node.getmMinimumAmount()/diff;
+        long diff = HGBUtility.dayDifference(node.getmCheckIn(), node.getmCheckOut());//HGBUtility.getDateDiff(node.getmCheckIn(), node.getmCheckOut());
+        double iCharge = node.getmMinimumAmount()/(diff+1);
         String result = String.format("%.2f", iCharge);
         grid_hotel_price.setText("$" + result);
 

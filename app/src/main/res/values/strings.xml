@@ -37,7 +37,7 @@
 
     <string name="flight_select_flight">Select Flight</string>
     <string name="flight_select_my_flight">My Flight</string>
-    <string name="flight_show_alternate_flights">Show Alternative Flight</string>
+    <string name="flight_show_alternate_flights">Change Flight</string>
     <string name="flight_stop_over">STOPOVER: </string>
     <string name="show_alterate_hotels">Show Alternate Hotels</string>
 

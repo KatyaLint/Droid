@@ -22,9 +22,11 @@
     <RadioButton
         android:id="@+id/setting_radio_image"
         android:layout_width="wrap_content"
-        style="@style/MyRadioButtonStyle"
+
         android:layout_marginRight="@dimen/DP10"
         android:layout_alignParentRight="true"
         android:layout_height="wrap_content" />
+
+    <!--style="@style/MyRadioButtonStyle"-->
 
 </RelativeLayout>

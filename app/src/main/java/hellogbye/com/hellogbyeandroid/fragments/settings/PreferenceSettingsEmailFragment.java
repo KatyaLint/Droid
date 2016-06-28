@@ -203,7 +203,7 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
 
     private void onSavePopup(){
 
-        if(personalEmail == null){ //on add new email scree
+        if(personalEmail == null){ //on add new email screen
             String newUserEmail = settings_email_edit.getText().toString();
             boolean isEmailValid = HGBUtility.isValidEmail(newUserEmail);
             if(isEmailValid){

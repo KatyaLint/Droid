@@ -11,6 +11,8 @@ import java.util.HashSet;
 public class UserDataVO {
 
 
+    private String mTravelPreferencesProfileId;
+
     @SerializedName("userprofileid")
     private String userprofileid;
 
@@ -78,7 +80,7 @@ public class UserDataVO {
         setCountry(country);
         setAddress(address);
         setCity(city);
-      setState(state);
+        setState(state);
         this.postalcode = postalcode;
         this.avatar = avatar;
         this.ispremiumuser = ispremiumuser;
@@ -244,4 +246,11 @@ public class UserDataVO {
     }
 
 
+    public String getmTravelPreferencesProfileId() {
+        return mTravelPreferencesProfileId;
+    }
+
+    public void setmTravelPreferencesProfileId(String mTravelPreferencesProfileId) {
+        this.mTravelPreferencesProfileId = mTravelPreferencesProfileId;
+    }
 }

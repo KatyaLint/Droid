@@ -167,10 +167,12 @@ public class CostumeToolBar extends Toolbar {
             case ALTERNATIVE_FLIGHT:
             case HOTEL:
             case COMPANION_HELP_FEEDBACK:
+            case ALTERNATIVE_FLIGHT_DETAILS:
                 titleText.setVisibility(View.VISIBLE);
                 break;
-            case PREFERENCE:
 
+            case PREFERENCE:
+            //    preference_save_changes.setVisibility(View.VISIBLE);
                 titleText.setVisibility(View.VISIBLE);
                 preferences_edit_mode.setVisibility(View.VISIBLE);
                 edit_preferences.setVisibility(View.VISIBLE);

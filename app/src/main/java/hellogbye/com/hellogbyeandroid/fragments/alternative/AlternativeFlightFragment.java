@@ -103,7 +103,6 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
         String paxId = currentNode.getAccountID();
         String flightID =   currentNode.getmGuid();
-
         ConnectionManager.getInstance(getActivity()).getAlternateFlightsForFlight(solutionID, paxId, flightID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
@@ -129,7 +128,6 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
 
         View rootView = inflater.inflate(R.layout.flight_layout_details, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.flightRecyclerView);
