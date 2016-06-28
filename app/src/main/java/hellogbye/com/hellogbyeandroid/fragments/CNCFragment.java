@@ -86,6 +86,7 @@ public class CNCFragment extends HGBAbstractFragment {
     private int maxAirportSize = 0;
     private boolean clearCNCscreen;
     private Bundle args;
+    private  AirportSendValuesVO airportSendValuesVO;
 
 
     public static Fragment newInstance(int position) {
@@ -473,18 +474,18 @@ public class CNCFragment extends HGBAbstractFragment {
                     ArrayList<ResponsesVO> responses = airportResult.getResponses();
                     maxAirportSize = 0;//responses.size();
                     for (ResponsesVO response : responses) {
-                        if (response.getType().equals("City")) {
+                        if (response.getType().equals("City") || response.getType().equals("AirportCode") ) {
                             maxAirportSize = maxAirportSize + 1;
                         }
                     }
 
 
-                    for (int i = 0; i < responses.size(); i++) {
-                        ResponsesVO response = responses.get(i);
-                        if (responses.get(i).getType().equals("City")) {
+
+                    for (ResponsesVO response: responses){
+                      //  if(response.getType().equals("City") || response.getType().equals("AirportCode") ) {
                             String airport = getResources().getString(R.string.cnc_choose_airport);
-                            airport = airport + " " +response.getValue() + "?";
-                            final AirportSendValuesVO airportSendValuesVO = new AirportSendValuesVO();
+                            airport = airport + " " + response.getValue() + "?";
+                            airportSendValuesVO = new AirportSendValuesVO();
                             airportSendValuesVO.setQuery(strMessage);
 
                             airportSendValuesVO.setTravelpreferenceprofileid(getActivityInterface().getCurrentUser().getmTravelPreferencesProfileId());
@@ -496,55 +497,39 @@ public class CNCFragment extends HGBAbstractFragment {
 
                             final ArrayList<AirportResultsVO> results = response.getResults();
 
+
                             //Type not city result can be 0
-
-                            String[] titleArray = new String[results.size()];
-                            for (int j = 0; j < results.size(); j++) {
-                                titleArray[j] = results.get(j).getAirportname();
-                            }
+                            //   boolean isDefaultFound = false;
 
 
-                            HGBUtility.showPikerDialog(null, getActivity(), airport,
-                                    titleArray, 0, results.size() - 1, new PopUpAlertStringCB() {
+                            if (response.getType().equals("City")) {
+                                String[] titleArray = new String[results.size()];
+                                for (int j = 0; j < results.size(); j++) {
+                                    titleArray[j] = results.get(j).getAirportname();
+                                }
 
-                                        @Override
-                                        public void itemSelected(String inputItem) {
-                                            args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, false);
-                           //                 clearCNCscreen = false;
-                                            AirportResultsVO choosenAirport = findChoosenAirport(inputItem, results);
-                                            airportSendValuesVO.setId(choosenAirport.getId());
+                           /* if(isDefaultFound){
+                                break;
+                            }*/
 
+                                HGBUtility.showPikerDialog(null, getActivity(), airport,
+                                        titleArray, 0, results.size() - 1, new PopUpAlertStringCB() {
 
-                                            String location = HGBUtility.getLocation(getActivity(), false);
+                                            @Override
+                                            public void itemSelected(String inputItem) {
 
-                                 /*       HGBUtility.removeGPSListener();
-                                        if (location == null) { // no location found
-                                            handleHGBMessage(getString(R.string.itinerary_try_again));
-                                            return;
-                                        }*/
-
-                                            if (location != null && getActivityInterface().getTravelOrder() != null) {
-                                                String[] locationArr = location.split("&");
-                                                getActivityInterface().getTravelOrder().setLocation(locationArr);
+                                                AirportResultsVO choosenAirport = findChoosenAirport(inputItem, results);
+                                                sendUserAnswearToServer(choosenAirport.getId());
                                             }
 
-                                            locationArr = location.split("&");
-                                            airportSendValuesVO.setLatitude(locationArr[0]);
-                                            airportSendValuesVO.setLongitude(locationArr[1]);
-                                            airportSendValuesVOs.add(airportSendValuesVO);
+                                            @Override
+                                            public void itemCanceled() {
 
-
-                                            if (maxAirportSize == airportSendValuesVOs.size()) {
-                                                sendVOForIternarary(airportSendValuesVOs);
                                             }
+                                        }, false);
 
-                                        }
-
-                                        @Override
-                                        public void itemCanceled() {
-
-                                        }
-                                    }, false);
+                        }else if(response.getType().equals("AirportCode")){
+                            sendUserAnswearToServer(response.getValue());
                         }
                     }
 
@@ -554,6 +539,32 @@ public class CNCFragment extends HGBAbstractFragment {
         }
     }
 
+
+    private void sendUserAnswearToServer(String mainAirportID){
+        args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, false);
+
+
+        airportSendValuesVO.setId(mainAirportID);
+
+
+        String location = HGBUtility.getLocation(getActivity(), false);
+
+
+        if (location != null && getActivityInterface().getTravelOrder() != null) {
+            String[] locationArr = location.split("&");
+            getActivityInterface().getTravelOrder().setLocation(locationArr);
+        }
+
+        locationArr = location.split("&");
+        airportSendValuesVO.setLatitude(locationArr[0]);
+        airportSendValuesVO.setLongitude(locationArr[1]);
+        airportSendValuesVOs.add(airportSendValuesVO);
+
+
+        if (maxAirportSize == airportSendValuesVOs.size()) {
+            sendVOForIternarary(airportSendValuesVOs);
+        }
+    }
 
     interface iAfterServer {
         void serverFinished(AirportServerResultVO airportResult);

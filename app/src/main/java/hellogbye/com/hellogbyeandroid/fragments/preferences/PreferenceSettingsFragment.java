@@ -87,7 +87,6 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
                 }
             }
         });
-
     }
 
 

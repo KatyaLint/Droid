@@ -57,4 +57,12 @@ public class AirportResultsVO {
     public void setId(String id) {
         this.id = id;
     }
+
+    public boolean isdefault() {
+        return isdefault;
+    }
+
+    public void setIsdefault(boolean isdefault) {
+        this.isdefault = isdefault;
+    }
 }
