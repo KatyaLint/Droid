@@ -160,7 +160,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
                                                       });
 
         companion_personal_settings_date_of_birth = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_date_of_birth);
-        
+
         companion_personal_settings_date_of_birth.setText(HGBUtility.parseDateToddMMyyyyForPayment(currentUser.getDob()));
 
 
@@ -174,7 +174,6 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
             GENDER = currentUser.getGender();
         }
         companion_personal_settings_gender.setText(GENDER);
-
 
         companion_personal_settings_phone_number = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_phone_number);
         companion_personal_settings_phone_number.setText(currentUser.getPhone());

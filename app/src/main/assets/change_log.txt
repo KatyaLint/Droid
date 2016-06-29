@@ -132,6 +132,8 @@ Code changing:
     HEL-647 - can't see alternative flights duration time
     HEL-646 - add duration time
     HEL-628 - make airport codes not highlighted
+    HEL-980 - Flight Details - Stopover
+    HEL-979 - Flight Details
 
     Code changing:
     --------------

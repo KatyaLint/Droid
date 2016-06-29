@@ -12,8 +12,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:layout_centerVertical="true"
-    android:layout_centerHorizontal="true"
- >
+    android:layout_centerHorizontal="true" >
 
     <LinearLayout
         android:id="@+id/stop_over_layout"

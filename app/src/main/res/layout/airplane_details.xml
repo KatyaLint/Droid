@@ -259,28 +259,28 @@
                 android:text="Economy"
                 android:textSize="@dimen/SP16"
                 app:fontName="dinnextltpro_light.otf"
-                android:textColor="@color/red_pink"
+                android:textColor="@color/warm_grey"
             />
 
 
     </LinearLayout>
 
-        <include  android:layout_width="wrap_content"
+ <!--       <include  android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_toRightOf="@+id/flight_class_text"
             android:layout_marginTop="@dimen/DP20"
             android:layout_marginRight="@dimen/DP20"
-            layout="@layout/layout_arrow"/>
+            layout="@layout/layout_arrow"/>-->
 
-        <View
+   <!--     <View
             android:layout_width="@dimen/DP1"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/DP10"
             android:layout_weight="1"
-            android:background="@color/warm_grey"/>
+            android:background="@color/warm_grey"/>-->
 
-        <LinearLayout
+<!--        <LinearLayout
             android:layout_marginTop="@dimen/DP10"
             android:layout_weight="100"
             android:layout_marginLeft="@dimen/DP10"
@@ -306,10 +306,11 @@
                 app:fontName="dinnextltpro_light.otf"
                 android:textColor="@color/red_pink"/>
 
-        </LinearLayout>
+        </LinearLayout>-->
 
 
 
+<!--
         <include
             android:layout_marginTop="@dimen/DP20"
             android:layout_marginRight="@dimen/DP20"
@@ -318,6 +319,7 @@
             android:layout_weight="1"
             android:layout_toRightOf="@+id/flight_meal_text"
             layout="@layout/layout_arrow"/>
+-->
 
 
     </LinearLayout>
@@ -373,7 +375,7 @@
         android:background="@color/warm_grey" />
 
 
-    <LinearLayout
+<!--    <LinearLayout
         android:id="@+id/baggage_layout_main_ll"
         android:orientation="horizontal"
         android:layout_below="@+id/footer_separator_fourth"
@@ -407,16 +409,16 @@
                 android:textSize="@dimen/SP16"
                 app:fontName="dinnextltpro_light.otf"
                 android:textColor="@color/red_pink"/>
-            </LinearLayout>
+            </LinearLayout>-->
 
-        <include
+  <!--      <include
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_toRightOf="@+id/flight_class_text"
             android:layout_marginTop="@dimen/DP20"
             android:layout_marginRight="@dimen/DP20"
-            layout="@layout/layout_arrow"/>
+            layout="@layout/layout_arrow"/>-->
 
 
         <!--<include-->
@@ -426,15 +428,15 @@
             <!--android:layout_marginTop="@dimen/DP10"-->
             <!--layout="@layout/bottom_separator"/>-->
 
-        <View
+  <!--      <View
             android:layout_width="@dimen/DP1"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/DP10"
             android:layout_weight="1"
-            android:background="@color/warm_grey"/>
+            android:background="@color/warm_grey"/>-->
 
 
-        <LinearLayout
+<!--        <LinearLayout
             android:layout_marginTop="@dimen/DP10"
             android:layout_weight="100"
             android:layout_marginLeft="@dimen/DP10"
@@ -461,25 +463,25 @@
                 android:textColor="@color/red_pink"/>
 
 
-        </LinearLayout>
-        <include
+        </LinearLayout>-->
+   <!--     <include
             android:layout_marginTop="@dimen/DP20"
             android:layout_marginRight="@dimen/DP20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_toRightOf="@+id/flight_meal_text"
-            layout="@layout/layout_arrow"/>
+            layout="@layout/layout_arrow"/>-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
 
-    <include
+ <!--   <include
         android:layout_below="@+id/baggage_layout_main_ll"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/DP10"
-        layout="@layout/bottom_separator"/>
+        layout="@layout/bottom_separator"/>-->
 
     <!--<Button-->
         <!--android:id="@+id/show_alternative_flights"-->

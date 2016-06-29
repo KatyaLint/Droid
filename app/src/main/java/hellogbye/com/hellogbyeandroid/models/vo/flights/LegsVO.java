@@ -266,4 +266,12 @@ public class LegsVO {
     public void setmDeparture(String mDeparture) {
         this.mDeparture = mDeparture;
     }
+
+    public String getmAirportName() {
+        return mAirportName;
+    }
+
+    public void setmAirportName(String mAirportName) {
+        this.mAirportName = mAirportName;
+    }
 }

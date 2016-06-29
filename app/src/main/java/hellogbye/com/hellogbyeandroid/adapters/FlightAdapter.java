@@ -79,7 +79,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             viewHolder.stop_over_include_layout.setVisibility(View.GONE);
 
         } else if (legFlightVO.getmType().equals("StopOver")) {
-            viewHolder.stop_over_txt.setText(legFlightVO.getmCityName());
+            viewHolder.stop_over_txt.setText(" city " +legFlightVO.getmCityName()+", airport " +legFlightVO.getmAirportName());
             viewHolder.stop_over_time.setText((int) legFlightVO.getmDurationHours() + "h " + (int) legFlightVO.getmDurationMinutes() + "m");
 
             viewHolder.includeAirplaneDetails.setVisibility(View.GONE);
@@ -161,10 +161,10 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         private FontTextView flight_boarding_text;
         private FontTextView flight_duration_text;
         private FontTextView flight_class_text;
-        private FontTextView flight_meal_text;
+     //   private FontTextView flight_meal_text;
         private FontTextView flight_aircraft_text;
-        private FontTextView flight_baggage_text;
-        private FontTextView flight_seat_selection_text;
+       // private FontTextView flight_baggage_text;
+       // private FontTextView flight_seat_selection_text;
         private FontTextView stop_over_txt;
         private FontTextView stop_over_time;
         private View includeAirplaneDetails;
@@ -250,15 +250,15 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             flight_boarding_text = (FontTextView) includeAirplaneDetails.findViewById(R.id.flight_boarding_text);
             flight_duration_text = (FontTextView) includeAirplaneDetails.findViewById(R.id.flight_duration_text);
             flight_class_text = (FontTextView) includeAirplaneDetails.findViewById(R.id.flight_class_text);
-            flight_meal_text = (FontTextView) includeAirplaneDetails.findViewById(R.id.flight_meal_text);
+  /*          flight_meal_text = (FontTextView) includeAirplaneDetails.findViewById(R.id.flight_meal_text);*/
             // flight_meal_text.setText(legFlightVO.getmFareClass());
 
             flight_aircraft_text = (FontTextView) includeAirplaneDetails.findViewById(R.id.flight_aircraft_text);
             //flight_aircraft_text.setText(legFlightVO.getmFareClass());
 
-            flight_baggage_text = (FontTextView) includeAirplaneDetails.findViewById(R.id.flight_baggage_text);
+     /*       flight_baggage_text = (FontTextView) includeAirplaneDetails.findViewById(R.id.flight_baggage_text);
 
-            flight_seat_selection_text = (FontTextView) includeAirplaneDetails.findViewById(R.id.flight_seat_selection_text);
+            flight_seat_selection_text = (FontTextView) includeAirplaneDetails.findViewById(R.id.flight_seat_selection_text);*/
         }
 
     }
