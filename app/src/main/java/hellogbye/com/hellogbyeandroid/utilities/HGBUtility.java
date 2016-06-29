@@ -883,7 +883,7 @@ public static String formattDateToStringMonthDate(String dateInString) {
 
 
 
-    public static void showPikerDialog(final FontTextView textView, Activity activity, String title,
+    public static void showPikerDialog(final int centerValue, final FontTextView textView, Activity activity, String title,
                                  final String[] titleArray, int minValue, int maxValue, final PopUpAlertStringCB
                                                alertCB, boolean isNegativeButton) {
 
@@ -893,6 +893,8 @@ public static String formattDateToStringMonthDate(String dateInString) {
         genderPicker.setMinValue(minValue);
         genderPicker.setWrapSelectorWheel(false);
         genderPicker.setMaxValue(maxValue);
+        genderPicker.setValue(centerValue);
+
         genderPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
         genderPicker.setDisplayedValues(titleArray);
 
@@ -920,6 +922,7 @@ public static String formattDateToStringMonthDate(String dateInString) {
         }
 
         AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);
         dialog.show();
 
     }
@@ -1064,6 +1067,7 @@ public static String formattDateToStringMonthDate(String dateInString) {
                   }
               })
               .create().show();
+
   }
 
 

@@ -251,7 +251,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
             @Override
             public void onClick(View v) {
 
-            HGBUtility.showPikerDialog(companion_personal_settings_gender, getActivity(), getResources().getString(R.string.select_gender), getResources().getStringArray(R.array.gender_array), 0, 1, null,true);
+            HGBUtility.showPikerDialog(0,companion_personal_settings_gender, getActivity(), getResources().getString(R.string.select_gender), getResources().getStringArray(R.array.gender_array), 0, 1, null,true);
             }
         });
 

@@ -503,16 +503,20 @@ public class CNCFragment extends HGBAbstractFragment {
 
 
                             if (response.getType().equals("City") || response.getType().equals("AirportName")  ) {
+                                int centerValue = 0;
                                 String[] titleArray = new String[results.size()];
                                 for (int j = 0; j < results.size(); j++) {
                                     titleArray[j] = results.get(j).getAirportname();
+                                    if(results.get(j).isdefault()){
+                                        centerValue = j;
+                                    }
                                 }
 
                            /* if(isDefaultFound){
                                 break;
                             }*/
 
-                                HGBUtility.showPikerDialog(null, getActivity(), airport,
+                                HGBUtility.showPikerDialog(centerValue ,null, getActivity(), airport,
                                         titleArray, 0, results.size() - 1, new PopUpAlertStringCB() {
 
                                             @Override

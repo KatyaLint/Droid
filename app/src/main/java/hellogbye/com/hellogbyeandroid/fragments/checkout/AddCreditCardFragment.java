@@ -151,7 +151,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
                     countryarray[i] = countries.get(i).getName();
                 }
 
-                HGBUtility.showPikerDialog(mCardCountry, getActivity(), "Choose country",
+                HGBUtility.showPikerDialog(0,mCardCountry, getActivity(), "Choose country",
                         countryarray, 0, countries.size() - 1, new PopUpAlertStringCB() {
                             @Override
                             public void itemSelected(String inputItem) {
@@ -544,7 +544,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
             countryarray[i] = provinceItems.get(i).getProvincename();
         }
 
-        HGBUtility.showPikerDialog(mCardProvince, getActivity(), "Choose province",
+        HGBUtility.showPikerDialog(0,mCardProvince, getActivity(), "Choose province",
                 countryarray, 0, provinceItems.size() - 1, new PopUpAlertStringCB() {
                     @Override
                     public void itemSelected(String inputItem) {

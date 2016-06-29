@@ -127,7 +127,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
                     countryarray[i] = countries.get(i).getName();
                 }
 
-                HGBUtility.showPikerDialog(mCountry, getActivity(), "Choose country",
+                HGBUtility.showPikerDialog(0,mCountry, getActivity(), "Choose country",
                         countryarray, 0, countries.size() - 1, new PopUpAlertStringCB() {
                             @Override
                             public void itemSelected(String inputItem) {
@@ -163,7 +163,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             public void onClick(View v) {
 
                 //  showGenderDialog();
-                HGBUtility.showPikerDialog(mGender, getActivity(), getResources().getString(R.string.select_gender), getResources().getStringArray(R.array.gender_array), 0, 1, null, true);
+                HGBUtility.showPikerDialog(0,mGender, getActivity(), getResources().getString(R.string.select_gender), getResources().getStringArray(R.array.gender_array), 0, 1, null, true);
             }
         });
 
@@ -171,7 +171,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             @Override
             public void onClick(View v) {
 
-                HGBUtility.showPikerDialog(mTitle, getActivity(), SLECT_TITLE, getResources().getStringArray(R.array.title_array), 0, 1, null, true);
+                HGBUtility.showPikerDialog(0,mTitle, getActivity(), SLECT_TITLE, getResources().getStringArray(R.array.title_array), 0, 1, null, true);
 
 
                 // showTitleDialog();
@@ -453,7 +453,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             countryarray[i] = provinceItems.get(i).getProvincename();
         }
 
-        HGBUtility.showPikerDialog(mState, getActivity(), "Choose province",
+        HGBUtility.showPikerDialog(0,mState, getActivity(), "Choose province",
                 countryarray, 0, provinceItems.size() - 1, new PopUpAlertStringCB() {
                     @Override
                     public void itemSelected(String inputItem) {

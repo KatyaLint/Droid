@@ -120,7 +120,7 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
                         titleArray[j] = componentsDescription.get(j).getmDescription();
                     }
 
-                    HGBUtility.showPikerDialog(companion_add_relationship, getActivity(),getResources().getString( R.string.preferences_relationship_choose),
+                    HGBUtility.showPikerDialog(0,companion_add_relationship, getActivity(),getResources().getString( R.string.preferences_relationship_choose),
                             titleArray, 0, componentsDescription.size() - 1, new PopUpAlertStringCB() {
 
                                 @Override

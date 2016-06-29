@@ -178,7 +178,7 @@ public class SignUpActivity extends AppCompatActivity {
                     countryarray[i] = countries.get(i).getName();
                 }
 
-                HGBUtility.showPikerDialog(sign_up_country, SignUpActivity.this, "Choose country",
+                HGBUtility.showPikerDialog(0,sign_up_country, SignUpActivity.this, "Choose country",
                         countryarray, 0, countries.size() - 1, new PopUpAlertStringCB() {
                             @Override
                             public void itemSelected(String inputItem) {
@@ -297,7 +297,7 @@ public class SignUpActivity extends AppCompatActivity {
             countryarray[i] = provinceItems.get(i).getProvincename();
         }
 
-        HGBUtility.showPikerDialog(sign_up_province_name, SignUpActivity.this, "Choose province",
+        HGBUtility.showPikerDialog(0,sign_up_province_name, SignUpActivity.this, "Choose province",
                 countryarray, 0, provinceItems.size() - 1, new PopUpAlertStringCB() {
                     @Override
                     public void itemSelected(String inputItem) {

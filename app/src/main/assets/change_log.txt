@@ -134,6 +134,8 @@ Code changing:
     HEL-628 - make airport codes not highlighted
     HEL-980 - Flight Details - Stopover
     HEL-979 - Flight Details
+    HEL-986 - Itinerary - City name
+    HEL-978 - selecting an airport
 
     Code changing:
     --------------

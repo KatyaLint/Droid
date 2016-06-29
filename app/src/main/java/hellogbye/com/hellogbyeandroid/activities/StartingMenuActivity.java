@@ -135,7 +135,7 @@ public class StartingMenuActivity extends Activity {
         public void onClick(View view) {
             String[] account_settings = getResources().getStringArray(R.array.base_url);
 
-            HGBUtility.showPikerDialog(change_server_url, StartingMenuActivity.this, "Choose url",
+            HGBUtility.showPikerDialog(0,change_server_url, StartingMenuActivity.this, "Choose url",
                     account_settings, 0, account_settings.length -1, new PopUpAlertStringCB(){
 
                         @Override
