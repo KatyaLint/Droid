@@ -12,6 +12,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
+import hellogbye.com.hellogbyeandroid.models.PersonalUserInformationVO;
 import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
@@ -52,6 +53,7 @@ public class HGBSaveDataClass implements HGBMainInterface {
     private String solutionID;
     private List<NodesVO> alternativeFlights;
     private HGBPreferencesManager hgbPrefrenceManager;
+    private PersonalUserInformationVO personalUserInformationVO;
 
 //    public HGBSaveDataClass(MainActivity mainActivity ,HGBPreferencesManager hgbPrefrenceManager) {
 //        this.hgbPrefrenceManager = hgbPrefrenceManager;
@@ -304,6 +306,16 @@ public class HGBSaveDataClass implements HGBMainInterface {
     @Override
     public ArrayList<AccountsVO> getAccounts() {
         return accounts;
+    }
+
+    @Override
+    public void setPersonalUserInformation(PersonalUserInformationVO personalUserInformationVO) {
+        this.personalUserInformationVO = personalUserInformationVO;
+    }
+
+    @Override
+    public PersonalUserInformationVO getPersonalUserInformation() {
+        return personalUserInformationVO;
     }
 
     @Override

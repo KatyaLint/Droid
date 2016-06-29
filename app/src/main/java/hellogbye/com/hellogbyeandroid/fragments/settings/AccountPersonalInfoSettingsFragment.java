@@ -46,7 +46,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
     private LinearLayout companion_personal_settings_email_add_another;
     private FontEditTextView companion_personal_settings_name;
     private FontEditTextView companion_personal_settings_last;
-    private FontEditTextView companion_personal_settings_date_of_birth;
+    private FontTextView companion_personal_settings_date_of_birth;
  //   private FontTextView companion_personal_settings_email;
     private FontTextView companion_personal_settings_gender;
     private FontEditTextView companion_personal_settings_phone_number;
@@ -86,28 +86,6 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
     }
 
 
-    private void getUserData(){
-
-        ConnectionManager.getInstance(getActivity()).getUserProfile(new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
-
-                UserDataVO mCurrentUser = (UserDataVO) data;
-
-                getActivityInterface().setCurrentUser(mCurrentUser);
-                getAccountsProfiles();
-           /*     HGBUtility.getAndSaveUserImage(mCurrentUser.getAvatar(), mProfileImage, null);
-                getAccountsProfiles();
-                selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null);*/
-
-            }
-
-            @Override
-            public void onError(Object data) {
-               ErrorMessage(data);
-            }
-        });
-    }
 
 
     public void getAccountsProfiles() {
@@ -181,8 +159,11 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
                                                           }
                                                       });
 
-        companion_personal_settings_date_of_birth = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_date_of_birth);
+        companion_personal_settings_date_of_birth = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_date_of_birth);
+        
         companion_personal_settings_date_of_birth.setText(HGBUtility.parseDateToddMMyyyyForPayment(currentUser.getDob()));
+
+
         companion_personal_settings_location_province = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_state);
         companion_personal_settings_location_province.setText(currentUser.getState());
 

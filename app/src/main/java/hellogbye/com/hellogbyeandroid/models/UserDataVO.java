@@ -11,7 +11,6 @@ import java.util.HashSet;
 public class UserDataVO {
 
 
-    private String mTravelPreferencesProfileId;
 
     @SerializedName("userprofileid")
     private String userprofileid;
@@ -98,13 +97,13 @@ public class UserDataVO {
         this.userprofileid = userprofileid;
     }
 
-    public String getEmailaddress() {
+/*    public String getEmailaddress() {
         return emailaddress;
     }
 
     public void setEmailaddress(String emailaddress) {
         this.emailaddress = emailaddress;
-    }
+    }*/
 
     public String getFirstname() {
         return firstname;
@@ -246,11 +245,11 @@ public class UserDataVO {
     }
 
 
-    public String getmTravelPreferencesProfileId() {
-        return mTravelPreferencesProfileId;
+    public String getEmailaddress() {
+        return emailaddress;
     }
 
-    public void setmTravelPreferencesProfileId(String mTravelPreferencesProfileId) {
-        this.mTravelPreferencesProfileId = mTravelPreferencesProfileId;
+    public void setEmailaddress(String emailaddress) {
+        this.emailaddress = emailaddress;
     }
 }

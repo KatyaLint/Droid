@@ -22,6 +22,7 @@ import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSettingsMainClass;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
+import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
@@ -39,8 +40,8 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
     private List<AccountDefaultSettingsVO> accountDefaultSettings;
     private PreferencesSettingsRadioButtonAdapter preferenceSettingsListAdapter;
     private View promptsView;
-    private String accountAttributeCheckedID;
-    private String accountAttributeCheckedFirstID;
+    private String accountAttributeCheckedID = "";
+    private String accountAttributeCheckedFirstID = "";
     private boolean noBack;
     private FontEditTextView settings_email_edit;
     private FontTextView settings_remove_email_address;
@@ -110,6 +111,7 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
             public void clickedItem(int selectedPosition) {
                 AccountDefaultSettingsVO selected = accountDefaultSettings.get(selectedPosition);
                 selected.setChecked(true);
+                accountAttributeCheckedID = selected.getmId();
 
                 //radioButtonSelected = selectedPosition;
             }
@@ -210,8 +212,7 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
                 saveDataAlert();
             }
         }
-        else if(accountAttributeCheckedID != null && !accountAttributeCheckedID.isEmpty()
-                && !accountAttributeCheckedID.equals(accountAttributeCheckedFirstID)){ //preferences were changed
+        else if(!accountAttributeCheckedID.isEmpty() && !accountAttributeCheckedID.equals(accountAttributeCheckedFirstID)){ //preferences were changed
             saveDataAlert();
         }
     }
@@ -221,7 +222,12 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
         ConnectionManager.getInstance(getActivity()).putAccountsPreferences(personalEmail, accountAttributeCheckedID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                ((MainActivity)getActivity()).getAccountsProfiles();
+
+                if(getActivityInterface().getPersonalUserInformation().getUserEmailLogIn().equals(personalEmail)){
+                    getActivityInterface().getPersonalUserInformation().setmTravelPreferencesProfileId(accountAttributeCheckedID);
+                }
+
+               // ((MainActivity)getActivity()).getAccountsProfiles();
             }
 
             @Override
@@ -268,10 +274,12 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
             return;
         }*/
       //  String id = account.getTravelpreferenceprofile().getId();
-        for( AccountDefaultSettingsVO accountAttribute : accountDefaultSettings) {
+        for(AccountDefaultSettingsVO accountAttribute : accountDefaultSettings) {
             if (accountAttribute.getmId().equals(id)) {
                 accountAttribute.setChecked(true);
                 accountAttributeCheckedFirstID = accountAttribute.getmId();
+                preferenceSettingsListAdapter.selectedItemID(accountAttributeCheckedFirstID);
+                break;
             }
         }
     }
@@ -289,8 +297,10 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
             for( AccountDefaultSettingsVO accountAttribute : accountDefaultSettings) {
                 if(accountAttribute.getmId().equals(clickedItemID)){
                     accountAttribute.setChecked(true);
+
                     accountAttributeCheckedID = accountAttribute.getmId();
 
+                    preferenceSettingsListAdapter.selectedItemID(accountAttributeCheckedID);
                 }else{
                     if(accountAttribute.isChecked()){
                         accountAttribute.setChecked(false);

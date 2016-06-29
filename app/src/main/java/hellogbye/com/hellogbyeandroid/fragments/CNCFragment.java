@@ -488,7 +488,7 @@ public class CNCFragment extends HGBAbstractFragment {
                             airportSendValuesVO = new AirportSendValuesVO();
                             airportSendValuesVO.setQuery(strMessage);
 
-                            airportSendValuesVO.setTravelpreferenceprofileid(getActivityInterface().getCurrentUser().getmTravelPreferencesProfileId());
+                            airportSendValuesVO.setTravelpreferenceprofileid(getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId());
                             airportSendValuesVO.setType(response.getType());
                             airportSendValuesVO.setStart(response.getPositionVO().getStart());
                             airportSendValuesVO.setEnd(response.getPositionVO().getEnd());

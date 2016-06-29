@@ -74,6 +74,7 @@ import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSett
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountSettingsFragment;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.NavItem;
+import hellogbye.com.hellogbyeandroid.models.PersonalUserInformationVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserDataVO;
@@ -149,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        hgbSaveDataClass.setPersonalUserInformation(new PersonalUserInformationVO());
         setContentView(R.layout.main_activity_layout);
 
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
@@ -235,11 +236,12 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         my_trip_profile = (FontTextView) findViewById(R.id.my_trip_profile);
 
         for(AccountsVO account: accounts){
-            String currentUserEmailAdd = hgbSaveDataClass.getCurrentUser().getEmailaddress();
+            String currentUserEmailAdd = hgbSaveDataClass.getPersonalUserInformation().getUserEmailLogIn();
             if(account.getEmail().equals(currentUserEmailAdd)){
                 my_trip_profile.setText(account.getTravelpreferenceprofile().getProfilename());
                 my_trip_profile.setTag(account.getTravelpreferenceprofile().getId());
-                hgbSaveDataClass.getCurrentUser().setmTravelPreferencesProfileId(account.getTravelpreferenceprofile().getId());
+             //   hgbSaveDataClass.getCurrentUser().setmTravelPreferencesProfileId(account.getTravelpreferenceprofile().getId());
+                hgbSaveDataClass.getPersonalUserInformation().setmTravelPreferencesProfileId(account.getTravelpreferenceprofile().getId());
                 break;
             }
         }
@@ -293,8 +295,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
                 UserDataVO mCurrentUser = (UserDataVO) data;
                 String logInEmail = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL,"");
-                mCurrentUser.setEmailaddress(logInEmail);
                 hgbSaveDataClass.setCurrentUser(mCurrentUser);
+
+                hgbSaveDataClass.getPersonalUserInformation().setUserEmailLogIn(logInEmail);
                 //     ImageView my_trips_image_profile = (ImageView)findViewById(R.id.my_trips_image_profile);
                 HGBUtility.getAndSaveUserImage(mCurrentUser.getAvatar(), mProfileImage, null);
                 //my_trips_image_profile.setImageBitmap(HGBUtility.getBitmapFromCache(getBaseContext()));

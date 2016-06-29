@@ -53,7 +53,7 @@
                 android:hint="Last Name"
                 app:fontName="dinnextltpro_regular.otf" />
 
-            <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/companion_personal_settings_date_of_birth"
                 style="@style/PersonalInformationEditText"
                 android:hint="Date of birth"
@@ -65,13 +65,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <LinearLayout
+           <!-- <LinearLayout
                 android:id="@+id/companion_personal_email_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
-
 
                 <hellogbye.com.hellogbyeandroid.views.FontTextView
                     android:id="@+id/companion_personal_settings_email"
@@ -83,7 +81,7 @@
                     android:text="email@admin.com"
                     app:fontName="dinnextltpro_regular.otf" />
 
-            </LinearLayout>
+            </LinearLayout>-->
 
             <LinearLayout
                 android:id="@+id/companion_personal_add_email_ll"

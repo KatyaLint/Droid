@@ -7,6 +7,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
+import hellogbye.com.hellogbyeandroid.models.PersonalUserInformationVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.UserDataVO;
@@ -96,6 +97,8 @@ public interface HGBMainInterface {
     void setAccounts(ArrayList<AccountsVO> accounts);
     ArrayList<AccountsVO> getAccounts();
 
+    void setPersonalUserInformation(PersonalUserInformationVO personalUserInformationVO);
+    PersonalUserInformationVO getPersonalUserInformation();
 
 
     void setCreditCardsSelected(HashSet<CreditCardItem> cardsList);
