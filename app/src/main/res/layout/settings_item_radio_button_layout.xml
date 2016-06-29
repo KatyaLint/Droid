@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/DP10"
-    android:id="@+id/settings_radio_button_ll"
+    android:id="@+id/settings_radio_button_ll_right_side"
     android:orientation="horizontal">
 
 
 
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_weight="0.8"
         android:id="@+id/settings_radio_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/DP10"
         android:text="lalala"
+        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="true"
         android:textColor="@color/warm_grey"
         android:textSize="@dimen/SP16"
         app:fontName="dinnextltpro_medium.otf" />
 
     <RadioButton
+        android:layout_weight="0.2"
         android:id="@+id/setting_radio_image"
         android:layout_width="wrap_content"
 
         android:layout_marginRight="@dimen/DP10"
+        android:layout_centerInParent="true"
         android:layout_alignParentRight="true"
         android:layout_height="wrap_content" />
 

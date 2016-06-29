@@ -77,13 +77,13 @@
         <item name="android:background">@drawable/red_disable_button</item>
     </style>
 
-    <style name="MyRadioButtonStyle" parent="@android:style/Widget.CompoundButton.RadioButton">
+<!--    <style name="MyRadioButtonStyle" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:button">@drawable/custom_radio_button</item>
     </style>
 
     <style name="MyRadioCheckButtonStyle" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:button">@drawable/custom_radio_check_button</item>
-    </style>
+    </style>-->
 
     <style name="RedCheckoutCustomButtonStyle" parent="CustomButtonTextStyle">
         <item name="android:textColor">@android:color/white</item>

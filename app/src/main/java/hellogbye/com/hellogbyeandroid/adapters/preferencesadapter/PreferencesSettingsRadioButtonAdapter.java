@@ -98,7 +98,7 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountD
             settings_flight_title.setText(attribute.getmProfileName());
           //  settings_flight_title.setTag(attribute.getmId());
 
-            RelativeLayout settings_radio_button_ll = (RelativeLayout)v.findViewById(R.id.settings_radio_button_ll);
+            RelativeLayout settings_radio_button_ll = (RelativeLayout)v.findViewById(R.id.settings_radio_button_ll_right_side);
             settings_radio_button_ll.setTag(attribute.getmId());
             settings_radio_button_ll.setOnClickListener(new View.OnClickListener() {
                 @Override
