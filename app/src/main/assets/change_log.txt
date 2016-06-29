@@ -148,7 +148,7 @@ Code changing:
 
         Fixed Bugs:
         -----------
-HEL-987 - Can't exit app.
+        HEL-987 - Can't exit app.
 
         Code changing:
         --------------
