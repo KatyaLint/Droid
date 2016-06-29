@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private ImageButton imageButton;
     private ImageButton up_bar_favorite;
 
-    protected OnBackPressedListener onBackPressedListener;
+    private OnBackPressedListener onBackPressedListener;
 
     private UserDataVO mCurrentUser;
 
@@ -551,8 +551,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER,"");
         Intent intent = new Intent(getApplicationContext(), StartingMenuActivity.class);
-
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
 
@@ -849,6 +851,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 getResources().getString(R.string.main_exit_application),getResources().getString(R.string.ok_button), new PopUpAlertStringCB() {
                     @Override
                     public void itemSelected(String inputItem) {
+                    //    HGBUtility.removeAllFragments(getSupportFragmentManager());
                         gotToStartMenuActivity();
                     }
 
@@ -885,6 +888,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
         if(count == 1 && str.equals(TripsTabsView.class.toString())){
             LogOutPopup();
+
             return;
         }
 

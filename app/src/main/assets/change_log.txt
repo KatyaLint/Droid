@@ -140,3 +140,15 @@ Code changing:
     Code changing:
     --------------
     - Empty Notification screen
+
+
+     ------------------------------------------
+               Version 1.5.5
+     ------------------------------------------
+
+        Fixed Bugs:
+        -----------
+HEL-987 - Can't exit app.
+
+        Code changing:
+        --------------
