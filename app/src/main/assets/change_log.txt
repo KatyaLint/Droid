@@ -144,13 +144,16 @@ Code changing:
     - Radio Buttons for SettingAccount
 
 
-     ------------------------------------------
+   ------------------------------------------
                Version 1.5.5
-     ------------------------------------------
+   ------------------------------------------
 
-        Fixed Bugs:
-        -----------
-        HEL-980 - Flight Details - Stopover
+   Fixed Bugs:
+   -----------
+    HEL-980 - Flight Details - Stopover
+    HEL-987 - Can't exit app.
+    HEL-978 - selecting an airport
+    HEL-973 - Personal info - Country
 
-        Code changing:
-        --------------
+   Code changing:
+   --------------

@@ -20,7 +20,6 @@ import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -83,7 +82,8 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
         mState = (FontTextView) view.findViewById(R.id.travel_detail_province);
         mSave = (FontTextView) view.findViewById(R.id.travler_detail_save);
 
-        getStaticBooking();
+        //getStaticBooking();
+        bookingResponse = getActivityInterface().getBookingRequest();
 
         Bundle args = getArguments();
         if (args != null) {
@@ -107,9 +107,9 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
     private void selectStates(String countryPicked) {
         int countryPick = Integer.parseInt(countryPicked);
-
-        stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPick).getProvinces().size()];
-        ArrayList<ProvincesItem> provinces = getActivityInterface().getEligabileCountries().get(countryPick).getProvinces();
+        ArrayList<CountryItemVO> countries = getActivityInterface().getBookingRequest().getCountries();
+        stateArray = new String[countries.get(countryPick).getProvinces().size()];
+        ArrayList<ProvincesItem> provinces = countries.get(countryPick).getProvinces();
         for (int i = 0; i < provinces.size(); i++) {
             stateArray[i] = provinces.get(i).getProvincename();
         }
@@ -415,7 +415,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
     }
 
     private void getStaticProvince() {
-        String countryID;
+      /*  String countryID;
         if (mCountry.getTag() == null) {
             countryID = mCountry.getText().toString();
             if (countryID.equals("Canada")) {
@@ -425,8 +425,8 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             }
         } else {
             countryID = (String) mCountry.getTag();
-        }
-
+        }*/
+        String  countryID = (String) mCountry.getTag();
         ConnectionManager.getInstance(getActivity()).getStaticBookingProvince(countryID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {

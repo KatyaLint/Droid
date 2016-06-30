@@ -64,7 +64,8 @@ public class StartingMenuActivity extends Activity {
             public void onClick(View view) {
                 //TODO start Create Acount page
 
-                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+                Intent intent = new Intent(getBaseContext(), SignUpActivity.class);
+            //    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
 
             }
@@ -74,8 +75,10 @@ public class StartingMenuActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+            //    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
+                //finish();
             }
         });
 //

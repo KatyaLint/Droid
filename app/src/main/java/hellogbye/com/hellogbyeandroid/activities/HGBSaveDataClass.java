@@ -22,6 +22,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
+import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 
 
@@ -45,7 +46,7 @@ public class HGBSaveDataClass implements HGBMainInterface {
     private ArrayList<CompanionStaticRelationshipTypesVO> componionStaticDescriptionVOs;
     private ArrayList<AccountsVO> accounts;
     private UserDataVO mCurrentUser;
-    private ArrayList<CountryItemVO> mEligabileCountryList;
+    private BookingRequestVO mBookingRequestVO;
     private ArrayList<CreditCardItem> mCreditCardList;
     private ArrayList<UserDataVO> mTravelList;
     private UserTravelMainVO mUserTravelOrder;
@@ -164,13 +165,13 @@ public class HGBSaveDataClass implements HGBMainInterface {
     }
 
     @Override
-    public ArrayList<CountryItemVO> getEligabileCountries() {
-        return mEligabileCountryList;
+    public BookingRequestVO getBookingRequest() {
+        return this.mBookingRequestVO;
     }
 
     @Override
-    public void setEligabileCountries(ArrayList<CountryItemVO> mEligabileCountries) {
-        mEligabileCountryList = mEligabileCountries;
+    public void setBookingRequest(BookingRequestVO bookingRequest) {
+        this.mBookingRequestVO = bookingRequest;
     }
 
     @Override

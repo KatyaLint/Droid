@@ -31,6 +31,18 @@ public class BookingRequestVO {
         return countries;
     }
 
+
+    public void sortCountryItems(){
+        ArrayList<CountryItemVO> firstItems = new ArrayList<>();
+        for (CountryItemVO countryItemVO : countries){
+            if(countryItemVO.getCode().equals("CA") ||countryItemVO.getCode().equals("US")){
+                firstItems.add(countryItemVO);
+            }
+        }
+        countries.removeAll(firstItems);
+        countries.addAll(0,firstItems);
+
+    }
     public void setCountries(ArrayList<CountryItemVO> countries) {
         this.countries = countries;
     }

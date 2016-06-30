@@ -201,7 +201,8 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
         final FontEditTextView[] inputs = new FontEditTextView[]{change_pswd_current_pswd, change_pswd_new_pswd, change_pswd_confirm_new_pswd};
 
-        getStaticBooking();
+        bookingResponse = getActivityInterface().getBookingRequest();
+        //getStaticBooking();
 
 
 
@@ -290,11 +291,11 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
         changeNewUser();
 
-
-        countryMaxValueSize = getActivityInterface().getEligabileCountries().size();
-        countryarray = new String[getActivityInterface().getEligabileCountries().size()];
-        for (int i = 0; i < getActivityInterface().getEligabileCountries().size(); i++) {
-            countryarray[i] = getActivityInterface().getEligabileCountries().get(i).getName();
+        ArrayList<CountryItemVO> countries = getActivityInterface().getBookingRequest().getCountries();
+        countryMaxValueSize = countries.size();
+        countryarray = new String[countries.size()];
+        for (int i = 0; i < countries.size(); i++) {
+            countryarray[i] = countries.get(i).getName();
         }
 
        // selectStates("0");
@@ -370,11 +371,12 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
     private void selectStates(String countryPicked){
         int countryPick = Integer.parseInt(countryPicked);
-        ArrayList<CountryItemVO> countries = getActivityInterface().getEligabileCountries();
+        ArrayList<CountryItemVO> countries = getActivityInterface().getBookingRequest().getCountries();
+        //ArrayList<CountryItemVO> countries = getActivityInterface().getCountries();
         ArrayList<ProvincesItem> province = countries.get(countryPick).getProvinces();
         maxValueForStateDialog = province.size();
-        stateArray = new String[getActivityInterface().getEligabileCountries().get(countryPick).getProvinces().size()];
-        ArrayList<ProvincesItem> provinces = getActivityInterface().getEligabileCountries().get(countryPick).getProvinces();
+        stateArray = new String[countries.get(countryPick).getProvinces().size()];
+        ArrayList<ProvincesItem> provinces = countries.get(countryPick).getProvinces();
         for (int i = 0; i < provinces.size(); i++) {
             stateArray[i] = provinces.get(i).getProvincename();
         }
@@ -502,6 +504,9 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
             @Override
             public void onSuccess(Object data) {
                 bookingResponse = (BookingRequestVO) data;
+
+             //   bookingResponse = getActivityInterface().getCountries();
+
                 Log.i("",bookingResponse.toString());
 
                 setCountryAndState();
@@ -522,7 +527,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
             if(country.getCode().equals(currentUser.getCountry())){
                 companion_personal_settings_location_country.setText(country.getName());
                 companion_personal_settings_location_country.setTag(country.getCode());
-                String countryID;
+              /*  String countryID;
                 if( companion_personal_settings_location_country.getTag() == null){
                     countryID =  companion_personal_settings_location_country.getText().toString();
                     companion_personal_settings_location_country.setTag(countryID);
@@ -533,8 +538,9 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
                     }
                 }else{
                     countryID = (String) companion_personal_settings_location_country.getTag();
-                }
+                }*/
 
+                String countryID = (String) companion_personal_settings_location_country.getTag();
                 ConnectionManager.getInstance(getActivity()).getStaticBookingProvince(countryID, new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
@@ -558,8 +564,8 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
     }
 
     private void getStaticProvince() {
-        String countryID;
-        if( companion_personal_settings_location_country.getTag() == null){
+        //String countryID;
+       /* if( companion_personal_settings_location_country.getTag() == null){
             countryID =  companion_personal_settings_location_country.getText().toString();
             if (countryID.equals("Canada")) {
                 countryID = "CA";
@@ -568,8 +574,9 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
             }
         }else{
             countryID = (String) companion_personal_settings_location_country.getTag();
-        }
+        }*/
 
+        String countryID = (String) companion_personal_settings_location_country.getTag();
         ConnectionManager.getInstance(getActivity()).getStaticBookingProvince(countryID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {

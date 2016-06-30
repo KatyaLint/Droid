@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
@@ -82,6 +81,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
+import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.network.Parser;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
@@ -199,6 +199,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         getCompanionsFromServer();
    //     initRightPane();
 
+        getCountries();
+
         boolean locationToken = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.HGB_LOCATION_TOKEN, true);
         String location = HGBUtility.getLocation(MainActivity.this, locationToken);
         if(location != null && hgbSaveDataClass.getTravelOrder()!= null){
@@ -209,6 +211,24 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     }
 
+    private void getCountries(){
+        ConnectionManager.getInstance(MainActivity.this).getBookingOptions(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                //responceText.setText((String) data);
+                BookingRequestVO bookingrequest = (BookingRequestVO)data;
+                hgbSaveDataClass.setBookingRequest(bookingrequest);
+                hgbSaveDataClass.getBookingRequest().sortCountryItems();
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
+    }
 
     public void getAccountsProfiles() {
         ConnectionManager.getInstance(MainActivity.this).getUserProfileAccounts(new ConnectionManager.ServerRequestListener() {
@@ -550,10 +570,12 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER,"");
+
+
         Intent intent = new Intent(getApplicationContext(), StartingMenuActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+
         finish();
     }
 

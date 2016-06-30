@@ -212,7 +212,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
 
 
      //   getFlowInterface().loadJSONFromAsset();
-        getCountries();
+        //getCountries();
 
 
         account_details_image.setOnClickListener(imageClickListener);
@@ -397,7 +397,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
             public void onSuccess(Object data) {
                 //responceText.setText((String) data);
                 BookingRequestVO bookingrequest = (BookingRequestVO)data;
-                getActivityInterface().setEligabileCountries(bookingrequest.getCountries());
+                //getActivityInterface().setCountries(bookingrequest.getCountries());
             }
 
             @Override

@@ -97,8 +97,9 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         super.onViewCreated(view, savedInstanceState);
 
         progressDialog = new ProgressDialog(getActivity());
-        getStaticBooking();
+        // getStaticBooking();
 
+        bookingResponse = getActivityInterface().getBookingRequest();
         init(view);
 
         listOfPattern = new ArrayList<String>();
@@ -491,7 +492,6 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
     }
 
     private void getStaticBooking() {
-
         ConnectionManager.getInstance(getActivity()).getBookingOptions(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
@@ -508,8 +508,8 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
     }
 
     private void getStaticProvince() {
-        String countryID;
-        if( mCardCountry.getTag() == null){
+        //String countryID;
+    /*    if( mCardCountry.getTag() == null){
             countryID =  mCardCountry.getText().toString();
             if (countryID.equals("Canada")) {
                 countryID = "CA";
@@ -517,9 +517,9 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
                 countryID = "US";
             }
         }else{
-            countryID = (String) mCardCountry.getTag();
-        }
 
+        }*/
+        String countryID = (String) mCardCountry.getTag();
         ConnectionManager.getInstance(getActivity()).getStaticBookingProvince(countryID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {

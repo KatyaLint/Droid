@@ -39,12 +39,6 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.login_layout);
 
-
-//        if(!"".equals(hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.TOKEN,""))){
-//            if(hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME,false)){
-//                goToMainActivity();
-//            }
-//        }
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         mEmailEditText = (EditText) findViewById(R.id.email);
         mPasswordEditText = (EditText) findViewById(R.id.password);
@@ -156,44 +150,5 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
-
-
-//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-//                LoginActivity.this);
-//
-//        // set prompts.xml to alertdialog builder
-//        alertDialogBuilder.setView(promptsView);
-//
-//
-//        // set dialog message
-//        alertDialogBuilder
-//                .setCancelable(false)
-//                .setPositiveButton("OK",
-//                        new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int id) {
-//                                ConnectionManager.getInstance(LoginActivity.this).resetPasswordWithEmail(userInput.getText().toString(), new ConnectionManager.ServerRequestListener() {
-//                                    @Override
-//                                    public void onSuccess(Object data) {
-//                                        Toast.makeText(getApplicationContext(), R.string.email_reset_succesfully, Toast.LENGTH_SHORT).show();
-//                                    }
-//
-//                                    @Override
-//                                    public void onError(Object data) {
-//                                        HGBErrorHelper errorHelper = new HGBErrorHelper();
-//                                        errorHelper.show(getFragmentManager(), (String) data);
-//                                    }
-//                                });
-//                            }
-//                        })
-//                .setNegativeButton("Cancel",
-//                        new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int id) {
-//                                dialog.cancel();
-//                            }
-//                        });
-//        // create alert dialog
-//        AlertDialog alertDialog = alertDialogBuilder.create();
-//        // show it
-//        alertDialog.show();
     }
 }

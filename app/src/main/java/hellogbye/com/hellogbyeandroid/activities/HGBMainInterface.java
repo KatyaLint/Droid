@@ -17,6 +17,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelatio
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
+import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 
 /**
  * Created by arisprung on 9/20/15.
@@ -48,8 +49,8 @@ public interface HGBMainInterface {
     UserDataVO getCurrentUser();
     void setCurrentUser(UserDataVO currentUser);
 
-    ArrayList<CountryItemVO> getEligabileCountries();
-    void setEligabileCountries(ArrayList<CountryItemVO> mEligabileCountries);
+    BookingRequestVO getBookingRequest();
+    void setBookingRequest(BookingRequestVO bookingRequest);
 
     ArrayList<CreditCardItem> getCreditCards();
     void setCreditCards( ArrayList<CreditCardItem> mCreditCardsList);

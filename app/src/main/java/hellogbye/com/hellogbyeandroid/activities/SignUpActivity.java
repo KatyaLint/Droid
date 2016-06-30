@@ -147,6 +147,9 @@ public class SignUpActivity extends AppCompatActivity {
                                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent = new Intent(getApplicationContext(), StartingMenuActivity.class);
+                                     //   intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
                                         startActivity(intent);
                                         finish();
                                     }
@@ -244,14 +247,16 @@ public class SignUpActivity extends AppCompatActivity {
             getStaticProvince();
         }
     };
+
+
     private void getStaticBooking(){
 
             ConnectionManager.getInstance(SignUpActivity.this).getBookingOptions(new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
                      bookingResponse = (BookingRequestVO)data;
+                    sortCountryItems();
                     //BookingRequest bookingrequest = (BookingRequest)data;
-
                 }
 
                 @Override
@@ -263,6 +268,19 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             });
         }
+
+
+    public void sortCountryItems(){
+        ArrayList<CountryItemVO> countries = bookingResponse.getCountries();
+        ArrayList<CountryItemVO> firstItems = new ArrayList<>();
+        for (CountryItemVO countryItemVO : countries){
+            if(countryItemVO.getCode().equals("CA") ||countryItemVO.getCode().equals("US")){
+                firstItems.add(countryItemVO);
+            }
+        }
+        countries.removeAll(firstItems);
+        countries.addAll(0,firstItems);
+    }
 
     private void getStaticProvince(){
         String countryID =  userData.getCountry();
@@ -276,8 +294,6 @@ public class SignUpActivity extends AppCompatActivity {
                 }else{
                     sign_up_province_name.setVisibility(View.GONE);
                 }
-            //    bookingResponse = (BookingRequestVO)data;
-                //BookingRequest bookingrequest = (BookingRequest)data;
             }
 
             @Override
