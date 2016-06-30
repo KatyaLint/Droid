@@ -79,7 +79,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             viewHolder.stop_over_include_layout.setVisibility(View.GONE);
 
         } else if (legFlightVO.getmType().equals("StopOver")) {
-            viewHolder.stop_over_txt.setText(" city " +legFlightVO.getmCityName()+", airport " +legFlightVO.getmAirportName());
+            viewHolder.stop_over_txt.setText(" " +legFlightVO.getmCityName()+", " +legFlightVO.getmAirportName() + " Airport");
             viewHolder.stop_over_time.setText((int) legFlightVO.getmDurationHours() + "h " + (int) legFlightVO.getmDurationMinutes() + "m");
 
             viewHolder.includeAirplaneDetails.setVisibility(View.GONE);

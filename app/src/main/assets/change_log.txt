@@ -136,10 +136,12 @@ Code changing:
     HEL-979 - Flight Details
     HEL-986 - Itinerary - City name
     HEL-978 - selecting an airport
+    HEL-987 - Can't exit app.
 
     Code changing:
     --------------
     - Empty Notification screen
+    - Radio Buttons for SettingAccount
 
 
      ------------------------------------------
@@ -148,7 +150,7 @@ Code changing:
 
         Fixed Bugs:
         -----------
-        HEL-987 - Can't exit app.
+        HEL-980 - Flight Details - Stopover
 
         Code changing:
         --------------
