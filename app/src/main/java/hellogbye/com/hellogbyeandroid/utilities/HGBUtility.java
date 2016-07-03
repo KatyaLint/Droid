@@ -133,8 +133,10 @@ public class HGBUtility {
         if(bitmap != null) {
             bitmap = Bitmap.createScaledBitmap(bitmap, 60, 60, true);
         }else{
-            Drawable myDrawable = context.getDrawable(R.drawable.profile_image);
-            bitmap = ((BitmapDrawable) myDrawable).getBitmap();
+            Drawable myDrawable = ContextCompat.getDrawable(context, R.drawable.profile_image);//context.getDrawable(R.drawable.profile_image);
+            if(myDrawable != null) {
+                bitmap = ((BitmapDrawable) myDrawable).getBitmap();
+            }
         }
 
 

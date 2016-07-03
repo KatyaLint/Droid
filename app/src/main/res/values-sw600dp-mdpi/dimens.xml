@@ -1,0 +1,69 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="DP0">0dp</dimen>
+    <dimen name="DP1">2dp</dimen>
+    <dimen name="DP2">3dp</dimen>
+    <dimen name="DP4">6dp</dimen>
+    <dimen name="DP6">9dp</dimen>
+    <dimen name="DP8">12dp</dimen>
+    <dimen name="DP10">15dp</dimen>
+    <dimen name="DP14">21dp</dimen>
+    <dimen name="DP16">24dp</dimen>
+    <dimen name="DP18">27dp</dimen>
+    <dimen name="DP20">30dp</dimen>
+    <dimen name="DP22">33dp</dimen>
+    <dimen name="DP24">36dp</dimen>
+    <dimen name="DP26">39dp</dimen>
+
+    <dimen name="DP30">45dp</dimen>
+    <dimen name="DP34">51dp</dimen>
+    <dimen name="DP38">57dp</dimen>
+    <dimen name="DP44">66dp</dimen>
+    <dimen name="DP50">75dp</dimen>
+    <dimen name="DP54">81dp</dimen>
+    <dimen name="DP60">60dp</dimen>
+    <dimen name="DP80">120dp</dimen>
+    <dimen name="DP82">123dp</dimen>
+    <dimen name="DP90">135dp</dimen>
+    <dimen name="DP100">150dp</dimen>
+    <dimen name="DP104">156dp</dimen>
+    <dimen name="DP110">165dp</dimen>
+    <dimen name="DP115">173dp</dimen>
+    <dimen name="DP120">180dp</dimen>
+
+    <dimen name="DP130">130dp</dimen>
+    <dimen name="DP140">210dp</dimen>
+    <dimen name="DP144">216dp</dimen>
+    <dimen name="DP150">225dp</dimen>
+    <dimen name="DP160">240dp</dimen>
+    <dimen name="DP180">270dp</dimen>
+    <dimen name="DP200">300dp</dimen>
+    <dimen name="DP250">375dp</dimen>
+    <dimen name="DP280">420dp</dimen>
+    <dimen name="DP300">450dp</dimen>
+    <dimen name="DP340">510dp</dimen>
+
+
+
+    <dimen name="DP400">600dp</dimen>
+    <dimen name="DP450">675dp</dimen>
+
+    <dimen name="DP_64">-64dp</dimen>
+
+
+    <dimen name="SP10">15sp</dimen>
+    <dimen name="SP12">18sp</dimen>
+    <dimen name="SP13">20sp</dimen>
+    <dimen name="SP14">21sp</dimen>
+    <dimen name="SP16">24sp</dimen>
+    <dimen name="SP18">27sp</dimen>
+    <dimen name="SP20">30sp</dimen>
+    <dimen name="SP26">36sp</dimen>
+    <dimen name="SP30">45sp</dimen>
+    <dimen name="SP32">48sp</dimen>
+
+
+</resources>

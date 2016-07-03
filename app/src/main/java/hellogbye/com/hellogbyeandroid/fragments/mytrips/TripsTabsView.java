@@ -92,6 +92,7 @@ public class TripsTabsView extends HGBAbstractFragment {
                     TextView tv = (TextView) mTabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
                     tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_c3cad3));
                     tv.setTypeface(textFont);
+                  //  tv.setTextSize(R.dimen.SP16);
                     tv.setTransformationMethod(null);
 
                 }
@@ -99,6 +100,7 @@ public class TripsTabsView extends HGBAbstractFragment {
                 TextView tv = (TextView) mTabHost.getCurrentTabView().findViewById(android.R.id.title); //for Selected Tab
                 tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.white));
                 tv.setTypeface(textFont);
+               // tv.setTextSize(R.dimen.SP16);
                 tv.setTransformationMethod(null);
 
             }

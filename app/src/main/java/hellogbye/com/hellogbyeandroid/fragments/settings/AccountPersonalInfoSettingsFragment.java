@@ -418,7 +418,6 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         //get all user information and send to server
 
 
-
         String str_companion_personal_settings_name = companion_personal_settings_name.getText().toString();
         if (!str_companion_personal_settings_name.isEmpty()) {
             newUser.setFirstname(str_companion_personal_settings_name);
@@ -482,7 +481,6 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
 
 
-
         ConnectionManager.getInstance(getActivity()).putUserSettings(newUser, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
@@ -498,28 +496,6 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
     }
 
 
-    private void getStaticBooking() {
-
-        ConnectionManager.getInstance(getActivity()).getBookingOptions(new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
-                bookingResponse = (BookingRequestVO) data;
-
-             //   bookingResponse = getActivityInterface().getCountries();
-
-                Log.i("",bookingResponse.toString());
-
-                setCountryAndState();
-
-            }
-
-            @Override
-            public void onError(Object data) {
-                ErrorMessage(data);
-            }
-        });
-    }
-
     private void setCountryAndState() {
 
         for( CountryItemVO country:bookingResponse.getCountries()){
@@ -527,18 +503,6 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
             if(country.getCode().equals(currentUser.getCountry())){
                 companion_personal_settings_location_country.setText(country.getName());
                 companion_personal_settings_location_country.setTag(country.getCode());
-              /*  String countryID;
-                if( companion_personal_settings_location_country.getTag() == null){
-                    countryID =  companion_personal_settings_location_country.getText().toString();
-                    companion_personal_settings_location_country.setTag(countryID);
-                    if (countryID.equals("Canada")) {
-                        countryID = "CA";
-                    } else if (countryID.equals("UnitedStates")) {
-                        countryID = "US";
-                    }
-                }else{
-                    countryID = (String) companion_personal_settings_location_country.getTag();
-                }*/
 
                 String countryID = (String) companion_personal_settings_location_country.getTag();
                 ConnectionManager.getInstance(getActivity()).getStaticBookingProvince(countryID, new ConnectionManager.ServerRequestListener() {
@@ -564,17 +528,6 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
     }
 
     private void getStaticProvince() {
-        //String countryID;
-       /* if( companion_personal_settings_location_country.getTag() == null){
-            countryID =  companion_personal_settings_location_country.getText().toString();
-            if (countryID.equals("Canada")) {
-                countryID = "CA";
-            } else if (countryID.equals("UnitedStates")) {
-                countryID = "US";
-            }
-        }else{
-            countryID = (String) companion_personal_settings_location_country.getTag();
-        }*/
 
         String countryID = (String) companion_personal_settings_location_country.getTag();
         ConnectionManager.getInstance(getActivity()).getStaticBookingProvince(countryID, new ConnectionManager.ServerRequestListener() {

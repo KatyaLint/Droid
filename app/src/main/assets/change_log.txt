@@ -154,6 +154,8 @@ Code changing:
     HEL-987 - Can't exit app.
     HEL-978 - selecting an airport
     HEL-973 - Personal info - Country
+    HEL-986 - Itinerary - City name
 
    Code changing:
    --------------
+   - new dimension file for big devices, the sizes is regular dimention*1.5

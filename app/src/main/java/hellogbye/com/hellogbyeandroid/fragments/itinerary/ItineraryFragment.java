@@ -112,6 +112,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
         textView.setTextAppearance(activity, R.style.GridViewPassangersTextStyle);
         textView.setText(passenger.getmName());
         textView.setGravity(Gravity.CENTER);
+        textView.setTextSize(R.dimen.SP16);
     //    LayoutParams params = new LayoutParams((int) getResources().getDimension(R.dimen.DP150),LayoutParams.WRAP_CONTENT); //width 150
 
         textView.setLayoutParams(params);
@@ -647,7 +648,9 @@ public class ItineraryFragment extends HGBAbstractFragment {
         Point size = new Point();
         display.getSize(size);
         float dp =  HGBUtility.convertPixelsToDp(size.x,activity);//convertPixelsToDp(size.x, activity);
-        iScreenSize = dp + activity.getResources().getDimension(R.dimen.DP50);
+        iScreenSize = getActivity().getResources().getDimension(R.dimen.DP250); //dp + activity.getResources().getDimension(R.dimen.DP50);
+        System.out.println("Kate screen size = " + iScreenSize);
+
     }
 
 
@@ -669,7 +672,8 @@ public class ItineraryFragment extends HGBAbstractFragment {
             }
         });
 
-        getDimentions();
+        iScreenSize = getActivity().getResources().getDimension(R.dimen.DP250); //dp + activity.getResources().getDimension(R.dimen.DP50);
+        //getDimentions();
         createItinenaryView(rootView);
 
         getActivityInterface().setAlternativeFlights(null);
