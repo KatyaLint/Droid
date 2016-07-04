@@ -115,7 +115,7 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
                 viewHolder.companion_confirmation_layout.setVisibility(View.VISIBLE);
             }else {
 
-                viewHolder.companion_request.setText(item.getmConfirmationstatus());
+             //   viewHolder.companion_request.setText(item.getmConfirmationstatus());
                 viewHolder.companion_confirmation_layout.setVisibility(View.GONE);
             }
 

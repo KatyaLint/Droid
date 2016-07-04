@@ -155,6 +155,8 @@ Code changing:
     HEL-978 - selecting an airport
     HEL-973 - Personal info - Country
     HEL-986 - Itinerary - City name
+    HEL-971 - My Companions - Invite new travel companion
+    HEL-868 - pending request 1.5 +1.5.4
 
    Code changing:
    --------------

@@ -46,8 +46,8 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
     private CompanionsSwipeItemsAdapter searchListAdapter;
     private View popup_companion_new;
     private FontEditTextView[] inputs;
-    private FontEditTextView companion_editTextDialog_name;
-    private FontEditTextView companion_editTextDialog_last_name;
+/*    private FontEditTextView companion_editTextDialog_name;
+    private FontEditTextView companion_editTextDialog_last_name;*/
     private FontEditTextView companion_editTextDialog;
     private LinearLayout companion_empty_view;
     private View rootView;
@@ -104,10 +104,10 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
 
         popup_companion_new = inflater.inflate(R.layout.popup_layout_with_edit_text_new, null);
 
-        companion_editTextDialog_name = (FontEditTextView)popup_companion_new.findViewById(R.id.companion_editTextDialog_name);
-        companion_editTextDialog_last_name = (FontEditTextView)popup_companion_new.findViewById(R.id.companion_editTextDialog_last_name);
+/*        companion_editTextDialog_name = (FontEditTextView)popup_companion_new.findViewById(R.id.companion_editTextDialog_name);
+        companion_editTextDialog_last_name = (FontEditTextView)popup_companion_new.findViewById(R.id.companion_editTextDialog_last_name);*/
         companion_editTextDialog = (FontEditTextView) popup_companion_new.findViewById(R.id.companion_editTextDialog);
-        inputs = new FontEditTextView[]{companion_editTextDialog_name, companion_editTextDialog_last_name, companion_editTextDialog };
+        inputs = new FontEditTextView[]{companion_editTextDialog };
 
         FloatingActionButton companion_invite_companion = (FloatingActionButton) rootView.findViewById(R.id.fab);
         companion_invite_companion.setOnClickListener(new View.OnClickListener(){
@@ -285,7 +285,37 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
 
     private void addTravelCompanion() {
 
-        HGBUtility.showAlertPopAddCompanion(getActivity(),inputs,popup_companion_new,getResources().getString(R.string.component_invite_new_companion),
+
+        HGBUtility.showAlertPopUp(getActivity(), companion_editTextDialog, popup_companion_new, getResources().getString(R.string.edit_trip_name)
+                ,getResources().getString(R.string.save_button),
+                new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+                        String[] parts = inputItem.split("&");
+                        ConnectionManager.getInstance(getActivity()).postCompanions("","",inputItem, new ConnectionManager.ServerRequestListener() {
+                            @Override
+                            public void onSuccess(Object data) {
+                                getCompanions();
+
+                            }
+
+                            @Override
+                            public void onError(Object data) {
+                                ErrorMessage(data);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void itemCanceled() {
+
+                    }
+                });
+
+
+
+
+      /*  HGBUtility.showAlertPopAddCompanion(getActivity(),inputs,popup_companion_new,getResources().getString(R.string.component_invite_new_companion),
                 new PopUpAlertStringCB(){
 
                     @Override
@@ -310,7 +340,8 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
                     public void itemCanceled() {
 
                     }
-                });
+                });*/
+
     }
 
 
