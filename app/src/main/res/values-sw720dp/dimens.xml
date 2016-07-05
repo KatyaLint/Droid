@@ -1,0 +1,72 @@
+<resources>
+    <!-- Sizes 2x. -->
+    <dimen name="DP0">0dp</dimen>
+    <dimen name="DP1">2dp</dimen>
+    <dimen name="DP2">4dp</dimen>
+    <dimen name="DP4">8dp</dimen>
+    <dimen name="DP6">12dp</dimen>
+    <dimen name="DP8">16dp</dimen>
+    <dimen name="DP10">20dp</dimen>
+    <dimen name="DP14">28dp</dimen>
+    <dimen name="DP16">32dp</dimen>
+    <dimen name="DP18">36dp</dimen>
+    <dimen name="DP20">40dp</dimen>
+    <dimen name="DP22">44dp</dimen>
+    <dimen name="DP24">48dp</dimen>
+    <dimen name="DP26">52dp</dimen>
+
+    <dimen name="DP30">60dp</dimen>
+    <dimen name="DP34">68dp</dimen>
+    <dimen name="DP38">76dp</dimen>
+    <dimen name="DP44">88dp</dimen>
+    <dimen name="DP50">100dp</dimen>
+    <dimen name="DP54">108dp</dimen>
+    <dimen name="DP60">120dp</dimen>
+    <dimen name="DP80">160dp</dimen>
+    <dimen name="DP82">164dp</dimen>
+    <dimen name="DP90">180dp</dimen>
+    <dimen name="DP100">200dp</dimen>
+    <dimen name="DP104">208dp</dimen>
+    <dimen name="DP110">220dp</dimen>
+    <dimen name="DP115">230dp</dimen>
+    <dimen name="DP120">240dp</dimen>
+
+    <dimen name="DP130">260dp</dimen>
+    <dimen name="DP140">280dp</dimen>
+    <dimen name="DP144">288dp</dimen>
+    <dimen name="DP150">300dp</dimen>
+    <dimen name="DP160">320dp</dimen>
+    <dimen name="DP180">360dp</dimen>
+    <dimen name="DP200">400dp</dimen>
+    <dimen name="DP250">500dp</dimen>
+    <dimen name="DP280">560dp</dimen>
+    <dimen name="DP300">600dp</dimen>
+    <dimen name="DP340">680dp</dimen>
+    <dimen name="DP400">800dp</dimen>
+    <dimen name="DP450">900dp</dimen>
+
+    <dimen name="DP_64">-64dp</dimen>
+
+    <dimen name="SP10">20sp</dimen>
+    <dimen name="SP12">24sp</dimen>
+    <dimen name="SP13">26sp</dimen>
+    <dimen name="SP14">28sp</dimen>
+    <dimen name="SP16">32sp</dimen>
+    <dimen name="SP18">36sp</dimen>
+    <dimen name="SP20">40sp</dimen>
+    <dimen name="SP26">52sp</dimen>
+    <dimen name="SP30">60sp</dimen>
+    <dimen name="SP32">64sp</dimen>
+<!--    <dimen name="SP10">20dip</dimen>
+    <dimen name="SP12">24dip</dimen>
+    <dimen name="SP13">26dip</dimen>
+    <dimen name="SP14">28dip</dimen>
+    <dimen name="SP16">32dip</dimen>
+    <dimen name="SP18">36dip</dimen>
+    <dimen name="SP20">40dip</dimen>
+    <dimen name="SP26">52dip</dimen>
+    <dimen name="SP30">60dip</dimen>
+    <dimen name="SP32">64dip</dimen>-->
+
+
+</resources>

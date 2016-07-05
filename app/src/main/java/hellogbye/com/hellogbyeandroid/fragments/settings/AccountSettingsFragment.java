@@ -123,7 +123,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
                 .findViewById(R.id.companion_editTextDialog);
 
         final FontTextView text = (FontTextView) promptsView
-                .findViewById(R.id.component_popup_text);
+                .findViewById(R.id.component_popup_logout_text);
 
 
         LinearLayout btn_account_logout_button = (LinearLayout)rootView.findViewById(R.id.account_logout_button);
