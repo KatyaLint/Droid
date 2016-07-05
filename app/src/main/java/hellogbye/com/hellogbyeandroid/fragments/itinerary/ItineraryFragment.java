@@ -462,15 +462,15 @@ public class ItineraryFragment extends HGBAbstractFragment {
         TextView grid_traveler_flight_stops = (TextView)child.findViewById(R.id.grid_traveler_flight_stops);
         grid_traveler_flight_stops.setText(node.getmOrigin() + " - " + node.getmDestination());
 
-     /*   TextView grid_flight_operator = (TextView)child.findViewById(R.id.grid_flight_operator);
-        grid_flight_operator.setText(node.getmOperatorName() + " " + node.getmEquipment());
+        TextView grid_flight_operator = (TextView)child.findViewById(R.id.grid_flight_operator);
+        grid_flight_operator.setText("Depart: " + HGBUtility.parseDateToHHmm(node.getmDeparture()) +" " + "Arrival: "+HGBUtility.parseDateToHHmm(node.getmArrival()));
 
         //type
-        grid_flight_operator.setTag(node.getmType());*/
+        //grid_flight_operator.setTag(node.getmType());
 
 
-     /*   TextView grid_flight_time = (TextView)child.findViewById(R.id.grid_flight_time);
-        grid_flight_time.setText(node.getmTravelTime());*/
+        TextView grid_flight_time = (TextView)child.findViewById(R.id.grid_flight_time);
+        grid_flight_time.setText(node.getmFlightTime());
 
 
         LayoutParams outerLayoutParams = new LayoutParams((int)iScreenSize,cellHieght);
@@ -643,7 +643,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
     }
 
 
-    private void getDimentions(){
+/*    private void getDimentions(){
         Display display = activity.getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -651,7 +651,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
         iScreenSize = getActivity().getResources().getDimension(R.dimen.DP200); //dp + activity.getResources().getDimension(R.dimen.DP50);
 
 
-    }
+    }*/
 
 
 
@@ -660,7 +660,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        cellHieght = (int) getResources().getDimension(R.dimen.DP120);
+        cellHieght = (int) getResources().getDimension(R.dimen.DP150);
         activity = getActivity();
         View rootView = inflater.inflate(R.layout.new_grid_main_table, container, false);
 

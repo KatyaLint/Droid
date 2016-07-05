@@ -158,6 +158,7 @@ Code changing:
     HEL-971 - My Companions - Invite new travel companion
     HEL-868 - pending request 1.5 +1.5.4
     HEL-1009 - date display
+    HEL-1004 - grid - flight duration
 
    Code changing:
    --------------

@@ -40,12 +40,21 @@
             android:layout_below="@+id/grid_flight_destination_from"
             android:id="@+id/grid_traveler_flight_price"
             style="@style/GridTextStyle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="$100000"
             android:textColor="@color/red_pink"
             app:fontName="dinnextltpro_medium.otf" />
 
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            style="@style/GridTextStyle"
+            android:layout_marginLeft="@dimen/DP6"
+            android:layout_below="@+id/grid_flight_destination_from"
+            android:layout_toRightOf="@+id/grid_traveler_flight_price"
+            android:textSize="@dimen/SP10"
+            android:text="@string/itinerary_inner_flight_item"/>
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_below="@+id/grid_traveler_flight_price"
@@ -59,25 +68,27 @@
             android:textColor="@color/dark_teal"
             app:fontName="dinnextltpro_medium.otf" />
 
-<!--        <hellogbye.com.hellogbyeandroid.views.FontTextView
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_below="@+id/grid_traveler_flight_stops"
             android:id="@+id/grid_flight_operator"
             style="@style/GridTextStyle"
+            android:textSize="@dimen/SP12"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="AC222"
+            android:text="Departure : 17:35 Arrival: 20:41"
             android:textColor="@color/COLOR_555555"
-            app:fontName="dinnextltpro_regular.otf" />
+            app:fontName="dinnextltpro_light.otf" />
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_below="@+id/grid_flight_operator"
             android:id="@+id/grid_flight_time"
             style="@style/GridTextStyle"
+            android:textSize="@dimen/SP12"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="14:32"
             android:textColor="@color/COLOR_555555"
-            app:fontName="dinnextltpro_regular.otf" />-->
+            app:fontName="dinnextltpro_light.otf" />
 
     </RelativeLayout>
 </LinearLayout>

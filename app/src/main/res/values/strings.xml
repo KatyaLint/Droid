@@ -103,6 +103,7 @@
     <string name="itinerary_no_items">No items</string>
     <string name="grid_has_been_updated">OK, the grid has been updated</string>
     <string name="itinerary_try_again">Itinerary Try Again</string>
+    <string name="itinerary_inner_flight_item">(Incl.Taxes, fees &amp; charges)</string>
 
 
     <string name="settings_search_hunt">Looking for someone?</string>
