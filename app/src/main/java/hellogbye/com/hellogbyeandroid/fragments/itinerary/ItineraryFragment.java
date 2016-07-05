@@ -168,7 +168,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
                 long difference = HGBUtility.dayDifference(departure,arrival) ;
 
 
-                departure = HGBUtility.parseDateToddMMyyyyForPayment(departure); //parse return 23 is 2 different scenario need time not just date
+                departure = HGBUtility.parseDateToEEEMMMDyy(departure); //parse return 23 is 2 different scenario need time not just date
            //      HGBUtility.parseDateToddMMyyyyMyTrip(departure);
                  if(node.getmType().equals(NodeTypeEnum.HOTEL.getType())){
                      String time = HGBUtility.addDayHourToDate(departure);

@@ -502,9 +502,9 @@ public class HGBUtility {
     }
 
 
-    public static String parseDateToddMMyyyy(String time) {
+    public static String parseDateToEEEMMMDyy(String time) {
 
-        String outputPattern = "EEE,MM dd,yyyy";
+        String outputPattern = "EEE, MMM d, yy";//"EEE,MM dd,yyyy";
         SimpleDateFormat inputFormat = new SimpleDateFormat(BASE_SERVER_TIME_ZONE);
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
 
@@ -588,7 +588,7 @@ public class HGBUtility {
 
     public static String addDayHourToDate(String dateToIncr) {
         String newDate="";
-        String outputPattern = "MM/dd/yyyy";
+        String outputPattern = "EEE, MMM d, yy";
         DateFormat df = new SimpleDateFormat(outputPattern);
 
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
@@ -661,6 +661,25 @@ public class HGBUtility {
 
         return newDate;
     }*/
+
+
+    public static String parseDateToddMMyyyy(String time) {
+
+        String outputPattern = "MM/dd/yyyy";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(BASE_SERVER_TIME_ZONE);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+        Date date = null;
+        String str = null;
+
+        try {
+            date = getDateFromServer(time);
+            str = outputFormat.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
 
     public static String parseDateToddMMyyyyForPayment(String time) {
 
