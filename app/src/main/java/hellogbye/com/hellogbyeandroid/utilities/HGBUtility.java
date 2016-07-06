@@ -308,6 +308,7 @@ public class HGBUtility {
 
             transaction.replace(R.id.content_frame, fragment, fragment.getClass().toString());
 
+
             if (isAddToBackStack) {
                 transaction.addToBackStack(fragment.getClass().toString());
                 getFragmentStack().push(fragment);
@@ -320,6 +321,16 @@ public class HGBUtility {
         }
 
     }
+
+    public static boolean isFragmentInBackstack(final FragmentManager fragmentManager, final String fragmentTagName) {
+        for (int entry = 0; entry < fragmentManager.getBackStackEntryCount(); entry++) {
+            if (fragmentTagName.equals(fragmentManager.getBackStackEntryAt(entry).getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public static long dayDifference(String startDay, String endDate){
         Date date1 = getDateFromServer(startDay);
@@ -369,13 +380,15 @@ public class HGBUtility {
         fragmentStack.clear();
     }
 
+
+
     public static boolean clearBackStackAndGoToNextFragment(FragmentManager manager) {
 
         if(getFragmentStack().size() >= 2){
             FragmentTransaction fragmentTransaction =  manager.beginTransaction();
+
             fragmentTransaction.hide(getFragmentStack().pop());
             //fragmentStack.pop();
-
 
             Fragment fragmentTemp = getFragmentStack().lastElement();
             goToNextFragmentIsAddToBackStack(manager,fragmentTemp,false,false);

@@ -19,6 +19,7 @@ public interface HGBFlowInterface {
     void callRefreshItinerary(final int fragment);
     CostumeToolBar getToolBar();
 
+    void goToFragment(int fragment, Bundle bundle, boolean stashFragment);
     void goToFragment(int fragment, Bundle bundle);
 
     void continueFlow(int fragment);

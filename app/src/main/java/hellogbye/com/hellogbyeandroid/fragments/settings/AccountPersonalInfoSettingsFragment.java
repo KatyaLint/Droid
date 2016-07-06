@@ -15,8 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.settingaccount.AccountSettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSettingsMainClass;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
@@ -467,13 +469,15 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         }
 
 
-        String str_companion_personal_settings_location_country = companion_personal_settings_location_country.getTag().toString();
-        if (!str_companion_personal_settings_location_country.isEmpty()) {
+        String str_companion_personal_settings_location_countryTag = (String) companion_personal_settings_location_country.getTag();
+        if (str_companion_personal_settings_location_countryTag != null && !str_companion_personal_settings_location_countryTag.isEmpty()) {
+            String str_companion_personal_settings_location_country =  str_companion_personal_settings_location_countryTag.toString();
             newUser.setCountry(str_companion_personal_settings_location_country);
         }
 
-        String str_companion_personal_settings_location_province = companion_personal_settings_location_province.getTag().toString();
-        if (!str_companion_personal_settings_location_province.isEmpty()) {
+        String str_companion_personal_settings_location_provinceTag = (String) companion_personal_settings_location_province.getTag();
+        if (str_companion_personal_settings_location_provinceTag!= null && !str_companion_personal_settings_location_provinceTag.isEmpty()) {
+            String str_companion_personal_settings_location_province = str_companion_personal_settings_location_provinceTag.toString();
             newUser.setState(str_companion_personal_settings_location_province);
         }
         //AccountsVO account = getActivityInterface().getAccounts().get(0);
@@ -484,7 +488,11 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         ConnectionManager.getInstance(getActivity()).putUserSettings(newUser, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                getFragmentManager().popBackStack();
+                ((MainActivity) getActivity()).onBackPressed();
+
+             //   getFlowInterface().goToFragment(ToolBarNavEnum.ACCOUNT.getNavNumber(), null,false);
+
+                //getFragmentManager().popBackStack();
             }
 
             @Override

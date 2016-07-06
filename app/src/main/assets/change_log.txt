@@ -159,6 +159,7 @@ Code changing:
     HEL-868 - pending request 1.5 +1.5.4
     HEL-1009 - date display
     HEL-1004 - grid - flight duration
+    HEL-1017 - My Account > Personal info > making changes on personal info > save > crash
 
    Code changing:
    --------------

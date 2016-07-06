@@ -322,7 +322,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 HGBUtility.getAndSaveUserImage(mCurrentUser.getAvatar(), mProfileImage, null);
                 //my_trips_image_profile.setImageBitmap(HGBUtility.getBitmapFromCache(getBaseContext()));
                 getAccountsProfiles();
-                selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null);
+                selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null,true);
 
             }
 
@@ -552,7 +552,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     /* The click listener for RecyclerView in the navigation drawer */
     @Override
     public void onClick(View view, int position) {
-        selectItem(position, null);
+        selectItem(position, null,true);
     }
 
 
@@ -560,7 +560,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     public void continueFlow(int fragment) {
 
         if (fragment == ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber()) {
-            selectItem(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
+            selectItem(ToolBarNavEnum.ITINARERY.getNavNumber(), null,true);
         }
     }
 
@@ -673,12 +673,12 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         return fragment;
     }
 
-    public void selectItem(int position, Bundle bundle) {
+    public void selectItem(int position, Bundle bundle,final boolean stashFragment) {
         // update the main content by replacing fragments
 
         Fragment fragment = null;
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
-        boolean stashToBack = true;
+        boolean stashToBack = stashFragment;
         int navPosition = position;//navBar.getNavNumber();
         boolean isAddAnimation = false;
         switch (navBar) {
@@ -708,6 +708,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case COMPANIONS_PERSONAL_DETAILS:
                 fragment = AccountPersonalInfoSettingsFragment.newInstance(navPosition);
+            //    stashToBack = false;
                 //     fragment = isFreeUser(fragment, navPosition);
                 break;
             case COMPANION_HELP_FEEDBACK:
@@ -1038,9 +1039,19 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
-    public void goToFragment(int fragmentname, Bundle bundle) {
-        selectItem(fragmentname, bundle);
+    public void goToFragment(int fragmentname, Bundle bundle, boolean stashFragment) {
+        selectItem(fragmentname, bundle, stashFragment);
     }
+
+    @Override
+    public void goToFragment(int fragment, Bundle bundle) {
+        selectItem(fragment, bundle,true);
+    }
+
+   /* @Override
+    public void goToFragment(int fragmentname, Bundle bundle, boolean) {
+        selectItem(fragmentname, bundle);
+    }*/
 
 
     @Override
