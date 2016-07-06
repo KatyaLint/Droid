@@ -507,7 +507,7 @@ public class ConnectionManager {
                 jsonObjectThird.put("id", airportSendValuesVO.getId());
                 jsonObjectThird.put("start", airportSendValuesVO.getStart());
                 jsonObjectThird.put("end", airportSendValuesVO.getEnd());
-                jsonObjectThird.put("value", airportSendValuesVO.getValue());
+               // jsonObjectThird.put("value", airportSendValuesVO.getValue());
 
 
             } catch (Exception e) {

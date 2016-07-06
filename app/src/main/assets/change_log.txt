@@ -160,6 +160,8 @@ Code changing:
     HEL-1009 - date display
     HEL-1004 - grid - flight duration
     HEL-1017 - My Account > Personal info > making changes on personal info > save > crash
+    HEL-1021 - Continues query issue
+    HEL-1008 - airport selection
 
    Code changing:
    --------------

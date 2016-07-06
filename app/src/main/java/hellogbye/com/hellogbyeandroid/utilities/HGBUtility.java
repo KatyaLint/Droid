@@ -537,12 +537,13 @@ public class HGBUtility {
 
 
     public static String parseDateFromddMMyyyyToddmmYYYY(String time) {
-        String outputPattern = "EEE, MM dd, yyyy";
+        String outputPattern = "EEE, MMM dd, yyyy";
+        String inputPattern = "MM/dd/yyyy";
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
 
         String str = null;
 
-            SimpleDateFormat inputFormat = new SimpleDateFormat(BASE_SERVER_TIME_ZONE);
+            SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
             Date date = null;
             try {
                 date = inputFormat.parse(time);
@@ -552,6 +553,7 @@ public class HGBUtility {
             }
         return str;
         }
+
     public static String parseDateToddMMyyyyMyTrip(String time) {
         String outputPattern = "MMM dd,yyyy";
         SimpleDateFormat inputFormat = new SimpleDateFormat(BASE_SERVER_TIME_ZONE);
@@ -599,7 +601,7 @@ public class HGBUtility {
     }
 
 
-    public static String addDayHourToDate(String dateToIncr) {
+/*    public static String addDayHourToDate(String dateToIncr) {
         String newDate="";
         String outputPattern = "EEE, MMM d, yy";
         DateFormat df = new SimpleDateFormat(outputPattern);
@@ -616,8 +618,27 @@ public class HGBUtility {
         }
 
         return newDate;
-    }
+    }*/
 
+
+    public static String addDayHourToDate(String dateToIncr) {
+        String newDate="";
+        String outputPattern = "MM/dd/yyyy";
+        DateFormat df = new SimpleDateFormat(outputPattern);
+
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+        Date date ;
+        try {
+            date = df.parse(dateToIncr);
+            Date dayAfter = new Date(date.getTime() + 23*3600*1000);
+
+            newDate = outputFormat.format(dayAfter);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+        return newDate;
+    }
 
 
 
@@ -638,6 +659,8 @@ public class HGBUtility {
 
         return newDate;
     }*/
+
+
 
     public static String addDayToDate(String dateToIncr) {
         String newDate="";

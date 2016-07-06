@@ -65,4 +65,12 @@ public class AirportResultsVO {
     public void setIsdefault(boolean isdefault) {
         this.isdefault = isdefault;
     }
+
+    public String getCityname() {
+        return cityname;
+    }
+
+    public void setCityname(String cityname) {
+        this.cityname = cityname;
+    }
 }

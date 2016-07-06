@@ -110,7 +110,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
         FontTextView textView = new FontTextView(activity);
 
         textView.setTextAppearance(activity, R.style.GridViewPassangersTextStyle);
-        textView.setText(passenger.getmName() +"-" + passenger.getmTotalFlightPrice() + "$");
+        textView.setText(passenger.getmName() +" - " + "$" + passenger.getmTotalFlightPrice() );
         textView.setGravity(Gravity.CENTER);
      //   textView.setTextSize(R.dimen.SP16);
     //    LayoutParams params = new LayoutParams((int) getResources().getDimension(R.dimen.DP150),LayoutParams.WRAP_CONTENT); //width 150
@@ -167,8 +167,8 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
                 long difference = HGBUtility.dayDifference(departure,arrival) ;
 
-
-                departure = HGBUtility.parseDateToEEEMMMDyy(departure); //parse return 23 is 2 different scenario need time not just date
+                 departure = HGBUtility.parseDateToddMMyyyy(departure);
+            //    departure = HGBUtility.parseDateToEEEMMMDyy(departure); //parse return 23 is 2 different scenario need time not just date
            //      HGBUtility.parseDateToddMMyyyyMyTrip(departure);
                  if(node.getmType().equals(NodeTypeEnum.HOTEL.getType())){
                      String time = HGBUtility.addDayHourToDate(departure);
@@ -375,7 +375,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
         }
     }
 
-    private void addToPassangersAllNodes(ArrayList<PassengersVO> passangers,int maxNodeSize,String date){
+    private void addToPassangersAllNodes(ArrayList<PassengersVO> passangers,int maxNodeSize, String date){
         for(PassengersVO passenger : passangers) {
             HashMap<String, ArrayList<NodesVO>> hashMap = passenger.getHashMap();
             ArrayList<NodesVO> dates = hashMap.get(date);
@@ -567,7 +567,8 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
         TextView date_text_layout = (TextView)child.findViewById(R.id.date_text_layout);
       //  String correctDate = HGBUtility.parseDateFromddMMyyyyToddmmYYYY(date);
-        date_text_layout.setText(date);
+        String correctDate  = HGBUtility.parseDateFromddMMyyyyToddmmYYYY(date);
+        date_text_layout.setText(correctDate);
         LinearLayout outer = new LinearLayout(activity);
         outer.setOrientation(LinearLayout.VERTICAL);
         outer.setLayoutParams(layoutParams);
