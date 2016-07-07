@@ -162,6 +162,7 @@ Code changing:
     HEL-1017 - My Account > Personal info > making changes on personal info > save > crash
     HEL-1021 - Continues query issue
     HEL-1008 - airport selection
+    HEl -1018 - checkout - hazardous material notice
 
    Code changing:
    --------------

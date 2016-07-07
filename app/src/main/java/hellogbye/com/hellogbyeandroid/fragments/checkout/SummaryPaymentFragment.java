@@ -182,6 +182,11 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
             }
         });
 
+        Bundle args = getArguments();
+        if (args != null) {
+                mCheckBox.setChecked( args.getBoolean("i_accept"));
+        }
+
         SpannableString ss = new SpannableString(getString(R.string.i_have_read_and_understood_the_hazardous_nmaterial_notice));
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
