@@ -2,6 +2,7 @@ package hellogbye.com.hellogbyeandroid.fragments.checkout;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -59,7 +60,8 @@ public class CheckoutConfirmationFragment extends HGBAbstractFragment {
 
     }
 
-
-
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

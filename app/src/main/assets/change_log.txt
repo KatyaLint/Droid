@@ -163,9 +163,13 @@ Code changing:
     HEL-1021 - Continues query issue
     HEL-1008 - airport selection
     HEL-1019 - Grid issue
+    HEl -1018 - checkout - hazardous material notice
+
 
    Code changing:
    --------------
    - new dimension file for big devices, the sizes is regular dimention*1.5
     - Feedback layout, implementation of server post
     - new red selectors for button
+   - Changed Account ID for Adding Credit Card to CardStorage.com
+

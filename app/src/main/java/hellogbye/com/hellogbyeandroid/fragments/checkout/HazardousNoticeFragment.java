@@ -51,7 +51,9 @@ public class HazardousNoticeFragment extends HGBAbstractFragment {
         mDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
+                Bundle args = new Bundle();
+                args.putBoolean("i_accept", true);
+                getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), args);
             }
         });
 
