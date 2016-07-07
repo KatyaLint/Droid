@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:button="@drawable/hgb_checkbox"
+        android:button="@drawable/selector_hgb_checkbox"
         android:checked="true"
         android:layout_below="@+id/password"/>
 

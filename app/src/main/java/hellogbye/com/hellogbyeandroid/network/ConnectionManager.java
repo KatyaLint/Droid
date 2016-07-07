@@ -88,6 +88,34 @@ public class ConnectionManager {
     // POST
     ///////////////////////////////
 
+    public void postSubmitFeedback(String message,final ServerRequestListener listener) {
+        String url = getURL(Services.SUBMIT_FEEDBACK);
+
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("message", message);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
+    }
+
     public void postUserCreateAccount(UserSignUpDataVO userData, final ServerRequestListener listener) {
 
         String url = getURL(Services.USER_PROFILE_REGISTER);
@@ -1745,7 +1773,8 @@ public class ConnectionManager {
                 CARD_SESSION("Card/Session"),
                 BOOKING_PAY("booking/pay"),
                 USER_PROFILE_DEVICE_AUTHENTICATION("Session/Anonymous/"),
-                BOOKING_CONFIRMATION("Booking/flight/confirmation/pdf?");
+                BOOKING_CONFIRMATION("Booking/flight/confirmation/pdf?"),
+                SUBMIT_FEEDBACK("Feedback"),;
 
                 String url;
                 Services(String url){

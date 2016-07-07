@@ -236,10 +236,8 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
     private void setSaveButton() {
         if (HGBUtility.isUserDataValid(mUser)) {
-            mSave.setBackgroundResource(R.drawable.red_button);
             mSave.setEnabled(true);
         } else {
-            mSave.setBackgroundResource(R.drawable.red_disable_button);
             mSave.setEnabled(false);
         }
         mSave.setPadding(0, 30, 0, 30);

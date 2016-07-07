@@ -155,7 +155,7 @@
     android:id="@+id/sign_up_button"
     android:text="@string/sign_up_done"
     android:textColor="@color/white"
-    android:background="@drawable/red_button"
+    android:background="@drawable/selector_red_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/DP20"/>

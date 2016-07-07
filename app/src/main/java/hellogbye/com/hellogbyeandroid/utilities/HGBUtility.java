@@ -1114,7 +1114,7 @@ public static String formattDateToStringMonthDate(String dateInString) {
                     if(input != null) {
                         input.setText("");
                         IBinder token = input.getWindowToken();
-                        ( (InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
+                        ((InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
                     }
                       if(alertCB != null){
                           alertCB.itemCanceled();

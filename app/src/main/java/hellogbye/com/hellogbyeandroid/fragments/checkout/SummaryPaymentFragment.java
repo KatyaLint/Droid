@@ -433,7 +433,8 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
 
     @Override
     public void onStop() {
-        super.onStop();
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        super.onStop();
+
     }
 }
