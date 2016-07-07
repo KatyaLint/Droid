@@ -167,3 +167,4 @@ Code changing:
    Code changing:
    --------------
    - new dimension file for big devices, the sizes is regular dimention*1.5
+   - Changed Account ID for Adding Credit Card to CardStorage.com
