@@ -148,6 +148,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent = new Intent(getApplicationContext(), StartingMenuActivity.class);
                                      //   intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                                         startActivity(intent);

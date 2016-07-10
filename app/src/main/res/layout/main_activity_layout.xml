@@ -82,8 +82,7 @@
                     android:layout_width="@dimen/DP80"
                     android:layout_height="@dimen/DP80"
                     android:layout_marginLeft="@dimen/DP34"
-                    android:layout_gravity="center"
-                    />
+                    android:layout_gravity="center"  />
 
                 <hellogbye.com.hellogbyeandroid.views.FontTextView
                     android:id="@+id/nav_profile_name"

@@ -15,14 +15,28 @@
         android:orientation="vertical">
 
 
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
 
         <hellogbye.com.hellogbyeandroid.views.RoundedImageView
             android:id="@+id/account_details_image"
             android:background="@drawable/profile_image"
             android:layout_width="@dimen/DP100"
             android:layout_height="@dimen/DP100"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"  />
+    <ImageView
 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/camera_icon"
+        android:id="@+id/imageView"
+
+        android:layout_alignRight="@+id/account_details_image"
+        android:layout_alignEnd="@+id/account_details_image" />
+
+</RelativeLayout>
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/account_settings_details_name"

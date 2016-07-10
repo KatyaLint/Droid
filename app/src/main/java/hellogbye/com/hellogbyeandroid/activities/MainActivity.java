@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.v4.app.Fragment;
@@ -335,6 +336,14 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         });
     }
 
+
+    public void updateProfilePicture(Bitmap thumbnail){
+        if(mProfileImage != null && thumbnail != null){
+            mProfileImage.setImageBitmap(thumbnail);
+        }
+
+    }
+
     private void setNameInNavDraw() {
 
         String strName = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_NAME, "");
@@ -573,7 +582,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
 
         Intent intent = new Intent(getApplicationContext(), StartingMenuActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+       intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 
         finish();
@@ -807,6 +817,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mToolbar.updateToolBarView(position);
         mDrawerLayout.closeDrawer(mNavDrawerLinearLayout);
     }
+
 
     private void setItineraryTitleName() {
         if(hgbSaveDataClass.getTravelOrder() != null) {
@@ -1056,6 +1067,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
 
         if (requestCode == 0 && resultCode == RESULT_OK) {
             ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);

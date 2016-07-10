@@ -368,6 +368,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
             {
                 File file = new File(result);
                 Intent intent = new Intent(Intent.ACTION_VIEW);
+
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.setDataAndType(Uri.fromFile(file), "application/pdf");
                 startActivity(intent);

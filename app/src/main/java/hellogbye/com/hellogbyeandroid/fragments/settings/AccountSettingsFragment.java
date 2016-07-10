@@ -29,6 +29,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.settingaccount.AccountSettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
@@ -38,6 +39,7 @@ import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityPermissions;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
@@ -50,6 +52,9 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
     private FontTextView account_settings_details_city;
     private Activity activity;
     private UserDataVO currentUser;
+    private String userChoosenTask;
+    private Bitmap thumbnail;
+
     public AccountSettingsFragment() {
         // Empty constructor required for fragment subclasses
     }
@@ -70,6 +75,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
                 UserDataVO mCurrentUser = (UserDataVO) data;
                 getActivityInterface().setCurrentUser(mCurrentUser);
                 initializeUserData();
+                ((MainActivity)getActivity()).updateProfilePicture(thumbnail);
 
             }
 
@@ -83,7 +89,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
     private void initializeUserData(){
         currentUser = getActivityInterface().getCurrentUser();
 
-        HGBUtility.getAndSaveUserImage(currentUser.getAvatar(),account_details_image, null);
+        HGBUtility.getAndSaveUserImage(currentUser.getAvatar(), account_details_image, null);
        // HGBUtility.loadRoundedImage(getActivity().getApplicationContext(),currentUser.getAvatar(),account_details_image);
 
         String title = currentUser.getTitle();
@@ -102,6 +108,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
         }
         String userCity = currentUser.getCity() + " " + address;
         account_settings_details_city.setText(userCity);
+
     }
 
 
@@ -226,13 +233,13 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
    private View.OnClickListener imageClickListener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-
-            boolean permissionGainedStorage = HGBUtility.isStoragePermissionGranted(getActivity());
+            selectImage();
+         /*   boolean permissionGainedStorage = HGBUtility.isStoragePermissionGranted(getActivity());
             boolean permissionGainedCamera = HGBUtility.isCameraPermissionGranted(getActivity());
 
             if(permissionGainedStorage && permissionGainedCamera){
                 selectImage();
-            }
+            }*/
 
         }
     };
@@ -245,10 +252,6 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
 
         if(grantResults[0]== PackageManager.PERMISSION_GRANTED ){
             selectImage();
-       //     permissionGained = true;
-
-          //  Log.v(TAG,"Permission: "+permissions[0]+ "was "+grantResults[0]);
-            //resume tasks needing this permission
         }
     }
 
@@ -261,17 +264,38 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
+
+                boolean result= HGBUtilityPermissions.checkPermission(getActivity());
+
+
                 if (items[item].equals("Take Photo")) {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent, REQUEST_CAMERA);
+
+                    userChoosenTask ="Take Photo";
+                    if(result){
+                        cameraIntent();
+                    }
+
+                /*    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, REQUEST_CAMERA);*/
+
                 } else if (items[item].equals("Choose from Library")) {
-                    Intent intent = new Intent(
+
+                    userChoosenTask ="Choose from Library";
+                    if(result) {
+                        galleryIntent();
+                    }
+
+                   /* Intent intent = new Intent(
                             Intent.ACTION_PICK,
                             android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    intent.setType("image/*");
-                    startActivityForResult(
+                    intent.setType("image*//*");
+
+                    startActivityForResult(intent,
+                            SELECT_FILE);*/
+
+                   /* startActivityForResult(
                             Intent.createChooser(intent, "Select File"),
-                           SELECT_FILE);
+                           SELECT_FILE);*/
                 } else if (items[item].equals("Cancel")) {
                     dialog.dismiss();
                 }
@@ -279,6 +303,22 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
         });
         builder.show();
     }
+
+    private void cameraIntent()
+    {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_CAMERA);
+    }
+
+    private void galleryIntent()
+    {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);//
+     //   startActivityForResult(intent, IntentIntegrator.REQUEST_CODE);
+        startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
+    }
+
 
     int REQUEST_CAMERA = 100;
     int SELECT_FILE = 101;
@@ -292,6 +332,68 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == SELECT_FILE)
+                onSelectFromGalleryResult(data);
+            else if (requestCode == REQUEST_CAMERA)
+                onCaptureImageResult(data);
+        }
+    }
+
+
+    @SuppressWarnings("deprecation")
+    private void onSelectFromGalleryResult(Intent data) {
+
+        thumbnail=null;
+        if (data != null) {
+            try {
+                thumbnail = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+                byte[] b = bytes.toByteArray();
+                String encodedString = Base64.encodeToString(b, Base64.DEFAULT);
+
+                sendImageToServer(encodedString, currentUser.getUserprofileid());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        account_details_image.setImageBitmap(thumbnail);
+    }
+
+    private void onCaptureImageResult(Intent data) {
+        thumbnail = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+
+        byte[] b = bytes.toByteArray();
+        String encodedString = Base64.encodeToString(b, Base64.DEFAULT);
+
+        File destination = new File(Environment.getExternalStorageDirectory(),
+                System.currentTimeMillis() + ".jpg");
+
+        FileOutputStream fo;
+        try {
+            destination.createNewFile();
+            fo = new FileOutputStream(destination);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        sendImageToServer(encodedString, currentUser.getUserprofileid());
+        account_details_image.setImageBitmap(thumbnail);
+    }
+
+   /* @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == activity.RESULT_OK) {
@@ -342,7 +444,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
 
             }
         }
-    }
+    }*/
 
     private void sendImageToServer(String image, String userProfile){
         ConnectionManager.getInstance(getActivity()).postAvatar(userProfile, image,new ConnectionManager.ServerRequestListener() {
