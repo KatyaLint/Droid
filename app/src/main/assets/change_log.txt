@@ -172,4 +172,5 @@ Code changing:
     - Feedback layout, implementation of server post
     - new red selectors for button
    - Changed Account ID for Adding Credit Card to CardStorage.com
+   - Account image change
 
