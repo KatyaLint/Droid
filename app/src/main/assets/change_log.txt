@@ -164,6 +164,7 @@ Code changing:
     HEL-1008 - airport selection
     HEL-1019 - Grid issue
     HEl -1018 - checkout - hazardous material notice
+    HEL-1029 - Editing travelers info on checkout 2nd screen crashes app 1.5.4
 
 
    Code changing:

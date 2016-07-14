@@ -201,7 +201,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
                     mUser.setCountry(mCountry.getText().toString());
                 }
 
-                mUser.setState(mState.getTag().toString());
+                mUser.setState(mState.getText().toString());
                 mUser.setPostalcode(mPostalCode.getText().toString());
                 mUser.setDob(mDOB.getText().toString());
                 mUser.setCity(mCity.getText().toString());
@@ -210,24 +210,20 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
                 mUser.setPhone(mPhone.getText().toString());
                 mUser.setEmailaddress(mEmail.getText().toString());
 
-                if (mUser.getUserprofileid().equals(mUser.getPaxid())) {
 
-                    Toast.makeText(getActivity().getApplicationContext(), "Please change your data on profile page", Toast.LENGTH_SHORT).show();
+                ConnectionManager.getInstance(getActivity()).putCompanion(mUser.getPaxid(), mUser, new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        getFragmentManager().popBackStack();
+                    }
 
-                } else {
-                    ConnectionManager.getInstance(getActivity()).putCompanion(mUser.getPaxid(), mUser, new ConnectionManager.ServerRequestListener() {
-                        @Override
-                        public void onSuccess(Object data) {
-                            getFragmentManager().popBackStack();
-                        }
+                    @Override
+                    public void onError(Object data) {
+                        Toast.makeText(getActivity().getApplicationContext(), "There was a problem saving your information please try again", Toast.LENGTH_SHORT).show();
+                        ErrorMessage(data);
+                    }
+                });
 
-                        @Override
-                        public void onError(Object data) {
-                            Toast.makeText(getActivity().getApplicationContext(), "There was a problem saving your information please try again", Toast.LENGTH_SHORT).show();
-                            ErrorMessage(data);
-                        }
-                    });
-                }
 
 
             }
@@ -270,6 +266,23 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
         mPostalCode.setText(mUser.getPostalcode());
         mState.setText(mUser.getState());
+
+        ConnectionManager.getInstance(getActivity()).getStaticBookingProvince(mUser.getCountry(), new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                List<ProvincesItem> provinceItems = (List<ProvincesItem>) data;
+//                if (provinceItems.size() > 0) {
+//
+//                } else {
+//
+//                }
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
 
 
         setTextListner();
