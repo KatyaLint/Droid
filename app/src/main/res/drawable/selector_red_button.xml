@@ -3,5 +3,4 @@
     <item android:state_enabled="true"  android:textColor="@color/white" android:drawable="@drawable/red_button"/>
     <item android:state_enabled="false" android:textColor="@color/white" android:drawable="@drawable/red_disable_button"/>
 
-
 </selector>

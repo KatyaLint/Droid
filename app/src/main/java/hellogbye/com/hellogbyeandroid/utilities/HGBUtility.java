@@ -316,11 +316,20 @@ public class HGBUtility {
 
         //    FragmentManager manager = activity.getFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction(); //beginTransaction();
+
             if(isAddAnimation){
                 transaction.setCustomAnimations(R.anim.slide_in_left,R.anim.slide_out_right,R.anim.slide_in_left,R.anim.slide_out_right);
             }
 
+
+            Fragment mFragment = manager.findFragmentByTag(fragment.getClass().toString());
+
             transaction.replace(R.id.content_frame, fragment, fragment.getClass().toString());
+
+        /*    if (mFragment == null ) {
+                transaction.addToBackStack(fragment.getClass().toString());
+                getFragmentStack().push(fragment);
+            }*/
 
 
             if (isAddToBackStack) {
@@ -333,8 +342,8 @@ public class HGBUtility {
             e.printStackTrace();
             Crashlytics.logException(e);
         }
-
     }
+
 
     public static boolean isFragmentInBackstack(final FragmentManager fragmentManager, final String fragmentTagName) {
         for (int entry = 0; entry < fragmentManager.getBackStackEntryCount(); entry++) {

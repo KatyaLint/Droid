@@ -50,6 +50,7 @@ import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
+import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -63,8 +64,8 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
 //    private SummeryPaymentCCAdapter mAdapter;
 //    private ArrayList<PaymentSummaryItem> mArrayList;
 
-    private FontTextView mProceed;
-    private FontTextView mProceedDisable;
+    private FontButtonView mProceed;
+  //  private FontTextView mProceedDisable;
     private FontTextView mCardNumberText;
     private FontTextView mNameText;
     private FontTextView mTotalText;
@@ -113,8 +114,9 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
         super.onViewCreated(view, savedInstanceState);
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        mProceed = (FontTextView) view.findViewById(R.id.cc_proceed);
-        mProceedDisable = (FontTextView) view.findViewById(R.id.cc_proceed_disable);
+        mProceed = (FontButtonView) view.findViewById(R.id.cc_proceed);
+        mProceed.setEnabled(false);
+       // mProceedDisable = (FontTextView) view.findViewById(R.id.cc_proceed_disable);
 
 
         mPaymentTextView = (FontTextView) view.findViewById(R.id.steps_checkout_payment_text);
@@ -139,13 +141,17 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
                 isCheckedBoxChecked = b;
                 if(b){
                     if(isCVVEntered){
-                        mProceed.setVisibility(View.VISIBLE);
-                        mProceedDisable.setVisibility(View.GONE);
+
+                        mProceed.setEnabled(true);
+                       /* mProceed.setVisibility(View.VISIBLE);
+                        mProceedDisable.setVisibility(View.GONE);*/
                     }
 
                 }else{
-                    mProceed.setVisibility(View.GONE);
-                    mProceedDisable.setVisibility(View.VISIBLE);
+
+                    mProceed.setEnabled(false);
+                    /*mProceed.setVisibility(View.GONE);
+                    mProceedDisable.setVisibility(View.VISIBLE);*/
                 }
             }
         });
@@ -161,14 +167,16 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
                 if(charSequence.length()==3){
                     isCVVEntered = true;
                     if(isCheckedBoxChecked){
-                        mProceed.setVisibility(View.VISIBLE);
-                        mProceedDisable.setVisibility(View.GONE);
+                        mProceed.setEnabled(true);
+                       /* mProceed.setVisibility(View.VISIBLE);
+                        mProceedDisable.setVisibility(View.GONE);*/
                     }
                     mCVVImage.setVisibility(View.GONE);
                 }else{
                     isCVVEntered = false;
-                    mProceed.setVisibility(View.GONE);
-                    mProceedDisable.setVisibility(View.VISIBLE);
+                    mProceed.setEnabled(false);
+                   /* mProceed.setVisibility(View.GONE);
+                    mProceedDisable.setVisibility(View.VISIBLE);*/
                     mCVVImage.setVisibility(View.VISIBLE);
                 }
 

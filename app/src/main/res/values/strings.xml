@@ -231,7 +231,8 @@
     <string name="card_storage_account_id">604570</string>
 
 
-    <string name = "payment_select_payment_method">Select Payment Method"</string>
+    <string name = "payment_select_payment_method">Select Payment Method</string>
+    <string name = "payment_next_button">Next</string>
 
     <string name="select_gender">Select Gender</string>
 

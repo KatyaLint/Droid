@@ -17,7 +17,7 @@
     <ExpandableListView
         android:id="@+id/traveler_recyclerView"
         android:layout_width="match_parent"
-        android:layout_above="@+id/traveler_next_rl"
+        android:layout_above="@+id/traveler_next"
         android:layout_below="@+id/steps_layout"
         android:groupIndicator="@null"
         android:layout_height="match_parent">
@@ -27,10 +27,20 @@
 
 
 
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:id="@+id/traveler_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_red_button"
+        android:textColor="@color/white"
+        android:gravity="center"
+        app:fontName="dinnextltpro_medium.otf"
+        android:textAllCaps="false"
+        android:text="@string/payment_next_button"
+        android:layout_alignParentBottom="true"/>
 
 
-
-    <LinearLayout
+<!--    <LinearLayout
         android:id="@+id/traveler_next_rl"
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
@@ -50,6 +60,6 @@
             app:fontName="dinnextltpro_medium.otf"
             />
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 </RelativeLayout>

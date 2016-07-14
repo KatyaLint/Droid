@@ -38,6 +38,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -46,8 +47,8 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
     private FontTextView mTotalPrice;
-    private FontTextView mPaymentSubmit;
-    private FontTextView mPaymentDisableSubmit;
+    private FontButtonView mPaymentSubmit;
+   // private FontTextView mPaymentDisableSubmit;
    // private FontTextView mTotalSelectCC;
     private ExpandableListView lv;
     private AlertDialog selectCCDialog;
@@ -101,8 +102,9 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mTotalPrice = (FontTextView) view.findViewById(R.id.payment_total_price);
-        mPaymentSubmit = (FontTextView) view.findViewById(R.id.payment_submit);
-        mPaymentDisableSubmit = (FontTextView) view.findViewById(R.id.payment_submit_disable);
+        mPaymentSubmit = (FontButtonView) view.findViewById(R.id.payment_submit);
+        mPaymentSubmit.setEnabled(false);
+      //  mPaymentDisableSubmit = (FontTextView) view.findViewById(R.id.payment_submit_disable);
         mPaymentTextView = (FontTextView) view.findViewById(R.id.steps_checkout_payment_text);
         mTravlerTextView = (FontTextView) view.findViewById(R.id.steps_checkout_travler_text);
         mReviewTextView = (FontTextView) view.findViewById(R.id.steps_checkout_review_text);
@@ -903,13 +905,17 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
     }
 
     private void enablePaymentSelection() {
-        mPaymentDisableSubmit.setVisibility(View.GONE);
-        mPaymentSubmit.setVisibility(View.VISIBLE);
+       /* mPaymentDisableSubmit.setVisibility(View.GONE);
+        mPaymentSubmit.setVisibility(View.VISIBLE);*/
+
+        mPaymentSubmit.setEnabled(true);
     }
 
     private void disablePaymentSolution() {
-        mPaymentDisableSubmit.setVisibility(View.VISIBLE);
-        mPaymentSubmit.setVisibility(View.GONE);
+        /*mPaymentDisableSubmit.setVisibility(View.VISIBLE);
+        mPaymentSubmit.setVisibility(View.GONE);*/
+
+        mPaymentSubmit.setEnabled(false);
     }
 
 

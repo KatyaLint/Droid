@@ -27,6 +27,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymnentGroup;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -35,8 +36,8 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 public class TravelersFragment extends HGBAbstractFragment {
 
 
-    private FontTextView mNext;
-    private FontTextView mNextDisable;
+    private FontButtonView mNext;
+   // private FontTextView mNextDisable;
 
     private ArrayList<PaymnentGroup> mGroups;
     private TravlerExpandableAdapter mAdapter;
@@ -78,8 +79,9 @@ public class TravelersFragment extends HGBAbstractFragment {
             }.getType();
             mGroups = gson.fromJson((String) groups, listType);
         }
-        mNext = (FontTextView) view.findViewById(R.id.traveler_next);
-        mNextDisable = (FontTextView) view.findViewById(R.id.traveler_next_disable);
+        mNext = (FontButtonView) view.findViewById(R.id.traveler_next);
+        mNext.setEnabled(false);
+      //  mNextDisable = (FontTextView) view.findViewById(R.id.traveler_next_disable);
 
         mRecyclerView = (ExpandableListView) view.findViewById(R.id.traveler_recyclerView);
         mPaymentTextView = (FontTextView) view.findViewById(R.id.steps_checkout_payment_text);
@@ -115,11 +117,15 @@ public class TravelersFragment extends HGBAbstractFragment {
                         boolean isMissing = checkIfMissing(getFlowInterface().getListUsers().get(i));
                         mGroups.get(i).setmChildDataMissing(isMissing);
                         if(isMissing){
-                            mNext.setVisibility(View.GONE);
-                            mNextDisable.setVisibility(View.VISIBLE);
+
+                            mNext.setEnabled(false);
+                    /*        mNext.setVisibility(View.GONE);
+                            mNextDisable.setVisibility(View.VISIBLE);*/
                         }else{
-                            mNext.setVisibility(View.VISIBLE);
-                            mNextDisable.setVisibility(View.GONE);
+
+                            mNext.setEnabled(true);
+                         /*   mNext.setVisibility(View.VISIBLE);
+                            mNextDisable.setVisibility(View.GONE);*/
                         }
                     }
 
