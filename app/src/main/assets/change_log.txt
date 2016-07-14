@@ -200,5 +200,6 @@ Code changing:
    - Depart and arrive should be next line
    - alternative flight slide all the way up till the end
    - CNC in Nav draw
+   -  Fix for enable\disable button for payment, travelers
 
 
