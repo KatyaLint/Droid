@@ -40,7 +40,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
     private boolean isDisable = false;
     private View promptsView;
-    private FontTextView text;
+   // private FontTextView text;
     private String GENDER = "Gender";
 
     final String SELECT_TITLE = "Select Title";
@@ -207,9 +207,9 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         //getStaticBooking();
 
 
-
+/*
         text = (FontTextView) promptsView
-                .findViewById(R.id.component_popup_text);
+                .findViewById(R.id.component_popup_text);*/
 
         personal_settings_change_password_ll.setOnClickListener(new View.OnClickListener() {
             @Override

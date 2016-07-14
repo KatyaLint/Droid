@@ -202,5 +202,6 @@ Code changing:
    - alternative flight slide all the way up till the end
    - CNC in Nav draw
    -  Fix for enable\disable button for payment, travelers
+   - change password fix
 
 
