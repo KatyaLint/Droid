@@ -164,7 +164,7 @@ Code changing:
     HEL-1008 - airport selection
     HEL-1019 - Grid issue
     HEl -1018 - checkout - hazardous material notice
-    HEL-1029 - Editing travelers info on checkout 2nd screen crashes app 1.5.4
+
 
 
    Code changing:
@@ -186,7 +186,10 @@ Code changing:
     HEL-1083 - edit preferences on travel profile
     HEL-1071 - Crash
     HEL-1072 - adding new companion
-
+    HEL-1029 - Editing travelers info on checkout 2nd screen crashes app 1.5.4
+    HEL-1002 - spelling mistake
+    HEL-1101 - missing month in add cc
+    
    Code changing:
    --------------
    - Change "You dont have andy trips" to Start planning your trips here"
