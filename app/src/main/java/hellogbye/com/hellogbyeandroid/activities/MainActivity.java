@@ -94,7 +94,6 @@ import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
-/*import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionTabsFragment;*/
 
 public class MainActivity extends AppCompatActivity implements NavListAdapter.OnItemClickListener, HGBVoiceInterface, HGBFlowInterface, ActionBar.OnMenuVisibilityListener {
     private DrawerLayout mDrawerLayout;
@@ -522,6 +521,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         mNavItemsList.add(new NavItem(ToolBarNavEnum.COMPANIONS, false, R.drawable.companions_icon_enable, R.drawable.companions_icon_disable));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.ACCOUNT, false, R.drawable.my_account_enable, R.drawable.my_account_disable));
         mNavItemsList.add(new NavItem(ToolBarNavEnum.NOTIFICATIONS, false, R.drawable.notifications_enable, R.drawable.notifications_disable));
+        mNavItemsList.add(new NavItem(ToolBarNavEnum.CNC, false, R.drawable.my_account_enable, R.drawable.my_account_disable));
 
     }
 

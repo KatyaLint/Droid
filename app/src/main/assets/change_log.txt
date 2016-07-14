@@ -196,5 +196,6 @@ Code changing:
    - Remove tax and fees in flight node
    - Depart and arrive should be next line
    - alternative flight slide all the way up till the end
+   - CNC in Nav draw
 
 
