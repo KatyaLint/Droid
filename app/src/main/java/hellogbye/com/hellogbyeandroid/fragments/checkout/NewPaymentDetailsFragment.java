@@ -438,13 +438,13 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                     groups.get(i).setCreditcard(getString(R.string.select_card));
                 }
 
-                if (add) {
-                    groups.get(i).setCreditcard(selectedCreditCard.getLast4());
-                    groups.get(i).setCreditcardid(selectedCreditCard.getCardtypeid());
-                } else {
-                    groups.get(i).setCreditcard(getString(R.string.select_card));
-                }
-                for (int z = 0; z < children.size(); z++) {
+//                if (add) {
+//                    groups.get(i).setCreditcard(selectedCreditCard.getLast4());
+//                    groups.get(i).setCreditcardid(selectedCreditCard.getCardtypeid());
+//                } else {
+//                    groups.get(i).setCreditcard(getString(R.string.select_card));
+//                }
+                for (int z = 0; z < children.get(i).size(); z++) {
                     PaymentChild child = children.get(i).get(z);
                     if (add) {
                         child.setCreditcard(selectedCreditCard.getLast4());
