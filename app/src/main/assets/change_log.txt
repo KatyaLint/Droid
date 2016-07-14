@@ -185,6 +185,7 @@ Code changing:
    -----------
     HEL-1083 - edit preferences on travel profile
     HEL-1071 - Crash
+    HEL-1072 - adding new companion
 
    Code changing:
    --------------

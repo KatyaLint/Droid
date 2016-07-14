@@ -97,12 +97,12 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
 
 
         LayoutInflater li = LayoutInflater.from(getActivity());
-       final View promptsView = li.inflate(R.layout.popup_layout_with_edit_text_new, null);
+   /*    final View promptsView = li.inflate(R.layout.popup_layout_with_edit_text_new, null);
 
 
 
         FontTextView text = (FontTextView) promptsView
-                .findViewById(R.id.component_popup_text);
+                .findViewById(R.id.component_popup_text);*/
 
 
 

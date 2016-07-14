@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
@@ -34,6 +35,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
+import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by nyawka on 4/20/16.
@@ -102,12 +104,21 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
         this.isPending = isPending;
         getCompanions();
 
-        popup_companion_new = inflater.inflate(R.layout.popup_layout_with_edit_text_new, null);
+      //  popup_companion_new = inflater.inflate(R.layout.popup_layout_with_edit_text_new, null);
+        popup_companion_new = inflater.inflate(R.layout.popup_layout_log_out, null);
+
+
+
 
 /*        companion_editTextDialog_name = (FontEditTextView)popup_companion_new.findViewById(R.id.companion_editTextDialog_name);
         companion_editTextDialog_last_name = (FontEditTextView)popup_companion_new.findViewById(R.id.companion_editTextDialog_last_name);*/
+
         companion_editTextDialog = (FontEditTextView) popup_companion_new.findViewById(R.id.companion_editTextDialog);
+        companion_editTextDialog.setVisibility(View.VISIBLE);
+
+
         inputs = new FontEditTextView[]{companion_editTextDialog };
+
 
         FloatingActionButton companion_invite_companion = (FloatingActionButton) rootView.findViewById(R.id.fab);
         companion_invite_companion.setOnClickListener(new View.OnClickListener(){
@@ -286,7 +297,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
     private void addTravelCompanion() {
 
 
-        HGBUtility.showAlertPopUp(getActivity(), companion_editTextDialog, popup_companion_new, getResources().getString(R.string.edit_trip_name)
+        HGBUtility.showAlertPopUp(getActivity(), companion_editTextDialog, popup_companion_new, getResources().getString(R.string.component_invite)
                 ,getResources().getString(R.string.save_button),
                 new PopUpAlertStringCB() {
                     @Override
