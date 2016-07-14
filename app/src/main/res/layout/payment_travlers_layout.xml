@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/white"
+    android:background="@color/greyish_alternative_hotel"
     android:orientation="vertical">
 
     <include
@@ -20,6 +20,8 @@
         android:layout_above="@+id/traveler_next"
         android:layout_below="@+id/steps_layout"
         android:groupIndicator="@null"
+        android:divider="@color/greyish_alternative_hotel"
+        android:dividerHeight="@dimen/DP20"
         android:layout_height="match_parent">
 
 

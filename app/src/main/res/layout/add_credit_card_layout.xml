@@ -137,7 +137,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Use my home address as billing adress"/>
+            android:text="@string/use_my_home_address_as_billing_address"/>
 
         <LinearLayout
             android:layout_marginTop="@dimen/DP24"

@@ -73,7 +73,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
     private CreditCardSessionItem creditCardItemSession;
     private BookingRequestVO bookingResponse;
 
-    final String[] monthArray = {"1", "2", "4","5","6","7","8","9","10","11","12"};
+    final String[] monthArray = {"1", "2", "3", "4","5","6","7","8","9","10","11","12"};
 
     final String[] yearArray = {"2016", "2017", "2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030"};
 
