@@ -16,14 +16,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -39,14 +36,12 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.FlightAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.AirportCoordinatesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.ViewPDFManager;
 
 
@@ -108,11 +103,11 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
             public void onSuccess(Object data) {
                     List<NodesVO> alternativeFlightsVOs = (List<NodesVO>)data;//gson.fromJson((String) data, listType);
 
-                    if(alternativeFlightsVOs.isEmpty()){
+                 /*   if(alternativeFlightsVOs.isEmpty()){
                         mAdapter.setAlternativeButtonDisable(false);
                     }else{
                         mAdapter.setAlternativeButtonDisable(true);
-                    }
+                    }*/
 
                     getActivityInterface().setAlternativeFlights(alternativeFlightsVOs);
             }
@@ -131,6 +126,8 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
         View rootView = inflater.inflate(R.layout.flight_layout_details, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.flightRecyclerView);
+
+
         mSlidingPanels = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout_flight);
         pull_down = (RelativeLayout) rootView.findViewById(R.id.pull_down);
 
@@ -279,7 +276,17 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
 
         // 2. set layoutManger
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+
         // 3. create an adapter
         mAdapter = new FlightAdapter(currentNode,legsFlights);
 

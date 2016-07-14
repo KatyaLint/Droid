@@ -274,4 +274,12 @@ public class LegsVO {
     public void setmAirportName(String mAirportName) {
         this.mAirportName = mAirportName;
     }
+
+    public String getmCarrierBadgeUrl() {
+        return mCarrierBadgeUrl;
+    }
+
+    public void setmCarrierBadgeUrl(String mCarrierBadgeUrl) {
+        this.mCarrierBadgeUrl = mCarrierBadgeUrl;
+    }
 }

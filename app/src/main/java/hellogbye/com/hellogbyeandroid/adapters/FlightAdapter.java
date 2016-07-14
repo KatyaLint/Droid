@@ -77,6 +77,8 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             +legFlightVO.getmDestinationCityName()+", "+legFlightVO.getmDestinationAirportName()+"\n"
                     + HGBUtility.parseDateToddMMyyyyMyTrip(legFlightVO.getmDeparture()));
             viewHolder.stop_over_include_layout.setVisibility(View.GONE);
+            HGBUtility.loadAirplainImage( legFlightVO.getmCarrierBadgeUrl(),  viewHolder.airplane_details_operated_image);
+
 
         } else if (legFlightVO.getmType().equals("StopOver")) {
             viewHolder.stop_over_txt.setText(" " +legFlightVO.getmCityName()+", " +legFlightVO.getmAirportName() + " Airport");
@@ -179,6 +181,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         private LinearLayout press_here_ll;
 
         private ImageView mBadgeImageView;
+        private ImageView airplane_details_operated_image;
 
 
         public ViewHolder(View itemLayoutView) {
@@ -250,6 +253,9 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             flight_boarding_text = (FontTextView) includeAirplaneDetails.findViewById(R.id.flight_boarding_text);
             flight_duration_text = (FontTextView) includeAirplaneDetails.findViewById(R.id.flight_duration_text);
             flight_class_text = (FontTextView) includeAirplaneDetails.findViewById(R.id.flight_class_text);
+
+            airplane_details_operated_image = (ImageView)includeAirplaneDetails.findViewById(R.id.airplane_details_operated_image);
+
   /*          flight_meal_text = (FontTextView) includeAirplaneDetails.findViewById(R.id.flight_meal_text);*/
             // flight_meal_text.setText(legFlightVO.getmFareClass());
 

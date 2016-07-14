@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="Pull down to see more"
+                android:text="@string/alternative_pull_down_text"
                 android:textColor="@color/white"
                 app:fontName="dinnextltpro_regular.otf" />
 

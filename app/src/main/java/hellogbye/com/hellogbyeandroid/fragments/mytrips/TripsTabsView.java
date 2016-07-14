@@ -69,10 +69,12 @@ public class TripsTabsView extends HGBAbstractFragment {
 
         mTabHost.setup(getActivity(), getChildFragmentManager(), android.R.id.tabcontent);
 
-        mTabHost.addTab(mTabHost.newTabSpec(TAB_1_TAG).setIndicator(TAB_1_TAG),
-                TabUpcomingTripsView.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(TAB_2_TAG).setIndicator(TAB_2_TAG),
                 TabFavoritesView.class, null);
+
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_1_TAG).setIndicator(TAB_1_TAG),
+                TabUpcomingTripsView.class, null);
+
         mTabHost.addTab(mTabHost.newTabSpec(TAB_3_TAG).setIndicator(TAB_3_TAG),
                 TabHistoryView.class, null);
 

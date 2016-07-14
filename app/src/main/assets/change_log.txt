@@ -174,4 +174,26 @@ Code changing:
     - new red selectors for button
    - Changed Account ID for Adding Credit Card to CardStorage.com
    - Account image change
+   - pen icon removed
+
+
+   ------------------------------------------
+               Version 1.5.5
+   ------------------------------------------
+
+   Fixed Bugs:
+   -----------
+    HEL-1083 - edit preferences on travel profile
+    HEL-1071 - Crash
+
+   Code changing:
+   --------------
+   - Change "You dont have andy trips" to Start planning your trips here"
+   - Change order in My trips to "Fav" "upcoming" "history"
+   - Hint on message should be "Type or speak your request"
+   - change "Itenerary Created" to "Ok, here's what we found for you.
+   - Remove tax and fees in flight node
+   - Depart and arrive should be next line
+   - alternative flight slide all the way up till the end
+
 

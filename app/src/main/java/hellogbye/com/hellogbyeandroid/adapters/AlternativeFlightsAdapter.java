@@ -18,6 +18,7 @@ import hellogbye.com.hellogbyeandroid.R;
 
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by nyawka on 10/7/15.
@@ -61,9 +62,15 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
         viewHolder.txtEndTime.setText(HGBUtility.parseDateToHHmm(itemData.getmArrival()));
         viewHolder.txtTravelTime.setText(itemData.getmTravelTime());
 
-        viewHolder.txtTravelCost.setText("$"+itemData.getCost());
-        viewHolder.txtTravelCost.setTag(itemData.getmGuid());
+        viewHolder.alternative_flight_price.setText("$"+itemData.getCost());
+        viewHolder.alternative_flight_price.setTag(itemData.getmGuid());
 
+        if(itemData.getLegs().size() > 1)
+        {
+            viewHolder.alternative_flight_multiple.setText("Multiple");
+        }else{
+            viewHolder.alternative_flight_multiple.setText("Single");
+        }
       //  viewHolder.mainRelativeItem.setOnClickListener(clickListener);
     }
 
@@ -77,26 +84,30 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
     // inner class to hold a reference to each item of RecyclerView
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        public TextView txtStartTime;
-        public TextView txtEndTime;
-        public TextView txtTravelTime;
-        public TextView txtTravelCost;
+        private final FontTextView alternative_flight_price;
+        private final FontTextView alternative_flight_multiple;
+        public FontTextView txtStartTime;
+        public FontTextView txtEndTime;
+        public FontTextView txtTravelTime;
+   //     public FontTextView txtTravelCost;
         public GraphicsViewLayout view;
         public View viewDivider;
         private RelativeLayout mainRelativeItem;
-        private TextView alternative_flight_guid;
+   //     private FontTextView alternative_flight_guid;
 
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
-            alternative_flight_guid = (TextView)itemLayoutView.findViewById(R.id.alternative_flight_guid);
+       //     alternative_flight_guid = (FontTextView)itemLayoutView.findViewById(R.id.alternative_flight_guid);
             mainRelativeItem = (RelativeLayout)itemLayoutView.findViewById(R.id.alternate_flight_item_rl);
-            txtStartTime = (TextView) itemLayoutView.findViewById(R.id.startTime);
-            txtEndTime = (TextView) itemLayoutView.findViewById(R.id.endTime);
-            txtTravelTime = (TextView) itemLayoutView.findViewById(R.id.travelTime);
+            txtStartTime = (FontTextView) itemLayoutView.findViewById(R.id.startTime);
+            txtEndTime = (FontTextView) itemLayoutView.findViewById(R.id.endTime);
+            txtTravelTime = (FontTextView) itemLayoutView.findViewById(R.id.travelTime);
             view = (GraphicsViewLayout)itemLayoutView.findViewById(R.id.view);
             viewDivider = (View)itemLayoutView.findViewById(R.id.alternative_list_divider);
-            txtTravelCost = (TextView)itemLayoutView.findViewById(R.id.alternative_flight_price);
+         //   txtTravelCost = (FontTextView)itemLayoutView.findViewById(R.id.alternative_flight_price);
+            alternative_flight_price = (FontTextView)itemLayoutView.findViewById(R.id.alternative_flight_price);
+            alternative_flight_multiple = (FontTextView)itemLayoutView.findViewById(R.id.alternative_flight_multiple);
             itemLayoutView.setOnClickListener(this);
         }
 
@@ -104,8 +115,8 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
         @Override
         public void onClick(View v) {
             View root = v.getRootView();
-            TextView textView = (TextView)v.findViewById(R.id.alternative_flight_price);
-            mItemClickListener.onItemClick(textView.getTag().toString());
+
+            mItemClickListener.onItemClick(alternative_flight_price.getTag().toString());
         }
 
     }

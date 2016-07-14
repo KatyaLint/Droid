@@ -96,13 +96,13 @@
         <!--android:layout_alignParentTop="true"-->
         <!--android:background="@color/warm_grey_line" />-->
         ​
-        <Button
+ <!--       <Button
             android:id="@+id/cnc_fragment_trip_settings"
             android:layout_width="@dimen/DP22"
             android:layout_height="@dimen/DP22"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/DP10"
-            android:background="@drawable/edit_icon" />
+            android:background="@drawable/edit_icon" />-->
         ​
 
         <hellogbye.com.hellogbyeandroid.views.FontEditTextView

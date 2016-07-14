@@ -73,4 +73,12 @@ public class AirportResultsVO {
     public void setCityname(String cityname) {
         this.cityname = cityname;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

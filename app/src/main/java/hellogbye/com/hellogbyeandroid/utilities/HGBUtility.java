@@ -200,12 +200,37 @@ public class HGBUtility {
 
 
 
+    public static void loadAirplainImage(String imageUrl,final ImageView imageView) {
 
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(false)
+                .build();
+
+        ImageLoader.getInstance().displayImage(imageUrl, imageView, options, new ImageLoadingListener() {
+            @Override
+            public void onLoadingStarted(String s, View view) {
+            }
+
+            @Override
+            public void onLoadingFailed(String s, View view, FailReason failReason) {
+            }
+
+            @Override
+            public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+
+            }
+
+            @Override
+            public void onLoadingCancelled(String s, View view) {
+            }
+        });
+
+    }
 
 
     public static void loadRoundedImage(String imageUrl,final ImageView imageView, int tempAvatar) {
 
-    //    imageUrl = imageUrl + ".png";
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                // .considerExifParams(true)
                 .showImageForEmptyUri(tempAvatar)
@@ -214,17 +239,6 @@ public class HGBUtility {
                 .showImageOnFail(tempAvatar) //R.drawable.profile_image
                 .showImageForEmptyUri(tempAvatar)
                 .cacheOnDisk(false)
-//                .postProcessor(new BitmapProcessor() {
-//                    @Override
-//                    public Bitmap process(Bitmap bmp) {
-//                        try {
-//                        //    return Bitmap.createScaledBitmap(bmp,  bmp.getWidth()/2,bmp.getHeight()/2, false);
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//                        return null;
-//                    }
-//                })
                 .build();
 
         ImageLoader.getInstance().displayImage(imageUrl, imageView, options, new ImageLoadingListener() {

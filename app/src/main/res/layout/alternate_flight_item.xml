@@ -7,7 +7,7 @@
 
 
 
-    <TextView
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/alternative_flight_guid"
@@ -18,14 +18,13 @@
         android:id="@+id/alternate_flight_item_rl"
         android:padding="@dimen/DP10"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" >
     <LinearLayout
         android:id="@+id/alternative_flight_cost_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_alignParentRight="true"
-        >
+        android:layout_alignParentRight="true" >
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/alternative_flight_price"
@@ -34,9 +33,7 @@
             android:textColor="@color/marine"
             android:textSize="@dimen/SP18"
             android:text="$1556.12"
-            app:fontName="dinnextltpro_mediumcond.ttf"
-
-            />
+            app:fontName="dinnextltpro_mediumcond.ttf"  />
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/alternative_flight_multiple"

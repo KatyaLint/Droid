@@ -462,8 +462,12 @@ public class ItineraryFragment extends HGBAbstractFragment {
         TextView grid_traveler_flight_stops = (TextView)child.findViewById(R.id.grid_traveler_flight_stops);
         grid_traveler_flight_stops.setText(node.getmOrigin() + " - " + node.getmDestination());
 
-        TextView grid_flight_operator = (TextView)child.findViewById(R.id.grid_flight_operator);
-        grid_flight_operator.setText("Depart: " + HGBUtility.parseDateToHHmm(node.getmDeparture()) +" " + "Arrival: "+HGBUtility.parseDateToHHmm(node.getmArrival()));
+        TextView grid_flight_operator_departure = (TextView)child.findViewById(R.id.grid_flight_operator_departure);
+        grid_flight_operator_departure.setText("Depart: " + HGBUtility.parseDateToHHmm(node.getmDeparture()));
+
+        TextView grid_flight_operator_arrival = (TextView)child.findViewById(R.id.grid_flight_operator_arrival);
+        grid_flight_operator_arrival.setText("Arrival: "+HGBUtility.parseDateToHHmm(node.getmArrival()));
+
 
         //type
         //grid_flight_operator.setTag(node.getmType());
