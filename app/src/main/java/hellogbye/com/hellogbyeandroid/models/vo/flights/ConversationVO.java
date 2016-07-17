@@ -13,4 +13,12 @@ public class ConversationVO {
     private String mParticipant;
     @SerializedName("messagedatetime")
     private String mMessageDateTime;
+
+    public String getmMessage() {
+        return mMessage;
+    }
+
+    public void setmMessage(String mMessage) {
+        this.mMessage = mMessage;
+    }
 }

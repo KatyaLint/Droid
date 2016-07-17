@@ -43,6 +43,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportServerResultVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.ResponsesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.ConversationVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
@@ -90,6 +91,7 @@ public class CNCFragment extends HGBAbstractFragment {
     private int maxAirportSize = 0;
     private boolean clearCNCscreen;
     private Bundle args;
+    private int selectedCount = 0;
  //   private  AirportSendValuesVO airportSendValuesVO;
 
 
@@ -122,16 +124,18 @@ public class CNCFragment extends HGBAbstractFragment {
 
         getAccountsProfiles();
 
-        //This is to ckeck and display tutorial this version was cancelled waiting for new one
-        startTutorial();
+
         joinCompanionToTravel();
 
-         args = getArguments();
+        args = getArguments();
         clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT);
 
         if(clearCNCscreen){
             startTutorialText();
             clearCNCItems();
+
+            //This is to ckeck and display tutorial this version was cancelled waiting for new one
+            startTutorial();
 
             mTextTutoralHeader.setVisibility(View.VISIBLE);
             mTextTutoralBody.setVisibility(View.VISIBLE);
@@ -141,10 +145,45 @@ public class CNCFragment extends HGBAbstractFragment {
         }
 
 
+        String solution_id = args.getString(HGBConstants.SOLUTION_ITINERARY_ID);
+        if(solution_id != null){
+            addWaitingItem();
+            getCurrentItinerary(solution_id);
+        }
 
         return rootView;
     }
 
+
+    private void addUserConversation(){
+        ArrayList<ConversationVO> conversations = getActivityInterface().getTravelOrder().getConversation();
+        for(ConversationVO conversation : conversations){
+            handleHGBMessageMe(conversation.getmMessage());
+            handleHGBMessage(getString(R.string.itinerary_created));
+        }
+    }
+
+    private void getCurrentItinerary(String solutionId){
+
+        ConnectionManager.getInstance(getActivity()).getItinerary(solutionId, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                args.putString(HGBConstants.SOLUTION_ITINERARY_ID,null);
+                args.putBoolean(HGBConstants.CNC_CLEAR_CHAT,false);
+
+                UserTravelMainVO userTravelMainVO = (UserTravelMainVO) data;
+                getActivityInterface().setTravelOrder(userTravelMainVO);
+                addUserConversation();
+                getFlowInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+
+            }
+        });
+    }
 
     private void clearCNCItems() {
 
@@ -336,7 +375,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
 //        if ("".equals(strCNCList) && getActivityInterface().getCNCItems()== null ||
 //                strCNCList==null && getActivityInterface().getCNCItems()== null) {
-        if ( (strCNCList.equals("") || strCNCList.equals("null")) && getActivityInterface().getCNCItems()== null ) {
+        if ((strCNCList.equals("") || strCNCList.equals("null")) && getActivityInterface().getCNCItems()== null ) {
             Resources res = getResources();
             String userName = "";
             if( getActivityInterface().getCurrentUser() != null){
@@ -428,7 +467,7 @@ public class CNCFragment extends HGBAbstractFragment {
     }
 
 
-    public void handleMyMessage( final String strMessage) {
+    public void handleMyMessage(final String strMessage) {
         stopTextTutorial();
         mTextTutoralHeader.setVisibility(View.GONE);
         mTextTutoralBody.setVisibility(View.GONE);
@@ -449,10 +488,6 @@ public class CNCFragment extends HGBAbstractFragment {
                 enterCNCMessage(strMessage);
             }
         });
-
-
-
-
 
 
 
@@ -524,8 +559,6 @@ public class CNCFragment extends HGBAbstractFragment {
     }
 
 
-    private int selectedCount = 0;
-
     private void popupDialogForAirports(){
 
 
@@ -546,7 +579,6 @@ public class CNCFragment extends HGBAbstractFragment {
                             @Override
                             public void itemSelected(String inputItem) {
 
-                                //TODO change input resultsValue
                                 AirportResultsVO choosenAirport = findChoosenAirport(inputItem, airportSendValueVO.getResults());
                                 sendUserAnswearToServer(choosenAirport);
                             }
@@ -591,22 +623,6 @@ public class CNCFragment extends HGBAbstractFragment {
                 }
             }
 
-      /*      if(airportSendValuesVO.getValue().equals(choosenAirport.getCityname()) ||
-                    airportSendValuesVO.getValue().equals(choosenAirport.getId()) ){
-                airportSendValuesVO.setId(choosenAirport.getId());
-                String location = HGBUtility.getLocation(getActivity(), false);
-
-
-                if (location != null && getActivityInterface().getTravelOrder() != null) {
-                    String[] locationArr = location.split("&");
-                    getActivityInterface().getTravelOrder().setLocation(locationArr);
-                }
-
-                locationArr = location.split("&");
-                airportSendValuesVO.setLatitude(locationArr[0]);
-                airportSendValuesVO.setLongitude(locationArr[1]);
-              //  airportSendValuesVOs.add(airportSendValuesVO);
-            }*/
         }
 
 
@@ -618,7 +634,6 @@ public class CNCFragment extends HGBAbstractFragment {
     }
 
 
-
     interface iAfterServer {
         void serverFinished(AirportServerResultVO airportResult);
     }
@@ -627,7 +642,6 @@ public class CNCFragment extends HGBAbstractFragment {
         getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.HGB_ITEM));
         removeWaitingItem();
     }
-
 
     public void handleHGBMessageMe(String strMessage) {
         getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.ME_ITEM));
@@ -830,5 +844,19 @@ public class CNCFragment extends HGBAbstractFragment {
     }
 
 
+    @Override
+    public void onDestroyView() {
 
+        try {
+            Gson gsonback = new Gson();
+            String json = gsonback.toJson(getActivityInterface().getCNCItems());
+            // When user exit the app, next time hi will see his itirnarary
+            mHGBPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, json);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        super.onDestroyView();
+    }
 }

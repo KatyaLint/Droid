@@ -576,7 +576,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public void gotToStartMenuActivity() {
         HGBUtility.removeAllFragments(getSupportFragmentManager());
-        hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
+      //  hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER,"");
 
@@ -1127,12 +1127,13 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     protected void onStop() {
         super.onStop();
-        hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
+      //  hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
         try {
             Gson gsonback = new Gson();
             String json = gsonback.toJson(hgbSaveDataClass.getCNCItems());
-            //TODO understand why is here??
-            //   hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, json);
+            // When user exit the app, next time hi will see his itirnarary
+
+            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, json);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -190,6 +190,7 @@ Code changing:
     HEL-1002 - spelling mistake
     HEL-1101 - missing month in add cc
     HEL-1107 - adding preffred airlines crashes app version 1.5.5
+    HEL-1020 - history screen
     
    Code changing:
    --------------

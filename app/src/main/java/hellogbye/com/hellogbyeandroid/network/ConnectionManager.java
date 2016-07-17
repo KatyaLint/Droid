@@ -564,9 +564,6 @@ public class ConnectionManager {
         url = url +"CNC";
         JSONObject jsonObjectMain = new JSONObject();
 
-
-        JSONArray jsonArray = new JSONArray();
-
         for (AirportSendValuesVO airportSendValuesVO : airportSendValuesVOs) {
 
             try {
@@ -601,10 +598,67 @@ public class ConnectionManager {
     }
 
 
+    public void AddCreditCardHelloGbye(JSONObject json,final ServerRequestListener listener) {
+        String url = getURL(Services.CARD_TOKEN);
+
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                json, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseCreditCardList(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
+    }
+
+    public void addCreditCard(CreditCardItem creditCardItem, final ServerRequestListener listener) {
+
+        //AddCreditCard addCreditCard = new AddCreditCard();
+
+        HGBStringXMLRequest req = new HGBStringXMLRequest(Request.Method.POST, "https://beta.mycardstorage.com/api/api.asmx",creditCardItem,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        listener.onSuccess(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        },false);
+    }
+
     ////////////////////////////////
     // GETS
     ///////////////////////////////
 
+    public void getItinerary(String solutionid, final ServerRequestListener listener) {
+
+        String url = getURL(Services.ITINERARY);
+        url = url + solutionid;
+        JSONObject jsonObject = new JSONObject();
+
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseAirplaneData(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, false);
+    }
 
     public void ItineraryCNCSearchGet(String query, final ServerRequestListener listener) {
 
@@ -757,24 +811,6 @@ public class ConnectionManager {
 
     }
 
-    public void AddCreditCardHelloGbye(JSONObject json,final ServerRequestListener listener) {
-        String url = getURL(Services.CARD_TOKEN);
-
-
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
-                json, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listener.onSuccess(Parser.parseCreditCardList(response));
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
-            }
-        });
-
-    }
 
 
 
@@ -1039,26 +1075,7 @@ public class ConnectionManager {
     }
 
 
-    public void getItinerary(String solutionid, final ServerRequestListener listener) {
 
-        String url = getURL(Services.ITINERARY);
-        url = url + solutionid;
-        JSONObject jsonObject = new JSONObject();
-
-
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
-                jsonObject, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listener.onSuccess(Parser.parseAirplaneData(response));
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
-            }
-        }, false);
-    }
 
 
 
@@ -1483,23 +1500,7 @@ public class ConnectionManager {
         });
     }
 
-    public void addCreditCard(CreditCardItem creditCardItem, final ServerRequestListener listener) {
 
-        //AddCreditCard addCreditCard = new AddCreditCard();
-
-        HGBStringXMLRequest req = new HGBStringXMLRequest(Request.Method.POST, "https://beta.mycardstorage.com/api/api.asmx",creditCardItem,
-                 new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listener.onSuccess(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
-            }
-        },false);
-    }
 
 
 
