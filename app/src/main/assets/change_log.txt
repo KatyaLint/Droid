@@ -198,7 +198,8 @@ Code changing:
     HEL-1123 - headline in hotel details should be "hotel Details" and not "hotel" version 1.5.5
     HEL-1121 - can't change flight in alternative flights version 1.5.5
     HEL-1119 - change flight information from "alternative flight" to "Flight Details" version 1.5.5
-
+    HEL-1118 - big space between map and flight info in flight information version 1.5.5
+    
    Code changing:
    --------------
    - Change "You dont have andy trips" to Start planning your trips here"
