@@ -220,3 +220,14 @@ Code changing:
    - New HGBUtilityDate class for date issue
 
 
+   ------------------------------------------
+               Version 1.5.6
+   ------------------------------------------
+
+   Fixed Bugs:
+   -----------
+
+
+
+   Code changing:
+   --------------
