@@ -773,6 +773,7 @@ public class ConnectionManager {
 
     public void getMyTripsFavorite(final ServerRequestListener listener) {
 
+     //   http://apidev.hellogbye.com/dev/rest/Itinerary?count=15&skip=0&isFavorite=true
         String url = getURL(Services.ITINERARY_MY_TRIP) + "?count=15&skip=0&isFavorite=true";
         //  http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/itinerary?count=15&skip=0
 
@@ -1378,9 +1379,12 @@ public class ConnectionManager {
     }
 
 
-    public void putFavorityItenarary(boolean isFavority,String itineraryID, final ServerRequestListener listener) {
+    public void putFavorityItenarary(final boolean isFavority,final String itineraryID, final ServerRequestListener listener) {
         String url = getURL(Services.ITINERARY);
         url = url + itineraryID;
+
+       /*JSONObject jsonObjectWrapper = new JSONObject();*/
+
         JSONObject json1 = new JSONObject();
         try {
             json1.put("isfavorite", isFavority);

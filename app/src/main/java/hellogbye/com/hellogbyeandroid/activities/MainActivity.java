@@ -1003,6 +1003,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         UserTravelMainVO travelOrder = hgbSaveDataClass.getTravelOrder();
         String solutionID = travelOrder.getmSolutionID();
         boolean isFavorite = travelOrder.ismIsFavorite();
+
         ConnectionManager.getInstance(MainActivity.this).putFavorityItenarary(isFavorite, solutionID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
