@@ -217,5 +217,6 @@ Code changing:
    - change password fix
    - traveler_detail_layout.xml sizes change
    - created dynamic upcoming years for dialog in Add CreditCard
+   - New HGBUtilityDate class for date issue
 
 
