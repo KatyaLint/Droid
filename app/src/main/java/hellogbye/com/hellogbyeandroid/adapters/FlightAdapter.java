@@ -18,6 +18,7 @@ import hellogbye.com.hellogbyeandroid.fragments.alternative.IWebViewClicked;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -99,8 +100,8 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
 
         if (mIsMyFlight) {
          /*   viewHolder.image_my_flight.setVisibility(View.VISIBLE);
-            viewHolder.text_my_flight.setVisibility(View.VISIBLE);
-            viewHolder.select_flight.setVisibility(View.GONE);*/
+            viewHolder.text_my_flight.setVisibility(View.VISIBLE);*/
+            viewHolder.select_flight.setVisibility(View.GONE);
 
             if (paid.equals("PAID")) {
                 viewHolder.mBadgeImageView.setBackgroundResource(R.drawable.paid_badge);
@@ -113,8 +114,8 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
 
         } else {
   /*          viewHolder.image_my_flight.setVisibility(View.GONE);
-            viewHolder.text_my_flight.setVisibility(View.GONE);
-            viewHolder.select_flight.setVisibility(View.VISIBLE);*/
+            viewHolder.text_my_flight.setVisibility(View.GONE);*/
+            viewHolder.select_flight.setVisibility(View.VISIBLE);
             viewHolder.mBadgeImageView.setVisibility(View.GONE);
         }
 
@@ -126,7 +127,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             viewHolder.show_alternative_flights.setBackgroundResource(R.drawable.red_button);
         }
 
-     //   viewHolder.select_flight.setTag(legFlightVO.getmParentguid());
+        viewHolder.select_flight.setTag(legFlightVO.getmParentguid());
         viewHolder.press_here.setTag(legFlightVO.getmParentguid());
 
     }
@@ -188,8 +189,8 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         private FontTextView flight_direction;
         private FontTextView flight_cost;
   /*      private ImageView image_my_flight;
-        private FontTextView text_my_flight;
-        private FontTextView select_flight;*/
+        private FontTextView text_my_flight;*/
+        private FontTextView select_flight;
         private FontTextView flight_details;
         private FontTextView press_here;
         private LinearLayout press_here_ll;
@@ -216,13 +217,13 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             });
 
 
-        /*    select_flight.setOnClickListener(new View.OnClickListener() {
+            select_flight.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     String guid = view.getTag().toString();
                     alternativeButtonCB.selectCurrentFlight(guid);
                 }
-            });*/
+            });
 
             press_here.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -246,8 +247,8 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
 
         private void initializeSelecteOrMyFlight(View mainView) {
 /*            image_my_flight = (ImageView) mainView.findViewById(R.id.image_my_flight);
-            text_my_flight = (FontTextView) mainView.findViewById(R.id.text_my_flight);
-            select_flight = (FontTextView) mainView.findViewById(R.id.select_flight);*/
+            text_my_flight = (FontTextView) mainView.findViewById(R.id.text_my_flight);*/
+            select_flight = (FontTextView) mainView.findViewById(R.id.select_flight);
             flight_details = (FontTextView) mainView.findViewById(R.id.flight_details);
 
             press_here_ll = (LinearLayout) mainView.findViewById(R.id.select_tix_ll);

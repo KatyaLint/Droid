@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+
+
+<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:id="@+id/flight_details_rl">
 
     <com.sothree.slidinguppanel.SlidingUpPanelLayout
         xmlns:sothree="http://schemas.android.com/apk/res-auto"
@@ -10,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
+
         sothree:umanoPanelHeight="@dimen/DP100"
         sothree:umanoScrollableView="@+id/detail_scroll_view_flights">
 
@@ -36,8 +41,7 @@
         android:layout_marginRight="@dimen/DP10"
         android:padding="@dimen/DP10"
         android:layout_marginBottom="@dimen/DP10"
-        android:background="@color/hgb_blue"
-        >
+        android:background="@color/hgb_blue">
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_width="wrap_content"
@@ -61,7 +65,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/pull_down"
-
         android:gravity="center|top">
 
     <android.support.v7.widget.RecyclerView
@@ -71,10 +74,18 @@
 
     </ScrollView>
 
->
-
     </RelativeLayout>
 
     </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 
+
+
+
 </RelativeLayout>
+
+ <!--   <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:id="@+id/select_current_flight"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_red_button"/>-->

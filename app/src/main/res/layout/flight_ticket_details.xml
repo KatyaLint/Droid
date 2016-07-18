@@ -116,6 +116,22 @@
                     android:textAllCaps="false"
                     android:textSize="@dimen/SP13" />
 
+
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+                    android:layout_below="@+id/show_alternative_flights"
+                    android:id="@+id/select_flight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:background="@drawable/red_button"
+                    android:padding="@dimen/DP6"
+                    android:text="@string/flight_select_flight"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/SP13"
+                    android:visibility="visible"
+                    app:fontName="dinnextltpro_light.otf" />
+
+
              <!--   <LinearLayout
                     android:visibility="gone"
                     android:id="@+id/my_flight_ll"
@@ -158,6 +174,7 @@
                         android:visibility="gone"
                         app:fontName="dinnextltpro_light.otf" />
                 </LinearLayout>-->
+
 
 
 
