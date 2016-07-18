@@ -10,15 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+
+import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.adapters.CreditCardAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.CreditCardSwipeItemsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 
 /**
@@ -28,7 +32,7 @@ public class CreditCardListFragment extends HGBAbstractFragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private CreditCardAdapter mAdapter;
+    private CreditCardSwipeItemsAdapter mAdapter;
     private FloatingActionButton mAddImageView;
     private LinearLayout mMissingLinearLayout;
 
@@ -50,9 +54,9 @@ public class CreditCardListFragment extends HGBAbstractFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView = (RecyclerView)view.findViewById(R.id.credit_card_recycler_view);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.credit_card_recycler_view);
         mAddImageView = (FloatingActionButton) view.findViewById(R.id.fab);
-        mMissingLinearLayout = (LinearLayout)view.findViewById(R.id.payment_missing_ll);
+        mMissingLinearLayout = (LinearLayout) view.findViewById(R.id.payment_missing_ll);
 
 
         mAddImageView.setOnClickListener(new View.OnClickListener() {
@@ -76,11 +80,41 @@ public class CreditCardListFragment extends HGBAbstractFragment {
             @Override
             public void onSuccess(Object data) {
                 getFlowInterface().setCreditCards((ArrayList<CreditCardItem>) data);
-                if(((ArrayList<CreditCardItem>) data).size()!=0){
+                if (((ArrayList<CreditCardItem>) data).size() != 0) {
                     mMissingLinearLayout.setVisibility(View.GONE);
-                    mAdapter = new CreditCardAdapter(getFlowInterface().getCreditCards(),getActivity().getApplicationContext());
+                    mAdapter = new CreditCardSwipeItemsAdapter(getActivity().getApplicationContext(), getFlowInterface().getCreditCards());
                     mRecyclerView.setAdapter(mAdapter);
-                }else{
+                    mAdapter.addClickeListeners(new ISwipeAdapterExecution() {
+                        @Override
+                        public void clickedItem(String companionId) {
+
+                        }
+
+                        @Override
+                        public void deleteClicked(String token) {
+
+
+                            for (int i = 0; i < getFlowInterface().getCreditCards().size(); i++) {
+                                if (getFlowInterface().getCreditCards().get(i).getToken().equals(token)) {
+                                    removeCardFromServer(i);
+                                    break;
+                                }
+                            }
+
+
+                        }
+
+                        @Override
+                        public void confirmItem(String companionId) {
+
+                        }
+
+                        @Override
+                        public void rejectItem(String companionId) {
+
+                        }
+                    });
+                } else {
                     mMissingLinearLayout.setVisibility(View.VISIBLE);
                 }
             }
@@ -90,6 +124,30 @@ public class CreditCardListFragment extends HGBAbstractFragment {
                 ErrorMessage(data);
             }
         });
+    }
+
+    private void removeCardFromServer(final int number) {
+        try {
+            ConnectionManager.getInstance(getActivity()).RemoveCreditCardHelloGbye(getFlowInterface().getCreditCards().get(number).getToken(), new ConnectionManager.ServerRequestListener() {
+                @Override
+                public void onSuccess(Object data) {
+
+                    getFlowInterface().getCreditCards().remove(number);
+                    mAdapter.notifyDataSetChanged();
+
+                }
+
+                @Override
+                public void onError(Object data) {
+
+                    ErrorMessage(data);
+
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }

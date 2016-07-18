@@ -776,6 +776,35 @@ public class ConnectionManager {
 
     }
 
+    public void RemoveCreditCardHelloGbye(String token,final ServerRequestListener listener) {
+        String url = getURL(Services.CARD_TOKEN);
+
+        try{
+            JSONObject json = new JSONObject();
+            json.put("token",token);
+            //THIS is a terrible work around because Volley doesnt support json body in DELETE https://code.google.com/p/android/issues/detail?id=65529
+            // Hack - http://stackoverflow.com/questions/33553559/delete-request-with-header-and-parametes-volley
+            HGBJsonRequest req = new HGBJsonRequest(true,Request.Method.DELETE, url,
+                    json, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    listener.onSuccess(response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    listener.onError(Parser.parseErrorMessage(error));
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+
+    }
+
 
 
     public void getPreferenceProfiles(final ServerRequestListener listener) {

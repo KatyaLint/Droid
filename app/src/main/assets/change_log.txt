@@ -189,7 +189,8 @@ Code changing:
     HEL-1029 - Editing travelers info on checkout 2nd screen crashes app 1.5.4
     HEL-1002 - spelling mistake
     HEL-1101 - missing month in add cc
-    
+    HEL-983 - Can't remove existing credit card
+
    Code changing:
    --------------
    - Change "You dont have andy trips" to Start planning your trips here"

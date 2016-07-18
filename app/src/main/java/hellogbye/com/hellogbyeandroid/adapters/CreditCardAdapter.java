@@ -34,7 +34,7 @@ public class CreditCardAdapter extends RecyclerView.Adapter<CreditCardAdapter.Vi
         // each data item is just a string in this case
         public ImageView mCardImage;
         public FontTextView mCardNumberText;
-        public ImageView mNext;
+       // public ImageView mNext;
 
 
 
@@ -42,7 +42,7 @@ public class CreditCardAdapter extends RecyclerView.Adapter<CreditCardAdapter.Vi
             super(itemLayoutView);
             mCardImage= (ImageView)itemLayoutView.findViewById(R.id.cc_image);
             mCardNumberText = (FontTextView)itemLayoutView.findViewById(R.id.cc_number);
-            mNext = (ImageView)itemLayoutView.findViewById(R.id.cc_image_next);
+          //  mNext = (ImageView)itemLayoutView.findViewById(R.id.cc_image_next);
             itemLayoutView.setOnClickListener(this);
 
         }

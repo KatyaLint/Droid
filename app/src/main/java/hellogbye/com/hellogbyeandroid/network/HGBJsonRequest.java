@@ -135,6 +135,31 @@ public class HGBJsonRequest extends Request<String> {
         setService(url);
         send();
     }
+    public HGBJsonRequest(boolean customhurl,int method, String url, JSONObject params, Listener<String> listener, ErrorListener errorListener) {
+
+        super(method, url, errorListener);
+
+        this.listener = listener;
+        this.jsonParams = params;
+        Log.i(TAG, " params :\t" + params.toString());
+
+        this.errorListener = errorListener;
+        OkHttpClient client = new OkHttpClient();
+        client.networkInterceptors().add(new StethoInterceptor());
+        CustomHurlStack customHurlStack = new CustomHurlStack();
+        this.queue = Volley.newRequestQueue(mContext.getApplicationContext(), customHurlStack);
+        // this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
+        this.url = url;
+        this.showLoader = true;
+        progressDialog = new ProgressDialog(mContext);
+        loading = "Loading...";
+        setRetryPolicy(new DefaultRetryPolicy(
+                HGBApplication.TIMEOUT_TIME,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        setService(url);
+        send();
+    }
 
 
     @Override
@@ -251,7 +276,6 @@ public class HGBJsonRequest extends Request<String> {
 
     public void send() {
         Log.d(TAG, service + "\nURL: " + url + "\nPARAMS: " + returnParams().toString());
-        Log.d(TAG, "TOKEN: " + token);
         showLoader();
         queue.add(this);
     }
