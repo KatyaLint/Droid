@@ -21,6 +21,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -250,7 +251,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
         mTitle.setText(mUser.getTitle());
         mFirstName.setText(mUser.getFirstname());
         mLastName.setText(mUser.getLastname());
-        mDOB.setText(HGBUtility.parseDateToddMMyyyyForPayment(mUser.getDob()));
+        mDOB.setText(HGBUtilityDate.parseDateToddMMyyyyForPayment(mUser.getDob()));
         mEmail.setText(mUser.getEmailaddress());
         mPhone.setText(mUser.getPhone());
         mAddress.setText(mUser.getAddress());

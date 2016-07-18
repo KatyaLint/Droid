@@ -91,7 +91,23 @@ public class CreditCardSwipeItemsAdapter extends RecyclerSwipeAdapter<CreditCard
         CreditCardItem item = mDataset.get(position);
 
         viewHolder.mCardNumberText.setText(item.getLast4());
-        if(item.getCardtypeid().equals("1")){
+
+        switch (item.getCardtypeid()){
+            case "1":
+                break;
+            case "2":
+                break;
+            case "3":
+                viewHolder.mCardImage.setBackgroundResource(R.drawable.master_card);
+                break;
+            case "4":
+                viewHolder.mCardImage.setBackgroundResource(R.drawable.visa);
+                break;
+            default:
+                viewHolder.mCardImage.setBackgroundResource(R.drawable.visa);
+        }
+
+ /*       if(item.getCardtypeid().equals("1")){
             //holder.mCardImage.setBackgroundResource(R.drawable.visa);
         }else if (item.getCardtypeid().equals("2")){
             // holder.mCardImage.setBackgroundResource(R.drawable.master_card);
@@ -101,7 +117,7 @@ public class CreditCardSwipeItemsAdapter extends RecyclerSwipeAdapter<CreditCard
             viewHolder.mCardImage.setBackgroundResource(R.drawable.visa);
         }else {
             viewHolder.mCardImage.setBackgroundResource(R.drawable.visa);
-        }
+        }*/
 
         viewHolder.swipe_my_companions.setShowMode(SwipeLayout.ShowMode.PullOut);
         viewHolder.mCardelete.setTag(item.getToken());

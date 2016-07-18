@@ -18,6 +18,7 @@ import hellogbye.com.hellogbyeandroid.R;
 
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -56,10 +57,10 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
         NodesVO itemData = itemsData.get(position);
         viewHolder.view.drawAlternativeFlights(itemData);
        // String startTime = itemData.getmDepartureTime().split(" ",2)[0];
-        viewHolder.txtStartTime.setText(HGBUtility.parseDateToHHmm(itemData.getmDeparture()));
+        viewHolder.txtStartTime.setText(HGBUtilityDate.parseDateToHHmm(itemData.getmDeparture()));
        // String endTime = itemData.getmArrivalTime().split(" ",2)[0];
 
-        viewHolder.txtEndTime.setText(HGBUtility.parseDateToHHmm(itemData.getmArrival()));
+        viewHolder.txtEndTime.setText(HGBUtilityDate.parseDateToHHmm(itemData.getmArrival()));
         viewHolder.txtTravelTime.setText(itemData.getmTravelTime());
 
         viewHolder.alternative_flight_price.setText("$"+itemData.getCost());

@@ -35,6 +35,7 @@ import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.utilities.TwoDigitsCardTextWatcher;
 import hellogbye.com.hellogbyeandroid.views.CreditCardEditText;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
@@ -76,9 +77,11 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
     private CreditCardSessionItem creditCardItemSession;
     private BookingRequestVO bookingResponse;
 
-    final String[] monthArray = {"1", "2", "3", "4","5","6","7","8","9","10","11","12"};
+   // final String[] monthArray = {"1", "2", "3", "4","5","6","7","8","9","10","11","12"};
+    private ArrayList<String> yearArray;
+    private String[] monthArray;
 
-    private  ArrayList<String> yearArray = new ArrayList<String>();
+    // private  ArrayList<String> yearArray = new ArrayList<String>();
 
     //final String[] yearArray = {"2016", "2017", "2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030"};
 
@@ -100,8 +103,11 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getYears();
+       // getYears();
         progressDialog = new ProgressDialog(getActivity());
+        yearArray = HGBUtilityDate.getYears(NUMBER_OF_FUTURE_YEARS);
+        monthArray = (String[]) HGBUtilityDate.getMonths().toArray();
+
         // getStaticBooking();
 
         bookingResponse = getActivityInterface().getBookingRequest();
@@ -211,8 +217,10 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         mCardExpiryYear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String[] yearArr = new String[yearArray.size()];
                 yearArr = yearArray.toArray(yearArr);
+
                 HGBUtility.showPikerDialogEditText(mCardExpiryYear, getActivity(), "Choose Year",
                         yearArr, 0, NUMBER_OF_FUTURE_YEARS, new PopUpAlertStringCB() {
                             @Override
@@ -479,9 +487,10 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
             });
         }else{
             progressDialog.hide();
-            HGBErrorHelper errorHelper = new HGBErrorHelper();
+            ErrorMessage("The Credit Card number is not valid please try again");
+           /* HGBErrorHelper errorHelper = new HGBErrorHelper();
             errorHelper.setMessageForError("The Credit Card number is not valid please try again");
-            errorHelper.show(getActivity().getFragmentManager(), "Problem with Credit Card");
+            errorHelper.show(getActivity().getFragmentManager(), "Problem with Credit Card");*/
         }
 
 
@@ -698,15 +707,6 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         return false;
     }
 
-    private void getYears(){
 
-      //  ArrayList<Integer> years = new ArrayList<Integer>();
-        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
-        for (int i = thisYear; i <= thisYear+NUMBER_OF_FUTURE_YEARS; i++) {
-            yearArray.add(String.valueOf(i));
-        }
-        Log.d("","");
-
-    }
 
 }

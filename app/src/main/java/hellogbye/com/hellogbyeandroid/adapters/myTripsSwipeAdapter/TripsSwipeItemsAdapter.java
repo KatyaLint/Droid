@@ -25,6 +25,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
@@ -113,7 +114,7 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
 
         HGBUtility.loadRoundedImage( item.getUrlToCityView(),  viewHolder.my_trip_user_image, R.drawable.city_avatar_a_2);
         viewHolder.my_trip_name.setText(item.getName());
-        viewHolder.my_trip_dates.setText(HGBUtility.parseDateToddMMyyyyMyTrip(item.getStartdate())+" - "+HGBUtility.parseDateToddMMyyyyMyTrip(item.getEnddate()));
+        viewHolder.my_trip_dates.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(item.getStartdate())+" - "+HGBUtilityDate.parseDateToddMMyyyyMyTrip(item.getEnddate()));
         if(item.getPaymentstatus().equals("UPD")){
             viewHolder.my_trip_paid.setText("UNPAID");
             viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.red_button_color));

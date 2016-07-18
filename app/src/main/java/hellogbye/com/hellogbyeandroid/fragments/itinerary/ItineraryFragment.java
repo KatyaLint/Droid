@@ -43,6 +43,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import android.widget.LinearLayout.LayoutParams;
@@ -167,13 +168,13 @@ public class ItineraryFragment extends HGBAbstractFragment {
                      arrival = node.getmCheckOut();
                 }
 
-                long difference = HGBUtility.dayDifference(departure,arrival) ;
+                long difference = HGBUtilityDate.dayDifference(departure,arrival) ;
 
-                 departure = HGBUtility.parseDateToddMMyyyy(departure);
+                 departure = HGBUtilityDate.parseDateToddMMyyyy(departure);
             //    departure = HGBUtility.parseDateToEEEMMMDyy(departure); //parse return 23 is 2 different scenario need time not just date
            //      HGBUtility.parseDateToddMMyyyyMyTrip(departure);
                  if(node.getmType().equals(NodeTypeEnum.HOTEL.getType())){
-                     String time = HGBUtility.addDayHourToDate(departure);
+                     String time = HGBUtilityDate.addDayHourToDate(departure);
                      node.setDateOfCell(time);
                  }else {
                      node.setDateOfCell(departure);
@@ -188,7 +189,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
                 for(int i=1;i<=difference;i++){ //adding days, if hotel is 3 day, adding another 2
                  //   String time = HGBUtility.parseDateToddMMyyyyForPayment(departure);
-                    departure =  HGBUtility.addDayToDate(departure);
+                    departure =  HGBUtilityDate.addDayToDate(departure);
 
                     node.setUserName(passenger.getmName());
                     node.setDateOfCell(departure);
@@ -465,7 +466,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
         grid_traveler_flight_stops.setText(node.getmOrigin() + " - " + node.getmDestination());
 
         TextView grid_flight_operator_departure = (TextView)child.findViewById(R.id.grid_flight_operator_departure);
-        grid_flight_operator_departure.setText("Depart: " + HGBUtility.parseDateToHHmm(node.getmDeparture()) + " Arrival: "+HGBUtility.parseDateToHHmm(node.getmArrival()));
+        grid_flight_operator_departure.setText("Depart: " + HGBUtilityDate.parseDateToHHmm(node.getmDeparture()) + " Arrival: "+HGBUtilityDate.parseDateToHHmm(node.getmArrival()));
 
 /*        TextView grid_flight_operator_arrival = (TextView)child.findViewById(R.id.grid_flight_operator_arrival);
         grid_flight_operator_arrival.setText("Arrival: "+HGBUtility.parseDateToHHmm(node.getmArrival()));*/
@@ -540,7 +541,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
         grid_hotel_place.setTag(node.getmGuid());
 
         TextView grid_hotel_price = (TextView)child.findViewById(R.id.grid_hotel_price);
-        long diff = HGBUtility.dayDifference(node.getmCheckIn(), node.getmCheckOut());//HGBUtility.getDateDiff(node.getmCheckIn(), node.getmCheckOut());
+        long diff = HGBUtilityDate.dayDifference(node.getmCheckIn(), node.getmCheckOut());//HGBUtility.getDateDiff(node.getmCheckIn(), node.getmCheckOut());
         double iCharge = node.getmMinimumAmount()/(diff+1);
         String result = String.format("%.2f", iCharge);
         grid_hotel_price.setText("$" + result);
@@ -574,7 +575,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
         TextView date_text_layout = (TextView)child.findViewById(R.id.date_text_layout);
       //  String correctDate = HGBUtility.parseDateFromddMMyyyyToddmmYYYY(date);
-        String correctDate  = HGBUtility.parseDateFromddMMyyyyToddmmYYYY(date);
+        String correctDate  = HGBUtilityDate.parseDateFromddMMyyyyToddmmYYYY(date);
         date_text_layout.setText(correctDate);
         LinearLayout outer = new LinearLayout(activity);
         outer.setOrientation(LinearLayout.VERTICAL);

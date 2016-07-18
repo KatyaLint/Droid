@@ -85,6 +85,13 @@ public class HGBAbstractFragment extends Fragment {
         errorHelper.show(getActivity().getFragmentManager(), (String) message);
     }
 
+
+/*    public void ErrorMessageString(final String message){
+        HGBErrorHelper errorHelper = new HGBErrorHelper();
+        errorHelper.setMessageForError((String) message);
+        errorHelper.show(getActivity().getFragmentManager(), (String) message);
+    }*/
+
     public NodesVO getLegWithGuid(UserTravelMainVO userOrder){
         String guid = getSelectedGuid();
         Map<String, NodesVO> itemsMap = userOrder.getItems();

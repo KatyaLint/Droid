@@ -29,6 +29,7 @@ import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -163,7 +164,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
         companion_personal_settings_date_of_birth = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_date_of_birth);
 
-        companion_personal_settings_date_of_birth.setText(HGBUtility.parseDateToddMMyyyyForPayment(currentUser.getDob()));
+        companion_personal_settings_date_of_birth.setText(HGBUtilityDate.parseDateToddMMyyyyForPayment(currentUser.getDob()));
 
 
         companion_personal_settings_location_province = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_state);

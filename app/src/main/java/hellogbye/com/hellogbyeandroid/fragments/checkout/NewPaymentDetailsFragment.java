@@ -38,6 +38,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -174,7 +175,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                                     "\n" + nodesVO.getmCheckIn() +
                                     "-" + nodesVO.getmCheckOut() + "\n" +
                                     nodesVO.getRoomsVOs().get(0).getmRoomType() + " " +
-                                    HGBUtility.getDateDiffString(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()),
+                                    HGBUtilityDate.getDateDiffString(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()),
                                     "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card));
                             passengerChildArray.add(paymentChild);
                         } else if (NodeTypeEnum.FLIGHT.getType().equals(nodesVO.getmType())) {

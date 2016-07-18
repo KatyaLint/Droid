@@ -59,6 +59,7 @@ import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -513,7 +514,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
         mListForGallery = new ArrayList<>();
         mHotelNameFontTextView.setText(node.getmHotelName());
-        long diff = HGBUtility.dayDifference(node.getmCheckIn(), node.getmCheckOut());
+        long diff = HGBUtilityDate.dayDifference(node.getmCheckIn(), node.getmCheckOut());
         double iCharge = node.getmMinimumAmount()/diff;
         String result = String.format("%.2f", iCharge);
         mHotelPriceFontTextView.setText("$" + node.getmMinimumAmount());
@@ -524,8 +525,8 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         // mHotelGuestNumberFontTextView.setText(mTravelDetails.getPassengerses().get(1).getmCells().get(0).getmNodes().get(0).getm());
 //        mHotelCheckInFontTextView.setText(nodesVO.getmCheckIn());
 //        mHotelCheckOutFontTextView.setText(nodesVO.getmCheckOut());
-        mHotelCheckInFontTextView.setText(HGBUtility.parseDateToddMMyyyy(node.getmCheckIn()));
-        mHotelCheckOutFontTextView.setText(HGBUtility.parseDateToddMMyyyy(node.getmCheckOut()));
+        mHotelCheckInFontTextView.setText(HGBUtilityDate.parseDateToddMMyyyy(node.getmCheckIn()));
+        mHotelCheckOutFontTextView.setText(HGBUtilityDate.parseDateToddMMyyyy(node.getmCheckOut()));
 
         if (nodesVO.getmHotelCode().equals(node.getmHotelCode())) {
             mMyHotelText.setVisibility(View.VISIBLE);

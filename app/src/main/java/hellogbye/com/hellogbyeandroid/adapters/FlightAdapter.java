@@ -18,6 +18,7 @@ import hellogbye.com.hellogbyeandroid.fragments.alternative.IWebViewClicked;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -81,7 +82,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             viewHolder.flight_aircraft_text.setText(legFlightVO.getmEquipment());
             viewHolder.flight_class_text.setText(legFlightVO.getmFareClass());
 
-            String departureDate = HGBUtility.parseDateToddMMyyyyMyTrip(legFlightVO.getmDeparture());
+            String departureDate = HGBUtilityDate.parseDateToddMMyyyyMyTrip(legFlightVO.getmDeparture());
 
             viewHolder.flight_details.setText(legFlightVO.getmOriginCityName()+", "+legFlightVO.getmOriginAirPortName()+"\n"
             +legFlightVO.getmDestinationCityName()+", "+legFlightVO.getmDestinationAirportName()+"\n"

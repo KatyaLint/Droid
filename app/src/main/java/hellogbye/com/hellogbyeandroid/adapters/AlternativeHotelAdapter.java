@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -98,7 +99,7 @@ public class AlternativeHotelAdapter extends RecyclerView.Adapter<AlternativeHot
         NodesVO nodesVO = mArrayList.get(position);
         holder.mHotelName.setText(nodesVO.getmHotelName());
         holder.mHotelPrice.setText("$"+String.valueOf((int) nodesVO.getmMinimumAmount()));
-        holder.mHotelNights.setText(HGBUtility.getDateDiffString(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()));
+        holder.mHotelNights.setText(HGBUtilityDate.getDateDiffString(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()));
         setStarRating(holder,nodesVO.getmStarRating());
 
     }

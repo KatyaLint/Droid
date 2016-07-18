@@ -21,6 +21,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 
 
 public class ConnectionManager {
@@ -1503,7 +1504,7 @@ public class ConnectionManager {
             json2.put("phone", user.getPhone());
             json2.put("postalcode", user.getPostalcode());
             json2.put("lastname", user.getLastname());
-            json2.put("dob", HGBUtility.parseDateToServertime(user.getDob()));
+            json2.put("dob", HGBUtilityDate.parseDateToServertime(user.getDob()));
             json2.put("firstname", user.getFirstname());
             json2.put("title", user.getTitle());
             json2.put("address", user.getAddress());

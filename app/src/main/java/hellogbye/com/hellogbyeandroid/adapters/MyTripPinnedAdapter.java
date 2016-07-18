@@ -19,6 +19,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
@@ -146,7 +147,7 @@ public class MyTripPinnedAdapter extends SectionedBaseAdapter {
         if(section == 0 ){
             HGBUtility.loadRoundedImage( item.getUrlToCityView(),  holder.my_trip_user_image, R.drawable.city_avatar_a_2);
             holder.my_trip_name.setText(item.getName());
-            holder.my_trip_dates.setText(HGBUtility.parseDateToddMMyyyyMyTrip(item.getStartdate())+" - "+HGBUtility.parseDateToddMMyyyyMyTrip(item.getEnddate()));
+            holder.my_trip_dates.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(item.getStartdate())+" - "+HGBUtilityDate.parseDateToddMMyyyyMyTrip(item.getEnddate()));
             if(item.getPaymentstatus().equals("UPD")){
                 holder.my_trip_paid.setText("UNPAID");
             }else{
@@ -157,7 +158,7 @@ public class MyTripPinnedAdapter extends SectionedBaseAdapter {
 
             HGBUtility.loadRoundedImage( item.getUrlToCityView(),  holder.my_trip_user_image, R.drawable.city_avatar_a_2);
             holder.my_trip_name.setText(item.getName());
-            holder.my_trip_dates.setText(HGBUtility.parseDateToddMMyyyyMyTrip(item.getStartdate())+" - "+HGBUtility.parseDateToddMMyyyyMyTrip(item.getEnddate()));
+            holder.my_trip_dates.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(item.getStartdate())+" - "+HGBUtilityDate.parseDateToddMMyyyyMyTrip(item.getEnddate()));
             if(item.getPaymentstatus().equals("UPD")){
                 holder.my_trip_paid.setText("UNPAID");
             }else{
