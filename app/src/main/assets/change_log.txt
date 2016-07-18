@@ -197,7 +197,7 @@ Code changing:
     HEL-1134 - app crash when press on save with or without changes version 1.5.5 in carrier,aircraft and hotel chain
     HEL-1123 - headline in hotel details should be "hotel Details" and not "hotel" version 1.5.5
     HEL-1121 - can't change flight in alternative flights version 1.5.5
-
+    HEL-1119 - change flight information from "alternative flight" to "Flight Details" version 1.5.5
 
    Code changing:
    --------------
