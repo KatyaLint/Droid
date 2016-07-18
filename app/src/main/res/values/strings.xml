@@ -26,14 +26,20 @@
     <string name="title_activity_maps">Map</string>
     <string name="flight_operator">OPERATED BY</string>
     <string name="flight_number">FLIGHT #</string>
+    <string name="flight_date">DATE</string>
+    <string name="flight_aircraft_type">AIRCRAFT_TYPE</string>
     <string name="flight_airport">AIRPORTS</string>
-    <string name="flight_boarding">BOARDING</string>
+    <string name="flight_boarding">DEPARTURE</string>
     <string name="flight_duration">DURATION</string>
+    <string name="flight_arrival">ARRIVAL</string>
     <string name="flight_class">CLASS</string>
+    <string name="flight_addition_fees_title">ADDITIONAL FEES FOR BAGGAGE MAY APPLY</string>
+    <string name="flight_addition_fees">Check for this airlines\'s policy</string>
     <string name="flight_meal">MEAL</string>
     <string name="flight_aircraft">AIRCRAFT</string>
     <string name="flight_baggage">BAGGAGE</string>
     <string name="flight_seat_selection">SEAT SELECTION</string>
+    <string name="flight_baggage_carry_on">Carry On Baggage</string>
 
     <string name="flight_select_flight">Select Flight</string>
     <string name="flight_select_my_flight">My Flight</string>

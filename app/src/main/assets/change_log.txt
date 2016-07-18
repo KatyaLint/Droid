@@ -190,6 +190,14 @@ Code changing:
     HEL-1002 - spelling mistake
     HEL-1101 - missing month in add cc
     HEL-983 - Can't remove existing credit card
+    HEL-1107 - adding preffred airlines crashes app version 1.5.5
+    HEL-1020 - history screen
+    HEL-1084 - Flight Details screen
+    HEL-1137 - can't go to "cnc" from a trip in history version 1.5.5
+    HEL-1134 - app crash when press on save with or without changes version 1.5.5 in carrier,aircraft and hotel chain
+    HEL-1123 - headline in hotel details should be "hotel Details" and not "hotel" version 1.5.5
+
+
 
    Code changing:
    --------------
@@ -201,5 +209,8 @@ Code changing:
    - Depart and arrive should be next line
    - alternative flight slide all the way up till the end
    - CNC in Nav draw
+   -  Fix for enable\disable button for payment, travelers
+   - change password fix
+   - traveler_detail_layout.xml sizes change
 
 

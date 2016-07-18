@@ -1,5 +1,7 @@
 package hellogbye.com.hellogbyeandroid.adapters;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
+import hellogbye.com.hellogbyeandroid.fragments.alternative.IWebViewClicked;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -28,6 +31,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
     private boolean mIsMyFlight;
     private boolean alternativeButtonDisable;
     private String paid;
+    private IWebViewClicked webViewLinkClicked;
 
     public FlightAdapter(NodesVO currentNode, ArrayList<LegsVO> itemsData) {
         this.itemsData = itemsData;
@@ -72,11 +76,17 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             viewHolder.flight_airport_text.setText(legFlightVO.getmOrigin() + " - " + legFlightVO.getmDestination());
             viewHolder.flight_boarding_text.setText(legFlightVO.getmDepartureTime());
             viewHolder.flight_duration_text.setText(legFlightVO.getmFlightTime());
+            viewHolder.flight_arrival.setText(legFlightVO.getmArrivalTime());
+            viewHolder.flight_aircraft_text.setText(legFlightVO.getmEquipment());
             viewHolder.flight_class_text.setText(legFlightVO.getmFareClass());
+
+            String departureDate = HGBUtility.parseDateToddMMyyyyMyTrip(legFlightVO.getmDeparture());
+
             viewHolder.flight_details.setText(legFlightVO.getmOriginCityName()+", "+legFlightVO.getmOriginAirPortName()+"\n"
             +legFlightVO.getmDestinationCityName()+", "+legFlightVO.getmDestinationAirportName()+"\n"
-                    + HGBUtility.parseDateToddMMyyyyMyTrip(legFlightVO.getmDeparture()));
+                    + departureDate);
             viewHolder.stop_over_include_layout.setVisibility(View.GONE);
+            viewHolder.flight_date.setText(departureDate);
             HGBUtility.loadAirplainImage( legFlightVO.getmCarrierBadgeUrl(),  viewHolder.airplane_details_operated_image);
 
 
@@ -152,6 +162,10 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         this.paid = paid;
     }
 
+    public void setWebViewLinkClicked(IWebViewClicked webViewLinkClicked) {
+        this.webViewLinkClicked = webViewLinkClicked;
+    }
+
     // inner class to hold a reference to each item of RecyclerView
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -182,7 +196,10 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
 
         private ImageView mBadgeImageView;
         private ImageView airplane_details_operated_image;
-
+        private LinearLayout flight_addition_layout;
+        private FontTextView flight_arrival;
+        private FontTextView flight_aircraft_type_title;
+        private FontTextView flight_date;
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
@@ -212,6 +229,15 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
                 public void onClick(View view) {
                     String guid = view.getTag().toString();
                     alternativeButtonCB.selectedPressEticket(guid);
+                }
+            });
+
+
+            flight_addition_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    webViewLinkClicked.webLinkClicked();
+
                 }
             });
 
@@ -256,6 +282,9 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
 
             airplane_details_operated_image = (ImageView)includeAirplaneDetails.findViewById(R.id.airplane_details_operated_image);
 
+
+            flight_arrival = (FontTextView)includeAirplaneDetails.findViewById(R.id.flight_arrival);
+
   /*          flight_meal_text = (FontTextView) includeAirplaneDetails.findViewById(R.id.flight_meal_text);*/
             // flight_meal_text.setText(legFlightVO.getmFareClass());
 
@@ -265,6 +294,14 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
      /*       flight_baggage_text = (FontTextView) includeAirplaneDetails.findViewById(R.id.flight_baggage_text);
 
             flight_seat_selection_text = (FontTextView) includeAirplaneDetails.findViewById(R.id.flight_seat_selection_text);*/
+
+
+
+            flight_addition_layout = (LinearLayout)includeAirplaneDetails.findViewById(R.id.flight_addition_layout);
+
+            flight_aircraft_type_title = (FontTextView)includeAirplaneDetails.findViewById(R.id.flight_aircraft_type_title);
+            flight_date = (FontTextView)includeAirplaneDetails.findViewById(R.id.flight_date);
+
         }
 
     }

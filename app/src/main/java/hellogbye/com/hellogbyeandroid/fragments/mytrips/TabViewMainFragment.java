@@ -73,6 +73,8 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
         // 2. set layoutManger
         mRecyclerView.setLayoutManager(new LinearLayoutManager(activity));
         goToCNCView(rootView);
+
+        args = new Bundle();
     }
 
 
@@ -88,27 +90,20 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
             }
         });
     }
-
+    private Bundle args;
 
     private void adapterClickListener(){
         mAdapter.addClickeListeners(new ISwipeAdapterExecution(){
 
             @Override
             public void clickedItem(String solutionId) {
-                ConnectionManager.getInstance(activity).getItinerary(solutionId, new ConnectionManager.ServerRequestListener() {
-                    @Override
-                    public void onSuccess(Object data) {
-                        UserTravelMainVO userTravelMainVO = (UserTravelMainVO) data;
-                        getActivityInterface().setTravelOrder(userTravelMainVO);
-                        getFlowInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
-                    }
 
-                    @Override
-                    public void onError(Object data) {
-                        ErrorMessage(data);
 
-                    }
-                });
+                args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
+                args.putString(HGBConstants.SOLUTION_ITINERARY_ID, solutionId);
+                getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), args);
+
+
 
             }
 

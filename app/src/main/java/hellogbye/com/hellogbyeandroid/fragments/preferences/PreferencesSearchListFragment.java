@@ -185,7 +185,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
             @Override
             public void onItemClick(String guid, final String position) {
 
-                if(myAccountAttribute.getAttributesVOs().size() > MAX_CHOOSEN_NUMBER){
+                if(myAccountAttribute.getAttributesVOs().size() >= MAX_CHOOSEN_NUMBER){
                     maxChoosenNumberAlert();
                     return;
                 }
@@ -237,7 +237,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
                 .findViewById(R.id.companion_editTextDialog);
         input.setVisibility(View.GONE);
         final FontTextView text = (FontTextView) promptsView
-                .findViewById(R.id.component_popup_text);
+                .findViewById(R.id.component_popup_logout_text);
 
 
         text.setVisibility(View.VISIBLE);

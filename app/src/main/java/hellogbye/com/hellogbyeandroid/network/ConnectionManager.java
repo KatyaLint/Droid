@@ -513,11 +513,11 @@ public class ConnectionManager {
                 jsonObjectMain.put("travelpreferenceprofileid", airportSendValuesVO.getTravelpreferenceprofileid());
 
 //                //TODO need to remove
-                jsonObjectMain.put("latitude", "0");
-                jsonObjectMain.put("longitude", "0");
+               /* jsonObjectMain.put("latitude", "0");
+                jsonObjectMain.put("longitude", "0");*/
 
-//                jsonObjectMain.put("latitude", airportSendValuesVO.getLatitude());
-//                jsonObjectMain.put("longitude", airportSendValuesVO.getLongitude());
+                jsonObjectMain.put("latitude", airportSendValuesVO.getLatitude());
+                jsonObjectMain.put("longitude", airportSendValuesVO.getLongitude());
 
                 jsonObjectMain.put("token", jsonArray);
 
@@ -564,9 +564,6 @@ public class ConnectionManager {
         url = url +"CNC";
         JSONObject jsonObjectMain = new JSONObject();
 
-
-        JSONArray jsonArray = new JSONArray();
-
         for (AirportSendValuesVO airportSendValuesVO : airportSendValuesVOs) {
 
             try {
@@ -601,10 +598,67 @@ public class ConnectionManager {
     }
 
 
+    public void AddCreditCardHelloGbye(JSONObject json,final ServerRequestListener listener) {
+        String url = getURL(Services.CARD_TOKEN);
+
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                json, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseCreditCardList(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
+    }
+
+    public void addCreditCard(CreditCardItem creditCardItem, final ServerRequestListener listener) {
+
+        //AddCreditCard addCreditCard = new AddCreditCard();
+
+        HGBStringXMLRequest req = new HGBStringXMLRequest(Request.Method.POST, "https://beta.mycardstorage.com/api/api.asmx",creditCardItem,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        listener.onSuccess(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        },false);
+    }
+
     ////////////////////////////////
     // GETS
     ///////////////////////////////
 
+    public void getItinerary(String solutionid, final ServerRequestListener listener) {
+
+        String url = getURL(Services.ITINERARY);
+        url = url + solutionid;
+        JSONObject jsonObject = new JSONObject();
+
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseAirplaneData(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, false);
+    }
 
     public void ItineraryCNCSearchGet(String query, final ServerRequestListener listener) {
 
@@ -719,6 +773,7 @@ public class ConnectionManager {
 
     public void getMyTripsFavorite(final ServerRequestListener listener) {
 
+     //   http://apidev.hellogbye.com/dev/rest/Itinerary?count=15&skip=0&isFavorite=true
         String url = getURL(Services.ITINERARY_MY_TRIP) + "?count=15&skip=0&isFavorite=true";
         //  http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/itinerary?count=15&skip=0
 
@@ -757,24 +812,6 @@ public class ConnectionManager {
 
     }
 
-    public void AddCreditCardHelloGbye(JSONObject json,final ServerRequestListener listener) {
-        String url = getURL(Services.CARD_TOKEN);
-
-
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
-                json, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listener.onSuccess(Parser.parseCreditCardList(response));
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
-            }
-        });
-
-    }
 
     public void RemoveCreditCardHelloGbye(String token,final ServerRequestListener listener) {
         String url = getURL(Services.CARD_TOKEN);
@@ -1068,26 +1105,7 @@ public class ConnectionManager {
     }
 
 
-    public void getItinerary(String solutionid, final ServerRequestListener listener) {
 
-        String url = getURL(Services.ITINERARY);
-        url = url + solutionid;
-        JSONObject jsonObject = new JSONObject();
-
-
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
-                jsonObject, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listener.onSuccess(Parser.parseAirplaneData(response));
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
-            }
-        }, false);
-    }
 
 
 
@@ -1390,9 +1408,12 @@ public class ConnectionManager {
     }
 
 
-    public void putFavorityItenarary(boolean isFavority,String itineraryID, final ServerRequestListener listener) {
+    public void putFavorityItenarary(final boolean isFavority,final String itineraryID, final ServerRequestListener listener) {
         String url = getURL(Services.ITINERARY);
         url = url + itineraryID;
+
+       /*JSONObject jsonObjectWrapper = new JSONObject();*/
+
         JSONObject json1 = new JSONObject();
         try {
             json1.put("isfavorite", isFavority);
@@ -1512,23 +1533,7 @@ public class ConnectionManager {
         });
     }
 
-    public void addCreditCard(CreditCardItem creditCardItem, final ServerRequestListener listener) {
 
-        //AddCreditCard addCreditCard = new AddCreditCard();
-
-        HGBStringXMLRequest req = new HGBStringXMLRequest(Request.Method.POST, "https://beta.mycardstorage.com/api/api.asmx",creditCardItem,
-                 new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listener.onSuccess(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
-            }
-        },false);
-    }
 
 
 

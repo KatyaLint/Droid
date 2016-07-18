@@ -11,7 +11,7 @@ public enum ToolBarNavEnum {
     HOME(7,"Home"),
     ITINARERY(8,"Current Itinerary"),
     ALTERNATIVE_FLIGHT(9,"Alternative Flight"),
-    HOTEL(10,"Hotel"),
+    HOTEL(10,"Hotel Details"),
     ALTERNATIVE_FLIGHT_DETAILS(11,"Alternative Flights"),
     PAYMENT_DETAILS(12,"Payment details"),
     PREFERENCES_TAB_SETTINGS(13,"Preferences Settings"),

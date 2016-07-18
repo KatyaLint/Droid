@@ -87,4 +87,12 @@ public class UserTravelMainVO {
     public void setLocation(String[] location) {
         this.location = location;
     }
+
+    public ArrayList<ConversationVO> getConversation() {
+        return conversation;
+    }
+
+    public void setConversation(ArrayList<ConversationVO> conversation) {
+        this.conversation = conversation;
+    }
 }
