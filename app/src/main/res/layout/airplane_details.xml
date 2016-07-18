@@ -383,6 +383,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/flight_addition_fees_title"
+
                 style="@style/flight_details_view_title" />
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -390,6 +391,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/flight_addition_fees"
+                android:textColor="@color/COLOR_00475e"
                 style="@style/flight_details_view_text"/>
 
         </LinearLayout>
