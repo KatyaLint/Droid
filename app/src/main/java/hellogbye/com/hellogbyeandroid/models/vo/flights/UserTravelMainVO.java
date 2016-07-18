@@ -50,9 +50,6 @@ public class UserTravelMainVO {
     public String getmSolutionID() {
         return mSolutionID;
     }
-    public String getmTotalPrice() {
-        return mTotalPrice;
-    }
 
     public ArrayList<PassengersVO> getPassengerses() {
         return passengerses;
@@ -94,5 +91,13 @@ public class UserTravelMainVO {
 
     public void setConversation(ArrayList<ConversationVO> conversation) {
         this.conversation = conversation;
+    }
+
+    public String getmTotalPrice() {
+        return mTotalPrice;
+    }
+
+    public void setmTotalPrice(String mTotalPrice) {
+        this.mTotalPrice = mTotalPrice;
     }
 }

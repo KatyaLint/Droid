@@ -6,7 +6,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <HorizontalScrollView
-android:layout_above="@+id/grid_make_payment"
+    android:layout_above="@+id/grid_checkout_ll"
     android:id="@+id/table_scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,15 +19,57 @@ android:layout_above="@+id/grid_make_payment"
 
 
 </HorizontalScrollView>
-<hellogbye.com.hellogbyeandroid.views.FontButtonView
-android:id="@+id/grid_make_payment"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:background="@drawable/selector_red_button"
-android:textColor="@color/white"
-android:gravity="center"
-    app:fontName="dinnextltpro_medium.otf"
-android:textAllCaps="false"
-android:text="@string/continue_to_checkout"
-     android:layout_alignParentBottom="true"/>
+
+
+    <LinearLayout
+        android:id="@+id/grid_checkout_ll"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="3"
+        android:padding="@dimen/DP6"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_weight="2"
+            android:layout_width="@dimen/DP0"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/SP12"
+            android:textColor="@color/COLOR_005077"
+            app:fontName="dinnextltpro_medium.otf"
+            android:text="@string/continue_to_checkout_price"/>
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/grid_total_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/SP24"
+                android:textColor="@color/COLOR_005077"
+                app:fontName="dinnextltpro_boldcondensed.otf"
+                android:text="@string/continue_to_checkout_price"/>
+
+        </LinearLayout>
+
+        <hellogbye.com.hellogbyeandroid.views.FontButtonView
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/grid_make_payment"
+            android:layout_width="@dimen/DP0"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_red_button"
+            android:textColor="@color/white"
+            android:gravity="center"
+            app:fontName="dinnextltpro_medium.otf"
+            android:textAllCaps="false"
+            android:textSize="@dimen/SP18"
+            android:text="@string/continue_to_checkout" />
+
+
+    </LinearLayout>
+
 </RelativeLayout>

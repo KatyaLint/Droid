@@ -201,6 +201,7 @@ Code changing:
     HEL-1118 - big space between map and flight info in flight information version 1.5.5
     HEL-1116 - app crashes in preferences every where there is a list (carrier,aircraft and hotel chain)
     HEL-1073 - Flight Details screen
+    HEL-1085 - new design - grid
 
    Code changing:
    --------------

@@ -54,6 +54,7 @@
     <dimen name="SP16">32sp</dimen>
     <dimen name="SP18">36sp</dimen>
     <dimen name="SP20">40sp</dimen>
+    <dimen name="SP24">48sp</dimen>
     <dimen name="SP26">52sp</dimen>
     <dimen name="SP30">60sp</dimen>
     <dimen name="SP32">64sp</dimen>

@@ -43,6 +43,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
+import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
@@ -54,8 +55,9 @@ public class ItineraryFragment extends HGBAbstractFragment {
     private UserTravelMainVO userOrder;
     private Activity activity;
     private float iScreenSize;
-    private Button grid_make_payment;
+    private FontButtonView grid_make_payment;
     private int cellHieght;
+    private FontTextView grid_total_price;
 
     public ItineraryFragment() {
         // Empty constructor required for fragment subclasses
@@ -463,7 +465,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
         grid_traveler_flight_stops.setText(node.getmOrigin() + " - " + node.getmDestination());
 
         TextView grid_flight_operator_departure = (TextView)child.findViewById(R.id.grid_flight_operator_departure);
-        grid_flight_operator_departure.setText("Depart: " + HGBUtility.parseDateToHHmm(node.getmDeparture()) + "Arrival: "+HGBUtility.parseDateToHHmm(node.getmArrival()));
+        grid_flight_operator_departure.setText("Depart: " + HGBUtility.parseDateToHHmm(node.getmDeparture()) + " Arrival: "+HGBUtility.parseDateToHHmm(node.getmArrival()));
 
 /*        TextView grid_flight_operator_arrival = (TextView)child.findViewById(R.id.grid_flight_operator_arrival);
         grid_flight_operator_arrival.setText("Arrival: "+HGBUtility.parseDateToHHmm(node.getmArrival()));*/
@@ -641,6 +643,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
             itineraryLayout.addView(mainView);
             cnc_empty_view.setVisibility(View.GONE);
             grid_make_payment.setEnabled(true);
+            grid_total_price.setText("$" + userOrder.getmTotalPrice() + "USD");
         }else{  // server returning wrong data
             itineraryLayout.setVisibility(View.GONE);
             cnc_empty_view.setVisibility(View.VISIBLE);
@@ -668,9 +671,10 @@ public class ItineraryFragment extends HGBAbstractFragment {
                              Bundle savedInstanceState) {
         cellHieght = (int) getResources().getDimension(R.dimen.DP150);
         activity = getActivity();
-        View rootView = inflater.inflate(R.layout.new_grid_main_table, container, false);
 
-        grid_make_payment = (Button)rootView.findViewById(R.id.grid_make_payment);
+        View rootView = inflater.inflate(R.layout.new_grid_main_table, container, false);
+        grid_total_price = (FontTextView)rootView.findViewById(R.id.grid_total_price);
+        grid_make_payment = (FontButtonView)rootView.findViewById(R.id.grid_make_payment);
         grid_make_payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

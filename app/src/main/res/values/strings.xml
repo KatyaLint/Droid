@@ -205,7 +205,8 @@
     <!--<string name="terms">By clicking pre-register. You agree to HelloGbye\nUser Agreement and Privacy Policy.</string>-->
     <string name="sign_up_done">Done!</string>
 
-    <string name="continue_to_checkout">Continue to Checkout</string>
+    <string name="continue_to_checkout">Checkout</string>
+    <string name="continue_to_checkout_price">PRICE :</string>
     <string name="edit_trip_name">Edit Trip Name</string>
 
     <string name="onBoarding_just_type">Just type or say\nsomething like:</string>
