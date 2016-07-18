@@ -200,7 +200,7 @@ Code changing:
     HEL-1119 - change flight information from "alternative flight" to "Flight Details" version 1.5.5
     HEL-1118 - big space between map and flight info in flight information version 1.5.5
     HEL-1116 - app crashes in preferences every where there is a list (carrier,aircraft and hotel chain)
-
+    HEL-1073 - Flight Details screen
 
    Code changing:
    --------------
