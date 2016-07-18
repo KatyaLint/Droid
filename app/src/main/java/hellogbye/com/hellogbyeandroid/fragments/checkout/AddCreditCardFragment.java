@@ -20,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
@@ -66,6 +67,8 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
     private AlertDialog countryDialog;
     private AlertDialog stateDialog;
 
+    private final int NUMBER_OF_FUTURE_YEARS = 10;
+
     private ArrayList<String> listOfPattern;
     private final int MY_SCAN_REQUEST_CODE = 123;
 
@@ -75,7 +78,9 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
 
     final String[] monthArray = {"1", "2", "3", "4","5","6","7","8","9","10","11","12"};
 
-    final String[] yearArray = {"2016", "2017", "2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030"};
+    private  ArrayList<String> yearArray = new ArrayList<String>();
+
+    //final String[] yearArray = {"2016", "2017", "2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030"};
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new AddCreditCardFragment();
@@ -95,7 +100,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        getYears();
         progressDialog = new ProgressDialog(getActivity());
         // getStaticBooking();
 
@@ -206,8 +211,10 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         mCardExpiryYear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String[] yearArr = new String[yearArray.size()];
+                yearArr = yearArray.toArray(yearArr);
                 HGBUtility.showPikerDialogEditText(mCardExpiryYear, getActivity(), "Choose Year",
-                        yearArray, 0, 13, new PopUpAlertStringCB() {
+                        yearArr, 0, NUMBER_OF_FUTURE_YEARS, new PopUpAlertStringCB() {
                             @Override
                             public void itemSelected(String inputItem) {
 
@@ -689,6 +696,17 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         }
 
         return false;
+    }
+
+    private void getYears(){
+
+      //  ArrayList<Integer> years = new ArrayList<Integer>();
+        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+        for (int i = thisYear; i <= thisYear+NUMBER_OF_FUTURE_YEARS; i++) {
+            yearArray.add(String.valueOf(i));
+        }
+        Log.d("","");
+
     }
 
 }
