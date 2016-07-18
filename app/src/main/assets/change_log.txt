@@ -191,7 +191,8 @@ Code changing:
     HEL-1101 - missing month in add cc
     HEL-1107 - adding preffred airlines crashes app version 1.5.5
     HEL-1020 - history screen
-    
+    HEL-1084 - Flight Details screen
+
    Code changing:
    --------------
    - Change "You dont have andy trips" to Start planning your trips here"
@@ -204,5 +205,6 @@ Code changing:
    - CNC in Nav draw
    -  Fix for enable\disable button for payment, travelers
    - change password fix
+   - traveler_detail_layout.xml sizes change
 
 

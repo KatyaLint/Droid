@@ -463,10 +463,10 @@ public class ItineraryFragment extends HGBAbstractFragment {
         grid_traveler_flight_stops.setText(node.getmOrigin() + " - " + node.getmDestination());
 
         TextView grid_flight_operator_departure = (TextView)child.findViewById(R.id.grid_flight_operator_departure);
-        grid_flight_operator_departure.setText("Depart: " + HGBUtility.parseDateToHHmm(node.getmDeparture()));
+        grid_flight_operator_departure.setText("Depart: " + HGBUtility.parseDateToHHmm(node.getmDeparture()) + "Arrival: "+HGBUtility.parseDateToHHmm(node.getmArrival()));
 
-        TextView grid_flight_operator_arrival = (TextView)child.findViewById(R.id.grid_flight_operator_arrival);
-        grid_flight_operator_arrival.setText("Arrival: "+HGBUtility.parseDateToHHmm(node.getmArrival()));
+/*        TextView grid_flight_operator_arrival = (TextView)child.findViewById(R.id.grid_flight_operator_arrival);
+        grid_flight_operator_arrival.setText("Arrival: "+HGBUtility.parseDateToHHmm(node.getmArrival()));*/
 
 
         //type
@@ -477,7 +477,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
         grid_flight_time.setText(node.getmFlightTime());
 
 
-        LayoutParams outerLayoutParams = new LayoutParams((int)iScreenSize,cellHieght);
+        LayoutParams outerLayoutParams = new LayoutParams((int)iScreenSize, cellHieght);
         RelativeLayout innerWhiteFlightLayout = (RelativeLayout)child.findViewById(R.id.innerWhiteFlightLayout);
         innerWhiteFlightLayout.setLayoutParams(outerLayoutParams);
 
@@ -487,6 +487,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
         outer.setOrientation(LinearLayout.VERTICAL);
         outer.addView(child);
+
 
         return outer;
     }

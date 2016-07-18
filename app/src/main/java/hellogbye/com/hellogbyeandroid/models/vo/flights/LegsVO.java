@@ -282,4 +282,28 @@ public class LegsVO {
     public void setmCarrierBadgeUrl(String mCarrierBadgeUrl) {
         this.mCarrierBadgeUrl = mCarrierBadgeUrl;
     }
+
+    public String getmArrival() {
+        return mArrival;
+    }
+
+    public void setmArrival(String mArrival) {
+        this.mArrival = mArrival;
+    }
+
+    public String getmArrivalTime() {
+        return mArrivalTime;
+    }
+
+    public void setmArrivalTime(String mArrivalTime) {
+        this.mArrivalTime = mArrivalTime;
+    }
+
+    public String getmEquipment() {
+        return mEquipment;
+    }
+
+    public void setmEquipment(String mEquipment) {
+        this.mEquipment = mEquipment;
+    }
 }

@@ -79,8 +79,6 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         FragmentManager fm = getChildFragmentManager();
-
-
         fragment = (SupportMapFragment)fm.findFragmentById(R.id.map); //((SupportMapFragment) activity.getFragmentManager().findFragmentById(R.id.map));//(SupportMapFragment) fm.findFragmentById(R.id.map);
 
         if (fragment == null) {
@@ -290,7 +288,14 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         // 3. create an adapter
         mAdapter = new FlightAdapter(currentNode,legsFlights);
 
-
+        mAdapter.setWebViewLinkClicked(new IWebViewClicked(){
+            @Override
+            public void webLinkClicked() {
+                Uri uri = Uri.parse("http://www.flightnetwork.com/pages/airline-information/");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
 
 
         // 4. set adapter
@@ -336,8 +341,8 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
             getAlternativeFlights(currentNode);
         }
 
-
     }
+
 
     @Override
     public boolean onMarkerClick(Marker marker) {

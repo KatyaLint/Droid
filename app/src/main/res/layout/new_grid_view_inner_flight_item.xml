@@ -84,6 +84,7 @@
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_below="@+id/grid_flight_operator_departure"
             android:id="@+id/grid_flight_operator_arrival"
+            android:visibility="gone"
             style="@style/GridTextStyle"
             android:textSize="@dimen/SP12"
             android:layout_width="fill_parent"
