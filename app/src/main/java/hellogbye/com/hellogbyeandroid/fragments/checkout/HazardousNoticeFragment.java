@@ -13,6 +13,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -23,7 +24,7 @@ public class HazardousNoticeFragment extends HGBAbstractFragment {
 
     private FontTextView mHazaardText;
 
-    private Button mDone;
+    private FontButtonView mDone;
 
 
     public static Fragment newInstance(int position) {
@@ -37,7 +38,6 @@ public class HazardousNoticeFragment extends HGBAbstractFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.hazard_notice_layout, container, false);
-
         return rootView;
     }
 
@@ -46,7 +46,7 @@ public class HazardousNoticeFragment extends HGBAbstractFragment {
         super.onViewCreated(view, savedInstanceState);
 
         mHazaardText = (FontTextView) view.findViewById(R.id.hazard_text);
-        mDone = (Button) view.findViewById(R.id.confirm_read);
+        mDone = (FontButtonView) view.findViewById(R.id.confirm_read);
         mHazaardText.setMovementMethod(new ScrollingMovementMethod());
         mDone.setOnClickListener(new View.OnClickListener() {
             @Override

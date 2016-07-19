@@ -14,7 +14,7 @@
         style="@style/TextViewTravlerCheckoutDetails"
         android:layout_marginLeft="@dimen/DP44"
         android:layout_marginBottom="@dimen/DP16"
-        android:text="Travel Information" />
+        android:text="@string/payment_traveler_information" />
 
     <include
         android:id="@+id/travel_data_ll"

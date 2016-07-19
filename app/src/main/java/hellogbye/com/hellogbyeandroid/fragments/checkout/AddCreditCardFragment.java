@@ -68,7 +68,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
     private AlertDialog countryDialog;
     private AlertDialog stateDialog;
 
-    private final int NUMBER_OF_FUTURE_YEARS = 10;
+    private final int NUMBER_OF_FUTURE_YEARS = 14;
 
     private ArrayList<String> listOfPattern;
     private final int MY_SCAN_REQUEST_CODE = 123;
@@ -106,7 +106,10 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
        // getYears();
         progressDialog = new ProgressDialog(getActivity());
         yearArray = HGBUtilityDate.getYears(NUMBER_OF_FUTURE_YEARS);
-        monthArray = (String[]) HGBUtilityDate.getMonths().toArray();
+        ArrayList<String> months = HGBUtilityDate.getMonths();
+        monthArray = new String[months.size()];
+        monthArray = months.toArray(monthArray);
+
 
         // getStaticBooking();
 
@@ -188,6 +191,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
             }
         });
 
+
         mCardProvince.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -199,7 +203,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
             @Override
             public void onClick(View view) {
                 HGBUtility.showPikerDialogEditText(mCardExpiryMonth, getActivity(), "Choose Month",
-                        monthArray, 0, 10, new PopUpAlertStringCB() {
+                        monthArray, 0, monthArray.length-1, new PopUpAlertStringCB() {
                             @Override
                             public void itemSelected(String inputItem) {
 
@@ -221,8 +225,9 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
                 String[] yearArr = new String[yearArray.size()];
                 yearArr = yearArray.toArray(yearArr);
 
+
                 HGBUtility.showPikerDialogEditText(mCardExpiryYear, getActivity(), "Choose Year",
-                        yearArr, 0, NUMBER_OF_FUTURE_YEARS, new PopUpAlertStringCB() {
+                        yearArr, 0, yearArr.length-1, new PopUpAlertStringCB() {
                             @Override
                             public void itemSelected(String inputItem) {
 
