@@ -34,14 +34,11 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/summary_traveler_recyclerView_cc"
             android:layout_width="match_parent"
-<<<<<<< HEAD
             android:layout_height="wrap_content"
             >
         </android.support.v7.widget.RecyclerView>
 
-=======
-            android:layout_height="wrap_content"/>
->>>>>>> origin/master
+
 
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
