@@ -418,15 +418,17 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 for (String passengerItem : passenger.getmItineraryItems()) {
                     if (add) {
                         getFlowInterface().getBookingHashMap().put(passengerItem, selectedCreditCard.getToken());
+                        currentPassenger.getmBookingItems().addAll(passenger.getmItineraryItems());
                     } else {
                         getFlowInterface().getBookingHashMap().remove(passengerItem);
+                        currentPassenger.getmBookingItems().removeAll(passenger.getmItineraryItems());
                     }
-                    if (add) {
+/*                    if (add) {
                         currentPassenger.getmBookingItems().addAll(passenger.getmItineraryItems());
 
                     } else {
                         currentPassenger.getmBookingItems().removeAll(passenger.getmItineraryItems());
-                    }
+                    }*/
 
                 }
 
@@ -463,7 +465,23 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
     }
 
     private void setCCIcon(ImageView view, String cardid) {
-        if (cardid.equals("1")) {
+
+        switch (cardid){
+            case "1":
+                view.setBackgroundResource(R.drawable.master_card);
+                break;
+            case "2":
+                view.setBackgroundResource(R.drawable.master_card);
+                break;
+            case "3":
+                view.setBackgroundResource(R.drawable.master_card);
+                break;
+            case "4":
+                view.setBackgroundResource(R.drawable.visa);
+                break;
+        }
+
+   /*     if (cardid.equals("1")) {
             view.setBackgroundResource(R.drawable.master_card);
 
         } else if (cardid.equals("2")) {
@@ -476,7 +494,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         } else if (cardid.equals("4")) {
             view.setBackgroundResource(R.drawable.visa);
 
-        }
+        }*/
 
 
     }
