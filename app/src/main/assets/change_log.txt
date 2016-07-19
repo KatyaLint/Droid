@@ -226,10 +226,12 @@ Code changing:
 
    Fixed Bugs:
    -----------
+
     HEL-1144 - can't add credit card app crashes version 1.5.6
     HEL-1125 - pressing on the star in itinerary for saving in favorites isn't saving version 1.5.5
     HEL-649 - anonymous user account settings delete address
     HEL-1102 - create a head line for manage payment cards version 1.5.5
+    HEL-1138 - trying to pay for 2 items with 2 credit cards caughts exception version
 
    Code changing:
    --------------

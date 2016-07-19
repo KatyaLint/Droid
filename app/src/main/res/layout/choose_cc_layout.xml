@@ -31,11 +31,14 @@
             android:textSize="@dimen/SP10"
             app:fontName="dinnextltpro_regular.otf" />
 
-        <include
-            android:id="@+id/select_cc_recyclerView"
-            layout="@layout/payment_summary_item"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/summary_traveler_recyclerView_cc"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            >
+        </android.support.v7.widget.RecyclerView>
+
+
 
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView

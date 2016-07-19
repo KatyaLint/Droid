@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -106,7 +107,7 @@ public class TravlerAdapter extends RecyclerView.Adapter<TravlerAdapter.ViewHold
 
 
         holder.childNametext.setText(child.getFirstname() + " " + child.getLastname());
-        holder.childDOB.setText(child.getDob());
+        holder.childDOB.setText(HGBUtilityDate.parseDateToddMMyyyyForPayment(child.getDob()));
         holder.childPhone.setText(child.getPhone());
         holder.childAddress.setText(child.getAddress() + "\n" + child.getCity() + "," + child.getState() + "\n" + child.getPostalcode());
         holder.childEmail.setText(child.getEmailaddress());
