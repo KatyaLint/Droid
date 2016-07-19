@@ -31,6 +31,7 @@ import java.util.Map;
 import java.util.Set;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
@@ -689,9 +690,20 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
         getActivityInterface().setAlternativeFlights(null);
 
-
-
+        setFavorityIcon();
+        setSolutionNameForItirnarary();
         return rootView;
+    }
+
+    private void setSolutionNameForItirnarary() {
+        String solutionName = userOrder.getmSolutionName();
+        ((MainActivity)getActivity()).setTitleForItirnarary(solutionName);
+    }
+
+
+    private void setFavorityIcon(){
+        boolean isFavority = userOrder.ismIsFavorite();
+        ((MainActivity)getActivity()).setFavority(isFavority);
     }
 
 

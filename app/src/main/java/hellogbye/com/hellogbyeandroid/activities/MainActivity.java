@@ -211,6 +211,31 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     }
 
+
+    private void getCurrentItinerary(String solutionId){
+
+        ConnectionManager.getInstance(MainActivity.this).getItinerary(solutionId, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+                UserTravelMainVO userTravelMainVO = (UserTravelMainVO) data;
+                hgbSaveDataClass.setTravelOrder(userTravelMainVO);
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+
+               // ErrorMessage(data);
+
+            }
+        });
+    }
+
+
+
     private void getCountries(){
         ConnectionManager.getInstance(MainActivity.this).getBookingOptions(new ConnectionManager.ServerRequestListener() {
             @Override
@@ -738,9 +763,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case ITINARERY:
                 fragment = ItineraryFragment.newInstance(navPosition);
-                if(hgbSaveDataClass.getTravelOrder() != null) {
-                    itirnarary_title_Bar.setText(hgbSaveDataClass.getTravelOrder().getmSolutionName());
-                }
+
                // setItineraryTitleName();
                 break;
             case ALTERNATIVE_FLIGHT:
@@ -998,22 +1021,40 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         }
     }
 
+public void setTitleForItirnarary(String solutionName){
+
+        itirnarary_title_Bar.setText(hgbSaveDataClass.getTravelOrder().getmSolutionName());
+
+}
+
+    public void setFavority(boolean isFavority){
+        if (isFavority) {
+            up_bar_favorite.setBackgroundResource(R.drawable.star_in_favorite);
+            //   hgbSaveDataClass.getTravelOrder().setmIsFavorite(false);
+
+        } else {
+            //    hgbSaveDataClass.getTravelOrder().setmIsFavorite(true);
+            up_bar_favorite.setBackgroundResource(R.drawable.thin_0651_star_favorite_rating);
+        }
+    }
 
     private void setFavorityItinerary() {
         UserTravelMainVO travelOrder = hgbSaveDataClass.getTravelOrder();
-        String solutionID = travelOrder.getmSolutionID();
+        final String solutionID = travelOrder.getmSolutionID();
         boolean isFavorite = travelOrder.ismIsFavorite();
 
-        ConnectionManager.getInstance(MainActivity.this).putFavorityItenarary(isFavorite, solutionID, new ConnectionManager.ServerRequestListener() {
+        ConnectionManager.getInstance(MainActivity.this).putFavorityItenarary(!isFavorite, solutionID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 if (hgbSaveDataClass.getTravelOrder().ismIsFavorite()) {
-                    hgbSaveDataClass.getTravelOrder().setmIsFavorite(false);
+                 //   hgbSaveDataClass.getTravelOrder().setmIsFavorite(false);
                     up_bar_favorite.setBackgroundResource(R.drawable.thin_0651_star_favorite_rating);
                 } else {
-                    hgbSaveDataClass.getTravelOrder().setmIsFavorite(true);
+                //    hgbSaveDataClass.getTravelOrder().setmIsFavorite(true);
                     up_bar_favorite.setBackgroundResource(R.drawable.star_in_favorite);
                 }
+
+                getCurrentItinerary(solutionID);
             }
 
             @Override
