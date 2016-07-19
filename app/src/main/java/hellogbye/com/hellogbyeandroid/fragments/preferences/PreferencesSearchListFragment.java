@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
@@ -222,6 +223,12 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
 
 
         settings_empty_view_layout = (LinearLayout)rootView.findViewById(R.id.settings_empty_view_layout);
+        TextView settings_empty_view_text = (TextView) rootView.findViewById(R.id.settings_empty_view_text);
+        if(strType.equals("FLT")){
+            settings_empty_view_text.setText(getString(R.string.settings_empty_view_aircraft));
+        }else{
+            settings_empty_view_text.setText(getString(R.string.settings_empty_view_hotel));
+        }
         if(selectedItem.isEmpty()){
             settings_empty_view_layout.setVisibility(View.VISIBLE);
         }
