@@ -170,6 +170,7 @@ public class CostumeToolBar extends Toolbar {
             case ALTERNATIVE_FLIGHT_DETAILS:
             case ADD_CREDIT_CARD:
             case PAYMENT_DETAILS:
+            case HAZARDOUS_NOTICE:
                 titleText.setVisibility(View.VISIBLE);
                 break;
 

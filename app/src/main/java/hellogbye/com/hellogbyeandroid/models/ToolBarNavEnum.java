@@ -30,7 +30,7 @@ public enum ToolBarNavEnum {
     CREDIT_CARD_LIST(26,"Credit Card list"),
     CHECKOUT_CONFIRMATION(27,"Checkout confirmation"),
     CNC_TUTORIAL(28,"CNC Tutorial"),
-    HAZARDOUS_NOTICE(29,"Hazard Notice"),
+    HAZARDOUS_NOTICE(29,"Make Payment"),
     ALL_COMPANIONS_VIEW(30,"My Companions"),
     COMPANION_HELP_FEEDBACK(31,"Help and Feedback"),
     PREFERENCES_CHECK_AS_RADIO_SETTINGS(32,"Preferences Settings"),;
