@@ -80,6 +80,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
    // final String[] monthArray = {"1", "2", "3", "4","5","6","7","8","9","10","11","12"};
     private ArrayList<String> yearArray;
     private String[] monthArray;
+    private List<ProvincesItem> provinceItems;
 
     // private  ArrayList<String> yearArray = new ArrayList<String>();
 
@@ -544,7 +545,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         ConnectionManager.getInstance(getActivity()).getStaticBookingProvince(countryID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                List<ProvincesItem> provinceItems = (List<ProvincesItem>) data;
+                provinceItems = (List<ProvincesItem>) data;
                 if (provinceItems.size() > 0) {
                     setDropDownItems(provinceItems);
                     mCardProvince.setVisibility(View.VISIBLE);
@@ -620,8 +621,10 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
             return false;
         }else if (mCardLastName.getText().toString().equals("")){
             return false;
-        }else if (mCardProvince.getText().toString().equals("")){
-            return false;
+        }else if (provinceItems!= null && provinceItems.size() !=0){
+            if(mCardProvince.getText().toString().equals("")){
+                return false;
+            }
         }else if (mCardPostal.getText().toString().equals("")){
             return false;
         }else if (mCardCity.getText().toString().equals("")){

@@ -233,6 +233,7 @@ Code changing:
     HEL-1102 - create a head line for manage payment cards version 1.5.5
     HEL-1138 - trying to pay for 2 items with 2 credit cards caughts exception version
     HEL-1127 - Checkout - wrong traveler information when flying with more than one traveler version 1.5.5
+    HEL-1082 - add credit card
 
    Code changing:
    --------------
