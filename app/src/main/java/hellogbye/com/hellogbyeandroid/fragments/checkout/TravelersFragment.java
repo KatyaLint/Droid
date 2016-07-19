@@ -27,6 +27,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymnentGroup;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -111,22 +112,33 @@ public class TravelersFragment extends HGBAbstractFragment {
 
                 if(getFlowInterface().getListUsers().size() !=0 ){
                     for (int i = 0; i < getFlowInterface().getListUsers().size(); i++) {
-                        ArrayList<UserDataVO> passengerChildArray = new ArrayList<>();
-                        passengerChildArray.add(getFlowInterface().getListUsers().get(i));
-                        children.add(passengerChildArray);
-                        boolean isMissing = checkIfMissing(getFlowInterface().getListUsers().get(i));
-                        mGroups.get(i).setmChildDataMissing(isMissing);
-                        if(isMissing){
+                            UserDataVO user = getFlowInterface().getListUsers().get(i);
+                        for (int z = 0; z <mGroups.size() ; z++) {
 
-                            mNext.setEnabled(false);
+                            String name1 = mGroups.get(z).getNameText();
+                            String name2 = user.getFirstname();
+
+                            if(mGroups.get(z).getNameText().equals(user.getFirstname())){
+                                ArrayList<UserDataVO> passengerChildArray = new ArrayList<>();
+                                passengerChildArray.add(getFlowInterface().getListUsers().get(z));
+                                children.add(passengerChildArray);
+                                boolean isMissing = checkIfMissing(getFlowInterface().getListUsers().get(z));
+                                mGroups.get(z).setmChildDataMissing(isMissing);
+                                if(isMissing){
+
+                                    mNext.setEnabled(false);
                     /*        mNext.setVisibility(View.GONE);
                             mNextDisable.setVisibility(View.VISIBLE);*/
-                        }else{
+                                }else{
 
-                            mNext.setEnabled(true);
+                                    mNext.setEnabled(true);
                          /*   mNext.setVisibility(View.VISIBLE);
                             mNextDisable.setVisibility(View.GONE);*/
+                                }
+                            }
+
                         }
+
                     }
 
                     mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), mGroups, children);
@@ -297,7 +309,7 @@ public class TravelersFragment extends HGBAbstractFragment {
 
 
             holder.childNametext.setText(child.getFirstname() + " " + child.getLastname());
-            holder.childDOB.setText(child.getDob());
+            holder.childDOB.setText(HGBUtilityDate.parseDateToddMMyyyyForPayment(child.getDob()));
             holder.childPhone.setText(child.getPhone());
             holder.childAddress.setText(child.getAddress() + "\n" + child.getCity() + "," + child.getState() + "\n" + child.getPostalcode());
             holder.childEmail.setText(child.getEmailaddress());
