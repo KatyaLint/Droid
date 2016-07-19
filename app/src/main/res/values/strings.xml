@@ -240,6 +240,22 @@
 
     <string name = "payment_select_payment_method">Select Payment Method</string>
     <string name = "payment_next_button">Next</string>
+    <string name="payment_card_information">CARD INFORMATION</string>
+    <string name="payment_scan_card">Scan Card</string>
+    <string name="payment_card_number">Card Number</string>
+    <string name="payment_exp_month">Exp. Month</string>
+    <string name="payment_exp_year">Exp. Year</string>
+    <string name="payment_cvv">CVV</string>
+    <string name="payment_first_name">First Name</string>
+    <string name="payment_last_name">Last Name</string>
+    <string name="payment_save_card">Save Card</string>
+    <string name="payment_postal">Postal</string>
+    <string name="payment_province">Province</string>
+    <string name="payment_city">City</string>
+    <string name="payment_country">Country</string>
+    <string name="payment_street">Street</string>
+
+    <string name="payment_billing_information">BILLING INFORMATION</string>
 
     <string name="select_gender">Select Gender</string>
 
