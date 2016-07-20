@@ -64,13 +64,10 @@ public class HGBStringXMLRequest extends Request<String> {
         super(method, url, errorListener);
         this.listener = listener;
         this.params = params;
-//        params.put("username","omer.vinik@amginetech.com");
-//        params.put("password","password");
         this.errorListener = errorListener;
         OkHttpClient client = new OkHttpClient();
         client.networkInterceptors().add(new StethoInterceptor());
         this.queue = Volley.newRequestQueue(mContext.getApplicationContext(), new OkHttpStack(client));
-      //  this.queue = Volley.newRequestQueue(mContext.getApplicationContext());
         this.url = url;
         setRetryPolicy((new DefaultRetryPolicy(
                 HGBApplication.TIMEOUT_TIME,
@@ -108,25 +105,20 @@ public class HGBStringXMLRequest extends Request<String> {
 
     private String updateCreditCard(){
 
-        String strResponce = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
-                " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Header>" +
-                "<AuthHeader xmlns=\"https://MyCardStorage.com/\"><UserName>HelloGByeUser</UserName><Password>bWapRT#ayLJYN5S!</Password></AuthHeader> " +
-                "</soap:Header> <soap:Body><UpdateCOF_Soap xmlns=\"https://MyCardStorage.com/\"> <addToken><ServiceSecurity><ServiceUserName>HelloGBye</ServiceUserName><ServicePassword>NQbhm#KNDqO2X</ServicePassword>" +
-                "<MCSAccountID>"+mContext.getString(R.string.card_storage_account_id)+"</MCSAccountID><SessionID>"+creditCardItem.getToken()+"</SessionID></ServiceSecurity>" +
-                "<TokenData><CardNumber>"+creditCardItem.getCardNumber()+"</CardNumber>" +
-                "<CardType>"+creditCardItem.getCardtypeid()+"</CardType>" +
-                "<ExpirationMonth>"+creditCardItem.getExpmonth()+"</ExpirationMonth>" +
-                "<ExpirationYear>"+creditCardItem.getExpyear()+"</ExpirationYear>" +
-                "<NickName>"+creditCardItem.getNickname()+"</NickName>" +
-                "<FirstName>"+creditCardItem.getBuyerfirstname()+"</FirstName>" +
-                "<LastName>"+creditCardItem.getBuyerlastname()+"</LastName>" +
-                "<StreetAddress>"+creditCardItem.getBuyeraddress()+"</StreetAddress>" +
-                "<ZipCode>"+creditCardItem.getBuyerzip()+"</ZipCode>" +
-                "<CVV>"+creditCardItem.getCvv()+"</CVV>" +
-                "<Last4>"+creditCardItem.getLast4()+"</Last4>" +
-                "</TokenData></addToken>" +
-                "</UpdateCOF_Soap> </soap:Body> </soap:Envelope>";
+
+        String strResponce = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
+                "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns=\"https://MyCardStorage.com/\">  " +
+                "  <soap:Header><AuthHeader xmlns=\"https://MyCardStorage.com/\"><UserName>HelloGByeUser</UserName><Password>bWapRT#ayLJYN5S!</Password></AuthHeader> " +
+                " </soap:Header>  <soap:Body>    <UpdateCOF xmlns=\"https://MyCardStorage.com/\">      <xml>&lt;Request&gt;    &lt;ServiceLogin&gt;      " +
+                " &lt;ServiceUserName&gt;HelloGBye&lt;/ServiceUserName&gt;        &lt;ServicePassword&gt;NQbhm#KNDqO2X&lt;/ServicePassword&gt;      " +
+                "  &lt;MCSAccountID&gt;"+mContext.getString(R.string.card_storage_account_id)+"&lt;/MCSAccountID&gt;    &lt;/ServiceLogin&gt;    &lt;UpdateCOF&gt;        &lt;Token&gt;"+creditCardItem.getToken()+"&lt;/Token&gt;       " +
+                " &lt;ExpirationMonth&gt;"+creditCardItem.getExpmonth()+"&lt;/ExpirationMonth&gt;        &lt;ExpirationYear&gt;"+creditCardItem.getExpyear()+"&lt;/ExpirationYear&gt;        &lt;CardTypeId&gt;"+creditCardItem.getCardtypeid()+"&lt;/CardTypeId&gt;       " +
+                " &lt;FirstName&gt;"+creditCardItem.getBuyerfirstname()+"&lt;/FirstName&gt;        &lt;LastName&gt;"+creditCardItem.getBuyerlastname()+"&lt;/LastName&gt;        &lt;ZipCode&gt;"+creditCardItem.getBuyerzip()+"&lt;/ZipCode&gt;       " +
+                " &lt;StreetAddress&gt;"+creditCardItem.getBuyeraddress()+"&lt;/StreetAddress&gt;        &lt;NickName&gt;"+creditCardItem.getNickname()+"&lt;/NickName&gt;  " +
+                "  &lt;/UpdateCOF&gt;&lt;/Request&gt;</xml>    </UpdateCOF>  </soap:Body></soap:Envelope>";
+
         return strResponce;
+
     }
 
     @Override
@@ -137,24 +129,7 @@ public class HGBStringXMLRequest extends Request<String> {
         }else{
             strResponce = addCreditCard();
         }
-        /*String strResponce = "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
-                " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Header>" +
-                " <AuthHeader xmlns=\"https://MyCardStorage.com/\"><UserName>HelloGByeUser</UserName><Password>bWapRT#ayLJYN5S!</Password></AuthHeader> " +
-                "</soap:Header> <soap:Body><AddCOF_Soap xmlns=\"https://MyCardStorage.com/\"> <addToken><ServiceSecurity><ServiceUserName>HelloGBye</ServiceUserName><ServicePassword>NQbhm#KNDqO2X</ServicePassword>" +
-                "<MCSAccountID>"+mContext.getString(R.string.card_storage_account_id)+"</MCSAccountID><SessionID>"+creditCardItem.getToken()+"</SessionID></ServiceSecurity>" +
-                "<TokenData><CardNumber>"+creditCardItem.getCardNumber()+"</CardNumber>" +
-                "<CardType>"+creditCardItem.getCardtypeid()+"</CardType>" +
-                "<ExpirationMonth>"+creditCardItem.getExpmonth()+"</ExpirationMonth>" +
-                "<ExpirationYear>"+creditCardItem.getExpyear()+"</ExpirationYear>" +
-                "<NickName>"+creditCardItem.getNickname()+"</NickName>" +
-                "<FirstName>"+creditCardItem.getBuyerfirstname()+"</FirstName>" +
-                "<LastName>"+creditCardItem.getBuyerlastname()+"</LastName>" +
-                "<StreetAddress>"+creditCardItem.getBuyeraddress()+"</StreetAddress>" +
-                "<ZipCode>"+creditCardItem.getBuyerzip()+"</ZipCode>" +
-                "<CVV>"+creditCardItem.getCvv()+"</CVV>" +
-                "<Last4>"+creditCardItem.getLast4()+"</Last4>" +
-                "</TokenData></addToken>" +
-                " </AddCOF_Soap> </soap:Body> </soap:Envelope>";*/
+
 
         return strResponce.getBytes();
     }
@@ -182,12 +157,6 @@ public class HGBStringXMLRequest extends Request<String> {
         this.showLoader = showLoader;
         send();
     }
-
-
-//    protected Map<String, String> getParams()
-//            throws AuthFailureError {
-//        return params;
-//    };
 
     private void setService(String url) {
         URI uri;
@@ -223,10 +192,6 @@ public class HGBStringXMLRequest extends Request<String> {
         }
     }
 
-//    public String getBodyContentType()
-//    {
-//        return "application/xml";
-//    }
 
 
     @Override
@@ -239,38 +204,14 @@ public class HGBStringXMLRequest extends Request<String> {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "text/xml; charset=utf-8");
         if(creditCardItem.isUpdateCard()){
-            headers.put("SOAPAction", "https://MyCardStorage.com/UpdateCOF_Soap");
+            headers.put("SOAPAction", "https://MyCardStorage.com/UpdateCOF");
         }else{
             headers.put("SOAPAction", "https://MyCardStorage.com/AddCOF_Soap");
         }
 
-
-        headers.put("Content-Length", "1079");
-
-       // headers.put("Content-Type", "application/json");
-//        HGBPreferencesManager sharedPreferences = HGBPreferencesManager.getInstance(mContext);
-//        String token = sharedPreferences.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
-//        if(!token.equals("")){
-//            headers.put("Authorization", "Session " + token);
-//        }
         return headers;
     }
 
-//    public void setHeader(String header) {
-//        authorizationString = header;
-//    }
-
-
-//    @Override
-//    public byte[] getBody() {
-//        try {
-//            return params == null ? null : params.toString().getBytes(PROTOCOL_CHARSET);
-//        } catch (UnsupportedEncodingException uee) {
-//            VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s",
-//                    params.toString(), PROTOCOL_CHARSET);
-//            return null;
-//        }
-//    }
 
     @Override
     protected Response<String> parseNetworkResponse(final NetworkResponse response) {
@@ -286,24 +227,16 @@ public class HGBStringXMLRequest extends Request<String> {
         }
     }
 
-//    @Override
-//    public String getBodyContentType() {
-//        return "application/x-www-form-urlencoded; charset=UTF-8";
-//    }
 
 
     public void send() {
-      //  Log.d(TAG, service + "\nURL: " + url + "\nPARAMS: " + params);
-   //     Log.d(TAG, "TOKEN: " + token);
-//        DataStore.getInstance(mContext).showLoader();
+
         showLoader();
 
         queue.add(this);
     }
 
-//    public static void setToken(String userToken) {
-//        token = userToken;
-//    }
+
 
     public static void setContext(Context context) {
         mContext = context;

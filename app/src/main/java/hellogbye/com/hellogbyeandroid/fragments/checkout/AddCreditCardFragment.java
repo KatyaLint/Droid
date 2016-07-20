@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.NumberPicker;
+import android.widget.Toast;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
@@ -61,6 +63,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
     private FontButtonView mSave;
     private FontTextView mScan;
     private CheckBox mBillingCheckbox;
+    private CreditCardItem mCurrentCard;
 
     private NumberPicker countryPicker;
     private NumberPicker statePicker;
@@ -80,6 +83,8 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
     private ArrayList<String> yearArray;
     private String[] monthArray;
     private List<ProvincesItem> provinceItems;
+
+    private String mProgessDialogString = "Adding Credit Card";
 
     // private  ArrayList<String> yearArray = new ArrayList<String>();
 
@@ -262,6 +267,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
             String isFillPayment = args.getString(HGBConstants.PAYMENT_FILL_CREDIT_CARD);
             if(isFillPayment!= null){
                 fillPaymentDetails(isFillPayment);
+                mProgessDialogString = "Updating Credit Card";
             }
         }
 
@@ -276,21 +282,21 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         isFillPayment = true;
         mBillingCheckbox.setVisibility(View.GONE);
         ArrayList<CreditCardItem> creditCards = getFlowInterface().getCreditCards();
-        CreditCardItem currentCard = new CreditCardItem();
+        mCurrentCard = new CreditCardItem();
         for(CreditCardItem creditCard: creditCards){
             if(creditCard.getToken() != null && creditCard.getToken().equals(creditCardToken)){
-                currentCard = creditCard;
+                mCurrentCard = creditCard;
                 break;
             }
         }
 
-        String cardNumber = hideCardNumberWithStars(currentCard.getToken());
-        mCardNumber.setTag(currentCard.getToken());
+        String cardNumber = hideCardNumberWithStars(mCurrentCard.getToken());
+        mCardNumber.setTag(mCurrentCard.getToken());
         mCardNumber.setText(cardNumber);
         mCardNumber.setEnabled(false);
-        mCardExpiryMonth.setText(currentCard.getExpmonth());
-                mCardExpiryYear.setText(currentCard.getExpyear());
-        mCardCCV.setText(currentCard.getCvv());
+        mCardExpiryMonth.setText(mCurrentCard.getExpmonth());
+                mCardExpiryYear.setText(mCurrentCard.getExpyear());
+        mCardCCV.setText(mCurrentCard.getCvv());
         mCardCCV.setEnabled(false);
         mSave.setEnabled(true);
          //TODO Kate
@@ -410,16 +416,20 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
 
 
     private void sendCCToServer() {
-        progressDialog = ProgressDialog.show(getActivity(), "", "Adding Credit Card");
+        progressDialog = ProgressDialog.show(getActivity(), "",mProgessDialogString );
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
 
-        final CreditCardItem creditCardItem = new CreditCardItem();
-        creditCardItem.setBuyerfirstname(mCardFirstName.getText().toString());
-        creditCardItem.setBuyerlastname(mCardLastName.getText().toString());
-        creditCardItem.setBuyerzip(mCardPostal.getText().toString());
-        creditCardItem.setBuyeraddress(mCardStreet.getText().toString());
-        creditCardItem.setCardtypeid(getCCType());
+        //IF new Card need to initiailize
+        if(mCurrentCard == null){
+            mCurrentCard = new CreditCardItem();
+        }
+
+        mCurrentCard.setBuyerfirstname(mCardFirstName.getText().toString());
+        mCurrentCard.setBuyerlastname(mCardLastName.getText().toString());
+        mCurrentCard.setBuyerzip(mCardPostal.getText().toString());
+        mCurrentCard.setBuyeraddress(mCardStreet.getText().toString());
+        mCurrentCard.setCardtypeid(getCCType());
 
 //        String expDate = mCardExpiry.getText().toString();
 //        if (expDate.contains("/")) {
@@ -430,17 +440,17 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
 //            creditCardItem.setExpyear(partYear);
 //        }
 
-        creditCardItem.setExpmonth(mCardExpiryMonth.getText().toString());
-        creditCardItem.setExpyear(mCardExpiryYear.getText().toString());
+        mCurrentCard.setExpmonth(mCardExpiryMonth.getText().toString());
+        mCurrentCard.setExpyear(mCardExpiryYear.getText().toString());
 
 
         String last4 = mCardNumber.getText().toString();
         last4 = last4.substring(last4.length() - 5, last4.length());
         final String strCardNumber= mCardNumber.getText().toString().replaceAll("\\s+","");
-        creditCardItem.setCardNumber(strCardNumber);
+        mCurrentCard.setCardNumber(strCardNumber);
         if(isFillPayment){
             last4 = mCardNumber.getTag().toString();
-            creditCardItem.setCardNumber(last4);
+            mCurrentCard.setCardNumber(last4);
             last4 = last4.substring(last4.length() - 4, last4.length());
 
         }
@@ -449,42 +459,51 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
       //  last4 = last4.substring(last4.length() - 5, last4.length());
 
         last4= last4.replaceAll("\\s+","");
-        creditCardItem.setLast4(last4);
-        creditCardItem.setCvv(mCardCCV.getText().toString());
+        mCurrentCard.setLast4(last4);
+        mCurrentCard.setCvv(mCardCCV.getText().toString());
 
 
-      //  if(verifyValidCCNumber(creditCardItem))
+
+
+
+      // TODO need to check verofocation if(verifyValidCCNumber(creditCardItem))
         if(true)
         {
-            ConnectionManager.getInstance(getActivity()).getCCSession(new ConnectionManager.ServerRequestListener() {
-                @Override
-                public void onSuccess(Object data) {
-                    creditCardItemSession = (CreditCardSessionItem) data;
+            if(!isFillPayment){
+                ConnectionManager.getInstance(getActivity()).getCCSession(new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        creditCardItemSession = (CreditCardSessionItem) data;
 
-                    if (creditCardItemSession == null) {
+                        if (creditCardItemSession == null) {
                         /*HGBErrorHelper errorHelper = new HGBErrorHelper();
                         errorHelper.setMessageForError((String) data);
                         errorHelper.show(getActivity().getFragmentManager(), "There was a problem please try again");*/
-                        ErrorMessage("There was a problem please try again");
+                            ErrorMessage("There was a problem please try again");
 
-                    }else{
-                        creditCardItem.setNickname(creditCardItemSession.getNickname());
-                        creditCardItem.setToken(creditCardItemSession.getToken());
+                        }else{
+                            mCurrentCard.setNickname(creditCardItemSession.getNickname());
+                            mCurrentCard.setToken(creditCardItemSession.getToken());
 
 
-                        addCreditCard(creditCardItem);
+                            addCreditCard(mCurrentCard);
+
+                        }
+
+
 
                     }
 
+                    @Override
+                    public void onError(Object data) {
+                        ErrorMessage(data);
+                    }
+                });
 
+            }else{
+                addCreditCard(mCurrentCard);
+            }
 
-                }
-
-                @Override
-                public void onError(Object data) {
-                    ErrorMessage(data);
-                }
-            });
         }else{
             progressDialog.hide();
             ErrorMessage("The Credit Card number is not valid please try again");
@@ -513,17 +532,28 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
                 JSONObject json;
                 if(isFillPayment){
                     json = createJsonObjectForEditCreditCard(creditCardItem, data);
+                    ConnectionManager.getInstance(getActivity()).UpdateCreditCardHelloGbye(json, new ConnectionManager.ServerRequestListener() {
+                        @Override
+                        public void onSuccess(Object data) {
+                            progressDialog.hide();
+                            Toast.makeText(getActivity().getApplicationContext(),"Credit Card Updated",Toast.LENGTH_SHORT).show();
+                            ((MainActivity)getActivity()).onBackPressed();
+                            //getFragmentManager().popBackStack();
+
+                        }
+
+                        @Override
+                        public void onError(Object data) {
+
+                            progressDialog.hide();
+                            ErrorMessage(data);
+
+                        }
+                    });
+
                 }else{
                      json = createJsonObjectForAddCreditCard(creditCardItem, data);
-                }
-
-
-                if(json == null){
-                    ErrorMessage("Something went wrong");
-                    return;
-                }
-
-                ConnectionManager.getInstance(getActivity()).AddCreditCardHelloGbye(json, new ConnectionManager.ServerRequestListener() {
+                    ConnectionManager.getInstance(getActivity()).AddCreditCardHelloGbye(json, new ConnectionManager.ServerRequestListener() {
                         @Override
                         public void onSuccess(Object data) {
                             progressDialog.hide();
@@ -540,6 +570,15 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
 
                         }
                     });
+                }
+
+
+                if(json == null){
+                    ErrorMessage("Something went wrong");
+                    return;
+                }
+
+
 
 
               /*  }
@@ -787,8 +826,14 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
             JSONObject jsonObj = XML.toJSONObject((String) data);
             JSONObject json1 = jsonObj.getJSONObject("soap:Envelope");
             JSONObject json2 = json1.getJSONObject("soap:Body");
-            JSONObject json3 = json2.getJSONObject("UpdateCOF_SoapResponse");
-            JSONObject json4 = json3.getJSONObject("UpdateCOF_SoapResult");
+            JSONObject json3 = json2.getJSONObject("UpdateCOFResponse");
+          //  JSONObject json4 = json3.getJSONObject("UpdateCOFResult");
+            String strXML = json3.getString("UpdateCOFResult");
+
+            JSONObject jsonObj1 = XML.toJSONObject(strXML);
+            JSONObject jsonObj2 = jsonObj1.getJSONObject("Response");
+            JSONObject jsonObj3 = jsonObj2.getJSONObject("UpdateCOF");
+            String strToken = jsonObj3.getString("Token");
 /*            JSONObject json5 = json4.getJSONObject("TokenData");
             String strToken = json5.getString("Token");
             String strNickName = json5.getString("NickName");
@@ -796,16 +841,16 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
 
             json = new JSONObject();
             json.put("Last4", creditCardItem.getLast4());
-            json.put("NickName", creditCardItem.getNickname());
-            json.put("Token", creditCardItem.getToken());
+            json.put("NickName", jsonObj3.getString("NickName"));
+            json.put("Token", jsonObj3.getString("Token"));
             json.put("CardNumber", creditCardItem.getCardNumber());
-            json.put("ExpirationMonth", creditCardItem.getExpmonth());
-            json.put("ExpirationYear", creditCardItem.getExpyear());
-            json.put("CardType", creditCardItem.getCardtypeid());
-            json.put("FirstName", creditCardItem.getBuyerfirstname());
-            json.put("LastName", creditCardItem.getBuyerlastname());
-            json.put("StreetAddress", creditCardItem.getBuyeraddress());
-            json.put("ZipCode", creditCardItem.getBuyerzip());
+            json.put("ExpirationMonth", jsonObj3.getString("ExpMonth"));
+            json.put("ExpirationYear", jsonObj3.getString("ExpYear"));
+            json.put("CardType", jsonObj3.getString("CardTypeID"));
+            json.put("FirstName", jsonObj3.getString("FirstName"));
+            json.put("LastName", jsonObj3.getString("LastName"));
+            json.put("StreetAddress", jsonObj3.getString("StreetAddress"));
+            json.put("ZipCode",jsonObj3.getString("ZipCode"));
             json.put("BillingCity", mCardCity.getText().toString());
             json.put("BillingCountry", mCardCountry.getText().toString());
             json.put("BillingSuite", "");

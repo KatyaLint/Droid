@@ -239,3 +239,4 @@ Code changing:
    --------------
    - Titles for Payment
    - Payment titles for screen
+   - Editing CC

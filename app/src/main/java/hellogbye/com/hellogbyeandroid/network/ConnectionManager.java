@@ -618,6 +618,25 @@ public class ConnectionManager {
 
     }
 
+    public void UpdateCreditCardHelloGbye(JSONObject json,final ServerRequestListener listener) {
+        String url = getURL(Services.CARD_TOKEN);
+
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
+                json, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseCreditCardList(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        },false);
+
+    }
+
     public void addCreditCard(CreditCardItem creditCardItem, final ServerRequestListener listener) {
 
         //AddCreditCard addCreditCard = new AddCreditCard();
