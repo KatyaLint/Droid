@@ -11,10 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
+import hellogbye.com.hellogbyeandroid.IClickedItem;
 import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.CreditCardSwipeItemsAdapter;
@@ -35,7 +34,7 @@ public class CreditCardListFragment extends HGBAbstractFragment {
     private CreditCardSwipeItemsAdapter mAdapter;
     private FloatingActionButton mAddImageView;
     private LinearLayout mMissingLinearLayout;
-
+    private Bundle bundle;
     public static Fragment newInstance(int position) {
         Fragment fragment = new CreditCardListFragment();
         Bundle args = new Bundle();
@@ -54,6 +53,9 @@ public class CreditCardListFragment extends HGBAbstractFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        bundle = new Bundle();
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.credit_card_recycler_view);
         mAddImageView = (FloatingActionButton) view.findViewById(R.id.fab);
         mMissingLinearLayout = (LinearLayout) view.findViewById(R.id.payment_missing_ll);
@@ -76,44 +78,33 @@ public class CreditCardListFragment extends HGBAbstractFragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 
+
+        mAdapter = new CreditCardSwipeItemsAdapter(getActivity());
+
+        mAdapter.setClickedItemIterface(new IClickedItem(){
+
+            @Override
+            public String clickedItem(String clickedItem) {
+                bundle.putString(HGBConstants.PAYMENT_FILL_CREDIT_CARD,clickedItem);
+                getFlowInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(), bundle);
+                return "";
+            }
+        });
+
+
+        mRecyclerView.setAdapter(mAdapter);
+        removeCreditCardSwipe();
+     //   clickListenerOnAdapter();
+
         ConnectionManager.getInstance(getActivity()).getCreditCards(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 getFlowInterface().setCreditCards((ArrayList<CreditCardItem>) data);
                 if (((ArrayList<CreditCardItem>) data).size() != 0) {
                     mMissingLinearLayout.setVisibility(View.GONE);
-                    mAdapter = new CreditCardSwipeItemsAdapter(getActivity().getApplicationContext(), getFlowInterface().getCreditCards());
-                    mRecyclerView.setAdapter(mAdapter);
-                    mAdapter.addClickeListeners(new ISwipeAdapterExecution() {
-                        @Override
-                        public void clickedItem(String companionId) {
+                    mAdapter.setDataSet((ArrayList<CreditCardItem>) data);
+                    mAdapter.notifyDataSetChanged();
 
-                        }
-
-                        @Override
-                        public void deleteClicked(String token) {
-
-
-                            for (int i = 0; i < getFlowInterface().getCreditCards().size(); i++) {
-                                if (getFlowInterface().getCreditCards().get(i).getToken().equals(token)) {
-                                    removeCardFromServer(i);
-                                    break;
-                                }
-                            }
-
-
-                        }
-
-                        @Override
-                        public void confirmItem(String companionId) {
-
-                        }
-
-                        @Override
-                        public void rejectItem(String companionId) {
-
-                        }
-                    });
                 } else {
                     mMissingLinearLayout.setVisibility(View.VISIBLE);
                 }
@@ -125,6 +116,58 @@ public class CreditCardListFragment extends HGBAbstractFragment {
             }
         });
     }
+
+
+
+/*    private void clickListenerOnAdapter(){
+        mRecyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                RecyclerView.ViewHolder childView = mRecyclerView.getChildViewHolder(v);
+
+
+                View rootView2 = v.getRootView();
+                View rootView = v.findViewById(R.id.companion_delete_item);
+                System.out.println("Kate toke =" + rootView2.getTag().toString());
+              //  View deleteItem = rootView.findViewById(R.id.companion_delete_item);
+                System.out.println("Kate deleteItem.getTag() =" + rootView.getTag().toString());
+
+                bundle.putBoolean(HGBConstants.PAYMENT_FILL_CREDIT_CARD,true);
+                getFlowInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(), bundle);
+
+            }
+        });
+    }*/
+
+    private void removeCreditCardSwipe(){
+        mAdapter.addClickeListeners(new ISwipeAdapterExecution() {
+            @Override
+            public void clickedItem(String companionId) {
+            }
+
+            @Override
+            public void deleteClicked(String token) {
+                for (int i = 0; i < getFlowInterface().getCreditCards().size(); i++) {
+                    if (getFlowInterface().getCreditCards().get(i).getToken().equals(token)) {
+                        removeCardFromServer(i);
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void confirmItem(String companionId) {
+
+            }
+
+            @Override
+            public void rejectItem(String companionId) {
+
+            }
+        });
+    }
+
 
     private void removeCardFromServer(final int number) {
         try {

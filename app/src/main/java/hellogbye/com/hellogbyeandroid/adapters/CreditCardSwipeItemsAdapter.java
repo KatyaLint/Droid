@@ -17,6 +17,7 @@ import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.IClickedItem;
 import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
@@ -35,6 +36,7 @@ public class CreditCardSwipeItemsAdapter extends RecyclerSwipeAdapter<CreditCard
     private Context mContext;
     private ArrayList<CreditCardItem>  mDataset;
     private ISwipeAdapterExecution swipeAdapterExecution;
+    private  IClickedItem clickedItemIterface;
 
     public void addClickeListeners(ISwipeAdapterExecution swipeAdapterExecution) {
         this.swipeAdapterExecution = swipeAdapterExecution;
@@ -47,12 +49,17 @@ public class CreditCardSwipeItemsAdapter extends RecyclerSwipeAdapter<CreditCard
 
     }
 
+    public void setClickedItemIterface(final IClickedItem clickedItemIterface) {
+        this.clickedItemIterface = clickedItemIterface;
+    }
+
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {
         private SwipeLayout swipe_my_companions;
-        public ImageView mCardImage;
-        public ImageButton mCardelete;
-        public FontTextView mCardNumberText;
-        public ImageView mNext;
+        private ImageView mCardImage;
+        private ImageButton mCardelete;
+        private FontTextView mCardNumberText;
+        private ImageView mNext;
+        private RelativeLayout credit_card_layiut_rl;
 
 
         public SimpleViewHolder(View itemView) {
@@ -62,21 +69,27 @@ public class CreditCardSwipeItemsAdapter extends RecyclerSwipeAdapter<CreditCard
             swipe_my_companions.setShowMode(SwipeLayout.ShowMode.PullOut);
             mCardelete = (ImageButton) itemView.findViewById(R.id.companion_delete_item);
 
-
+            credit_card_layiut_rl = (RelativeLayout)itemView.findViewById(R.id.credit_card_layiut_rl);
             mCardImage= (ImageView)itemView.findViewById(R.id.cc_image);
             mCardNumberText = (FontTextView)itemView.findViewById(R.id.cc_number);
+
          //   mNext = (ImageView)itemView.findViewById(R.id.cc_image_next);
           //   my_trip_paid = (FontTextView) itemView.findViewById(R.id.my_trip_paid);
 
 
         }
+
+
     }
 
-    public CreditCardSwipeItemsAdapter(Context context, ArrayList objects) {
+    public CreditCardSwipeItemsAdapter(Context context) {
         this.mContext = context;
+
+    }
+
+    public void setDataSet(ArrayList objects){
         this.mDataset = objects;
     }
-
 
     @Override
     public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -91,6 +104,11 @@ public class CreditCardSwipeItemsAdapter extends RecyclerSwipeAdapter<CreditCard
         CreditCardItem item = mDataset.get(position);
 
         viewHolder.mCardNumberText.setText(item.getLast4());
+
+        String cardID = item.getCardtypeid();
+        if(cardID == null){
+            return;
+        }
 
         switch (item.getCardtypeid()){
             case "1":
@@ -119,10 +137,16 @@ public class CreditCardSwipeItemsAdapter extends RecyclerSwipeAdapter<CreditCard
             viewHolder.mCardImage.setBackgroundResource(R.drawable.visa);
         }*/
 
+        viewHolder.credit_card_layiut_rl.setTag(item.getToken());
+        viewHolder.credit_card_layiut_rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickedItemIterface.clickedItem(v.getTag().toString());
+            }
+        });
+
         viewHolder.swipe_my_companions.setShowMode(SwipeLayout.ShowMode.PullOut);
         viewHolder.mCardelete.setTag(item.getToken());
-
-
         viewHolder.mCardelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

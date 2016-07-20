@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
+    android:id="@+id/credit_card_layiut_rl"
+    android:layout_height="@dimen/DP60" >
 
-    android:layout_height="@dimen/DP104">
 
+  <!--  <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DP100">-->
+    
     <com.daimajia.swipe.SwipeLayout
         android:id="@+id/swipe_my_companions"
         android:layout_width="match_parent"
@@ -28,22 +34,21 @@
                 android:background="@color/red_button_color"
                 android:src="@drawable/close_icon_a_1" />
 
-
         </LinearLayout>
 
 
         <LinearLayout
+        android:padding="@dimen/DP10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/cc_image"
-            android:layout_marginLeft="@dimen/DP20"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/master_card" />
@@ -75,10 +80,10 @@
     <include layout="@layout/layout_arrow"
         android:layout_alignParentRight="true"
         android:id="@+id/cc_image_next"
+        android:layout_margin="@dimen/DP10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/DP20"
         android:layout_centerVertical="true"/>
-
+<!--    </RelativeLayout>-->
 
 </RelativeLayout>

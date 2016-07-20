@@ -52,6 +52,7 @@ public class CreditCardItem {
     private boolean isSelected;
 
     private String cardNumber;
+    private boolean updateCard = false;
 
     public CreditCardItem(){
 
@@ -204,5 +205,13 @@ public class CreditCardItem {
 
     public void setCvv(String cvv) {
         this.cvv = cvv;
+    }
+
+    public void setUpdateCard(boolean updateCard) {
+        this.updateCard = updateCard;
+    }
+
+    public boolean isUpdateCard() {
+        return updateCard;
     }
 }

@@ -83,10 +83,61 @@ public class HGBStringXMLRequest extends Request<String> {
         send();
     }
 
+    private String addCreditCard(){
+        String strResponce = "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
+                " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Header>" +
+                " <AuthHeader xmlns=\"https://MyCardStorage.com/\"><UserName>HelloGByeUser</UserName><Password>bWapRT#ayLJYN5S!</Password></AuthHeader> " +
+                "</soap:Header> <soap:Body><AddCOF_Soap xmlns=\"https://MyCardStorage.com/\"> <addToken><ServiceSecurity><ServiceUserName>HelloGBye</ServiceUserName><ServicePassword>NQbhm#KNDqO2X</ServicePassword>" +
+                "<MCSAccountID>"+mContext.getString(R.string.card_storage_account_id)+"</MCSAccountID>" +
+                "<SessionID>"+creditCardItem.getToken()+"</SessionID></ServiceSecurity>" +
+                "<TokenData><CardNumber>"+creditCardItem.getCardNumber()+"</CardNumber>" +
+                "<CardType>"+creditCardItem.getCardtypeid()+"</CardType>" +
+                "<ExpirationMonth>"+creditCardItem.getExpmonth()+"</ExpirationMonth>" +
+                "<ExpirationYear>"+creditCardItem.getExpyear()+"</ExpirationYear>" +
+                "<NickName>"+creditCardItem.getNickname()+"</NickName>" +
+                "<FirstName>"+creditCardItem.getBuyerfirstname()+"</FirstName>" +
+                "<LastName>"+creditCardItem.getBuyerlastname()+"</LastName>" +
+                "<StreetAddress>"+creditCardItem.getBuyeraddress()+"</StreetAddress>" +
+                "<ZipCode>"+creditCardItem.getBuyerzip()+"</ZipCode>" +
+                "<CVV>"+creditCardItem.getCvv()+"</CVV>" +
+                "<Last4>"+creditCardItem.getLast4()+"</Last4>" +
+                "</TokenData></addToken>" +
+                " </AddCOF_Soap> </soap:Body> </soap:Envelope>";
+        return strResponce;
+    }
+
+    private String updateCreditCard(){
+
+        String strResponce = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
+                " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Header>" +
+                "<AuthHeader xmlns=\"https://MyCardStorage.com/\"><UserName>HelloGByeUser</UserName><Password>bWapRT#ayLJYN5S!</Password></AuthHeader> " +
+                "</soap:Header> <soap:Body><UpdateCOF_Soap xmlns=\"https://MyCardStorage.com/\"> <addToken><ServiceSecurity><ServiceUserName>HelloGBye</ServiceUserName><ServicePassword>NQbhm#KNDqO2X</ServicePassword>" +
+                "<MCSAccountID>"+mContext.getString(R.string.card_storage_account_id)+"</MCSAccountID><SessionID>"+creditCardItem.getToken()+"</SessionID></ServiceSecurity>" +
+                "<TokenData><CardNumber>"+creditCardItem.getCardNumber()+"</CardNumber>" +
+                "<CardType>"+creditCardItem.getCardtypeid()+"</CardType>" +
+                "<ExpirationMonth>"+creditCardItem.getExpmonth()+"</ExpirationMonth>" +
+                "<ExpirationYear>"+creditCardItem.getExpyear()+"</ExpirationYear>" +
+                "<NickName>"+creditCardItem.getNickname()+"</NickName>" +
+                "<FirstName>"+creditCardItem.getBuyerfirstname()+"</FirstName>" +
+                "<LastName>"+creditCardItem.getBuyerlastname()+"</LastName>" +
+                "<StreetAddress>"+creditCardItem.getBuyeraddress()+"</StreetAddress>" +
+                "<ZipCode>"+creditCardItem.getBuyerzip()+"</ZipCode>" +
+                "<CVV>"+creditCardItem.getCvv()+"</CVV>" +
+                "<Last4>"+creditCardItem.getLast4()+"</Last4>" +
+                "</TokenData></addToken>" +
+                "</UpdateCOF_Soap> </soap:Body> </soap:Envelope>";
+        return strResponce;
+    }
+
     @Override
     public byte[] getBody() throws AuthFailureError {
-
-        String strResponce = "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
+        String strResponce;
+        if(creditCardItem.isUpdateCard()){
+            strResponce = updateCreditCard();
+        }else{
+            strResponce = addCreditCard();
+        }
+        /*String strResponce = "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
                 " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Header>" +
                 " <AuthHeader xmlns=\"https://MyCardStorage.com/\"><UserName>HelloGByeUser</UserName><Password>bWapRT#ayLJYN5S!</Password></AuthHeader> " +
                 "</soap:Header> <soap:Body><AddCOF_Soap xmlns=\"https://MyCardStorage.com/\"> <addToken><ServiceSecurity><ServiceUserName>HelloGBye</ServiceUserName><ServicePassword>NQbhm#KNDqO2X</ServicePassword>" +
@@ -103,10 +154,7 @@ public class HGBStringXMLRequest extends Request<String> {
                 "<CVV>"+creditCardItem.getCvv()+"</CVV>" +
                 "<Last4>"+creditCardItem.getLast4()+"</Last4>" +
                 "</TokenData></addToken>" +
-                " </AddCOF_Soap> </soap:Body> </soap:Envelope>";
-
-
-
+                " </AddCOF_Soap> </soap:Body> </soap:Envelope>";*/
 
         return strResponce.getBytes();
     }
@@ -190,7 +238,13 @@ public class HGBStringXMLRequest extends Request<String> {
     public Map<String, String> getHeaders() throws AuthFailureError {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "text/xml; charset=utf-8");
-        headers.put("SOAPAction", "https://MyCardStorage.com/AddCOF_Soap");
+        if(creditCardItem.isUpdateCard()){
+            headers.put("SOAPAction", "https://MyCardStorage.com/UpdateCOF_Soap");
+        }else{
+            headers.put("SOAPAction", "https://MyCardStorage.com/AddCOF_Soap");
+        }
+
+
         headers.put("Content-Length", "1079");
 
        // headers.put("Content-Type", "application/json");

@@ -24,6 +24,7 @@ public class HGBConstants {
     public static final String CNC_CLEAR_CHAT = "cnc_clear_chat";
 
     public static final String SOLUTION_ITINERARY_ID = "solution_itinerary_id";
+    public static final String PAYMENT_FILL_CREDIT_CARD= "payment_fill_credit_card";
 
 
     public static final String BUNDLE_SETTINGS_ATT_ID = "setting_att_id";

@@ -257,6 +257,7 @@
     <string name="payment_street">Street</string>
     <string name="payment_itirnerary_payment">HAZARDOUS MATERIAL NOTICE</string>
     <string name="payment_traveler_information">Traveler Information</string>
+    <string name="payment_no_payment_cards">You don\'t have any\nPayment card</string>
 
 
     <string name="payment_billing_information">BILLING INFORMATION</string>

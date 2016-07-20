@@ -8,13 +8,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/cc_info"
@@ -37,7 +33,6 @@
         android:textSize="@dimen/SP10"
         android:layout_marginTop="@dimen/DP6"
         android:layout_marginRight="@dimen/DP6"
-
         android:text="@string/payment_scan_card" />
 
 
@@ -46,7 +41,6 @@
         android:id="@+id/cc_details_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:background="@color/white"
         android:layout_below="@+id/cc_info"
         android:orientation="vertical"
@@ -127,7 +121,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cc_billing_address"
-
         android:background="@color/white"
         android:orientation="vertical"
         android:padding='@dimen/DP24'>
@@ -224,23 +217,25 @@
         </LinearLayout>
     </LinearLayout>
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
         android:id="@+id/cc_save"
-        style="@style/RedCustomButtonStyle"
-        android:background="@drawable/red_disable_button"
-        android:clickable="false"
+
+        android:background="@drawable/selector_red_button"
+        android:textSize="@dimen/SP20"
+        app:fontName="dinnextltpro_medium.otf"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_marginLeft="@dimen/DP44"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/DP20"
+        android:layout_margin="@dimen/DP20"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
         android:layout_below="@+id/cc_billing_adress_ll"
         android:text="@string/payment_save_card" />
 
 
 
-
     </RelativeLayout>
-    </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -27,7 +27,7 @@ public enum ToolBarNavEnum {
     HISTORY(23,"History"),
     COMPANIONS_PERSONAL_DETAILS(24,"Personal Info"),
     PREFERENCE_SETTINGS_EMAILS(25,"Email"),
-    CREDIT_CARD_LIST(26,"Credit Card list"),
+    CREDIT_CARD_LIST(26,"Payment Cards"),
     CHECKOUT_CONFIRMATION(27,"Checkout confirmation"),
     CNC_TUTORIAL(28,"CNC Tutorial"),
     HAZARDOUS_NOTICE(29,"Make Payment"),
