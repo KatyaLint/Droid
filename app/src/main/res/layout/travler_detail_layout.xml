@@ -155,7 +155,6 @@
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/travel_detail_province"
-
             android:layout_weight="1"
             android:hint="Province"
             style="@style/TravelerDetailsTextStyle"
