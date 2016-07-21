@@ -16,7 +16,7 @@ public enum ToolBarNavEnum {
     PAYMENT_DETAILS(12,"Payment Info"),
     PREFERENCES_TAB_SETTINGS(13,"Preferences Settings"),
     PAYMENT_TRAVELERS(14,"Travelers"),
-    PAYMENT_TRAVELERS_DETAILS(15,"Preferences Travelers Details"),
+    PAYMENT_TRAVELERS_DETAILS(15,"Traveler"),
     PREFERENCES_SEARCH_LIST_SETTINGS(16,"Preferences Settings"),
     PREFERENCES_DRAG_LIST_SETTINGS(17,"Preferences Settings"),
     PREFERENCES_CHECK_LIST_SETTINGS(18,"Preferences Settings"),
