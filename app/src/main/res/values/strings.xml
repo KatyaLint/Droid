@@ -106,7 +106,7 @@
     <string name="type_message">Type or speak your reques</string>
     <string name="send">Send</string>
     <!--<string name="default_cnc_message"> welcome to\nHelloGbye. Tell us in your own words where and when you'd\nlike to go.</string>-->
-    <string name="default_cnc_message">Hello %1$s wellcome to\nHelloGbye. Tell us in your own words where and when you would\nlike to go.</string>
+    <string name="default_cnc_message">Hello %1$s, welcome to\nHelloGbye. Tell us in your own words where and when you\'d like to go.</string>
     <string name="itinerary_created">Ok, here\'s what we found for you</string>
     <string name="itinerary_no_items">No items</string>
     <string name="grid_has_been_updated">OK, the grid has been updated</string>

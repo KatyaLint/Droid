@@ -234,6 +234,7 @@ Code changing:
     HEL-1138 - trying to pay for 2 items with 2 credit cards caughts exception version
     HEL-1127 - Checkout - wrong traveler information when flying with more than one traveler version 1.5.5
     HEL-1082 - add credit card
+    HEL-700 - keyboard jumps when shouldn't
 
    Code changing:
    --------------

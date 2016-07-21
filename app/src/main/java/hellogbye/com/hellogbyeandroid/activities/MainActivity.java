@@ -835,6 +835,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         }
 
 
+        HGBUtility.hideKeyboard(MainActivity.this);
         HGBUtility.goToNextFragmentIsAddToBackStack(getSupportFragmentManager(), fragment, stashToBack, isAddAnimation);
         mToolbar.initToolBarItems();
         mToolbar.updateToolBarView(position);

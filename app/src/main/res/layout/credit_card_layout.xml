@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:id="@+id/credit_card_layiut_rl"
     android:layout_height="@dimen/DP60" >
-    
+
 
   <!--  <RelativeLayout
         android:layout_width="match_parent"
