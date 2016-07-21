@@ -235,6 +235,7 @@ Code changing:
     HEL-1127 - Checkout - wrong traveler information when flying with more than one traveler version 1.5.5
     HEL-1082 - add credit card
     HEL-700 - keyboard jumps when shouldn't
+    HEL-1147 - fix text - Hint on message should be "Type or speak your reques" to - "Type or speak your request"
 
    Code changing:
    --------------
