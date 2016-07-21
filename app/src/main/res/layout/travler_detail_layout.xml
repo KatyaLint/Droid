@@ -17,9 +17,8 @@
 
     <EditText
         android:id="@+id/travel_detail_first_name"
-        style="@style/TravelerDetailsTextStyle"
-        android:hint="First Name"
-        />
+        style="@style/TravelerDetailsTextStyle" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
@@ -36,15 +35,16 @@
         android:background="@color/warm_grey_line"  />
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:weightSum="2"
         android:orientation="horizontal">
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/travel_detail_dob"
             style="@style/TravelerDetailsTextStyle"
-            android:layout_height="@dimen/DP0"
+
             android:layout_weight="1"
             android:hint="Date of Birth"
             app:fontName="dinnextltpro_light.otf" />
@@ -57,12 +57,14 @@
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/travel_detail_gender"
             style="@style/TravelerDetailsTextStyle"
-            android:layout_width="@dimen/DP0"
+
             android:layout_weight="1"
             android:hint="Gender"
             app:fontName="dinnextltpro_light.otf" />
 
     </LinearLayout>
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
@@ -143,8 +145,7 @@
             style="@style/TravelerDetailsTextStyle"
             android:layout_width="@dimen/DP0"
             android:layout_weight="1"
-            android:hint="Postal Code"
-             />
+            android:hint="Postal Code" />
 
         <View
             android:layout_width="@dimen/DP0"

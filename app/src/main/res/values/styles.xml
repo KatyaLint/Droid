@@ -124,9 +124,10 @@
     </style>
 
     <style name="TextViewTravlerCheckoutDetails">
+        <item name="android:textSize">@dimen/SP14</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/COLOR_555555</item>
 
 
 

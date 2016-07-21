@@ -101,6 +101,7 @@
         android:id="@+id/sign_up_phone_number"
         style="@style/Sign_up_text_color"
         android:hint="@string/sign_up_phone_number"
+        android:inputType="phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
