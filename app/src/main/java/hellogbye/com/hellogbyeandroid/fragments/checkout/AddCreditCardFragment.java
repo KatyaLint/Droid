@@ -18,6 +18,8 @@ import android.widget.CompoundButton;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
+import com.devmarvel.creditcardentry.library.CreditCardForm;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
@@ -34,10 +36,10 @@ import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
-import hellogbye.com.hellogbyeandroid.views.CreditCardEditText;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -49,7 +51,7 @@ import io.card.payment.CreditCard;
  */
 public class AddCreditCardFragment extends HGBAbstractFragment implements TextWatcher{
 
-    private CreditCardEditText mCardNumber;
+    private CreditCardForm mCardNumber;
     private FontEditTextView mCardExpiryMonth;
     private FontEditTextView mCardExpiryYear;
     private FontEditTextView mCardCCV;
@@ -292,7 +294,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
 
         String cardNumber = hideCardNumberWithStars(mCurrentCard.getToken());
         mCardNumber.setTag(mCurrentCard.getToken());
-        mCardNumber.setText(cardNumber);
+        mCardNumber.setCardNumber(cardNumber,false);
         mCardNumber.setEnabled(false);
         mCardExpiryMonth.setText(mCurrentCard.getExpmonth());
                 mCardExpiryYear.setText(mCurrentCard.getExpyear());
@@ -343,7 +345,8 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
     }
 
     private void init(View view) {
-        mCardNumber = (CreditCardEditText) view.findViewById(R.id.cc_number);
+        mCardNumber = (CreditCardForm) view.findViewById(R.id.cc_number);
+//        mCardNumber.validate();
         mCardExpiryMonth = (FontEditTextView) view.findViewById(R.id.cc_expiry_month);
         mCardExpiryYear= (FontEditTextView) view.findViewById(R.id.cc_expiry_year);
         mCardCCV = (FontEditTextView) view.findViewById(R.id.cc_ccv);
@@ -356,7 +359,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         mCardPostal = (FontEditTextView) view.findViewById(R.id.cc_billing_postal);
         mSave = (FontButtonView) view.findViewById(R.id.cc_save);
         mScan = (FontTextView) view.findViewById(R.id.cc_scan);
-        mCardNumber.addTextChangedListener(new FourDigitCardFormatWatcher());
+      ///  mCardNumber.addTextChangedListener(new FourDigitCardFormatWatcher());
         mBillingCheckbox = (CheckBox)view.findViewById(R.id.add_cc_checkboox);
        // mCardExpiry.addTextChangedListener(new TwoDigitsCardTextWatcher(mCardExpiry));
 
@@ -389,7 +392,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
 
                 // Never log a raw card number. Avoid displaying it, but if necessary use getFormattedCardNumber()
                 resultDisplayStr = "Card Number: " + scanResult.getRedactedCardNumber() + "\n";
-                mCardNumber.setText(scanResult.getRedactedCardNumber());
+                mCardNumber.setCardNumber(scanResult.getRedactedCardNumber(), false);
 
                 if (scanResult.isExpiryValid()) {
                     resultDisplayStr += "Expiration Date: " + scanResult.expiryMonth + "/" + scanResult.expiryYear + "\n";
@@ -416,6 +419,9 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
 
 
     private void sendCCToServer() {
+
+
+
         progressDialog = ProgressDialog.show(getActivity(), "",mProgessDialogString );
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
@@ -444,9 +450,9 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         mCurrentCard.setExpyear(mCardExpiryYear.getText().toString());
 
 
-        String last4 = mCardNumber.getText().toString();
+        String last4 = mCardNumber.getCreditCard().getCardNumber().toString();
         last4 = last4.substring(last4.length() - 5, last4.length());
-        final String strCardNumber= mCardNumber.getText().toString().replaceAll("\\s+","");
+        final String strCardNumber= mCardNumber.getCreditCard().getCardNumber().replaceAll("\\s+","");
         mCurrentCard.setCardNumber(strCardNumber);
         if(isFillPayment){
             last4 = mCardNumber.getTag().toString();
@@ -466,8 +472,8 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
 
 
 
-      // TODO need to check verofocation if(verifyValidCCNumber(creditCardItem))
-        if(true)
+       // CcnTypeEnum hh=  mCardNumber.validate();
+        if(mCardNumber.isCreditCardValid())
         {
             if(!isFillPayment){
                 ConnectionManager.getInstance(getActivity()).getCCSession(new ConnectionManager.ServerRequestListener() {
@@ -606,7 +612,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
 
     private String getCCType() {
         for (int i = 0; i < listOfPattern.size(); i++) {
-            if (mCardNumber.getText().toString().matches(listOfPattern.get(i))) {
+            if (mCardNumber.getCreditCard().getCardNumber().toString().matches(listOfPattern.get(i))) {
                 return String.valueOf(i + 1);
             }
         }
@@ -733,7 +739,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
             return false;
         }else if (mCardCity.getText().toString().equals("")){
             return false;
-        }else if (mCardNumber.getText().toString().equals("")){
+        }else if (mCardNumber.getCreditCard().getCardNumber().toString().equals("")){
             return false;
         }else if (mCardExpiryMonth.getText().toString().equals("")){
             return false;
@@ -788,7 +794,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         
         //American Express
         if(creditCardItem.getCardtypeid().equals("1")){
-            if(mCardNumber.getText().length()==15){
+            if(mCardNumber.getCreditCard().getCardNumber().length()==15){
                 return true;
             }else{
                 return false;
@@ -801,7 +807,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         }
         //MasterCard
         else if (creditCardItem.getCardtypeid().equals("3")){
-            if(mCardNumber.getText().length()==16){
+            if(mCardNumber.getCreditCard().getCardNumber().length()==16){
                 return true;
             }else{
                 return false;
@@ -809,7 +815,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         }
         //Visa
         else if (creditCardItem.getCardtypeid().equals("4")){
-            if(mCardNumber.getText().length()==13 || mCardNumber.getText().length()==16){
+            if(mCardNumber.getCreditCard().getCardNumber().length()==13 || mCardNumber.getCreditCard().getCardNumber().length()==16){
                 return true;
             }else{
                 return false;

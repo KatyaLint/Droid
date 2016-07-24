@@ -46,11 +46,17 @@
         android:orientation="vertical"
         android:padding='@dimen/DP24'>
 
-        <hellogbye.com.hellogbyeandroid.views.CreditCardEditText
+        <com.devmarvel.creditcardentry.library.CreditCardForm
             android:id="@+id/cc_number"
-            style="@style/cc_edit_text"
+            style="@style/cc_number_edit_text"
+            app:input_background="@drawable/cc_edit_text_border"
             android:layout_width="match_parent"
+            app:card_number_hint="@string/payment_card_number"
             android:hint="@string/payment_card_number"
+            app:include_helper="false"
+            app:include_zip="false"
+            app:include_exp="false"
+            app:include_security="false"
             android:inputType="phone"
             app:fontName="dinnextltpro_regular.otf" />
 
