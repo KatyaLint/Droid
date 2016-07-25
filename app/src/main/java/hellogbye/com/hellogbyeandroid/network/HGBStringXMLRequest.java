@@ -81,25 +81,30 @@ public class HGBStringXMLRequest extends Request<String> {
     }
 
     private String addCreditCard(){
-        String strResponce = "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" +
-                " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Header>" +
-                " <AuthHeader xmlns=\"https://MyCardStorage.com/\"><UserName>HelloGByeUser</UserName><Password>bWapRT#ayLJYN5S!</Password></AuthHeader> " +
-                "</soap:Header> <soap:Body><AddCOF_Soap xmlns=\"https://MyCardStorage.com/\"> <addToken><ServiceSecurity><ServiceUserName>HelloGBye</ServiceUserName><ServicePassword>NQbhm#KNDqO2X</ServicePassword>" +
-                "<MCSAccountID>"+mContext.getString(R.string.card_storage_account_id)+"</MCSAccountID>" +
-                "<SessionID>"+creditCardItem.getToken()+"</SessionID></ServiceSecurity>" +
-                "<TokenData><CardNumber>"+creditCardItem.getCardNumber()+"</CardNumber>" +
-                "<CardType>"+creditCardItem.getCardtypeid()+"</CardType>" +
-                "<ExpirationMonth>"+creditCardItem.getExpmonth()+"</ExpirationMonth>" +
-                "<ExpirationYear>"+creditCardItem.getExpyear()+"</ExpirationYear>" +
-                "<NickName>"+creditCardItem.getNickname()+"</NickName>" +
-                "<FirstName>"+creditCardItem.getBuyerfirstname()+"</FirstName>" +
-                "<LastName>"+creditCardItem.getBuyerlastname()+"</LastName>" +
-                "<StreetAddress>"+creditCardItem.getBuyeraddress()+"</StreetAddress>" +
-                "<ZipCode>"+creditCardItem.getBuyerzip()+"</ZipCode>" +
-                "<CVV>"+creditCardItem.getCvv()+"</CVV>" +
-                "<Last4>"+creditCardItem.getLast4()+"</Last4>" +
-                "</TokenData></addToken>" +
-                " </AddCOF_Soap> </soap:Body> </soap:Envelope>";
+
+        String strResponce ="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns=\"https://MyCardStorage.com/\"> \n" +
+                "\t<soap:Header>\n" +
+                "\t\t<AuthHeader xmlns=\"https://MyCardStorage.com/\">\n" +
+                "\t\t\t<UserName>HelloGByeUser</UserName>\n" +
+                "\t\t\t<Password>bWapRT#ayLJYN5S!</Password>\n" +
+                "\t\t</AuthHeader> \n" +
+                "\t</soap:Header> \n" +
+                "\t<soap:Body> \n" +
+                "\t\t<AddCOF xmlns=\"https://MyCardStorage.com/\"> \n" +
+                "\t\t\t<xml>&lt;Request&gt; &lt;ServiceLogin&gt; &lt;ServiceUserName&gt;HelloGBye&lt;/ServiceUserName&gt;" +
+                " &lt;ServicePassword&gt;NQbhm#KNDqO2X&lt;/ServicePassword&gt; &lt;MCSAccountID&gt;"+mContext.getString(R.string.card_storage_account_id)+"&lt;/MCSAccountID&gt; " +
+                "&lt;/ServiceLogin&gt; &lt;AddCOF&gt; &lt;SessionID&gt;"+creditCardItem.getToken()+"&lt;/SessionID&gt; &lt;" +
+                "CardNumber&gt;"+creditCardItem.getCardNumber()+"&lt;/CardNumber&gt; &lt;ExpirationMonth&gt;"+creditCardItem.getExpmonth()+"&lt;/ExpirationMonth&gt; " +
+                "&lt;ExpirationYear&gt;"+creditCardItem.getExpyear()+"&lt;/ExpirationYear&gt; &lt;NickName&gt;"+creditCardItem.getNickname()+"&lt;/NickName&gt; &lt;" +
+                "CardType&gt;"+creditCardItem.getCardtypeid()+"&lt;/CardType&gt; &lt;FirstName&gt;"+creditCardItem.getBuyerfirstname()+"&lt;/FirstName&gt; &lt;LastName&gt;"+creditCardItem.getBuyerlastname()+"&lt;/LastName&gt;" +
+                " &lt;ZipCode&gt;"+creditCardItem.getBuyerzip()+"&lt;/ZipCode&gt;" +
+                " &lt;StreetAddress&gt;"+creditCardItem.getBuyeraddress()+"&lt;/StreetAddress&gt; &lt;/AddCOF&gt;&lt;/Request&gt;</xml> \n" +
+                "\t\t</AddCOF> \n" +
+                "\t</soap:Body>\n" +
+                "</soap:Envelope>";
+
+
+
         return strResponce;
     }
 
@@ -184,7 +189,8 @@ public class HGBStringXMLRequest extends Request<String> {
 
     @Override
     public void deliverError(VolleyError error) {
-        Log.e(TAG, "ERROR: " + service + " " + (error != null && error.networkResponse != null ? error.getClass().getSimpleName() + ": " + error.networkResponse.statusCode + " " + new String(error.networkResponse.data) : "null"));
+        String ss =new String( error.networkResponse.data);
+        Log.e(TAG, "ERROR: " + service + " "+ss+" " + (error != null && error.networkResponse != null ? error.getClass().getSimpleName() + ": " + error.networkResponse.statusCode + " " + new String(error.networkResponse.data) : "null"));
 
         removeLoader();
         if (errorListener != null) {
@@ -206,7 +212,7 @@ public class HGBStringXMLRequest extends Request<String> {
         if(creditCardItem.isUpdateCard()){
             headers.put("SOAPAction", "https://MyCardStorage.com/UpdateCOF");
         }else{
-            headers.put("SOAPAction", "https://MyCardStorage.com/AddCOF_Soap");
+            headers.put("SOAPAction", "https://MyCardStorage.com/AddCOF");
         }
 
         return headers;

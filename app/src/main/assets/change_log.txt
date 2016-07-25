@@ -243,3 +243,5 @@ Code changing:
    - Titles for Payment
    - Payment titles for screen
    - Editing CC
+   - CC Validation
+   - CC image fix
