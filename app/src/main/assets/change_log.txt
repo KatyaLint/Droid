@@ -236,6 +236,7 @@ Code changing:
     HEL-1082 - add credit card
     HEL-700 - keyboard jumps when shouldn't
     HEL-1147 - fix text - Hint on message should be "Type or speak your reques" to - "Type or speak your request"
+    HEL-543 - can't delete trips on my trips version 1.4
 
    Code changing:
    --------------
