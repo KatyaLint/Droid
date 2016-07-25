@@ -91,8 +91,8 @@ public class HGBStringXMLRequest extends Request<String> {
                 "\t</soap:Header> \n" +
                 "\t<soap:Body> \n" +
                 "\t\t<AddCOF xmlns=\"https://MyCardStorage.com/\"> \n" +
-                "\t\t\t<xml>&lt;Request&gt; &lt;ServiceLogin&gt; &lt;ServiceUserName&gt;HelloGBye&lt;/ServiceUserName&gt;" +
-                " &lt;ServicePassword&gt;NQbhm#KNDqO2X&lt;/ServicePassword&gt; &lt;MCSAccountID&gt;"+mContext.getString(R.string.card_storage_account_id)+"&lt;/MCSAccountID&gt; " +
+                "\t\t\t<xml>&lt;Request&gt; &lt;ServiceLogin&gt; &lt;ServiceUserName&gt;"+mContext.getString(R.string.card_storage_username)+"&lt;/ServiceUserName&gt;" +
+                " &lt;ServicePassword&gt;"+mContext.getString(R.string.card_storage_password)+"&lt;/ServicePassword&gt; &lt;MCSAccountID&gt;"+mContext.getString(R.string.card_storage_account_id)+"&lt;/MCSAccountID&gt; " +
                 "&lt;/ServiceLogin&gt; &lt;AddCOF&gt; &lt;SessionID&gt;"+creditCardItem.getToken()+"&lt;/SessionID&gt; &lt;" +
                 "CardNumber&gt;"+creditCardItem.getCardNumber()+"&lt;/CardNumber&gt; &lt;ExpirationMonth&gt;"+creditCardItem.getExpmonth()+"&lt;/ExpirationMonth&gt; " +
                 "&lt;ExpirationYear&gt;"+creditCardItem.getExpyear()+"&lt;/ExpirationYear&gt; &lt;NickName&gt;"+creditCardItem.getNickname()+"&lt;/NickName&gt; &lt;" +

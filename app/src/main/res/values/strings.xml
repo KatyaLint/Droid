@@ -263,6 +263,10 @@
     <string name="payment_billing_information">BILLING INFORMATION</string>
 
     <string name="select_gender">Select Gender</string>
+    <string name="card_storage_password">NQbhm#KNDqO2X</string>
+    <string name="card_storage_username">HelloGBye</string>
+
+
 
     <string name="feedback_title">Your Feedback has been send.</string>
     <string name="use_my_home_address_as_billing_address">Use my home address as billing address</string>
