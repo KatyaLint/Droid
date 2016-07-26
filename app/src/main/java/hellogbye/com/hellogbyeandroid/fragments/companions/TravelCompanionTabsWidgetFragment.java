@@ -46,7 +46,7 @@ public class TravelCompanionTabsWidgetFragment extends HGBAbstractFragment {
         for (int i = 0; i < mTabHost.getTabWidget().getTabCount(); i++) {
             View view = mTabHost.getTabWidget().getChildAt(i);
 
-            // view.setBackgroundResource(R.color.red_pink);
+            view.setBackgroundResource(R.drawable.selector_tabs_indicator);
             TextView tv = (TextView) view.findViewById(android.R.id.title);
             if (i == 0) { //selected
                 tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.white));

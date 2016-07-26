@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
+import android.widget.TabWidget;
 import android.widget.TextView;
 
 import hellogbye.com.hellogbyeandroid.R;
@@ -40,12 +41,12 @@ public class TripsTabsView extends HGBAbstractFragment {
 
 
 
-    private void firstTextInit(){
+    private void firstTextInit(View rootView){
 
         for (int i = 0; i < mTabHost.getTabWidget().getTabCount(); i++) {
             View view = mTabHost.getTabWidget().getChildAt(i);
 
-           // view.setBackgroundResource(R.color.red_pink);
+            view.setBackgroundResource(R.drawable.selector_tabs_indicator);
             TextView tv = (TextView) view.findViewById(android.R.id.title);
             if (i == 0) { //selected
                 tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.white));
@@ -57,6 +58,9 @@ public class TripsTabsView extends HGBAbstractFragment {
            // tv.setTextSize(R.dimen.SP10);
         }
     }
+
+
+
 
 
     @Nullable
@@ -81,7 +85,7 @@ public class TripsTabsView extends HGBAbstractFragment {
         mTabHost.setCurrentTab(0);
 
         textFont = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + "dinnextltpro_medium.otf");
-        firstTextInit();
+        firstTextInit(rootView);
         mTabHost.getTabWidget().getChildAt(mTabHost.getCurrentTab()).getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
 
         mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {

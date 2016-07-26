@@ -40,11 +40,11 @@
     <style name="register_edit_text">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textCursorDrawable">@null</item>
         <item name="android:textSize">@dimen/SP20</item>
         <item name="android:textColorHint">@color/hgb_edit_text_color</item>
-        <item name="android:textColor">@color/hgb_edit_text_color</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:background">@drawable/edit_text_border</item>
+
     </style>
 
     <style name="cc_edit_text">
@@ -233,6 +233,7 @@
         <item name="android:textColorHighlight">@color/white</item>
         <item name="fontName">dinnextltpro_regular.otf</item>
         <item name="android:padding">@dimen/DP10</item>
+        <item name="android:layout_margin">@dimen/DP10</item>
     </style>
 
     <style name="TutAppTheme" parent="@android:style/Theme.Translucent.NoTitleBar">
