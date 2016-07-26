@@ -255,7 +255,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         });
     }
 
-    public void getAccountsProfiles() {
+    private void getAccountsProfiles() {
         ConnectionManager.getInstance(MainActivity.this).getUserProfileAccounts(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
@@ -281,8 +281,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         my_trip_profile = (FontTextView) findViewById(R.id.my_trip_profile);
 
         for(AccountsVO account: accounts){
-            String currentUserEmailAdd = hgbSaveDataClass.getPersonalUserInformation().getUserEmailLogIn();
-            if(account.getEmail().equals(currentUserEmailAdd)){
+            String userEmailLogIn = hgbSaveDataClass.getPersonalUserInformation().getUserEmailLogIn();
+            if(account.getEmail().equals(userEmailLogIn)){
                 my_trip_profile.setText(account.getTravelpreferenceprofile().getProfilename());
                 my_trip_profile.setTag(account.getTravelpreferenceprofile().getId());
              //   hgbSaveDataClass.getCurrentUser().setmTravelPreferencesProfileId(account.getTravelpreferenceprofile().getId());
@@ -340,9 +340,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
                 UserDataVO mCurrentUser = (UserDataVO) data;
                 String logInEmail = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL,"");
-                hgbSaveDataClass.setCurrentUser(mCurrentUser);
-
                 hgbSaveDataClass.getPersonalUserInformation().setUserEmailLogIn(logInEmail);
+                hgbSaveDataClass.setCurrentUser(mCurrentUser);
+                String profileID = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID,"");
+                hgbSaveDataClass.getPersonalUserInformation().setmTravelPreferencesProfileId(profileID);
                 //     ImageView my_trips_image_profile = (ImageView)findViewById(R.id.my_trips_image_profile);
                 HGBUtility.getAndSaveUserImage(mCurrentUser.getAvatar(), mProfileImage, null);
                 //my_trips_image_profile.setImageBitmap(HGBUtility.getBitmapFromCache(getBaseContext()));
@@ -699,12 +700,15 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     private Fragment isFreeUser(Fragment fragment, int navPosition) {
 
-        if (isFreeUser) {
+        if (isFreeUser)
+        {
             fragment = FreeUserFragment.newInstance(navPosition);
-            mToolbar.setVisibility(View.GONE);
-        } else {
-            mToolbar.setVisibility(View.VISIBLE);
+          //  mToolbar.setVisibility(View.GONE);
         }
+       /* else {
+            mToolbar.setVisibility(View.VISIBLE);
+        }*/
+        mToolbar.setVisibility(View.VISIBLE);
         return fragment;
     }
 
@@ -799,7 +803,6 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case CHECKOUT_CONFIRMATION:
                 fragment = CheckoutConfirmationFragment.newInstance(navPosition);
                 break;
-
             case PAYMENT_TRAVELERS:
                 fragment = TravelersFragment.newInstance(navPosition);
 

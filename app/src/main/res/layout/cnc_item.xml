@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:gravity="right"
-    android:layout_margin="@dimen/DP10">
+    android:layout_margin="@dimen/DP10" >
 
 
 

@@ -237,6 +237,7 @@ Code changing:
     HEL-700 - keyboard jumps when shouldn't
     HEL-1147 - fix text - Hint on message should be "Type or speak your reques" to - "Type or speak your request"
     HEL-543 - can't delete trips on my trips version 1.4
+    HEL-1148 - anonymous - >cnc- > press change profile list app crashes
 
    Code changing:
    --------------

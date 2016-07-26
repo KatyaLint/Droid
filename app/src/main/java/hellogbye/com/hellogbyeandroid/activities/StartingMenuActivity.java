@@ -116,6 +116,9 @@ public class StartingMenuActivity extends Activity {
                         UserLoginCredentials user = (UserLoginCredentials) data;
                         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
                         hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER,true);
+                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
+                        String freeUserEmail = "demo"+ user.getUserprofileid()+"@hellogbye.com";
+                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, freeUserEmail);
 //                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
                         goToMainActivity();
 

@@ -368,6 +368,8 @@ public class CNCFragment extends HGBAbstractFragment {
 
 
 
+
+
     }
 
     private void loadCNCList() {
@@ -431,6 +433,9 @@ public class CNCFragment extends HGBAbstractFragment {
                 handleMyMessage(strMessage);
             }
         });
+
+
+
 
         mProfileTutorialText = (FontTextView)view.findViewById(R.id.profile_tutorial);
         mSpeechTutorialText = (FontTextView)view.findViewById(R.id.speak_tutorial);

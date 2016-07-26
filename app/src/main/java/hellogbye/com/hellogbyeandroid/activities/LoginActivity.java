@@ -80,6 +80,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onSuccess(Object data) {
                         UserLoginCredentials user = (UserLoginCredentials) data;
                         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
+                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
+
                         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, mEmailEditText.getText().toString());
                         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, mPasswordEditText.getText().toString());
                         hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER,false);

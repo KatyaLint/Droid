@@ -130,11 +130,17 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
     };
 
     private void selectedRadioPreference(){
+        //Kate
         FontTextView my_trip_profile = ((MainActivity) getActivity()).my_trip_profile;
-        if(my_trip_profile != null && mAdapter != null){
-            String selectedTag = my_trip_profile.getTag().toString();
-            mAdapter.selectedItemID(selectedTag);
+        if(my_trip_profile == null || mAdapter == null){
+            return;
         }
+        if(my_trip_profile.getTag() == null){
+            return;
+        }
+        String selectedTag = my_trip_profile.getTag().toString();
+        mAdapter.selectedItemID(selectedTag);
+
     }
 
     private void createListAdapter() {

@@ -21,7 +21,7 @@ import pl.tajchert.sample.DotsTextView;
  */
 public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList<CNCItem> mArrayList;
-    OnItemClickListener mItemClickListner;
+    private OnItemClickListener mItemClickListner;
     private Context mContext;
 
     public static final int HGB_ITEM = 2;
