@@ -238,6 +238,7 @@ Code changing:
     HEL-1147 - fix text - Hint on message should be "Type or speak your reques" to - "Type or speak your request"
     HEL-543 - can't delete trips on my trips version 1.4
     HEL-1148 - anonymous - >cnc- > press change profile list app crashes
+    HEL-1104 - implement card details view after creating credit card version 1.5.5
 
    Code changing:
    --------------
