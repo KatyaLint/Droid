@@ -53,7 +53,7 @@ public class PreferencesSettingsDragListAdapter extends ArrayAdapter<SettingsAtt
         if(attribute != null){
             FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.setting_preferences_title_drag);
             if(settings_flight_title != null){
-                settings_flight_title.setText(attribute.getmDescription());
+                settings_flight_title.setText(attribute.getmName());
                 settings_flight_title.setTag(attribute.getmId());
             }
             FontTextView settings_text_drag = (FontTextView) v.findViewById(R.id.settings_preferences_place_number);

@@ -254,7 +254,7 @@ Code changing:
 
    Fixed Bugs:
    -----------
-
+    HEL-1204 - preference settings - change text according to design
 
    Code changing:
    --------------
