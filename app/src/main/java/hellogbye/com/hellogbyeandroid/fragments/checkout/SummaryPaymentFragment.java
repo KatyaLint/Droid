@@ -204,7 +204,6 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
                         jsonUser.put("mealpreference", "");//TODO need to add
 
 
-                        //TODO this need to change once we switch new design
 
 
                         UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();

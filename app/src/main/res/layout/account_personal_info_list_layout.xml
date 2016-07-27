@@ -35,9 +35,9 @@
             android:paddingRight="@dimen/DP8">
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
-                android:id="@+id/companion_personal_settings_gender"
+                android:id="@+id/companion_personal_settings_title"
                 style="@style/PersonalInformationEditText"
-                android:hint="@string/account_personal_gender"
+                android:hint="@string/title"
                 app:fontName="dinnextltpro_regular.otf" />
 
 

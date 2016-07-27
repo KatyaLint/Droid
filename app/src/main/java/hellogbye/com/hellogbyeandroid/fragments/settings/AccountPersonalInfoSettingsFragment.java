@@ -42,16 +42,16 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
     private boolean isDisable = false;
     private View promptsView;
    // private FontTextView text;
-    private String GENDER = "Gender";
+    //private String GENDER = "Gender";
 
-    final String SELECT_TITLE = "Select Title";
+    private  String SELECT_TITLE = "Select Title";
 
     private LinearLayout companion_personal_settings_email_add_another;
     private FontEditTextView companion_personal_settings_name;
     private FontEditTextView companion_personal_settings_last;
     private FontTextView companion_personal_settings_date_of_birth;
  //   private FontTextView companion_personal_settings_email;
-    private FontTextView companion_personal_settings_gender;
+    private FontTextView companion_personal_settings_title;
     private FontEditTextView companion_personal_settings_phone_number;
     private FontEditTextView companion_personal_settings_location_street;
     private FontEditTextView companion_personal_settings_location_city;
@@ -171,12 +171,12 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         companion_personal_settings_location_province.setText(currentUser.getState());
 
 
-        companion_personal_settings_gender = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_gender);
+        companion_personal_settings_title = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_title);
 
-       if(currentUser.getGender() != null && !currentUser.getGender().isEmpty()){
-            GENDER = currentUser.getGender();
+       if(currentUser.getTitle() != null && !currentUser.getTitle().isEmpty()){
+           SELECT_TITLE = currentUser.getTitle();
         }
-        companion_personal_settings_gender.setText(GENDER);
+        companion_personal_settings_title.setText(SELECT_TITLE);
 
         companion_personal_settings_phone_number = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_phone_number);
         companion_personal_settings_phone_number.setText(currentUser.getPhone());
@@ -251,11 +251,11 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
 
 
-        companion_personal_settings_gender.setOnClickListener(new View.OnClickListener() {
+        companion_personal_settings_title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-            HGBUtility.showPikerDialog(0,companion_personal_settings_gender, getActivity(), getResources().getString(R.string.select_gender), getResources().getStringArray(R.array.gender_array), 0, 1, null,true);
+            HGBUtility.showPikerDialog(0,companion_personal_settings_title, getActivity(), getActivity().getString(R.string.select_title), getResources().getStringArray(R.array.title_array), 0, 2, null,true);
             }
         });
 
@@ -448,9 +448,9 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         }*/
 
 
-        String str_companion_personal_settings_gender = companion_personal_settings_gender.getText().toString();
-        if (!str_companion_personal_settings_gender.isEmpty()) {
-            newUser.setGender(str_companion_personal_settings_gender);
+        String str_companion_personal_settings_title = companion_personal_settings_title.getText().toString();
+        if (!str_companion_personal_settings_title.isEmpty()) {
+            newUser.setTitle(str_companion_personal_settings_title);
         }
 
 
@@ -482,7 +482,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
             newUser.setState(str_companion_personal_settings_location_province);
         }
         //AccountsVO account = getActivityInterface().getAccounts().get(0);
-        newUser.setTitle(currentUser.getTitle());
+       // newUser.setTitle(currentUser.getTitle());
 
 
 
