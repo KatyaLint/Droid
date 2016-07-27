@@ -247,3 +247,14 @@ Code changing:
    - Editing CC
    - CC Validation
    - CC image fix
+
+   ------------------------------------------
+               Version 1.5.7
+   ------------------------------------------
+
+   Fixed Bugs:
+   -----------
+
+
+   Code changing:
+   --------------
