@@ -298,6 +298,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         mCardCCV.setText(mCurrentCard.getCvv());
         mCardCCV.setEnabled(false);
         mSave.setEnabled(true);
+
         //TODO Kate
     }
 
@@ -429,7 +430,10 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         mCurrentCard.setBuyerlastname(mCardLastName.getText().toString());
         mCurrentCard.setBuyerzip(mCardPostal.getText().toString());
         mCurrentCard.setBuyeraddress(mCardStreet.getText().toString());
-        mCurrentCard.setCardtypeid(getCCType(mCardNumber.getCreditCard().getCardType().name));
+        if(mCardNumber.getCreditCard().getCardType()!=null){
+            mCurrentCard.setCardtypeid(getCCType(mCardNumber.getCreditCard().getCardType().name));
+        }
+
 
 //        String expDate = mCardExpiry.getText().toString();
 //        if (expDate.contains("/")) {
@@ -464,8 +468,9 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
 
 
         // CcnTypeEnum hh=  mCardNumber.validate();
-        if (mCardNumber.isCreditCardValid()) {
+
             if (!isFillPayment) {
+                if (mCardNumber.isCreditCardValid()) {
                 ConnectionManager.getInstance(getActivity()).getCCSession(new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
@@ -494,18 +499,19 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
                         ErrorMessage(data);
                     }
                 });
+                } else {
+                    progressDialog.hide();
+                    ErrorMessage("The Credit Card number is not valid please try again");
+           /* HGBErrorHelper errorHelper = new HGBErrorHelper();
+            errorHelper.setMessageForError("The Credit Card number is not valid please try again");
+            errorHelper.show(getActivity().getFragmentManager(), "Problem with Credit Card");*/
+                }
 
             } else {
                 addCreditCard(mCurrentCard);
             }
 
-        } else {
-            progressDialog.hide();
-            ErrorMessage("The Credit Card number is not valid please try again");
-           /* HGBErrorHelper errorHelper = new HGBErrorHelper();
-            errorHelper.setMessageForError("The Credit Card number is not valid please try again");
-            errorHelper.show(getActivity().getFragmentManager(), "Problem with Credit Card");*/
-        }
+
 
 
     }

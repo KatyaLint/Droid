@@ -247,3 +247,18 @@ Code changing:
    - Editing CC
    - CC Validation
    - CC image fix
+
+
+
+   ------------------------------------------
+               Version 1.5.7
+   ------------------------------------------
+
+   Fixed Bugs:
+   -----------
+
+    HEL-1202 - change expiration date of existing card > error > crash
+
+
+   Code changing:
+   --------------
