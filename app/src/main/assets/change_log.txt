@@ -255,6 +255,8 @@ Code changing:
    Fixed Bugs:
    -----------
     HEL-1204 - preference settings - change text according to design
+    HEL-1202 - change expiration date of existing card > error > crash
+
 
    Code changing:
    --------------
