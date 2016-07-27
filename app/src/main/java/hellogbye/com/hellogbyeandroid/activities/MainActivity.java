@@ -59,6 +59,7 @@ import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionsTravelers;
 import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionTabsWidgetFragment;
 import hellogbye.com.hellogbyeandroid.fragments.freeuser.FreeUserFragment;
 import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragment;
+import hellogbye.com.hellogbyeandroid.fragments.membership.MembershipFragment;
 import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsTabsView;
 import hellogbye.com.hellogbyeandroid.fragments.notification.NotificationFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
@@ -753,6 +754,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case COMPANION_HELP_FEEDBACK:
                 fragment = AccountPersonalInfoHelpAndFeedbackFragment.newInstance(navPosition);
                 break;
+
             case PREFERENCE_SETTINGS_EMAILS:
                 fragment = PreferenceSettingsEmailFragment.newInstance(navPosition);
                 break;
@@ -764,6 +766,9 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case NOTIFICATIONS:
                 fragment = NotificationFragment.newInstance(navPosition);
+                break;
+            case PREFERENCES_MEMBERSHIP:
+                fragment = MembershipFragment.newInstance(navPosition);
                 break;
             case ITINARERY:
                 fragment = ItineraryFragment.newInstance(navPosition);

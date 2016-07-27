@@ -205,6 +205,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
                         break;
                     case 3:
                         //membership
+                        getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCES_MEMBERSHIP.getNavNumber(), null);
                         break;
                     case 4:
                         getFlowInterface().goToFragment(ToolBarNavEnum.COMPANION_HELP_FEEDBACK.getNavNumber(), null);

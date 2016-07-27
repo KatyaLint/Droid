@@ -256,7 +256,7 @@ Code changing:
    -----------
     HEL-1204 - preference settings - change text according to design
     HEL-1202 - change expiration date of existing card > error > crash
-
+    HEL-1208 - membership screen - design
 
    Code changing:
    --------------

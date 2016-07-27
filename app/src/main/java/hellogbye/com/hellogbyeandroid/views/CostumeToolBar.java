@@ -175,6 +175,8 @@ public class CostumeToolBar extends Toolbar {
             case PAYMENT_TRAVELERS:
             case CREDIT_CARD_LIST:
             case PAYMENT_TRAVELERS_DETAILS:
+            case NOTIFICATIONS:
+            case PREFERENCES_MEMBERSHIP:
                 titleText.setVisibility(View.VISIBLE);
                 break;
 

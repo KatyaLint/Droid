@@ -33,7 +33,8 @@ public enum ToolBarNavEnum {
     HAZARDOUS_NOTICE(29,"Make Payment"),
     ALL_COMPANIONS_VIEW(30,"My Companions"),
     COMPANION_HELP_FEEDBACK(31,"Help and Feedback"),
-    PREFERENCES_CHECK_AS_RADIO_SETTINGS(32,"Preferences Settings"),;
+    PREFERENCES_CHECK_AS_RADIO_SETTINGS(32,"Preferences Settings"),
+    PREFERENCES_MEMBERSHIP(33,"Membership");
 
 
 
