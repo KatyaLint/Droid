@@ -525,8 +525,8 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         // mHotelGuestNumberFontTextView.setText(mTravelDetails.getPassengerses().get(1).getmCells().get(0).getmNodes().get(0).getm());
 //        mHotelCheckInFontTextView.setText(nodesVO.getmCheckIn());
 //        mHotelCheckOutFontTextView.setText(nodesVO.getmCheckOut());
-        mHotelCheckInFontTextView.setText(HGBUtilityDate.parseDateToddMMyyyy(node.getmCheckIn()));
-        mHotelCheckOutFontTextView.setText(HGBUtilityDate.parseDateToddMMyyyy(node.getmCheckOut()));
+        mHotelCheckInFontTextView.setText(HGBUtilityDate.parseDateToEEEMMMDyy(node.getmCheckIn()));
+        mHotelCheckOutFontTextView.setText(HGBUtilityDate.parseDateToEEEMMMDyy(node.getmCheckOut()));
 
         if (nodesVO.getmHotelCode().equals(node.getmHotelCode())) {
             mMyHotelText.setVisibility(View.VISIBLE);

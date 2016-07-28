@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="New York \n Toronto \n Nov 20"
-                    android:textColor="@color/filight_details_grey"
+                    android:textColor="@color/COLOR_8d8e91"
                     android:textSize="@dimen/SP13"
                     app:fontName="dinnextltpro_regular.otf" />
 

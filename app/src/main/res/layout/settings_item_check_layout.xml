@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/DP10"
-    android:id="@+id/settings_item_check_ll"
+    android:id="@+id/settings_item_check_rl"
     android:orientation="horizontal">
 
     <ImageView
+        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="true"
         android:id="@+id/setting_check_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/check_on" />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@+id/setting_check_image"
         android:id="@+id/settings_check_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,6 +25,17 @@
         android:textSize="@dimen/SP16"
         android:text="prr"
         app:fontName="dinnextltpro_medium.otf" />
+
+
+
+    <RadioButton
+        android:id="@+id/setting_radio_image"
+        android:layout_width="wrap_content"
+        android:gravity="right"
+        android:layout_marginRight="@dimen/DP10"
+        android:layout_centerInParent="true"
+        android:layout_alignParentRight="true"
+        android:layout_height="wrap_content" />
 
 
     <!--<LinearLayout-->
@@ -37,4 +52,4 @@
 
 
 
-</LinearLayout>
+</RelativeLayout>

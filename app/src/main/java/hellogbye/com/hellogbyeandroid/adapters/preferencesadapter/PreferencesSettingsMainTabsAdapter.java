@@ -6,11 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -23,6 +26,10 @@ public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<Pre
 
     private OnItemClickListener mItemClickListener;
     private List<SettingsAttributesVO> itemsData;
+    private PreferenceSettingsFragment.ListRadioButtonClicked listRadioButtonClickedClicked;
+    private int selectedPosition = -1;
+    private String selectedPreferebcesID="";
+
 
     public PreferencesSettingsMainTabsAdapter(List<SettingsAttributesVO> accountSettings) {
         itemsData = new ArrayList<>(accountSettings);
@@ -57,7 +64,7 @@ public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<Pre
             }
         }
       //  holder.setting_flight_text.setText(strAttributes);
-        holder.settings_item_check_ll.setTag(position);
+        holder.settings_item_check_rl.setTag(position);
         holder.settings_flight_title.setText(item.getmName());
         holder.settings_flight_title.setTag(item.getmId());
         if(item.isChecked()){
@@ -65,6 +72,37 @@ public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<Pre
         }else {
             holder.setting_check_image.setBackgroundResource(R.drawable.check_off);
         }
+
+
+/*        int currentPosition = position+1;
+//            settings_text_drag.setText(""+correntPosition);
+        attributes.get(position).setmRank("" + currentPosition);
+
+
+
+        if(selectedPreferebcesID.equals(attributes.get(position).getmID())){
+            selectedPosition = position;
+            selectedPreferebcesID = "";
+
+        }
+
+
+
+        holder.radioButton.setChecked(position == selectedPosition);
+        holder.radioButton.setTag(position);
+
+        holder.radioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                selectedPosition = (Integer)view.getTag();
+                listRadioButtonClickedClicked.clickedItem(selectedPosition);
+                notifyDataSetChanged();
+
+            }
+        });*/
+
+
     }
 
 
@@ -77,13 +115,17 @@ public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<Pre
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private FontTextView settings_flight_title;
-        private LinearLayout settings_item_check_ll;
+        private RelativeLayout settings_item_check_rl;
         private ImageView setting_check_image;
+        private  RadioButton radioButton;
         public ViewHolder(View itemView) {
             super(itemView);
             settings_flight_title = (FontTextView) itemView.findViewById(R.id.settings_check_name);
-            settings_item_check_ll = (LinearLayout) itemView.findViewById(R.id.settings_item_check_ll);
+            settings_item_check_rl = (RelativeLayout) itemView.findViewById(R.id.settings_item_check_rl);
             setting_check_image = (ImageView) itemView.findViewById(R.id.setting_check_image);
+
+
+            radioButton = (RadioButton)itemView.findViewById(R.id.setting_radio_image);
 
             itemView.setOnClickListener(this);
 
@@ -93,13 +135,13 @@ public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<Pre
         public void onClick(View view) {
 
             FontTextView textView = (FontTextView) view.findViewById(R.id.settings_check_name);
-            LinearLayout settings_item_check_ll = (LinearLayout) view.findViewById(R.id.settings_item_check_ll);
-            mItemClickListener.onItemClick(textView.getTag().toString(), settings_item_check_ll.getTag().toString());
+            RelativeLayout settings_item_check_rl = (RelativeLayout) view.findViewById(R.id.settings_item_check_rl);
+            mItemClickListener.onItemClick(textView.getTag().toString(), settings_item_check_rl.getTag().toString());
         }
     }
 
     public interface OnItemClickListener {
-        public void onItemClick(String guid, String position);
+        void onItemClick(String guid, String position);
     }
 
 

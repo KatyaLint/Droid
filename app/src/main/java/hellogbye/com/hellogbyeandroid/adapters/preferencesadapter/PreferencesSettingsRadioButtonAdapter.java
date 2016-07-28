@@ -119,8 +119,6 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountD
 
             RadioButton r = (RadioButton)v.findViewById(R.id.setting_radio_image);
 
-
-
             if(selectedPreferebcesID.equals(attribute.getmId())){
                 selectedPosition = position;
                 selectedPreferebcesID = "";

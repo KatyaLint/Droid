@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 
 import com.nhaarman.listviewanimations.ArrayAdapter;
 import com.nhaarman.listviewanimations.util.Swappable;
@@ -31,6 +33,9 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
 
     private boolean isEditMode = false;
     private PreferenceSettingsFragment.ListLineClicked listLineClicked;
+    private PreferenceSettingsFragment.ListRadioButtonClicked listRadioButtonClickedClicked;
+    private int selectedPosition = -1;
+    private String selectedPreferebcesID="";
 
     public PreferencesSettingsPreferencesCheckAdapter(Context context, List<AccountDefaultSettingsVO> accountAttributes) {
         super(accountAttributes);
@@ -48,12 +53,12 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
 
     @Override
     public void setSelectedRadioButtonListener(PreferenceSettingsFragment.ListRadioButtonClicked listRadioButtonClicked) {
-
+        this.listRadioButtonClickedClicked = listRadioButtonClicked;
     }
 
     @Override
     public void selectedItemID(String id) {
-
+        this.selectedPreferebcesID = id;
     }
 
     public void setEditMode(boolean isEditMode){
@@ -91,7 +96,7 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
 
                 settings_flight_title.setText(attribute.getmProfileName());
                 settings_flight_title.setTag(attribute.getmId());
-            LinearLayout settings_item_check_ll = (LinearLayout)v.findViewById(R.id.settings_item_check_ll);
+            RelativeLayout settings_item_check_ll = (RelativeLayout)v.findViewById(R.id.settings_item_check_rl);
             settings_item_check_ll.setTag(attribute.getmId());
             settings_item_check_ll.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -105,10 +110,39 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
 //            settings_text_drag.setText(""+correntPosition);
             this.getItem(position).setRank("" + correntPosition);
             ImageView image = (ImageView)v.findViewById(R.id.setting_check_image);
+
+            RadioButton radioButton = (RadioButton)v.findViewById(R.id.setting_radio_image);
+
+            if(selectedPreferebcesID.equals(attribute.getmId())){
+                selectedPosition = position;
+                selectedPreferebcesID = "";
+
+            }
+
+
+
+            radioButton.setChecked(position == selectedPosition);
+            radioButton.setTag(position);
+
+            radioButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    selectedPosition = (Integer)view.getTag();
+                    listRadioButtonClickedClicked.clickedItem(selectedPosition);
+                    notifyDataSetChanged();
+
+                }
+            });
+
+
+
             if(!isEditMode){
-                image.setVisibility(View.GONE);
+                image.setVisibility(View.INVISIBLE);
+                radioButton.setVisibility(View.VISIBLE);
             }else{
                 image.setVisibility(View.VISIBLE);
+                radioButton.setVisibility(View.INVISIBLE);
                // image.setBackgroundResource(R.drawable.check_off);
                 if(attribute.isChecked()){
                     image.setBackgroundResource(R.drawable.check_on);

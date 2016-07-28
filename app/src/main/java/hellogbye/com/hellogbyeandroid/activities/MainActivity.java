@@ -404,7 +404,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             public void onClick(View view) {
                 Bundle args = new Bundle();
                 args.putString("edit_mode", "true");
-                goToFragment(ToolBarNavEnum.PREFERENCE.getNavNumber(), args);
+                goToFragment(ToolBarNavEnum.TREVEL_PREFERENCE.getNavNumber(), args);
                 LinearLayout edit_preferences = (LinearLayout) mToolbar.findViewById(R.id.preferences_edit_mode);
                 edit_preferences.setVisibility(View.GONE);
             }
@@ -758,7 +758,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case PREFERENCE_SETTINGS_EMAILS:
                 fragment = PreferenceSettingsEmailFragment.newInstance(navPosition);
                 break;
-            case PREFERENCE:
+            case TREVEL_PREFERENCE:
                 fragment = PreferenceSettingsFragment.newInstance(navPosition);
                 break;
             case ACCOUNT:

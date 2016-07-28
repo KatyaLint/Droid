@@ -15,7 +15,10 @@ public class SettingsValuesVO {
     private String mName;
     @SerializedName("description")
     private String mDescription;
+
     private boolean isChecked;
+
+
 
     public SettingsValuesVO(String id, String name, String description, String rank) {
         this.mID = id;

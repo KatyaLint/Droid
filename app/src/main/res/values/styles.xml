@@ -244,7 +244,7 @@
 
     <style name="flight_details_view_title">
         <item name="android:textSize">@dimen/SP13</item>
-        <item name="android:textColor">@color/filight_details_grey</item>
+        <item name="android:textColor">@color/COLOR_8d8e91</item>
         <item name="fontName">dinnextltpro_medium.otf</item>
     </style>
 
@@ -253,5 +253,25 @@
         <item name="android:textColor">@color/COLOR_565656</item>
         <item name="fontName">dinnextltpro_regular.otf</item>
     </style>
+
+
+    <style name="alternative_hotel_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/COLOR_8d8e91</item>
+        <item name="android:textSize">@dimen/SP13</item>
+        <item name="fontName">dinnextltpro_medium.otf</item>
+    </style>
+
+
+    <style name="alternative_hotel_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/COLOR_565656</item>
+        <item name="android:textSize">@dimen/SP14</item>
+        <item name="fontName">dinnextltpro_regular.otf</item>
+    </style>
+
+
 
 </resources>

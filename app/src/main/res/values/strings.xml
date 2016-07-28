@@ -45,7 +45,19 @@
     <string name="flight_select_my_flight">My Flight</string>
     <string name="flight_show_alternate_flights">Change Flight</string>
     <string name="flight_stop_over">STOPOVER: </string>
-    <string name="show_alterate_hotels">Show Alternate Hotels</string>
+
+    <string name="show_alterate_hotels">Alternatives Hotels</string>
+    <string name="alternative_hotel_room">ROOM</string>
+    <string name="alternative_hotel_guest">GUEST</string>
+    <string name="alternative_hotel_check_in">CHECKIN</string>
+    <string name="alternative_hotel_check_out">CHECKOUT</string>
+    <string name="alternative_hotel_address">ADDRESS</string>
+    <string name="alternative_hotel_contact">CONTACT</string>
+    <string name="alternative_hotel_photo_gallery">PHOTO GALLERY</string>
+    <string name="alternative_hotel_amenities">AMENITIES</string>
+    <string name="alternative_hotel_nearby_attractions">NEARBY ATTRACTIONS</string>
+
+
 
     <string name="alternative_pull_down_text">Pull down to see more"</string>
 

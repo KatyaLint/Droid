@@ -151,7 +151,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
             edit_mode = args.getString("edit_mode");
             if (edit_mode != null && edit_mode.equals("true")) {
                 mAdapter = new PreferencesSettingsRadioButtonAdapter(getActivity(), accountDefaultSettings);
-                mAdapter.setSelectedRadioButtonListener(new ListRadioButtonClicked(){
+              /*  mAdapter.setSelectedRadioButtonListener(new ListRadioButtonClicked(){
 
                     @Override
                     public void clickedItem(int selectedPosition) {
@@ -159,12 +159,27 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
                     }
                 });
                 mDynamicListView.setAdapter((PreferencesSettingsRadioButtonAdapter)mAdapter);
-                selectedRadioPreference();
+                selectedRadioPreference();*/
+
+                mDynamicListView.setAdapter((PreferencesSettingsRadioButtonAdapter)mAdapter);
+
             }else{
 
                 mAdapter = new PreferencesSettingsPreferencesCheckAdapter(getActivity(), accountDefaultSettings);
                 mDynamicListView.setAdapter((PreferencesSettingsPreferencesCheckAdapter)mAdapter);
             }
+
+            mAdapter.setSelectedRadioButtonListener(new ListRadioButtonClicked(){
+
+                @Override
+                public void clickedItem(int selectedPosition) {
+                    radioButtonSelected = selectedPosition;
+                }
+            });
+
+            selectedRadioPreference();
+
+
             mAdapter.setClickedLineCB(listLineClicked);
         }
     }
@@ -260,7 +275,6 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
                 ErrorMessage(data);
             }
         });
-
 
         return rootView;
     }

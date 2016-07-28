@@ -412,7 +412,7 @@ public class CNCFragment extends HGBAbstractFragment {
             @Override
             public void onClick(View view) {
                *//* getFlowInterface().closeRightPane();*//*
-                getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCE.getNavNumber(), null);
+                getFlowInterface().goToFragment(ToolBarNavEnum.TREVEL_PREFERENCE.getNavNumber(), null);
             }
         });*/
 
