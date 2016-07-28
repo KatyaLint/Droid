@@ -165,11 +165,11 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
 
         accountAttributesTemp = new ArrayList<>(accountAttributes);
 
-        selectedItem = myAccountAttribute.getAttributesVOs();
+        firstItems = myAccountAttribute.getAttributesVOs();
 
-        firstItems = new ArrayList<>( myAccountAttribute.getAttributesVOs());
+        selectedItem = new ArrayList<>( );
 
-        for (SettingsValuesVO myAccount : selectedItem) {
+        for (SettingsValuesVO myAccount : firstItems) {
             for (SettingsAttributesVO accountAttribute : accountAttributes) {
                 if (accountAttribute.getmId().equals(myAccount.getmID())) {
                    // accountAttributesTemp.remove(accountAttribute);
@@ -202,7 +202,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
                             int intRank = myAccountAttributeVO.size()+1;
                             SettingsValuesVO valuesVO = new SettingsValuesVO(accountAttribute.getmId(),accountAttribute.getmName(),accountAttribute.getmDescription(),""+intRank);
                             myAccountAttribute.getAttributesVOs().add(valuesVO);
-
+                            selectedItem.add(valuesVO);
 
                             break;
                         }
@@ -229,7 +229,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         }else{
             settings_empty_view_text.setText(getString(R.string.settings_empty_view_hotel));
         }
-        if(selectedItem.isEmpty()){
+        if(firstItems.isEmpty()){
             settings_empty_view_layout.setVisibility(View.VISIBLE);
         }
 

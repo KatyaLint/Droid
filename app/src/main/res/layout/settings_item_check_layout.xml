@@ -32,6 +32,7 @@
         android:id="@+id/setting_radio_image"
         android:layout_width="wrap_content"
         android:gravity="right"
+        android:visibility="gone"
         android:layout_marginRight="@dimen/DP10"
         android:layout_centerInParent="true"
         android:layout_alignParentRight="true"

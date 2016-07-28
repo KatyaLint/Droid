@@ -78,11 +78,16 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
         LayoutInflater li = LayoutInflater.from(getActivity());
         View promptsView = li.inflate(R.layout.settings_save_popup, null);
 
-        if( settingsAttributesVO == null || guid.equals("7")
+    /*    if( settingsAttributesVO == null || guid.equals("7")
             && firstItems.isEmpty()
             && myAccountAttribute.getAttributesVOs().isEmpty() || settingsAttributesVO.isEmpty()){
             return;
+        }*/
+
+        if(settingsAttributesVO == null  && selectedItem.isEmpty()){// myAccountAttribute.getAttributesVOs().isEmpty()   && firstItems.isEmpty()){
+            return;
         }
+
 
         HGBUtility.showAlertPopUp(getActivity(), null, promptsView,
                 getResources().getString(R.string.preferences_save_pop_up),

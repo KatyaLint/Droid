@@ -260,6 +260,7 @@ Code changing:
     HEL-1212 - hotel details screen - design
     HEL-1205 - travel profiles > can't choose a profile
     HEL-1211 - change flight
+    HEL-963 - empty preferences text
 
    Code changing:
    --------------

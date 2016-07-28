@@ -128,7 +128,7 @@
 
     <string name="settings_search_hunt">Looking for someone?</string>
     <string name="settings_empty_view_hotel">No favorite hotel chains selected\nUse the search bar to add them.</string>
-    <string name="settings_empty_view_aircraft">No favorite aircraft type chains selected/\nUse the search bar to add them.</string>
+    <string name="settings_empty_view_aircraft">No favorite aircraft type chains selected\nUse the search bar to add them.</string>
     <string name="settings_more_then_allowed_selected_title">Error</string>
     <string name="settings_more_then_allowed_selected">Can not have more than 10 selected</string>
     <string name="settings_choose_profile">Choose profile</string>
