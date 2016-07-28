@@ -102,19 +102,22 @@
                     app:fontName="dinnextltpro_medium.otf" />
 
 
-                <hellogbye.com.hellogbyeandroid.views.FontButtonView
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
                     android:layout_below="@+id/flight_cost"
                     android:id="@+id/show_alternative_flights"
                     android:layout_marginTop="@dimen/DP6"
+                    android:padding="@dimen/DP10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/red_button"
+                    android:gravity="center"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/flight_show_alternate_flights"
                     android:textColor="@color/white"
                     app:fontName="dinnextltpro_medium.otf"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/SP13" />
+                    android:textSize="@dimen/SP13"
+                    android:layout_marginBottom="@dimen/DP6"/>
 
 
                 <hellogbye.com.hellogbyeandroid.views.FontTextView

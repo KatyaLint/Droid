@@ -171,7 +171,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
     // inner class to hold a reference to each item of RecyclerView
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private Button show_alternative_flights;
+        private FontTextView show_alternative_flights;
         private View flight_ticket_details_layout;
         private FontTextView operatorName;
         private FontTextView flightNumber;
@@ -208,7 +208,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             initializeAirplaneDetails(itemLayoutView);
             stopOverInitialization(itemLayoutView);
             flightMainCostInitialization(itemLayoutView);
-            show_alternative_flights = (Button) itemLayoutView.findViewById(R.id.show_alternative_flights);
+            show_alternative_flights = (FontTextView) itemLayoutView.findViewById(R.id.show_alternative_flights);
 
             show_alternative_flights.setOnClickListener(new View.OnClickListener() {
                 @Override
