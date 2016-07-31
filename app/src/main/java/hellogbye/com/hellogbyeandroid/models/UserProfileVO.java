@@ -8,7 +8,7 @@ import java.util.HashSet;
 /**
  * Created by arisprung on 10/29/15.
  */
-public class UserDataVO {
+public class UserProfileVO {
 
 
 
@@ -66,11 +66,11 @@ public class UserDataVO {
     private HashSet<String> bookingItems;
 
 
-    public UserDataVO() {
+    public UserProfileVO() {
     }
 
 
-    public UserDataVO(String userprofileid, String emailaddress, String firstname, String lastname, String dob, String country, String address, String city, String state, String postalcode, String avatar, boolean ispremiumuser, String paxid, String phone, String title) {
+    public UserProfileVO(String userprofileid, String emailaddress, String firstname, String lastname, String dob, String country, String address, String city, String state, String postalcode, String avatar, boolean ispremiumuser, String paxid, String phone, String title) {
         this.userprofileid = userprofileid;
         this.emailaddress = emailaddress;
         this.firstname = firstname;

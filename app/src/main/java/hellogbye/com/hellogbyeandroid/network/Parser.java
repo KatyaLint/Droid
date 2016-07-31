@@ -22,7 +22,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.TravelPreference;
-import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
@@ -224,10 +224,10 @@ public class Parser {
     }
 
     public static Object getTravels(String response){
-        ArrayList<UserDataVO>  mTravelList = null;
+        ArrayList<UserProfileVO>  mTravelList = null;
         try {
             Gson gson = new Gson();
-            Type listType = new TypeToken<List<UserDataVO>>() {
+            Type listType = new TypeToken<List<UserProfileVO>>() {
             }.getType();
             mTravelList = gson.fromJson((String) response, listType);
         } catch (Exception e) {
@@ -320,10 +320,10 @@ public class Parser {
     }
 
     public static Object parseUser(String response) {
-        UserDataVO userdata = new UserDataVO();
+        UserProfileVO userdata = new UserProfileVO();
         try {
             Gson gson = new Gson();
-            Type type = new TypeToken<UserDataVO>() {
+            Type type = new TypeToken<UserProfileVO>() {
             }.getType();
             userdata = gson.fromJson(response, type);
 

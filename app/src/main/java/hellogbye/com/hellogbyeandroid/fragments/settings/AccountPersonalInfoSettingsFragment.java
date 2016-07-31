@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +17,13 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.settingaccount.AccountSettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
-import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSettingsMainClass;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
-import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -59,9 +57,9 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
     private FontEditTextView companion_personal_settings_location_country;
     private FontEditTextView companion_personal_settings_location_province;
 
-    private UserDataVO currentUser;
+    private UserProfileVO currentUser;
     private FontTextView account_done_editting;
-    private UserDataVO newUser;
+    private UserProfileVO newUser;
     private int maxValueForStateDialog;
     private String[] stateArray;
     private int countryMaxValueSize;
@@ -406,7 +404,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
     }
 
     private void changeNewUser() {
-        newUser = new UserDataVO(currentUser.getUserprofileid(), currentUser.getEmailaddress(), currentUser.getFirstname(),
+        newUser = new UserProfileVO(currentUser.getUserprofileid(), currentUser.getEmailaddress(), currentUser.getFirstname(),
                 currentUser.getLastname(), currentUser.getDob(), currentUser.getCountry(),
                 currentUser.getAddress(), currentUser.getCity(), currentUser.getState(),
                 currentUser.getPostalcode(), currentUser.getAvatar(), currentUser.ispremiumuser(), currentUser.getPaxid(), currentUser.getPhone(),

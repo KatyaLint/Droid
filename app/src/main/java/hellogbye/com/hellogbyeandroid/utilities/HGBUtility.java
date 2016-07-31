@@ -10,7 +10,6 @@ import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.os.Build;
 import android.provider.Settings;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -53,7 +52,6 @@ import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -68,20 +66,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 
 import java.util.Stack;
-import java.util.concurrent.Exchanger;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
-import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -577,7 +568,7 @@ public class HGBUtility {
         return haveConnectedWifi || haveConnectedMobile;
     }
 
-    public static boolean isUserDataValid(UserDataVO user){
+    public static boolean isUserDataValid(UserProfileVO user){
         boolean isValid = true;
         if(user.getFirstname().length()== 0){
             return false;

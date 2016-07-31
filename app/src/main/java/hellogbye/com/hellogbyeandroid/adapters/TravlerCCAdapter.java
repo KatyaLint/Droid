@@ -1,7 +1,6 @@
 package hellogbye.com.hellogbyeandroid.adapters;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;

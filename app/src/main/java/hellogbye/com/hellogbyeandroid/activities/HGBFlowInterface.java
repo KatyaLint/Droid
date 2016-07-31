@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
-import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 
@@ -29,14 +29,14 @@ public interface HGBFlowInterface {
     HashSet<CreditCardItem> getCreditCardsSelected();
     void setBookingHashMap(HashMap<String, String> bookigItems);
     HashMap<String, String> getBookingHashMap();
-    ArrayList<UserDataVO> getListUsers();
-    UserDataVO getCurrentUser();
-    void setCurrentUser(UserDataVO currentUser);
+    ArrayList<UserProfileVO> getListUsers();
+    UserProfileVO getCurrentUser();
+    void setCurrentUser(UserProfileVO currentUser);
     void setEligabileCountries(ArrayList<CountryItemVO> list);
     ArrayList<CountryItemVO> getEligabileCountries();
     ArrayList<CreditCardItem> getCreditCards();
     void setCreditCards(ArrayList<CreditCardItem> mCreditCardList);
-    void setListUsers(ArrayList<UserDataVO> travellist);
+    void setListUsers(ArrayList<UserProfileVO> travellist);
     void closeRightPane();
     void openRightPane();
 

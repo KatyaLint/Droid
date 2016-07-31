@@ -11,9 +11,8 @@ import java.util.List;
 
 
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
-import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.PersonalUserInformationVO;
-import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
@@ -45,10 +44,10 @@ public class HGBSaveDataClass implements HGBMainInterface {
     private ArrayList<CompanionVO> companionsInvintation;
     private ArrayList<CompanionStaticRelationshipTypesVO> componionStaticDescriptionVOs;
     private ArrayList<AccountsVO> accounts;
-    private UserDataVO mCurrentUser;
+    private UserProfileVO mCurrentUser;
     private BookingRequestVO mBookingRequestVO;
     private ArrayList<CreditCardItem> mCreditCardList;
-    private ArrayList<UserDataVO> mTravelList;
+    private ArrayList<UserProfileVO> mTravelList;
     private UserTravelMainVO mUserTravelOrder;
     private ArrayList<CNCItem> mCNCItems;
     private String solutionID;
@@ -145,22 +144,22 @@ public class HGBSaveDataClass implements HGBMainInterface {
     }
 
     @Override
-    public void setListUsers(ArrayList<UserDataVO> mTravelList) {
+    public void setListUsers(ArrayList<UserProfileVO> mTravelList) {
         this.mTravelList = mTravelList;
     }
 
     @Override
-    public ArrayList<UserDataVO> getListUsers() {
+    public ArrayList<UserProfileVO> getListUsers() {
         return mTravelList;
     }
 
     @Override
-    public UserDataVO getCurrentUser() {
+    public UserProfileVO getCurrentUser() {
         return mCurrentUser;
     }
 
     @Override
-    public void setCurrentUser(UserDataVO currentUser) {
+    public void setCurrentUser(UserProfileVO currentUser) {
         this.mCurrentUser = currentUser;
     }
 

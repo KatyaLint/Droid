@@ -16,7 +16,7 @@
         <item>http://qa.hellogbye.com/qa/Rest/</item>
         <item>http://dev.hellogbye.com/dev/Rest/</item>
         <item>http://cnc.hellogbye.com/cnc/Rest/</item>
-        <item>http://apiuat.hellogbye.com/uat/rest/</item>
+        <item>https://apiuat.hellogbye.com/uat/rest/</item>
         <item>http://demo.hellogbye.com/dev/rest/</item>
         <item>http://apidev.hellogbye.com/dev/rest/</item>
     </string-array>
@@ -35,8 +35,8 @@
 
     <string-array name="tutorial_arr">
         <item>I want to fly to Vancouver on December 17th for 10 days, staying in a 4 star hotel</item>
-        <item>"I would like to edit my trip"</item>
-        <item>"I would like to add a travel companion"</item>
+        <item>I would like to edit my trip</item>
+        <item>I would like to add a travel companion</item>
 
     </string-array>
 

@@ -33,7 +33,7 @@ import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.CreditCardSessionItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
-import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
@@ -322,7 +322,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
 
     private void addFields() {
 
-        UserDataVO currentUser = getActivityInterface().getCurrentUser();
+        UserProfileVO currentUser = getActivityInterface().getCurrentUser();
         mCardStreet.setText(currentUser.getAddress());
         mCardCountry.setText(currentUser.getCountry());
         mCardFirstName.setText(currentUser.getFirstname());

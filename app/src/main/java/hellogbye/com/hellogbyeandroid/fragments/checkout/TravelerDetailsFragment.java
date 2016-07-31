@@ -16,7 +16,7 @@ import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
-import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
@@ -44,7 +44,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
     private FontTextView mCountry;
     private EditText mPostalCode;
     private FontTextView mState;
-    private UserDataVO mUser;
+    private UserProfileVO mUser;
 
     private String[] stateArray;
 

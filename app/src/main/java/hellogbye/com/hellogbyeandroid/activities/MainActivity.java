@@ -78,7 +78,7 @@ import hellogbye.com.hellogbyeandroid.models.NavItem;
 import hellogbye.com.hellogbyeandroid.models.PersonalUserInformationVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     private OnBackPressedListener onBackPressedListener;
 
-    private UserDataVO mCurrentUser;
+    private UserProfileVO mCurrentUser;
 
     public FontTextView my_trip_profile;
     private HGBSaveDataClass hgbSaveDataClass = new HGBSaveDataClass();
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     //private MyTripsFragment.OnItemClickListener editMyTripsClickCB;
     private FontTextView itirnarary_title_Bar;
 
-    private ArrayList<UserDataVO> mTravelList = new ArrayList<>();
+    private ArrayList<UserProfileVO> mTravelList = new ArrayList<>();
     private ArrayList<CountryItemVO> mEligabileCountryList = new ArrayList<>();
     private ArrayList<CreditCardItem> mCreditCardList = new ArrayList<>();
     private boolean isFreeUser;
@@ -339,7 +339,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             @Override
             public void onSuccess(Object data) {
 
-                UserDataVO mCurrentUser = (UserDataVO) data;
+                UserProfileVO mCurrentUser = (UserProfileVO) data;
                 String logInEmail = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL,"");
                 hgbSaveDataClass.getPersonalUserInformation().setUserEmailLogIn(logInEmail);
                 hgbSaveDataClass.setCurrentUser(mCurrentUser);
@@ -378,7 +378,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             ConnectionManager.getInstance(MainActivity.this).getUserProfile(new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
-                    mCurrentUser = (UserDataVO) data;
+                    mCurrentUser = (UserProfileVO) data;
                     String name = mCurrentUser.getFirstname() + " " + mCurrentUser.getLastname();
                     hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_NAME, "");
                     mName.setText(name);
@@ -639,17 +639,17 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
 
     @Override
-    public ArrayList<UserDataVO> getListUsers() {
+    public ArrayList<UserProfileVO> getListUsers() {
         return mTravelList;
     }
 
     @Override
-    public UserDataVO getCurrentUser() {
+    public UserProfileVO getCurrentUser() {
         return mCurrentUser;
     }
 
     @Override
-    public void setCurrentUser(UserDataVO currentUser) {
+    public void setCurrentUser(UserProfileVO currentUser) {
         this.mCurrentUser = currentUser;
     }
 
@@ -678,7 +678,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     }
 
     @Override
-    public void setListUsers(ArrayList<UserDataVO> travellist) {
+    public void setListUsers(ArrayList<UserProfileVO> travellist) {
         mTravelList = travellist;
     }
 

@@ -255,7 +255,7 @@ public class SignUpActivity extends AppCompatActivity {
             ConnectionManager.getInstance(SignUpActivity.this).getBookingOptions(new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
-                     bookingResponse = (BookingRequestVO)data;
+                    bookingResponse = (BookingRequestVO)data;
                     sortCountryItems();
                     //BookingRequest bookingrequest = (BookingRequest)data;
                 }

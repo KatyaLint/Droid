@@ -22,7 +22,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymnentGroup;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
@@ -106,20 +106,20 @@ public class TravelersFragment extends HGBAbstractFragment {
         ConnectionManager.getInstance(getActivity()).getTravellersInforWithSolutionId(getActivityInterface().getTravelOrder().getmSolutionID(), new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                List<ArrayList<UserDataVO>> children = new ArrayList<ArrayList<UserDataVO>>();
+                List<ArrayList<UserProfileVO>> children = new ArrayList<ArrayList<UserProfileVO>>();
 
-                getFlowInterface().setListUsers((ArrayList<UserDataVO>) data);
+                getFlowInterface().setListUsers((ArrayList<UserProfileVO>) data);
 
                 if(getFlowInterface().getListUsers().size() !=0 ){
                     for (int i = 0; i < getFlowInterface().getListUsers().size(); i++) {
-                            UserDataVO user = getFlowInterface().getListUsers().get(i);
+                            UserProfileVO user = getFlowInterface().getListUsers().get(i);
                         for (int z = 0; z <mGroups.size() ; z++) {
 
                             String name1 = mGroups.get(z).getNameText();
                             String name2 = user.getFirstname();
 
                             if(mGroups.get(z).getNameText().equals(user.getFirstname())){
-                                ArrayList<UserDataVO> passengerChildArray = new ArrayList<>();
+                                ArrayList<UserProfileVO> passengerChildArray = new ArrayList<>();
                                 passengerChildArray.add(getFlowInterface().getListUsers().get(z));
                                 children.add(passengerChildArray);
                                 boolean isMissing = checkIfMissing(getFlowInterface().getListUsers().get(z));
@@ -146,8 +146,8 @@ public class TravelersFragment extends HGBAbstractFragment {
                 }else{
 
                     for (int i = 0; i < mGroups.size(); i++) {
-                        ArrayList<UserDataVO> passengerChildArray = new ArrayList<>();
-                        passengerChildArray.add(new UserDataVO());
+                        ArrayList<UserProfileVO> passengerChildArray = new ArrayList<>();
+                        passengerChildArray.add(new UserProfileVO());
                         children.add(passengerChildArray);
                         mGroups.get(i).setmChildDataMissing(true);
                     }
@@ -202,7 +202,7 @@ public class TravelersFragment extends HGBAbstractFragment {
         initCheckoutSteps();
     }
 
-    private boolean checkIfMissing(UserDataVO child) {
+    private boolean checkIfMissing(UserProfileVO child) {
         if (child.getFirstname() == null || child.getFirstname().equals("")) {
             return true;
         } else if (child.getPostalcode() == null || child.getPostalcode().equals("")) {
@@ -236,10 +236,10 @@ public class TravelersFragment extends HGBAbstractFragment {
 
         private final LayoutInflater inf;
         private final ArrayList<PaymnentGroup> groupsList;
-        private List<ArrayList<UserDataVO>> childrenList = new ArrayList<>();
+        private List<ArrayList<UserProfileVO>> childrenList = new ArrayList<>();
 
 
-        public TravlerExpandableAdapter(Context context, ArrayList<PaymnentGroup> groups, List<ArrayList<UserDataVO>> children) {
+        public TravlerExpandableAdapter(Context context, ArrayList<PaymnentGroup> groups, List<ArrayList<UserProfileVO>> children) {
             this.groupsList = groups;
             this.childrenList = children;
             this.inf = LayoutInflater.from(context);
@@ -305,7 +305,7 @@ public class TravelersFragment extends HGBAbstractFragment {
             } else {
                 holder = (ChildViewHolder) convertView.getTag();
             }
-            final UserDataVO child = (UserDataVO) getChild(groupPosition, childPosition);
+            final UserProfileVO child = (UserProfileVO) getChild(groupPosition, childPosition);
 
 
             holder.childNametext.setText(child.getFirstname() + " " + child.getLastname());
@@ -324,7 +324,7 @@ public class TravelersFragment extends HGBAbstractFragment {
             return convertView;
         }
 
-        private void findMissingElemnts(ChildViewHolder holder, UserDataVO child) {
+        private void findMissingElemnts(ChildViewHolder holder, UserProfileVO child) {
 
             if (child.getFirstname() == null || child.getFirstname().equals("")) {
                 holder.childNametextLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.red_button_color));

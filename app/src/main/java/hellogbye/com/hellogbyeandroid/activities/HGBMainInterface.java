@@ -6,11 +6,10 @@ import java.util.HashSet;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
-import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.PersonalUserInformationVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
-import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelationshipTypesVO;
@@ -43,11 +42,11 @@ public interface HGBMainInterface {
     void setAccountSettingsAttribute(List<SettingsAttributeParamVO> settingsAttribute);
     List<SettingsAttributeParamVO> getAccountSettingsAttribute();
 
-    void setListUsers( ArrayList<UserDataVO> mTravelList);
-    ArrayList<UserDataVO> getListUsers();
+    void setListUsers( ArrayList<UserProfileVO> mTravelList);
+    ArrayList<UserProfileVO> getListUsers();
 
-    UserDataVO getCurrentUser();
-    void setCurrentUser(UserDataVO currentUser);
+    UserProfileVO getCurrentUser();
+    void setCurrentUser(UserProfileVO currentUser);
 
     BookingRequestVO getBookingRequest();
     void setBookingRequest(BookingRequestVO bookingRequest);

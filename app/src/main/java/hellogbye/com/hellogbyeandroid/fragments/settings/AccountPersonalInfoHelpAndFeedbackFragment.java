@@ -1,51 +1,27 @@
 package hellogbye.com.hellogbyeandroid.fragments.settings;
 
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
-import hellogbye.com.hellogbyeandroid.activities.StartingMenuActivity;
-import hellogbye.com.hellogbyeandroid.adapters.settingaccount.AccountSettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
-import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
-import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
-import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.UserDataVO;
-import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
-import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
-import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
-import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
-import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by arisprung on 8/17/15.

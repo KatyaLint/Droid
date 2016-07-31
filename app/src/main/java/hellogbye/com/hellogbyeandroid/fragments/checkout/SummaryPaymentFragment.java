@@ -1,18 +1,15 @@
 package hellogbye.com.hellogbyeandroid.fragments.checkout;
 
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
-import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Log;
@@ -24,8 +21,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,24 +31,20 @@ import java.util.Map;
 
 import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.StartingMenuActivity;
 import hellogbye.com.hellogbyeandroid.adapters.TravlerAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.TravlerCCAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
-import hellogbye.com.hellogbyeandroid.models.PaymentSummaryItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
-import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -174,7 +165,7 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
                 try {
 
                     JSONArray jsonArray = new JSONArray();
-                    for (UserDataVO userData : getFlowInterface().getListUsers()) {
+                    for (UserProfileVO userData : getFlowInterface().getListUsers()) {
                         JSONObject jsonUser = new JSONObject();
                         jsonUser.put("dateofbirth", userData.getDob());
                         jsonUser.put("lastname", userData.getLastname());

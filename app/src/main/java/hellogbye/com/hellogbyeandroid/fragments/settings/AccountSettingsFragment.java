@@ -35,7 +35,7 @@ import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -51,7 +51,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
     private FontTextView account_settings_details_name;
     private FontTextView account_settings_details_city;
     private Activity activity;
-    private UserDataVO currentUser;
+    private UserProfileVO currentUser;
     private String userChoosenTask;
     private Bitmap thumbnail;
 
@@ -72,7 +72,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
             @Override
             public void onSuccess(Object data) {
 
-                UserDataVO mCurrentUser = (UserDataVO) data;
+                UserProfileVO mCurrentUser = (UserProfileVO) data;
                 getActivityInterface().setCurrentUser(mCurrentUser);
                 initializeUserData();
                 ((MainActivity)getActivity()).updateProfilePicture(thumbnail);

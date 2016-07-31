@@ -1,20 +1,15 @@
 package hellogbye.com.hellogbyeandroid.fragments.preferences;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 
@@ -32,12 +27,10 @@ import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.SettingsAdapte
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.UserDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 

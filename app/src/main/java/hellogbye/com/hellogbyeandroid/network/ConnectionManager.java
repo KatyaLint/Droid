@@ -16,11 +16,10 @@ import java.util.HashSet;
 import java.util.List;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
-import hellogbye.com.hellogbyeandroid.models.UserDataVO;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
-import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 
 
@@ -76,7 +75,7 @@ public class ConnectionManager {
         String choosenServer = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER,"");
 
         if(choosenServer == null || choosenServer.isEmpty()){
-            BASE_URL =  "http://apidev.hellogbye.com/dev/rest/";
+            BASE_URL =  "https://apiuat.hellogbye.com/uat/rest/";
         }else{
             BASE_URL = choosenServer;
         }
@@ -1510,7 +1509,7 @@ public class ConnectionManager {
         });
     }
 
-    public void putCompanion(String id, UserDataVO user, final ServerRequestListener listener) {
+    public void putCompanion(String id, UserProfileVO user, final ServerRequestListener listener) {
         String url = getURL(Services.COMPANIONS);
         JSONObject json1 = new JSONObject();
         try {
@@ -1558,7 +1557,7 @@ public class ConnectionManager {
 
 
 
-    public void putUserSettings(UserDataVO user, final ServerRequestListener listener){
+    public void putUserSettings(UserProfileVO user, final ServerRequestListener listener){
 
         String url = getURL(Services.USER_GET_PROFILE);
         JSONObject json1 = new JSONObject();

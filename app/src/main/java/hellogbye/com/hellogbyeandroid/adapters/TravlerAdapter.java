@@ -10,8 +10,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.models.UserDataVO;
-import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -23,7 +22,7 @@ public class TravlerAdapter extends RecyclerView.Adapter<TravlerAdapter.ViewHold
 
     private Fragment travelFragment;
 
-    private ArrayList<UserDataVO> mArrayList;
+    private ArrayList<UserProfileVO> mArrayList;
     private OnItemClickListener  mItemClickListner;
 
 
@@ -77,7 +76,7 @@ public class TravlerAdapter extends RecyclerView.Adapter<TravlerAdapter.ViewHold
 
     // Provide a suitable constructor (depends on the kind of dataset)
 
-    public TravlerAdapter(ArrayList<UserDataVO> myDataset,Context context) {
+    public TravlerAdapter(ArrayList<UserProfileVO> myDataset, Context context) {
 
         mArrayList = myDataset;
         mContext = context;
@@ -103,7 +102,7 @@ public class TravlerAdapter extends RecyclerView.Adapter<TravlerAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        UserDataVO child = mArrayList.get(position);
+        UserProfileVO child = mArrayList.get(position);
 
 
         holder.childNametext.setText(child.getFirstname() + " " + child.getLastname());
