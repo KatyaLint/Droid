@@ -32,7 +32,7 @@ import java.util.Map;
 import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.TravlerAdapter;
-import hellogbye.com.hellogbyeandroid.adapters.TravlerCCAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.creditcardadapters.TravlerCCAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;

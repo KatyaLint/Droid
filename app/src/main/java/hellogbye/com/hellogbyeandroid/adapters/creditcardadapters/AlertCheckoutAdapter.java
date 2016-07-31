@@ -1,4 +1,4 @@
-package hellogbye.com.hellogbyeandroid.adapters;
+package hellogbye.com.hellogbyeandroid.adapters.creditcardadapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,6 +21,8 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  */
 public class AlertCheckoutAdapter extends BaseAdapter {
 
+    private final Typeface textFontReg;
+    private final Typeface textFont;
     ArrayList<String> mData;
     Context mContext;
     LayoutInflater inflater;
@@ -28,7 +30,10 @@ public class AlertCheckoutAdapter extends BaseAdapter {
     public AlertCheckoutAdapter(ArrayList<String> data, Context context) {
         mData = data;
         mContext = context;
+        textFont = Typeface.createFromAsset(mContext.getAssets(), "fonts/" + "dinnextltpro_medium.otf");
+        textFontReg = Typeface.createFromAsset(mContext.getAssets(), "fonts/" + "dinnextltpro_regular.otf");
         inflater = LayoutInflater.from(context);
+
     }
 
     @Override
@@ -56,8 +61,7 @@ public class AlertCheckoutAdapter extends BaseAdapter {
         }
         FontTextView text = (FontTextView) convertView.findViewById(R.id.alert_checkout_text);
         ImageView image = (ImageView) convertView.findViewById(R.id.alert_checkout_image);
-        Typeface textFont = Typeface.createFromAsset(mContext.getAssets(), "fonts/" + "dinnextltpro_medium.otf");
-        Typeface textFontReg = Typeface.createFromAsset(mContext.getAssets(), "fonts/" + "dinnextltpro_regular.otf");
+
         text.setText(mData.get(position));
 
         if(mContext.getResources().getString(R.string.add_card).equals(mData.get(position))){
@@ -70,7 +74,6 @@ public class AlertCheckoutAdapter extends BaseAdapter {
             image.setBackgroundResource(R.drawable.all_card_icon);
             text.setTypeface(textFontReg);
         }
-
 
         return convertView;
     }

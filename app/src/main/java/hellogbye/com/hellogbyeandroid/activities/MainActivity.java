@@ -6,6 +6,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -14,6 +15,7 @@ import android.speech.RecognizerIntent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -40,6 +42,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.userprofilesadapter.UserProfilesAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
 
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
@@ -80,9 +83,11 @@ import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
+import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.network.Parser;
@@ -132,6 +137,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private FrameLayout frameLayout;
     private FontTextView preference_save_changes;
     private PreferencesSettingsMainClass.saveButtonClicked onSavePreferencesButtonClicked;
+    private AlertDialog selectDefaultProfileDialog;
+    private ArrayList<DefaultsProfilesVO> userDefaultProfiles;
 
     public HGBSaveDataClass getHGBSaveDataClass() {
         return hgbSaveDataClass;
@@ -343,19 +350,21 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 String logInEmail = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL,"");
                 hgbSaveDataClass.getPersonalUserInformation().setUserEmailLogIn(logInEmail);
                 hgbSaveDataClass.setCurrentUser(mCurrentUser);
-                String profileID = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID,"");
-                hgbSaveDataClass.getPersonalUserInformation().setmTravelPreferencesProfileId(profileID);
+
                 //     ImageView my_trips_image_profile = (ImageView)findViewById(R.id.my_trips_image_profile);
                 HGBUtility.getAndSaveUserImage(mCurrentUser.getAvatar(), mProfileImage, null);
+
+                if(!mCurrentUser.getIsTravelprofile()){
+                    showUserProfiles();
+                }
+
+                String profileID = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID,"");
+                hgbSaveDataClass.getPersonalUserInformation().setmTravelPreferencesProfileId(profileID);
                 //my_trips_image_profile.setImageBitmap(HGBUtility.getBitmapFromCache(getBaseContext()));
                 getAccountsProfiles();
                 selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null,true);
 
 
-                if(!mCurrentUser.getIsTravelprofile()){
-                    //TODO show profile dialog
-
-                }
 
 
             }
@@ -369,6 +378,97 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         });
     }
 
+
+    private void showUserProfiles(){
+
+   //     https://apiuat.hellogbye.com/uat/rest/TravelPreference/Profiles/Defaults
+
+
+        ConnectionManager.getInstance(MainActivity.this).getDefaultProfiles(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+                ArrayList<DefaultsProfilesVO> userProfileVO = (ArrayList<DefaultsProfilesVO>) data;
+                if (!userProfileVO.isEmpty()) {
+                    setUserDefaultProfiles(userProfileVO);
+                    showAlertProfilesDialog(userProfileVO);
+                }
+
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
+
+    }
+
+
+    private void showAlertProfilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs ){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        dialogBuilder.setTitle(getResources().getString(R.string.profile_choose_between));
+
+       final ArrayList<String> itemsList = new ArrayList<String>();
+        for (DefaultsProfilesVO userProfileVO:userProfileVOs ){
+            itemsList.add(userProfileVO.getName());
+        }
+        // final CharSequence[] list = itemsList.toArray(new String[itemsList.size()]);
+        UserProfilesAdapter adapter = new UserProfilesAdapter(itemsList,this.getBaseContext());
+        dialogBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                DefaultsProfilesVO defaultProfile = userDefaultProfiles.get(item);
+                postDefaultPrifile(String.valueOf(defaultProfile.getId()),defaultProfile.getName());
+                selectDefaultProfileDialog.dismiss();
+            }
+        });
+        //Create alert dialog object via builder
+        selectDefaultProfileDialog = dialogBuilder.create();
+        selectDefaultProfileDialog.setCancelable(false);
+        selectDefaultProfileDialog.show();
+    }
+
+
+    private void postDefaultPrifile(String profileId,String profileName) {
+        ConnectionManager.getInstance(MainActivity.this).postDefaultProfile(profileId,profileName, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                if (data != null) {
+                    AccountDefaultSettingsVO accountDefault = (AccountDefaultSettingsVO) data;
+                    putNewPreferencesForUser(hgbSaveDataClass.getPersonalUserInformation().getUserEmailLogIn(), accountDefault.getmId());
+                }
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
+
+    }
+
+
+
+    private void putNewPreferencesForUser(final String userEmail, final String accountID){
+        ConnectionManager.getInstance(MainActivity.this).putAccountsPreferences(userEmail, accountID, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID,accountID);
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
+    }
 
     public void updateProfilePicture(Bitmap thumbnail){
         if(mProfileImage != null && thumbnail != null){
@@ -1205,6 +1305,10 @@ public void setTitleForItirnarary(String solutionName){
 
     public void setOnSavePreferencesButtonClicked(PreferencesSettingsMainClass.saveButtonClicked onSavePreferencesButtonClicked) {
         this.onSavePreferencesButtonClicked = onSavePreferencesButtonClicked;
+    }
+
+    public void setUserDefaultProfiles(ArrayList<DefaultsProfilesVO> userDefaultProfiles) {
+        this.userDefaultProfiles = userDefaultProfiles;
     }
 
     public class LanguageDetailsChecker extends BroadcastReceiver

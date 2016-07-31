@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.IClickedItem;
 import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.adapters.CreditCardSwipeItemsAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.creditcardadapters.CreditCardSwipeItemsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;

@@ -523,6 +523,31 @@ public class ConnectionManager {
         });
     }
 
+    public void postDefaultProfile(String defaultProfileId,String profilename, final ServerRequestListener listener) {
+        String url = getURL(Services.USER_GET_TRAVEL_PROFILES);
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("profilename", profilename);
+            jsonObject.put("defaultprofileid", defaultProfileId);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.getSettingsAcount(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
+
 
     public void ItineraryCNCSearchPost(ArrayList<AirportSendValuesVO> airportSendValuesVOs, final ServerRequestListener listener) {
         String url = getURL(Services.ITINERARY);
@@ -848,6 +873,25 @@ public class ConnectionManager {
             @Override
             public void onResponse(String response) {
                 listener.onSuccess(Parser.parseCreditCardList(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        },false);
+
+    }
+
+    public void getDefaultProfiles(final ServerRequestListener listener) {
+        String url = getURL(Services.DEFAULT_PROFILES);
+
+        JSONObject jsonObject = new JSONObject();
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseDefaultProfiles(response));
             }
         }, new Response.ErrorListener() {
             @Override
@@ -1855,7 +1899,8 @@ public class ConnectionManager {
                 USER_PROFILE_DEVICE_AUTHENTICATION("Session/Anonymous/"),
                 BOOKING_CONFIRMATION("Booking/flight/confirmation/pdf?"),
                 SUBMIT_FEEDBACK("Feedback"),
-                USER_ACTIVATION_PIN("UserProfile/Activate?activationKey=");
+                USER_ACTIVATION_PIN("UserProfile/Activate?activationKey="),
+                DEFAULT_PROFILES("TravelPreference/Profiles/Defaults");
 
                 String url;
                 Services(String url){

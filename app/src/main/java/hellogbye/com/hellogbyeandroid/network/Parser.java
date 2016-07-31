@@ -17,6 +17,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.models.CreditCardSessionItem;
 
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
+import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
@@ -181,6 +182,22 @@ public class Parser {
         ArrayList<CreditCardItem> creditCardList = null;
         try {
             Type listType = new TypeToken<ArrayList<CreditCardItem>>() {
+            }.getType();
+
+            Gson gson = new Gson();
+
+            creditCardList = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return creditCardList;
+    }
+
+
+    public static Object parseDefaultProfiles(String response){
+        ArrayList<DefaultsProfilesVO> creditCardList = null;
+        try {
+            Type listType = new TypeToken<ArrayList<DefaultsProfilesVO>>() {
             }.getType();
 
             Gson gson = new Gson();

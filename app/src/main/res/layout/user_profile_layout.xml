@@ -14,14 +14,14 @@
 
 
         <ImageView
-            android:id="@+id/alert_checkout_image"
+            android:id="@+id/user_profile_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/all_card_icon" />
+            android:background="@drawable/money_saver" />
 
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:id="@+id/alert_checkout_text"
+            android:id="@+id/user_profile_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/SP10"

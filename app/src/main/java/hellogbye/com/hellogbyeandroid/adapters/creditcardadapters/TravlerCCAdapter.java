@@ -1,4 +1,4 @@
-package hellogbye.com.hellogbyeandroid.adapters;
+package hellogbye.com.hellogbyeandroid.adapters.creditcardadapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
