@@ -1,6 +1,7 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,7 +21,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +33,8 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
@@ -53,6 +59,10 @@ public class SignUpActivity extends AppCompatActivity {
     private UserSignUpDataVO userData;
     private FontTextView sign_up_hyperlink;
     private HGBPreferencesManager hgbPrefrenceManager;
+    private LinearLayout sign_up_layout_ll;
+    private View pin_code_verification_layout;
+    private FontTextView pin_code_verification_next;
+    private FontEditTextView pin_code_verification_pin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,9 +109,23 @@ public class SignUpActivity extends AppCompatActivity {
         sign_up_hyperlink.setText(ss);
         sign_up_hyperlink.setMovementMethod(LinkMovementMethod.getInstance());
 
+        pin_code_verification_layout = (View)findViewById(R.id.pin_code_verification_layout);
+        sign_up_layout_ll = (LinearLayout)findViewById(R.id.sign_up_layout_ll);
+        sign_up_layout_ll.setVisibility(View.VISIBLE);
+        pin_code_verification_layout.setVisibility(View.GONE);
 
+        pin_code_verification_next = (FontTextView)pin_code_verification_layout.findViewById(R.id.pin_code_verification_next);
+        pin_code_verification_pin = (FontEditTextView)pin_code_verification_layout.findViewById(R.id.pin_code_verification_pin);
 
-        sign_up_confirm_password.addTextChangedListener(new TextWatcher(){
+        pin_code_verification_next.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                activateUserWithKey();
+                System.out.println("Kate pin clicked");
+            }
+        });
+
+                sign_up_confirm_password.addTextChangedListener(new TextWatcher(){
             public void afterTextChanged(Editable s) {
                 String password = sign_up_password.getText().toString();
                 String confirm_password = sign_up_confirm_password.getText().toString();
@@ -137,25 +161,11 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Object data) {
                         hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER,false);
-                      //  bookingResponse = (BookingRequestVO)data;
-                        //BookingRequest bookingrequest = (BookingRequest)data;
 
-                        final AlertDialog.Builder alert = new AlertDialog.Builder(SignUpActivity.this);
-                        alert.setCancelable(false);
-                        alert.setMessage("A confirmation code was sent to your email. Please verify then login");
-                        alert.setTitle("Confirmation Email")
-                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent(getApplicationContext(), StartingMenuActivity.class);
-                                     //   intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        resetPassword();
+                        sign_up_layout_ll.setVisibility(View.GONE);
+                        pin_code_verification_layout.setVisibility(View.VISIBLE);
 
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                })
-                                .create().show();
 
                     }
 
@@ -206,10 +216,73 @@ public class SignUpActivity extends AppCompatActivity {
                         }, false);
             }
         });
+    }
 
 
+    private void activateUserWithKey(){
+
+        String userPinCode = pin_code_verification_pin.getText().toString();
+
+        ConnectionManager.getInstance(SignUpActivity.this).postUserActivation(userPinCode,new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                sign_up_layout_ll.setVisibility(View.VISIBLE);
+                pin_code_verification_layout.setVisibility(View.GONE);
+                UserLoginCredentials user = (UserLoginCredentials) data;
+                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
+                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
+
+                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER,false);
+                goToMainActivity();
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+
+            }
+        });
 
     }
+
+
+    private void goToMainActivity() {
+
+        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
+        boolean doesExist = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY, false);
+        if (doesExist) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(getApplicationContext(), TravelPrefrenceStartingActivity.class);
+            startActivity(intent);
+        }
+
+    }
+
+    private void resetPassword() {
+
+        LayoutInflater li = LayoutInflater.from(SignUpActivity.this);
+        final  View promptsView = li.inflate(R.layout.popup_confirm_email_sent, null);
+
+        HGBUtility.showAlertPopUp(SignUpActivity.this,  null, promptsView,
+                getResources().getString(R.string.popup_confirm_account_title),getResources().getString(R.string.ok_button), new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+
+                    }
+
+                    @Override
+                    public void itemCanceled() {
+
+                    }
+                });
+    }
+
+
 
     public class myClickableSpan extends ClickableSpan {
 

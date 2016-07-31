@@ -284,4 +284,9 @@
     <string name="use_my_home_address_as_billing_address">Use my home address as billing address</string>
     <string name="title">Title</string>
     <string name="select_title">Select Title</string>
+
+    <string name="popup_confirm_account_text">We\'ve sent you an email. Please follow\nthe instruction to confirm your\naccount before signing in.</string>
+    <string name="popup_confirm_account_title">Confirm Your Account to Continue</string>
+
+
 </resources>

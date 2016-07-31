@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/b_g_android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@drawable/b_g_android">
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -12,6 +11,15 @@
     android:orientation="vertical"
     android:background="@drawable/b_g_android" >
 
+
+    <include android:id="@+id/pin_code_verification_layout" layout="@layout/pin_code_verification"/>
+
+
+    <LinearLayout
+        android:id="@+id/sign_up_layout_ll"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_width="match_parent"
@@ -159,5 +167,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/DP20"/>
+
+    </LinearLayout>
+
 </LinearLayout>
+
 </ScrollView>

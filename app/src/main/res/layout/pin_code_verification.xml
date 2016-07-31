@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+
+    android:background="@drawable/background">
+
+<hellogbye.com.hellogbyeandroid.views.FontTextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="@color/white"
+    android:gravity="center"
+    android:textSize="@dimen/SP18"
+    android:layout_margin="@dimen/DP10"
+    android:text="Enter Pin"/>
+
+
+<hellogbye.com.hellogbyeandroid.views.FontEditTextView
+    android:id="@+id/pin_code_verification_pin"
+    android:layout_width="match_parent"
+    android:textColor="@color/white"
+    android:textSize="@dimen/SP18"
+    android:layout_margin="@dimen/DP10"
+    android:layout_height="wrap_content" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        style="@style/RedCustomButtonStyle"
+        android:layout_margin="@dimen/DP10"
+        android:id="@+id/pin_code_verification_next"
+        android:text="Next"/>
+
+
+</LinearLayout>

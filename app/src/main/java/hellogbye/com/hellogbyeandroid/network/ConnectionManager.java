@@ -116,6 +116,33 @@ public class ConnectionManager {
 
     }
 
+
+    public void postUserActivation(String userActivationKey, final ServerRequestListener listener) {
+
+        String url = getURL(Services.USER_ACTIVATION_PIN);
+        url = url+userActivationKey;
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.loginData(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, true);
+    }
+
     public void postUserCreateAccount(UserSignUpDataVO userData, final ServerRequestListener listener) {
 
         String url = getURL(Services.USER_PROFILE_REGISTER);
@@ -1827,7 +1854,8 @@ public class ConnectionManager {
                 BOOKING_PAY("booking/pay"),
                 USER_PROFILE_DEVICE_AUTHENTICATION("Session/Anonymous/"),
                 BOOKING_CONFIRMATION("Booking/flight/confirmation/pdf?"),
-                SUBMIT_FEEDBACK("Feedback"),;
+                SUBMIT_FEEDBACK("Feedback"),
+                USER_ACTIVATION_PIN("UserProfile/Activate?activationKey=");
 
                 String url;
                 Services(String url){

@@ -351,6 +351,13 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 getAccountsProfiles();
                 selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null,true);
 
+
+                if(!mCurrentUser.getIsTravelprofile()){
+                    //TODO show profile dialog
+
+                }
+
+
             }
 
             @Override
