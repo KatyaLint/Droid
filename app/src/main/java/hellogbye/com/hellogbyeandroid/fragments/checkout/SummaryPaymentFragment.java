@@ -118,20 +118,13 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
         mReviewImageView = (ImageView) view.findViewById(R.id.steps_checkout_review_image);
         mHazerdiusText = (FontTextView) view.findViewById(R.id.hazerdus_text);
         mCheckBox = (CheckBox)  view.findViewById(R.id.hazerdus_checkbox);
+        mRecyclerViewCC = (RecyclerView) view.findViewById(R.id.summary_traveler_recyclerView_cc);
 
 
-        mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                checkMandatoryFields();
-            }
-        });
 
 
-        Bundle args = getArguments();
-        if (args != null) {
-                mCheckBox.setChecked( args.getBoolean("i_accept"));
-        }
+
+
 
         SpannableString ss = new SpannableString(getString(R.string.i_have_read_and_understood_the_hazardous_nmaterial_notice));
         ClickableSpan clickableSpan = new ClickableSpan() {
@@ -296,6 +289,13 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
         loadBookingItemList();
         loadTravlerList(view);
         loadCCList(view);
+        mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                checkMandatoryFields();
+            }
+        });
+
 
 
     }
@@ -320,7 +320,7 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
 
     private void loadCCList(View v) {
 
-        mRecyclerViewCC = (RecyclerView) v.findViewById(R.id.summary_traveler_recyclerView_cc);
+
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -341,6 +341,10 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
                 checkMandatoryFields();
             }
         });
+        Bundle args = getArguments();
+        if (args != null) {
+            mCheckBox.setChecked( args.getBoolean("i_accept"));
+        }
     }
 
     private void loadBookingItemList() {
