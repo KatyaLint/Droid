@@ -48,6 +48,12 @@
                 app:fontName="dinnextltpro_regular.otf" />
 
             <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+                android:id="@+id/companion_personal_settings_middle_name"
+                style="@style/PersonalInformationEditText"
+                android:hint="Middle Name"
+                app:fontName="dinnextltpro_regular.otf" />
+
+            <hellogbye.com.hellogbyeandroid.views.FontEditTextView
                 android:id="@+id/companion_personal_settings_last"
                 style="@style/PersonalInformationEditText"
                 android:hint="Last Name"

@@ -72,6 +72,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
     private BookingRequestVO bookingResponse;
     private RecyclerView account_settings_email_list;
     private Bundle bundle;
+    private FontEditTextView companion_personal_settings_middle_name;
 
     public AccountPersonalInfoSettingsFragment() {
         // Empty constructor required for fragment subclasses
@@ -119,6 +120,10 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
         companion_personal_settings_name = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_name);
         companion_personal_settings_name.setText(currentUser.getFirstname());
+
+        companion_personal_settings_middle_name = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_middle_name);
+
+
 
         companion_personal_settings_last = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_last);
         companion_personal_settings_last.setText(currentUser.getLastname());
