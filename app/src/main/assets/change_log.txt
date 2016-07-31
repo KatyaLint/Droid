@@ -261,6 +261,8 @@ Code changing:
     HEL-1205 - travel profiles > can't choose a profile
     HEL-1211 - change flight
     HEL-963 - empty preferences text
+    HEL-1227 - change text headline from "Preferred Aircraft" to "Preferred Airline" and all relevant text
+
 
    Code changing:
    --------------

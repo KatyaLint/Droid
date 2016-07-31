@@ -92,11 +92,11 @@
     <string name="preferences_prefered_hotel_chain">Preferred Hotel Chain</string>
     <string name="preferences_prefered_hotel_favorite">Do you have any favorite Hotels? Add\nthem here to make sure HelloGbye\nalwayes finds you the right Hotel!</string>
 
-    <string name="preferences_prefered_aircraft">Preferred Aircraft</string>
+    <string name="preferences_prefered_aircraft">Preferred Airline</string>
     <string name="preferences_prefered_aircraft_favorite">Tell us where you like to stay\nwhen you travel</string>
 
-    <string name="preferences_prefered_flight_carrier">Preferred Aircraft</string>
-    <string name="preferences_prefered_flight_carrier_favorite">Do you have any favorite Aircraft? Add\nthem here to make sure HelloGbye\nalwayes finds you the right Aircraft!</string>
+    <string name="preferences_prefered_flight_carrier">Preferred Airline</string>
+    <string name="preferences_prefered_flight_carrier_favorite">Do you have any favorite Airline? Add\nthem here to make sure HelloGbye\nalwayes finds you the right Airline!</string>
 
     <string name="preferences_hint_add_name">Add new preference name</string>
 

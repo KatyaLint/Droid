@@ -63,6 +63,9 @@ public class UserProfileVO {
     @SerializedName("gender")
     private String gender;
 
+    @SerializedName("istravelprofile")
+    private boolean isTravelprofile;
+
     private HashSet<String> bookingItems;
 
 
@@ -251,5 +254,13 @@ public class UserProfileVO {
 
     public void setEmailaddress(String emailaddress) {
         this.emailaddress = emailaddress;
+    }
+
+    public boolean getIsTravelprofile() {
+        return isTravelprofile;
+    }
+
+    public void setIsTravelprofile(boolean isTravelprofile) {
+        this.isTravelprofile = isTravelprofile;
     }
 }
