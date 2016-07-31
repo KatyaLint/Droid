@@ -198,6 +198,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         lv.setAdapter(mAdapter);
         lv.setGroupIndicator(null);
         initCheckoutSteps();
+        getFlowInterface().getCreditCardsSelected().clear();
+
     }
 
     private void sendPaymentSolution() {
