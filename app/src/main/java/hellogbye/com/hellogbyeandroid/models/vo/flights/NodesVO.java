@@ -585,4 +585,12 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     public void setCalenderDay(String calenderDay) {
         this.calenderDay = calenderDay;
     }
+
+    public String getmFareClass() {
+        return mFareClass;
+    }
+
+    public void setmFareClass(String mFareClass) {
+        this.mFareClass = mFareClass;
+    }
 }

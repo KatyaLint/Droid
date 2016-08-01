@@ -1196,7 +1196,10 @@ public class HGBUtility {
     }
 
 
-
+    public static int roundUp(double number){
+        int RoundedUpCost = (int) Math.ceil(number);
+        return RoundedUpCost;
+    }
 
 }
 

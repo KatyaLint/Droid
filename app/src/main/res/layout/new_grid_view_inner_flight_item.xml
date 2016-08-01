@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:text="Toronto to"
             android:textColor="@color/dark_teal"
-            app:fontName="dinnextltpro_medium.otf" />
+            app:fontName="dinnextltpro_regular.otf" />
         
         <ImageView
             android:id="@+id/flight_image"
@@ -56,6 +56,15 @@
             android:textSize="@dimen/SP10"
             android:text="@string/itinerary_inner_flight_item"/>-->
 
+
+
+        <LinearLayout
+            android:id="@+id/flight_direction_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/grid_traveler_flight_price"
+            android:orientation="horizontal">
+
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_below="@+id/grid_traveler_flight_price"
             android:id="@+id/grid_traveler_flight_stops"
@@ -66,10 +75,29 @@
             android:layout_marginTop="@dimen/DP4"
             android:text="YYZ-AMS-CPT"
             android:textColor="@color/dark_teal"
-            app:fontName="dinnextltpro_medium.otf" />
+            app:fontName="dinnextltpro_regular.otf" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/arrow_one_direction" />
+
+        </LinearLayout>
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:layout_below="@+id/grid_traveler_flight_stops"
+            android:layout_below="@+id/flight_direction_ll"
+            android:id="@+id/grid_flight_airlines_class"
+            style="@style/GridTextStyle"
+            android:textSize="@dimen/SP12"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="American Airline, Business Class"
+            android:textColor="@color/COLOR_555555"
+            app:fontName="dinnextltpro_light.otf" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_below="@+id/grid_flight_airlines_class"
             android:id="@+id/grid_flight_operator_departure"
             style="@style/GridTextStyle"
             android:textSize="@dimen/SP12"

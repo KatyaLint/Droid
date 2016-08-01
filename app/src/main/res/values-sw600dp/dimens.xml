@@ -38,6 +38,7 @@
     <dimen name="DP140">210dp</dimen>
     <dimen name="DP144">216dp</dimen>
     <dimen name="DP150">225dp</dimen>
+    <dimen name="DP156">234dp</dimen>
     <dimen name="DP160">240dp</dimen>
     <dimen name="DP180">270dp</dimen>
     <dimen name="DP200">300dp</dimen>

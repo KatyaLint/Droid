@@ -51,6 +51,7 @@
                 android:id="@+id/companion_personal_settings_middle_name"
                 style="@style/PersonalInformationEditText"
                 android:hint="Middle Name"
+                android:visibility="gone"
                 app:fontName="dinnextltpro_regular.otf" />
 
             <hellogbye.com.hellogbyeandroid.views.FontEditTextView

@@ -60,6 +60,11 @@ public class ItineraryFragment extends HGBAbstractFragment {
     private FontButtonView grid_make_payment;
     private int cellHieght;
     private FontTextView grid_total_price;
+    private ImageView mStart5ImageView;
+    private ImageView mStart4ImageView;
+    private ImageView mStart3ImageView;
+    private ImageView mStart2ImageView;
+    private ImageView mStart1ImageView;
 
     public ItineraryFragment() {
         // Empty constructor required for fragment subclasses
@@ -114,7 +119,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
         FontTextView textView = new FontTextView(activity);
 
         textView.setTextAppearance(activity, R.style.GridViewPassangersTextStyle);
-        textView.setText(passenger.getmName() +" - " + "$" + passenger.getmTotalFlightPrice() );
+        textView.setText(passenger.getmName() +" - " + "$" + HGBUtility.roundUp(passenger.getmTotalPrice() ));
         textView.setGravity(Gravity.CENTER);
      //   textView.setTextSize(R.dimen.SP16);
     //    LayoutParams params = new LayoutParams((int) getResources().getDimension(R.dimen.DP150),LayoutParams.WRAP_CONTENT); //width 150
@@ -340,7 +345,6 @@ public class ItineraryFragment extends HGBAbstractFragment {
                     TextView grid_traveler_flight_price = (TextView)view.findViewById(R.id.grid_traveler_flight_price);
                     String guidSelectedItem = grid_traveler_flight_price.getTag().toString();
 
-
                     ((AlternativeFlightFragment) fragment).selectedItemGuidNumber(guidSelectedItem);
                     ((AlternativeFlightFragment) fragment).selectedUserGuidNumber(guidSelectedUser);
                     getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber(),null);
@@ -445,7 +449,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
         View child = activity.getLayoutInflater().inflate(R.layout.new_grid_view_inner_flight_item, null);
 
         TextView grid_flight_destination_from = (TextView)child.findViewById(R.id.grid_flight_destination_from);
-        grid_flight_destination_from.setText(node.getmOriginCityName() + " to " + node.getmDestinationCityName());
+        grid_flight_destination_from.setText(node.getmOriginCityName() + " - " + node.getmDestinationCityName());
 
         ImageView flight_image = (ImageView)child.findViewById(R.id.flight_image);
         if(counter == 0){
@@ -458,7 +462,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
 
         TextView grid_traveler_flight_price = (TextView)child.findViewById(R.id.grid_traveler_flight_price);
-        grid_traveler_flight_price.setText("$" + node.getCost());
+        grid_traveler_flight_price.setText("$" + HGBUtility.roundUp(node.getCost()));
 
         //guid
         grid_traveler_flight_price.setTag(node.getmGuid());
@@ -468,6 +472,12 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
         TextView grid_flight_operator_departure = (TextView)child.findViewById(R.id.grid_flight_operator_departure);
         grid_flight_operator_departure.setText("Depart: " + HGBUtilityDate.parseDateToHHmm(node.getmDeparture()) + " Arrival: "+HGBUtilityDate.parseDateToHHmm(node.getmArrival()));
+
+
+        TextView grid_flight_airlines_class = (TextView)child.findViewById(R.id.grid_flight_airlines_class);
+        grid_flight_airlines_class.setText(node.getmOperatorName() + ", " + node.getmFareClass());
+
+
 
 /*        TextView grid_flight_operator_arrival = (TextView)child.findViewById(R.id.grid_flight_operator_arrival);
         grid_flight_operator_arrival.setText("Arrival: "+HGBUtility.parseDateToHHmm(node.getmArrival()));*/
@@ -545,15 +555,28 @@ public class ItineraryFragment extends HGBAbstractFragment {
         long diff = HGBUtilityDate.dayDifference(node.getmCheckIn(), node.getmCheckOut());//HGBUtility.getDateDiff(node.getmCheckIn(), node.getmCheckOut());
         double iCharge = node.getmMinimumAmount()/(diff+1);
         String result = String.format("%.2f", iCharge);
-        grid_hotel_price.setText("$" + result);
+        grid_hotel_price.setText("$" + HGBUtility.roundUp(iCharge));
 
         //type
         grid_hotel_price.setTag(node.getmType());
 
-        LayoutParams outerLayoutParams = new LayoutParams((int)iScreenSize,cellHieght);
+        View starView = (View)child.findViewById(R.id.grid_star_layout);
+
+        mStart1ImageView = (ImageView) starView.findViewById(R.id.star1);
+        mStart2ImageView = (ImageView) starView.findViewById(R.id.star2);
+        mStart3ImageView = (ImageView) starView.findViewById(R.id.star3);
+        mStart4ImageView = (ImageView) starView.findViewById(R.id.star4);
+        mStart5ImageView = (ImageView) starView.findViewById(R.id.star5);
+
+        setStarRating(starView, node.getmStarRating());
+
+
+        TextView grid_hotel_room_explanation = (TextView) child.findViewById(R.id.grid_hotel_room_explanation);
+        grid_hotel_room_explanation.setText(node.getRoomsVOs().get(0).getmRoomType());
+
+        LayoutParams outerLayoutParams = new LayoutParams((int)iScreenSize, cellHieght);
         RelativeLayout innerWhiteLayout = (RelativeLayout)child.findViewById(R.id.innerWhiteHotelLayout);
         innerWhiteLayout.setLayoutParams(outerLayoutParams);
-
 
 
         LinearLayout outer = new LinearLayout(activity);
@@ -565,6 +588,59 @@ public class ItineraryFragment extends HGBAbstractFragment {
         return outer;
 
     }
+
+
+
+    private void setStarRating(View holder, float star) {
+
+        if ("0.5".equals(String.valueOf(star))) {
+            starHolder(holder, R.drawable.half_star, R.drawable.empty_star,
+                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
+
+        } else if ("1.0".equals(String.valueOf(star))) {
+            starHolder(holder, R.drawable.full_star, R.drawable.empty_star,
+                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
+
+        } else if ("1.5".equals(String.valueOf(star))) {
+            starHolder(holder, R.drawable.full_star, R.drawable.half_star,
+                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
+
+        } else if ("2.0".equals(String.valueOf(star))) {
+            starHolder(holder, R.drawable.full_star, R.drawable.full_star,
+                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
+        } else if ("2.5".equals(String.valueOf(star))) {
+            starHolder(holder, R.drawable.full_star, R.drawable.full_star,
+                    R.drawable.half_star, R.drawable.empty_star, R.drawable.empty_star);
+        } else if ("3.0".equals(String.valueOf(star))) {
+            starHolder(holder, R.drawable.full_star, R.drawable.full_star,
+                    R.drawable.full_star, R.drawable.empty_star, R.drawable.empty_star);
+        } else if ("3.5".equals(String.valueOf(star))) {
+            starHolder(holder, R.drawable.full_star, R.drawable.full_star,
+                    R.drawable.full_star, R.drawable.half_star, R.drawable.empty_star);
+
+        } else if ("4.0".equals(String.valueOf(star))) {
+            starHolder(holder, R.drawable.full_star, R.drawable.full_star,
+                    R.drawable.full_star, R.drawable.full_star, R.drawable.empty_star);
+
+        } else if ("4.5".equals(String.valueOf(star))) {
+            starHolder(holder, R.drawable.full_star, R.drawable.full_star,
+                    R.drawable.full_star, R.drawable.full_star, R.drawable.half_star);
+
+        } else if ("5.0".equals(String.valueOf(star))) {
+            starHolder(holder, R.drawable.full_star, R.drawable.full_star,
+                    R.drawable.full_star, R.drawable.full_star, R.drawable.full_star);
+
+        }
+    }
+
+    private void starHolder(View view, int firstStar, int secondStar, int thirdStar, int fourStar, int fiveStar){
+        mStart1ImageView.setBackgroundResource(firstStar);
+        mStart2ImageView.setBackgroundResource(secondStar);
+        mStart3ImageView.setBackgroundResource(thirdStar);
+        mStart4ImageView.setBackgroundResource(fourStar);
+        mStart5ImageView.setBackgroundResource(fiveStar);
+    }
+
 
     /**
      * Create dates layout, the linear layout of dates
@@ -645,7 +721,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
             itineraryLayout.addView(mainView);
             cnc_empty_view.setVisibility(View.GONE);
             grid_make_payment.setEnabled(true);
-            grid_total_price.setText("$" + userOrder.getmTotalPrice() + "USD");
+            grid_total_price.setText("$" + HGBUtility.roundUp(Double.parseDouble(userOrder.getmTotalPrice())) + "USD");
         }else{  // server returning wrong data
             itineraryLayout.setVisibility(View.GONE);
             cnc_empty_view.setVisibility(View.VISIBLE);

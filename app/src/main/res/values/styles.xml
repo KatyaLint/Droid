@@ -31,9 +31,9 @@
 
 
     <style name="GridTextStyle">
-        <item name="android:textSize">@dimen/SP16</item>
+        <item name="android:textSize">@dimen/SP14</item>
         <!--<item name="android:paddingLeft">@dimen/DP4</item>-->
-        <item name="android:layout_marginBottom">@dimen/DP6</item>
+        <item name="android:layout_marginBottom">@dimen/DP4</item>
         <item name="android:maxLines">1</item>
     </style>
 

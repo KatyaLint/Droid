@@ -289,4 +289,6 @@
     <string name="popup_confirm_account_title">Confirm Your Account to Continue</string>
 
     <string name = "profile_choose_between">Choose between</string>
+
+    <string name="grid_taxes">(Taxes &amp; Fees Extra)</string>
 </resources>
