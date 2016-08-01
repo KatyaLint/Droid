@@ -1,9 +1,15 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/feedback_rl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="@dimen/DP20">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/account_submit_big_title"
@@ -35,7 +41,7 @@
         android:layout_height="@dimen/DP160"
         android:layout_width="match_parent"
         >
-    
+
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/account_submit_edit_text"
         android:layout_width="match_parent"
@@ -46,15 +52,19 @@
         android:background="@android:color/transparent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+
+
         <!--android:background="@android:color/transparent"-->
 </RelativeLayout>
+
 
     <RelativeLayout
 
         android:id="@+id/m_table_menu"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true">
+        android:layout_below="@+id/edit_text_layout">
         <hellogbye.com.hellogbyeandroid.views.FontButtonView
             android:id="@+id/account_submit_feedback"
             style="@style/CustomButtonTextStyle"
@@ -63,8 +73,6 @@
 
             android:text="@string/account_submit_feedback_submit" />
     </RelativeLayout>
-
-
 
 
    <!-- <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -92,5 +100,5 @@
         android:textColor="@color/COLOR_063345"
         app:fontName="dinnextltpro_mediumcond.ttf"
         android:text="@string/cancel" />-->
-
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>
