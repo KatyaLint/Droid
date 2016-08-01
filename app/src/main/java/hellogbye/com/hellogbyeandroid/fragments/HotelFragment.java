@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -110,6 +111,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private PassengersVO passengersVO;
     private NodesVO currentSelectedNode;
     private ImageView mConfirmBadge;
+    private ProgressDialog progressDialog;
 
     public final  float PANEL_HIGHT = 0.4f;
     private Activity activity;
@@ -142,6 +144,8 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         initRootView(rootView);
 
         initCurrentHotel();
+        progressDialog = new ProgressDialog(getActivity());
+        startProgressDialog();
 
         mMyHotelLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -372,11 +376,13 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
                                 //sendServerNewHotelOrder(node);
                             }
                         });
+                        dissmissProgressDialog();
                     }
 
                     @Override
                     public void onError(Object data) {
                         ErrorMessage(data);
+                        dissmissProgressDialog();
                     }
                 });
     }
@@ -727,6 +733,16 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         mRecyclerView.setAnimation(animDown);
         animDown.start();
 
+    }
+
+    private void startProgressDialog(){
+        progressDialog = ProgressDialog.show(getActivity(), "", "loading");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+    }
+
+    private void dissmissProgressDialog(){
+        progressDialog.dismiss();
     }
 
 
