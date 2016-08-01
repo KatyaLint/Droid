@@ -144,6 +144,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         initRootView(rootView);
 
         initCurrentHotel();
+
         progressDialog = new ProgressDialog(getActivity());
         startProgressDialog();
 
@@ -376,12 +377,14 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
                                 //sendServerNewHotelOrder(node);
                             }
                         });
+                        mSlidingPanels.setVisibility(View.VISIBLE);
                         dissmissProgressDialog();
                     }
 
                     @Override
                     public void onError(Object data) {
                         ErrorMessage(data);
+                        mSlidingPanels.setVisibility(View.VISIBLE);
                         dissmissProgressDialog();
                     }
                 });
@@ -744,6 +747,5 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private void dissmissProgressDialog(){
         progressDialog.dismiss();
     }
-
 
 }
