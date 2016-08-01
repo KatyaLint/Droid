@@ -39,8 +39,7 @@
         android:id="@+id/edit_text_layout"
         android:layout_margin="@dimen/DP30"
         android:layout_height="@dimen/DP160"
-        android:layout_width="match_parent"
-        >
+        android:layout_width="match_parent">
 
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/account_submit_edit_text"
@@ -60,6 +59,8 @@
 
 
     <RelativeLayout
+    android:layout_alignLeft="@+id/edit_text_layout"
+        android:layout_alignRight="@+id/edit_text_layout"
 
         android:id="@+id/m_table_menu"
         android:layout_height="wrap_content"
@@ -68,9 +69,9 @@
         <hellogbye.com.hellogbyeandroid.views.FontButtonView
             android:id="@+id/account_submit_feedback"
             style="@style/CustomButtonTextStyle"
+
             app:fontName="dinnextltpro_mediumcond.ttf"
             android:background="@drawable/selector_red_button"
-
             android:text="@string/account_submit_feedback_submit" />
     </RelativeLayout>
 
