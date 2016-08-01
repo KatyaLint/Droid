@@ -262,6 +262,9 @@ Code changing:
     HEL-1211 - change flight
     HEL-963 - empty preferences text
     HEL-1227 - change text headline from "Preferred Aircraft" to "Preferred Airline" and all relevant text
+    HEL-965 keyboard goes over "Submit Feedback"
+    HEL-1226 - paying with multiple credit cards version 1.5.6
+    HEL-1215 - checkout - hazardous material notice - crash
 
 
    Code changing:

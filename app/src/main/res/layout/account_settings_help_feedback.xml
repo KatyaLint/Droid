@@ -39,9 +39,10 @@
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/account_submit_edit_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:scrollbars="vertical"
         android:inputType="textMultiLine"
+        android:gravity="top|left"
         android:background="@android:color/transparent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />

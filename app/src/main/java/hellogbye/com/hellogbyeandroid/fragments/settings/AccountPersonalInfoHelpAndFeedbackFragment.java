@@ -52,7 +52,7 @@ public class AccountPersonalInfoHelpAndFeedbackFragment extends HGBAbstractFragm
     @Override
     public void onViewCreated(View rootView, Bundle savedInstanceState)  {
 
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+       // getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
       //  View rootView = inflater.inflate(R.layout.account_settings_help_feedback, container, false);
 
         LayoutInflater li = LayoutInflater.from(getActivity());
@@ -92,8 +92,15 @@ public class AccountPersonalInfoHelpAndFeedbackFragment extends HGBAbstractFragm
         });
 
 
+
     }
 
+    @Override
+    public void onStop() {
+    //    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        super.onStop();
+
+    }
 
     private void sendFeedback(){
 
