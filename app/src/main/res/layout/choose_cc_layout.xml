@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="@dimen/DP10"
-            android:text="ITINERARY AND PAYMENT"
+            android:text="@string/itinerary_and_payment"
             android:textColor="@color/COLOR_555555"
             android:textSize="@dimen/SP10"
             app:fontName="dinnextltpro_regular.otf" />

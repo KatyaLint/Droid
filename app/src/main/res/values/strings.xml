@@ -291,4 +291,5 @@
     <string name = "profile_choose_between">Choose between</string>
 
     <string name="grid_taxes">(Taxes &amp; Fees Extra)</string>
+    <string name="itinerary_and_payment">ITINERARY AND PAYMENT</string>
 </resources>
