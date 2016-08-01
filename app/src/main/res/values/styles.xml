@@ -147,7 +147,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:maxWidth">@dimen/DP300</item>
-        <item name="android:minWidth">@dimen/DP80</item>
+        <item name="android:minWidth">@dimen/DP50</item>
         <item name="android:textColor">@color/marine</item>
         <item name="android:textSize">@dimen/SP18</item>
         <item name="android:padding">@dimen/DP10</item>
