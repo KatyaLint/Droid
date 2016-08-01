@@ -10,9 +10,9 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
-
+import android.widget.ScrollView;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
@@ -31,6 +31,7 @@ public class AccountPersonalInfoHelpAndFeedbackFragment extends HGBAbstractFragm
 
     private View promptsView;
     private FontEditTextView account_submit_edit_text;
+    private ScrollView mFeedbackRelativeLayout;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new AccountPersonalInfoHelpAndFeedbackFragment();
@@ -45,15 +46,13 @@ public class AccountPersonalInfoHelpAndFeedbackFragment extends HGBAbstractFragm
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.account_settings_help_feedback, container, false);
+        mFeedbackRelativeLayout = (ScrollView)rootView.findViewById(R.id.feedback_rl);
        // View rootView = inflater.inflate(R.layout.account_settings_help_feedback_test, container, false);
         return rootView;
     }
 
     @Override
     public void onViewCreated(View rootView, Bundle savedInstanceState)  {
-
-       // getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-      //  View rootView = inflater.inflate(R.layout.account_settings_help_feedback, container, false);
 
         LayoutInflater li = LayoutInflater.from(getActivity());
         promptsView = li.inflate(R.layout.popup_alert_layout, null);
@@ -91,16 +90,18 @@ public class AccountPersonalInfoHelpAndFeedbackFragment extends HGBAbstractFragm
             }
         });
 
-
+        mFeedbackRelativeLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                int heightDiff = mFeedbackRelativeLayout.getRootView().getHeight() - mFeedbackRelativeLayout.getHeight();
+                if (heightDiff > HGBUtility.dpToPx(getActivity().getApplicationContext(), 200)) { // if more than 200 dp, it's probably a keyboard...
+                    mFeedbackRelativeLayout.fullScroll(ScrollView.FOCUS_DOWN);
+                }
+            }
+        });
 
     }
 
-    @Override
-    public void onStop() {
-    //    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        super.onStop();
-
-    }
 
     private void sendFeedback(){
 

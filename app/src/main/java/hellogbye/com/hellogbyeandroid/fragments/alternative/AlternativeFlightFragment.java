@@ -19,12 +19,12 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -239,7 +239,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         String allFlights = "";
 
         ArrayList<LegsVO> legsFlights = currentNode.getLegs();// legs; //TODO change
-        LatLngBounds.Builder bc = new LatLngBounds.Builder();
+       // LatLngBounds.Builder bc = new LatLngBounds.Builder();
         for (int i = 0; i < legsFlights.size(); i++) {
             LegsVO leg = legsFlights.get(i);
             if (leg.getmType().equals("Leg")) {
@@ -264,13 +264,15 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
             }
         }
-        bc.include(new LatLng(currentNode.getOriginairportcoordinates().getLatitude(), currentNode.getOriginairportcoordinates().getLongitude()));
-        bc.include(new LatLng(currentNode.getDestinationairportcoordinates().getLatitude(), currentNode.getDestinationairportcoordinates().getLongitude()));
+        //bc.include(new LatLng(currentNode.getOriginairportcoordinates().getLatitude(), currentNode.getOriginairportcoordinates().getLongitude()));
+      //  bc.include(new LatLng(currentNode.getDestinationairportcoordinates().getLatitude(), currentNode.getDestinationairportcoordinates().getLongitude()));
         mMap.addMarker(new MarkerOptions().
                 position(new LatLng(currentNode.getOriginairportcoordinates().getLatitude(), currentNode.getOriginairportcoordinates().getLongitude())));
         mMap.addMarker(new MarkerOptions().
                 position(new LatLng(currentNode.getDestinationairportcoordinates().getLatitude(), currentNode.getDestinationairportcoordinates().getLongitude())));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bc.build(), 50));
+
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(currentNode.getDestinationairportcoordinates().getLatitude(), currentNode.getDestinationairportcoordinates().getLongitude()),5);
+        mMap.moveCamera(cameraUpdate);
 
 
 
