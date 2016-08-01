@@ -267,6 +267,7 @@ Code changing:
     HEL-1215 - checkout - hazardous material notice - crash
     HEL-1209 - changes on grid
     HEL-1207 - Submit Feedback button not according to design
+    HEL-1210 - Flight Details screen
 
    Code changing:
    --------------
