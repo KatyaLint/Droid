@@ -21,6 +21,8 @@
 </HorizontalScrollView>
 
 
+
+
     <LinearLayout
         android:id="@+id/grid_checkout_ll"
         android:layout_alignParentBottom="true"
@@ -83,6 +85,10 @@
 
 
     </LinearLayout>
+
+    <View
+        android:layout_above="@+id/grid_checkout_ll"
+        style="@style/Divider"/>
 
 
 </RelativeLayout>
