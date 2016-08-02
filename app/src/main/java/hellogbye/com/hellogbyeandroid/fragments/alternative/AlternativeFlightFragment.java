@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -63,6 +64,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
     private ProgressDialog progressDialog;
     private RelativeLayout pull_down;
     private FlightAdapter mAdapter;
+
 
     public AlternativeFlightFragment() {
         // Empty constructor required for fragment subclasses
@@ -126,9 +128,11 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         /*View rootView = inflater.inflate(R.layout.flight_layout_details, container, false);*/
         View rootView = inflater.inflate(R.layout.flight_layout_details, container, false);
 
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.flightRecyclerView);
         progressDialog = new ProgressDialog(getActivity());
         startProgressDialog();
+
+
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.flightRecyclerView);
 
         mSlidingPanels = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout_flight);
         pull_down = (RelativeLayout) rootView.findViewById(R.id.pull_down);
@@ -164,6 +168,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         });
 
         return rootView;
+
     }
 
     @Override
@@ -343,17 +348,15 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
         // TODO empty alternative flight after select clicked
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                dissmissProgressDialog();
-            }
-        }, 1000);
+
+        mSlidingPanels.setVisibility(View.VISIBLE);
+
+        dissmissProgressDialog();
 
         if(isMyFlight){
             getAlternativeFlights(currentNode);
         }
+
 
 
     }
@@ -407,8 +410,10 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
     private void startProgressDialog() {
         progressDialog = ProgressDialog.show(getActivity(), "", "loading");
         progressDialog.setCancelable(false);
+        progressDialog.setIndeterminate(true);
         progressDialog.setCanceledOnTouchOutside(false);
     }
+
     private void dissmissProgressDialog(){
         progressDialog.dismiss();
     }

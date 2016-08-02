@@ -57,7 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/electronic_ticket"
-                        android:textColor="@color/electric_tix_blue"
+                        android:textColor="@color/COLOR_0f3d4b"
                         android:textSize="@dimen/SP13"
                         app:fontName="dinnextltpro_bold.otf" />
 

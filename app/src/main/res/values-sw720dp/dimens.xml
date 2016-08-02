@@ -48,6 +48,8 @@
 
     <dimen name="DP_64">-64dp</dimen>
 
+    <dimen name="SP4">8sp</dimen>
+    <dimen name="SP6">12sp</dimen>
     <dimen name="SP10">20sp</dimen>
     <dimen name="SP12">24sp</dimen>
     <dimen name="SP13">26sp</dimen>

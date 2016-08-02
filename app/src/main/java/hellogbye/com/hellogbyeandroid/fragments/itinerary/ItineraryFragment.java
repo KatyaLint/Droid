@@ -36,10 +36,12 @@ import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -50,6 +52,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ItineraryFragment extends HGBAbstractFragment {
 
@@ -65,6 +68,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
     private ImageView mStart3ImageView;
     private ImageView mStart2ImageView;
     private ImageView mStart1ImageView;
+    private FontTextView continue_to_checkout_flight_baggage;
 
     public ItineraryFragment() {
         // Empty constructor required for fragment subclasses
@@ -752,6 +756,14 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
         View rootView = inflater.inflate(R.layout.new_grid_main_table, container, false);
         grid_total_price = (FontTextView)rootView.findViewById(R.id.grid_total_price);
+        continue_to_checkout_flight_baggage = (FontTextView)rootView.findViewById(R.id.continue_to_checkout_flight_baggage);
+        continue_to_checkout_flight_baggage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                priceInformationPopup();
+            }
+        });
+
         grid_make_payment = (FontButtonView)rootView.findViewById(R.id.grid_make_payment);
         grid_make_payment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -769,6 +781,14 @@ public class ItineraryFragment extends HGBAbstractFragment {
         setFavorityIcon();
         setSolutionNameForItirnarary();
         return rootView;
+    }
+
+
+    private void priceInformationPopup(){
+        LayoutInflater li = LayoutInflater.from(getContext());
+        final  View popupView = li.inflate(R.layout.popup_flight_baggage_info, null);
+        HGBUtility.showAlertPopUpOneButton(getActivity(),  null, popupView,
+                null, null);
     }
 
     private void setSolutionNameForItirnarary() {
