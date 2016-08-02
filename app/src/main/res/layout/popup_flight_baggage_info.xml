@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_root"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:paddingLeft="@dimen/DP20"
+    android:paddingRight="@dimen/DP20"
+    android:paddingBottom="@dimen/DP20"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:paddingTop="@dimen/DP14">
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/COLOR_063345"
+        android:text="@string/popup_flight_baggage_info_title"
+        android:textSize="@dimen/SP24"
+        android:gravity="center"
+        app:fontName="dinnextltpro_medium.otf"
+        android:paddingBottom="@dimen/DP20"/>
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/companion_editTextDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/SP16"
+        android:gravity="center"
+        app:fontName="dinnextltpro_regular.otf"
+        android:text="@string/popup_flight_baggage_info_text"
+        android:textColor="@color/black"/>
+
+</LinearLayout>

@@ -219,6 +219,7 @@
     <string name="sign_up_done">Done!</string>
 
     <string name="continue_to_checkout">Checkout</string>
+    <string name="continue_to_checkout_flight_baggage">Flight Baggage &amp; Hotel info</string>
     <string name="continue_to_checkout_price">PRICE :</string>
     <string name="edit_trip_name">Edit Trip Name</string>
 
@@ -292,4 +293,10 @@
 
     <string name="grid_taxes">(Taxes &amp; Fees Extra)</string>
     <string name="itinerary_and_payment">ITINERARY AND PAYMENT</string>
+
+    <string name="popup_flight_baggage_info_title">Flight Baggage &amp; Hotel Info</string>
+    <string name="popup_flight_baggage_info_text">All flights shown are in USD, per\npassenger, and include all taxes, fees and\ncharges.\n\n
+                                                    Additional baggage fees may apply.\n\n
+                                        Hotel prices do not include taxes, fees\nand charges.</string>
+
 </resources>

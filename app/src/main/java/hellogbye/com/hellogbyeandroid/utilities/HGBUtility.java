@@ -836,8 +836,10 @@ public class HGBUtility {
                                               alertCB){
         final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
         alert.setCancelable(false);
-        alert.setTitle(popupTitle)
-                .setView(popupView)
+        if(popupTitle != null) {
+            alert.setTitle(popupTitle);
+        }
+        alert.setView(popupView)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         String newName = "";

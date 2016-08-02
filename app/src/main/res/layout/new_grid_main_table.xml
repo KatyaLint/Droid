@@ -31,6 +31,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+
             android:layout_weight="2"
             android:layout_width="@dimen/DP0"
             android:layout_height="wrap_content"
@@ -53,7 +54,18 @@
                 app:fontName="dinnextltpro_boldcondensed.otf"
                 android:text="@string/continue_to_checkout_price"/>
 
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+                android:id="@+id/continue_to_checkout_flight_baggage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/SP12"
+                android:textColor="@color/COLOR_005077"
+                app:fontName="dinnextltpro_regular.otf"
+                android:text="@string/continue_to_checkout_flight_baggage"/>
+
         </LinearLayout>
+
 
         <hellogbye.com.hellogbyeandroid.views.FontButtonView
             android:layout_weight="1"
@@ -71,5 +83,6 @@
 
 
     </LinearLayout>
+
 
 </RelativeLayout>
