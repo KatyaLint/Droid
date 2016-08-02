@@ -83,7 +83,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/grid_star_layout"
-            android:layout_below="@+id/grid_hotel_price_ll" layout="@layout/star_layout" />
+            android:layout_below="@+id/grid_hotel_price_ll"
+            layout="@layout/star_layout" />
 
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
