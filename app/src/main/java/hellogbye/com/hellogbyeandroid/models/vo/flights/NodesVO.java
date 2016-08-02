@@ -94,6 +94,9 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     @SerializedName("normalizedduration")
     private double mNormalizedDuration;
 
+    @SerializedName("parentflightid\n")
+    private String parentflightid;
+
 
 
 
@@ -592,5 +595,13 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
 
     public void setmFareClass(String mFareClass) {
         this.mFareClass = mFareClass;
+    }
+
+    public String getParentflightid() {
+        return parentflightid;
+    }
+
+    public void setParentflightid(String parentflightid) {
+        this.parentflightid = parentflightid;
     }
 }

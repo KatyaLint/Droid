@@ -175,13 +175,14 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                                     "-" + HGBUtilityDate.parseDateToddMMyyyyForPayment(nodesVO.getmCheckOut()) + "\n" +
                                     nodesVO.getRoomsVOs().get(0).getmRoomType() + " " +
                                     HGBUtilityDate.getDateDiffString(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()),
-                                    "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card));
+                                    "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card),null);
                             passengerChildArray.add(paymentChild);
                         } else if (NodeTypeEnum.FLIGHT.getType().equals(nodesVO.getmType())) {
+
                             paymentChild = new PaymentChild(nodesVO.getmOrigin() + "-" + nodesVO.getmDestination() + "\n" +
                                     nodesVO.getmOperatorName() + "" + nodesVO.getmEquipment() +
                                     "\n" + nodesVO.getDateOfCell(),
-                                    "$" + String.valueOf(nodesVO.getCost()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card));
+                                    "$" + String.valueOf(nodesVO.getCost()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card),nodesVO.getParentflightid());
                             passengerChildArray.add(paymentChild);
                         }
                     }
@@ -620,6 +621,13 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 holder.childSelectCCDropDown.setVisibility(View.GONE);
                 holder.childSelectCCImage.setVisibility(View.VISIBLE);
                 setCCIcon(holder.childSelectCCImage,child.getCreditcardid());
+            }
+            if(child.getParentflight() != null){
+                holder.childSelectCCDropDown.setVisibility(View.GONE);
+                holder.childSelectCCImage.setVisibility(View.GONE);
+            }else{
+                holder.childSelectCCDropDown.setVisibility(View.VISIBLE);
+                holder.childSelectCCImage.setVisibility(View.VISIBLE);
             }
 
 

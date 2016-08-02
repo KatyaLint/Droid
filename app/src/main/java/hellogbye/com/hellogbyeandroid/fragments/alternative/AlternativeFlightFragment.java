@@ -343,7 +343,14 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
         // TODO empty alternative flight after select clicked
 
-        dissmissProgressDialog();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dissmissProgressDialog();
+            }
+        }, 1000);
+
         if(isMyFlight){
             getAlternativeFlights(currentNode);
         }

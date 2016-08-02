@@ -12,14 +12,16 @@ public class PaymentChild {
     private String paxguid;
     private String creditcard;
     private String creditcardid;
+    private String parentflight;
 
-    public PaymentChild(String nameText, String totalText, boolean selected,String guid,String paxguid,String creditcard) {
+    public PaymentChild(String nameText, String totalText, boolean selected,String guid,String paxguid,String creditcard,String parentflight) {
         this.nameText = nameText;
         this.totalText = totalText;
         this.selected = selected;
         this.guid = guid;
         this.paxguid = paxguid;
         this.creditcard = creditcard;
+        this.parentflight = parentflight;
     }
 
     public String getNameText() {
@@ -76,5 +78,13 @@ public class PaymentChild {
 
     public void setCreditcardid(String creditcardid) {
         this.creditcardid = creditcardid;
+    }
+
+    public String getParentflight() {
+        return parentflight;
+    }
+
+    public void setParentflight(String parentflight) {
+        this.parentflight = parentflight;
     }
 }
