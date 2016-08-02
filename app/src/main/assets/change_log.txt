@@ -272,3 +272,13 @@ Code changing:
    Code changing:
    --------------
    - Choosing profile on first log in
+
+   ------------------------------------------
+               Version 1.5.8
+   ------------------------------------------
+   Fixed Bugs:
+   -----------
+
+
+   Code changing:
+   --------------
