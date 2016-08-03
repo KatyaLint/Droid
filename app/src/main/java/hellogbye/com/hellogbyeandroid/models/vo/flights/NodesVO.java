@@ -94,7 +94,7 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     @SerializedName("normalizedduration")
     private double mNormalizedDuration;
 
-    @SerializedName("parentflightid\n")
+    @SerializedName("parentflightid")
     private String parentflightid;
 
 
