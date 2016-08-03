@@ -348,6 +348,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
                 UserProfileVO mCurrentUser = (UserProfileVO) data;
                 String logInEmail = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL,"");
+
                 hgbSaveDataClass.getPersonalUserInformation().setUserEmailLogIn(logInEmail);
                 hgbSaveDataClass.setCurrentUser(mCurrentUser);
 

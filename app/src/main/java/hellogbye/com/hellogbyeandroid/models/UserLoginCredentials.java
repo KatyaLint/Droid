@@ -16,7 +16,6 @@ public class UserLoginCredentials {
     @SerializedName("modifieddatetime")
     private String modifieddatetime;
 
-
     @SerializedName("addeddatetime")
     private String addeddatetime;
 

@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         remember_me = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME,false);
         String email = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, null);
 
+
         if(remember_me && email != null){
             mEmailEditText.setText(email);
             String pswd = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, null);

@@ -233,7 +233,11 @@ public class SignUpActivity extends AppCompatActivity {
                 hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
 
                 hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER,false);
-                goToMainActivity();
+                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, null);
+                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, null);
+
+                Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+                startActivity(intent);
 
             }
 
@@ -248,20 +252,6 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
-
-    private void goToMainActivity() {
-
-        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
-        boolean doesExist = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY, false);
-        if (doesExist) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(getApplicationContext(), TravelPrefrenceStartingActivity.class);
-            startActivity(intent);
-        }
-
-    }
 
     private void resetPassword() {
 
