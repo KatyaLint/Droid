@@ -30,11 +30,23 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/SP18"
+        android:textSize="@dimen/SP24"
         android:gravity="center"
         app:fontName="dinnextltpro_light.otf"
         android:textColor="@color/warm_grey"
-        android:text="@string/my_trip_empty_text"
-        />
+        android:text="@string/my_trip_empty_text" />
+
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/my_trips_add_trip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/CustomButtonTextStyle"
+        android:background="@drawable/selector_red_button"
+        android:text="@string/my_trip_plan_trip"
+        android:textSize="@dimen/SP20"
+        android:layout_margin="@dimen/DP30"
+        app:fontName="dinnextltpro_medium.otf" />
 
 </LinearLayout>

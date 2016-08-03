@@ -31,6 +31,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
+import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by nyawka on 5/8/16.
@@ -79,7 +80,7 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
 
 
     private void goToCNCView(View rootView){
-        FloatingActionButton my_trips_go_to_cnc = (FloatingActionButton) rootView.findViewById(R.id.my_trips_add_trip);
+        FontTextView my_trips_go_to_cnc = (FontTextView) rootView.findViewById(R.id.my_trips_add_trip);
         my_trips_go_to_cnc.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

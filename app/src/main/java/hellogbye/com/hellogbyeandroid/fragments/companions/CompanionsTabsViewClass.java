@@ -323,36 +323,6 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
                     }
                 });
 
-
-
-
-      /*  HGBUtility.showAlertPopAddCompanion(getActivity(),inputs,popup_companion_new,getResources().getString(R.string.component_invite_new_companion),
-                new PopUpAlertStringCB(){
-
-                    @Override
-                    public void itemSelected(String inputItem) {
-                        //go to server
-                        String[] parts = inputItem.split("&");
-                        ConnectionManager.getInstance(getActivity()).postCompanions(parts[0],parts[1],parts[2], new ConnectionManager.ServerRequestListener() {
-                            @Override
-                            public void onSuccess(Object data) {
-                                getCompanions();
-
-                            }
-
-                            @Override
-                            public void onError(Object data) {
-                                ErrorMessage(data);
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void itemCanceled() {
-
-                    }
-                });*/
-
     }
 
 
