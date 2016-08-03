@@ -622,12 +622,11 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 holder.childSelectCCImage.setVisibility(View.VISIBLE);
                 setCCIcon(holder.childSelectCCImage,child.getCreditcardid());
             }
-            if(child.getParentflight() != null){
-                holder.childSelectCCDropDown.setVisibility(View.GONE);
-                holder.childSelectCCImage.setVisibility(View.GONE);
+            if(child.getParentflight() == null){
+                holder.childSelectCCLinearLayout.setVisibility(View.VISIBLE);
+
             }else{
-                holder.childSelectCCDropDown.setVisibility(View.VISIBLE);
-                holder.childSelectCCImage.setVisibility(View.VISIBLE);
+                holder.childSelectCCLinearLayout.setVisibility(View.INVISIBLE);
             }
 
 
