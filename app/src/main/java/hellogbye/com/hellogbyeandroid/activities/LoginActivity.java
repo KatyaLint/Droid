@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         boolean doesExist = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY, false);
         if (doesExist) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), MainActivityBottomTabs.class);
             startActivity(intent);
         } else {
             Intent intent = new Intent(getApplicationContext(), TravelPrefrenceStartingActivity.class);

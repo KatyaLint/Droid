@@ -18,6 +18,7 @@ import hellogbye.com.hellogbyeandroid.activities.HGBFlowInterface;
 import hellogbye.com.hellogbyeandroid.activities.HGBMainInterface;
 import hellogbye.com.hellogbyeandroid.activities.HGBVoiceInterface;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
@@ -38,7 +39,9 @@ public class HGBAbstractFragment extends Fragment {
     private CostumeToolBar mToolBar;
     private static String settingGuidSelected;
 
-
+    public interface FragmentNavigation {
+        public void pushFragment(Fragment fragment);
+    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -48,7 +51,7 @@ public class HGBAbstractFragment extends Fragment {
             mHGBFlowInterface  = (HGBFlowInterface) getActivity();
             mHGBVoiceInterface  = (HGBVoiceInterface) getActivity();
 
-            mActivityInterface = ((MainActivity) activity).getHGBSaveDataClass();
+            mActivityInterface = ((MainActivityBottomTabs) activity).getHGBSaveDataClass();
 
         } catch (ClassCastException e) {
             throw new ClassCastException(getActivity().toString() + "must implement HostingActivityInterface");

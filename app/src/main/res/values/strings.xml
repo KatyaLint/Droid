@@ -301,5 +301,9 @@
 
 
     <string name="my_trip_plan_trip">Plan a Trip</string>
+    <string name="my_trips">My Trips</string>
+    <string name="companions">Companions</string>
+    <string name="notification">Notification</string>
+    <string name="my_account">My Account</string>
 
 </resources>

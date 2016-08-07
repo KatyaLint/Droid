@@ -116,6 +116,12 @@ public class TripsTabsView extends HGBAbstractFragment {
 
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getFlowInterface().selectBottomBar(R.id.bb_menu_my_trips);
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         mTabHost = null;

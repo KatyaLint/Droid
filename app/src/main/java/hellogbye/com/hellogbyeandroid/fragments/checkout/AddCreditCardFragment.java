@@ -28,6 +28,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.CreditCardSessionItem;
@@ -536,7 +537,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
                         public void onSuccess(Object data) {
                             progressDialog.hide();
                             Toast.makeText(getActivity().getApplicationContext(), "Credit Card Updated", Toast.LENGTH_SHORT).show();
-                            ((MainActivity) getActivity()).onBackPressed();
+                            ((MainActivityBottomTabs) getActivity()).onBackPressed();
                             //getFragmentManager().popBackStack();
 
                         }

@@ -25,7 +25,7 @@ android {
         applicationId "hellogbye.com.hellogbyeandroid"
 
 
-        minSdkVersion 11
+        minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.5.8"
@@ -86,7 +86,7 @@ dependencies {
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
     compile 'io.card:android-sdk:5.1.2'
     compile 'com.github.dbachelder:CreditCardEntry:1.4.7'
-
+    compile 'com.roughike:bottom-bar:1.4.0.1'
     compile files('libs/AndroidSwipeLayout-v1.1.8.jar')
 
 //    compile 'com.android.support:multidex:1.0.1'

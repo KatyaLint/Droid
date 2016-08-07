@@ -807,6 +807,11 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
     }
 
+    @Override
+    public void selectBottomBar(int selection) {
+        
+    }
+
     private Fragment isFreeUser(Fragment fragment, int navPosition) {
 
         if (isFreeUser)
@@ -1283,21 +1288,7 @@ public void setTitleForItirnarary(String solutionName){
     }
 
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-      //  hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
-        try {
-            Gson gsonback = new Gson();
-            String json = gsonback.toJson(hgbSaveDataClass.getCNCItems());
-            // When user exit the app, next time hi will see his itirnarary
 
-            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, json);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
     public void setEditClickCB(PreferenceSettingsFragment.OnItemClickListener editClickCB) {

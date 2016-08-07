@@ -10,7 +10,10 @@
 
         <item name="color">@android:color/white</item>
     </style>
-
+    <style name="bottom_bar_text">
+        <item name="android:textSize">@dimen/SP10</item>
+        <item name="android:fontFamily">dinnextltpro_regular.otf</item>
+    </style>
 
     <style name="NavigationTextStyle">
         <item name="android:textColor">@color/navigation_text_state</item>

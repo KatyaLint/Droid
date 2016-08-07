@@ -316,7 +316,7 @@ public class HGBUtility {
 
             Fragment mFragment = manager.findFragmentByTag(fragment.getClass().toString());
 
-            transaction.replace(R.id.content_frame, fragment, fragment.getClass().toString());
+            transaction.replace(R.id.container, fragment, fragment.getClass().toString());
 
 
         /*    if (mFragment == null ) {

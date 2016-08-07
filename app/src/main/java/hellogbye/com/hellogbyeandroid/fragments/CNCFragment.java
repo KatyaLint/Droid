@@ -32,6 +32,7 @@ import java.util.Queue;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.CNCAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
@@ -152,6 +153,13 @@ public class CNCFragment extends HGBAbstractFragment {
         }
 
         return rootView;
+    }
+
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getFlowInterface().selectBottomBar(R.id.bb_menu_cnc);
     }
 
 
@@ -334,7 +342,7 @@ public class CNCFragment extends HGBAbstractFragment {
             public void onSuccess(Object data) {
                 ArrayList<AccountsVO> accounts = ( ArrayList<AccountsVO> )data;
                 getActivityInterface().setAccounts(accounts);
-                ((MainActivity) getActivity()).editProfileTypeMainToolBar();
+                ((MainActivityBottomTabs) getActivity()).editProfileTypeMainToolBar();
             }
 
             @Override
