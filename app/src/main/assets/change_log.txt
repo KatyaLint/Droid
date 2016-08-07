@@ -278,7 +278,7 @@ Code changing:
    ------------------------------------------
    Fixed Bugs:
    -----------
-
+   HEL-1273 - crash at step one of checkout in choosing a credit card to pay for trip
 
    Code changing:
    --------------
