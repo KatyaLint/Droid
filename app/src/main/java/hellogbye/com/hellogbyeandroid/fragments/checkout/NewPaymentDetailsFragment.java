@@ -514,7 +514,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
     private CreditCardItem getCardByNumber(String selectedText) {
         for (CreditCardItem credit : getFlowInterface().getCreditCards()) {
-            if (credit.getLast4().equals(selectedText)) {
+            if (selectedText.equals(credit.getLast4())) {
                 return credit;
             }
         }
