@@ -434,6 +434,24 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         });
     }
 
+    public void setFavority(boolean isFavority){
+        if (isFavority) {
+            up_bar_favorite.setBackgroundResource(R.drawable.star_in_favorite);
+            //   hgbSaveDataClass.getTravelOrder().setmIsFavorite(false);
+
+        } else {
+            //    hgbSaveDataClass.getTravelOrder().setmIsFavorite(true);
+            up_bar_favorite.setBackgroundResource(R.drawable.thin_0651_star_favorite_rating);
+        }
+    }
+
+
+    public void setTitleForItirnarary(String solutionName){
+
+        itirnarary_title_Bar.setText(hgbSaveDataClass.getTravelOrder().getmSolutionName());
+
+    }
+
     private void getCurrentItinerary(String solutionId){
 
         ConnectionManager.getInstance(MainActivityBottomTabs.this).getItinerary(solutionId, new ConnectionManager.ServerRequestListener() {
@@ -1022,6 +1040,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
                 break;
             case R.id.bb_menu_cnc:
                 mBottomBar.selectTabAtPosition(BOTTOM_BAR_THIRD_INDEX,true,false);
+                bottomBarVisible(false);
                 break;
             case R.id.bb_menu_notiifcations:
                 mBottomBar.selectTabAtPosition(BOTTOM_BAR_FOURTH_INDEX,true,false);
@@ -1030,6 +1049,17 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
                 mBottomBar.selectTabAtPosition(BOTTOM_BAR_FIFTH_INDEX,true,false);
                 break;
         }
+    }
+
+    @Override
+    public void bottomBarVisible(boolean visible) {
+        if(visible){
+            mBottomBar.show();
+        }else{
+            mBottomBar.hide();
+
+        }
+
     }
 
     @Override

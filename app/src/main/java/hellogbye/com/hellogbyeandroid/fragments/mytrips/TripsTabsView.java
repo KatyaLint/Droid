@@ -119,6 +119,7 @@ public class TripsTabsView extends HGBAbstractFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getFlowInterface().selectBottomBar(R.id.bb_menu_my_trips);
+        getFlowInterface().bottomBarVisible(true);
     }
 
     @Override

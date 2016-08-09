@@ -35,6 +35,7 @@ public class NotificationFragment extends HGBAbstractFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getFlowInterface().selectBottomBar(R.id.bb_menu_notiifcations);
+        getFlowInterface().bottomBarVisible(true);
     }
 
 

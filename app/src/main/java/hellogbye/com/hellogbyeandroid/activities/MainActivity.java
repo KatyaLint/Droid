@@ -812,6 +812,11 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         
     }
 
+    @Override
+    public void bottomBarVisible(boolean visible) {
+
+    }
+
     private Fragment isFreeUser(Fragment fragment, int navPosition) {
 
         if (isFreeUser)

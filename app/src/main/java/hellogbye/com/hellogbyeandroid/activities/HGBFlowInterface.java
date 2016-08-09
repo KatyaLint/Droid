@@ -40,6 +40,7 @@ public interface HGBFlowInterface {
     void closeRightPane();
     void openRightPane();
     void selectBottomBar(int selection);
+    void bottomBarVisible(boolean visible);
 
 
 
