@@ -165,7 +165,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         mBottomBar.setItems(R.menu.menu_bottombar);
         mBottomBar.setTextAppearance(R.style.bottom_bar_text);
         mBottomBar.setActiveTabColor( ContextCompat.getColor(getApplicationContext(),R.color.electric_tix_blue_press));
-        ;
+
 
         mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
             @Override
@@ -1015,19 +1015,19 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     public void selectBottomBar(int selection) {
         switch (selection) {
             case R.id.bb_menu_my_trips:
-                mBottomBar.selectTabAtPosition(BOTTOM_BAR_FIRST_INDEX,true);
+                mBottomBar.selectTabAtPosition(BOTTOM_BAR_FIRST_INDEX,true,false);
                 break;
             case R.id.bb_menu_companions:
-                mBottomBar.selectTabAtPosition(BOTTOM_BAR_SECOND_INDEX,true);
+                mBottomBar.selectTabAtPosition(BOTTOM_BAR_SECOND_INDEX,true,false);
                 break;
             case R.id.bb_menu_cnc:
-                mBottomBar.selectTabAtPosition(BOTTOM_BAR_THIRD_INDEX,true);
+                mBottomBar.selectTabAtPosition(BOTTOM_BAR_THIRD_INDEX,true,false);
                 break;
             case R.id.bb_menu_notiifcations:
-                mBottomBar.selectTabAtPosition(BOTTOM_BAR_FOURTH_INDEX,true);
+                mBottomBar.selectTabAtPosition(BOTTOM_BAR_FOURTH_INDEX,true,false);
                 break;
             case R.id.bb_menu_my_account:
-                mBottomBar.selectTabAtPosition(BOTTOM_BAR_FIFTH_INDEX,true);
+                mBottomBar.selectTabAtPosition(BOTTOM_BAR_FIFTH_INDEX,true,false);
                 break;
         }
     }

@@ -419,7 +419,7 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
      *
      * @param position the position to select.
      */
-    public void selectTabAtPosition(int position, boolean animate) {
+    public void selectTabAtPosition(int position, boolean animate,boolean loadFragment) {
         if (mItems == null || mItems.length == 0) {
             throw new UnsupportedOperationException("Can't select tab at " +
                     "position " + position + ". This BottomBar has no items set yet.");
@@ -433,8 +433,9 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
 
         unselectTab(oldTab, animate);
         selectTab(newTab, animate);
-
-        updateSelectedTab(position);
+        if(loadFragment){
+            updateSelectedTab(position);
+        }
         shiftingMagic(oldTab, newTab, animate);
     }
 
@@ -456,7 +457,7 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
                     defaultTabPosition + ". This BottomBar has no items at that position.");
         }
 
-        selectTabAtPosition(defaultTabPosition, false);
+        selectTabAtPosition(defaultTabPosition, false,true);
     }
 
     /**
@@ -669,7 +670,7 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
         mCustomActiveTabColor = activeTabColor;
 
         if (mItems != null && mItems.length > 0) {
-            selectTabAtPosition(mCurrentTabPosition, false);
+            selectTabAtPosition(mCurrentTabPosition, false,true);
         }
     }
 
