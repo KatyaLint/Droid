@@ -1,6 +1,7 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,8 +12,9 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
+
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,7 @@ import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -157,12 +160,12 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
 //        mNavController = new FragNavController(getSupportFragmentManager(), R.id.container, fragments);
         mTitle = getTitle();
 
-
         mBottomBar = BottomBar.attach(this, savedInstanceState);
         mBottomBar.useFixedMode();
         mBottomBar.setItems(R.menu.menu_bottombar);
         mBottomBar.setTextAppearance(R.style.bottom_bar_text);
         mBottomBar.setActiveTabColor( ContextCompat.getColor(getApplicationContext(),R.color.electric_tix_blue_press));
+        ;
 
         mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
             @Override
@@ -192,7 +195,8 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
             public void onMenuTabReSelected(@IdRes int menuItemId) {
             }
         });
-
+        AppCompatImageView icon = (AppCompatImageView) mBottomBar.getBar().findViewById(com.roughike.bottombar.R.id.bb_bottom_bar_icon);
+        icon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.red_button_color));
 
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         hgbSaveDataClass.setPreferenceManager(hgbPrefrenceManager); //= new HGBSaveDataClass(this, hgbPrefrenceManager);
@@ -921,7 +925,9 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
 
         finish();
     }
-
+    public void setEditClickCB(PreferenceSettingsFragment.OnItemClickListener editClickCB) {
+        this.editClickCB = editClickCB;
+    }
 
     @Override
     public void setCreditCardsSelected(HashSet<CreditCardItem> cardsList) {

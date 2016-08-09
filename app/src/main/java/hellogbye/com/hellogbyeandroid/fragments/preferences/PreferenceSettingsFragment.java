@@ -210,7 +210,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
 
         View rootView = inflater.inflate(R.layout.settings_list_layout, container, false);
 
-        ((MainActivity)getActivity()).setEditClickCB(new OnItemClickListener(){
+        ((MainActivityBottomTabs)getActivity()).setEditClickCB(new OnItemClickListener(){
             @Override
             public void onItemClick(String option) {
 
