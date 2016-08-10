@@ -160,43 +160,9 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
 //        mNavController = new FragNavController(getSupportFragmentManager(), R.id.container, fragments);
         mTitle = getTitle();
 
-        mBottomBar = BottomBar.attach(this, savedInstanceState);
-        mBottomBar.useFixedMode();
-        mBottomBar.setItems(R.menu.menu_bottombar);
-        mBottomBar.setTextAppearance(R.style.bottom_bar_text);
-        mBottomBar.setActiveTabColor( ContextCompat.getColor(getApplicationContext(),R.color.electric_tix_blue_press));
+        initBottomBar(savedInstanceState);
 
 
-        mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
-            @Override
-            public void onMenuTabSelected(@IdRes int menuItemId) {
-                switch (menuItemId) {
-                    case R.id.bb_menu_my_trips:
-                        //mNavController.switchTab(INDEX_MY_TRIPS);
-
-                        selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null,true);
-                        break;
-                    case R.id.bb_menu_companions:
-                        selectItem(ToolBarNavEnum.COMPANIONS.getNavNumber(), null,true);
-                        break;
-                    case R.id.bb_menu_cnc:
-                        selectItem(ToolBarNavEnum.CNC.getNavNumber(), null,true);
-                        break;
-                    case R.id.bb_menu_notiifcations:
-                        selectItem(ToolBarNavEnum.NOTIFICATIONS.getNavNumber(), null,true);
-                        break;
-                    case R.id.bb_menu_my_account:
-                        selectItem(ToolBarNavEnum.ACCOUNT.getNavNumber(), null,true);
-                        break;
-                }
-            }
-
-            @Override
-            public void onMenuTabReSelected(@IdRes int menuItemId) {
-            }
-        });
-        AppCompatImageView icon = (AppCompatImageView) mBottomBar.getBar().findViewById(com.roughike.bottombar.R.id.bb_bottom_bar_icon);
-        icon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.red_button_color));
 
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         hgbSaveDataClass.setPreferenceManager(hgbPrefrenceManager); //= new HGBSaveDataClass(this, hgbPrefrenceManager);
@@ -229,6 +195,50 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
             hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_LOCATION_TOKEN, false);
         }
 
+    }
+
+    private void initBottomBar(Bundle savedInstanceState) {
+
+        mBottomBar = BottomBar.attach(this, savedInstanceState);
+        mBottomBar.useFixedMode();
+        mBottomBar.setItems(R.menu.menu_bottombar);
+        mBottomBar.setTextAppearance(R.style.bottom_bar_text);
+        mBottomBar.setActiveTabColor( ContextCompat.getColor(getApplicationContext(),R.color.electric_tix_blue_press));
+        mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
+            @Override
+            public void onMenuTabSelected(@IdRes int menuItemId) {
+                selectBottemTab(menuItemId);
+            }
+
+            @Override
+            public void onMenuTabReSelected(@IdRes int menuItemId) {
+  
+            }
+        });
+
+    }
+
+    private void selectBottemTab(int menuItemId) {
+
+        switch (menuItemId) {
+            case R.id.bb_menu_my_trips:
+                //mNavController.switchTab(INDEX_MY_TRIPS);
+
+                selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null,true);
+                break;
+            case R.id.bb_menu_companions:
+                selectItem(ToolBarNavEnum.COMPANIONS.getNavNumber(), null,true);
+                break;
+            case R.id.bb_menu_cnc:
+                selectItem(ToolBarNavEnum.CNC.getNavNumber(), null,true);
+                break;
+            case R.id.bb_menu_notiifcations:
+                selectItem(ToolBarNavEnum.NOTIFICATIONS.getNavNumber(), null,true);
+                break;
+            case R.id.bb_menu_my_account:
+                selectItem(ToolBarNavEnum.ACCOUNT.getNavNumber(), null,true);
+                break;
+        }
     }
 
     @Override
@@ -1042,19 +1052,24 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         switch (selection) {
             case R.id.bb_menu_my_trips:
                 mBottomBar.selectTabAtPosition(BOTTOM_BAR_FIRST_INDEX,true,false);
+                mBottomBar.setmCurrentTabPosition(BOTTOM_BAR_FIRST_INDEX);
                 break;
             case R.id.bb_menu_companions:
                 mBottomBar.selectTabAtPosition(BOTTOM_BAR_SECOND_INDEX,true,false);
+                mBottomBar.setmCurrentTabPosition(BOTTOM_BAR_SECOND_INDEX);
                 break;
             case R.id.bb_menu_cnc:
                 mBottomBar.selectTabAtPosition(BOTTOM_BAR_THIRD_INDEX,true,false);
+                mBottomBar.setmCurrentTabPosition(BOTTOM_BAR_THIRD_INDEX);
                 enableFullScreen(false);
                 break;
             case R.id.bb_menu_notiifcations:
                 mBottomBar.selectTabAtPosition(BOTTOM_BAR_FOURTH_INDEX,true,false);
+                mBottomBar.setmCurrentTabPosition(BOTTOM_BAR_FOURTH_INDEX);
                 break;
             case R.id.bb_menu_my_account:
                 mBottomBar.selectTabAtPosition(BOTTOM_BAR_FIFTH_INDEX,true,false);
+                mBottomBar.setmCurrentTabPosition(BOTTOM_BAR_FIFTH_INDEX);
                 break;
         }
     }
