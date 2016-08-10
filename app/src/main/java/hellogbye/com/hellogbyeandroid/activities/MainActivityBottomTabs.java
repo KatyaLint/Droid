@@ -347,6 +347,14 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
     }
 
     private void setOnClickListenerForSavePreferences() {
@@ -1040,7 +1048,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
                 break;
             case R.id.bb_menu_cnc:
                 mBottomBar.selectTabAtPosition(BOTTOM_BAR_THIRD_INDEX,true,false);
-                bottomBarVisible(false);
+                enableFullScreen(false);
                 break;
             case R.id.bb_menu_notiifcations:
                 mBottomBar.selectTabAtPosition(BOTTOM_BAR_FOURTH_INDEX,true,false);
@@ -1052,12 +1060,16 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     }
 
     @Override
-    public void bottomBarVisible(boolean visible) {
-        if(visible){
-            mBottomBar.show();
-        }else{
+    public void enableFullScreen(boolean fullscreen) {
+        if(fullscreen){
             mBottomBar.hide();
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
 
+        }else{
+            mBottomBar.show();
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setHomeButtonEnabled(false);
         }
 
     }

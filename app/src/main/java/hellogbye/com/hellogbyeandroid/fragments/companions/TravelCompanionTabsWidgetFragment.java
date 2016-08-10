@@ -46,7 +46,7 @@ public class TravelCompanionTabsWidgetFragment extends HGBAbstractFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getFlowInterface().selectBottomBar(R.id.bb_menu_companions);
-        getFlowInterface().bottomBarVisible(true);
+        getFlowInterface().enableFullScreen(false);
     }
 
     private void firstTextInit(){

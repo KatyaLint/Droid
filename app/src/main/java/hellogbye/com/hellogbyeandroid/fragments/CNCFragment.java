@@ -159,7 +159,8 @@ public class CNCFragment extends HGBAbstractFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getFlowInterface().selectBottomBar(R.id.bb_menu_cnc);
+        getFlowInterface().enableFullScreen(true);
+
     }
 
 
