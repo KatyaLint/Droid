@@ -282,6 +282,8 @@ Code changing:
    HEL-1332 - change all calls from http to https
    HEL-1331 - text is cut in information when keyboard is up
    HEL-1324 - change trip name isn't really saved
+   HEL-1323 - redirect the plus icon for adding companion in itinerary in anonymous mode
+
 
    Code changing:
    --------------
