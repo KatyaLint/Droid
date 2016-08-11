@@ -962,7 +962,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
         }
 
         if (isFreeUser && (navBar.equals(ToolBarNavEnum.COMPANIONS_PERSONAL_DETAILS) || navBar.equals(ToolBarNavEnum.PAYMENT_DETAILS) || navBar.equals(ToolBarNavEnum.COMPANIONS)
-        || navBar.equals(ToolBarNavEnum.ALL_COMPANIONS_VIEW))) {
+        || navBar.equals(ToolBarNavEnum.ALL_COMPANIONS_VIEW) || navBar.equals(ToolBarNavEnum.CREDIT_CARD_LIST))) {
             isAddAnimation = true;
             fragment = isFreeUser(fragment, navPosition);
         }
