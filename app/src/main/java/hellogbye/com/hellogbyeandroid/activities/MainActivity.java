@@ -1019,6 +1019,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                             @Override
                             public void itemSelected(String inputItem) {
                                 itirnarary_title_Bar.setText(inputItem);
+                                sendNewSolutionName(inputItem);
                             }
 
                             @Override
@@ -1026,6 +1027,22 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
                             }
                         });
+            }
+        });
+    }
+
+    private void sendNewSolutionName(String solutionName){
+        ConnectionManager.getInstance(MainActivity.this).putItenararyTripName(solutionName, hgbSaveDataClass.getTravelOrder().getmSolutionID(),  new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
             }
         });
     }
@@ -1153,6 +1170,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 public void setTitleForItirnarary(String solutionName){
 
         itirnarary_title_Bar.setText(hgbSaveDataClass.getTravelOrder().getmSolutionName());
+        itirnarary_title_Bar.setTag(hgbSaveDataClass.getTravelOrder().getmSolutionID());
 
 }
 

@@ -240,7 +240,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
         } else {
             mSave.setEnabled(false);
         }
-        mSave.setPadding(0, 30, 0, 30);
+    //    mSave.setPadding(0, 30, 0, 30);
 
     }
 

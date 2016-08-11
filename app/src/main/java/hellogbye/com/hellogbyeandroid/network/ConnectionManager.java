@@ -1497,6 +1497,34 @@ public class ConnectionManager {
         });
     }
 
+    public void putItenararyTripName(final String name, final String itineraryID, final ServerRequestListener listener) {
+        String url = getURL(Services.ITINERARY);
+        url = url + itineraryID;
+
+       /*JSONObject jsonObjectWrapper = new JSONObject();*/
+
+        JSONObject json1 = new JSONObject();
+        try {
+            json1.put("name", name);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
+                json1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
 
     public void putFavorityItenarary(final boolean isFavority,final String itineraryID, final ServerRequestListener listener) {
         String url = getURL(Services.ITINERARY);
@@ -1586,7 +1614,6 @@ public class ConnectionManager {
         try {
 
             json1.put("companionid", id);
-
             JSONObject json2 = new JSONObject();
             json2.put("state", user.getState());
             json2.put("emailaddress", user.getEmailaddress());

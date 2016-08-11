@@ -281,6 +281,7 @@ Code changing:
    HEL-1273 - crash at step one of checkout in choosing a credit card to pay for trip
    HEL-1332 - change all calls from http to https
    HEL-1331 - text is cut in information when keyboard is up
+   HEL-1324 - change trip name isn't really saved
 
    Code changing:
    --------------
