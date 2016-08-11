@@ -97,8 +97,8 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     @SerializedName("parentflightid")
     private String parentflightid;
 
-
-
+    @SerializedName("isalternative")
+    private boolean ismIsAlternative;
 
 
     //-------Hotel-----------------------
@@ -168,8 +168,10 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     private String mGuid;
     @SerializedName("rank")
     private double mRank;
-    @SerializedName("isalternative")
-    private boolean mIsAlternative;
+
+    /*@SerializedName("isalternative")
+    private boolean mIsAlternative;*/
+
     @SerializedName("amenities")
     private String mAmenities;
     @SerializedName("originairportcoordinates")
@@ -603,5 +605,13 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
 
     public void setParentflightid(String parentflightid) {
         this.parentflightid = parentflightid;
+    }
+
+    public boolean ismIsAlternative() {
+        return ismIsAlternative;
+    }
+
+    public void setIsmIsAlternative(boolean ismIsAlternative) {
+        this.ismIsAlternative = ismIsAlternative;
     }
 }

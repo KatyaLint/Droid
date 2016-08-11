@@ -48,7 +48,9 @@ import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
+import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightTabsWidgetFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightsDetailsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.alternative.FactoryAlternativeFlight;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.AddCreditCardFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CheckoutConfirmationFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
@@ -703,7 +705,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public void continueFlow(int fragment) {
 
-        if (fragment == ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber()) {
+        if (fragment == ToolBarNavEnum.ALTERNATIVE_FLIGHT_ROUND_TRIP.getNavNumber()) {
             selectItem(ToolBarNavEnum.ITINARERY.getNavNumber(), null,true);
         }
     }
@@ -883,17 +885,27 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
                // setItineraryTitleName();
                 break;
-            case ALTERNATIVE_FLIGHT:
+            case ALTERNATIVE_FLIGHT_ROUND_TRIP:
+                fragment = AlternativeFlightTabsWidgetFragment.newInstance(navPosition);
+                stashToBack = false;
+                break;
+            case ALTERNATIVE_FLIGHT_ONE_WAY_TRIP:
                 fragment = AlternativeFlightFragment.newInstance(navPosition);
                 stashToBack = false;
                 break;
-            case HOTEL:
-                fragment = HotelFragment.newInstance(navPosition);
+            case ALTERNATIVE_FLIGHT_FACTORY:
+                fragment = FactoryAlternativeFlight.newInstance(navPosition);
+                stashToBack = false;
                 break;
             case ALTERNATIVE_FLIGHT_DETAILS:
                 fragment = AlternativeFlightsDetailsFragment.newInstance(navPosition);
                 stashToBack = false;
                 break;
+
+            case HOTEL:
+                fragment = HotelFragment.newInstance(navPosition);
+                break;
+
             case PAYMENT_DETAILS:
                 fragment = NewPaymentDetailsFragment.newInstance(navPosition);
                 //     fragment = isFreeUser( fragment , navPosition);
@@ -1190,7 +1202,7 @@ public void setTitleForItirnarary(String solutionName){
             @Override
             public void onSuccess(Object data) {
                 hgbSaveDataClass.setTravelOrder((UserTravelMainVO) data);
-                continueFlow(fragment);
+              //  continueFlow(fragment);
             }
 
             @Override

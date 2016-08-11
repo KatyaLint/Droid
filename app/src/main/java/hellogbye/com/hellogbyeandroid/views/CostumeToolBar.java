@@ -164,7 +164,6 @@ public class CostumeToolBar extends Toolbar {
             case HELP:
             case ACCOUNT:
             case PREFERENCES_TAB_SETTINGS:
-            case ALTERNATIVE_FLIGHT:
             case HOTEL:
             case COMPANION_HELP_FEEDBACK:
             case ALTERNATIVE_FLIGHT_DETAILS:
@@ -177,6 +176,8 @@ public class CostumeToolBar extends Toolbar {
             case PAYMENT_TRAVELERS_DETAILS:
             case NOTIFICATIONS:
             case PREFERENCES_MEMBERSHIP:
+            case ALTERNATIVE_FLIGHT_ONE_WAY_TRIP:
+            case ALTERNATIVE_FLIGHT_ROUND_TRIP:
                 titleText.setVisibility(View.VISIBLE);
                 break;
 

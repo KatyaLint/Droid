@@ -10,7 +10,7 @@ public enum ToolBarNavEnum {
     HELP(6,"Help & Feedback"),
     HOME(7,"Home"),
     ITINARERY(8,"Current Itinerary"),
-    ALTERNATIVE_FLIGHT(9,"Flight Details"),
+    ALTERNATIVE_FLIGHT_ROUND_TRIP(9,"Flight Details"),
     HOTEL(10,"Hotel Details"),
     ALTERNATIVE_FLIGHT_DETAILS(11,"Alternative Flight"),
     PAYMENT_DETAILS(12,"Payment Info"),
@@ -34,7 +34,10 @@ public enum ToolBarNavEnum {
     ALL_COMPANIONS_VIEW(30,"My Companions"),
     COMPANION_HELP_FEEDBACK(31,"Help and Feedback"),
     PREFERENCES_CHECK_AS_RADIO_SETTINGS(32,"Preferences Settings"),
-    PREFERENCES_MEMBERSHIP(33,"Membership");
+    PREFERENCES_MEMBERSHIP(33,"Membership"),
+    ALTERNATIVE_FLIGHT_FACTORY(34,"Flight Details"),
+    ALTERNATIVE_FLIGHT_ONE_WAY_TRIP(35,"Flight Details"),
+    ;
 
 
 

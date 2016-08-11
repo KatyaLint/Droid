@@ -121,7 +121,6 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 activateUserWithKey();
-                System.out.println("Kate pin clicked");
             }
         });
 
