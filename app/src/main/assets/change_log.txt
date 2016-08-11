@@ -283,7 +283,7 @@ Code changing:
    HEL-1331 - text is cut in information when keyboard is up
    HEL-1324 - change trip name isn't really saved
    HEL-1323 - redirect the plus icon for adding companion in itinerary in anonymous mode
-
+   HEL-1322 - too much empty space at a bottom of flight details
 
    Code changing:
    --------------
