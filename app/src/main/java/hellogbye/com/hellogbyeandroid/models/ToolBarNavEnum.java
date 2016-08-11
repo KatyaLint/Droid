@@ -37,6 +37,7 @@ public enum ToolBarNavEnum {
     PREFERENCES_MEMBERSHIP(33,"Membership"),
     ALTERNATIVE_FLIGHT_FACTORY(34,"Flight Details"),
     ALTERNATIVE_FLIGHT_ONE_WAY_TRIP(35,"Flight Details"),
+    FREE_USER_FRAGMENT(36,"Free User")
     ;
 
 

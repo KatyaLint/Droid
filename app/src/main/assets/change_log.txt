@@ -284,6 +284,9 @@ Code changing:
    HEL-1324 - change trip name isn't really saved
    HEL-1323 - redirect the plus icon for adding companion in itinerary in anonymous mode
    HEL-1322 - too much empty space at a bottom of flight details
+   HEL-1321 - on anonymous, user shouldn't get the option to create a new profile without signing in
+
+
 
    Code changing:
    --------------

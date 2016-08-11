@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private ArrayList<UserProfileVO> mTravelList = new ArrayList<>();
     private ArrayList<CountryItemVO> mEligabileCountryList = new ArrayList<>();
     private ArrayList<CreditCardItem> mCreditCardList = new ArrayList<>();
-    private boolean isFreeUser;
+    public boolean isFreeUser;
 
     private FrameLayout frameLayout;
     private FontTextView preference_save_changes;
@@ -946,6 +946,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                 break;
             case HAZARDOUS_NOTICE:
                 fragment = HazardousNoticeFragment.newInstance(navPosition);
+                break;
+            case FREE_USER_FRAGMENT:
+                fragment = FreeUserFragment.newInstance(navPosition);
+                stashToBack = false;
                 break;
 
         }
