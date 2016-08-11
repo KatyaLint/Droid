@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -62,13 +63,15 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.travler_detail_layout, container, false);
-
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         mTitle = (FontTextView) view.findViewById(R.id.travel_detail_title);
         mFirstName = (EditText) view.findViewById(R.id.travel_detail_first_name);
         mLastName = (EditText) view.findViewById(R.id.travel_detail_last_name);
@@ -268,7 +271,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
         mPostalCode.setText(mUser.getPostalcode());
         mState.setText(mUser.getState());
 
-        ConnectionManager.getInstance(getActivity()).getStaticBookingProvince(mUser.getCountry(), new ConnectionManager.ServerRequestListener() {
+/*        ConnectionManager.getInstance(getActivity()).getStaticBookingProvince(mUser.getCountry(), new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 List<ProvincesItem> provinceItems = (List<ProvincesItem>) data;
@@ -283,7 +286,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             public void onError(Object data) {
                 ErrorMessage(data);
             }
-        });
+        });*/
 
 
         setTextListner();

@@ -279,7 +279,8 @@ Code changing:
    Fixed Bugs:
    -----------
    HEL-1273 - crash at step one of checkout in choosing a credit card to pay for trip
-    HEL-1332 - change all calls from http to https
+   HEL-1332 - change all calls from http to https
+   HEL-1331 - text is cut in information when keyboard is up
 
    Code changing:
    --------------
