@@ -65,7 +65,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getFlowInterface().selectBottomBar(R.id.bb_menu_my_account);
-        getFlowInterface().enableFullScreen(true);
+        getFlowInterface().enableFullScreen(false);
     }
 
     public static Fragment newInstance(int position) {

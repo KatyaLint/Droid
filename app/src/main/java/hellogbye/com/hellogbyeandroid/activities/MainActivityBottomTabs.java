@@ -23,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
+
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
 
@@ -175,11 +176,6 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
             hgbSaveDataClass.setTravelOrder(userTravelVO);
         }
 
-
-
-
-
-
         getUserData();
         getCompanionsFromServer();
         getCountries();
@@ -212,7 +208,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
 
             @Override
             public void onMenuTabReSelected(@IdRes int menuItemId) {
-  
+
             }
         });
 
