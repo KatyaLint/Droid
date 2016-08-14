@@ -558,7 +558,8 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
         mHotelNameFullFontTextView.setText(node.getmAddress1() + "," + node.getmCityName() + "\n" + node.getmPostalCode() + "," + node.getmStateProvince() + "," + node.getmCountry());
        if(node.getmAmenities() != null){
-           mHotelAmnitiesFontTextView.setText(Html.fromHtml(node.getmAmenities()));
+           //TODO Need to fix via design
+          // mHotelAmnitiesFontTextView.setText(Html.fromHtml(node.getmAmenities()));
        }
 
         mHotelContactFontTextView.setText(node.getmPhone());

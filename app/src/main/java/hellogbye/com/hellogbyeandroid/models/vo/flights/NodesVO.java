@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+import hellogbye.com.hellogbyeandroid.models.Amenities;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 
@@ -173,7 +174,7 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     private boolean mIsAlternative;*/
 
     @SerializedName("amenities")
-    private String mAmenities;
+    private ArrayList<Amenities> mAmenities;
     @SerializedName("originairportcoordinates")
     private AirportCoordinatesVO originairportcoordinates = new AirportCoordinatesVO();
 
@@ -366,11 +367,11 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     public void setCost(double cost) {
         this.cost = cost;
     }
-    public String getmAmenities() {
+    public ArrayList<Amenities> getmAmenities() {
         return mAmenities;
     }
 
-    public void setmAmenities(String mAmenities) {
+    public void setmAmenities(ArrayList<Amenities> mAmenities) {
         this.mAmenities = mAmenities;
 
     }
