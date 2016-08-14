@@ -130,13 +130,13 @@ public class CNCFragment extends HGBAbstractFragment {
 
         args = getArguments();
         clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT);
-
+        startTutorial();
         if(clearCNCscreen){
-            startTutorialText();
+         //   startTutorialText();
             clearCNCItems();
 
             //This is to ckeck and display tutorial this version was cancelled waiting for new one
-            startTutorial();
+
 
             mTextTutoralHeader.setVisibility(View.VISIBLE);
             mTextTutoralBody.setVisibility(View.VISIBLE);
