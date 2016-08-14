@@ -110,7 +110,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     private ArrayList<UserProfileVO> mTravelList = new ArrayList<>();
     private ArrayList<CountryItemVO> mEligabileCountryList = new ArrayList<>();
     private ArrayList<CreditCardItem> mCreditCardList = new ArrayList<>();
-    private boolean isFreeUser;
+    public boolean isFreeUser;
     private CharSequence mTitle;
     private FontTextView preference_save_changes;
     private PreferencesSettingsMainClass.saveButtonClicked onSavePreferencesButtonClicked;

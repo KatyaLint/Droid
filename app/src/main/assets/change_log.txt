@@ -296,3 +296,14 @@ Code changing:
     - Bottom Bar
     - Back button when entering itinerary sequence.
     - Fixed entering CNC from Menu
+
+
+       ------------------------------------------
+                   Version 1.5.9
+       ------------------------------------------
+       Fixed Bugs:
+       -----------
+
+
+       Code changing:
+       --------------

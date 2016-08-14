@@ -125,7 +125,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
 
     private void selectedRadioPreference(){
         //Kate
-        FontTextView my_trip_profile = ((MainActivity) getActivity()).my_trip_profile;
+        FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).my_trip_profile;
         if(my_trip_profile == null || mAdapter == null){
             return;
         }
@@ -253,7 +253,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
             @Override
             public void onClick(View view) {
 
-                if(((MainActivity) getActivity()).isFreeUser){
+                if(((MainActivityBottomTabs) getActivity()).isFreeUser){
                     getFlowInterface().goToFragment(ToolBarNavEnum.FREE_USER_FRAGMENT.getNavNumber(), null);
                 }else{
                 editSettingsPreferencesPopUp();
