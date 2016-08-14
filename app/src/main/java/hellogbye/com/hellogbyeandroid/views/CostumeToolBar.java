@@ -16,6 +16,7 @@ public class CostumeToolBar extends Toolbar {
 
   //  private ImageButton keyBoardImage;
     private ImageButton up_bar_favorite;
+    private ImageButton new_itinerary;
     private ImageButton favoriteButton;
     private FontTextView editPreferense;
     private ImageView homeTitleImage;
@@ -96,6 +97,12 @@ public class CostumeToolBar extends Toolbar {
             toolbar_go_to_iternerary = (ImageButton) findViewById(R.id.toolbar_go_to_iternerary);
         }
 
+        if(new_itinerary == null){
+            new_itinerary = (ImageButton) findViewById(R.id.toolbar_new_iternerary);
+        }
+
+
+
     }
 
 
@@ -120,6 +127,7 @@ public class CostumeToolBar extends Toolbar {
         itirnarary_title_Bar.setVisibility(View.GONE);
         toolbar_go_to_iternerary.setVisibility(View.GONE);
         preference_save_changes.setVisibility(View.GONE);
+        new_itinerary.setVisibility(View.GONE);
 
         switch (navBar) {
          //   case HOME:
@@ -158,6 +166,10 @@ public class CostumeToolBar extends Toolbar {
             break;
 
             case TRIPS:
+                titleText.setVisibility(View.VISIBLE);
+                new_itinerary.setVisibility(View.VISIBLE);
+                break;
+
             case COMPANIONS:
             case ALL_COMPANIONS_VIEW:
             case COMPANIONS_PERSONAL_DETAILS:

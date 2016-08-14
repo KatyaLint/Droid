@@ -1390,6 +1390,8 @@ public void setTitleForItirnarary(String solutionName){
     }
 
 
+
+
 //    public void setEditMyTripsClickCB(MyTripsFragment.OnItemClickListener editMyTripsClickCB) {
 //        this.editMyTripsClickCB = editMyTripsClickCB;
 //    }

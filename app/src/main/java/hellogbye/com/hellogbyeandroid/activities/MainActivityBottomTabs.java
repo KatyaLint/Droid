@@ -99,6 +99,8 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     private CostumeToolBar mToolbar;
     private HGBPreferencesManager hgbPrefrenceManager;
     private ImageButton up_bar_favorite;
+    private ImageButton newIteneraryImageButton;
+
 
 
     private UserProfileVO mCurrentUser;
@@ -214,6 +216,17 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
             }
         });
 
+    }
+
+    private void clearCNCItems() {
+
+        hgbSaveDataClass.setCNCItems(null);
+        hgbSaveDataClass.setTravelOrder(null);
+        hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
+        hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
+        Bundle args = new Bundle();
+        args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
+        selectItem(ToolBarNavEnum.CNC.getNavNumber(), null,true);
     }
 
     private void selectBottemTab(int menuItemId) {
@@ -359,6 +372,14 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+        newIteneraryImageButton = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary);
+
+        newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearCNCItems();
             }
         });
 

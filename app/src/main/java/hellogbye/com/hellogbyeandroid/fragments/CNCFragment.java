@@ -179,7 +179,6 @@ public class CNCFragment extends HGBAbstractFragment {
             public void onSuccess(Object data) {
                 args.putString(HGBConstants.SOLUTION_ITINERARY_ID,null);
                 args.putBoolean(HGBConstants.CNC_CLEAR_CHAT,false);
-
                 UserTravelMainVO userTravelMainVO = (UserTravelMainVO) data;
                 getActivityInterface().setTravelOrder(userTravelMainVO);
                 addUserConversation();
