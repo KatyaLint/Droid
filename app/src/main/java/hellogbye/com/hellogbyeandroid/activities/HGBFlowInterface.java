@@ -39,6 +39,8 @@ public interface HGBFlowInterface {
     void setListUsers(ArrayList<UserProfileVO> travellist);
     void closeRightPane();
     void openRightPane();
+    void selectBottomBar(int selection);
+    void enableFullScreen(boolean visible);
 
 
 

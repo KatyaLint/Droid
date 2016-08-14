@@ -21,6 +21,7 @@ import hellogbye.com.hellogbyeandroid.R;
 
 
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsPreferencesCheckAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsRadioButtonAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.SettingsAdapter;
@@ -61,7 +62,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
 
 
     private void onBackPressed(){
-        ((MainActivity) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
+        ((MainActivityBottomTabs) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
             public void doBack() {
                 if(radioButtonSelected != -1) {
                     AccountDefaultSettingsVO selected = accountDefaultSettings.get(radioButtonSelected);
@@ -209,7 +210,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
 
         View rootView = inflater.inflate(R.layout.settings_list_layout, container, false);
 
-        ((MainActivity)getActivity()).setEditClickCB(new OnItemClickListener(){
+        ((MainActivityBottomTabs)getActivity()).setEditClickCB(new OnItemClickListener(){
             @Override
             public void onItemClick(String option) {
 

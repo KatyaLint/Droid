@@ -26,6 +26,7 @@ import java.util.Set;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -782,13 +783,13 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
     private void setSolutionNameForItirnarary() {
         String solutionName = userOrder.getmSolutionName();
-        ((MainActivity)getActivity()).setTitleForItirnarary(solutionName);
+        ((MainActivityBottomTabs)getActivity()).setTitleForItirnarary(solutionName);
     }
 
 
     private void setFavorityIcon(){
         boolean isFavority = userOrder.ismIsFavorite();
-        ((MainActivity)getActivity()).setFavority(isFavority);
+        ((MainActivityBottomTabs)getActivity()).setFavority(isFavority);
     }
 
 

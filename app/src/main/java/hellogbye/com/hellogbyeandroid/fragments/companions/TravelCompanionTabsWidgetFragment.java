@@ -4,6 +4,9 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.content.ContextCompat;
@@ -34,6 +37,13 @@ public class TravelCompanionTabsWidgetFragment extends HGBAbstractFragment {
         args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getFlowInterface().selectBottomBar(R.id.bb_menu_companions);
+        getFlowInterface().enableFullScreen(false);
     }
 
     private void firstTextInit(){

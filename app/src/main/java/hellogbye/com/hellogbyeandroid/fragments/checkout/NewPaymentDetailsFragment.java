@@ -413,7 +413,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             }
 
 
-            PassengersVO currentPassenger = getCurrentPassengerByName(getFlowInterface().getCurrentUser().getFirstname());
+            PassengersVO currentPassenger = getCurrentPassengerByName(getActivityInterface().getCurrentUser().getFirstname());
 
             for (PassengersVO passenger : passangers) {
 

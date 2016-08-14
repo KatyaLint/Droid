@@ -17,6 +17,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsDragListAdapter;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
@@ -82,7 +83,7 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
 
     public void backOnListClicked(final String strType,final String strId,final List<SettingsValuesVO> accountAttributesVO) {
 
-        ((MainActivity) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
+        ((MainActivityBottomTabs) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
             public void doBack() {
                 convertSettingsAttributesVO();
                 if(noBack){

@@ -50,6 +50,7 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.ImageGalleryActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelAdapter;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.AllImagesVO;
@@ -165,7 +166,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
             }
         });
 
-        ((MainActivity) activity).setOnBackPressedListener(new OnBackPressedListener() {
+        ((MainActivityBottomTabs) activity).setOnBackPressedListener(new OnBackPressedListener() {
             public void doBack() {
 
                 if (mRecyclerView.getVisibility() != View.VISIBLE) {

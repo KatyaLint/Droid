@@ -11,6 +11,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -63,7 +64,7 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
 
     public void backOnListClicked() {
 
-        ((MainActivity) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
+        ((MainActivityBottomTabs) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
             public void doBack() {
                 if(noBack){
                     return;

@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,6 +31,7 @@ import java.io.IOException;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.settingaccount.AccountSettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
@@ -59,6 +61,13 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
         // Empty constructor required for fragment subclasses
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getFlowInterface().selectBottomBar(R.id.bb_menu_my_account);
+        getFlowInterface().enableFullScreen(false);
+    }
+
     public static Fragment newInstance(int position) {
         Fragment fragment = new AccountSettingsFragment();
         Bundle args = new Bundle();
@@ -66,6 +75,8 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
         fragment.setArguments(args);
         return fragment;
     }
+
+
 
     private void getUserData(){
         ConnectionManager.getInstance(getActivity()).getUserProfile(new ConnectionManager.ServerRequestListener() {
@@ -75,7 +86,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
                 UserProfileVO mCurrentUser = (UserProfileVO) data;
                 getActivityInterface().setCurrentUser(mCurrentUser);
                 initializeUserData();
-                ((MainActivity)getActivity()).updateProfilePicture(thumbnail);
+               // ((MainActivityBottomTabs)getActivity()).updateProfilePicture(thumbnail);
 
             }
 
