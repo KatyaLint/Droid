@@ -4,11 +4,9 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
-<<<<<<< HEAD
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-=======
->>>>>>> master
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.content.ContextCompat;

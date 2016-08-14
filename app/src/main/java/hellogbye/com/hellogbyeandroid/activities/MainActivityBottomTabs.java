@@ -38,6 +38,7 @@ import hellogbye.com.hellogbyeandroid.adapters.userprofilesadapter.UserProfilesA
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
+import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightTabsWidgetFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightsDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.AddCreditCardFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CheckoutConfirmationFragment;
@@ -836,7 +837,11 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
 
                 // setItineraryTitleName();
                 break;
-            case ALTERNATIVE_FLIGHT:
+            case ALTERNATIVE_FLIGHT_ROUND_TRIP:
+                fragment = AlternativeFlightTabsWidgetFragment.newInstance(navPosition);
+                stashToBack = false;
+                break;
+            case ALTERNATIVE_FLIGHT_ONE_WAY_TRIP:
                 fragment = AlternativeFlightFragment.newInstance(navPosition);
                 stashToBack = false;
                 break;
@@ -937,7 +942,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     @Override
     public void continueFlow(int fragment) {
 
-        if (fragment == ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber()) {
+        if (fragment == ToolBarNavEnum.ALTERNATIVE_FLIGHT_ROUND_TRIP.getNavNumber()) {
             selectItem(ToolBarNavEnum.ITINARERY.getNavNumber(), null,true);
         }
     }
