@@ -40,6 +40,7 @@ import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightTabsWidgetFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightsDetailsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.alternative.FactoryAlternativeFlight;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.AddCreditCardFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CheckoutConfirmationFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
@@ -410,6 +411,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
                             @Override
                             public void itemSelected(String inputItem) {
                                 itirnarary_title_Bar.setText(inputItem);
+                                sendNewSolutionName(inputItem);
                             }
 
                             @Override
@@ -464,6 +466,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     public void setTitleForItirnarary(String solutionName){
 
         itirnarary_title_Bar.setText(hgbSaveDataClass.getTravelOrder().getmSolutionName());
+        itirnarary_title_Bar.setTag(hgbSaveDataClass.getTravelOrder().getmSolutionID());
 
     }
 
@@ -852,6 +855,10 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
                 fragment = AlternativeFlightsDetailsFragment.newInstance(navPosition);
                 stashToBack = false;
                 break;
+            case ALTERNATIVE_FLIGHT_FACTORY:
+                fragment = FactoryAlternativeFlight.newInstance(navPosition);
+                stashToBack = false;
+                break;
             case PAYMENT_DETAILS:
                 fragment = NewPaymentDetailsFragment.newInstance(navPosition);
                 //     fragment = isFreeUser( fragment , navPosition);
@@ -893,6 +900,10 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
             case HAZARDOUS_NOTICE:
                 fragment = HazardousNoticeFragment.newInstance(navPosition);
                 break;
+            case FREE_USER_FRAGMENT:
+                  fragment = FreeUserFragment.newInstance(navPosition);
+                  stashToBack = false;
+                break;
 
         }
 
@@ -903,7 +914,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
             fragment.setArguments(arguments);
         }
 
-        if (isFreeUser && (navBar.equals(ToolBarNavEnum.COMPANIONS_PERSONAL_DETAILS) || navBar.equals(ToolBarNavEnum.PAYMENT_DETAILS) || navBar.equals(ToolBarNavEnum.COMPANIONS))) {
+        if (isFreeUser && (navBar.equals(ToolBarNavEnum.COMPANIONS_PERSONAL_DETAILS) || navBar.equals(ToolBarNavEnum.PAYMENT_DETAILS) || navBar.equals(ToolBarNavEnum.COMPANIONS)|| navBar.equals(ToolBarNavEnum.ALL_COMPANIONS_VIEW) || navBar.equals(ToolBarNavEnum.CREDIT_CARD_LIST))) {
             isAddAnimation = true;
             fragment = isFreeUser(fragment, navPosition);
         }
@@ -931,6 +942,22 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         }*/
         mToolbar.setVisibility(View.VISIBLE);
         return fragment;
+    }
+
+    private void sendNewSolutionName(String solutionName){
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).putItenararyTripName(solutionName, hgbSaveDataClass.getTravelOrder().getmSolutionID(),  new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
     }
 
 
