@@ -511,7 +511,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
 
 
-        clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT, false);
+        clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
         if(!clearCNCscreen) {
             sendCNCMessageToServer(strMessage);
         } else {
