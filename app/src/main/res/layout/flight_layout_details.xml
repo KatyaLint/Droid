@@ -10,83 +10,99 @@
 
 
     <com.sothree.slidinguppanel.SlidingUpPanelLayout
+        android:layout_above="@+id/select_flight"
         xmlns:sothree="http://schemas.android.com/apk/res-auto"
         android:id="@+id/sliding_layout_flight"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
-        android:visibility="gone"
         sothree:umanoPanelHeight="@dimen/DP100"
-        sothree:umanoScrollableView="@+id/detail_scroll_view_flights">
+        sothree:umanoScrollableView="@+id/flightRecyclerView">
+        <!--sothree:umanoScrollableView="@+id/detail_scroll_view_flights"-->
 
-    <FrameLayout
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center" />
+        <FrameLayout
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center" />
         <!--android:layout_height="@dimen/DP200"
         android:layout_alignParentTop="true"-->
 
 
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
-    <!--android:layout_below="@+id/map"-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <!--android:layout_below="@+id/map"-->
 
-    <RelativeLayout
-        android:id="@+id/pull_down"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/DP10"
-        android:layout_marginRight="@dimen/DP10"
-        android:padding="@dimen/DP10"
-        android:layout_marginBottom="@dimen/DP10"
-        android:background="@color/hgb_blue">
+            <RelativeLayout
+                android:id="@+id/pull_down"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/DP10"
+                android:layout_marginRight="@dimen/DP10"
+                android:padding="@dimen/DP10"
+                android:layout_marginBottom="@dimen/DP10"
+                android:background="@color/hgb_blue">
 
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="@string/alternative_pull_down_text"
-            android:textColor="@color/white"
-            app:fontName="dinnextltpro_regular.otf" />
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/alternative_pull_down_text"
+                    android:textColor="@color/white"
+                    app:fontName="dinnextltpro_regular.otf" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/arrow_forward"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/arrow_forward"/>
 
 
-    </RelativeLayout>
+            </RelativeLayout>
 
-    <ScrollView
-        android:id="@+id/detail_scroll_view_flights"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/pull_down"
-        android:gravity="center|top">
+    <!--        <ScrollView
+                android:id="@+id/detail_scroll_view_flights"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/pull_down"
+                android:fillViewport="true"
+                android:gravity="center|top">-->
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/flightRecyclerView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+                <android.support.v7.widget.RecyclerView
+                    android:layout_below="@+id/pull_down"
+                    android:id="@+id/flightRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-    </ScrollView>
+            <!--</ScrollView>-->
 
-    </RelativeLayout>
+        </RelativeLayout>
 
     </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 
 
+       <hellogbye.com.hellogbyeandroid.views.FontTextView
+                    android:id="@+id/select_flight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/RedCustomButtonStyle"
+                    android:layout_alignParentBottom="true"
+                    android:text="@string/flight_select_flight"
+                    android:visibility="visible" />
+
+<!--    <android.support.v7.widget.RecyclerView
+        android:id="@+id/flightRecyclerView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />-->
 
 
 </RelativeLayout>
 
- <!--   <hellogbye.com.hellogbyeandroid.views.FontButtonView
-        android:id="@+id/select_current_flight"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/selector_red_button"/>-->
+    <!--   <hellogbye.com.hellogbyeandroid.views.FontButtonView
+           android:id="@+id/select_current_flight"
+           android:layout_alignParentBottom="true"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@drawable/selector_red_button"/>-->

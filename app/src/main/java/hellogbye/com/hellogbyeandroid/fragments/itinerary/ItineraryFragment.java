@@ -2,20 +2,14 @@ package hellogbye.com.hellogbyeandroid.fragments.itinerary;
 
 import android.app.Activity;
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,15 +28,11 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
-import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
-import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
-import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
-import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -53,7 +43,6 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ItineraryFragment extends HGBAbstractFragment {
 
@@ -341,7 +330,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
             //                NodeTypeEnum.FLIGHT.getType();
                 if (NodeTypeEnum.FLIGHT.getType().equals(nodeType)){
 
-                    Fragment fragment = new AlternativeFlightFragment();
+                  //  Fragment fragment = new AlternativeFlightFragment();
                     //accountID
                     TextView grid_flight_destination_from = (TextView)view.findViewById(R.id.grid_flight_destination_from);
                     String guidSelectedUser = grid_flight_destination_from.getTag().toString();
@@ -350,9 +339,10 @@ public class ItineraryFragment extends HGBAbstractFragment {
                     TextView grid_traveler_flight_price = (TextView)view.findViewById(R.id.grid_traveler_flight_price);
                     String guidSelectedItem = grid_traveler_flight_price.getTag().toString();
 
-                    ((AlternativeFlightFragment) fragment).selectedItemGuidNumber(guidSelectedItem);
-                    ((AlternativeFlightFragment) fragment).selectedUserGuidNumber(guidSelectedUser);
-                    getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber(),null);
+                    selectedItemGuidNumber(guidSelectedItem);
+                    selectedUserGuidNumber(guidSelectedUser);
+                    //getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_ROUND_TRIP.getNavNumber(),null);
+                    getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_FACTORY.getNavNumber(),null);
 
                 }else if (NodeTypeEnum.HOTEL.getType().equals(nodeType)){
 
@@ -362,9 +352,8 @@ public class ItineraryFragment extends HGBAbstractFragment {
                     TextView grid_hotel_place = (TextView)view.findViewById(R.id.grid_hotel_place);
                     String guidSelectedItem = grid_hotel_place.getTag().toString();
 
-                    Fragment fragment = new HotelFragment();
-                    ((HotelFragment) fragment).selectedItemGuidNumber(guidSelectedItem);
-                    ((HotelFragment) fragment).selectedUserGuidNumber(guidSelectedUser);
+                    selectedItemGuidNumber(guidSelectedItem);
+                    selectedUserGuidNumber(guidSelectedUser);
                     getFlowInterface().goToFragment(ToolBarNavEnum.HOTEL.getNavNumber(),null);
                 }
 

@@ -34,6 +34,9 @@ public class HGBConstants {
     public static final String BUNDLE_PARENT_LIST = "parent_list";
     public static final String BUNDLE_USER_JSON_POSITION = "user_json_position";
 
+    public static final String BUNDLE_ROUND_TRIP = "round_trip";
+    public static final String BUNDLE_CURRENT_VIEW_NODE_ID = "current_view_node_id";
+
     /* GPS Constant Permission */
     public static final int MY_PERMISSION_ACCESS_COARSE_LOCATION = 11;
     public static final int MY_PERMISSION_ACCESS_FINE_LOCATION = 12;

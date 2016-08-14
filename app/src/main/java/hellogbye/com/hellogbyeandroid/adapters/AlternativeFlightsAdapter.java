@@ -30,9 +30,9 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
     private  List<NodesVO> itemsData;
 
     private OnItemClickListener mItemClickListener;
-    public AlternativeFlightsAdapter(List<NodesVO> itemsData) {
-        this.itemsData = itemsData;
 
+    public void setData(List<NodesVO> itemsData){
+        this.itemsData = itemsData;
     }
 
     @Override
@@ -115,7 +115,6 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
 
         @Override
         public void onClick(View v) {
-            View root = v.getRootView();
 
             mItemClickListener.onItemClick(alternative_flight_price.getTag().toString());
         }

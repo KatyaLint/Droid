@@ -252,7 +252,12 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
         addNewPreferencesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(((MainActivity) getActivity()).isFreeUser){
+                    getFlowInterface().goToFragment(ToolBarNavEnum.FREE_USER_FRAGMENT.getNavNumber(), null);
+                }else{
                 editSettingsPreferencesPopUp();
+                }
             }
         });
 

@@ -279,7 +279,17 @@ Code changing:
    Fixed Bugs:
    -----------
    HEL-1273 - crash at step one of checkout in choosing a credit card to pay for trip
+   HEL-1332 - change all calls from http to https
+   HEL-1331 - text is cut in information when keyboard is up
+   HEL-1324 - change trip name isn't really saved
+   HEL-1323 - redirect the plus icon for adding companion in itinerary in anonymous mode
+   HEL-1322 - too much empty space at a bottom of flight details
+   HEL-1321 - on anonymous, user shouldn't get the option to create a new profile without signing in
+   HEL-1317 - change text in empty airline preference screen
+   HEL-1312 - Manage payment cards shouldn't be available on anonymous
+
 
    Code changing:
    --------------
     - Flight Baggage & Hotel Info
+    - Round Trips

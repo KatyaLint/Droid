@@ -12,13 +12,13 @@
 
 
     <string-array name="base_url">
-        <item>http://alpha.hellogbye.com/gtarest/rest/</item>
-        <item>http://qa.hellogbye.com/qa/Rest/</item>
-        <item>http://dev.hellogbye.com/dev/Rest/</item>
-        <item>http://cnc.hellogbye.com/cnc/Rest/</item>
+        <item>https://alpha.hellogbye.com/gtarest/rest/</item>
+        <item>https://qa.hellogbye.com/qa/Rest/</item>
+        <item>https://dev.hellogbye.com/dev/Rest/</item>
+        <item>https://cnc.hellogbye.com/cnc/Rest/</item>
         <item>https://apiuat.hellogbye.com/uat/rest/</item>
-        <item>http://demo.hellogbye.com/dev/rest/</item>
-        <item>http://apidev.hellogbye.com/dev/rest/</item>
+        <item>https://demo.hellogbye.com/dev/rest/</item>
+        <item>https://apidev.hellogbye.com/dev/rest/</item>
     </string-array>
 
 

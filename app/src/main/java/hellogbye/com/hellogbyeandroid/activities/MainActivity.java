@@ -48,7 +48,9 @@ import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
+import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightTabsWidgetFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightsDetailsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.alternative.FactoryAlternativeFlight;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.AddCreditCardFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CheckoutConfirmationFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
@@ -132,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     private ArrayList<UserProfileVO> mTravelList = new ArrayList<>();
     private ArrayList<CountryItemVO> mEligabileCountryList = new ArrayList<>();
     private ArrayList<CreditCardItem> mCreditCardList = new ArrayList<>();
-    private boolean isFreeUser;
+    public boolean isFreeUser;
 
     private FrameLayout frameLayout;
     private FontTextView preference_save_changes;
@@ -703,7 +705,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
     @Override
     public void continueFlow(int fragment) {
 
-        if (fragment == ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber()) {
+        if (fragment == ToolBarNavEnum.ALTERNATIVE_FLIGHT_ROUND_TRIP.getNavNumber()) {
             selectItem(ToolBarNavEnum.ITINARERY.getNavNumber(), null,true);
         }
     }
@@ -895,17 +897,27 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
                // setItineraryTitleName();
                 break;
-            case ALTERNATIVE_FLIGHT:
+            case ALTERNATIVE_FLIGHT_ROUND_TRIP:
+                fragment = AlternativeFlightTabsWidgetFragment.newInstance(navPosition);
+                stashToBack = false;
+                break;
+            case ALTERNATIVE_FLIGHT_ONE_WAY_TRIP:
                 fragment = AlternativeFlightFragment.newInstance(navPosition);
                 stashToBack = false;
                 break;
-            case HOTEL:
-                fragment = HotelFragment.newInstance(navPosition);
+            case ALTERNATIVE_FLIGHT_FACTORY:
+                fragment = FactoryAlternativeFlight.newInstance(navPosition);
+                stashToBack = false;
                 break;
             case ALTERNATIVE_FLIGHT_DETAILS:
                 fragment = AlternativeFlightsDetailsFragment.newInstance(navPosition);
                 stashToBack = false;
                 break;
+
+            case HOTEL:
+                fragment = HotelFragment.newInstance(navPosition);
+                break;
+
             case PAYMENT_DETAILS:
                 fragment = NewPaymentDetailsFragment.newInstance(navPosition);
                 //     fragment = isFreeUser( fragment , navPosition);
@@ -947,6 +959,10 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             case HAZARDOUS_NOTICE:
                 fragment = HazardousNoticeFragment.newInstance(navPosition);
                 break;
+            case FREE_USER_FRAGMENT:
+                fragment = FreeUserFragment.newInstance(navPosition);
+                stashToBack = false;
+                break;
 
         }
 
@@ -957,7 +973,8 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
             fragment.setArguments(arguments);
         }
 
-        if (isFreeUser && (navBar.equals(ToolBarNavEnum.COMPANIONS_PERSONAL_DETAILS) || navBar.equals(ToolBarNavEnum.PAYMENT_DETAILS) || navBar.equals(ToolBarNavEnum.COMPANIONS))) {
+        if (isFreeUser && (navBar.equals(ToolBarNavEnum.COMPANIONS_PERSONAL_DETAILS) || navBar.equals(ToolBarNavEnum.PAYMENT_DETAILS) || navBar.equals(ToolBarNavEnum.COMPANIONS)
+        || navBar.equals(ToolBarNavEnum.ALL_COMPANIONS_VIEW) || navBar.equals(ToolBarNavEnum.CREDIT_CARD_LIST))) {
             isAddAnimation = true;
             fragment = isFreeUser(fragment, navPosition);
         }
@@ -1019,6 +1036,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
                             @Override
                             public void itemSelected(String inputItem) {
                                 itirnarary_title_Bar.setText(inputItem);
+                                sendNewSolutionName(inputItem);
                             }
 
                             @Override
@@ -1026,6 +1044,22 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 
                             }
                         });
+            }
+        });
+    }
+
+    private void sendNewSolutionName(String solutionName){
+        ConnectionManager.getInstance(MainActivity.this).putItenararyTripName(solutionName, hgbSaveDataClass.getTravelOrder().getmSolutionID(),  new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
             }
         });
     }
@@ -1153,6 +1187,7 @@ public class MainActivity extends AppCompatActivity implements NavListAdapter.On
 public void setTitleForItirnarary(String solutionName){
 
         itirnarary_title_Bar.setText(hgbSaveDataClass.getTravelOrder().getmSolutionName());
+        itirnarary_title_Bar.setTag(hgbSaveDataClass.getTravelOrder().getmSolutionID());
 
 }
 
@@ -1202,7 +1237,7 @@ public void setTitleForItirnarary(String solutionName){
             @Override
             public void onSuccess(Object data) {
                 hgbSaveDataClass.setTravelOrder((UserTravelMainVO) data);
-                continueFlow(fragment);
+              //  continueFlow(fragment);
             }
 
             @Override

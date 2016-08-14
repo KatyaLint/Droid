@@ -2,16 +2,15 @@ package hellogbye.com.hellogbyeandroid.fragments.alternative;
 
 
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -27,14 +27,19 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.adapters.FlightAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -45,6 +50,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.ViewPDFManager;
+import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
 /**
@@ -53,17 +59,18 @@ import hellogbye.com.hellogbyeandroid.utilities.ViewPDFManager;
 
 public class AlternativeFlightFragment extends HGBAbstractFragment implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback {
 
-
-    private UserTravelMainVO userOrder;
     private SupportMapFragment fragment;
     private GoogleMap mMap;
     private RecyclerView recyclerView;
-    private boolean isMyFlight = true;
     private SlidingUpPanelLayout mSlidingPanels;
     public final float PANEL_HIGHT = 0.5f;
-    private ProgressDialog progressDialog;
+ //   private ProgressDialog progressDialog;
     private RelativeLayout pull_down;
     private FlightAdapter mAdapter;
+    private View rootView;
+    private FontTextView select_flight;
+    private boolean isInbound;
+    private NodesVO currentNodeVO;
 
 
     public AlternativeFlightFragment() {
@@ -93,49 +100,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
 
 
-    private void getAlternativeFlights(NodesVO currentNode){
-
-        String solutionID = getActivityInterface().getTravelOrder().getmSolutionID();
-
-        String paxId = currentNode.getAccountID();
-        String flightID =   currentNode.getmGuid();
-        ConnectionManager.getInstance(getActivity()).getAlternateFlightsForFlight(solutionID, paxId, flightID, new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
-                    List<NodesVO> alternativeFlightsVOs = (List<NodesVO>)data;//gson.fromJson((String) data, listType);
-
-                 /*   if(alternativeFlightsVOs.isEmpty()){
-                        mAdapter.setAlternativeButtonDisable(false);
-                    }else{
-                        mAdapter.setAlternativeButtonDisable(true);
-                    }*/
-
-                    getActivityInterface().setAlternativeFlights(alternativeFlightsVOs);
-            }
-
-            @Override
-            public void onError(Object data) {
-                ErrorMessage(data);
-            }
-        });
-    }
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        /*View rootView = inflater.inflate(R.layout.flight_layout_details, container, false);*/
-        View rootView = inflater.inflate(R.layout.flight_layout_details, container, false);
-
-        progressDialog = new ProgressDialog(getActivity());
-        startProgressDialog();
-
-
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.flightRecyclerView);
-
-        mSlidingPanels = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout_flight);
-        pull_down = (RelativeLayout) rootView.findViewById(R.id.pull_down);
+    private void slidingPanelInitialization(){
 
         mSlidingPanels.setCoveredFadeColor(Color.TRANSPARENT);
         mSlidingPanels.setAnchorPoint(PANEL_HIGHT);
@@ -166,10 +131,229 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
             }
         });
+        mSlidingPanels.setVisibility(View.VISIBLE);
+    }
 
-        return rootView;
+
+
+
+    public void initializeAdapter(final NodesVO currentNode){
+
+        currentNodeVO = currentNode;
+
+        if(!currentNodeVO.ismIsAlternative()){
+            getAlternativeFlights(currentNodeVO.getmPrimaryguid());
+        }
+
+        ArrayList<LegsVO> legsFlights = currentNode.getLegs();
+        String allFlights =  setAllFlights(currentNode);
+
+        mAdapter = new FlightAdapter(currentNode, legsFlights);
+
+        mAdapter.setWebViewLinkClicked(new IWebViewClicked(){
+            @Override
+            public void webLinkClicked() {
+                Uri uri = Uri.parse("http://www.flightnetwork.com/pages/airline-information/");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+
+        if(!currentNode.ismIsAlternative()){
+            select_flight.setVisibility(View.GONE);
+        }
+
+        select_flight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendServerNewFlightOrder(currentNode.getLegs().get(0).getmParentguid());
+            }
+        });
+
+        mAdapter.setFlightCost(currentNode.getCost());
+        mAdapter.setPaid(currentNode.getmPaymentProcessingState());
+        mAdapter.setDestinationFlights(allFlights);
+        mAdapter.updateMyFlight(!currentNode.ismIsAlternative());
+     //   mAdapter.updateMyFlight(isMyFlight);
+        mAdapter.setAlternativeButtonDisable(false);
+
+        mAdapter.setButtonListener(new AlternativeButtonCB() {
+            @Override
+            public void showAlternative() {
+                Bundle arg = new Bundle();
+                arg.putString(HGBConstants.BUNDLE_CURRENT_VIEW_NODE_ID, currentNode.getmPrimaryguid());
+                getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_DETAILS.getNavNumber(),arg);
+
+            }
+
+            @Override
+            public void selectCurrentFlight(String guidSelected) {
+
+            }
+
+            @Override
+            public void selectedPressEticket(String guid) {
+
+                String url = ConnectionManager.getURL(ConnectionManager.Services.BOOKING_CONFIRMATION) + "itineraryId="+getActivityInterface().getSolutionID()+"&itemGuid="+guid;
+                new BackgroundTask().execute(url);
+
+            }
+        });
+
+
+
+        // 4. set adapter
+        recyclerView.setAdapter(mAdapter);
+
+
+        // 2. set layoutManger
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity()) {
+            @Override
+            public boolean canScrollVertically() {
+                return true;
+            }
+        };
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        // 5. set item animator to DefaultAnimator
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
 
     }
+
+
+
+    public void flightType(boolean isInbound){
+        this.isInbound = isInbound;
+    }
+
+    private NodesVO getCurrentNodeOutbound(){
+        final NodesVO currentNode;
+        UserTravelMainVO userOrder = getActivityInterface().getTravelOrder();
+        currentNode = getLegWithGuid(userOrder);
+
+        return currentNode;
+    }
+
+    private NodesVO getCurrentNodeInbound(){
+        final NodesVO currentNode;
+        NodesVO nodeVO = null;
+
+        UserTravelMainVO userOrder = getActivityInterface().getTravelOrder();
+        currentNode = getLegWithGuid(userOrder);
+        String primaryGuid = currentNode.getmPrimaryguid();
+
+        Map<String, NodesVO> flightItems = userOrder.getItems();
+        //  nodeVO = flightItems.get(primaryGuid);
+        Collection<NodesVO> nodesValue = flightItems.values();
+        for(NodesVO node : nodesValue){
+            if(node.getParentflightid() != null && node.getParentflightid().equals(primaryGuid)){
+                return node;
+            }
+        }
+        return nodeVO;
+    }
+
+
+
+    public NodesVO getNodeFromAlternative(List<NodesVO> alternativeFlights) {
+
+        String selectedGuid = getSelectedGuid();
+        for(NodesVO nodeVO:alternativeFlights){
+            if(selectedGuid.equals(nodeVO.getmGuid())){
+                return nodeVO;
+            }
+        }
+
+        return null;
+    }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        rootView = inflater.inflate(R.layout.flight_layout_details, null, false);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.flightRecyclerView);
+        pull_down = (RelativeLayout) rootView.findViewById(R.id.pull_down);
+
+        select_flight = (FontTextView)rootView.findViewById(R.id.select_flight);
+
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //   slidingPanelInitialization();
+        //   mSlidingPanels = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout_flight);
+        mSlidingPanels = (SlidingUpPanelLayout)rootView.findViewById(R.id.sliding_layout_flight);
+        slidingPanelInitialization();
+
+        Bundle args = getArguments();
+
+        boolean isRoundTrip = args.getBoolean(HGBConstants.BUNDLE_ROUND_TRIP);
+        NodesVO currentNode;
+        if(!isRoundTrip){
+            currentNode = getCurrentNode();
+        }
+        else{
+            if(isInbound){
+                currentNode =  getCurrentNodeInbound();
+            }else{
+                currentNode =  getCurrentNodeOutbound();
+            }
+        }
+        initializeAdapter(currentNode);
+        return rootView;
+    }
+
+    private NodesVO getCurrentNode(){
+        NodesVO currentNode;
+        List<NodesVO> alternativeFlights = getActivityInterface().getAlternativeFlights();
+
+        if (alternativeFlights != null) {
+            currentNode = getNodeFromAlternative(alternativeFlights);
+        }else {
+            UserTravelMainVO userOrder = getActivityInterface().getTravelOrder();
+            currentNode = getLegWithGuid(userOrder);
+
+        }
+
+        return currentNode;
+    }
+
+
+
+
+    private void getAlternativeFlights(String mGuid){
+
+        String solutionID = getActivityInterface().getTravelOrder().getmSolutionID();
+
+        String paxId = getSelectedUserGuid();
+        String flightID = mGuid;
+
+        ConnectionManager.getInstance(getActivity()).getAlternateFlightsForFlight(solutionID, paxId, flightID, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+                List<NodesVO> alternativeFlightsVOs = (List<NodesVO>)data;//gson.fromJson((String) data, listType);
+
+                getActivityInterface().setAlternativeFlights(alternativeFlightsVOs);
+            }
+
+            @Override
+            public void onError(Object data) {
+
+                ErrorMessage(data);
+            }
+        });
+    }
+
+
 
     @Override
     public void onResume() {
@@ -200,9 +384,9 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
                     @Override
                     public void onSuccess(Object data) {
                         getActivityInterface().setAlternativeFlights(null);
-                        getFlowInterface().callRefreshItinerary(ToolBarNavEnum.ALTERNATIVE_FLIGHT.getNavNumber());
-                        //TODO clean nodeVO, go to iternarary screen
-
+                        //TODO why this here???
+                        getFlowInterface().callRefreshItinerary(ToolBarNavEnum.ALTERNATIVE_FLIGHT_ROUND_TRIP.getNavNumber());
+                        getActivity().onBackPressed();
                     }
 
                     @Override
@@ -213,40 +397,12 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
     }
 
 
-
-    public NodesVO getNodeFromAlternative(List<NodesVO> alternativeFlights) {
-
-        String selectedGuid = getSelectedGuid();
-        for(NodesVO nodeVO:alternativeFlights){
-            if(selectedGuid.equals(nodeVO.getmGuid())){
-                return nodeVO;
-            }
-        }
-
-        return null;
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        final NodesVO currentNode;
-        List<NodesVO> alternativeFlights = getActivityInterface().getAlternativeFlights();
-
-        if (alternativeFlights != null) {
-            currentNode = getNodeFromAlternative(alternativeFlights);
-            // primaryGuid = currentNode.getmPrimaryguid();
-            isMyFlight = false;
-        }else {
-            userOrder = getActivityInterface().getTravelOrder();
-            currentNode = getLegWithGuid(userOrder);
-
-        }
-
-
+    private String setAllFlights(NodesVO currentNode){
         String allFlights = "";
 
         ArrayList<LegsVO> legsFlights = currentNode.getLegs();// legs; //TODO change
-       // LatLngBounds.Builder bc = new LatLngBounds.Builder();
+        int legSize = legsFlights.size();
+        // LatLngBounds.Builder bc = new LatLngBounds.Builder();
         for (int i = 0; i < legsFlights.size(); i++) {
             LegsVO leg = legsFlights.get(i);
             if (leg.getmType().equals("Leg")) {
@@ -255,107 +411,54 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
                 } else {
                     allFlights = allFlights + leg.getmOrigin() + " - ";
                 }
-                AirportCoordinatesVO airportOrginCoordinatesVO = leg.getOriginairportcoordinates();
-                AirportCoordinatesVO airportDestinCoordinatesVO = leg.getDestinationairportcoordinates();
-                mMap.addPolyline(new PolylineOptions()
-                        .add(new LatLng(airportOrginCoordinatesVO.getLatitude(), airportOrginCoordinatesVO.getLongitude()),
-                                new LatLng(airportDestinCoordinatesVO.getLatitude(), airportDestinCoordinatesVO.getLongitude()))
-                        .width(5).color(Color.RED).geodesic(true));
-
-                if(i!=0 || i != legsFlights.size() - 1){
-                    mMap.addMarker(new MarkerOptions().
-                            position(new LatLng(leg.getDestinationairportcoordinates().getLatitude(), leg.getDestinationairportcoordinates().getLongitude())));
-                }
-
-
-
             }
         }
-        //bc.include(new LatLng(currentNode.getOriginairportcoordinates().getLatitude(), currentNode.getOriginairportcoordinates().getLongitude()));
-      //  bc.include(new LatLng(currentNode.getDestinationairportcoordinates().getLatitude(), currentNode.getDestinationairportcoordinates().getLongitude()));
-        mMap.addMarker(new MarkerOptions().
-                position(new LatLng(currentNode.getOriginairportcoordinates().getLatitude(), currentNode.getOriginairportcoordinates().getLongitude())));
-        mMap.addMarker(new MarkerOptions().
-                position(new LatLng(currentNode.getDestinationairportcoordinates().getLatitude(), currentNode.getDestinationairportcoordinates().getLongitude())));
+        return allFlights;
+    }
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(currentNode.getDestinationairportcoordinates().getLatitude(), currentNode.getDestinationairportcoordinates().getLongitude()),5);
+
+    private void setMapCoordinates(ArrayList<LegsVO> legsFlights, int i){
+        int size = legsFlights.size();
+        LegsVO leg = legsFlights.get(i);
+
+        AirportCoordinatesVO airportOrginCoordinatesVO = leg.getOriginairportcoordinates();
+        AirportCoordinatesVO airportDestinCoordinatesVO = leg.getDestinationairportcoordinates();
+        if(mMap == null) {
+            return;
+        }
+            mMap.addPolyline(new PolylineOptions()
+                    .add(new LatLng(airportOrginCoordinatesVO.getLatitude(), airportOrginCoordinatesVO.getLongitude()),
+                            new LatLng(airportDestinCoordinatesVO.getLatitude(), airportDestinCoordinatesVO.getLongitude()))
+                    .width(5).color(Color.RED).geodesic(true));
+
+        if (i != 0 || i != size - 1) {
+            mMap.addMarker(new MarkerOptions().
+                  position(new LatLng(leg.getDestinationairportcoordinates().getLatitude(), leg.getDestinationairportcoordinates().getLongitude())));
+         }
+
+    }
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        ArrayList<LegsVO> legsFlights = currentNodeVO.getLegs();
+        for (int i = 0; i < legsFlights.size(); i++) {
+            setMapCoordinates(legsFlights, i);
+        }
+
+        LatLngBounds.Builder bc = new LatLngBounds.Builder();
+        bc.include(new LatLng(currentNodeVO.getOriginairportcoordinates().getLatitude(), currentNodeVO.getOriginairportcoordinates().getLongitude()));
+        bc.include(new LatLng(currentNodeVO.getDestinationairportcoordinates().getLatitude(), currentNodeVO.getDestinationairportcoordinates().getLongitude()));
+
+        //Kate
+        mMap.addMarker(new MarkerOptions().
+                position(new LatLng(currentNodeVO.getOriginairportcoordinates().getLatitude(), currentNodeVO.getOriginairportcoordinates().getLongitude())));
+        mMap.addMarker(new MarkerOptions().
+                position(new LatLng(currentNodeVO.getDestinationairportcoordinates().getLatitude(), currentNodeVO.getDestinationairportcoordinates().getLongitude())));
+
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(currentNodeVO.getDestinationairportcoordinates().getLatitude(), currentNodeVO.getDestinationairportcoordinates().getLongitude()),8);
         mMap.moveCamera(cameraUpdate);
-
-
-
-
-        // 2. set layoutManger
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity()) {
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        };
-
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-
-        // 3. create an adapter
-        mAdapter = new FlightAdapter(currentNode,legsFlights);
-
-        mAdapter.setWebViewLinkClicked(new IWebViewClicked(){
-            @Override
-            public void webLinkClicked() {
-                Uri uri = Uri.parse("http://www.flightnetwork.com/pages/airline-information/");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-            }
-        });
-
-
-        // 4. set adapter
-        recyclerView.setAdapter(mAdapter);
-        // 5. set item animator to DefaultAnimator
-        //  recyclerView.setItemAnimator(new DefaultItemAnimator());
-        mAdapter.setFlightCost(currentNode.getCost());
-        mAdapter.setPaid(currentNode.getmPaymentProcessingState());
-        mAdapter.setDestinationFlights(allFlights);
-        mAdapter.updateMyFlight(isMyFlight);
-        mAdapter.setAlternativeButtonDisable(false);
-
-        mAdapter.setButtonListener(new AlternativeButtonCB() {
-            @Override
-            public void showAlternative() {
-
-                getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_DETAILS.getNavNumber(),null);
-
-            }
-
-            @Override
-            public void selectCurrentFlight(String guidSelected) {
-                mAdapter.updateMyFlight(true);
-                mAdapter.notifyDataSetChanged();
-                mAdapter.setAlternativeButtonDisable(true);
-                sendServerNewFlightOrder(guidSelected);
-
-            }
-
-            @Override
-            public void selectedPressEticket(String guid) {
-
-                String url = ConnectionManager.getURL(ConnectionManager.Services.BOOKING_CONFIRMATION) + "itineraryId="+getActivityInterface().getSolutionID()+"&itemGuid="+guid;
-                new BackgroundTask().execute(url);
-
-            }
-        });
-
-
-        // TODO empty alternative flight after select clicked
-
-
-        mSlidingPanels.setVisibility(View.VISIBLE);
-
-        dissmissProgressDialog();
-
-        if(isMyFlight){
-            getAlternativeFlights(currentNode);
-        }
 
 
 
@@ -407,7 +510,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
     }
 
-    private void startProgressDialog() {
+/*    private void startProgressDialog() {
         progressDialog = ProgressDialog.show(getActivity(), "", "loading");
         progressDialog.setCancelable(false);
         progressDialog.setIndeterminate(true);
@@ -416,7 +519,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
     private void dissmissProgressDialog(){
         progressDialog.dismiss();
-    }
+    }*/
 
 
 }

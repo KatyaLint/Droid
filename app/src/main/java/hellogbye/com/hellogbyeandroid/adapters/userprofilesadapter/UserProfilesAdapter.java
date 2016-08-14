@@ -67,12 +67,10 @@ public class UserProfilesAdapter extends BaseAdapter {
             image.setBackgroundResource(R.drawable.time_saver);
             text.setTypeface(textFont);
         }
-
-
-      /*  else{
+        else{
             image.setBackgroundResource(R.drawable.create_your_own_profile_icon);
             text.setTypeface(textFont);
-        }*/
+        }
 
         return convertView;
     }

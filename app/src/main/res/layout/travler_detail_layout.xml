@@ -27,8 +27,7 @@
     <EditText
         android:id="@+id/travel_detail_last_name"
         style="@style/TravelerDetailsTextStyle"
-        android:hint="Last Name"
-         />
+        android:hint="Last Name" />
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
