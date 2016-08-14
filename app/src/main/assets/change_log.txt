@@ -293,3 +293,6 @@ Code changing:
    --------------
     - Flight Baggage & Hotel Info
     - Round Trips
+    - Bottom Bar
+    - Back button when entering itinerary sequence.
+    - Fixed entering CNC from Menu
