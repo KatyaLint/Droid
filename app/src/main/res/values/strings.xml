@@ -305,5 +305,6 @@
     <string name="companions">Companions</string>
     <string name="notification">Notification</string>
     <string name="my_account">My Account</string>
+    <string name="search">search</string>
 
 </resources>

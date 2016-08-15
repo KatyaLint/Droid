@@ -2,6 +2,7 @@ package hellogbye.com.hellogbyeandroid.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.SearchManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,18 +13,17 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
-
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
 
@@ -69,7 +69,6 @@ import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSett
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.PreferenceSettingsEmailFragment;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
-import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.PersonalUserInformationVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -94,13 +93,12 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by arisprung on 8/7/16.
  */
-public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoiceInterface, HGBFlowInterface  {
+public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoiceInterface, HGBFlowInterface {
 
     private CostumeToolBar mToolbar;
     private HGBPreferencesManager hgbPrefrenceManager;
     private ImageButton up_bar_favorite;
     private ImageButton newIteneraryImageButton;
-
 
 
     private UserProfileVO mCurrentUser;
@@ -138,8 +136,6 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     }
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,8 +144,9 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         setContentView(R.layout.main_activity_bottom_tab_layout);
 
         //INIT ToolBar
-        mToolbar = (CostumeToolBar)findViewById(R.id.toolbar_costume);
+        mToolbar = (CostumeToolBar) findViewById(R.id.toolbar_costume);
         initToolBar();
+        initSearchBar();
 
         //INIT Bottom tabs
 
@@ -166,7 +163,6 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         mTitle = getTitle();
 
         initBottomBar(savedInstanceState);
-
 
 
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
@@ -189,7 +185,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
 
         boolean locationToken = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.HGB_LOCATION_TOKEN, true);
         String location = HGBUtility.getLocation(MainActivityBottomTabs.this, locationToken);
-        if(location != null && hgbSaveDataClass.getTravelOrder()!= null){
+        if (location != null && hgbSaveDataClass.getTravelOrder() != null) {
             String[] locationArr = location.split("&");
             hgbSaveDataClass.getTravelOrder().setLocation(locationArr);
             hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_LOCATION_TOKEN, false);
@@ -203,7 +199,8 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         mBottomBar.useFixedMode();
         mBottomBar.setItems(R.menu.menu_bottombar);
         mBottomBar.setTextAppearance(R.style.bottom_bar_text);
-        mBottomBar.setActiveTabColor( ContextCompat.getColor(getApplicationContext(),R.color.electric_tix_blue_press));
+        mBottomBar.setActiveTabColor(ContextCompat.getColor(getApplicationContext(), R.color.electric_tix_blue_press));
+
         mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
@@ -218,6 +215,26 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
 
     }
 
+    private void initSearchBar() {
+        SearchView searchView = (SearchView) mToolbar.findViewById(R.id.search);
+        // Sets searchable configuration defined in searchable.xml for this SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+    }
+
     private void clearCNCItems() {
 
         hgbSaveDataClass.setCNCItems(null);
@@ -226,7 +243,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
         Bundle args = new Bundle();
         args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
-        selectItem(ToolBarNavEnum.CNC.getNavNumber(), null,true);
+        selectItem(ToolBarNavEnum.CNC.getNavNumber(), null, true);
     }
 
     private void selectBottemTab(int menuItemId) {
@@ -235,19 +252,19 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
             case R.id.bb_menu_my_trips:
                 //mNavController.switchTab(INDEX_MY_TRIPS);
 
-                selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null,true);
+                selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null, true);
                 break;
             case R.id.bb_menu_companions:
-                selectItem(ToolBarNavEnum.COMPANIONS.getNavNumber(), null,true);
+                selectItem(ToolBarNavEnum.COMPANIONS.getNavNumber(), null, true);
                 break;
             case R.id.bb_menu_cnc:
-                selectItem(ToolBarNavEnum.CNC.getNavNumber(), null,true);
+                selectItem(ToolBarNavEnum.CNC.getNavNumber(), null, true);
                 break;
             case R.id.bb_menu_notiifcations:
-                selectItem(ToolBarNavEnum.NOTIFICATIONS.getNavNumber(), null,true);
+                selectItem(ToolBarNavEnum.NOTIFICATIONS.getNavNumber(), null, true);
                 break;
             case R.id.bb_menu_my_account:
-                selectItem(ToolBarNavEnum.ACCOUNT.getNavNumber(), null,true);
+                selectItem(ToolBarNavEnum.ACCOUNT.getNavNumber(), null, true);
                 break;
         }
     }
@@ -275,20 +292,15 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         String str = backEntry.getName();
 
 
-
-
-
-
         if (str.equals(HotelFragment.class.toString()) && !HotelFragment.IS_MAIN_BACK_ALLOWED) {
             return;
         }
 
-        if(count == 1 && str.equals(TripsTabsView.class.toString())){
+        if (count == 1 && str.equals(TripsTabsView.class.toString())) {
             LogOutPopup();
 
             return;
         }
-
 
 
         if (HGBUtility.clearBackStackAndGoToNextFragment(getSupportFragmentManager())) {
@@ -326,7 +338,6 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     }
 
 
-
 //    @Override
 //    protected void onSaveInstanceState(Bundle outState) {
 //        super.onSaveInstanceState(outState);
@@ -334,11 +345,11 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
 //    }
 
 
-    private void LogOutPopup(){
+    private void LogOutPopup() {
         LayoutInflater li = LayoutInflater.from(getApplicationContext());
-        final  View popupView = li.inflate(R.layout.popup_alert_layout, null);
-        HGBUtility.showAlertPopUp(MainActivityBottomTabs.this,  null, popupView,
-                getResources().getString(R.string.main_exit_application),getResources().getString(R.string.ok_button), new PopUpAlertStringCB() {
+        final View popupView = li.inflate(R.layout.popup_alert_layout, null);
+        HGBUtility.showAlertPopUp(MainActivityBottomTabs.this, null, popupView,
+                getResources().getString(R.string.main_exit_application), getResources().getString(R.string.ok_button), new PopUpAlertStringCB() {
                     @Override
                     public void itemSelected(String inputItem) {
                         //    HGBUtility.removeAllFragments(getSupportFragmentManager());
@@ -351,7 +362,6 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
                     }
                 });
     }
-
 
 
     private void initToolBar() {
@@ -387,19 +397,17 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     }
 
     private void setOnClickListenerForSavePreferences() {
-        preference_save_changes = (FontTextView)mToolbar.findViewById(R.id.preference_save_changes);
-        preference_save_changes.setOnClickListener(new View.OnClickListener(){
+        preference_save_changes = (FontTextView) mToolbar.findViewById(R.id.preference_save_changes);
+        preference_save_changes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(onSavePreferencesButtonClicked != null) {
+                if (onSavePreferencesButtonClicked != null) {
                     onSavePreferencesButtonClicked.onSaveClicked();
                 }
 
             }
         });
     }
-
-
 
 
     private void setOnClickListenerForItineraryTopBar() {
@@ -427,7 +435,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
 
                 input.setText(itirnarary_title_Bar.getText());
                 HGBUtility.showAlertPopUp(MainActivityBottomTabs.this, input, promptsView, getResources().getString(R.string.edit_trip_name)
-                        ,getResources().getString(R.string.save_button),
+                        , getResources().getString(R.string.save_button),
                         new PopUpAlertStringCB() {
                             @Override
                             public void itemSelected(String inputItem) {
@@ -472,7 +480,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         });
     }
 
-    public void setFavority(boolean isFavority){
+    public void setFavority(boolean isFavority) {
         if (isFavority) {
             up_bar_favorite.setBackgroundResource(R.drawable.star_in_favorite);
             //   hgbSaveDataClass.getTravelOrder().setmIsFavorite(false);
@@ -484,14 +492,14 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     }
 
 
-    public void setTitleForItirnarary(String solutionName){
+    public void setTitleForItirnarary(String solutionName) {
 
         itirnarary_title_Bar.setText(hgbSaveDataClass.getTravelOrder().getmSolutionName());
         itirnarary_title_Bar.setTag(hgbSaveDataClass.getTravelOrder().getmSolutionID());
 
     }
 
-    private void getCurrentItinerary(String solutionId){
+    private void getCurrentItinerary(String solutionId) {
 
         ConnectionManager.getInstance(MainActivityBottomTabs.this).getItinerary(solutionId, new ConnectionManager.ServerRequestListener() {
             @Override
@@ -529,17 +537,17 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         });
 
 
-        final ImageButton toolbar_go_to_iternerary = (ImageButton)mToolbar.findViewById(R.id.toolbar_go_to_iternerary);
-        toolbar_go_to_iternerary.setOnClickListener(new View.OnClickListener(){
+        final ImageButton toolbar_go_to_iternerary = (ImageButton) mToolbar.findViewById(R.id.toolbar_go_to_iternerary);
+        toolbar_go_to_iternerary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 // goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
 
 
-                if(hgbSaveDataClass.getTravelOrder() == null){
+                if (hgbSaveDataClass.getTravelOrder() == null) {
                     toolbar_go_to_iternerary.setEnabled(false);
-                }else {
+                } else {
                     goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
                 }
 
@@ -549,30 +557,28 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
 
     }
 
-    private void getUserData(){
+    private void getUserData() {
 
         ConnectionManager.getInstance(MainActivityBottomTabs.this).getUserProfile(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
 
                 UserProfileVO mCurrentUser = (UserProfileVO) data;
-                String logInEmail = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL,"");
+                String logInEmail = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, "");
 
                 hgbSaveDataClass.getPersonalUserInformation().setUserEmailLogIn(logInEmail);
                 hgbSaveDataClass.setCurrentUser(mCurrentUser);
 
 
-                if(!mCurrentUser.getIsTravelprofile()){
+                if (!mCurrentUser.getIsTravelprofile()) {
                     showUserProfiles();
                 }
 
-                String profileID = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID,"");
+                String profileID = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, "");
                 hgbSaveDataClass.getPersonalUserInformation().setmTravelPreferencesProfileId(profileID);
                 //my_trips_image_profile.setImageBitmap(HGBUtility.getBitmapFromCache(getBaseContext()));
                 getAccountsProfiles();
-              //  selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null,true);
-
-
+                //  selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null,true);
 
 
             }
@@ -594,7 +600,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
                 hgbSaveDataClass.setAccounts(accounts);
                 //  AccountsVO account = accounts.get(0);
                 //  hgbSaveDataClass.getCurrentUser().setEmailaddress(account.getEmail());
-              //  editProfileTypeMainToolBar();
+                //  editProfileTypeMainToolBar();
             }
 
             @Override
@@ -610,9 +616,9 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         ArrayList<AccountsVO> accounts = hgbSaveDataClass.getAccounts();
         my_trip_profile = (FontTextView) findViewById(R.id.my_trip_profile);
 
-        for(AccountsVO account: accounts){
+        for (AccountsVO account : accounts) {
             String userEmailLogIn = hgbSaveDataClass.getPersonalUserInformation().getUserEmailLogIn();
-            if(account.getEmail().equals(userEmailLogIn)){
+            if (account.getEmail().equals(userEmailLogIn)) {
                 my_trip_profile.setText(account.getTravelpreferenceprofile().getProfilename());
                 my_trip_profile.setTag(account.getTravelpreferenceprofile().getId());
                 //   hgbSaveDataClass.getCurrentUser().setmTravelPreferencesProfileId(account.getTravelpreferenceprofile().getId());
@@ -622,7 +628,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         }
     }
 
-    private void showUserProfiles(){
+    private void showUserProfiles() {
 
         //     https://apiuat.hellogbye.com/uat/rest/TravelPreference/Profiles/Defaults
 
@@ -650,20 +656,20 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
 
     }
 
-    private void showAlertProfilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs ){
+    private void showAlertProfilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivityBottomTabs.this);
         dialogBuilder.setTitle(getResources().getString(R.string.profile_choose_between));
 
         final ArrayList<String> itemsList = new ArrayList<String>();
-        for (DefaultsProfilesVO userProfileVO:userProfileVOs ){
+        for (DefaultsProfilesVO userProfileVO : userProfileVOs) {
             itemsList.add(userProfileVO.getName());
         }
         // final CharSequence[] list = itemsList.toArray(new String[itemsList.size()]);
-        UserProfilesAdapter adapter = new UserProfilesAdapter(itemsList,this.getBaseContext());
+        UserProfilesAdapter adapter = new UserProfilesAdapter(itemsList, this.getBaseContext());
         dialogBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 DefaultsProfilesVO defaultProfile = userDefaultProfiles.get(item);
-                postDefaultPrifile(String.valueOf(defaultProfile.getId()),defaultProfile.getName());
+                postDefaultPrifile(String.valueOf(defaultProfile.getId()), defaultProfile.getName());
                 selectDefaultProfileDialog.dismiss();
             }
         });
@@ -674,8 +680,8 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     }
 
 
-    private void postDefaultPrifile(String profileId,String profileName) {
-        ConnectionManager.getInstance(MainActivityBottomTabs.this).postDefaultProfile(profileId,profileName, new ConnectionManager.ServerRequestListener() {
+    private void postDefaultPrifile(String profileId, String profileName) {
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).postDefaultProfile(profileId, profileName, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
@@ -695,11 +701,11 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     }
 
 
-    private void putNewPreferencesForUser(final String userEmail, final String accountID){
+    private void putNewPreferencesForUser(final String userEmail, final String accountID) {
         ConnectionManager.getInstance(MainActivityBottomTabs.this).putAccountsPreferences(userEmail, accountID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID,accountID);
+                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, accountID);
             }
 
             @Override
@@ -719,7 +725,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         ConnectionManager.getInstance(MainActivityBottomTabs.this).getCompanions(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                ArrayList<CompanionVO> companions =(ArrayList<CompanionVO>)data;
+                ArrayList<CompanionVO> companions = (ArrayList<CompanionVO>) data;
                 hgbSaveDataClass.setCompanions(companions);
                 getCompanionsInvitation();
             }
@@ -734,11 +740,11 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         });
     }
 
-    private void getCompanionsInvitation(){
+    private void getCompanionsInvitation() {
         ConnectionManager.getInstance(MainActivityBottomTabs.this).getCompanionInvitation(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                ArrayList<CompanionVO> companionsInvitation =(ArrayList<CompanionVO>)data;
+                ArrayList<CompanionVO> companionsInvitation = (ArrayList<CompanionVO>) data;
                 hgbSaveDataClass.addInvitationCompanionsToCompanions(companionsInvitation);
             }
 
@@ -751,12 +757,12 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         });
     }
 
-    private void getCountries(){
+    private void getCountries() {
         ConnectionManager.getInstance(MainActivityBottomTabs.this).getBookingOptions(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 //responceText.setText((String) data);
-                BookingRequestVO bookingrequest = (BookingRequestVO)data;
+                BookingRequestVO bookingrequest = (BookingRequestVO) data;
                 hgbSaveDataClass.setBookingRequest(bookingrequest);
                 hgbSaveDataClass.getBookingRequest().sortCountryItems();
             }
@@ -799,7 +805,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     }
 
 
-    public void selectItem(int position, Bundle bundle,final boolean stashFragment) {
+    public void selectItem(int position, Bundle bundle, final boolean stashFragment) {
         // update the main content by replacing fragments
 
         Fragment fragment = null;
@@ -922,8 +928,8 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
                 fragment = HazardousNoticeFragment.newInstance(navPosition);
                 break;
             case FREE_USER_FRAGMENT:
-                  fragment = FreeUserFragment.newInstance(navPosition);
-                  stashToBack = false;
+                fragment = FreeUserFragment.newInstance(navPosition);
+                stashToBack = false;
                 break;
 
         }
@@ -935,7 +941,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
             fragment.setArguments(arguments);
         }
 
-        if (isFreeUser && (navBar.equals(ToolBarNavEnum.COMPANIONS_PERSONAL_DETAILS) || navBar.equals(ToolBarNavEnum.PAYMENT_DETAILS) || navBar.equals(ToolBarNavEnum.COMPANIONS)|| navBar.equals(ToolBarNavEnum.ALL_COMPANIONS_VIEW) || navBar.equals(ToolBarNavEnum.CREDIT_CARD_LIST))) {
+        if (isFreeUser && (navBar.equals(ToolBarNavEnum.COMPANIONS_PERSONAL_DETAILS) || navBar.equals(ToolBarNavEnum.PAYMENT_DETAILS) || navBar.equals(ToolBarNavEnum.COMPANIONS) || navBar.equals(ToolBarNavEnum.ALL_COMPANIONS_VIEW) || navBar.equals(ToolBarNavEnum.CREDIT_CARD_LIST))) {
             isAddAnimation = true;
             fragment = isFreeUser(fragment, navPosition);
         }
@@ -946,6 +952,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         mToolbar.initToolBarItems();
         mToolbar.updateToolBarView(position);
     }
+
     public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
         this.onBackPressedListener = onBackPressedListener;
     }
@@ -953,8 +960,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
 
     private Fragment isFreeUser(Fragment fragment, int navPosition) {
 
-        if (isFreeUser)
-        {
+        if (isFreeUser) {
             fragment = FreeUserFragment.newInstance(navPosition);
             //  mToolbar.setVisibility(View.GONE);
         }
@@ -965,8 +971,8 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         return fragment;
     }
 
-    private void sendNewSolutionName(String solutionName){
-        ConnectionManager.getInstance(MainActivityBottomTabs.this).putItenararyTripName(solutionName, hgbSaveDataClass.getTravelOrder().getmSolutionID(),  new ConnectionManager.ServerRequestListener() {
+    private void sendNewSolutionName(String solutionName) {
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).putItenararyTripName(solutionName, hgbSaveDataClass.getTravelOrder().getmSolutionID(), new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
 
@@ -982,7 +988,6 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     }
 
 
-
     /////////////////////////////////
     /////   HGBFlowInterface  //////
     /////////////////////////////////
@@ -991,7 +996,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     public void continueFlow(int fragment) {
 
         if (fragment == ToolBarNavEnum.ALTERNATIVE_FLIGHT_ROUND_TRIP.getNavNumber()) {
-            selectItem(ToolBarNavEnum.ITINARERY.getNavNumber(), null,true);
+            selectItem(ToolBarNavEnum.ITINARERY.getNavNumber(), null, true);
         }
     }
 
@@ -1000,7 +1005,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         HGBUtility.removeAllFragments(getSupportFragmentManager());
         //  hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
-        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER,"");
+        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER, "");
 
 
         Intent intent = new Intent(getApplicationContext(), StartingMenuActivity.class);
@@ -1010,6 +1015,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
 
         finish();
     }
+
     public void setEditClickCB(PreferenceSettingsFragment.OnItemClickListener editClickCB) {
         this.editClickCB = editClickCB;
     }
@@ -1087,7 +1093,6 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     }
 
 
-
     @Override
     public void openRightPane() {
 
@@ -1100,24 +1105,24 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     public void selectBottomBar(int selection) {
         switch (selection) {
             case R.id.bb_menu_my_trips:
-                mBottomBar.selectTabAtPosition(BOTTOM_BAR_FIRST_INDEX,true,false);
+                mBottomBar.selectTabAtPosition(BOTTOM_BAR_FIRST_INDEX, true, false);
                 mBottomBar.setmCurrentTabPosition(BOTTOM_BAR_FIRST_INDEX);
                 break;
             case R.id.bb_menu_companions:
-                mBottomBar.selectTabAtPosition(BOTTOM_BAR_SECOND_INDEX,true,false);
+                mBottomBar.selectTabAtPosition(BOTTOM_BAR_SECOND_INDEX, true, false);
                 mBottomBar.setmCurrentTabPosition(BOTTOM_BAR_SECOND_INDEX);
                 break;
             case R.id.bb_menu_cnc:
-                mBottomBar.selectTabAtPosition(BOTTOM_BAR_THIRD_INDEX,true,false);
+                mBottomBar.selectTabAtPosition(BOTTOM_BAR_THIRD_INDEX, true, false);
                 mBottomBar.setmCurrentTabPosition(BOTTOM_BAR_THIRD_INDEX);
                 enableFullScreen(false);
                 break;
             case R.id.bb_menu_notiifcations:
-                mBottomBar.selectTabAtPosition(BOTTOM_BAR_FOURTH_INDEX,true,false);
+                mBottomBar.selectTabAtPosition(BOTTOM_BAR_FOURTH_INDEX, true, false);
                 mBottomBar.setmCurrentTabPosition(BOTTOM_BAR_FOURTH_INDEX);
                 break;
             case R.id.bb_menu_my_account:
-                mBottomBar.selectTabAtPosition(BOTTOM_BAR_FIFTH_INDEX,true,false);
+                mBottomBar.selectTabAtPosition(BOTTOM_BAR_FIFTH_INDEX, true, false);
                 mBottomBar.setmCurrentTabPosition(BOTTOM_BAR_FIFTH_INDEX);
                 break;
         }
@@ -1125,12 +1130,12 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
 
     @Override
     public void enableFullScreen(boolean fullscreen) {
-        if(fullscreen){
+        if (fullscreen) {
             mBottomBar.hide();
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
 
-        }else{
+        } else {
             mBottomBar.show();
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setHomeButtonEnabled(false);
@@ -1170,7 +1175,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
 
     @Override
     public void goToFragment(int fragment, Bundle bundle) {
-        selectItem(fragment, bundle,true);
+        selectItem(fragment, bundle, true);
     }
 
    /* @Override
@@ -1190,20 +1195,16 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     }
 
 
-
-
-                    /////////////////////////////////
-                    /////   HGBVoiceInterface  //////
-                    /////////////////////////////////
-
-
+    /////////////////////////////////
+    /////   HGBVoiceInterface  //////
+    /////////////////////////////////
 
 
     @Override
     public void openVoiceToTextControl() {
         try {
 
-            Intent detailsIntent =  new Intent(RecognizerIntent.ACTION_GET_LANGUAGE_DETAILS);
+            Intent detailsIntent = new Intent(RecognizerIntent.ACTION_GET_LANGUAGE_DETAILS);
             sendOrderedBroadcast(
                     detailsIntent, null, new LanguageDetailsChecker(), null, Activity.RESULT_OK, null, null);
 
@@ -1212,23 +1213,19 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         }
     }
 
-    public class LanguageDetailsChecker extends BroadcastReceiver
-    {
+    public class LanguageDetailsChecker extends BroadcastReceiver {
         private List<String> supportedLanguages;
 
         private String languagePreference;
 
         @Override
-        public void onReceive(Context context, Intent i)
-        {
+        public void onReceive(Context context, Intent i) {
             Bundle results = getResultExtras(true);
-            if (results.containsKey(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE))
-            {
+            if (results.containsKey(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE)) {
                 languagePreference =
                         results.getString(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE);
             }
-            if (results.containsKey(RecognizerIntent.EXTRA_SUPPORTED_LANGUAGES))
-            {
+            if (results.containsKey(RecognizerIntent.EXTRA_SUPPORTED_LANGUAGES)) {
                 supportedLanguages =
                         results.getStringArrayList(
                                 RecognizerIntent.EXTRA_SUPPORTED_LANGUAGES);
@@ -1255,8 +1252,6 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
             }
         }
     }
-
-
 
 
 }
