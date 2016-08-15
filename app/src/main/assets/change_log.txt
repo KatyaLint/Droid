@@ -298,12 +298,15 @@ Code changing:
     - Fixed entering CNC from Menu
 
 
-       ------------------------------------------
+   ------------------------------------------
                    Version 1.5.9
-       ------------------------------------------
-       Fixed Bugs:
+   ------------------------------------------
+    Fixed Bugs:
        -----------
-
+        - HEL (1367) - crash in preference
+        - HEL(1366)-  fixed crash in Manage cards
+        - Fixed crash in Personal information
+        - (HEL-1355) can't create a new query
 
        Code changing:
        --------------

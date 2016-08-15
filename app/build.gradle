@@ -49,7 +49,7 @@ android {
         live {
             buildConfigField 'boolean', 'IS_DEV', 'false'
             applicationId "com.hellogbye"
-            versionName "1.5.9"
+            versionName "1.6.0"
         }
     }
 
