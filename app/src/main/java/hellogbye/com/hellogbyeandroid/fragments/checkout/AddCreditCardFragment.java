@@ -557,7 +557,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
                         @Override
                         public void onSuccess(Object data) {
                             progressDialog.hide();
-                            ((MainActivity) getActivity()).onBackPressed();
+                            ((MainActivityBottomTabs) getActivity()).onBackPressed();
                             //getFragmentManager().popBackStack();s
 
                         }
