@@ -15,6 +15,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.settingaccount.AccountSettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -492,7 +493,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
         ConnectionManager.getInstance(getActivity()).putUserSettings(newUser, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                ((MainActivity) getActivity()).onBackPressed();
+                ((MainActivityBottomTabs) getActivity()).onBackPressed();
 
              //   getFlowInterface().goToFragment(ToolBarNavEnum.ACCOUNT.getNavNumber(), null,false);
 
