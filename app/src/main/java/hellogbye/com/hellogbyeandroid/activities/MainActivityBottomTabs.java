@@ -309,6 +309,10 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     }
 
 
+    public void setOnSavePreferencesButtonClicked(PreferencesSettingsMainClass.saveButtonClicked onSavePreferencesButtonClicked) {
+        this.onSavePreferencesButtonClicked = onSavePreferencesButtonClicked;
+    }
+
     @Override
     protected void onStop() {
         super.onStop();

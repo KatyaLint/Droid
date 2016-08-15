@@ -4,25 +4,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
-
 import java.util.List;
-
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
-import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
-import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
-import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by nyawka on 12/2/15.
@@ -49,11 +40,11 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ((MainActivity) getActivity()).setOnSavePreferencesButtonClicked(new saveButtonClicked(){
+        ((MainActivityBottomTabs) getActivity()).setOnSavePreferencesButtonClicked(new saveButtonClicked(){
             @Override
             public void onSaveClicked() {
                // savePreferenceAlert();
-                ((MainActivity) getActivity()).onBackPressed();
+                ((MainActivityBottomTabs) getActivity()).onBackPressed();
             }
         });
 
