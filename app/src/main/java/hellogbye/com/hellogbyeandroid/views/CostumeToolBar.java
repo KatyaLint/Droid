@@ -1,13 +1,19 @@
 package hellogbye.com.hellogbyeandroid.views;
 
+import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Context;
 
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -18,6 +24,7 @@ public class CostumeToolBar extends Toolbar {
     private ImageButton up_bar_favorite;
     private ImageButton new_itinerary;
     private ImageButton favoriteButton;
+    private ImageButton search_maginfy;
     private FontTextView editPreferense;
     private ImageView homeTitleImage;
     private FontTextView titleText;
@@ -34,6 +41,8 @@ public class CostumeToolBar extends Toolbar {
     private LinearLayout tool_bar_profile_name;
     private ImageButton toolbar_go_to_iternerary;
     private FontTextView preference_save_changes;
+    private SearchView search_view;
+    private Activity mActivity;
 
     public CostumeToolBar(Context context) {
         super(context);
@@ -100,8 +109,64 @@ public class CostumeToolBar extends Toolbar {
         if(new_itinerary == null){
             new_itinerary = (ImageButton) findViewById(R.id.toolbar_new_iternerary);
         }
+        if(search_maginfy == null){
+            search_maginfy = (ImageButton) findViewById(R.id.search_maginfy);
+        }
+
+        initSearchBar();
 
 
+    }
+
+    private void initSearchBar() {
+        if(search_view == null){
+            search_view = (SearchView) findViewById(R.id.search);
+        }
+
+
+        ImageView searchClose = (ImageView) search_view.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+        TextView searchCloseText = (TextView) search_view.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+
+        searchClose.setImageResource(R.drawable.close_icon_a_1);
+//        int id = search_view.getContext()
+//                .getResources()
+//                .getIdentifier("android:id/search_src_text", null, null);
+//        TextView textView = (TextView) search_view.findViewById(id);
+        searchCloseText.setTextColor(ContextCompat.getColor(getContext(), R.color.hgb_toolbar_blue));
+        searchCloseText.setHintTextColor(ContextCompat.getColor(getContext(), R.color.hgb_toolbar_blue));
+        search_maginfy.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openSearchBar();
+            }
+        });
+
+        search_view.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                closeSearchBar();
+                return false;
+            }
+        });
+
+
+    }
+
+    private void closeSearchBar() {
+        titleText.setVisibility(View.VISIBLE);
+        new_itinerary.setVisibility(View.VISIBLE);
+        search_maginfy.setVisibility(View.VISIBLE);
+        search_view.setVisibility(View.GONE);
+
+    }
+
+
+    private void openSearchBar() {
+        titleText.setVisibility(View.GONE);
+        new_itinerary.setVisibility(View.GONE);
+        search_maginfy.setVisibility(View.GONE);
+        search_view.setVisibility(View.VISIBLE);
+        search_view.setIconified(false);
 
     }
 
@@ -128,6 +193,9 @@ public class CostumeToolBar extends Toolbar {
         toolbar_go_to_iternerary.setVisibility(View.GONE);
         preference_save_changes.setVisibility(View.GONE);
         new_itinerary.setVisibility(View.GONE);
+        search_maginfy.setVisibility(View.GONE);
+        search_view.setVisibility(View.GONE);
+
 
         switch (navBar) {
          //   case HOME:
@@ -168,6 +236,7 @@ public class CostumeToolBar extends Toolbar {
             case TRIPS:
                 titleText.setVisibility(View.VISIBLE);
                 new_itinerary.setVisibility(View.VISIBLE);
+                search_maginfy.setVisibility(View.VISIBLE);
                 break;
 
             case COMPANIONS:
