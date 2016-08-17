@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import org.apache.http.Header;
 
 import java.util.ArrayList;
@@ -24,6 +27,7 @@ import hellogbye.com.hellogbyeandroid.activities.HGBMainInterface;
 import hellogbye.com.hellogbyeandroid.activities.HGBVoiceInterface;
 import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
+import hellogbye.com.hellogbyeandroid.application.HGBApplication;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
@@ -43,6 +47,7 @@ public class HGBAbstractFragment extends Fragment {
     private static String selectedUserGuid;
     private CostumeToolBar mToolBar;
     private static String settingGuidSelected;
+    private Tracker tracker;
 
     public interface FragmentNavigation {
         public void pushFragment(Fragment fragment);
@@ -68,6 +73,16 @@ public class HGBAbstractFragment extends Fragment {
             throw new ClassCastException(getActivity().toString() + "must implement HostingActivityInterface");
         }
 
+    }
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Tracker tracker = ((HGBApplication) getActivity().getApplicationContext()).getTracker();
+        tracker.setScreenName(getClass().getSimpleName());
+        tracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
 

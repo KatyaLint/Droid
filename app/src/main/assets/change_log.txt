@@ -323,4 +323,6 @@ Code changing:
    Code changing:
    --------------
     - SearchView UI
-    - Appsee
+    - Appsee :)
+    - Google analytics
+
