@@ -1,6 +1,10 @@
 package hellogbye.com.hellogbyeandroid.fragments.mytrips;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
@@ -14,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.daimajia.swipe.util.Attributes;
 
@@ -43,13 +48,14 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
     private Activity activity;
     private RecyclerView mRecyclerView;
     private LinearLayout my_trip_empty_view_ll;
+    private  SearchReceiver mSearchReciever;
 
     public void initFragmentTabsView(View rootView){
         this.activity = getActivity();
 
          mRecyclerView = (RecyclerView) rootView.findViewById(R.id.my_trips_recycle_list);
 
-        SearchView  my_trip_search_view=(SearchView) rootView.findViewById(R.id.my_trips_search_view);
+    //    SearchView  my_trip_search_view=(SearchView) rootView.findViewById(R.id.my_trips_search_view);
 
         my_trip_empty_view_ll = (LinearLayout) rootView.findViewById(R.id.my_trip_empty_view_ll);
 
@@ -67,8 +73,8 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
         mAdapter.setMode(Attributes.Mode.Single);
         mRecyclerView.setAdapter(mAdapter);
 
-        my_trip_search_view.setOnQueryTextListener(this);
-
+//        my_trip_search_view.setOnQueryTextListener(this);
+        mSearchReciever = new SearchReceiver();
         // 5. set item animator to DefaultAnimator
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         // 2. set layoutManger
@@ -78,6 +84,17 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
         args = new Bundle();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().registerReceiver(mSearchReciever, new IntentFilter("search_query"));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().unregisterReceiver(mSearchReciever);
+    }
 
     private void goToCNCView(View rootView){
         FontTextView my_trips_go_to_cnc = (FontTextView) rootView.findViewById(R.id.my_trips_add_trip);
@@ -221,13 +238,13 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
         }
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_main, menu);
-        final MenuItem item = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        searchView.setOnQueryTextListener(this);
-    }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        inflater.inflate(R.menu.menu_main, menu);
+//        final MenuItem item = menu.findItem(R.id.action_search);
+//        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+//        searchView.setOnQueryTextListener(this);
+//    }
 
 
     @Override
@@ -264,7 +281,25 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
         return filteredModelList;
     }
 
+    public class SearchReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent.getStringExtra("query_type").equals("change")){
+                String strChangeText = intent.getStringExtra("query");
+                if(mCurrItemsList == null){ //list empty
+                    return;
+                }
+                // Here is where we are going to implement our filter logic
+                final List<MyTripItem> filteredModelList = filter(mCurrItemsList, strChangeText);
+                mAdapter.animateTo(filteredModelList);
+                mRecyclerView.scrollToPosition(0);
 
+            } else if(intent.getStringExtra("query_type").equals("submit")){
+                String strSubmitText = intent.getStringExtra("query");
+            }
+
+        }
+    }
 
 
 }

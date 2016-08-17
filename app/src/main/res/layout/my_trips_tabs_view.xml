@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <SearchView
-        android:layout_width="match_parent"
-        android:id="@+id/my_trips_search_view"
-        android:background="@color/cc_add_backround"
-        android:layout_margin="@dimen/DP10"
-        android:queryHint="@string/settings_search_hunt"
-        android:focusableInTouchMode="true"
-        android:layout_height="wrap_content"/>
+    <!--<SearchView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:id="@+id/my_trips_search_view"-->
+        <!--android:background="@color/cc_add_backround"-->
+        <!--android:layout_margin="@dimen/DP10"-->
+        <!--android:queryHint="@string/settings_search_hunt"-->
+        <!--android:focusableInTouchMode="true"-->
+        <!--android:layout_height="wrap_content"/>-->
 
     <include layout="@layout/my_trip_empty_view"
         android:layout_height="wrap_content"

@@ -34,7 +34,7 @@ public class TripsTabsView extends HGBAbstractFragment {
     private static final String TAB_2_TAG = "Favorites";
     private static final String TAB_3_TAG = "History";
     private Typeface textFont;
-     private  SearchReceiver mSearchReciever;
+
 
 
     public static Fragment newInstance(int position) {
@@ -65,11 +65,7 @@ public class TripsTabsView extends HGBAbstractFragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        getActivity().registerReceiver(mSearchReciever, new IntentFilter("search_query"));
-    }
+
 
     @Nullable
     @Override
@@ -95,7 +91,7 @@ public class TripsTabsView extends HGBAbstractFragment {
         textFont = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + "dinnextltpro_medium.otf");
         firstTextInit(rootView);
         mTabHost.getTabWidget().getChildAt(mTabHost.getCurrentTab()).getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
-        mSearchReciever = new SearchReceiver();
+
         mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
@@ -136,18 +132,6 @@ public class TripsTabsView extends HGBAbstractFragment {
         mTabHost = null;
     }
 
-    public class SearchReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
 
-            if(intent.getStringExtra("query_type").equals("change")){
-                String strChangeText = intent.getStringExtra("query");
-
-            } else if(intent.getStringExtra("query_type").equals("change")){
-                String strSubmitText = intent.getStringExtra("query");
-            }
-
-        }
-    }
 
 }
