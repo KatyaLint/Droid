@@ -118,7 +118,6 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     private AlertDialog selectDefaultProfileDialog;
     private ArrayList<DefaultsProfilesVO> userDefaultProfiles;
 
-
     private HashSet<CreditCardItem> mSelectedCreditCards = new HashSet<>();
 
     private HashMap<String, String> mBookingHashMap = new HashMap<>();
@@ -222,14 +221,25 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
+
+
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent("search_query");
+                intent.putExtra("query_type","submit");
+                intent.putExtra("query",query);
+                sendBroadcast(intent);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                Intent intent = new Intent("search_query");
+                intent.putExtra("query_type","change");
+                intent.putExtra("query",newText);
+                sendBroadcast(intent);
                 return false;
             }
         });

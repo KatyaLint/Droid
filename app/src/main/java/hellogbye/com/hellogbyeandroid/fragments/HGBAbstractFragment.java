@@ -4,7 +4,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import org.apache.http.Header;
@@ -41,6 +46,12 @@ public class HGBAbstractFragment extends Fragment {
 
     public interface FragmentNavigation {
         public void pushFragment(Fragment fragment);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override

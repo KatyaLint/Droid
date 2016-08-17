@@ -122,14 +122,18 @@ public class CostumeToolBar extends Toolbar {
         if(search_view == null){
             search_view = (SearchView) findViewById(R.id.search);
         }
+
+
         ImageView searchClose = (ImageView) search_view.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
         TextView searchCloseText = (TextView) search_view.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        searchClose.setImageResource(R.drawable.all_card_icon);
+
+        searchClose.setImageResource(R.drawable.close_icon_a_1);
 //        int id = search_view.getContext()
 //                .getResources()
 //                .getIdentifier("android:id/search_src_text", null, null);
 //        TextView textView = (TextView) search_view.findViewById(id);
         searchCloseText.setTextColor(ContextCompat.getColor(getContext(), R.color.hgb_toolbar_blue));
+        searchCloseText.setHintTextColor(ContextCompat.getColor(getContext(), R.color.hgb_toolbar_blue));
         search_maginfy.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

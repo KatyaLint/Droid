@@ -2,9 +2,7 @@
 <hellogbye.com.hellogbyeandroid.views.CostumeToolBar xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/toolbar_costume"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/abc_action_bar_default_height_material"
-
-
+    android:layout_height="match_parent"
     android:background="@color/hgb_toolbar_blue"
     android:minHeight="?attr/actionBarSize">
 
@@ -175,8 +173,8 @@
     <android.support.v7.widget.SearchView
         android:id="@+id/search"
         android:visibility="gone"
-        android:layout_marginTop="@dimen/DP6"
-        android:layout_marginBottom="@dimen/DP6"
+        android:layout_marginTop="@dimen/DP16"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
