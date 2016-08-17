@@ -103,7 +103,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
 
-public class MainActivity extends AppCompatActivity implements NavListAdapter.OnItemClickListener, HGBVoiceInterface, HGBFlowInterface, ActionBar.OnMenuVisibilityListener {
+public class MainActivity extends BaseActivity implements NavListAdapter.OnItemClickListener, HGBVoiceInterface, HGBFlowInterface, ActionBar.OnMenuVisibilityListener {
     private DrawerLayout mDrawerLayout;
     private RecyclerView mDrawerList;
     private LinearLayout mNavDrawerLinearLayout;

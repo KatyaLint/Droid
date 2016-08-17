@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.appsee.Appsee;
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
 import com.roughike.bottombar.BottomBar;
@@ -32,6 +33,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.userprofilesadapter.UserProfilesAdapter;
@@ -93,7 +95,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by arisprung on 8/7/16.
  */
-public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoiceInterface, HGBFlowInterface {
+public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInterface, HGBFlowInterface {
 
     private CostumeToolBar mToolbar;
     private HGBPreferencesManager hgbPrefrenceManager;
@@ -138,6 +140,7 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         hgbSaveDataClass.setPersonalUserInformation(new PersonalUserInformationVO());
         setContentView(R.layout.main_activity_bottom_tab_layout);
@@ -222,14 +225,12 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
 
-
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Intent intent = new Intent("search_query");
-                intent.putExtra("query_type","submit");
-                intent.putExtra("query",query);
+                intent.putExtra("query_type", "submit");
+                intent.putExtra("query", query);
                 sendBroadcast(intent);
                 return false;
             }
@@ -237,8 +238,8 @@ public class MainActivityBottomTabs extends AppCompatActivity implements HGBVoic
             @Override
             public boolean onQueryTextChange(String newText) {
                 Intent intent = new Intent("search_query");
-                intent.putExtra("query_type","change");
-                intent.putExtra("query",newText);
+                intent.putExtra("query_type", "change");
+                intent.putExtra("query", newText);
                 sendBroadcast(intent);
                 return false;
             }

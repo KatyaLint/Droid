@@ -12,7 +12,7 @@ import hellogbye.com.hellogbyeandroid.R;
 /**
  * Created by arisprung on 4/21/16.
  */
-public class CNCTutorialActivity extends Activity{
+public class CNCTutorialActivity extends BaseActivity{
     private RelativeLayout mTutorialRelativeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

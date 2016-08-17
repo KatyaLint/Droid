@@ -85,6 +85,7 @@ dependencies {
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
     compile 'io.card:android-sdk:5.1.2'
     compile 'com.github.dbachelder:CreditCardEntry:1.4.7'
+    compile 'com.appsee:appsee-android:+'
     compile files('libs/AndroidSwipeLayout-v1.1.8.jar')
     //    compile 'com.android.support:multidex:1.0.1'
     compile project(':bottom-bar')

@@ -22,7 +22,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by arisprung on 9/8/15.
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     private EditText mEmailEditText;
     private EditText mPasswordEditText;

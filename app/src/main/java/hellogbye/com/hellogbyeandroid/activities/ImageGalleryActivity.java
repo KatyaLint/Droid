@@ -16,7 +16,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 /**
  * Created by arisprung on 10/20/15.
  */
-public class ImageGalleryActivity extends FragmentActivity {
+public class ImageGalleryActivity extends BaseActivity {
 
     private ArrayList<String> listImages ;
     private int mIndex;

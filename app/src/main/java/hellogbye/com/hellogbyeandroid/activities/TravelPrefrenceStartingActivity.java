@@ -12,7 +12,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by arisprung on 9/16/15.
  */
-public class TravelPrefrenceStartingActivity extends Activity {
+public class TravelPrefrenceStartingActivity extends BaseActivity {
 
 
     private FontTextView mButtonTextView;

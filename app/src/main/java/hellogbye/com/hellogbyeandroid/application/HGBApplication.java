@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.appsee.Appsee;
 import com.crashlytics.android.Crashlytics;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp.StethoInterceptor;
@@ -12,6 +13,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.squareup.okhttp.OkHttpClient;
 
 import hellogbye.com.hellogbyeandroid.BuildConfig;
+import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.network.OkHttpStack;
 import io.fabric.sdk.android.Fabric;
 
@@ -35,6 +37,8 @@ public class HGBApplication extends Application {
                             .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
                             .build());
         }
+
+
     }
 
 

@@ -26,7 +26,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by arisprung on 9/8/15.
  */
-public class StartingMenuActivity extends Activity {
+public class StartingMenuActivity extends BaseActivity {
 
     private FontTextView mSignUp;
     private FontTextView mLogin;
