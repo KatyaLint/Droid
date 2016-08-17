@@ -43,9 +43,11 @@ public class HGBApplication extends Application {
                             .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
                             .build());
         }
+        if(!BuildConfig.IS_DEV){
+            GoogleAnalytics googleAnalytics = GoogleAnalytics.getInstance(this);
+            tracker = googleAnalytics.newTracker(R.xml.analytics);
+        }
 
-        GoogleAnalytics googleAnalytics = GoogleAnalytics.getInstance(this);
-        tracker = googleAnalytics.newTracker(R.xml.analytics);
 
     }
 

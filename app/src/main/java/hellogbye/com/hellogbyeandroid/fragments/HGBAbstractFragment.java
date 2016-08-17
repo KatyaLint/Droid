@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 
+import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.activities.HGBFlowInterface;
 import hellogbye.com.hellogbyeandroid.activities.HGBMainInterface;
 import hellogbye.com.hellogbyeandroid.activities.HGBVoiceInterface;
@@ -80,9 +81,13 @@ public class HGBAbstractFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Tracker tracker = ((HGBApplication) getActivity().getApplicationContext()).getTracker();
-        tracker.setScreenName(getClass().getSimpleName());
-        tracker.send(new HitBuilders.ScreenViewBuilder().build());
+
+        if(!BuildConfig.IS_DEV){
+            Tracker tracker = ((HGBApplication) getActivity().getApplicationContext()).getTracker();
+            tracker.setScreenName(getClass().getSimpleName());
+            tracker.send(new HitBuilders.ScreenViewBuilder().build());
+        }
+
     }
 
 

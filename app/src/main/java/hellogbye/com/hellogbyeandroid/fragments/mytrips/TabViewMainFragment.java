@@ -284,6 +284,7 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
     public class SearchReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
+            //TODO KATE I dont know how this is suppose to work.....
             if(intent.getStringExtra("query_type").equals("change")){
                 String strChangeText = intent.getStringExtra("query");
                 if(mCurrItemsList == null){ //list empty
