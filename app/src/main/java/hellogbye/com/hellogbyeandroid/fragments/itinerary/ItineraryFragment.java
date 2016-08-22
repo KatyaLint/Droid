@@ -461,11 +461,15 @@ public class ItineraryFragment extends HGBAbstractFragment {
         //guid
         grid_traveler_flight_price.setTag(node.getmGuid());
 
-        TextView grid_traveler_flight_stops = (TextView)child.findViewById(R.id.grid_traveler_flight_stops);
-        grid_traveler_flight_stops.setText(node.getmOrigin() + " - " + node.getmDestination());
+        TextView grid_traveler_flight_stops_departure = (TextView)child.findViewById(R.id.grid_traveler_flight_stops_departure);
+        grid_traveler_flight_stops_departure.setText(node.getmOrigin() );
+
+
+        TextView grid_traveler_flight_stops_arrival = (TextView)child.findViewById(R.id.grid_traveler_flight_stops_arrival);
+        grid_traveler_flight_stops_arrival.setText( node.getmDestination());
 
         TextView grid_flight_operator_departure = (TextView)child.findViewById(R.id.grid_flight_operator_departure);
-        grid_flight_operator_departure.setText("Depart: " + HGBUtilityDate.parseDateToHHmm(node.getmDeparture()) + " Arrival: "+HGBUtilityDate.parseDateToHHmm(node.getmArrival()));
+        grid_flight_operator_departure.setText("Depart: " + HGBUtilityDate.parseDateToHHmm(node.getmDeparture()) + "     Arrival: "+HGBUtilityDate.parseDateToHHmm(node.getmArrival()));
 
 
         TextView grid_flight_airlines_class = (TextView)child.findViewById(R.id.grid_flight_airlines_class);
