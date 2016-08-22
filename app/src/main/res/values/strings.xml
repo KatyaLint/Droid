@@ -71,8 +71,8 @@
     <string name="preferences_non_smoking_choice">Non-Smoking</string>
     <string name="preferences_smoking_choice">Smoking</string>
 
-    <string name="preferences_flight_preferences">Rank your Flight Preferences</string>
-    <string name="preferences_hotel_preferences">Rank your Hotel Preferences</string>
+    <string name="preferences_flight_preferences">Rank your Flight\nPreferences</string>
+    <string name="preferences_hotel_preferences">Rank your Hotel\nPreferences</string>
     <string name="preferences_flight_prefer">Drag each item up and down to rank their\nimportance in determining search results</string>
 
 

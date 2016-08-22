@@ -26,7 +26,7 @@ import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.activities.HGBFlowInterface;
 import hellogbye.com.hellogbyeandroid.activities.HGBMainInterface;
 import hellogbye.com.hellogbyeandroid.activities.HGBVoiceInterface;
-import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+//import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.application.HGBApplication;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;

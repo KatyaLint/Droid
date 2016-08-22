@@ -1,3 +1,4 @@
+/*
 
 package hellogbye.com.hellogbyeandroid.activities;
 
@@ -412,8 +413,11 @@ public class MainActivity extends BaseActivity implements NavListAdapter.OnItemC
 
 
     private void showAlertProfilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs ){
+        LayoutInflater li = LayoutInflater.from(MainActivity.this);
+        View promptsView = li.inflate(R.layout.popup_custom_title, null);
+
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
-        dialogBuilder.setTitle(getResources().getString(R.string.profile_choose_between));
+        dialogBuilder.setCustomTitle(promptsView);
 
        final ArrayList<String> itemsList = new ArrayList<String>();
         for (DefaultsProfilesVO userProfileVO:userProfileVOs ){
@@ -585,11 +589,15 @@ public class MainActivity extends BaseActivity implements NavListAdapter.OnItemC
 
         mDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(
                 this, mDrawerLayout, mToolbar,
-                R.string.drawer_open,  /* "open drawer" description for accessibility */
+                R.string.drawer_open,  */
+/* "open drawer" description for accessibility *//*
+
                 R.string.drawer_close
         ) {
 
-            /** Called when a drawer has settled in a completely closed state. */
+            */
+/** Called when a drawer has settled in a completely closed state. *//*
+
             public void onDrawerClosed(View view) {
                 if(view.getId()== R.id.right_content_frame){
                     animateRightPaneClosed();
@@ -602,7 +610,9 @@ public class MainActivity extends BaseActivity implements NavListAdapter.OnItemC
 
             }
 
-            /** Called when a drawer has settled in a completely open state. */
+            */
+/** Called when a drawer has settled in a completely open state. *//*
+
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 super.onDrawerSlide(drawerView, 0); // this disables the arrow @ completed state
@@ -662,7 +672,9 @@ public class MainActivity extends BaseActivity implements NavListAdapter.OnItemC
 
     }
 
-    /* Called whenever we call invalidateOptionsMenu() */
+    */
+/* Called whenever we call invalidateOptionsMenu() *//*
+
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
@@ -695,7 +707,9 @@ public class MainActivity extends BaseActivity implements NavListAdapter.OnItemC
         }
     }
 
-    /* The click listener for RecyclerView in the navigation drawer */
+    */
+/* The click listener for RecyclerView in the navigation drawer *//*
+
     @Override
     public void onClick(View view, int position) {
         selectItem(position, null,true);
@@ -794,9 +808,11 @@ public class MainActivity extends BaseActivity implements NavListAdapter.OnItemC
 
     @Override
     public void closeRightPane() {
-      /*  mDrawerLayout.closeDrawer(frameLayout);
+      */
+/*  mDrawerLayout.closeDrawer(frameLayout);
 
-        isRightPaneOpened = false;*/
+        isRightPaneOpened = false;*//*
+
     }
 
 
@@ -804,8 +820,10 @@ public class MainActivity extends BaseActivity implements NavListAdapter.OnItemC
     @Override
     public void openRightPane() {
 
-    /*    mDrawerLayout.openDrawer(frameLayout);
-        isRightPaneOpened = true;*/
+    */
+/*    mDrawerLayout.openDrawer(frameLayout);
+        isRightPaneOpened = true;*//*
+
 
     }
 
@@ -828,9 +846,11 @@ public class MainActivity extends BaseActivity implements NavListAdapter.OnItemC
             fragment = FreeUserFragment.newInstance(navPosition);
           //  mToolbar.setVisibility(View.GONE);
         }
-       /* else {
+       */
+/* else {
             mToolbar.setVisibility(View.VISIBLE);
-        }*/
+        }*//*
+
         mToolbar.setVisibility(View.VISIBLE);
         return fragment;
     }
@@ -1089,10 +1109,12 @@ public class MainActivity extends BaseActivity implements NavListAdapter.OnItemC
             onBackPressedListener.doBack();
         }
 
-  /*      if(isRightPaneOpened){
+  */
+/*      if(isRightPaneOpened){
             closeRightPane();
             return;
-        }*/
+        }*//*
+
 
         //TODO this is when I want the fragment to contorl the back -Kate I suggest we do this for all Fragments
 
@@ -1129,10 +1151,12 @@ public class MainActivity extends BaseActivity implements NavListAdapter.OnItemC
         getSupportActionBar().setTitle(mTitle);
     }
 
-    /**
+    */
+/**
      * When using the ActionBarDrawerToggle, you must call it during
      * onPostCreate() and onConfigurationChanged()...
-     */
+     *//*
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -1265,10 +1289,12 @@ public void setTitleForItirnarary(String solutionName){
         selectItem(fragment, bundle,true);
     }
 
-   /* @Override
+   */
+/* @Override
     public void goToFragment(int fragmentname, Bundle bundle, boolean) {
         selectItem(fragmentname, bundle);
-    }*/
+    }*//*
+
 
 
     @Override
@@ -1301,13 +1327,15 @@ public void setTitleForItirnarary(String solutionName){
 
     @Override
     public void setHomeImage(String id) {
-    /*    if (id.equals("keyboard")) {
+    */
+/*    if (id.equals("keyboard")) {
             imageButton.setBackgroundResource(R.drawable.app_bar_microphone_icn);
             imageButton.setTag("mic");
         } else if (id.equals("mic")) {
             imageButton.setBackgroundResource(R.drawable.group_7);
             imageButton.setTag("keyboard");
-        }*/
+        }*//*
+
     }
 
 
@@ -1395,4 +1423,4 @@ public void setTitleForItirnarary(String solutionName){
 //    public void setEditMyTripsClickCB(MyTripsFragment.OnItemClickListener editMyTripsClickCB) {
 //        this.editMyTripsClickCB = editMyTripsClickCB;
 //    }
-}
+}*/

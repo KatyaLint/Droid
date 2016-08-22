@@ -14,7 +14,7 @@ import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ScrollView;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+//import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
@@ -117,7 +117,7 @@ public class AccountPersonalInfoHelpAndFeedbackFragment extends HGBAbstractFragm
                                 ((InputMethodManager) getActivity().getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
 
 
-                                ((MainActivity)getActivity()).onBackPressed();
+                                getActivity().onBackPressed();
                             }
                             @Override
                             public void itemCanceled() {

@@ -49,7 +49,7 @@ import java.util.HashMap;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.ImageGalleryActivity;
-import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+//import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelAdapter;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;

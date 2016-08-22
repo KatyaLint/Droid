@@ -20,7 +20,7 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 
 
-import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+//import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsPreferencesCheckAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsRadioButtonAdapter;

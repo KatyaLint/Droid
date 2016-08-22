@@ -13,7 +13,6 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,7 +21,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import com.appsee.Appsee;
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
 import com.roughike.bottombar.BottomBar;
@@ -33,7 +31,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.userprofilesadapter.UserProfilesAdapter;
@@ -217,6 +214,14 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     }
 
+
+    private void querySearchChanges(String query){
+        Intent intent = new Intent("search_query");
+        intent.putExtra("query_type", "submit");
+        intent.putExtra("query", query);
+        sendBroadcast(intent);
+    }
+
     private void initSearchBar() {
         SearchView searchView = (SearchView) mToolbar.findViewById(R.id.search);
         // Sets searchable configuration defined in searchable.xml for this SearchView
@@ -228,19 +233,13 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Intent intent = new Intent("search_query");
-                intent.putExtra("query_type", "submit");
-                intent.putExtra("query", query);
-                sendBroadcast(intent);
+                querySearchChanges(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Intent intent = new Intent("search_query");
-                intent.putExtra("query_type", "change");
-                intent.putExtra("query", newText);
-                sendBroadcast(intent);
+                querySearchChanges(newText);
                 return false;
             }
         });
@@ -319,7 +318,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             Bundle arguments = fragmentTemp.getArguments();
             int fragNumber = arguments.getInt(HGBConstants.ARG_NAV_NUMBER);
             mToolbar.updateToolBarView(fragNumber);
-            return;
         }
 
     }
@@ -330,6 +328,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         mTitle = title;
         getSupportActionBar().setTitle(mTitle);
     }
+
 
 
     public void setOnSavePreferencesButtonClicked(PreferencesSettingsMainClass.saveButtonClicked onSavePreferencesButtonClicked) {
@@ -488,9 +487,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                reportError(data);
             }
         });
     }
@@ -526,9 +523,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                reportError(data);
 
                 // ErrorMessage(data);
 
@@ -600,9 +595,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                reportError(data);
             }
         });
     }
@@ -615,14 +608,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 hgbSaveDataClass.setAccounts(accounts);
                 //  AccountsVO account = accounts.get(0);
                 //  hgbSaveDataClass.getCurrentUser().setEmailaddress(account.getEmail());
-                //  editProfileTypeMainToolBar();
+                  editProfileTypeMainToolBar();
             }
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                reportError(data);
             }
         });
     }
@@ -663,17 +654,20 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                reportError(data);
             }
         });
 
     }
 
+
+
     private void showAlertProfilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs) {
+        LayoutInflater li = LayoutInflater.from(MainActivityBottomTabs.this);
+        View promptsView = li.inflate(R.layout.popup_custom_title, null);
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivityBottomTabs.this);
-        dialogBuilder.setTitle(getResources().getString(R.string.profile_choose_between));
+        dialogBuilder.setCustomTitle(promptsView);
+       // dialogBuilder.setTitle(getResources().getString(R.string.profile_choose_between));
 
         final ArrayList<String> itemsList = new ArrayList<String>();
         for (DefaultsProfilesVO userProfileVO : userProfileVOs) {
@@ -684,7 +678,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         dialogBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 DefaultsProfilesVO defaultProfile = userDefaultProfiles.get(item);
-                postDefaultPrifile(String.valueOf(defaultProfile.getId()), defaultProfile.getName());
+                postDefaultProfile(String.valueOf(defaultProfile.getId()), defaultProfile.getName());
                 selectDefaultProfileDialog.dismiss();
             }
         });
@@ -695,7 +689,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
 
-    private void postDefaultPrifile(String profileId, String profileName) {
+    private void postDefaultProfile(String profileId, String profileName) {
         ConnectionManager.getInstance(MainActivityBottomTabs.this).postDefaultProfile(profileId, profileName, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
@@ -707,9 +701,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                reportError(data);
             }
         });
 
@@ -725,9 +717,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                reportError(data);
             }
         });
     }
@@ -748,9 +738,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                reportError(data);
             }
         });
     }
@@ -765,9 +753,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                reportError(data);
             }
         });
     }
@@ -784,9 +770,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                reportError(data);
             }
         });
     }
@@ -995,9 +979,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
+                reportError(data);
             }
         });
     }
@@ -1170,9 +1152,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), "Problem updating grid ");
+                reportError("Problem updating grid ");
+
             }
         });
 
@@ -1268,5 +1249,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         }
     }
 
+
+
+    private void reportError(Object data){
+        HGBErrorHelper errorHelper = new HGBErrorHelper();
+        errorHelper.setMessageForError((String) data);
+        errorHelper.show(getFragmentManager(), (String) data);
+    }
 
 }

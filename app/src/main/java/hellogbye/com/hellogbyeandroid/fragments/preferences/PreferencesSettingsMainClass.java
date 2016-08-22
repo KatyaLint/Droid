@@ -40,11 +40,11 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ((MainActivityBottomTabs) getActivity()).setOnSavePreferencesButtonClicked(new saveButtonClicked(){
+        ((MainActivityBottomTabs)getActivity()).setOnSavePreferencesButtonClicked(new saveButtonClicked(){
             @Override
             public void onSaveClicked() {
                // savePreferenceAlert();
-                ((MainActivityBottomTabs) getActivity()).onBackPressed();
+                getActivity().onBackPressed();
             }
         });
 

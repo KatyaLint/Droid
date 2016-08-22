@@ -31,11 +31,10 @@
         android:id="@+id/setting_preferences_title_drag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/SP14"
+        android:textSize="@dimen/SP16"
         android:text="zdfsfsfsdf"
-        app:fontName="dinnextltpro_regular.otf"
-        android:textColor="@color/COLOR_555555"
-
+        app:fontName="dinnextltpro_medium.otf"
+        android:textColor="@color/dark_teal"
         android:lines="1"/>
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -51,6 +50,15 @@
         android:lines="1"/>
 
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/move_icon"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/DP6"
+        android:layout_toLeftOf="@+id/preferences_more"/>
+
 
     <include android:id="@+id/preferences_more" layout="@layout/layout_arrow"
         android:layout_centerVertical="true"

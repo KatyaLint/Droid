@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/COLOR_0E587D"
+        android:textSize="@dimen/SP18"
+        app:fontName="dinnextltpro_medium.otf"
+        android:padding="@dimen/DP20"
+        android:text="@string/profile_choose_between"/>
+   <!-- profile_choose_between-->
+
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/DP1"
+        android:background="@color/warm_grey_line" />
+
+</LinearLayout>

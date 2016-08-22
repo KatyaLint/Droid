@@ -14,7 +14,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+//import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsRadioButtonAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
@@ -128,12 +128,14 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
 
         backOnListClicked();
 
-        ((MainActivity) getActivity()).setOnSavePreferencesButtonClicked(new PreferencesSettingsMainClass.saveButtonClicked(){
+        ((MainActivityBottomTabs) getActivity()).setOnSavePreferencesButtonClicked(new PreferencesSettingsMainClass.saveButtonClicked(){
             @Override
             public void onSaveClicked() {
-                ((MainActivity) getActivity()).onBackPressed();
+                getActivity().onBackPressed();
             }
         });
+
+
         getUserProfiles();
 
         return rootView;

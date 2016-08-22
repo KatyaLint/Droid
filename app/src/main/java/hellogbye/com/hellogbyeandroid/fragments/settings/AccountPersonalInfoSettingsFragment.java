@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+//import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.settingaccount.AccountSettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;

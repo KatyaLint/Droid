@@ -317,8 +317,8 @@ Code changing:
    ------------------------------------------
    Fixed Bugs:
    -----------
-
-
+    HEL-1257 - preference settings - change according to design
+    HEL-1310 - on first log in the "choose between" pop is cut
 
    Code changing:
    --------------
