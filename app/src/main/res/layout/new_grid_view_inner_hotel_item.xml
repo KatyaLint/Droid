@@ -51,8 +51,18 @@
         android:textColor="@color/dark_teal"
         app:fontName="dinnextltpro_regular.otf" />
 
+        <include
+            android:layout_marginBottom="@dimen/DP6"
+            android:layout_marginTop="@dimen/DP6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/grid_star_layout"
+            android:layout_below="@+id/grid_hotel_place"
+            layout="@layout/star_layout" />
+
+
     <LinearLayout
-        android:layout_below="@+id/grid_hotel_place"
+        android:layout_below="@+id/grid_star_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -79,16 +89,11 @@
     </LinearLayout>
 
 
-        <include
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/grid_star_layout"
-            android:layout_below="@+id/grid_hotel_price_ll"
-            layout="@layout/star_layout" />
+
 
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:layout_below="@+id/grid_star_layout"
+            android:layout_below="@+id/grid_hotel_price_ll"
             android:id="@+id/grid_hotel_taxes"
             style="@style/GridTextStyle"
             android:layout_width="wrap_content"

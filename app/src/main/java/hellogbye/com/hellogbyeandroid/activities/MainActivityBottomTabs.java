@@ -940,7 +940,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             fragment.setArguments(arguments);
         }
 
-        if (isFreeUser && (navBar.equals(ToolBarNavEnum.COMPANIONS_PERSONAL_DETAILS) || navBar.equals(ToolBarNavEnum.PAYMENT_DETAILS) || navBar.equals(ToolBarNavEnum.COMPANIONS) || navBar.equals(ToolBarNavEnum.ALL_COMPANIONS_VIEW) || navBar.equals(ToolBarNavEnum.CREDIT_CARD_LIST))) {
+        if (isFreeUser && (navBar.equals(ToolBarNavEnum.COMPANIONS_PERSONAL_DETAILS) ||
+                navBar.equals(ToolBarNavEnum.PAYMENT_DETAILS) ||
+                navBar.equals(ToolBarNavEnum.COMPANIONS) ||
+                navBar.equals(ToolBarNavEnum.ALL_COMPANIONS_VIEW) ||
+                navBar.equals(ToolBarNavEnum.CREDIT_CARD_LIST))) {
+
             isAddAnimation = true;
             fragment = isFreeUser(fragment, navPosition);
         }

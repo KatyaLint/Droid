@@ -320,7 +320,8 @@ Code changing:
     HEL-1257 - preference settings - change according to design
     HEL-1310 - on first log in the "choose between" pop is cut
     HEL-1405 - add icons between airport codes
-    
+    HEL-1407 - change places between hotel ranking and hotel cost on hotel tile in grid
+
    Code changing:
    --------------
     - SearchView UI
