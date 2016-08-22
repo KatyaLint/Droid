@@ -12,12 +12,12 @@
         "source": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/color/abc_secondary_text_material_dark.xml"
     },
     {
-        "merged": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/color/switch_thumb_material_light.xml",
-        "source": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/color/switch_thumb_material_light.xml"
-    },
-    {
         "merged": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/color/switch_thumb_material_dark.xml",
         "source": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/color/switch_thumb_material_dark.xml"
+    },
+    {
+        "merged": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/color/switch_thumb_material_light.xml",
+        "source": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/color/switch_thumb_material_light.xml"
     },
     {
         "merged": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/color/abc_primary_text_material_dark.xml",

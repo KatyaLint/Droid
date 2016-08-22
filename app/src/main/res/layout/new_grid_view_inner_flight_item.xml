@@ -80,12 +80,12 @@
 
 
             <ImageView
+                android:id="@+id/grid_flight_direction_view"
                 android:layout_marginRight="@dimen/DP6"
                 android:layout_marginLeft="@dimen/DP6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/arrow_one_direction"
-                android:background="@drawable/arrow_one_direction"/>
+                />
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/grid_traveler_flight_stops_arrival"

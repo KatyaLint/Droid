@@ -190,7 +190,13 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     }
 
     private void initializeMap(){
-        mMap = fragment.getMap();
+
+        //if (mMap == null) {
+          //  fragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+            fragment.getMapAsync(this);
+        //}
+
+  /*      mMap = fragment.getMap();
 
         if (mMap != null) {
 
@@ -201,9 +207,9 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
             //  if(!permissionDenied) {
             //    HGBUtility.checkPermissions(get);
             //   }
-            /*if(!permissionDenied) {
+            *//*if(!permissionDenied) {
                 HGBUtility.checkPermissions(getActivity());
-            }*/
+            }*//*
 
 
 
@@ -211,7 +217,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
             mMap.setOnMarkerClickListener(this);
         } else {
             Log.d("DEBUG", "map is null");
-        }
+        }*/
     }
 
 
@@ -327,6 +333,12 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     }
 
     private void loadMap() {
+        //SET UP MAP
+        mMap.getUiSettings().setCompassEnabled(true);
+        mMap.getUiSettings().setZoomControlsEnabled(false);
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mMap.setOnMarkerClickListener(this);
+
 
         //GET ALL HOTEL NODES AND SET CURRENT ONE
         ConnectionManager.getInstance(activity).getAlternateHotelsWithHotel(getActivityInterface().getTravelOrder().getmSolutionID(),

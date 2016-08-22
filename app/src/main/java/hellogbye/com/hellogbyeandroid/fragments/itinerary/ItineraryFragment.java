@@ -19,6 +19,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -465,6 +466,21 @@ public class ItineraryFragment extends HGBAbstractFragment {
         grid_traveler_flight_stops_departure.setText(node.getmOrigin() );
 
 
+        ImageView grid_flight_direction_view = (ImageView)child.findViewById(R.id.grid_flight_direction_view);
+        String isRoundTrip = isRoundTrip();
+
+        if(node.getmPrimaryguid().equals(isRoundTrip) || node.getParentflightid() != null){
+            grid_flight_direction_view.setImageDrawable(getResources().getDrawable(R.drawable.arrow_bi_directional_copy));
+        }else{
+            grid_flight_direction_view.setImageDrawable(getResources().getDrawable(R.drawable.arrow_one_direction));
+        }
+
+      /*  if(isRoundTrip != null) {
+            grid_flight_direction_view.setImageDrawable(getResources().getDrawable(R.drawable.arrow_bi_directional_copy));
+        }else{
+            grid_flight_direction_view.setImageDrawable(getResources().getDrawable(R.drawable.arrow_one_direction));
+        }*/
+
         TextView grid_traveler_flight_stops_arrival = (TextView)child.findViewById(R.id.grid_traveler_flight_stops_arrival);
         grid_traveler_flight_stops_arrival.setText( node.getmDestination());
 
@@ -504,8 +520,17 @@ public class ItineraryFragment extends HGBAbstractFragment {
         return outer;
     }
 
-
-
+    private String isRoundTrip(){
+        UserTravelMainVO userOrder = getActivityInterface().getTravelOrder();
+        Map<String, NodesVO> flightItems = userOrder.getItems();
+        Collection<NodesVO> values = flightItems.values();
+        for(NodesVO value : values){
+            if(value.getParentflightid() != null ){
+                return value.getParentflightid();
+            }
+        }
+        return null;
+    }
 
     /**
      * Create empty layout, for dates when nothing is happening

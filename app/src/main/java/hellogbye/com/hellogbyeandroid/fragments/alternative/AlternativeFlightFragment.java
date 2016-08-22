@@ -57,7 +57,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  * Created by kate on 8/17/15.
  */
 
-public class AlternativeFlightFragment extends HGBAbstractFragment implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback {
+public class AlternativeFlightFragment extends HGBAbstractFragment implements GoogleMap.OnMarkerClickListener,  OnMapReadyCallback {
 
     private SupportMapFragment fragment;
     private GoogleMap mMap;
@@ -354,13 +354,13 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
     }
 
 
-
     @Override
     public void onResume() {
         super.onResume();
-        mMap = fragment.getMap();
+        fragment.getMapAsync(this);
+       // mMap = fragment.getMapAsync();
 
-        if (mMap != null) {
+       /* if (mMap != null) {
 
             //SET UP MAP
             mMap.getUiSettings().setCompassEnabled(true);
@@ -369,7 +369,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
             mMap.setOnMarkerClickListener(this);
         } else {
             Log.d("DEBUG", "map is null");
-        }
+        }*/
 
     }
 
@@ -441,6 +441,14 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+
+        //SET UP MAP
+        mMap.getUiSettings().setCompassEnabled(true);
+        mMap.getUiSettings().setZoomControlsEnabled(false);
+        // mMap.setMyLocationEnabled(true);
+        mMap.setOnMarkerClickListener(this);
 
         ArrayList<LegsVO> legsFlights = currentNodeVO.getLegs();
         for (int i = 0; i < legsFlights.size(); i++) {
