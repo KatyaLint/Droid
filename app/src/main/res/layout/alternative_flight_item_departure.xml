@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <RelativeLayout
+        android:id="@+id/alternative_departure_rl"
+        android:layout_margin="@dimen/DP4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/alternative_flight_departure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/SP14"
+        android:textColor="@color/COLOR_565656"
+        app:fontName="dinnextltpro_medium.otf"
+        android:text="Outbound"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/alternative_arrow_foward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/DP4"
+        android:layout_marginLeft="@dimen/DP4"
+        android:background="@drawable/arrow_back"
+
+        android:layout_toRightOf="@+id/alternative_flight_departure"
+        />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/alternative_city_name_from"
+        android:text="Tel Aviv"
+        android:textSize="@dimen/SP14"
+        android:textColor="@color/COLOR_565656"
+        app:fontName="dinnextltpro_regular.otf"
+        android:layout_marginRight="@dimen/DP4"
+
+        android:layout_toRightOf="@+id/alternative_arrow_foward"
+         />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/alternative_airport_name_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/COLOR_565656"
+        app:fontName="dinnextltpro_light.otf"
+        android:textSize="@dimen/SP14"
+        android:text="(TLV)"
+
+        android:layout_toRightOf="@+id/alternative_city_name_from"  />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/alternative_date_from"
+        android:text="10/7/16"
+        android:textColor="@color/COLOR_565656"
+        app:fontName="dinnextltpro_light.otf"
+        android:textSize="@dimen/SP12"
+
+        android:layout_toLeftOf="@+id/alternative_time_from"
+        android:layout_marginRight="@dimen/DP4"
+         />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/alternative_time_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/COLOR_565656"
+        app:fontName="dinnextltpro_light.otf"
+        android:textSize="@dimen/SP12"
+        android:text="20:30"
+
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_margin="@dimen/DP4"
+        android:id="@+id/alternative_stops_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/alternative_flight_stops"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/SP12"
+            android:textColor="@color/COLOR_565656"
+            app:fontName="dinnextltpro_light.otf"
+            android:text="Stops"
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:id="@+id/alternative_arrow_back"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/DP4"
+            android:background="@drawable/arrow_back"
+
+            android:layout_toRightOf="@+id/alternative_flight_stops"
+            />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/alternative_city_name_to"
+            android:text="Tel Aviv"
+            android:textSize="@dimen/SP14"
+            android:textColor="@color/COLOR_565656"
+            app:fontName="dinnextltpro_regular.otf"
+            android:layout_marginRight="@dimen/DP4"
+
+            android:layout_toRightOf="@+id/alternative_arrow_back"
+            />
+
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/alternative_airport_name_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/alternative_city_name_to"
+            android:textColor="@color/COLOR_565656"
+            app:fontName="dinnextltpro_light.otf"
+            android:textSize="@dimen/SP14"
+            android:text="(TLV)"/>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/alternative_date_to"
+            android:text="10/7/16"
+            android:textColor="@color/COLOR_565656"
+            app:fontName="dinnextltpro_light.otf"
+            android:textSize="@dimen/SP12"
+
+            android:layout_toLeftOf="@+id/alternative_time_to"
+            android:layout_marginRight="@dimen/DP4"
+            />
+
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/alternative_time_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/COLOR_565656"
+            app:fontName="dinnextltpro_light.otf"
+            android:textSize="@dimen/SP12"
+            android:text="20:30"
+
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+
+    </RelativeLayout>
+
+
+
+
+
+</LinearLayout>

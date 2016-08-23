@@ -147,7 +147,7 @@
     <string name="component_email">Email </string>
     <string name="component_first_name">Name</string>
     <string name="component_invite">Invite Travel Companion</string>
-    <string name="component_invite_new_companion">Invite New Travel Comapanion</string>
+    <string name="component_invite_new_companion">Invite New Travel Companion</string>
     <string name="component_invite_hint">Email Address</string>
     <string name="component_invite_hint_name">First Name</string>
     <string name="component_invite_hint_last_name">Last Name</string>
@@ -227,7 +227,7 @@
     <string name="onBoarding_search_flight_example">&quot;I want to fly to Rome on Friday with\nLauren and Jesse and return home on\nJune 5th&quot;</string>
     <string name="onBoarding_got_it_button">Got it</string>
 
-    <string name="companion_empty_view_text">You dont have any\nTravel Companions</string>
+    <string name="companion_empty_view_text">No Companions\nRequests</string>
     <string name="companion_empty_search">Search for travel companions  \nin the HelloGbye system above,\nor Invite a new travel companion\nto HelloGbye</string>
     <string name="companion_pending">Pending Companions</string>
     <string name="companion_travel">Travel Companions</string>

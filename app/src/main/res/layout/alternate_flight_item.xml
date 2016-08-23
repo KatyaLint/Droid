@@ -17,49 +17,80 @@
     <RelativeLayout
         android:id="@+id/alternate_flight_item_rl"
         android:padding="@dimen/DP10"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-    <LinearLayout
-        android:id="@+id/alternative_flight_cost_ll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentRight="true" >
 
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:id="@+id/alternative_flight_price"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/alternative_cost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/profile_image"
+                android:layout_marginRight="@dimen/DP10"
+                android:id="@+id/alternative_airplane_image"/>
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/alternative_airplane_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/SP16"
+                android:layout_toRightOf="@+id/alternative_airplane_image"
+                app:fontName="dinnextltpro_mediumcond.ttf"
+                android:textColor="@color/COLOR_565656"
+                android:text="AIRFRANCE"/>
+
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/alternative_flight_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/COLOR_565656"
+                android:textSize="@dimen/SP20"
+                android:text="$1556.12"
+                android:layout_alignParentRight="true"
+                app:fontName="dinnextltpro_medium.otf"  />
+
+        </RelativeLayout>
+
+        <include
+            android:id="@+id/alternative_departure"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/marine"
-            android:textSize="@dimen/SP18"
-            android:text="$1556.12"
-            app:fontName="dinnextltpro_mediumcond.ttf"  />
+            android:layout_below="@+id/alternative_cost"
+            layout="@layout/alternative_flight_item_departure"/>
 
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:id="@+id/alternative_flight_multiple"
-            android:text="Multiple"
-            android:layout_width="wrap_content"
+<!--        <View
+            android:id="@+id/alternative_divider"
+            android:layout_below="@+id/alternative_departure"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/DP1"
+            android:background="@color/light_grey"
+            />
+
+
+        <include
+            android:id="@+id/alternative_arrival"
+            android:layout_below="@+id/alternative_divider"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/warm_grey"
-            android:textSize="@dimen/SP12"
-            android:layout_gravity="right"
-            app:fontName="dinnextltpro_light.otf" />
-
-    </LinearLayout>
+            layout="@layout/alternative_flight_item_departure"/>-->
 
 
-    <hellogbye.com.hellogbyeandroid.adapters.GraphicsViewLayout
+ <!--   <hellogbye.com.hellogbyeandroid.adapters.GraphicsViewLayout
         android:id="@+id/view"
-        android:layout_toLeftOf="@+id/alternative_flight_cost_ll"
+
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/DP44" />
+        android:layout_height="@dimen/DP44" />-->
 
 
-    <RelativeLayout
+   <!-- <RelativeLayout
 
         android:id="@+id/flight_time_ll"
-        android:layout_below="@+id/view"
-        android:layout_toLeftOf="@+id/alternative_flight_cost_ll"
+        android:layout_below="@+id/alternative_cost"
+
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
@@ -96,7 +127,7 @@
             app:fontName="dinnextltpro_regular.otf"
             />
 
-    </RelativeLayout>
+    </RelativeLayout>-->
 
 </RelativeLayout>
 

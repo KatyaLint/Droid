@@ -615,4 +615,20 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     public void setIsmIsAlternative(boolean ismIsAlternative) {
         this.ismIsAlternative = ismIsAlternative;
     }
+
+    public String getmDestinationAirportName() {
+        return mDestinationAirportName;
+    }
+
+    public void setmDestinationAirportName(String mDestinationAirportName) {
+        this.mDestinationAirportName = mDestinationAirportName;
+    }
+
+    public String getmOriginAirportName() {
+        return mOriginAirportName;
+    }
+
+    public void setmOriginAirportName(String mOriginAirportName) {
+        this.mOriginAirportName = mOriginAirportName;
+    }
 }

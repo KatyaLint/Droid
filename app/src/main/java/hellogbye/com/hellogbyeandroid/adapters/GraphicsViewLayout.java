@@ -1,3 +1,4 @@
+/*
 package hellogbye.com.hellogbyeandroid.adapters;
 
 import android.content.Context;
@@ -13,9 +14,11 @@ import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFl
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 
+*/
 /**
  * Created by nyawka on 10/8/15.
- */
+ *//*
+
 public class GraphicsViewLayout extends View {
 
     private float xStart ;
@@ -130,3 +133,4 @@ public class GraphicsViewLayout extends View {
     }
 
 }
+*/

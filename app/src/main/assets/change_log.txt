@@ -321,10 +321,12 @@ Code changing:
     HEL-1310 - on first log in the "choose between" pop is cut
     HEL-1405 - add icons between airport codes
     HEL-1407 - change places between hotel ranking and hotel cost on hotel tile in grid
+    HEL-1358 - trip name is deleted when pressing on flight details
 
    Code changing:
    --------------
     - SearchView UI
     - Appsee :)
     - Google analytics
+    - Alternative flights new view
 

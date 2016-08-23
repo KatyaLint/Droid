@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingTop="@dimen/DP20"
     android:id="@+id/companion_empty_view"
-    android:visibility="gone"
+    android:visibility="visible"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -14,19 +14,20 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/profil_icon_copy"/>
+        android:src="@drawable/no_companions_requests"/>
+
     <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/SP32"
         android:textColor="@color/COLOR_005077"
         android:gravity="center"
-        app:fontName="dinnextltpro_mediumcond.ttf"
+        app:fontName="dinnextltpro_boldcondensed.otf"
         android:text="@string/companion_empty_view_text"
         android:padding="@dimen/DP20"/>
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
-
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/SP18"
