@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <hellogbye.com.hellogbyeandroid.views.CostumeToolBar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar_costume"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -77,8 +78,10 @@
         android:id="@+id/titleBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-
+        android:layout_gravity="left"
+        android:textSize="@dimen/SP20"
+        app:fontName="dinnextltpro_medium.otf"
+        android:layout_marginRight="@dimen/DP30"
         android:textColor="@color/white"
         android:visibility="visible" />
 

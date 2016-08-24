@@ -10,115 +10,116 @@
     android:background="@color/hgb_toolbar_blue">
 
 
-    <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@drawable/title_bar_logo"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:visibility="gone"-->
-        <!--android:id="@+id/home_image" />-->
+    <!--   &lt;!&ndash;<ImageView&ndash;&gt;
+           &lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;
+           &lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;
+           &lt;!&ndash;android:src="@drawable/title_bar_logo"&ndash;&gt;
+           &lt;!&ndash;android:layout_gravity="center"&ndash;&gt;
+           &lt;!&ndash;android:visibility="gone"&ndash;&gt;
+           &lt;!&ndash;android:id="@+id/home_image" />&ndash;&gt;
 
 
-    <include
-        android:id="@+id/tool_bar_profile_name"
-        layout="@layout/profile_name_layout"
-        />
+       <include
+           android:id="@+id/tool_bar_profile_name"
+           layout="@layout/profile_name_layout"
+           />
 
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginRight="@dimen/DP14"
-        android:background="@drawable/thin_0651_star_favorite_rating"
-        android:id="@+id/up_bar_favorite"
-        android:visibility="gone"/>
+       <ImageButton
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="right"
+           android:layout_marginRight="@dimen/DP14"
+           android:background="@drawable/thin_0651_star_favorite_rating"
+           android:id="@+id/up_bar_favorite"
+           android:visibility="gone"/>
 
-    <!--<ImageButton-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="right"-->
-        <!--android:layout_marginRight="@dimen/DP14"-->
-        <!--android:background="@drawable/icon_shopping_cart_white"-->
-        <!--android:id="@+id/my_trips_button"-->
-        <!--android:visibility="gone"/>-->
-
-
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/favority"
-        android:layout_gravity="right"
-        android:layout_marginRight="@dimen/DP34"
-        android:visibility="gone" />
-
-
-    <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/my_trip_edit_button"-->
-        <!--android:layout_gravity="left"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:text="@string/tool_bar"-->
-        <!--android:layout_marginRight="@dimen/DP14"-->
-        <!--android:visibility="gone"-->
-        <!--android:paddingLeft="@dimen/DP10" />-->
+       &lt;!&ndash;<ImageButton&ndash;&gt;
+           &lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;
+           &lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;
+           &lt;!&ndash;android:layout_gravity="right"&ndash;&gt;
+           &lt;!&ndash;android:layout_marginRight="@dimen/DP14"&ndash;&gt;
+           &lt;!&ndash;android:background="@drawable/icon_shopping_cart_white"&ndash;&gt;
+           &lt;!&ndash;android:id="@+id/my_trips_button"&ndash;&gt;
+           &lt;!&ndash;android:visibility="gone"/>&ndash;&gt;
 
 
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/titleBar"
+       <ImageButton
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/favority"
+           android:layout_gravity="right"
+           android:layout_marginRight="@dimen/DP34"
+           android:visibility="gone" />
 
-        android:textColor="@color/white"
-        android:visibility="visible"/>
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/itirnarary_title_Bar"
-        android:textColor="@color/white"
-        android:visibility="visible"/>
+       &lt;!&ndash;<hellogbye.com.hellogbyeandroid.views.FontTextView&ndash;&gt;
+           &lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;
+           &lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;
+           &lt;!&ndash;android:id="@+id/my_trip_edit_button"&ndash;&gt;
+           &lt;!&ndash;android:layout_gravity="left"&ndash;&gt;
+           &lt;!&ndash;android:textColor="@color/white"&ndash;&gt;
+           &lt;!&ndash;android:text="@string/tool_bar"&ndash;&gt;
+           &lt;!&ndash;android:layout_marginRight="@dimen/DP14"&ndash;&gt;
+           &lt;!&ndash;android:visibility="gone"&ndash;&gt;
+           &lt;!&ndash;android:paddingLeft="@dimen/DP10" />&ndash;&gt;
 
-    <LinearLayout
-        android:id="@+id/preferences_edit_mode"
-        android:layout_marginRight="@dimen/DP14"
-        android:visibility="gone"
-        android:layout_gravity="right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:orientation="horizontal">
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/edit_preferences"
-            android:background="@drawable/edit_img"
-            />
 
-        <ImageButton
-            android:visibility="gone"
-            android:layout_marginLeft="@dimen/DP20"
-            android:id="@+id/check_preferences"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/check"/>
-    </LinearLayout>
 
-    <!--android:background="@drawable/star2"-->
+       <hellogbye.com.hellogbyeandroid.views.FontTextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center_horizontal"
+           android:id="@+id/titleBar"
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editPreference"
-        android:layout_gravity="right"
-        android:text="@string/tool_bar"
-        android:layout_marginRight="@dimen/DP14"
-        android:visibility="gone"
-        />
+           android:textColor="@color/white"
+           android:visibility="visible"/>
+
+       <hellogbye.com.hellogbyeandroid.views.FontTextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center_horizontal"
+           android:id="@+id/itirnarary_title_Bar"
+           android:textColor="@color/white"
+           android:visibility="visible"/>
+
+       <LinearLayout
+           android:id="@+id/preferences_edit_mode"
+           android:layout_marginRight="@dimen/DP14"
+           android:visibility="gone"
+           android:layout_gravity="right"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content" android:orientation="horizontal">
+           <ImageButton
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/edit_preferences"
+               android:background="@drawable/edit_img"
+               />
+
+           <ImageButton
+               android:visibility="gone"
+               android:layout_marginLeft="@dimen/DP20"
+               android:id="@+id/check_preferences"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:background="@drawable/check"/>
+       </LinearLayout>
+
+       &lt;!&ndash;android:background="@drawable/star2"&ndash;&gt;
+
+       <hellogbye.com.hellogbyeandroid.views.FontTextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/editPreference"
+           android:layout_gravity="right"
+           android:text="@string/tool_bar"
+           android:layout_marginRight="@dimen/DP14"
+           android:visibility="gone"
+           />   -->
 
 
 
 </hellogbye.com.hellogbyeandroid.views.CostumeToolBar>
+
