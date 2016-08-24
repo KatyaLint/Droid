@@ -398,6 +398,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 onBackPressed();
             }
         });
+
         newIteneraryImageButton = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary);
 
         newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
@@ -407,6 +408,14 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             }
         });
 
+
+        ImageButton toolbar_new_iternerary_cnc = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary_cnc);
+        toolbar_new_iternerary_cnc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearCNCItems();
+            }
+        });
 
     }
 
@@ -547,7 +556,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
 
 
-        final ImageButton toolbar_go_to_iternerary = (ImageButton) mToolbar.findViewById(R.id.toolbar_go_to_iternerary);
+    /*    final ImageButton toolbar_go_to_iternerary = (ImageButton) mToolbar.findViewById(R.id.toolbar_go_to_iternerary);
         toolbar_go_to_iternerary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -563,7 +572,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
 
             }
-        });
+        });*/
 
     }
 

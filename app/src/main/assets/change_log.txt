@@ -329,4 +329,6 @@ Code changing:
     - Appsee :)
     - Google analytics
     - Alternative flights new view
-
+    - arrow_drop_down
+    - alignment left all titles
+    - clear Itinerary Button

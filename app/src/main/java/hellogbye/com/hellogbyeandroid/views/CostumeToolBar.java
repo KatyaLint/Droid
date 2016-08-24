@@ -39,7 +39,7 @@ public class CostumeToolBar extends Toolbar {
     private FontTextView my_trip_profile;
     private FontTextView itirnarary_title_Bar;
     private LinearLayout tool_bar_profile_name;
-    private ImageButton toolbar_go_to_iternerary;
+    private ImageButton toolbar_new_iternerary_cnc;
     private FontTextView preference_save_changes;
     private SearchView search_view;
     private Activity mActivity;
@@ -102,8 +102,8 @@ public class CostumeToolBar extends Toolbar {
         }if(tool_bar_profile_name == null){
             tool_bar_profile_name = (LinearLayout)findViewById(R.id.tool_bar_profile_name);
         }
-        if(toolbar_go_to_iternerary == null){
-            toolbar_go_to_iternerary = (ImageButton) findViewById(R.id.toolbar_go_to_iternerary);
+        if(toolbar_new_iternerary_cnc == null){
+            toolbar_new_iternerary_cnc = (ImageButton) findViewById(R.id.toolbar_new_iternerary_cnc);
         }
 
         if(new_itinerary == null){
@@ -190,7 +190,7 @@ public class CostumeToolBar extends Toolbar {
        // my_trip_edit_button.setVisibility(View.GONE);
      //   my_trips_image_profile.setVisibility(View.GONE);
         itirnarary_title_Bar.setVisibility(View.GONE);
-        toolbar_go_to_iternerary.setVisibility(View.GONE);
+        toolbar_new_iternerary_cnc.setVisibility(View.GONE);
         preference_save_changes.setVisibility(View.GONE);
         new_itinerary.setVisibility(View.GONE);
         search_maginfy.setVisibility(View.GONE);
@@ -208,7 +208,7 @@ public class CostumeToolBar extends Toolbar {
          //       break;
             case CNC:
                 tool_bar_profile_name.setVisibility(View.VISIBLE);
-                toolbar_go_to_iternerary.setVisibility(View.VISIBLE);
+                toolbar_new_iternerary_cnc.setVisibility(View.VISIBLE);
                 break;
             case ITINARERY:
                // titleText.setVisibility(View.VISIBLE);

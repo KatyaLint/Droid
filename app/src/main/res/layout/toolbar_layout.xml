@@ -22,7 +22,7 @@
         layout="@layout/profile_name_layout" />
 
 
-    <ImageButton
+<!--    <ImageButton
         android:id="@+id/toolbar_go_to_iternerary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,8 +30,18 @@
         android:layout_marginRight="@dimen/DP14"
         android:background="@drawable/group_7"
         android:tag="keyboard"
-        android:visibility="gone" />
+        android:visibility="gone" />-->
 
+
+    <ImageButton
+        android:id="@+id/toolbar_new_iternerary_cnc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/DP14"
+        android:background="@drawable/new_trip"
+        android:tag="keyboard"
+        android:visibility="gone" />
 
 
     <ImageButton
@@ -147,6 +157,7 @@
         android:text="@string/tool_bar_preferences_save_button"
         android:textColor="@color/white"
         android:visibility="gone" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:orientation="horizontal"

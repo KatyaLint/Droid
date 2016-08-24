@@ -474,17 +474,17 @@ public class CNCFragment extends HGBAbstractFragment {
     }
 
 
-    public void handleMyMessage(final String strMessage) {
+    public void handleMyMessage(final String strMessageReceived) {
         stopTextTutorial();
         mTextTutoralHeader.setVisibility(View.GONE);
         mTextTutoralBody.setVisibility(View.GONE);
-        getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.ME_ITEM));
+        getActivityInterface().addCNCItem(new CNCItem(strMessageReceived.trim(), CNCAdapter.ME_ITEM));
         addWaitingItem();
         mAdapter.notifyDataSetChanged();
         resetMessageEditText();
      //   enterCNCMessage(strMessage);
 
-        HGBTranslate.translateQueary(getActivity().getApplicationContext(),strMessage, new HGBTranslateInterface() {
+        HGBTranslate.translateQueary(getActivity().getApplicationContext(),strMessageReceived, new HGBTranslateInterface() {
             @Override
             public void onSuccess(String message) {
                 enterCNCMessage(message);
@@ -492,7 +492,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
             @Override
             public void onError(String error) {
-                enterCNCMessage(strMessage);
+                enterCNCMessage(strMessageReceived);
             }
         });
 

@@ -20,7 +20,7 @@ public class HGBTranslate {
 
     public static final String MAIN_LANGUAGE = "en";
 
-    public static void translateQueary(Context context,String message, final HGBTranslateInterface tranlsateinterface){
+    public static void translateQueary(Context context,final String message, final HGBTranslateInterface tranlsateinterface){
         String strResponce = "";
 
         final String strQuery = message.replaceAll(" ", "%20");
@@ -89,7 +89,7 @@ public class HGBTranslate {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                tranlsateinterface.onSuccess(error.getMessage());
+                tranlsateinterface.onError(error.getMessage());
             }
 
         }, false);
