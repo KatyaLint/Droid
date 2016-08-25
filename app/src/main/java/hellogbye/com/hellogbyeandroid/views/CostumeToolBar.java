@@ -43,6 +43,7 @@ public class CostumeToolBar extends Toolbar {
     private FontTextView preference_save_changes;
     private SearchView search_view;
     private Activity mActivity;
+    private ImageButton toolbar_add_companion;
 
     public CostumeToolBar(Context context) {
         super(context);
@@ -111,6 +112,9 @@ public class CostumeToolBar extends Toolbar {
         }
         if(search_maginfy == null){
             search_maginfy = (ImageButton) findViewById(R.id.search_maginfy);
+        }
+        if(toolbar_add_companion == null){
+            toolbar_add_companion = (ImageButton)findViewById(R.id.toolbar_add_companion);
         }
 
         initSearchBar();
@@ -195,7 +199,7 @@ public class CostumeToolBar extends Toolbar {
         new_itinerary.setVisibility(View.GONE);
         search_maginfy.setVisibility(View.GONE);
         search_view.setVisibility(View.GONE);
-
+        toolbar_add_companion.setVisibility(View.GONE);
 
         switch (navBar) {
          //   case HOME:
@@ -240,6 +244,7 @@ public class CostumeToolBar extends Toolbar {
                 break;
 
             case COMPANIONS:
+                toolbar_add_companion.setVisibility(View.VISIBLE);
             case ALL_COMPANIONS_VIEW:
             case COMPANIONS_PERSONAL_DETAILS:
             case HELP:

@@ -27,7 +27,9 @@ public class CompanionUserProfileVO {
     @SerializedName("avatarurl")
     private String mAvatar;
     @SerializedName("ispremiumuser")
-    private String mIsPremiumUser;
+    private boolean mIsPremiumUser;
+    @SerializedName("istravelprofile")
+    private boolean mIstravelProfile;
 
     public String getmFirstName() {
         return mFirstName;
@@ -91,5 +93,13 @@ public class CompanionUserProfileVO {
 
     public void setmState(String mState) {
         this.mState = mState;
+    }
+
+    public String getmUserProfileId() {
+        return mUserProfileId;
+    }
+
+    public void setmUserProfileId(String mUserProfileId) {
+        this.mUserProfileId = mUserProfileId;
     }
 }

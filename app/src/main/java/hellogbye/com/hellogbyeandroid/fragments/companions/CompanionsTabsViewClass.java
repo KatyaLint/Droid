@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
@@ -25,11 +26,15 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
 
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.companion.CompanionsSwipeItemsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
+import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionsSearchItemsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.companion.ICompanionsSearchCB;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -54,6 +59,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
     private LinearLayout companion_empty_view;
     private View rootView;
     private ArrayList<CompanionVO> companionsVOPending = new ArrayList<>();
+    private ArrayList<CompanionVO> searchCompanionsVO = new ArrayList<>();
     private ArrayList mCurrItemsSearchList ;
     public static boolean isPending;
 
@@ -120,14 +126,21 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
         inputs = new FontEditTextView[]{companion_editTextDialog };
 
 
-        FloatingActionButton companion_invite_companion = (FloatingActionButton) rootView.findViewById(R.id.fab);
+    /*    FloatingActionButton companion_invite_companion = (FloatingActionButton) rootView.findViewById(R.id.fab);
         companion_invite_companion.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 addTravelCompanion();
             }
-        });
+        });*/
 
+       ImageButton toolbar_add_companion = ((MainActivityBottomTabs) getActivity()).getAddCompanionButton();
+        toolbar_add_companion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addTravelCompanion();
+            }
+        });
 
         return rootView;
     }
@@ -177,8 +190,61 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
                 rejectComapanion(companionId);
             }
         });
-        searchRecyclerView.setAdapter(searchListAdapter);
 
+
+        searchListAdapter.setCompanionSearchCB(new ICompanionsSearchCB() {
+            @Override
+            public void onAddCompanionFromSearchClicked(String companion_id) {
+                CompanionVO companionSearchVO  = null;
+                for(CompanionVO companionVO : searchCompanionsVO)
+                {
+                    if(companionVO.getCompanionUserProfile().getmUserProfileId().equals(companion_id)){
+                        companionSearchVO = companionVO;
+                        break;
+                    }
+                }
+                if(companionSearchVO == null){
+                    return;
+                }
+                companionSearchVO.setmAddedvia("Search");
+
+
+
+                ConnectionManager.getInstance(getActivity()).postSearchCompanionAdd(companionSearchVO, new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+
+                        CompanionVO companionVO = (CompanionVO)data;
+                        getCompanions();
+                      //  setNewRelationshipForCompanion(companionVO);
+
+                    }
+
+                    @Override
+                    public void onError(Object data) {
+                        ErrorMessage(data);
+                    }
+                });
+
+            }
+        });
+        searchRecyclerView.setAdapter(searchListAdapter);
+    }
+
+
+    private void setNewRelationshipForCompanion(CompanionVO companionVO){
+
+        ConnectionManager.getInstance(getActivity()).putCompanionRelationship(companionVO.getmCompanionid(), 1,new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                getCompanions();
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
     }
 
     private void rejectComapanion(String companionId) {
@@ -239,6 +305,9 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
 
 
     private void getCompanions(){
+        if(mSearchView != null) {
+            mSearchView.setQuery("", false);
+        }
         ConnectionManager.getInstance(getActivity()).getCompanions(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
@@ -340,10 +409,41 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
         if(mCurrItemsSearchList == null){ //list empty
             return false;
         }
+
+
+        if(query.isEmpty()){
+            searchListAdapter.updateItems(mCurrItemsSearchList);
+            searchListAdapter.animateTo(mCurrItemsSearchList);
+            searchListAdapter.notifyDataSetChanged();
+            searchRecyclerView.scrollToPosition(0);
+        }else {
+
+            ConnectionManager.getInstance(getActivity()).getCompanionsForSearch(query, new ConnectionManager.ServerRequestListener() {
+                @Override
+                public void onSuccess(Object data) {
+
+                    CompanionsSearchItemsVO mItemsList = (CompanionsSearchItemsVO) data;
+                    searchCompanionsVO = mItemsList.getmNodes();
+                    searchListAdapter.updateItems(mItemsList.getmNodes());
+                    //searchListAdapter.animateTo(mItemsList.getmNodes());
+                    searchListAdapter.notifyDataSetChanged();
+                    //searchRecyclerView.scrollToPosition(0);
+                }
+
+                @Override
+                public void onError(Object data) {
+                    ErrorMessage(data);
+                }
+            });
+
+
+        }
+
+
         // Here is where we are going to implement our filter logic
-        final List<CompanionVO> filteredModelList = filter(mCurrItemsSearchList, query);
+      /*  final List<CompanionVO> filteredModelList = filter(mCurrItemsSearchList, query);
         searchListAdapter.animateTo(filteredModelList);
-        searchRecyclerView.scrollToPosition(0);
+        searchRecyclerView.scrollToPosition(0);*/
         return true;
 
     }

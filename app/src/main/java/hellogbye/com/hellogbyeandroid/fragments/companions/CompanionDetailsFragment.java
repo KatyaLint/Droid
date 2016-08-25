@@ -164,7 +164,7 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
 
 
         RoundedImageView companion_details_image = (RoundedImageView) view.findViewById(R.id.companion_details_image);
-        HGBUtility.loadRoundedImage(profileData.getmAvatar(),companion_details_image, R.drawable.profile_image);
+        HGBUtility.loadRoundedImage(profileData.getmAvatar(),companion_details_image, R.drawable.avatar_companions);
        // MyTripPinnedAdapter sectionedAdapter = new MyTripPinnedAdapter(mItemsList);
 
     }
@@ -183,6 +183,7 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
             }
         });
     }
+
     private void getRelationshipTypes(){
         ConnectionManager.getInstance(getActivity()).getStaticCompanionsRelationTypesVO( new ConnectionManager.ServerRequestListener() {
             @Override

@@ -110,6 +110,13 @@
             android:layout_weight="0"
             android:id="@+id/companion_arrow" />
 
+
+            <ImageView
+                android:id="@+id/companion_add_companion_to_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/add_icon"/>
+
         </LinearLayout>
 
     </com.daimajia.swipe.SwipeLayout>

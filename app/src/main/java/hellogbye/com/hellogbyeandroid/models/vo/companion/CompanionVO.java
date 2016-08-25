@@ -29,6 +29,12 @@ public class CompanionVO {
     @SerializedName("invitationtoken")
     private String mInvitationtoken;
 
+    @SerializedName("isfamilymember")
+    private boolean mIsFamilyMember;
+
+    @SerializedName("addedvia")
+    private String mAddedvia;
+
     public String getmConfirmationstatus() {
         return mConfirmationstatus;
     }
@@ -91,5 +97,13 @@ public class CompanionVO {
 
     public void setmInvitationtoken(String mInvitationtoken) {
         this.mInvitationtoken = mInvitationtoken;
+    }
+
+    public String getmAddedvia() {
+        return mAddedvia;
+    }
+
+    public void setmAddedvia(String mAddedvia) {
+        this.mAddedvia = mAddedvia;
     }
 }

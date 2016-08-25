@@ -24,7 +24,9 @@ public class CompanionInviteUserProfileVO {
     @SerializedName("state")
     private String mState;
     @SerializedName("ispremiumuser")
-    private String mIsPremiumUser;
+    private boolean mIsPremiumUser;
+    @SerializedName("istravelprofile")
+    private boolean mIstravelProfile;
 
     public String getmUserProfileId() {
         return mUserProfileId;

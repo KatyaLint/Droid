@@ -17,6 +17,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.models.CreditCardSessionItem;
 
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
+import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionsSearchItemsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
@@ -291,12 +292,44 @@ public class Parser {
         return user;
     }
 
-    public static Object parseCompanionData(String response) {
+
+
+    public static Object parseCompanionSearchData(String response) {
+
+        CompanionsSearchItemsVO  campanionVO = null;
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<CompanionsSearchItemsVO>() {
+            }.getType();
+            campanionVO = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return campanionVO;
+
+    }
+
+
+    public static Object parseCompanionsData(String response) {
 
         List<CompanionVO>  campanionVO = null;
         try {
             Gson gson = new Gson();
             Type listType = new TypeToken<List<CompanionVO>>() {
+            }.getType();
+            campanionVO = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return campanionVO;
+    }
+
+    public static Object parseCompanionData(String response) {
+
+        CompanionVO  campanionVO = null;
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<CompanionVO>() {
             }.getType();
             campanionVO = gson.fromJson((String) response, listType);
         } catch (Exception e) {

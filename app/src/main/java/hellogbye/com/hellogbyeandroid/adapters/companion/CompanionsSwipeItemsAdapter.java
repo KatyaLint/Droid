@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -20,6 +21,7 @@ import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
 
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
+import hellogbye.com.hellogbyeandroid.models.vo.companion.ICompanionsSearchCB;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
@@ -34,6 +36,7 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
     private Context mContext;
     private ArrayList<CompanionVO> mDataset;
     private ISwipeAdapterExecution swipeAdapterExecution;
+    private ICompanionsSearchCB companionSearchCB;
 
     public void addClickeListeners(ISwipeAdapterExecution swipeAdapterExecution) {
         this.swipeAdapterExecution = swipeAdapterExecution;
@@ -46,6 +49,10 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
 
     }
 
+    public void setCompanionSearchCB(ICompanionsSearchCB companionSearchCB) {
+        this.companionSearchCB = companionSearchCB;
+    }
+
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {
         private SwipeLayout swipe_my_companions;
         private ImageButton companion_delete_item;
@@ -56,6 +63,7 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
         private View companion_arrow;
         private FontTextView companion_confirm_button;
         private FontTextView companion_delete_button;
+        private ImageView companion_add_companion_to_list;
 
         private LinearLayout companion_confirmation_layout;
 
@@ -71,6 +79,8 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
             companion_details_name_item = (FontTextView) itemView.findViewById(R.id.companion_details_name_item);
             companion_request = (FontTextView) itemView.findViewById(R.id.companion_request);
             companion_arrow = (View)itemView.findViewById(R.id.companion_arrow);
+            companion_add_companion_to_list = (ImageView)itemView.findViewById(R.id.companion_add_companion_to_list);
+
 
             companion_confirm_button = (FontTextView)itemView.findViewById(R.id.companion_confirm_button);
             companion_delete_button = (FontTextView)itemView.findViewById(R.id.companion_delete_button);
@@ -107,27 +117,39 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
             viewHolder.companion_details_name_item.setTag(item.getmCompanionid());
             viewHolder.companion_request.setText(item.getCompanionUserProfile().getmEmailAddress());
             viewHolder.companion_arrow.setVisibility(View.GONE);
+            viewHolder.companion_add_companion_to_list.setVisibility(View.GONE);
 
             if(item.getCompanionInviteUserProfileVO() != null) {
                 viewHolder.companion_details_name_item.setText(item.getCompanionInviteUserProfileVO().getmFirstName());
                 viewHolder.companion_confirm_button.setTag(item.getmInvitationtoken());
                 viewHolder.companion_delete_button.setTag(item.getmInvitationtoken());
                 viewHolder.companion_confirmation_layout.setVisibility(View.VISIBLE);
+
+
             }else {
 
              //   viewHolder.companion_request.setText(item.getmConfirmationstatus());
                 viewHolder.companion_confirmation_layout.setVisibility(View.GONE);
             }
 
-        }else {
+        }else if(item.getmConfirmationstatus().equals("Accepted")){
                 viewHolder.companion_details_name_item.setText(item.getCompanionUserProfile().getmFirstName());
                 viewHolder.companion_details_name_item.setTag(item.getmCompanionid());
                 viewHolder.companion_arrow.setVisibility(View.VISIBLE);
                 viewHolder.companion_request.setText(item.getCompanionUserProfile().getmEmailAddress());
                 viewHolder.companion_confirmation_layout.setVisibility(View.GONE);
+                viewHolder.companion_add_companion_to_list.setVisibility(View.GONE);
+
+        } else if(item.getmConfirmationstatus().equals("None")){
+            viewHolder.companion_details_name_item.setText(item.getCompanionUserProfile().getmFirstName());
+            viewHolder.companion_details_name_item.setTag(item.getmCompanionid());
+            viewHolder.companion_request.setText(item.getCompanionUserProfile().getmEmailAddress());
+            viewHolder.companion_arrow.setVisibility(View.GONE);
+            viewHolder.companion_confirmation_layout.setVisibility(View.GONE);
+            viewHolder.companion_add_companion_to_list.setVisibility(View.VISIBLE);
         }
 
-        HGBUtility.loadRoundedImage(item.getCompanionUserProfile().getmAvatar(), viewHolder.companion_image_view, R.drawable.profile_image);
+        HGBUtility.loadRoundedImage(item.getCompanionUserProfile().getmAvatar(), viewHolder.companion_image_view, R.drawable.avatar_companions);
 
         viewHolder.swipe_my_companions.setShowMode(SwipeLayout.ShowMode.PullOut);
         viewHolder.swipe_my_companions.addSwipeListener(new SimpleSwipeListener() {
@@ -175,7 +197,7 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
 
         viewHolder.companion_rl.setTag(item.getmCompanionid());
         viewHolder.companion_delete_item.setTag(item.getmCompanionid());
-
+        viewHolder.companion_add_companion_to_list.setTag(item.getCompanionUserProfile().getmUserProfileId());
 
         viewHolder.companion_rl.setOnClickListener(new SwipeLayout.OnClickListener() {
 
@@ -183,6 +205,14 @@ public class CompanionsSwipeItemsAdapter extends RecyclerSwipeAdapter<Companions
             public void onClick(View v) {
                 swipeAdapterExecution.clickedItem((String)v.getTag());
 
+            }
+        });
+
+        viewHolder.companion_add_companion_to_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String guid =  (String)view.getTag();
+                companionSearchCB.onAddCompanionFromSearchClicked(guid);
             }
         });
 

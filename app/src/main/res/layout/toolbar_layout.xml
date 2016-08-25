@@ -53,6 +53,17 @@
         android:background="@drawable/thin_0651_star_favorite_rating"
         android:visibility="gone" />
 
+    <ImageButton
+        android:id="@+id/toolbar_add_companion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/DP14"
+        android:background="@drawable/add_companion_a"
+        android:tag="keyboard"
+        android:visibility="gone" />
+
+
     <!--<ImageButton-->
     <!--android:layout_width="wrap_content"-->
     <!--android:layout_height="wrap_content"-->

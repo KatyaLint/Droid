@@ -128,6 +128,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private final int BOTTOM_BAR_THIRD_INDEX = 2;
     private final int BOTTOM_BAR_FOURTH_INDEX = 3;
     private final int BOTTOM_BAR_FIFTH_INDEX = 4;
+    private ImageButton toolbar_add_companion;
 
     public HGBSaveDataClass getHGBSaveDataClass() {
         return hgbSaveDataClass;
@@ -308,7 +309,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
         if (count == 1 && str.equals(TripsTabsView.class.toString())) {
             LogOutPopup();
-
             return;
         }
 
@@ -417,6 +417,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             }
         });
 
+
+
+         toolbar_add_companion = (ImageButton)mToolbar.findViewById(R.id.toolbar_add_companion);
+
     }
 
     private void setOnClickListenerForSavePreferences() {
@@ -432,6 +436,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
     }
 
+    public ImageButton getAddCompanionButton(){
+        return toolbar_add_companion;
+    }
 
     private void setOnClickListenerForItineraryTopBar() {
         up_bar_favorite = (ImageButton) mToolbar.findViewById(R.id.up_bar_favorite);

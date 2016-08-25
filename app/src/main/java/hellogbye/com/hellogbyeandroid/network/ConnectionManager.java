@@ -18,6 +18,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
@@ -176,6 +177,35 @@ public class ConnectionManager {
         }, true);
     }
 
+
+    public void postSearchCompanionAdd(CompanionVO companionData, final ServerRequestListener listener) {
+
+        String url = getURL(Services.COMPANIONS);
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("addedvia", companionData.getmAddedvia());
+            jsonObject.put("emailaddress", companionData.getCompanionUserProfile().getmEmailAddress());
+            jsonObject.put("firstname", companionData.getCompanionUserProfile().getmFirstName());
+            jsonObject.put("lastname",  companionData.getCompanionUserProfile().getmLastName());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseCompanionData(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, true);
+    }
 
 
 
@@ -669,24 +699,6 @@ public class ConnectionManager {
 
     }
 
-    public void UpdateCreditCardHelloGbye(JSONObject json,final ServerRequestListener listener) {
-        String url = getURL(Services.CARD_TOKEN);
-
-
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
-                json, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listener.onSuccess(Parser.parseCreditCardList(response));
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
-            }
-        },false);
-
-    }
 
     public void addCreditCard(CreditCardItem creditCardItem, final ServerRequestListener listener) {
 
@@ -755,6 +767,26 @@ public class ConnectionManager {
 
     }
 
+
+
+    public void getCompanionsForSearch(final String searchParam, final ServerRequestListener listener){
+      //  https://apiuat.hellogbye.com/uat/rest/UserProfile/Search?count=5&excludeCompanions=false&searchParam=a&skip=0
+        String url = getURL(Services.COMPANION_SEARCH) + "searchParam="+searchParam+"&skip="+0;
+        JSONObject jsonObject = new JSONObject();
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseCompanionSearchData(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+       // https://apiuat.hellogbye.com/uat/rest/UserProfile/Search?count=5&excludeCompanions=false&searchParam=a&skip=0
+    }
 
     public void getConfirmationBooking(String iteneraryid,String itemGuid, final ServerRequestListener listener) {
 
@@ -903,34 +935,6 @@ public class ConnectionManager {
     }
 
 
-    public void RemoveCreditCardHelloGbye(String token,final ServerRequestListener listener) {
-        String url = getURL(Services.CARD_TOKEN);
-
-        try{
-            JSONObject json = new JSONObject();
-            json.put("token",token);
-            //THIS is a terrible work around because Volley doesnt support json body in DELETE https://code.google.com/p/android/issues/detail?id=65529
-            // Hack - http://stackoverflow.com/questions/33553559/delete-request-with-header-and-parametes-volley
-            HGBJsonRequest req = new HGBJsonRequest(true,Request.Method.DELETE, url,
-                    json, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    listener.onSuccess(response);
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    listener.onError(Parser.parseErrorMessage(error));
-                }
-            });
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-
-
-
-    }
 
 
 
@@ -1195,10 +1199,6 @@ public class ConnectionManager {
     }
 
 
-
-
-
-
   //  http://cnc.hellogbye.com/cnc/rest/Statics/GetProvinceByCountryCode?countryCode=ID
 
     public void getStaticBookingProvince(String countryCode, final ServerRequestListener listener) {
@@ -1293,7 +1293,7 @@ public class ConnectionManager {
                 jsonObject, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(Parser.parseCompanionData(response));
+                listener.onSuccess(Parser.parseCompanionsData(response));
             }
         }, new Response.ErrorListener() {
             @Override
@@ -1314,7 +1314,7 @@ public class ConnectionManager {
                 jsonObject, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(Parser.parseCompanionData(response));
+                listener.onSuccess(Parser.parseCompanionsData(response));
             }
         }, new Response.ErrorListener() {
             @Override
@@ -1349,6 +1349,33 @@ public class ConnectionManager {
     ////////////////////////////////
     // DELETE
     ///////////////////////////////
+
+
+    public void RemoveCreditCardHelloGbye(String token,final ServerRequestListener listener) {
+        String url = getURL(Services.CARD_TOKEN);
+
+        try{
+            JSONObject json = new JSONObject();
+            json.put("token",token);
+            //THIS is a terrible work around because Volley doesnt support json body in DELETE https://code.google.com/p/android/issues/detail?id=65529
+            // Hack - http://stackoverflow.com/questions/33553559/delete-request-with-header-and-parametes-volley
+            HGBJsonRequest req = new HGBJsonRequest(true,Request.Method.DELETE, url,
+                    json, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    listener.onSuccess(response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    listener.onError(Parser.parseErrorMessage(error));
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
     public void deleteItinerary(String solutionid, final ServerRequestListener listener) {
 
@@ -1809,6 +1836,26 @@ public class ConnectionManager {
         });
     }
 
+
+    public void UpdateCreditCardHelloGbye(JSONObject json,final ServerRequestListener listener) {
+        String url = getURL(Services.CARD_TOKEN);
+
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
+                json, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseCreditCardList(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        },false);
+
+    }
+
     public void putFlight(String solutioid, String paxid, String bookedflight, String newflight, final ServerRequestListener listener) {
         String url = getURL(Services.USER_FLIGHT_SOLUTIONS);
         JSONObject jsonObjectWrapper = new JSONObject();
@@ -1927,7 +1974,8 @@ public class ConnectionManager {
                 BOOKING_CONFIRMATION("Booking/flight/confirmation/pdf?"),
                 SUBMIT_FEEDBACK("Feedback"),
                 USER_ACTIVATION_PIN("UserProfile/Activate?activationKey="),
-                DEFAULT_PROFILES("TravelPreference/Profiles/Defaults");
+                DEFAULT_PROFILES("TravelPreference/Profiles/Defaults"),
+                COMPANION_SEARCH("UserProfile/Search?count=5&excludeCompanions=false&");
 
                 String url;
                 Services(String url){
