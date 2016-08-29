@@ -47,6 +47,7 @@
     <dimen name="DP450">900dp</dimen>
 
     <dimen name="DP_64">-64dp</dimen>
+    <dimen name="DP_2">-4dp</dimen>
 
     <dimen name="SP4">8sp</dimen>
     <dimen name="SP6">12sp</dimen>

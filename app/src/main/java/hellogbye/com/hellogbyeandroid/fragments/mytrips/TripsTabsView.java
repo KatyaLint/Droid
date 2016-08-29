@@ -1,9 +1,5 @@
 package hellogbye.com.hellogbyeandroid.fragments.mytrips;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -16,9 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
-import android.widget.TabWidget;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
@@ -55,9 +49,9 @@ public class TripsTabsView extends HGBAbstractFragment {
             view.setBackgroundResource(R.drawable.selector_tabs_indicator);
             TextView tv = (TextView) view.findViewById(android.R.id.title);
             if (i == 0) { //selected
-                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.white));
+                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_WHITE));
             } else { //unselected
-                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_c3cad3));
+                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_F5F5F5));
             }
             tv.setTypeface(textFont);
             tv.setTransformationMethod(null);
@@ -100,7 +94,7 @@ public class TripsTabsView extends HGBAbstractFragment {
 
                 for (int i = 0; i < mTabHost.getTabWidget().getChildCount(); i++) {
                     TextView tv = (TextView) mTabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
-                    tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_c3cad3));
+                    tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_F5F5F5));
                     tv.setTypeface(textFont);
                   //  tv.setTextSize(R.dimen.SP16);
                     tv.setTransformationMethod(null);
@@ -108,7 +102,7 @@ public class TripsTabsView extends HGBAbstractFragment {
                 }
 
                 TextView tv = (TextView) mTabHost.getCurrentTabView().findViewById(android.R.id.title); //for Selected Tab
-                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.white));
+                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_WHITE));
                 tv.setTypeface(textFont);
                // tv.setTextSize(R.dimen.SP16);
                 tv.setTransformationMethod(null);

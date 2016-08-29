@@ -7,7 +7,7 @@
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/COLOR_0E587D"
+        android:textColor="@color/COLOR_00516f"
         android:textSize="@dimen/SP18"
         app:fontName="dinnextltpro_medium.otf"
         android:padding="@dimen/DP20"

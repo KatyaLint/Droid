@@ -7,7 +7,7 @@
 
 
     <LinearLayout
-        android:background="@color/hgb_toolbar_blue"
+        android:background="@color/COLOR_003D4C"
         android:gravity="center"
         android:paddingLeft="@dimen/DP10"
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:gravity="center"
             android:textSize="@dimen/SP16"
             app:fontName="dinnextltpro_medium.otf"
-            android:textColor="@color/white"
+            android:textColor="@color/COLOR_WHITE"
             android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/my_trips_upcoming"/>
@@ -30,7 +30,7 @@
             app:fontName="dinnextltpro_medium.otf"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/white"
+            android:textColor="@color/COLOR_WHITE"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/my_trips_favorites"/>
@@ -42,7 +42,7 @@
             app:fontName="dinnextltpro_medium.otf"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/white"
+            android:textColor="@color/COLOR_WHITE"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/my_trips_history"/>
@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/SP32"
-            android:textColor="@color/COLOR_005077"
+            android:textColor="@color/COLOR_00516f"
             android:gravity="center"
             app:fontName="dinnextltpro_mediumcond.ttf"
             android:text="@string/trip_no_trips_title"

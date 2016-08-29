@@ -199,7 +199,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         mBottomBar.useFixedMode();
         mBottomBar.setItems(R.menu.menu_bottombar);
         mBottomBar.setTextAppearance(R.style.bottom_bar_text);
-        mBottomBar.setActiveTabColor(ContextCompat.getColor(getApplicationContext(), R.color.electric_tix_blue_press));
+        mBottomBar.setActiveTabColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_00516f));
 
         mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
             @Override

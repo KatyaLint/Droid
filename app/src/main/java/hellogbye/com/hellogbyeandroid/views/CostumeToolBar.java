@@ -1,10 +1,8 @@
 package hellogbye.com.hellogbyeandroid.views;
 
 import android.app.Activity;
-import android.app.SearchManager;
 import android.content.Context;
 
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -136,8 +134,8 @@ public class CostumeToolBar extends Toolbar {
 //                .getResources()
 //                .getIdentifier("android:id/search_src_text", null, null);
 //        TextView textView = (TextView) search_view.findViewById(id);
-        searchCloseText.setTextColor(ContextCompat.getColor(getContext(), R.color.hgb_toolbar_blue));
-        searchCloseText.setHintTextColor(ContextCompat.getColor(getContext(), R.color.hgb_toolbar_blue));
+        searchCloseText.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
+        searchCloseText.setHintTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
         search_maginfy.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

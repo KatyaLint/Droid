@@ -25,7 +25,6 @@ import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttribute
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
@@ -322,8 +321,8 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
             hotel_tab_view.setVisibility(View.GONE);
             flight_tab_view.setVisibility(View.VISIBLE);
 
-            hotelTab.setTextColor(getActivity().getResources().getColor(R.color.hgb_nav_font_unselected));
-            flightTab.setTextColor(getActivity().getResources().getColor(R.color.white));
+            hotelTab.setTextColor(getActivity().getResources().getColor(R.color.COLOR_7FA5B4));
+            flightTab.setTextColor(getActivity().getResources().getColor(R.color.COLOR_WHITE));
             flight_tab_view.setSelected(true);
             hotel_tab_view.setSelected(false);
             addFlightPreferenceText();
@@ -333,8 +332,8 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
         } else {
             hotel_tab_view.setVisibility(View.VISIBLE);
             flight_tab_view.setVisibility(View.GONE);
-            hotelTab.setTextColor(getActivity().getResources().getColor(R.color.white));
-            flightTab.setTextColor(getActivity().getResources().getColor(R.color.hgb_nav_font_unselected));
+            hotelTab.setTextColor(getActivity().getResources().getColor(R.color.COLOR_WHITE));
+            flightTab.setTextColor(getActivity().getResources().getColor(R.color.COLOR_7FA5B4));
             flight_tab_view.setSelected(false);
             hotel_tab_view.setSelected(true);
             addHotelPreferenceText();

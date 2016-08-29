@@ -2,13 +2,13 @@
 
     <stroke
         android:width="@dimen/DP1"
-        android:color="@color/COLOR_E3EBF3" />
+        android:color="@color/COLOR_F5F5F5" />
 
     <padding
         android:left="@dimen/DP1"
         android:right="@dimen/DP1"
         android:top="@dimen/DP1" />
-    <solid android:color="@color/COLOR_E3EBF3" />
+    <solid android:color="@color/COLOR_F5F5F5" />
     <corners
         android:bottomLeftRadius="@dimen/DP10"
         android:bottomRightRadius="@dimen/DP10"

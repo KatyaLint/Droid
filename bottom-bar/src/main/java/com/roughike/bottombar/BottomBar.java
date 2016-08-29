@@ -994,7 +994,7 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
 
 
         if (mWhiteColor == null) {
-            mWhiteColor = ContextCompat.getColor(getContext(), R.color.white);
+            mWhiteColor = ContextCompat.getColor(getContext(), R.color.COLOR_WHITE);
             mPrimaryColor = MiscUtils.getColor(getContext(), R.attr.colorPrimary);
             mInActiveColor = ContextCompat.getColor(getContext(), R.color.bb_inActiveBottomBarItemColor);
         }

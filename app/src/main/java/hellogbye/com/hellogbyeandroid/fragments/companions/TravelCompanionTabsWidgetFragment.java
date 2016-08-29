@@ -5,7 +5,6 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
@@ -54,9 +53,9 @@ public class TravelCompanionTabsWidgetFragment extends HGBAbstractFragment {
             view.setBackgroundResource(R.drawable.selector_tabs_indicator);
             TextView tv = (TextView) view.findViewById(android.R.id.title);
             if (i == 0) { //selected
-                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.white));
+                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_WHITE));
             } else { //unselected
-                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_c3cad3));
+                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_F5F5F5));
             }
             tv.setTypeface(textFont);
             tv.setTransformationMethod(null);
@@ -95,14 +94,14 @@ public class TravelCompanionTabsWidgetFragment extends HGBAbstractFragment {
 
                 for (int i = 0; i < mTabHost.getTabWidget().getChildCount(); i++) {
                     TextView tv = (TextView) mTabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
-                    tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_c3cad3));
+                    tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_F5F5F5));
                     tv.setTypeface(textFont);
                     tv.setTransformationMethod(null);
 
                 }
 
                 TextView tv = (TextView) mTabHost.getCurrentTabView().findViewById(android.R.id.title); //for Selected Tab
-                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.white));
+                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_WHITE));
                 tv.setTypeface(textFont);
                 tv.setTransformationMethod(null);
 

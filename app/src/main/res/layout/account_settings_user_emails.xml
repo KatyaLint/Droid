@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/greyish_alternative_hotel">
+    android:background="@color/COLOR_F5F5F5">
 
 
 <LinearLayout
-    android:background="@color/greyish_alternative_hotel"
+    android:background="@color/COLOR_F5F5F5"
     android:id="@+id/settings_user_ll"
     android:layout_alignParentTop="true"
     android:layout_above="@+id/settings_remove_email_address"
@@ -21,7 +21,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/greyish_alternative_hotel">
+        android:background="@color/COLOR_F5F5F5">
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_margin="@dimen/DP10"
@@ -42,7 +42,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/greyish_alternative_hotel">
+        android:background="@color/COLOR_F5F5F5">
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_margin="@dimen/DP10"
         android:layout_width="match_parent"
@@ -52,7 +52,7 @@
 
     <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
         android:id="@+id/settings_choose_profile"
-        android:background="@color/greyish_alternative_hotel"
+        android:background="@color/COLOR_F5F5F5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/DP10"
         android:layout_alignParentBottom="true"
-        android:textColor="@color/white"
+        android:textColor="@color/COLOR_WHITE"
         android:textSize="@dimen/SP20"
         android:gravity="center"
         app:fontName="dinnextltpro_medium.otf"

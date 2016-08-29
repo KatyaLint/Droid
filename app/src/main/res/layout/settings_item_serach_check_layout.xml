@@ -20,7 +20,7 @@
             android:layout_marginEnd="@dimen/DP10"
             android:layout_marginStart="@dimen/DP10"
             android:text="1"
-            android:textColor="@color/dark_teal"
+            android:textColor="@color/COLOR_003D4C"
             android:textSize="@dimen/SP20"
             app:fontName="dinnextltpro_condensed.ttf" />
 

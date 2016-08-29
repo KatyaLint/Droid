@@ -265,11 +265,15 @@ public class ItineraryFragment extends HGBAbstractFragment {
                 LinearLayout NodeLinearLayout = new LinearLayout(activity);
                 NodeLinearLayout.setLayoutParams(MarginLLParams);
                 NodeLinearLayout.setOrientation(LinearLayout.VERTICAL);
-                if(i%2 == 0) {
-                    NodeLinearLayout.setBackgroundColor(getResources().getColor(R.color.cc_edit_text));
+
+
+                //TODO check if there a difference of colors
+               /* if(i%2 == 0) {
+                    NodeLinearLayout.setBackgroundColor(getResources().getColor(R.color.COLOR_F5F5F5));
                 }else{
-                    NodeLinearLayout.setBackgroundColor(getResources().getColor(R.color.grid_odd_grey));
-                }
+                    NodeLinearLayout.setBackgroundColor(getResources().getColor(R.color.COLOR_F5F5F5));
+                }*/
+
                 for (NodesVO node : passengerNode) {
                     View view;
                     if (node.isEmpty()) {

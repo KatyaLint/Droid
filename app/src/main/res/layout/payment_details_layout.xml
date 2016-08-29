@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/greyish_alternative_hotel">
+    android:background="@color/COLOR_F5F5F5">
 
     <include
         android:id="@+id/steps_layout"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/steps_layout_seprator"
         android:layout_marginLeft="@dimen/DP6"
-        android:background="@color/white"
+        android:background="@color/COLOR_WHITE"
         android:padding="@dimen/DP6">
 
 
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pay for trip"
-                android:textColor="@color/hgb_blue"
+                android:textColor="@color/COLOR_00516f"
                 android:textSize="@dimen/SP16"
                 app:fontName="dinnextltpro_medium.otf" />
 
@@ -51,7 +51,7 @@
                 android:id="@+id/payment_total_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/hgb_blue"
+                android:textColor="@color/COLOR_00516f"
                 android:textSize="@dimen/SP26"
                 app:fontName="dinnextltpro_light.otf" />
 
@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/total_ll"
-        android:background="@color/greyish_alternative_hotel">
+        android:background="@color/COLOR_F5F5F5">
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_width="match_parent"
@@ -102,7 +102,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_red_button"
-        android:textColor="@color/white"
+        android:textColor="@color/COLOR_WHITE"
         android:gravity="center"
         app:fontName="dinnextltpro_medium.otf"
         android:textAllCaps="false"

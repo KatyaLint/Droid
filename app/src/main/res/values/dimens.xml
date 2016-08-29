@@ -51,6 +51,7 @@
 
 
     <dimen name="DP_64">-64dp</dimen>
+    <dimen name="DP_2">-2dp</dimen>
 
 
     <dimen name="SP4">4sp</dimen>

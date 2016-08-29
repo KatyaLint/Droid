@@ -327,20 +327,20 @@ public class TravelersFragment extends HGBAbstractFragment {
         private void findMissingElemnts(ChildViewHolder holder, UserProfileVO child) {
 
             if (child.getFirstname() == null || child.getFirstname().equals("")) {
-                holder.childNametextLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.red_button_color));
+                holder.childNametextLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_EE3A3C));
 
             }
             if (child.getPostalcode() == null || child.getPostalcode().equals("")) {
-                holder.childAddressLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.red_button_color));
+                holder.childAddressLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_EE3A3C));
             }
             if (child.getEmailaddress() == null || child.getEmailaddress().equals("")) {
-                holder.childEmailLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.red_button_color));
+                holder.childEmailLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_EE3A3C));
             }
             if (child.getPhone() == null || child.getPhone().equals("")) {
-                holder.childPhoneLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.red_button_color));
+                holder.childPhoneLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_EE3A3C));
             }
             if (child.getDob() == null || child.getDob().equals("")) {
-                holder.childDOBLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.red_button_color));
+                holder.childDOBLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_EE3A3C));
             }
 
         }
@@ -452,8 +452,8 @@ public class TravelersFragment extends HGBAbstractFragment {
 
     private void initCheckoutSteps() {
 
-        mPaymentTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_063345));
-        mTravlerTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_063345));
+        mPaymentTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
+        mTravlerTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
         mReviewTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_777776));
         mPaymentImageView.setBackgroundResource(R.drawable.step_menu_blue_stand);
         mTravlerImageView.setBackgroundResource(R.drawable.step_menu_blue_on);

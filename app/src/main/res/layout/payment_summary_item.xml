@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:padding="@dimen/DP20"
-    android:background="@color/white"
+    android:background="@color/COLOR_WHITE"
     android:layout_height="wrap_content"
     >
 
@@ -17,7 +17,7 @@
             android:id="@+id/summary_passenger_name"
             app:fontName="dinnextltpro_regular.otf"
             android:text="Ruffus"
-            android:textColor="@color/hgb_blue"
+            android:textColor="@color/COLOR_00516f"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -25,7 +25,7 @@
             app:fontName="dinnextltpro_regular.otf"
 
             android:text="1234"
-            android:textColor="@color/hgb_blue"
+            android:textColor="@color/COLOR_00516f"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -49,7 +49,7 @@
             android:id="@+id/cc_text"
             android:layout_width="wrap_content"
             android:text="1234"
-            android:textColor="@color/marine"
+            android:textColor="@color/COLOR_003D4C"
             android:textSize="@dimen/SP16"
             android:layout_marginLeft="@dimen/DP6"
             android:layout_gravity="center_vertical"
@@ -72,8 +72,8 @@
             android:id="@+id/ccv_edittext"
             android:layout_width="wrap_content"
             android:hint="CVV"
-            android:textColorHint="@color/red_button_color"
-            android:textColor="@color/marine"
+            android:textColorHint="@color/COLOR_EE3A3C"
+            android:textColor="@color/COLOR_003D4C"
             android:textSize="@dimen/SP16"
             android:background="@android:color/transparent"
             android:layout_gravity="center_vertical"

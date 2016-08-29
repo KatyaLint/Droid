@@ -1,70 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="hgb_blue">#085676</color>
-    <color name="hgb_toolbar_blue">#00374B</color>
-    <color name="hgb_nav_font_unselected">#7FA5B4</color>
-    <color name="white">#ffffff</color>
+
+
+
+
     <color name="white_opacity">#22ffffff</color>
-    <color name="hgb_edit_text_color">#5D808E</color>
+
     <color name="green_button_color">#36B784</color>
-    <color name="red_button_color">#EE3A3C</color>
-    <color name="red_disable_button_color">#F1979A</color>
-    <color name="dark_teal">#003d4c</color>
-    <color name="marine">#053246</color>
+
     <color name="warm_grey">#777777</color>
     <color name="warm_grey_line">#979797</color>
-    <color name="red_pink">#eb3e43</color>
+
     <color name="COLOR_555555">#555555</color>
-    <color name="greyish_alternative_hotel">#F2F2F2</color>
-    <color name="grey_title_preferese_settings">#F1F1F1</color>
-    <color name="cvv_red">#FDF5F6</color>
+
 
     <color name="item_border_color">#666666</color>
-    <color name="item_default_color">#EEEEEE</color>
-    <color name="item_pressed_color">#CCCCCC</color>
-    <color name="item_activated_color">#77CEEE</color>
-    <color name="azure">#069ee0</color>
+
+
+
     <color name="dark_grey">#575757</color>
     <color name="light_grey">#999999</color>
     <color name="black">#000000</color>
-    <color name="grey_very_light">#f7f7f7</color>
-    <color name="red_money">#ff5a5f</color>
-    <color name="cnc_hgb_backround">#20647C</color>
-    <color name="cnc_hgb_text">#cae2eb</color>
-    <color name="odd_grey">#E5E5E5</color>
-    <color name="disable_tab">#588596</color>
-    <color name="enable_tab">#E2EBEE</color>
-    <color name="cc_add_backround">#ececec</color>
-    <color name="cc_edit_text">#CDCDCD</color>
-    <color name="grid_odd_grey">#D8D8D8</color>
+
+
+
     <color name="blue_my_trip">#232323</color>
-    <color name="cnc_main_message_blue">#376888</color>
-    <color name="cnc_user_message">#419ADD</color>
-    <color name="cnc_user_message_color">#0f3d4d</color>
+
+
+
     <color name="COLOR_8d8e91">#8d8e91</color>
 
-    <color name="COLOR_2C5466">#2C5466</color>
-    <color name="COLOR_73929E">#73929E</color>
-    <color name="COLOR_00516f">#00516f</color>
-    <color name="COLOR_005077">#005077</color>
-    <color name="COLOR_E3EBF3">#E3EBF3</color>
-    <color name="COLOR_079DE0">#079DE0</color>
-    <color name="COLOR_0E587D">#0E587D</color>
-    <color name="COLOR_00475e">#00475e</color>
-    <color name="color_grey">#EBEBEB</color>
+
     <color name="paid_green">#38b77f</color>
     <color name="COLOR_777776">#777776</color>
-    <color name="COLOR_c3cad3">#c3cad3</color>
-    <color name="COLOR_005278">#005278</color>
-    <color name="COLOR_053c4b">#053c4b</color>
-    <color name="COLOR_0f3d4b">#0f3d4b</color>
-    <color name="electric_tix_blue_press">#0a5c80</color>
-    <color name="COLOR_0e3d4b">#0e3d4b</color>
-    <color name="COLOR_063345">#063345</color>
+
+
+
+    <color name="COLOR_5D808E">#5D808E</color>
+    <color name="COLOR_7FA5B4">#7FA5B4</color>
+
+
+
     <color name="COLOR_565656">#565656</color>
 
     <!--<color name="no_payment_color">#0e587d</color>-->
 
+<!-- Color in app -->
+
+    <color name="COLOR_FF5A60">#FF5A60</color>
+    <color name="COLOR_EE3A3C">#EE3A3C</color>
+    <color name="COLOR_003D4C">#003D4C</color>
+    <color name="COLOR_00516f">#00516f</color>
+
+    <color name="COLOR_079DE0">#079DE0</color>
+
+    <color name="COLOR_F5F5F5">#F5F5F5</color>
+    <color name="COLOR_WHITE">#ffffff</color>
 
 </resources>

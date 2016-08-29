@@ -22,7 +22,7 @@
         android:text="@string/account_submit_feedback"
         app:fontName="dinnextltpro_boldcondensed.otf"
         android:gravity="center"
-        android:textColor="@color/COLOR_063345" />
+        android:textColor="@color/COLOR_003D4C" />
 
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -47,7 +47,7 @@
         android:layout_width="match_parent">
     
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
-        android:background="@color/red_money"
+        android:background="@color/COLOR_FF5A60"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"

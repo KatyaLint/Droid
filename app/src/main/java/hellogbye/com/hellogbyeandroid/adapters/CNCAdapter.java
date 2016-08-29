@@ -148,12 +148,12 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 if (mContext.getResources().getString(R.string.itinerary_created).equals(strMessage)
                         || mContext.getResources().getString(R.string.grid_has_been_updated).equals(strMessage)) {
                     hgbholder.itemHGB.setBackgroundResource(R.drawable.hgb_cnc_backround);
-                    hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_0E587D));
+                    hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_00516f));
                     hgbholder.itemHGB.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
                     hgbholder.itemHGB.setPaintFlags(hgbholder.itemHGB.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                 } else {
                     hgbholder.itemHGB.setBackgroundResource(R.drawable.hgb_cnc_backround);
-                    hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_0E587D));
+                    hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_00516f));
                     hgbholder.itemHGB.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
                 }
 

@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Thank you!"
-            android:textColor="@color/white"
+            android:textColor="@color/COLOR_WHITE"
             android:textSize="60sp"
             app:fontName="dinnextltpro_mediumcond.ttf" />
 
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Your order has been placed"
-            android:textColor="@color/white"
+            android:textColor="@color/COLOR_WHITE"
             android:textSize="23sp"
             app:fontName="dinnextltpro_mediumcond.ttf" />
 
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="test@gmail.com"
-            android:textColor="@color/white"
+            android:textColor="@color/COLOR_WHITE"
             android:layout_marginTop="30dp"
             android:textSize="16sp"
             app:fontName="dinnextltpro_regular.otf" />
@@ -54,7 +54,7 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="A mail confirmation has been\nsent to the email address above"
-            android:textColor="@color/white"
+            android:textColor="@color/COLOR_WHITE"
             android:textSize="15sp"
             app:fontName="dinnextltpro_regular.otf" />
     </LinearLayout>
@@ -68,7 +68,7 @@
         android:layout_margin="@dimen/DP20"
         android:background="@drawable/red_button"
         android:text="@string/done"
-        android:textColor="@color/white" />
+        android:textColor="@color/COLOR_WHITE" />
 
 
 </RelativeLayout>

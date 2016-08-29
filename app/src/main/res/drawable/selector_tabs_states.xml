@@ -1,9 +1,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_pressed="true"
-          android:color="@color/white"/>
+          android:color="@color/COLOR_WHITE"/>
 
-    <item android:state_selected="true" android:color="@color/white"/>
+    <item android:state_selected="true" android:color="@color/COLOR_WHITE"/>
 
-    <item android:state_selected="false" android:color="@color/hgb_nav_font_unselected"/>
+    <item android:state_selected="false" android:color="@color/COLOR_7FA5B4"/>
 </selector>

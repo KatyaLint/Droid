@@ -3,18 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/greyish_alternative_hotel">
+    android:background="@color/COLOR_F5F5F5">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/COLOR_WHITE"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/greyish_alternative_hotel">
+            android:background="@color/COLOR_F5F5F5">
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:layout_width="match_parent"
@@ -178,7 +178,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/greyish_alternative_hotel">
+            android:background="@color/COLOR_F5F5F5">
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:layout_width="match_parent"
@@ -197,7 +197,7 @@
             android:id="@+id/personal_settings_change_password_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/COLOR_WHITE"
             android:orientation="vertical"
             android:padding="@dimen/DP10">
 
@@ -213,7 +213,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/greyish_alternative_hotel">
+            android:background="@color/COLOR_F5F5F5">
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/account_done_editing"
                 style="@style/RedCustomButtonStyle"

@@ -402,9 +402,9 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
 
     private void initCheckoutSteps() {
 
-        mPaymentTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_063345));
-        mTravlerTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_063345));
-        mReviewTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_063345));
+        mPaymentTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
+        mTravlerTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
+        mReviewTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
         mPaymentImageView.setBackgroundResource(R.drawable.step_menu_blue_stand);
         mTravlerImageView.setBackgroundResource(R.drawable.step_menu_blue_stand);
         mReviewImageView.setBackgroundResource(R.drawable.step_menu_blue_on);

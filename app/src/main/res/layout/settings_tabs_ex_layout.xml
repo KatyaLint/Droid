@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:id="@+id/settings_layout_tabs"
-        android:background="@color/hgb_toolbar_blue"
+        android:background="@color/COLOR_003D4C"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/DP34"
         android:orientation="horizontal"

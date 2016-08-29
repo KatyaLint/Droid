@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="@dimen/DP10"
-    android:background="@color/white"
+    android:background="@color/COLOR_WHITE"
     android:orientation="horizontal" >
 
     <ImageView
@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/SP18"
-        android:textColor="@color/hgb_nav_font_unselected"
+        android:textColor="@color/COLOR_7FA5B4"
         app:fontName="dinnextltpro_regular.otf" />
 
 </LinearLayout>

@@ -28,7 +28,7 @@
                 android:id="@+id/companion_delete_item"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@color/red_button_color"
+                android:background="@color/COLOR_EE3A3C"
                 android:src="@drawable/close_icon_a_1" />
 
         </LinearLayout>
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:background="@color/white"
+        android:background="@color/COLOR_WHITE"
         android:orientation="horizontal">
 
 
@@ -61,7 +61,7 @@
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/my_trip_name"
-            android:textColor="@color/marine"
+            android:textColor="@color/COLOR_003D4C"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/SP16"

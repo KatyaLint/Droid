@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/SP32"
         app:fontName="dinnextltpro_condensed.ttf"
-        android:textColor="@color/dark_teal"
+        android:textColor="@color/COLOR_003D4C"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         android:text="@string/preferences_prefered_hotel_chain"

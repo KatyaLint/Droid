@@ -4,7 +4,7 @@
     android:id="@+id/grid_squer_empty"
     android:layout_width="fill_parent"
     android:layout_height="@dimen/DP26"
-    android:background="@color/item_default_color"
+    android:background="@color/COLOR_F5F5F5"
     android:orientation="horizontal">
 
 

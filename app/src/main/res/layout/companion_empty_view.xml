@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/SP32"
-        android:textColor="@color/COLOR_005077"
+        android:textColor="@color/COLOR_00516f"
         android:gravity="center"
         app:fontName="dinnextltpro_boldcondensed.otf"
         android:text="@string/companion_empty_view_text"

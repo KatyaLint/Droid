@@ -33,14 +33,14 @@
             android:layout_marginRight="@dimen/DP10"
             android:padding="@dimen/DP10"
             android:layout_marginBottom="@dimen/DP10"
-            android:background="@color/hgb_blue">
+            android:background="@color/COLOR_00516f">
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:text="@string/alternative_pull_down_text"
-                android:textColor="@color/white"
+                android:textColor="@color/COLOR_WHITE"
                 app:fontName="dinnextltpro_regular.otf" />
 
             <ImageView
@@ -81,7 +81,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:maxWidth="@dimen/DP250"
-                        android:textColor="@color/dark_teal"
+                        android:textColor="@color/COLOR_003D4C"
                         android:textSize="@dimen/SP18"
                         app:fontName="dinnextltpro_medium.otf" />
 
@@ -120,7 +120,7 @@
                             android:background="@drawable/red_button"
                             android:padding="@dimen/DP6"
                             android:text="Select Hotel"
-                            android:textColor="@color/white"
+                            android:textColor="@color/COLOR_WHITE"
                             android:textSize="@dimen/SP16"
                             android:visibility="gone"
                             app:fontName="dinnextltpro_light.otf" />
@@ -135,7 +135,7 @@
                         android:padding="@dimen/DP6"
                         android:layout_marginTop="@dimen/DP10"
                         android:layout_alignParentRight="true"
-                        android:textColor="@color/white"
+                        android:textColor="@color/COLOR_WHITE"
                         android:textSize="@dimen/SP13"
                         app:fontName="dinnextltpro_medium.otf"
                         android:text="@string/show_alterate_hotels" />
@@ -162,7 +162,7 @@
                             android:id="@+id/hotel_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/red_button_color"
+                            android:textColor="@color/COLOR_EE3A3C"
                             android:textSize="@dimen/SP18"
                             app:fontName="dinnextltpro_medium.otf" />
 
@@ -442,6 +442,6 @@
         android:layout_height="match_parent"
         android:visibility="gone"
         android:clickable="true"
-        android:background="@color/greyish_alternative_hotel"
+        android:background="@color/COLOR_F5F5F5"
         android:scrollbars="vertical" />
 </RelativeLayout>

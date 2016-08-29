@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxWidth="@dimen/DP280"
-            android:textColor="@color/marine"
+            android:textColor="@color/COLOR_003D4C"
             android:textSize="18sp"
             app:fontName="dinnextltpro_medium.otf" />
         <include layout="@layout/star_layout" />
@@ -33,7 +33,7 @@
             android:id="@+id/alt_hotel_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/marine"
+            android:textColor="@color/COLOR_003D4C"
             android:textSize="@dimen/SP18"
             app:fontName="dinnextltpro_medium.otf" />
 

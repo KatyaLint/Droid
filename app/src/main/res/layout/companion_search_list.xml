@@ -2,13 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/COLOR_WHITE"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <SearchView
         android:layout_width="match_parent"
         android:id="@+id/companion_search_view"
-        android:background="@color/cc_add_backround"
+        android:background="@color/COLOR_F5F5F5"
         android:layout_margin="@dimen/DP10"
         android:queryHint="@string/settings_search_hunt"
         android:focusableInTouchMode="true"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content">
     <android.support.v7.widget.RecyclerView
         android:visibility="gone"
-        android:background="@color/white"
+        android:background="@color/COLOR_WHITE"
         android:id="@+id/companion_search_recycle_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />

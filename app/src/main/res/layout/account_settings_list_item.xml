@@ -12,7 +12,7 @@
         android:text="Companion Request"
         android:layout_centerInParent="true"
         android:textSize="@dimen/SP16"
-        android:textColor="@color/COLOR_00475e"
+        android:textColor="@color/COLOR_003D4C"
         android:layout_alignParentLeft="true"
         app:fontName="dinnextltpro_regular.otf"
         android:layout_width="wrap_content"

@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text="YYZ "
-                android:textColor="@color/dark_teal"
+                android:textColor="@color/COLOR_003D4C"
                 android:textSize="@dimen/SP30"
                 app:fontName="dinnextltpro_medium.otf" />
 
@@ -58,7 +58,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/electronic_ticket"
-                        android:textColor="@color/COLOR_0f3d4b"
+                        android:textColor="@color/COLOR_003D4C"
                         android:textSize="@dimen/SP13"
                         app:fontName="dinnextltpro_bold.otf" />
 
@@ -67,7 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/press_here"
-                        android:textColor="@color/electric_tix_blue_press"
+                        android:textColor="@color/COLOR_00516f"
                         android:textSize="@dimen/SP13"
                         app:fontName="dinnextltpro_bold.otf" />
 
@@ -98,7 +98,7 @@
                     android:layout_weight="1"
                     android:gravity="right"
                     android:text="$1434.12"
-                    android:textColor="@color/dark_teal"
+                    android:textColor="@color/COLOR_003D4C"
                     android:textSize="@dimen/SP30"
                     app:fontName="dinnextltpro_medium.otf" />
 
@@ -114,7 +114,7 @@
                     android:gravity="center"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/flight_show_alternate_flights"
-                    android:textColor="@color/white"
+                    android:textColor="@color/COLOR_WHITE"
                     app:fontName="dinnextltpro_medium.otf"
                     android:textAllCaps="false"
                     android:textSize="@dimen/SP13"

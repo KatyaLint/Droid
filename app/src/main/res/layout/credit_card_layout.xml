@@ -32,7 +32,7 @@
                 android:id="@+id/companion_delete_item"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@color/red_button_color"
+                android:background="@color/COLOR_EE3A3C"
                 android:src="@drawable/close_icon_a_1" />
 
         </LinearLayout>

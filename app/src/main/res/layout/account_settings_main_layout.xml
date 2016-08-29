@@ -10,7 +10,7 @@
         android:id="@+id/account_image_view_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/hgb_toolbar_blue"
+        android:background="@color/COLOR_003D4C"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/DP10"
             android:gravity="center_horizontal"
-            android:textColor="@color/white"
+            android:textColor="@color/COLOR_WHITE"
             android:textSize="@dimen/SP18"
             app:fontName="dinnextltpro_medium.otf" />
 
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/DP10"
             android:gravity="center_horizontal"
-            android:textColor="@color/white"
+            android:textColor="@color/COLOR_WHITE"
             android:textSize="@dimen/SP14"
             app:fontName="dinnextltpro_light.otf" />
 
@@ -84,7 +84,7 @@
             android:layout_marginTop="@dimen/DP10"
             android:gravity="center_horizontal"
             android:text="@string/component_log_out"
-            android:textColor="@color/red_button_color"
+            android:textColor="@color/COLOR_EE3A3C"
             android:textSize="@dimen/SP16"
             app:fontName="dinnextltpro_regular.otf" />
 

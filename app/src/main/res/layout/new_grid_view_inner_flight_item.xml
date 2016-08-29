@@ -12,7 +12,7 @@
         android:id="@+id/innerWhiteFlightLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/COLOR_WHITE"
         android:layout_gravity="center"
         android:layout_margin="@dimen/DP6"
         android:padding="@dimen/DP6"
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Toronto to"
-            android:textColor="@color/dark_teal"
+            android:textColor="@color/COLOR_003D4C"
             app:fontName="dinnextltpro_regular.otf"
             />
         
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="$100000"
-            android:textColor="@color/red_pink"
+            android:textColor="@color/COLOR_EE3A3C"
             app:fontName="dinnextltpro_medium.otf" />
 
    <!--     <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -75,7 +75,7 @@
             android:layout_marginBottom="@dimen/DP2"
             android:layout_marginTop="@dimen/DP4"
             android:text="YYZ"
-            android:textColor="@color/dark_teal"
+            android:textColor="@color/COLOR_003D4C"
             app:fontName="dinnextltpro_regular.otf" />
 
 
@@ -95,7 +95,7 @@
                 android:layout_marginBottom="@dimen/DP2"
                 android:layout_marginTop="@dimen/DP4"
                 android:text="CPT"
-                android:textColor="@color/dark_teal"
+                android:textColor="@color/COLOR_003D4C"
                 app:fontName="dinnextltpro_regular.otf" />
 
         </LinearLayout>

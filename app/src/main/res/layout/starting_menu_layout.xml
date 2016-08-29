@@ -42,7 +42,7 @@
         android:textSize="@dimen/SP18"
         android:gravity="center"
         android:text="@string/already_have_account"
-        android:textColor="@color/white"
+        android:textColor="@color/COLOR_WHITE"
         app:fontName="dinnextltpro_regular.otf"
         android:layout_below="@+id/try_now"
         android:layout_marginTop="@dimen/DP20"
@@ -87,7 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Change Server Url"
-        android:textColor="@color/red_button_color"
+        android:textColor="@color/COLOR_EE3A3C"
         android:visibility="gone"/>
 
 </RelativeLayout>

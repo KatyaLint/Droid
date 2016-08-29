@@ -2,15 +2,10 @@ package hellogbye.com.hellogbyeandroid.adapters.myTripsSwipeAdapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.daimajia.swipe.SimpleSwipeListener;
 import com.daimajia.swipe.SwipeLayout;
@@ -23,7 +18,6 @@ import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
 /*import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsFragment;*/
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
-import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -117,7 +111,7 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
         viewHolder.my_trip_dates.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(item.getStartdate())+" - "+HGBUtilityDate.parseDateToddMMyyyyMyTrip(item.getEnddate()));
         if(item.getPaymentstatus().equals("UPD")){
             viewHolder.my_trip_paid.setText("UNPAID");
-            viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.red_button_color));
+            viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.COLOR_EE3A3C));
         }else{
             viewHolder.my_trip_paid.setText("PAID");
             viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.paid_green));
