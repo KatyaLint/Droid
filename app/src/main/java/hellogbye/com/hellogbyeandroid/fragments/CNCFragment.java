@@ -502,8 +502,6 @@ public class CNCFragment extends HGBAbstractFragment {
 
     private void enterCNCMessage(final String strMessage) {
 
-
-
         clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
         if(!clearCNCscreen) {
             sendCNCMessageToServer(strMessage);
@@ -525,9 +523,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
 
                     for (ResponsesVO response: responses) {
-                      //  if(response.getType().equals("City") || response.getType().equals("AirportCode") ) {
-                            String airport = getResources().getString(R.string.cnc_choose_airport);
-                            airport = airport + " " + response.getValue() + "?";
+
                             AirportSendValuesVO  airportSendValuesVO = new AirportSendValuesVO();
                             airportSendValuesVO.setQuery(strMessage);
 
@@ -568,14 +564,20 @@ public class CNCFragment extends HGBAbstractFragment {
 
     private void popupDialogForAirports(){
 
-
         for(int j = airportSendValuesVOs.size()-1;j>=0;j--){
            final AirportSendValuesVO airportSendValueVO = airportSendValuesVOs.get(j);
-            String airport = getResources().getString(R.string.cnc_choose_airport);
-            airport = airport + " " + airportSendValueVO.getValue() + "?";
+            String airport = "";
+            if(airportSendValueVO.getType().equals("Name")){
 
+                airport = getResources().getString(R.string.cnc_choose_companion_name);
+                airport = airport + " " + airportSendValueVO.getValue() + "?";
+            }
+            else if(airportSendValueVO.getType().equals("City")){
+                airport = getResources().getString(R.string.cnc_choose_airport);
+                airport = airport + " " + airportSendValueVO.getValue() + "?";
+            }
 
-            if(airportSendValueVO.getType().equals("AirportCode")){
+            else if(airportSendValueVO.getType().equals("AirportCode")){
                 sendUserAnswearToServer(airportSendValueVO.getResults().get(0));
 
             }else {

@@ -332,3 +332,4 @@ Code changing:
     - arrow_drop_down
     - alignment left all titles
     - clear Itinerary Button
+    - fly me to ..., now asking with which companion

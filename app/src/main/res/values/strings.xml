@@ -177,6 +177,7 @@
 
 
     <string name="cnc_choose_airport">Which airport in </string>
+    <string name="cnc_choose_companion_name">Which companion named</string>
 
     <string name="companion_undo">Undo</string>
     <string name="timeout">Time Out</string>
