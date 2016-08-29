@@ -66,6 +66,10 @@ public class UserProfileVO {
     @SerializedName("istravelprofile")
     private boolean isTravelprofile;
 
+    @SerializedName("middlename")
+    private String middlename;
+
+
     private HashSet<String> bookingItems;
 
 
@@ -262,5 +266,14 @@ public class UserProfileVO {
 
     public void setIsTravelprofile(boolean isTravelprofile) {
         this.isTravelprofile = isTravelprofile;
+    }
+
+
+    public String getMiddlename() {
+        return middlename;
+    }
+
+    public void setMiddlename(String middlename) {
+        this.middlename = middlename;
     }
 }

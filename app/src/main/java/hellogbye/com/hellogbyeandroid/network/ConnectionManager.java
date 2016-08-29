@@ -1701,6 +1701,8 @@ public class ConnectionManager {
             json1.put("country", user.getCountry());
             json1.put("avatar", user.getAvatar());
             json1.put("userprofileid", user.getUserprofileid());
+            json1.put("middlename", user.getMiddlename());
+
 
 
         } catch (Exception e) {

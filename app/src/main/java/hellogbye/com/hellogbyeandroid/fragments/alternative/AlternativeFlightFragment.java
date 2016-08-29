@@ -443,7 +443,6 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-
         //SET UP MAP
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(false);
