@@ -577,7 +577,7 @@ public class CNCFragment extends HGBAbstractFragment {
                 airport = airport + " " + airportSendValueVO.getValue() + "?";
             }
 
-            else if(airportSendValueVO.getType().equals("AirportCode")){
+            if(airportSendValueVO.getType().equals("AirportCode")){
                 sendUserAnswearToServer(airportSendValueVO.getResults().get(0));
 
             }else {
