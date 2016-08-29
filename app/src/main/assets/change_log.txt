@@ -333,3 +333,4 @@ Code changing:
     - alignment left all titles
     - clear Itinerary Button
     - fly me to ..., now asking with which companion
+    - new arrow_back for alternative flights

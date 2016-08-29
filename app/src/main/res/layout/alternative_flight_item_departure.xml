@@ -21,7 +21,6 @@
         android:textColor="@color/COLOR_565656"
         app:fontName="dinnextltpro_medium.otf"
         android:text="Outbound"
-
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -31,8 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/DP4"
         android:layout_marginLeft="@dimen/DP4"
-        android:background="@drawable/arrow_back"
-
+        android:background="@drawable/arrow_up"
+        android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/alternative_flight_departure"
         />
 
@@ -114,7 +113,8 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/DP4"
             android:background="@drawable/arrow_back"
-
+            android:layout_marginLeft="@dimen/DP18"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/alternative_flight_stops"
             />
 
