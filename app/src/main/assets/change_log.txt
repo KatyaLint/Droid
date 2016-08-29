@@ -337,3 +337,4 @@ Code changing:
     - fly me to ..., now asking with which companion
     - new arrow_back for alternative flights
      - Middle name in account settings
+     - travel profiles at left
