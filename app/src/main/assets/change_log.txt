@@ -322,6 +322,7 @@ Code changing:
     HEL-1405 - add icons between airport codes
     HEL-1407 - change places between hotel ranking and hotel cost on hotel tile in grid
     HEL-1358 - trip name is deleted when pressing on flight details
+    HEL-1193 - traveler info - add middle name field
 
    Code changing:
    --------------

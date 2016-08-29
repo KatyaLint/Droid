@@ -23,6 +23,7 @@ import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
+import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -32,24 +33,25 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
 
     private FontTextView mTitle;
-    private EditText mFirstName;
-    private EditText mLastName;
+    private FontEditTextView mFirstName;
+    private FontEditTextView mLastName;
     private FontTextView mDOB;
     private FontTextView mSave;
 
     private FontTextView mGender;
-    private EditText mEmail;
-    private EditText mPhone;
-    private EditText mAddress;
-    private EditText mCity;
+    private FontEditTextView mEmail;
+    private FontEditTextView mPhone;
+    private FontEditTextView mAddress;
+    private FontEditTextView mCity;
     private FontTextView mCountry;
-    private EditText mPostalCode;
+    private FontEditTextView mPostalCode;
     private FontTextView mState;
     private UserProfileVO mUser;
 
     private String[] stateArray;
 
     private BookingRequestVO bookingResponse;
+    private FontEditTextView travel_detail_middle_name;
 
 
     public static Fragment newInstance(int position) {
@@ -73,16 +75,17 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         mTitle = (FontTextView) view.findViewById(R.id.travel_detail_title);
-        mFirstName = (EditText) view.findViewById(R.id.travel_detail_first_name);
-        mLastName = (EditText) view.findViewById(R.id.travel_detail_last_name);
+        mFirstName = (FontEditTextView) view.findViewById(R.id.travel_detail_first_name);
+        mLastName = (FontEditTextView) view.findViewById(R.id.travel_detail_last_name);
+        travel_detail_middle_name = (FontEditTextView) view.findViewById(R.id.travel_detail_middle_name);
         mDOB = (FontTextView) view.findViewById(R.id.travel_detail_dob);
         mGender = (FontTextView) view.findViewById(R.id.travel_detail_gender);
-        mEmail = (EditText) view.findViewById(R.id.travel_detail_email);
-        mPhone = (EditText) view.findViewById(R.id.travel_detail_phone);
-        mAddress = (EditText) view.findViewById(R.id.travel_detail_adress);
-        mCity = (EditText) view.findViewById(R.id.travel_detail_city);
+        mEmail = (FontEditTextView) view.findViewById(R.id.travel_detail_email);
+        mPhone = (FontEditTextView) view.findViewById(R.id.travel_detail_phone);
+        mAddress = (FontEditTextView) view.findViewById(R.id.travel_detail_adress);
+        mCity = (FontEditTextView) view.findViewById(R.id.travel_detail_city);
         mCountry = (FontTextView) view.findViewById(R.id.travel_detail_country);
-        mPostalCode = (EditText) view.findViewById(R.id.travel_detail_postal_code);
+        mPostalCode = (FontEditTextView) view.findViewById(R.id.travel_detail_postal_code);
         mState = (FontTextView) view.findViewById(R.id.travel_detail_province);
         mSave = (FontTextView) view.findViewById(R.id.travler_detail_save);
 
@@ -213,7 +216,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
                 mUser.setLastname(mLastName.getText().toString());
                 mUser.setPhone(mPhone.getText().toString());
                 mUser.setEmailaddress(mEmail.getText().toString());
-
+                mUser.setMiddlename(travel_detail_middle_name.getText().toString());
 
                 ConnectionManager.getInstance(getActivity()).putCompanion(mUser.getPaxid(), mUser, new ConnectionManager.ServerRequestListener() {
                     @Override
@@ -259,7 +262,9 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
         mPhone.setText(mUser.getPhone());
         mAddress.setText(mUser.getAddress());
         mCity.setText(mUser.getCity());
-
+        if(mUser.getMiddlename() != null) {
+            travel_detail_middle_name.setText(mUser.getMiddlename());
+        }
         if (mUser.getCountry().equals("CA")) {
             mCountry.setText("Canada");
         } else if (mUser.getCountry().equals("US")) {
@@ -323,6 +328,25 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mUser.setLastname(s.toString());
+                setSaveButton();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+            }
+        });
+
+        travel_detail_middle_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mUser.setMiddlename(s.toString());
                 setSaveButton();
             }
 

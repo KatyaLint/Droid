@@ -1655,6 +1655,7 @@ public class ConnectionManager {
             json2.put("country", user.getCountry());
             json2.put("gender", user.getGender());
             json2.put("userprofileid", user.getUserprofileid());
+            json2.put("middlename", user.getMiddlename());
 
             json1.put("stubcompanion", json2);
 

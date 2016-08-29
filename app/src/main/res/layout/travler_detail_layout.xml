@@ -15,7 +15,7 @@
         android:layout_height="@dimen/DP1"
         android:background="@color/warm_grey_line"  />
 
-    <EditText
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/travel_detail_first_name"
         style="@style/TravelerDetailsTextStyle" />
 
@@ -24,10 +24,20 @@
         android:layout_height="@dimen/DP1"
         android:background="@color/warm_grey_line"  />
 
-    <EditText
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/travel_detail_last_name"
         style="@style/TravelerDetailsTextStyle"
         android:hint="Last Name" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DP1"
+        android:background="@color/warm_grey_line"  />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+        android:id="@+id/travel_detail_middle_name"
+        style="@style/TravelerDetailsTextStyle"
+        android:hint="Middle Name" />
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
@@ -68,7 +78,7 @@
         android:layout_height="@dimen/DP1"
         android:background="@color/warm_grey_line"  />
 
-    <EditText
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/travel_detail_email"
         style="@style/TravelerDetailsTextStyle"
         android:hint="Email"
@@ -78,7 +88,7 @@
         android:layout_height="@dimen/DP1"
         android:background="@color/warm_grey_line"  />
 
-    <EditText
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/travel_detail_phone"
         style="@style/TravelerDetailsTextStyle"
         android:hint="Phone"
@@ -89,7 +99,7 @@
         android:layout_height="@dimen/DP1"
         android:background="@color/warm_grey_line"  />
 
-    <EditText
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/travel_detail_adress"
         style="@style/TravelerDetailsTextStyle"
         android:hint="Address"
@@ -106,7 +116,7 @@
         android:weightSum="2"
         android:orientation="horizontal">
 
-        <EditText
+        <hellogbye.com.hellogbyeandroid.views.FontEditTextView
             android:id="@+id/travel_detail_city"
 
             android:layout_weight="1"
@@ -140,10 +150,9 @@
         android:background="@color/white"
         android:orientation="horizontal">
 
-        <EditText
+        <hellogbye.com.hellogbyeandroid.views.FontEditTextView
             android:id="@+id/travel_detail_postal_code"
             style="@style/TravelerDetailsTextStyle"
-
             android:layout_weight="1"
             android:hint="Postal Code" />
 
