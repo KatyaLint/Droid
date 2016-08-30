@@ -31,7 +31,7 @@
         android:text="@string/account_submit_feedback_tell_us"
         app:fontName="dinnextltpro_regular.otf"
         android:gravity="center"
-        android:textColor="@color/dark_grey" />
+        android:textColor="@color/COLOR_565656" />
 
     <RelativeLayout
         android:layout_below="@+id/account_submit_small_title"

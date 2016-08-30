@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:fontName="dinnextltpro_light.otf"
-        android:textColor="@color/COLOR_5D808E"
+        android:textColor="@color/COLOR_999999"
         android:text="@string/remmeber_me"
         android:layout_marginLeft="@dimen/DP10"
         android:layout_alignTop="@+id/remmember_me_checkbox"
@@ -70,7 +70,7 @@
         app:fontName="dinnextltpro_light.otf"
         android:layout_marginTop="@dimen/DP18"
         android:text="@string/forgot_password"
-        android:textColor="@color/COLOR_5D808E"
+        android:textColor="@color/COLOR_999999"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         />

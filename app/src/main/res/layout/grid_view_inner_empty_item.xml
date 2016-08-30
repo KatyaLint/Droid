@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/grid_squer_empty"
-        android:background="@color/green_button_color">
+        android:background="@color/paid_green">
 
 
         <LinearLayout
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/SP13"
                 app:fontName="dinnextltpro_regular.otf"
-                android:textColor="@color/black"/>
+                android:textColor="@color/COLOR_BLACK"/>
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/grid_calender_date_empty"
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/SP13"
                 app:fontName="dinnextltpro_regular.otf"
-                android:textColor="@color/black"
+                android:textColor="@color/COLOR_BLACK"
                 />
 
         </LinearLayout>

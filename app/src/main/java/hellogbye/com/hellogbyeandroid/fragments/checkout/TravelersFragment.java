@@ -454,7 +454,7 @@ public class TravelersFragment extends HGBAbstractFragment {
 
         mPaymentTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
         mTravlerTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
-        mReviewTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_777776));
+        mReviewTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_565656));
         mPaymentImageView.setBackgroundResource(R.drawable.step_menu_blue_stand);
         mTravlerImageView.setBackgroundResource(R.drawable.step_menu_blue_on);
         mReviewImageView.setBackgroundResource(R.drawable.step_menu_gray);

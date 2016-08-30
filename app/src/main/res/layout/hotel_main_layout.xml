@@ -108,7 +108,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/DP10"
                             android:text="My Hotel"
-                            android:textColor="@color/warm_grey"
+                            android:textColor="@color/COLOR_999999"
                             android:textSize="@dimen/SP16"
                             app:fontName="dinnextltpro_light.otf" />
 
@@ -170,7 +170,7 @@
 
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/warm_grey"
+                            android:textColor="@color/COLOR_999999"
                             android:text=" /Total (Taxes +fees)"
                             android:textSize="@dimen/SP14"
                             app:fontName="dinnextltpro_medium.otf" />
@@ -187,7 +187,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_below="@+id/hotel_price_layout"
-                        android:textColor="@color/warm_grey"
+                        android:textColor="@color/COLOR_999999"
                         android:textSize="@dimen/SP16"
                         app:fontName="dinnextltpro_light.otf" />
 
@@ -199,7 +199,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/DP1"
                     android:layout_marginTop="@dimen/DP10"
-                    android:background="@color/warm_grey_line" />
+                    android:background="@color/COLOR_999999" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -235,7 +235,7 @@
                         android:layout_marginRight="@dimen/DP20"
                         android:layout_marginTop="@dimen/DP10"
                         android:layout_weight="1"
-                        android:background="@color/warm_grey" />
+                        android:background="@color/COLOR_999999" />
 
 
                     <LinearLayout
@@ -276,7 +276,7 @@
                     android:layout_height="@dimen/DP1"
                     android:layout_alignParentBottom="true"
                     android:layout_marginTop="@dimen/DP10"
-                    android:background="@color/warm_grey_line" />
+                    android:background="@color/COLOR_999999" />
 
 
                 <LinearLayout
@@ -313,7 +313,7 @@
                         android:layout_marginRight="@dimen/DP20"
                         android:layout_marginTop="@dimen/DP10"
                         android:layout_weight="1"
-                        android:background="@color/warm_grey" />
+                        android:background="@color/COLOR_999999" />
 
                     <LinearLayout
                         android:layout_width="@dimen/DP0"
@@ -341,7 +341,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/DP1"
                     android:layout_marginTop="@dimen/DP10"
-                    android:background="@color/warm_grey_line" />
+                    android:background="@color/COLOR_999999" />
 
 
 

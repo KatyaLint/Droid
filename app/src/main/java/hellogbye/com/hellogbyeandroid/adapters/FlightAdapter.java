@@ -126,7 +126,8 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         }
 
         if (alternativeButtonDisable) {
-            viewHolder.show_alternative_flights.setBackgroundResource(R.drawable.round_grey_button_shape);
+            //TODO check if needed
+        //    viewHolder.show_alternative_flights.setBackgroundResource(R.drawable.round_grey_button_shape);
             viewHolder.show_alternative_flights.setClickable(false);
 
         } else {

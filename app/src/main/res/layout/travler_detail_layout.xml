@@ -13,7 +13,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
-        android:background="@color/warm_grey_line"  />
+        android:background="@color/COLOR_999999"  />
 
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/travel_detail_first_name"
@@ -22,7 +22,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
-        android:background="@color/warm_grey_line"  />
+        android:background="@color/COLOR_999999"  />
 
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/travel_detail_last_name"
@@ -31,7 +31,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
-        android:background="@color/warm_grey_line"  />
+        android:background="@color/COLOR_999999"  />
 
 
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
@@ -41,7 +41,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
-        android:background="@color/warm_grey_line"  />
+        android:background="@color/COLOR_999999"  />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -61,7 +61,7 @@
         <View
             android:layout_width="@dimen/DP1"
             android:layout_height="fill_parent"
-            android:background="@color/warm_grey_line" />
+            android:background="@color/COLOR_999999" />
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/travel_detail_gender"
@@ -76,7 +76,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
-        android:background="@color/warm_grey_line"  />
+        android:background="@color/COLOR_999999"  />
 
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/travel_detail_email"
@@ -86,7 +86,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
-        android:background="@color/warm_grey_line"  />
+        android:background="@color/COLOR_999999"  />
 
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/travel_detail_phone"
@@ -97,7 +97,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
-        android:background="@color/warm_grey_line"  />
+        android:background="@color/COLOR_999999"  />
 
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/travel_detail_adress"
@@ -107,7 +107,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
-        android:background="@color/warm_grey_line"  />
+        android:background="@color/COLOR_999999"  />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -127,7 +127,7 @@
         <View
             android:layout_width="@dimen/DP1"
             android:layout_height="fill_parent"
-            android:background="@color/warm_grey_line"  />
+            android:background="@color/COLOR_999999"  />
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/travel_detail_country"
@@ -141,7 +141,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
-        android:background="@color/warm_grey_line"  />
+        android:background="@color/COLOR_999999"  />
 
     <LinearLayout
         android:weightSum="2"
@@ -159,7 +159,7 @@
         <View
             android:layout_width="@dimen/DP1"
             android:layout_height="fill_parent"
-            android:background="@color/warm_grey_line"  />
+            android:background="@color/COLOR_999999"  />
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/travel_detail_province"
@@ -172,7 +172,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
-        android:background="@color/warm_grey_line"  />
+        android:background="@color/COLOR_999999"  />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/travler_detail_save"

@@ -24,7 +24,7 @@
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/cc_scan"
-        style="@style/GreenCustomButtonStyle"
+        style="@style/GrayCustomButtonStyle"
         android:layout_alignParentTop="true"
         android:padding="5dp"
         android:layout_height="wrap_content"

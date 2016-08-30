@@ -140,7 +140,7 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case HGB_ERROR_ITEM:
                 ViewHolderHGB hgbholderError = (ViewHolderHGB) holder;
                 hgbholderError.itemHGB.setBackgroundResource(R.drawable.hgb_red_cnc_backround);
-                hgbholderError.itemHGB.setTextColor(mContext.getResources().getColor(R.color.black));
+                hgbholderError.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_BLACK));
                 hgbholderError.itemHGB.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
                 break;
             case HGB_ITEM:

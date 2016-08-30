@@ -1,50 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
-
-
-
-    <color name="white_opacity">#22ffffff</color>
-
-    <color name="green_button_color">#36B784</color>
-
-    <color name="warm_grey">#777777</color>
-    <color name="warm_grey_line">#979797</color>
-
-    <color name="COLOR_555555">#555555</color>
-
-
-    <color name="item_border_color">#666666</color>
-
-
-
-    <color name="dark_grey">#575757</color>
-    <color name="light_grey">#999999</color>
-    <color name="black">#000000</color>
-
-
-
-    <color name="blue_my_trip">#232323</color>
-
-
-
-    <color name="COLOR_8d8e91">#8d8e91</color>
-
-
-    <color name="paid_green">#38b77f</color>
-    <color name="COLOR_777776">#777776</color>
-
-
-
-    <color name="COLOR_5D808E">#5D808E</color>
     <color name="COLOR_7FA5B4">#7FA5B4</color>
-
-
-
-    <color name="COLOR_565656">#565656</color>
-
-    <!--<color name="no_payment_color">#0e587d</color>-->
 
 <!-- Color in app -->
 
@@ -52,10 +9,13 @@
     <color name="COLOR_EE3A3C">#EE3A3C</color>
     <color name="COLOR_003D4C">#003D4C</color>
     <color name="COLOR_00516f">#00516f</color>
-
     <color name="COLOR_079DE0">#079DE0</color>
-
     <color name="COLOR_F5F5F5">#F5F5F5</color>
     <color name="COLOR_WHITE">#ffffff</color>
+    <color name="paid_green">#38b77f</color>
+    <color name="COLOR_999999">#999999</color>
+    <color name="COLOR_565656">#565656</color>
+    <color name="COLOR_BLACK">#000000</color>
+    <color name="COLOR_22999999">#22999999</color>
 
 </resources>

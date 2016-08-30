@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/you_can_say_things_like"
-            android:textColor="@color/light_grey"
+            android:textColor="@color/COLOR_999999"
             android:textSize="@dimen/SP14"
             android:visibility="gone"
             app:fontName="dinnextltpro_medium.otf" />
@@ -48,7 +48,7 @@
             android:paddingRight="@dimen/DP54"
             android:gravity="center"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/light_grey"
+            android:textColor="@color/COLOR_999999"
             android:visibility="gone"
             android:textSize="14sp"
             app:fontName="dinnextltpro_medium.otf" />

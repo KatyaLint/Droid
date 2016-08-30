@@ -12,6 +12,6 @@
         android:layout_width="match_parent"
         android:text="prrrr"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/light_grey"/>
+        android:textColorHint="@color/COLOR_999999"/>
 
 </LinearLayout>

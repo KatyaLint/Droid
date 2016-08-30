@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:fontName="dinnextltpro_regular.otf"
-                android:textColor="@color/warm_grey"
+                android:textColor="@color/COLOR_999999"
                 android:textSize="@dimen/SP12"
                 android:text="@string/component_name" />
         </LinearLayout>
@@ -73,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/DP10"
                 app:fontName="dinnextltpro_regular.otf"
-                android:textColor="@color/warm_grey"
+                android:textColor="@color/COLOR_999999"
                 android:textSize="@dimen/SP12"
                 android:layout_height="wrap_content"
                 android:text="@string/component_email" />
@@ -122,7 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/DP10"
                 app:fontName="dinnextltpro_regular.otf"
-                android:textColor="@color/warm_grey"
+                android:textColor="@color/COLOR_999999"
                 android:textSize="@dimen/SP12"
                 android:layout_height="wrap_content"
                 android:text="Date OF BIRTH" />

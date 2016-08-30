@@ -949,8 +949,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
     private void initCheckoutSteps(){
 
         mPaymentTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
-        mTravlerTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_777776));
-        mReviewTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_777776));
+        mTravlerTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_565656));
+        mReviewTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_565656));
         mPaymentImageView.setBackgroundResource(R.drawable.step_menu_blue_on);
         mTravlerImageView.setBackgroundResource(R.drawable.step_menu_gray);
         mReviewImageView.setBackgroundResource(R.drawable.step_menu_gray);

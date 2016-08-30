@@ -4,14 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_centerInParent="true"
-    android:background="@color/light_grey"
+    android:background="@color/COLOR_999999"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
 <LinearLayout
 
-    android:background="@color/light_grey"
+    android:background="@color/COLOR_999999"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:text="@string/flight_stop_over"
             android:textSize="@dimen/SP16"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/COLOR_565656"
             app:fontName="dinnextltpro_regular.otf"/>
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:text="1h 56m"
             android:textSize="@dimen/SP18"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/COLOR_565656"
             app:fontName="dinnextltpro_bold.otf"/>
 
 
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:text="Amsterdam, Schipol Airport"
         android:textSize="@dimen/SP16"
-        android:textColor="@color/dark_grey"
+        android:textColor="@color/COLOR_565656"
         app:fontName="dinnextltpro_regular.otf"/>
 
 </LinearLayout>

@@ -52,7 +52,7 @@
             android:layout_marginRight="@dimen/DP6"
             android:layout_width="@dimen/DP1"
             android:layout_height="match_parent"
-            android:background="@color/warm_grey"/>
+            android:background="@color/COLOR_999999"/>
 
         <LinearLayout
             android:id="@+id/flight_date_ll"
@@ -85,7 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
         android:layout_weight="1"
-        android:background="@color/warm_grey" />
+        android:background="@color/COLOR_999999" />
 
 
     <LinearLayout
@@ -124,7 +124,7 @@
             android:layout_marginRight="@dimen/DP6"
             android:layout_width="@dimen/DP1"
             android:layout_height="match_parent"
-            android:background="@color/warm_grey"/>
+            android:background="@color/COLOR_999999"/>
 
     <LinearLayout
         android:id="@+id/boarding_details_ll"
@@ -154,7 +154,7 @@
             android:layout_marginRight="@dimen/DP6"
             android:layout_width="@dimen/DP1"
             android:layout_height="match_parent"
-            android:background="@color/warm_grey"/>
+            android:background="@color/COLOR_999999"/>
 
 
         <LinearLayout
@@ -189,7 +189,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
         android:layout_weight="1"
-        android:background="@color/warm_grey" />
+        android:background="@color/COLOR_999999" />
 
 
 
@@ -228,7 +228,7 @@
             android:layout_marginRight="@dimen/DP6"
             android:layout_width="@dimen/DP1"
             android:layout_height="match_parent"
-            android:background="@color/warm_grey"/>
+            android:background="@color/COLOR_999999"/>
 
 
         <LinearLayout
@@ -259,7 +259,7 @@
             android:layout_marginRight="@dimen/DP6"
             android:layout_width="@dimen/DP1"
             android:layout_height="match_parent"
-            android:background="@color/warm_grey"/>
+            android:background="@color/COLOR_999999"/>
 
 
         <LinearLayout
@@ -290,7 +290,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
         android:layout_weight="1"
-        android:background="@color/warm_grey" />
+        android:background="@color/COLOR_999999" />
 
 
 
@@ -331,7 +331,7 @@
             android:layout_marginRight="@dimen/DP6"
             android:layout_width="@dimen/DP1"
             android:layout_height="match_parent"
-            android:background="@color/warm_grey"/>
+            android:background="@color/COLOR_999999"/>
 
         <LinearLayout
             android:layout_weight="1"
@@ -362,7 +362,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
         android:layout_weight="1"
-        android:background="@color/warm_grey" />
+        android:background="@color/COLOR_999999" />
 
 
     <LinearLayout

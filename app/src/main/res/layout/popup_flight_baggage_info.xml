@@ -32,6 +32,6 @@
         android:gravity="center"
         app:fontName="dinnextltpro_regular.otf"
         android:text="@string/popup_flight_baggage_info_text"
-        android:textColor="@color/black"/>
+        android:textColor="@color/COLOR_BLACK"/>
 
 </LinearLayout>

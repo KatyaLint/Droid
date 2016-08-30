@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:padding="@dimen/DP10"
             android:text="@string/itinerary_and_payment"
-            android:textColor="@color/COLOR_555555"
+            android:textColor="@color/COLOR_565656"
             android:textSize="@dimen/SP10"
             app:fontName="dinnextltpro_regular.otf" />
 
@@ -47,7 +47,7 @@
             android:layout_gravity="center"
             android:padding="@dimen/DP10"
             android:text="@string/payment_traveler_information"
-            android:textColor="@color/COLOR_555555"
+            android:textColor="@color/COLOR_565656"
             android:textSize="@dimen/SP10"
             app:fontName="dinnextltpro_regular.otf" />
 
@@ -87,7 +87,7 @@
             android:layout_marginLeft="@dimen/DP10"
             android:layout_gravity="center"
             android:text="@string/i_have_read_and_understood_the_hazardous_nmaterial_notice"
-            android:textColor="@color/COLOR_555555"
+            android:textColor="@color/COLOR_565656"
             android:textSize="@dimen/SP14"
             app:fontName="dinnextltpro_regular.otf" />
 

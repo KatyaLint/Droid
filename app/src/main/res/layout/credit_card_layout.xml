@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/DP10"
             android:text="1234"
-            android:textColor="@color/warm_grey_line"
+            android:textColor="@color/COLOR_999999"
             app:fontName="dinnextltpro_regular.otf" />
 
     </LinearLayout>

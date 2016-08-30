@@ -29,7 +29,7 @@
             app:fontName="dinnextltpro_regular.otf" />
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/my_trip_dates"
-            android:textColor="@color/warm_grey"
+            android:textColor="@color/COLOR_999999"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/SP10"

@@ -64,7 +64,7 @@
     <hellogbye.com.hellogbyeandroid.views.FontTextView
 
         android:id="@+id/create_account"
-        style="@style/GreenCustomButtonStyle"
+        style="@style/GrayCustomButtonStyle"
         android:text="@string/create_account"
         android:layout_marginBottom="@dimen/DP20"
         android:layout_below="@+id/login_button" />

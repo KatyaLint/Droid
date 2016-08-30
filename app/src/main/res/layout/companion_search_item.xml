@@ -95,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
                 android:textSize="@dimen/SP14"
-                android:textColor="@color/light_grey"
+                android:textColor="@color/COLOR_999999"
                 app:fontName="dinnextltpro_regular.otf"
             android:text="@string/companion_delete"/>
         </LinearLayout>

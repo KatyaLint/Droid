@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/DP10"
             android:text="dsfsdfdsf"
-            android:textColor="@color/warm_grey"
+            android:textColor="@color/COLOR_999999"
             android:textSize="17sp"
             app:fontName="dinnextltpro_medium.otf" />
     </LinearLayout>

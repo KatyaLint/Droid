@@ -16,7 +16,7 @@
         android:lines="1"
         android:paddingLeft="@dimen/DP26"
         android:text="12/3/1986"
-        android:textColor="@color/black"
+        android:textColor="@color/COLOR_BLACK"
         android:textSize="@dimen/SP14" />
 
 

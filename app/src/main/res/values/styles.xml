@@ -44,7 +44,7 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/SP20</item>
-        <item name="android:textColorHint">@color/COLOR_5D808E</item>
+        <item name="android:textColorHint">@color/COLOR_999999</item>
         <item name="android:textColor">@color/COLOR_WHITE</item>
         <item name="android:background">@drawable/edit_text_border</item>
 
@@ -57,7 +57,7 @@
         <item name="android:textSize">@dimen/SP16</item>
         <item name="android:paddingBottom">@dimen/DP10</item>
         <item name="android:textColorHint">@color/COLOR_F5F5F5</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/COLOR_BLACK</item>
         <item name="android:background">@drawable/cc_edit_text_border</item>
     </style>
 
@@ -68,7 +68,7 @@
         <item name="android:textSize">@dimen/SP16</item>
         <item name="android:paddingBottom">@dimen/DP10</item>
         <item name="android:textColorHint">@color/COLOR_F5F5F5</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/COLOR_BLACK</item>
     </style>
 
     <style name="CustomButtonTextStyle">
@@ -121,7 +121,7 @@
         <item name="android:background">@drawable/red_disable_button_no_radius</item>
     </style>
 
-    <style name="GreenCustomButtonStyle" parent="CustomButtonTextStyle">
+    <style name="GrayCustomButtonStyle" parent="CustomButtonTextStyle">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@drawable/rounded_corner_opacity</item>
     </style>
@@ -140,7 +140,7 @@
         <item name="android:textSize">@dimen/SP14</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/COLOR_555555</item>
+        <item name="android:textColor">@color/COLOR_565656</item>
 
 
 
@@ -245,7 +245,7 @@
 
     <style name="flight_details_view_title">
         <item name="android:textSize">@dimen/SP13</item>
-        <item name="android:textColor">@color/COLOR_8d8e91</item>
+        <item name="android:textColor">@color/COLOR_565656</item>
         <item name="fontName">dinnextltpro_medium.otf</item>
     </style>
 
@@ -259,7 +259,7 @@
     <style name="alternative_hotel_title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/COLOR_8d8e91</item>
+        <item name="android:textColor">@color/COLOR_565656</item>
         <item name="android:textSize">@dimen/SP13</item>
         <item name="fontName">dinnextltpro_medium.otf</item>
     </style>

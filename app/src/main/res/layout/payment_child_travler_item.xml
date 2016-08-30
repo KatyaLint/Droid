@@ -37,7 +37,7 @@
         android:layout_marginTop="@dimen/DP20"
         android:layout_marginLeft="@dimen/DP54"
         android:layout_centerVertical="true"
-        android:background="@color/warm_grey_line" />
+        android:background="@color/COLOR_999999" />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_below="@+id/travler_line"
@@ -46,7 +46,7 @@
         android:layout_marginTop="@dimen/DP16"
         app:fontName="dinnextltpro_regular.otf"
         style="@style/TextViewTravlerCheckoutDetails"
-        android:textColor="@color/COLOR_555555"
+        android:textColor="@color/COLOR_565656"
         android:text="@string/payment_billing" />
 
 </RelativeLayout>
