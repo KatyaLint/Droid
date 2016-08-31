@@ -266,7 +266,7 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
         ArrayList<AccountsVO> accounts = getActivityInterface().getAccounts();
         for(AccountsVO account:accounts){
             if(account.getEmail().equals(personalEmail)){
-                id = account.getTravelpreferenceprofile().getId();
+                id = account.getTravelpreferenceprofile().getmId();
                 break;
             }
         }

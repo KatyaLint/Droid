@@ -265,7 +265,7 @@ public class CostumeToolBar extends Toolbar {
                 titleText.setVisibility(View.VISIBLE);
                 break;
 
-            case TREVEL_PREFERENCE:
+            case TRAVEL_PREFERENCE:
             //    preference_save_changes.setVisibility(View.VISIBLE);
                 titleText.setVisibility(View.VISIBLE);
                 preferences_edit_mode.setVisibility(View.VISIBLE);

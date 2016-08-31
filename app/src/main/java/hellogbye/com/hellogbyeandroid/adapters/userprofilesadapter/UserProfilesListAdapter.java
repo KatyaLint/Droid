@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
@@ -55,8 +56,8 @@ public class UserProfilesListAdapter extends BaseAdapter {
         FontTextView text = (FontTextView) convertView.findViewById(R.id.user_profile_text);
       //  ImageView image = (ImageView) convertView.findViewById(R.id.user_profile_image);
 
-
-        text.setText(mData.get(position));
+        String data = mData.get(position);
+        text.setText(data);
 
   /*      if(position == 0){
             image.setBackgroundResource(R.drawable.money_saver);

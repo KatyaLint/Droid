@@ -19,12 +19,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/money_saver" />
-
-
-
-
-
-
     </LinearLayout>-->
 
 
@@ -49,14 +43,14 @@
         android:layout_height="wrap_content" />
 
 
-    <View
+ <!--   <View
         android:layout_below="@+id/user_profile_text"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/DP1"
-        android:background="@color/COLOR_999999" />
+        android:background="@color/COLOR_999999" />-->
 
 
-    <LinearLayout
+  <!--  <LinearLayout
         android:visibility="gone"
         android:id="@+id/manage_profile_ll"
         android:layout_alignParentBottom="true"
@@ -79,7 +73,7 @@
             android:textSize="@dimen/SP18"
             app:fontName="dinnextltpro_medium.otf" />
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 
 </RelativeLayout>

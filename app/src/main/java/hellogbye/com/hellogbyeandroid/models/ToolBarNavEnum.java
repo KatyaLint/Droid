@@ -6,7 +6,7 @@ public enum ToolBarNavEnum {
     ACCOUNT(2,"My Account"),
     NOTIFICATIONS(3,"Notifications"),
     CNC(4,"CNC"),
-    TREVEL_PREFERENCE(5,"Preference Settings"),
+    TRAVEL_PREFERENCE(5,"Preference Settings"),
     HELP(6,"Help & Feedback"),
     HOME(7,"Home"),
     ITINARERY(8,"Current Itinerary"),

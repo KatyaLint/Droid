@@ -568,6 +568,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 hgbSaveDataClass.getPersonalUserInformation().setUserEmailLogIn(logInEmail);
                 hgbSaveDataClass.setCurrentUser(mCurrentUser);
 
+
+                //showUserProfiles();
                 if (!mCurrentUser.getIsTravelprofile()) {
                     showUserProfiles();
                 }
@@ -613,10 +615,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         for (AccountsVO account : accounts) {
             String userEmailLogIn = hgbSaveDataClass.getPersonalUserInformation().getUserEmailLogIn();
             if (account.getEmail().equals(userEmailLogIn)) {
-                my_trip_profile.setText(account.getTravelpreferenceprofile().getProfilename());
-                my_trip_profile.setTag(account.getTravelpreferenceprofile().getId());
+                my_trip_profile.setText(account.getTravelpreferenceprofile().getmProfileName());
+                my_trip_profile.setTag(account.getTravelpreferenceprofile().getmId());
                 //   hgbSaveDataClass.getCurrentUser().setmTravelPreferencesProfileId(account.getTravelpreferenceprofile().getId());
-                hgbSaveDataClass.getPersonalUserInformation().setmTravelPreferencesProfileId(account.getTravelpreferenceprofile().getId());
+                hgbSaveDataClass.getPersonalUserInformation().setmTravelPreferencesProfileId(account.getTravelpreferenceprofile().getmId());
                 break;
             }
         }
@@ -649,35 +651,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
 
-    private void profilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs){
-        LayoutInflater li = LayoutInflater.from(MainActivityBottomTabs.this);
-        View promptsView = li.inflate(R.layout.popup_custom_title, null);
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivityBottomTabs.this);
-        dialogBuilder.setCustomTitle(promptsView);
-        // dialogBuilder.setTitle(getResources().getString(R.string.profile_choose_between));
 
-        final ArrayList<String> itemsList = new ArrayList<String>();
-        for (DefaultsProfilesVO userProfileVO : userProfileVOs) {
-            itemsList.add(userProfileVO.getName());
-        }
-        // final CharSequence[] list = itemsList.toArray(new String[itemsList.size()]);
-     /*   UserProfilesAdapter adapter = new UserProfilesAdapter(itemsList, this.getBaseContext());*/
-
-
-        UserProfilesListAdapter adapter = new UserProfilesListAdapter(itemsList, this.getBaseContext());
-
-        dialogBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-                DefaultsProfilesVO defaultProfile = userDefaultProfiles.get(item);
-                postDefaultProfile(String.valueOf(defaultProfile.getId()), defaultProfile.getName());
-                selectDefaultProfileDialog.dismiss();
-            }
-        });
-        //Create alert dialog object via builder
-        selectDefaultProfileDialog = dialogBuilder.create();
-        selectDefaultProfileDialog.setCancelable(false);
-        selectDefaultProfileDialog.show();
-    }
 
     private void showAlertProfilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs) {
         LayoutInflater li = LayoutInflater.from(MainActivityBottomTabs.this);
@@ -848,7 +822,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             case PREFERENCE_SETTINGS_EMAILS:
                 fragment = PreferenceSettingsEmailFragment.newInstance(navPosition);
                 break;
-            case TREVEL_PREFERENCE:
+            case TRAVEL_PREFERENCE:
                 fragment = PreferenceSettingsFragment.newInstance(navPosition);
                 break;
             case ACCOUNT:

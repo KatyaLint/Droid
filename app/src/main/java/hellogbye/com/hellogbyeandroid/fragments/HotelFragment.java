@@ -286,9 +286,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     public void onResume() {
         super.onResume();
         initializeMap();
-        if(!permissionDenied){
-            mMap.setMyLocationEnabled(true);
-        }
 
        /* mMap = fragment.getMap();
 
@@ -329,10 +326,15 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
         loadMap();
     }
 
     private void loadMap() {
+        if(!permissionDenied){
+            mMap.setMyLocationEnabled(true);
+        }
+
         //SET UP MAP
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(false);

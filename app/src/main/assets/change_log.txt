@@ -342,3 +342,5 @@ Code changing:
     - Preference settings change with active view
     - New image for adding companion
     - Voice fix
+    - Maps fix
+    - Travel profiles popup

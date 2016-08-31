@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public class DefaultsProfilesVO {
     @SerializedName("id")
-    private int id;
+    private String id;
 
     @SerializedName("name")
     private String name;
@@ -21,6 +21,9 @@ public class DefaultsProfilesVO {
     @SerializedName("modifieddatetime")
     private String modifieddatetime;
 
+    @SerializedName("profilename")
+    private String profilename;
+
     public String getName() {
         return name;
     }
@@ -29,11 +32,27 @@ public class DefaultsProfilesVO {
         this.name = name;
     }
 
-    public int getId() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getProfilename() {
+        return profilename;
+    }
+
+    public void setProfilename(String profilename) {
+        this.profilename = profilename;
+    }
+
+   /* public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
+    }*/
 }

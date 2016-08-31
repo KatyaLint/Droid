@@ -1,9 +1,12 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,11 +34,13 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.CNCAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.userprofilesadapter.UserProfilesListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportResultsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportServerResultVO;
@@ -42,6 +48,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.airports.ResponsesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.ConversationVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
+import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
@@ -133,7 +140,6 @@ public class CNCFragment extends HGBAbstractFragment {
 
             //This is to ckeck and display tutorial this version was cancelled waiting for new one
 
-
             mTextTutoralHeader.setVisibility(View.VISIBLE);
             mTextTutoralBody.setVisibility(View.VISIBLE);
         }else{
@@ -154,13 +160,13 @@ public class CNCFragment extends HGBAbstractFragment {
         tool_bar_profile_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("Kate clicked");
-                Bundle args = new Bundle();
+                getUserSettings();
+
+
+             /*   Bundle args = new Bundle();
                 args.putString("edit_mode", "true");
-              /*  goToFragment(ToolBarNavEnum.TREVEL_PREFERENCE.getNavNumber(), args);
-                LinearLayout edit_preferences = (LinearLayout) mToolbar.findViewById(R.id.preferences_edit_mode);*/
                 edit_preferences.setVisibility(View.GONE);
-                getFlowInterface().goToFragment(ToolBarNavEnum.TREVEL_PREFERENCE.getNavNumber(), args);
+                getFlowInterface().goToFragment(ToolBarNavEnum.TRAVEL_PREFERENCE.getNavNumber(), args);*/
             }
         });
 
@@ -168,6 +174,75 @@ public class CNCFragment extends HGBAbstractFragment {
         return rootView;
     }
 
+    private void getUserSettings(){
+       // getPreferenceProfiles(final ServerRequestListener listener)
+    ConnectionManager.getInstance(getActivity()).getPreferenceProfiles(new ConnectionManager.ServerRequestListener() {
+        @Override
+        public void onSuccess(Object data) {
+            if (data != null) {
+                ArrayList<DefaultsProfilesVO> defaultsProfilesVOs = (ArrayList<DefaultsProfilesVO> )data;
+           //     List<AccountDefaultSettingsVO> accountDefaultSettings = (List<AccountDefaultSettingsVO>) data;
+                profilesDialog(defaultsProfilesVOs);
+            }
+        }
+        @Override
+        public void onError(Object data) {
+            ErrorMessage(data);
+        }
+    });
+    }
+
+    private void profilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs){
+        LayoutInflater li = LayoutInflater.from(getActivity());
+        View promptsView = li.inflate(R.layout.popup_custom_title, null);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+        dialogBuilder.setCustomTitle(promptsView);
+
+
+        // dialogBuilder.setTitle(getResources().getString(R.string.profile_choose_between));
+
+        final ArrayList<String> itemsList = new ArrayList<String>();
+        for (DefaultsProfilesVO userProfileVO : userProfileVOs) {
+            itemsList.add(userProfileVO.getProfilename());
+        }
+        // final CharSequence[] list = itemsList.toArray(new String[itemsList.size()]);
+     /*   UserProfilesAdapter adapter = new UserProfilesAdapter(itemsList, this.getBaseContext());*/
+
+
+        UserProfilesListAdapter adapter = new UserProfilesListAdapter(itemsList, getActivity());
+
+        View promptsViewTeest = li.inflate(R.layout.user_profile_popup_list_layout, null);
+        ListView user_profile_popup_list_view = (ListView) promptsViewTeest.findViewById(R.id.user_profile_popup_list_view);
+        user_profile_popup_list_view.setAdapter(adapter);
+
+
+
+    /*    dialogBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+             *//*   DefaultsProfilesVO defaultProfile = userDefaultProfiles.get(item);
+                postDefaultProfile(String.valueOf(defaultProfile.getId()), defaultProfile.getName());*//*
+                selectDefaultProfileDialog.dismiss();
+            }
+        });*/
+
+        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+            } });
+
+
+        //Create alert dialog object via builder
+        selectDefaultProfileDialog = dialogBuilder.create();
+        selectDefaultProfileDialog.setView(promptsViewTeest);
+        selectDefaultProfileDialog.setCancelable(false);
+        selectDefaultProfileDialog.show();
+
+
+
+      //  dialogBuilder.setView(promptsViewTeest);
+
+    }
+    private AlertDialog selectDefaultProfileDialog;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -428,15 +503,6 @@ public class CNCFragment extends HGBAbstractFragment {
 
     private void init(View view) {
 
- /*       cnc_fragment_trip_settings = (Button)view.findViewById(R.id.cnc_fragment_trip_settings);
-        cnc_fragment_trip_settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               *//* getFlowInterface().closeRightPane();*//*
-                getFlowInterface().goToFragment(ToolBarNavEnum.TREVEL_PREFERENCE.getNavNumber(), null);
-            }
-        });*/
-
         mRecyclerView = (RecyclerView) view.findViewById(R.id.cnc_recycler_view);
         mEditText = (FontEditTextView) view.findViewById(R.id.cnc_edit_text);
         mMicImageView = (ImageView) view.findViewById(R.id.cnc_mic);
@@ -678,7 +744,7 @@ public class CNCFragment extends HGBAbstractFragment {
     }
 
     private void sendMessageToServer(final String strMessage,final iAfterServer iserverFinished) {
-        ConnectionManager.getInstance(getActivity()).ItineraryCNCSearchGet(strMessage, new ConnectionManager.ServerRequestListener() {
+        ConnectionManager.getInstance(getActivity()).getItineraryCNCSearch(strMessage, new ConnectionManager.ServerRequestListener() {
 
                     @Override
                     public void onSuccess(Object data) {
@@ -749,7 +815,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
     private void sendVOForIternarary(ArrayList<AirportSendValuesVO> airportSendValuesVO){
 
-        ConnectionManager.getInstance(getActivity()).ItineraryCNCSearchPost(airportSendValuesVO,  new ConnectionManager.ServerRequestListener() {
+        ConnectionManager.getInstance(getActivity()).postItineraryCNCSearch(airportSendValuesVO,  new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
 
