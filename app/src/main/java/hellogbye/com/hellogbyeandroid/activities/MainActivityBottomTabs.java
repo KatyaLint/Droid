@@ -34,6 +34,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.userprofilesadapter.UserProfilesAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.userprofilesadapter.UserProfilesListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
@@ -98,11 +99,11 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private HGBPreferencesManager hgbPrefrenceManager;
     private ImageButton up_bar_favorite;
     private ImageButton newIteneraryImageButton;
-
+    private ImageButton toolbar_add_companion;
 
     private UserProfileVO mCurrentUser;
     private OnBackPressedListener onBackPressedListener;
-    public FontTextView my_trip_profile;
+    private FontTextView my_trip_profile;
     private HGBSaveDataClass hgbSaveDataClass = new HGBSaveDataClass();
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
     private FontTextView itirnarary_title_Bar;
@@ -128,7 +129,11 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private final int BOTTOM_BAR_THIRD_INDEX = 2;
     private final int BOTTOM_BAR_FOURTH_INDEX = 3;
     private final int BOTTOM_BAR_FIFTH_INDEX = 4;
-    private ImageButton toolbar_add_companion;
+    private LinearLayout tool_bar_profile_name;
+    private LinearLayout edit_preferences_ll;
+    private ImageButton edit_preferences_imagebtn;
+    private ImageButton check_preferences;
+
 
     public HGBSaveDataClass getHGBSaveDataClass() {
         return hgbSaveDataClass;
@@ -193,6 +198,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     }
 
+    public FontTextView getMyTripProfile(){
+       return my_trip_profile;
+    }
     private void initBottomBar(Bundle savedInstanceState) {
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
@@ -382,8 +390,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
         setSupportActionBar(mToolbar);
 
-        preferencesChanges();
-        toolBarProfileChnage();
         setOnClickListenerForItineraryTopBar();
         setOnClickListenerForSavePreferences();
 
@@ -419,7 +425,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
 
 
-         toolbar_add_companion = (ImageButton)mToolbar.findViewById(R.id.toolbar_add_companion);
+        toolbar_add_companion = (ImageButton)mToolbar.findViewById(R.id.toolbar_add_companion);
+        tool_bar_profile_name = (LinearLayout) mToolbar.findViewById(R.id.tool_bar_profile_name);
+        edit_preferences_ll = (LinearLayout) mToolbar.findViewById(R.id.preferences_edit_mode);
+        edit_preferences_imagebtn = (ImageButton) mToolbar.findViewById(R.id.edit_preferences);
+        check_preferences = (ImageButton) mToolbar.findViewById(R.id.check_preferences);
+
 
     }
 
@@ -439,7 +450,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     public ImageButton getAddCompanionButton(){
         return toolbar_add_companion;
     }
-
+    public LinearLayout getToolBarEditPreferences(){
+        return edit_preferences_ll;
+    }
     private void setOnClickListenerForItineraryTopBar() {
         up_bar_favorite = (ImageButton) mToolbar.findViewById(R.id.up_bar_favorite);
         up_bar_favorite.setOnClickListener(new View.OnClickListener() {
@@ -508,23 +521,13 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
     }
 
-    public void setFavority(boolean isFavority) {
-        if (isFavority) {
-            up_bar_favorite.setBackgroundResource(R.drawable.star_in_favorite);
-            //   hgbSaveDataClass.getTravelOrder().setmIsFavorite(false);
 
-        } else {
-            //    hgbSaveDataClass.getTravelOrder().setmIsFavorite(true);
-            up_bar_favorite.setBackgroundResource(R.drawable.thin_0651_star_favorite_rating);
-        }
+
+    public ImageButton getFavorityImageButton(){
+        return up_bar_favorite;
     }
-
-
-    public void setTitleForItirnarary(String solutionName) {
-
-        itirnarary_title_Bar.setText(hgbSaveDataClass.getTravelOrder().getmSolutionName());
-        itirnarary_title_Bar.setTag(hgbSaveDataClass.getTravelOrder().getmSolutionID());
-
+    public FontTextView getItirnaryTitleBar(){
+        return itirnarary_title_Bar;
     }
 
     private void getCurrentItinerary(String solutionId) {
@@ -547,41 +550,11 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
     }
 
-
-    private void toolBarProfileChnage() {
-
-        final LinearLayout tool_bar_profile_name = (LinearLayout) mToolbar.findViewById(R.id.tool_bar_profile_name);
-        tool_bar_profile_name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle args = new Bundle();
-                args.putString("edit_mode", "true");
-                goToFragment(ToolBarNavEnum.TREVEL_PREFERENCE.getNavNumber(), args);
-                LinearLayout edit_preferences = (LinearLayout) mToolbar.findViewById(R.id.preferences_edit_mode);
-                edit_preferences.setVisibility(View.GONE);
-            }
-        });
-
-
-    /*    final ImageButton toolbar_go_to_iternerary = (ImageButton) mToolbar.findViewById(R.id.toolbar_go_to_iternerary);
-        toolbar_go_to_iternerary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
-
-
-                if (hgbSaveDataClass.getTravelOrder() == null) {
-                    toolbar_go_to_iternerary.setEnabled(false);
-                } else {
-                    goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
-                }
-
-
-            }
-        });*/
-
+    public LinearLayout getToolBarProfileChange(){
+        return tool_bar_profile_name;
     }
+
+
 
     private void getUserData() {
 
@@ -594,7 +567,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
                 hgbSaveDataClass.getPersonalUserInformation().setUserEmailLogIn(logInEmail);
                 hgbSaveDataClass.setCurrentUser(mCurrentUser);
-
 
                 if (!mCurrentUser.getIsTravelprofile()) {
                     showUserProfiles();
@@ -677,6 +649,35 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
 
+    private void profilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs){
+        LayoutInflater li = LayoutInflater.from(MainActivityBottomTabs.this);
+        View promptsView = li.inflate(R.layout.popup_custom_title, null);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivityBottomTabs.this);
+        dialogBuilder.setCustomTitle(promptsView);
+        // dialogBuilder.setTitle(getResources().getString(R.string.profile_choose_between));
+
+        final ArrayList<String> itemsList = new ArrayList<String>();
+        for (DefaultsProfilesVO userProfileVO : userProfileVOs) {
+            itemsList.add(userProfileVO.getName());
+        }
+        // final CharSequence[] list = itemsList.toArray(new String[itemsList.size()]);
+     /*   UserProfilesAdapter adapter = new UserProfilesAdapter(itemsList, this.getBaseContext());*/
+
+
+        UserProfilesListAdapter adapter = new UserProfilesListAdapter(itemsList, this.getBaseContext());
+
+        dialogBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                DefaultsProfilesVO defaultProfile = userDefaultProfiles.get(item);
+                postDefaultProfile(String.valueOf(defaultProfile.getId()), defaultProfile.getName());
+                selectDefaultProfileDialog.dismiss();
+            }
+        });
+        //Create alert dialog object via builder
+        selectDefaultProfileDialog = dialogBuilder.create();
+        selectDefaultProfileDialog.setCancelable(false);
+        selectDefaultProfileDialog.show();
+    }
 
     private void showAlertProfilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs) {
         LayoutInflater li = LayoutInflater.from(MainActivityBottomTabs.this);
@@ -691,6 +692,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         }
         // final CharSequence[] list = itemsList.toArray(new String[itemsList.size()]);
         UserProfilesAdapter adapter = new UserProfilesAdapter(itemsList, this.getBaseContext());
+
+
+      //  UserProfilesListAdapter adapter = new UserProfilesListAdapter(itemsList, this.getBaseContext());
+
         dialogBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 DefaultsProfilesVO defaultProfile = userDefaultProfiles.get(item);
@@ -778,7 +783,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         ConnectionManager.getInstance(MainActivityBottomTabs.this).getBookingOptions(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                //responceText.setText((String) data);
                 BookingRequestVO bookingrequest = (BookingRequestVO) data;
                 hgbSaveDataClass.setBookingRequest(bookingrequest);
                 hgbSaveDataClass.getBookingRequest().sortCountryItems();
@@ -791,34 +795,13 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
     }
 
-    private void preferencesChanges() {
-        final ImageButton edit_preferences = (ImageButton) mToolbar.findViewById(R.id.edit_preferences);
-        edit_preferences.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View checkButton = mToolbar.findViewById(R.id.check_preferences);
-                if (checkButton.getVisibility() == View.VISIBLE) {
-                    //delete
-                    editClickCB.onItemClick("delete");
-                } else if (checkButton.getVisibility() == View.GONE) {
-                    edit_preferences.setBackgroundResource(R.drawable.ic_delete);
-                    mToolbar.findViewById(R.id.check_preferences).setVisibility(View.VISIBLE);
-                    editClickCB.onItemClick("edit");
-                }
-            }
-        });
-
-        final ImageButton check_preferences = (ImageButton) mToolbar.findViewById(R.id.check_preferences);
-        check_preferences.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mToolbar.findViewById(R.id.check_preferences).setVisibility(View.GONE);
-                edit_preferences.setBackgroundResource(R.drawable.edit_img);
-                editClickCB.onItemClick("done");
-            }
-        });
+    public ImageButton getEditPreferenceBtn(){
+        return edit_preferences_imagebtn;
     }
 
+    public ImageButton getCheckPreferenceButton(){
+        return check_preferences;
+    }
 
     public void selectItem(int position, Bundle bundle, final boolean stashFragment) {
         // update the main content by replacing fragments
@@ -1034,10 +1017,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         finish();
     }
 
-    public void setEditClickCB(PreferenceSettingsFragment.OnItemClickListener editClickCB) {
-        this.editClickCB = editClickCB;
-    }
-
     @Override
     public void setCreditCardsSelected(HashSet<CreditCardItem> cardsList) {
         mSelectedCreditCards = cardsList;
@@ -1195,21 +1174,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         selectItem(fragment, bundle, true);
     }
 
-   /* @Override
-    public void goToFragment(int fragmentname, Bundle bundle, boolean) {
-        selectItem(fragmentname, bundle);
-    }*/
-
-    @Override
-    public void setHomeImage(String id) {
-    /*    if (id.equals("keyboard")) {
-            imageButton.setBackgroundResource(R.drawable.app_bar_microphone_icn);
-            imageButton.setTag("mic");
-        } else if (id.equals("mic")) {
-            imageButton.setBackgroundResource(R.drawable.group_7);
-            imageButton.setTag("keyboard");
-        }*/
-    }
 
 
     /////////////////////////////////
@@ -1270,7 +1234,29 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
 
+        if (requestCode == 0 && resultCode == RESULT_OK) {
+            ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
+            //   String fragmentTag = getFragmentManager().getBackStackEntryAt(getFragmentManager().getBackStackEntryCount() - 1).getName();
+            //   Fragment currentFragment = getFragmentManager().findFragmentByTag(CNCFragment.class.toString());
+
+
+            Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(CNCFragment.class.toString());
+
+            ((CNCFragment) currentFragment).handleMyMessage(matches.get(0));
+//            if (currentFragment instanceof CNCFragment) {
+//                ((CNCFragment) currentFragment).handleMyMessage(matches.get(0));
+//            }
+//            HomeFragment fragment = (HomeFragment) getFragmentManager().findFragmentByTag(HomeFragment.class.toString());
+//            if (fragment != null) {
+//                fragment.handleClick(matches.get(0));
+//            }
+        }
+    }
 
     private void reportError(Object data){
         HGBErrorHelper errorHelper = new HGBErrorHelper();

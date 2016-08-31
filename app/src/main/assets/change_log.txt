@@ -336,6 +336,9 @@ Code changing:
     - clear Itinerary Button
     - fly me to ..., now asking with which companion
     - new arrow_back for alternative flights
-     - Middle name in account settings
-     - travel profiles at left
-     - Color change
+    - Middle name in account settings
+    - travel profiles at left
+    - Color change
+    - Preference settings change with active view
+    - New image for adding companion
+    - Voice fix

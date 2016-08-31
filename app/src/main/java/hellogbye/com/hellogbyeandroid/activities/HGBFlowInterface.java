@@ -24,7 +24,7 @@ public interface HGBFlowInterface {
 
     void continueFlow(int fragment);
     void gotToStartMenuActivity();
-    void setHomeImage(String id);
+
     void setCreditCardsSelected(HashSet<CreditCardItem> cardsList);
     HashSet<CreditCardItem> getCreditCardsSelected();
     void setBookingHashMap(HashMap<String, String> bookigItems);

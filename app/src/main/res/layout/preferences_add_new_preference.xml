@@ -8,11 +8,11 @@
         android:layout_height="wrap_content" android:textColor="#FFF"
         android:gravity="top" android:textSize="@dimen/SP16" android:paddingBottom="@dimen/DP20"/>
 
-    <EditText
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/editTextDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/preferences_hint_add_name"
-        android:textColorHint="@color/COLOR_999999">
-    </EditText>
+        android:textColorHint="@color/COLOR_999999"/>
+
 </LinearLayout>

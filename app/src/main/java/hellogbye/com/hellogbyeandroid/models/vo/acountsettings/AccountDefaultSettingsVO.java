@@ -17,6 +17,7 @@ public class AccountDefaultSettingsVO {
     @SerializedName("profilename")
     private String mProfileName;
 
+    private boolean isActiveProfile = false;
 
 
     public String getmId() {
@@ -52,4 +53,11 @@ public class AccountDefaultSettingsVO {
         isChecked = checked;
     }
 
+    public boolean isActiveProfile() {
+        return isActiveProfile;
+    }
+
+    public void setActiveProfile(boolean activeProfile) {
+        isActiveProfile = activeProfile;
+    }
 }

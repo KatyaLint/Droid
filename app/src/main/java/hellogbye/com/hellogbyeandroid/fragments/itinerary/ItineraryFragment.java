@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -816,13 +817,24 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
     private void setSolutionNameForItirnarary() {
         String solutionName = userOrder.getmSolutionName();
-        ((MainActivityBottomTabs)getActivity()).setTitleForItirnarary(solutionName);
+        FontTextView itirnarary_title_Bar = ((MainActivityBottomTabs)getActivity()).getItirnaryTitleBar();
+        itirnarary_title_Bar.setText(getActivityInterface().getTravelOrder().getmSolutionName());
+        itirnarary_title_Bar.setTag(getActivityInterface().getTravelOrder().getmSolutionID());
+
     }
 
 
     private void setFavorityIcon(){
         boolean isFavority = userOrder.ismIsFavorite();
-        ((MainActivityBottomTabs)getActivity()).setFavority(isFavority);
+        ImageButton up_bar_favorite = ((MainActivityBottomTabs)getActivity()).getFavorityImageButton();
+        if (isFavority) {
+            up_bar_favorite.setBackgroundResource(R.drawable.star_in_favorite);
+            //   hgbSaveDataClass.getTravelOrder().setmIsFavorite(false);
+
+        } else {
+            //    hgbSaveDataClass.getTravelOrder().setmIsFavorite(true);
+            up_bar_favorite.setBackgroundResource(R.drawable.thin_0651_star_favorite_rating);
+        }
     }
 
 

@@ -19,6 +19,8 @@ import android.view.animation.Animation;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
@@ -145,6 +147,23 @@ public class CNCFragment extends HGBAbstractFragment {
             addWaitingItem();
             getCurrentItinerary(solution_id);
         }
+
+
+        final LinearLayout edit_preferences = ((MainActivityBottomTabs)getActivity()).getToolBarEditPreferences();
+        LinearLayout tool_bar_profile_name = ((MainActivityBottomTabs)getActivity()).getToolBarProfileChange();
+        tool_bar_profile_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("Kate clicked");
+                Bundle args = new Bundle();
+                args.putString("edit_mode", "true");
+              /*  goToFragment(ToolBarNavEnum.TREVEL_PREFERENCE.getNavNumber(), args);
+                LinearLayout edit_preferences = (LinearLayout) mToolbar.findViewById(R.id.preferences_edit_mode);*/
+                edit_preferences.setVisibility(View.GONE);
+                getFlowInterface().goToFragment(ToolBarNavEnum.TREVEL_PREFERENCE.getNavNumber(), args);
+            }
+        });
+
 
         return rootView;
     }

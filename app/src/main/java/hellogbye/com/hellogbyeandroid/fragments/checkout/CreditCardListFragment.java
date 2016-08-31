@@ -118,28 +118,6 @@ public class CreditCardListFragment extends HGBAbstractFragment {
     }
 
 
-
-/*    private void clickListenerOnAdapter(){
-        mRecyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                RecyclerView.ViewHolder childView = mRecyclerView.getChildViewHolder(v);
-
-
-                View rootView2 = v.getRootView();
-                View rootView = v.findViewById(R.id.companion_delete_item);
-                System.out.println("Kate toke =" + rootView2.getTag().toString());
-              //  View deleteItem = rootView.findViewById(R.id.companion_delete_item);
-                System.out.println("Kate deleteItem.getTag() =" + rootView.getTag().toString());
-
-                bundle.putBoolean(HGBConstants.PAYMENT_FILL_CREDIT_CARD,true);
-                getFlowInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(), bundle);
-
-            }
-        });
-    }*/
-
     private void removeCreditCardSwipe(){
         mAdapter.addClickeListeners(new ISwipeAdapterExecution() {
             @Override

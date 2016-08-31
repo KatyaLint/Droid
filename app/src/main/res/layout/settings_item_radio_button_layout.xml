@@ -11,7 +11,7 @@
 
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:layout_weight="0.8"
+
         android:id="@+id/settings_radio_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,10 +21,19 @@
         android:layout_alignParentLeft="true"
         android:textColor="@color/COLOR_999999"
         android:textSize="@dimen/SP16"
+        android:layout_marginRight="@dimen/DP6"
         app:fontName="dinnextltpro_medium.otf" />
 
+ <!--   <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/settings_radio_active_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@+id/settings_radio_name"
+        android:text="(Active)"/>-->
+
     <RadioButton
-        android:layout_weight="0.2"
+
         android:id="@+id/setting_radio_image"
         android:layout_width="wrap_content"
 

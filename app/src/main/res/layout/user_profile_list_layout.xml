@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="horizontal">
+
+ <!--   <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/DP20">
+
+
+      <ImageView
+            android:id="@+id/user_profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/money_saver" />
+
+
+
+
+
+
+    </LinearLayout>-->
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_margin="@dimen/DP20"
+        android:layout_centerVertical="true"
+        android:id="@+id/user_profile_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="1234"
+        android:textColor="@color/COLOR_00516f"
+        android:textSize="@dimen/SP16"
+        app:fontName="dinnextltpro_regular.otf" />
+
+    <RadioButton
+        android:layout_margin="@dimen/DP20"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/user_profile_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <View
+        android:layout_below="@+id/user_profile_text"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/DP1"
+        android:background="@color/COLOR_999999" />
+
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/manage_profile_ll"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/manage_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_margin="@dimen/DP20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Manage Profile"
+            android:textColor="@color/COLOR_00516f"
+            android:textSize="@dimen/SP18"
+            app:fontName="dinnextltpro_medium.otf" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -64,6 +64,16 @@ public class PreferencesSettingsRadioButtonAsCheckBoxAdapter extends ArrayAdapte
         this.selectedPreferebcesID = id;
     }
 
+    @Override
+    public void updateItems(List<AccountDefaultSettingsVO> accountAttributes) {
+
+    }
+
+    @Override
+    public void updateItem(AccountDefaultSettingsVO accountAttribute) {
+
+    }
+
     public void setEditMode(boolean isEditMode){
         this.isEditMode = isEditMode;
     }

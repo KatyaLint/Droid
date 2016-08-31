@@ -290,7 +290,7 @@
     <string name="popup_confirm_account_text">We\'ve sent you an email. Please follow\nthe instruction to confirm your\naccount before signing in.</string>
     <string name="popup_confirm_account_title">Confirm Your Account to Continue</string>
 
-    <string name = "profile_choose_between">Choose between</string>
+    <string name = "profile_choose_between">Which Travel Profile?</string>
 
     <string name="grid_taxes">(Taxes &amp; Fees Extra)</string>
     <string name="itinerary_and_payment">ITINERARY AND PAYMENT</string>

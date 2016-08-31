@@ -21,11 +21,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/DP10"
+        android:layout_marginRight="@dimen/DP10"
         android:textColor="@color/COLOR_999999"
         android:textSize="@dimen/SP16"
         android:text="prr"
         app:fontName="dinnextltpro_medium.otf" />
 
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@+id/settings_check_name"
+        android:id="@+id/settings_check_active_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textColor="@color/COLOR_999999"
+        android:textSize="@dimen/SP16"
+        android:text="(Active)"
+        app:fontName="dinnextltpro_medium.otf" />
 
 
     <RadioButton
