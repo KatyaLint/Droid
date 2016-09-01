@@ -128,12 +128,12 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
 
         backOnListClicked();
 
-        ((MainActivityBottomTabs) getActivity()).setOnSavePreferencesButtonClicked(new PreferencesSettingsMainClass.saveButtonClicked(){
+     /*   ((MainActivityBottomTabs) getActivity()).setOnSavePreferencesButtonClicked(new PreferencesSettingsMainClass.saveButtonClicked(){
             @Override
             public void onSaveClicked() {
                 getActivity().onBackPressed();
             }
-        });
+        });*/
 
 
         getUserProfiles();

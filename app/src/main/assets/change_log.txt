@@ -345,3 +345,4 @@ Code changing:
     - Maps fix
     - Travel profiles popup
     - change travel name, code changes
+    - clear cnc screen new implementation

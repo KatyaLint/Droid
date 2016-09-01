@@ -108,7 +108,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     public boolean isFreeUser;
     private CharSequence mTitle;
     private FontTextView preference_save_changes;
-    private PreferencesSettingsMainClass.saveButtonClicked onSavePreferencesButtonClicked;
     private AlertDialog selectDefaultProfileDialog;
     private ArrayList<DefaultsProfilesVO> userDefaultProfiles;
 
@@ -132,6 +131,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private ImageButton toolbar_add_companion;
     private FontTextView my_trip_profile;
     private FontTextView itirnarary_title_Bar;
+    private ImageButton toolbar_new_iternerary_cnc;
 
 
     public HGBSaveDataClass getHGBSaveDataClass() {
@@ -337,11 +337,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
 
-
-    public void setOnSavePreferencesButtonClicked(PreferencesSettingsMainClass.saveButtonClicked onSavePreferencesButtonClicked) {
-        this.onSavePreferencesButtonClicked = onSavePreferencesButtonClicked;
-    }
-
     @Override
     protected void onStop() {
         super.onStop();
@@ -389,9 +384,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
         setSupportActionBar(mToolbar);
 
-
-        setOnClickListenerForSavePreferences();
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -404,25 +396,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             }
         });
 
-        newIteneraryImageButton = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary);
-
-        newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clearCNCItems();
-            }
-        });
-
-
-        ImageButton toolbar_new_iternerary_cnc = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary_cnc);
-        toolbar_new_iternerary_cnc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clearCNCItems();
-            }
-        });
-
-
 
         toolbar_add_companion = (ImageButton)mToolbar.findViewById(R.id.toolbar_add_companion);
         tool_bar_profile_name = (LinearLayout) mToolbar.findViewById(R.id.tool_bar_profile_name);
@@ -431,20 +404,21 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         check_preferences = (ImageButton) mToolbar.findViewById(R.id.check_preferences);
         itirnarary_title_Bar = (FontTextView)mToolbar.findViewById(R.id.itirnarary_title_Bar);
         up_bar_favorite = (ImageButton)mToolbar.findViewById(R.id.up_bar_favorite);
+        preference_save_changes = (FontTextView) mToolbar.findViewById(R.id.preference_save_changes);
+        newIteneraryImageButton = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary);
+        toolbar_new_iternerary_cnc = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary_cnc);
+
 
     }
+    public ImageButton getNewIteneraryImageButton(){
+        return toolbar_new_iternerary_cnc;
+    }
 
-    private void setOnClickListenerForSavePreferences() {
-        preference_save_changes = (FontTextView) mToolbar.findViewById(R.id.preference_save_changes);
-        preference_save_changes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (onSavePreferencesButtonClicked != null) {
-                    onSavePreferencesButtonClicked.onSaveClicked();
-                }
-
-            }
-        });
+    public ImageButton getNewIternararyButton(){
+        return newIteneraryImageButton;
+    }
+    public FontTextView getPreferencesSaveButton(){
+        return preference_save_changes;
     }
 
     public ImageButton getAddCompanionButton(){

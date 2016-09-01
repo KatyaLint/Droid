@@ -14,6 +14,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttribute
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by nyawka on 12/2/15.
@@ -30,28 +31,30 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
     protected List<SettingsAttributesVO> accountAttributesTemp;
     protected List<SettingsAttributesVO> settingsAttributesVO;
     private String guid;
+    private FontTextView preference_save_changes;
 
 
-    public interface saveButtonClicked{
-        void onSaveClicked();
-    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ((MainActivityBottomTabs)getActivity()).setOnSavePreferencesButtonClicked(new saveButtonClicked(){
-            @Override
-            public void onSaveClicked() {
-               // savePreferenceAlert();
-                getActivity().onBackPressed();
-            }
-        });
-
+        preference_save_changes =  ((MainActivityBottomTabs)getActivity()).getPreferencesSaveButton();
+        setOnClickListenerForSavePreferences();
         guid = getSettingGuidSelected();
     }
 
+    private void setOnClickListenerForSavePreferences() {
 
+        preference_save_changes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+
+            }
+        });
+    }
 
     public void backOnListClicked() {
 

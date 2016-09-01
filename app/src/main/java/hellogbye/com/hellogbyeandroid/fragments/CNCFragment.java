@@ -170,6 +170,13 @@ public class CNCFragment extends HGBAbstractFragment {
             }
         });
 
+        ImageButton newIteneraryImageButton = ((MainActivityBottomTabs) getActivity()).getNewIteneraryImageButton();
+        newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearCNCItems();
+            }
+        });
 
         return rootView;
     }

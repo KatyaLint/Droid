@@ -11,12 +11,16 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TabHost;
 import android.widget.TextView;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 
 /**
  * Created by nyawka on 5/16/16.
@@ -28,7 +32,7 @@ public class TripsTabsView extends HGBAbstractFragment {
     private static final String TAB_2_TAG = "Favorites";
     private static final String TAB_3_TAG = "History";
     private Typeface textFont;
-
+    private ImageButton newIteneraryImageButton;
 
 
     public static Fragment newInstance(int position) {
@@ -109,9 +113,35 @@ public class TripsTabsView extends HGBAbstractFragment {
 
             }
         });
+
+
+        newIteneraryImageButton =  ((MainActivityBottomTabs)getActivity()).getNewIternararyButton();
+        setNewIteneraryImageButtonClickListener();
         return rootView;
     }
 
+    private void setNewIteneraryImageButtonClickListener(){
+    newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            clearCNCItems();
+        }
+    });
+    }
+
+
+    private void clearCNCItems() {
+
+        getActivityInterface().setCNCItems(null);
+        getActivityInterface().setTravelOrder(null);
+        HGBPreferencesManager sharedPreferences = HGBPreferencesManager.getInstance(getContext());
+        sharedPreferences.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
+        sharedPreferences.removeKey(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
+        Bundle args = new Bundle();
+        args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
+        getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), args);
+      //  selectItem(ToolBarNavEnum.CNC.getNavNumber(), null, true);
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
