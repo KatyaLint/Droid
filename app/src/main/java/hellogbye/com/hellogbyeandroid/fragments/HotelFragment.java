@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,7 +16,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,14 +24,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TableRow.LayoutParams;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -41,6 +37,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
@@ -49,9 +46,7 @@ import java.util.HashMap;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.ImageGalleryActivity;
-//import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
-import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelAdapter;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.AllImagesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
@@ -59,7 +54,6 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
@@ -80,7 +74,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private FontTextView mHotelNameFontTextView;
     private FontTextView mHotelPriceFontTextView;
     private FontTextView mHotelDaysFontTextView;
-    //private FontTextView mHotelAddressFontTextView;
     private RelativeLayout mPullDOwnRelativeLayout;
 
     private FontTextView mHotelRoomNameFontTextView;
@@ -92,7 +85,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private FontTextView mHotelContactFontTextView;
     private FontTextView mHotelAmnitiesFontTextView;
     private FontTextView mHotelNearbyAttrictionsFontTextView;
-    //  private UserTravelVO mTravelDetails;
     private ImageView mStart1ImageView;
     private ImageView mStart2ImageView;
     private ImageView mStart3ImageView;
@@ -103,7 +95,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private FontTextView mMyHotelText;
     private FontTextView mSelectHotelText;
 
-    private AlternativeHotelAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView mRecyclerView;
     private NodesVO nodesVO;
@@ -112,7 +103,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private PassengersVO passengersVO;
     private NodesVO currentSelectedNode;
     private ImageView mConfirmBadge;
-    private ProgressDialog progressDialog;
 
     public final  float PANEL_HIGHT = 0.4f;
     private Activity activity;
@@ -137,7 +127,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         mSlidingPanels = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout);
 
         nodeMarkerMap = new HashMap<Marker, NodesVO>();
-        mAdapter = new AlternativeHotelAdapter(new ArrayList<NodesVO>(nodeMarkerMap.values()));
+        //mAdapter = new AlternativeHotelAdapter(new ArrayList<NodesVO>(nodeMarkerMap.values()),currentSelectedNode);
 
 
         initSliderPanel();
@@ -146,8 +136,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
         initCurrentHotel();
 
-        progressDialog = new ProgressDialog(getActivity());
-        startProgressDialog();
 
         mMyHotelLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,7 +150,12 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         mAlertnativeHotelFontTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAlternativeHotels();
+                //showAlternativeHotels();
+                Bundle args = new Bundle();
+                Gson gson = new Gson();
+                String json = gson.toJson(new ArrayList<NodesVO>(nodeMarkerMap.values()));
+                args.putString("alternative_hotels", json);
+                getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_HOTEL_FRAGMENT.getNavNumber(), args);
             }
         });
 
@@ -286,9 +279,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     public void onResume() {
         super.onResume();
         initializeMap();
-        if(!permissionDenied){
-            mMap.setMyLocationEnabled(true);
-        }
+
 
        /* mMap = fragment.getMap();
 
@@ -329,11 +320,15 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
         loadMap();
     }
 
     private void loadMap() {
         //SET UP MAP
+        if(!permissionDenied){
+            mMap.setMyLocationEnabled(true);
+        }
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(false);
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
@@ -367,6 +362,8 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
                                 Marker mark = mMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(Double.valueOf(node.getmLatitude()), Double.valueOf(node.getmLongitude())))
                                         .icon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(activity, String.valueOf((int) node.getmMinimumAmount()), R.drawable.other_location_blue))));
+
+
                                 nodeMarkerMap.put(mark, node);
 
                             }
@@ -374,31 +371,29 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
                         // specify an adapter (see also next example)
 
-                        mAdapter = new AlternativeHotelAdapter(new ArrayList<NodesVO>(nodeMarkerMap.values()));
-                        mRecyclerView.setAdapter(mAdapter);
-                        mAdapter.SetOnItemClickListener(new AlternativeHotelAdapter.OnItemClickListener() {
-
-                            @Override
-                            public void onItemClick(View v, int position) {
-
-                                NodesVO node = (new ArrayList<NodesVO>(nodeMarkerMap.values())).get(position);
-                                Marker marker = (new ArrayList<Marker>(nodeMarkerMap.keySet())).get(position);
-                                currentSelectedNode = node;
-                                initHotel(node, marker);
-                                hideAlternativeHotels();
-
-                                //sendServerNewHotelOrder(node);
-                            }
-                        });
+//                        mAdapter = new AlternativeHotelAdapter(new ArrayList<NodesVO>(nodeMarkerMap.values()));
+//                        mRecyclerView.setAdapter(mAdapter);
+//                        mAdapter.SetOnItemClickListener(new AlternativeHotelAdapter.OnItemClickListener() {
+//
+//                            @Override
+//                            public void onItemClick(View v, int position) {
+//
+//                                NodesVO node = (new ArrayList<NodesVO>(nodeMarkerMap.values())).get(position);
+//                                Marker marker = (new ArrayList<Marker>(nodeMarkerMap.keySet())).get(position);
+//                                currentSelectedNode = node;
+//                                initHotel(node, marker);
+//                                hideAlternativeHotels();
+//
+//                                //sendServerNewHotelOrder(node);
+//                            }
+//                        });
                         mSlidingPanels.setVisibility(View.VISIBLE);
-                        dissmissProgressDialog();
                     }
 
                     @Override
                     public void onError(Object data) {
                         ErrorMessage(data);
                         mSlidingPanels.setVisibility(View.VISIBLE);
-                        dissmissProgressDialog();
                     }
                 });
     }
@@ -449,9 +444,16 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         //   mTravelDetails = getActivityInterface().getTravelOrder();
 //        passengersVO = mTravelDetails.getPassengerses().get(0);
 //        cellsVO = getCellWitGuid(getActivityInterface().getTravelOrder());  //passengersVO.getmCells().get(0);
-        passengersVO = getTravellerWitGuid(getActivityInterface().getTravelOrder());//cellsVO.getmNodes().get(1);
-        nodesVO = getLegWithGuid(getActivityInterface().getTravelOrder());//cellsVO.getmNodes().get(1);
-        currentSelectedNode = nodesVO;
+
+        if(getFlowInterface().getSelectedHotelNode() != null){
+            currentSelectedNode =getFlowInterface().getSelectedHotelNode();
+        }else{
+
+            passengersVO = getTravellerWitGuid(getActivityInterface().getTravelOrder());//cellsVO.getmNodes().get(1);
+            nodesVO = getLegWithGuid(getActivityInterface().getTravelOrder());//cellsVO.getmNodes().get(1);
+            currentSelectedNode = nodesVO;
+        }
+
     }
 
 
@@ -600,6 +602,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
             }
 
         }
+
     }
 
     private void setStarRating(float star) {
@@ -752,14 +755,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
     }
 
-    private void startProgressDialog(){
-        progressDialog = ProgressDialog.show(getActivity(), "", "loading");
-        progressDialog.setCancelable(false);
-        progressDialog.setCanceledOnTouchOutside(false);
-    }
 
-    private void dissmissProgressDialog(){
-        progressDialog.dismiss();
-    }
+
 
 }

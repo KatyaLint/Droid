@@ -2,7 +2,6 @@ package hellogbye.com.hellogbyeandroid.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.SearchManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,7 +12,6 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +34,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.userprofilesadapter.UserProfilesAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
+import hellogbye.com.hellogbyeandroid.fragments.SelectNewHotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightTabsWidgetFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightsDetailsFragment;
@@ -76,6 +75,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
@@ -130,6 +130,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private final int BOTTOM_BAR_FIFTH_INDEX = 4;
     private ImageButton toolbar_add_companion;
 
+    private NodesVO mSelectedHotelNode;
     public HGBSaveDataClass getHGBSaveDataClass() {
         return hgbSaveDataClass;
     }
@@ -146,7 +147,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         //INIT ToolBar
         mToolbar = (CostumeToolBar) findViewById(R.id.toolbar_costume);
         initToolBar();
-        initSearchBar();
 
         //INIT Bottom tabs
 
@@ -216,35 +216,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
 
-    private void querySearchChanges(String query){
-        Intent intent = new Intent("search_query");
-        intent.putExtra("query_type", "submit");
-        intent.putExtra("query", query);
-        sendBroadcast(intent);
-    }
-
-    private void initSearchBar() {
-        SearchView searchView = (SearchView) mToolbar.findViewById(R.id.search);
-        // Sets searchable configuration defined in searchable.xml for this SearchView
-        SearchManager searchManager =
-                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                querySearchChanges(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                querySearchChanges(newText);
-                return false;
-            }
-        });
-    }
 
     private void clearCNCItems() {
 
@@ -947,6 +920,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 stashToBack = false;
                 break;
 
+            case SELECT_HOTEL_FRAGMENT:
+                fragment = SelectNewHotelFragment.newInstance(navPosition);
+                break;
+
         }
 
 
@@ -1162,6 +1139,17 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
     @Override
+    public NodesVO getSelectedHotelNode() {
+        return mSelectedHotelNode;
+    }
+
+    @Override
+    public void setSelectedHotelNode(NodesVO node) {
+        mSelectedHotelNode = node;
+
+    }
+
+    @Override
     public void callRefreshItinerary(final int fragment) {
 
         ConnectionManager.getInstance(MainActivityBottomTabs.this).getItinerary(hgbSaveDataClass.getSolutionID(), new ConnectionManager.ServerRequestListener() {
@@ -1277,5 +1265,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         errorHelper.setMessageForError((String) data);
         errorHelper.show(getFragmentManager(), (String) data);
     }
+
+
 
 }

@@ -9,6 +9,7 @@ import java.util.HashSet;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 
 /**
@@ -41,6 +42,8 @@ public interface HGBFlowInterface {
     void openRightPane();
     void selectBottomBar(int selection);
     void enableFullScreen(boolean visible);
+    NodesVO getSelectedHotelNode();
+    void setSelectedHotelNode(NodesVO node);
 
 
 

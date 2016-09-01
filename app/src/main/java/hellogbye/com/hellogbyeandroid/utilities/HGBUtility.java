@@ -524,6 +524,8 @@ public class HGBUtility {
         return createDrawableFromView(context, markerHotelView);
     }
 
+
+
     // Convert a view to bitmap
     public static Bitmap createDrawableFromView(Context context, View view) {
         DisplayMetrics displayMetrics = new DisplayMetrics();

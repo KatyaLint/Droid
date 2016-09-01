@@ -55,6 +55,7 @@
 
     <dimen name="SP4">4sp</dimen>
     <dimen name="SP6">6sp</dimen>
+    <dimen name="SP8">8sp</dimen>
     <dimen name="SP10">10sp</dimen>
     <dimen name="SP12">12sp</dimen>
     <dimen name="SP13">13sp</dimen>
