@@ -17,7 +17,6 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -34,7 +33,6 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.userprofilesadapter.UserProfilesAdapter;
-import hellogbye.com.hellogbyeandroid.adapters.userprofilesadapter.UserProfilesListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
@@ -97,16 +95,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     private CostumeToolBar mToolbar;
     private HGBPreferencesManager hgbPrefrenceManager;
-    private ImageButton up_bar_favorite;
-    private ImageButton newIteneraryImageButton;
-    private ImageButton toolbar_add_companion;
-
     private UserProfileVO mCurrentUser;
     private OnBackPressedListener onBackPressedListener;
-    private FontTextView my_trip_profile;
+
     private HGBSaveDataClass hgbSaveDataClass = new HGBSaveDataClass();
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
-    private FontTextView itirnarary_title_Bar;
+
 
     private ArrayList<UserProfileVO> mTravelList = new ArrayList<>();
     private ArrayList<CountryItemVO> mEligabileCountryList = new ArrayList<>();
@@ -133,6 +127,11 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private LinearLayout edit_preferences_ll;
     private ImageButton edit_preferences_imagebtn;
     private ImageButton check_preferences;
+    private ImageButton up_bar_favorite;
+    private ImageButton newIteneraryImageButton;
+    private ImageButton toolbar_add_companion;
+    private FontTextView my_trip_profile;
+    private FontTextView itirnarary_title_Bar;
 
 
     public HGBSaveDataClass getHGBSaveDataClass() {
@@ -390,7 +389,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
         setSupportActionBar(mToolbar);
 
-        setOnClickListenerForItineraryTopBar();
+
         setOnClickListenerForSavePreferences();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -430,7 +429,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         edit_preferences_ll = (LinearLayout) mToolbar.findViewById(R.id.preferences_edit_mode);
         edit_preferences_imagebtn = (ImageButton) mToolbar.findViewById(R.id.edit_preferences);
         check_preferences = (ImageButton) mToolbar.findViewById(R.id.check_preferences);
-
+        itirnarary_title_Bar = (FontTextView)mToolbar.findViewById(R.id.itirnarary_title_Bar);
+        up_bar_favorite = (ImageButton)mToolbar.findViewById(R.id.up_bar_favorite);
 
     }
 
@@ -453,73 +453,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     public LinearLayout getToolBarEditPreferences(){
         return edit_preferences_ll;
     }
-    private void setOnClickListenerForItineraryTopBar() {
-        up_bar_favorite = (ImageButton) mToolbar.findViewById(R.id.up_bar_favorite);
-        up_bar_favorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setFavorityItinerary();
-                // goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
-            }
-        });
-
-        itirnarary_title_Bar = (FontTextView) findViewById(R.id.itirnarary_title_Bar);
 
 
-        LayoutInflater li = LayoutInflater.from(MainActivityBottomTabs.this);
-        final View promptsView = li.inflate(R.layout.popup_layout_change_iteinarary_name, null);
-        final EditText input = (EditText) promptsView
-                .findViewById(R.id.change_iteinarary_name);
-
-
-        itirnarary_title_Bar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                input.setText(itirnarary_title_Bar.getText());
-                HGBUtility.showAlertPopUp(MainActivityBottomTabs.this, input, promptsView, getResources().getString(R.string.edit_trip_name)
-                        , getResources().getString(R.string.save_button),
-                        new PopUpAlertStringCB() {
-                            @Override
-                            public void itemSelected(String inputItem) {
-                                itirnarary_title_Bar.setText(inputItem);
-                                sendNewSolutionName(inputItem);
-                            }
-
-                            @Override
-                            public void itemCanceled() {
-
-                            }
-                        });
-            }
-        });
-    }
-
-    private void setFavorityItinerary() {
-        UserTravelMainVO travelOrder = hgbSaveDataClass.getTravelOrder();
-        final String solutionID = travelOrder.getmSolutionID();
-        boolean isFavorite = travelOrder.ismIsFavorite();
-
-        ConnectionManager.getInstance(MainActivityBottomTabs.this).putFavorityItenarary(!isFavorite, solutionID, new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
-                if (hgbSaveDataClass.getTravelOrder().ismIsFavorite()) {
-                    //   hgbSaveDataClass.getTravelOrder().setmIsFavorite(false);
-                    up_bar_favorite.setBackgroundResource(R.drawable.thin_0651_star_favorite_rating);
-                } else {
-                    //    hgbSaveDataClass.getTravelOrder().setmIsFavorite(true);
-                    up_bar_favorite.setBackgroundResource(R.drawable.star_in_favorite);
-                }
-
-                getCurrentItinerary(solutionID);
-            }
-
-            @Override
-            public void onError(Object data) {
-                reportError(data);
-            }
-        });
-    }
 
 
 
@@ -530,25 +465,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         return itirnarary_title_Bar;
     }
 
-    private void getCurrentItinerary(String solutionId) {
 
-        ConnectionManager.getInstance(MainActivityBottomTabs.this).getItinerary(solutionId, new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
-
-                UserTravelMainVO userTravelMainVO = (UserTravelMainVO) data;
-                hgbSaveDataClass.setTravelOrder(userTravelMainVO);
-            }
-
-            @Override
-            public void onError(Object data) {
-                reportError(data);
-
-                // ErrorMessage(data);
-
-            }
-        });
-    }
 
     public LinearLayout getToolBarProfileChange(){
         return tool_bar_profile_name;
@@ -585,7 +502,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                reportError(data);
+                ErrorMessage(data);
             }
         });
     }
@@ -603,7 +520,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                reportError(data);
+                ErrorMessage(data);
             }
         });
     }
@@ -644,7 +561,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                reportError(data);
+                ErrorMessage(data);
             }
         });
 
@@ -696,7 +613,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                reportError(data);
+                ErrorMessage(data);
             }
         });
 
@@ -712,7 +629,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                reportError(data);
+                ErrorMessage(data);
             }
         });
     }
@@ -733,7 +650,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                reportError(data);
+                ErrorMessage(data);
             }
         });
     }
@@ -748,7 +665,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                reportError(data);
+                ErrorMessage(data);
             }
         });
     }
@@ -764,7 +681,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                reportError(data);
+                ErrorMessage(data);
             }
         });
     }
@@ -948,19 +865,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         return fragment;
     }
 
-    private void sendNewSolutionName(String solutionName) {
-        ConnectionManager.getInstance(MainActivityBottomTabs.this).putItenararyTripName(solutionName, hgbSaveDataClass.getTravelOrder().getmSolutionID(), new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
 
-            }
-
-            @Override
-            public void onError(Object data) {
-                reportError(data);
-            }
-        });
-    }
 
 
     /////////////////////////////////
@@ -1126,7 +1031,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onError(Object data) {
-                reportError("Problem updating grid ");
+                ErrorMessage("Problem updating grid ");
 
             }
         });
@@ -1232,7 +1137,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         }
     }
 
-    private void reportError(Object data){
+    private void ErrorMessage(Object data){
         HGBErrorHelper errorHelper = new HGBErrorHelper();
         errorHelper.setMessageForError((String) data);
         errorHelper.show(getFragmentManager(), (String) data);

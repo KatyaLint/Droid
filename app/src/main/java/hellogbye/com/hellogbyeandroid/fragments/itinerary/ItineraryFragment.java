@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -31,10 +32,12 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -61,6 +64,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
     private ImageView mStart2ImageView;
     private ImageView mStart1ImageView;
     private FontTextView continue_to_checkout_flight_baggage;
+    private ImageButton up_bar_favorite;
 
     public ItineraryFragment() {
         // Empty constructor required for fragment subclasses
@@ -803,7 +807,9 @@ public class ItineraryFragment extends HGBAbstractFragment {
         getActivityInterface().setAlternativeFlights(null);
 
         setFavorityIcon();
+        onFavorityClickListener();
         setSolutionNameForItirnarary();
+        setOnClickListenerForItineraryTopBar();
         return rootView;
     }
 
@@ -826,7 +832,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
     private void setFavorityIcon(){
         boolean isFavority = userOrder.ismIsFavorite();
-        ImageButton up_bar_favorite = ((MainActivityBottomTabs)getActivity()).getFavorityImageButton();
+        up_bar_favorite = ((MainActivityBottomTabs)getActivity()).getFavorityImageButton();
         if (isFavority) {
             up_bar_favorite.setBackgroundResource(R.drawable.star_in_favorite);
             //   hgbSaveDataClass.getTravelOrder().setmIsFavorite(false);
@@ -837,6 +843,113 @@ public class ItineraryFragment extends HGBAbstractFragment {
         }
     }
 
+
+    private void onFavorityClickListener(){
+        up_bar_favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFavorityItinerary();
+                // goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
+            }
+        });
+    }
+
+
+    private void setOnClickListenerForItineraryTopBar() {
+
+       final FontTextView itirnarary_title_Bar = ((MainActivityBottomTabs) getActivity()).getItirnaryTitleBar();
+
+
+        LayoutInflater li = LayoutInflater.from(getActivity());
+        final View promptsView = li.inflate(R.layout.popup_layout_change_iteinarary_name, null);
+        final EditText input = (EditText) promptsView
+                .findViewById(R.id.change_iteinarary_name);
+
+
+        itirnarary_title_Bar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                input.setText(itirnarary_title_Bar.getText());
+                HGBUtility.showAlertPopUp(getActivity(), input, promptsView, getResources().getString(R.string.edit_trip_name)
+                        , getResources().getString(R.string.save_button),
+                        new PopUpAlertStringCB() {
+                            @Override
+                            public void itemSelected(String inputItem) {
+                                itirnarary_title_Bar.setText(inputItem);
+                                sendNewSolutionName(inputItem);
+                            }
+
+                            @Override
+                            public void itemCanceled() {
+
+                            }
+                        });
+            }
+        });
+    }
+
+    private void sendNewSolutionName(String solutionName) {
+        ConnectionManager.getInstance(getActivity()).putItenararyTripName(solutionName, getActivityInterface().getTravelOrder().getmSolutionID(), new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
+
+    private void setFavorityItinerary() {
+        UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
+        final String solutionID = travelOrder.getmSolutionID();
+        boolean isFavorite = travelOrder.ismIsFavorite();
+
+        ConnectionManager.getInstance(getActivity()).putFavorityItenarary(!isFavorite, solutionID, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                if (getActivityInterface().getTravelOrder().ismIsFavorite()) {
+                    //   hgbSaveDataClass.getTravelOrder().setmIsFavorite(false);
+                    up_bar_favorite.setBackgroundResource(R.drawable.thin_0651_star_favorite_rating);
+                } else {
+                    //    hgbSaveDataClass.getTravelOrder().setmIsFavorite(true);
+                    up_bar_favorite.setBackgroundResource(R.drawable.star_in_favorite);
+                }
+
+                getCurrentItinerary(solutionID);
+            }
+
+            @Override
+            public void onError(Object data) {
+
+                ErrorMessage(data);
+            }
+        });
+    }
+
+
+    private void getCurrentItinerary(String solutionId) {
+
+        ConnectionManager.getInstance(getActivity()).getItinerary(solutionId, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+                UserTravelMainVO userTravelMainVO = (UserTravelMainVO) data;
+                getActivityInterface().setTravelOrder(userTravelMainVO);
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+
+                // ErrorMessage(data);
+
+            }
+        });
+    }
 
     @Override
     public void onDestroyView() {
