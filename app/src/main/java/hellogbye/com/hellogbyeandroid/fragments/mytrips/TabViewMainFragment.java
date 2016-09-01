@@ -27,6 +27,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.myTripsSwipeAdapter.TripsSwipeItemsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
@@ -235,8 +236,22 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
             mRecyclerView.setVisibility(View.VISIBLE);
             mAdapter.updateDataSet(mItemsList);
             mAdapter.notifyDataSetChanged();
+
+            ArrayList<String> searchArray = organizeListOfStrings(mCurrItemsList);
+            ((MainActivityBottomTabs)getActivity()).updateSearchList(searchArray);
         }
     }
+
+
+    private  ArrayList<String> organizeListOfStrings(List<MyTripItem> mCurrItemsList){
+        ArrayList<String> searchingArray = new ArrayList<>();
+        for (MyTripItem model : mCurrItemsList) {
+            final String text = model.getName().toLowerCase();
+            searchingArray.add(text);
+        }
+        return searchingArray;
+    }
+
 
 //    @Override
 //    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

@@ -3,17 +3,25 @@ package hellogbye.com.hellogbyeandroid.views;
 import android.app.Activity;
 import android.content.Context;
 
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.adapters.searchAdapter.SearchCustomAdapter;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 
 public class CostumeToolBar extends Toolbar {
@@ -37,6 +45,11 @@ public class CostumeToolBar extends Toolbar {
     private SearchView search_view;
     private ImageButton toolbar_add_companion;
 
+    private ArrayList<String> mResultString;
+    private AutoCompleteTextView customerAutoComplete;
+    private SearchCustomAdapter customerAdapter;
+    private LinearLayout search_view_ll;
+
     public CostumeToolBar(Context context) {
         super(context);
     }
@@ -52,6 +65,10 @@ public class CostumeToolBar extends Toolbar {
 
 
     public void initToolBarItems() {
+
+        if (search_view_ll == null) {
+            search_view_ll = (LinearLayout) findViewById(R.id.search_layout);
+        }
 
         if(my_trip_profile == null){
             my_trip_profile = (FontTextView)findViewById(R.id.my_trip_profile);
@@ -112,21 +129,38 @@ public class CostumeToolBar extends Toolbar {
     }
 
     private void initSearchBar() {
-        if(search_view == null){
+      /*  if(search_view == null){
             search_view = (SearchView) findViewById(R.id.search);
-        }
+        }*/
 
 
-        ImageView searchClose = (ImageView) search_view.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
-        TextView searchCloseText = (TextView) search_view.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        mResultString = new ArrayList<>();
 
-        searchClose.setImageResource(R.drawable.close_icon_a_1);
+
+        ImageView searchClose = (ImageView) findViewById(R.id.search_close);
+
+        AutoCompleteTextView searchCloseText = (AutoCompleteTextView) findViewById(R.id.search);
+
+
+      //  TextView searchCloseText = (TextView) search_view.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+
+        searchCloseText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent("search_query");
+                intent.putExtra("query_type", "submit");
+//                intent.putExtra("query", query);
+//                sendBroadcast(intent);//TODO send result to whoever is listning
+            }
+        });
+
+
+      //  searchClose.setImageResource(R.drawable.close_icon_a_1);
 //        int id = search_view.getContext()
 //                .getResources()
 //                .getIdentifier("android:id/search_src_text", null, null);
 //        TextView textView = (TextView) search_view.findViewById(id);
-        searchCloseText.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
-        searchCloseText.setHintTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
+
         search_maginfy.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,22 +168,48 @@ public class CostumeToolBar extends Toolbar {
             }
         });
 
-        search_view.setOnCloseListener(new SearchView.OnCloseListener() {
+        searchClose.setOnClickListener(new OnClickListener() {
             @Override
-            public boolean onClose() {
+            public void onClick(View view) {
                 closeSearchBar();
-                return false;
+            }
+        });
+
+
+        customerAutoComplete = (AutoCompleteTextView) findViewById(R.id.search);
+        customerAdapter = new SearchCustomAdapter(getContext(), R.layout.search_autocomplete_result, mResultString);
+        customerAutoComplete.setAdapter(customerAdapter);
+        customerAutoComplete.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                //TODO refresh adapter after getting results from server
+
+              /*  mResultString.add(charSequence.toString());
+                customerAdapter.updateListData(mResultString);
+                System.out.println("Kate onTextChanged charSequence =" + charSequence);*/
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+
             }
         });
 
 
     }
 
+
     private void closeSearchBar() {
         titleText.setVisibility(View.VISIBLE);
         new_itinerary.setVisibility(View.VISIBLE);
         search_maginfy.setVisibility(View.VISIBLE);
-        search_view.setVisibility(View.GONE);
+        search_view_ll.setVisibility(View.GONE);
 
     }
 
@@ -158,9 +218,7 @@ public class CostumeToolBar extends Toolbar {
         titleText.setVisibility(View.GONE);
         new_itinerary.setVisibility(View.GONE);
         search_maginfy.setVisibility(View.GONE);
-        search_view.setVisibility(View.VISIBLE);
-        search_view.setIconified(false);
-
+        search_view_ll.setVisibility(View.VISIBLE);
     }
 
 
@@ -169,52 +227,30 @@ public class CostumeToolBar extends Toolbar {
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
         String selectedItem = navBar.getNavTitle();
         tool_bar_profile_name.setVisibility(View.GONE);
-   //     homeTitleImage.setVisibility(View.GONE);
-     //   my_trip_profile.setVisibility(View.GONE);
         titleText.setVisibility(View.GONE);
-    //    keyBoardImage.setVisibility(View.GONE);
         up_bar_favorite.setVisibility(View.GONE);
         favoriteButton.setVisibility(View.GONE);
         editPreferense.setVisibility(View.GONE);
         edit_preferences.setVisibility(View.GONE);
         preferences_edit_mode.setVisibility(View.GONE);
         check_preferences.setVisibility(View.GONE);
-//        my_trips_button.setVisibility(View.GONE);
-       // my_trip_edit_button.setVisibility(View.GONE);
-     //   my_trips_image_profile.setVisibility(View.GONE);
         itirnarary_title_Bar.setVisibility(View.GONE);
         toolbar_new_iternerary_cnc.setVisibility(View.GONE);
         preference_save_changes.setVisibility(View.GONE);
         new_itinerary.setVisibility(View.GONE);
         search_maginfy.setVisibility(View.GONE);
-        search_view.setVisibility(View.GONE);
+        search_view_ll.setVisibility(View.GONE);
         toolbar_add_companion.setVisibility(View.GONE);
 
         switch (navBar) {
-         //   case HOME:
-     /*           tool_bar_profile_name.setVisibility(View.VISIBLE);
-                toolbar_go_to_iternerary.setVisibility(View.VISIBLE);*/
-//             //   homeTitleImage.setVisibility(View.VISIBLE);
-//                my_trip_profile.setVisibility(View.VISIBLE);
-//                keyBoardImage.setVisibility(View.VISIBLE);
-//
-         //       break;
             case CNC:
                 tool_bar_profile_name.setVisibility(View.VISIBLE);
                 toolbar_new_iternerary_cnc.setVisibility(View.VISIBLE);
                 break;
             case ITINARERY:
-               // titleText.setVisibility(View.VISIBLE);
-            //    up_bar_favorite.setVisibility(View.VISIBLE);
                 up_bar_favorite.setVisibility(View.VISIBLE);
                 itirnarary_title_Bar.setVisibility(View.VISIBLE);
-            //    itirnarary_title_Bar.setText(selectedItem);
                 break;
-//            case HISTORY:
-//                titleText.setVisibility(View.VISIBLE);
-//                keyBoardImage.setVisibility(View.INVISIBLE);
-//                break;
-
             case PREFERENCES_CHECK_LIST_SETTINGS:
             case PREFERENCES_SEARCH_LIST_SETTINGS:
             case PREFERENCES_SPECIFIC_LIST_SETTINGS:
@@ -231,6 +267,12 @@ public class CostumeToolBar extends Toolbar {
                 new_itinerary.setVisibility(View.VISIBLE);
                 search_maginfy.setVisibility(View.VISIBLE);
                 break;
+
+/*            case SELECT_HOTEL_FRAGMENT:
+                titleText.setVisibility(View.VISIBLE);
+                search_maginfy.setVisibility(View.VISIBLE);
+
+                break;*/
 
             case COMPANIONS:
                 toolbar_add_companion.setVisibility(View.VISIBLE);
@@ -257,7 +299,6 @@ public class CostumeToolBar extends Toolbar {
                 break;
 
             case TRAVEL_PREFERENCE:
-            //    preference_save_changes.setVisibility(View.VISIBLE);
                 titleText.setVisibility(View.VISIBLE);
                 preferences_edit_mode.setVisibility(View.VISIBLE);
                 edit_preferences.setVisibility(View.VISIBLE);
@@ -276,5 +317,10 @@ public class CostumeToolBar extends Toolbar {
     public void setmToolbar(Toolbar mToolbar) {
         this.mToolbar = mToolbar;
     }
+
+    public void setSearchAutocomplete(ArrayList<String> list){
+        customerAdapter.updateListData(list);
+    }
+
 }
 

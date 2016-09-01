@@ -120,8 +120,13 @@ public class TripsTabsView extends HGBAbstractFragment {
         return rootView;
     }
 
+    private void searchView(){
+
+    }
+
+
     private void setNewIteneraryImageButtonClickListener(){
-    newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
+        newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             clearCNCItems();

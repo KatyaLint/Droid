@@ -5,11 +5,11 @@
 
     <group android:checkableBehavior="single">
 
-        <item
+  <!--      <item
             android:id="@+id/search"
             android:checked="true"
             android:icon="@drawable/selected_item"
-            android:title="Search" />
+            android:title="Search" />-->
 
         <item
             android:id="@+id/current_itenerary"

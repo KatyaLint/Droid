@@ -195,12 +195,39 @@
 
 
 
-    <android.support.v7.widget.SearchView
+<!--    <android.support.v7.widget.SearchView
         android:id="@+id/search"
         android:visibility="gone"
         android:layout_marginTop="@dimen/DP16"
         android:background="@color/COLOR_WHITE"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" />-->
+
+
+
+    <LinearLayout
+        android:id="@+id/search_layout"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/COLOR_WHITE"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/DP10"
+        android:layout_marginBottom="@dimen/DP10"
+        android:padding="@dimen/DP6"
+        android:layout_height="?attr/actionBarSize">
+
+        <ImageView
+            android:id="@+id/search_close"
+            android:background="@drawable/close_icon_a_1"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content" />
+        <AutoCompleteTextView
+            android:id="@+id/search"
+            android:layout_marginLeft="@dimen/DP2"
+            android:textColor="@color/COLOR_00516f"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 </hellogbye.com.hellogbyeandroid.views.CostumeToolBar>

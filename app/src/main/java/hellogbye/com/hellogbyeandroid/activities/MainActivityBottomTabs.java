@@ -150,7 +150,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         //INIT ToolBar
         mToolbar = (CostumeToolBar) findViewById(R.id.toolbar_costume);
         initToolBar();
-        initSearchBar();
+       // initSearchBar();
 
         //INIT Bottom tabs
 
@@ -198,6 +198,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
 
+    void setSearchAutocomplete(){
+
+    }
     private void initBottomBar(Bundle savedInstanceState) {
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
@@ -228,7 +231,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         sendBroadcast(intent);
     }
 
-    private void initSearchBar() {
+/*    private void initSearchBar() {
         SearchView searchView = (SearchView) mToolbar.findViewById(R.id.search);
         // Sets searchable configuration defined in searchable.xml for this SearchView
         SearchManager searchManager =
@@ -249,7 +252,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 return false;
             }
         });
-    }
+    }*/
 
 /*    private void clearCNCItems() {
 
@@ -1114,4 +1117,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         errorHelper.show(getFragmentManager(), (String) data);
     }
 
+
+
+    public void updateSearchList(ArrayList<String> list){
+        mToolbar.setSearchAutocomplete(list);
+    }
 }
