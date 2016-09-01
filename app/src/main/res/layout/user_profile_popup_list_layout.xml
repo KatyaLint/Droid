@@ -41,6 +41,7 @@
             android:layout_height="wrap_content" />
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
+
             android:layout_margin="@dimen/DP20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

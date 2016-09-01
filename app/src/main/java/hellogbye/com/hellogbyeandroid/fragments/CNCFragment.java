@@ -155,7 +155,7 @@ public class CNCFragment extends HGBAbstractFragment {
         }
 
 
-        final LinearLayout edit_preferences = ((MainActivityBottomTabs)getActivity()).getToolBarEditPreferences();
+       /* final LinearLayout edit_preferences = ((MainActivityBottomTabs)getActivity()).getToolBarEditPreferences();*/
         LinearLayout tool_bar_profile_name = ((MainActivityBottomTabs)getActivity()).getToolBarProfileChange();
         tool_bar_profile_name.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -222,6 +222,14 @@ public class CNCFragment extends HGBAbstractFragment {
         ListView user_profile_popup_list_view = (ListView) promptsViewTeest.findViewById(R.id.user_profile_popup_list_view);
         user_profile_popup_list_view.setAdapter(adapter);
 
+        LinearLayout manage_profile_ll = (LinearLayout)promptsViewTeest.findViewById(R.id.manage_profile_ll);
+        manage_profile_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFlowInterface().goToFragment(ToolBarNavEnum.TRAVEL_PREFERENCE.getNavNumber(), null);
+                selectDefaultProfileDialog.dismiss();
+            }
+        });
 
 
     /*    dialogBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {

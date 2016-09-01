@@ -18,21 +18,16 @@ import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 
 public class CostumeToolBar extends Toolbar {
 
-  //  private ImageButton keyBoardImage;
     private ImageButton up_bar_favorite;
     private ImageButton new_itinerary;
     private ImageButton favoriteButton;
     private ImageButton search_maginfy;
     private FontTextView editPreferense;
-    private ImageView homeTitleImage;
     private FontTextView titleText;
     private Toolbar mToolbar;
-    private Context mContext;
     private ImageButton edit_preferences;
     private LinearLayout preferences_edit_mode;
     private ImageButton check_preferences;
-    //private ImageButton my_trips_button;
-   // private FontTextView my_trip_edit_button;
     private ImageView my_trips_image_profile;
     private FontTextView my_trip_profile;
     private FontTextView itirnarary_title_Bar;
@@ -40,23 +35,19 @@ public class CostumeToolBar extends Toolbar {
     private ImageButton toolbar_new_iternerary_cnc;
     private FontTextView preference_save_changes;
     private SearchView search_view;
-    private Activity mActivity;
     private ImageButton toolbar_add_companion;
 
     public CostumeToolBar(Context context) {
         super(context);
-        mContext = context;
     }
 
     public CostumeToolBar(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContext = context;
     }
 
 
     public CostumeToolBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mContext = context;
     }
 
 

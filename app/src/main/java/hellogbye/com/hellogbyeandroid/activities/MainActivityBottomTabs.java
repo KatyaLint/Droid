@@ -197,9 +197,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     }
 
-    public FontTextView getMyTripProfile(){
-       return my_trip_profile;
-    }
+
     private void initBottomBar(Bundle savedInstanceState) {
 
         mBottomBar = BottomBar.attach(this, savedInstanceState);
@@ -253,7 +251,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
     }
 
-    private void clearCNCItems() {
+/*    private void clearCNCItems() {
 
         hgbSaveDataClass.setCNCItems(null);
         hgbSaveDataClass.setTravelOrder(null);
@@ -262,7 +260,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         Bundle args = new Bundle();
         args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
         selectItem(ToolBarNavEnum.CNC.getNavNumber(), null, true);
-    }
+    }*/
 
     private void selectBottemTab(int menuItemId) {
 
@@ -428,9 +426,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         return edit_preferences_ll;
     }
 
-
-
-
+    public FontTextView getMyTripProfile(){
+        return my_trip_profile;
+    }
 
     public ImageButton getFavorityImageButton(){
         return up_bar_favorite;
@@ -439,13 +437,17 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         return itirnarary_title_Bar;
     }
 
-
-
     public LinearLayout getToolBarProfileChange(){
         return tool_bar_profile_name;
     }
 
+    public ImageButton getEditPreferenceBtn(){
+        return edit_preferences_imagebtn;
+    }
 
+    public ImageButton getCheckPreferenceButton(){
+        return check_preferences;
+    }
 
     private void getUserData() {
 
@@ -500,6 +502,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
     public void editProfileTypeMainToolBar() {
+        //TODO remove to profile fragment
         ArrayList<AccountsVO> accounts = hgbSaveDataClass.getAccounts();
         my_trip_profile = (FontTextView) findViewById(R.id.my_trip_profile);
 
@@ -660,13 +663,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
     }
 
-    public ImageButton getEditPreferenceBtn(){
-        return edit_preferences_imagebtn;
-    }
 
-    public ImageButton getCheckPreferenceButton(){
-        return check_preferences;
-    }
 
     public void selectItem(int position, Bundle bundle, final boolean stashFragment) {
         // update the main content by replacing fragments
