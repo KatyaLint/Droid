@@ -23,7 +23,7 @@
         android:layout_margin="@dimen/DP20"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:id="@+id/user_profile_check"
+        android:id="@+id/user_profile_check_radio_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

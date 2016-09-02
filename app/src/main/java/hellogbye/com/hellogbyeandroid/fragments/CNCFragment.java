@@ -33,12 +33,13 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.CNCAdapter;
-import hellogbye.com.hellogbyeandroid.adapters.userprofilesadapter.UserProfilesListAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsPreferencesCheckAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportResultsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportServerResultVO;
@@ -63,7 +64,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private CNCAdapter mAdapter;
+    private CNCAdapter mCNCAdapter;
     private EditText mEditText;
     private ImageView mMicImageView;
     private FontTextView mSendTextView;
@@ -94,7 +95,11 @@ public class CNCFragment extends HGBAbstractFragment {
     private boolean clearCNCscreen;
     private Bundle args;
     private int selectedCount = 0;
- //   private  AirportSendValuesVO airportSendValuesVO;
+    private PreferencesSettingsPreferencesCheckAdapter mRadioPreferencesAdapter;
+    private ArrayList<AccountDefaultSettingsVO> accountAttributes;
+    private LinearLayout tool_bar_profile_name;
+    private ArrayList<DefaultsProfilesVO> accountDefaultSettings;
+    //   private  AirportSendValuesVO airportSendValuesVO;
 
 
     public static Fragment newInstance(int position) {
@@ -154,7 +159,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
 
        /* final LinearLayout edit_preferences = ((MainActivityBottomTabs)getActivity()).getToolBarEditPreferences();*/
-        LinearLayout tool_bar_profile_name = ((MainActivityBottomTabs)getActivity()).getToolBarProfileChange();
+        tool_bar_profile_name = ((MainActivityBottomTabs)getActivity()).getToolBarProfileChange();
         tool_bar_profile_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -185,9 +190,9 @@ public class CNCFragment extends HGBAbstractFragment {
         @Override
         public void onSuccess(Object data) {
             if (data != null) {
-                ArrayList<DefaultsProfilesVO> defaultsProfilesVOs = (ArrayList<DefaultsProfilesVO> )data;
+                accountDefaultSettings = (ArrayList<DefaultsProfilesVO> )data;
            //     List<AccountDefaultSettingsVO> accountDefaultSettings = (List<AccountDefaultSettingsVO>) data;
-                profilesDialog(defaultsProfilesVOs);
+                profilesDialog(accountDefaultSettings);
             }
         }
         @Override
@@ -197,6 +202,8 @@ public class CNCFragment extends HGBAbstractFragment {
     });
     }
 
+    private int radioButtonSelected = -1;
+
     private void profilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs){
         LayoutInflater li = LayoutInflater.from(getActivity());
         View promptsView = li.inflate(R.layout.popup_custom_title, null);
@@ -204,21 +211,23 @@ public class CNCFragment extends HGBAbstractFragment {
         dialogBuilder.setCustomTitle(promptsView);
 
 
-        // dialogBuilder.setTitle(getResources().getString(R.string.profile_choose_between));
 
-        final ArrayList<String> itemsList = new ArrayList<String>();
-        for (DefaultsProfilesVO userProfileVO : userProfileVOs) {
-            itemsList.add(userProfileVO.getProfilename());
+      //  UserProfilesListAdapter adapter = new UserProfilesListAdapter(userProfileVOs, getContext());
+
+
+        accountAttributes = new ArrayList<>();
+        for(DefaultsProfilesVO defaultsProfilesVO: userProfileVOs){
+            AccountDefaultSettingsVO accountDefaultSettingsVO = new AccountDefaultSettingsVO();
+            accountDefaultSettingsVO.setmId(defaultsProfilesVO.getId());
+            accountDefaultSettingsVO.setmProfileName(defaultsProfilesVO.getProfilename());
+            accountAttributes.add(accountDefaultSettingsVO);
         }
-        // final CharSequence[] list = itemsList.toArray(new String[itemsList.size()]);
-     /*   UserProfilesAdapter adapter = new UserProfilesAdapter(itemsList, this.getBaseContext());*/
 
-
-        UserProfilesListAdapter adapter = new UserProfilesListAdapter(itemsList, getActivity());
+        mRadioPreferencesAdapter = new PreferencesSettingsPreferencesCheckAdapter(getContext(),accountAttributes);
 
         View promptsViewTeest = li.inflate(R.layout.user_profile_popup_list_layout, null);
         ListView user_profile_popup_list_view = (ListView) promptsViewTeest.findViewById(R.id.user_profile_popup_list_view);
-        user_profile_popup_list_view.setAdapter(adapter);
+        user_profile_popup_list_view.setAdapter(mRadioPreferencesAdapter);
 
         LinearLayout manage_profile_ll = (LinearLayout)promptsViewTeest.findViewById(R.id.manage_profile_ll);
         manage_profile_ll.setOnClickListener(new View.OnClickListener() {
@@ -229,18 +238,45 @@ public class CNCFragment extends HGBAbstractFragment {
             }
         });
 
+        mRadioPreferencesAdapter.setClickedLineCB(new PreferenceSettingsFragment.ListLineClicked() {
+            @Override
+            public void clickedItem(String itemID) {
 
-    /*    dialogBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-             *//*   DefaultsProfilesVO defaultProfile = userDefaultProfiles.get(item);
-                postDefaultProfile(String.valueOf(defaultProfile.getId()), defaultProfile.getName());*//*
-                selectDefaultProfileDialog.dismiss();
+
             }
-        });*/
+        });
 
-        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        mRadioPreferencesAdapter.setSelectedRadioButtonListener(new PreferenceSettingsFragment.ListRadioButtonClicked(){
+
+            @Override
+            public void clickedItem(int selectedPosition) {
+                radioButtonSelected = selectedPosition;
+            }
+        });
+
+        selectedRadioPreference();
+
+
+        dialogBuilder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+                if(radioButtonSelected != -1) {
+                    final DefaultsProfilesVO selected = accountDefaultSettings.get(radioButtonSelected);
 
+                    String userEmail = getActivityInterface().getPersonalUserInformation().getUserEmailLogIn();
+
+                    ConnectionManager.getInstance(getActivity()).putAccountsPreferences(userEmail, selected.getId(), new ConnectionManager.ServerRequestListener() {
+                        @Override
+                        public void onSuccess(Object data) {
+                            FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
+                            my_trip_profile.setText(selected.getProfilename());
+                        }
+
+                        @Override
+                        public void onError(Object data) {
+                            ErrorMessage(data);
+                        }
+                    });
+                }
             } });
 
 
@@ -255,6 +291,39 @@ public class CNCFragment extends HGBAbstractFragment {
       //  dialogBuilder.setView(promptsViewTeest);
 
     }
+
+
+    private void sendUserSelectionToServer(){
+
+
+
+       /* AccountDefaultSettingsVO selected = accountDefaultSettings.get(radioButtonSelected);
+
+        String userEmail = getActivityInterface().getPersonalUserInformation().getUserEmailLogIn();
+        ConnectionManager.getInstance(getActivity()).putAccountsPreferences(userEmail, selected.getmId(), new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });*/
+    }
+
+    private void selectedRadioPreference(){
+
+        FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
+
+        if(my_trip_profile.getTag() == null){
+            return;
+        }
+        String selectedTag = my_trip_profile.getTag().toString();
+        mRadioPreferencesAdapter.selectedItemID(selectedTag);
+    }
+
     private AlertDialog selectDefaultProfileDialog;
 
     @Override
@@ -461,9 +530,9 @@ public class CNCFragment extends HGBAbstractFragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new CNCAdapter(getActivity().getApplicationContext(), getActivityInterface().getCNCItems());
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.SetOnItemClickListener(new CNCAdapter.OnItemClickListener() {
+        mCNCAdapter = new CNCAdapter(getActivity().getApplicationContext(), getActivityInterface().getCNCItems());
+        mRecyclerView.setAdapter(mCNCAdapter);
+        mCNCAdapter.SetOnItemClickListener(new CNCAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 String strText = getActivityInterface().getCNCItems().get(position).getText();
@@ -578,7 +647,7 @@ public class CNCFragment extends HGBAbstractFragment {
         mTextTutoralBody.setVisibility(View.GONE);
         getActivityInterface().addCNCItem(new CNCItem(strMessageReceived.trim(), CNCAdapter.ME_ITEM));
         addWaitingItem();
-        mAdapter.notifyDataSetChanged();
+        mCNCAdapter.notifyDataSetChanged();
         resetMessageEditText();
      //   enterCNCMessage(strMessage);
 
@@ -897,7 +966,7 @@ public class CNCFragment extends HGBAbstractFragment {
                 iter.remove();
             }
         }
-        mAdapter.notifyDataSetChanged();
+        mCNCAdapter.notifyDataSetChanged();
     }
 
 

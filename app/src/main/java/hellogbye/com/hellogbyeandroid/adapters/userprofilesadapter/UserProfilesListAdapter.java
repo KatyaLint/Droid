@@ -9,25 +9,26 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
 public class UserProfilesListAdapter extends BaseAdapter {
 
-    private final Typeface textFont;
-    private ArrayList<String> mData;
+    //private final Typeface textFont;
+    private ArrayList<DefaultsProfilesVO> mData;
     private Context mContext;
     private LayoutInflater inflater;
 
-    public UserProfilesListAdapter(ArrayList<String> data, Context context) {
+    public UserProfilesListAdapter(ArrayList<DefaultsProfilesVO> data, Context context) {
         mData = data;
-        mContext = context;
-        textFont = Typeface.createFromAsset(mContext.getAssets(), "fonts/" + "dinnextltpro_medium.otf");
-        inflater = LayoutInflater.from(context);
+        this.mContext = context;
+      //  textFont = Typeface.createFromAsset(mContext.getAssets(), "fonts/" + "dinnextltpro_medium.otf");
     }
 
     @Override
@@ -53,11 +54,34 @@ public class UserProfilesListAdapter extends BaseAdapter {
                     .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.user_profile_list_layout, null);
         }
+
+        DefaultsProfilesVO item = mData.get(position);
         FontTextView text = (FontTextView) convertView.findViewById(R.id.user_profile_text);
       //  ImageView image = (ImageView) convertView.findViewById(R.id.user_profile_image);
 
-        String data = mData.get(position);
-        text.setText(data);
+        RadioButton user_profile_check_radio_btn = (RadioButton) convertView.findViewById(R.id.user_profile_check_radio_btn);
+
+    /*    if(selectedPreferebcesID.equals(attribute.getmId())){
+            selectedPosition = position;
+            selectedPreferebcesID = "";
+
+        }*/
+
+  /*      user_profile_check_radio_btn.setChecked(position == selectedPosition);
+        user_profile_check_radio_btn.setTag(position);
+
+        user_profile_check_radio_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                selectedPosition = (Integer)view.getTag();
+                listRadioButtonClickedClicked.clickedItem(selectedPosition);
+                notifyDataSetChanged();
+
+            }
+        });
+        */
+        text.setText(item.getProfilename());
 
   /*      if(position == 0){
             image.setBackgroundResource(R.drawable.money_saver);

@@ -387,7 +387,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         search_view_tool_bar = (SearchView)mToolbar.findViewById(R.id.search_view_tool_bar);
         search_maginfy = (ImageButton)mToolbar.findViewById(R.id.search_maginfy);
         titleBar = (FontTextView)mToolbar.findViewById(R.id.titleBar);
-
+        my_trip_profile = (FontTextView) findViewById(R.id.my_trip_profile);
 
     }
 
@@ -497,7 +497,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     public void editProfileTypeMainToolBar() {
         //TODO remove to profile fragment
         ArrayList<AccountsVO> accounts = hgbSaveDataClass.getAccounts();
-        my_trip_profile = (FontTextView) findViewById(R.id.my_trip_profile);
+
 
         for (AccountsVO account : accounts) {
             String userEmailLogIn = hgbSaveDataClass.getPersonalUserInformation().getUserEmailLogIn();

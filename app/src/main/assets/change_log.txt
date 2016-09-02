@@ -343,7 +343,7 @@ Code changing:
     - New image for adding companion
     - Voice fix
     - Maps fix
-    - Travel profiles popup
+    - Travel profiles popup view and logic
     - change travel name, code changes
     - clear cnc screen new implementation
     - search implementation on My Trips

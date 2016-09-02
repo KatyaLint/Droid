@@ -153,7 +153,6 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
             radioButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     selectedPosition = (Integer)view.getTag();
                     listRadioButtonClickedClicked.clickedItem(selectedPosition);
                     notifyDataSetChanged();

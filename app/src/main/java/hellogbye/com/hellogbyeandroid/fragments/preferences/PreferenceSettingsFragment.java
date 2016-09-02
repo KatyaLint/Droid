@@ -131,15 +131,14 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
     private void selectedRadioPreference(){
 
         FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
-        if(my_trip_profile == null || mAdapter == null){
+     /*   if(my_trip_profile == null || mAdapter == null){
             return;
-        }
+        }*/
         if(my_trip_profile.getTag() == null){
             return;
         }
         String selectedTag = my_trip_profile.getTag().toString();
         mAdapter.selectedItemID(selectedTag);
-
     }
 
 
