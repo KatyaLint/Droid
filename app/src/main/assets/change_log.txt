@@ -346,3 +346,4 @@ Code changing:
     - Travel profiles popup
     - change travel name, code changes
     - clear cnc screen new implementation
+    - search implementation on My Trips

@@ -8,10 +8,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -33,6 +35,7 @@ public class TripsTabsView extends HGBAbstractFragment {
     private static final String TAB_3_TAG = "History";
     private Typeface textFont;
     private ImageButton newIteneraryImageButton;
+
 
 
     public static Fragment newInstance(int position) {
@@ -117,8 +120,16 @@ public class TripsTabsView extends HGBAbstractFragment {
 
         newIteneraryImageButton =  ((MainActivityBottomTabs)getActivity()).getNewIternararyButton();
         setNewIteneraryImageButtonClickListener();
+
+
+
+
+
         return rootView;
     }
+
+
+
 
     private void setNewIteneraryImageButtonClickListener(){
     newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {

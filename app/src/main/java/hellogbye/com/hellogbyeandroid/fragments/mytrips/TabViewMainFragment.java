@@ -6,19 +6,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.MenuItemCompat;
+import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.support.v7.widget.SearchView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SearchView;
-import android.widget.Toast;
+
+import android.widget.TextView;
 
 import com.daimajia.swipe.util.Attributes;
 
@@ -27,12 +28,12 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.myTripsSwipeAdapter.TripsSwipeItemsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 
-import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
@@ -49,6 +50,63 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
     private RecyclerView mRecyclerView;
     private LinearLayout my_trip_empty_view_ll;
     private  SearchReceiver mSearchReciever;
+    private SearchView search_view;
+    private ImageButton search_maginfy;
+    private ImageButton toolbar_new_iternerary;
+    private FontTextView titleBar;
+
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    private void initSearchBar() {
+
+        ImageView searchClose = (ImageView) search_view.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+        TextView searchCloseText = (TextView) search_view.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+
+        searchClose.setImageResource(R.drawable.close_icon_a_1);
+        searchCloseText.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
+        searchCloseText.setHintTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
+
+        search_maginfy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openSearchBar();
+            }
+        });
+
+        search_view.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                closeSearchBar();
+                return false;
+            }
+        });
+
+    }
+
+    private void closeSearchBar() {
+        titleBar.setVisibility(View.VISIBLE);
+        toolbar_new_iternerary.setVisibility(View.VISIBLE);
+        search_maginfy.setVisibility(View.VISIBLE);
+        search_view.setVisibility(View.GONE);
+
+    }
+
+
+    private void openSearchBar() {
+        titleBar.setVisibility(View.GONE);
+        toolbar_new_iternerary.setVisibility(View.GONE);
+        search_maginfy.setVisibility(View.GONE);
+        search_view.setVisibility(View.VISIBLE);
+        search_view.setIconified(false);
+
+    }
 
     public void initFragmentTabsView(View rootView){
         this.activity = getActivity();
@@ -73,7 +131,16 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
         mAdapter.setMode(Attributes.Mode.Single);
         mRecyclerView.setAdapter(mAdapter);
 
+        search_view =  ((MainActivityBottomTabs)getActivity()).getSearchView();
+        search_maginfy =  ((MainActivityBottomTabs)getActivity()).getSearchMagifyImage();
+        toolbar_new_iternerary =  ((MainActivityBottomTabs)getActivity()).getNewIternararyButton();
+        titleBar =  ((MainActivityBottomTabs)getActivity()).getTitleBar();
+
+
+
+        initSearchBar();
 //        my_trip_search_view.setOnQueryTextListener(this);
+        search_view.setOnQueryTextListener(this);
         mSearchReciever = new SearchReceiver();
         // 5. set item animator to DefaultAnimator
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());

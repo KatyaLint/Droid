@@ -2,7 +2,6 @@ package hellogbye.com.hellogbyeandroid.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.SearchManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -60,7 +59,6 @@ import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsRa
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesCheckListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesDragListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSearchListFragment;
-import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSettingsMainClass;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesTabsFragmentSettings;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoHelpAndFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
@@ -127,11 +125,14 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private ImageButton edit_preferences_imagebtn;
     private ImageButton check_preferences;
     private ImageButton up_bar_favorite;
-    private ImageButton newIteneraryImageButton;
+    private ImageButton toolbar_new_iternerary;
     private ImageButton toolbar_add_companion;
     private FontTextView my_trip_profile;
     private FontTextView itirnarary_title_Bar;
     private ImageButton toolbar_new_iternerary_cnc;
+    private SearchView search_view_tool_bar;
+    private ImageButton search_maginfy;
+    private FontTextView titleBar;
 
 
     public HGBSaveDataClass getHGBSaveDataClass() {
@@ -150,7 +151,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         //INIT ToolBar
         mToolbar = (CostumeToolBar) findViewById(R.id.toolbar_costume);
         initToolBar();
-        initSearchBar();
+        //initSearchBar();
 
         //INIT Bottom tabs
 
@@ -228,28 +229,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         sendBroadcast(intent);
     }
 
-    private void initSearchBar() {
-        SearchView searchView = (SearchView) mToolbar.findViewById(R.id.search);
-        // Sets searchable configuration defined in searchable.xml for this SearchView
-        SearchManager searchManager =
-                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                querySearchChanges(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                querySearchChanges(newText);
-                return false;
-            }
-        });
-    }
 
 /*    private void clearCNCItems() {
 
@@ -403,17 +382,31 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         itirnarary_title_Bar = (FontTextView)mToolbar.findViewById(R.id.itirnarary_title_Bar);
         up_bar_favorite = (ImageButton)mToolbar.findViewById(R.id.up_bar_favorite);
         preference_save_changes = (FontTextView) mToolbar.findViewById(R.id.preference_save_changes);
-        newIteneraryImageButton = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary);
+        toolbar_new_iternerary = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary);
         toolbar_new_iternerary_cnc = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary_cnc);
+        search_view_tool_bar = (SearchView)mToolbar.findViewById(R.id.search_view_tool_bar);
+        search_maginfy = (ImageButton)mToolbar.findViewById(R.id.search_maginfy);
+        titleBar = (FontTextView)mToolbar.findViewById(R.id.titleBar);
 
 
     }
-    public ImageButton getNewIteneraryImageButton(){
+
+    public FontTextView getTitleBar(){
+        return titleBar;
+    }
+    public ImageButton getSearchMagifyImage(){
+        return search_maginfy;
+    }
+
+    public ImageButton getToolbar_new_iterneraryCnc(){
         return toolbar_new_iternerary_cnc;
+    }
+    public SearchView getSearchView(){
+        return search_view_tool_bar;
     }
 
     public ImageButton getNewIternararyButton(){
-        return newIteneraryImageButton;
+        return toolbar_new_iternerary;
     }
     public FontTextView getPreferencesSaveButton(){
         return preference_save_changes;
