@@ -260,7 +260,7 @@ public class CNCFragment extends HGBAbstractFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getFlowInterface().enableFullScreen(true);
+        getFlowInterface().enableFullScreen(false);
 
     }
 

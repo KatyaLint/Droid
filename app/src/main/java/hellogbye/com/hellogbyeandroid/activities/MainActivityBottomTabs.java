@@ -215,7 +215,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             @Override
             public void onMenuTabReSelected(@IdRes int menuItemId) {
-
+                selectBottemTab(menuItemId);
             }
         });
 
@@ -666,27 +666,22 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         boolean stashToBack = stashFragment;
         int navPosition = position;//navBar.getNavNumber();
         boolean isAddAnimation = false;
+        boolean fullscreen = false;
         switch (navBar) {
-            case HOME:
-                //  fragment = HomeFragment.newInstance(navPosition);
-                //openRightPane();
-                //  clearCNCItems();
-                break;
             case CNC:
                 fragment = CNCFragment.newInstance(navPosition);
-
+                fullscreen = true;
                 break;
-//            case HISTORY:
-//                fragment = HistoryFragment.newInstance(navPosition);
-//                break;
             case TRIPS:
                 fragment = TripsTabsView.newInstance(navPosition);
+                selectBottomBar(R.id.bb_menu_my_trips);
                 break;
             case ALL_COMPANIONS_VIEW:
                 fragment = CompanionsTravelers.newInstance(navPosition);
                 break;
             case COMPANIONS:
                 fragment = TravelCompanionTabsWidgetFragment.newInstance(navPosition);
+                selectBottomBar(R.id.bb_menu_companions);
                 break;
             case COMPANIONS_DETAILS:
                 fragment = CompanionDetailsFragment.newInstance(navPosition);
@@ -708,9 +703,11 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 break;
             case ACCOUNT:
                 fragment = AccountSettingsFragment.newInstance(navPosition);
+                selectBottomBar(R.id.bb_menu_my_account);
                 break;
             case NOTIFICATIONS:
                 fragment = NotificationFragment.newInstance(navPosition);
+                selectBottomBar(R.id.bb_menu_notiifcations);
                 break;
             case PREFERENCES_MEMBERSHIP:
                 fragment = MembershipFragment.newInstance(navPosition);
@@ -758,16 +755,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             case PREFERENCES_DRAG_LIST_SETTINGS:
                 fragment = PreferencesDragListFragment.newInstance(navPosition);
                 break;
-            case CHECKOUT_CONFIRMATION:
-                fragment = CheckoutConfirmationFragment.newInstance(navPosition);
-                break;
-            case PAYMENT_TRAVELERS:
-                fragment = TravelersFragment.newInstance(navPosition);
 
-                break;
-            case PAYMENT_TRAVELERS_DETAILS:
-                fragment = TravelerDetailsFragment.newInstance(navPosition);
-                break;
             case SELECT_CREDIT_CARD:
                 fragment = SummaryPaymentFragment.newInstance(navPosition);
                 break;
@@ -784,10 +772,19 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 fragment = FreeUserFragment.newInstance(navPosition);
                 stashToBack = false;
                 break;
+            case CHECKOUT_CONFIRMATION:
+                fragment = CheckoutConfirmationFragment.newInstance(navPosition);
+                break;
+            case PAYMENT_TRAVELERS:
+                fragment = TravelersFragment.newInstance(navPosition);
+                break;
+            case PAYMENT_TRAVELERS_DETAILS:
+                fragment = TravelerDetailsFragment.newInstance(navPosition);
+                break;
 
         }
 
-
+        enableFullScreen(fullscreen);
         if (bundle != null) {
             Bundle arguments = fragment.getArguments();
             arguments.putAll(bundle);
@@ -810,6 +807,22 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         mToolbar.initToolBarItems();
         mToolbar.updateToolBarView(position);
     }
+
+    @Override
+    public void enableFullScreen(boolean fullscreen) {
+        if (fullscreen) {
+            mBottomBar.hide();
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+
+        } else {
+            mBottomBar.show();
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setHomeButtonEnabled(false);
+        }
+
+    }
+
 
     public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
         this.onBackPressedListener = onBackPressedListener;
@@ -941,8 +954,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     }
 
-    @Override
-    public void selectBottomBar(int selection) {
+    private void selectBottomBar(int selection) {
         switch (selection) {
             case R.id.bb_menu_my_trips:
                 mBottomBar.selectTabAtPosition(BOTTOM_BAR_FIRST_INDEX, true, false);
@@ -955,7 +967,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             case R.id.bb_menu_cnc:
                 mBottomBar.selectTabAtPosition(BOTTOM_BAR_THIRD_INDEX, true, false);
                 mBottomBar.setmCurrentTabPosition(BOTTOM_BAR_THIRD_INDEX);
-                enableFullScreen(false);
+
                 break;
             case R.id.bb_menu_notiifcations:
                 mBottomBar.selectTabAtPosition(BOTTOM_BAR_FOURTH_INDEX, true, false);
@@ -968,20 +980,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         }
     }
 
-    @Override
-    public void enableFullScreen(boolean fullscreen) {
-        if (fullscreen) {
-            mBottomBar.hide();
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeButtonEnabled(true);
 
-        } else {
-            mBottomBar.show();
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            getSupportActionBar().setHomeButtonEnabled(false);
-        }
-
-    }
 
     @Override
     public void callRefreshItinerary(final int fragment) {

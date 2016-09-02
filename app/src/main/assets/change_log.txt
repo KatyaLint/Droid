@@ -347,3 +347,4 @@ Code changing:
     - change travel name, code changes
     - clear cnc screen new implementation
     - search implementation on My Trips
+    - Reselecting Tabs
