@@ -169,19 +169,13 @@ public class CostumeToolBar extends Toolbar {
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
         String selectedItem = navBar.getNavTitle();
         tool_bar_profile_name.setVisibility(View.GONE);
-   //     homeTitleImage.setVisibility(View.GONE);
-     //   my_trip_profile.setVisibility(View.GONE);
         titleText.setVisibility(View.GONE);
-    //    keyBoardImage.setVisibility(View.GONE);
         up_bar_favorite.setVisibility(View.GONE);
         favoriteButton.setVisibility(View.GONE);
         editPreferense.setVisibility(View.GONE);
         edit_preferences.setVisibility(View.GONE);
         preferences_edit_mode.setVisibility(View.GONE);
         check_preferences.setVisibility(View.GONE);
-//        my_trips_button.setVisibility(View.GONE);
-       // my_trip_edit_button.setVisibility(View.GONE);
-     //   my_trips_image_profile.setVisibility(View.GONE);
         itirnarary_title_Bar.setVisibility(View.GONE);
         toolbar_new_iternerary_cnc.setVisibility(View.GONE);
         preference_save_changes.setVisibility(View.GONE);
@@ -191,30 +185,14 @@ public class CostumeToolBar extends Toolbar {
         toolbar_add_companion.setVisibility(View.GONE);
 
         switch (navBar) {
-         //   case HOME:
-     /*           tool_bar_profile_name.setVisibility(View.VISIBLE);
-                toolbar_go_to_iternerary.setVisibility(View.VISIBLE);*/
-//             //   homeTitleImage.setVisibility(View.VISIBLE);
-//                my_trip_profile.setVisibility(View.VISIBLE);
-//                keyBoardImage.setVisibility(View.VISIBLE);
-//
-         //       break;
             case CNC:
                 tool_bar_profile_name.setVisibility(View.VISIBLE);
                 toolbar_new_iternerary_cnc.setVisibility(View.VISIBLE);
                 break;
             case ITINARERY:
-               // titleText.setVisibility(View.VISIBLE);
-            //    up_bar_favorite.setVisibility(View.VISIBLE);
                 up_bar_favorite.setVisibility(View.VISIBLE);
                 itirnarary_title_Bar.setVisibility(View.VISIBLE);
-            //    itirnarary_title_Bar.setText(selectedItem);
                 break;
-//            case HISTORY:
-//                titleText.setVisibility(View.VISIBLE);
-//                keyBoardImage.setVisibility(View.INVISIBLE);
-//                break;
-
             case PREFERENCES_CHECK_LIST_SETTINGS:
             case PREFERENCES_SEARCH_LIST_SETTINGS:
             case PREFERENCES_SPECIFIC_LIST_SETTINGS:
@@ -257,7 +235,6 @@ public class CostumeToolBar extends Toolbar {
                 break;
 
             case TRAVEL_PREFERENCE:
-            //    preference_save_changes.setVisibility(View.VISIBLE);
                 titleText.setVisibility(View.VISIBLE);
                 preferences_edit_mode.setVisibility(View.VISIBLE);
                 edit_preferences.setVisibility(View.VISIBLE);
