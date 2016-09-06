@@ -551,11 +551,11 @@ public class CNCFragment extends HGBAbstractFragment {
     }
 
     private void loadCNCList() {
-        String strCNCList = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, "");
+
 
 //        if ("".equals(strCNCList) && getActivityInterface().getCNCItems()== null ||
 //                strCNCList==null && getActivityInterface().getCNCItems()== null) {
-        if ((strCNCList.equals("") || strCNCList.equals("null")) && getActivityInterface().getCNCItems()== null ) {
+/*        if ((strCNCList.equals("") || strCNCList.equals("null")) && getActivityInterface().getCNCItems()== null ) {
             Resources res = getResources();
             String userName = "";
             if( getActivityInterface().getCurrentUser() != null){
@@ -580,7 +580,40 @@ public class CNCFragment extends HGBAbstractFragment {
                     e.printStackTrace();
                 }
             }
+        }*/
+
+        String strCNCList = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, "");
+        if(!strCNCList.isEmpty() &&  getActivityInterface().getCNCItems()== null){
+            Resources res = getResources();
+            String userName = "";
+            if( getActivityInterface().getCurrentUser() != null){
+                userName = getActivityInterface().getCurrentUser().getFirstname();
+            }
+
+            String text = String.format(res.getString(R.string.default_cnc_message),userName );
+
+            getActivityInterface().addCNCItem(new CNCItem(text, CNCAdapter.HGB_ITEM));
+            mTextTutoralHeader.setVisibility(View.VISIBLE);
+            mTextTutoralBody.setVisibility(View.VISIBLE);
         }
+        else if (getActivityInterface().getCNCItems() == null) {
+            try {
+                Gson gson = new Gson();
+                Type listType = new TypeToken<List<CNCItem>>() {
+                }.getType();
+                ArrayList<CNCItem> posts = (ArrayList<CNCItem>) gson.fromJson(strCNCList, listType);
+                getActivityInterface().setCNCItems(posts);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+
+
+
+
     }
 
     private void init(View view) {

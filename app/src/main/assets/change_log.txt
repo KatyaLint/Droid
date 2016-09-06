@@ -348,3 +348,4 @@ Code changing:
     - clear cnc screen new implementation
     - search implementation on My Trips
     - Reselecting Tabs
+    - first selected is CNC screen

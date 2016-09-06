@@ -144,6 +144,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getUserData();
+        getCompanionsFromServer();
+        getCountries();
+
 
         hgbSaveDataClass.setPersonalUserInformation(new PersonalUserInformationVO());
         setContentView(R.layout.main_activity_bottom_tab_layout);
@@ -181,9 +185,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             hgbSaveDataClass.setTravelOrder(userTravelVO);
         }
 
-        getUserData();
-        getCompanionsFromServer();
-        getCountries();
+
 
 
         //INIT Location
@@ -208,14 +210,21 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         mBottomBar.setActiveTabColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_00516f));
 
         mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
+            int i = 0;
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
-                selectBottemTab(menuItemId);
+                if (this.i != 0) {
+                    selectBottemTab(menuItemId);
+                }
+                this.i++;
             }
 
             @Override
             public void onMenuTabReSelected(@IdRes int menuItemId) {
-                selectBottemTab(menuItemId);
+                if (this.i != 1) {
+                    selectBottemTab(menuItemId);
+                }
+                this.i++;
             }
         });
 
@@ -291,7 +300,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             return;
         }
 
-        if (count == 1 && str.equals(TripsTabsView.class.toString())) {
+        if (count == 1 && str.equals(CNCFragment.class.toString())) {
             LogOutPopup();
             return;
         }
@@ -464,9 +473,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 hgbSaveDataClass.getPersonalUserInformation().setmTravelPreferencesProfileId(profileID);
                 //my_trips_image_profile.setImageBitmap(HGBUtility.getBitmapFromCache(getBaseContext()));
                 getAccountsProfiles();
+                selectBottemTab(R.id.bb_menu_cnc);
                 //  selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null,true);
 
-
+                //selectBottemTab(R.id.bb_menu_cnc);
             }
 
             @Override
@@ -670,6 +680,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         switch (navBar) {
             case CNC:
                 fragment = CNCFragment.newInstance(navPosition);
+                selectBottomBar(R.id.bb_menu_cnc);
                 fullscreen = true;
                 break;
             case TRIPS:
