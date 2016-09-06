@@ -27,7 +27,7 @@
     <string name="flight_operator">OPERATED BY</string>
     <string name="flight_number">FLIGHT #</string>
     <string name="flight_date">DATE</string>
-    <string name="flight_aircraft_type">AIRCRAFT_TYPE</string>
+    <string name="flight_aircraft_type">AIRCRAFT TYPE</string>
     <string name="flight_airport">AIRPORTS</string>
     <string name="flight_boarding">DEPARTURE</string>
     <string name="flight_duration">DURATION</string>
@@ -43,10 +43,12 @@
 
     <string name="flight_select_flight">Select Flight</string>
     <string name="flight_select_my_flight">My Flight</string>
-    <string name="flight_show_alternate_flights">Change Flight</string>
+    <string name="flight_show_alternate_flights">More Options</string>
     <string name="flight_stop_over">STOPOVER: </string>
+    <string name="flight_details_include_tax">incl taxes &amp; fees</string>
+    <string name="flight_grid_more_options">Flight details and more options</string>
 
-    <string name="show_alterate_hotels">Alternatives Hotels</string>
+    <string name="show_alterate_hotels">More Options</string>
     <string name="alternative_hotel_room">ROOM</string>
     <string name="alternative_hotel_guest">GUEST</string>
     <string name="alternative_hotel_check_in">CHECKIN</string>
@@ -71,19 +73,19 @@
     <string name="preferences_non_smoking_choice">Non-Smoking</string>
     <string name="preferences_smoking_choice">Smoking</string>
 
-    <string name="preferences_flight_preferences">Rank your Flight\nPreferences</string>
-    <string name="preferences_hotel_preferences">Rank your Hotel\nPreferences</string>
-    <string name="preferences_flight_prefer">Drag each item up and down to rank their\nimportance in determining search results</string>
+    <string name="preferences_flight_preferences">Rank Your Flight Preferences</string>
+    <string name="preferences_hotel_preferences">Rank Your Hotel Preferences</string>
+    <string name="preferences_flight_prefer">Rank the importance of your flight\npreferences, first being the most\nimportant.</string>
 
 
     <string name="preferences_stops">Preferred Number of Stops</string>
-    <string name="preferences_stops_prefer">Do you prefer to have flights that are\nnon-stop? or do you mind the\nodd layover?</string>
+    <string name="preferences_stops_prefer">Tell us if you prefer direct flights or if you\'d\nrather save money on non-direct flights</string>
 
     <string name="preferences_stars">Preferred Number of Stars</string>
     <string name="preferences_stars_prefer">What number of stars do you prefer</string>
 
     <string name="preferences_class">Preferred Flight Class</string>
-    <string name="preferences_class_prefer">Drag to change your preferred flight class.</string>
+    <string name="preferences_class_prefer">Rank the importance of cabin class\nfrom most to least important.</string>
 
 
     <string name="preferences_bed_type">Preferred Bed Type</string>
@@ -92,15 +94,18 @@
     <string name="preferences_prefered_hotel_chain">Preferred Hotel Chain</string>
     <string name="preferences_prefered_hotel_favorite">Do you have any favorite Hotels? Add\nthem here to make sure HelloGbye\nalwayes finds you the right Hotel!</string>
 
-    <string name="preferences_prefered_aircraft">Preferred Airline</string>
-    <string name="preferences_prefered_aircraft_favorite">Tell us where you like to stay\nwhen you travel</string>
+    <string name="preferences_hotel_prefer">Rank the importance of your hotel\npreferences, first being the most\nimportant.</string>
+
+
+    <string name="preferences_prefered_aircraft">Preferred Airline Type</string>
+    <string name="preferences_prefered_aircraft_favorite">Tell us where airline you prefer\n(if that\'s important to you)</string>
 
     <string name="preferences_prefered_flight_carrier">Preferred Airline</string>
-    <string name="preferences_prefered_flight_carrier_favorite">Do you have any favorite Airline? Add\nthem here to make sure HelloGbye\nalwayes finds you the right Airline!</string>
+    <string name="preferences_prefered_flight_carrier_favorite">Tell us which airlines you like best</string>
 
     <string name="preferences_hint_add_name">Add new preference name</string>
 
-    <string name="preferences_add_button">Add New Preferences</string>
+    <string name="preferences_add_button">Create New Profile</string>
     <string name="preferences_remove_email">Remove Email Address</string>
     <string name="preferences_add_new_preferences">Add New Preferences</string>
     <string name="preferences_at_least_one_preference">You must have at least one\ntravel preference.</string>
@@ -116,11 +121,11 @@
     <string name="closeDrawer">Navigation View</string>
     <string name="openDrawer">Navigation View Closed</string>
     <string name="type_message">Type or speak your request</string>
-    <string name="send">Send</string>
+    <string name="send">Go</string>
     <!--<string name="default_cnc_message"> welcome to\nHelloGbye. Tell us in your own words where and when you'd\nlike to go.</string>-->
     <string name="default_cnc_message">Hello %1$s, welcome to\nHelloGbye. Tell us in your own words where and when you\'d like to go.</string>
     <string name="itinerary_created">Ok, here\'s what we found for you</string>
-    <string name="itinerary_no_items">No items</string>
+    <string name="itinerary_no_items">No content available</string>
     <string name="grid_has_been_updated">OK, the grid has been updated</string>
     <string name="itinerary_try_again">Itinerary Try Again</string>
     <string name="itinerary_inner_flight_item">(Incl.Taxes, fees &amp; charges)</string>
@@ -170,7 +175,7 @@
     <string name="account_personal_your_details">YOUR DETAILS</string>
 
     <string name="account_submit_feedback">Submit Feedback</string>
-    <string name="account_submit_feedback_tell_us">Tell us what’s wrong in the box below:</string>
+    <string name="account_submit_feedback_tell_us">Tell us what you think.Thoughts,\ncomments and suggestions are\nalways appreciated.</string>
     <string name="account_submit_feedback_submit">Submit Feedback</string>
 
     <string name="itinerary_add_companion">Companion</string>

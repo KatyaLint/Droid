@@ -23,6 +23,7 @@
         <!--android:layout_width="@dimen/DP150"-->
         <!--android:layout_height="@dimen/DP150"-->
 
+
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/grid_hotel_name"
         style="@style/GridTextStyle"
@@ -96,6 +97,7 @@
             android:layout_below="@+id/grid_hotel_price_ll"
             android:id="@+id/grid_hotel_taxes"
             style="@style/GridTextStyle"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/grid_taxes"

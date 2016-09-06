@@ -165,9 +165,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/grey_button"
                 android:gravity="center"
-                android:padding="@dimen/DP8"
+                android:padding="@dimen/DP10"
                 android:text="@string/send"
                 android:textColor="@color/COLOR_003D4C"
+
                 android:visibility="gone" />
             ​
             <ImageView

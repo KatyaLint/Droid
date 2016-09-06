@@ -15,7 +15,7 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         android:text="@string/preferences_prefered_hotel_chain"
-        android:layout_marginTop="@dimen/DP38"
+        android:layout_marginTop="@dimen/DP30"
         android:layout_marginBottom="@dimen/DP26"/>
 
 

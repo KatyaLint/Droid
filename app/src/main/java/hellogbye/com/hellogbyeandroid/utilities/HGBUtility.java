@@ -1204,9 +1204,19 @@ public class HGBUtility {
     }
 
 
-    public static int roundUp(double number){
-        int RoundedUpCost = (int) Math.ceil(number);
-        return RoundedUpCost;
+    public static int roundNumber(double number){
+
+        double dAbs = Math.abs(number);
+        int i = (int) dAbs;
+        double result = dAbs - (double) i;
+        if(result<0.5){
+            return number<0 ? -i : i;
+        }else{
+            return number<0 ? -(i+1) : i+1;
+        }
+
+    /*    int RoundedUpCost = (int) Math.ceil(number);
+        return RoundedUpCost;*/
     }
 
 }

@@ -583,7 +583,7 @@ public class CNCFragment extends HGBAbstractFragment {
         }*/
 
         String strCNCList = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, "");
-        if(!strCNCList.isEmpty() &&  getActivityInterface().getCNCItems()== null){
+        if((strCNCList.equals("") || strCNCList.equals("null")) &&  getActivityInterface().getCNCItems()== null){
             Resources res = getResources();
             String userName = "";
             if( getActivityInterface().getCurrentUser() != null){

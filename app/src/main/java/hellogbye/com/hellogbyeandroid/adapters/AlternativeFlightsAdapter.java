@@ -84,13 +84,13 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
         viewHolder.txtEndTime.setText(HGBUtilityDate.parseDateToHHmm(itemData.getmArrival()));
         viewHolder.txtTravelTime.setText(itemData.getmTravelTime());*/
 
-        viewHolder.alternative_flight_price.setText("$"+itemData.getCost());
+        viewHolder.alternative_flight_price.setText("$"+HGBUtility.roundNumber(itemData.getCost()));
         viewHolder.alternative_flight_price.setTag(itemData.getmGuid());
         viewHolder.alternative_city_name_from.setText(itemData.getmOriginAirportName());
-        viewHolder.alternative_airport_name_from.setText(itemData.getmOrigin());
+        viewHolder.alternative_airport_name_from.setText("("+itemData.getmOrigin()+")");
 
         viewHolder.alternative_city_name_to.setText(itemData.getmDestinationAirportName());
-        viewHolder.alternative_airport_name_to.setText(itemData.getmDestination());
+        viewHolder.alternative_airport_name_to.setText("("+itemData.getmDestination()+")");
         viewHolder.alternative_time_to.setText(legs.get(0).getmDepartureTime());
         viewHolder.alternative_time_from.setText(legs.get(legs.size()-1).getmArrivalTime());
 

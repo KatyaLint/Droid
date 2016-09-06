@@ -3,6 +3,7 @@ package hellogbye.com.hellogbyeandroid.fragments.itinerary;
 import android.app.Activity;
 
 import android.graphics.Typeface;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
@@ -119,7 +120,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
         FontTextView textView = new FontTextView(activity);
 
         textView.setTextAppearance(activity, R.style.GridViewPassangersTextStyle);
-        textView.setText(passenger.getmName() +" - " + "$" + HGBUtility.roundUp(passenger.getmTotalPrice() ));
+        textView.setText(passenger.getmName() +" - " + "$" + HGBUtility.roundNumber(passenger.getmTotalPrice() ));
         textView.setGravity(Gravity.CENTER);
      //   textView.setTextSize(R.dimen.SP16);
     //    LayoutParams params = new LayoutParams((int) getResources().getDimension(R.dimen.DP150),LayoutParams.WRAP_CONTENT); //width 150
@@ -466,7 +467,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
 
         TextView grid_traveler_flight_price = (TextView)child.findViewById(R.id.grid_traveler_flight_price);
-        grid_traveler_flight_price.setText("$" + HGBUtility.roundUp(node.getCost()));
+        grid_traveler_flight_price.setText("$" + HGBUtility.roundNumber(node.getCost()) + " USD");
 
         //guid
         grid_traveler_flight_price.setTag(node.getmGuid());
@@ -493,12 +494,17 @@ public class ItineraryFragment extends HGBAbstractFragment {
         TextView grid_traveler_flight_stops_arrival = (TextView)child.findViewById(R.id.grid_traveler_flight_stops_arrival);
         grid_traveler_flight_stops_arrival.setText( node.getmDestination());
 
+        ImageView grid_airplane_logo = (ImageView)child.findViewById(R.id.grid_airplane_logo);
+
+       HGBUtility.loadRoundedImage(node.getLegs().get(0).getmCarrierBadgeUrl(), grid_airplane_logo, R.drawable.profile_image);
+
+
         TextView grid_flight_operator_departure = (TextView)child.findViewById(R.id.grid_flight_operator_departure);
         grid_flight_operator_departure.setText("Depart: " + HGBUtilityDate.parseDateToHHmm(node.getmDeparture()) + "     Arrival: "+HGBUtilityDate.parseDateToHHmm(node.getmArrival()));
 
 
         TextView grid_flight_airlines_class = (TextView)child.findViewById(R.id.grid_flight_airlines_class);
-        grid_flight_airlines_class.setText(node.getmOperatorName() + ", " + node.getmFareClass());
+        grid_flight_airlines_class.setText(node.getmOperatorName() + ", " + node.getmFareClass() + " Class");
 
 
 
@@ -568,11 +574,14 @@ public class ItineraryFragment extends HGBAbstractFragment {
     private View hotelLayout(NodesVO node,int counter){
         View child = activity.getLayoutInflater().inflate(R.layout.new_grid_view_inner_hotel_item, null);
         ImageView hotel_bad_image = (ImageView)child.findViewById(R.id.hotel_bad_image);
-        if(counter == 0){
+        hotel_bad_image.setImageResource(R.drawable.group_2);
+
+       /* if(counter == 0){
             hotel_bad_image.setImageResource(R.drawable.group_2);
-        }else{
-            hotel_bad_image.setImageResource(R.drawable.group_2_copy);
         }
+        else{
+            hotel_bad_image.setImageResource(R.drawable.group_2_copy);
+        }*/
         TextView grid_hotel_name = (TextView)child.findViewById(R.id.grid_hotel_name);
         grid_hotel_name.setText(node.getmHotelName());
 
@@ -587,7 +596,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
         long diff = HGBUtilityDate.dayDifference(node.getmCheckIn(), node.getmCheckOut());//HGBUtility.getDateDiff(node.getmCheckIn(), node.getmCheckOut());
         double iCharge = node.getmMinimumAmount()/(diff+1);
         String result = String.format("%.2f", iCharge);
-        grid_hotel_price.setText("$" + HGBUtility.roundUp(iCharge));
+        grid_hotel_price.setText("$" + HGBUtility.roundNumber(iCharge) +"USD");
 
         //type
         grid_hotel_price.setTag(node.getmType());
@@ -685,7 +694,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
         TextView date_text_layout = (TextView)child.findViewById(R.id.date_text_layout);
       //  String correctDate = HGBUtility.parseDateFromddMMyyyyToddmmYYYY(date);
         String correctDate  = HGBUtilityDate.parseDateFromddMMyyyyToddmmYYYY(date);
-        date_text_layout.setText(correctDate);
+        date_text_layout.setText(correctDate.toUpperCase());
         LinearLayout outer = new LinearLayout(activity);
         outer.setOrientation(LinearLayout.VERTICAL);
         outer.setLayoutParams(layoutParams);
@@ -753,7 +762,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
             itineraryLayout.addView(mainView);
             cnc_empty_view.setVisibility(View.GONE);
             grid_make_payment.setEnabled(true);
-            grid_total_price.setText("$" + HGBUtility.roundUp(Double.parseDouble(userOrder.getmTotalPrice())) + "USD");
+            grid_total_price.setText("$" + HGBUtility.roundNumber(Double.parseDouble(userOrder.getmTotalPrice())) + "USD");
         }else{  // server returning wrong data
             itineraryLayout.setVisibility(View.GONE);
             cnc_empty_view.setVisibility(View.VISIBLE);

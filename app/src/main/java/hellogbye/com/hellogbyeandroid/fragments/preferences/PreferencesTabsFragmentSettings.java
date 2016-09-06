@@ -129,7 +129,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
 
     private void addHotelPreferenceText(){
         settings_title_hotel_text.setText(getActivity().getResources().getText(R.string.preferences_hotel_preferences));
-        settings_hotel_text.setText(getActivity().getResources().getText(R.string.preferences_flight_prefer));
+        settings_hotel_text.setText(getActivity().getResources().getText(R.string.preferences_hotel_prefer));
     }
 
     private void initializeFlightRecycle(View rootView,  List<SettingsAttributesVO> accountFlightSettings) {

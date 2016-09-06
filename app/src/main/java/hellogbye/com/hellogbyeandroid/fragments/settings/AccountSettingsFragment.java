@@ -206,10 +206,10 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
                         getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCE_SETTINGS_EMAILS.getNavNumber(), null);
                         //emails
                         break;*/
-                    case 1:
+                    case 2:
                         getFlowInterface().goToFragment(ToolBarNavEnum.CREDIT_CARD_LIST.getNavNumber(), null);
                         break;
-                    case 2:
+                    case 1:
                         //travel preferences
                         getFlowInterface().goToFragment(ToolBarNavEnum.TRAVEL_PREFERENCE.getNavNumber(), null);
                         break;

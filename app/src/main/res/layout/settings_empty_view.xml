@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/big_star"
         android:layout_marginBottom="@dimen/DP30"/>
+
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/settings_empty_view_text"
         android:layout_width="match_parent"

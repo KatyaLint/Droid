@@ -349,3 +349,15 @@ Code changing:
     - search implementation on My Trips
     - Reselecting Tabs
     - first selected is CNC screen
+
+     View changes
+    - Airline logo after paiment
+    - Economy Class
+    - New row of flight details
+    - USD after $
+    - Hotel icons all blue
+    - USD after price hotels
+    - Date all caps
+    - Brackets in alternative flights
+    - Rounded Price
+    - new line incl taxes
