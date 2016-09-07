@@ -92,7 +92,7 @@
             <LinearLayout
                 android:id="@+id/companion_personal_add_email_ll"
                 android:layout_width="match_parent"
-
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 

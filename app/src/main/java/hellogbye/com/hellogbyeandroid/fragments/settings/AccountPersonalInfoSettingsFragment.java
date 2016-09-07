@@ -141,11 +141,13 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
 
         ArrayList<AccountsVO> accounts = getActivityInterface().getAccounts();
-       final String[] account_settings = new String[accounts.size()];
+/*       final String[] account_settings = new String[accounts.size()];
         for(int i=0;i<accounts.size();i++){
             account_settings[i] = accounts.get(i).getEmail();
-        }
+        }*/
 
+        final String[] account_settings = new String[1];
+        account_settings[0] = accounts.get(0).getEmail();
 
         AccountSettingsAdapter accountSettingsAdapter = new AccountSettingsAdapter(account_settings,getActivity());
         account_settings_email_list.setAdapter(accountSettingsAdapter);
@@ -160,14 +162,14 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
 
 
-        accountSettingsAdapter.SetOnItemClickListener(new AccountSettingsAdapter.OnItemClickListener() {
+/*        accountSettingsAdapter.SetOnItemClickListener(new AccountSettingsAdapter.OnItemClickListener() {
                                                           @Override
                                                           public void onItemClick(View view, int position) {
                                                               String account_setting = account_settings[position];
                                                               bundle.putString(HGBConstants.PERSONAL_INFO_EMAIL, account_setting);
                                                               getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCE_SETTINGS_EMAILS.getNavNumber(), bundle);
                                                           }
-                                                      });
+                                                      });*/
 
         companion_personal_settings_date_of_birth = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_date_of_birth);
 

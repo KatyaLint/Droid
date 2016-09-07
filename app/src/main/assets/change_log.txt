@@ -363,3 +363,6 @@ Code changing:
     - new line incl taxes
     - new text for type message
     - no server error in cnc
+
+    - removed add another email from account_personal_info_list_layout
+    - only one email in Personal Info
