@@ -14,12 +14,12 @@
 
     <SearchView
         android:layout_below="@+id/title_instraction"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:id="@+id/settings_search"
         android:layout_height="wrap_content"/>
 
     <include
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
         layout="@layout/settings_empty_view"
         android:layout_marginTop="@dimen/DP60"

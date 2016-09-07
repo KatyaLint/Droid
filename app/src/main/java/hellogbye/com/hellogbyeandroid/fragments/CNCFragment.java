@@ -443,7 +443,7 @@ public class CNCFragment extends HGBAbstractFragment {
             @Override
             public void onError(Object data) {
 
-                ErrorMessage(data);
+             //   ErrorMessage(data);
                 handleHGBMessage(getResources().getString(R.string.cnc_error));
                 CNCFragment.this.airportSendValuesVOs.clear();
             }
@@ -871,7 +871,7 @@ public class CNCFragment extends HGBAbstractFragment {
                     @Override
                     public void onError(Object data) {
                         handleHGBMessage(getResources().getString(R.string.cnc_error));
-                        ErrorMessage(data);
+                    //    ErrorMessage(data);
 
 
                     }
@@ -906,7 +906,7 @@ public class CNCFragment extends HGBAbstractFragment {
                 }
                 @Override
                 public void onError(Object data) {
-                    ErrorMessage(data);
+                  //  ErrorMessage(data);
                     handleHGBMessage(getResources().getString(R.string.cnc_error));
                     CNCFragment.this.airportSendValuesVOs.clear();
                 }
@@ -941,7 +941,7 @@ public class CNCFragment extends HGBAbstractFragment {
             }
             @Override
             public void onError(Object data) {
-                ErrorMessage(data);
+             //   ErrorMessage(data);
                 handleHGBMessage(getResources().getString(R.string.cnc_error));
                 airportSendValuesVOs.clear();
             }

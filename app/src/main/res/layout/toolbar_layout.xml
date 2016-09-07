@@ -123,11 +123,25 @@
         android:orientation="horizontal"
         android:visibility="gone">
 
-        <ImageButton
+   <!--     <ImageButton
             android:id="@+id/edit_preferences"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_img" />
+            android:background="@drawable/edit_img" />-->
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/edit_preferences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:textSize="@dimen/SP16"/>
+
+        <ImageButton
+            android:id="@+id/tool_bar_delete_preferences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="@drawable/ic_delete"/>
 
         <ImageButton
             android:id="@+id/check_preferences"

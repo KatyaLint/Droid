@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.crashlytics.android.Crashlytics;
@@ -122,7 +123,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private final int BOTTOM_BAR_FIFTH_INDEX = 4;
     private LinearLayout tool_bar_profile_name;
     private LinearLayout edit_preferences_ll;
-    private ImageButton edit_preferences_imagebtn;
+    private FontTextView edit_preferences_imagebtn;
     private ImageButton check_preferences;
     private ImageButton up_bar_favorite;
     private ImageButton toolbar_new_iternerary;
@@ -133,6 +134,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private SearchView search_view_tool_bar;
     private ImageButton search_maginfy;
     private FontTextView titleBar;
+    private ImageButton tool_bar_delete_preferences;
 
 
     public HGBSaveDataClass getHGBSaveDataClass() {
@@ -386,7 +388,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         toolbar_add_companion = (ImageButton)mToolbar.findViewById(R.id.toolbar_add_companion);
         tool_bar_profile_name = (LinearLayout) mToolbar.findViewById(R.id.tool_bar_profile_name);
         edit_preferences_ll = (LinearLayout) mToolbar.findViewById(R.id.preferences_edit_mode);
-        edit_preferences_imagebtn = (ImageButton) mToolbar.findViewById(R.id.edit_preferences);
+       // edit_preferences_imagebtn = (ImageButton) mToolbar.findViewById(R.id.edit_preferences);
+        edit_preferences_imagebtn = (FontTextView) mToolbar.findViewById(R.id.edit_preferences);
         check_preferences = (ImageButton) mToolbar.findViewById(R.id.check_preferences);
         itirnarary_title_Bar = (FontTextView)mToolbar.findViewById(R.id.itirnarary_title_Bar);
         up_bar_favorite = (ImageButton)mToolbar.findViewById(R.id.up_bar_favorite);
@@ -397,9 +400,13 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         search_maginfy = (ImageButton)mToolbar.findViewById(R.id.search_maginfy);
         titleBar = (FontTextView)mToolbar.findViewById(R.id.titleBar);
         my_trip_profile = (FontTextView) findViewById(R.id.my_trip_profile);
+        tool_bar_delete_preferences = (ImageButton)findViewById(R.id.tool_bar_delete_preferences);
 
     }
 
+    public ImageButton getToolBarDeletePreferences(){
+        return tool_bar_delete_preferences;
+    }
     public FontTextView getTitleBar(){
         return titleBar;
     }
@@ -443,10 +450,13 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         return tool_bar_profile_name;
     }
 
-    public ImageButton getEditPreferenceBtn(){
+  /*  public ImageButton getEditPreferenceBtn(){
+        return edit_preferences_imagebtn;
+    }*/
+
+    public FontTextView getEditPreferenceBtn(){
         return edit_preferences_imagebtn;
     }
-
     public ImageButton getCheckPreferenceButton(){
         return check_preferences;
     }

@@ -220,9 +220,12 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
 
         View rootView = inflater.inflate(R.layout.settings_list_layout, container, false);
 
-      final ImageButton edit_preferences_imagebtn = ((MainActivityBottomTabs)getActivity()).getEditPreferenceBtn();
+      //final ImageButton edit_preferences_imagebtn = ((MainActivityBottomTabs)getActivity()).getEditPreferenceBtn();
+        final FontTextView edit_preferences_imagebtn = ((MainActivityBottomTabs)getActivity()).getEditPreferenceBtn();
 
        final ImageButton check_preferences = ((MainActivityBottomTabs)getActivity()).getCheckPreferenceButton();
+        final ImageButton tool_bar_delete_preferences = ((MainActivityBottomTabs)getActivity()).getToolBarDeletePreferences();
+
         check_preferences.setVisibility(View.GONE);
         edit_preferences_imagebtn.setVisibility(View.VISIBLE);
 
@@ -262,7 +265,8 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
                     }
 
                     mAdapter.updateItems(accountAttributes);
-                    edit_preferences_imagebtn.setBackgroundResource(R.drawable.ic_delete);
+                    tool_bar_delete_preferences.setVisibility(View.VISIBLE);
+                    edit_preferences_imagebtn.setVisibility(View.GONE);
                     check_preferences.setVisibility(View.VISIBLE);
                     mAdapter.setEditMode(true);
                   //  editClickCB.onItemClick("edit");
@@ -276,7 +280,8 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
             @Override
             public void onClick(View view) { //done mode
                 check_preferences.setVisibility(View.GONE);
-                edit_preferences_imagebtn.setBackgroundResource(R.drawable.edit_img);
+                tool_bar_delete_preferences.setVisibility(View.GONE);
+              //  edit_preferences_imagebtn. //setBackgroundResource(R.drawable.edit_img);
                 edit_preferences_imagebtn.setVisibility(View.VISIBLE);
                 if(accountDefaultSettingsVO != null){
                     List<AccountDefaultSettingsVO> accountAttributes = new ArrayList<AccountDefaultSettingsVO>();

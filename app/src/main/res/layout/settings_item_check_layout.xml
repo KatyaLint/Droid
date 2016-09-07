@@ -33,10 +33,10 @@
         android:id="@+id/settings_check_active_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:textColor="@color/COLOR_999999"
         android:textSize="@dimen/SP16"
         android:text="(Active)"
+        android:visibility="gone"
         app:fontName="dinnextltpro_medium.otf" />
 
 

@@ -361,3 +361,5 @@ Code changing:
     - Brackets in alternative flights
     - Rounded Price
     - new line incl taxes
+    - new text for type message
+    - no server error in cnc

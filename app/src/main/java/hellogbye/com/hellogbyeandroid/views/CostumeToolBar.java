@@ -22,7 +22,7 @@ public class CostumeToolBar extends Toolbar {
     private FontTextView editPreferense;
     private FontTextView titleBar;
     private Toolbar mToolbar;
-    private ImageButton edit_preferences;
+    private FontTextView edit_preferences;
     private LinearLayout preferences_edit_mode;
     private ImageButton check_preferences;
     private ImageView my_trips_image_profile;
@@ -33,6 +33,7 @@ public class CostumeToolBar extends Toolbar {
     private FontTextView preference_save_changes;
     private SearchView search_view;
     private ImageButton toolbar_add_companion;
+    private ImageButton tool_bar_delete_preferences;
 
     public CostumeToolBar(Context context) {
         super(context);
@@ -71,9 +72,10 @@ public class CostumeToolBar extends Toolbar {
         }
         if (editPreferense == null) {
             preferences_edit_mode = (LinearLayout)findViewById(R.id.preferences_edit_mode);
-            edit_preferences = (ImageButton)findViewById(R.id.edit_preferences);
+            edit_preferences = (FontTextView)findViewById(R.id.edit_preferences);
             check_preferences = (ImageButton)findViewById(R.id.check_preferences);
             editPreferense = (FontTextView) findViewById(R.id.editPreference);
+            tool_bar_delete_preferences = (ImageButton)findViewById(R.id.tool_bar_delete_preferences);
         }
         if(preference_save_changes == null) {
             preference_save_changes = (FontTextView)findViewById(R.id.preference_save_changes);
@@ -121,6 +123,7 @@ public class CostumeToolBar extends Toolbar {
         editPreferense.setVisibility(View.GONE);
         edit_preferences.setVisibility(View.GONE);
         preferences_edit_mode.setVisibility(View.GONE);
+        tool_bar_delete_preferences.setVisibility(GONE);
         check_preferences.setVisibility(View.GONE);
         itirnarary_title_Bar.setVisibility(View.GONE);
         toolbar_new_iternerary_cnc.setVisibility(View.GONE);
