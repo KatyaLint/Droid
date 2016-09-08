@@ -189,14 +189,25 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
     }
 
     private void getSettingsAttributes(final String clickedAttributeID) {
+
         ConnectionManager.getInstance(getActivity()).getUserSettingsAttributes(clickedAttributeID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
 
+                    String accountName = "";
+                    for (AccountDefaultSettingsVO accountDefaultSetting : accountDefaultSettings){
+                        if(accountDefaultSetting.getmId().equals(clickedAttributeID)){
+                            accountName = accountDefaultSetting.getmProfileName();
+                            break;
+                        }
+                    }
+
+
                     accountSettingsAttributes = (List<SettingsAttributeParamVO>) data;//gson.fromJson((String) data, listType);
                     getActivityInterface().setAccountSettingsAttribute(accountSettingsAttributes);
                     Bundle args = new Bundle();
+                    args.putString(HGBConstants.BUNDLE_SETTINGS_TITLE_NAME, accountName);
                     args.putString(HGBConstants.BUNDLE_SETTINGS_ATT_ID, clickedAttributeID);
                     getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCES_TAB_SETTINGS.getNavNumber(), args);
                 }

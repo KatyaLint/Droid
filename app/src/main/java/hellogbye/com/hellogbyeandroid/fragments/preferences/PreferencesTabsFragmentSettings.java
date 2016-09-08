@@ -17,6 +17,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsDragListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
@@ -58,6 +59,15 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Bundle args = getArguments();
+
+        if (args != null) {
+            strJson = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
+            String titleName =  args.getString(HGBConstants.BUNDLE_SETTINGS_TITLE_NAME);
+            FontTextView titleBar = ((MainActivityBottomTabs) getActivity()).getTitleBar();
+            titleBar.setText(titleName);
+        }
+
         final View rootView = inflater.inflate(R.layout.settings_tabs_ex_layout, container, false);
 
         flight_tab_view = (View) rootView.findViewById(R.id.setting_flight_include);
@@ -104,10 +114,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
 
 
 
-        Bundle args = getArguments();
-        if (args != null) {
-            strJson = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
-        }
+
         initializeFontText(flight_tab_view, hotel_tab_view);
         showCorrectView();
         return rootView;
@@ -278,6 +285,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
                 if (data != null) {
                     List<SettingsAttributesVO> acountSettingsAttributes = (List<SettingsAttributesVO>) data; //gson.fromJson((String) data, listType);
                     String settingsGuid = getSettingGuidSelected();
+
                     switch (settingsGuid) {
                         case "1":
                             getActivityInterface().setAccountSettingsFlightCarrierAttributes(acountSettingsAttributes);

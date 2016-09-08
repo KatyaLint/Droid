@@ -41,6 +41,9 @@ public interface HGBFlowInterface {
     void openRightPane();
 
     void enableFullScreen(boolean fullscreen);
+
+
+
    /* void selectBottomBar(int selection);*/
 
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HelloGBye</string>
+    <string name="app_name">HelloGbye</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -103,7 +103,7 @@
     <string name="preferences_prefered_flight_carrier">Preferred Airline</string>
     <string name="preferences_prefered_flight_carrier_favorite">Tell us which airlines you like best</string>
 
-    <string name="preferences_hint_add_name">Add new preference name</string>
+    <string name="preferences_hint_add_name">Name your profile</string>
 
     <string name="preferences_add_button">Create New Profile</string>
     <string name="preferences_remove_email">Remove Email Address</string>
@@ -124,6 +124,7 @@
     <string name="send">Go</string>
     <!--<string name="default_cnc_message"> welcome to\nHelloGbye. Tell us in your own words where and when you'd\nlike to go.</string>-->
     <string name="default_cnc_message">Hello %1$s, welcome to\nHelloGbye. Tell us in your own words where and when you\'d like to go.</string>
+    <string name="default_cnc_message_two">You can come back here\nanytime and make changes to\nyour itinerary</string>
     <string name="itinerary_created">Ok, here\'s what we found for you</string>
     <string name="itinerary_no_items">No content available</string>
     <string name="grid_has_been_updated">OK, the grid has been updated</string>

@@ -63,7 +63,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         if (position != 0) {
             viewHolder.flight_tickets_rl.setVisibility(View.GONE);
         } else {
-            viewHolder.flight_cost.setText("$" + HGBUtility.roundNumber(getFlightCost()));
+            viewHolder.flight_cost.setText("$" + HGBUtility.roundNumber(getFlightCost()) + "USD");
 
             viewHolder.flight_direction.setText(destinationFlights);
             viewHolder.flight_tickets_rl.setVisibility(View.VISIBLE);

@@ -120,7 +120,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
         FontTextView textView = new FontTextView(activity);
 
         textView.setTextAppearance(activity, R.style.GridViewPassangersTextStyle);
-        textView.setText(passenger.getmName() +" - " + "$" + HGBUtility.roundNumber(passenger.getmTotalPrice() ));
+        textView.setText(passenger.getmName() +" - " + "$" + HGBUtility.roundNumber(passenger.getmTotalPrice()) + "USD");
         textView.setGravity(Gravity.CENTER);
      //   textView.setTextSize(R.dimen.SP16);
     //    LayoutParams params = new LayoutParams((int) getResources().getDimension(R.dimen.DP150),LayoutParams.WRAP_CONTENT); //width 150

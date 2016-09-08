@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:text="$1434.12"
+                    android:text="$1434"
                     android:textColor="@color/COLOR_003D4C"
                     android:textSize="@dimen/SP30"
                     app:fontName="dinnextltpro_medium.otf" />

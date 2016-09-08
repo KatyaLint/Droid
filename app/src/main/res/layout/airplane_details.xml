@@ -302,7 +302,7 @@
         android:padding="@dimen/DP10">
 
         <LinearLayout
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:id="@+id/flight_class_layout"
             android:orientation="vertical"
             android:layout_width="@dimen/DP0"
@@ -330,10 +330,12 @@
             android:layout_marginLeft="@dimen/DP6"
             android:layout_marginRight="@dimen/DP6"
             android:layout_width="@dimen/DP1"
+            android:visibility="gone"
             android:layout_height="match_parent"
             android:background="@color/COLOR_999999"/>
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_weight="1"
             android:id="@+id/aircraft_layout"
             android:orientation="vertical"
@@ -345,6 +347,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/flight_baggage"
+
             style="@style/flight_details_view_title"/>
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -355,7 +358,7 @@
             style="@style/flight_details_view_text"/>
         </LinearLayout>
 
-        <include  layout="@layout/layout_arrow"/>
+        <include  android:visibility="gone" layout="@layout/layout_arrow"/>
     </LinearLayout>
 
     <View

@@ -366,3 +366,8 @@ Code changing:
 
     - removed add another email from account_personal_info_list_layout
     - only one email in Personal Info
+    - app name changed to HelloGbye
+    - new message for user in cnc screen
+    - instead of join new companion, add
+    - first screen of profile screen title profile name
+    - no more baggage in flight screen

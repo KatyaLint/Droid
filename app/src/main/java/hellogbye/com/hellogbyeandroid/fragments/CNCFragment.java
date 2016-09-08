@@ -389,7 +389,7 @@ public class CNCFragment extends HGBAbstractFragment {
         String tripSolutionId = getActivityInterface().getTravelOrder().getmSolutionID(); //getActivityInterface().getSolutionID();
 
         String userName = "";
-        String joinQuery = "Join ";
+        String joinQuery = "Add ";
 
      //   ArrayList<AccountsVO> accounts = getActivityInterface().getAccounts();
         ArrayList<CompanionVO> companions = getActivityInterface().getCompanions();
@@ -593,8 +593,11 @@ public class CNCFragment extends HGBAbstractFragment {
             String text = String.format(res.getString(R.string.default_cnc_message),userName );
 
             getActivityInterface().addCNCItem(new CNCItem(text, CNCAdapter.HGB_ITEM));
+            getActivityInterface().addCNCItem(new CNCItem(res.getString(R.string.default_cnc_message_two), CNCAdapter.HGB_ITEM_NO_ICON));
             mTextTutoralHeader.setVisibility(View.VISIBLE);
             mTextTutoralBody.setVisibility(View.VISIBLE);
+
+
         }
         else if (getActivityInterface().getCNCItems() == null) {
             try {
