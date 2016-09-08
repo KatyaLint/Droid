@@ -27,32 +27,6 @@
         app:fontName="dinnextltpro_medium.otf" />
  <!--   android:layout_below="@+id/toolbar_cnc"-->
 
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:id="@+id/text_tutorial_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/you_can_say_things_like"
-            android:textColor="@color/COLOR_999999"
-            android:textSize="@dimen/SP14"
-            android:visibility="gone"
-            app:fontName="dinnextltpro_medium.otf" />
-        ​
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:id="@+id/text_tutorial_body"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/DP16"
-            android:layout_below="@+id/text_tutorial_header"
-            android:paddingLeft="@dimen/DP54"
-            android:paddingRight="@dimen/DP54"
-            android:gravity="center"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/COLOR_999999"
-            android:visibility="gone"
-            android:textSize="@dimen/SP14"
-            app:fontName="dinnextltpro_medium.otf" />
-
 
 
     <!--android:background="@drawable/b_g_android"-->
@@ -73,7 +47,7 @@
         android:scrollbars="vertical" />
 
            <RelativeLayout
-               android:layout_marginTop="@dimen/DP44"
+               android:layout_marginTop="@dimen/DP26"
                android:layout_gravity="center"
                android:layout_width="match_parent"
                android:layout_height="wrap_content">
@@ -86,11 +60,42 @@
            android:layout_height="wrap_content"
            android:textSize="@dimen/SP14"
            android:padding="@dimen/DP6"
+           android:visibility="gone"
+           android:textColor="@color/COLOR_999999"
            android:drawableRight="@drawable/new_trip"
            android:drawablePadding="@dimen/DP6"
            app:fontName="dinnextltpro_medium.otf"
            android:text="@string/cnc_start_planning_msg"/>
 
+               <LinearLayout
+                   android:id="@+id/cnc_text_tutorial_ll"
+                   android:layout_centerInParent="true"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:gravity="center"
+                   android:layout_marginLeft="@dimen/DP54"
+                   android:layout_marginRight="@dimen/DP54"
+                   android:orientation="vertical">
+               <hellogbye.com.hellogbyeandroid.views.FontTextView
+                   android:id="@+id/text_tutorial_header"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:gravity="center"
+                   android:text="@string/you_can_say_things_like"
+                   android:textColor="@color/COLOR_999999"
+                   android:textSize="@dimen/SP14"
+                   app:fontName="dinnextltpro_medium.otf" />
+               ​
+               <hellogbye.com.hellogbyeandroid.views.FontTextView
+                   android:id="@+id/text_tutorial_body"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="@dimen/DP14"
+                   android:gravity="center"
+                   android:textColor="@color/COLOR_999999"
+                   android:textSize="@dimen/SP14"
+                   app:fontName="dinnextltpro_medium.otf" />
+               </LinearLayout>
 
            </RelativeLayout>
        </LinearLayout>

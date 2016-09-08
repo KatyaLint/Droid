@@ -371,3 +371,4 @@ Code changing:
     - instead of join new companion, add
     - first screen of profile screen title profile name
     - no more baggage in flight screen
+    - tutorial text for user fix

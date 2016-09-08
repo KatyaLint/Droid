@@ -75,6 +75,7 @@ public class CNCFragment extends HGBAbstractFragment {
     private String[] locationArr;
    // private Button cnc_fragment_trip_settings;
     private static int SPLASH_TIME_OUT = 5000;
+    private static int CNC_TUTORIAL_TYPING_TEXT_TIME_DURATION = 3000;
     //  private CostumeToolBar mToolbar;
 
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
@@ -82,6 +83,7 @@ public class CNCFragment extends HGBAbstractFragment {
     private ImageButton cncDissmissImageButton;
 
     private FontTextView mTextTutoralBody;
+    private LinearLayout cnc_text_tutorial_ll;
     private FontTextView mTextTutoralHeader;
     private  Handler tutorailTexthandler = new Handler();
     private   Runnable mRunnable;
@@ -99,6 +101,7 @@ public class CNCFragment extends HGBAbstractFragment {
     private ArrayList<AccountDefaultSettingsVO> accountAttributes;
     private LinearLayout tool_bar_profile_name;
     private ArrayList<DefaultsProfilesVO> accountDefaultSettings;
+    private FontTextView cnc_start_planing_text;
     //   private  AirportSendValuesVO airportSendValuesVO;
 
 
@@ -109,6 +112,8 @@ public class CNCFragment extends HGBAbstractFragment {
         fragment.setArguments(args);
         return fragment;
     }
+
+
 
     @Nullable
     @Override
@@ -136,18 +141,18 @@ public class CNCFragment extends HGBAbstractFragment {
 
         args = getArguments();
         clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT);
+
         startTutorial();
+
         if(clearCNCscreen){
          //   startTutorialText();
             clearCNCItems();
 
             //This is to ckeck and display tutorial this version was cancelled waiting for new one
 
-            mTextTutoralHeader.setVisibility(View.VISIBLE);
-            mTextTutoralBody.setVisibility(View.VISIBLE);
+            setTutorialTextVisibility(true);
         }else{
-            mTextTutoralHeader.setVisibility(View.GONE);
-            mTextTutoralBody.setVisibility(View.GONE);
+            setTutorialTextVisibility(false);
         }
 
 
@@ -180,7 +185,8 @@ public class CNCFragment extends HGBAbstractFragment {
                 clearCNCItems();
             }
         });
-
+        startTutorialText();
+      //  showMessagesToUser();
         return rootView;
     }
 
@@ -493,16 +499,6 @@ public class CNCFragment extends HGBAbstractFragment {
             }, SPLASH_TIME_OUT);
         }
 
-        mRunnable = new Runnable() {
-            @Override
-            public void run() {
-                //Do something after 100ms
-                changeTutorialText();
-                tutorailTexthandler.postDelayed(mRunnable, 2000);
-            }
-        };
-
-
     }
 
 
@@ -594,8 +590,8 @@ public class CNCFragment extends HGBAbstractFragment {
 
             getActivityInterface().addCNCItem(new CNCItem(text, CNCAdapter.HGB_ITEM));
             getActivityInterface().addCNCItem(new CNCItem(res.getString(R.string.default_cnc_message_two), CNCAdapter.HGB_ITEM_NO_ICON));
-            mTextTutoralHeader.setVisibility(View.VISIBLE);
-            mTextTutoralBody.setVisibility(View.VISIBLE);
+            setTutorialTextVisibility(true);
+
 
 
         }
@@ -609,13 +605,8 @@ public class CNCFragment extends HGBAbstractFragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            setTutorialTextVisibility(false);
         }
-
-
-
-
-
-
 
     }
 
@@ -629,7 +620,9 @@ public class CNCFragment extends HGBAbstractFragment {
 
         mTextTutoralHeader = (FontTextView) view.findViewById(R.id.text_tutorial_header);
         mTextTutoralBody = (FontTextView)view.findViewById(R.id.text_tutorial_body);
+        cnc_text_tutorial_ll = (LinearLayout)view.findViewById(R.id.cnc_text_tutorial_ll);
 
+        cnc_start_planing_text = (FontTextView)view.findViewById(R.id.cnc_start_planing_text);
 
         mSendTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -677,14 +670,26 @@ public class CNCFragment extends HGBAbstractFragment {
     }
 
 
+
+    private void setTutorialTextVisibility(boolean isVisible){
+        if(isVisible){
+            cnc_start_planing_text.setVisibility(View.GONE);
+            cnc_text_tutorial_ll.setVisibility(View.VISIBLE);
+        }else{
+            cnc_start_planing_text.setVisibility(View.VISIBLE);
+            cnc_text_tutorial_ll.setVisibility(View.GONE);
+        }
+    }
+
     public void handleMyMessage(final String strMessageReceived) {
-        stopTextTutorial();
-        mTextTutoralHeader.setVisibility(View.GONE);
-        mTextTutoralBody.setVisibility(View.GONE);
+        //stopTextTutorial();
+        //setTutorialTextVisibility(false);
+
         getActivityInterface().addCNCItem(new CNCItem(strMessageReceived.trim(), CNCAdapter.ME_ITEM));
         addWaitingItem();
         mCNCAdapter.notifyDataSetChanged();
         resetMessageEditText();
+
      //   enterCNCMessage(strMessage);
 
         HGBTranslate.translateQueary(getActivity().getApplicationContext(),strMessageReceived, new HGBTranslateInterface() {
@@ -715,6 +720,9 @@ public class CNCFragment extends HGBAbstractFragment {
 
                 @Override
                 public void serverFinished(AirportServerResultVO airportResult) {
+
+                    setTutorialTextVisibility(false);
+
                     ArrayList<ResponsesVO> responses = airportResult.getResponses();
                     maxAirportSize = 0;//responses.size();
                    /* for (ResponsesVO response : responses) {
@@ -892,9 +900,12 @@ public class CNCFragment extends HGBAbstractFragment {
         if(!cncItems.isEmpty() && cncItems.size()>1){
 
             UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
-            String solutionId = travelOrder.getmSolutionID();
+            
+                String solutionId = travelOrder.getmSolutionID();
+                airportSendValuesVO.setId(solutionId);
+
             airportSendValuesVO.setQuery(strMessage);
-            airportSendValuesVO.setId(solutionId);
+
             airportSendValuesVO.setTravelpreferenceprofileid(getActivityInterface().getCurrentUser().getUserprofileid());
 
             airportSendValuesVOsTemp.add(airportSendValuesVO);
@@ -1005,14 +1016,41 @@ public class CNCFragment extends HGBAbstractFragment {
         mCNCAdapter.notifyDataSetChanged();
     }
 
-
     public void requestFocusOnMessage(){
         mEditText.requestFocus();
     }
 
-    public void  startTutorialText(){
 
-        tutorailTexthandler.postDelayed(mRunnable,2000);
+    private void updateText(){
+
+        if(account_settings.length ==mTutorialTextNumber){
+            mTutorialTextNumber = 0;
+        }
+        mTextTutoralBody.setText(account_settings[mTutorialTextNumber]);
+
+        mTutorialTextNumber++;
+    }
+
+    private void  startTutorialText(){
+        mRunnable = new Runnable() {
+            @Override
+            public void run() {
+                changeTutorialText();
+                tutorailTexthandler.postDelayed(mRunnable, CNC_TUTORIAL_TYPING_TEXT_TIME_DURATION);
+            }
+        };
+    }
+
+    @Override
+    public void onResume() {
+        tutorailTexthandler.post(mRunnable);
+        super.onResume();
+    }
+
+    @Override
+    public void onStop() {
+        tutorailTexthandler.removeCallbacks(mRunnable);
+        super.onStop();
     }
 
     private void changeTutorialText() {
@@ -1032,29 +1070,14 @@ public class CNCFragment extends HGBAbstractFragment {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-
-                if(account_settings.length ==mTutorialTextNumber){
-                    mTutorialTextNumber = 0;
-                }
-                mTextTutoralBody.setText(account_settings[mTutorialTextNumber]);
-                mTextTutoralBody.startAnimation(fadeIn);
-
-                mTutorialTextNumber++;
+                updateText();
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-
             }
         });
-
-
     }
-
-    public void stopTextTutorial(){
-        tutorailTexthandler.removeCallbacks(mRunnable);
-    }
-
 
     @Override
     public void onDestroyView() {
