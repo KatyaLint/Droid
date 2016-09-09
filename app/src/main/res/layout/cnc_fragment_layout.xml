@@ -32,21 +32,25 @@
     <!--android:background="@drawable/b_g_android"-->
 
    <ScrollView
+       android:layout_alignParentTop="true"
+       android:layout_above="@+id/speak_tutorial"
        android:layout_width="match_parent"
        android:layout_height="wrap_content">
        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:orientation="vertical">
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cnc_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/cnc_message_rl"
-        android:layout_alignParentTop="true"
-        android:scrollbars="vertical" />
+        android:layout_alignParentTop="true" />
 
            <RelativeLayout
+               android:id="@+id/cnc_tutorial_text_rl"
                android:layout_marginTop="@dimen/DP26"
                android:layout_gravity="center"
                android:layout_width="match_parent"

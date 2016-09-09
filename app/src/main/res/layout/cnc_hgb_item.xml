@@ -26,4 +26,5 @@
         android:background="@drawable/hgb_cnc_backround"
         android:layout_alignParentLeft="true"/>
 
+
 </LinearLayout>

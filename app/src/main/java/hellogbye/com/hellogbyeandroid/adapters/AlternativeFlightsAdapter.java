@@ -66,6 +66,7 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
                 stopOverCount = stopOverCount + 1;
             }
         }
+        stopOverCount = stopOverCount - 1; //StopOver one less then legs
         if(stopOverCount > 0){
             viewHolder.alternative_flight_stops.setText("Stops: " + stopOverCount);
         }else{

@@ -123,12 +123,10 @@ public class CNCFragment extends HGBAbstractFragment {
         account_settings = getResources().getStringArray(R.array.tutorial_arr);
 
         View rootView = inflater.inflate(R.layout.cnc_fragment_layout, container, false);
+        init(rootView);
         //   mToolbar = (CostumeToolBar)rootView.findViewById(R.id.toolbar_cnc);
 
         mHGBPrefrenceManager = HGBPreferencesManager.getInstance(getActivity().getApplicationContext());
-
-        init(rootView);
-        initList();
 
 
         //    updateToolBarView();
@@ -142,8 +140,6 @@ public class CNCFragment extends HGBAbstractFragment {
         args = getArguments();
         clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT);
 
-        startTutorial();
-
         if(clearCNCscreen){
          //   startTutorialText();
             clearCNCItems();
@@ -155,6 +151,9 @@ public class CNCFragment extends HGBAbstractFragment {
             setTutorialTextVisibility(false);
         }
 
+        startTutorial();
+
+        initList();
 
         String solution_id = args.getString(HGBConstants.SOLUTION_ITINERARY_ID);
         if(solution_id != null){
@@ -523,7 +522,15 @@ public class CNCFragment extends HGBAbstractFragment {
         loadCNCList();
         mRecyclerView.setHasFixedSize(true);
         // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager = new LinearLayoutManager(getContext());
+ /*       mLayoutManager = new LinearLayoutManager(getContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+*/
+
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mCNCAdapter = new CNCAdapter(getActivity().getApplicationContext(), getActivityInterface().getCNCItems());
@@ -709,7 +716,7 @@ public class CNCFragment extends HGBAbstractFragment {
     }
 
     private void enterCNCMessage(final String strMessage) {
-
+        setTutorialTextVisibility(false);
         clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
         if(!clearCNCscreen) {
             sendCNCMessageToServer(strMessage);
@@ -721,7 +728,7 @@ public class CNCFragment extends HGBAbstractFragment {
                 @Override
                 public void serverFinished(AirportServerResultVO airportResult) {
 
-                    setTutorialTextVisibility(false);
+
 
                     ArrayList<ResponsesVO> responses = airportResult.getResponses();
                     maxAirportSize = 0;//responses.size();
@@ -900,7 +907,7 @@ public class CNCFragment extends HGBAbstractFragment {
         if(!cncItems.isEmpty() && cncItems.size()>1){
 
             UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
-            
+
                 String solutionId = travelOrder.getmSolutionID();
                 airportSendValuesVO.setId(solutionId);
 

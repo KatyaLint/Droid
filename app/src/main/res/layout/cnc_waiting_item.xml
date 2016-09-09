@@ -20,7 +20,15 @@
         <!--android:background="@drawable/hgb_cnc_backround"-->
         <!--android:layout_alignParentLeft="true"/>-->
 
+    <ImageView
+        android:id="@+id/cnc_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/DP10"
+        android:background="@drawable/hello_gbye_icon_r_g_b_red"/>
+
     <pl.tajchert.sample.DotsTextView
+        android:layout_toRightOf="@+id/cnc_image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/dots"

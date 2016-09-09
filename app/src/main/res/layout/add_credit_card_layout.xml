@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,19 +22,6 @@
         android:text="@string/payment_card_information"
         app:fontName="dinnextltpro_regular.otf" />
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/cc_scan"
-        style="@style/GrayCustomButtonStyle"
-        android:layout_alignParentTop="true"
-        android:padding="5dp"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_alignParentRight="true"
-        android:textSize="@dimen/SP10"
-        android:layout_marginTop="@dimen/DP6"
-        android:layout_marginRight="@dimen/DP6"
-        android:text="@string/payment_scan_card" />
-
 
 
     <LinearLayout
@@ -46,6 +33,11 @@
         android:orientation="vertical"
         android:padding='@dimen/DP24'>
 
+        <RelativeLayout
+
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <com.devmarvel.creditcardentry.library.CreditCardForm
             android:id="@+id/cc_number"
             style="@style/cc_number_edit_text"
@@ -60,6 +52,19 @@
             android:inputType="phone"
             app:fontName="dinnextltpro_regular.otf" />
 
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/cc_scan"
+            android:layout_alignParentTop="true"
+            android:padding="@dimen/DP4"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/SP10"
+            android:layout_marginTop="@dimen/DP6"
+            android:layout_marginRight="@dimen/DP6"
+            android:text="@string/payment_scan_card" />
+     <!--       style="@style/GrayCustomButtonStyle"-->
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -244,4 +249,4 @@
 
     </RelativeLayout>
     </ScrollView>
-</LinearLayout>
+</RelativeLayout>

@@ -372,3 +372,6 @@ Code changing:
     - first screen of profile screen title profile name
     - no more baggage in flight screen
     - tutorial text for user fix
+    - credit card, scan card text
+    - stopOver fix count
+    - middle name in correct places

@@ -17,8 +17,18 @@
 
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/travel_detail_first_name"
-        style="@style/TravelerDetailsTextStyle" />
+        style="@style/TravelerDetailsTextStyle"
+        android:hint="First Name"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DP1"
+        android:background="@color/COLOR_999999"  />
+
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+        android:id="@+id/travel_detail_middle_name"
+        style="@style/TravelerDetailsTextStyle"
+        android:hint="Middle Name" />
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
@@ -34,14 +44,7 @@
         android:background="@color/COLOR_999999"  />
 
 
-    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
-        android:id="@+id/travel_detail_middle_name"
-        style="@style/TravelerDetailsTextStyle"
-        android:hint="Middle Name" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/DP1"
-        android:background="@color/COLOR_999999"  />
+
 
     <LinearLayout
         android:layout_width="match_parent"
