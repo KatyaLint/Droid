@@ -308,11 +308,11 @@ Code changing:
         - Fixed crash in Personal information
         - (HEL-1355) can't create a new query
 
-       Code changing:
-       --------------
+    Code changing:
+    --------------
 
 
-  ------------------------------------------
+   ------------------------------------------
                Version 1.6.0
    ------------------------------------------
    Fixed Bugs:
@@ -375,3 +375,13 @@ Code changing:
     - credit card, scan card text
     - stopOver fix count
     - middle name in correct places
+
+   ------------------------------------------
+                   Version 1.6.1
+   ------------------------------------------
+    Fixed Bugs:
+    -----------
+
+
+    Code changing:
+    --------------
