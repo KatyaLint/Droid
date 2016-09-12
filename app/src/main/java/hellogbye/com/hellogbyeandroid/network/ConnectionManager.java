@@ -1087,9 +1087,10 @@ public class ConnectionManager {
     }
 
     public void getAlternateHotelRoomsWithHotel(String solutioid, String paxid, String checkin, String checkout, String hotelcode, final ServerRequestListener listener) {
-
+        String [] chekinArray = checkin.split("T");
+        String [] chekoutArray = checkout.split("T");
         String url = getURL(Services.USER_HOTEL_ROOM_ALTERNATIVE);
-        url = url + solutioid + "&paxid=" + paxid + "&checkin=" + checkin + "&checkout=" + checkout + "hotelcode=" + hotelcode;
+        url = url+"?solution=" + solutioid + "&paxid=" + paxid + "&checkin=" + chekinArray[0] + "&checkout=" + chekoutArray[0] + "&hotelcode=" + hotelcode;
 
         JSONObject jsonObject = new JSONObject();
 
@@ -1097,14 +1098,14 @@ public class ConnectionManager {
                 jsonObject, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(response);
+                listener.onSuccess(Parser.parseHotelRoomsData(response));
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
+                  listener.onError(Parser.parseErrorMessage(error));
             }
-        });
+        },false);
     }
 
     //{"parameters":{"solution":"c86d9879-eb15-4164-8b75-6bbac0787b75","paxid":"9d2c85f5-d295-4064-a8c6-a4d0015b52e4","checkin":"2015-09-03","checkout":"2015-09-04"},"hotel":"c329c20a-4836-4bec-9580-48f7814e9fbd"}

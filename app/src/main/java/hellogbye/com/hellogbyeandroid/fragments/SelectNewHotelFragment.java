@@ -1,18 +1,11 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +30,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelAdapter;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.views.FontTextView;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 /**
  * Created by arisprung on 8/29/16.
@@ -70,7 +63,7 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
         View rootView = inflater.inflate(R.layout.select_new_hotel_main_layout, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.alt_hotel_recycler_view);
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        initHotel();
+
         mRecyclerView.setLayoutManager(mLayoutManager);
         getFlowInterface().setSelectedHotelNode(null);
 
@@ -82,7 +75,7 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         FragmentManager fm = getChildFragmentManager();
-
+        initHotel();
         mMapfragment = (SupportMapFragment) fm.findFragmentById(R.id.map); //((SupportMapFragment) activity.getFragmentManager().findFragmentById(R.id.map));//(SupportMapFragment) fm.findFragmentById(R.id.map);
 
         if (mMapfragment == null) {
@@ -115,7 +108,6 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
         mAdapter.SetOnSelectClickListener(new AlternativeHotelAdapter.OnSelectItemClickListener() {
             @Override
             public void onSelectItemClick(View view, int position) {
-                Log.d("","");
                 getFlowInterface().setSelectedHotelNode(mNodesList.get(position));
                 getActivity().onBackPressed();
             }
@@ -195,103 +187,17 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
             Marker marker = mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(mNodesList.get(i).getmLatitude(), mNodesList.get(i).getmLongitude())));
             if(mCurrentSelectedNode.getmHotelCode().equals(mNodesList.get(i).getmHotelCode())){
-                marker.setIcon(BitmapDescriptorFactory.fromBitmap(getMarkerBitmap(true,i + 1, mNodesList.get(i).getmStarRating(), mNodesList.get(i).getmMinimumAmount())));
+                marker.setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(true,i + 1, mNodesList.get(i).getmStarRating(), mNodesList.get(i).getmMinimumAmount(),getActivity())));
 
             }else{
-                marker.setIcon(BitmapDescriptorFactory.fromBitmap(getMarkerBitmap(false,i + 1, mNodesList.get(i).getmStarRating(), mNodesList.get(i).getmMinimumAmount())));
+                marker.setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(false,i + 1, mNodesList.get(i).getmStarRating(), mNodesList.get(i).getmMinimumAmount(),getActivity())));
             }
-
-
         }
-
     }
 
     private void initializeMap() {
         mMapfragment.getMapAsync(this);
     }
-
-    private Bitmap getMarkerBitmap(boolean isFirst,int index, float star, double price) {
-
-
-        View customMarkerView = ((LayoutInflater)  getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.select_hotel_marker_layout, null);
-
-        if(isFirst){
-            customMarkerView.setBackgroundResource(R.drawable.bubbles_red_background);
-        }else{
-            customMarkerView.setBackgroundResource(R.drawable.bubbles_white_background);
-        }
-        FontTextView numTxt = (FontTextView) customMarkerView.findViewById(R.id.select_hotel_marker_price);
-
-        FontTextView indexText = (FontTextView) customMarkerView.findViewById(R.id.index);
-        numTxt.setText("$" + price);
-        indexText.setText(String.valueOf(index));
-
-        setStarRating(customMarkerView, star);
-        customMarkerView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        customMarkerView.layout(0, 0, customMarkerView.getMeasuredWidth(), customMarkerView.getMeasuredHeight());
-        customMarkerView.buildDrawingCache();
-        Bitmap returnedBitmap = Bitmap.createBitmap(customMarkerView.getMeasuredWidth(), customMarkerView.getMeasuredHeight(),
-                Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(returnedBitmap);
-        canvas.drawColor(Color.WHITE, PorterDuff.Mode.SRC_IN);
-        Drawable drawable = customMarkerView.getBackground();
-        if (drawable != null)
-            drawable.draw(canvas);
-        customMarkerView.draw(canvas);
-        return returnedBitmap;
-    }
-
-    private void setStarRating(View view, float star) {
-
-        if ("0.5".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.half_star, R.drawable.empty_star,
-                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
-
-        } else if ("1.0".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.full_star, R.drawable.empty_star,
-                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
-
-        } else if ("1.5".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.full_star, R.drawable.half_star,
-                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
-
-        } else if ("2.0".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
-        } else if ("2.5".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.half_star, R.drawable.empty_star, R.drawable.empty_star);
-        } else if ("3.0".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.empty_star, R.drawable.empty_star);
-        } else if ("3.5".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.half_star, R.drawable.empty_star);
-
-        } else if ("4.0".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.full_star, R.drawable.empty_star);
-
-        } else if ("4.5".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.full_star, R.drawable.half_star);
-
-        } else if ("5.0".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.full_star, R.drawable.full_star);
-
-        }
-    }
-
-    private void starHolder(View view, int firstStar, int secondStar, int thirdStar, int fourStar, int fiveStar) {
-        view.findViewById(R.id.star1).setBackgroundResource(firstStar);
-        view.findViewById(R.id.star2).setBackgroundResource(secondStar);
-        view.findViewById(R.id.star3).setBackgroundResource(thirdStar);
-        view.findViewById(R.id.star4).setBackgroundResource(fourStar);
-        view.findViewById(R.id.star5).setBackgroundResource(fiveStar);
-
-    }
-
 
 
     private void initHotel(){

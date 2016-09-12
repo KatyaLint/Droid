@@ -7,6 +7,7 @@ import android.app.DatePickerDialog;
 
 
 import android.content.pm.PackageManager;
+import android.graphics.PorterDuff;
 import android.location.Criteria;
 import android.os.Build;
 import android.provider.Settings;
@@ -543,7 +544,114 @@ public class HGBUtility {
         return bitmap;
     }
 
+    public static Bitmap getMarkerBitmap(boolean isFirst,int index, float star, double price,Activity activity) {
 
+
+        View customMarkerView = ((LayoutInflater)  activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.select_hotel_marker_layout, null);
+
+        if(isFirst){
+            customMarkerView.setBackgroundResource(R.drawable.bubbles_red_background);
+        }else{
+            customMarkerView.setBackgroundResource(R.drawable.bubbles_white_background);
+        }
+        FontTextView numTxt = (FontTextView) customMarkerView.findViewById(R.id.select_hotel_marker_price);
+
+        FontTextView indexText = (FontTextView) customMarkerView.findViewById(R.id.index);
+        numTxt.setText("$" + price);
+        indexText.setText(String.valueOf(index));
+
+        setStarRating(customMarkerView, star);
+        customMarkerView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        customMarkerView.layout(0, 0, customMarkerView.getMeasuredWidth(), customMarkerView.getMeasuredHeight());
+        customMarkerView.buildDrawingCache();
+        Bitmap returnedBitmap = Bitmap.createBitmap(customMarkerView.getMeasuredWidth(), customMarkerView.getMeasuredHeight(),
+                Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(returnedBitmap);
+        canvas.drawColor(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        Drawable drawable = customMarkerView.getBackground();
+        if (drawable != null)
+            drawable.draw(canvas);
+        customMarkerView.draw(canvas);
+        return returnedBitmap;
+    }
+
+    public static Bitmap getMyHotelMarkerBitmap(float star, double price,Activity activity) {
+
+
+        View customMarkerView = ((LayoutInflater)  activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.select_hotel_marker_layout, null);
+
+
+        customMarkerView.setBackgroundResource(R.drawable.rectangle_726);
+        FontTextView numTxt = (FontTextView) customMarkerView.findViewById(R.id.select_hotel_marker_price);
+
+        FontTextView indexText = (FontTextView) customMarkerView.findViewById(R.id.index);
+        numTxt.setText("$" + price);
+        indexText.setVisibility(View.GONE);
+
+        setStarRating(customMarkerView, star);
+        customMarkerView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        customMarkerView.layout(0, 0, customMarkerView.getMeasuredWidth(), customMarkerView.getMeasuredHeight());
+        customMarkerView.buildDrawingCache();
+        Bitmap returnedBitmap = Bitmap.createBitmap(customMarkerView.getMeasuredWidth(), customMarkerView.getMeasuredHeight(),
+                Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(returnedBitmap);
+        canvas.drawColor(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        Drawable drawable = customMarkerView.getBackground();
+        if (drawable != null)
+            drawable.draw(canvas);
+        customMarkerView.draw(canvas);
+        return returnedBitmap;
+    }
+    private static void setStarRating(View view, float star) {
+
+        if ("0.5".equals(String.valueOf(star))) {
+            starHolder(view, R.drawable.half_star, R.drawable.empty_star,
+                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
+
+        } else if ("1.0".equals(String.valueOf(star))) {
+            starHolder(view, R.drawable.full_star, R.drawable.empty_star,
+                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
+
+        } else if ("1.5".equals(String.valueOf(star))) {
+            starHolder(view, R.drawable.full_star, R.drawable.half_star,
+                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
+
+        } else if ("2.0".equals(String.valueOf(star))) {
+            starHolder(view, R.drawable.full_star, R.drawable.full_star,
+                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
+        } else if ("2.5".equals(String.valueOf(star))) {
+            starHolder(view, R.drawable.full_star, R.drawable.full_star,
+                    R.drawable.half_star, R.drawable.empty_star, R.drawable.empty_star);
+        } else if ("3.0".equals(String.valueOf(star))) {
+            starHolder(view, R.drawable.full_star, R.drawable.full_star,
+                    R.drawable.full_star, R.drawable.empty_star, R.drawable.empty_star);
+        } else if ("3.5".equals(String.valueOf(star))) {
+            starHolder(view, R.drawable.full_star, R.drawable.full_star,
+                    R.drawable.full_star, R.drawable.half_star, R.drawable.empty_star);
+
+        } else if ("4.0".equals(String.valueOf(star))) {
+            starHolder(view, R.drawable.full_star, R.drawable.full_star,
+                    R.drawable.full_star, R.drawable.full_star, R.drawable.empty_star);
+
+        } else if ("4.5".equals(String.valueOf(star))) {
+            starHolder(view, R.drawable.full_star, R.drawable.full_star,
+                    R.drawable.full_star, R.drawable.full_star, R.drawable.half_star);
+
+        } else if ("5.0".equals(String.valueOf(star))) {
+            starHolder(view, R.drawable.full_star, R.drawable.full_star,
+                    R.drawable.full_star, R.drawable.full_star, R.drawable.full_star);
+
+        }
+    }
+
+    private static void starHolder(View view, int firstStar, int secondStar, int thirdStar, int fourStar, int fiveStar) {
+        view.findViewById(R.id.star1).setBackgroundResource(firstStar);
+        view.findViewById(R.id.star2).setBackgroundResource(secondStar);
+        view.findViewById(R.id.star3).setBackgroundResource(thirdStar);
+        view.findViewById(R.id.star4).setBackgroundResource(fourStar);
+        view.findViewById(R.id.star5).setBackgroundResource(fiveStar);
+
+    }
 
 
     public static void hideKeyboard(Context context,View view) {

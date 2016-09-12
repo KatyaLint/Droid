@@ -369,6 +369,19 @@ public class Parser {
         return cell;
     }
 
+    public static Object parseHotelRoomsData(String response) {
+        NodesVO node = new NodesVO();
+        try {
+            Gson gson = new Gson();
+            Type type = new TypeToken<NodesVO>() {
+            }.getType();
+            node = gson.fromJson(response, type);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return node;
+    }
+
     public static Object parseUser(String response) {
         UserProfileVO userdata = new UserProfileVO();
         try {
