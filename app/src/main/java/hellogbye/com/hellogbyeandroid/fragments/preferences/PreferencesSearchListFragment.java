@@ -66,6 +66,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
     private FontTextView settings_item_text;
 
     private LinearLayout settings_empty_view_layout;
+    private String strTitleName;
 
 
     public static Fragment newInstance(int position) {
@@ -149,7 +150,14 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         if (args != null) {
             strId = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
             strType = args.getString(HGBConstants.BUNDLE_SETTINGS_TYPE);
+            String strTitleName = args.getString(HGBConstants.BUNDLE_SETTINGS_TITLE_NAME);
+            FontTextView titleBar = ((MainActivityBottomTabs) getActivity()).getTitleBar();
+            titleBar.setText(strTitleName);
+
         }
+
+
+
         noBack = false;
     //    my_settings = (FontTextView)rootView.findViewById(R.id.my_flights_settings);
        // popular_settings = (FontTextView)rootView.findViewById(R.id.popular_settings);

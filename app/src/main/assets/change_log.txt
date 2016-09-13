@@ -385,3 +385,4 @@ Code changing:
 
     Code changing:
     --------------
+    - Preference title corrected

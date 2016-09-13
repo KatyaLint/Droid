@@ -17,6 +17,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 //import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsCheckListAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsRadioButtonAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsRadioButtonAsCheckBoxAdapter;
@@ -61,6 +62,9 @@ public class PreferenceSettingsRadioCheckFragment extends PreferencesSettingsMai
         if (args != null) {
             strId = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
             strType = args.getString(HGBConstants.BUNDLE_SETTINGS_TYPE);
+            String strTitleName = args.getString(HGBConstants.BUNDLE_SETTINGS_TITLE_NAME);
+            FontTextView titleBar = ((MainActivityBottomTabs) getActivity()).getTitleBar();
+            titleBar.setText(strTitleName);
         }
 
         settings_title_text = (FontTextView)rootView.findViewById(R.id.settings_item_title);

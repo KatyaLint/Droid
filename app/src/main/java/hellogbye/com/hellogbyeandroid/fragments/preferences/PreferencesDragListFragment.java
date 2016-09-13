@@ -61,6 +61,9 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
         if (args != null) {
             strId = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
             strType = args.getString(HGBConstants.BUNDLE_SETTINGS_TYPE);
+            String strTitleName = args.getString(HGBConstants.BUNDLE_SETTINGS_TITLE_NAME);
+            FontTextView titleBar = ((MainActivityBottomTabs) getActivity()).getTitleBar();
+            titleBar.setText(strTitleName);
 
         }
 

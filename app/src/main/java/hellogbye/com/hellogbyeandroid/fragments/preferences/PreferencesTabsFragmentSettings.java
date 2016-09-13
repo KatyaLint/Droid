@@ -148,7 +148,8 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
 
                 FontTextView settings_flight_title = (FontTextView) view.findViewById(R.id.setting_preferences_title_drag);
                 String clickedItemID = settings_flight_title.getTag().toString();
-                switchBetweenOptions(clickedItemID);
+                String titleName = settings_flight_title.getText().toString();
+                switchBetweenOptions(clickedItemID, titleName);
             }
         });
 
@@ -177,7 +178,8 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
 
                 FontTextView settings_flight_title = (FontTextView) view.findViewById(R.id.setting_preferences_title_drag);
                 String clickedItemID = settings_flight_title.getTag().toString();
-                switchBetweenOptions(clickedItemID);
+                String titleName = settings_flight_title.getText().toString();
+                switchBetweenOptions(clickedItemID, titleName);
             }
         });
         PreferencesSettingsDragListAdapter mTabsAdapter = new PreferencesSettingsDragListAdapter(getActivity(),accountFlightSettings);
@@ -196,7 +198,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
 
     }
 
-    private void switchBetweenOptions(String guid) {
+    private void switchBetweenOptions(String guid, String titleName) {
         List<SettingsAttributesVO> accountAttributes = null;
         boolean goToNewFragment = false;
         String type = null;
@@ -240,19 +242,21 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
         if (accountAttributes != null) {
             goToNewFragment = true;
         } else {
-            getSettingsAttributes(guid, type);
+            getSettingsAttributes(guid, type, titleName);
         }
 
         if(goToNewFragment){
-            gotToSelectedFragment(guid,type);
+            gotToSelectedFragment(guid,type, titleName);
         }
 
     }
 
 
-    private void gotToSelectedFragment(String guid, String type){
+    private void gotToSelectedFragment(String guid, String type, String titleName){
         args.putString(HGBConstants.BUNDLE_SETTINGS_ATT_ID, strJson);
         args.putString(HGBConstants.BUNDLE_SETTINGS_TYPE, type);
+        args.putString(HGBConstants.BUNDLE_SETTINGS_TITLE_NAME, titleName);
+
         switch (guid){
             case "1":
             case "2":
@@ -277,7 +281,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
 
 
     Bundle args = new Bundle();
-    private void getSettingsAttributes(String clickedAttributeID, final String type) {
+    private void getSettingsAttributes(String clickedAttributeID, final String type, final String titleName) {
 
         ConnectionManager.getInstance(getActivity()).getUserSettingAttributesForAttributeID(clickedAttributeID, type, new ConnectionManager.ServerRequestListener() {
             @Override
@@ -312,7 +316,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
                             getActivityInterface().setAccountSettingsHotelChainAttributes(acountSettingsAttributes);
                             break;
                     }
-                    gotToSelectedFragment(settingsGuid,type);
+                    gotToSelectedFragment(settingsGuid,type, titleName);
                 }
             }
 
