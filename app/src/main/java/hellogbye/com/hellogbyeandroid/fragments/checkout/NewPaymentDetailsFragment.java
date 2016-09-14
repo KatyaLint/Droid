@@ -102,6 +102,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
         mTotalPrice = (FontTextView) view.findViewById(R.id.payment_total_price);
         mPaymentSubmit = (FontButtonView) view.findViewById(R.id.payment_submit);
         mPaymentSubmit.setEnabled(false);
@@ -119,9 +121,6 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         mTotalCCImage = (ImageView) view.findViewById(R.id.passenger_select_cc_image);
         mTotalCCDropDown = (ImageView) view.findViewById(R.id.passenger_select_cc_dropdown);
         mTotalCCLinearLayout = (LinearLayout) view.findViewById(R.id.passenger_select_cc_ll);
-
-
-
 
 
         lv = (ExpandableListView) view.findViewById(R.id.ex_list);
@@ -167,7 +166,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             ArrayList<String> passengerItems = passengersVO.getmItineraryItems();
             for (String passengerItem : passengerItems) {
                 NodesVO nodesVO = hashMap.get(passengerItem);
-                if (nodesVO != null) {
+/*                if (nodesVO != null) {*/
                     if (nodesVO != null) {//&& list.size() > 0) {
                         PaymentChild paymentChild;
                         if (NodeTypeEnum.HOTEL.getType().equals(nodesVO.getmType())) {
@@ -188,21 +187,17 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                         }
                     }
 
-                }
+   //             }
             }
             children.add(passengerChildArray);
-
-
         }
+
 
         mAdapter = new ExpandableListAdapter(groups, children);
         lv.setAdapter(mAdapter);
         lv.setGroupIndicator(null);
         initCheckoutSteps();
         getFlowInterface().getCreditCardsSelected().clear();
-
-
-        getUsersList();
 
     }
 
@@ -214,11 +209,15 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             public void onSuccess(Object data) {
                 List<ArrayList<UserProfileVO>> children = new ArrayList<ArrayList<UserProfileVO>>();
                 getFlowInterface().setListUsers((ArrayList<UserProfileVO>) data);
+                Bundle args = new Bundle();
+                Gson gson = new Gson();
+                args.putString(HGBConstants.BUNDLE_PARENT_LIST, gson.toJson(groups));
+                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS.getNavNumber(), args);
             }
-                    @Override
-                    public void onError(Object data) {
+            @Override
+            public void onError(Object data) {
                         ErrorMessage(data);
-                    }
+            }
         });
     }
 
@@ -232,10 +231,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         ConnectionManager.getInstance(getActivity()).checkoutSolutionId(getActivityInterface().getSolutionID(), set, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                Bundle args = new Bundle();
-                Gson gson = new Gson();
-                args.putString(HGBConstants.BUNDLE_PARENT_LIST, gson.toJson(groups));
-                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS.getNavNumber(), args);
+                getUsersList();
             }
 
             @Override

@@ -35,15 +35,9 @@ public interface HGBMainInterface {
     void setAlternativeFlights(List<NodesVO> alternativeFlightsVO);
     List<NodesVO> getAlternativeFlights();
 
-    void setTotalPrice(String totalPrice);
-    String getTotalPrice();
-
-
     void setAccountSettingsAttribute(List<SettingsAttributeParamVO> settingsAttribute);
     List<SettingsAttributeParamVO> getAccountSettingsAttribute();
 
-    void setListUsers( ArrayList<UserProfileVO> mTravelList);
-    ArrayList<UserProfileVO> getListUsers();
 
     UserProfileVO getCurrentUser();
     void setCurrentUser(UserProfileVO currentUser);
@@ -99,16 +93,6 @@ public interface HGBMainInterface {
 
     void setPersonalUserInformation(PersonalUserInformationVO personalUserInformationVO);
     PersonalUserInformationVO getPersonalUserInformation();
-
-
-    void setCreditCardsSelected(HashSet<CreditCardItem> cardsList);
-
-    HashSet<CreditCardItem> getCreditCardsSelected();
-
-
-    void setBookingHashMap(HashMap<String,String> bookigItems);
-
-    HashMap<String,String> getBookingHashMap();
 
 
 }

@@ -390,3 +390,4 @@ Code changing:
     - Checkout traveler screen fix
     - Checkout traveler screen , edit fix
     - More options fix, to More Hotels, More Flights
+    - Checkout crash on third screen fix

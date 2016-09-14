@@ -287,9 +287,11 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
 
             }
         });
+
         loadBookingItemList();
         loadTravlerList(view);
         loadCCList(view);
+
         mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -316,12 +318,11 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
         mRecyclerViewTravlers.setLayoutManager(mLayoutManager);
 
         ArrayList<UserProfileVO> listUsers = getFlowInterface().getListUsers();
-        mTravlerAdapter = new TravlerAdapter(getFlowInterface().getListUsers(), getActivity().getApplicationContext());
+        mTravlerAdapter = new TravlerAdapter(listUsers, getActivity().getApplicationContext());
         mRecyclerViewTravlers.setAdapter(mTravlerAdapter);
     }
 
     private void loadCCList(View v) {
-
 
 
         // use this setting to improve performance if you know that changes

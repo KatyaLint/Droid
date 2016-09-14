@@ -124,7 +124,8 @@ public class TravelersFragment extends HGBAbstractFragment {
                 ConnectionManager.getInstance(getActivity()).getCreditCards(new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
-                        getActivityInterface().setCreditCards((ArrayList<CreditCardItem>) data);
+                        ArrayList<CreditCardItem>  creditCards = (ArrayList<CreditCardItem>) data;
+                        getActivityInterface().setCreditCards(creditCards);
                         getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
 
                     }

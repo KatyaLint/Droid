@@ -38,6 +38,7 @@ import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFr
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportResultsVO;
@@ -589,8 +590,9 @@ public class CNCFragment extends HGBAbstractFragment {
         if((strCNCList.equals("") || strCNCList.equals("null")) &&  getActivityInterface().getCNCItems()== null){
             Resources res = getResources();
             String userName = "";
-            if( getActivityInterface().getCurrentUser() != null){
-                userName = getActivityInterface().getCurrentUser().getFirstname();
+            UserProfileVO usersList = getActivityInterface().getCurrentUser();
+            if( usersList != null){
+                userName = usersList.getFirstname();
             }
 
             String text = String.format(res.getString(R.string.default_cnc_message),userName );
