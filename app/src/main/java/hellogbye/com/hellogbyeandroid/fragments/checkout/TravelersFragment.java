@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.adapters.checkout.IExpandableViewSelected;
+import hellogbye.com.hellogbyeandroid.adapters.checkout.TravlerExpandableAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
@@ -102,80 +104,18 @@ public class TravelersFragment extends HGBAbstractFragment {
 //        mLayoutManager = new LinearLayoutManager(getActivity());
 //        mRecyclerView.setLayoutManager(mLayoutManager);
 
+        setChildrenToView();
 
-        ConnectionManager.getInstance(getActivity()).getTravellersInforWithSolutionId(getActivityInterface().getTravelOrder().getmSolutionID(), new ConnectionManager.ServerRequestListener() {
+ /*       ConnectionManager.getInstance(getActivity()).getTravellersInforWithSolutionId(getActivityInterface().getTravelOrder().getmSolutionID(), new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                List<ArrayList<UserProfileVO>> children = new ArrayList<ArrayList<UserProfileVO>>();
-
-                getFlowInterface().setListUsers((ArrayList<UserProfileVO>) data);
-
-                if(getFlowInterface().getListUsers().size() !=0 ){
-                    for (int i = 0; i < getFlowInterface().getListUsers().size(); i++) {
-                            UserProfileVO user = getFlowInterface().getListUsers().get(i);
-                        for (int z = 0; z <mGroups.size() ; z++) {
-
-                            String name1 = mGroups.get(z).getNameText();
-                            String name2 = user.getFirstname();
-
-                            if(mGroups.get(z).getNameText().equals(user.getFirstname())){
-                                ArrayList<UserProfileVO> passengerChildArray = new ArrayList<>();
-                                passengerChildArray.add(getFlowInterface().getListUsers().get(z));
-                                children.add(passengerChildArray);
-                                boolean isMissing = checkIfMissing(getFlowInterface().getListUsers().get(z));
-                                mGroups.get(z).setmChildDataMissing(isMissing);
-                                if(isMissing){
-
-                                    mNext.setEnabled(false);
-                    /*        mNext.setVisibility(View.GONE);
-                            mNextDisable.setVisibility(View.VISIBLE);*/
-                                }else{
-
-                                    mNext.setEnabled(true);
-                         /*   mNext.setVisibility(View.VISIBLE);
-                            mNextDisable.setVisibility(View.GONE);*/
-                                }
-                            }
-
-                        }
-
-                    }
-
-                    mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), mGroups, children);
-                    mRecyclerView.setAdapter(mAdapter);
-                }else{
-
-                    for (int i = 0; i < mGroups.size(); i++) {
-                        ArrayList<UserProfileVO> passengerChildArray = new ArrayList<>();
-                        passengerChildArray.add(new UserProfileVO());
-                        children.add(passengerChildArray);
-                        mGroups.get(i).setmChildDataMissing(true);
-                    }
-
-
-                    mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), mGroups, children);
-                    mRecyclerView.setAdapter(mAdapter);
-                }
-
-
-//                mAdapter.SetOnItemClickListener(new TravlerAdapter.OnItemClickListener() {
-//
-//                    @Override
-//                    public void onItemClick(View v, int position) {
-//                        Bundle args = new Bundle();
-//                        args.putInt("user_json_position", position);
-//                        getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS_DETAILS.getNavNumber(), args);
-//                    }
-//                });
-
-
             }
 
             @Override
             public void onError(Object data) {
                 ErrorMessage(data);
             }
-        });
+        });*/
 
         mNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,6 +141,96 @@ public class TravelersFragment extends HGBAbstractFragment {
 
         initCheckoutSteps();
     }
+
+    private void setChildrenToView(){
+        List<ArrayList<UserProfileVO>> children = new ArrayList<ArrayList<UserProfileVO>>();
+
+        ArrayList<UserProfileVO> userList = getFlowInterface().getListUsers();
+      //  getFlowInterface().setListUsers((ArrayList<UserProfileVO>) data);
+
+        if(userList.size() !=0 ){
+            for (int i = 0; i < userList.size(); i++) {
+                UserProfileVO user = userList.get(i);
+                for (int z = 0; z <mGroups.size() ; z++) {
+
+                    String name1 = mGroups.get(z).getNameText();
+                    String name2 = user.getFirstname();
+
+                    if(mGroups.get(z).getNameText().equals(user.getFirstname())){
+                        ArrayList<UserProfileVO> passengerChildArray = new ArrayList<>();
+                        UserProfileVO userInfo = userList.get(z);
+                        passengerChildArray.add(userInfo);
+                        children.add(passengerChildArray);
+                        boolean isMissing = checkIfMissing(userInfo);
+                        mGroups.get(z).setmChildDataMissing(isMissing);
+                        if(isMissing){
+
+                            mNext.setEnabled(false);
+                    /*        mNext.setVisibility(View.GONE);
+                            mNextDisable.setVisibility(View.VISIBLE);*/
+                        }else{
+
+                            mNext.setEnabled(true);
+                         /*   mNext.setVisibility(View.VISIBLE);
+                            mNextDisable.setVisibility(View.GONE);*/
+                        }
+                    }
+
+                }
+
+            }
+
+            mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), mGroups, children);
+            mRecyclerView.setAdapter(mAdapter);
+        }else{
+
+            for (int i = 0; i < mGroups.size(); i++) {
+                ArrayList<UserProfileVO> passengerChildArray = new ArrayList<>();
+                passengerChildArray.add(new UserProfileVO());
+                children.add(passengerChildArray);
+                mGroups.get(i).setmChildDataMissing(true);
+            }
+
+            mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), mGroups, children);
+            mRecyclerView.setAdapter(mAdapter);
+        }
+        mAdapter.setGroupViewClickedInterface(new IExpandableViewSelected(){
+
+            @Override
+            public boolean groupClicked(int position) {
+                if(mRecyclerView.isGroupExpanded(position)) {
+                    mRecyclerView.collapseGroup(position);
+
+                    return true;
+                }else{
+                    mRecyclerView.expandGroup(position);
+                    return false;
+                }
+            }
+
+            @Override
+            public void groupEditClicked(int groupPosition) {
+                Bundle args = new Bundle();
+                args.putInt(HGBConstants.BUNDLE_USER_JSON_POSITION, groupPosition);
+                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS_DETAILS.getNavNumber(), args);
+            }
+        });
+
+
+//                mAdapter.SetOnItemClickListener(new TravlerAdapter.OnItemClickListener() {
+//
+//                    @Override
+//                    public void onItemClick(View v, int position) {
+//                        Bundle args = new Bundle();
+//                        args.putInt("user_json_position", position);
+//                        getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVLERS_DETAILS.getNavNumber(), args);
+//                    }
+//                });
+
+
+
+    }
+
 
     private boolean checkIfMissing(UserProfileVO child) {
         if (child.getFirstname() == null || child.getFirstname().equals("")) {
@@ -230,223 +260,6 @@ public class TravelersFragment extends HGBAbstractFragment {
         } else {
             mNext.setBackgroundResource(R.drawable.red_disable_button);
         }
-    }
-
-    public class TravlerExpandableAdapter extends BaseExpandableListAdapter {
-
-        private final LayoutInflater inf;
-        private final ArrayList<PaymnentGroup> groupsList;
-        private List<ArrayList<UserProfileVO>> childrenList = new ArrayList<>();
-
-
-        public TravlerExpandableAdapter(Context context, ArrayList<PaymnentGroup> groups, List<ArrayList<UserProfileVO>> children) {
-            this.groupsList = groups;
-            this.childrenList = children;
-            this.inf = LayoutInflater.from(context);
-
-        }
-
-        @Override
-        public int getGroupCount() {
-            return groupsList.size();
-        }
-
-        @Override
-        public int getChildrenCount(int groupPosition) {
-            return childrenList.get(groupPosition).size();
-        }
-
-        @Override
-        public Object getGroup(int groupPosition) {
-            return groupsList.get(groupPosition);
-        }
-
-        @Override
-        public Object getChild(int groupPosition, int childPosition) {
-            return childrenList.get(groupPosition).get(childPosition);
-        }
-
-        @Override
-        public long getGroupId(int groupPosition) {
-            return groupPosition;
-        }
-
-        @Override
-        public long getChildId(int groupPosition, int childPosition) {
-            return childPosition;
-        }
-
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
-
-        @Override
-        public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-
-            final ChildViewHolder holder;
-            if (convertView == null) {
-                convertView = inf.inflate(R.layout.payment_child_travler_item, parent, false);
-                holder = new ChildViewHolder();
-
-                holder.childNametext = (FontTextView) convertView.findViewById(R.id.travler_name_entry);
-                holder.childDOB = (FontTextView) convertView.findViewById(R.id.travler_dob_entry);
-                holder.childPhone = (FontTextView) convertView.findViewById(R.id.travler_phone_entry);
-                holder.childAddress = (FontTextView) convertView.findViewById(R.id.travler_address_entry);
-                holder.childEmail = (FontTextView) convertView.findViewById(R.id.travler_email_entry);
-
-                holder.childNametextLabel = (FontTextView) convertView.findViewById(R.id.travler_name);
-                holder.childDOBLabel = (FontTextView) convertView.findViewById(R.id.travler_dob);
-                holder.childPhoneLabel = (FontTextView) convertView.findViewById(R.id.travler_phone);
-                holder.childAddressLabel = (FontTextView) convertView.findViewById(R.id.travler_address);
-                holder.childEmailLabel = (FontTextView) convertView.findViewById(R.id.travler_email);
-
-                convertView.setTag(holder);
-            } else {
-                holder = (ChildViewHolder) convertView.getTag();
-            }
-            final UserProfileVO child = (UserProfileVO) getChild(groupPosition, childPosition);
-
-
-            holder.childNametext.setText(child.getFirstname() + " " + child.getLastname());
-            holder.childDOB.setText(HGBUtilityDate.parseDateToddMMyyyyForPayment(child.getDob()));
-            holder.childPhone.setText(child.getPhone());
-            holder.childAddress.setText(child.getAddress() + "\n" + child.getCity() + "," + child.getState() + "\n" + child.getPostalcode());
-            holder.childEmail.setText(child.getEmailaddress());
-            if(child.getFirstname() == null){
-                holder.childNametext.setText("");
-            }
-            if(child.getAddress()  == null){
-                holder.childAddress.setText("");
-            }
-
-            findMissingElemnts(holder, child);
-            return convertView;
-        }
-
-        private void findMissingElemnts(ChildViewHolder holder, UserProfileVO child) {
-
-            if (child.getFirstname() == null || child.getFirstname().equals("")) {
-                holder.childNametextLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_EE3A3C));
-
-            }
-            if (child.getPostalcode() == null || child.getPostalcode().equals("")) {
-                holder.childAddressLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_EE3A3C));
-            }
-            if (child.getEmailaddress() == null || child.getEmailaddress().equals("")) {
-                holder.childEmailLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_EE3A3C));
-            }
-            if (child.getPhone() == null || child.getPhone().equals("")) {
-                holder.childPhoneLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_EE3A3C));
-            }
-            if (child.getDob() == null || child.getDob().equals("")) {
-                holder.childDOBLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_EE3A3C));
-            }
-
-        }
-
-
-        @Override
-        public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-            final GroupViewHolder holder;
-
-            if (convertView == null) {
-                convertView = inf.inflate(R.layout.payment_group_travlers_item, parent, false);
-
-                holder = new GroupViewHolder();
-                holder.groupNametext = (FontTextView) convertView.findViewById(R.id.payment_group_name);
-                holder.groupEdittext = (FontTextView) convertView.findViewById(R.id.payment_group_edit);
-                holder.groupMissing = (FontTextView) convertView.findViewById(R.id.payment_group_missing);
-
-
-                holder.groupPricetext = (FontTextView) convertView.findViewById(R.id.payment_group_price);
-                // holder.groupSelectCC = (FontTextView) convertView.findViewById(R.id.passenger_select_cc);
-                // holder.groupCheckBox = (CheckBox) convertView.findViewById(R.id.payment_group_checkbox);
-                holder.groupImageView = (ImageView) convertView.findViewById(R.id.payment_group_image);
-
-                convertView.setTag(holder);
-            } else {
-                holder = (GroupViewHolder) convertView.getTag();
-
-            }
-
-            final PaymnentGroup group = (PaymnentGroup) getGroup(groupPosition);
-            holder.groupNametext.setText(group.getNameText());
-            holder.groupPricetext.setText(group.getTotalText());
-
-
-            if (group.isSelected()) {
-                holder.groupImageView.setBackgroundResource(R.drawable.expand_copy_3);
-            } else {
-                holder.groupImageView.setBackgroundResource(R.drawable.minimize);
-            }
-            holder.groupImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mRecyclerView.isGroupExpanded(groupPosition)) {
-                        mRecyclerView.collapseGroup(groupPosition);
-                        v.setBackgroundResource(R.drawable.expand_copy_3);
-                        group.setSelected(true);
-                    } else {
-                        mRecyclerView.expandGroup(groupPosition);
-                        group.setSelected(false);
-                        v.setBackgroundResource(R.drawable.minimize);
-                    }
-                }
-            });
-            holder.groupEdittext.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Bundle args = new Bundle();
-                    args.putInt(HGBConstants.BUNDLE_USER_JSON_POSITION, groupPosition);
-                    getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS_DETAILS.getNavNumber(), args);
-                }
-            });
-
-            if(group.ismChildDataMissing()){
-                holder.groupMissing.setVisibility(View.VISIBLE);
-            }else{
-                holder.groupMissing.setVisibility(View.GONE);
-            }
-
-
-            return convertView;
-        }
-
-        @Override
-        public boolean isChildSelectable(int groupPosition, int childPosition) {
-            return true;
-        }
-
-        private class GroupViewHolder {
-            FontTextView groupNametext;
-            FontTextView groupPricetext;
-            FontTextView groupEdittext;
-            FontTextView groupMissing;
-            //CheckBox groupCheckBox;
-            ImageView groupImageView;
-
-
-        }
-
-        private class ChildViewHolder {
-
-
-            FontTextView childNametextLabel;
-            FontTextView childDOBLabel;
-            FontTextView childEmailLabel;
-            FontTextView childPhoneLabel;
-            FontTextView childAddressLabel;
-
-            FontTextView childNametext;
-            FontTextView childDOB;
-            FontTextView childEmail;
-            FontTextView childPhone;
-            FontTextView childAddress;
-
-        }
-
-
     }
 
 

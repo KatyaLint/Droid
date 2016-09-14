@@ -29,6 +29,7 @@ import hellogbye.com.hellogbyeandroid.adapters.creditcardadapters.AlertCheckoutA
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymentChild;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymnentGroup;
@@ -200,6 +201,25 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         initCheckoutSteps();
         getFlowInterface().getCreditCardsSelected().clear();
 
+
+        getUsersList();
+
+    }
+
+
+    private void getUsersList(){
+        ConnectionManager.getInstance(getActivity()).getTravellersInforWithSolutionId(getActivityInterface().getTravelOrder().getmSolutionID(),
+                new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                List<ArrayList<UserProfileVO>> children = new ArrayList<ArrayList<UserProfileVO>>();
+                getFlowInterface().setListUsers((ArrayList<UserProfileVO>) data);
+            }
+                    @Override
+                    public void onError(Object data) {
+                        ErrorMessage(data);
+                    }
+        });
     }
 
     private void sendPaymentSolution() {

@@ -8,11 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
@@ -38,21 +38,21 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
     private FontTextView mDOB;
     private FontTextView mSave;
 
-    private FontTextView mGender;
+   // private FontTextView mGender;
     private FontEditTextView mEmail;
     private FontEditTextView mPhone;
-    private FontEditTextView mAddress;
+    /*private FontEditTextView mAddress;
     private FontEditTextView mCity;
     private FontTextView mCountry;
     private FontEditTextView mPostalCode;
-    private FontTextView mState;
+    private FontTextView mState;*/
     private UserProfileVO mUser;
 
     private String[] stateArray;
 
     private BookingRequestVO bookingResponse;
     private FontEditTextView travel_detail_middle_name;
-
+    private String SELECT_TITLE = "Select Title";
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new TravelerDetailsFragment();
@@ -72,21 +72,21 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+     //   getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         mTitle = (FontTextView) view.findViewById(R.id.travel_detail_title);
         mFirstName = (FontEditTextView) view.findViewById(R.id.travel_detail_first_name);
         mLastName = (FontEditTextView) view.findViewById(R.id.travel_detail_last_name);
         travel_detail_middle_name = (FontEditTextView) view.findViewById(R.id.travel_detail_middle_name);
         mDOB = (FontTextView) view.findViewById(R.id.travel_detail_dob);
-        mGender = (FontTextView) view.findViewById(R.id.travel_detail_gender);
+  //      mGender = (FontTextView) view.findViewById(R.id.travel_detail_gender);
         mEmail = (FontEditTextView) view.findViewById(R.id.travel_detail_email);
         mPhone = (FontEditTextView) view.findViewById(R.id.travel_detail_phone);
-        mAddress = (FontEditTextView) view.findViewById(R.id.travel_detail_adress);
+    /*    mAddress = (FontEditTextView) view.findViewById(R.id.travel_detail_adress);
         mCity = (FontEditTextView) view.findViewById(R.id.travel_detail_city);
         mCountry = (FontTextView) view.findViewById(R.id.travel_detail_country);
         mPostalCode = (FontEditTextView) view.findViewById(R.id.travel_detail_postal_code);
-        mState = (FontTextView) view.findViewById(R.id.travel_detail_province);
+        mState = (FontTextView) view.findViewById(R.id.travel_detail_province);*/
         mSave = (FontTextView) view.findViewById(R.id.travler_detail_save);
 
         //getStaticBooking();
@@ -109,7 +109,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
     }
 
 /*    final String[] titleArray = {"Mr", "Mrs", "Miss"};*/
-    final String SLECT_TITLE = "Select Title";
+
 
 
     private void selectStates(String countryPicked) {
@@ -124,7 +124,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
     private void setClickListner() {
 
-        mCountry.setOnClickListener(new View.OnClickListener() {
+/*        mCountry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -163,9 +163,9 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             public void onClick(View v) {
                 getStaticProvince();
             }
-        });
+        });*/
 
-        mGender.setOnClickListener(new View.OnClickListener() {
+     /*   mGender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -173,12 +173,12 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
                 HGBUtility.showPikerDialog(0,mGender, getActivity(), getResources().getString(R.string.select_gender), getResources().getStringArray(R.array.gender_array), 0, 1, null, true);
             }
         });
-
+*/
         mTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                HGBUtility.showPikerDialog(0,mTitle, getActivity(), SLECT_TITLE, getResources().getStringArray(R.array.title_array), 0, 1, null, true);
+                HGBUtility.showPikerDialog(0,mTitle, getActivity(), SELECT_TITLE, getResources().getStringArray(R.array.title_array), 0, 1, null, true);
 
 
                 // showTitleDialog();
@@ -197,28 +197,36 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             public void onClick(View v) {
 
                 mUser.setTitle(mTitle.getText().toString());
-                mUser.setGender(mGender.getText().toString());
-                mUser.setAddress(mAddress.getText().toString());
+               // mUser.setGender(mGender.getText().toString());
+            //    mUser.setAddress(mAddress.getText().toString());
 
-                if (mCountry.getText().toString().equals("Canada")) {
+              /*  if (mCountry.getText().toString().equals("Canada")) {
                     mUser.setCountry("CN");
                 } else if (mCountry.getText().toString().equals("UnitedStates")) {
                     mUser.setCountry("US");
                 }else{
                     mUser.setCountry(mCountry.getText().toString());
-                }
+                }*/
 
-                mUser.setState(mState.getText().toString());
+/*                mUser.setState(mState.getText().toString());
                 mUser.setPostalcode(mPostalCode.getText().toString());
-                mUser.setDob(mDOB.getText().toString());
-                mUser.setCity(mCity.getText().toString());
+                mUser.setCity(mCity.getText().toString());*/
+
+
+                String dob = HGBUtilityDate.parseDateToyyyyMMddTHHmmss(mDOB.getText().toString());
+
+                mUser.setDob(dob);
+
                 mUser.setFirstname(mFirstName.getText().toString());
                 mUser.setLastname(mLastName.getText().toString());
                 mUser.setPhone(mPhone.getText().toString());
                 mUser.setEmailaddress(mEmail.getText().toString());
                 mUser.setMiddlename(travel_detail_middle_name.getText().toString());
 
-                ConnectionManager.getInstance(getActivity()).putCompanion(mUser.getPaxid(), mUser, new ConnectionManager.ServerRequestListener() {
+                ((MainActivityBottomTabs) getActivity()).onBackPressed();
+
+
+             /*   ConnectionManager.getInstance(getActivity()).putCompanion(mUser.getPaxid(), mUser, new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
                         getFragmentManager().popBackStack();
@@ -230,7 +238,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
                         ErrorMessage(data);
                     }
                 });
-
+*/
 
 
             }
@@ -260,11 +268,12 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
         mDOB.setText(HGBUtilityDate.parseDateToddMMyyyyForPayment(mUser.getDob()));
         mEmail.setText(mUser.getEmailaddress());
         mPhone.setText(mUser.getPhone());
-        mAddress.setText(mUser.getAddress());
-        mCity.setText(mUser.getCity());
         if(mUser.getMiddlename() != null) {
             travel_detail_middle_name.setText(mUser.getMiddlename());
         }
+     /*   mAddress.setText(mUser.getAddress());
+        mCity.setText(mUser.getCity());
+
         if (mUser.getCountry().equals("CA")) {
             mCountry.setText("Canada");
         } else if (mUser.getCountry().equals("US")) {
@@ -274,7 +283,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
         }
 
         mPostalCode.setText(mUser.getPostalcode());
-        mState.setText(mUser.getState());
+        mState.setText(mUser.getState());*/
 
 /*        ConnectionManager.getInstance(getActivity()).getStaticBookingProvince(mUser.getCountry(), new ConnectionManager.ServerRequestListener() {
             @Override
@@ -308,7 +317,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mUser.setFirstname(s.toString());
+               // mUser.setFirstname(s.toString());
                 setSaveButton();
             }
 
@@ -327,7 +336,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mUser.setLastname(s.toString());
+            //    mUser.setLastname(s.toString());
                 setSaveButton();
             }
 
@@ -346,7 +355,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mUser.setMiddlename(s.toString());
+             //  mUser.setMiddlename(s.toString());
                 setSaveButton();
             }
 
@@ -357,7 +366,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             }
         });
 
-        mCity.addTextChangedListener(new TextWatcher() {
+     /*   mCity.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -432,7 +441,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
             }
         });
-
+*/
 
     }
 
@@ -465,7 +474,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
         } else {
             countryID = (String) mCountry.getTag();
         }*/
-        String  countryID = (String) mCountry.getTag();
+    /*    String  countryID = (String) mCountry.getTag();
         ConnectionManager.getInstance(getActivity()).getStaticBookingProvince(countryID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
@@ -482,12 +491,12 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             public void onError(Object data) {
                 ErrorMessage(data);
             }
-        });
+        });*/
     }
 
 
     private void setDropDownItems(final List<ProvincesItem> provinceItems) {
-        String[] countryarray = new String[provinceItems.size()];
+/*        String[] countryarray = new String[provinceItems.size()];
         for (int i = 0; i < provinceItems.size(); i++) {
             countryarray[i] = provinceItems.get(i).getProvincename();
         }
@@ -510,7 +519,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
                     public void itemCanceled() {
 
                     }
-                }, false);
+                }, false);*/
 
     }
 

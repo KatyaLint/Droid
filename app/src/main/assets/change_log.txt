@@ -386,3 +386,7 @@ Code changing:
     Code changing:
     --------------
     - Preference title corrected
+    - Notification new view
+    - Checkout traveler screen fix
+    - Checkout traveler screen , edit fix
+    - More options fix, to More Hotels, More Flights

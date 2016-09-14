@@ -30,13 +30,14 @@ public interface HGBFlowInterface {
     void setBookingHashMap(HashMap<String, String> bookigItems);
     HashMap<String, String> getBookingHashMap();
     ArrayList<UserProfileVO> getListUsers();
+    void setListUsers(ArrayList<UserProfileVO> travellist);
     UserProfileVO getCurrentUser();
     void setCurrentUser(UserProfileVO currentUser);
     void setEligabileCountries(ArrayList<CountryItemVO> list);
     ArrayList<CountryItemVO> getEligabileCountries();
     ArrayList<CreditCardItem> getCreditCards();
     void setCreditCards(ArrayList<CreditCardItem> mCreditCardList);
-    void setListUsers(ArrayList<UserProfileVO> travellist);
+
     void closeRightPane();
     void openRightPane();
 

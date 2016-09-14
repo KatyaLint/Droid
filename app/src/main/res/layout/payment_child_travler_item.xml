@@ -29,13 +29,13 @@
 
     <View
         android:id="@+id/travler_line"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
         android:layout_below="@+id/travel_data_ll"
         android:layout_centerHorizontal="true"
-        android:layout_marginRight="@dimen/DP54"
+        android:layout_alignLeft="@+id/travel_data_ll"
         android:layout_marginTop="@dimen/DP20"
-        android:layout_marginLeft="@dimen/DP54"
+
         android:layout_centerVertical="true"
         android:background="@color/COLOR_999999" />
 

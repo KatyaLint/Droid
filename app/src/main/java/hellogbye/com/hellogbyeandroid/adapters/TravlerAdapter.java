@@ -19,9 +19,6 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  */
 public class TravlerAdapter extends RecyclerView.Adapter<TravlerAdapter.ViewHolder> {
 
-
-    private Fragment travelFragment;
-
     private ArrayList<UserProfileVO> mArrayList;
     private OnItemClickListener  mItemClickListner;
 

@@ -314,6 +314,7 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerViewTravlers.setLayoutManager(mLayoutManager);
 
+        ArrayList<UserProfileVO> listUsers = getFlowInterface().getListUsers();
         mTravlerAdapter = new TravlerAdapter(getFlowInterface().getListUsers(), getActivity().getApplicationContext());
         mRecyclerViewTravlers.setAdapter(mTravlerAdapter);
     }
@@ -381,7 +382,6 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
         for (Map.Entry<String, ArrayList<String>> entry : mBookingItems.entrySet()) {
 
             CreditCardItem item = getCreditCard(entry.getKey());
-
 
             double iTotal = 0;
 
