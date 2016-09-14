@@ -158,9 +158,9 @@
                                 app:fontName="dinnextltpro_medium.otf" />
 
                             <hellogbye.com.hellogbyeandroid.views.FontTextView
+                                android:id="@+id/room_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Bruce Wang"
                                 android:textColor="@color/COLOR_565656"
                                 android:textSize="@dimen/SP14"
                                 app:fontName="dinnextltpro_medium.otf" />
@@ -190,6 +190,7 @@
                                 app:fontName="dinnextltpro_medium.otf" />
 
                             <hellogbye.com.hellogbyeandroid.views.FontTextView
+                                android:id="@+id/checkin_date"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0-0-0"
@@ -225,7 +226,7 @@
                             <hellogbye.com.hellogbyeandroid.views.FontTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0-0-0"
+                                android:id="@+id/checkout_date"
                                 android:textColor="@color/COLOR_565656"
                                 android:textSize="@dimen/SP14"
                                 app:fontName="dinnextltpro_medium.otf" />

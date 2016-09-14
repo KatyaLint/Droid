@@ -605,41 +605,41 @@ public class HGBUtility {
     private static void setStarRating(View view, float star) {
 
         if ("0.5".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.half_star, R.drawable.empty_star,
-                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
+            starHolder(view, R.drawable.red_star_half, R.drawable.red_star_out,
+                    R.drawable.red_star_out, R.drawable.red_star_out, R.drawable.red_star_out);
 
         } else if ("1.0".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.full_star, R.drawable.empty_star,
-                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
+            starHolder(view, R.drawable.red_star_full, R.drawable.red_star_out,
+                    R.drawable.red_star_out, R.drawable.red_star_out, R.drawable.red_star_out);
 
         } else if ("1.5".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.full_star, R.drawable.half_star,
-                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
+            starHolder(view, R.drawable.red_star_full, R.drawable.red_star_half,
+                    R.drawable.red_star_out, R.drawable.red_star_out, R.drawable.red_star_out);
 
         } else if ("2.0".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
+            starHolder(view, R.drawable.red_star_full, R.drawable.red_star_full,
+                    R.drawable.red_star_out, R.drawable.red_star_out, R.drawable.red_star_out);
         } else if ("2.5".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.half_star, R.drawable.empty_star, R.drawable.empty_star);
+            starHolder(view, R.drawable.red_star_full, R.drawable.red_star_full,
+                    R.drawable.red_star_half, R.drawable.red_star_out, R.drawable.red_star_out);
         } else if ("3.0".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.empty_star, R.drawable.empty_star);
+            starHolder(view, R.drawable.red_star_full, R.drawable.red_star_full,
+                    R.drawable.red_star_full, R.drawable.red_star_out, R.drawable.red_star_out);
         } else if ("3.5".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.half_star, R.drawable.empty_star);
+            starHolder(view, R.drawable.red_star_full, R.drawable.red_star_full,
+                    R.drawable.red_star_full, R.drawable.red_star_half, R.drawable.red_star_out);
 
         } else if ("4.0".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.full_star, R.drawable.empty_star);
+            starHolder(view, R.drawable.red_star_full, R.drawable.red_star_full,
+                    R.drawable.red_star_full, R.drawable.red_star_full, R.drawable.red_star_out);
 
         } else if ("4.5".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.full_star, R.drawable.half_star);
+            starHolder(view, R.drawable.red_star_full, R.drawable.red_star_full,
+                    R.drawable.red_star_full, R.drawable.red_star_full, R.drawable.red_star_half);
 
         } else if ("5.0".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.full_star, R.drawable.full_star);
+            starHolder(view, R.drawable.red_star_full, R.drawable.red_star_full,
+                    R.drawable.red_star_full, R.drawable.red_star_full, R.drawable.red_star_full);
 
         }
     }

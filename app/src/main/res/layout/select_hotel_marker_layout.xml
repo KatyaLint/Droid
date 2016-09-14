@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/bubbles_white_background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bubbles_white_background"
+    >
 
     <LinearLayout
         android:id="@+id/marker_center_ll"
         android:layout_width="match_parent"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:layout_height="match_parent">
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/index"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/SP8"
-
             android:text="1"
-            android:layout_above="@+id/marker_center_ll"
-            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/DP2"
+            android:textColor="@color/white"
+            android:textSize="@dimen/SP8"
             app:fontName="dinnextltpro_medium.otf" />
 
-        <include layout="@layout/star_layout"
-            />
+        <include layout="@layout/star_layout" />
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/select_hotel_marker_price"
@@ -33,11 +33,10 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/DP1"
             android:text="$999"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/SP14"
             app:fontName="dinnextltpro_medium.otf" />
     </LinearLayout>
-
 
 
 </RelativeLayout>

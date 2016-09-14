@@ -179,67 +179,111 @@ public class AlternativeHotelAdapter extends RecyclerView.Adapter<AlternativeHot
     private void setStarRating(boolean isSelected,ViewHolder holder, float star) {
 
         if ("0.5".equals(String.valueOf(star))) {
-            starHolder(isSelected,holder,R.drawable.half_star,R.drawable.empty_star,
-                    R.drawable.empty_star, R.drawable.empty_star,R.drawable.empty_star);
+            if(isSelected){
+                starHolder(holder,R.drawable.star_blue_half,R.drawable.star_blue_out,
+                        R.drawable.star_blue_out, R.drawable.star_blue_out,R.drawable.star_blue_out);
+            }else{
+                starHolder(holder,R.drawable.gray_star_half,R.drawable.gray_star_out,
+                        R.drawable.gray_star_out, R.drawable.gray_star_out,R.drawable.gray_star_out);
+            }
+
 
         } else if ("1.0".equals(String.valueOf(star))) {
-            starHolder(isSelected,holder,R.drawable.full_star,R.drawable.empty_star,
-                    R.drawable.empty_star, R.drawable.empty_star,R.drawable.empty_star);
+            if(isSelected){
+                starHolder(holder,R.drawable.star_blue_full,R.drawable.star_blue_out,
+                        R.drawable.star_blue_out, R.drawable.star_blue_out,R.drawable.star_blue_out);
+            }else{
+                starHolder(holder,R.drawable.gray_star_full,R.drawable.gray_star_out,
+                        R.drawable.gray_star_out, R.drawable.gray_star_out,R.drawable.gray_star_out);
+            }
+
 
         } else if ("1.5".equals(String.valueOf(star))) {
-            starHolder(isSelected,holder,R.drawable.full_star,R.drawable.half_star,
-                    R.drawable.empty_star, R.drawable.empty_star,R.drawable.empty_star);
+            if(isSelected){
+                starHolder(holder,R.drawable.star_blue_full,R.drawable.star_blue_half,
+                        R.drawable.star_blue_out, R.drawable.star_blue_out,R.drawable.star_blue_out);
+            }else{
+                starHolder(holder,R.drawable.gray_star_full,R.drawable.gray_star_half,
+                        R.drawable.gray_star_out, R.drawable.gray_star_out,R.drawable.gray_star_out);
+            }
+
 
         } else if ("2.0".equals(String.valueOf(star))) {
-            starHolder(isSelected,holder,R.drawable.full_star,R.drawable.full_star,
-                    R.drawable.empty_star, R.drawable.empty_star,R.drawable.empty_star);
+            if(isSelected){
+                starHolder(holder,R.drawable.star_blue_full,R.drawable.star_blue_full,
+                        R.drawable.star_blue_out, R.drawable.star_blue_out,R.drawable.star_blue_out);
+            }else{
+                starHolder(holder,R.drawable.gray_star_full,R.drawable.gray_star_full,
+                        R.drawable.gray_star_out, R.drawable.gray_star_out,R.drawable.gray_star_out);
+            }
+
         } else if ("2.5".equals(String.valueOf(star))) {
-            starHolder(isSelected,holder,R.drawable.full_star,R.drawable.full_star,
-                    R.drawable.half_star, R.drawable.empty_star,R.drawable.empty_star);
+            if(isSelected){
+                starHolder(holder,R.drawable.star_blue_full,R.drawable.star_blue_full,
+                        R.drawable.star_blue_half, R.drawable.star_blue_out,R.drawable.star_blue_out);
+            }else{
+                starHolder(holder,R.drawable.gray_star_full,R.drawable.gray_star_full,
+                        R.drawable.gray_star_half, R.drawable.gray_star_out,R.drawable.gray_star_out);
+            }
+
         } else if ("3.0".equals(String.valueOf(star))) {
-            starHolder(isSelected,holder,R.drawable.full_star,R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.empty_star,R.drawable.empty_star);
+            if(isSelected){
+                starHolder(holder,R.drawable.star_blue_full,R.drawable.star_blue_full,
+                        R.drawable.star_blue_full, R.drawable.star_blue_out,R.drawable.star_blue_out);
+            }else{
+                starHolder(holder,R.drawable.gray_star_full,R.drawable.gray_star_full,
+                        R.drawable.gray_star_full, R.drawable.gray_star_out,R.drawable.gray_star_out);
+            }
+
         } else if ("3.5".equals(String.valueOf(star))) {
-            starHolder(isSelected,holder,R.drawable.full_star,R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.half_star,R.drawable.empty_star);
+            if(isSelected){
+                starHolder(holder,R.drawable.star_blue_full,R.drawable.star_blue_full,
+                        R.drawable.star_blue_full, R.drawable.star_blue_half,R.drawable.star_blue_out);
+            }else{
+                starHolder(holder,R.drawable.gray_star_full,R.drawable.gray_star_full,
+                        R.drawable.gray_star_full, R.drawable.gray_star_half,R.drawable.gray_star_out);
+            }
+
 
         } else if ("4.0".equals(String.valueOf(star))) {
-            starHolder(isSelected,holder,R.drawable.full_star,R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.full_star,R.drawable.empty_star);
+            if(isSelected){
+                starHolder(holder,R.drawable.star_blue_full,R.drawable.star_blue_full,
+                        R.drawable.star_blue_full, R.drawable.star_blue_full,R.drawable.star_blue_out);
+            }else{
+                starHolder(holder,R.drawable.gray_star_full,R.drawable.gray_star_full,
+                        R.drawable.gray_star_full, R.drawable.gray_star_full,R.drawable.gray_star_out);
+            }
+
 
         } else if ("4.5".equals(String.valueOf(star))) {
-            starHolder(isSelected,holder,R.drawable.full_star,R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.full_star,R.drawable.half_star);
+            if(isSelected){
+                starHolder(holder,R.drawable.star_blue_full,R.drawable.star_blue_full,
+                        R.drawable.star_blue_full, R.drawable.star_blue_full,R.drawable.star_blue_half);
+            }else{
+                starHolder(holder,R.drawable.gray_star_full,R.drawable.gray_star_full,
+                        R.drawable.gray_star_full, R.drawable.gray_star_full,R.drawable.gray_star_half);
+            }
+
 
         } else if ("5.0".equals(String.valueOf(star))) {
-            starHolder(isSelected,holder,R.drawable.full_star,R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.full_star,R.drawable.full_star);
+            if(isSelected){
+                starHolder(holder,R.drawable.star_blue_full,R.drawable.star_blue_full,
+                        R.drawable.star_blue_full, R.drawable.star_blue_full,R.drawable.star_blue_full);
+            }else{
+                starHolder(holder,R.drawable.gray_star_full,R.drawable.gray_star_full,
+                        R.drawable.gray_star_full, R.drawable.gray_star_full,R.drawable.gray_star_full);
+            }
+
 
         }
     }
 
-    private void starHolder(boolean isSelected,ViewHolder holder,int firstStar, int secondStar, int thirdStar, int fourStar, int fiveStar){
+    private void starHolder(ViewHolder holder,int firstStar, int secondStar, int thirdStar, int fourStar, int fiveStar){
         holder.mStart1ImageView.setBackgroundResource(firstStar);
         holder.mStart2ImageView.setBackgroundResource(secondStar);
         holder.mStart3ImageView.setBackgroundResource(thirdStar);
         holder.mStart4ImageView.setBackgroundResource(fourStar);
         holder.mStart5ImageView.setBackgroundResource(fiveStar);
-
-        if(isSelected){
-            holder.mStart1ImageView.setColorFilter(ContextCompat.getColor(mContext,R.color.blue_my_trip));
-            holder.mStart2ImageView.setColorFilter(ContextCompat.getColor(mContext,R.color.blue_my_trip));
-            holder.mStart3ImageView.setColorFilter(ContextCompat.getColor(mContext,R.color.blue_my_trip));
-            holder.mStart4ImageView.setColorFilter(ContextCompat.getColor(mContext,R.color.blue_my_trip));
-            holder.mStart5ImageView.setColorFilter(ContextCompat.getColor(mContext,R.color.blue_my_trip));
-        }else{
-            holder.mStart1ImageView.setColorFilter(ContextCompat.getColor(mContext,R.color.warm_grey));
-            holder.mStart2ImageView.setColorFilter(ContextCompat.getColor(mContext,R.color.warm_grey));
-            holder.mStart3ImageView.setColorFilter(ContextCompat.getColor(mContext,R.color.warm_grey));
-            holder.mStart4ImageView.setColorFilter(ContextCompat.getColor(mContext,R.color.warm_grey));
-            holder.mStart5ImageView.setColorFilter(ContextCompat.getColor(mContext,R.color.warm_grey));
-        }
-
-
     }
 
     public void setmMyNode(NodesVO mMyNode) {

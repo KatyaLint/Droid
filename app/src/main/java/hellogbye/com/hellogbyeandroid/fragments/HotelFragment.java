@@ -3,7 +3,6 @@ package hellogbye.com.hellogbyeandroid.fragments;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,7 +25,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
 
@@ -53,7 +51,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
     private SupportMapFragment fragment;
     private GoogleMap mMap;
-  //  private SlidingUpPanelLayout mSlidingPanels;
+    //  private SlidingUpPanelLayout mSlidingPanels;
     private RecyclerView mRecyclerView;
     private AlternativeHotelRoomAdapter mHotelRoomAdapter;
     private FontTextView mHotelNameFontTextView;
@@ -66,6 +64,9 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private ImageView mStart3ImageView;
     private ImageView mStart4ImageView;
     private ImageView mStart5ImageView;
+    private FontTextView mRoomName;
+    private FontTextView mChckInDate;
+    private FontTextView mChckOutDate;
 
     //  private NodesVO nodesVO;
     private ArrayList<String> mListForGallery;
@@ -95,7 +96,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
         activity = getActivity();
         View rootView = inflater.inflate(R.layout.hotel_main_layout, container, false);
-      //  mSlidingPanels = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout);
+        //  mSlidingPanels = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout);
         mNodeArrayList = new ArrayList<>();
 
         initSliderPanel();
@@ -262,13 +263,13 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
                         }
 
 
-                  //      mSlidingPanels.setVisibility(View.VISIBLE);
+                        //      mSlidingPanels.setVisibility(View.VISIBLE);
                     }
 
                     @Override
                     public void onError(Object data) {
                         ErrorMessage(data);
-                    //    mSlidingPanels.setVisibility(View.VISIBLE);
+                        //    mSlidingPanels.setVisibility(View.VISIBLE);
                     }
                 });
     }
@@ -283,6 +284,9 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private View initRootView(View rootView) {
 
         //    mScrollView = (ScrollView) rootView.findViewById(R.id.detail_scroll_view);
+        mRoomName = (FontTextView) rootView.findViewById(R.id.room_name);
+        mChckInDate = (FontTextView) rootView.findViewById(R.id.checkin_date);
+        mChckOutDate = (FontTextView) rootView.findViewById(R.id.checkout_date);
         mHotelNameFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_name);
         mHotelPriceFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_price);
         mHotelDaysFontTextView = (FontTextView) rootView.findViewById(R.id.days);
@@ -317,6 +321,9 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
         mListForGallery = new ArrayList<>();
         mHotelNameFontTextView.setText(node.getmHotelName());
+        mRoomName.setText(node.getUserName());
+        mChckInDate.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(node.getmCheckIn()));
+        mChckOutDate.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(node.getmCheckOut()));
         long diff = HGBUtilityDate.dayDifference(node.getmCheckIn(), node.getmCheckOut());
         double iCharge = node.getmMinimumAmount() / diff;
         String result = String.format("%.2f", iCharge);
@@ -331,83 +338,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
         mHotelRoomAdapter = new AlternativeHotelRoomAdapter(roomlist);
         mRecyclerView.setAdapter(mHotelRoomAdapter);
-
-
-    }
-
-    private void setStarRating(float star) {
-
-        if ("0.5".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.half_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.empty_star);
-
-        } else if ("1.0".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.empty_star);
-
-        } else if ("1.5".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.half_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.empty_star);
-
-        } else if ("2.0".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.empty_star);
-
-        } else if ("2.5".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.half_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.empty_star);
-
-        } else if ("3.0".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.empty_star);
-
-        } else if ("3.5".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.half_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.empty_star);
-
-        } else if ("4.0".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.empty_star);
-
-        } else if ("4.5".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.half_star);
-
-        } else if ("5.0".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.full_star);
-
-        }
 
 
     }
@@ -430,17 +360,19 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
     }
 
-    private void loadRoomsList(){
+    private void loadRoomsList() {
 
         //GET ALL HOTEL NODES AND SET CURRENT ONE
         ConnectionManager.getInstance(activity).getAlternateHotelRoomsWithHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
                 passengersVO.getmPaxguid(),
-                currentSelectedNode.getmCheckIn(), currentSelectedNode.getmCheckOut(),currentSelectedNode.getmHotelCode(), new ConnectionManager.ServerRequestListener() {
+                currentSelectedNode.getmCheckIn(), currentSelectedNode.getmCheckOut(), currentSelectedNode.getmHotelCode(), new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
-                        Log.d("","");
                         NodesVO node = (NodesVO) data;
-                        initAlternativeRoomList(node.getRoomsVOs()  );
+                        if (node.getRoomsVOs().size() > 0) {
+                            initAlternativeRoomList(node.getRoomsVOs());
+                        }
+
 
                     }
 
