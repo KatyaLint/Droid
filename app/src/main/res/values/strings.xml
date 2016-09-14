@@ -228,6 +228,7 @@
     <string name="continue_to_checkout">Checkout</string>
     <string name="continue_to_checkout_flight_baggage">Flight Baggage &amp; Hotel info</string>
     <string name="continue_to_checkout_price">PRICE :</string>
+    <string name="continue_to_checkout_last_screen">A mail confirmation has been\nsent to the email address above</string>
     <string name="edit_trip_name">Edit Trip Name</string>
 
     <string name="onBoarding_just_type">Just type or say\nsomething like:</string>

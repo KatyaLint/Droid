@@ -157,8 +157,9 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
                 JSONObject jsonObject = new JSONObject();
                 try {
 
+                    ArrayList<UserProfileVO> users = getFlowInterface().getListUsers();
                     JSONArray jsonArray = new JSONArray();
-                    for (UserProfileVO userData : getFlowInterface().getListUsers()) {
+                    for (UserProfileVO userData : users) {
                         JSONObject jsonUser = new JSONObject();
                         jsonUser.put("dateofbirth", userData.getDob());
                         jsonUser.put("lastname", userData.getLastname());
