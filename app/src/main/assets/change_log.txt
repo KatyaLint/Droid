@@ -388,6 +388,7 @@ Code changing:
     HEL-1356 - crash in profile preferences from cnc
     HEL-1357 - can't enter flight details
     HEL-1326 - can't delete credit card
+    HEL-1138 - trying to pay for 3 items with 3 credit cards caughts exception
 
 
     Code changing:
