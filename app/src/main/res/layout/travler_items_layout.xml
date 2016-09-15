@@ -25,7 +25,7 @@
             style="@style/TextViewTravlerCheckoutDetails"
             android:layout_alignLeft="@+id/trevelerName_ll"
             android:layout_below="@+id/trevelerName_ll"
-            android:text="Date of birth :"
+            android:text="Date of Birth :"
             app:fontName="dinnextltpro_regular.otf" />
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView

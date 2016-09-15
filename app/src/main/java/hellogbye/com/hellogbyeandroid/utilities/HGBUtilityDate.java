@@ -74,7 +74,7 @@ public class HGBUtilityDate {
     public static String parseDateToyyyyMMddTHHmmss(String time) {
         String outputPattern = BASE_SERVER_TIME_ZONE;//"EEE,MM dd,yyyy";
 
-        String inputPattern = "MM/dd/yyyy";
+        String inputPattern = "dd/MM/yyyy";
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
 
         String str = null;
@@ -290,9 +290,29 @@ public class HGBUtilityDate {
         return str;
     }
 
-    public static String parseDateToddMMyyyyForPayment(String time) {
+    public static String parseDateToMMddyyyyForPayment(String time) {
 
         String outputPattern = "MM/dd/yyyy";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(BASE_SERVER_TIME_ZONE);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+        Date date = null;
+        String str = null;
+
+        try {
+            date = getDateFromServer(time);
+            str = outputFormat.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
+
+
+
+    public static String parseDateToddMMyyyyForPayment(String time) {
+
+        String outputPattern = "dd/MM/yyyy";
         SimpleDateFormat inputFormat = new SimpleDateFormat(BASE_SERVER_TIME_ZONE);
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
 

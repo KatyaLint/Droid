@@ -398,3 +398,4 @@ Code changing:
     - Checkout traveler screen , edit fix
     - More options fix, to More Hotels, More Flights
     - Checkout crash on third screen fix
+    - date fix on checkout

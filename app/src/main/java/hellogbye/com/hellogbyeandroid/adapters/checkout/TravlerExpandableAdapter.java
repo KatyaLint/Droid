@@ -1,7 +1,6 @@
 package hellogbye.com.hellogbyeandroid.adapters.checkout;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,10 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymnentGroup;
-import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -95,6 +92,7 @@ public class TravlerExpandableAdapter extends BaseExpandableListAdapter {
         }
 
         holder.childNametext.setText(userName);
+        String dateOfBirth = child.getDob();
         holder.childDOB.setText(HGBUtilityDate.parseDateToddMMyyyyForPayment(child.getDob()));
         holder.childPhone.setText(child.getPhone());
         holder.childAddress.setText(child.getAddress() + "\n" + child.getCity() + "," + child.getState() + "\n" + child.getPostalcode());
@@ -140,7 +138,6 @@ public class TravlerExpandableAdapter extends BaseExpandableListAdapter {
             convertView = inf.inflate(R.layout.payment_group_travlers_item, parent, false);
 
             holder = new GroupViewHolder(convertView);
-
             convertView.setTag(holder);
         } else {
             holder = (GroupViewHolder) convertView.getTag();

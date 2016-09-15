@@ -173,7 +173,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
         companion_personal_settings_date_of_birth = (FontTextView)rootView.findViewById(R.id.companion_personal_settings_date_of_birth);
 
-        companion_personal_settings_date_of_birth.setText(HGBUtilityDate.parseDateToddMMyyyyForPayment(currentUser.getDob()));
+        companion_personal_settings_date_of_birth.setText(HGBUtilityDate.parseDateToMMddyyyyForPayment(currentUser.getDob()));
 
 
         companion_personal_settings_location_province = (FontEditTextView)rootView.findViewById(R.id.companion_personal_settings_state);

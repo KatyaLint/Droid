@@ -7,15 +7,13 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
-import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
@@ -212,8 +210,8 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
                 mUser.setPostalcode(mPostalCode.getText().toString());
                 mUser.setCity(mCity.getText().toString());*/
 
-
-                String dob = HGBUtilityDate.parseDateToyyyyMMddTHHmmss(mDOB.getText().toString());
+                String dobString = mDOB.getText().toString();
+                String dob = HGBUtilityDate.parseDateToyyyyMMddTHHmmss(dobString);
 
                 mUser.setDob(dob);
 

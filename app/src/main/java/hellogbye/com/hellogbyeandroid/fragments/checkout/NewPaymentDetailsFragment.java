@@ -171,8 +171,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                         PaymentChild paymentChild;
                         if (NodeTypeEnum.HOTEL.getType().equals(nodesVO.getmType())) {
                             paymentChild = new PaymentChild(nodesVO.getmHotelName() +
-                                    "\n" + HGBUtilityDate.parseDateToddMMyyyyForPayment(nodesVO.getmCheckIn()) +
-                                    "-" + HGBUtilityDate.parseDateToddMMyyyyForPayment(nodesVO.getmCheckOut()) + "\n" +
+                                    "\n" + HGBUtilityDate.parseDateToMMddyyyyForPayment(nodesVO.getmCheckIn()) +
+                                    "-" + HGBUtilityDate.parseDateToMMddyyyyForPayment(nodesVO.getmCheckOut()) + "\n" +
                                     nodesVO.getRoomsVOs().get(0).getmRoomType() + " " +
                                     HGBUtilityDate.getDateDiffString(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()),
                                     "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card),null);

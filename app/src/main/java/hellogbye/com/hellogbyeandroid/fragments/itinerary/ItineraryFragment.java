@@ -195,7 +195,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
 
                 for(int i=1;i<=difference;i++){ //adding days, if hotel is 3 day, adding another 2
-                 //   String time = HGBUtility.parseDateToddMMyyyyForPayment(departure);
+
                     departure =  HGBUtilityDate.addDayToDate(departure);
 
                     node.setUserName(passenger.getmName());
@@ -256,7 +256,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
             DatesLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
 
             currentDate = date;
-        //    currentDate = HGBUtility.parseDateToddMMyyyyForPayment(date);
+
 
             for(int i=0;i<passengers.size();i++){
 
