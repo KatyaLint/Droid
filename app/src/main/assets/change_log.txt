@@ -391,6 +391,7 @@ Code changing:
     HEL-1138 - trying to pay for 3 items with 3 credit cards caughts exception
     HEL-1548 - change text in preferred airline
     HEL-1544 - text in smoking preference change
+    HEL-1549 - the trash can button for deleting a profile doesn't work
 
 
     Code changing:
@@ -403,4 +404,4 @@ Code changing:
     - Checkout crash on third screen fix
     - date fix on checkout
     - Checkout empty credit card crash fix
-    - Preference delete profile fix
+    
