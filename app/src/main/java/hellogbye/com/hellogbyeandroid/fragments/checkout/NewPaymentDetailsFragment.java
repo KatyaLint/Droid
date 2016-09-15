@@ -272,9 +272,13 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                     public void onClick(DialogInterface dialog, int item) {
 
                         String selectedText = itemsList.get(item);
+                        if(selectedText == null){
+                            ErrorMessage("Wrong credit Card");
+                            return;
+                        }
                         //This is to set creditcard  array  final json for payment
 
-                        if (selectedText.equals(getString(R.string.cancel))) {
+                        if ( selectedText.equals(getString(R.string.cancel))) {
 
                         } else if (selectedText.equals(getString(R.string.add_card))) {
                             getFlowInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(), null);
