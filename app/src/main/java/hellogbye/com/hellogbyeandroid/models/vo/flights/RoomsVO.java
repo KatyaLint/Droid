@@ -41,7 +41,8 @@ public class RoomsVO {
     @SerializedName("hasalternative")
     private boolean mHasalternative;
 
-
+    @SerializedName("cancellationpolicy")
+    private String mCancellationPolicy;
     @SerializedName("type")
     private String mType;
     @SerializedName("dateorder")
@@ -145,5 +146,13 @@ public class RoomsVO {
 
     public double getmTotalBeforeTax() {
         return mTotalBeforeTax;
+    }
+
+    public String getmCancellationPolicy() {
+        return mCancellationPolicy;
+    }
+
+    public void setmCancellationPolicy(String mCancellationPolicy) {
+        this.mCancellationPolicy = mCancellationPolicy;
     }
 }

@@ -3,18 +3,23 @@ package hellogbye.com.hellogbyeandroid.fragments;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTabHost;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
+import android.widget.TabHost;
+import android.widget.TextView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -25,13 +30,17 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
-
 import java.util.ArrayList;
-
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelRoomAdapter;
+import hellogbye.com.hellogbyeandroid.fragments.hotel.DetailsHotelFragment;
+import hellogbye.com.hellogbyeandroid.fragments.hotel.GalleryHotelFragment;
+import hellogbye.com.hellogbyeandroid.fragments.hotel.PolicyHotelFragment;
+import hellogbye.com.hellogbyeandroid.fragments.mytrips.TabFavoritesView;
+import hellogbye.com.hellogbyeandroid.fragments.mytrips.TabHistoryView;
+import hellogbye.com.hellogbyeandroid.fragments.mytrips.TabUpcomingTripsView;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
@@ -51,7 +60,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
     private SupportMapFragment fragment;
     private GoogleMap mMap;
-    //  private SlidingUpPanelLayout mSlidingPanels;
     private RecyclerView mRecyclerView;
     private AlternativeHotelRoomAdapter mHotelRoomAdapter;
     private FontTextView mHotelNameFontTextView;
@@ -59,16 +67,9 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private FontTextView mHotelDaysFontTextView;
     private LinearLayoutManager mLayoutManager;
     private FontTextView mAlertnativeHotelFontTextView;
-    private ImageView mStart1ImageView;
-    private ImageView mStart2ImageView;
-    private ImageView mStart3ImageView;
-    private ImageView mStart4ImageView;
-    private ImageView mStart5ImageView;
     private FontTextView mRoomName;
     private FontTextView mChckInDate;
     private FontTextView mChckOutDate;
-
-    //  private NodesVO nodesVO;
     private ArrayList<String> mListForGallery;
     private ArrayList<NodesVO> mNodeArrayList;
     private PassengersVO passengersVO;
@@ -81,6 +82,11 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private Activity activity;
 
     public static boolean IS_MAIN_BACK_ALLOWED = true;
+
+    private FragmentTabHost mTabHost;
+    private static final String TAB_1_TAG = "DETAILS";
+    private static final String TAB_2_TAG = "GALLERY";
+    private static final String TAB_3_TAG = "Hotel Cancellation Policy";
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new HotelFragment();
@@ -99,11 +105,12 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         //  mSlidingPanels = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout);
         mNodeArrayList = new ArrayList<>();
 
-        initSliderPanel();
-
         initRootView(rootView);
+        initHotelTabs(rootView);
 
         initCurrentHotel();
+        loadAlternativeHotels();
+        loadRoomsList();
 
 
         mAlertnativeHotelFontTextView.setOnClickListener(new View.OnClickListener() {
@@ -231,9 +238,12 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         mMap.getUiSettings().setZoomControlsEnabled(false);
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.setOnMarkerClickListener(this);
+        setCurrentHotel();
 
+    }
 
-        //GET ALL HOTEL NODES AND SET CURRENT ONE
+    private void loadAlternativeHotels() {
+
         ConnectionManager.getInstance(activity).getAlternateHotelsWithHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
                 passengersVO.getmPaxguid(),
                 currentSelectedNode.getmCheckIn(), currentSelectedNode.getmCheckOut(), new ConnectionManager.ServerRequestListener() {
@@ -241,36 +251,13 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
                     public void onSuccess(Object data) {
                         CellsVO cellsVO = (CellsVO) data;
                         mNodeArrayList.clear();
+                        mNodeArrayList.addAll(cellsVO.getmNodes());
 
-                        for (NodesVO node : cellsVO.getmNodes()) {
-                            if (currentSelectedNode.getmHotelCode().equals(node.getmHotelCode())) {
-                                if (getFlowInterface().getSelectedHotelNode() != null) {
-                                    currentSelectedNode = getFlowInterface().getSelectedHotelNode();
-                                    mSelectHotel.setVisibility(View.VISIBLE);
-
-                                } else {
-
-                                    currentSelectedNode = getLegWithGuid(getActivityInterface().getTravelOrder());//cellsVO.getmNodes().get(1);
-                                    mSelectHotel.setVisibility(View.GONE);
-                                }
-
-                                initHotel(currentSelectedNode);
-                                setCurrentHotel();
-                                loadRoomsList();
-                            } else {
-                                mNodeArrayList.add(node);
-
-                            }
-                        }
-
-
-                        //      mSlidingPanels.setVisibility(View.VISIBLE);
                     }
 
                     @Override
                     public void onError(Object data) {
                         ErrorMessage(data);
-                        //    mSlidingPanels.setVisibility(View.VISIBLE);
                     }
                 });
     }
@@ -279,6 +266,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private void initCurrentHotel() {
         passengersVO = getTravellerWitGuid(getActivityInterface().getTravelOrder());//cellsVO.getmNodes().get(1);
         currentSelectedNode = getLegWithGuid(getActivityInterface().getTravelOrder());//cellsVO.getmNodes().get(1);
+        initHotel(currentSelectedNode);
     }
 
 
@@ -297,11 +285,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         mSelectHotel = (FontTextView) rootView.findViewById(R.id.select_hotel);
 
 
-        mStart1ImageView = (ImageView) rootView.findViewById(R.id.star1);
-        mStart2ImageView = (ImageView) rootView.findViewById(R.id.star2);
-        mStart3ImageView = (ImageView) rootView.findViewById(R.id.star3);
-        mStart4ImageView = (ImageView) rootView.findViewById(R.id.star4);
-        mStart5ImageView = (ImageView) rootView.findViewById(R.id.star5);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.rooms_recycler_view);
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -312,11 +295,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         return rootView;
     }
 
-    private void initSliderPanel() {
-//        mSlidingPanels.setCoveredFadeColor(Color.TRANSPARENT);
-//        mSlidingPanels.setAnchorPoint(PANEL_HIGHT);
-//        mSlidingPanels.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
-    }
+
 
     private void initHotel(NodesVO node) {
 
@@ -339,13 +318,14 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
         mHotelRoomAdapter = new AlternativeHotelRoomAdapter(roomlist);
         mRecyclerView.setAdapter(mHotelRoomAdapter);
-
-
     }
 
 
     private Marker setCurrentHotel() {
-        mMap.clear();
+        if(mMap != null){
+            mMap.clear();
+        }
+
         LatLng currentHotelLatLon = new LatLng(currentSelectedNode.getmLatitude(), currentSelectedNode.getmLongitude());
         Marker currentHotel = mMap.addMarker(new MarkerOptions()
                 .position(currentHotelLatLon)
@@ -383,6 +363,49 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
                     }
                 });
 
+    }
+
+    private void initHotelTabs(View rootview){
+
+
+//        Bundle detailBundle = new Bundle();
+//        detailBundle.putString("hotel_desc", currentSelectedNode.getmShortDescription());
+        mTabHost = (FragmentTabHost)rootview.findViewById(android.R.id.tabhost);
+
+        mTabHost.setup(getActivity(), getChildFragmentManager(), android.R.id.tabcontent);
+
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_1_TAG).setIndicator(TAB_1_TAG),
+                DetailsHotelFragment.class, null);
+
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_2_TAG).setIndicator(TAB_2_TAG),
+                GalleryHotelFragment.class, null);
+
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_3_TAG).setIndicator(TAB_3_TAG),
+                PolicyHotelFragment.class, null);
+
+        mTabHost.setCurrentTab(0);
+        mTabHost.getTabWidget().getChildAt(mTabHost.getCurrentTab()).getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+        mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+
+                mTabHost.getTabWidget().getChildAt(mTabHost.getCurrentTab()).getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+                Typeface textFont = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + "dinnextltpro_medium.otf");
+                for (int i = 0; i < mTabHost.getTabWidget().getChildCount(); i++) {
+                    TextView tv = (TextView) mTabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
+                    tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.light_grey));
+                    tv.setTypeface(textFont);
+                    tv.setTransformationMethod(null);
+
+                }
+
+                TextView tv = (TextView) mTabHost.getCurrentTabView().findViewById(android.R.id.title); //for Selected Tab
+                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_565656));
+                tv.setTypeface(textFont);
+                tv.setTransformationMethod(null);
+
+            }
+        });
     }
 
 
