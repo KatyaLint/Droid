@@ -156,6 +156,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
         searchListInitialization();
 
         searchListAdapter = new CompanionsSwipeItemsAdapter(getActivity().getApplicationContext(), companionsVOPending);
+
         searchListAdapter.addClickeListeners(new ISwipeAdapterExecution(){
 
             @Override

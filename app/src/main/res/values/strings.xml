@@ -47,6 +47,7 @@
     <string name="flight_stop_over">STOPOVER: </string>
     <string name="flight_details_include_tax">incl taxes &amp; fees</string>
     <string name="flight_grid_more_options">Flight details and more options</string>
+    <string name="hotel_grid_more_options">Hotel details and more options</string>
 
     <string name="show_alterate_hotels">More Hotels</string>
     <string name="alternative_hotel_room">ROOM</string>

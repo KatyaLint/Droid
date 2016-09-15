@@ -45,6 +45,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportResultsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportServerResultVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.ResponsesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionUserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.ConversationVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
@@ -136,8 +137,6 @@ public class CNCFragment extends HGBAbstractFragment {
         getAccountsProfiles();
 
 
-        joinCompanionToTravel();
-
         args = getArguments();
         clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT);
 
@@ -162,7 +161,7 @@ public class CNCFragment extends HGBAbstractFragment {
             getCurrentItinerary(solution_id);
         }
 
-
+        joinCompanionToTravel();
        /* final LinearLayout edit_preferences = ((MainActivityBottomTabs)getActivity()).getToolBarEditPreferences();*/
         tool_bar_profile_name = ((MainActivityBottomTabs)getActivity()).getToolBarProfileChange();
         tool_bar_profile_name.setOnClickListener(new View.OnClickListener() {
@@ -402,10 +401,14 @@ public class CNCFragment extends HGBAbstractFragment {
 
         for(CompanionVO companionVO : companions){
             if(companionVO.getmCompanionid().equals(user_id)){
-                userName = companionVO.getCompanionUserProfile().getmFirstName();
+                CompanionUserProfileVO companionProfile = companionVO.getCompanionUserProfile();
+                userName = companionProfile.getmFirstName() + " " +companionProfile.getmLastName();
                 break;
             }
         }
+
+
+
 
        /* for(AccountsVO account:accounts){
             if(account.getTravelpreferenceprofile().getId().equals(user_id)){
@@ -422,7 +425,7 @@ public class CNCFragment extends HGBAbstractFragment {
         airportSendValuesVO.setQuery(joinQuery);
         airportSendValuesVO.setLatitude("0");
         airportSendValuesVO.setLongitude("0");
-        airportSendValuesVO.setTravelpreferenceprofileid(user_id);
+        airportSendValuesVO.setTravelpreferenceprofileid(getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId());
 
 
         ArrayList<AirportSendValuesVO> airportSendValuesVOs = new ArrayList<>();

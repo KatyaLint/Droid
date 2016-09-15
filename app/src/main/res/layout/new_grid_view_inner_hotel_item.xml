@@ -115,6 +115,17 @@
             android:textColor="@color/COLOR_565656"
             app:fontName="dinnextltpro_light.otf" />
 
+
+        <RelativeLayout
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/SP12"
+                android:text="@string/flight_grid_more_options"/>
+        </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>
 

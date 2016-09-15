@@ -650,12 +650,12 @@ public class ConnectionManager {
 
             try {
 
-                jsonObjectMain.put("ItineraryId", airportSendValuesVO.getId());
+                jsonObjectMain.put("itineraryid", airportSendValuesVO.getId());
                 //Main for all query request
                 jsonObjectMain.put("query", airportSendValuesVO.getQuery());
                 //TODO need to remove
-                jsonObjectMain.put("latitude", "0");
-                jsonObjectMain.put("longitude", "0");
+                jsonObjectMain.put("latitude", 0);
+                jsonObjectMain.put("longitude", 0);
                 jsonObjectMain.put("travelpreferenceprofileid", airportSendValuesVO.getTravelpreferenceprofileid());
 
 
