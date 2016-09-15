@@ -248,20 +248,10 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
                     //delete
                  //   editClickCB.onItemClick("delete");
 
-                    List<AccountDefaultSettingsVO> accountAttributes = new ArrayList<AccountDefaultSettingsVO>();
-                    accountAttributes.addAll(accountDefaultSettings);
+            /*        List<AccountDefaultSettingsVO> accountAttributes = new ArrayList<AccountDefaultSettingsVO>();
+                    accountAttributes.addAll(accountDefaultSettings);*/
 
-                    for(AccountDefaultSettingsVO accountAttribute :accountAttributes){
-                        if(accountAttribute.isChecked()){
-                            if(accountDefaultSettings.size() <= MIN_PREFERENCE_SIZE){
-                                //popup
-                                atLeastOnePreference();
-                                break;
-                            }
-                            accountDefaultSettings.remove(accountAttribute);
-                            deletePreference(accountAttribute.getmId());
-                        }
-                    }
+
 
 
                 } else if (check_preferences.getVisibility() == View.GONE) { //edit mode
@@ -283,6 +273,29 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
                   //  editClickCB.onItemClick("edit");
                 }
              //   mAdapter.notifyDataSetChanged();
+            }
+        });
+
+        tool_bar_delete_preferences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<AccountDefaultSettingsVO> accountAttributes = new ArrayList<AccountDefaultSettingsVO>();
+                accountAttributes.addAll(accountDefaultSettings);
+                for(AccountDefaultSettingsVO accountAttribute :accountAttributes){
+                    if(accountAttribute.isChecked()){
+                        if(accountDefaultSettings.size() <= MIN_PREFERENCE_SIZE){
+                            //popup
+                            atLeastOnePreference();
+                            break;
+                        }
+                        accountDefaultSettings.remove(accountAttribute);
+                        deletePreference(accountAttribute.getmId());
+                    }
+                }
+              //  mAdapter.updateItems(accountDefaultSettings);
+                mAdapter.notifyDataSetChanged();
+               // deletePreference(String preferenceId)
+
             }
         });
 
@@ -356,6 +369,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
         ConnectionManager.getInstance(getActivity()).deletePreferenceProfileId(preferenceId,new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
+
             }
 
             @Override

@@ -401,3 +401,4 @@ Code changing:
     - Checkout crash on third screen fix
     - date fix on checkout
     - Checkout empty credit card crash fix
+    - Preference delete profile fix
