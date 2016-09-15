@@ -393,6 +393,7 @@ Code changing:
     HEL-1544 - text in smoking preference change
     HEL-1549 - the trash can button for deleting a profile doesn't work
     HEL-1551 - crash at add companion from grid
+    HEL-1554 - adding companion through search pressing on name crashing app
 
     Code changing:
     --------------
