@@ -39,6 +39,9 @@
         android:layout_marginLeft="@dimen/DP20"
         android:layout_toRightOf="@+id/name_summary_ll">
 
+
+
+        //Kate
         <ImageView
             android:id="@+id/cc_image"
             android:layout_width="wrap_content"

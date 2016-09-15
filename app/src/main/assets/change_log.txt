@@ -381,6 +381,13 @@ Code changing:
    ------------------------------------------
     Fixed Bugs:
     -----------
+    HEL-1330 - on second part of checkout can't change details of traveller
+    HEL-1361 - app crashes on step 3 of checkout
+    HEL-1366 - crash at add credit card
+    HEL-1354 - error in first page of checkout
+    HEL-1356 - crash in profile preferences from cnc
+    HEL-1357 - can't enter flight details
+    HEL-1326 - can't delete credit card
 
 
     Code changing:

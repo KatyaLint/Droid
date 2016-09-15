@@ -94,7 +94,6 @@ public class CreditCardListFragment extends HGBAbstractFragment {
 
         mRecyclerView.setAdapter(mAdapter);
         removeCreditCardSwipe();
-     //   clickListenerOnAdapter();
 
         ConnectionManager.getInstance(getActivity()).getCreditCards(new ConnectionManager.ServerRequestListener() {
             @Override
@@ -126,8 +125,10 @@ public class CreditCardListFragment extends HGBAbstractFragment {
 
             @Override
             public void deleteClicked(String token) {
-                for (int i = 0; i < getFlowInterface().getCreditCards().size(); i++) {
-                    if (getFlowInterface().getCreditCards().get(i).getToken().equals(token)) {
+                ArrayList<CreditCardItem> creditCards = getFlowInterface().getCreditCards();
+                for (int i = 0; i < creditCards.size(); i++) {
+                    String creditCardToken = creditCards.get(i).getToken();
+                    if (creditCardToken != null && creditCardToken.equals(token)) {
                         removeCardFromServer(i);
                         break;
                     }
@@ -148,8 +149,8 @@ public class CreditCardListFragment extends HGBAbstractFragment {
 
 
     private void removeCardFromServer(final int number) {
-        try {
-            ConnectionManager.getInstance(getActivity()).RemoveCreditCardHelloGbye(getFlowInterface().getCreditCards().get(number).getToken(), new ConnectionManager.ServerRequestListener() {
+
+            ConnectionManager.getInstance(getActivity()).removeCreditCardHelloGbye(getFlowInterface().getCreditCards().get(number).getToken(), new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
 
@@ -165,10 +166,5 @@ public class CreditCardListFragment extends HGBAbstractFragment {
 
                 }
             });
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 }

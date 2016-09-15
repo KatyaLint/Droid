@@ -1348,7 +1348,7 @@ public class ConnectionManager {
     ///////////////////////////////
 
 
-    public void RemoveCreditCardHelloGbye(String token,final ServerRequestListener listener) {
+    public void removeCreditCardHelloGbye(String token, final ServerRequestListener listener) {
         String url = getURL(Services.CARD_TOKEN);
 
         try{
