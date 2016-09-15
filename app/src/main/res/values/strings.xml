@@ -69,7 +69,7 @@
     <string name="select_hotel">Select Hotel</string>
 
     <string name="preferences_smoking">Smoking Preference</string>
-    <string name="preferences_smoking_prefer">Do you prefer to have smoking or non-\nsmoking rooms int your hotel?</string>
+    <string name="preferences_smoking_prefer">Do you prefer to have smoking or non-\nsmoking rooms in your hotel?</string>
     <string name="preferences_non_smoking_choice">Non-Smoking</string>
     <string name="preferences_smoking_choice">Smoking</string>
 
