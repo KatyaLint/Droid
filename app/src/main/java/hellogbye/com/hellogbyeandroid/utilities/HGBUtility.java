@@ -548,19 +548,26 @@ public class HGBUtility {
 
 
         View customMarkerView = ((LayoutInflater)  activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.select_hotel_marker_layout, null);
-
-        if(isFirst){
-            customMarkerView.setBackgroundResource(R.drawable.bubbles_red_background);
-        }else{
-            customMarkerView.setBackgroundResource(R.drawable.bubbles_white_background);
-        }
         FontTextView numTxt = (FontTextView) customMarkerView.findViewById(R.id.select_hotel_marker_price);
-
         FontTextView indexText = (FontTextView) customMarkerView.findViewById(R.id.index);
         numTxt.setText("$" + price);
         indexText.setText(String.valueOf(index));
+        if(isFirst){
+            customMarkerView.setBackgroundResource(R.drawable.bubbles_red_background);
+            indexText.setTextColor(ContextCompat.getColor(activity, R.color.white));
+            numTxt.setTextColor(ContextCompat.getColor(activity, R.color.white));
+        }else{
+            customMarkerView.setBackgroundResource(R.drawable.bubbles_white_background);
+            indexText.setTextColor(ContextCompat.getColor(activity, R.color.warm_grey));
+            numTxt.setTextColor(ContextCompat.getColor(activity, R.color.warm_grey));
+        }
 
-        setStarRating(customMarkerView, star);
+
+
+
+
+
+        setStarRating(customMarkerView, star,isFirst);
         customMarkerView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
         customMarkerView.layout(0, 0, customMarkerView.getMeasuredWidth(), customMarkerView.getMeasuredHeight());
         customMarkerView.buildDrawingCache();
@@ -588,7 +595,7 @@ public class HGBUtility {
         numTxt.setText("$" + price);
         indexText.setVisibility(View.GONE);
 
-        setStarRating(customMarkerView, star);
+        setStarRating(customMarkerView, star,true);
         customMarkerView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
         customMarkerView.layout(0, 0, customMarkerView.getMeasuredWidth(), customMarkerView.getMeasuredHeight());
         customMarkerView.buildDrawingCache();
@@ -602,44 +609,104 @@ public class HGBUtility {
         customMarkerView.draw(canvas);
         return returnedBitmap;
     }
-    private static void setStarRating(View view, float star) {
+    private static void setStarRating(View view, float star,boolean isSelected) {
 
         if ("0.5".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.red_star_half, R.drawable.red_star_out,
-                    R.drawable.red_star_out, R.drawable.red_star_out, R.drawable.red_star_out);
+            if(isSelected){
+                starHolder(view,R.drawable.red_star_half,R.drawable.red_star_out,
+                        R.drawable.red_star_out, R.drawable.red_star_out,R.drawable.red_star_out);
+            }else{
+                starHolder(view,R.drawable.gray_star_half,R.drawable.gray_star_out,
+                        R.drawable.gray_star_out, R.drawable.gray_star_out,R.drawable.gray_star_out);
+            }
+
 
         } else if ("1.0".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.red_star_full, R.drawable.red_star_out,
-                    R.drawable.red_star_out, R.drawable.red_star_out, R.drawable.red_star_out);
+            if(isSelected){
+                starHolder(view,R.drawable.red_star_full,R.drawable.red_star_out,
+                        R.drawable.red_star_out, R.drawable.red_star_out,R.drawable.red_star_out);
+            }else{
+                starHolder(view,R.drawable.gray_star_full,R.drawable.gray_star_out,
+                        R.drawable.gray_star_out, R.drawable.gray_star_out,R.drawable.gray_star_out);
+            }
+
 
         } else if ("1.5".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.red_star_full, R.drawable.red_star_half,
-                    R.drawable.red_star_out, R.drawable.red_star_out, R.drawable.red_star_out);
+            if(isSelected){
+                starHolder(view,R.drawable.red_star_full,R.drawable.red_star_half,
+                        R.drawable.red_star_out, R.drawable.red_star_out,R.drawable.red_star_out);
+            }else{
+                starHolder(view,R.drawable.gray_star_full,R.drawable.gray_star_half,
+                        R.drawable.gray_star_out, R.drawable.gray_star_out,R.drawable.gray_star_out);
+            }
+
 
         } else if ("2.0".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.red_star_full, R.drawable.red_star_full,
-                    R.drawable.red_star_out, R.drawable.red_star_out, R.drawable.red_star_out);
+            if(isSelected){
+                starHolder(view,R.drawable.red_star_full,R.drawable.red_star_full,
+                        R.drawable.red_star_out, R.drawable.red_star_out,R.drawable.red_star_out);
+            }else{
+                starHolder(view,R.drawable.gray_star_full,R.drawable.gray_star_full,
+                        R.drawable.gray_star_out, R.drawable.gray_star_out,R.drawable.gray_star_out);
+            }
+
         } else if ("2.5".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.red_star_full, R.drawable.red_star_full,
-                    R.drawable.red_star_half, R.drawable.red_star_out, R.drawable.red_star_out);
+            if(isSelected){
+                starHolder(view,R.drawable.red_star_full,R.drawable.red_star_full,
+                        R.drawable.red_star_half, R.drawable.red_star_out,R.drawable.red_star_out);
+            }else{
+                starHolder(view,R.drawable.gray_star_full,R.drawable.gray_star_full,
+                        R.drawable.gray_star_half, R.drawable.gray_star_out,R.drawable.gray_star_out);
+            }
+
         } else if ("3.0".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.red_star_full, R.drawable.red_star_full,
-                    R.drawable.red_star_full, R.drawable.red_star_out, R.drawable.red_star_out);
+            if(isSelected){
+                starHolder(view,R.drawable.red_star_full,R.drawable.red_star_full,
+                        R.drawable.red_star_full, R.drawable.red_star_out,R.drawable.red_star_out);
+            }else{
+                starHolder(view,R.drawable.gray_star_full,R.drawable.gray_star_full,
+                        R.drawable.gray_star_full, R.drawable.gray_star_out,R.drawable.gray_star_out);
+            }
+
         } else if ("3.5".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.red_star_full, R.drawable.red_star_full,
-                    R.drawable.red_star_full, R.drawable.red_star_half, R.drawable.red_star_out);
+            if(isSelected){
+                starHolder(view,R.drawable.red_star_full,R.drawable.red_star_full,
+                        R.drawable.red_star_full, R.drawable.red_star_half,R.drawable.red_star_out);
+            }else{
+                starHolder(view,R.drawable.gray_star_full,R.drawable.gray_star_full,
+                        R.drawable.gray_star_full, R.drawable.gray_star_half,R.drawable.gray_star_out);
+            }
+
 
         } else if ("4.0".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.red_star_full, R.drawable.red_star_full,
-                    R.drawable.red_star_full, R.drawable.red_star_full, R.drawable.red_star_out);
+            if(isSelected){
+                starHolder(view,R.drawable.red_star_full,R.drawable.red_star_full,
+                        R.drawable.red_star_full, R.drawable.red_star_full,R.drawable.red_star_out);
+            }else{
+                starHolder(view,R.drawable.gray_star_full,R.drawable.gray_star_full,
+                        R.drawable.gray_star_full, R.drawable.gray_star_full,R.drawable.gray_star_out);
+            }
+
 
         } else if ("4.5".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.red_star_full, R.drawable.red_star_full,
-                    R.drawable.red_star_full, R.drawable.red_star_full, R.drawable.red_star_half);
+            if(isSelected){
+                starHolder(view,R.drawable.red_star_full,R.drawable.red_star_full,
+                        R.drawable.red_star_full, R.drawable.red_star_full,R.drawable.red_star_half);
+            }else{
+                starHolder(view,R.drawable.gray_star_full,R.drawable.gray_star_full,
+                        R.drawable.gray_star_full, R.drawable.gray_star_full,R.drawable.gray_star_half);
+            }
+
 
         } else if ("5.0".equals(String.valueOf(star))) {
-            starHolder(view, R.drawable.red_star_full, R.drawable.red_star_full,
-                    R.drawable.red_star_full, R.drawable.red_star_full, R.drawable.red_star_full);
+            if(isSelected){
+                starHolder(view,R.drawable.red_star_full,R.drawable.red_star_full,
+                        R.drawable.red_star_full, R.drawable.red_star_full,R.drawable.red_star_full);
+            }else{
+                starHolder(view,R.drawable.gray_star_full,R.drawable.gray_star_full,
+                        R.drawable.gray_star_full, R.drawable.gray_star_full,R.drawable.gray_star_full);
+            }
+
 
         }
     }

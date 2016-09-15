@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/room_card"
 
@@ -48,6 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Price per night"
+                    app:fontName="dinnextltpro_regular.otf"
                     android:textColor="@color/white"
                     android:textSize="@dimen/DP10" />
 
@@ -55,6 +57,7 @@
                     android:id="@+id/room_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:fontName="dinnextltpro_regular.otf"
                     android:textColor="@color/white"
                     android:textSize="@dimen/DP20" />
 
@@ -74,8 +77,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxWidth="@dimen/DP300"
+                android:textSize="@dimen/SP16"
+                android:maxLines="1"
+                app:fontName="dinnextltpro_regular.otf"
                 android:layout_alignParentLeft="true"
-                android:textColor="@color/black" />
+                android:textColor="@color/dark_teal" />
 
             <ImageView
                 android:id="@+id/room_selected"

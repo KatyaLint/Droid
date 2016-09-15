@@ -1945,7 +1945,7 @@ public class ConnectionManager {
                 USER_POST_CHECKOUT("CheckOut"),
                 USER_GET_SEARCH_QUERY("Solution/Primarysearch?query="),
                 USER_GET_HOTEL_ALTERNATIVE("Hotel"),
-                USER_HOTEL_ROOM_ALTERNATIVE("HotelRoom"),
+                USER_HOTEL_ROOM_ALTERNATIVE("hotelroom"),
                 USER_PUT_HOTEL("Hotel"),
                 USER_GET_BOOKING_OPTIONS("Statics/BookingOptions"),
                 USER_FLIGHT_SOLUTIONS("Flight"),

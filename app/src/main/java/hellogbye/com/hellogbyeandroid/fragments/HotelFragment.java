@@ -256,6 +256,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
                                 initHotel(currentSelectedNode);
                                 setCurrentHotel();
+                                loadRoomsList();
                             } else {
                                 mNodeArrayList.add(node);
 
@@ -329,7 +330,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         String result = String.format("%.2f", iCharge);
         mHotelPriceFontTextView.setText("$" + node.getmMinimumAmount());
         mHotelDaysFontTextView.setText(diff + " Nights");
-        loadRoomsList();
+
 
 
     }
