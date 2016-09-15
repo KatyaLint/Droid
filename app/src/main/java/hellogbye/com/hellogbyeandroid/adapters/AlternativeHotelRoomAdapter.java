@@ -53,7 +53,7 @@ public class AlternativeHotelRoomAdapter extends RecyclerView.Adapter<Alternativ
             imageLoader.displayImage(room.getmImages().get(0), viewHolder.mRoomImageView);
         }
         else{
-            viewHolder.mRoomImageView.setBackgroundResource(R.drawable.bubbles_red_background);
+            viewHolder.mRoomImageView.setBackgroundResource(R.drawable.room_placeholder);
         }
 //            DisplayImageOptions opts = new DisplayImageOptions.Builder().imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
 //                    .postProcessor(new BitmapProcessor() {

@@ -93,7 +93,6 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
         Gson gson = new Gson();
         mNodesList = gson.fromJson(strValue, listType);
 
-        mNodesList.add(0,mCurrentSelectedNode);
         mAdapter = new AlternativeHotelAdapter(mNodesList,mCurrentSelectedNode,getActivity().getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
 
