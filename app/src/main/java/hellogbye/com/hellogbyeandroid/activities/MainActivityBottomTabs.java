@@ -60,6 +60,7 @@ import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsRa
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesCheckListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesDragListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSearchListFragment;
+import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesTabWidgetFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesTabsFragmentSettings;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoHelpAndFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
@@ -762,7 +763,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 //     fragment = isFreeUser( fragment , navPosition);
                 break;
             case PREFERENCES_TAB_SETTINGS:
-                fragment = PreferencesTabsFragmentSettings.newInstance(navPosition);
+                fragment = PreferencesTabWidgetFragment.newInstance(navPosition);
                 break;
             case PREFERENCES_SEARCH_LIST_SETTINGS:
                 fragment = PreferencesSearchListFragment.newInstance(navPosition);

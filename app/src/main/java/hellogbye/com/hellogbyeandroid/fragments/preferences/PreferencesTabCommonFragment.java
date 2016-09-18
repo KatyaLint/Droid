@@ -1,14 +1,9 @@
-/*
 package hellogbye.com.hellogbyeandroid.fragments.preferences;
 
-
+import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
@@ -17,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
-
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsDragListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
@@ -29,39 +23,28 @@ import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
-
-*/
 /**
- * Created by nyawka on 11/8/15.
- *//*
+ * Created by nyawka on 9/18/16.
+ */
+public class PreferencesTabCommonFragment extends HGBAbstractFragment {
 
-public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
+
+    private View rootView;
+    private String strJson;
+    private ArrayList<SettingsAttributesVO> accountFlightSettings ;
+    private ArrayList<SettingsAttributesVO> accountHotelSettings;
     private DynamicListView mFlightDynamicListView;
     private DynamicListView mHotelDynamicListView;
-    private boolean mIsFlightViewShown = true;
-    private View flight_tab_view;
-    private View hotel_tab_view;
-    private String strJson;
-    private FontTextView hotelTab;
-    private FontTextView flightTab;
-    private FontTextView settings_hotel_text;
+    private Bundle args = new Bundle();
     private FontTextView settings_title_flight_text;
     private FontTextView settings_flight_text;
     private FontTextView settings_title_hotel_text;
+    private FontTextView settings_hotel_text;
 
-    public static Fragment newInstance(int position) {
-        Fragment fragment = new PreferencesTabsFragmentSettings();
-        Bundle args = new Bundle();
-        args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View createViewForTab(int layoutID, Context context, boolean isFlightTab){
+        System.out.println("Kate PreferencesTabCommonFragment");
+        LayoutInflater inflater = LayoutInflater.from(context);
+        rootView = inflater.inflate(layoutID,null, false);
 
         Bundle args = getArguments();
         if (args != null) {
@@ -71,65 +54,31 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
             titleBar.setText(titleName);
         }
 
-        final View rootView = inflater.inflate(R.layout.settings_tabs_ex_layout, container, false);
-
-        flight_tab_view = (View) rootView.findViewById(R.id.setting_flight_include);
-        hotel_tab_view = (View) rootView.findViewById(R.id.setting_hotel_include);
 
 
-        //TODO sort by rank :)
-        List<SettingsAttributeParamVO> accountSettings = getActivityInterface().getAccountSettingsAttribute();
-        ArrayList<SettingsAttributesVO> accountFlightSettings = null;
-        ArrayList<SettingsAttributesVO> accountHotelSettings = null;
-
-        for (SettingsAttributeParamVO accountSetting : accountSettings) {
-            if (accountSetting.getmName().equalsIgnoreCase(NodeTypeEnum.FLIGHT.toString())) {
-                accountFlightSettings = accountSetting.getAttributesVOs();
-            } else if (accountSetting.getmName().equalsIgnoreCase(NodeTypeEnum.HOTEL.toString())) {
-                accountHotelSettings = accountSetting.getAttributesVOs();
-
-            }
+        initializePreferenceData();
+        initializeFlightFontText(rootView);
+        if(isFlightTab){
+            initializeFlightRecycle(rootView, accountFlightSettings);
+            addFlightPreferenceText();
+        }else{
+            initializeHotelRecycle(rootView, accountHotelSettings);
+            addHotelPreferenceText();
         }
 
-        initializeFlightRecycle(flight_tab_view, accountFlightSettings);
-        initializeHotelRecycle(hotel_tab_view, accountHotelSettings);
 
-
-        flightTab = (FontTextView) rootView.findViewById(R.id.settings_flight_tab);
-        flightTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mIsFlightViewShown = true;
-                showCorrectView();
-            }
-        });
-
-
-        hotelTab = (FontTextView) rootView.findViewById(R.id.setting_hotel_tab);
-        hotelTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mIsFlightViewShown = false;
-                showCorrectView();
-
-            }
-        });
-
-
-
-
-        initializeFontText(flight_tab_view, hotel_tab_view);
-        showCorrectView();
+        showCorrectView(isFlightTab);
         return rootView;
+
     }
 
-
-    private void initializeFontText(View flightView, View hotelView){
-         settings_title_flight_text = (FontTextView)flightView.findViewById(R.id.settings_item_title);
-         settings_flight_text = (FontTextView)flightView.findViewById(R.id.settings_item_text);
-         settings_title_hotel_text = (FontTextView)hotelView.findViewById(R.id.settings_item_title);
-         settings_hotel_text = (FontTextView)hotelView.findViewById(R.id.settings_item_text);
+    private void initializeFlightFontText(View rootView){
+        settings_title_flight_text = (FontTextView)rootView.findViewById(R.id.settings_item_title);
+        settings_flight_text = (FontTextView)rootView.findViewById(R.id.settings_item_text);
+        settings_title_hotel_text = (FontTextView)rootView.findViewById(R.id.settings_item_title);
+        settings_hotel_text = (FontTextView)rootView.findViewById(R.id.settings_item_text);
     }
+
 
     private void addFlightPreferenceText(){
         settings_title_flight_text.setText(getActivity().getResources().getText(R.string.preferences_flight_preferences));
@@ -140,6 +89,28 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
     private void addHotelPreferenceText(){
         settings_title_hotel_text.setText(getActivity().getResources().getText(R.string.preferences_hotel_preferences));
         settings_hotel_text.setText(getActivity().getResources().getText(R.string.preferences_hotel_prefer));
+    }
+
+    private void showCorrectView(boolean mIsFlightViewShown) {
+        if (mIsFlightViewShown) {
+            addFlightPreferenceText();
+        } else {
+            addHotelPreferenceText();
+        }
+    }
+
+
+    private void initializePreferenceData(){
+
+        List<SettingsAttributeParamVO> accountSettings = getActivityInterface().getAccountSettingsAttribute();
+        for (SettingsAttributeParamVO accountSetting : accountSettings) {
+            if (accountSetting.getmName().equalsIgnoreCase(NodeTypeEnum.FLIGHT.toString())) {
+                accountFlightSettings = accountSetting.getAttributesVOs();
+            } else if (accountSetting.getmName().equalsIgnoreCase(NodeTypeEnum.HOTEL.toString())) {
+                accountHotelSettings = accountSetting.getAttributesVOs();
+
+            }
+        }
     }
 
     private void initializeFlightRecycle(View rootView,  List<SettingsAttributesVO> accountFlightSettings) {
@@ -169,9 +140,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
                     }
                 }
         );
-
     }
-
 
     private void initializeHotelRecycle(View rootView, ArrayList<SettingsAttributesVO> accountFlightSettings) {
         mHotelDynamicListView = (DynamicListView) rootView.findViewById(R.id.settings_hotel_drag_list);
@@ -198,7 +167,6 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
                     }
                 }
         );
-
     }
 
     private void switchBetweenOptions(String guid, String titleName) {
@@ -254,7 +222,6 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
 
     }
 
-
     private void gotToSelectedFragment(String guid, String type, String titleName){
         args.putString(HGBConstants.BUNDLE_SETTINGS_ATT_ID, strJson);
         args.putString(HGBConstants.BUNDLE_SETTINGS_TYPE, type);
@@ -282,8 +249,6 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
         }
     }
 
-
-    Bundle args = new Bundle();
     private void getSettingsAttributes(String clickedAttributeID, final String type, final String titleName) {
 
         ConnectionManager.getInstance(getActivity()).getUserSettingAttributesForAttributeID(clickedAttributeID, type, new ConnectionManager.ServerRequestListener() {
@@ -330,33 +295,4 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
         });
     }
 
-
-    private void showCorrectView() {
-        if (mIsFlightViewShown) {
-            hotel_tab_view.setVisibility(View.GONE);
-            flight_tab_view.setVisibility(View.VISIBLE);
-
-            hotelTab.setTextColor(getActivity().getResources().getColor(R.color.COLOR_7FA5B4));
-            flightTab.setTextColor(getActivity().getResources().getColor(R.color.COLOR_WHITE));
-            flight_tab_view.setSelected(true);
-            hotel_tab_view.setSelected(false);
-            addFlightPreferenceText();
-
-
-            //show flight
-        } else {
-            hotel_tab_view.setVisibility(View.VISIBLE);
-            flight_tab_view.setVisibility(View.GONE);
-            hotelTab.setTextColor(getActivity().getResources().getColor(R.color.COLOR_WHITE));
-            flightTab.setTextColor(getActivity().getResources().getColor(R.color.COLOR_7FA5B4));
-            flight_tab_view.setSelected(false);
-            hotel_tab_view.setSelected(true);
-            addHotelPreferenceText();
-            //show hotel
-        }
-
-
-    }
-
 }
-*/

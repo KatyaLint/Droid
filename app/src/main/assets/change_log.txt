@@ -394,6 +394,9 @@ Code changing:
     HEL-1549 - the trash can button for deleting a profile doesn't work
     HEL-1551 - crash at add companion from grid
     HEL-1554 - adding companion through search pressing on name crashing app
+    HEL-1111 - add additional email
+    HEL-1325 - error when deleting an additional email to an account
+    HEL-1467 - add redline under current state of preference(flight or hotel)
 
     Code changing:
     --------------
