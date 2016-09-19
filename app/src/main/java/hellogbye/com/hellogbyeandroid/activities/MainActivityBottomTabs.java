@@ -330,7 +330,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         super.onStop();
 
         if(isLogoutExit){
-
             hgbPrefrenceManager.deleteSharedPrefrence(HGBPreferencesManager.HGB_CNC_LIST);
             hgbPrefrenceManager.deleteSharedPrefrence(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
             return;

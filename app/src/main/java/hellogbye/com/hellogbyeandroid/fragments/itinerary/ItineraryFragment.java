@@ -66,6 +66,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
     private ImageView mStart1ImageView;
     private FontTextView continue_to_checkout_flight_baggage;
     private ImageButton up_bar_favorite;
+    private FontTextView itirnarary_title_Bar;
 
     public ItineraryFragment() {
         // Empty constructor required for fragment subclasses
@@ -832,9 +833,9 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
     private void setSolutionNameForItirnarary() {
         String solutionName = userOrder.getmSolutionName();
-        FontTextView itirnarary_title_Bar = ((MainActivityBottomTabs)getActivity()).getItirnaryTitleBar();
-        itirnarary_title_Bar.setText(getActivityInterface().getTravelOrder().getmSolutionName());
-        itirnarary_title_Bar.setTag(getActivityInterface().getTravelOrder().getmSolutionID());
+        itirnarary_title_Bar = ((MainActivityBottomTabs)getActivity()).getItirnaryTitleBar();
+        itirnarary_title_Bar.setText(solutionName);
+        itirnarary_title_Bar.setTag(userOrder.getmSolutionID());
 
     }
 
@@ -866,9 +867,6 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
     private void setOnClickListenerForItineraryTopBar() {
 
-       final FontTextView itirnarary_title_Bar = ((MainActivityBottomTabs) getActivity()).getItirnaryTitleBar();
-
-
         LayoutInflater li = LayoutInflater.from(getActivity());
         final View promptsView = li.inflate(R.layout.popup_layout_change_iteinarary_name, null);
         final EditText input = (EditText) promptsView
@@ -886,6 +884,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
                             @Override
                             public void itemSelected(String inputItem) {
                                 itirnarary_title_Bar.setText(inputItem);
+                                userOrder.setmSolutionName(inputItem);
                                 sendNewSolutionName(inputItem);
                             }
 
