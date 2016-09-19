@@ -30,7 +30,6 @@ public class PreferencesHotelFragment extends PreferencesTabCommonFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        System.out.println("Kate PreferencesHotelFragment");
         View rootView = createViewForTab(R.layout.settings_tabs_hotel_list, getContext(), false);
         return rootView;
     }

@@ -378,7 +378,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
         setSupportActionBar(mToolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -692,12 +692,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         boolean stashToBack = stashFragment;
         int navPosition = position;//navBar.getNavNumber();
         boolean isAddAnimation = false;
-        boolean fullscreen = false;
+
         switch (navBar) {
             case CNC:
                 fragment = CNCFragment.newInstance(navPosition);
                 selectBottomBar(R.id.bb_menu_cnc);
-                fullscreen = true;
+
                 break;
             case TRIPS:
                 fragment = TripsTabsView.newInstance(navPosition);
@@ -811,7 +811,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
         }
 
-        enableFullScreen(fullscreen);
+
         if (bundle != null) {
             Bundle arguments = fragment.getArguments();
             arguments.putAll(bundle);
@@ -839,12 +839,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     public void enableFullScreen(boolean fullscreen) {
         if (fullscreen) {
             mBottomBar.hide();
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       //     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
 
         } else {
             mBottomBar.show();
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        //    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setHomeButtonEnabled(false);
         }
 

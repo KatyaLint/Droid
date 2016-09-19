@@ -42,7 +42,6 @@ public class PreferencesTabCommonFragment extends HGBAbstractFragment {
     private FontTextView settings_hotel_text;
 
     public View createViewForTab(int layoutID, Context context, boolean isFlightTab){
-        System.out.println("Kate PreferencesTabCommonFragment");
         LayoutInflater inflater = LayoutInflater.from(context);
         rootView = inflater.inflate(layoutID,null, false);
 

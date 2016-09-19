@@ -15,6 +15,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -120,28 +121,22 @@ public class CNCFragment extends HGBAbstractFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         account_settings = getResources().getStringArray(R.array.tutorial_arr);
 
         View rootView = inflater.inflate(R.layout.cnc_fragment_layout, container, false);
-        init(rootView);
-        //   mToolbar = (CostumeToolBar)rootView.findViewById(R.id.toolbar_cnc);
-
-        mHGBPrefrenceManager = HGBPreferencesManager.getInstance(getActivity().getApplicationContext());
-
-
-        //    updateToolBarView();
-
-
-        getAccountsProfiles();
-
-
         args = getArguments();
+
         clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT);
 
+
+
+        init(rootView);
+        startTutorial();
+        startTutorialText();
+
         if(clearCNCscreen){
-         //   startTutorialText();
+            //   startTutorialText();
             clearCNCItems();
 
             //This is to ckeck and display tutorial this version was cancelled waiting for new one
@@ -151,9 +146,20 @@ public class CNCFragment extends HGBAbstractFragment {
             setTutorialTextVisibility(false);
         }
 
-        startTutorial();
+
+        //   mToolbar = (CostumeToolBar)rootView.findViewById(R.id.toolbar_cnc);
+
+
+
+
+        //    updateToolBarView();
+
+
+        getAccountsProfiles();
+
 
         initList();
+
 
         String solution_id = args.getString(HGBConstants.SOLUTION_ITINERARY_ID);
         if(solution_id != null){
@@ -184,7 +190,10 @@ public class CNCFragment extends HGBAbstractFragment {
                 clearCNCItems();
             }
         });
-        startTutorialText();
+
+
+
+
       //  showMessagesToUser();
         return rootView;
     }
@@ -209,7 +218,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
     private int radioButtonSelected = -1;
 
-    private void profilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs){
+    private void profilesDialog (ArrayList<DefaultsProfilesVO> userProfileVOs) {
         LayoutInflater li = LayoutInflater.from(getActivity());
         View promptsView = li.inflate(R.layout.popup_custom_title, null);
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
@@ -550,12 +559,8 @@ public class CNCFragment extends HGBAbstractFragment {
                 }
             }
         });
-
-
-
-
-
     }
+
 
     private void loadCNCList() {
 
@@ -624,6 +629,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
     private void init(View view) {
 
+        mHGBPrefrenceManager = HGBPreferencesManager.getInstance(getActivity().getApplicationContext());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.cnc_recycler_view);
         mEditText = (FontEditTextView) view.findViewById(R.id.cnc_edit_text);
         mMicImageView = (ImageView) view.findViewById(R.id.cnc_mic);

@@ -41,7 +41,7 @@
 
 
 
-        //Kate
+
         <ImageView
             android:id="@+id/cc_image"
             android:layout_width="wrap_content"
@@ -51,7 +51,6 @@
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/cc_text"
             android:layout_width="wrap_content"
-            android:text="1234"
             android:textColor="@color/COLOR_003D4C"
             android:textSize="@dimen/SP16"
             android:layout_marginLeft="@dimen/DP6"

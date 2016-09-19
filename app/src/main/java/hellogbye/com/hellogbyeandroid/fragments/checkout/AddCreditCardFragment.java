@@ -300,7 +300,6 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         mCardCCV.setEnabled(false);
         mSave.setEnabled(true);
 
-        //TODO Kate
     }
 
 

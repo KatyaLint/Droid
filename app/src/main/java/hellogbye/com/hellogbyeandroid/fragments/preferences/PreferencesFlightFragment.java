@@ -31,13 +31,11 @@ public class PreferencesFlightFragment extends PreferencesTabCommonFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        System.out.println("Kate PreferencesFlightFragment onCreate");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        System.out.println("Kate PreferencesFlightFragment");
         View rootView = createViewForTab(R.layout.settings_drag_list, getContext(), true);
         return rootView;
 

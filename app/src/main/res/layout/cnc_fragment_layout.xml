@@ -10,21 +10,7 @@
         android:id="@+id/toolbar_cnc"
         android:visibility="gone"
         layout="@layout/toolbar_layout" />-->
-    ​
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/profile_tutorial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/combined_shape_02"
-        android:gravity="center"
-        android:paddingTop="@dimen/DP10"
-        android:text="Tap to choose/create profile"
-        android:textColor="@color/COLOR_WHITE"
-        android:textSize="@dimen/SP16"
-        android:visibility="gone"
-        app:fontName="dinnextltpro_medium.otf" />
  <!--   android:layout_below="@+id/toolbar_cnc"-->
 
 
@@ -41,6 +27,21 @@
            android:layout_height="wrap_content"
            android:orientation="vertical">
 
+           ​
+           <hellogbye.com.hellogbyeandroid.views.FontTextView
+               android:id="@+id/profile_tutorial"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+
+               android:layout_centerHorizontal="true"
+               android:background="@drawable/combined_shape_02"
+               android:layout_gravity="center"
+               android:paddingTop="@dimen/DP10"
+               android:text="Tap to choose/create profile"
+               android:textColor="@color/COLOR_WHITE"
+               android:textSize="@dimen/SP16"
+               android:visibility="gone"
+               app:fontName="dinnextltpro_medium.otf" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cnc_recycler_view"
@@ -155,7 +156,7 @@
             android:layout_toEndOf="@+id/cnc_fragment_trip_settings"
             android:layout_toLeftOf="@+id/send_ll"
             android:layout_toStartOf="@+id/send_ll"
-            android:focusableInTouchMode="true"
+
             android:gravity="center_vertical"
             android:hint="@string/type_message"
             android:minHeight="@dimen/DP44"
@@ -210,7 +211,6 @@
                 android:padding="@dimen/DP10"
                 android:text="@string/send"
                 android:textColor="@color/COLOR_003D4C"
-
                 android:visibility="gone" />
             ​
             <ImageView
