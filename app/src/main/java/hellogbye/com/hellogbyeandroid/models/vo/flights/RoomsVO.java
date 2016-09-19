@@ -28,6 +28,9 @@ public class RoomsVO {
     @SerializedName("nightlyrate")
     private ArrayList<Double> mNightLyrateVOs = new ArrayList<Double>();
 
+    @SerializedName("images")
+    private ArrayList<String> mImages = new ArrayList<String>();
+
     @SerializedName("averagerate")
     private double mAverageRate;
     @SerializedName("surchargertotal")
@@ -38,7 +41,8 @@ public class RoomsVO {
     @SerializedName("hasalternative")
     private boolean mHasalternative;
 
-
+    @SerializedName("cancellationpolicy")
+    private String mCancellationPolicy;
     @SerializedName("type")
     private String mType;
     @SerializedName("dateorder")
@@ -70,5 +74,85 @@ public class RoomsVO {
 
     public void setmRoomType(String mRoomType) {
         this.mRoomType = mRoomType;
+    }
+
+    public String getmPrimaryguid() {
+        return mPrimaryguid;
+    }
+
+    public String getmCode() {
+        return mCode;
+    }
+
+    public String getmDescription() {
+        return mDescription;
+    }
+
+    public String getmSmoking() {
+        return mSmoking;
+    }
+
+    public ArrayList<String> getmBedTypesVOs() {
+        return mBedTypesVOs;
+    }
+
+    public ArrayList<Double> getmNightLyrateVOs() {
+        return mNightLyrateVOs;
+    }
+
+    public ArrayList<String> getmImages() {
+        return mImages;
+    }
+
+    public double getmAverageRate() {
+        return mAverageRate;
+    }
+
+    public double getmSurchargerTotal() {
+        return mSurchargerTotal;
+    }
+
+    public boolean ismIsAlternative() {
+        return mIsAlternative;
+    }
+
+    public boolean ismHasalternative() {
+        return mHasalternative;
+    }
+
+    public String getmType() {
+        return mType;
+    }
+
+    public String getmDateOrder() {
+        return mDateOrder;
+    }
+
+    public String getmGuid() {
+        return mGuid;
+    }
+
+    public double getmRank() {
+        return mRank;
+    }
+
+    public String getmCheckIn() {
+        return mCheckIn;
+    }
+
+    public String getmCheckOut() {
+        return mCheckOut;
+    }
+
+    public double getmTotalBeforeTax() {
+        return mTotalBeforeTax;
+    }
+
+    public String getmCancellationPolicy() {
+        return mCancellationPolicy;
+    }
+
+    public void setmCancellationPolicy(String mCancellationPolicy) {
+        this.mCancellationPolicy = mCancellationPolicy;
     }
 }

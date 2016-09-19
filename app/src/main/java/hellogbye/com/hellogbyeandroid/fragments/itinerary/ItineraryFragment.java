@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -59,11 +60,11 @@ public class ItineraryFragment extends HGBAbstractFragment {
     private FontButtonView grid_make_payment;
     private int cellHieght;
     private FontTextView grid_total_price;
-    private ImageView mStart5ImageView;
-    private ImageView mStart4ImageView;
-    private ImageView mStart3ImageView;
-    private ImageView mStart2ImageView;
-    private ImageView mStart1ImageView;
+    private AppCompatImageView mStart5ImageView;
+    private AppCompatImageView mStart4ImageView;
+    private AppCompatImageView mStart3ImageView;
+    private AppCompatImageView mStart2ImageView;
+    private AppCompatImageView mStart1ImageView;
     private FontTextView continue_to_checkout_flight_baggage;
     private ImageButton up_bar_favorite;
     private FontTextView itirnarary_title_Bar;
@@ -604,11 +605,11 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
         View starView = (View)child.findViewById(R.id.grid_star_layout);
 
-        mStart1ImageView = (ImageView) starView.findViewById(R.id.star1);
-        mStart2ImageView = (ImageView) starView.findViewById(R.id.star2);
-        mStart3ImageView = (ImageView) starView.findViewById(R.id.star3);
-        mStart4ImageView = (ImageView) starView.findViewById(R.id.star4);
-        mStart5ImageView = (ImageView) starView.findViewById(R.id.star5);
+        mStart1ImageView = (AppCompatImageView) starView.findViewById(R.id.star1);
+        mStart2ImageView = (AppCompatImageView) starView.findViewById(R.id.star2);
+        mStart3ImageView = (AppCompatImageView) starView.findViewById(R.id.star3);
+        mStart4ImageView = (AppCompatImageView) starView.findViewById(R.id.star4);
+        mStart5ImageView = (AppCompatImageView) starView.findViewById(R.id.star5);
 
         setStarRating(starView, node.getmStarRating());
 
@@ -636,41 +637,41 @@ public class ItineraryFragment extends HGBAbstractFragment {
     private void setStarRating(View holder, float star) {
 
         if ("0.5".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.half_star, R.drawable.empty_star,
-                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
+            starHolder(holder, R.drawable.star_blue_half, R.drawable.star_blue_out,
+                    R.drawable.star_blue_out, R.drawable.star_blue_out, R.drawable.star_blue_out);
 
         } else if ("1.0".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.full_star, R.drawable.empty_star,
-                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
+            starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_out,
+                    R.drawable.star_blue_out, R.drawable.star_blue_out, R.drawable.star_blue_out);
 
         } else if ("1.5".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.full_star, R.drawable.half_star,
-                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
+            starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_half,
+                    R.drawable.star_blue_out, R.drawable.star_blue_out, R.drawable.star_blue_out);
 
         } else if ("2.0".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
+            starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_full,
+                    R.drawable.star_blue_out, R.drawable.star_blue_out, R.drawable.star_blue_out);
         } else if ("2.5".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.half_star, R.drawable.empty_star, R.drawable.empty_star);
+            starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_full,
+                    R.drawable.star_blue_half, R.drawable.star_blue_out, R.drawable.star_blue_out);
         } else if ("3.0".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.empty_star, R.drawable.empty_star);
+            starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_full,
+                    R.drawable.star_blue_full, R.drawable.star_blue_out, R.drawable.star_blue_out);
         } else if ("3.5".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.half_star, R.drawable.empty_star);
+            starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_full,
+                    R.drawable.star_blue_full, R.drawable.star_blue_half, R.drawable.star_blue_out);
 
         } else if ("4.0".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.full_star, R.drawable.empty_star);
+            starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_full,
+                    R.drawable.star_blue_full, R.drawable.star_blue_full, R.drawable.star_blue_out);
 
         } else if ("4.5".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.full_star, R.drawable.half_star);
+            starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_full,
+                    R.drawable.star_blue_full, R.drawable.star_blue_full, R.drawable.star_blue_half);
 
         } else if ("5.0".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.full_star, R.drawable.full_star,
-                    R.drawable.full_star, R.drawable.full_star, R.drawable.full_star);
+            starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_full,
+                    R.drawable.star_blue_full, R.drawable.star_blue_full, R.drawable.star_blue_full);
 
         }
     }

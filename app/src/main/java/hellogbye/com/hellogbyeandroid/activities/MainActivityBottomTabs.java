@@ -16,10 +16,9 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
 import com.roughike.bottombar.BottomBar;
@@ -35,6 +34,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.userprofilesadapter.UserProfilesAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
+import hellogbye.com.hellogbyeandroid.fragments.SelectNewHotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightTabsWidgetFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightsDetailsFragment;
@@ -60,6 +60,7 @@ import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsRa
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesCheckListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesDragListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSearchListFragment;
+import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSettingsMainClass;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesTabWidgetFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoHelpAndFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
@@ -74,6 +75,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
@@ -137,6 +139,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private ImageButton tool_bar_delete_preferences;
 
 
+    private AutoCompleteTextView mAutoComplete;
+
+    private NodesVO mSelectedHotelNode;
+
     public HGBSaveDataClass getHGBSaveDataClass() {
         return hgbSaveDataClass;
     }
@@ -157,7 +163,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         //INIT ToolBar
         mToolbar = (CostumeToolBar) findViewById(R.id.toolbar_costume);
         initToolBar();
-        //initSearchBar();
+
 
         //INIT Bottom tabs
 
@@ -233,6 +239,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
 
+
     private void querySearchChanges(String query){
         Intent intent = new Intent("search_query");
         intent.putExtra("query_type", "submit");
@@ -242,6 +249,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
 
 /*    private void clearCNCItems() {
+>>>>>>> master
 
         hgbSaveDataClass.setCNCItems(null);
         hgbSaveDataClass.setTravelOrder(null);
@@ -391,6 +399,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
 
 
+
+        mAutoComplete = (AutoCompleteTextView) mToolbar.findViewById(R.id.autocomplete);
+        toolbar_add_companion = (ImageButton) mToolbar.findViewById(R.id.toolbar_add_companion);
+
         toolbar_add_companion = (ImageButton)mToolbar.findViewById(R.id.toolbar_add_companion);
         tool_bar_profile_name = (LinearLayout) mToolbar.findViewById(R.id.tool_bar_profile_name);
         edit_preferences_ll = (LinearLayout) mToolbar.findViewById(R.id.preferences_edit_mode);
@@ -434,7 +446,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         return preference_save_changes;
     }
 
-    public ImageButton getAddCompanionButton(){
+    public ImageButton getAddCompanionButton() {
         return toolbar_add_companion;
     }
     public LinearLayout getToolBarEditPreferences(){
@@ -510,7 +522,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 hgbSaveDataClass.setAccounts(accounts);
                 //  AccountsVO account = accounts.get(0);
                 //  hgbSaveDataClass.getCurrentUser().setEmailaddress(account.getEmail());
-                  editProfileTypeMainToolBar();
+                editProfileTypeMainToolBar();
             }
 
             @Override
@@ -564,14 +576,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
 
-
-
     private void showAlertProfilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs) {
         LayoutInflater li = LayoutInflater.from(MainActivityBottomTabs.this);
         View promptsView = li.inflate(R.layout.popup_custom_title, null);
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivityBottomTabs.this);
         dialogBuilder.setCustomTitle(promptsView);
-       // dialogBuilder.setTitle(getResources().getString(R.string.profile_choose_between));
+        // dialogBuilder.setTitle(getResources().getString(R.string.profile_choose_between));
 
         final ArrayList<String> itemsList = new ArrayList<String>();
         for (DefaultsProfilesVO userProfileVO : userProfileVOs) {
@@ -809,6 +819,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 fragment = TravelerDetailsFragment.newInstance(navPosition);
                 break;
 
+            case SELECT_HOTEL_FRAGMENT:
+                fragment = SelectNewHotelFragment.newInstance(navPosition);
+                break;
+
         }
 
 
@@ -985,7 +999,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     }
 
-    private void selectBottomBar(int selection) {
+    @Override
+    public void selectBottomBar(int selection) {
         switch (selection) {
             case R.id.bb_menu_my_trips:
                 mBottomBar.selectTabAtPosition(BOTTOM_BAR_FIRST_INDEX, true, false);
@@ -1009,9 +1024,21 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 mBottomBar.setmCurrentTabPosition(BOTTOM_BAR_FIFTH_INDEX);
                 break;
         }
+
     }
 
 
+
+    @Override
+    public NodesVO getSelectedHotelNode() {
+        return mSelectedHotelNode;
+    }
+
+    @Override
+    public void setSelectedHotelNode(NodesVO node) {
+        mSelectedHotelNode = node;
+
+    }
 
     @Override
     public void callRefreshItinerary(final int fragment) {
@@ -1131,10 +1158,15 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         }
     }
 
+
+
+
     private void ErrorMessage(Object data){
         HGBErrorHelper errorHelper = new HGBErrorHelper();
         errorHelper.setMessageForError((String) data);
         errorHelper.show(getFragmentManager(), (String) data);
     }
-
+    public AutoCompleteTextView getmAutoComplete() {
+        return mAutoComplete;
+    }
 }

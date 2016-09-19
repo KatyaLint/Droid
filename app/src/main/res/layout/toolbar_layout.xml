@@ -22,15 +22,15 @@
         layout="@layout/profile_name_layout" />
 
 
-<!--    <ImageButton
-        android:id="@+id/toolbar_go_to_iternerary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginRight="@dimen/DP14"
-        android:background="@drawable/group_7"
-        android:tag="keyboard"
-        android:visibility="gone" />-->
+    <!--    <ImageButton
+            android:id="@+id/toolbar_go_to_iternerary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/DP14"
+            android:background="@drawable/group_7"
+            android:tag="keyboard"
+            android:visibility="gone" />-->
 
 
     <ImageButton
@@ -104,7 +104,8 @@
         app:fontName="dinnextltpro_medium.otf"
         android:layout_marginRight="@dimen/DP30"
         android:textColor="@color/COLOR_WHITE"
-        android:visibility="visible" />
+        android:visibility="visible"/>
+
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/itirnarary_title_Bar"
@@ -185,10 +186,10 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginRight="@dimen/DP14"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/toolbar_new_iternerary"
@@ -208,7 +209,6 @@
     </LinearLayout>
 
 
-
     <android.support.v7.widget.SearchView
         android:id="@+id/search_view_tool_bar"
         android:visibility="gone"
@@ -216,5 +216,16 @@
         android:background="@color/COLOR_WHITE"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autocomplete"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/DP6"
+        android:textColor="@color/COLOR_BLACK"
+        android:background="@color/COLOR_WHITE"
+        android:popupBackground="@color/COLOR_WHITE"
+        android:dropDownSelector="@color/COLOR_WHITE"
+        android:visibility="gone" />
 
 </hellogbye.com.hellogbyeandroid.views.CostumeToolBar>

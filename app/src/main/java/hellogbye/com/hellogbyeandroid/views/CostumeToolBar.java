@@ -1,17 +1,23 @@
 package hellogbye.com.hellogbyeandroid.views;
 
+import android.app.Activity;
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.content.Context;
 
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 public class CostumeToolBar extends Toolbar {
 
@@ -32,11 +38,17 @@ public class CostumeToolBar extends Toolbar {
     private ImageButton toolbar_new_iternerary_cnc;
     private FontTextView preference_save_changes;
     private SearchView search_view;
+    private AutoCompleteTextView auto_complete;
+    private Activity mActivity;
     private ImageButton toolbar_add_companion;
+    private int mSelectedFragment;
+    private Context mContext;
+
     private ImageButton tool_bar_delete_preferences;
 
     public CostumeToolBar(Context context) {
         super(context);
+        mContext = context;
     }
 
     public CostumeToolBar(Context context, AttributeSet attrs) {
@@ -105,15 +117,102 @@ public class CostumeToolBar extends Toolbar {
             toolbar_add_companion = (ImageButton)findViewById(R.id.toolbar_add_companion);
         }
 
+        initSearchBar();
+        initAutoComplete();
+
+
+    }
+
+    private void initSearchBar() {
+
         if(search_view == null){
             search_view = (SearchView) findViewById(R.id.search_view_tool_bar);
         }
+
+
+        ImageView searchClose = (ImageView) search_view.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+        TextView searchCloseText = (TextView) search_view.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+
+        searchClose.setImageResource(R.drawable.close_icon_a_1);
+//        int id = search_view.getContext()
+//                .getResources()
+//                .getIdentifier("android:id/search_src_text", null, null);
+//        TextView textView = (TextView) search_view.findViewById(id);
+        searchCloseText.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
+        searchCloseText.setHintTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
+        search_maginfy.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                ToolBarNavEnum navBar = ToolBarNavEnum.getNav(mSelectedFragment);
+                switch (navBar) {
+
+                    case TRIPS:
+                        openSearchBar();
+                        break;
+                    case SELECT_HOTEL_FRAGMENT:
+                        openAutoComplete();
+                        break;
+                }
+            }
+        });
+
+        search_view.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                closeSearchBar();
+                return false;
+            }
+        });
+
+
+    }
+
+    private void initAutoComplete(){
+        if(auto_complete == null){
+            auto_complete = (AutoCompleteTextView) findViewById(R.id.autocomplete);
+        }
+    }
+
+    private void closeSearchBar() {
+        titleBar.setVisibility(View.VISIBLE);
+        toolbar_new_iternerary_cnc.setVisibility(View.VISIBLE);
+        search_maginfy.setVisibility(View.VISIBLE);
+        search_view.setVisibility(View.GONE);
+
+    }
+
+
+    private void openSearchBar() {
+        titleBar.setVisibility(View.GONE);
+        toolbar_new_iternerary_cnc.setVisibility(View.GONE);
+        search_maginfy.setVisibility(View.GONE);
+        search_view.setVisibility(View.VISIBLE);
+        search_view.setIconified(false);
+
+    }
+
+    public void closeAutoComplete() {
+        titleBar.setVisibility(View.VISIBLE);
+        search_maginfy.setVisibility(View.VISIBLE);
+        auto_complete.setVisibility(View.GONE);
+        HGBUtility.hideKeyboard(mContext,auto_complete);
+
+    }
+
+
+    private void openAutoComplete() {
+        titleBar.setVisibility(View.GONE);
+        search_maginfy.setVisibility(View.GONE);
+        auto_complete.setVisibility(View.VISIBLE);
+        auto_complete.requestFocus();
+        HGBUtility.showKeyboard(mContext,auto_complete);
 
     }
 
 
     public void updateToolBarView(int position) {
-
+        mSelectedFragment = position;
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
         String selectedItem = navBar.getNavTitle();
         tool_bar_profile_name.setVisibility(View.GONE);
@@ -131,9 +230,20 @@ public class CostumeToolBar extends Toolbar {
         toolbar_new_iternerary.setVisibility(View.GONE);
         search_maginfy.setVisibility(View.GONE);
         search_view.setVisibility(View.GONE);
+        auto_complete.setVisibility(View.GONE);
         toolbar_add_companion.setVisibility(View.GONE);
 
         switch (navBar) {
+
+         //   case HOME:
+     /*           tool_bar_profile_name.setVisibility(View.VISIBLE);
+                toolbar_go_to_iternerary.setVisibility(View.VISIBLE);*/
+//             //   homeTitleImage.setVisibility(View.VISIBLE);
+//                my_trip_profile.setVisibility(View.VISIBLE);
+//                keyBoardImage.setVisibility(View.VISIBLE);
+//
+         //       break;
+
             case CNC:
                 tool_bar_profile_name.setVisibility(View.VISIBLE);
                 toolbar_new_iternerary_cnc.setVisibility(View.VISIBLE);
@@ -180,6 +290,10 @@ public class CostumeToolBar extends Toolbar {
             case PREFERENCES_MEMBERSHIP:
             case ALTERNATIVE_FLIGHT_ONE_WAY_TRIP:
             case ALTERNATIVE_FLIGHT_ROUND_TRIP:
+                titleBar.setVisibility(View.VISIBLE);
+                break;
+            case SELECT_HOTEL_FRAGMENT:
+                search_maginfy.setVisibility(View.VISIBLE);
                 titleBar.setVisibility(View.VISIBLE);
                 break;
 

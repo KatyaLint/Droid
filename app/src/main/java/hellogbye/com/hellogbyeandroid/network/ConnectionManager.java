@@ -5,6 +5,7 @@ import android.content.Context;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -107,6 +108,40 @@ public class ConnectionManager {
             @Override
             public void onResponse(String response) {
                 listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
+    }
+
+
+    public void postSearchHotels(String solutionid, String hotelid, LatLng latlng,final ServerRequestListener listener) {
+        String url = getURL(Services.HOTEL_SEARCH);
+
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("solutionId", solutionid);
+            jsonObject.put("PrimaryHotelId", hotelid);
+            jsonObject.put("Latitude", latlng.latitude);
+            jsonObject.put("Longitude", latlng.longitude);
+            jsonObject.put("maxsearchresult", 16);
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseHotelData(response));
             }
         }, new Response.ErrorListener() {
             @Override
@@ -1084,9 +1119,10 @@ public class ConnectionManager {
     }
 
     public void getAlternateHotelRoomsWithHotel(String solutioid, String paxid, String checkin, String checkout, String hotelcode, final ServerRequestListener listener) {
-
+        String [] chekinArray = checkin.split("T");
+        String [] chekoutArray = checkout.split("T");
         String url = getURL(Services.USER_HOTEL_ROOM_ALTERNATIVE);
-        url = url + solutioid + "&paxid=" + paxid + "&checkin=" + checkin + "&checkout=" + checkout + "hotelcode=" + hotelcode;
+        url = url+"?solution=" + solutioid + "&paxid=" + paxid + "&checkin=" + chekinArray[0] + "&checkout=" + chekoutArray[0] + "&hotelcode=" + hotelcode;
 
         JSONObject jsonObject = new JSONObject();
 
@@ -1094,14 +1130,14 @@ public class ConnectionManager {
                 jsonObject, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(response);
+                listener.onSuccess(Parser.parseHotelRoomsData(response));
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
+                  listener.onError(Parser.parseErrorMessage(error));
             }
-        });
+        },false);
     }
 
     //{"parameters":{"solution":"c86d9879-eb15-4164-8b75-6bbac0787b75","paxid":"9d2c85f5-d295-4064-a8c6-a4d0015b52e4","checkin":"2015-09-03","checkout":"2015-09-04"},"hotel":"c329c20a-4836-4bec-9580-48f7814e9fbd"}
@@ -1944,7 +1980,7 @@ public class ConnectionManager {
                 USER_POST_CHECKOUT("CheckOut"),
                 USER_GET_SEARCH_QUERY("Solution/Primarysearch?query="),
                 USER_GET_HOTEL_ALTERNATIVE("Hotel"),
-                USER_HOTEL_ROOM_ALTERNATIVE("HotelRoom"),
+                USER_HOTEL_ROOM_ALTERNATIVE("hotelroom"),
                 USER_PUT_HOTEL("Hotel"),
                 USER_GET_BOOKING_OPTIONS("Statics/BookingOptions"),
                 USER_FLIGHT_SOLUTIONS("Flight"),
@@ -1974,6 +2010,7 @@ public class ConnectionManager {
                 BOOKING_CONFIRMATION("Booking/flight/confirmation/pdf?"),
                 SUBMIT_FEEDBACK("Feedback"),
                 USER_ACTIVATION_PIN("UserProfile/Activate?activationKey="),
+                HOTEL_SEARCH("hotel/Search"),
                 DEFAULT_PROFILES("TravelPreference/Profiles/Defaults"),
                 COMPANION_SEARCH("UserProfile/Search?count=5&excludeCompanions=false&");
 

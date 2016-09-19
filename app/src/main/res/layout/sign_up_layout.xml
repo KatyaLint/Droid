@@ -9,7 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/b_g_android" >
+    android:src="@drawable/b_g_android" >
 
 
     <include android:id="@+id/pin_code_verification_layout" layout="@layout/pin_code_verification"/>

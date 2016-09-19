@@ -5,7 +5,7 @@
 .DS_Store
 /build
 /captures
-
+bottom-bar/build/
 *.aar
 
 libs/layouts/build/intermediates/exploded-aar/HelloGByeDroid.libs/core/unspecified/jars/classes.jar
@@ -54,38 +54,3 @@ libs/libs.iml
 
 .idea/vcs.xml
 
-bottom-bar/build/intermediates/bundles/debug/classes.jar
-
-bottom-bar/build/intermediates/bundles/debug/classes.jar
-
-bottom-bar/build/intermediates/bundles/debug/classes.jar
-
-bottom-bar/build/intermediates/bundles/debug/classes.jar
-
-bottom-bar/build/intermediates/bundles/debug/classes.jar
-
-bottom-bar/build/intermediates/classes/debug/com/roughike/bottombar/BottomBar$1.class
-
-bottom-bar/build/intermediates/classes/debug/com/roughike/bottombar/BottomBar$3.class
-
-bottom-bar/build/intermediates/classes/release/com/roughike/bottombar/BottomBar.class
-
-bottom-bar/build/intermediates/classes/release/com/roughike/bottombar/BottomBar.class
-
-bottom-bar/build/intermediates/classes/release/com/roughike/bottombar/BottomBar$1.class
-
-bottom-bar/build/intermediates/classes/release/com/roughike/bottombar/BottomBar$2.class
-
-bottom-bar/build/intermediates/classes/release/com/roughike/bottombar/BottomBar$3.class
-
-bottom-bar/build/intermediates/classes/release/com/roughike/bottombar/BottomBar$4.class
-
-bottom-bar/build/intermediates/classes/release/com/roughike/bottombar/BottomBar$5.class
-
-
-
-bottom-bar/build/intermediates/classes/debug/com/roughike/bottombar/BottomBar$2.class
-
-bottom-bar/build/intermediates/classes/debug/com/roughike/bottombar/BottomBar$4.class
-
-bottom-bar/build/intermediates/classes/debug/com/roughike/bottombar/BottomBar$5.class

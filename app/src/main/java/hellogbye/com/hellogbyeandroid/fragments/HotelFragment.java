@@ -2,38 +2,26 @@ package hellogbye.com.hellogbyeandroid.fragments;
 
 import android.Manifest;
 import android.app.Activity;
-
-
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTabHost;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TableRow.LayoutParams;
-
+import android.widget.TabHost;
+import android.widget.TextView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -41,28 +29,24 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
-
+import com.google.gson.Gson;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.ImageGalleryActivity;
-//import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
-import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelRoomAdapter;
+import hellogbye.com.hellogbyeandroid.fragments.hotel.DetailsHotelFragment;
+import hellogbye.com.hellogbyeandroid.fragments.hotel.GalleryHotelFragment;
+import hellogbye.com.hellogbyeandroid.fragments.hotel.PolicyHotelFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.AllImagesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.RoomsVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
-import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
@@ -73,51 +57,33 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
     private SupportMapFragment fragment;
     private GoogleMap mMap;
-    private TableLayout mTableLayout;
-    private ArrayList<String> mImageList;
-    private SlidingUpPanelLayout mSlidingPanels;
-
+    private RecyclerView mRecyclerView;
+    private AlternativeHotelRoomAdapter mHotelRoomAdapter;
     private FontTextView mHotelNameFontTextView;
     private FontTextView mHotelPriceFontTextView;
     private FontTextView mHotelDaysFontTextView;
-    //private FontTextView mHotelAddressFontTextView;
-    private RelativeLayout mPullDOwnRelativeLayout;
-
-    private FontTextView mHotelRoomNameFontTextView;
-    private FontTextView mHotelGuestNumberFontTextView;
-    private FontTextView mHotelCheckInFontTextView;
-    private FontTextView mHotelCheckOutFontTextView;
+    private LinearLayoutManager mLayoutManager;
     private FontTextView mAlertnativeHotelFontTextView;
-    private FontTextView mHotelNameFullFontTextView;
-    private FontTextView mHotelContactFontTextView;
-    private FontTextView mHotelAmnitiesFontTextView;
-    private FontTextView mHotelNearbyAttrictionsFontTextView;
-    //  private UserTravelVO mTravelDetails;
-    private ImageView mStart1ImageView;
-    private ImageView mStart2ImageView;
-    private ImageView mStart3ImageView;
-    private ImageView mStart4ImageView;
-    private ImageView mStart5ImageView;
-    private LinearLayout mMyHotelLinearLayout;
-    private ImageView mMyHotelImage;
-    private FontTextView mMyHotelText;
-    private FontTextView mSelectHotelText;
-
-    private AlternativeHotelAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private RecyclerView mRecyclerView;
-    private NodesVO nodesVO;
+    private FontTextView mRoomName;
+    private FontTextView mChckInDate;
+    private FontTextView mChckOutDate;
     private ArrayList<String> mListForGallery;
-    private HashMap<Marker, NodesVO> nodeMarkerMap;
+    private ArrayList<NodesVO> mNodeArrayList;
     private PassengersVO passengersVO;
     private NodesVO currentSelectedNode;
     private ImageView mConfirmBadge;
-    private ProgressDialog progressDialog;
+    private FontTextView mSelectHotel;
+    private boolean isChangeHotelSelected = false;
 
-    public final  float PANEL_HIGHT = 0.4f;
+    public final float PANEL_HIGHT = 0.4f;
     private Activity activity;
 
     public static boolean IS_MAIN_BACK_ALLOWED = true;
+
+    private FragmentTabHost mTabHost;
+    private static final String TAB_1_TAG = "DETAILS";
+    private static final String TAB_2_TAG = "GALLERY";
+    private static final String TAB_3_TAG = "Hotel Cancellation Policy";
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new HotelFragment();
@@ -133,54 +99,41 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
         activity = getActivity();
         View rootView = inflater.inflate(R.layout.hotel_main_layout, container, false);
-        mTableLayout = (TableLayout) rootView.findViewById(R.id.tableLayout1);
-        mSlidingPanels = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout);
-
-        nodeMarkerMap = new HashMap<Marker, NodesVO>();
-        mAdapter = new AlternativeHotelAdapter(new ArrayList<NodesVO>(nodeMarkerMap.values()));
-
-
-        initSliderPanel();
+        mNodeArrayList = new ArrayList<>();
 
         initRootView(rootView);
+        initHotelTabs(rootView);
 
         initCurrentHotel();
+        loadAlternativeHotels();
+        loadRoomsList();
 
-        progressDialog = new ProgressDialog(getActivity());
-        startProgressDialog();
-
-        mMyHotelLinearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mMyHotelImage.getVisibility() != View.VISIBLE) {
-                    sendServerNewHotelOrder(currentSelectedNode);
-
-                }
-            }
-        });
 
         mAlertnativeHotelFontTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAlternativeHotels();
+                Bundle args = new Bundle();
+                Gson gson = new Gson();
+                String json = gson.toJson(mNodeArrayList);
+                args.putString("alternative_hotels", json);
+                getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_HOTEL_FRAGMENT.getNavNumber(), args);
             }
         });
 
         ((MainActivityBottomTabs) activity).setOnBackPressedListener(new OnBackPressedListener() {
             public void doBack() {
 
-                if (mRecyclerView.getVisibility() != View.VISIBLE) {
-                    if (getActivity() != null && getActivity().getFragmentManager() != null) {
-                        IS_MAIN_BACK_ALLOWED = true;
-                        //getFragmentManager().popBackStack();
-//                        FragmentManager fm = getActivity().getFragmentManager();
-//                        fm.popBackStack(HotelFragment.class.toString(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    }
-                } else {
-                    IS_MAIN_BACK_ALLOWED = false;
-                    hideAlternativeHotels();
+                if (getActivity() != null && getActivity().getFragmentManager() != null) {
+                    IS_MAIN_BACK_ALLOWED = true;
                 }
 
+            }
+        });
+
+        mSelectHotel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendServerNewHotelOrder();
             }
         });
 
@@ -189,53 +142,25 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         return rootView;
     }
 
-    private void initializeMap(){
+    private void initializeMap() {
 
-        //if (mMap == null) {
-          //  fragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-            fragment.getMapAsync(this);
-        //}
-
-  /*      mMap = fragment.getMap();
-
-        if (mMap != null) {
-
-            //SET UP MAP
-            mMap.getUiSettings().setCompassEnabled(true);
-            mMap.getUiSettings().setZoomControlsEnabled(false);
-            mMap.getUiSettings().setMyLocationButtonEnabled(true);
-            //  if(!permissionDenied) {
-            //    HGBUtility.checkPermissions(get);
-            //   }
-            *//*if(!permissionDenied) {
-                HGBUtility.checkPermissions(getActivity());
-            }*//*
-
-
-
-            //  mMap.setMyLocationEnabled(true);
-            mMap.setOnMarkerClickListener(this);
-        } else {
-            Log.d("DEBUG", "map is null");
-        }*/
+        fragment.getMapAsync(this);
     }
 
 
-    private void sendServerNewHotelOrder(NodesVO cnode) {
+    private void sendServerNewHotelOrder() {
 
         ConnectionManager.getInstance(activity).putAlternateHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
                 passengersVO.getmPaxguid(),
-                nodesVO.getmCheckIn(), nodesVO.getmCheckOut(), cnode.getmGuid(),
+                currentSelectedNode.getmCheckIn(), currentSelectedNode.getmCheckOut(), currentSelectedNode.getmGuid(),
                 new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
-                        getFlowInterface().callRefreshItinerary(ToolBarNavEnum.HOTEL.getNavNumber());
-                        //GET ALL HOTEL NODES AND SET CURRENT ONE
-                        nodesVO = currentSelectedNode;
-                        //TODO set hotel locall and call server
-                        loadMap();
 
-                        hideAlternativeHotels();
+                        getFlowInterface().callRefreshItinerary(ToolBarNavEnum.HOTEL.getNavNumber());
+                        selectedItemGuidNumber(currentSelectedNode.getmGuid());
+                        getFlowInterface().setSelectedHotelNode(null);
+                        loadMap();
 
                     }
 
@@ -252,7 +177,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         super.onActivityCreated(savedInstanceState);
         FragmentManager fm = getChildFragmentManager();
 
-        fragment = (SupportMapFragment)fm.findFragmentById(R.id.map); //((SupportMapFragment) activity.getFragmentManager().findFragmentById(R.id.map));//(SupportMapFragment) fm.findFragmentById(R.id.map);
+        fragment = (SupportMapFragment) fm.findFragmentById(R.id.map); //((SupportMapFragment) activity.getFragmentManager().findFragmentById(R.id.map));//(SupportMapFragment) fm.findFragmentById(R.id.map);
 
         if (fragment == null) {
             fragment = SupportMapFragment.newInstance();
@@ -266,7 +191,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 
-        if (requestCode == HGBConstants.MY_PERMISSION_ACCESS_COARSE_LOCATION ) {
+        if (requestCode == HGBConstants.MY_PERMISSION_ACCESS_COARSE_LOCATION) {
             if (permissions.length == 1 &&
                     permissions[0] == Manifest.permission.ACCESS_FINE_LOCATION &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -275,11 +200,9 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
             } else {
                 permissionDenied = true;
             }
-                // Permission was denied. Display an error message.
-            }
+            // Permission was denied. Display an error message.
         }
-
-
+    }
 
 
     @Override
@@ -287,39 +210,10 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         super.onResume();
         initializeMap();
 
-       /* mMap = fragment.getMap();
-
-        if (mMap != null) {
-
-            //SET UP MAP
-            mMap.getUiSettings().setCompassEnabled(true);
-            mMap.getUiSettings().setZoomControlsEnabled(false);
-          //  if(!permissionDenied) {
-            //    HGBUtility.checkPermissions(get);
-         //   }
-            if(!permissionDenied) {
-                HGBUtility.checkPermissions(getActivity());
-            }
-            System.out.println("Kate permissionDenied =" + permissionDenied);
-
-
-          //  mMap.setMyLocationEnabled(true);
-            mMap.setOnMarkerClickListener(this);
-        } else {
-            Log.d("DEBUG", "map is null");
-        }*/
     }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        NodesVO node = nodeMarkerMap.get(marker);
-        if (node != null) {
-            initHotel(node, marker);
-            currentSelectedNode = node;
-        } else {
-            setCurrentHotel();
-            initHotel(nodesVO, null);
-        }
 
         return false;
     }
@@ -335,358 +229,99 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
             mMap.setMyLocationEnabled(true);
         }
 
-        //SET UP MAP
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(false);
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.setOnMarkerClickListener(this);
+        setCurrentHotel();
 
+    }
 
-        //GET ALL HOTEL NODES AND SET CURRENT ONE
+    private void loadAlternativeHotels() {
+
         ConnectionManager.getInstance(activity).getAlternateHotelsWithHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
-              passengersVO.getmPaxguid(),
-                nodesVO.getmCheckIn(), nodesVO.getmCheckOut(), new ConnectionManager.ServerRequestListener() {
+                passengersVO.getmPaxguid(),
+                currentSelectedNode.getmCheckIn(), currentSelectedNode.getmCheckOut(), new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
                         CellsVO cellsVO = (CellsVO) data;
-                        setCurrentHotel();
-                        if (nodeMarkerMap.size() > 0) {
-                            nodeMarkerMap.clear();
-                            mMap.clear();
-                        }
-
-                        setCurrentHotel();
-
-
-                        for (NodesVO node : cellsVO.getmNodes()) {
-                            if (nodesVO.getmHotelCode().equals(node.getmHotelCode())) {
-
-                                initHotel(node, null);
-                                //  nodeMarkerMap.put(marker, node);
-                            } else {
-
-
-                                Marker mark = mMap.addMarker(new MarkerOptions()
-                                        .position(new LatLng(Double.valueOf(node.getmLatitude()), Double.valueOf(node.getmLongitude())))
-                                        .icon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(activity, String.valueOf((int) node.getmMinimumAmount()), R.drawable.other_location_blue))));
-                                nodeMarkerMap.put(mark, node);
-
-                            }
-                        }
-
-                        // specify an adapter (see also next example)
-
-                        mAdapter = new AlternativeHotelAdapter(new ArrayList<NodesVO>(nodeMarkerMap.values()));
-                        mRecyclerView.setAdapter(mAdapter);
-                        mAdapter.SetOnItemClickListener(new AlternativeHotelAdapter.OnItemClickListener() {
-
-                            @Override
-                            public void onItemClick(View v, int position) {
-
-                                NodesVO node = (new ArrayList<NodesVO>(nodeMarkerMap.values())).get(position);
-                                Marker marker = (new ArrayList<Marker>(nodeMarkerMap.keySet())).get(position);
-                                currentSelectedNode = node;
-                                initHotel(node, marker);
-                                hideAlternativeHotels();
-
-                                //sendServerNewHotelOrder(node);
-                            }
-                        });
-                        mSlidingPanels.setVisibility(View.VISIBLE);
-                        dissmissProgressDialog();
+                        mNodeArrayList.clear();
+                        mNodeArrayList.addAll(cellsVO.getmNodes());
                     }
 
                     @Override
                     public void onError(Object data) {
                         ErrorMessage(data);
-                        mSlidingPanels.setVisibility(View.VISIBLE);
-                        dissmissProgressDialog();
                     }
                 });
     }
 
 
-    private void buildHotelGalleryTable(int cols) {
-        // outer for loop
-        int iIndex = 0;
-
-        if (mTableLayout.getChildCount() > 0) {
-            mTableLayout.removeAllViews();
-        }
-
-
-        for (int i = 1; i <= 2; i++) {
-            TableRow row = new TableRow(activity);
-            row.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-                    LayoutParams.WRAP_CONTENT));
-            for (int j = 1; j <= cols; j++) {
-                LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                ImageView image = (ImageView) inflater.inflate(R.layout.hotel_gallery_imageview, null);
-
-                //  tv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-
-                if (mImageList.size() > 0) {
-                    String strValue = mImageList.remove(0);
-                    HGBUtility.loadHotelImage(activity.getApplicationContext(), strValue, image);
-                    image.setTag(iIndex++);
-                    row.addView(image);
-                    image.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(activity.getApplicationContext(), ImageGalleryActivity.class);
-                            intent.putStringArrayListExtra("images", mListForGallery);
-                            intent.putExtra("image_index", (Integer) v.getTag());
-                            startActivity(intent);
-                        }
-                    });
-                }
-            }
-
-            mTableLayout.addView(row);
-        }
-    }
-
     private void initCurrentHotel() {
+        passengersVO = getTravellerWitGuid(getActivityInterface().getTravelOrder());
+        if(getFlowInterface().getSelectedHotelNode() != null){
+            currentSelectedNode = getFlowInterface().getSelectedHotelNode();
+        }else{
+            currentSelectedNode = getLegWithGuid(getActivityInterface().getTravelOrder());
 
-        //   mTravelDetails = getActivityInterface().getTravelOrder();
-//        passengersVO = mTravelDetails.getPassengerses().get(0);
-//        cellsVO = getCellWitGuid(getActivityInterface().getTravelOrder());  //passengersVO.getmCells().get(0);
-        passengersVO = getTravellerWitGuid(getActivityInterface().getTravelOrder());//cellsVO.getmNodes().get(1);
-        nodesVO = getLegWithGuid(getActivityInterface().getTravelOrder());//cellsVO.getmNodes().get(1);
-        currentSelectedNode = nodesVO;
+        }
+        initHotel(currentSelectedNode);
     }
 
 
     private View initRootView(View rootView) {
 
-    //    mScrollView = (ScrollView) rootView.findViewById(R.id.detail_scroll_view);
+        mRoomName = (FontTextView) rootView.findViewById(R.id.room_name);
+        mChckInDate = (FontTextView) rootView.findViewById(R.id.checkin_date);
+        mChckOutDate = (FontTextView) rootView.findViewById(R.id.checkout_date);
         mHotelNameFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_name);
         mHotelPriceFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_price);
         mHotelDaysFontTextView = (FontTextView) rootView.findViewById(R.id.days);
-    //    mHotelAddressFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_address);
-        mHotelRoomNameFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_room_name);
-        mHotelGuestNumberFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_guest_number);
-        mHotelCheckInFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_dates_checkin_name);
-        mHotelCheckOutFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_dates_checkout_name);
         mAlertnativeHotelFontTextView = (FontTextView) rootView.findViewById(R.id.show_alternative_hotel);
-        mHotelNameFullFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_full_address_name);
-        mHotelContactFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_contact_name);
-        mHotelAmnitiesFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_amnities_name);
-        mHotelNearbyAttrictionsFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_nearby_attrictaions_name);
-        mMyHotelLinearLayout = (LinearLayout) rootView.findViewById(R.id.my_hotel_ll);
-        mMyHotelImage = (ImageView) rootView.findViewById(R.id.image_my_hotel);
-        mMyHotelText = (FontTextView) rootView.findViewById(R.id.text_my_hotel);
-        mSelectHotelText = (FontTextView) rootView.findViewById(R.id.text_select_hotel);
-        mPullDOwnRelativeLayout = (RelativeLayout) rootView.findViewById(R.id.pull_down);
-        mRecyclerView  = (RecyclerView) rootView.findViewById(R.id.alt_hotel_recycler_view);
-    //    mConfirmBadge = (ImageView)rootView.findViewById(R.id.cofirm_badge);
-
-
-        mStart1ImageView = (ImageView) rootView.findViewById(R.id.star1);
-        mStart2ImageView = (ImageView) rootView.findViewById(R.id.star2);
-        mStart3ImageView = (ImageView) rootView.findViewById(R.id.star3);
-        mStart4ImageView = (ImageView) rootView.findViewById(R.id.star4);
-        mStart5ImageView = (ImageView) rootView.findViewById(R.id.star5);
-
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL_LIST));
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(activity);
+        mSelectHotel = (FontTextView) rootView.findViewById(R.id.select_hotel);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.rooms_recycler_view);
+        mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 
         return rootView;
     }
 
-    private void initSliderPanel() {
-        mSlidingPanels.setCoveredFadeColor(Color.TRANSPARENT);
-        mSlidingPanels.setAnchorPoint(PANEL_HIGHT);
-        mSlidingPanels.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
-
-        mSlidingPanels.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
-            @Override
-            public void onPanelSlide(View panel, float slideOffset) {
-                mPullDOwnRelativeLayout.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onPanelCollapsed(View panel) {
-            }
-
-            @Override
-            public void onPanelExpanded(View panel) {
-            }
-
-            @Override
-            public void onPanelAnchored(View panel) {
-                //          Log.i(TAG, "main height=" + mSlidingPanels.findViewById(R.id.main).getHeight());
-            }
-
-            @Override
-            public void onPanelHidden(View panel) {
-
-            }
-        });
 
 
-    }
-
-    private void initHotel(NodesVO node, Marker marker) {
+    private void initHotel(NodesVO node) {
 
         mListForGallery = new ArrayList<>();
         mHotelNameFontTextView.setText(node.getmHotelName());
+        mRoomName.setText(node.getUserName());
+        mChckInDate.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(node.getmCheckIn()));
+        mChckOutDate.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(node.getmCheckOut()));
         long diff = HGBUtilityDate.dayDifference(node.getmCheckIn(), node.getmCheckOut());
-        double iCharge = node.getmMinimumAmount()/diff;
+        double iCharge = node.getmMinimumAmount() / diff;
         String result = String.format("%.2f", iCharge);
         mHotelPriceFontTextView.setText("$" + node.getmMinimumAmount());
-        mHotelDaysFontTextView.setText(diff+" Nights");
-       // mHotelAddressFontTextView.setText(node.getmAddress1());
-        //TODO we need to check if size is more then 1 show option to change
-        mHotelRoomNameFontTextView.setText(node.getRoomsVOs().get(0).getmRoomType());
-        // mHotelGuestNumberFontTextView.setText(mTravelDetails.getPassengerses().get(1).getmCells().get(0).getmNodes().get(0).getm());
-//        mHotelCheckInFontTextView.setText(nodesVO.getmCheckIn());
-//        mHotelCheckOutFontTextView.setText(nodesVO.getmCheckOut());
-        mHotelCheckInFontTextView.setText(HGBUtilityDate.parseDateToEEEMMMDyy(node.getmCheckIn()));
-        mHotelCheckOutFontTextView.setText(HGBUtilityDate.parseDateToEEEMMMDyy(node.getmCheckOut()));
+        mHotelDaysFontTextView.setText(diff + " Nights");
 
-        if (nodesVO.getmHotelCode().equals(node.getmHotelCode())) {
-            mMyHotelText.setVisibility(View.VISIBLE);
-            mMyHotelImage.setVisibility(View.VISIBLE);
-            mSelectHotelText.setVisibility(View.GONE);
-//            mConfirmBadge.setVisibility(View.VISIBLE);
-//            if(node.getmPaymentProcessingState().equals("PAID")){
-//                mConfirmBadge.setBackgroundResource(R.drawable.paid_badge);
-//            }else{
-//                mConfirmBadge.setBackgroundResource(R.drawable.cofirm_badge);
-//            }
 
-        } else {
-            mSelectHotelText.setVisibility(View.VISIBLE);
-            mMyHotelText.setVisibility(View.GONE);
-            mMyHotelImage.setVisibility(View.GONE);
-         //   mConfirmBadge.setVisibility(View.GONE);
-        }
 
-        mHotelNameFullFontTextView.setText(node.getmAddress1() + "," + node.getmCityName() + "\n" + node.getmPostalCode() + "," + node.getmStateProvince() + "," + node.getmCountry());
-       if(node.getmAmenities() != null){
-           //TODO Need to fix via design
-          // mHotelAmnitiesFontTextView.setText(Html.fromHtml(node.getmAmenities()));
-       }
-
-        mHotelContactFontTextView.setText(node.getmPhone());
-        if(node.getmShortDescription() != null){
-            mHotelNearbyAttrictionsFontTextView.setText(Html.fromHtml(node.getmShortDescription()));
-        }
-        setStarRating(node.getmStarRating());
-        mImageList = new ArrayList<>();
-        for (AllImagesVO image : node.getAllImagesVOs()) {
-            mImageList.add(image.getmImage());
-            mListForGallery.add(image.getmImage());
-        }
-        buildHotelGalleryTable(mImageList.size() / 2);//
-
-        if (marker != null) {
-
-            for (Marker marker1 : nodeMarkerMap.keySet()) {
-
-                if (!marker.equals(marker1)) {
-                    marker1.setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(getActivity(), String.valueOf((int) nodeMarkerMap.get(marker1).getmMinimumAmount()), R.drawable.other_location_blue)));
-
-                } else {
-                    marker1.setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(getActivity(), String.valueOf((int) nodeMarkerMap.get(marker1).getmMinimumAmount()), R.drawable.other_location_red)));
-                }
-
-            }
-
-        }
     }
 
-    private void setStarRating(float star) {
+    private void initAlternativeRoomList(ArrayList<RoomsVO> roomlist) {
 
-        if ("0.5".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.half_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.empty_star);
-
-        } else if ("1.0".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.empty_star);
-
-        } else if ("1.5".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.half_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.empty_star);
-
-        } else if ("2.0".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.empty_star);
-
-        } else if ("2.5".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.half_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.empty_star);
-
-        } else if ("3.0".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.empty_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.empty_star);
-
-        } else if ("3.5".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.half_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.empty_star);
-
-        } else if ("4.0".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.empty_star);
-
-        } else if ("4.5".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.half_star);
-
-        } else if ("5.0".equals(String.valueOf(star))) {
-            mStart1ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart2ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart3ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart4ImageView.setBackgroundResource(R.drawable.full_star);
-            mStart5ImageView.setBackgroundResource(R.drawable.full_star);
-
-        }
-
-
+        mHotelRoomAdapter = new AlternativeHotelRoomAdapter(roomlist);
+        mRecyclerView.setAdapter(mHotelRoomAdapter);
     }
 
 
     private Marker setCurrentHotel() {
-        LatLng currentHotelLatLon = new LatLng(nodesVO.getmLatitude(), nodesVO.getmLongitude());
+        if(mMap != null){
+            mMap.clear();
+        }
+
+        LatLng currentHotelLatLon = new LatLng(currentSelectedNode.getmLatitude(), currentSelectedNode.getmLongitude());
         Marker currentHotel = mMap.addMarker(new MarkerOptions()
                 .position(currentHotelLatLon)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_selected_hotel_blue)));
+                .icon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMyHotelMarkerBitmap(currentSelectedNode.getmStarRating(), currentSelectedNode.getmMinimumAmount(), getActivity()))));
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(currentHotelLatLon)      // Sets the center of the map to Mountain View
                 .zoom(11)                   // Sets the zoom
@@ -698,70 +333,72 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
     }
 
-    private void showAlternativeHotels() {
-        mRecyclerView.clearAnimation();
-        mRecyclerView.setVisibility(View.VISIBLE);
+    private void loadRoomsList() {
 
-        Animation anim = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.slide_in_up);
-        anim.setAnimationListener(new Animation.AnimationListener() {
+        //GET ALL HOTEL NODES AND SET CURRENT ONE
+        ConnectionManager.getInstance(activity).getAlternateHotelRoomsWithHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
+                passengersVO.getmPaxguid(),
+                currentSelectedNode.getmCheckIn(), currentSelectedNode.getmCheckOut(), currentSelectedNode.getmHotelCode(), new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        NodesVO node = (NodesVO) data;
+                        if (node.getRoomsVOs().size() > 0) {
+                            initAlternativeRoomList(node.getRoomsVOs());
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Object data) {
+                        ErrorMessage(data);
+                    }
+                });
+
+    }
+
+    private void initHotelTabs(View rootview){
+
+
+//        Bundle detailBundle = new Bundle();
+//        detailBundle.putString("hotel_desc", currentSelectedNode.getmShortDescription());
+        mTabHost = (FragmentTabHost)rootview.findViewById(android.R.id.tabhost);
+
+        mTabHost.setup(getActivity(), getChildFragmentManager(), android.R.id.tabcontent);
+
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_1_TAG).setIndicator(TAB_1_TAG),
+                DetailsHotelFragment.class, null);
+
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_2_TAG).setIndicator(TAB_2_TAG),
+                GalleryHotelFragment.class, null);
+
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_3_TAG).setIndicator(TAB_3_TAG),
+                PolicyHotelFragment.class, null);
+
+        mTabHost.setCurrentTab(0);
+        mTabHost.getTabWidget().getChildAt(mTabHost.getCurrentTab()).getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+        mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
-            public void onAnimationStart(Animation animation) {
+            public void onTabChanged(String tabId) {
 
-            }
+                mTabHost.getTabWidget().getChildAt(mTabHost.getCurrentTab()).getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+                Typeface textFont = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + "dinnextltpro_medium.otf");
+                for (int i = 0; i < mTabHost.getTabWidget().getChildCount(); i++) {
+                    TextView tv = (TextView) mTabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
+                    tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_999999));
+                    tv.setTypeface(textFont);
+                    tv.setTransformationMethod(null);
 
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                mSlidingPanels.setVisibility(View.GONE);
+                }
 
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
+                TextView tv = (TextView) mTabHost.getCurrentTabView().findViewById(android.R.id.title); //for Selected Tab
+                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_565656));
+                tv.setTypeface(textFont);
+                tv.setTransformationMethod(null);
 
             }
         });
-        mRecyclerView.setAnimation(anim);
-        anim.start();
-
     }
 
-    private void hideAlternativeHotels() {
-        mRecyclerView.clearAnimation();
-        if (mRecyclerView.getVisibility() != View.VISIBLE) {
-            return;
-        }
-
-        Animation animDown = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.slide_out_down);
-        animDown.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                mSlidingPanels.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                mRecyclerView.setVisibility(View.GONE);
-                mSlidingPanels.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-        mRecyclerView.setAnimation(animDown);
-        animDown.start();
-
-    }
-
-    private void startProgressDialog(){
-        progressDialog = ProgressDialog.show(getActivity(), "", "loading");
-        progressDialog.setCancelable(false);
-        progressDialog.setCanceledOnTouchOutside(false);
-    }
-
-    private void dissmissProgressDialog(){
-        progressDialog.dismiss();
-    }
 
 }
