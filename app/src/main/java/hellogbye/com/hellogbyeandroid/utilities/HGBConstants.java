@@ -28,6 +28,7 @@ public class HGBConstants {
 
 
     public static final String BUNDLE_SETTINGS_ATT_ID = "setting_att_id";
+    public static final String BUNDLE_SETTINGS_TITLE_NAME = "setting_att_title_name";
     public static final String BUNDLE_SETTINGS_TYPE = "setting_type";
 
 

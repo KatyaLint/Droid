@@ -25,6 +25,7 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
 
     public static final int HGB_ITEM = 2;
+    public static final int HGB_ITEM_NO_ICON = 4;
     public static final int HGB_ERROR_ITEM = 1;
     public static final int ME_ITEM = 0;
     public static final int WAITING_ITEM = 3;
@@ -62,12 +63,22 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     class ViewHolderHGB extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
         public FontTextView itemHGB;
-
+        private ImageView cnc_image_view;
 
         public ViewHolderHGB(View itemLayoutView) {
             super(itemLayoutView);
             itemHGB = (FontTextView) itemLayoutView.findViewById(R.id.cnc_hgb_input);
+            cnc_image_view = (ImageView) itemLayoutView.findViewById(R.id.cnc_image_view);
             itemLayoutView.setOnClickListener(this);
+
+        }
+
+        public void setVisabilityIcon(boolean isVisible){
+            if(isVisible){
+                cnc_image_view.setVisibility(View.VISIBLE);
+            }else{
+                cnc_image_view.setVisibility(View.INVISIBLE);
+            }
 
         }
 
@@ -113,7 +124,13 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case HGB_ITEM:
                 View hgbview = LayoutInflater.from(parent.getContext()).inflate(R.layout.cnc_hgb_item, parent, false);
                 ViewHolderHGB vh2 = new ViewHolderHGB(hgbview);
+                vh2.setVisabilityIcon(true);
                 return vh2;
+            case HGB_ITEM_NO_ICON:
+                View hgbview2 = LayoutInflater.from(parent.getContext()).inflate(R.layout.cnc_hgb_item, parent, false);
+                ViewHolderHGB vh3 = new ViewHolderHGB(hgbview2);
+                vh3.setVisabilityIcon(false);
+                return vh3;
 
             case WAITING_ITEM:
                 View waitview = LayoutInflater.from(parent.getContext()).inflate(R.layout.cnc_waiting_item, parent, false);
@@ -140,20 +157,21 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case HGB_ERROR_ITEM:
                 ViewHolderHGB hgbholderError = (ViewHolderHGB) holder;
                 hgbholderError.itemHGB.setBackgroundResource(R.drawable.hgb_red_cnc_backround);
-                hgbholderError.itemHGB.setTextColor(mContext.getResources().getColor(R.color.black));
+                hgbholderError.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_BLACK));
                 hgbholderError.itemHGB.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
                 break;
             case HGB_ITEM:
+            case HGB_ITEM_NO_ICON:
                 ViewHolderHGB hgbholder = (ViewHolderHGB) holder;
                 if (mContext.getResources().getString(R.string.itinerary_created).equals(strMessage)
                         || mContext.getResources().getString(R.string.grid_has_been_updated).equals(strMessage)) {
                     hgbholder.itemHGB.setBackgroundResource(R.drawable.hgb_cnc_backround);
-                    hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_0E587D));
+                    hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_00516f));
                     hgbholder.itemHGB.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
                     hgbholder.itemHGB.setPaintFlags(hgbholder.itemHGB.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                 } else {
                     hgbholder.itemHGB.setBackgroundResource(R.drawable.hgb_cnc_backround);
-                    hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_0E587D));
+                    hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_00516f));
                     hgbholder.itemHGB.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
                 }
 

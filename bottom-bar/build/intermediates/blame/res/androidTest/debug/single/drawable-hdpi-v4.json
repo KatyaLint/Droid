@@ -20,12 +20,12 @@
         "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/drawable-hdpi-v4/abc_switch_track_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/abc_cab_background_top_mtrl_alpha.9.png",
-        "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/drawable-hdpi-v4/abc_cab_background_top_mtrl_alpha.9.png"
-    },
-    {
         "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png",
         "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/abc_cab_background_top_mtrl_alpha.9.png",
+        "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/drawable-hdpi-v4/abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
         "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/abc_ic_menu_share_mtrl_alpha.png",
@@ -56,12 +56,12 @@
         "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/drawable-hdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png"
     },
     {
-        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/abc_list_divider_mtrl_alpha.9.png",
-        "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/drawable-hdpi-v4/abc_list_divider_mtrl_alpha.9.png"
-    },
-    {
         "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/abc_list_longpressed_holo.9.png",
         "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/drawable-hdpi-v4/abc_list_longpressed_holo.9.png"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/abc_list_divider_mtrl_alpha.9.png",
+        "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/drawable-hdpi-v4/abc_list_divider_mtrl_alpha.9.png"
     },
     {
         "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/drawable-hdpi-v4/abc_ic_star_half_black_36dp.png",

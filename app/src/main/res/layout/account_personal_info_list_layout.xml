@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/greyish_alternative_hotel">
+    android:background="@color/COLOR_F5F5F5">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/COLOR_WHITE"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/greyish_alternative_hotel">
+            android:background="@color/COLOR_F5F5F5">
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/DP10"
                 android:text="@string/account_personal_your_details"
-                android:textColor="@color/warm_grey"
+                android:textColor="@color/COLOR_999999"
                 android:textSize="@dimen/SP12"
                 app:fontName="dinnextltpro_regular.otf" />
         </LinearLayout>
@@ -51,7 +51,6 @@
                 android:id="@+id/companion_personal_settings_middle_name"
                 style="@style/PersonalInformationEditText"
                 android:hint="Middle Name"
-                android:visibility="gone"
                 app:fontName="dinnextltpro_regular.otf" />
 
             <hellogbye.com.hellogbyeandroid.views.FontEditTextView
@@ -93,7 +92,7 @@
             <LinearLayout
                 android:id="@+id/companion_personal_add_email_ll"
                 android:layout_width="match_parent"
-
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -179,14 +178,14 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/greyish_alternative_hotel">
+            android:background="@color/COLOR_F5F5F5">
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/DP10"
                 android:text="@string/account_personal_password"
-                android:textColor="@color/warm_grey"
+                android:textColor="@color/COLOR_999999"
                 android:textSize="@dimen/SP12"
                 app:fontName="dinnextltpro_regular.otf" />
         </LinearLayout>
@@ -198,7 +197,7 @@
             android:id="@+id/personal_settings_change_password_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/COLOR_WHITE"
             android:orientation="vertical"
             android:padding="@dimen/DP10">
 
@@ -214,7 +213,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/greyish_alternative_hotel">
+            android:background="@color/COLOR_F5F5F5">
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/account_done_editing"
                 style="@style/RedCustomButtonStyle"

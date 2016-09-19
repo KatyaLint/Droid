@@ -4,7 +4,7 @@
     android:id="@+id/toolbar_costume"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/hgb_toolbar_blue"
+    android:background="@color/COLOR_003D4C"
     android:minHeight="?attr/actionBarSize">
 
 
@@ -100,18 +100,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:layout_marginRight="@dimen/DP30"
-        android:textColor="@color/white"
         android:textSize="@dimen/SP20"
-        android:visibility="visible"
-        app:fontName="dinnextltpro_medium.otf" />
+        app:fontName="dinnextltpro_medium.otf"
+        android:layout_marginRight="@dimen/DP30"
+        android:textColor="@color/COLOR_WHITE"
+        android:visibility="visible"/>
+
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/itirnarary_title_Bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textColor="@color/white"
+        android:textColor="@color/COLOR_WHITE"
         android:visibility="visible" />
 
     <LinearLayout
@@ -123,11 +124,25 @@
         android:orientation="horizontal"
         android:visibility="gone">
 
-        <ImageButton
+   <!--     <ImageButton
             android:id="@+id/edit_preferences"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_img" />
+            android:background="@drawable/edit_img" />-->
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/edit_preferences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:textSize="@dimen/SP16"/>
+
+        <ImageButton
+            android:id="@+id/tool_bar_delete_preferences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="@drawable/ic_delete"/>
 
         <ImageButton
             android:id="@+id/check_preferences"
@@ -166,7 +181,7 @@
         android:layout_gravity="right"
         android:layout_marginRight="@dimen/DP14"
         android:text="@string/tool_bar_preferences_save_button"
-        android:textColor="@color/white"
+        android:textColor="@color/COLOR_WHITE"
         android:visibility="gone" />
 
     <LinearLayout
@@ -195,22 +210,22 @@
 
 
     <android.support.v7.widget.SearchView
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/search_view_tool_bar"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/DP16"
-        android:background="@color/white"
-        android:visibility="gone" />
+        android:background="@color/COLOR_WHITE"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <AutoCompleteTextView
         android:id="@+id/autocomplete"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/DP6"
-        android:textColor="@color/black"
-        android:background="@color/white"
-        android:popupBackground="@color/white"
-        android:dropDownSelector="@color/white"
+        android:textColor="@color/COLOR_BLACK"
+        android:background="@color/COLOR_WHITE"
+        android:popupBackground="@color/COLOR_WHITE"
+        android:dropDownSelector="@color/COLOR_WHITE"
         android:visibility="gone" />
 
 </hellogbye.com.hellogbyeandroid.views.CostumeToolBar>

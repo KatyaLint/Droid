@@ -4,8 +4,8 @@
 
     <string-array name="settings_account">
         <item>Personal Information</item>
-        <item>Manage Payment Cards</item>
         <item>Travel Profiles</item>
+        <item>Manage Payment Cards</item>
         <item>Membership</item>
         <item>Help and Feedback</item>
     </string-array>
@@ -29,7 +29,7 @@
 
     <string-array name="title_array">
         <item>Mr</item>
-        <item>Miss</item>
+        <item>Mss</item>
         <item>Mrs</item>
     </string-array>
 

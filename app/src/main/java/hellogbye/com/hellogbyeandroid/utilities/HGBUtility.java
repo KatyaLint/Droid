@@ -554,12 +554,12 @@ public class HGBUtility {
         indexText.setText(String.valueOf(index));
         if(isFirst){
             customMarkerView.setBackgroundResource(R.drawable.bubbles_red_background);
-            indexText.setTextColor(ContextCompat.getColor(activity, R.color.white));
-            numTxt.setTextColor(ContextCompat.getColor(activity, R.color.white));
+            indexText.setTextColor(ContextCompat.getColor(activity, R.color.COLOR_WHITE));
+            numTxt.setTextColor(ContextCompat.getColor(activity, R.color.COLOR_WHITE));
         }else{
             customMarkerView.setBackgroundResource(R.drawable.bubbles_white_background);
-            indexText.setTextColor(ContextCompat.getColor(activity, R.color.warm_grey));
-            numTxt.setTextColor(ContextCompat.getColor(activity, R.color.warm_grey));
+            indexText.setTextColor(ContextCompat.getColor(activity, R.color.COLOR_565656));
+            numTxt.setTextColor(ContextCompat.getColor(activity, R.color.COLOR_565656));
         }
 
 
@@ -1381,9 +1381,19 @@ public class HGBUtility {
     }
 
 
-    public static int roundUp(double number){
-        int RoundedUpCost = (int) Math.ceil(number);
-        return RoundedUpCost;
+    public static int roundNumber(double number){
+
+        double dAbs = Math.abs(number);
+        int i = (int) dAbs;
+        double result = dAbs - (double) i;
+        if(result<0.5){
+            return number<0 ? -i : i;
+        }else{
+            return number<0 ? -(i+1) : i+1;
+        }
+
+    /*    int RoundedUpCost = (int) Math.ceil(number);
+        return RoundedUpCost;*/
     }
 
 }

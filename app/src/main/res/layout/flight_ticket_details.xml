@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text="YYZ "
-                android:textColor="@color/dark_teal"
+                android:textColor="@color/COLOR_003D4C"
                 android:textSize="@dimen/SP30"
                 app:fontName="dinnextltpro_medium.otf" />
 
@@ -40,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="New York \n Toronto \n Nov 20"
-                    android:textColor="@color/COLOR_8d8e91"
+                    android:textColor="@color/COLOR_999999"
                     android:textSize="@dimen/SP13"
                     app:fontName="dinnextltpro_regular.otf" />
 
@@ -58,7 +58,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/electronic_ticket"
-                        android:textColor="@color/COLOR_0f3d4b"
+                        android:textColor="@color/COLOR_003D4C"
                         android:textSize="@dimen/SP13"
                         app:fontName="dinnextltpro_bold.otf" />
 
@@ -67,7 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/press_here"
-                        android:textColor="@color/electric_tix_blue_press"
+                        android:textColor="@color/COLOR_00516f"
                         android:textSize="@dimen/SP13"
                         app:fontName="dinnextltpro_bold.otf" />
 
@@ -97,24 +97,37 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:text="$1434.12"
-                    android:textColor="@color/dark_teal"
+                    android:text="$1434"
+                    android:textColor="@color/COLOR_003D4C"
                     android:textSize="@dimen/SP30"
                     app:fontName="dinnextltpro_medium.otf" />
 
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+                    android:id="@+id/flight_cost_include_tax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/flight_cost"
+                    android:layout_alignEnd="@+id/flight_cost"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="@string/flight_details_include_tax"
+                    android:textColor="@color/COLOR_003D4C"
+                    android:textSize="@dimen/SP12"
+                    app:fontName="dinnextltpro_regular.otf" />
 
                 <hellogbye.com.hellogbyeandroid.views.FontTextView
-                    android:layout_below="@+id/flight_cost"
+                    android:layout_below="@+id/flight_cost_include_tax"
                     android:id="@+id/show_alternative_flights"
                     android:layout_marginTop="@dimen/DP6"
                     android:padding="@dimen/DP10"
-                    android:layout_width="match_parent"
+                    android:layout_alignEnd="@+id/flight_cost"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/red_button"
                     android:gravity="center"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/flight_show_alternate_flights"
-                    android:textColor="@color/white"
+                    android:textColor="@color/COLOR_WHITE"
                     app:fontName="dinnextltpro_medium.otf"
                     android:textAllCaps="false"
                     android:textSize="@dimen/SP13"
@@ -209,7 +222,7 @@
         android:layout_height="@dimen/DP1"
         android:layout_below="@+id/main_flight_details_layout_rl"
         android:layout_marginTop="@dimen/DP10"
-        android:background="@color/warm_grey" />
+        android:background="@color/COLOR_999999" />
 
 
 </RelativeLayout>

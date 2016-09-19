@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/white"
+    android:background="@color/COLOR_WHITE"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:text="1.PAYMENT"
                 android:textSize="@dimen/SP12"
-                android:textColor="@color/COLOR_063345"
+                android:textColor="@color/COLOR_003D4C"
 
                 />
 
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="2.TRAVELLER"
                 android:textSize="@dimen/SP12"
-                android:textColor="@color/COLOR_063345"
+                android:textColor="@color/COLOR_003D4C"
 
                 />
 
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:text="3.REVIEW"
                 android:textSize="@dimen/SP12"
-                android:textColor="@color/COLOR_063345"
+                android:textColor="@color/COLOR_003D4C"
 
                 />
 

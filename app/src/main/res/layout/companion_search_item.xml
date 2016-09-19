@@ -27,7 +27,7 @@
                 android:id="@+id/companion_delete_item"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@color/red_button_color"
+                android:background="@color/COLOR_EE3A3C"
                 android:src="@drawable/close_icon_a_1" />
 
 
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:background="@color/white"
+            android:background="@color/COLOR_WHITE"
             android:orientation="horizontal">
 
   <hellogbye.com.hellogbyeandroid.views.RoundedImageView
@@ -64,7 +64,7 @@
             android:id="@+id/companion_details_name_item"
             android:text="Companion Name"
             android:textSize="@dimen/SP16"
-            android:textColor="@color/hgb_blue"
+            android:textColor="@color/COLOR_00516f"
             app:fontName="dinnextltpro_regular.otf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -88,14 +88,14 @@
             android:textSize="@dimen/SP14"
                 android:layout_marginRight="@dimen/DP10"
             app:fontName="dinnextltpro_regular.otf"
-                android:textColor="@color/COLOR_005278"
+                android:textColor="@color/COLOR_00516f"
             android:text="@string/companion_confirm"/>
             <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/companion_delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
                 android:textSize="@dimen/SP14"
-                android:textColor="@color/light_grey"
+                android:textColor="@color/COLOR_999999"
                 app:fontName="dinnextltpro_regular.otf"
             android:text="@string/companion_delete"/>
         </LinearLayout>
@@ -115,7 +115,8 @@
                 android:id="@+id/companion_add_companion_to_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/add_icon"/>
+                android:layout_marginRight="@dimen/DP10"
+                android:background="@drawable/add_new_companion_icon_companion_icon"/>
 
         </LinearLayout>
 

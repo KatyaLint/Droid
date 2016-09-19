@@ -24,7 +24,7 @@
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/COLOR_WHITE"
         android:gravity="center"
         android:padding="@dimen/DP10"
         android:textSize="@dimen/SP16"
@@ -37,8 +37,8 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:padding="@dimen/DP10"
-        android:background="@color/COLOR_2C5466"
-        android:textColor="@color/white"
+        android:background="@color/COLOR_00516f"
+        android:textColor="@color/COLOR_WHITE"
         android:textSize="@dimen/SP12"
         android:text="@string/sign_up_personal_details"/>
 
@@ -91,8 +91,8 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:padding="@dimen/DP10"
-        android:background="@color/COLOR_2C5466"
-        android:textColor="@color/white"
+        android:background="@color/COLOR_00516f"
+        android:textColor="@color/COLOR_WHITE"
         android:textSize="@dimen/SP12"
         android:text="@string/sign_up_contact_details"/>
 
@@ -120,8 +120,8 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:padding="@dimen/DP10"
-        android:background="@color/COLOR_2C5466"
-        android:textColor="@color/white"
+        android:background="@color/COLOR_00516f"
+        android:textColor="@color/COLOR_WHITE"
         android:textSize="@dimen/SP12"
         android:text="@string/sign_up_password"/>
 
@@ -153,7 +153,7 @@
         android:padding="@dimen/DP10"
         android:autoLink="all"
         android:linksClickable="true"
-        android:textColor="@color/white"
+        android:textColor="@color/COLOR_WHITE"
         android:textSize="@dimen/SP14"
         android:text="@string/sign_up_term_of_use"/>
 
@@ -162,7 +162,7 @@
 <Button
     android:id="@+id/sign_up_button"
     android:text="@string/sign_up_done"
-    android:textColor="@color/white"
+    android:textColor="@color/COLOR_WHITE"
     android:background="@drawable/selector_red_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

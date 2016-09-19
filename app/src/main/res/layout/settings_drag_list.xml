@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent" android:layout_height="fill_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/settings_layout_title" android:layout_width="fill_parent"
+    <include
+        android:id="@+id/settings_layout_title_id" layout="@layout/settings_layout_title" android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
-        android:layout_margin="@dimen/DP10"
+        android:layout_below="@+id/settings_layout_title_id"
         android:id="@+id/settings_drag_list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
-</LinearLayout>
+</RelativeLayout>

@@ -27,7 +27,7 @@
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/component_popup_text" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:textColor="@color/black"
+        android:layout_height="wrap_content" android:textColor="@color/COLOR_BLACK"
         android:text="@string/component_invite_hint"
         android:gravity="top" android:textSize="@dimen/SP12" android:paddingBottom="@dimen/DP20"/>
 
@@ -36,6 +36,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/component_invite_hint"
-        android:textColorHint="@color/light_grey"/>
+        android:textColorHint="@color/COLOR_999999"/>
 
 </LinearLayout>

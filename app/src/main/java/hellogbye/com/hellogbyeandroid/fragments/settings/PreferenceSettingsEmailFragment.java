@@ -128,12 +128,12 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
 
         backOnListClicked();
 
-        ((MainActivityBottomTabs) getActivity()).setOnSavePreferencesButtonClicked(new PreferencesSettingsMainClass.saveButtonClicked(){
+     /*   ((MainActivityBottomTabs) getActivity()).setOnSavePreferencesButtonClicked(new PreferencesSettingsMainClass.saveButtonClicked(){
             @Override
             public void onSaveClicked() {
                 getActivity().onBackPressed();
             }
-        });
+        });*/
 
 
         getUserProfiles();
@@ -266,7 +266,7 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
         ArrayList<AccountsVO> accounts = getActivityInterface().getAccounts();
         for(AccountsVO account:accounts){
             if(account.getEmail().equals(personalEmail)){
-                id = account.getTravelpreferenceprofile().getId();
+                id = account.getTravelpreferenceprofile().getmId();
                 break;
             }
         }

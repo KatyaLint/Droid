@@ -1,5 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/greyish_alternative_hotel"
+    android:background="@color/COLOR_F5F5F5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
      >

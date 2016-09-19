@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/SP12"
-            android:textColor="@color/COLOR_005077"
+            android:textColor="@color/COLOR_00516f"
             app:fontName="dinnextltpro_medium.otf"
             android:text="@string/continue_to_checkout_price"/>
 
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/SP24"
-                android:textColor="@color/COLOR_005077"
+                android:textColor="@color/COLOR_00516f"
                 app:fontName="dinnextltpro_boldcondensed.otf"
                 android:text="@string/continue_to_checkout_price"/>
 
@@ -62,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/SP12"
-                android:textColor="@color/COLOR_005077"
+                android:textColor="@color/COLOR_00516f"
                 app:fontName="dinnextltpro_regular.otf"
                 android:text="@string/continue_to_checkout_flight_baggage"/>
 
@@ -76,7 +76,7 @@
             android:layout_width="@dimen/DP0"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_red_button"
-            android:textColor="@color/white"
+            android:textColor="@color/COLOR_WHITE"
             android:gravity="center"
             app:fontName="dinnextltpro_medium.otf"
             android:textAllCaps="false"

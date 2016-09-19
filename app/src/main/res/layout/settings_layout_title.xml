@@ -11,11 +11,11 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/SP32"
         app:fontName="dinnextltpro_condensed.ttf"
-        android:textColor="@color/dark_teal"
+        android:textColor="@color/COLOR_003D4C"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         android:text="@string/preferences_prefered_hotel_chain"
-        android:layout_marginTop="@dimen/DP38"
+        android:layout_marginTop="@dimen/DP30"
         android:layout_marginBottom="@dimen/DP26"/>
 
 
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/SP18"
         app:fontName="dinnextltpro_regular.otf"
-        android:textColor="@color/warm_grey"
+        android:textColor="@color/COLOR_999999"
         android:gravity="center_horizontal"
         android:layout_gravity="center_horizontal"
         android:text="@string/preferences_prefered_hotel_favorite"/>

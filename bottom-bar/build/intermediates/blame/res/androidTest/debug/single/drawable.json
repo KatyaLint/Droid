@@ -8,12 +8,12 @@
         "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/drawable/abc_switch_thumb_material.xml"
     },
     {
-        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/drawable/abc_spinner_textfield_background_material.xml",
-        "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/drawable/abc_spinner_textfield_background_material.xml"
-    },
-    {
         "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/drawable/abc_tab_indicator_material.xml",
         "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/drawable/abc_tab_indicator_material.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/drawable/abc_spinner_textfield_background_material.xml",
+        "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/drawable/abc_spinner_textfield_background_material.xml"
     },
     {
         "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/drawable/abc_ratingbar_small_material.xml",
@@ -68,12 +68,12 @@
         "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/drawable/abc_cab_background_top_material.xml"
     },
     {
-        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/drawable/design_snackbar_background.xml",
-        "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/drawable/design_snackbar_background.xml"
-    },
-    {
         "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/drawable/abc_list_selector_holo_light.xml",
         "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/drawable/abc_list_selector_holo_light.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/drawable/design_snackbar_background.xml",
+        "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/drawable/design_snackbar_background.xml"
     },
     {
         "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/drawable/abc_ratingbar_indicator_material.xml",

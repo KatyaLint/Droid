@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/odd_grey">
+    android:background="@color/COLOR_F5F5F5">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/DP10"
             android:text="@string/payment_itirnerary_payment"
-            android:textColor="@color/COLOR_555555"
+            android:textColor="@color/COLOR_565656"
             android:textSize="@dimen/SP10"
             app:fontName="dinnextltpro_regular.otf" />
 
@@ -26,14 +26,14 @@
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/hazard_text"
         android:layout_width="match_parent"
-        android:background="@color/white"
+        android:background="@color/COLOR_WHITE"
         android:layout_height="wrap_content"
         android:lineSpacingExtra="@dimen/SP10"
         android:padding="@dimen/DP20"
         android:scrollbars="vertical"
         android:scrollbarStyle="outsideOverlay"
         android:text="@string/payment_hazardous"
-        android:textColor="@color/dark_grey"
+        android:textColor="@color/COLOR_565656"
         android:textSize="@dimen/SP14"
         app:fontName="dinnextltpro_mediumcond.ttf" />
 
@@ -50,7 +50,7 @@
         android:layout_margin="@dimen/DP20"
         android:textSize="@dimen/SP20"
         android:text="@string/i_understand"
-        android:textColor="@color/white" />
+        android:textColor="@color/COLOR_WHITE" />
 
 
 </RelativeLayout>

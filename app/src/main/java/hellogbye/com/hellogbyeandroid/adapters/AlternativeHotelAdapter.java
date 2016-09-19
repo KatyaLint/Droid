@@ -141,27 +141,27 @@ public class AlternativeHotelAdapter extends RecyclerView.Adapter<AlternativeHot
         if(mCurrentNode.getmHotelCode().equals(nodesVO.getmHotelCode())){
 
             holder.mSelectTextView.setText("MY HOTEL");
-            holder.mSelectTextView.setTextColor(ContextCompat.getColor(mContext,R.color.red_button_color));
+            holder.mSelectTextView.setTextColor(ContextCompat.getColor(mContext,R.color.COLOR_EE3A3C));
             holder.mSelectTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.check, 0, 0, 0);
-            holder.mTopView.setBackgroundColor(ContextCompat.getColor(mContext,R.color.red_button_color));
+            holder.mTopView.setBackgroundColor(ContextCompat.getColor(mContext,R.color.COLOR_EE3A3C));
 
 
         }else{
             holder.mSelectTextView.setText("SELECTED");
-            holder.mSelectTextView.setTextColor(ContextCompat.getColor(mContext,R.color.dark_grey));
+            holder.mSelectTextView.setTextColor(ContextCompat.getColor(mContext,R.color.COLOR_565656));
             holder.mSelectTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-            holder.mTopView.setBackgroundColor(ContextCompat.getColor(mContext,R.color.warm_grey));
+            holder.mTopView.setBackgroundColor(ContextCompat.getColor(mContext,R.color.COLOR_565656));
         }
 
         if(mMyNode.getmHotelCode().equals(nodesVO.getmHotelCode())){
-            holder.mTopView.setBackgroundColor(ContextCompat.getColor(mContext,R.color.red_button_color));
-            holder.mHotelName.setTextColor(ContextCompat.getColor(mContext,R.color.blue_my_trip));
-            holder.mHotelPrice.setTextColor(ContextCompat.getColor(mContext,R.color.blue_my_trip));
+            holder.mTopView.setBackgroundColor(ContextCompat.getColor(mContext,R.color.COLOR_EE3A3C));
+            holder.mHotelName.setTextColor(ContextCompat.getColor(mContext,R.color.COLOR_003D4C));
+            holder.mHotelPrice.setTextColor(ContextCompat.getColor(mContext,R.color.COLOR_003D4C));
             setStarRating(true,holder,nodesVO.getmStarRating());
         }else{
-            holder.mTopView.setBackgroundColor(ContextCompat.getColor(mContext,R.color.warm_grey));
-            holder.mHotelName.setTextColor(ContextCompat.getColor(mContext,R.color.warm_grey));
-            holder.mHotelPrice.setTextColor(ContextCompat.getColor(mContext,R.color.warm_grey));
+            holder.mTopView.setBackgroundColor(ContextCompat.getColor(mContext,R.color.COLOR_565656));
+            holder.mHotelName.setTextColor(ContextCompat.getColor(mContext,R.color.COLOR_565656));
+            holder.mHotelPrice.setTextColor(ContextCompat.getColor(mContext,R.color.COLOR_565656));
             setStarRating(false,holder,nodesVO.getmStarRating());
         }
 

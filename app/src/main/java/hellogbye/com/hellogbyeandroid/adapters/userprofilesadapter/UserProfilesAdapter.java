@@ -14,9 +14,7 @@ import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
-/**
- * Created by arisprung on 6/16/16.
- */
+
 public class UserProfilesAdapter extends BaseAdapter {
 
     private final Typeface textFont;
@@ -56,20 +54,23 @@ public class UserProfilesAdapter extends BaseAdapter {
         }
         FontTextView text = (FontTextView) convertView.findViewById(R.id.user_profile_text);
         ImageView image = (ImageView) convertView.findViewById(R.id.user_profile_image);
-
+        View bottom_line = (View)convertView.findViewById(R.id.bottom_line);
 
         text.setText(mData.get(position));
 
         if(position == 0){
             image.setBackgroundResource(R.drawable.money_saver);
             text.setTypeface(textFont);
+            bottom_line.setVisibility(View.VISIBLE);
         }else if(position == 1){
             image.setBackgroundResource(R.drawable.time_saver);
             text.setTypeface(textFont);
+            bottom_line.setVisibility(View.VISIBLE);
         }
         else{
             image.setBackgroundResource(R.drawable.create_your_own_profile_icon);
             text.setTypeface(textFont);
+            bottom_line.setVisibility(View.GONE);
         }
 
         return convertView;

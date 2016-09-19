@@ -16,7 +16,7 @@
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/COLOR_063345"
+        android:textColor="@color/COLOR_003D4C"
         android:text="@string/popup_flight_baggage_info_title"
         android:textSize="@dimen/SP24"
         android:gravity="center"
@@ -32,6 +32,6 @@
         android:gravity="center"
         app:fontName="dinnextltpro_regular.otf"
         android:text="@string/popup_flight_baggage_info_text"
-        android:textColor="@color/black"/>
+        android:textColor="@color/COLOR_BLACK"/>
 
 </LinearLayout>

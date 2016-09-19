@@ -1,8 +1,8 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cc_add_backround">
+    android:background="@color/COLOR_F5F5F5">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,34 +22,26 @@
         android:text="@string/payment_card_information"
         app:fontName="dinnextltpro_regular.otf" />
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/cc_scan"
-        style="@style/GreenCustomButtonStyle"
-        android:layout_alignParentTop="true"
-        android:padding="5dp"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_alignParentRight="true"
-        android:textSize="@dimen/SP10"
-        android:layout_marginTop="@dimen/DP6"
-        android:layout_marginRight="@dimen/DP6"
-        android:text="@string/payment_scan_card" />
-
 
 
     <LinearLayout
         android:id="@+id/cc_details_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/COLOR_WHITE"
         android:layout_below="@+id/cc_info"
         android:orientation="vertical"
         android:padding='@dimen/DP24'>
 
+        <RelativeLayout
+
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <com.devmarvel.creditcardentry.library.CreditCardForm
             android:id="@+id/cc_number"
             style="@style/cc_number_edit_text"
-            app:input_background="@drawable/cc_edit_text_border"
+
             android:layout_width="match_parent"
             app:card_number_hint="@string/payment_card_number"
             android:hint="@string/payment_card_number"
@@ -60,6 +52,19 @@
             android:inputType="phone"
             app:fontName="dinnextltpro_regular.otf" />
 
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/cc_scan"
+            android:layout_alignParentTop="true"
+            android:padding="@dimen/DP4"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/SP10"
+            android:layout_marginTop="@dimen/DP6"
+            android:layout_marginRight="@dimen/DP6"
+            android:text="@string/payment_scan_card" />
+     <!--       style="@style/GrayCustomButtonStyle"-->
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,7 +74,7 @@
 
             <hellogbye.com.hellogbyeandroid.views.FontEditTextView
                 android:id="@+id/cc_expiry_month"
-                style="@style/cc_edit_text"
+                style="@style/cc_edit_text_style"
                 android:layout_width="@dimen/DP0"
                 android:layout_weight="1"
                 android:hint="@string/payment_exp_month"
@@ -83,7 +88,7 @@
 
             <hellogbye.com.hellogbyeandroid.views.FontEditTextView
                 android:id="@+id/cc_expiry_year"
-                style="@style/cc_edit_text"
+                style="@style/cc_edit_text_style"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:hint="@string/payment_exp_year"
@@ -97,7 +102,7 @@
 
             <hellogbye.com.hellogbyeandroid.views.FontEditTextView
                 android:id="@+id/cc_ccv"
-                style="@style/cc_edit_text"
+                style="@style/cc_edit_text_style"
                 android:layout_width="@dimen/DP0"
                 android:layout_marginLeft="@dimen/DP24"
                 android:layout_weight="1"
@@ -127,7 +132,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cc_billing_address"
-        android:background="@color/white"
+        android:background="@color/COLOR_WHITE"
         android:orientation="vertical"
         android:padding='@dimen/DP24'>
 
@@ -146,7 +151,7 @@
 
             <hellogbye.com.hellogbyeandroid.views.FontEditTextView
                 android:id="@+id/cc_first_name"
-                style="@style/cc_edit_text"
+                style="@style/cc_edit_text_style"
                 android:layout_width="@dimen/DP0"
                 android:layout_weight="1"
                 android:hint="@string/payment_first_name"
@@ -155,7 +160,7 @@
 
             <hellogbye.com.hellogbyeandroid.views.FontEditTextView
                 android:id="@+id/cc_last_name"
-                style="@style/cc_edit_text"
+                style="@style/cc_edit_text_style"
                 android:layout_width="@dimen/DP0"
                 android:layout_marginLeft="@dimen/DP20"
                 android:layout_weight="1"
@@ -168,7 +173,7 @@
 
         <hellogbye.com.hellogbyeandroid.views.FontEditTextView
             android:id="@+id/cc_billint_st"
-            style="@style/cc_edit_text"
+            style="@style/cc_edit_text_style"
             android:layout_width="match_parent"
             android:hint="@string/payment_street"
             android:layout_marginTop="@dimen/DP24"
@@ -177,7 +182,7 @@
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/cc_country"
-            style="@style/cc_edit_text"
+            style="@style/cc_edit_text_style"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/DP24"
             android:hint="@string/payment_country"
@@ -192,7 +197,7 @@
 
             <hellogbye.com.hellogbyeandroid.views.FontEditTextView
                 android:id="@+id/cc_billing_city"
-                style="@style/cc_edit_text"
+                style="@style/cc_edit_text_style"
                 android:layout_width="@dimen/DP0"
                 android:layout_weight="1"
                 android:hint="@string/payment_city"
@@ -201,7 +206,7 @@
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/cc_billing_province"
-                style="@style/cc_edit_text"
+                style="@style/cc_edit_text_style"
                 android:layout_width="@dimen/DP0"
                 android:layout_marginLeft="@dimen/DP20"
                 android:layout_weight="1"
@@ -211,7 +216,7 @@
 
             <hellogbye.com.hellogbyeandroid.views.FontEditTextView
                 android:id="@+id/cc_billing_postal"
-                style="@style/cc_edit_text"
+                style="@style/cc_edit_text_style"
                 android:layout_width="@dimen/DP0"
                 android:layout_marginLeft="@dimen/DP20"
                 android:layout_weight="1"
@@ -235,7 +240,7 @@
         android:layout_width="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/DP20"
-        android:textColor="@color/white"
+        android:textColor="@color/COLOR_WHITE"
         android:textAllCaps="false"
         android:layout_below="@+id/cc_billing_adress_ll"
         android:text="@string/payment_save_card" />
@@ -244,4 +249,4 @@
 
     </RelativeLayout>
     </ScrollView>
-</LinearLayout>
+</RelativeLayout>

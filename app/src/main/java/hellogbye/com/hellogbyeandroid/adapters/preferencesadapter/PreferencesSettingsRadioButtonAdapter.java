@@ -63,6 +63,16 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountD
         this.selectedPreferebcesID = id;
     }
 
+    @Override
+    public void updateItems(List<AccountDefaultSettingsVO> accountAttributes) {
+
+    }
+
+    @Override
+    public void updateItem(AccountDefaultSettingsVO accountAttribute) {
+
+    }
+
     public void setEditMode(boolean isEditMode){
         this.isEditMode = isEditMode;
     }
@@ -96,6 +106,8 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountD
         if(attribute != null){
             FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_radio_name);
             settings_flight_title.setText(attribute.getmProfileName());
+
+
           //  settings_flight_title.setTag(attribute.getmId());
 
             RelativeLayout settings_radio_button_ll = (RelativeLayout)v.findViewById(R.id.settings_radio_button_ll_right_side);
@@ -110,6 +122,8 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountD
 
                 }
             });
+
+
 //            FontTextView settings_text_drag = (FontTextView) v.findViewById(R.id.settings_place_number);
             //  settings_text_drag.setText();
             int currentPosition = position+1;

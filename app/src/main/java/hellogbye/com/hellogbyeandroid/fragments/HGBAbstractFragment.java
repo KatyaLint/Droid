@@ -143,9 +143,9 @@ public class HGBAbstractFragment extends Fragment {
 
     public CreditCardItem getCreditCard(String token){
 
-        for(CreditCardItem card:getActivityInterface().getCreditCards())
+        for(CreditCardItem card: getActivityInterface().getCreditCards())
         {
-            if(card.getToken().equals(token)){
+            if(card.getToken() != null && card.getToken().equals(token)){
                 return card;
             }
         }

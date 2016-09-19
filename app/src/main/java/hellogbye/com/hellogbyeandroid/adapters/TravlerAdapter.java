@@ -1,7 +1,6 @@
 package hellogbye.com.hellogbyeandroid.adapters;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +17,6 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  * Created by arisprung on 10/27/15.
  */
 public class TravlerAdapter extends RecyclerView.Adapter<TravlerAdapter.ViewHolder> {
-
-
-    private Fragment travelFragment;
 
     private ArrayList<UserProfileVO> mArrayList;
     private OnItemClickListener  mItemClickListner;
@@ -106,7 +102,7 @@ public class TravlerAdapter extends RecyclerView.Adapter<TravlerAdapter.ViewHold
 
 
         holder.childNametext.setText(child.getFirstname() + " " + child.getLastname());
-        holder.childDOB.setText(HGBUtilityDate.parseDateToddMMyyyyForPayment(child.getDob()));
+        holder.childDOB.setText(HGBUtilityDate.parseDateToMMddyyyyForPayment(child.getDob()));
         holder.childPhone.setText(child.getPhone());
         holder.childAddress.setText(child.getAddress() + "\n" + child.getCity() + "," + child.getState() + "\n" + child.getPostalcode());
         holder.childEmail.setText(child.getEmailaddress());

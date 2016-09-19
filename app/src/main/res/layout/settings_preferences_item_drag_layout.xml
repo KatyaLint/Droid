@@ -10,7 +10,7 @@
             android:id="@+id/settings_preferences_place_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/dark_teal"
+            android:textColor="@color/COLOR_003D4C"
             android:textSize="@dimen/SP20"
             android:text="1"
             android:layout_centerVertical="true"
@@ -34,7 +34,7 @@
         android:textSize="@dimen/SP16"
         android:text="zdfsfsfsdf"
         app:fontName="dinnextltpro_medium.otf"
-        android:textColor="@color/dark_teal"
+        android:textColor="@color/COLOR_003D4C"
         android:lines="1"/>
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -43,10 +43,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/SP10"
-        android:text="uderrere sfsdf"
+        android:text="item drag"
         android:visibility="gone"
         app:fontName="dinnextltpro_regular.otf"
-        android:textColor="@color/COLOR_555555"
+        android:textColor="@color/COLOR_565656"
         android:lines="1"/>
 
     </LinearLayout>
@@ -57,13 +57,13 @@
         android:src="@drawable/move_icon"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/DP6"
-        android:layout_toLeftOf="@+id/preferences_more"/>
+        android:layout_alignParentRight="true"/>
 
 
-    <include android:id="@+id/preferences_more" layout="@layout/layout_arrow"
+ <!--   <include android:id="@+id/preferences_more" layout="@layout/layout_arrow"
         android:layout_centerVertical="true"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:visibility="visible"/>
+        android:visibility="visible"/>-->
 
 </RelativeLayout>

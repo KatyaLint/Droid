@@ -83,12 +83,12 @@ public class NavListAdapter extends RecyclerView.Adapter<NavListAdapter.ViewHold
         holder.mTextView.setText(item.getName());
         if(item.isSelected()){
 
-            holder.mTextView.setTextColor(mContext.getResources().getColor(R.color.COLOR_063345));
+            holder.mTextView.setTextColor(mContext.getResources().getColor(R.color.COLOR_003D4C));
             holder.mSelectedImage.setVisibility(View.VISIBLE);
             holder.nav_item_view_image.setImageResource(item.getIconEnable());
         }else{
 
-            holder.mTextView.setTextColor(mContext.getResources().getColor(R.color.hgb_nav_font_unselected));
+            holder.mTextView.setTextColor(mContext.getResources().getColor(R.color.COLOR_7FA5B4));
             holder.mSelectedImage.setVisibility(View.INVISIBLE);
             holder.nav_item_view_image.setImageResource(item.getIconDisable());
         }

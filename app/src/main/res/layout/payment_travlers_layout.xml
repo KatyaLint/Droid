@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/greyish_alternative_hotel"
+    android:background="@color/COLOR_F5F5F5"
     android:orientation="vertical">
 
     <include
@@ -20,7 +20,7 @@
         android:layout_above="@+id/traveler_next"
         android:layout_below="@+id/steps_layout"
         android:groupIndicator="@null"
-        android:divider="@color/greyish_alternative_hotel"
+        android:divider="@color/COLOR_F5F5F5"
         android:dividerHeight="@dimen/DP20"
         android:layout_height="match_parent">
 
@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_red_button"
-        android:textColor="@color/white"
+        android:textColor="@color/COLOR_WHITE"
         android:gravity="center"
         app:fontName="dinnextltpro_medium.otf"
         android:textAllCaps="false"

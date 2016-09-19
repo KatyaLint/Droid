@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 
@@ -28,11 +30,13 @@ import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.SettingsAdapte
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -45,12 +49,13 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
     private SettingsAdapter mAdapter;
     private List<AccountDefaultSettingsVO> accountDefaultSettings;
     private List<SettingsAttributeParamVO> accountSettingsAttributes;
-    private EditText input;
+    private FontEditTextView input;
     private View popup_preferences_layout;
     private static int MIN_PREFERENCE_SIZE = 1;
     private View preferences_at_least_one_preference;
     private String edit_mode;
     private int radioButtonSelected = -1;
+    private AccountDefaultSettingsVO accountDefaultSettingsVO;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new PreferenceSettingsFragment();
@@ -124,20 +129,35 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
     };
 
     private void selectedRadioPreference(){
-        //Kate
-        FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).my_trip_profile;
-        if(my_trip_profile == null || mAdapter == null){
+
+        FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
+     /*   if(my_trip_profile == null || mAdapter == null){
             return;
-        }
+        }*/
         if(my_trip_profile.getTag() == null){
             return;
         }
         String selectedTag = my_trip_profile.getTag().toString();
         mAdapter.selectedItemID(selectedTag);
+    }
 
+
+    private void setActiveAccount(){
+        String userPreferenceID =  getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId();
+
+        for (AccountDefaultSettingsVO accountDefaultSettingVO: accountDefaultSettings){
+            if(accountDefaultSettingVO.getmId().equals(userPreferenceID)){
+                accountDefaultSettingVO.setActiveProfile(true);
+                break;
+            }
+        }
     }
 
     private void createListAdapter() {
+
+
+        setActiveAccount();
+
 
         //Factory implementation :)
         Bundle args = getArguments();
@@ -145,21 +165,11 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
             edit_mode = args.getString("edit_mode");
             if (edit_mode != null && edit_mode.equals("true")) {
                 mAdapter = new PreferencesSettingsRadioButtonAdapter(getActivity(), accountDefaultSettings);
-              /*  mAdapter.setSelectedRadioButtonListener(new ListRadioButtonClicked(){
-
-                    @Override
-                    public void clickedItem(int selectedPosition) {
-                        radioButtonSelected = selectedPosition;
-                    }
-                });
-                mDynamicListView.setAdapter((PreferencesSettingsRadioButtonAdapter)mAdapter);
-                selectedRadioPreference();*/
-
                 mDynamicListView.setAdapter((PreferencesSettingsRadioButtonAdapter)mAdapter);
 
             }else{
-
                 mAdapter = new PreferencesSettingsPreferencesCheckAdapter(getActivity(), accountDefaultSettings);
+
                 mDynamicListView.setAdapter((PreferencesSettingsPreferencesCheckAdapter)mAdapter);
             }
 
@@ -173,20 +183,31 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
 
             selectedRadioPreference();
 
-
+        //    mAdapter.notifyDataSetChanged();
             mAdapter.setClickedLineCB(listLineClicked);
         }
     }
 
     private void getSettingsAttributes(final String clickedAttributeID) {
+
         ConnectionManager.getInstance(getActivity()).getUserSettingsAttributes(clickedAttributeID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
 
+                    String accountName = "";
+                    for (AccountDefaultSettingsVO accountDefaultSetting : accountDefaultSettings){
+                        if(accountDefaultSetting.getmId().equals(clickedAttributeID)){
+                            accountName = accountDefaultSetting.getmProfileName();
+                            break;
+                        }
+                    }
+
+
                     accountSettingsAttributes = (List<SettingsAttributeParamVO>) data;//gson.fromJson((String) data, listType);
                     getActivityInterface().setAccountSettingsAttribute(accountSettingsAttributes);
                     Bundle args = new Bundle();
+                    args.putString(HGBConstants.BUNDLE_SETTINGS_TITLE_NAME, accountName);
                     args.putString(HGBConstants.BUNDLE_SETTINGS_ATT_ID, clickedAttributeID);
                     getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCES_TAB_SETTINGS.getNavNumber(), args);
                 }
@@ -210,33 +231,98 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
 
         View rootView = inflater.inflate(R.layout.settings_list_layout, container, false);
 
-        ((MainActivityBottomTabs)getActivity()).setEditClickCB(new OnItemClickListener(){
-            @Override
-            public void onItemClick(String option) {
+      //final ImageButton edit_preferences_imagebtn = ((MainActivityBottomTabs)getActivity()).getEditPreferenceBtn();
+        final FontTextView edit_preferences_imagebtn = ((MainActivityBottomTabs)getActivity()).getEditPreferenceBtn();
 
-                if(option.equals("delete")){
+       final ImageButton check_preferences = ((MainActivityBottomTabs)getActivity()).getCheckPreferenceButton();
+        final ImageButton tool_bar_delete_preferences = ((MainActivityBottomTabs)getActivity()).getToolBarDeletePreferences();
+
+        check_preferences.setVisibility(View.GONE);
+        edit_preferences_imagebtn.setVisibility(View.VISIBLE);
+
+        edit_preferences_imagebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             //   View checkButton = mToolbar.findViewById(R.id.check_preferences);
+                if (check_preferences.getVisibility() == View.VISIBLE) { // delete mode
+                    //delete
+                 //   editClickCB.onItemClick("delete");
+
+            /*        List<AccountDefaultSettingsVO> accountAttributes = new ArrayList<AccountDefaultSettingsVO>();
+                    accountAttributes.addAll(accountDefaultSettings);*/
+
+
+
+
+                } else if (check_preferences.getVisibility() == View.GONE) { //edit mode
+
                     List<AccountDefaultSettingsVO> accountAttributes = new ArrayList<AccountDefaultSettingsVO>();
-                    accountAttributes.addAll(accountDefaultSettings);
-                    for(AccountDefaultSettingsVO accountAttribute :accountAttributes){
-                        if(accountAttribute.isChecked()){
-                            if(accountDefaultSettings.size() <= MIN_PREFERENCE_SIZE){
-                                //popup
-                                atLeastOnePreference();
-                                break;
-                            }
-                            accountDefaultSettings.remove(accountAttribute);
-                            deletePreference(accountAttribute.getmId());
+                    for(AccountDefaultSettingsVO accountAttribute :accountDefaultSettings){
+                        if(!accountAttribute.isActiveProfile()){
+                            accountAttributes.add(accountAttribute);
+                        }else{
+                            accountDefaultSettingsVO = accountAttribute;
                         }
                     }
-                }
-                else if (option.equals("edit")){
+
+                    mAdapter.updateItems(accountAttributes);
+                    tool_bar_delete_preferences.setVisibility(View.VISIBLE);
+                    edit_preferences_imagebtn.setVisibility(View.GONE);
+                    check_preferences.setVisibility(View.VISIBLE);
                     mAdapter.setEditMode(true);
-                }else if(option.equals("done")){
-                    mAdapter.setEditMode(false);
+                  //  editClickCB.onItemClick("edit");
                 }
-                mAdapter.notifyDataSetChanged();
+             //   mAdapter.notifyDataSetChanged();
             }
         });
+
+        tool_bar_delete_preferences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<AccountDefaultSettingsVO> accountAttributes = new ArrayList<AccountDefaultSettingsVO>();
+                accountAttributes.addAll(accountDefaultSettings);
+                for(AccountDefaultSettingsVO accountAttribute :accountAttributes){
+                    if(accountAttribute.isChecked()){
+                        if(accountDefaultSettings.size() <= MIN_PREFERENCE_SIZE){
+                            //popup
+                            atLeastOnePreference();
+                            break;
+                        }
+                        accountDefaultSettings.remove(accountAttribute);
+                        deletePreference(accountAttribute.getmId());
+                    }
+                }
+              //  mAdapter.updateItems(accountDefaultSettings);
+                mAdapter.notifyDataSetChanged();
+               // deletePreference(String preferenceId)
+
+            }
+        });
+
+
+        check_preferences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { //done mode
+                check_preferences.setVisibility(View.GONE);
+                tool_bar_delete_preferences.setVisibility(View.GONE);
+              //  edit_preferences_imagebtn. //setBackgroundResource(R.drawable.edit_img);
+                edit_preferences_imagebtn.setVisibility(View.VISIBLE);
+                if(accountDefaultSettingsVO != null){
+                    List<AccountDefaultSettingsVO> accountAttributes = new ArrayList<AccountDefaultSettingsVO>();
+                    accountAttributes.add(0,accountDefaultSettingsVO);
+                    accountAttributes.addAll(accountDefaultSettings);
+
+                    mAdapter.updateItems(accountAttributes);
+                 //   accountDefaultSettings.add(accountDefaultSettingsVO);
+                }
+         //       mAdapter.updateItems(accountDefaultSettings);
+                mAdapter.setEditMode(false);
+
+              //  mAdapter.notifyDataSetChanged();
+             //   editClickCB.onItemClick("done");
+            }
+        });
+
 
 
         mDynamicListView = (DynamicListView) rootView.findViewById(R.id.settings_preferences_drag_list);
@@ -247,7 +333,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
     //    tempListView = (ListView)rootView.findViewById(R.id.tempListView);
 
         Button addNewPreferencesButton = (Button) rootView.findViewById(R.id.add_preferences);
-        input = (EditText) popup_preferences_layout.findViewById(R.id.editTextDialog);
+        input = (FontEditTextView) popup_preferences_layout.findViewById(R.id.editTextDialog);
 
         addNewPreferencesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -256,7 +342,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
                 if(((MainActivityBottomTabs) getActivity()).isFreeUser){
                     getFlowInterface().goToFragment(ToolBarNavEnum.FREE_USER_FRAGMENT.getNavNumber(), null);
                 }else{
-                editSettingsPreferencesPopUp();
+                    editSettingsPreferencesPopUp();
                 }
             }
         });
@@ -283,6 +369,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
         ConnectionManager.getInstance(getActivity()).deletePreferenceProfileId(preferenceId,new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
+
             }
 
             @Override

@@ -25,25 +25,27 @@ public interface HGBFlowInterface {
 
     void continueFlow(int fragment);
     void gotToStartMenuActivity();
-    void setHomeImage(String id);
+
     void setCreditCardsSelected(HashSet<CreditCardItem> cardsList);
     HashSet<CreditCardItem> getCreditCardsSelected();
     void setBookingHashMap(HashMap<String, String> bookigItems);
     HashMap<String, String> getBookingHashMap();
     ArrayList<UserProfileVO> getListUsers();
+    void setListUsers(ArrayList<UserProfileVO> travellist);
     UserProfileVO getCurrentUser();
     void setCurrentUser(UserProfileVO currentUser);
     void setEligabileCountries(ArrayList<CountryItemVO> list);
     ArrayList<CountryItemVO> getEligabileCountries();
     ArrayList<CreditCardItem> getCreditCards();
     void setCreditCards(ArrayList<CreditCardItem> mCreditCardList);
-    void setListUsers(ArrayList<UserProfileVO> travellist);
+
     void closeRightPane();
     void openRightPane();
     void selectBottomBar(int selection);
     void enableFullScreen(boolean visible);
     NodesVO getSelectedHotelNode();
     void setSelectedHotelNode(NodesVO node);
+
 
 
 

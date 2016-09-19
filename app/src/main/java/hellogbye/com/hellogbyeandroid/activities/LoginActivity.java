@@ -76,7 +76,8 @@ public class LoginActivity extends BaseActivity {
 
                 hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME, mRemmeberMeCheckbox.isChecked());
 
-                ConnectionManager.getInstance(LoginActivity.this).login(mEmailEditText.getText().toString(), mPasswordEditText.getText().toString(), new ConnectionManager.ServerRequestListener() {
+                ConnectionManager.getInstance(LoginActivity.this).login(mEmailEditText.getText().toString(), mPasswordEditText.getText().toString(),
+                        new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
                         UserLoginCredentials user = (UserLoginCredentials) data;
@@ -132,7 +133,8 @@ public class LoginActivity extends BaseActivity {
                 getResources().getString(R.string.reset_your_password),getResources().getString(R.string.save_button), new PopUpAlertStringCB() {
                     @Override
                     public void itemSelected(String inputItem) {
-                        ConnectionManager.getInstance(LoginActivity.this).resetPasswordWithEmail(userInput.getText().toString(), new ConnectionManager.ServerRequestListener() {
+                        ConnectionManager.getInstance(LoginActivity.this).resetPasswordWithEmail(userInput.getText().toString(),
+                                new ConnectionManager.ServerRequestListener() {
                             @Override
                             public void onSuccess(Object data) {
                                 Toast.makeText(getApplicationContext(), R.string.email_reset_succesfully, Toast.LENGTH_SHORT).show();

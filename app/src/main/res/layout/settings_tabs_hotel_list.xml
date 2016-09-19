@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent" android:layout_height="fill_parent"
+    android:layout_width="match_parent" android:layout_height="match_parent"
     android:id="@+id/hotel_tab_ll"
     android:orientation="vertical">
 
 
 
-    <include layout="@layout/settings_layout_title" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+    <include layout="@layout/settings_layout_title" android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
-        android:layout_margin="@dimen/DP10"
+
         android:id="@+id/settings_hotel_drag_list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

@@ -123,7 +123,7 @@ public class HGBSaveDataClass implements HGBMainInterface {
         return alternativeFlights;
     }
 
-    @Override
+ /*   @Override
     public void setTotalPrice(String totalPrice) {
         mTotalPrice = totalPrice;
     }
@@ -131,7 +131,7 @@ public class HGBSaveDataClass implements HGBMainInterface {
     @Override
     public String getTotalPrice() {
         return mTotalPrice;
-    }
+    }*/
 
     @Override
     public void setAccountSettingsAttribute(List<SettingsAttributeParamVO> settingsAttribute) {
@@ -143,7 +143,7 @@ public class HGBSaveDataClass implements HGBMainInterface {
         return mSettingsAttribute;
     }
 
-    @Override
+ /*   @Override
     public void setListUsers(ArrayList<UserProfileVO> mTravelList) {
         this.mTravelList = mTravelList;
     }
@@ -151,7 +151,7 @@ public class HGBSaveDataClass implements HGBMainInterface {
     @Override
     public ArrayList<UserProfileVO> getListUsers() {
         return mTravelList;
-    }
+    }*/
 
     @Override
     public UserProfileVO getCurrentUser() {
@@ -318,7 +318,7 @@ public class HGBSaveDataClass implements HGBMainInterface {
         return personalUserInformationVO;
     }
 
-    @Override
+ /*   @Override
     public void setCreditCardsSelected(HashSet<CreditCardItem> cardsList) {
 
     }
@@ -336,5 +336,5 @@ public class HGBSaveDataClass implements HGBMainInterface {
     @Override
     public HashMap<String, String> getBookingHashMap() {
         return null;
-    }
+    }*/
 }

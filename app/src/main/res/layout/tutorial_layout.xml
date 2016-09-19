@@ -3,7 +3,7 @@
     android:id="@+id/tutrial_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/COLOR_BLACK"
     android:alpha="0.85">
 
 
@@ -24,7 +24,7 @@
         android:layout_toLeftOf="@+id/tut_arrow"
         android:gravity="center_horizontal"
         android:text="Tap to change\nyour travel profile"
-        android:textColor="@color/white" />
+        android:textColor="@color/COLOR_WHITE" />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/tap_to_type"
@@ -34,7 +34,7 @@
         android:layout_centerHorizontal="true"
         android:text="Tap to type"
         android:layout_marginBottom="@dimen/DP4"
-        android:textColor="@color/white" />
+        android:textColor="@color/COLOR_WHITE" />
 
 
     <ImageView

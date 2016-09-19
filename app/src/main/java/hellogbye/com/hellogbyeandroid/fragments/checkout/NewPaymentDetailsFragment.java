@@ -29,6 +29,7 @@ import hellogbye.com.hellogbyeandroid.adapters.creditcardadapters.AlertCheckoutA
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymentChild;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymnentGroup;
@@ -101,6 +102,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
         mTotalPrice = (FontTextView) view.findViewById(R.id.payment_total_price);
         mPaymentSubmit = (FontButtonView) view.findViewById(R.id.payment_submit);
         mPaymentSubmit.setEnabled(false);
@@ -118,9 +121,6 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         mTotalCCImage = (ImageView) view.findViewById(R.id.passenger_select_cc_image);
         mTotalCCDropDown = (ImageView) view.findViewById(R.id.passenger_select_cc_dropdown);
         mTotalCCLinearLayout = (LinearLayout) view.findViewById(R.id.passenger_select_cc_ll);
-
-
-
 
 
         lv = (ExpandableListView) view.findViewById(R.id.ex_list);
@@ -166,13 +166,13 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             ArrayList<String> passengerItems = passengersVO.getmItineraryItems();
             for (String passengerItem : passengerItems) {
                 NodesVO nodesVO = hashMap.get(passengerItem);
-                if (nodesVO != null) {
+/*                if (nodesVO != null) {*/
                     if (nodesVO != null) {//&& list.size() > 0) {
                         PaymentChild paymentChild;
                         if (NodeTypeEnum.HOTEL.getType().equals(nodesVO.getmType())) {
                             paymentChild = new PaymentChild(nodesVO.getmHotelName() +
-                                    "\n" + HGBUtilityDate.parseDateToddMMyyyyForPayment(nodesVO.getmCheckIn()) +
-                                    "-" + HGBUtilityDate.parseDateToddMMyyyyForPayment(nodesVO.getmCheckOut()) + "\n" +
+                                    "\n" + HGBUtilityDate.parseDateToMMddyyyyForPayment(nodesVO.getmCheckIn()) +
+                                    "-" + HGBUtilityDate.parseDateToMMddyyyyForPayment(nodesVO.getmCheckOut()) + "\n" +
                                     nodesVO.getRoomsVOs().get(0).getmRoomType() + " " +
                                     HGBUtilityDate.getDateDiffString(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()),
                                     "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card),null);
@@ -187,12 +187,11 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                         }
                     }
 
-                }
+   //             }
             }
             children.add(passengerChildArray);
-
-
         }
+
 
         mAdapter = new ExpandableListAdapter(groups, children);
         lv.setAdapter(mAdapter);
@@ -200,6 +199,26 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         initCheckoutSteps();
         getFlowInterface().getCreditCardsSelected().clear();
 
+    }
+
+
+    private void getUsersList(){
+        ConnectionManager.getInstance(getActivity()).getTravellersInforWithSolutionId(getActivityInterface().getTravelOrder().getmSolutionID(),
+                new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                List<ArrayList<UserProfileVO>> children = new ArrayList<ArrayList<UserProfileVO>>();
+                getFlowInterface().setListUsers((ArrayList<UserProfileVO>) data);
+                Bundle args = new Bundle();
+                Gson gson = new Gson();
+                args.putString(HGBConstants.BUNDLE_PARENT_LIST, gson.toJson(groups));
+                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS.getNavNumber(), args);
+            }
+            @Override
+            public void onError(Object data) {
+                        ErrorMessage(data);
+            }
+        });
     }
 
     private void sendPaymentSolution() {
@@ -212,10 +231,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         ConnectionManager.getInstance(getActivity()).checkoutSolutionId(getActivityInterface().getSolutionID(), set, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                Bundle args = new Bundle();
-                Gson gson = new Gson();
-                args.putString(HGBConstants.BUNDLE_PARENT_LIST, gson.toJson(groups));
-                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS.getNavNumber(), args);
+                getUsersList();
             }
 
             @Override
@@ -256,9 +272,13 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                     public void onClick(DialogInterface dialog, int item) {
 
                         String selectedText = itemsList.get(item);
+                        if(selectedText == null){
+                            ErrorMessage("Wrong credit Card");
+                            return;
+                        }
                         //This is to set creditcard  array  final json for payment
 
-                        if (selectedText.equals(getString(R.string.cancel))) {
+                        if ( selectedText.equals(getString(R.string.cancel))) {
 
                         } else if (selectedText.equals(getString(R.string.add_card))) {
                             getFlowInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(), null);
@@ -948,9 +968,9 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
     private void initCheckoutSteps(){
 
-        mPaymentTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_063345));
-        mTravlerTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_777776));
-        mReviewTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_777776));
+        mPaymentTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
+        mTravlerTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_565656));
+        mReviewTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_565656));
         mPaymentImageView.setBackgroundResource(R.drawable.step_menu_blue_on);
         mTravlerImageView.setBackgroundResource(R.drawable.step_menu_gray);
         mReviewImageView.setBackgroundResource(R.drawable.step_menu_gray);

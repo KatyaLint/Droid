@@ -65,7 +65,7 @@ public class CreditCardSwipeItemsAdapter extends RecyclerSwipeAdapter<CreditCard
             mCardelete = (ImageButton) itemView.findViewById(R.id.companion_delete_item);
 
             credit_card_layiut_rl = (RelativeLayout)itemView.findViewById(R.id.credit_card_layiut_rl);
-            mCardImage= (ImageView)itemView.findViewById(R.id.cc_image);
+            mCardImage = (ImageView)itemView.findViewById(R.id.cc_image);
             mCardNumberText = (FontTextView)itemView.findViewById(R.id.cc_number);
 
          //   mNext = (ImageView)itemView.findViewById(R.id.cc_image_next);

@@ -63,7 +63,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         if (position != 0) {
             viewHolder.flight_tickets_rl.setVisibility(View.GONE);
         } else {
-            viewHolder.flight_cost.setText("$" + getFlightCost());
+            viewHolder.flight_cost.setText("$" + HGBUtility.roundNumber(getFlightCost()) + "USD");
 
             viewHolder.flight_direction.setText(destinationFlights);
             viewHolder.flight_tickets_rl.setVisibility(View.VISIBLE);
@@ -126,7 +126,8 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         }
 
         if (alternativeButtonDisable) {
-            viewHolder.show_alternative_flights.setBackgroundResource(R.drawable.round_grey_button_shape);
+            //TODO check if needed
+        //    viewHolder.show_alternative_flights.setBackgroundResource(R.drawable.round_grey_button_shape);
             viewHolder.show_alternative_flights.setClickable(false);
 
         } else {

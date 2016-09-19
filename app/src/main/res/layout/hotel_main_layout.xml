@@ -35,7 +35,7 @@
                         android:id="@+id/rl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
+                        android:background="@color/COLOR_WHITE"
                         android:paddingLeft="@dimen/DP10"
                         android:paddingRight="@dimen/DP10"
                         android:paddingTop="@dimen/DP10">
@@ -47,7 +47,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
                             android:maxWidth="@dimen/DP250"
-                            android:textColor="@color/dark_teal"
+                            android:textColor="@color/COLOR_003D4C"
                             android:textSize="@dimen/SP18"
                             app:fontName="dinnextltpro_medium.otf" />
 
@@ -61,7 +61,7 @@
                             android:background="@drawable/red_button"
                             android:padding="@dimen/DP6"
                             android:text="@string/change_hotel"
-                            android:textColor="@color/white"
+                            android:textColor="@color/COLOR_WHITE"
                             android:textSize="@dimen/SP13"
                             app:fontName="dinnextltpro_medium.otf" />
 
@@ -86,7 +86,7 @@
                                 android:id="@+id/hotel_price"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/red_button_color"
+                                android:textColor="@color/COLOR_EE3A3C"
                                 android:textSize="@dimen/SP18"
                                 app:fontName="dinnextltpro_medium.otf" />
 
@@ -95,7 +95,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text=" /Total (Taxes +fees)"
-                                android:textColor="@color/warm_grey"
+                                android:textColor="@color/COLOR_565656"
                                 android:textSize="@dimen/SP14"
                                 app:fontName="dinnextltpro_medium.otf" />
 
@@ -108,7 +108,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
                             android:layout_below="@+id/hotel_price_layout"
-                            android:textColor="@color/warm_grey"
+                            android:textColor="@color/COLOR_565656"
                             android:textSize="@dimen/SP16"
                             app:fontName="dinnextltpro_light.otf" />
 
@@ -119,7 +119,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:textColor="@color/COLOR_777776">
+                        android:textColor="@color/COLOR_565656">
 
 
                         <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -137,7 +137,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/DP1"
                             android:layout_marginTop="@dimen/DP4"
-                            android:background="@color/warm_grey_line" />
+                            android:background="@color/COLOR_565656" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -160,7 +160,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="ROOM OCCUPANTS"
-                                    android:textColor="@color/light_grey"
+                                    android:textColor="@color/COLOR_999999"
                                     android:textSize="@dimen/SP14"
                                     app:fontName="dinnextltpro_medium.otf" />
 
@@ -177,7 +177,7 @@
                                 android:layout_width="@dimen/DP0"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:background="@color/warm_grey_line"
+                                android:background="@color/COLOR_565656"
                                 android:gravity="center_vertical" />
 
                             <LinearLayout
@@ -192,7 +192,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="CHECK-IN"
-                                    android:textColor="@color/light_grey"
+                                    android:textColor="@color/COLOR_999999"
                                     android:textSize="@dimen/SP14"
                                     app:fontName="dinnextltpro_medium.otf" />
 
@@ -211,7 +211,7 @@
                                 android:layout_width="@dimen/DP0"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:background="@color/warm_grey_line"
+                                android:background="@color/COLOR_565656"
                                 android:gravity="center_vertical" />
 
                             <LinearLayout
@@ -226,7 +226,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="CHECK-OUT"
-                                    android:textColor="@color/light_grey"
+                                    android:textColor="@color/COLOR_999999"
                                     android:textSize="@dimen/SP14"
                                     app:fontName="dinnextltpro_medium.otf" />
 
@@ -244,7 +244,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/DP1"
-                            android:background="@color/warm_grey_line" />
+                            android:background="@color/COLOR_565656" />
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/rooms_recycler_view"
@@ -259,7 +259,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
+                        android:background="@color/COLOR_WHITE"
                         android:orientation="vertical">
 
                         <hellogbye.com.hellogbyeandroid.views.FontTextView

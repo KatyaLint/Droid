@@ -43,14 +43,14 @@
                 android:layout_marginRight="@dimen/DP10"
                 android:padding="@dimen/DP10"
                 android:layout_marginBottom="@dimen/DP10"
-                android:background="@color/hgb_blue">
+                android:background="@color/COLOR_00516f">
 
                 <hellogbye.com.hellogbyeandroid.views.FontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:text="@string/alternative_pull_down_text"
-                    android:textColor="@color/white"
+                    android:textColor="@color/COLOR_WHITE"
                     app:fontName="dinnextltpro_regular.otf" />
 
                 <ImageView

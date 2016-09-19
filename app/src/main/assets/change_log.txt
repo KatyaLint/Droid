@@ -308,11 +308,11 @@ Code changing:
         - Fixed crash in Personal information
         - (HEL-1355) can't create a new query
 
-       Code changing:
-       --------------
+    Code changing:
+    --------------
 
 
-  ------------------------------------------
+   ------------------------------------------
                Version 1.6.0
    ------------------------------------------
    Fixed Bugs:
@@ -322,6 +322,8 @@ Code changing:
     HEL-1405 - add icons between airport codes
     HEL-1407 - change places between hotel ranking and hotel cost on hotel tile in grid
     HEL-1358 - trip name is deleted when pressing on flight details
+    HEL-1193 - traveler info - add middle name field
+    HEL-1414 - implement adding friends through search companions
 
    Code changing:
    --------------
@@ -332,3 +334,79 @@ Code changing:
     - arrow_drop_down
     - alignment left all titles
     - clear Itinerary Button
+    - fly me to ..., now asking with which companion
+    - new arrow_back for alternative flights
+    - Middle name in account settings
+    - travel profiles at left
+    - Color change
+    - Preference settings change with active view
+    - New image for adding companion
+    - Voice fix
+    - Maps fix
+    - Travel profiles popup view and logic
+    - change travel name, code changes
+    - clear cnc screen new implementation
+    - search implementation on My Trips
+    - Reselecting Tabs
+    - first selected is CNC screen
+
+     View changes
+    - Airline logo after paiment
+    - Economy Class
+    - New row of flight details
+    - USD after $
+    - Hotel icons all blue
+    - USD after price hotels
+    - Date all caps
+    - Brackets in alternative flights
+    - Rounded Price
+    - new line incl taxes
+    - new text for type message
+    - no server error in cnc
+
+    - removed add another email from account_personal_info_list_layout
+    - only one email in Personal Info
+    - app name changed to HelloGbye
+    - new message for user in cnc screen
+    - instead of join new companion, add
+    - first screen of profile screen title profile name
+    - no more baggage in flight screen
+    - tutorial text for user fix
+    - credit card, scan card text
+    - stopOver fix count
+    - middle name in correct places
+
+   ------------------------------------------
+                   Version 1.6.1
+   ------------------------------------------
+    Fixed Bugs:
+    -----------
+    HEL-1330 - on second part of checkout can't change details of traveller
+    HEL-1361 - app crashes on step 3 of checkout
+    HEL-1366 - crash at add credit card
+    HEL-1354 - error in first page of checkout
+    HEL-1356 - crash in profile preferences from cnc
+    HEL-1357 - can't enter flight details
+    HEL-1326 - can't delete credit card
+    HEL-1138 - trying to pay for 3 items with 3 credit cards caughts exception
+    HEL-1548 - change text in preferred airline
+    HEL-1544 - text in smoking preference change
+    HEL-1549 - the trash can button for deleting a profile doesn't work
+    HEL-1551 - crash at add companion from grid
+    HEL-1554 - adding companion through search pressing on name crashing app
+    HEL-1111 - add additional email
+    HEL-1325 - error when deleting an additional email to an account
+    HEL-1467 - add redline under current state of preference(flight or hotel)
+    HEL-1537 - delete last search in cnc after reentering app/entering with a different user
+    HEL-1533 - changing trip name in grid isn't updated
+
+    Code changing:
+    --------------
+    - Preference title corrected
+    - Notification new view
+    - Checkout traveler screen fix
+    - Checkout traveler screen , edit fix
+    - More options fix, to More Hotels, More Flights
+    - Checkout crash on third screen fix
+    - date fix on checkout
+    - Checkout empty credit card crash fix

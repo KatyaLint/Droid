@@ -16,7 +16,7 @@
             android:id="@+id/settings_flight_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/marine"
+            android:textColor="@color/COLOR_003D4C"
             android:textSize="@dimen/DP14"
             android:text="may be it's here"
             app:fontName="dinnextltpro_regular.otf"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/DP10"
             app:fontName="dinnextltpro_light.otf"
-            android:textColor="@color/COLOR_555555"
+            android:textColor="@color/COLOR_565656"
             android:layout_centerInParent="true"
             android:lines="1"
             />

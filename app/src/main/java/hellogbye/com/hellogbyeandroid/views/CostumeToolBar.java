@@ -3,6 +3,8 @@ package hellogbye.com.hellogbyeandroid.views;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.content.Context;
+
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
@@ -19,21 +21,16 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 public class CostumeToolBar extends Toolbar {
 
-  //  private ImageButton keyBoardImage;
     private ImageButton up_bar_favorite;
-    private ImageButton new_itinerary;
+    private ImageButton toolbar_new_iternerary;
     private ImageButton favoriteButton;
     private ImageButton search_maginfy;
     private FontTextView editPreferense;
-    private ImageView homeTitleImage;
-    private FontTextView titleText;
+    private FontTextView titleBar;
     private Toolbar mToolbar;
-    private Context mContext;
-    private ImageButton edit_preferences;
+    private FontTextView edit_preferences;
     private LinearLayout preferences_edit_mode;
     private ImageButton check_preferences;
-    //private ImageButton my_trips_button;
-   // private FontTextView my_trip_edit_button;
     private ImageView my_trips_image_profile;
     private FontTextView my_trip_profile;
     private FontTextView itirnarary_title_Bar;
@@ -45,6 +42,9 @@ public class CostumeToolBar extends Toolbar {
     private Activity mActivity;
     private ImageButton toolbar_add_companion;
     private int mSelectedFragment;
+    private Context mContext;
+
+    private ImageButton tool_bar_delete_preferences;
 
     public CostumeToolBar(Context context) {
         super(context);
@@ -53,13 +53,11 @@ public class CostumeToolBar extends Toolbar {
 
     public CostumeToolBar(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContext = context;
     }
 
 
     public CostumeToolBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mContext = context;
     }
 
 
@@ -68,8 +66,8 @@ public class CostumeToolBar extends Toolbar {
         if(my_trip_profile == null){
             my_trip_profile = (FontTextView)findViewById(R.id.my_trip_profile);
         }
-        if (titleText == null) {
-            titleText = (FontTextView) findViewById(R.id.titleBar);
+        if (titleBar == null) {
+            titleBar = (FontTextView) findViewById(R.id.titleBar);
         }
         if(my_trips_image_profile == null){
             my_trips_image_profile = (ImageView)findViewById(R.id.my_trips_image_profile);
@@ -86,9 +84,10 @@ public class CostumeToolBar extends Toolbar {
         }
         if (editPreferense == null) {
             preferences_edit_mode = (LinearLayout)findViewById(R.id.preferences_edit_mode);
-            edit_preferences = (ImageButton)findViewById(R.id.edit_preferences);
+            edit_preferences = (FontTextView)findViewById(R.id.edit_preferences);
             check_preferences = (ImageButton)findViewById(R.id.check_preferences);
             editPreferense = (FontTextView) findViewById(R.id.editPreference);
+            tool_bar_delete_preferences = (ImageButton)findViewById(R.id.tool_bar_delete_preferences);
         }
         if(preference_save_changes == null) {
             preference_save_changes = (FontTextView)findViewById(R.id.preference_save_changes);
@@ -108,8 +107,8 @@ public class CostumeToolBar extends Toolbar {
             toolbar_new_iternerary_cnc = (ImageButton) findViewById(R.id.toolbar_new_iternerary_cnc);
         }
 
-        if(new_itinerary == null){
-            new_itinerary = (ImageButton) findViewById(R.id.toolbar_new_iternerary);
+        if(toolbar_new_iternerary == null){
+            toolbar_new_iternerary = (ImageButton) findViewById(R.id.toolbar_new_iternerary);
         }
         if(search_maginfy == null){
             search_maginfy = (ImageButton) findViewById(R.id.search_maginfy);
@@ -125,8 +124,9 @@ public class CostumeToolBar extends Toolbar {
     }
 
     private void initSearchBar() {
+
         if(search_view == null){
-            search_view = (SearchView) findViewById(R.id.search);
+            search_view = (SearchView) findViewById(R.id.search_view_tool_bar);
         }
 
 
@@ -138,8 +138,8 @@ public class CostumeToolBar extends Toolbar {
 //                .getResources()
 //                .getIdentifier("android:id/search_src_text", null, null);
 //        TextView textView = (TextView) search_view.findViewById(id);
-        searchCloseText.setTextColor(ContextCompat.getColor(getContext(), R.color.hgb_toolbar_blue));
-        searchCloseText.setHintTextColor(ContextCompat.getColor(getContext(), R.color.hgb_toolbar_blue));
+        searchCloseText.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
+        searchCloseText.setHintTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
         search_maginfy.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -175,8 +175,8 @@ public class CostumeToolBar extends Toolbar {
     }
 
     private void closeSearchBar() {
-        titleText.setVisibility(View.VISIBLE);
-        new_itinerary.setVisibility(View.VISIBLE);
+        titleBar.setVisibility(View.VISIBLE);
+        toolbar_new_iternerary_cnc.setVisibility(View.VISIBLE);
         search_maginfy.setVisibility(View.VISIBLE);
         search_view.setVisibility(View.GONE);
 
@@ -184,8 +184,8 @@ public class CostumeToolBar extends Toolbar {
 
 
     private void openSearchBar() {
-        titleText.setVisibility(View.GONE);
-        new_itinerary.setVisibility(View.GONE);
+        titleBar.setVisibility(View.GONE);
+        toolbar_new_iternerary_cnc.setVisibility(View.GONE);
         search_maginfy.setVisibility(View.GONE);
         search_view.setVisibility(View.VISIBLE);
         search_view.setIconified(false);
@@ -193,7 +193,7 @@ public class CostumeToolBar extends Toolbar {
     }
 
     public void closeAutoComplete() {
-        titleText.setVisibility(View.VISIBLE);
+        titleBar.setVisibility(View.VISIBLE);
         search_maginfy.setVisibility(View.VISIBLE);
         auto_complete.setVisibility(View.GONE);
         HGBUtility.hideKeyboard(mContext,auto_complete);
@@ -202,7 +202,7 @@ public class CostumeToolBar extends Toolbar {
 
 
     private void openAutoComplete() {
-        titleText.setVisibility(View.GONE);
+        titleBar.setVisibility(View.GONE);
         search_maginfy.setVisibility(View.GONE);
         auto_complete.setVisibility(View.VISIBLE);
         auto_complete.requestFocus();
@@ -216,23 +216,18 @@ public class CostumeToolBar extends Toolbar {
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
         String selectedItem = navBar.getNavTitle();
         tool_bar_profile_name.setVisibility(View.GONE);
-   //     homeTitleImage.setVisibility(View.GONE);
-     //   my_trip_profile.setVisibility(View.GONE);
-        titleText.setVisibility(View.GONE);
-    //    keyBoardImage.setVisibility(View.GONE);
+        titleBar.setVisibility(View.GONE);
         up_bar_favorite.setVisibility(View.GONE);
         favoriteButton.setVisibility(View.GONE);
         editPreferense.setVisibility(View.GONE);
         edit_preferences.setVisibility(View.GONE);
         preferences_edit_mode.setVisibility(View.GONE);
+        tool_bar_delete_preferences.setVisibility(GONE);
         check_preferences.setVisibility(View.GONE);
-//        my_trips_button.setVisibility(View.GONE);
-       // my_trip_edit_button.setVisibility(View.GONE);
-     //   my_trips_image_profile.setVisibility(View.GONE);
         itirnarary_title_Bar.setVisibility(View.GONE);
         toolbar_new_iternerary_cnc.setVisibility(View.GONE);
         preference_save_changes.setVisibility(View.GONE);
-        new_itinerary.setVisibility(View.GONE);
+        toolbar_new_iternerary.setVisibility(View.GONE);
         search_maginfy.setVisibility(View.GONE);
         search_view.setVisibility(View.GONE);
         auto_complete.setVisibility(View.GONE);
@@ -248,22 +243,15 @@ public class CostumeToolBar extends Toolbar {
 //                keyBoardImage.setVisibility(View.VISIBLE);
 //
          //       break;
+
             case CNC:
                 tool_bar_profile_name.setVisibility(View.VISIBLE);
                 toolbar_new_iternerary_cnc.setVisibility(View.VISIBLE);
                 break;
             case ITINARERY:
-               // titleText.setVisibility(View.VISIBLE);
-            //    up_bar_favorite.setVisibility(View.VISIBLE);
                 up_bar_favorite.setVisibility(View.VISIBLE);
                 itirnarary_title_Bar.setVisibility(View.VISIBLE);
-            //    itirnarary_title_Bar.setText(selectedItem);
                 break;
-//            case HISTORY:
-//                titleText.setVisibility(View.VISIBLE);
-//                keyBoardImage.setVisibility(View.INVISIBLE);
-//                break;
-
             case PREFERENCES_CHECK_LIST_SETTINGS:
             case PREFERENCES_SEARCH_LIST_SETTINGS:
             case PREFERENCES_SPECIFIC_LIST_SETTINGS:
@@ -271,13 +259,13 @@ public class CostumeToolBar extends Toolbar {
             case PREFERENCE_SETTINGS_EMAILS:
             case PREFERENCES_CHECK_AS_RADIO_SETTINGS:
                 preference_save_changes.setVisibility(View.VISIBLE);
-                titleText.setVisibility(View.VISIBLE);
+                titleBar.setVisibility(View.VISIBLE);
                 edit_preferences.setVisibility(View.GONE);
             break;
 
             case TRIPS:
-                titleText.setVisibility(View.VISIBLE);
-                new_itinerary.setVisibility(View.VISIBLE);
+                titleBar.setVisibility(View.VISIBLE);
+                toolbar_new_iternerary.setVisibility(View.VISIBLE);
                 search_maginfy.setVisibility(View.VISIBLE);
                 break;
 
@@ -302,23 +290,22 @@ public class CostumeToolBar extends Toolbar {
             case PREFERENCES_MEMBERSHIP:
             case ALTERNATIVE_FLIGHT_ONE_WAY_TRIP:
             case ALTERNATIVE_FLIGHT_ROUND_TRIP:
-                titleText.setVisibility(View.VISIBLE);
+                titleBar.setVisibility(View.VISIBLE);
                 break;
             case SELECT_HOTEL_FRAGMENT:
                 search_maginfy.setVisibility(View.VISIBLE);
-                titleText.setVisibility(View.VISIBLE);
+                titleBar.setVisibility(View.VISIBLE);
                 break;
 
-            case TREVEL_PREFERENCE:
-            //    preference_save_changes.setVisibility(View.VISIBLE);
-                titleText.setVisibility(View.VISIBLE);
+            case TRAVEL_PREFERENCE:
+                titleBar.setVisibility(View.VISIBLE);
                 preferences_edit_mode.setVisibility(View.VISIBLE);
                 edit_preferences.setVisibility(View.VISIBLE);
                 break;
 
         }
 
-        titleText.setText(selectedItem);
+        titleBar.setText(selectedItem);
     }
 
 

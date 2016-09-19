@@ -3,7 +3,7 @@
 <LinearLayout android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/COLOR_WHITE"
     android:orientation="vertical">
 
 <TextView
@@ -12,7 +12,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:text="Coming Soon"
-    android:textColor="@color/hgb_blue"
+    android:textColor="@color/COLOR_00516f"
     android:textSize="@dimen/SP32" />
 
 </LinearLayout>

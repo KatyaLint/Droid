@@ -1,6 +1,8 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,12 +15,16 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
@@ -28,18 +34,23 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.CNCAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsPreferencesCheckAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportResultsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportServerResultVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.ResponsesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionUserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.ConversationVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
+import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
@@ -56,7 +67,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private CNCAdapter mAdapter;
+    private CNCAdapter mCNCAdapter;
     private EditText mEditText;
     private ImageView mMicImageView;
     private FontTextView mSendTextView;
@@ -67,6 +78,7 @@ public class CNCFragment extends HGBAbstractFragment {
     private String[] locationArr;
    // private Button cnc_fragment_trip_settings;
     private static int SPLASH_TIME_OUT = 5000;
+    private static int CNC_TUTORIAL_TYPING_TEXT_TIME_DURATION = 3000;
     //  private CostumeToolBar mToolbar;
 
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
@@ -74,6 +86,7 @@ public class CNCFragment extends HGBAbstractFragment {
     private ImageButton cncDissmissImageButton;
 
     private FontTextView mTextTutoralBody;
+    private LinearLayout cnc_text_tutorial_ll;
     private FontTextView mTextTutoralHeader;
     private  Handler tutorailTexthandler = new Handler();
     private   Runnable mRunnable;
@@ -87,7 +100,12 @@ public class CNCFragment extends HGBAbstractFragment {
     private boolean clearCNCscreen;
     private Bundle args;
     private int selectedCount = 0;
- //   private  AirportSendValuesVO airportSendValuesVO;
+    private PreferencesSettingsPreferencesCheckAdapter mRadioPreferencesAdapter;
+    private ArrayList<AccountDefaultSettingsVO> accountAttributes;
+    private LinearLayout tool_bar_profile_name;
+    private ArrayList<DefaultsProfilesVO> accountDefaultSettings;
+    private FontTextView cnc_start_planing_text;
+    //   private  AirportSendValuesVO airportSendValuesVO;
 
 
     public static Fragment newInstance(int position) {
@@ -98,20 +116,40 @@ public class CNCFragment extends HGBAbstractFragment {
         return fragment;
     }
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         account_settings = getResources().getStringArray(R.array.tutorial_arr);
 
         View rootView = inflater.inflate(R.layout.cnc_fragment_layout, container, false);
-        //   mToolbar = (CostumeToolBar)rootView.findViewById(R.id.toolbar_cnc);
+        args = getArguments();
 
-        mHGBPrefrenceManager = HGBPreferencesManager.getInstance(getActivity().getApplicationContext());
+        clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT);
+
+
 
         init(rootView);
-        initList();
+        startTutorial();
+        startTutorialText();
+
+        if(clearCNCscreen){
+            //   startTutorialText();
+            clearCNCItems();
+
+            //This is to ckeck and display tutorial this version was cancelled waiting for new one
+
+            setTutorialTextVisibility(true);
+        }else{
+            setTutorialTextVisibility(false);
+        }
+
+
+        //   mToolbar = (CostumeToolBar)rootView.findViewById(R.id.toolbar_cnc);
+
+
 
 
         //    updateToolBarView();
@@ -120,24 +158,7 @@ public class CNCFragment extends HGBAbstractFragment {
         getAccountsProfiles();
 
 
-        joinCompanionToTravel();
-
-        args = getArguments();
-        clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT);
-        startTutorial();
-        if(clearCNCscreen){
-         //   startTutorialText();
-            clearCNCItems();
-
-            //This is to ckeck and display tutorial this version was cancelled waiting for new one
-
-
-            mTextTutoralHeader.setVisibility(View.VISIBLE);
-            mTextTutoralBody.setVisibility(View.VISIBLE);
-        }else{
-            mTextTutoralHeader.setVisibility(View.GONE);
-            mTextTutoralBody.setVisibility(View.GONE);
-        }
+        initList();
 
 
         String solution_id = args.getString(HGBConstants.SOLUTION_ITINERARY_ID);
@@ -146,14 +167,183 @@ public class CNCFragment extends HGBAbstractFragment {
             getCurrentItinerary(solution_id);
         }
 
+        joinCompanionToTravel();
+       /* final LinearLayout edit_preferences = ((MainActivityBottomTabs)getActivity()).getToolBarEditPreferences();*/
+        tool_bar_profile_name = ((MainActivityBottomTabs)getActivity()).getToolBarProfileChange();
+        tool_bar_profile_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getUserSettings();
+
+
+             /*   Bundle args = new Bundle();
+                args.putString("edit_mode", "true");
+                edit_preferences.setVisibility(View.GONE);
+                getFlowInterface().goToFragment(ToolBarNavEnum.TRAVEL_PREFERENCE.getNavNumber(), args);*/
+            }
+        });
+
+        ImageButton newIteneraryImageButton = ((MainActivityBottomTabs) getActivity()).getToolbar_new_iterneraryCnc();
+        newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearCNCItems();
+            }
+        });
+
+
+
+
+      //  showMessagesToUser();
         return rootView;
     }
 
+    private void getUserSettings(){
+       // getPreferenceProfiles(final ServerRequestListener listener)
+    ConnectionManager.getInstance(getActivity()).getPreferenceProfiles(new ConnectionManager.ServerRequestListener() {
+        @Override
+        public void onSuccess(Object data) {
+            if (data != null) {
+                accountDefaultSettings = (ArrayList<DefaultsProfilesVO> )data;
+           //     List<AccountDefaultSettingsVO> accountDefaultSettings = (List<AccountDefaultSettingsVO>) data;
+                profilesDialog(accountDefaultSettings);
+            }
+        }
+        @Override
+        public void onError(Object data) {
+            ErrorMessage(data);
+        }
+    });
+    }
+
+    private int radioButtonSelected = -1;
+
+    private void profilesDialog (ArrayList<DefaultsProfilesVO> userProfileVOs) {
+        LayoutInflater li = LayoutInflater.from(getActivity());
+        View promptsView = li.inflate(R.layout.popup_custom_title, null);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+        dialogBuilder.setCustomTitle(promptsView);
+
+
+
+      //  UserProfilesListAdapter adapter = new UserProfilesListAdapter(userProfileVOs, getContext());
+
+
+        accountAttributes = new ArrayList<>();
+        for(DefaultsProfilesVO defaultsProfilesVO: userProfileVOs){
+            AccountDefaultSettingsVO accountDefaultSettingsVO = new AccountDefaultSettingsVO();
+            accountDefaultSettingsVO.setmId(defaultsProfilesVO.getId());
+            accountDefaultSettingsVO.setmProfileName(defaultsProfilesVO.getProfilename());
+            accountAttributes.add(accountDefaultSettingsVO);
+        }
+
+        mRadioPreferencesAdapter = new PreferencesSettingsPreferencesCheckAdapter(getContext(),accountAttributes);
+
+        View promptsViewTeest = li.inflate(R.layout.user_profile_popup_list_layout, null);
+        ListView user_profile_popup_list_view = (ListView) promptsViewTeest.findViewById(R.id.user_profile_popup_list_view);
+        user_profile_popup_list_view.setAdapter(mRadioPreferencesAdapter);
+
+        LinearLayout manage_profile_ll = (LinearLayout)promptsViewTeest.findViewById(R.id.manage_profile_ll);
+        manage_profile_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFlowInterface().goToFragment(ToolBarNavEnum.TRAVEL_PREFERENCE.getNavNumber(), null);
+                selectDefaultProfileDialog.dismiss();
+            }
+        });
+
+        mRadioPreferencesAdapter.setClickedLineCB(new PreferenceSettingsFragment.ListLineClicked() {
+            @Override
+            public void clickedItem(String itemID) {
+
+
+            }
+        });
+
+        mRadioPreferencesAdapter.setSelectedRadioButtonListener(new PreferenceSettingsFragment.ListRadioButtonClicked(){
+
+            @Override
+            public void clickedItem(int selectedPosition) {
+                radioButtonSelected = selectedPosition;
+            }
+        });
+
+        selectedRadioPreference();
+
+
+        dialogBuilder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                if(radioButtonSelected != -1) {
+                    final DefaultsProfilesVO selected = accountDefaultSettings.get(radioButtonSelected);
+
+                    String userEmail = getActivityInterface().getPersonalUserInformation().getUserEmailLogIn();
+
+                    ConnectionManager.getInstance(getActivity()).putAccountsPreferences(userEmail, selected.getId(), new ConnectionManager.ServerRequestListener() {
+                        @Override
+                        public void onSuccess(Object data) {
+                            FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
+                            my_trip_profile.setText(selected.getProfilename());
+                        }
+
+                        @Override
+                        public void onError(Object data) {
+                            ErrorMessage(data);
+                        }
+                    });
+                }
+            } });
+
+
+        //Create alert dialog object via builder
+        selectDefaultProfileDialog = dialogBuilder.create();
+        selectDefaultProfileDialog.setView(promptsViewTeest);
+        selectDefaultProfileDialog.setCancelable(false);
+        selectDefaultProfileDialog.show();
+
+
+
+      //  dialogBuilder.setView(promptsViewTeest);
+
+    }
+
+
+    private void sendUserSelectionToServer(){
+
+
+
+       /* AccountDefaultSettingsVO selected = accountDefaultSettings.get(radioButtonSelected);
+
+        String userEmail = getActivityInterface().getPersonalUserInformation().getUserEmailLogIn();
+        ConnectionManager.getInstance(getActivity()).putAccountsPreferences(userEmail, selected.getmId(), new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });*/
+    }
+
+    private void selectedRadioPreference(){
+
+        FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
+
+        if(my_trip_profile.getTag() == null){
+            return;
+        }
+        String selectedTag = my_trip_profile.getTag().toString();
+        mRadioPreferencesAdapter.selectedItemID(selectedTag);
+    }
+
+    private AlertDialog selectDefaultProfileDialog;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getFlowInterface().enableFullScreen(true);
+        getFlowInterface().enableFullScreen(false);
 
     }
 
@@ -213,17 +403,21 @@ public class CNCFragment extends HGBAbstractFragment {
         String tripSolutionId = getActivityInterface().getTravelOrder().getmSolutionID(); //getActivityInterface().getSolutionID();
 
         String userName = "";
-        String joinQuery = "Join ";
+        String joinQuery = "Add ";
 
      //   ArrayList<AccountsVO> accounts = getActivityInterface().getAccounts();
         ArrayList<CompanionVO> companions = getActivityInterface().getCompanions();
 
         for(CompanionVO companionVO : companions){
             if(companionVO.getmCompanionid().equals(user_id)){
-                userName = companionVO.getCompanionUserProfile().getmFirstName();
+                CompanionUserProfileVO companionProfile = companionVO.getCompanionUserProfile();
+                userName = companionProfile.getmFirstName() + " " +companionProfile.getmLastName();
                 break;
             }
         }
+
+
+
 
        /* for(AccountsVO account:accounts){
             if(account.getTravelpreferenceprofile().getId().equals(user_id)){
@@ -240,7 +434,7 @@ public class CNCFragment extends HGBAbstractFragment {
         airportSendValuesVO.setQuery(joinQuery);
         airportSendValuesVO.setLatitude("0");
         airportSendValuesVO.setLongitude("0");
-        airportSendValuesVO.setTravelpreferenceprofileid(user_id);
+        airportSendValuesVO.setTravelpreferenceprofileid(getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId());
 
 
         ArrayList<AirportSendValuesVO> airportSendValuesVOs = new ArrayList<>();
@@ -267,7 +461,7 @@ public class CNCFragment extends HGBAbstractFragment {
             @Override
             public void onError(Object data) {
 
-                ErrorMessage(data);
+             //   ErrorMessage(data);
                 handleHGBMessage(getResources().getString(R.string.cnc_error));
                 CNCFragment.this.airportSendValuesVOs.clear();
             }
@@ -317,16 +511,6 @@ public class CNCFragment extends HGBAbstractFragment {
             }, SPLASH_TIME_OUT);
         }
 
-        mRunnable = new Runnable() {
-            @Override
-            public void run() {
-                //Do something after 100ms
-                changeTutorialText();
-                tutorailTexthandler.postDelayed(mRunnable, 2000);
-            }
-        };
-
-
     }
 
 
@@ -351,12 +535,20 @@ public class CNCFragment extends HGBAbstractFragment {
         loadCNCList();
         mRecyclerView.setHasFixedSize(true);
         // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager = new LinearLayoutManager(getContext());
+ /*       mLayoutManager = new LinearLayoutManager(getContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+*/
+
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new CNCAdapter(getActivity().getApplicationContext(), getActivityInterface().getCNCItems());
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.SetOnItemClickListener(new CNCAdapter.OnItemClickListener() {
+        mCNCAdapter = new CNCAdapter(getActivity().getApplicationContext(), getActivityInterface().getCNCItems());
+        mRecyclerView.setAdapter(mCNCAdapter);
+        mCNCAdapter.SetOnItemClickListener(new CNCAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 String strText = getActivityInterface().getCNCItems().get(position).getText();
@@ -367,19 +559,15 @@ public class CNCFragment extends HGBAbstractFragment {
                 }
             }
         });
-
-
-
-
-
     }
 
+
     private void loadCNCList() {
-        String strCNCList = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, "");
+
 
 //        if ("".equals(strCNCList) && getActivityInterface().getCNCItems()== null ||
 //                strCNCList==null && getActivityInterface().getCNCItems()== null) {
-        if ((strCNCList.equals("") || strCNCList.equals("null")) && getActivityInterface().getCNCItems()== null ) {
+/*        if ((strCNCList.equals("") || strCNCList.equals("null")) && getActivityInterface().getCNCItems()== null ) {
             Resources res = getResources();
             String userName = "";
             if( getActivityInterface().getCurrentUser() != null){
@@ -404,20 +592,44 @@ public class CNCFragment extends HGBAbstractFragment {
                     e.printStackTrace();
                 }
             }
+        }*/
+
+        String strCNCList = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, "");
+        if((strCNCList.equals("") || strCNCList.equals("null")) &&  getActivityInterface().getCNCItems()== null){
+            Resources res = getResources();
+            String userName = "";
+            UserProfileVO usersList = getActivityInterface().getCurrentUser();
+            if( usersList != null){
+                userName = usersList.getFirstname();
+            }
+
+            String text = String.format(res.getString(R.string.default_cnc_message),userName );
+
+            getActivityInterface().addCNCItem(new CNCItem(text, CNCAdapter.HGB_ITEM));
+            getActivityInterface().addCNCItem(new CNCItem(res.getString(R.string.default_cnc_message_two), CNCAdapter.HGB_ITEM_NO_ICON));
+            setTutorialTextVisibility(true);
+
+
+
         }
+        else if (getActivityInterface().getCNCItems() == null) {
+            try {
+                Gson gson = new Gson();
+                Type listType = new TypeToken<List<CNCItem>>() {
+                }.getType();
+                ArrayList<CNCItem> posts = (ArrayList<CNCItem>) gson.fromJson(strCNCList, listType);
+                getActivityInterface().setCNCItems(posts);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            setTutorialTextVisibility(false);
+        }
+
     }
 
     private void init(View view) {
 
- /*       cnc_fragment_trip_settings = (Button)view.findViewById(R.id.cnc_fragment_trip_settings);
-        cnc_fragment_trip_settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               *//* getFlowInterface().closeRightPane();*//*
-                getFlowInterface().goToFragment(ToolBarNavEnum.TREVEL_PREFERENCE.getNavNumber(), null);
-            }
-        });*/
-
+        mHGBPrefrenceManager = HGBPreferencesManager.getInstance(getActivity().getApplicationContext());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.cnc_recycler_view);
         mEditText = (FontEditTextView) view.findViewById(R.id.cnc_edit_text);
         mMicImageView = (ImageView) view.findViewById(R.id.cnc_mic);
@@ -426,7 +638,9 @@ public class CNCFragment extends HGBAbstractFragment {
 
         mTextTutoralHeader = (FontTextView) view.findViewById(R.id.text_tutorial_header);
         mTextTutoralBody = (FontTextView)view.findViewById(R.id.text_tutorial_body);
+        cnc_text_tutorial_ll = (LinearLayout)view.findViewById(R.id.cnc_text_tutorial_ll);
 
+        cnc_start_planing_text = (FontTextView)view.findViewById(R.id.cnc_start_planing_text);
 
         mSendTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -474,14 +688,26 @@ public class CNCFragment extends HGBAbstractFragment {
     }
 
 
+
+    private void setTutorialTextVisibility(boolean isVisible){
+        if(isVisible){
+            cnc_start_planing_text.setVisibility(View.GONE);
+            cnc_text_tutorial_ll.setVisibility(View.VISIBLE);
+        }else{
+            cnc_start_planing_text.setVisibility(View.VISIBLE);
+            cnc_text_tutorial_ll.setVisibility(View.GONE);
+        }
+    }
+
     public void handleMyMessage(final String strMessageReceived) {
-        stopTextTutorial();
-        mTextTutoralHeader.setVisibility(View.GONE);
-        mTextTutoralBody.setVisibility(View.GONE);
+        //stopTextTutorial();
+        //setTutorialTextVisibility(false);
+
         getActivityInterface().addCNCItem(new CNCItem(strMessageReceived.trim(), CNCAdapter.ME_ITEM));
         addWaitingItem();
-        mAdapter.notifyDataSetChanged();
+        mCNCAdapter.notifyDataSetChanged();
         resetMessageEditText();
+
      //   enterCNCMessage(strMessage);
 
         HGBTranslate.translateQueary(getActivity().getApplicationContext(),strMessageReceived, new HGBTranslateInterface() {
@@ -501,9 +727,7 @@ public class CNCFragment extends HGBAbstractFragment {
     }
 
     private void enterCNCMessage(final String strMessage) {
-
-
-
+        setTutorialTextVisibility(false);
         clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
         if(!clearCNCscreen) {
             sendCNCMessageToServer(strMessage);
@@ -514,6 +738,9 @@ public class CNCFragment extends HGBAbstractFragment {
 
                 @Override
                 public void serverFinished(AirportServerResultVO airportResult) {
+
+
+
                     ArrayList<ResponsesVO> responses = airportResult.getResponses();
                     maxAirportSize = 0;//responses.size();
                    /* for (ResponsesVO response : responses) {
@@ -525,9 +752,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
 
                     for (ResponsesVO response: responses) {
-                      //  if(response.getType().equals("City") || response.getType().equals("AirportCode") ) {
-                            String airport = getResources().getString(R.string.cnc_choose_airport);
-                            airport = airport + " " + response.getValue() + "?";
+
                             AirportSendValuesVO  airportSendValuesVO = new AirportSendValuesVO();
                             airportSendValuesVO.setQuery(strMessage);
 
@@ -568,12 +793,18 @@ public class CNCFragment extends HGBAbstractFragment {
 
     private void popupDialogForAirports(){
 
-
         for(int j = airportSendValuesVOs.size()-1;j>=0;j--){
            final AirportSendValuesVO airportSendValueVO = airportSendValuesVOs.get(j);
-            String airport = getResources().getString(R.string.cnc_choose_airport);
-            airport = airport + " " + airportSendValueVO.getValue() + "?";
+            String airport = "";
+            if(airportSendValueVO.getType().equals("Name")){
 
+                airport = getResources().getString(R.string.cnc_choose_companion_name);
+                airport = airport + " " + airportSendValueVO.getValue() + "?";
+            }
+            else if(airportSendValueVO.getType().equals("City")){
+                airport = getResources().getString(R.string.cnc_choose_airport);
+                airport = airport + " " + airportSendValueVO.getValue() + "?";
+            }
 
             if(airportSendValueVO.getType().equals("AirportCode")){
                 sendUserAnswearToServer(airportSendValueVO.getResults().get(0));
@@ -657,7 +888,7 @@ public class CNCFragment extends HGBAbstractFragment {
     }
 
     private void sendMessageToServer(final String strMessage,final iAfterServer iserverFinished) {
-        ConnectionManager.getInstance(getActivity()).ItineraryCNCSearchGet(strMessage, new ConnectionManager.ServerRequestListener() {
+        ConnectionManager.getInstance(getActivity()).getItineraryCNCSearch(strMessage, new ConnectionManager.ServerRequestListener() {
 
                     @Override
                     public void onSuccess(Object data) {
@@ -669,7 +900,7 @@ public class CNCFragment extends HGBAbstractFragment {
                     @Override
                     public void onError(Object data) {
                         handleHGBMessage(getResources().getString(R.string.cnc_error));
-                        ErrorMessage(data);
+                    //    ErrorMessage(data);
 
 
                     }
@@ -687,9 +918,12 @@ public class CNCFragment extends HGBAbstractFragment {
         if(!cncItems.isEmpty() && cncItems.size()>1){
 
             UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
-            String solutionId = travelOrder.getmSolutionID();
+
+                String solutionId = travelOrder.getmSolutionID();
+                airportSendValuesVO.setId(solutionId);
+
             airportSendValuesVO.setQuery(strMessage);
-            airportSendValuesVO.setId(solutionId);
+
             airportSendValuesVO.setTravelpreferenceprofileid(getActivityInterface().getCurrentUser().getUserprofileid());
 
             airportSendValuesVOsTemp.add(airportSendValuesVO);
@@ -704,7 +938,7 @@ public class CNCFragment extends HGBAbstractFragment {
                 }
                 @Override
                 public void onError(Object data) {
-                    ErrorMessage(data);
+                  //  ErrorMessage(data);
                     handleHGBMessage(getResources().getString(R.string.cnc_error));
                     CNCFragment.this.airportSendValuesVOs.clear();
                 }
@@ -728,7 +962,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
     private void sendVOForIternarary(ArrayList<AirportSendValuesVO> airportSendValuesVO){
 
-        ConnectionManager.getInstance(getActivity()).ItineraryCNCSearchPost(airportSendValuesVO,  new ConnectionManager.ServerRequestListener() {
+        ConnectionManager.getInstance(getActivity()).postItineraryCNCSearch(airportSendValuesVO,  new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
 
@@ -739,7 +973,7 @@ public class CNCFragment extends HGBAbstractFragment {
             }
             @Override
             public void onError(Object data) {
-                ErrorMessage(data);
+             //   ErrorMessage(data);
                 handleHGBMessage(getResources().getString(R.string.cnc_error));
                 airportSendValuesVOs.clear();
             }
@@ -797,17 +1031,44 @@ public class CNCFragment extends HGBAbstractFragment {
                 iter.remove();
             }
         }
-        mAdapter.notifyDataSetChanged();
+        mCNCAdapter.notifyDataSetChanged();
     }
-
 
     public void requestFocusOnMessage(){
         mEditText.requestFocus();
     }
 
-    public void  startTutorialText(){
 
-        tutorailTexthandler.postDelayed(mRunnable,2000);
+    private void updateText(){
+
+        if(account_settings.length ==mTutorialTextNumber){
+            mTutorialTextNumber = 0;
+        }
+        mTextTutoralBody.setText(account_settings[mTutorialTextNumber]);
+
+        mTutorialTextNumber++;
+    }
+
+    private void  startTutorialText(){
+        mRunnable = new Runnable() {
+            @Override
+            public void run() {
+                changeTutorialText();
+                tutorailTexthandler.postDelayed(mRunnable, CNC_TUTORIAL_TYPING_TEXT_TIME_DURATION);
+            }
+        };
+    }
+
+    @Override
+    public void onResume() {
+        tutorailTexthandler.post(mRunnable);
+        super.onResume();
+    }
+
+    @Override
+    public void onStop() {
+        tutorailTexthandler.removeCallbacks(mRunnable);
+        super.onStop();
     }
 
     private void changeTutorialText() {
@@ -827,29 +1088,14 @@ public class CNCFragment extends HGBAbstractFragment {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-
-                if(account_settings.length ==mTutorialTextNumber){
-                    mTutorialTextNumber = 0;
-                }
-                mTextTutoralBody.setText(account_settings[mTutorialTextNumber]);
-                mTextTutoralBody.startAnimation(fadeIn);
-
-                mTutorialTextNumber++;
+                updateText();
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-
             }
         });
-
-
     }
-
-    public void stopTextTutorial(){
-        tutorailTexthandler.removeCallbacks(mRunnable);
-    }
-
 
     @Override
     public void onDestroyView() {

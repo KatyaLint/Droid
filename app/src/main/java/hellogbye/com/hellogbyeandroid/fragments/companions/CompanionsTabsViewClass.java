@@ -156,20 +156,24 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
         searchListInitialization();
 
         searchListAdapter = new CompanionsSwipeItemsAdapter(getActivity().getApplicationContext(), companionsVOPending);
+
         searchListAdapter.addClickeListeners(new ISwipeAdapterExecution(){
 
             @Override
             public void clickedItem(final String guid) {
                 Bundle args = new Bundle();
+                boolean isSearchView = mSearchView.isActivated();
+
                 if(addCompanionsToCNCScreen){
                     args.putString(HGBConstants.BUNDLE_ADD_COMPANION_ID, guid);
                     args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, false);
                     getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), args);
 
-                }else {
+                }else if(!searchIsOpen){
                     args.putString(HGBConstants.USER_ID, guid);
                     getFlowInterface().goToFragment(ToolBarNavEnum.COMPANIONS_DETAILS.getNavNumber(), args);
                 }
+
 
             }
 
@@ -307,6 +311,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
     private void getCompanions(){
         if(mSearchView != null) {
             mSearchView.setQuery("", false);
+            searchIsOpen = false;
         }
         ConnectionManager.getInstance(getActivity()).getCompanions(new ConnectionManager.ServerRequestListener() {
             @Override
@@ -403,15 +408,18 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
         searchView.setOnQueryTextListener(this);
     }
 
+    private boolean searchIsOpen = false;
 
     @Override
     public boolean onQueryTextChange(String query) {
         if(mCurrItemsSearchList == null){ //list empty
+            searchIsOpen = false;
             return false;
         }
 
 
         if(query.isEmpty()){
+            searchIsOpen = false;
             searchListAdapter.updateItems(mCurrItemsSearchList);
             searchListAdapter.animateTo(mCurrItemsSearchList);
             searchListAdapter.notifyDataSetChanged();
@@ -427,6 +435,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
                     searchListAdapter.updateItems(mItemsList.getmNodes());
                     //searchListAdapter.animateTo(mItemsList.getmNodes());
                     searchListAdapter.notifyDataSetChanged();
+                    searchIsOpen = true;
                     //searchRecyclerView.scrollToPosition(0);
                 }
 

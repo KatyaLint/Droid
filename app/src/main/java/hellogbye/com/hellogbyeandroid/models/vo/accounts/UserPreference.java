@@ -1,10 +1,13 @@
+/*
 package hellogbye.com.hellogbyeandroid.models.vo.accounts;
 
 import com.google.gson.annotations.SerializedName;
 
+*/
 /**
  * Created by nyawka on 9/2/15.
- */
+ *//*
+
 public class UserPreference {
 
     @SerializedName("id")
@@ -29,3 +32,4 @@ public class UserPreference {
         this.profilename = profilename;
     }
 }
+*/

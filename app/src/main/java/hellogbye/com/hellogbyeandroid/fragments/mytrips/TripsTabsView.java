@@ -1,9 +1,5 @@
 package hellogbye.com.hellogbyeandroid.fragments.mytrips;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -12,17 +8,21 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TabHost;
-import android.widget.TabWidget;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 
 /**
  * Created by nyawka on 5/16/16.
@@ -34,6 +34,7 @@ public class TripsTabsView extends HGBAbstractFragment {
     private static final String TAB_2_TAG = "Favorites";
     private static final String TAB_3_TAG = "History";
     private Typeface textFont;
+    private ImageButton newIteneraryImageButton;
 
 
 
@@ -55,9 +56,9 @@ public class TripsTabsView extends HGBAbstractFragment {
             view.setBackgroundResource(R.drawable.selector_tabs_indicator);
             TextView tv = (TextView) view.findViewById(android.R.id.title);
             if (i == 0) { //selected
-                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.white));
+                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_WHITE));
             } else { //unselected
-                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_c3cad3));
+                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_F5F5F5));
             }
             tv.setTypeface(textFont);
             tv.setTransformationMethod(null);
@@ -100,7 +101,7 @@ public class TripsTabsView extends HGBAbstractFragment {
 
                 for (int i = 0; i < mTabHost.getTabWidget().getChildCount(); i++) {
                     TextView tv = (TextView) mTabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
-                    tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_c3cad3));
+                    tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_F5F5F5));
                     tv.setTypeface(textFont);
                   //  tv.setTextSize(R.dimen.SP16);
                     tv.setTransformationMethod(null);
@@ -108,21 +109,55 @@ public class TripsTabsView extends HGBAbstractFragment {
                 }
 
                 TextView tv = (TextView) mTabHost.getCurrentTabView().findViewById(android.R.id.title); //for Selected Tab
-                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.white));
+                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_WHITE));
                 tv.setTypeface(textFont);
                // tv.setTextSize(R.dimen.SP16);
                 tv.setTransformationMethod(null);
 
             }
         });
+
+
+        newIteneraryImageButton =  ((MainActivityBottomTabs)getActivity()).getNewIternararyButton();
+        setNewIteneraryImageButtonClickListener();
+
+
+
+
+
         return rootView;
     }
 
 
+
+
+    private void setNewIteneraryImageButtonClickListener(){
+    newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            clearCNCItems();
+        }
+    });
+    }
+
+
+    private void clearCNCItems() {
+
+        getActivityInterface().setCNCItems(null);
+        getActivityInterface().setTravelOrder(null);
+        HGBPreferencesManager sharedPreferences = HGBPreferencesManager.getInstance(getContext());
+        sharedPreferences.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
+        sharedPreferences.removeKey(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
+        Bundle args = new Bundle();
+        args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
+        getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), args);
+      //  selectItem(ToolBarNavEnum.CNC.getNavNumber(), null, true);
+    }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getFlowInterface().selectBottomBar(R.id.bb_menu_my_trips);
+      //  getFlowInterface().selectBottomBar(R.id.bb_menu_my_trips);
         getFlowInterface().enableFullScreen(false);
     }
 

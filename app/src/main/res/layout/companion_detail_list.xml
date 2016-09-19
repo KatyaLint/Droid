@@ -14,7 +14,7 @@
 
 
     <LinearLayout
-        android:background="@color/hgb_toolbar_blue"
+        android:background="@color/COLOR_003D4C"
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:fontName="dinnextltpro_medium.otf"
-            android:textColor="@color/white"
+            android:textColor="@color/COLOR_WHITE"
             android:textSize="@dimen/SP18"
             android:text="Sandra Prter" />
 
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:fontName="dinnextltpro_light.otf"
-            android:textColor="@color/white"
+            android:textColor="@color/COLOR_WHITE"
             android:textSize="@dimen/SP14"
             android:text="Torronto, Ontario,Canada" />
 
@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:fontName="dinnextltpro_light.otf"
-            android:textColor="@color/white"
+            android:textColor="@color/COLOR_WHITE"
             android:textSize="@dimen/SP14"
             android:text="Added 11.12.2015" />
 
@@ -69,20 +69,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:fontName="dinnextltpro_light.otf"
-            android:textColor="@color/white"
+            android:textColor="@color/COLOR_WHITE"
             android:textSize="@dimen/SP14"
             android:text="@string/account_relationship" />
 
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:background="@color/white"
+            android:background="@color/COLOR_WHITE"
             android:id="@+id/companion_add_relationship"
             android:layout_margin="@dimen/DP10"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="@dimen/DP34"
             app:fontName="dinnextltpro_light.otf"
-            android:textColor="@color/black"
+            android:textColor="@color/COLOR_BLACK"
             android:textSize="@dimen/SP14"
             android:text="@string/account_relationship" />
 
@@ -103,7 +103,7 @@
 
     <LinearLayout
 
-        android:background="@color/greyish_alternative_hotel"
+        android:background="@color/COLOR_F5F5F5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -111,7 +111,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:fontName="dinnextltpro_regular.otf"
-        android:textColor="@color/warm_grey"
+        android:textColor="@color/COLOR_999999"
         android:textSize="@dimen/SP12"
         android:text="@string/component_name" />
     </LinearLayout>
@@ -149,7 +149,7 @@
 
 
     <LinearLayout
-        android:background="@color/white"
+        android:background="@color/COLOR_WHITE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -158,7 +158,7 @@
             android:layout_margin="@dimen/DP10"
             android:layout_height="wrap_content"
             app:fontName="dinnextltpro_regular.otf"
-            android:textColor="@color/warm_grey"
+            android:textColor="@color/COLOR_999999"
             android:textSize="@dimen/SP12"
             android:text="@string/component_first" />
         <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -167,14 +167,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/companion_name_details"
             app:fontName="dinnextltpro_regular.otf"
-            android:textColor="@color/dark_teal"
+            android:textColor="@color/COLOR_003D4C"
             android:textSize="@dimen/SP12"
             android:text="Sandra" />
     </LinearLayout>
 
     <include layout="@layout/bottom_separator" />
     <LinearLayout
-        android:background="@color/white"
+        android:background="@color/COLOR_WHITE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -183,7 +183,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fontName="dinnextltpro_regular.otf"
-            android:textColor="@color/warm_grey"
+            android:textColor="@color/COLOR_999999"
             android:textSize="@dimen/SP12"
             android:text="@string/component_second"  />
         <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -192,7 +192,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/companion_second_name"
             app:fontName="dinnextltpro_regular.otf"
-            android:textColor="@color/dark_teal"
+            android:textColor="@color/COLOR_003D4C"
             android:textSize="@dimen/SP12"
             android:text="Sandra" />
     </LinearLayout>
@@ -201,14 +201,14 @@
     <include layout="@layout/bottom_separator" />
     <LinearLayout
 
-        android:background="@color/greyish_alternative_hotel"
+        android:background="@color/COLOR_F5F5F5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_width="match_parent"
             android:layout_margin="@dimen/DP10"
             app:fontName="dinnextltpro_regular.otf"
-            android:textColor="@color/warm_grey"
+            android:textColor="@color/COLOR_999999"
             android:textSize="@dimen/SP12"
             android:layout_height="wrap_content"
             android:text="@string/component_email" />
@@ -218,7 +218,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="@color/white"
+        android:background="@color/COLOR_WHITE"
         android:layout_height="wrap_content">
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_width="match_parent"
@@ -227,7 +227,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/companion_email_address"
             app:fontName="dinnextltpro_regular.otf"
-            android:textColor="@color/dark_teal"
+            android:textColor="@color/COLOR_003D4C"
             android:textSize="@dimen/SP12"
             android:text="Email" />
     </LinearLayout>

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/DP10"
     android:orientation="vertical">
 
 
@@ -37,10 +38,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/DP10"
+
         android:paddingLeft="@dimen/DP20"
         android:paddingRight="@dimen/DP20"
-        android:textColor="@color/white"
+        android:textColor="@color/COLOR_WHITE"
         android:textAllCaps="false"
         android:text="@string/preferences_add_button" />
 

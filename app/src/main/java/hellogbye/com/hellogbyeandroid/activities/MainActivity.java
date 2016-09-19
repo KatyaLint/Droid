@@ -900,7 +900,7 @@ public class MainActivity extends BaseActivity implements NavListAdapter.OnItemC
             case PREFERENCE_SETTINGS_EMAILS:
                 fragment = PreferenceSettingsEmailFragment.newInstance(navPosition);
                 break;
-            case TREVEL_PREFERENCE:
+            case TRAVEL_PREFERENCE:
                 fragment = PreferenceSettingsFragment.newInstance(navPosition);
                 break;
             case ACCOUNT:

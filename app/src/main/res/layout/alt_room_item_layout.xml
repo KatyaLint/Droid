@@ -49,14 +49,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Price per night"
-                    android:textColor="@color/white"
+                    android:textColor="@color/COLOR_WHITE"
                     android:textSize="@dimen/DP10" />
 
                 <hellogbye.com.hellogbyeandroid.views.FontTextView
                     android:id="@+id/room_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:textColor="@color/COLOR_WHITE"
                     android:textSize="@dimen/DP20" />
 
             </LinearLayout>
@@ -79,7 +79,7 @@
                 android:maxLines="1"
                 app:fontName="dinnextltpro_regular.otf"
                 android:layout_alignParentLeft="true"
-                android:textColor="@color/dark_teal" />
+                android:textColor="@color/COLOR_00516f" />
 
             <ImageView
                 android:id="@+id/room_selected"

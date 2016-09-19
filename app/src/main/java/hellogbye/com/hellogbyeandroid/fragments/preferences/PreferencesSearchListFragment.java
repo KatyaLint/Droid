@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferenceSettingsAirlineCarriersAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferenceSettingsFlightTabsAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsSearchCheckListAdapter;
@@ -65,6 +66,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
     private FontTextView settings_item_text;
 
     private LinearLayout settings_empty_view_layout;
+    private String strTitleName;
 
 
     public static Fragment newInstance(int position) {
@@ -148,7 +150,14 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         if (args != null) {
             strId = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
             strType = args.getString(HGBConstants.BUNDLE_SETTINGS_TYPE);
+            String strTitleName = args.getString(HGBConstants.BUNDLE_SETTINGS_TITLE_NAME);
+            FontTextView titleBar = ((MainActivityBottomTabs) getActivity()).getTitleBar();
+            titleBar.setText(strTitleName);
+
         }
+
+
+
         noBack = false;
     //    my_settings = (FontTextView)rootView.findViewById(R.id.my_flights_settings);
        // popular_settings = (FontTextView)rootView.findViewById(R.id.popular_settings);
@@ -330,6 +339,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         List<SettingsAttributesVO> accountAttributes = null;
         mDynamicListView.setVisibility(View.VISIBLE);
         mSearchView.setVisibility(View.VISIBLE);
+        String titleName;
         switch (guid){
             case "9":
                 accountAttributes = getActivityInterface().getAccountSettingsHotelChainAttributes();
@@ -349,11 +359,14 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
                 accountAttributes = getActivityInterface().getAccountSettingsFlightCarrierAttributes();
       //          my_settings.setText(R.string.my_settings_flight);
           //      popular_settings.setText(R.string.popular_settings_flight);
+
                 settings_item_title.setText(R.string.preferences_prefered_flight_carrier);
                 settings_item_text.setText(R.string.preferences_prefered_flight_carrier_favorite);
                 break;
 
         }
+       /* FontTextView titleBar = ((MainActivityBottomTabs) getActivity()).getTitleBar();
+        titleBar.setText(titleName);*/
         return accountAttributes;
     }
 

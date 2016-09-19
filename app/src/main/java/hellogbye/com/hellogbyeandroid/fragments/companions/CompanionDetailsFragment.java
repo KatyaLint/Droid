@@ -18,7 +18,6 @@ import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelationshipTypesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -87,7 +86,7 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
 
 
         FontTextView companion_added_date = (FontTextView) view.findViewById(R.id.companion_added_date);
-        companion_added_date.setText("Added:" + HGBUtilityDate.parseDateToddMMyyyyForPayment(companionVO.getmAddedatetime()));
+        companion_added_date.setText("Added:" + HGBUtilityDate.parseDateToMMddyyyyForPayment(companionVO.getmAddedatetime()));
 
 //       final Button companion_add_relationship = (Button) view.findViewById(R.id.companion_add_relationship);
 //        companion_add_relationship.setText(companionVO.getRelationshiptype());
@@ -165,7 +164,7 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
 
         RoundedImageView companion_details_image = (RoundedImageView) view.findViewById(R.id.companion_details_image);
         HGBUtility.loadRoundedImage(profileData.getmAvatar(),companion_details_image, R.drawable.avatar_companions);
-       // MyTripPinnedAdapter sectionedAdapter = new MyTripPinnedAdapter(mItemsList);
+
 
     }
 

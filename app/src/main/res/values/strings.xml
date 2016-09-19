@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HelloGBye</string>
+    <string name="app_name">HelloGbye</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -27,7 +27,7 @@
     <string name="flight_operator">OPERATED BY</string>
     <string name="flight_number">FLIGHT #</string>
     <string name="flight_date">DATE</string>
-    <string name="flight_aircraft_type">AIRCRAFT_TYPE</string>
+    <string name="flight_aircraft_type">AIRCRAFT TYPE</string>
     <string name="flight_airport">AIRPORTS</string>
     <string name="flight_boarding">DEPARTURE</string>
     <string name="flight_duration">DURATION</string>
@@ -43,10 +43,13 @@
 
     <string name="flight_select_flight">Select Flight</string>
     <string name="flight_select_my_flight">My Flight</string>
-    <string name="flight_show_alternate_flights">Change Flight</string>
+    <string name="flight_show_alternate_flights">More Flights</string>
     <string name="flight_stop_over">STOPOVER: </string>
+    <string name="flight_details_include_tax">incl taxes &amp; fees</string>
+    <string name="flight_grid_more_options">Flight details and more options</string>
+    <string name="hotel_grid_more_options">Hotel details and more options</string>
 
-    <string name="show_alterate_hotels">Alternatives Hotels</string>
+    <string name="show_alterate_hotels">More Hotels</string>
     <string name="alternative_hotel_room">ROOM</string>
     <string name="alternative_hotel_guest">GUEST</string>
     <string name="alternative_hotel_check_in">CHECKIN</string>
@@ -67,23 +70,23 @@
     <string name="select_hotel">Select Hotel</string>
 
     <string name="preferences_smoking">Smoking Preference</string>
-    <string name="preferences_smoking_prefer">Do you prefer to have smoking or non-\nsmoking rooms int your hotel?</string>
+    <string name="preferences_smoking_prefer">Do you prefer to have smoking or non-\nsmoking rooms in your hotel?</string>
     <string name="preferences_non_smoking_choice">Non-Smoking</string>
     <string name="preferences_smoking_choice">Smoking</string>
 
-    <string name="preferences_flight_preferences">Rank your Flight\nPreferences</string>
-    <string name="preferences_hotel_preferences">Rank your Hotel\nPreferences</string>
-    <string name="preferences_flight_prefer">Drag each item up and down to rank their\nimportance in determining search results</string>
+    <string name="preferences_flight_preferences">Rank Your Flight Preferences</string>
+    <string name="preferences_hotel_preferences">Rank Your Hotel Preferences</string>
+    <string name="preferences_flight_prefer">Rank the importance of your flight\npreferences, first being the most\nimportant.</string>
 
 
     <string name="preferences_stops">Preferred Number of Stops</string>
-    <string name="preferences_stops_prefer">Do you prefer to have flights that are\nnon-stop? or do you mind the\nodd layover?</string>
+    <string name="preferences_stops_prefer">Tell us if you prefer direct flights or if you\'d\nrather save money on non-direct flights</string>
 
     <string name="preferences_stars">Preferred Number of Stars</string>
     <string name="preferences_stars_prefer">What number of stars do you prefer</string>
 
     <string name="preferences_class">Preferred Flight Class</string>
-    <string name="preferences_class_prefer">Drag to change your preferred flight class.</string>
+    <string name="preferences_class_prefer">Rank the importance of cabin class\nfrom most to least important.</string>
 
 
     <string name="preferences_bed_type">Preferred Bed Type</string>
@@ -92,15 +95,18 @@
     <string name="preferences_prefered_hotel_chain">Preferred Hotel Chain</string>
     <string name="preferences_prefered_hotel_favorite">Do you have any favorite Hotels? Add\nthem here to make sure HelloGbye\nalwayes finds you the right Hotel!</string>
 
-    <string name="preferences_prefered_aircraft">Preferred Airline</string>
-    <string name="preferences_prefered_aircraft_favorite">Tell us where you like to stay\nwhen you travel</string>
+    <string name="preferences_hotel_prefer">Rank the importance of your hotel\npreferences, first being the most\nimportant.</string>
+
+
+    <string name="preferences_prefered_aircraft">Preferred Airline Type</string>
+    <string name="preferences_prefered_aircraft_favorite">Tell us which airline you prefer\n(if that\'s important to you)</string>
 
     <string name="preferences_prefered_flight_carrier">Preferred Airline</string>
-    <string name="preferences_prefered_flight_carrier_favorite">Do you have any favorite Airline? Add\nthem here to make sure HelloGbye\nalwayes finds you the right Airline!</string>
+    <string name="preferences_prefered_flight_carrier_favorite">Tell us which airlines you like best</string>
 
-    <string name="preferences_hint_add_name">Add new preference name</string>
+    <string name="preferences_hint_add_name">Name your profile</string>
 
-    <string name="preferences_add_button">Add New Preferences</string>
+    <string name="preferences_add_button">Create New Profile</string>
     <string name="preferences_remove_email">Remove Email Address</string>
     <string name="preferences_add_new_preferences">Add New Preferences</string>
     <string name="preferences_at_least_one_preference">You must have at least one\ntravel preference.</string>
@@ -115,16 +121,17 @@
 
     <string name="closeDrawer">Navigation View</string>
     <string name="openDrawer">Navigation View Closed</string>
-    <string name="type_message">Type or speak your request</string>
-    <string name="send">Send</string>
+    <string name="type_message">Type to search or press the mic to speak</string>
+    <string name="send">Go</string>
     <!--<string name="default_cnc_message"> welcome to\nHelloGbye. Tell us in your own words where and when you'd\nlike to go.</string>-->
     <string name="default_cnc_message">Hello %1$s, welcome to\nHelloGbye. Tell us in your own words where and when you\'d like to go.</string>
+    <string name="default_cnc_message_two">You can come back here\nanytime and make changes to\nyour itinerary</string>
     <string name="itinerary_created">Ok, here\'s what we found for you</string>
-    <string name="itinerary_no_items">No items</string>
+    <string name="itinerary_no_items">No content available</string>
     <string name="grid_has_been_updated">OK, the grid has been updated</string>
     <string name="itinerary_try_again">Itinerary Try Again</string>
     <string name="itinerary_inner_flight_item">(Incl.Taxes, fees &amp; charges)</string>
-
+    <string name="cnc_start_planning_msg">Start planning a new itinerary by selecting</string>
 
     <string name="settings_search_hunt">Looking for someone?</string>
     <string name="settings_empty_view_hotel">No favorite hotel chains selected\nUse the search bar to add them.</string>
@@ -170,13 +177,14 @@
     <string name="account_personal_your_details">YOUR DETAILS</string>
 
     <string name="account_submit_feedback">Submit Feedback</string>
-    <string name="account_submit_feedback_tell_us">Tell us what’s wrong in the box below:</string>
+    <string name="account_submit_feedback_tell_us">Tell us what you think.Thoughts,\ncomments and suggestions are\nalways appreciated.</string>
     <string name="account_submit_feedback_submit">Submit Feedback</string>
 
     <string name="itinerary_add_companion">Companion</string>
 
 
     <string name="cnc_choose_airport">Which airport in </string>
+    <string name="cnc_choose_companion_name">Which companion named</string>
 
     <string name="companion_undo">Undo</string>
     <string name="timeout">Time Out</string>
@@ -221,6 +229,7 @@
     <string name="continue_to_checkout">Checkout</string>
     <string name="continue_to_checkout_flight_baggage">Flight Baggage &amp; Hotel info</string>
     <string name="continue_to_checkout_price">PRICE :</string>
+    <string name="continue_to_checkout_last_screen">A mail confirmation has been\nsent to the email address above</string>
     <string name="edit_trip_name">Edit Trip Name</string>
 
     <string name="onBoarding_just_type">Just type or say\nsomething like:</string>
@@ -245,7 +254,7 @@
     <string name="ok_button">Ok</string>
 
     <string name="you_can_say_things_like">You can say things like:</string>
-    <string name="cnc_error">You received error, please try again.</string>
+    <string name="cnc_error">Your query was not recognized.\nPlease try again.</string>
     <string name="i_have_read_and_understood_the_hazardous_nmaterial_notice">I have read and understood the <u>Hazardous\nMaterial notice</u></string>
     <string name="payment_hazardous"><![CDATA[Some everyday products, such as aerosol spray starch, can be dangerous when transported on the aircraft in carry-on and/or checked baggage. Changes in temperature or pressure can cause some items to leak, generate toxic fumes or start a fire. Carriage of prohibited items may result in fines or in certain cases imprisonment. Please ensure there are no forbidden hazardous materials in your baggage such as: Some lithium batteries (eg. spares in checked baggage, batteries over a certain size) Explosives / Fireworks Strike anywhere matches / Lighter fluid Compressed gases / Aerosols Oxygen bottles / Liquid oxygen Flammable liquids Pesticide / Poison Corrosive material There are special exceptions for small quantities (up to 70 ounces total) of medicinal and toilet articles carried in your luggage, Spare lithium batteries for most consumer electronic devices in carry-on baggage, and certain smoking materials carried on your person. Certain items are required to be carried with you onboard the aircraft.  For example, spare lithium batteries for portable electronic devices and cigarette lighters must be removed from checked or gate-checked baggage and carried onboard the aircraft. Traveling with medical oxygen, liquid oxygen, mobility aids and other assistive devices may require airline pre- approval or be restricted from carriage entirely. Passengers requiring these items should contact the airline operator for information on use of such devices.]]></string>
     <string name="i_understand">I Understand</string>
@@ -289,7 +298,7 @@
     <string name="popup_confirm_account_text">We\'ve sent you an email. Please follow\nthe instruction to confirm your\naccount before signing in.</string>
     <string name="popup_confirm_account_title">Confirm Your Account to Continue</string>
 
-    <string name = "profile_choose_between">Choose between</string>
+    <string name = "profile_choose_between">Which Travel Profile?</string>
 
     <string name="grid_taxes">(Taxes &amp; Fees Extra)</string>
     <string name="itinerary_and_payment">ITINERARY AND PAYMENT</string>

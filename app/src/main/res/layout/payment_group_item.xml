@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/payment_group_root"
     android:padding="@dimen/DP10"
-    android:background="@color/white"
+    android:background="@color/COLOR_WHITE"
     android:clickable="true"
     >
 
@@ -30,7 +30,7 @@
                 android:id="@+id/payment_group_name"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:textColor="@color/marine"
+                android:textColor="@color/COLOR_003D4C"
                 android:textSize="@dimen/SP20"
                 android:text="dd"
                 app:fontName="dinnextltpro_medium.otf"
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="$$$$"
-                android:textColor="@color/marine"
+                android:textColor="@color/COLOR_003D4C"
                 android:textSize="@dimen/SP16"
                 app:fontName="dinnextltpro_light.otf"
                 />

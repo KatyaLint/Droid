@@ -1,3 +1,4 @@
+/*
 package hellogbye.com.hellogbyeandroid.fragments.preferences;
 
 
@@ -17,6 +18,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsDragListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
@@ -25,13 +27,14 @@ import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttribute
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
+*/
 /**
  * Created by nyawka on 11/8/15.
- */
+ *//*
+
 public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
     private DynamicListView mFlightDynamicListView;
     private DynamicListView mHotelDynamicListView;
@@ -59,6 +62,15 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        Bundle args = getArguments();
+        if (args != null) {
+            strJson = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
+            String titleName =  args.getString(HGBConstants.BUNDLE_SETTINGS_TITLE_NAME);
+            FontTextView titleBar = ((MainActivityBottomTabs) getActivity()).getTitleBar();
+            titleBar.setText(titleName);
+        }
+
         final View rootView = inflater.inflate(R.layout.settings_tabs_ex_layout, container, false);
 
         flight_tab_view = (View) rootView.findViewById(R.id.setting_flight_include);
@@ -105,10 +117,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
 
 
 
-        Bundle args = getArguments();
-        if (args != null) {
-            strJson = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
-        }
+
         initializeFontText(flight_tab_view, hotel_tab_view);
         showCorrectView();
         return rootView;
@@ -130,7 +139,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
 
     private void addHotelPreferenceText(){
         settings_title_hotel_text.setText(getActivity().getResources().getText(R.string.preferences_hotel_preferences));
-        settings_hotel_text.setText(getActivity().getResources().getText(R.string.preferences_flight_prefer));
+        settings_hotel_text.setText(getActivity().getResources().getText(R.string.preferences_hotel_prefer));
     }
 
     private void initializeFlightRecycle(View rootView,  List<SettingsAttributesVO> accountFlightSettings) {
@@ -142,7 +151,8 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
 
                 FontTextView settings_flight_title = (FontTextView) view.findViewById(R.id.setting_preferences_title_drag);
                 String clickedItemID = settings_flight_title.getTag().toString();
-                switchBetweenOptions(clickedItemID);
+                String titleName = settings_flight_title.getText().toString();
+                switchBetweenOptions(clickedItemID, titleName);
             }
         });
 
@@ -171,7 +181,8 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
 
                 FontTextView settings_flight_title = (FontTextView) view.findViewById(R.id.setting_preferences_title_drag);
                 String clickedItemID = settings_flight_title.getTag().toString();
-                switchBetweenOptions(clickedItemID);
+                String titleName = settings_flight_title.getText().toString();
+                switchBetweenOptions(clickedItemID, titleName);
             }
         });
         PreferencesSettingsDragListAdapter mTabsAdapter = new PreferencesSettingsDragListAdapter(getActivity(),accountFlightSettings);
@@ -190,7 +201,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
 
     }
 
-    private void switchBetweenOptions(String guid) {
+    private void switchBetweenOptions(String guid, String titleName) {
         List<SettingsAttributesVO> accountAttributes = null;
         boolean goToNewFragment = false;
         String type = null;
@@ -234,19 +245,21 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
         if (accountAttributes != null) {
             goToNewFragment = true;
         } else {
-            getSettingsAttributes(guid, type);
+            getSettingsAttributes(guid, type, titleName);
         }
 
         if(goToNewFragment){
-            gotToSelectedFragment(guid,type);
+            gotToSelectedFragment(guid,type, titleName);
         }
 
     }
 
 
-    private void gotToSelectedFragment(String guid, String type){
+    private void gotToSelectedFragment(String guid, String type, String titleName){
         args.putString(HGBConstants.BUNDLE_SETTINGS_ATT_ID, strJson);
         args.putString(HGBConstants.BUNDLE_SETTINGS_TYPE, type);
+        args.putString(HGBConstants.BUNDLE_SETTINGS_TITLE_NAME, titleName);
+
         switch (guid){
             case "1":
             case "2":
@@ -271,7 +284,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
 
 
     Bundle args = new Bundle();
-    private void getSettingsAttributes(String clickedAttributeID, final String type) {
+    private void getSettingsAttributes(String clickedAttributeID, final String type, final String titleName) {
 
         ConnectionManager.getInstance(getActivity()).getUserSettingAttributesForAttributeID(clickedAttributeID, type, new ConnectionManager.ServerRequestListener() {
             @Override
@@ -279,6 +292,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
                 if (data != null) {
                     List<SettingsAttributesVO> acountSettingsAttributes = (List<SettingsAttributesVO>) data; //gson.fromJson((String) data, listType);
                     String settingsGuid = getSettingGuidSelected();
+
                     switch (settingsGuid) {
                         case "1":
                             getActivityInterface().setAccountSettingsFlightCarrierAttributes(acountSettingsAttributes);
@@ -305,7 +319,7 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
                             getActivityInterface().setAccountSettingsHotelChainAttributes(acountSettingsAttributes);
                             break;
                     }
-                    gotToSelectedFragment(settingsGuid,type);
+                    gotToSelectedFragment(settingsGuid,type, titleName);
                 }
             }
 
@@ -322,8 +336,8 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
             hotel_tab_view.setVisibility(View.GONE);
             flight_tab_view.setVisibility(View.VISIBLE);
 
-            hotelTab.setTextColor(getActivity().getResources().getColor(R.color.hgb_nav_font_unselected));
-            flightTab.setTextColor(getActivity().getResources().getColor(R.color.white));
+            hotelTab.setTextColor(getActivity().getResources().getColor(R.color.COLOR_7FA5B4));
+            flightTab.setTextColor(getActivity().getResources().getColor(R.color.COLOR_WHITE));
             flight_tab_view.setSelected(true);
             hotel_tab_view.setSelected(false);
             addFlightPreferenceText();
@@ -333,8 +347,8 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
         } else {
             hotel_tab_view.setVisibility(View.VISIBLE);
             flight_tab_view.setVisibility(View.GONE);
-            hotelTab.setTextColor(getActivity().getResources().getColor(R.color.white));
-            flightTab.setTextColor(getActivity().getResources().getColor(R.color.hgb_nav_font_unselected));
+            hotelTab.setTextColor(getActivity().getResources().getColor(R.color.COLOR_WHITE));
+            flightTab.setTextColor(getActivity().getResources().getColor(R.color.COLOR_7FA5B4));
             flight_tab_view.setSelected(false);
             hotel_tab_view.setSelected(true);
             addHotelPreferenceText();
@@ -345,3 +359,4 @@ public class PreferencesTabsFragmentSettings extends HGBAbstractFragment {
     }
 
 }
+*/

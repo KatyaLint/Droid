@@ -157,8 +157,9 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
                 JSONObject jsonObject = new JSONObject();
                 try {
 
+                    ArrayList<UserProfileVO> users = getFlowInterface().getListUsers();
                     JSONArray jsonArray = new JSONArray();
-                    for (UserProfileVO userData : getFlowInterface().getListUsers()) {
+                    for (UserProfileVO userData : users) {
                         JSONObject jsonUser = new JSONObject();
                         jsonUser.put("dateofbirth", userData.getDob());
                         jsonUser.put("lastname", userData.getLastname());
@@ -286,9 +287,11 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
 
             }
         });
+
         loadBookingItemList();
         loadTravlerList(view);
         loadCCList(view);
+
         mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -314,12 +317,12 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerViewTravlers.setLayoutManager(mLayoutManager);
 
-        mTravlerAdapter = new TravlerAdapter(getFlowInterface().getListUsers(), getActivity().getApplicationContext());
+        ArrayList<UserProfileVO> listUsers = getFlowInterface().getListUsers();
+        mTravlerAdapter = new TravlerAdapter(listUsers, getActivity().getApplicationContext());
         mRecyclerViewTravlers.setAdapter(mTravlerAdapter);
     }
 
     private void loadCCList(View v) {
-
 
 
         // use this setting to improve performance if you know that changes
@@ -382,7 +385,6 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
 
             CreditCardItem item = getCreditCard(entry.getKey());
 
-
             double iTotal = 0;
 
 
@@ -402,9 +404,9 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
 
     private void initCheckoutSteps() {
 
-        mPaymentTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_063345));
-        mTravlerTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_063345));
-        mReviewTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_063345));
+        mPaymentTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
+        mTravlerTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
+        mReviewTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
         mPaymentImageView.setBackgroundResource(R.drawable.step_menu_blue_stand);
         mTravlerImageView.setBackgroundResource(R.drawable.step_menu_blue_stand);
         mReviewImageView.setBackgroundResource(R.drawable.step_menu_blue_on);

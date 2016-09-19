@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP4"
         android:layout_alignParentTop="true"
-        android:background="@color/warm_grey" />
+        android:background="@color/COLOR_999999" />
 
     <LinearLayout
         android:id="@+id/alternate_hotel_item_left_ll"
@@ -24,7 +24,7 @@
             android:id="@+id/alt_hotel_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/dark_teal"
+            android:textColor="@color/COLOR_00516f"
             android:maxLines="2"
             android:ellipsize="end"
             android:textSize="18sp"
@@ -34,18 +34,17 @@
 
         <include layout="@layout/star_layout" />
 
-
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/alt_hotel_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/dark_teal"
+            android:textColor="@color/COLOR_00516f"
             android:textSize="@dimen/SP18"
             app:fontName="dinnextltpro_medium.otf" />
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/light_grey"
+            android:textColor="@color/COLOR_999999"
             android:textSize="@dimen/SP12"
             android:text="Not incl. taxes and fees"
             app:fontName="dinnextltpro_regular.otf" />
@@ -56,7 +55,7 @@
         android:id="@+id/select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/light_grey"
+        android:textColor="@color/COLOR_999999"
         android:textSize="@dimen/SP14"
         android:text="SELECT"
         android:clickable="true"
@@ -73,7 +72,7 @@
         android:layout_width="@dimen/DP1"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
-        android:background="@color/warm_grey" />
+        android:background="@color/COLOR_565656" />
 
 
 

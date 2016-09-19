@@ -1,5 +1,11 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+<ScrollView
     android:id="@+id/feedback_rl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,7 +25,7 @@
         android:text="@string/account_submit_feedback"
         app:fontName="dinnextltpro_boldcondensed.otf"
         android:gravity="center"
-        android:textColor="@color/COLOR_063345" />
+        android:textColor="@color/COLOR_003D4C" />
 
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -31,7 +37,7 @@
         android:text="@string/account_submit_feedback_tell_us"
         app:fontName="dinnextltpro_regular.otf"
         android:gravity="center"
-        android:textColor="@color/dark_grey" />
+        android:textColor="@color/COLOR_565656" />
 
     <RelativeLayout
         android:layout_below="@+id/account_submit_small_title"
@@ -103,3 +109,4 @@
         android:text="@string/cancel" />-->
     </RelativeLayout>
 </ScrollView>
+</RelativeLayout>

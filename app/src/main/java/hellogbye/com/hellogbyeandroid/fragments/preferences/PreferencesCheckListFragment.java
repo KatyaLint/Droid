@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsCheckListAdapter;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
@@ -58,6 +59,9 @@ public class PreferencesCheckListFragment extends PreferencesSettingsMainClass {
         if (args != null) {
             strId = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
             strType = args.getString(HGBConstants.BUNDLE_SETTINGS_TYPE);
+            String strTitleName = args.getString(HGBConstants.BUNDLE_SETTINGS_TITLE_NAME);
+            FontTextView titleBar = ((MainActivityBottomTabs) getActivity()).getTitleBar();
+            titleBar.setText(strTitleName);
         }
 
         settings_title_text = (FontTextView)rootView.findViewById(R.id.settings_item_title);

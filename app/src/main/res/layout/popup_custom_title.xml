@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:layout_marginLeft="@dimen/DP10"
+        android:id="@+id/image_profile_switch_a_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/profile_switch_a_1"/>
+
     <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/profile_title_layout_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/COLOR_0E587D"
+        android:layout_toRightOf="@+id/image_profile_switch_a_1"
+        android:textColor="@color/COLOR_00516f"
         android:textSize="@dimen/SP18"
+        android:layout_centerVertical="true"
         app:fontName="dinnextltpro_medium.otf"
         android:padding="@dimen/DP20"
         android:text="@string/profile_choose_between"/>
@@ -16,8 +30,9 @@
 
 
     <View
-        android:layout_width="fill_parent"
+        android:layout_below="@+id/profile_title_layout_text"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
-        android:background="@color/warm_grey_line" />
+        android:background="@color/COLOR_999999" />
 
-</LinearLayout>
+</RelativeLayout>

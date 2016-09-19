@@ -19,7 +19,7 @@
             android:scrollbars="none" >
         <TabWidget
             android:id="@android:id/tabs"
-            android:background="@color/hgb_toolbar_blue"
+            android:background="@color/COLOR_003D4C"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         </HorizontalScrollView>

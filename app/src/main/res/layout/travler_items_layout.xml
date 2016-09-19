@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/COLOR_WHITE"
     android:orientation="horizontal"
     android:padding="@dimen/DP10">
 
@@ -25,7 +25,7 @@
             style="@style/TextViewTravlerCheckoutDetails"
             android:layout_alignLeft="@+id/trevelerName_ll"
             android:layout_below="@+id/trevelerName_ll"
-            android:text="Date of birth :"
+            android:text="Date of Birth :"
             app:fontName="dinnextltpro_regular.otf" />
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView

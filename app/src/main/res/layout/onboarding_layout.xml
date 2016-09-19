@@ -9,7 +9,7 @@
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/COLOR_WHITE"
         android:textSize="@dimen/SP20"
         android:layout_margin="@dimen/DP20"
         app:fontName="dinnextltpro_regular.otf"
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textColor="@color/white"
+        android:textColor="@color/COLOR_WHITE"
         android:gravity="left"
         app:fontName="dinnextltpro_regular.otf"
         android:layout_margin="@dimen/DP20"

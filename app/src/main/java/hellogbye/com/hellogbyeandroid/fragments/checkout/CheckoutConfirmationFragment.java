@@ -24,7 +24,6 @@ public class CheckoutConfirmationFragment extends HGBAbstractFragment {
 
 
     private FontTextView mEmail;
-
     private Button mDone;
 
 
@@ -58,10 +57,5 @@ public class CheckoutConfirmationFragment extends HGBAbstractFragment {
             }
         });
 
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
     }
 }

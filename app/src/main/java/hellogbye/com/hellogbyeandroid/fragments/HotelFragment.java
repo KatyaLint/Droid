@@ -38,9 +38,6 @@ import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelRoomAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.hotel.DetailsHotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.hotel.GalleryHotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.hotel.PolicyHotelFragment;
-import hellogbye.com.hellogbyeandroid.fragments.mytrips.TabFavoritesView;
-import hellogbye.com.hellogbyeandroid.fragments.mytrips.TabHistoryView;
-import hellogbye.com.hellogbyeandroid.fragments.mytrips.TabUpcomingTripsView;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
@@ -212,6 +209,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     public void onResume() {
         super.onResume();
         initializeMap();
+
     }
 
     @Override
@@ -227,11 +225,10 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     }
 
     private void loadMap() {
-        //SET UP MAP
-
-        if (!permissionDenied) {
+        if(!permissionDenied){
             mMap.setMyLocationEnabled(true);
         }
+
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(false);
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
@@ -388,7 +385,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
                 Typeface textFont = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + "dinnextltpro_medium.otf");
                 for (int i = 0; i < mTabHost.getTabWidget().getChildCount(); i++) {
                     TextView tv = (TextView) mTabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
-                    tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.light_grey));
+                    tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_999999));
                     tv.setTypeface(textFont);
                     tv.setTransformationMethod(null);
 

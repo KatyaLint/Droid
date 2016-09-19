@@ -36,9 +36,12 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
     private PreferenceSettingsFragment.ListRadioButtonClicked listRadioButtonClickedClicked;
     private int selectedPosition = -1;
     private String selectedPreferebcesID="";
+    private List<AccountDefaultSettingsVO> accountAttributes;
 
     public PreferencesSettingsPreferencesCheckAdapter(Context context, List<AccountDefaultSettingsVO> accountAttributes) {
+
         super(accountAttributes);
+        this.accountAttributes = accountAttributes;
     }
 
 
@@ -66,6 +69,20 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
     }
 
     @Override
+    public void updateItems(List<AccountDefaultSettingsVO> accountAttributes){
+        clear();
+        addAll(accountAttributes);
+      //  this.accountAttributes = accountAttributes;
+    }
+
+
+    @Override
+    public void updateItem(AccountDefaultSettingsVO accountAttribute) {
+
+        add(accountAttribute);
+    }
+
+    @Override
     public boolean addAll(@NonNull Collection<? extends AccountDefaultSettingsVO> collection) {
         // this.items = (List<SettingsValuesVO>) collection;
         return super.addAll(collection);
@@ -78,7 +95,8 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
 
     @Override
     public long getItemId(final int position) {
-        return getItem(position).hashCode();
+
+        return getItem(position).hashCode();// accountAttributes.get(position).hashCode();
     }
 
     @Override
@@ -90,12 +108,20 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
                     .inflate(R.layout.settings_item_check_layout, null);
         }
 
-        AccountDefaultSettingsVO attribute = this.getItem(position);//items.get(position);
+        AccountDefaultSettingsVO attribute = getItem(position);//items.get(position);
         if(attribute != null){
             FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_check_name);
 
                 settings_flight_title.setText(attribute.getmProfileName());
                 settings_flight_title.setTag(attribute.getmId());
+
+            FontTextView settings_check_active_profile = (FontTextView)v.findViewById(R.id.settings_check_active_profile);
+            if(attribute.isActiveProfile()){
+                settings_check_active_profile.setVisibility(View.VISIBLE);
+            }else{
+                settings_check_active_profile.setVisibility(View.GONE);
+            }
+
             RelativeLayout settings_item_check_ll = (RelativeLayout)v.findViewById(R.id.settings_item_check_rl);
             settings_item_check_ll.setTag(attribute.getmId());
             settings_item_check_ll.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +153,6 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
             radioButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     selectedPosition = (Integer)view.getTag();
                     listRadioButtonClickedClicked.clickedItem(selectedPosition);
                     notifyDataSetChanged();
@@ -140,7 +165,10 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
             if(!isEditMode){
                 image.setVisibility(View.INVISIBLE);
                 radioButton.setVisibility(View.VISIBLE);
+                settings_item_check_ll.setVisibility(View.VISIBLE);
+
             }else{
+
                 image.setVisibility(View.VISIBLE);
                 radioButton.setVisibility(View.INVISIBLE);
                // image.setBackgroundResource(R.drawable.check_off);

@@ -6,7 +6,7 @@
     android:id="@+id/payment_group_root"
     android:paddingLeft="@dimen/DP10"
     android:paddingRight="@dimen/DP10"
-    android:background="@color/white"
+    android:background="@color/COLOR_WHITE"
     android:clickable="true"
     >
 
@@ -41,7 +41,7 @@
                 android:id="@+id/payment_group_name"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:textColor="@color/marine"
+                android:textColor="@color/COLOR_003D4C"
                 android:textSize="@dimen/SP20"
                 android:text="Bruce"
                 app:fontName="dinnextltpro_medium.otf"
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:text="$$$$"
                 android:layout_marginTop="@dimen/DP4"
-                android:textColor="@color/marine"
+                android:textColor="@color/COLOR_003D4C"
                 android:textSize="@dimen/SP16"
                 app:fontName="dinnextltpro_light.otf"
                 />
@@ -66,7 +66,7 @@
             android:text="Missing Details"
             android:layout_marginLeft="@dimen/DP44"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/red_button_color"
+            android:textColor="@color/COLOR_EE3A3C"
             android:textSize="@dimen/SP16"
             app:fontName="dinnextltpro_light.otf"
             />
@@ -93,7 +93,7 @@
         android:layout_alignParentRight="true"
         android:text="Edit"
         android:layout_centerVertical="true"
-        android:textColor="@color/red_button_color"
+        android:textColor="@color/COLOR_EE3A3C"
         android:textSize="@dimen/SP16"
         app:fontName="dinnextltpro_light.otf"
         />

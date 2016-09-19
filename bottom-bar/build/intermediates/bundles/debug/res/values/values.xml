@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <bool name="bb_bottom_bar_is_tablet_mode">false</bool>
+    <color name="COLOR_WHITE">#FFFFFF</color>
     <color name="bb_darkBackgroundColor">#212121</color>
     <color name="bb_inActiveBottomBarItemColor">#747474</color>
     <color name="bb_tabletRightBorderDark">#505050</color>
-    <color name="white">#FFFFFF</color>
     <dimen name="bb_height">56dp</dimen>
     <string name="app_name">BottomBar</string>
     <style name="BB_BottomBarBadge_Text" parent="TextAppearance.AppCompat.Body2">

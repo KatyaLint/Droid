@@ -22,8 +22,9 @@
         android:gravity="left"
         android:textSize="@dimen/SP16"
         app:fontName="dinnextltpro_regular.otf"
-        android:textColor="@color/COLOR_0E587D"
+        android:textColor="@color/COLOR_00516f"
         android:background="@drawable/hgb_cnc_backround"
         android:layout_alignParentLeft="true"/>
+
 
 </LinearLayout>

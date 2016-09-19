@@ -614,7 +614,7 @@ public class ConnectionManager {
     }
 
 
-    public void ItineraryCNCSearchPost(ArrayList<AirportSendValuesVO> airportSendValuesVOs, final ServerRequestListener listener) {
+    public void postItineraryCNCSearch(ArrayList<AirportSendValuesVO> airportSendValuesVOs, final ServerRequestListener listener) {
         String url = getURL(Services.ITINERARY);
         JSONObject jsonObjectMain = new JSONObject();
 
@@ -685,12 +685,12 @@ public class ConnectionManager {
 
             try {
 
-                jsonObjectMain.put("ItineraryId", airportSendValuesVO.getId());
+                jsonObjectMain.put("itineraryid", airportSendValuesVO.getId());
                 //Main for all query request
                 jsonObjectMain.put("query", airportSendValuesVO.getQuery());
                 //TODO need to remove
-                jsonObjectMain.put("latitude", "0");
-                jsonObjectMain.put("longitude", "0");
+                jsonObjectMain.put("latitude", 0);
+                jsonObjectMain.put("longitude", 0);
                 jsonObjectMain.put("travelpreferenceprofileid", airportSendValuesVO.getTravelpreferenceprofileid());
 
 
@@ -778,7 +778,7 @@ public class ConnectionManager {
         }, false);
     }
 
-    public void ItineraryCNCSearchGet(String query, final ServerRequestListener listener) {
+    public void getItineraryCNCSearch(String query, final ServerRequestListener listener) {
 
         String url = getURL(Services.ITINERARY_HIGHLIGHT);
         JSONObject jsonObject = new JSONObject();
@@ -970,9 +970,6 @@ public class ConnectionManager {
     }
 
 
-
-
-
     public void getPreferenceProfiles(final ServerRequestListener listener) {
         String url = getURL(Services.USER_GET_TRAVEL_PROFILES);
 
@@ -981,7 +978,7 @@ public class ConnectionManager {
                 jsonObject, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(response);
+                listener.onSuccess(Parser.parseDefaultProfiles(response));
             }
         }, new Response.ErrorListener() {
             @Override
@@ -1387,7 +1384,7 @@ public class ConnectionManager {
     ///////////////////////////////
 
 
-    public void RemoveCreditCardHelloGbye(String token,final ServerRequestListener listener) {
+    public void removeCreditCardHelloGbye(String token, final ServerRequestListener listener) {
         String url = getURL(Services.CARD_TOKEN);
 
         try{
@@ -1691,6 +1688,7 @@ public class ConnectionManager {
             json2.put("country", user.getCountry());
             json2.put("gender", user.getGender());
             json2.put("userprofileid", user.getUserprofileid());
+            json2.put("middlename", user.getMiddlename());
 
             json1.put("stubcompanion", json2);
 
@@ -1737,6 +1735,8 @@ public class ConnectionManager {
             json1.put("country", user.getCountry());
             json1.put("avatar", user.getAvatar());
             json1.put("userprofileid", user.getUserprofileid());
+            json1.put("middlename", user.getMiddlename());
+
 
 
         } catch (Exception e) {
