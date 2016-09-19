@@ -1,15 +1,34 @@
 package hellogbye.com.hellogbyeandroid.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.Html;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.location.places.AutocompletePrediction;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceBuffer;
+import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -17,18 +36,27 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.PlaceAutocompleteAdapter;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.network.HGBJsonRequest;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
@@ -37,7 +65,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
  */
 
 
-public class SelectNewHotelFragment extends HGBAbstractFragment implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback {
+public class SelectNewHotelFragment extends HGBAbstractFragment implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback,GoogleApiClient.OnConnectionFailedListener {
 
 
     private SupportMapFragment mMapfragment;
@@ -47,6 +75,12 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
     private ArrayList<NodesVO> mNodesList;
     private LinearLayoutManager mLayoutManager;
     private NodesVO mCurrentSelectedNode;
+    private AutoCompleteTextView mAutocomplete;
+
+
+    protected GoogleApiClient mGoogleApiClient;
+
+    private PlaceAutocompleteAdapter mPlaceAutocompleteAdapter;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new SelectNewHotelFragment();
@@ -112,7 +146,45 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
             }
         });
 
+        initAutoComplete();
+
+
+
+
+
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mGoogleApiClient.disconnect();
+    }
+
+    private void initAutoComplete() {
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                .addApi(Places.GEO_DATA_API)
+                .build();
+        mAutocomplete =  ((MainActivityBottomTabs)getActivity()).getmAutoComplete();
+
+// // Register a listener that receives callbacks when a suggestion has been selected
+        mAutocomplete.setOnItemClickListener(mAutocompleteClickListener);
+
+        mPlaceAutocompleteAdapter = new PlaceAutocompleteAdapter(getActivity(), mGoogleApiClient, new LatLngBounds(new LatLng(mCurrentSelectedNode.getmLatitude(),mCurrentSelectedNode.getmLongitude()),new LatLng(mCurrentSelectedNode.getmLatitude(),mCurrentSelectedNode.getmLongitude())),
+                null);
+        mAutocomplete.setAdapter(mPlaceAutocompleteAdapter);
+    }
+
+    private void sendToGoogleAutoComplete(CharSequence charSequence) {
+
+
+    }
+
 
     private void resetSelectedNode(NodesVO node) {
         mCurrentSelectedNode = node;
@@ -202,4 +274,89 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
     private void initHotel(){
         mCurrentSelectedNode = getLegWithGuid(getActivityInterface().getTravelOrder());
     }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    /**
+     * Listener that handles selections from suggestions from the AutoCompleteTextView that
+     * displays Place suggestions.
+     * Gets the place id of the selected item and issues a request to the Places Geo Data API
+     * to retrieve more details about the place.
+     *
+     * @see com.google.android.gms.location.places.GeoDataApi#getPlaceById(com.google.android.gms.common.api.GoogleApiClient,
+     * String...)
+     */
+    private AdapterView.OnItemClickListener mAutocompleteClickListener
+            = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            /*
+             Retrieve the place ID of the selected item from the Adapter.
+             The adapter stores each Place suggestion in a AutocompletePrediction from which we
+             read the place ID and title.
+              */
+
+            mAutocomplete.setText("");
+            getFlowInterface().getToolBar().closeAutoComplete();
+            final AutocompletePrediction item = mPlaceAutocompleteAdapter.getItem(position);
+            final String placeId = item.getPlaceId();
+
+            /*
+             Issue a request to the Places Geo Data API to retrieve a Place object with additional
+             details about the place.
+              */
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                    .getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
+        }
+    };
+
+
+    /**
+     * Callback for results from a Places Geo Data API query that shows the first place result in
+     * the details view on screen.
+     */
+    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback
+            = new ResultCallback<PlaceBuffer>() {
+        @Override
+        public void onResult(PlaceBuffer places) {
+            if (!places.getStatus().isSuccess()) {
+                // Request did not complete successfully
+                Log.e("", "Place query did not complete. Error: " + places.getStatus().toString());
+                places.release();
+                return;
+            }
+            // Get the Place object from the buffer.
+            searchForMoreHotels( places.get(0).getLatLng());
+
+            places.release();
+        }
+    };
+
+
+    private void searchForMoreHotels(LatLng latlng){
+
+        ConnectionManager.getInstance(getActivity()).postSearchHotels(getActivityInterface().getTravelOrder().getmSolutionID(),
+                mCurrentSelectedNode.getmGuid(),
+                latlng, new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        CellsVO cellsVO = (CellsVO) data;
+                        mNodesList.clear();
+                        mNodesList.addAll(cellsVO.getmNodes());
+                        mAdapter.notifyDataSetChanged();
+                        resetSelectedNode(mNodesList.get(0));
+                    }
+
+                    @Override
+                    public void onError(Object data) {
+                        ErrorMessage(data);
+                    }
+                });
+
+    }
+
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -107,6 +108,40 @@ public class ConnectionManager {
             @Override
             public void onResponse(String response) {
                 listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
+    }
+
+
+    public void postSearchHotels(String solutionid, String hotelid, LatLng latlng,final ServerRequestListener listener) {
+        String url = getURL(Services.HOTEL_SEARCH);
+
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("solutionId", solutionid);
+            jsonObject.put("PrimaryHotelId", hotelid);
+            jsonObject.put("Latitude", latlng.latitude);
+            jsonObject.put("Longitude", latlng.longitude);
+            jsonObject.put("maxsearchresult", 16);
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseHotelData(response));
             }
         }, new Response.ErrorListener() {
             @Override
@@ -1975,6 +2010,7 @@ public class ConnectionManager {
                 BOOKING_CONFIRMATION("Booking/flight/confirmation/pdf?"),
                 SUBMIT_FEEDBACK("Feedback"),
                 USER_ACTIVATION_PIN("UserProfile/Activate?activationKey="),
+                HOTEL_SEARCH("hotel/Search"),
                 DEFAULT_PROFILES("TravelPreference/Profiles/Defaults"),
                 COMPANION_SEARCH("UserProfile/Search?count=5&excludeCompanions=false&");
 

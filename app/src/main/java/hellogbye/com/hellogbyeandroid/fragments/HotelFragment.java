@@ -102,7 +102,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
         activity = getActivity();
         View rootView = inflater.inflate(R.layout.hotel_main_layout, container, false);
-        //  mSlidingPanels = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout);
         mNodeArrayList = new ArrayList<>();
 
         initRootView(rootView);
@@ -213,7 +212,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     public void onResume() {
         super.onResume();
         initializeMap();
-
     }
 
     @Override
@@ -252,7 +250,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
                         CellsVO cellsVO = (CellsVO) data;
                         mNodeArrayList.clear();
                         mNodeArrayList.addAll(cellsVO.getmNodes());
-
                     }
 
                     @Override
@@ -264,15 +261,19 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
 
     private void initCurrentHotel() {
-        passengersVO = getTravellerWitGuid(getActivityInterface().getTravelOrder());//cellsVO.getmNodes().get(1);
-        currentSelectedNode = getLegWithGuid(getActivityInterface().getTravelOrder());//cellsVO.getmNodes().get(1);
+        passengersVO = getTravellerWitGuid(getActivityInterface().getTravelOrder());
+        if(getFlowInterface().getSelectedHotelNode() != null){
+            currentSelectedNode = getFlowInterface().getSelectedHotelNode();
+        }else{
+            currentSelectedNode = getLegWithGuid(getActivityInterface().getTravelOrder());
+
+        }
         initHotel(currentSelectedNode);
     }
 
 
     private View initRootView(View rootView) {
 
-        //    mScrollView = (ScrollView) rootView.findViewById(R.id.detail_scroll_view);
         mRoomName = (FontTextView) rootView.findViewById(R.id.room_name);
         mChckInDate = (FontTextView) rootView.findViewById(R.id.checkin_date);
         mChckOutDate = (FontTextView) rootView.findViewById(R.id.checkout_date);
@@ -280,15 +281,9 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         mHotelPriceFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_price);
         mHotelDaysFontTextView = (FontTextView) rootView.findViewById(R.id.days);
         mAlertnativeHotelFontTextView = (FontTextView) rootView.findViewById(R.id.show_alternative_hotel);
-
-
         mSelectHotel = (FontTextView) rootView.findViewById(R.id.select_hotel);
-
-
-
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.rooms_recycler_view);
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 

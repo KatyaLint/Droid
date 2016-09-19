@@ -91,6 +91,7 @@ dependencies {
     compile 'com.github.dbachelder:CreditCardEntry:1.4.7'
     compile 'com.appsee:appsee-android:+'
     compile 'com.google.android.gms:play-services-analytics:9.2.0'
+    compile 'com.google.android.gms:play-services-places:9.4.0'
     compile files('libs/AndroidSwipeLayout-v1.1.8.jar')
     //    compile 'com.android.support:multidex:1.0.1'
     compile project(':bottom-bar')

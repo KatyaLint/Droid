@@ -1,15 +1,13 @@
 package hellogbye.com.hellogbyeandroid.views;
 
 import android.app.Activity;
-import android.app.SearchManager;
 import android.content.Context;
-
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,6 +15,7 @@ import android.widget.TextView;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 public class CostumeToolBar extends Toolbar {
 
@@ -42,8 +41,10 @@ public class CostumeToolBar extends Toolbar {
     private ImageButton toolbar_new_iternerary_cnc;
     private FontTextView preference_save_changes;
     private SearchView search_view;
+    private AutoCompleteTextView auto_complete;
     private Activity mActivity;
     private ImageButton toolbar_add_companion;
+    private int mSelectedFragment;
 
     public CostumeToolBar(Context context) {
         super(context);
@@ -118,6 +119,7 @@ public class CostumeToolBar extends Toolbar {
         }
 
         initSearchBar();
+        initAutoComplete();
 
 
     }
@@ -141,7 +143,17 @@ public class CostumeToolBar extends Toolbar {
         search_maginfy.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                openSearchBar();
+
+                ToolBarNavEnum navBar = ToolBarNavEnum.getNav(mSelectedFragment);
+                switch (navBar) {
+
+                    case TRIPS:
+                        openSearchBar();
+                        break;
+                    case SELECT_HOTEL_FRAGMENT:
+                        openAutoComplete();
+                        break;
+                }
             }
         });
 
@@ -154,6 +166,12 @@ public class CostumeToolBar extends Toolbar {
         });
 
 
+    }
+
+    private void initAutoComplete(){
+        if(auto_complete == null){
+            auto_complete = (AutoCompleteTextView) findViewById(R.id.autocomplete);
+        }
     }
 
     private void closeSearchBar() {
@@ -174,9 +192,27 @@ public class CostumeToolBar extends Toolbar {
 
     }
 
+    public void closeAutoComplete() {
+        titleText.setVisibility(View.VISIBLE);
+        search_maginfy.setVisibility(View.VISIBLE);
+        auto_complete.setVisibility(View.GONE);
+        HGBUtility.hideKeyboard(mContext,auto_complete);
+
+    }
+
+
+    private void openAutoComplete() {
+        titleText.setVisibility(View.GONE);
+        search_maginfy.setVisibility(View.GONE);
+        auto_complete.setVisibility(View.VISIBLE);
+        auto_complete.requestFocus();
+        HGBUtility.showKeyboard(mContext,auto_complete);
+
+    }
+
 
     public void updateToolBarView(int position) {
-
+        mSelectedFragment = position;
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
         String selectedItem = navBar.getNavTitle();
         tool_bar_profile_name.setVisibility(View.GONE);
@@ -199,9 +235,11 @@ public class CostumeToolBar extends Toolbar {
         new_itinerary.setVisibility(View.GONE);
         search_maginfy.setVisibility(View.GONE);
         search_view.setVisibility(View.GONE);
+        auto_complete.setVisibility(View.GONE);
         toolbar_add_companion.setVisibility(View.GONE);
 
         switch (navBar) {
+
          //   case HOME:
      /*           tool_bar_profile_name.setVisibility(View.VISIBLE);
                 toolbar_go_to_iternerary.setVisibility(View.VISIBLE);*/
@@ -264,6 +302,10 @@ public class CostumeToolBar extends Toolbar {
             case PREFERENCES_MEMBERSHIP:
             case ALTERNATIVE_FLIGHT_ONE_WAY_TRIP:
             case ALTERNATIVE_FLIGHT_ROUND_TRIP:
+                titleText.setVisibility(View.VISIBLE);
+                break;
+            case SELECT_HOTEL_FRAGMENT:
+                search_maginfy.setVisibility(View.VISIBLE);
                 titleText.setVisibility(View.VISIBLE);
                 break;
 

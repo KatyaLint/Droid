@@ -15,6 +15,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -130,7 +131,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private final int BOTTOM_BAR_FIFTH_INDEX = 4;
     private ImageButton toolbar_add_companion;
 
+    private AutoCompleteTextView mAutoComplete;
+
     private NodesVO mSelectedHotelNode;
+
     public HGBSaveDataClass getHGBSaveDataClass() {
         return hgbSaveDataClass;
     }
@@ -216,9 +220,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
 
-
-
-
     private void clearCNCItems() {
 
         hgbSaveDataClass.setCNCItems(null);
@@ -301,7 +302,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         mTitle = title;
         getSupportActionBar().setTitle(mTitle);
     }
-
 
 
     public void setOnSavePreferencesButtonClicked(PreferencesSettingsMainClass.saveButtonClicked onSavePreferencesButtonClicked) {
@@ -391,8 +391,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
 
 
-
-         toolbar_add_companion = (ImageButton)mToolbar.findViewById(R.id.toolbar_add_companion);
+        mAutoComplete = (AutoCompleteTextView) mToolbar.findViewById(R.id.autocomplete);
+        toolbar_add_companion = (ImageButton) mToolbar.findViewById(R.id.toolbar_add_companion);
 
     }
 
@@ -409,7 +409,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
     }
 
-    public ImageButton getAddCompanionButton(){
+    public ImageButton getAddCompanionButton() {
         return toolbar_add_companion;
     }
 
@@ -597,7 +597,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 hgbSaveDataClass.setAccounts(accounts);
                 //  AccountsVO account = accounts.get(0);
                 //  hgbSaveDataClass.getCurrentUser().setEmailaddress(account.getEmail());
-                  editProfileTypeMainToolBar();
+                editProfileTypeMainToolBar();
             }
 
             @Override
@@ -650,13 +650,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
 
-
     private void showAlertProfilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs) {
         LayoutInflater li = LayoutInflater.from(MainActivityBottomTabs.this);
         View promptsView = li.inflate(R.layout.popup_custom_title, null);
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivityBottomTabs.this);
         dialogBuilder.setCustomTitle(promptsView);
-       // dialogBuilder.setTitle(getResources().getString(R.string.profile_choose_between));
+        // dialogBuilder.setTitle(getResources().getString(R.string.profile_choose_between));
 
         final ArrayList<String> itemsList = new ArrayList<String>();
         for (DefaultsProfilesVO userProfileVO : userProfileVOs) {
@@ -1259,13 +1258,13 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
 
-
-    private void reportError(Object data){
+    private void reportError(Object data) {
         HGBErrorHelper errorHelper = new HGBErrorHelper();
         errorHelper.setMessageForError((String) data);
         errorHelper.show(getFragmentManager(), (String) data);
     }
 
-
-
+    public AutoCompleteTextView getmAutoComplete() {
+        return mAutoComplete;
+    }
 }
