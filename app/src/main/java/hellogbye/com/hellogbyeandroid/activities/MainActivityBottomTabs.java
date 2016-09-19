@@ -333,11 +333,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
 
-//    public void setOnSavePreferencesButtonClicked(PreferencesSettingsMainClass.saveButtonClicked onSavePreferencesButtonClicked) {
-//        this.onSavePreferencesButtonClicked = onSavePreferencesButtonClicked;
-//    }
-
-
     @Override
     protected void onStop() {
         super.onStop();
