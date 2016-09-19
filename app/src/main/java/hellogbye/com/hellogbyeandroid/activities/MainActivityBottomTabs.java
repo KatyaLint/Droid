@@ -61,7 +61,6 @@ import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesCheckList
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesDragListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSearchListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesTabWidgetFragment;
-import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesTabsFragmentSettings;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoHelpAndFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountSettingsFragment;
@@ -329,17 +328,24 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     @Override
     protected void onStop() {
         super.onStop();
-        //  hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
-        try {
-            Gson gsonback = new Gson();
-            String json = gsonback.toJson(hgbSaveDataClass.getCNCItems());
-            // When user exit the app, next time hi will see his itirnarary
 
-            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, json);
+        if(isLogoutExit){
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            hgbPrefrenceManager.deleteSharedPrefrence(HGBPreferencesManager.HGB_CNC_LIST);
+            hgbPrefrenceManager.deleteSharedPrefrence(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
+            return;
         }
+
+            try {
+                Gson gsonback = new Gson();
+                String json = gsonback.toJson(hgbSaveDataClass.getCNCItems());
+                // When user exit the app, next time hi will see his itirnarary
+
+                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, json);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
 
@@ -879,13 +885,17 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         }
     }
 
+    private boolean isLogoutExit = false;
+
     @Override
     public void gotToStartMenuActivity() {
         HGBUtility.removeAllFragments(getSupportFragmentManager());
         //  hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER, "");
-
+        isLogoutExit = true;
+/*        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO,"");
+        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST,""); */
 
         Intent intent = new Intent(getApplicationContext(), StartingMenuActivity.class);
 
