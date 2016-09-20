@@ -502,11 +502,8 @@ public class CNCFragment extends HGBAbstractFragment {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-
                     mProfileTutorialText.startAnimation(fadeOut);
                     mSpeechTutorialText.startAnimation(fadeOut);
-
-
                 }
             }, SPLASH_TIME_OUT);
         }
@@ -559,6 +556,9 @@ public class CNCFragment extends HGBAbstractFragment {
                 }
             }
         });
+        UserProfileVO usersList = getActivityInterface().getCurrentUser();
+        System.out.println("Kate usersList.getAvatar() =" + usersList.getAvatar());
+        mCNCAdapter.setAvatarUserUrl(usersList.getAvatar());
     }
 
 

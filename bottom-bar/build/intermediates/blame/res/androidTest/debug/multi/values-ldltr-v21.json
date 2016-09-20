@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/values-ldltr-v21/values-ldltr-v21.xml",
+        "outputFile": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/values-ldltr-v21/values-ldltr-v21.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 163
                 },
                 "from": {
-                    "file": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-ldltr-v21/values-ldltr-v21.xml",
+                    "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-ldltr-v21/values-ldltr-v21.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,

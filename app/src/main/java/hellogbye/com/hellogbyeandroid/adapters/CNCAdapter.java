@@ -14,6 +14,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
+import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 import pl.tajchert.sample.DotsTextView;
 
 /**
@@ -30,23 +31,29 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int ME_ITEM = 0;
     public static final int WAITING_ITEM = 3;
     private int padding_integer;
-
+    private String avatarUrl;
     // Provide a suitable constructor (depends on the kind of dataset)
     public CNCAdapter(Context context, ArrayList<CNCItem> myDataset) {
         mArrayList = myDataset;
         mContext = context;
         padding_integer = (int) context.getResources().getDimension(R.dimen.DP10);
+
     }
 
+    public void setAvatarUserUrl(String avatarUrl){
+        this.avatarUrl = avatarUrl;
+    }
     class ViewHolderMe extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
-        public FontTextView itemME;
-        private ImageView cnc_image_view_user;
+        private FontTextView itemME;
+        private RoundedImageView cnc_image_view_user;
+        private String userAvatarUrl;
 
         public ViewHolderMe(View itemLayoutView) {
             super(itemLayoutView);
             itemME = (FontTextView) itemLayoutView.findViewById(R.id.cnc_input);
-            cnc_image_view_user = (ImageView) itemLayoutView.findViewById(R.id.cnc_image_view_user);
+            cnc_image_view_user = (RoundedImageView) itemLayoutView.findViewById(R.id.cnc_image_view_user);
+
             itemLayoutView.setOnClickListener(this);
 
         }
@@ -152,7 +159,8 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case ME_ITEM:
                 ViewHolderMe meholder = (ViewHolderMe) holder;
                 meholder.itemME.setText(strMessage);
-                meholder.cnc_image_view_user.setImageBitmap(HGBUtility.getBitmapFromCache(mContext));
+                HGBUtility.getAndSaveUserImage(avatarUrl,  meholder.cnc_image_view_user, null);
+              //  meholder.cnc_image_view_user.setImageBitmap(HGBUtility.getBitmapFromCache(mContext));
                 break;
             case HGB_ERROR_ITEM:
                 ViewHolderHGB hgbholderError = (ViewHolderHGB) holder;

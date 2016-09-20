@@ -46,8 +46,6 @@ public class LoginActivity extends BaseActivity {
         mLoginTextView = (FontTextView) findViewById(R.id.user_login);
         mForgotPasswordTextView = (FontTextView) findViewById(R.id.forgotpassword);
 
-
-
         remember_me = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME,false);
         String email = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, null);
 
@@ -81,6 +79,7 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void onSuccess(Object data) {
                         UserLoginCredentials user = (UserLoginCredentials) data;
+                        hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_USER_IS_LOGIN_IN_PAST, true);
                         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
                         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
 

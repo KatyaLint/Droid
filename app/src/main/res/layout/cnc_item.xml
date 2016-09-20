@@ -21,7 +21,7 @@
         android:background="@drawable/cnc_backround"
         android:layout_alignParentRight="true"/>
 
-    <ImageView
+    <hellogbye.com.hellogbyeandroid.views.RoundedImageView
 
         android:id="@+id/cnc_image_view_user"
         android:layout_width="@dimen/DP18"

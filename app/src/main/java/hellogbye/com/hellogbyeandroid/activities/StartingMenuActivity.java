@@ -105,7 +105,12 @@ public class StartingMenuActivity extends BaseActivity {
         }
 
 
+
         try_now = (FontTextView)findViewById(R.id.try_now);
+        boolean userLogInInPast = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.HGB_USER_IS_LOGIN_IN_PAST, false);
+        if(userLogInInPast){
+            try_now.setVisibility(View.INVISIBLE);
+        }
         try_now.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

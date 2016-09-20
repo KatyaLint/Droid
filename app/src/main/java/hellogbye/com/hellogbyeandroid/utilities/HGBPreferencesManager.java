@@ -22,6 +22,7 @@ public class HGBPreferencesManager
 	public static final String HGB_USER_PROFILE_ID = "user_profile_id";
 	public static final String HGB_LOCATION_TOKEN = "location_token";
 	public static final String CHOOSEN_SERVER = "choosen_server";
+	public static final String HGB_USER_IS_LOGIN_IN_PAST = "user_login_in_past";
 
 	private SharedPreferences mSharedPreferencesFile;
 	private static HGBPreferencesManager mHomeSharedPreferences = null;

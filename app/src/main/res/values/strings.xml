@@ -16,7 +16,7 @@
     <string name="forgot_password"><u>Forgot password?</u></string>
     <string name="password_reset">Password Reset</string>
     <string name="email_reset_succesfully">Email rest successfully! Go check email</string>
-    <string name="create_account">Create a new Account</string>
+    <string name="create_account">Create a New Account</string>
     <string name="try_it_now">Try it Now</string>
     <string name="already_have_account">Already have a HellGbye account?</string>
 
