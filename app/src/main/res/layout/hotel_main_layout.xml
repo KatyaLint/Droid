@@ -306,11 +306,5 @@
         </RelativeLayout>
     </ScrollView>
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/select_hotel"
-        style="@style/RedCustomButtonStyle"
-        android:layout_alignParentBottom="true"
-        android:text="Select Hotel"
-        android:visibility="gone" />
 
 </RelativeLayout>

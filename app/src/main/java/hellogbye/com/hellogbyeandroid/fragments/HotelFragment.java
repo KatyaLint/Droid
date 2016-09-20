@@ -72,7 +72,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private PassengersVO passengersVO;
     private NodesVO currentSelectedNode;
     private ImageView mConfirmBadge;
-    private FontTextView mSelectHotel;
     private boolean isChangeHotelSelected = false;
 
     public final float PANEL_HIGHT = 0.4f;
@@ -130,12 +129,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
             }
         });
 
-        mSelectHotel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendServerNewHotelOrder();
-            }
-        });
+
 
         HGBUtility.checkPermissions(getActivity());
 
@@ -147,29 +141,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         fragment.getMapAsync(this);
     }
 
-
-    private void sendServerNewHotelOrder() {
-
-        ConnectionManager.getInstance(activity).putAlternateHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
-                passengersVO.getmPaxguid(),
-                currentSelectedNode.getmCheckIn(), currentSelectedNode.getmCheckOut(), currentSelectedNode.getmGuid(),
-                new ConnectionManager.ServerRequestListener() {
-                    @Override
-                    public void onSuccess(Object data) {
-
-                        getFlowInterface().callRefreshItinerary(ToolBarNavEnum.HOTEL.getNavNumber());
-                        selectedItemGuidNumber(currentSelectedNode.getmGuid());
-                        getFlowInterface().setSelectedHotelNode(null);
-                        loadMap();
-
-                    }
-
-                    @Override
-                    public void onError(Object data) {
-                        ErrorMessage(data);
-                    }
-                });
-    }
 
 
     @Override
@@ -239,32 +210,29 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
     private void loadAlternativeHotels() {
 
-        ConnectionManager.getInstance(activity).getAlternateHotelsWithHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
-                passengersVO.getmPaxguid(),
-                currentSelectedNode.getmCheckIn(), currentSelectedNode.getmCheckOut(), new ConnectionManager.ServerRequestListener() {
-                    @Override
-                    public void onSuccess(Object data) {
-                        CellsVO cellsVO = (CellsVO) data;
-                        mNodeArrayList.clear();
-                        mNodeArrayList.addAll(cellsVO.getmNodes());
-                    }
 
-                    @Override
-                    public void onError(Object data) {
-                        ErrorMessage(data);
-                    }
-                });
+            ConnectionManager.getInstance(activity).getAlternateHotelsWithHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
+                    passengersVO.getmPaxguid(),
+                    currentSelectedNode.getmCheckIn(), currentSelectedNode.getmCheckOut(), new ConnectionManager.ServerRequestListener() {
+                        @Override
+                        public void onSuccess(Object data) {
+                            CellsVO cellsVO = (CellsVO) data;
+                            mNodeArrayList.clear();
+                            mNodeArrayList.addAll(cellsVO.getmNodes());
+                        }
+
+                        @Override
+                        public void onError(Object data) {
+                            ErrorMessage(data);
+                        }
+                    });
+
     }
 
 
     private void initCurrentHotel() {
         passengersVO = getTravellerWitGuid(getActivityInterface().getTravelOrder());
-        if(getFlowInterface().getSelectedHotelNode() != null){
-            currentSelectedNode = getFlowInterface().getSelectedHotelNode();
-        }else{
-            currentSelectedNode = getLegWithGuid(getActivityInterface().getTravelOrder());
-
-        }
+        currentSelectedNode = getLegWithGuid(getActivityInterface().getTravelOrder());
         initHotel(currentSelectedNode);
     }
 
@@ -278,7 +246,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         mHotelPriceFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_price);
         mHotelDaysFontTextView = (FontTextView) rootView.findViewById(R.id.days);
         mAlertnativeHotelFontTextView = (FontTextView) rootView.findViewById(R.id.show_alternative_hotel);
-        mSelectHotel = (FontTextView) rootView.findViewById(R.id.select_hotel);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.rooms_recycler_view);
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);

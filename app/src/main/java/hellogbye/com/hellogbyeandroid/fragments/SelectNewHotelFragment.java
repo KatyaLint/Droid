@@ -51,8 +51,10 @@ import java.util.ArrayList;
 import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
+import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
 import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.PlaceAutocompleteAdapter;
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
@@ -99,7 +101,6 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
-        getFlowInterface().setSelectedHotelNode(null);
 
         return rootView;
     }
@@ -141,14 +142,11 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
         mAdapter.SetOnSelectClickListener(new AlternativeHotelAdapter.OnSelectItemClickListener() {
             @Override
             public void onSelectItemClick(View view, int position) {
-                getFlowInterface().setSelectedHotelNode(mNodesList.get(position));
-                getActivity().onBackPressed();
+                sendServerNewHotelOrder(mNodesList.get(position));
             }
         });
 
         initAutoComplete();
-
-
 
 
 
@@ -215,7 +213,10 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
     }
 
     private void resetMarker() {
-        mMap.clear();
+        if(mMap != null){
+            mMap.clear();
+
+        }
         setMarkers();
     }
 
@@ -358,5 +359,39 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
                 });
 
     }
+
+
+    private void sendServerNewHotelOrder(final NodesVO nodesVO) {
+
+        ConnectionManager.getInstance(getActivity()).putAlternateHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
+                getTravellerWitGuid(getActivityInterface().getTravelOrder()).getmPaxguid(),
+                nodesVO.getmCheckIn(), nodesVO.getmCheckOut(), nodesVO.getmGuid(),
+                new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+
+                        getFlowInterface().callRefreshItineraryWithCallback(ToolBarNavEnum.HOTEL.getNavNumber(), new RefreshComplete() {
+                            @Override
+                            public void onRefreshSuccess() {
+                                selectedItemGuidNumber(nodesVO.getmGuid());
+                                getActivity().onBackPressed();
+                            }
+
+                            @Override
+                            public void onRefreshError() {
+
+                            }
+                        });
+
+
+                    }
+
+                    @Override
+                    public void onError(Object data) {
+                        ErrorMessage(data);
+                    }
+                });
+    }
+
 
 }

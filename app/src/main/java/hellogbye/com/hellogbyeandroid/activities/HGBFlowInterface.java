@@ -18,6 +18,7 @@ import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 public interface HGBFlowInterface {
 
     void callRefreshItinerary(final int fragment);
+    void callRefreshItineraryWithCallback(final int fragment, RefreshComplete refreshlistner);
     CostumeToolBar getToolBar();
 
     void goToFragment(int fragment, Bundle bundle, boolean stashFragment);
@@ -43,8 +44,7 @@ public interface HGBFlowInterface {
     void openRightPane();
     void selectBottomBar(int selection);
     void enableFullScreen(boolean visible);
-    NodesVO getSelectedHotelNode();
-    void setSelectedHotelNode(NodesVO node);
+
 
 
 

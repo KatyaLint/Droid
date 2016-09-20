@@ -1029,16 +1029,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
 
 
-    @Override
-    public NodesVO getSelectedHotelNode() {
-        return mSelectedHotelNode;
-    }
 
-    @Override
-    public void setSelectedHotelNode(NodesVO node) {
-        mSelectedHotelNode = node;
-
-    }
 
     @Override
     public void callRefreshItinerary(final int fragment) {
@@ -1053,6 +1044,28 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             @Override
             public void onError(Object data) {
                 ErrorMessage("Problem updating grid ");
+
+            }
+        });
+
+    }
+
+
+    @Override
+    public void callRefreshItineraryWithCallback(final int fragment,final RefreshComplete refreslistner) {
+
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).getItinerary(hgbSaveDataClass.getSolutionID(), new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                hgbSaveDataClass.setTravelOrder((UserTravelMainVO) data);
+                continueFlow(fragment);
+                refreslistner.onRefreshSuccess();
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage("Problem updating grid ");
+                refreslistner.onRefreshError();
 
             }
         });
