@@ -28,7 +28,7 @@
            android:orientation="vertical">
 
            ​
-           <hellogbye.com.hellogbyeandroid.views.FontTextView
+     <!--      <hellogbye.com.hellogbyeandroid.views.FontTextView
                android:id="@+id/profile_tutorial"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -40,8 +40,8 @@
                android:text="Tap to choose/create profile"
                android:textColor="@color/COLOR_WHITE"
                android:textSize="@dimen/SP16"
-               android:visibility="gone"
-               app:fontName="dinnextltpro_medium.otf" />
+               android:visibility="visible"
+               app:fontName="dinnextltpro_medium.otf" />-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cnc_recycler_view"

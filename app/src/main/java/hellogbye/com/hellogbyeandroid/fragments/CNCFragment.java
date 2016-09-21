@@ -72,7 +72,7 @@ public class CNCFragment extends HGBAbstractFragment {
     private ImageView mMicImageView;
     private FontTextView mSendTextView;
     private HGBPreferencesManager mHGBPrefrenceManager;
-    private FontTextView mProfileTutorialText;
+    //private FontTextView mProfileTutorialText;
     private FontTextView mSpeechTutorialText;
 
     private String[] locationArr;
@@ -132,7 +132,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
 
         init(rootView);
-        startTutorial();
+       // startTutorial();
         startTutorialText();
 
         if(clearCNCscreen){
@@ -474,11 +474,11 @@ public class CNCFragment extends HGBAbstractFragment {
 
 
 
-    private void startTutorial() {
+/*    private void startTutorial() {
 
         if(mHGBPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.HGB_CNC_FIRST_TIME,true)){
             mHGBPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_CNC_FIRST_TIME,false);
-            mProfileTutorialText.setVisibility(View.VISIBLE);
+        //    mProfileTutorialText.setVisibility(View.VISIBLE);
             mSpeechTutorialText.setVisibility(View.VISIBLE);
             final Animation fadeOut = new AlphaAnimation(1, 0);
             fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
@@ -512,7 +512,7 @@ public class CNCFragment extends HGBAbstractFragment {
             }, SPLASH_TIME_OUT);
         }
 
-    }
+    }*/
 
 
     private void getAccountsProfiles(){
@@ -657,7 +657,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
 
 
-        mProfileTutorialText = (FontTextView)view.findViewById(R.id.profile_tutorial);
+     //   mProfileTutorialText = (FontTextView)view.findViewById(R.id.profile_tutorial);
         mSpeechTutorialText = (FontTextView)view.findViewById(R.id.speak_tutorial);
 
 

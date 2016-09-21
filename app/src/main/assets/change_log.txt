@@ -400,6 +400,7 @@ Code changing:
     HEL-1537 - delete last search in cnc after reentering app/entering with a different user
     HEL-1533 - changing trip name in grid isn't updated
     HEL-1576 - preferences wrong text at preferences screen
+    HEL-1579 - tutorial in cnc screen, behind the bubble , remove the tutorial bubble
 
     Code changing:
     --------------
