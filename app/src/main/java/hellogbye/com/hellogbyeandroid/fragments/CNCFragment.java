@@ -380,7 +380,11 @@ public class CNCFragment extends HGBAbstractFragment {
     private void clearCNCItems() {
 
         getActivityInterface().setCNCItems(null);
-        getActivityInterface().setTravelOrder(null);
+
+        //Kate check
+
+        //getActivityInterface().setTravelOrder(null);
+
         mHGBPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
         mHGBPrefrenceManager.removeKey(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
         initList();
@@ -801,7 +805,7 @@ public class CNCFragment extends HGBAbstractFragment {
                 airport = getResources().getString(R.string.cnc_choose_companion_name);
                 airport = airport + " " + airportSendValueVO.getValue() + "?";
             }
-            else if(airportSendValueVO.getType().equals("City")){
+            else if(airportSendValueVO.getType().equals("City") || airportSendValueVO.getType().equals("CountryName")){
                 airport = getResources().getString(R.string.cnc_choose_airport);
                 airport = airport + " " + airportSendValueVO.getValue() + "?";
             }
@@ -845,7 +849,7 @@ public class CNCFragment extends HGBAbstractFragment {
 
 
             for (AirportResultsVO result : results){
-                if(result.getId().equals(choosenAirport.getId())){
+                if(result.getId().equals(choosenAirport.getId())) {
                     airportSendValuesVO.setId(choosenAirport.getId());
                     String location = HGBUtility.getLocation(getActivity(), false);
 
