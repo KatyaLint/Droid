@@ -50,6 +50,17 @@
             android:textColor="@color/COLOR_EE3A3C"
             app:fontName="dinnextltpro_medium.otf" />
 
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_below="@+id/grid_flight_destination_from"
+            android:id="@+id/grid_traveler_continued_flight"
+            style="@style/GridTextStyle"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Continued Flight"
+            android:textColor="@color/COLOR_565656"
+            app:fontName="dinnextltpro_medium.otf" />
+
    <!--     <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

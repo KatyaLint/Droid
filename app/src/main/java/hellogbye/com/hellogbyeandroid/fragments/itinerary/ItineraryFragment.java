@@ -225,16 +225,11 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
         ArrayList<PassengersVO> passengers = user.getPassengerses();
 
-
         LinearLayout MainLinearLayout = new LinearLayout(activity);
         LayoutParams LLParams = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.MATCH_PARENT);
 
-//        LayoutParams MarginLLParams = new LayoutParams((int) getResources().getDimension(R.dimen.DP250),LayoutParams.MATCH_PARENT);
-
         LayoutParams MarginLLParams = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
 
-
-        // MainLinearLayout.setLayoutParams(LLParams);
         MainLinearLayout.setOrientation(LinearLayout.VERTICAL);
 
         if(passengers.size() < 1){
@@ -249,8 +244,8 @@ public class ItineraryFragment extends HGBAbstractFragment {
 
         String priviouseDate="";
         String currentDate="";
-        int counter =0 ;
 
+        int counter =0 ;
         for(String date : list) { //run for dates insteadof for users
             //new horizontal
             LinearLayout DatesLinearLayout = new LinearLayout(activity);
@@ -258,6 +253,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
             DatesLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
 
             currentDate = date;
+
 
 
             for(int i=0;i<passengers.size();i++){
@@ -289,10 +285,13 @@ public class ItineraryFragment extends HGBAbstractFragment {
                         view.setTag(NodeTypeEnum.EMPTY.getType());
                     } else if (NodeTypeEnum.FLIGHT.getType().equals(node.getmType())) {
                         //create flight
+
                         view = flightLayout(node, counter);
                         view.setTag(NodeTypeEnum.FLIGHT.getType());
+                        counter  = counter + 1;
 
                     } else {
+                        counter = 0;
                         //create hotel
                         view = hotelLayout(node,counter);
                         view.setTag(NodeTypeEnum.HOTEL.getType());
@@ -312,7 +311,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
                 DatesLinearLayout.addView(NodeLinearLayout);
 
             }
-            counter ++;
+         //   counter ++;
 
             if(!priviouseDate.equals(currentDate)){
                 View dateView = dateLayout(currentDate);
@@ -458,18 +457,24 @@ public class ItineraryFragment extends HGBAbstractFragment {
         TextView grid_flight_destination_from = (TextView)child.findViewById(R.id.grid_flight_destination_from);
         grid_flight_destination_from.setText(node.getmOriginCityName() + " - " + node.getmDestinationCityName());
 
-        ImageView flight_image = (ImageView)child.findViewById(R.id.flight_image);
-        if(counter == 0){
-            flight_image.setImageResource(R.drawable.dlight_b_icon);
-        }else{
-            flight_image.setImageResource(R.drawable.flight_g_icon);
-        }
+/*        ImageView flight_image = (ImageView)child.findViewById(R.id.flight_image);
+        flight_image.setImageResource(R.drawable.dlight_b_icon);*/
+
         //accountID
         grid_flight_destination_from.setTag(node.getAccountID());
 
-
         TextView grid_traveler_flight_price = (TextView)child.findViewById(R.id.grid_traveler_flight_price);
-        grid_traveler_flight_price.setText("$" + HGBUtility.roundNumber(node.getCost()) + " USD");
+        TextView grid_traveler_continued_flight = (TextView)child.findViewById(R.id.grid_traveler_continued_flight);
+        if(counter == 0){
+
+            grid_traveler_flight_price.setText("$" + HGBUtility.roundNumber(node.getCost()) + " USD");
+            grid_traveler_flight_price.setVisibility(View.VISIBLE);
+            grid_traveler_continued_flight.setVisibility(View.INVISIBLE);
+        }else{
+            grid_traveler_continued_flight.setVisibility(View.VISIBLE);
+            grid_traveler_flight_price.setVisibility(View.INVISIBLE);
+        }
+
 
         //guid
         grid_traveler_flight_price.setTag(node.getmGuid());

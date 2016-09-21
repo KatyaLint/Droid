@@ -412,3 +412,4 @@ Code changing:
     - Checkout empty credit card crash fix
      - Try now, disappear after first login
     - bottom blue bar in grid
+    - Continue flight

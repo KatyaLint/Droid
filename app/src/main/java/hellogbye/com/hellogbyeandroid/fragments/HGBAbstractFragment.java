@@ -82,11 +82,11 @@ public class HGBAbstractFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        if(!BuildConfig.IS_DEV){
+   /*     if(!BuildConfig.IS_DEV){
             Tracker tracker = ((HGBApplication) getActivity().getApplicationContext()).getTracker();
             tracker.setScreenName(getClass().getSimpleName());
             tracker.send(new HitBuilders.ScreenViewBuilder().build());
-        }
+        }*/
 
     }
 
