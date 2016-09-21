@@ -35,7 +35,6 @@ public class HGBApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        Fabric.with(this, new Crashlytics());
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(HGBApplication.this));
         if (BuildConfig.IS_DEV) {
             Stetho.initialize(
@@ -47,6 +46,7 @@ public class HGBApplication extends Application {
         if(!BuildConfig.IS_DEV){
             GoogleAnalytics googleAnalytics = GoogleAnalytics.getInstance(this);
             tracker = googleAnalytics.newTracker(R.xml.analytics);
+            Fabric.with(this, new Crashlytics());
         }
 
 

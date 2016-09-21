@@ -1,4 +1,4 @@
-package hellogbye.com.hellogbyeandroid.fragments;
+package hellogbye.com.hellogbyeandroid.fragments.hotel;
 
 import android.Manifest;
 import android.app.Activity;
@@ -35,9 +35,7 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelRoomAdapter;
-import hellogbye.com.hellogbyeandroid.fragments.hotel.DetailsHotelFragment;
-import hellogbye.com.hellogbyeandroid.fragments.hotel.GalleryHotelFragment;
-import hellogbye.com.hellogbyeandroid.fragments.hotel.PolicyHotelFragment;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;

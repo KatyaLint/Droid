@@ -33,8 +33,8 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.userprofilesadapter.UserProfilesAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
-import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
-import hellogbye.com.hellogbyeandroid.fragments.SelectNewHotelFragment;
+import hellogbye.com.hellogbyeandroid.fragments.hotel.HotelFragment;
+import hellogbye.com.hellogbyeandroid.fragments.hotel.SelectNewHotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightTabsWidgetFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightsDetailsFragment;
@@ -60,7 +60,6 @@ import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsRa
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesCheckListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesDragListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSearchListFragment;
-import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSettingsMainClass;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesTabWidgetFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoHelpAndFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
