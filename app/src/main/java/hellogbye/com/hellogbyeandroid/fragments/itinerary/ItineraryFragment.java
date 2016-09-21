@@ -167,17 +167,18 @@ public class ItineraryFragment extends HGBAbstractFragment {
              for (String itineraryItem :ItineraryItems){
 
                 NodesVO node = items.get(itineraryItem);
-
+                long difference = 0;
                 if(NodeTypeEnum.FLIGHT.getType().equals(node.getmType())){
                      departure = node.getmDeparture();
                      arrival = node.getmArrival();
-
+                    difference = HGBUtilityDate.dayDifference(departure,arrival) ;
                 }else if(NodeTypeEnum.HOTEL.getType().equals(node.getmType())){
                      departure = node.getmCheckIn();
                      arrival = node.getmCheckOut();
+                    difference = HGBUtilityDate.nightDifference(departure,arrival) ;
                 }
 
-                long difference = HGBUtilityDate.dayDifference(departure,arrival) ;
+              //  long difference = HGBUtilityDate.dayDifference(departure,arrival) ;
 
                  departure = HGBUtilityDate.parseDateToddMMyyyy(departure);
             //    departure = HGBUtility.parseDateToEEEMMMDyy(departure); //parse return 23 is 2 different scenario need time not just date

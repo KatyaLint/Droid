@@ -44,6 +44,15 @@ public class HGBUtilityDate {
         return delta;
     }
 
+    public static long nightDifference(String startDay, String endDate){
+        Date date1 = getDateFromServer(startDay);
+        Date date2 = getDateFromServer(endDate);
+        long timeOne = date1.getTime();
+        long timeTwo = date2.getTime();
+        long oneDay = 1000 * 60 * 60 * 24;
+        long delta = ((timeTwo - timeOne) / oneDay) - 1;
+        return delta;
+    }
 
     public static String parseDateToServertime(String time) {
 
