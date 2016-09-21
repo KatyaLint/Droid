@@ -11,12 +11,15 @@
     <RelativeLayout
         android:id="@+id/innerWhiteFlightLayout"
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/COLOR_WHITE"
         android:layout_gravity="center"
-        android:layout_margin="@dimen/DP6"
-        android:padding="@dimen/DP6"
-        android:orientation="vertical">
+        android:padding="@dimen/DP10" >
 
         <!--android:background="@drawable/rounded_corner_white"-->
 
@@ -153,21 +156,34 @@
             android:textColor="@color/COLOR_565656"
             app:fontName="dinnextltpro_light.otf" />
 
-        <RelativeLayout
-            android:layout_alignParentBottom="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <hellogbye.com.hellogbyeandroid.views.FontTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/SP12"
-                android:text="@string/flight_grid_more_options"/>
-        </RelativeLayout>
+
 
     </RelativeLayout>
 
 
+    <RelativeLayout
+            android:padding="@dimen/DP6"
+            android:background="@color/COLOR_f9fbfd"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/SP10"
+                app:fontName="dinnextltpro_regular.otf"
+                android:textColor="@color/COLOR_00516f"
+                android:text="@string/flight_grid_more_options"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:background="@drawable/grid_more_option"/>
+        </RelativeLayout>
 
+
+    </RelativeLayout>
 
 </LinearLayout>
 
