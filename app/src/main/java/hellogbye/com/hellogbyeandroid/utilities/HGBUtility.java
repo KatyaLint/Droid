@@ -585,16 +585,11 @@ public class HGBUtility {
     public static Bitmap getMyHotelMarkerBitmap(float star, double price,Activity activity) {
 
 
-        View customMarkerView = ((LayoutInflater)  activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.select_hotel_marker_layout, null);
+        View customMarkerView = ((LayoutInflater)  activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.hotel_current_marker_layout, null);
 
-
-        customMarkerView.setBackgroundResource(R.drawable.rectangle_726);
         FontTextView numTxt = (FontTextView) customMarkerView.findViewById(R.id.select_hotel_marker_price);
 
-        FontTextView indexText = (FontTextView) customMarkerView.findViewById(R.id.index);
         numTxt.setText("$" + price);
-        indexText.setVisibility(View.GONE);
-
         setStarRating(customMarkerView, star,true);
         customMarkerView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
         customMarkerView.layout(0, 0, customMarkerView.getMeasuredWidth(), customMarkerView.getMeasuredHeight());

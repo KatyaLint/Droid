@@ -70,7 +70,6 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private PassengersVO passengersVO;
     private NodesVO currentSelectedNode;
     private ImageView mConfirmBadge;
-    private boolean isChangeHotelSelected = false;
 
     public final float PANEL_HIGHT = 0.4f;
     private Activity activity;
