@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -41,7 +42,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
-import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.CustomAlternativeHotelAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.PlaceAutocompleteAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -61,10 +62,9 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
 
     private SupportMapFragment mMapfragment;
     private GoogleMap mMap;
-    private AlternativeHotelAdapter mAdapter;
-    private RecyclerView mRecyclerView;
+    private CustomAlternativeHotelAdapter mAdapter;
+    private ViewPager mViewPager;
     private ArrayList<NodesVO> mNodesList;
-    private LinearLayoutManager mLayoutManager;
     private NodesVO mCurrentSelectedNode;
     private AutoCompleteTextView mAutocomplete;
 
@@ -86,10 +86,8 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.select_new_hotel_main_layout, container, false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.alt_hotel_recycler_view);
-        mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        mViewPager = (ViewPager) rootView.findViewById(R.id.alt_hotel_viewpager);
 
-        mRecyclerView.setLayoutManager(mLayoutManager);
 
         return rootView;
     }
@@ -117,10 +115,10 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
         Gson gson = new Gson();
         mNodesList = gson.fromJson(strValue, listType);
 
-        mAdapter = new AlternativeHotelAdapter(mNodesList,mCurrentSelectedNode,getActivity().getApplicationContext());
-        mRecyclerView.setAdapter(mAdapter);
+        mAdapter = new CustomAlternativeHotelAdapter(mNodesList,mCurrentSelectedNode,getActivity().getApplicationContext());
+        mViewPager.setAdapter(mAdapter);
 
-        mAdapter.SetOnItemClickListener(new AlternativeHotelAdapter.OnLinearLayoutClickListener() {
+        mAdapter.SetOnItemClickListener(new CustomAlternativeHotelAdapter.OnLinearLayoutClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 NodesVO node = mNodesList.get(position);
@@ -128,7 +126,7 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
             }
         });
 
-        mAdapter.SetOnSelectClickListener(new AlternativeHotelAdapter.OnSelectItemClickListener() {
+        mAdapter.SetOnSelectClickListener(new CustomAlternativeHotelAdapter.OnSelectItemClickListener() {
             @Override
             public void onSelectItemClick(View view, int position) {
                 sendServerNewHotelOrder(mNodesList.get(position));
@@ -210,7 +208,7 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
     }
 
     private void resetList(NodesVO node) {
-        mRecyclerView.smoothScrollToPosition(mNodesList.indexOf(node));
+        mViewPager.setCurrentItem(mNodesList.indexOf(node),true);
         mAdapter.setmMyNode(node);
         mAdapter.notifyDataSetChanged();
     }
