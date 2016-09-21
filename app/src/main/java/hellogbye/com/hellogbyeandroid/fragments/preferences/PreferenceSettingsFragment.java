@@ -56,6 +56,10 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
     private String edit_mode;
     private int radioButtonSelected = -1;
     private AccountDefaultSettingsVO accountDefaultSettingsVO;
+    private Button addNewPreferencesButton;
+    private FontTextView edit_preferences_imagebtn;
+    private ImageButton check_preferences;
+    private ImageButton tool_bar_delete_preferences;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new PreferenceSettingsFragment();
@@ -224,37 +228,27 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
         void onItemClick(String guid);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        onBackPressed();
+    private void addNewPreferenceClick(){
+        addNewPreferencesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        View rootView = inflater.inflate(R.layout.settings_list_layout, container, false);
+                if(((MainActivityBottomTabs) getActivity()).isFreeUser){
+                    getFlowInterface().goToFragment(ToolBarNavEnum.FREE_USER_FRAGMENT.getNavNumber(), null);
+                }else{
+                    editSettingsPreferencesPopUp();
+                }
+            }
+        });
+    }
 
-      //final ImageButton edit_preferences_imagebtn = ((MainActivityBottomTabs)getActivity()).getEditPreferenceBtn();
-        final FontTextView edit_preferences_imagebtn = ((MainActivityBottomTabs)getActivity()).getEditPreferenceBtn();
 
-       final ImageButton check_preferences = ((MainActivityBottomTabs)getActivity()).getCheckPreferenceButton();
-        final ImageButton tool_bar_delete_preferences = ((MainActivityBottomTabs)getActivity()).getToolBarDeletePreferences();
-
-        check_preferences.setVisibility(View.GONE);
-        edit_preferences_imagebtn.setVisibility(View.VISIBLE);
-
+    private void editPreference(){
         edit_preferences_imagebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             //   View checkButton = mToolbar.findViewById(R.id.check_preferences);
-                if (check_preferences.getVisibility() == View.VISIBLE) { // delete mode
-                    //delete
-                 //   editClickCB.onItemClick("delete");
-
-            /*        List<AccountDefaultSettingsVO> accountAttributes = new ArrayList<AccountDefaultSettingsVO>();
-                    accountAttributes.addAll(accountDefaultSettings);*/
-
-
-
-
-                } else if (check_preferences.getVisibility() == View.GONE) { //edit mode
+                addNewPreferencesButton.setVisibility(View.INVISIBLE);
+                if (check_preferences.getVisibility() == View.GONE) { //edit mode
 
                     List<AccountDefaultSettingsVO> accountAttributes = new ArrayList<AccountDefaultSettingsVO>();
                     for(AccountDefaultSettingsVO accountAttribute :accountDefaultSettings){
@@ -270,12 +264,12 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
                     edit_preferences_imagebtn.setVisibility(View.GONE);
                     check_preferences.setVisibility(View.VISIBLE);
                     mAdapter.setEditMode(true);
-                  //  editClickCB.onItemClick("edit");
                 }
-             //   mAdapter.notifyDataSetChanged();
             }
         });
+    }
 
+    private void deletePreferences(){
         tool_bar_delete_preferences.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -292,20 +286,22 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
                         deletePreference(accountAttribute.getmId());
                     }
                 }
-              //  mAdapter.updateItems(accountDefaultSettings);
+                //  mAdapter.updateItems(accountDefaultSettings);
                 mAdapter.notifyDataSetChanged();
-               // deletePreference(String preferenceId)
+                // deletePreference(String preferenceId)
 
             }
         });
+    }
 
-
+    private void doneEditingPreference(){
         check_preferences.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { //done mode
+                addNewPreferencesButton.setVisibility(View.VISIBLE);
                 check_preferences.setVisibility(View.GONE);
                 tool_bar_delete_preferences.setVisibility(View.GONE);
-              //  edit_preferences_imagebtn. //setBackgroundResource(R.drawable.edit_img);
+                //  edit_preferences_imagebtn. //setBackgroundResource(R.drawable.edit_img);
                 edit_preferences_imagebtn.setVisibility(View.VISIBLE);
                 if(accountDefaultSettingsVO != null){
                     List<AccountDefaultSettingsVO> accountAttributes = new ArrayList<AccountDefaultSettingsVO>();
@@ -313,39 +309,48 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
                     accountAttributes.addAll(accountDefaultSettings);
 
                     mAdapter.updateItems(accountAttributes);
-                 //   accountDefaultSettings.add(accountDefaultSettingsVO);
+                    //   accountDefaultSettings.add(accountDefaultSettingsVO);
                 }
-         //       mAdapter.updateItems(accountDefaultSettings);
+                //       mAdapter.updateItems(accountDefaultSettings);
                 mAdapter.setEditMode(false);
 
-              //  mAdapter.notifyDataSetChanged();
-             //   editClickCB.onItemClick("done");
+                //  mAdapter.notifyDataSetChanged();
+                //   editClickCB.onItemClick("done");
             }
         });
+    }
 
+    private void initialize(View rootView, LayoutInflater inflater){
+        edit_preferences_imagebtn = ((MainActivityBottomTabs)getActivity()).getEditPreferenceBtn();
+        check_preferences = ((MainActivityBottomTabs)getActivity()).getCheckPreferenceButton();
+        tool_bar_delete_preferences = ((MainActivityBottomTabs)getActivity()).getToolBarDeletePreferences();
 
+        addNewPreferencesButton = (Button) rootView.findViewById(R.id.add_preferences);
+
+        check_preferences.setVisibility(View.GONE);
+        edit_preferences_imagebtn.setVisibility(View.VISIBLE);
 
         mDynamicListView = (DynamicListView) rootView.findViewById(R.id.settings_preferences_drag_list);
         popup_preferences_layout = inflater.inflate(R.layout.preferences_add_new_preference, null);
         preferences_at_least_one_preference = inflater.inflate(R.layout.preferences_at_least_one_preference, null);
-
-
-    //    tempListView = (ListView)rootView.findViewById(R.id.tempListView);
-
-        Button addNewPreferencesButton = (Button) rootView.findViewById(R.id.add_preferences);
         input = (FontEditTextView) popup_preferences_layout.findViewById(R.id.editTextDialog);
+    }
 
-        addNewPreferencesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                if(((MainActivityBottomTabs) getActivity()).isFreeUser){
-                    getFlowInterface().goToFragment(ToolBarNavEnum.FREE_USER_FRAGMENT.getNavNumber(), null);
-                }else{
-                    editSettingsPreferencesPopUp();
-                }
-            }
-        });
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        onBackPressed();
+
+        View rootView = inflater.inflate(R.layout.settings_list_layout, container, false);
+
+        initialize(rootView, inflater);
+
+
+        addNewPreferenceClick();
+        editPreference();
+        deletePreferences();
+        doneEditingPreference();
 
         ConnectionManager.getInstance(getActivity()).getUserSettingsDefault(new ConnectionManager.ServerRequestListener() {
             @Override
@@ -363,8 +368,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
 
         return rootView;
     }
-
-
+    
     private void deletePreference(String preferenceId){
         ConnectionManager.getInstance(getActivity()).deletePreferenceProfileId(preferenceId,new ConnectionManager.ServerRequestListener() {
             @Override

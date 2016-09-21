@@ -401,6 +401,7 @@ Code changing:
     HEL-1533 - changing trip name in grid isn't updated
     HEL-1576 - preferences wrong text at preferences screen
     HEL-1579 - tutorial in cnc screen, behind the bubble , remove the tutorial bubble
+    HEL-1582 - Travel profiles, in edit mode, Create new profile button should dissapear
 
     Code changing:
     --------------
