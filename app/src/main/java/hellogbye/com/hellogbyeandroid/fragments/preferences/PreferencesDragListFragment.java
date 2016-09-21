@@ -166,7 +166,7 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
         );
 
         getCorrectAccountAtribute();
-        preferenceSettingsListAdapter = new PreferencesSettingsDragListAdapter(getActivity(), accountAttributes);
+        preferenceSettingsListAdapter = new PreferencesSettingsDragListAdapter(getActivity(), accountAttributes, false);
         mDynamicListView.setAdapter(preferenceSettingsListAdapter);
     }
 

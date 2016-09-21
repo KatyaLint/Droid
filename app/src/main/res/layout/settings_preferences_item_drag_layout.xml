@@ -52,12 +52,23 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/settings_preferences_move_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/move_icon"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/DP6"
-        android:layout_alignParentRight="true"/>
+        android:layout_toLeftOf="@+id/preferences_next_arrow"
+        />
+
+
+<include
+    android:id="@+id/preferences_next_arrow"
+    android:layout_alignParentRight="true"
+    android:layout_centerVertical="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    layout="@layout/layout_arrow"/>
 
 
  <!--   <include android:id="@+id/preferences_more" layout="@layout/layout_arrow"

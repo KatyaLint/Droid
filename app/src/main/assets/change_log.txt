@@ -399,6 +399,7 @@ Code changing:
     HEL-1467 - add redline under current state of preference(flight or hotel)
     HEL-1537 - delete last search in cnc after reentering app/entering with a different user
     HEL-1533 - changing trip name in grid isn't updated
+    HEL-1576 - preferences wrong text at preferences screen
 
     Code changing:
     --------------

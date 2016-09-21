@@ -126,7 +126,7 @@ public class PreferencesTabCommonFragment extends HGBAbstractFragment {
             }
         });
 
-        PreferencesSettingsDragListAdapter mTabsAdapter = new PreferencesSettingsDragListAdapter(getActivity(),accountFlightSettings);
+        PreferencesSettingsDragListAdapter mTabsAdapter = new PreferencesSettingsDragListAdapter(getActivity(),accountFlightSettings,true);
         mFlightDynamicListView.setAdapter(mTabsAdapter);
         mFlightDynamicListView.enableDragAndDrop();
         mFlightDynamicListView.setOnItemLongClickListener(
@@ -153,7 +153,7 @@ public class PreferencesTabCommonFragment extends HGBAbstractFragment {
                 switchBetweenOptions(clickedItemID, titleName);
             }
         });
-        PreferencesSettingsDragListAdapter mTabsAdapter = new PreferencesSettingsDragListAdapter(getActivity(),accountFlightSettings);
+        PreferencesSettingsDragListAdapter mTabsAdapter = new PreferencesSettingsDragListAdapter(getActivity(),accountFlightSettings,true);
         mHotelDynamicListView.setAdapter(mTabsAdapter);
         mHotelDynamicListView.enableDragAndDrop();
         mHotelDynamicListView.setOnItemLongClickListener(

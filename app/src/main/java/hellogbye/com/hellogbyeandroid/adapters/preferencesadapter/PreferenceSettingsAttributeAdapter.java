@@ -1,3 +1,4 @@
+/*
 package hellogbye.com.hellogbyeandroid.adapters.preferencesadapter;
 
 import android.content.Context;
@@ -16,9 +17,11 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
+*/
 /**
  * Created by nyawka on 11/25/15.
- */
+ *//*
+
 public class PreferenceSettingsAttributeAdapter extends ArrayAdapter<SettingsValuesVO> implements Swappable {
 
     public PreferenceSettingsAttributeAdapter(Context context, List<SettingsValuesVO> accountAttributes) {
@@ -70,3 +73,4 @@ public class PreferenceSettingsAttributeAdapter extends ArrayAdapter<SettingsVal
         super.swapItems(i,i2);
     }
 }
+*/

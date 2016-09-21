@@ -22,8 +22,10 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  */
 public class PreferencesSettingsDragListAdapter extends ArrayAdapter<SettingsAttributesVO> implements Swappable {
 
-    public PreferencesSettingsDragListAdapter(Context context, List<SettingsAttributesVO> accountAttributes) {
+    private boolean isArrowNextShow;
+    public PreferencesSettingsDragListAdapter(Context context, List<SettingsAttributesVO> accountAttributes, boolean isArrowNextShow) {
         super(accountAttributes);
+        this.isArrowNextShow = isArrowNextShow;
     }
 
     @Override
@@ -61,6 +63,12 @@ public class PreferencesSettingsDragListAdapter extends ArrayAdapter<SettingsAtt
             int correntPosition = position+1;
             settings_text_drag.setText(""+correntPosition);
             this.getItem(position).setmRank(""+correntPosition);
+            View preferences_next_arrow = v.findViewById(R.id.preferences_next_arrow);;
+            if(isArrowNextShow){
+                preferences_next_arrow.setVisibility(View.VISIBLE);
+            }else{
+                preferences_next_arrow.setVisibility(View.INVISIBLE);
+            }
 
 //            List<SettingsValuesVO> attributes = attribute.getAttributesVOs();
 //            String strAttributes = "";

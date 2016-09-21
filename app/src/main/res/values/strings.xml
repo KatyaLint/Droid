@@ -70,7 +70,7 @@
     <string name="select_hotel">Select Hotel</string>
 
     <string name="preferences_smoking">Smoking Preference</string>
-    <string name="preferences_smoking_prefer">Do you prefer to have smoking or non-\nsmoking rooms in your hotel?</string>
+    <string name="preferences_smoking_prefer">Do you prefer to have smoking or\nnon-smoking rooms in your hotel?</string>
     <string name="preferences_non_smoking_choice">Non-Smoking</string>
     <string name="preferences_smoking_choice">Smoking</string>
 
@@ -82,23 +82,23 @@
     <string name="preferences_stops">Preferred Number of Stops</string>
     <string name="preferences_stops_prefer">Tell us if you prefer direct flights or if you\'d\nrather save money on non-direct flights</string>
 
-    <string name="preferences_stars">Preferred Number of Stars</string>
-    <string name="preferences_stars_prefer">What number of stars do you prefer</string>
+    <string name="preferences_stars">Preferred Star Rating</string>
+    <string name="preferences_stars_prefer">Tell us what hotel star retings\nyou prefer when traveling</string>
 
     <string name="preferences_class">Preferred Flight Class</string>
     <string name="preferences_class_prefer">Rank the importance of cabin class\nfrom most to least important.</string>
 
 
     <string name="preferences_bed_type">Preferred Bed Type</string>
-    <string name="preferences_bed_rank">Rank the importance of Bed Types\nfrom most important to least important</string>
+    <string name="preferences_bed_rank">Rank the importance of bed types\nfrom most to least important</string>
 
     <string name="preferences_prefered_hotel_chain">Preferred Hotel Chain</string>
-    <string name="preferences_prefered_hotel_favorite">Do you have any favorite Hotels? Add\nthem here to make sure HelloGbye\nalwayes finds you the right Hotel!</string>
+    <string name="preferences_prefered_hotel_favorite">Tell us where you like to stay\nwhen you travel</string>
 
     <string name="preferences_hotel_prefer">Rank the importance of your hotel\npreferences, first being the most\nimportant.</string>
 
 
-    <string name="preferences_prefered_aircraft">Preferred Airline Type</string>
+    <string name="preferences_prefered_aircraft">Preferred Aircraft Type</string>
     <string name="preferences_prefered_aircraft_favorite">Tell us which airline you prefer\n(if that\'s important to you)</string>
 
     <string name="preferences_prefered_flight_carrier">Preferred Airline</string>
@@ -112,7 +112,7 @@
     <string name="preferences_at_least_one_preference">You must have at least one\ntravel preference.</string>
 
     <string name="preferences_preferred_cabin_class">Preferred Cabin Class</string>
-    <string name="preferences_preferred_cabin_class_rank">Rank the importance of Cabin Class\nfrom most important to least important</string>
+
 
     <string name="preferences_relationship_choose">Choose relationship</string>
 
