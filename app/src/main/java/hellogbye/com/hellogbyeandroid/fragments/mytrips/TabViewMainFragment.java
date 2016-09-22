@@ -42,14 +42,14 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by nyawka on 5/8/16.
  */
-public class TabViewMainFragment extends HGBAbstractFragment   implements SearchView.OnQueryTextListener{
+public class TabViewMainFragment extends HGBAbstractFragment implements SearchView.OnQueryTextListener{
     private ArrayList<MyTripItem> mItemsList;
     private TripsSwipeItemsAdapter mAdapter;
     private List<MyTripItem> mCurrItemsList;
     private Activity activity;
     private RecyclerView mRecyclerView;
     private LinearLayout my_trip_empty_view_ll;
-    private  SearchReceiver mSearchReciever;
+    //private SearchReceiver mSearchReciever;
     private SearchView search_view;
     private ImageButton search_maginfy;
     private ImageButton toolbar_new_iternerary;
@@ -59,8 +59,6 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -141,7 +139,7 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
         initSearchBar();
 //        my_trip_search_view.setOnQueryTextListener(this);
         search_view.setOnQueryTextListener(this);
-        mSearchReciever = new SearchReceiver();
+   //     mSearchReciever = new SearchReceiver();
         // 5. set item animator to DefaultAnimator
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         // 2. set layoutManger
@@ -151,7 +149,7 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
         args = new Bundle();
     }
 
-    @Override
+/*    @Override
     public void onResume() {
         super.onResume();
         getActivity().registerReceiver(mSearchReciever, new IntentFilter("search_query"));
@@ -161,7 +159,7 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
     public void onPause() {
         super.onPause();
         getActivity().unregisterReceiver(mSearchReciever);
-    }
+    }*/
 
     private void goToCNCView(View rootView){
         FontTextView my_trips_go_to_cnc = (FontTextView) rootView.findViewById(R.id.my_trips_add_trip);
@@ -348,7 +346,7 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
         return filteredModelList;
     }
 
-    public class SearchReceiver extends BroadcastReceiver {
+/*    public class SearchReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             //TODO KATE I dont know how this is suppose to work.....
@@ -367,7 +365,7 @@ public class TabViewMainFragment extends HGBAbstractFragment   implements Search
             }
 
         }
-    }
+    }*/
 
 
 }

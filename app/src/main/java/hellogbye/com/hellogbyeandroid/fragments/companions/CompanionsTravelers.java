@@ -55,7 +55,7 @@ public class CompanionsTravelers extends CompanionsTabsViewClass {
         // Inflate the layout for this fragment
         View rootView = createViewForTab(R.layout.companions_travel, getContext(),false);
 
-        SearchView searchView = (SearchView)rootView.findViewById(R.id.companion_search_view);
+      //  SearchView searchView = (SearchView)rootView.findViewById(R.id.companion_search_view);
         RecyclerView searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.companion_travel_recycle_list);
         LinearLayout companion_empty_view = (LinearLayout)rootView.findViewById(R.id.companion_empty_view);
 
@@ -66,7 +66,7 @@ public class CompanionsTravelers extends CompanionsTabsViewClass {
         LinearLayout companion_empty_view = (LinearLayout) rootView.findViewById(R.id.companion_empty_view);*/
 
         boolean addCompanionsToCNCScreen = addingCompanionsToCNCView();
-        setSearchView(searchRecyclerView, companion_empty_view, searchView, addCompanionsToCNCScreen);
+        setSearchView(searchRecyclerView, companion_empty_view, addCompanionsToCNCScreen);
 
 
         return rootView;

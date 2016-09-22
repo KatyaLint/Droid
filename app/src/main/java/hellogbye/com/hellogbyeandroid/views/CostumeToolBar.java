@@ -37,7 +37,7 @@ public class CostumeToolBar extends Toolbar {
     //private LinearLayout tool_bar_profile_name;
     private ImageButton toolbar_new_iternerary_cnc;
     private FontTextView preference_save_changes;
-    private SearchView search_view;
+    private SearchView search_view_tool_bar;
     private AutoCompleteTextView auto_complete;
     private Activity mActivity;
     private ImageButton toolbar_add_companion;
@@ -118,23 +118,25 @@ public class CostumeToolBar extends Toolbar {
         if(toolbar_add_companion == null){
             toolbar_add_companion = (ImageButton)findViewById(R.id.toolbar_add_companion);
         }
+        if(search_view_tool_bar == null){
+            search_view_tool_bar = (SearchView) findViewById(R.id.search_view_tool_bar);
+        }
+        if(auto_complete == null){
+            auto_complete = (AutoCompleteTextView) findViewById(R.id.autocomplete);
+        }
+
 
 
         initSearchBar();
-        initAutoComplete();
+//        initAutoComplete();
 
 
     }
 
     private void initSearchBar() {
 
-        if(search_view == null){
-            search_view = (SearchView) findViewById(R.id.search_view_tool_bar);
-        }
-
-
-        ImageView searchClose = (ImageView) search_view.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
-        TextView searchCloseText = (TextView) search_view.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        ImageView searchClose = (ImageView) search_view_tool_bar.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+        TextView searchCloseText = (TextView) search_view_tool_bar.findViewById(android.support.v7.appcompat.R.id.search_src_text);
 
         searchClose.setImageResource(R.drawable.close_icon_a_1);
 //        int id = search_view.getContext()
@@ -146,21 +148,22 @@ public class CostumeToolBar extends Toolbar {
         search_maginfy.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                ToolBarNavEnum navBar = ToolBarNavEnum.getNav(mSelectedFragment);
+                openAutoComplete();
+             /*   ToolBarNavEnum navBar = ToolBarNavEnum.getNav(mSelectedFragment);
                 switch (navBar) {
 
                     case TRIPS:
+                    case COMPANIONS:
                         openSearchBar();
                         break;
                     case SELECT_HOTEL_FRAGMENT:
                         openAutoComplete();
                         break;
-                }
+                }*/
             }
         });
 
-        search_view.setOnCloseListener(new SearchView.OnCloseListener() {
+        search_view_tool_bar.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
                 closeSearchBar();
@@ -171,17 +174,17 @@ public class CostumeToolBar extends Toolbar {
 
     }
 
-    private void initAutoComplete(){
+/*    private void initAutoComplete(){
         if(auto_complete == null){
             auto_complete = (AutoCompleteTextView) findViewById(R.id.autocomplete);
         }
-    }
+    }*/
 
     private void closeSearchBar() {
         titleBar.setVisibility(View.VISIBLE);
         toolbar_new_iternerary_cnc.setVisibility(View.VISIBLE);
         search_maginfy.setVisibility(View.VISIBLE);
-        search_view.setVisibility(View.GONE);
+        search_view_tool_bar.setVisibility(View.GONE);
 
     }
 
@@ -190,8 +193,8 @@ public class CostumeToolBar extends Toolbar {
         titleBar.setVisibility(View.GONE);
         toolbar_new_iternerary_cnc.setVisibility(View.GONE);
         search_maginfy.setVisibility(View.GONE);
-        search_view.setVisibility(View.VISIBLE);
-        search_view.setIconified(false);
+        search_view_tool_bar.setVisibility(View.VISIBLE);
+        search_view_tool_bar.setIconified(false);
 
     }
 
@@ -232,7 +235,7 @@ public class CostumeToolBar extends Toolbar {
         preference_save_changes.setVisibility(View.GONE);
         toolbar_new_iternerary.setVisibility(View.GONE);
         search_maginfy.setVisibility(View.GONE);
-        search_view.setVisibility(View.GONE);
+        search_view_tool_bar.setVisibility(View.GONE);
         auto_complete.setVisibility(View.GONE);
         toolbar_add_companion.setVisibility(View.GONE);
 
@@ -276,6 +279,7 @@ public class CostumeToolBar extends Toolbar {
 
             case COMPANIONS:
                 toolbar_add_companion.setVisibility(View.VISIBLE);
+                search_maginfy.setVisibility(View.VISIBLE);
             case ALL_COMPANIONS_VIEW:
             case COMPANIONS_PERSONAL_DETAILS:
             case HELP:

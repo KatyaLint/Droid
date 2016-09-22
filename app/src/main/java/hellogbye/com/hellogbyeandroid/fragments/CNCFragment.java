@@ -192,6 +192,8 @@ public class CNCFragment extends HGBAbstractFragment implements TitleNameChange 
         UserTravelMainVO travelerOrder = getActivityInterface().getTravelOrder();
         if(travelerOrder != null && travelerOrder.getmSolutionName()!= null){
             setSolutionNameForItirnarary();
+        }else{
+            setTextForTrip("New Trip");
         }
         titleChangeName();
 /*        itirnarary_title_Bar.setOnClickListener(new View.OnClickListener() {

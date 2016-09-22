@@ -6,6 +6,7 @@ package hellogbye.com.hellogbyeandroid.fragments.companions;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,8 +18,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,10 +48,10 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by nyawka on 4/20/16.
  */
-public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements SearchView.OnQueryTextListener{
+public class CompanionsTabsViewClass  extends HGBAbstractFragment implements android.support.v7.widget.SearchView.OnQueryTextListener{
 
 
-    private SearchView mSearchView;
+  //  private SearchView mSearchView;
     private RecyclerView searchRecyclerView;
     private CompanionsSwipeItemsAdapter searchListAdapter;
     private View popup_companion_new;
@@ -62,11 +65,15 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
     private ArrayList<CompanionVO> searchCompanionsVO = new ArrayList<>();
     private ArrayList mCurrItemsSearchList ;
     public static boolean isPending;
+    private android.support.v7.widget.SearchView search_view;
+    private ImageButton search_maginfy;
+    private FontTextView titleBar;
+    private ImageButton toolbar_add_companion;
 
     private void searchListInitialization(){
 
         // mSearchView.setVisibility(View.GONE);
-        mSearchView.setOnQueryTextListener(this);
+        search_view.setOnQueryTextListener(this);
 
         searchRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         // 5. set item animator to DefaultAnimator
@@ -75,6 +82,52 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
         searchRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
     }
+
+    private void initSearchBar() {
+
+        ImageView searchClose = (ImageView) search_view.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
+        TextView searchCloseText = (TextView) search_view.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+
+        searchClose.setImageResource(R.drawable.close_icon_a_1);
+        searchCloseText.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
+        searchCloseText.setHintTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
+
+        search_maginfy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openSearchBar();
+            }
+        });
+
+        search_view.setOnCloseListener(new android.support.v7.widget.SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                closeSearchBar();
+                return false;
+            }
+        });
+
+    }
+    private void closeSearchBar() {
+        titleBar.setVisibility(View.VISIBLE);
+        toolbar_add_companion.setVisibility(View.VISIBLE);
+       // toolbar_new_iternerary.setVisibility(View.VISIBLE);
+        search_maginfy.setVisibility(View.VISIBLE);
+        search_view.setVisibility(View.GONE);
+
+    }
+
+
+    private void openSearchBar() {
+        titleBar.setVisibility(View.GONE);
+        toolbar_add_companion.setVisibility(View.GONE);
+     //   toolbar_new_iternerary.setVisibility(View.GONE);
+        search_maginfy.setVisibility(View.GONE);
+        search_view.setVisibility(View.VISIBLE);
+        search_view.setIconified(false);
+
+    }
+
 
     private void pendingCompanions(ArrayList<CompanionVO> companionsVO){
         companionsVOPending.clear();
@@ -146,14 +199,14 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
     }
 
 
-    public void setSearchView(RecyclerView searchRecyclerView, LinearLayout companion_empty_view, SearchView searchView,final boolean addCompanionsToCNCScreen){
+    public void setSearchView(RecyclerView searchRecyclerView, LinearLayout companion_empty_view, final boolean addCompanionsToCNCScreen){
 
-        this.mSearchView = searchView;
+      //  this.mSearchView = searchView;
         this.searchRecyclerView = searchRecyclerView;
         this.companion_empty_view = companion_empty_view;
 
         //emptyCompanionsView();
-        searchListInitialization();
+
 
         searchListAdapter = new CompanionsSwipeItemsAdapter(getActivity().getApplicationContext(), companionsVOPending);
 
@@ -162,7 +215,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
             @Override
             public void clickedItem(final String guid) {
                 Bundle args = new Bundle();
-                boolean isSearchView = mSearchView.isActivated();
+                boolean isSearchView = search_view.isActivated();
 
                 if(addCompanionsToCNCScreen){
                     args.putString(HGBConstants.BUNDLE_ADD_COMPANION_ID, guid);
@@ -195,6 +248,13 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
             }
         });
 
+
+        search_view =  ((MainActivityBottomTabs)getActivity()).getSearchView();
+        search_maginfy =  ((MainActivityBottomTabs)getActivity()).getSearchMagifyImage();
+        titleBar =  ((MainActivityBottomTabs)getActivity()).getTitleBar();
+        toolbar_add_companion = ((MainActivityBottomTabs)getActivity()).getAddCompanionButton();
+        searchListInitialization();
+        initSearchBar();
 
         searchListAdapter.setCompanionSearchCB(new ICompanionsSearchCB() {
             @Override
@@ -309,8 +369,8 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
 
 
     private void getCompanions(){
-        if(mSearchView != null) {
-            mSearchView.setQuery("", false);
+        if(search_view != null) {
+            search_view.setQuery("", false);
             searchIsOpen = false;
         }
         ConnectionManager.getInstance(getActivity()).getCompanions(new ConnectionManager.ServerRequestListener() {
@@ -400,13 +460,13 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment  implements Se
     }
 
 
-    @Override
+/*    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
         final MenuItem item = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
         searchView.setOnQueryTextListener(this);
-    }
+    }*/
 
     private boolean searchIsOpen = false;
 

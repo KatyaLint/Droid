@@ -402,6 +402,9 @@ Code changing:
     HEL-1576 - preferences wrong text at preferences screen
     HEL-1579 - tutorial in cnc screen, behind the bubble , remove the tutorial bubble
     HEL-1582 - Travel profiles, in edit mode, Create new profile button should dissapear
+    HEL-1585 - cnc screen, after when query is found, in the title should appear trip name
+    HEL-1578 - companions search should be up like in trips
+
 
     Code changing:
     --------------

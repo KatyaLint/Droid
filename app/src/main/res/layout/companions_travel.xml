@@ -3,27 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <SearchView
+<!--    <SearchView
         android:layout_width="match_parent"
         android:id="@+id/companion_search_view"
         android:background="@color/COLOR_F5F5F5"
         android:layout_margin="@dimen/DP10"
         android:queryHint="@string/settings_search_hunt"
         android:focusableInTouchMode="true"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"/>-->
 
     <include layout="@layout/companion_empty_view"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_below="@+id/companion_search_view"
+
         android:layout_centerHorizontal="true" />
 
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/companion_travel_recycle_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/companion_search_view" />
+            android:layout_height="match_parent" />
 
 <!--        <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
