@@ -16,8 +16,18 @@
     <!--android:visibility="gone"-->
     <!--android:id="@+id/home_image" />-->
 
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar_trip_name"
+        android:textColor="@color/COLOR_WHITE"
+        android:layout_gravity="center"
+        android:visibility="visible" />
+
+
 
     <include
+
         android:id="@+id/tool_bar_profile_name"
         layout="@layout/profile_name_layout" />
 

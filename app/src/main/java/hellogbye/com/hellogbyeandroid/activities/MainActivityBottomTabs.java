@@ -122,7 +122,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private final int BOTTOM_BAR_THIRD_INDEX = 2;
     private final int BOTTOM_BAR_FOURTH_INDEX = 3;
     private final int BOTTOM_BAR_FIFTH_INDEX = 4;
-    private LinearLayout tool_bar_profile_name;
+  //  private LinearLayout tool_bar_profile_name;
     private LinearLayout edit_preferences_ll;
     private FontTextView edit_preferences_imagebtn;
     private ImageButton check_preferences;
@@ -141,6 +141,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private AutoCompleteTextView mAutoComplete;
 
     private NodesVO mSelectedHotelNode;
+    //private FontTextView toolbar_trip_name;
 
     public HGBSaveDataClass getHGBSaveDataClass() {
         return hgbSaveDataClass;
@@ -403,7 +404,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         toolbar_add_companion = (ImageButton) mToolbar.findViewById(R.id.toolbar_add_companion);
 
         toolbar_add_companion = (ImageButton)mToolbar.findViewById(R.id.toolbar_add_companion);
-        tool_bar_profile_name = (LinearLayout) mToolbar.findViewById(R.id.tool_bar_profile_name);
+   /*     tool_bar_profile_name = (LinearLayout) mToolbar.findViewById(R.id.tool_bar_profile_name);
+        tool_bar_profile_name.setVisibility(View.GONE);*/
         edit_preferences_ll = (LinearLayout) mToolbar.findViewById(R.id.preferences_edit_mode);
        // edit_preferences_imagebtn = (ImageButton) mToolbar.findViewById(R.id.edit_preferences);
         edit_preferences_imagebtn = (FontTextView) mToolbar.findViewById(R.id.edit_preferences);
@@ -418,8 +420,13 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         titleBar = (FontTextView)mToolbar.findViewById(R.id.titleBar);
         my_trip_profile = (FontTextView) findViewById(R.id.my_trip_profile);
         tool_bar_delete_preferences = (ImageButton)findViewById(R.id.tool_bar_delete_preferences);
+      //  toolbar_trip_name = (FontTextView)findViewById(R.id.toolbar_trip_name);
 
     }
+
+/*    public FontTextView getToolBarTripName(){
+        return toolbar_trip_name;
+    }*/
 
     public ImageButton getToolBarDeletePreferences(){
         return tool_bar_delete_preferences;
@@ -463,9 +470,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         return itirnarary_title_Bar;
     }
 
-    public LinearLayout getToolBarProfileChange(){
+ /*   public LinearLayout getToolBarProfileChange(){
         return tool_bar_profile_name;
-    }
+    }*/
 
   /*  public ImageButton getEditPreferenceBtn(){
         return edit_preferences_imagebtn;

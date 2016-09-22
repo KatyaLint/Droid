@@ -368,7 +368,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
 
         return rootView;
     }
-    
+
     private void deletePreference(String preferenceId){
         ConnectionManager.getInstance(getActivity()).deletePreferenceProfileId(preferenceId,new ConnectionManager.ServerRequestListener() {
             @Override

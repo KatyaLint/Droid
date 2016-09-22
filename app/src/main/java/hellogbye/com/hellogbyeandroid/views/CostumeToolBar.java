@@ -34,7 +34,7 @@ public class CostumeToolBar extends Toolbar {
     private ImageView my_trips_image_profile;
     private FontTextView my_trip_profile;
     private FontTextView itirnarary_title_Bar;
-    private LinearLayout tool_bar_profile_name;
+    //private LinearLayout tool_bar_profile_name;
     private ImageButton toolbar_new_iternerary_cnc;
     private FontTextView preference_save_changes;
     private SearchView search_view;
@@ -43,6 +43,7 @@ public class CostumeToolBar extends Toolbar {
     private ImageButton toolbar_add_companion;
     private int mSelectedFragment;
     private Context mContext;
+
 
     private ImageButton tool_bar_delete_preferences;
 
@@ -100,9 +101,10 @@ public class CostumeToolBar extends Toolbar {
 //        }
         if(itirnarary_title_Bar == null){
             itirnarary_title_Bar = (FontTextView)findViewById(R.id.itirnarary_title_Bar);
-        }if(tool_bar_profile_name == null){
-            tool_bar_profile_name = (LinearLayout)findViewById(R.id.tool_bar_profile_name);
         }
+/*        if(tool_bar_profile_name == null){
+            tool_bar_profile_name = (LinearLayout)findViewById(R.id.tool_bar_profile_name);
+        }*/
         if(toolbar_new_iternerary_cnc == null){
             toolbar_new_iternerary_cnc = (ImageButton) findViewById(R.id.toolbar_new_iternerary_cnc);
         }
@@ -116,6 +118,7 @@ public class CostumeToolBar extends Toolbar {
         if(toolbar_add_companion == null){
             toolbar_add_companion = (ImageButton)findViewById(R.id.toolbar_add_companion);
         }
+
 
         initSearchBar();
         initAutoComplete();
@@ -215,7 +218,7 @@ public class CostumeToolBar extends Toolbar {
         mSelectedFragment = position;
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
         String selectedItem = navBar.getNavTitle();
-        tool_bar_profile_name.setVisibility(View.GONE);
+   //     tool_bar_profile_name.setVisibility(View.GONE);
         titleBar.setVisibility(View.GONE);
         up_bar_favorite.setVisibility(View.GONE);
         favoriteButton.setVisibility(View.GONE);
@@ -233,6 +236,7 @@ public class CostumeToolBar extends Toolbar {
         auto_complete.setVisibility(View.GONE);
         toolbar_add_companion.setVisibility(View.GONE);
 
+
         switch (navBar) {
 
          //   case HOME:
@@ -245,7 +249,8 @@ public class CostumeToolBar extends Toolbar {
          //       break;
 
             case CNC:
-                tool_bar_profile_name.setVisibility(View.VISIBLE);
+           //     tool_bar_profile_name.setVisibility(View.VISIBLE);
+                itirnarary_title_Bar.setVisibility(VISIBLE);
                 toolbar_new_iternerary_cnc.setVisibility(View.VISIBLE);
                 break;
             case ITINARERY:

@@ -32,7 +32,9 @@ import java.util.Set;
 import hellogbye.com.hellogbyeandroid.R;
 //import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
+import hellogbye.com.hellogbyeandroid.fragments.ChangeTripName;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.fragments.TitleNameChange;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -51,7 +53,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class ItineraryFragment extends HGBAbstractFragment {
+public class ItineraryFragment extends HGBAbstractFragment implements TitleNameChange {
 
 
     private UserTravelMainVO userOrder;
@@ -70,6 +72,8 @@ public class ItineraryFragment extends HGBAbstractFragment {
     private FontTextView itirnarary_title_Bar;
 
     public ItineraryFragment() {
+
+
         // Empty constructor required for fragment subclasses
     }
 
@@ -81,9 +85,14 @@ public class ItineraryFragment extends HGBAbstractFragment {
         return fragment;
     }
 
+    @Override
+    public void titleChangeName() {
+        ChangeTripName.onClickListener(getActivity(), getActivityInterface().getSolutionID(), getActivityInterface().getTravelOrder());
+    }
 
 
-    public interface TravelerShowChoose {
+
+        public interface TravelerShowChoose {
         void itemSelected(String guidSelectedItem, String itemType,String guidSelectedUser);
     }
 
@@ -643,41 +652,41 @@ public class ItineraryFragment extends HGBAbstractFragment {
     private void setStarRating(View holder, float star) {
 
         if ("0.5".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.star_blue_half, R.drawable.star_blue_out,
-                    R.drawable.star_blue_out, R.drawable.star_blue_out, R.drawable.star_blue_out);
+            starHolder(holder, R.drawable.big_star_dark_blue_half, R.drawable.big_star_dark_blue_out,
+                    R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out);
 
         } else if ("1.0".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_out,
-                    R.drawable.star_blue_out, R.drawable.star_blue_out, R.drawable.star_blue_out);
+            starHolder(holder, R.drawable.big_star_blue_dark_full, R.drawable.big_star_dark_blue_out,
+                    R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out);
 
         } else if ("1.5".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_half,
-                    R.drawable.star_blue_out, R.drawable.star_blue_out, R.drawable.star_blue_out);
+            starHolder(holder, R.drawable.big_star_blue_dark_full, R.drawable.big_star_dark_blue_half,
+                    R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out);
 
         } else if ("2.0".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_full,
-                    R.drawable.star_blue_out, R.drawable.star_blue_out, R.drawable.star_blue_out);
+            starHolder(holder, R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full,
+                    R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out);
         } else if ("2.5".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_full,
-                    R.drawable.star_blue_half, R.drawable.star_blue_out, R.drawable.star_blue_out);
+            starHolder(holder, R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full,
+                    R.drawable.big_star_dark_blue_half, R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out);
         } else if ("3.0".equals(String.valueOf(star))) {
             starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_full,
-                    R.drawable.star_blue_full, R.drawable.star_blue_out, R.drawable.star_blue_out);
+                    R.drawable.star_blue_full, R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out);
         } else if ("3.5".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_full,
-                    R.drawable.star_blue_full, R.drawable.star_blue_half, R.drawable.star_blue_out);
+            starHolder(holder, R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full,
+                    R.drawable.big_star_blue_dark_full, R.drawable.big_star_dark_blue_half, R.drawable.big_star_dark_blue_out);
 
         } else if ("4.0".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_full,
-                    R.drawable.star_blue_full, R.drawable.star_blue_full, R.drawable.star_blue_out);
+            starHolder(holder, R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full,
+                    R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full, R.drawable.big_star_dark_blue_out);
 
         } else if ("4.5".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_full,
-                    R.drawable.star_blue_full, R.drawable.star_blue_full, R.drawable.star_blue_half);
+            starHolder(holder, R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full,
+                    R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full, R.drawable.big_star_dark_blue_half);
 
         } else if ("5.0".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_full,
-                    R.drawable.star_blue_full, R.drawable.star_blue_full, R.drawable.star_blue_full);
+            starHolder(holder, R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full,
+                    R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full);
 
         }
     }
@@ -826,7 +835,7 @@ public class ItineraryFragment extends HGBAbstractFragment {
         setFavorityIcon();
         onFavorityClickListener();
         setSolutionNameForItirnarary();
-        setOnClickListenerForItineraryTopBar();
+        titleChangeName();
         return rootView;
     }
 
@@ -867,53 +876,6 @@ public class ItineraryFragment extends HGBAbstractFragment {
             public void onClick(View v) {
                 setFavorityItinerary();
                 // goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
-            }
-        });
-    }
-
-
-    private void setOnClickListenerForItineraryTopBar() {
-
-        LayoutInflater li = LayoutInflater.from(getActivity());
-        final View promptsView = li.inflate(R.layout.popup_layout_change_iteinarary_name, null);
-        final EditText input = (EditText) promptsView
-                .findViewById(R.id.change_iteinarary_name);
-
-
-        itirnarary_title_Bar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                input.setText(itirnarary_title_Bar.getText());
-                HGBUtility.showAlertPopUp(getActivity(), input, promptsView, getResources().getString(R.string.edit_trip_name)
-                        , getResources().getString(R.string.save_button),
-                        new PopUpAlertStringCB() {
-                            @Override
-                            public void itemSelected(String inputItem) {
-                                itirnarary_title_Bar.setText(inputItem);
-                                userOrder.setmSolutionName(inputItem);
-                                sendNewSolutionName(inputItem);
-                            }
-
-                            @Override
-                            public void itemCanceled() {
-
-                            }
-                        });
-            }
-        });
-    }
-
-    private void sendNewSolutionName(String solutionName) {
-        ConnectionManager.getInstance(getActivity()).putItenararyTripName(solutionName, getActivityInterface().getTravelOrder().getmSolutionID(), new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
-
-            }
-
-            @Override
-            public void onError(Object data) {
-                ErrorMessage(data);
             }
         });
     }
@@ -959,9 +921,6 @@ public class ItineraryFragment extends HGBAbstractFragment {
             @Override
             public void onError(Object data) {
                 ErrorMessage(data);
-
-                // ErrorMessage(data);
-
             }
         });
     }
@@ -970,8 +929,6 @@ public class ItineraryFragment extends HGBAbstractFragment {
     public void onDestroyView() {
         userOrder = getActivityInterface().getTravelOrder();
         if (userOrder != null) {
-
-
             ArrayList<PassengersVO> passangers = userOrder.getPassengerses();
             for (PassengersVO passanger : passangers) {
                 passanger.clearData();
