@@ -1,4 +1,4 @@
-package hellogbye.com.hellogbyeandroid.fragments;
+package hellogbye.com.hellogbyeandroid.fragments.cnc;
 
 
 import android.app.AlertDialog;
@@ -15,8 +15,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.EditText;
@@ -35,6 +33,9 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.CNCAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsPreferencesCheckAdapter;
+import hellogbye.com.hellogbyeandroid.fragments.ChangeTripName;
+import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.fragments.TitleNameChange;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
@@ -94,18 +95,20 @@ public class CNCFragment extends HGBAbstractFragment implements TitleNameChange 
     private int mTutorialTextNumber = 0;
 
 
+
   //  private Queue<AirportSendValuesVO> airportSendValuesVOs = new ArrayDeque<>();
     private ArrayList<AirportSendValuesVO> airportSendValuesVOs = new ArrayList<AirportSendValuesVO>();
     private int maxAirportSize = 0;
     private boolean clearCNCscreen;
     private Bundle args;
     private int selectedCount = 0;
-    private PreferencesSettingsPreferencesCheckAdapter mRadioPreferencesAdapter;
-    private ArrayList<AccountDefaultSettingsVO> accountAttributes;
+
+
    // private LinearLayout tool_bar_profile_name;
-    private ArrayList<DefaultsProfilesVO> accountDefaultSettings;
+
     private FontTextView cnc_start_planing_text;
     private FontTextView itirnarary_title_Bar;
+
     //   private  AirportSendValuesVO airportSendValuesVO;
 
 
@@ -144,15 +147,6 @@ public class CNCFragment extends HGBAbstractFragment implements TitleNameChange 
         }else{
             setTutorialTextVisibility(false);
         }
-
-
-        //   mToolbar = (CostumeToolBar)rootView.findViewById(R.id.toolbar_cnc);
-
-
-
-
-        //    updateToolBarView();
-
 
         getAccountsProfiles();
 
@@ -208,147 +202,8 @@ public class CNCFragment extends HGBAbstractFragment implements TitleNameChange 
         return rootView;
     }
 
-    private void getUserSettings(){
-       // getPreferenceProfiles(final ServerRequestListener listener)
-    ConnectionManager.getInstance(getActivity()).getPreferenceProfiles(new ConnectionManager.ServerRequestListener() {
-        @Override
-        public void onSuccess(Object data) {
-            if (data != null) {
-                accountDefaultSettings = (ArrayList<DefaultsProfilesVO> )data;
-           //     List<AccountDefaultSettingsVO> accountDefaultSettings = (List<AccountDefaultSettingsVO>) data;
-                profilesDialog(accountDefaultSettings);
-            }
-        }
-        @Override
-        public void onError(Object data) {
-            ErrorMessage(data);
-        }
-    });
-    }
-
-    private int radioButtonSelected = -1;
-
-    private void profilesDialog (ArrayList<DefaultsProfilesVO> userProfileVOs) {
-        LayoutInflater li = LayoutInflater.from(getActivity());
-        View promptsView = li.inflate(R.layout.popup_custom_title, null);
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-        dialogBuilder.setCustomTitle(promptsView);
 
 
-
-      //  UserProfilesListAdapter adapter = new UserProfilesListAdapter(userProfileVOs, getContext());
-
-
-        accountAttributes = new ArrayList<>();
-        for(DefaultsProfilesVO defaultsProfilesVO: userProfileVOs){
-            AccountDefaultSettingsVO accountDefaultSettingsVO = new AccountDefaultSettingsVO();
-            accountDefaultSettingsVO.setmId(defaultsProfilesVO.getId());
-            accountDefaultSettingsVO.setmProfileName(defaultsProfilesVO.getProfilename());
-            accountAttributes.add(accountDefaultSettingsVO);
-        }
-
-        mRadioPreferencesAdapter = new PreferencesSettingsPreferencesCheckAdapter(getContext(),accountAttributes);
-
-        View promptsViewTeest = li.inflate(R.layout.user_profile_popup_list_layout, null);
-        ListView user_profile_popup_list_view = (ListView) promptsViewTeest.findViewById(R.id.user_profile_popup_list_view);
-        user_profile_popup_list_view.setAdapter(mRadioPreferencesAdapter);
-
-        LinearLayout manage_profile_ll = (LinearLayout)promptsViewTeest.findViewById(R.id.manage_profile_ll);
-        manage_profile_ll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getFlowInterface().goToFragment(ToolBarNavEnum.TRAVEL_PREFERENCE.getNavNumber(), null);
-                selectDefaultProfileDialog.dismiss();
-            }
-        });
-
-        mRadioPreferencesAdapter.setClickedLineCB(new PreferenceSettingsFragment.ListLineClicked() {
-            @Override
-            public void clickedItem(String itemID) {
-
-
-            }
-        });
-
-        mRadioPreferencesAdapter.setSelectedRadioButtonListener(new PreferenceSettingsFragment.ListRadioButtonClicked(){
-
-            @Override
-            public void clickedItem(int selectedPosition) {
-                radioButtonSelected = selectedPosition;
-            }
-        });
-
-        selectedRadioPreference();
-
-
-        dialogBuilder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                if(radioButtonSelected != -1) {
-                    final DefaultsProfilesVO selected = accountDefaultSettings.get(radioButtonSelected);
-
-                    String userEmail = getActivityInterface().getPersonalUserInformation().getUserEmailLogIn();
-
-                    ConnectionManager.getInstance(getActivity()).putAccountsPreferences(userEmail, selected.getId(), new ConnectionManager.ServerRequestListener() {
-                        @Override
-                        public void onSuccess(Object data) {
-                            FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
-                            my_trip_profile.setText(selected.getProfilename());
-                        }
-
-                        @Override
-                        public void onError(Object data) {
-                            ErrorMessage(data);
-                        }
-                    });
-                }
-            } });
-
-
-        //Create alert dialog object via builder
-        selectDefaultProfileDialog = dialogBuilder.create();
-        selectDefaultProfileDialog.setView(promptsViewTeest);
-        selectDefaultProfileDialog.setCancelable(false);
-        selectDefaultProfileDialog.show();
-
-
-
-      //  dialogBuilder.setView(promptsViewTeest);
-
-    }
-
-
-    private void sendUserSelectionToServer(){
-
-
-
-       /* AccountDefaultSettingsVO selected = accountDefaultSettings.get(radioButtonSelected);
-
-        String userEmail = getActivityInterface().getPersonalUserInformation().getUserEmailLogIn();
-        ConnectionManager.getInstance(getActivity()).putAccountsPreferences(userEmail, selected.getmId(), new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
-
-            }
-
-            @Override
-            public void onError(Object data) {
-                ErrorMessage(data);
-            }
-        });*/
-    }
-
-    private void selectedRadioPreference(){
-
-        FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
-
-        if(my_trip_profile.getTag() == null){
-            return;
-        }
-        String selectedTag = my_trip_profile.getTag().toString();
-        mRadioPreferencesAdapter.selectedItemID(selectedTag);
-    }
-
-    private AlertDialog selectDefaultProfileDialog;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -392,8 +247,8 @@ public class CNCFragment extends HGBAbstractFragment implements TitleNameChange 
         getActivityInterface().setCNCItems(null);
 
         //Kate check
-
-        //getActivityInterface().setTravelOrder(null);
+        args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
+     //   getActivityInterface().setTravelOrder(null);
         setTextForTrip("New Trip");
         mHGBPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
         mHGBPrefrenceManager.removeKey(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
@@ -586,35 +441,6 @@ private void setTextForTrip(String name){
     private void loadCNCList() {
 
 
-//        if ("".equals(strCNCList) && getActivityInterface().getCNCItems()== null ||
-//                strCNCList==null && getActivityInterface().getCNCItems()== null) {
-/*        if ((strCNCList.equals("") || strCNCList.equals("null")) && getActivityInterface().getCNCItems()== null ) {
-            Resources res = getResources();
-            String userName = "";
-            if( getActivityInterface().getCurrentUser() != null){
-                userName = getActivityInterface().getCurrentUser().getFirstname();
-            }
-
-            String text = String.format(res.getString(R.string.default_cnc_message),userName );
-
-            getActivityInterface().addCNCItem(new CNCItem(text, CNCAdapter.HGB_ITEM));
-            mTextTutoralHeader.setVisibility(View.VISIBLE);
-            mTextTutoralBody.setVisibility(View.VISIBLE);
-        } else {
-
-            if (getActivityInterface().getCNCItems() == null) {
-                try {
-                    Gson gson = new Gson();
-                    Type listType = new TypeToken<List<CNCItem>>() {
-                    }.getType();
-                    ArrayList<CNCItem> posts = (ArrayList<CNCItem>) gson.fromJson(strCNCList, listType);
-                    getActivityInterface().setCNCItems(posts);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }*/
-
         String strCNCList = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, "");
         if((strCNCList.equals("") || strCNCList.equals("null")) &&  getActivityInterface().getCNCItems()== null){
             Resources res = getResources();
@@ -752,13 +578,11 @@ private void setTextForTrip(String name){
             sendCNCMessageToServer(strMessage);
         } else {
 
-
+            selectedCount = 0;
             sendMessageToServer(strMessage, new iAfterServer() {
 
                 @Override
                 public void serverFinished(AirportServerResultVO airportResult) {
-
-
 
                     ArrayList<ResponsesVO> responses = airportResult.getResponses();
                     maxAirportSize = 0;//responses.size();
@@ -941,12 +765,12 @@ private void setTextForTrip(String name){
 
             UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
 
-                String solutionId = travelOrder.getmSolutionID();
-                airportSendValuesVO.setId(solutionId);
+            String solutionId = travelOrder.getmSolutionID();
+            airportSendValuesVO.setId(solutionId);
 
             airportSendValuesVO.setQuery(strMessage);
-
-            airportSendValuesVO.setTravelpreferenceprofileid(getActivityInterface().getCurrentUser().getUserprofileid());
+            
+            airportSendValuesVO.setTravelpreferenceprofileid(getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId());
 
             airportSendValuesVOsTemp.add(airportSendValuesVO);
 

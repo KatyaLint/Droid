@@ -44,7 +44,7 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.NavListAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.userprofilesadapter.UserProfilesAdapter;
-import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
+
 
 import hellogbye.com.hellogbyeandroid.fragments.HotelFragment;
 

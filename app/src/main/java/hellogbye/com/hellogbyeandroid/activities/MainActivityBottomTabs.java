@@ -32,7 +32,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.userprofilesadapter.UserProfilesAdapter;
-import hellogbye.com.hellogbyeandroid.fragments.CNCFragment;
+import hellogbye.com.hellogbyeandroid.fragments.cnc.CNCFragment;
 import hellogbye.com.hellogbyeandroid.fragments.hotel.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.hotel.SelectNewHotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
