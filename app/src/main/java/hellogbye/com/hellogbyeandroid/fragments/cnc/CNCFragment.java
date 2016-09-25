@@ -769,7 +769,7 @@ private void setTextForTrip(String name){
             airportSendValuesVO.setId(solutionId);
 
             airportSendValuesVO.setQuery(strMessage);
-            
+
             airportSendValuesVO.setTravelpreferenceprofileid(getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId());
 
             airportSendValuesVOsTemp.add(airportSendValuesVO);

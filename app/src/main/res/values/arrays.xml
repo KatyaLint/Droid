@@ -29,7 +29,7 @@
 
     <string-array name="title_array">
         <item>Mr</item>
-        <item>Mss</item>
+        <item>Miss</item>
         <item>Mrs</item>
     </string-array>
 
