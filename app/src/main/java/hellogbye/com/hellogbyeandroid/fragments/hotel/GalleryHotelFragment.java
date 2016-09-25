@@ -14,6 +14,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.ImageGalleryActivity;
 import hellogbye.com.hellogbyeandroid.adapters.HotelGalleryImageAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
 /**
@@ -23,6 +24,7 @@ public class GalleryHotelFragment extends HGBAbstractFragment {
 
     private RecyclerView mRecyclerView;
     private HotelGalleryImageAdapter mGalleryAdapter;
+    private FontTextView mNoImageTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,19 +37,27 @@ public class GalleryHotelFragment extends HGBAbstractFragment {
         View v = inflater.inflate(R.layout.hotel_gallery_layout, container, false);
 
         mRecyclerView = (RecyclerView)v.findViewById(R.id.hotel_gallery_list);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mGalleryAdapter = new HotelGalleryImageAdapter(getLegWithGuid(getActivityInterface().getTravelOrder()).getAllImagesVOs(),getActivity().getApplicationContext());
-        mRecyclerView.setAdapter(mGalleryAdapter);
-        mGalleryAdapter.SetOnItemClickListener(new HotelGalleryImageAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick() {
-                Gson gson = new Gson();
-                String json = gson.toJson(getLegWithGuid(getActivityInterface().getTravelOrder()).getAllImagesVOs());
-                Intent intent = new Intent(getActivity().getApplicationContext(),ImageGalleryActivity.class);
-                intent.putExtra("images",json);
-                startActivity(intent);
-            }
-        });
+        mNoImageTextView = (FontTextView)v.findViewById(R.id.no_images);
+
+        if(getLegWithGuid(getActivityInterface().getTravelOrder()).getAllImagesVOs().size() != 0){
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            mGalleryAdapter = new HotelGalleryImageAdapter(getLegWithGuid(getActivityInterface().getTravelOrder()).getAllImagesVOs(),getActivity().getApplicationContext());
+            mRecyclerView.setAdapter(mGalleryAdapter);
+            mGalleryAdapter.SetOnItemClickListener(new HotelGalleryImageAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick() {
+                    Gson gson = new Gson();
+                    String json = gson.toJson(getLegWithGuid(getActivityInterface().getTravelOrder()).getAllImagesVOs());
+                    Intent intent = new Intent(getActivity().getApplicationContext(),ImageGalleryActivity.class);
+                    intent.putExtra("images",json);
+                    startActivity(intent);
+                }
+            });
+        }else{
+            mNoImageTextView.setVisibility(View.VISIBLE);
+        }
+
+
         return v;
     }
 }
