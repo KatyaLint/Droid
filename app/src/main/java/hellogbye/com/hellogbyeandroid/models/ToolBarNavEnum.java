@@ -24,7 +24,7 @@ public enum ToolBarNavEnum {
     PAYMENT_TRAVELERS(18,"Travelers"),
     PAYMENT_TRAVELERS_DETAILS(19,"Traveler"),
     SELECT_CREDIT_CARD(20,"Review"),
-    ADD_CREDIT_CARD(21,"Add Credit Card"),
+    ADD_CREDIT_CARD(21,"Card Details"),
     COMPANIONS_DETAILS(22,"Companions Details"),
     HISTORY(23,"History"),
     COMPANIONS_PERSONAL_DETAILS(24,"Personal Info"),

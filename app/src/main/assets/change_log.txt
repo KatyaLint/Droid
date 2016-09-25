@@ -405,6 +405,8 @@ Code changing:
     HEL-1585 - cnc screen, after when query is found, in the title should appear trip name
     HEL-1578 - companions search should be up like in trips
     HEL-1628 - change "Mss" to "Miss"
+    HEL-1629 - travel profiles - change titles
+    HEL-1631 - payment card details screen name incorrect
 
 
     Code changing:
