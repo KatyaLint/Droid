@@ -24,8 +24,8 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  * Created by nyawka on 9/18/16.
  */
 public class PreferencesTabWidgetFragment extends HGBAbstractFragment {
-    private static final String TAB_1_TAG = "Flight";
-    private static final String TAB_2_TAG = "Hotel";
+    private static final String TAB_1_TAG = "Flights";
+    private static final String TAB_2_TAG = "Hotels";
     private FragmentTabHost mTabHost;
     private Typeface textFont;
     public static Fragment newInstance(int position) {
