@@ -1,16 +1,20 @@
 package hellogbye.com.hellogbyeandroid.fragments.hotel;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.ImageGalleryActivity;
 import hellogbye.com.hellogbyeandroid.adapters.HotelGalleryImageAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+
 
 /**
  * Created by arisprung on 9/15/16.
@@ -18,7 +22,6 @@ import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 public class GalleryHotelFragment extends HGBAbstractFragment {
 
     private RecyclerView mRecyclerView;
-    private StaggeredGridLayoutManager mLayoutManager;
     private HotelGalleryImageAdapter mGalleryAdapter;
 
     @Override
@@ -31,14 +34,20 @@ public class GalleryHotelFragment extends HGBAbstractFragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.hotel_gallery_layout, container, false);
 
-//        mRecyclerView = (RecyclerView)v.findViewById(R.id.hotel_gallery_list);
-//        mLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
-//        mLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//        mRecyclerView.setHasFixedSize(false);
-//
-//        mGalleryAdapter = new HotelGalleryImageAdapter(mImageList);
-//        mRecyclerView.setAdapter(mGalleryAdapter);
+        mRecyclerView = (RecyclerView)v.findViewById(R.id.hotel_gallery_list);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mGalleryAdapter = new HotelGalleryImageAdapter(getLegWithGuid(getActivityInterface().getTravelOrder()).getAllImagesVOs(),getActivity().getApplicationContext());
+        mRecyclerView.setAdapter(mGalleryAdapter);
+        mGalleryAdapter.SetOnItemClickListener(new HotelGalleryImageAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick() {
+                Gson gson = new Gson();
+                String json = gson.toJson(getLegWithGuid(getActivityInterface().getTravelOrder()).getAllImagesVOs());
+                Intent intent = new Intent(getActivity().getApplicationContext(),ImageGalleryActivity.class);
+                intent.putExtra("images",json);
+                startActivity(intent);
+            }
+        });
         return v;
     }
 }

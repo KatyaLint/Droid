@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"    android:layout_width="match_parent"
+    android:layout_margin="@dimen/DP2"
+    android:weightSum="3"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/gallery_image_1_1"
+        android:layout_width="0dp"
+        android:scaleType="centerCrop"
+        android:layout_weight="2"
+        android:layout_marginRight="@dimen/DP6"
+        android:layout_height="@dimen/DP120"
+        />
+
+    <ImageView
+
+        android:id="@+id/gallery_image_1_2"
+        android:layout_width="0dp"
+        android:scaleType="centerCrop"
+        android:layout_weight="0"
+        android:layout_height="@dimen/DP120"
+        />
+
+    <RelativeLayout
+        android:id="@+id/second_image_rl"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/DP120"
+        android:layout_weight="2"
+        android:visibility="gone"
+
+       >
+
+        <ImageView
+            android:id="@+id/gallery_image_rl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/DP120"
+            android:scaleType="centerCrop"
+
+            />
+
+        <View
+            android:id="@+id/gallery_gradient"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/DP120"
+            android:background="@drawable/trending_gradient_shape" />
+
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/gallery_number_images"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+
+            android:textColor="@color/COLOR_WHITE"
+            android:textSize="@dimen/SP20" />
+
+
+    </RelativeLayout>
+    </LinearLayout>

@@ -51,5 +51,6 @@ public class DetailsHotelFragment extends HGBAbstractFragment {
         mGridView.setAdapter(adapter);
 
 
+
     }
 }
