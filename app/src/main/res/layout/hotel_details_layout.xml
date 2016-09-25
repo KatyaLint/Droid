@@ -6,6 +6,24 @@
     android:padding="@dimen/DP10"
     android:orientation="vertical">
 
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/hotel_detail_contact_label"
+        android:layout_width="wrap_content"
+        android:text="CONTACT"
+        android:visibility="gone"
+        android:textSize="@dimen/SP12"
+        app:fontName="dinnextltpro_regular.otf"
+        android:layout_height="wrap_content" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/hotel_detail_contact"
+        android:layout_marginTop="@dimen/DP10"
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/SP12"
+        app:fontName="dinnextltpro_regular.otf"
+
+        android:layout_height="wrap_content" />
 
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -13,6 +31,8 @@
         android:layout_width="wrap_content"
         android:text="DESCRIPTION"
         android:textSize="@dimen/SP12"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/SP20"
         app:fontName="dinnextltpro_regular.otf"
         android:layout_height="wrap_content" />
 

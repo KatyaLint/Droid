@@ -424,3 +424,7 @@ Code changing:
     - Continue flight
     - Correct hotel nights
     - No grey icons for flights or hotels
+    - New Hotel Details
+    - New Select New Hotels
+    - Search for Hotel
+

@@ -36,7 +36,7 @@ public class ProfileDialogPopup  extends HGBAbstractFragment {
     ProfileDialogPopup(Activity activity){
         this.activity = activity;
     }
-    
+
 
 
     private void profilesDialog (ArrayList<DefaultsProfilesVO> userProfileVOs) {
