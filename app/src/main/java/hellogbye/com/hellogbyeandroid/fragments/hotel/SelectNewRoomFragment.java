@@ -21,6 +21,7 @@ import hellogbye.com.hellogbyeandroid.models.Amenities;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.RoomsVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.views.ExpandableHeightGridView;
+import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 import static com.google.android.gms.analytics.internal.zzy.v;
@@ -39,6 +40,7 @@ public class SelectNewRoomFragment extends HGBAbstractFragment {
     private FontTextView mPrice;
     private FontTextView mType;
     private FontTextView mShowMore;
+    private FontButtonView mSelectRoom;
 
 
 
@@ -57,6 +59,7 @@ public class SelectNewRoomFragment extends HGBAbstractFragment {
         View rootView = inflater.inflate(R.layout.detail_room_layout, container, false);
         mGridViewLong = (ExpandableHeightGridView) rootView.findViewById(R.id.room_grid_long);
         mGridViewShort = (ExpandableHeightGridView) rootView.findViewById(R.id.room_grid_short);
+      //  mSelectRoom= (FontButtonView) rootView.findViewById(R.id.select_room);
         mShowMore = (FontTextView) rootView.findViewById(R.id.show_more);
 
         mGridViewShort.setExpanded(true);
@@ -83,8 +86,8 @@ public class SelectNewRoomFragment extends HGBAbstractFragment {
         mPrice.setText(room.getmCost()+" USD/NIGHT");
         ImageLoader  imageLoader = ImageLoader.getInstance();
         imageLoader.displayImage(room.getmImages().get(0), mMainImageView);
-        CustomDetailAmenitiesGridAdapter adapterLong = new CustomDetailAmenitiesGridAdapter(getActivity(),getShortAdapter(room.getmAmenities()));
-        CustomDetailAmenitiesGridAdapter adapterShort = new CustomDetailAmenitiesGridAdapter(getActivity(),room.getmAmenities() );
+        CustomDetailAmenitiesGridAdapter adapterLong = new CustomDetailAmenitiesGridAdapter(getActivity(),room.getmAmenities());
+        CustomDetailAmenitiesGridAdapter adapterShort = new CustomDetailAmenitiesGridAdapter(getActivity(),getShortAdapter(room.getmAmenities()) );
         mGridViewLong.setAdapter(adapterLong);
         mGridViewShort.setAdapter(adapterShort);
 
@@ -94,13 +97,26 @@ public class SelectNewRoomFragment extends HGBAbstractFragment {
             public void onClick(View view) {
                 FontTextView tv = (FontTextView) view;
                 String str = tv.getText().toString();
-                if(str.equals(R.string.show_more)){
+                String str1 = getActivity().getResources().getString(R.string.show_more);
+                if(str.equals(str1)){
                     showLongGrid();
                 }else{
                     showShortGrid();
                 }
+
             }
         });
+
+//        mSelectRoom.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                sendNewRoomToServer();
+//            }
+//        });
+    }
+
+    private void sendNewRoomToServer() {
+
     }
 
     private ArrayList<Amenities> getShortAdapter(ArrayList<Amenities> amenities) {

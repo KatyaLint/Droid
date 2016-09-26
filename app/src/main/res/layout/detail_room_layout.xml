@@ -1,141 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:id="@+id/room_scrollview"
+        android:layout_width="match_parent"
+        android:layout_above="@+id/select_room"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:fillViewport="true">
 
-        <RelativeLayout
-            android:id="@+id/room_top_rl"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/main_image_room"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/DP200"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:scaleType="centerCrop" />
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/DP130"
-                android:layout_alignBottom="@+id/main_image_room"
-                android:background="@drawable/trending_gradient_shape" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/room_top_rl"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/DP10"
+                android:layout_height="wrap_content">
 
-                android:layout_alignBottom="@+id/main_image_room">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/main_image_room"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/DP200"
                     android:layout_alignParentLeft="true"
-                    android:gravity="left"
-                    android:orientation="vertical">
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:scaleType="centerCrop" />
 
-                    <hellogbye.com.hellogbyeandroid.views.FontTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Room Type"
-                        android:textColor="@color/COLOR_WHITE"
-                        android:textSize="@dimen/SP10" />
-
-                    <hellogbye.com.hellogbyeandroid.views.FontTextView
-                        android:id="@+id/room_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/COLOR_WHITE"
-                        android:textSize="@dimen/SP16" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                <View
                     android:layout_width="wrap_content"
+                    android:layout_height="@dimen/DP130"
+                    android:layout_alignBottom="@+id/main_image_room"
+                    android:background="@drawable/trending_gradient_shape" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:gravity="right"
-                    android:orientation="vertical">
+                    android:layout_alignBottom="@+id/main_image_room"
 
-                    <hellogbye.com.hellogbyeandroid.views.FontTextView
-                        android:id="@+id/room_price"
+                    android:padding="@dimen/DP10">
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/COLOR_WHITE"
-                        android:textSize="@dimen/SP16" />
+                        android:layout_alignParentLeft="true"
+                        android:gravity="left"
+                        android:orientation="vertical">
 
-                    <hellogbye.com.hellogbyeandroid.views.FontTextView
+                        <hellogbye.com.hellogbyeandroid.views.FontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Room Type"
+                            android:textColor="@color/COLOR_WHITE"
+                            android:textSize="@dimen/SP10"
+                            app:fontName="dinnextltpro_medium.otf" />
 
+                        <hellogbye.com.hellogbyeandroid.views.FontTextView
+                            android:id="@+id/room_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/COLOR_WHITE"
+                            android:textSize="@dimen/SP16"
+                            app:fontName="dinnextltpro_light.otf" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Taxes and fees extra"
-                        android:textColor="@color/COLOR_WHITE"
-                        android:textSize="@dimen/SP10" />
+                        android:layout_alignParentRight="true"
+                        android:gravity="right"
+                        android:orientation="vertical">
 
-                </LinearLayout>
+                        <hellogbye.com.hellogbyeandroid.views.FontTextView
+                            android:id="@+id/room_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/COLOR_WHITE"
+                            android:textSize="@dimen/SP16"
+                            app:fontName="dinnextltpro_medium.otf" />
 
+                        <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Taxes and fees extra"
+                            android:textColor="@color/COLOR_WHITE"
+                            android:textSize="@dimen/SP10"
+                            app:fontName="dinnextltpro_regular.otf" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/DP60"
+                    android:layout_below="@+id/main_image_room"
+                    android:layout_marginTop="@dimen/DP_MINUS_5"
+                    android:background="@drawable/background_triangle" />
 
             </RelativeLayout>
 
-            <View
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/DP60"
-                android:layout_below="@+id/main_image_room"
-                android:layout_marginTop="@dimen/DP_MINUS_5"
-                android:background="@drawable/background_triangle" />
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/DP10"
+                android:orientation="vertical">
 
-        </RelativeLayout>
-
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/DP20"
-            android:text="Amenities"
-            android:textColor="@color/COLOR_565656"
-            android:textSize="@dimen/DP20" />
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/DP20"
+                    android:text="Amenities"
+                    android:textColor="@color/COLOR_565656"
+                    android:textSize="@dimen/DP20"
+                    app:fontName="dinnextltpro_medium.otf" />
 
 
-        <hellogbye.com.hellogbyeandroid.views.ExpandableHeightGridView
-            android:id="@+id/room_grid_short"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/DP20"
-            android:gravity="center"
-            android:isScrollContainer="false"
-            android:numColumns="4"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="@dimen/DP20" />
+                <hellogbye.com.hellogbyeandroid.views.ExpandableHeightGridView
+                    android:id="@+id/room_grid_short"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/DP20"
+                    android:gravity="center"
+                    android:isScrollContainer="false"
+                    android:numColumns="4"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="@dimen/DP20" />
 
-        <hellogbye.com.hellogbyeandroid.views.ExpandableHeightGridView
-            android:id="@+id/room_grid_long"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/DP20"
-            android:gravity="center"
-            android:isScrollContainer="false"
-            android:numColumns="4"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="@dimen/DP20" />
+                <hellogbye.com.hellogbyeandroid.views.ExpandableHeightGridView
+                    android:id="@+id/room_grid_long"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/DP20"
+                    android:gravity="center"
+                    android:isScrollContainer="false"
+                    android:numColumns="4"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="@dimen/DP20"
+                    android:visibility="gone" />
 
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:id="@+id/show_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/DP10"
-            android:text="@string/show_more"
-            android:textColor="@color/COLOR_7FA5B4"
-            android:textSize="@dimen/DP10" />
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+                    android:id="@+id/show_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="@dimen/DP10"
+                    android:text="@string/show_more"
+                    android:textColor="@color/COLOR_003D4C"
+                    android:textSize="@dimen/DP10"
+                    app:fontName="dinnextltpro_regular.otf" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/DP1"
+                    android:layout_marginTop="@dimen/DP30"
+                    android:background="@color/COLOR_22999999" />
+            </LinearLayout>
 
 
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
-</ScrollView>
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:id="@+id/select_room"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/selector_red_button"
+        android:text="SELECT"
+        android:textAllCaps="false"
+        android:textColor="@color/COLOR_WHITE"
+        app:fontName="dinnextltpro_medium.otf" />
+
+</RelativeLayout>
