@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+import hellogbye.com.hellogbyeandroid.models.Amenities;
+
 /**
  * Created by nyawka on 9/9/15.
  */
@@ -57,6 +59,9 @@ public class RoomsVO {
     private String mCheckOut;
     @SerializedName("totalbeforetax")
     private double mTotalBeforeTax;
+
+    @SerializedName("amenities")
+    private ArrayList<Amenities> mAmenities;
 
 
 
@@ -154,5 +159,9 @@ public class RoomsVO {
 
     public void setmCancellationPolicy(String mCancellationPolicy) {
         this.mCancellationPolicy = mCancellationPolicy;
+    }
+
+    public ArrayList<Amenities> getmAmenities() {
+        return mAmenities;
     }
 }

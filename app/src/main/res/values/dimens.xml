@@ -3,6 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="DP_MINUS_5">-5dp</dimen>
+
     <dimen name="DP0">0dp</dimen>
     <dimen name="DP1">1dp</dimen>
     <dimen name="DP2">2dp</dimen>
@@ -32,6 +34,7 @@
     <dimen name="DP104">104dp</dimen>
     <dimen name="DP110">110dp</dimen>
     <dimen name="DP115">115dp</dimen>
+
 
     <dimen name="DP120">120dp</dimen>
     <dimen name="DP130">130dp</dimen>

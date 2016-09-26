@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.adapters.creditcardadapters.CreditCardAdapter;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.RoomsVO;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -21,7 +22,7 @@ public class AlternativeHotelRoomAdapter extends RecyclerView.Adapter<Alternativ
 
     private List<RoomsVO> itemsData;
 
-    private OnItemClickListener mItemClickListener;
+    private OnItemClickListener mItemClickListner;
     private  ImageLoader imageLoader;
     // Provide a suitable constructor (depends on the kind of dataset)
     public AlternativeHotelRoomAdapter(ArrayList<RoomsVO> myDataset) {
@@ -55,23 +56,7 @@ public class AlternativeHotelRoomAdapter extends RecyclerView.Adapter<Alternativ
         else{
             viewHolder.mRoomImageView.setBackgroundResource(R.drawable.room_placeholder);
         }
-//            DisplayImageOptions opts = new DisplayImageOptions.Builder().imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
-//                    .postProcessor(new BitmapProcessor() {
-//                        @Override
-//                        public Bitmap process(Bitmap bmp) {
-//                            return Bitmap.createScaledBitmap(bmp,800, 500, false);
-//                        }
-//                    })
-//                    .build();
-//            imageLoader.displayImage(room.getmImages().get(0),viewHolder.mRoomImageView,opts,new SimpleImageLoadingListener() {
-//                @Override
-//                public void onLoadingComplete(String imageUri, View view, final Bitmap loadedImage) {
-//                    // Do whatever you want with Bitmap
-//                    viewHolder.mCardLayout.setVisibility(View.VISIBLE);
-//                }
-//
-//
-//            });
+
 
 
         viewHolder.mRoomPriceFontTextView.setText(""+room.getmCost());
@@ -113,20 +98,20 @@ public class AlternativeHotelRoomAdapter extends RecyclerView.Adapter<Alternativ
 
 
         @Override
-        public void onClick(View v) {
-
-            //  mItemClickListener.onItemClick();
+        public void onClick(View view) {
+            if (mItemClickListner != null){
+                mItemClickListner.onItemClick(view,getAdapterPosition());
+            }
         }
-
     }
 
 
     public interface OnItemClickListener {
-        void onItemClick();
+        public void onItemClick(View view, int position);
     }
 
-    public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
-        this.mItemClickListener = mItemClickListener;
+    public void SetOnItemClickListener(final AlternativeHotelRoomAdapter.OnItemClickListener mItemClickListener) {
+        mItemClickListner = mItemClickListener;
     }
 
 }

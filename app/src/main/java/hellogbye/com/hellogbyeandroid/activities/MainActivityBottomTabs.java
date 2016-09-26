@@ -51,6 +51,7 @@ import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionDetailsFragm
 import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionsTravelers;
 import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionTabsWidgetFragment;
 import hellogbye.com.hellogbyeandroid.fragments.freeuser.FreeUserFragment;
+import hellogbye.com.hellogbyeandroid.fragments.hotel.SelectNewRoomFragment;
 import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.membership.MembershipFragment;
 import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsTabsView;
@@ -823,6 +824,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 break;
             case PAYMENT_TRAVELERS_DETAILS:
                 fragment = TravelerDetailsFragment.newInstance(navPosition);
+                break;
+            case SELECT_ROOM_FRAGMENT:
+                fragment = SelectNewRoomFragment.newInstance(navPosition);
                 break;
 
             case SELECT_HOTEL_FRAGMENT:

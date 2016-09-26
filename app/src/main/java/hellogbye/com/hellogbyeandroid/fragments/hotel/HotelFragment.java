@@ -270,12 +270,21 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
     }
 
-    private void initAlternativeRoomList(ArrayList<RoomsVO> roomlist) {
+    private void initAlternativeRoomList(final ArrayList<RoomsVO> roomlist) {
 
         mHotelRoomAdapter = new AlternativeHotelRoomAdapter(roomlist);
         mRecyclerView.setAdapter(mHotelRoomAdapter);
+        mHotelRoomAdapter.SetOnItemClickListener(new AlternativeHotelRoomAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Bundle args = new Bundle();
+                Gson gson = new Gson();
+                String json = gson.toJson(roomlist.get(position));
+                args.putString("alternative_rooms", json);
+                getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_ROOM_FRAGMENT.getNavNumber(), args);
+            }
+        });
     }
-
 
     private Marker setCurrentHotel() {
         if(mMap != null){
