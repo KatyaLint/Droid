@@ -16,6 +16,9 @@ public class RoomsVO {
     private String mRoomType;
     @SerializedName("code")
     private String mCode;
+    @SerializedName("maxroomoccupancy")
+    private int maxroomoccupancy;
+
     @SerializedName("description")
     private String mDescription;
     @SerializedName("smoking")
@@ -163,5 +166,9 @@ public class RoomsVO {
 
     public ArrayList<Amenities> getmAmenities() {
         return mAmenities;
+    }
+
+    public int getMaxroomoccupancy() {
+        return maxroomoccupancy;
     }
 }

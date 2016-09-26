@@ -40,6 +40,8 @@ public class SelectNewRoomFragment extends HGBAbstractFragment {
     private FontTextView mPrice;
     private FontTextView mType;
     private FontTextView mShowMore;
+    private FontTextView mCapaity;
+    private FontTextView mPolicy;
     private FontButtonView mSelectRoom;
 
 
@@ -59,7 +61,9 @@ public class SelectNewRoomFragment extends HGBAbstractFragment {
         View rootView = inflater.inflate(R.layout.detail_room_layout, container, false);
         mGridViewLong = (ExpandableHeightGridView) rootView.findViewById(R.id.room_grid_long);
         mGridViewShort = (ExpandableHeightGridView) rootView.findViewById(R.id.room_grid_short);
-      //  mSelectRoom= (FontButtonView) rootView.findViewById(R.id.select_room);
+        mCapaity = (FontTextView) rootView.findViewById(R.id.capacity);
+        mPolicy = (FontTextView) rootView.findViewById(R.id.policy);
+        mSelectRoom= (FontButtonView) rootView.findViewById(R.id.select_room);
         mShowMore = (FontTextView) rootView.findViewById(R.id.show_more);
 
         mGridViewShort.setExpanded(true);
@@ -84,6 +88,9 @@ public class SelectNewRoomFragment extends HGBAbstractFragment {
         RoomsVO room = gson.fromJson(strValue, roomType);
         mType.setText(room.getmRoomType());
         mPrice.setText(room.getmCost()+" USD/NIGHT");
+
+        mCapaity.setText(room.getMaxroomoccupancy()+" people capacity");
+        mPolicy.setText(room.getmCancellationPolicy());
         ImageLoader  imageLoader = ImageLoader.getInstance();
         imageLoader.displayImage(room.getmImages().get(0), mMainImageView);
         CustomDetailAmenitiesGridAdapter adapterLong = new CustomDetailAmenitiesGridAdapter(getActivity(),room.getmAmenities());
@@ -107,12 +114,12 @@ public class SelectNewRoomFragment extends HGBAbstractFragment {
             }
         });
 
-//        mSelectRoom.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                sendNewRoomToServer();
-//            }
-//        });
+        mSelectRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendNewRoomToServer();
+            }
+        });
     }
 
     private void sendNewRoomToServer() {

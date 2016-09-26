@@ -7,8 +7,8 @@
     <ScrollView
         android:id="@+id/room_scrollview"
         android:layout_width="match_parent"
-        android:layout_above="@+id/select_room"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/select_room"
         android:fillViewport="true">
 
 
@@ -114,7 +114,7 @@
                 <hellogbye.com.hellogbyeandroid.views.FontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/DP20"
+                    android:layout_marginTop="@dimen/SP20"
                     android:text="Amenities"
                     android:textColor="@color/COLOR_565656"
                     android:textSize="@dimen/DP20"
@@ -130,7 +130,7 @@
                     android:isScrollContainer="false"
                     android:numColumns="4"
                     android:stretchMode="columnWidth"
-                    android:verticalSpacing="@dimen/DP20" />
+                    android:verticalSpacing="@dimen/SP20" />
 
                 <hellogbye.com.hellogbyeandroid.views.ExpandableHeightGridView
                     android:id="@+id/room_grid_long"
@@ -141,7 +141,7 @@
                     android:isScrollContainer="false"
                     android:numColumns="4"
                     android:stretchMode="columnWidth"
-                    android:verticalSpacing="@dimen/DP20"
+                    android:verticalSpacing="@dimen/SP20"
                     android:visibility="gone" />
 
                 <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -152,7 +152,7 @@
                     android:layout_marginTop="@dimen/DP10"
                     android:text="@string/show_more"
                     android:textColor="@color/COLOR_003D4C"
-                    android:textSize="@dimen/DP10"
+                    android:textSize="@dimen/SP10"
                     app:fontName="dinnextltpro_regular.otf" />
 
                 <View
@@ -160,6 +160,55 @@
                     android:layout_height="@dimen/DP1"
                     android:layout_marginTop="@dimen/DP30"
                     android:background="@color/COLOR_22999999" />
+
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/DP20"
+                    android:text="Capacity"
+                    android:textColor="@color/COLOR_565656"
+                    android:textSize="@dimen/SP20"
+                    app:fontName="dinnextltpro_medium.otf" />
+
+
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+                    android:id="@+id/capacity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/DP10"
+                    android:drawableLeft="@drawable/capacity"
+                    android:drawablePadding="@dimen/DP6"
+                    android:gravity="center_vertical"
+                    android:text="2 people capacity"
+                    android:textColor="@color/COLOR_565656"
+                    android:textSize="@dimen/SP14"
+                    app:fontName="dinnextltpro_regular.otf" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/DP1"
+                    android:layout_marginTop="@dimen/DP30"
+                    android:background="@color/COLOR_22999999" />
+
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/DP20"
+                    android:text="Policies"
+                    android:textColor="@color/COLOR_565656"
+                    app:fontName="dinnextltpro_medium.otf"
+                    android:textSize="@dimen/SP20" />
+
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+                    android:id="@+id/policy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/DP10"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/COLOR_565656"
+                    android:textSize="@dimen/SP14"
+                    app:fontName="dinnextltpro_regular.otf" />
             </LinearLayout>
 
 
@@ -171,7 +220,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/selector_red_button"
+        android:background="@drawable/red_button_no_radius"
         android:text="SELECT"
         android:textAllCaps="false"
         android:textColor="@color/COLOR_WHITE"
