@@ -54,7 +54,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/main_image_room"
-
                     android:padding="@dimen/DP10">
 
                     <LinearLayout
@@ -112,11 +111,9 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/DP60"
-                    android:background="@drawable/background_triangle"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:id="@+id/view" />
+                    android:layout_below="@+id/main_image_room"
+                    android:layout_marginTop="@dimen/DP_MINUS_5"
+                    android:background="@drawable/background_triangle" />
 
             </RelativeLayout>
 

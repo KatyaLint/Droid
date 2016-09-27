@@ -79,7 +79,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private FragmentTabHost mTabHost;
     private static final String TAB_1_TAG = "DETAILS";
     private static final String TAB_2_TAG = "GALLERY";
-    private static final String TAB_3_TAG = "Hotel Cancellation Policy";
+    private static final String TAB_3_TAG = "Hotel Policies";
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new HotelFragment();
