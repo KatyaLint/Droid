@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.application.HGBApplication;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
@@ -202,7 +203,7 @@ public class CostumeToolBar extends Toolbar {
         titleBar.setVisibility(View.VISIBLE);
         search_maginfy.setVisibility(View.VISIBLE);
         auto_complete.setVisibility(View.GONE);
-        HGBUtility.hideKeyboard(mContext,auto_complete);
+        HGBUtility.hideKeyboard(HGBApplication.getInstance(),auto_complete);
 
     }
 
@@ -212,7 +213,7 @@ public class CostumeToolBar extends Toolbar {
         search_maginfy.setVisibility(View.GONE);
         auto_complete.setVisibility(View.VISIBLE);
         auto_complete.requestFocus();
-        HGBUtility.showKeyboard(mContext,auto_complete);
+        HGBUtility.showKeyboard(HGBApplication.getInstance(),auto_complete);
 
     }
 
