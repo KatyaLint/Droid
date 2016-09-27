@@ -4,12 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:id="@+id/select_room"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/red_button_no_radius"
+        android:text="SELECT"
+        android:textAllCaps="false"
+        android:textColor="@color/COLOR_WHITE"
+        app:fontName="dinnextltpro_medium.otf" />
+
     <ScrollView
         android:id="@+id/room_scrollview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/select_room"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
 
         <LinearLayout
@@ -99,9 +112,11 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/DP60"
-                    android:layout_below="@+id/main_image_room"
-                    android:layout_marginTop="@dimen/DP_MINUS_5"
-                    android:background="@drawable/background_triangle" />
+                    android:background="@drawable/background_triangle"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/view" />
 
             </RelativeLayout>
 
@@ -152,7 +167,7 @@
                     android:layout_marginTop="@dimen/DP10"
                     android:text="@string/show_more"
                     android:textColor="@color/COLOR_003D4C"
-                    android:textSize="@dimen/SP10"
+                    android:textSize="@dimen/SP16"
                     app:fontName="dinnextltpro_regular.otf" />
 
                 <View
@@ -214,16 +229,5 @@
 
         </LinearLayout>
     </ScrollView>
-
-    <hellogbye.com.hellogbyeandroid.views.FontButtonView
-        android:id="@+id/select_room"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/red_button_no_radius"
-        android:text="SELECT"
-        android:textAllCaps="false"
-        android:textColor="@color/COLOR_WHITE"
-        app:fontName="dinnextltpro_medium.otf" />
 
 </RelativeLayout>

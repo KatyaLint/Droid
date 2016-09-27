@@ -17,7 +17,6 @@ import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.Amenities;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.RoomsVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
@@ -99,6 +98,7 @@ public class SelectNewRoomFragment extends HGBAbstractFragment {
         CustomDetailAmenitiesGridAdapter adapterShort = new CustomDetailAmenitiesGridAdapter(getActivity(),getShortAdapter(mSelectedRoom.getmAmenities()) );
         mGridViewLong.setAdapter(adapterLong);
         mGridViewShort.setAdapter(adapterShort);
+        setNumberOfPhotos();
 
 
         mShowMore.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +107,7 @@ public class SelectNewRoomFragment extends HGBAbstractFragment {
                 FontTextView tv = (FontTextView) view;
                 String str = tv.getText().toString();
                 String str1 = getActivity().getResources().getString(R.string.show_more);
-                if(str.equals(str1)){
+                if(str.contains(str1)){
                     showLongGrid();
                 }else{
                     showShortGrid();
@@ -163,10 +163,15 @@ public class SelectNewRoomFragment extends HGBAbstractFragment {
     }
 
     private void showShortGrid(){
-        mShowMore.setText(R.string.show_more);
+        setNumberOfPhotos();
         mGridViewLong.setVisibility(View.GONE);
         mGridViewShort.setVisibility(View.VISIBLE);
 
+    }
+
+    private void setNumberOfPhotos() {
+        int iNumber =mSelectedRoom.getmAmenities().size()-NUMBER_OF_SHORT_AMNITIES;
+        mShowMore.setText("Show more "+"("+iNumber+")");
     }
 
     private void showLongGrid(){
