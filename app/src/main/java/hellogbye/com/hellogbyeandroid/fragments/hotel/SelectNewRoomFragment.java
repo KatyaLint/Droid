@@ -7,24 +7,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.Amenities;
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.RoomsVO;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.views.ExpandableHeightGridView;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
-
-import static com.google.android.gms.analytics.internal.zzy.v;
 
 /**
  * Created by arisprung on 9/25/16.
@@ -43,6 +42,8 @@ public class SelectNewRoomFragment extends HGBAbstractFragment {
     private FontTextView mCapaity;
     private FontTextView mPolicy;
     private FontButtonView mSelectRoom;
+    private RoomsVO mSelectedRoom;
+    private String  mPax;
 
 
 
@@ -85,16 +86,17 @@ public class SelectNewRoomFragment extends HGBAbstractFragment {
         }.getType();
 
         Gson gson = new Gson();
-        RoomsVO room = gson.fromJson(strValue, roomType);
-        mType.setText(room.getmRoomType());
-        mPrice.setText(room.getmCost()+" USD/NIGHT");
+        mSelectedRoom = gson.fromJson(strValue, roomType);
+        mPax = getArguments().getString("paxid", "");
+        mType.setText(mSelectedRoom.getmRoomType());
+        mPrice.setText(mSelectedRoom.getmCost()+" USD/NIGHT");
 
-        mCapaity.setText(room.getMaxroomoccupancy()+" people capacity");
-        mPolicy.setText(room.getmCancellationPolicy());
+        mCapaity.setText(mSelectedRoom.getMaxroomoccupancy()+" people capacity");
+        mPolicy.setText(mSelectedRoom.getmCancellationPolicy());
         ImageLoader  imageLoader = ImageLoader.getInstance();
-        imageLoader.displayImage(room.getmImages().get(0), mMainImageView);
-        CustomDetailAmenitiesGridAdapter adapterLong = new CustomDetailAmenitiesGridAdapter(getActivity(),room.getmAmenities());
-        CustomDetailAmenitiesGridAdapter adapterShort = new CustomDetailAmenitiesGridAdapter(getActivity(),getShortAdapter(room.getmAmenities()) );
+        imageLoader.displayImage(mSelectedRoom.getmImages().get(0), mMainImageView);
+        CustomDetailAmenitiesGridAdapter adapterLong = new CustomDetailAmenitiesGridAdapter(getActivity(),mSelectedRoom.getmAmenities());
+        CustomDetailAmenitiesGridAdapter adapterShort = new CustomDetailAmenitiesGridAdapter(getActivity(),getShortAdapter(mSelectedRoom.getmAmenities()) );
         mGridViewLong.setAdapter(adapterLong);
         mGridViewShort.setAdapter(adapterShort);
 
@@ -124,16 +126,39 @@ public class SelectNewRoomFragment extends HGBAbstractFragment {
 
     private void sendNewRoomToServer() {
 
+        ConnectionManager.getInstance(getActivity()).putAlternateHotelRoom(getActivityInterface().getTravelOrder().getmSolutionID(),
+                mPax,
+                mSelectedRoom.getmGuid(), new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        getFlowInterface().callRefreshItineraryWithCallback(ToolBarNavEnum.HOTEL.getNavNumber(), new RefreshComplete() {
+                            @Override
+                            public void onRefreshSuccess() {
+                                //selectedItemGuidNumber(nodesVO.getmGuid());
+                                getActivity().onBackPressed();
+                            }
+
+                            @Override
+                            public void onRefreshError() {
+
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onError(Object data) {
+                        ErrorMessage(data);
+                    }
+                });
+
     }
 
     private ArrayList<Amenities> getShortAdapter(ArrayList<Amenities> amenities) {
-
         ArrayList<Amenities> list = new ArrayList<>();
-
         for (int i = 0; i < NUMBER_OF_SHORT_AMNITIES; i++) {
             list.add(amenities.get(i));
         }
-
         return list;
     }
 

@@ -311,6 +311,9 @@ public class CostumeToolBar extends Toolbar {
                 preferences_edit_mode.setVisibility(View.VISIBLE);
                 edit_preferences.setVisibility(View.VISIBLE);
                 break;
+            case SELECT_ROOM_FRAGMENT:
+                titleBar.setVisibility(View.VISIBLE);
+                break;
 
         }
 

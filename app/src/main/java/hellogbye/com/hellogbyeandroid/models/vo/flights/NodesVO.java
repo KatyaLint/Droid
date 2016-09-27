@@ -631,4 +631,8 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     public void setmOriginAirportName(String mOriginAirportName) {
         this.mOriginAirportName = mOriginAirportName;
     }
+
+    public String getmPaxguid() {
+        return mPaxguid;
+    }
 }

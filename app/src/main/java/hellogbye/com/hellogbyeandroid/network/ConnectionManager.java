@@ -1839,8 +1839,7 @@ public class ConnectionManager {
     }
 
 
-    public void putAlternateHotelRoom(String solutioid, String paxid, String checkin, String checkout, String hotelroomid, final ServerRequestListener listener) {
-        //  {"parameters":{"solution":"c86d9879-eb15-4164-8b75-6bbac0787b75","paxid":"9d2c85f5-d295-4064-a8c6-a4d0015b52e4","checkin":"2015-09-03","checkout":"2015-09-04"},"hotel":"c329c20a-4836-4bec-9580-48f7814e9fbd"}
+    public void putAlternateHotelRoom(String solutioid, String paxid,String hotelroomid, final ServerRequestListener listener) {
         String url = getURL(Services.USER_HOTEL_ROOM_ALTERNATIVE);
         JSONObject jsonObjectWrapper = new JSONObject();
         try {
@@ -1848,8 +1847,7 @@ public class ConnectionManager {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("solution", solutioid);
             jsonObject.put("paxid", paxid);
-            jsonObject.put("checkin", checkin);
-            jsonObject.put("checkout", checkout);
+
             jsonObjectWrapper.put("parameters", jsonObject);
             jsonObjectWrapper.put("hotelroom", hotelroomid);
 

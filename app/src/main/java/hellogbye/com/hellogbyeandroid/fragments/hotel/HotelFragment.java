@@ -207,22 +207,22 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
     private void loadAlternativeHotels() {
 
+        ConnectionManager.getInstance(activity).getAlternateHotelsWithHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
+                passengersVO.getmPaxguid(),
+                currentSelectedNode.getmCheckIn(), currentSelectedNode.getmCheckOut(), new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        CellsVO cellsVO = (CellsVO) data;
+                        mNodeArrayList.clear();
+                        mNodeArrayList.addAll(cellsVO.getmNodes());
+                    }
 
-            ConnectionManager.getInstance(activity).getAlternateHotelsWithHotel(getActivityInterface().getTravelOrder().getmSolutionID(),
-                    passengersVO.getmPaxguid(),
-                    currentSelectedNode.getmCheckIn(), currentSelectedNode.getmCheckOut(), new ConnectionManager.ServerRequestListener() {
-                        @Override
-                        public void onSuccess(Object data) {
-                            CellsVO cellsVO = (CellsVO) data;
-                            mNodeArrayList.clear();
-                            mNodeArrayList.addAll(cellsVO.getmNodes());
-                        }
+                    @Override
+                    public void onError(Object data) {
+                        ErrorMessage(data);
+                    }
+                });
 
-                        @Override
-                        public void onError(Object data) {
-                            ErrorMessage(data);
-                        }
-                    });
 
     }
 
@@ -256,8 +256,9 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
     private void initHotel(NodesVO node) {
 
         mListForGallery = new ArrayList<>();
+        NodesVO nodesVO = getNodeWithGuidAndPaxID(node.getmGuid());
         mHotelNameFontTextView.setText(node.getmHotelName());
-        mRoomName.setText(node.getUserName());
+        mRoomName.setText(nodesVO.getUserName());
         mChckInDate.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(node.getmCheckIn()));
         mChckOutDate.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(node.getmCheckOut()));
         long diff = HGBUtilityDate.dayDifference(node.getmCheckIn(), node.getmCheckOut());
@@ -281,6 +282,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
                 Gson gson = new Gson();
                 String json = gson.toJson(roomlist.get(position));
                 args.putString("alternative_rooms", json);
+                args.putString("paxid", currentSelectedNode.getmPaxguid());
                 getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_ROOM_FRAGMENT.getNavNumber(), args);
             }
         });
@@ -338,12 +340,10 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         mTabHost = (FragmentTabHost)rootview.findViewById(android.R.id.tabhost);
 
         mTabHost.setup(getActivity(), getChildFragmentManager(), android.R.id.tabcontent);
-
-        mTabHost.addTab(mTabHost.newTabSpec(TAB_1_TAG).setIndicator(TAB_1_TAG),
-                DetailsHotelFragment.class, null);
-
         mTabHost.addTab(mTabHost.newTabSpec(TAB_2_TAG).setIndicator(TAB_2_TAG),
                 GalleryHotelFragment.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_1_TAG).setIndicator(TAB_1_TAG),
+                DetailsHotelFragment.class, null);
 
         mTabHost.addTab(mTabHost.newTabSpec(TAB_3_TAG).setIndicator(TAB_3_TAG),
                 PolicyHotelFragment.class, null);
