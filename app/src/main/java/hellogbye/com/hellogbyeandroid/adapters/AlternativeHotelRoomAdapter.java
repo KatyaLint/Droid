@@ -93,6 +93,15 @@ public class AlternativeHotelRoomAdapter extends PagerAdapter {
         }else{
             mRoomSelectedImageView.setVisibility(View.VISIBLE);
         }
+
+        mRoomImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onLinearLayoutClickListner != null){
+                    onLinearLayoutClickListner.onItemClick(view,position);
+                }
+            }
+        });
         container.addView(itemLayoutView);
         return itemLayoutView;
     }
