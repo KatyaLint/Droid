@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,6 +36,7 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelRoomAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.CustomAlternativeHotelAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
@@ -47,6 +49,8 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
+import static hellogbye.com.hellogbyeandroid.R.id.position;
+
 
 /**
  * Created by arisprung on 9/30/15.
@@ -55,12 +59,11 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
     private SupportMapFragment fragment;
     private GoogleMap mMap;
-    private RecyclerView mRecyclerView;
+    private ViewPager mViewPager;
     private AlternativeHotelRoomAdapter mHotelRoomAdapter;
     private FontTextView mHotelNameFontTextView;
     private FontTextView mHotelPriceFontTextView;
     private FontTextView mHotelDaysFontTextView;
-    private LinearLayoutManager mLayoutManager;
     private FontTextView mAlertnativeHotelFontTextView;
     private FontTextView mRoomName;
     private FontTextView mChckInDate;
@@ -243,9 +246,8 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         mHotelPriceFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_price);
         mHotelDaysFontTextView = (FontTextView) rootView.findViewById(R.id.days);
         mAlertnativeHotelFontTextView = (FontTextView) rootView.findViewById(R.id.show_alternative_hotel);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.rooms_recycler_view);
-        mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        mViewPager = (ViewPager) rootView.findViewById(R.id.rooms_view_pager);
+
 
 
         return rootView;
@@ -273,9 +275,9 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
     private void initAlternativeRoomList(final ArrayList<RoomsVO> roomlist) {
 
-        mHotelRoomAdapter = new AlternativeHotelRoomAdapter(roomlist);
-        mRecyclerView.setAdapter(mHotelRoomAdapter);
-        mHotelRoomAdapter.SetOnItemClickListener(new AlternativeHotelRoomAdapter.OnItemClickListener() {
+        mHotelRoomAdapter = new AlternativeHotelRoomAdapter(roomlist,getActivity().getApplicationContext());
+        mViewPager.setAdapter(mHotelRoomAdapter);
+        mHotelRoomAdapter.SetOnItemClickListener(new CustomAlternativeHotelAdapter.OnLinearLayoutClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Bundle args = new Bundle();
@@ -287,6 +289,9 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
             }
         });
     }
+
+
+
 
     private Marker setCurrentHotel() {
         if(mMap != null){
