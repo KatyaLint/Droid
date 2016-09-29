@@ -427,4 +427,5 @@ Code changing:
     - New Hotel Details
     - New Select New Hotels
     - Search for Hotel
+    - Trips images
 

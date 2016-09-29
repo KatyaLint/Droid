@@ -106,7 +106,7 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
         });*/
 
 
-        HGBUtility.loadRoundedImage( item.getUrlToCityView(),  viewHolder.my_trip_user_image, R.drawable.city_avatar_a_2);
+        HGBUtility.loadRoundedImage( item.getTripimage(),  viewHolder.my_trip_user_image, R.drawable.city_avatar_a_2);
         viewHolder.my_trip_name.setText(item.getName());
         viewHolder.my_trip_dates.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(item.getStartdate())+" - "+HGBUtilityDate.parseDateToddMMyyyyMyTrip(item.getEnddate()));
         if(item.getPaymentstatus().equals("UPD")){

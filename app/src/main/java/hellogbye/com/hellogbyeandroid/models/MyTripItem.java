@@ -25,6 +25,9 @@ public class MyTripItem {
     @SerializedName("modifieddatetime")
     private String modifieddatetime;
 
+    @SerializedName("tripimage")
+    private String tripimage;
+
 
     @SerializedName("enddate")
     private String enddate;
@@ -125,5 +128,13 @@ public class MyTripItem {
 
         }
       //  this.urlToCityView = urlToCityView;
+    }
+
+    public String getTripimage() {
+        return tripimage;
+    }
+
+    public void setTripimage(String tripimage) {
+        this.tripimage = tripimage;
     }
 }
