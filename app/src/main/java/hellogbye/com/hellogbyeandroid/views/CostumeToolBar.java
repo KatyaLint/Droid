@@ -47,6 +47,7 @@ public class CostumeToolBar extends Toolbar {
 
 
     private ImageButton tool_bar_delete_preferences;
+    private ImageButton toolbar_profile_popup;
 
     public CostumeToolBar(Context context) {
         super(context);
@@ -125,7 +126,9 @@ public class CostumeToolBar extends Toolbar {
         if(auto_complete == null){
             auto_complete = (AutoCompleteTextView) findViewById(R.id.autocomplete);
         }
-
+        if(toolbar_profile_popup == null){
+            toolbar_profile_popup = (ImageButton)findViewById(R.id.toolbar_profile_popup);
+        }
 
 
         initSearchBar();
@@ -239,6 +242,7 @@ public class CostumeToolBar extends Toolbar {
         search_view_tool_bar.setVisibility(View.GONE);
         auto_complete.setVisibility(View.GONE);
         toolbar_add_companion.setVisibility(View.GONE);
+        toolbar_profile_popup.setVisibility(View.GONE);
 
 
         switch (navBar) {
@@ -256,6 +260,7 @@ public class CostumeToolBar extends Toolbar {
            //     tool_bar_profile_name.setVisibility(View.VISIBLE);
                 itirnarary_title_Bar.setVisibility(VISIBLE);
                 toolbar_new_iternerary_cnc.setVisibility(View.VISIBLE);
+                toolbar_profile_popup.setVisibility(View.VISIBLE);
                 break;
             case ITINARERY:
                 up_bar_favorite.setVisibility(View.VISIBLE);

@@ -20,13 +20,19 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 public class ChangeTripName  extends HGBAbstractFragment {
 
     public static void onClickListener(final Activity activity, final String solutionID, final UserTravelMainVO userTravelMainVO){
+        final FontTextView itirnarary_title_Bar = ((MainActivityBottomTabs)activity).getItirnaryTitleBar();
+
+        String text = itirnarary_title_Bar.getText().toString();
+       // if(text.equals("New Trip")){
+        //    return;
+        //}
+
 
         LayoutInflater li = LayoutInflater.from(activity);
         final View promptsView = li.inflate(R.layout.popup_layout_change_iteinarary_name, null);
         final EditText input = (EditText) promptsView
                 .findViewById(R.id.change_iteinarary_name);
 
-       final FontTextView itirnarary_title_Bar = ((MainActivityBottomTabs)activity).getItirnaryTitleBar();
 
         itirnarary_title_Bar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +63,6 @@ public class ChangeTripName  extends HGBAbstractFragment {
         ConnectionManager.getInstance(activity).putItenararyTripName(solutionName, solutionID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-
             }
 
             @Override
@@ -66,4 +71,6 @@ public class ChangeTripName  extends HGBAbstractFragment {
             }
         });
     }
+
+
 }

@@ -142,6 +142,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private AutoCompleteTextView mAutoComplete;
 
     private NodesVO mSelectedHotelNode;
+    private ImageButton toolbar_profile_popup;
     //private FontTextView toolbar_trip_name;
 
     public HGBSaveDataClass getHGBSaveDataClass() {
@@ -421,6 +422,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         titleBar = (FontTextView)mToolbar.findViewById(R.id.titleBar);
         my_trip_profile = (FontTextView) findViewById(R.id.my_trip_profile);
         tool_bar_delete_preferences = (ImageButton)findViewById(R.id.tool_bar_delete_preferences);
+        toolbar_profile_popup = (ImageButton)findViewById(R.id.toolbar_profile_popup);
       //  toolbar_trip_name = (FontTextView)findViewById(R.id.toolbar_trip_name);
 
     }
@@ -429,6 +431,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         return toolbar_trip_name;
     }*/
 
+    public ImageButton getToolbarProfilePopup(){
+        return toolbar_profile_popup;
+    }
     public ImageButton getToolBarDeletePreferences(){
         return tool_bar_delete_preferences;
     }

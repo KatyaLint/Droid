@@ -75,12 +75,13 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
             public void doBack() {
                 if(radioButtonSelected != -1) {
                     AccountDefaultSettingsVO selected = accountDefaultSettings.get(radioButtonSelected);
-
+                    final String selectedID = selected.getmId();
                     String userEmail = getActivityInterface().getPersonalUserInformation().getUserEmailLogIn();
-                    ConnectionManager.getInstance(getActivity()).putAccountsPreferences(userEmail, selected.getmId(), new ConnectionManager.ServerRequestListener() {
+                    ConnectionManager.getInstance(getActivity()).putAccountsPreferences(userEmail, selectedID, new ConnectionManager.ServerRequestListener() {
                         @Override
                         public void onSuccess(Object data) {
-
+                            FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
+                            my_trip_profile.setTag(selectedID);
                         }
 
                         @Override

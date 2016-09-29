@@ -37,6 +37,7 @@ import hellogbye.com.hellogbyeandroid.fragments.ChangeTripName;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TitleNameChange;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
+import hellogbye.com.hellogbyeandroid.fragments.preferences.preferencespopup.UserProfilePreferences;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -88,7 +89,7 @@ public class CNCFragment extends HGBAbstractFragment implements TitleNameChange 
 
     private FontTextView mTextTutoralBody;
     private LinearLayout cnc_text_tutorial_ll;
-    private FontTextView mTextTutoralHeader;
+
     private  Handler tutorailTexthandler = new Handler();
     private   Runnable mRunnable;
     private String[] account_settings;
@@ -108,6 +109,9 @@ public class CNCFragment extends HGBAbstractFragment implements TitleNameChange 
 
     private FontTextView cnc_start_planing_text;
     private FontTextView itirnarary_title_Bar;
+    private PreferencesSettingsPreferencesCheckAdapter mRadioPreferencesAdapter;
+    private ArrayList<DefaultsProfilesVO> accountDefaultSettings;
+    private UserProfilePreferences userProfilePreferences;
 
     //   private  AirportSendValuesVO airportSendValuesVO;
 
@@ -148,7 +152,8 @@ public class CNCFragment extends HGBAbstractFragment implements TitleNameChange 
             setTutorialTextVisibility(false);
         }
 
-        getAccountsProfiles();
+        userProfilePreferences = new UserProfilePreferences();
+        userProfilePreferences.getAccountsProfiles(getActivity(), getActivityInterface());
 
 
         initList();
@@ -161,16 +166,16 @@ public class CNCFragment extends HGBAbstractFragment implements TitleNameChange 
         }
 
         joinCompanionToTravel();
-       /* final LinearLayout edit_preferences = ((MainActivityBottomTabs)getActivity()).getToolBarEditPreferences();*/
-/*
-        tool_bar_profile_name = ((MainActivityBottomTabs)getActivity()).getToolBarProfileChange();
-        tool_bar_profile_name.setOnClickListener(new View.OnClickListener() {
+        final ImageButton toolbar_profile_popup = ((MainActivityBottomTabs)getActivity()).getToolbarProfilePopup();
+        toolbar_profile_popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getUserSettings();
+                userProfilePreferences.getUserSettings(getActivity(), getFlowInterface(), getActivityInterface());
             }
         });
-*/
+       // tool_bar_profile_name = ((MainActivityBottomTabs)getActivity()).getToolBarProfileChange();
+
+
 
         ImageButton newIteneraryImageButton = ((MainActivityBottomTabs) getActivity()).getToolbar_new_iterneraryCnc();
         newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
@@ -186,10 +191,12 @@ public class CNCFragment extends HGBAbstractFragment implements TitleNameChange 
         UserTravelMainVO travelerOrder = getActivityInterface().getTravelOrder();
         if(travelerOrder != null && travelerOrder.getmSolutionName()!= null){
             setSolutionNameForItirnarary();
+
         }else{
             setTextForTrip("New Trip");
         }
         titleChangeName();
+
 /*        itirnarary_title_Bar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -201,8 +208,6 @@ public class CNCFragment extends HGBAbstractFragment implements TitleNameChange 
       //  showMessagesToUser();
         return rootView;
     }
-
-
 
 
     @Override
@@ -387,21 +392,7 @@ private void setTextForTrip(String name){
     }*/
 
 
-    private void getAccountsProfiles(){
-        ConnectionManager.getInstance(getActivity()).getUserProfileAccounts(new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
-                ArrayList<AccountsVO> accounts = ( ArrayList<AccountsVO> )data;
-                getActivityInterface().setAccounts(accounts);
-                ((MainActivityBottomTabs) getActivity()).editProfileTypeMainToolBar();
-            }
 
-            @Override
-            public void onError(Object data) {
-                ErrorMessage(data);
-            }
-        });
-    }
 
     public void initList() {
 
@@ -418,8 +409,9 @@ private void setTextForTrip(String name){
 */
 
         mRecyclerView.setLayoutManager(mLayoutManager);
+        ArrayList<CNCItem> cncItems = getActivityInterface().getCNCItems();
 
-        mCNCAdapter = new CNCAdapter(getActivity().getApplicationContext(), getActivityInterface().getCNCItems());
+        mCNCAdapter = new CNCAdapter(getActivity().getApplicationContext(), cncItems);
         mRecyclerView.setAdapter(mCNCAdapter);
         mCNCAdapter.SetOnItemClickListener(new CNCAdapter.OnItemClickListener() {
             @Override
@@ -481,7 +473,7 @@ private void setTextForTrip(String name){
         mSendTextView = (FontTextView) view.findViewById(R.id.cnc_send);
 
 
-        mTextTutoralHeader = (FontTextView) view.findViewById(R.id.text_tutorial_header);
+       // mTextTutoralHeader = (FontTextView) view.findViewById(R.id.text_tutorial_header);
         mTextTutoralBody = (FontTextView)view.findViewById(R.id.text_tutorial_body);
         cnc_text_tutorial_ll = (LinearLayout)view.findViewById(R.id.cnc_text_tutorial_ll);
 
