@@ -62,7 +62,17 @@ public class AlternativeHotelFragment extends android.support.v4.app.Fragment
         mMyHotel= getArguments() != null ? getArguments().getBoolean("my_hotel") : false;
         isSelected = getArguments() != null ? getArguments().getBoolean("hotel_selected") : false;
         mHotelCode = getArguments() != null ? getArguments().getString("hotel_code") : "";
-
+        if (isSelected) {
+            mTopView.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.COLOR_EE3A3C));
+            mHotelNameTextView.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.COLOR_003D4C));
+            mHotelPriceTextView.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.COLOR_003D4C));
+            setStarRating(true, mView,mStar);
+        } else {
+            mTopView.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.COLOR_565656));
+            mHotelNameTextView.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.COLOR_565656));
+            mHotelPriceTextView.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.COLOR_565656));
+            setStarRating(false, mView, mStar);
+        }
 
         mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,17 +96,7 @@ public class AlternativeHotelFragment extends android.support.v4.app.Fragment
             mSelectTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         }
 
-        if (isSelected) {
-            mTopView.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.COLOR_EE3A3C));
-            mHotelNameTextView.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.COLOR_003D4C));
-            mHotelPriceTextView.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.COLOR_003D4C));
-            setStarRating(true, mView,mStar);
-        } else {
-            mTopView.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.COLOR_565656));
-            mHotelNameTextView.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.COLOR_565656));
-            mHotelPriceTextView.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.COLOR_565656));
-            setStarRating(false, mView, mStar);
-        }
+
     }
 
     private void setStarRating(boolean isSelected, View view, float star) {

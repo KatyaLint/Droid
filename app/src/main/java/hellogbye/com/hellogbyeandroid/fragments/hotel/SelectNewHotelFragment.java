@@ -139,14 +139,14 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
             @Override
             public void onPageSelected(int position) {
                 iIndex = position;
-                NodesVO node = mNodesList.get(iIndex);
-                resetList(node);
+
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
                 if (state == ViewPager.SCROLL_STATE_IDLE) {
                     NodesVO node = mNodesList.get(iIndex);
+                    resetList(node);
                     resetSelectedNode(node);
                 }
 
