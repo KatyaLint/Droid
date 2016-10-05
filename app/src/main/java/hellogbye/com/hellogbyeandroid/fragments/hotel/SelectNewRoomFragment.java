@@ -93,7 +93,9 @@ public class SelectNewRoomFragment extends HGBAbstractFragment {
         mCapaity.setText(mSelectedRoom.getMaxroomoccupancy()+" people capacity");
         mPolicy.setText(mSelectedRoom.getmCancellationPolicy());
         ImageLoader  imageLoader = ImageLoader.getInstance();
-        imageLoader.displayImage(mSelectedRoom.getmImages().get(0), mMainImageView);
+        if(mSelectedRoom.getmImages().size()>0){
+            imageLoader.displayImage(mSelectedRoom.getmImages().get(0), mMainImageView);
+        }
         CustomDetailAmenitiesGridAdapter adapterLong = new CustomDetailAmenitiesGridAdapter(getActivity(),mSelectedRoom.getmAmenities());
         CustomDetailAmenitiesGridAdapter adapterShort = new CustomDetailAmenitiesGridAdapter(getActivity(),getShortAdapter(mSelectedRoom.getmAmenities()) );
         mGridViewLong.setAdapter(adapterLong);

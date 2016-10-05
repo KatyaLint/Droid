@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
-import static com.google.android.gms.analytics.internal.zzy.m;
-
 /**
  * Created by arisprung on 9/28/16.
  */

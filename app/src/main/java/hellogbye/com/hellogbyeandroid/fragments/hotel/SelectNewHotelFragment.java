@@ -25,6 +25,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -37,6 +38,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +55,9 @@ import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
+import static com.google.android.gms.analytics.internal.zzy.i;
 import static hellogbye.com.hellogbyeandroid.R.id.map;
+
 
 /**
  * Created by arisprung on 8/29/16.
@@ -73,10 +77,10 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
     private AutoCompleteTextView mAutocomplete;
 
 
-
     protected GoogleApiClient mGoogleApiClient;
 
     private PlaceAutocompleteAdapter mPlaceAutocompleteAdapter;
+    private HashMap<Integer,Marker> mMarkersList;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new SelectNewHotelFragment();
@@ -92,7 +96,7 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
 
         View rootView = inflater.inflate(R.layout.select_new_hotel_main_layout, container, false);
         mViewPager = (ViewPager) rootView.findViewById(R.id.alt_hotel_viewpager);
-
+        mMarkersList = new HashMap<>();
         return rootView;
     }
 
@@ -124,7 +128,7 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
         mAdapter.SetOnSelectClickListener(new CustomAlternativeHotelAdapter.OnSelectItemClickListener() {
             @Override
             public void onSelectItemClick(View view, int position) {
-                    sendServerNewHotelOrder(mNodesList.get(position));
+                sendServerNewHotelOrder(mNodesList.get(position));
             }
         });
 
@@ -192,7 +196,7 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
 
 
     private void resetSelectedNode(NodesVO node) {
-       // mPastSelectedNode = mCurrentSelectedNode;
+        mPastSelectedNode = mCurrentSelectedNode;
         mCurrentSelectedNode = node;
         resetMarker();
 
@@ -209,10 +213,10 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
     public boolean onMarkerClick(Marker marker) {
         LatLng latlang = marker.getPosition();
 
-        for (int i = 0; i <mNodesList.size() ; i++) {
+        for (int i = 0; i < mNodesList.size(); i++) {
             if (mNodesList.get(i).getmLatitude() == latlang.latitude && mNodesList.get(i).getmLongitude() == latlang.longitude) {
                 resetSelectedNode(mNodesList.get(i));
-                mViewPager.setCurrentItem(i,true);
+                mViewPager.setCurrentItem(i, true);
                 break;
             }
         }
@@ -225,7 +229,7 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
     }
 
     private void resetMarker() {
-    //TODO NEEd to fix flickering in map
+        //TODO NEEd to fix flickering in map
         setMarkers();
     }
 
@@ -288,7 +292,7 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
 //                marker.setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(false, i + 1, mNodesList.get(i).getmStarRating(), mNodesList.get(i).getmMinimumAmount(), getActivity())));
 //            }
 //
-        LoadMarkersAsyncTask task = new LoadMarkersAsyncTask();
+        ResetMarkersAsyncTask task = new ResetMarkersAsyncTask();
         task.execute();
 
 
@@ -422,12 +426,12 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
 
     private class LoadMarkersAsyncTask extends AsyncTask<Void, MarkerOptions, Void> {
 
-
+    int iIndex= 0;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             mMap.clear();
-
+            iIndex =0;
         }
 
         @Override
@@ -435,11 +439,13 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
 
             for (int i = 0; i < mNodesList.size(); i++) {
                 if (mCurrentSelectedNode.getmHotelCode().equals(mNodesList.get(i).getmHotelCode())) {
+
                     publishProgress(new MarkerOptions()
                             .zIndex(1.0f)
                             .position(new LatLng(mNodesList.get(i).getmLatitude(), mNodesList.get(i).getmLongitude()))
                             .icon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(true, i + 1, mNodesList.get(i).getmStarRating(), mNodesList.get(i).getmMinimumAmount(), getActivity()))));
                 } else {
+
                     publishProgress(new MarkerOptions()
                             .zIndex(0)
                             .position(new LatLng(mNodesList.get(i).getmLatitude(), mNodesList.get(i).getmLongitude()))
@@ -454,6 +460,8 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
         @Override
         protected void onProgressUpdate(MarkerOptions... values) {
             Marker marker = mMap.addMarker(values[0]);
+            mMarkersList.put(iIndex, marker);
+            iIndex++;
         }
 
         @Override
@@ -463,49 +471,72 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
 
     }
 
-//    private class ResetMarkersAsyncTask extends AsyncTask<Void, Marker, Void> {
-//
-//
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Void... redo) {
-//
-//            for (Map.Entry<Marker, LatLng> entry : mMarkersList.entrySet()) {
-//                Marker marker = entry.getKey();
-//                LatLng latlang = entry.getValue();
-//                if (mCurrentSelectedNode.getmLatitude() == latlang.latitude && mCurrentSelectedNode.getmLongitude() == latlang.longitude) {
-//                    publishProgress(marker);
-//                } else if (mPastSelectedNode.getmLatitude() == latlang.latitude && mPastSelectedNode.getmLongitude() == latlang.longitude) {
-//                    publishProgress(marker);
-//                }
-//            }
-//
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onProgressUpdate(Marker... values) {
-//
-//            if (values[0].getZIndex() != 1.0f) {
-//                values[0].setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(true, 0, mCurrentSelectedNode.getmStarRating(), mCurrentSelectedNode.getmMinimumAmount(), getActivity())));
-//            } else {
-//                values[0].setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(false, 0, mPastSelectedNode.getmStarRating(), mPastSelectedNode.getmMinimumAmount(), getActivity())));
-//            }
-//
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void result) {
-//            setCamera();
-//        }
-//
-//
-//    }
+    private class ResetMarkersAsyncTask extends AsyncTask<Void, MarkerSet, Void> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... redo) {
+            for (int i = 0; i < mNodesList.size(); i++) {
+                if (mCurrentSelectedNode.getmLatitude() == mNodesList.get(i).getmLatitude() && mCurrentSelectedNode.getmLongitude() == mNodesList.get(i).getmLongitude()) {
+                    publishProgress(new MarkerSet(i,true));
+
+                } else if (mPastSelectedNode.getmLatitude() == mNodesList.get(i).getmLatitude() && mPastSelectedNode.getmLongitude() == mNodesList.get(i).getmLongitude()) {
+                    publishProgress(new MarkerSet(i,false));
+
+                }
+            }
+
+
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(MarkerSet... values) {
+            Marker marker = mMarkersList.get(values[0].getIndex());
+            marker.setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(values[0].isSelected(),
+                    values[0].getIndex() + 1, mNodesList.get(values[0].getIndex()).getmStarRating(),
+                    mNodesList.get(values[0].getIndex()).getmMinimumAmount(), getActivity())));
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            setCamera();
+        }
+
+
+    }
+
+    public class MarkerSet{
+        private int index;
+        private boolean isSelected;
+
+        public MarkerSet(int index, boolean isSelected) {
+            this.index = index;
+            this.isSelected = isSelected;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
+        public boolean isSelected() {
+            return isSelected;
+        }
+
+        public void setSelected(boolean selected) {
+            isSelected = selected;
+        }
+    }
 
 
 }
