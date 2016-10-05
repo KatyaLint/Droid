@@ -31,7 +31,7 @@ public class AlternativeHotelRoomAdapter extends PagerAdapter {
     private  ImageLoader imageLoader;
     private Context mContext;
     private LayoutInflater layoutInflater;
-    private CustomAlternativeHotelAdapter.OnLinearLayoutClickListener onLinearLayoutClickListner;
+    private AlternativeHotelRoomAdapter.OnLinearLayoutClickListener onLinearLayoutClickListner;
 
 
 
@@ -126,7 +126,7 @@ public class AlternativeHotelRoomAdapter extends PagerAdapter {
 
 
 
-    public void SetOnItemClickListener(final CustomAlternativeHotelAdapter.OnLinearLayoutClickListener mItemClickListener) {
+    public void SetOnItemClickListener(final AlternativeHotelRoomAdapter.OnLinearLayoutClickListener mItemClickListener) {
         onLinearLayoutClickListner = mItemClickListener;
     }
 

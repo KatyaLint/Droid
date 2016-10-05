@@ -277,7 +277,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
 
         mHotelRoomAdapter = new AlternativeHotelRoomAdapter(roomlist,getActivity().getApplicationContext());
         mViewPager.setAdapter(mHotelRoomAdapter);
-        mHotelRoomAdapter.SetOnItemClickListener(new CustomAlternativeHotelAdapter.OnLinearLayoutClickListener() {
+        mHotelRoomAdapter.SetOnItemClickListener(new AlternativeHotelRoomAdapter.OnLinearLayoutClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Bundle args = new Bundle();
