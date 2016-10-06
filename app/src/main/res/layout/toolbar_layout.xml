@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:layout_marginRight="@dimen/DP14"
-        android:background="@drawable/new_trip"
+        android:background="@drawable/icon_profile"
         android:visibility="gone" />
 
 

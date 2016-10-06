@@ -434,6 +434,7 @@ Code changing:
    ------------------------------------------
     Fixed Bugs:
     -----------
+    HEL-1661 - cnc screen - wrong icon
 
     Code changing:
     --------------
