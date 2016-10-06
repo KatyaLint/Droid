@@ -429,3 +429,15 @@ Code changing:
     - Search for Hotel
     - Trips images
 
+   ------------------------------------------
+                   Version 0.0.1
+   ------------------------------------------
+    Fixed Bugs:
+    -----------
+
+    Code changing:
+    --------------
+
+    - Changed how select hotel scrolls
+    - Enabled ProGuard
+    - Changed version to 0.0.1
