@@ -21,3 +21,4 @@
 -dontwarn com.google.android.gms.**
 -dontwarn com.viewpagerindicator.**
 -dontwarn com.appsee.**
+-keepattributes EnclosingMethod

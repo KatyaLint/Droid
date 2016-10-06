@@ -58,6 +58,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import static com.google.android.gms.analytics.internal.zzy.i;
 import static com.google.android.gms.analytics.internal.zzy.m;
 import static hellogbye.com.hellogbyeandroid.R.id.map;
+import static hellogbye.com.hellogbyeandroid.R.id.position;
 
 
 /**
@@ -130,9 +131,7 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
             @Override
             public void onSelectItemClick(View view, int position) {
 
-                mAdapter.setmCurrentNode(mNodesList.get(position));
 
-                mAdapter.notifyDataSetChanged();
                 sendServerNewHotelOrder(mNodesList.get(position));
             }
         });
@@ -405,6 +404,8 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
                 new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
+                        mAdapter.setmCurrentNode(nodesVO);
+                        mAdapter.notifyDataSetChanged();
 
                         getFlowInterface().callRefreshItineraryWithCallback(ToolBarNavEnum.HOTEL.getNavNumber(), new RefreshComplete() {
                             @Override
