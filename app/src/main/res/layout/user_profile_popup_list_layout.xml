@@ -61,7 +61,7 @@
             app:fontName="dinnextltpro_medium.otf" />
         </LinearLayout>
         <View
-            android:id="@+id/user_profile_popup_list_separator"
+            android:id="@+id/user_profile_popup_list_separator_"
             android:layout_above="@+id/manage_profile_ll"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/DP1"

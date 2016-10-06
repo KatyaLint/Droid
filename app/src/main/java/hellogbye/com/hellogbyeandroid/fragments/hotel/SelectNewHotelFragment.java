@@ -131,7 +131,7 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
             public void onSelectItemClick(View view, int position) {
 
                 mAdapter.setmCurrentNode(mNodesList.get(position));
-                
+
                 mAdapter.notifyDataSetChanged();
                 sendServerNewHotelOrder(mNodesList.get(position));
             }

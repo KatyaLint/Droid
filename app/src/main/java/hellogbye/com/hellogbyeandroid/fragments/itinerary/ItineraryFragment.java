@@ -62,11 +62,11 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
     private FontButtonView grid_make_payment;
     private int cellHieght;
     private FontTextView grid_total_price;
-    private AppCompatImageView mStart5ImageView;
-    private AppCompatImageView mStart4ImageView;
-    private AppCompatImageView mStart3ImageView;
-    private AppCompatImageView mStart2ImageView;
-    private AppCompatImageView mStart1ImageView;
+    private ImageView mStart5ImageView;
+    private ImageView mStart4ImageView;
+    private ImageView mStart3ImageView;
+    private ImageView mStart2ImageView;
+    private ImageView mStart1ImageView;
     private FontTextView continue_to_checkout_flight_baggage;
     private ImageButton up_bar_favorite;
     private FontTextView itirnarary_title_Bar;
@@ -620,11 +620,11 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
 
         View starView = (View)child.findViewById(R.id.grid_star_layout);
 
-        mStart1ImageView = (AppCompatImageView) starView.findViewById(R.id.star1);
-        mStart2ImageView = (AppCompatImageView) starView.findViewById(R.id.star2);
-        mStart3ImageView = (AppCompatImageView) starView.findViewById(R.id.star3);
-        mStart4ImageView = (AppCompatImageView) starView.findViewById(R.id.star4);
-        mStart5ImageView = (AppCompatImageView) starView.findViewById(R.id.star5);
+        mStart1ImageView = (ImageView) starView.findViewById(R.id.star1);
+        mStart2ImageView = (ImageView) starView.findViewById(R.id.star2);
+        mStart3ImageView = (ImageView) starView.findViewById(R.id.star3);
+        mStart4ImageView = (ImageView) starView.findViewById(R.id.star4);
+        mStart5ImageView = (ImageView) starView.findViewById(R.id.star5);
 
         setStarRating(starView, node.getmStarRating());
 

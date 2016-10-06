@@ -35,7 +35,7 @@ android {
     buildTypes {
         release {
 
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -44,12 +44,12 @@ android {
         dev {
             buildConfigField 'boolean', 'IS_DEV', 'true'
             applicationId "com.hellogbye.dev"
-            versionName "1.1-dev"
+            versionName "0.0.1-dev"
         }
         live {
             buildConfigField 'boolean', 'IS_DEV', 'false'
             applicationId "com.hellogbye"
-            versionName "1.6.1"
+            versionName "0.0.1"
         }
     }
 

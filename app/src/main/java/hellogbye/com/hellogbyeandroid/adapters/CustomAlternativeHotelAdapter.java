@@ -39,7 +39,7 @@ public class CustomAlternativeHotelAdapter extends FragmentStatePagerAdapter {
         AlternativeHotelFragment f =(AlternativeHotelFragment)object;
         String strCode= f.getmHotelCode();
 
-        if(this.mMyNode.getmHotelCode().equals(strCode) ||this.mPastNode.getmHotelCode().equals(strCode) ||this.mCurrentNode.getmHotelCode().equals(strCode) ){
+        if(this.mMyNode.getmHotelCode().equals(strCode) ||this.mPastNode.getmHotelCode().equals(strCode)  ){
             return POSITION_NONE;
         }else{
             return super.getItemPosition(object);

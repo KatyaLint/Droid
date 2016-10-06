@@ -33,9 +33,7 @@ public class ProfileDialogPopup  extends HGBAbstractFragment {
     private int radioButtonSelected = -1;
     private ArrayList<DefaultsProfilesVO> accountDefaultSettings;
 
-    ProfileDialogPopup(Activity activity){
-        this.activity = activity;
-    }
+
 
 
 

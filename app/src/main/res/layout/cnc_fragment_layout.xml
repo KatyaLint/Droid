@@ -153,7 +153,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/DP4"
-            android:layout_toEndOf="@+id/cnc_fragment_trip_settings"
             android:layout_toLeftOf="@+id/send_ll"
             android:layout_toStartOf="@+id/send_ll"
 

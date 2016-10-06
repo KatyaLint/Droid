@@ -54,3 +54,5 @@ libs/libs.iml
 
 .idea/vcs.xml
 
+
+*.apk
