@@ -435,6 +435,7 @@ Code changing:
     Fixed Bugs:
     -----------
     HEL-1661 - cnc screen - wrong icon
+    HEL-1662 - hotel details - long hotel name cut off
 
     Code changing:
     --------------

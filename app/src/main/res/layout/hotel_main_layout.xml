@@ -47,6 +47,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
                             android:maxWidth="@dimen/DP250"
+                            android:layout_toLeftOf="@+id/show_alternative_hotel"
                             android:textColor="@color/COLOR_003D4C"
                             android:textSize="@dimen/SP18"
                             app:fontName="dinnextltpro_medium.otf" />
