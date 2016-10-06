@@ -56,6 +56,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 import static com.google.android.gms.analytics.internal.zzy.i;
+import static com.google.android.gms.analytics.internal.zzy.m;
 import static hellogbye.com.hellogbyeandroid.R.id.map;
 
 
@@ -128,6 +129,10 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
         mAdapter.SetOnSelectClickListener(new CustomAlternativeHotelAdapter.OnSelectItemClickListener() {
             @Override
             public void onSelectItemClick(View view, int position) {
+
+                mAdapter.setmCurrentNode(mNodesList.get(position));
+                
+                mAdapter.notifyDataSetChanged();
                 sendServerNewHotelOrder(mNodesList.get(position));
             }
         });
