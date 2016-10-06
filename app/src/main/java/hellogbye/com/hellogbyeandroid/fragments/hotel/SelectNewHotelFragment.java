@@ -504,6 +504,9 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
         @Override
         protected void onProgressUpdate(MarkerSet... values) {
             Marker marker = mMarkersList.get(values[0].getIndex());
+            if(values[0].isSelected()){
+                marker.setZIndex(1.0f);
+            }
             marker.setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(values[0].isSelected(),
                     values[0].getIndex() + 1, mNodesList.get(values[0].getIndex()).getmStarRating(),
                     mNodesList.get(values[0].getIndex()).getmMinimumAmount(), getActivity())));

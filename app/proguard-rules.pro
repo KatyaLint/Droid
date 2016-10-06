@@ -15,3 +15,9 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-dontwarn okio.**
+-dontwarn com.nhaarman.**
+-dontwarn com.viewpagerindicator.**
+-dontwarn com.google.android.gms.**
+-dontwarn com.viewpagerindicator.**
+-dontwarn com.appsee.**
