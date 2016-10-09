@@ -89,10 +89,6 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
 
     private String mProgessDialogString = "Adding Credit Card";
 
-    // private  ArrayList<String> yearArray = new ArrayList<String>();
-
-    //final String[] yearArray = {"2016", "2017", "2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030"};
-
     public static Fragment newInstance(int position) {
         Fragment fragment = new AddCreditCardFragment();
         Bundle args = new Bundle();
@@ -111,15 +107,11 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // getYears();
         progressDialog = new ProgressDialog(getActivity());
         yearArray = HGBUtilityDate.getYears(NUMBER_OF_FUTURE_YEARS);
         ArrayList<String> months = HGBUtilityDate.getMonths();
         monthArray = new String[months.size()];
         monthArray = months.toArray(monthArray);
-
-
-        // getStaticBooking();
 
         bookingResponse = getActivityInterface().getBookingRequest();
         init(view);
@@ -134,18 +126,11 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         String ptVisa = "^4[0-9]{6,}$";
         listOfPattern.add(ptVisa);
 
-//        String ptDinClb = "^3(?:0[0-5]|[68][0-9])[0-9]{4,}$";
-//        listOfPattern.add(ptDinClb);
-//
-//        String ptJcb = "^(?:2131|1800|35[0-9]{3})[0-9]{3,}$";
-//        listOfPattern.add(ptJcb);
-
         mScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent scanIntent = new Intent(getActivity().getApplicationContext(), CardIOActivity.class);
 
-                // customize these values to suit your needs.
                 scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_EXPIRY, true); // default: false
                 scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, true); // default: false
                 scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_POSTAL_CODE, true); // default: false

@@ -130,6 +130,7 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View textView) {
+                
                 getFlowInterface().goToFragment(ToolBarNavEnum.HAZARDOUS_NOTICE.getNavNumber(), null);
             }
             @Override

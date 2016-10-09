@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -22,11 +24,11 @@ public class AlertCheckoutAdapter extends BaseAdapter {
 
     private final Typeface textFontReg;
     private final Typeface textFont;
-    ArrayList<String> mData;
+    ArrayList<CreditCardItem> mData;
     Context mContext;
     LayoutInflater inflater;
 
-    public AlertCheckoutAdapter(ArrayList<String> data, Context context) {
+    public AlertCheckoutAdapter(ArrayList<CreditCardItem> data, Context context) {
         mData = data;
         mContext = context;
         textFont = Typeface.createFromAsset(mContext.getAssets(), "fonts/" + "dinnextltpro_medium.otf");
@@ -58,19 +60,22 @@ public class AlertCheckoutAdapter extends BaseAdapter {
                     .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.alert_checkout_item_layout, null);
         }
+        CreditCardItem cardItem = mData.get(position);
         FontTextView text = (FontTextView) convertView.findViewById(R.id.alert_checkout_text);
         ImageView image = (ImageView) convertView.findViewById(R.id.alert_checkout_image);
 
-        text.setText(mData.get(position));
+        text.setText(cardItem.getLast4());
 
-        if(mContext.getResources().getString(R.string.add_card).equals(mData.get(position))){
+        if(mContext.getResources().getString(R.string.add_card).equals(cardItem.getLast4())){
             image.setBackgroundResource(R.drawable.add_icon);
             text.setTypeface(textFont);
-        }else if(mContext.getResources().getString(R.string.remove_card).equals(mData.get(position))){
+        }else if(mContext.getResources().getString(R.string.remove_card).equals(cardItem.getLast4())){
             image.setBackgroundResource(R.drawable.remove_icon);
             text.setTypeface(textFont);
         }else{
-            image.setBackgroundResource(R.drawable.all_card_icon);
+
+            HGBUtility.setCCIcon(image, mData.get(position).getCardtypeid());
+         //   image.setBackgroundResource(R.drawable.all_card_icon);
             text.setTypeface(textFontReg);
         }
 

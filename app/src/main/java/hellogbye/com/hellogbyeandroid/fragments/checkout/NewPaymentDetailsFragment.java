@@ -38,9 +38,12 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
+
+import static hellogbye.com.hellogbyeandroid.utilities.HGBUtility.setCCIcon;
 
 /**
  * Created by arisprung on 3/22/16.
@@ -53,7 +56,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
    // private FontTextView mTotalSelectCC;
     private ExpandableListView lv;
     private AlertDialog selectCCDialog;
-    private ArrayList<String> itemsList;
+    private ArrayList<CreditCardItem> itemsList;
     private FontTextView mSelectedView;
     private ArrayList<PassengersVO> passangers;
     private ExpandableListAdapter mAdapter;
@@ -247,14 +250,18 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             @Override
             public void onSuccess(Object data) {
 
-                itemsList = new ArrayList<String>();
-
+                itemsList = new ArrayList<>();
                 getFlowInterface().setCreditCards((ArrayList<CreditCardItem>) data);
                 for (CreditCardItem item : (ArrayList<CreditCardItem>) data) {
-                    itemsList.add(item.getLast4());
+                    itemsList.add(item);
                 }
-                itemsList.add(getString(R.string.add_card));
-                itemsList.add(getString(R.string.remove_card));
+
+                CreditCardItem cAdd = new CreditCardItem();
+                cAdd.setLast4(getActivity().getResources().getString(R.string.add_card));
+                CreditCardItem cLast = new CreditCardItem();
+                cLast.setLast4(getActivity().getResources().getString(R.string.remove_card));
+                itemsList.add(cAdd);
+                itemsList.add(cLast);
 
 
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
@@ -266,23 +273,22 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
                     } });
 
-               // final CharSequence[] list = itemsList.toArray(new String[itemsList.size()]);
                 AlertCheckoutAdapter adapter = new AlertCheckoutAdapter(itemsList,getActivity().getApplicationContext());
                 dialogBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
 
-                        String selectedText = itemsList.get(item);
+                        CreditCardItem selectedText = itemsList.get(item);
                         if(selectedText == null){
                             ErrorMessage("Wrong credit Card");
                             return;
                         }
                         //This is to set creditcard  array  final json for payment
 
-                        if ( selectedText.equals(getString(R.string.cancel))) {
+                        if ( selectedText.getLast4().equals(getString(R.string.cancel))) {
 
-                        } else if (selectedText.equals(getString(R.string.add_card))) {
+                        } else if (selectedText.getLast4().equals(getString(R.string.add_card))) {
                             getFlowInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(), null);
-                        } else if (selectedText.equals(getString(R.string.remove_card))) {
+                        } else if (selectedText.getLast4().equals(getString(R.string.remove_card))) {
                             if (!mSelectedView.getText().toString().equals(getString(R.string.select_card))) {
                                 CreditCardItem selectedCreditCard = getCardByNumber(mSelectedView.getText().toString());
                                 getFlowInterface().getCreditCardsSelected().remove(selectedCreditCard);
@@ -290,7 +296,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                             }
 
                         } else {
-                            CreditCardItem selectedCreditCard = getCardByNumber(selectedText);
+                            CreditCardItem selectedCreditCard = getCardByNumber(selectedText.getLast4());
                             getFlowInterface().getCreditCardsSelected().add(selectedCreditCard);
                             calculateCard(selectedCreditCard, mSelectedView, true);
                         }
@@ -424,7 +430,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 mTotalCCText.setText(selectedCreditCard.getLast4());
                 mTotalCCImage.setVisibility(View.VISIBLE);
                 mTotalCCDropDown.setVisibility(View.GONE);
-                setCCIcon(mTotalCCImage, selectedCreditCard.getCardtypeid());
+                HGBUtility.setCCIcon(mTotalCCImage, selectedCreditCard.getCardtypeid());
             } else {
                 mTotalCCText.setText(getString(R.string.select_card));
                 mTotalCCImage.setVisibility(View.GONE);
@@ -486,40 +492,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         mAdapter.notifyDataSetChanged();
     }
 
-    private void setCCIcon(ImageView view, String cardid) {
 
-        switch (cardid){
-            case "1":
-                view.setBackgroundResource(R.drawable.master_card);
-                break;
-            case "2":
-                view.setBackgroundResource(R.drawable.master_card);
-                break;
-            case "3":
-                view.setBackgroundResource(R.drawable.master_card);
-                break;
-            case "4":
-                view.setBackgroundResource(R.drawable.visa);
-                break;
-        }
-
-   /*     if (cardid.equals("1")) {
-            view.setBackgroundResource(R.drawable.master_card);
-
-        } else if (cardid.equals("2")) {
-            //TODO need DISCOVERY card
-            view.setBackgroundResource(R.drawable.master_card);
-
-        } else if (cardid.equals("3")) {
-            view.setBackgroundResource(R.drawable.master_card);
-
-        } else if (cardid.equals("4")) {
-            view.setBackgroundResource(R.drawable.visa);
-
-        }*/
-
-
-    }
 
     private PassengersVO getCurrentPassengerByName(String firstname) {
 
