@@ -102,6 +102,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private HGBSaveDataClass hgbSaveDataClass = new HGBSaveDataClass();
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
 
+    private ArrayList<String> mCvvList;
+
 
     private ArrayList<UserProfileVO> mTravelList = new ArrayList<>();
     private ArrayList<CountryItemVO> mEligabileCountryList = new ArrayList<>();
@@ -877,6 +879,16 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             getSupportActionBar().setHomeButtonEnabled(false);
         }
 
+    }
+
+    @Override
+    public void setCvvList(ArrayList<String> cvvList) {
+        mCvvList = cvvList;
+    }
+
+    @Override
+    public ArrayList<String> getCvvList() {
+        return mCvvList;
     }
 
 

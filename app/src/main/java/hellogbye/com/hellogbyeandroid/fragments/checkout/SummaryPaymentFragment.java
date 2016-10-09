@@ -47,12 +47,14 @@ import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
+import static com.google.android.gms.analytics.internal.zzy.k;
+
 /**
  * Created by arisprung on 12/2/15.
  */
 public class SummaryPaymentFragment extends HGBAbstractFragment {
 
-   // private ListView mListViewCC;
+    // private ListView mListViewCC;
 
 //    private SummeryPaymentCCAdapter mAdapter;
 //    private ArrayList<PaymentSummaryItem> mArrayList;
@@ -80,9 +82,10 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
     private FontTextView mHazerdiusText;
     private CheckBox mCheckBox;
     private boolean isCheckedBoxChecked;
+    private ArrayList<String> cvvList;
 
 
-    private static  HashMap<String, Double> cCTotalMap;
+    private static HashMap<String, Double> cCTotalMap;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new SummaryPaymentFragment();
@@ -106,7 +109,7 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         mProceed = (FontButtonView) view.findViewById(R.id.cc_proceed);
         mProceed.setEnabled(false);
-       // mProceedDisable = (FontTextView) view.findViewById(R.id.cc_proceed_disable);
+        // mProceedDisable = (FontTextView) view.findViewById(R.id.cc_proceed_disable);
 
 
         mPaymentTextView = (FontTextView) view.findViewById(R.id.steps_checkout_payment_text);
@@ -117,22 +120,32 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
         mTravlerImageView = (ImageView) view.findViewById(R.id.steps_checkout_travler_image);
         mReviewImageView = (ImageView) view.findViewById(R.id.steps_checkout_review_image);
         mHazerdiusText = (FontTextView) view.findViewById(R.id.hazerdus_text);
-        mCheckBox = (CheckBox)  view.findViewById(R.id.hazerdus_checkbox);
+        mCheckBox = (CheckBox) view.findViewById(R.id.hazerdus_checkbox);
         mRecyclerViewCC = (RecyclerView) view.findViewById(R.id.summary_traveler_recyclerView_cc);
-
-
-
-
-
 
 
         SpannableString ss = new SpannableString(getString(R.string.i_have_read_and_understood_the_hazardous_nmaterial_notice));
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View textView) {
-                
-                getFlowInterface().goToFragment(ToolBarNavEnum.HAZARDOUS_NOTICE.getNavNumber(), null);
+                Bundle args = new Bundle();
+                cvvList = new ArrayList<>();
+                for (CreditCardItem selectedCreditCard : getFlowInterface().getCreditCardsSelected()) {
+
+                    ArrayList<CreditCardItem> cardList = new ArrayList<CreditCardItem>(getFlowInterface().getCreditCardsSelected());
+                    for (int i = 0; i < cardList.size(); i++) {
+                        if (selectedCreditCard.getToken().equals(cardList.get(i).getToken())) {
+                            View view = mRecyclerViewCC.getChildAt(i);
+                            EditText edit = (EditText) view.findViewById(R.id.ccv_edittext);
+                            cvvList.add(edit.getText().toString());
+                        }
+                    }
+                }
+
+                getFlowInterface().setCvvList(cvvList);
+                getFlowInterface().goToFragment(ToolBarNavEnum.HAZARDOUS_NOTICE.getNavNumber(), args);
             }
+
             @Override
             public void updateDrawState(TextPaint ds) {
                 super.updateDrawState(ds);
@@ -147,7 +160,6 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
         mHazerdiusText.setHighlightColor(Color.TRANSPARENT);
 
         initCheckoutSteps();
-
 
 
         mProceed.setOnClickListener(new View.OnClickListener() {
@@ -190,8 +202,6 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
                         jsonUser.put("mealpreference", "");//TODO need to add
 
 
-
-
                         UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
                         ArrayList<PassengersVO> passangers = travelOrder.getPassengerses();
                         JSONArray array = new JSONArray();
@@ -231,11 +241,11 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
                         creditObject.put("cardnumber", selectedCreditCard.getToken());
                         creditObject.put("expirymonth", selectedCreditCard.getExpmonth());
                         ArrayList<CreditCardItem> cardList = new ArrayList<CreditCardItem>(getFlowInterface().getCreditCardsSelected());
-                        for (int i = 0; i <cardList.size() ; i++) {
+                        for (int i = 0; i < cardList.size(); i++) {
 
-                            if(selectedCreditCard.getToken().equals(cardList.get(i).getToken())){
+                            if (selectedCreditCard.getToken().equals(cardList.get(i).getToken())) {
                                 View view = mRecyclerViewCC.getChildAt(i);
-                                EditText edit = (EditText)view.findViewById(R.id.ccv_edittext);
+                                EditText edit = (EditText) view.findViewById(R.id.ccv_edittext);
                                 creditObject.put("cvv", edit.getText().toString());
                             }
                         }
@@ -271,20 +281,22 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
                     e.printStackTrace();
                 }
 
+                if (!BuildConfig.IS_DEV) {
+                    ConnectionManager.getInstance(getActivity()).pay(jsonObject, new ConnectionManager.ServerRequestListener() {
+                        @Override
+                        public void onSuccess(Object data) {
+                            // Toast.makeText(getActivity().getApplicationContext(), "Trip Booked", Toast.LENGTH_SHORT).show();
+                            getFlowInterface().goToFragment(ToolBarNavEnum.CHECKOUT_CONFIRMATION.getNavNumber(), null);
 
-                ConnectionManager.getInstance(getActivity()).pay(jsonObject, new ConnectionManager.ServerRequestListener() {
-                    @Override
-                    public void onSuccess(Object data) {
-                        // Toast.makeText(getActivity().getApplicationContext(), "Trip Booked", Toast.LENGTH_SHORT).show();
-                        getFlowInterface().goToFragment(ToolBarNavEnum.CHECKOUT_CONFIRMATION.getNavNumber(), null);
+                        }
 
-                    }
+                        @Override
+                        public void onError(Object data) {
+                            ErrorMessage(data);
+                        }
+                    });
+                }
 
-                    @Override
-                    public void onError(Object data) {
-                        ErrorMessage(data);
-                    }
-                });
 
             }
         });
@@ -299,7 +311,6 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
                 checkMandatoryFields();
             }
         });
-
 
 
     }
@@ -331,13 +342,20 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
         mRecyclerViewCC.setHasFixedSize(true);
 
         // use a linear layout manager
-        RecyclerView.LayoutManager   layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerViewTravlers.setLayoutManager(layoutManager);
         mRecyclerViewCC.setLayoutManager(mLayoutManager);
 
         ArrayList<CreditCardItem> list = new ArrayList<>(getFlowInterface().getCreditCardsSelected());
 
-        mTravlerCCAdapter = new TravlerCCAdapter(cCTotalMap,list, getActivity().getApplicationContext());
+        if (getFlowInterface().getCvvList() != null && getFlowInterface().getCvvList().size() > 0) {
+            for (int i = 0; i < getFlowInterface().getCvvList().size(); i++) {
+                String cvv = getFlowInterface().getCvvList().get(i);
+                list.get(i).setCvv(cvv);
+            }
+        }
+
+        mTravlerCCAdapter = new TravlerCCAdapter(cCTotalMap, list, getActivity().getApplicationContext());
         mRecyclerViewCC.setAdapter(mTravlerCCAdapter);
         mTravlerCCAdapter.setOnCheckCVV(new TravlerCCAdapter.onCheckCVV() {
             @Override
@@ -347,7 +365,8 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
         });
         Bundle args = getArguments();
         if (args != null) {
-            mCheckBox.setChecked( args.getBoolean("i_accept"));
+            mCheckBox.setChecked(args.getBoolean("i_accept"));
+
         }
     }
 
@@ -397,7 +416,7 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
                     iTotal += node.getCost();
                 }
             }
-            cCTotalMap.put(item.getToken(),iTotal);
+            cCTotalMap.put(item.getToken(), iTotal);
 
         }
     }
@@ -421,25 +440,25 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
 
     }
 
-    private synchronized  void checkMandatoryFields(){
+    private synchronized void checkMandatoryFields() {
 
         boolean isCVVEntered = checkCVVValueForList();
 
-        if(mCheckBox.isChecked() && isCVVEntered){
+        if (mCheckBox.isChecked() && isCVVEntered) {
             mProceed.setEnabled(true);
-        }else{
+        } else {
             mProceed.setEnabled(false);
         }
 
     }
 
     private boolean checkCVVValueForList() {
-        for (int i = 0; i <getFlowInterface().getCreditCardsSelected().size() ; i++) {
+        for (int i = 0; i < getFlowInterface().getCreditCardsSelected().size(); i++) {
 
             View v = mRecyclerViewCC.getChildAt(i);
-            EditText edit = (EditText)v.findViewById(R.id.ccv_edittext);
-            int iLength =   edit.getText().length();
-            if(iLength != 3){
+            EditText edit = (EditText) v.findViewById(R.id.ccv_edittext);
+            int iLength = edit.getText().length();
+            if (iLength != 3) {
                 return false;
             }
         }

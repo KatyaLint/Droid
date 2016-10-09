@@ -266,4 +266,5 @@ public class HGBAbstractFragment extends Fragment {
         this.settingGuidSelected = settingGuidSelected;
     }
 
+
 }

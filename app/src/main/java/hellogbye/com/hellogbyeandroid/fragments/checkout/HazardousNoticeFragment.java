@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -25,7 +27,6 @@ public class HazardousNoticeFragment extends HGBAbstractFragment {
     private FontTextView mHazaardText;
 
     private FontButtonView mDone;
-
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new HazardousNoticeFragment();
@@ -44,6 +45,7 @@ public class HazardousNoticeFragment extends HGBAbstractFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Bundle args = getArguments();
 
         mHazaardText = (FontTextView) view.findViewById(R.id.hazard_text);
         mDone = (FontButtonView) view.findViewById(R.id.confirm_read);

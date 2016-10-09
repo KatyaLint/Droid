@@ -45,6 +45,11 @@ public interface HGBFlowInterface {
     void selectBottomBar(int selection);
     void enableFullScreen(boolean visible);
 
+    void setCvvList(ArrayList<String> cvvList);
+    ArrayList<String> getCvvList();
+
+
+
 
 
 

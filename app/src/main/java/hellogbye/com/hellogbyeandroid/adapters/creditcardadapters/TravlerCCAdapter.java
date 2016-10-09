@@ -127,9 +127,9 @@ public class TravlerCCAdapter extends RecyclerView.Adapter<TravlerCCAdapter.View
             holder.mTotalText.setText("$" + String.format("%.2f",d ));
         }
 
-
-
-
+        if(item.getCvv()!= null){
+            holder.mCVVEditText.setText(item.getCvv());
+        }
 
         holder.mCVVEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -158,7 +158,6 @@ public class TravlerCCAdapter extends RecyclerView.Adapter<TravlerCCAdapter.View
 
 
         }
-     //   holder.mTravlerText.setText("$"+String.valueOf((int) nodesVO.getmMinimumAmount()));
 
 
 
