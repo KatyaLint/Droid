@@ -212,7 +212,7 @@ public class TravelersFragment extends HGBAbstractFragment {
             @Override
             public void groupEditClicked(int groupPosition) {
                 Bundle args = new Bundle();
-                args.putInt(HGBConstants.BUNDLE_USER_JSON_POSITION, groupPosition);
+                args.putString(HGBConstants.BUNDLE_USER_JSON_POSITION, mGroups.get(groupPosition).getNameText());
                 getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS_DETAILS.getNavNumber(), args);
             }
         });

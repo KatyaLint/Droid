@@ -208,7 +208,6 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                List<ArrayList<UserProfileVO>> children = new ArrayList<ArrayList<UserProfileVO>>();
                 getFlowInterface().setListUsers((ArrayList<UserProfileVO>) data);
                 Bundle args = new Bundle();
                 Gson gson = new Gson();

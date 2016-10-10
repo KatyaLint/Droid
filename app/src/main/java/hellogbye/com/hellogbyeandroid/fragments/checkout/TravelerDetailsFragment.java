@@ -24,6 +24,8 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
+import static hellogbye.com.hellogbyeandroid.R.id.position;
+
 /**
  * Created by arisprung on 11/24/15.
  */
@@ -92,8 +94,13 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
         Bundle args = getArguments();
         if (args != null) {
-            int position = args.getInt(HGBConstants.BUNDLE_USER_JSON_POSITION);
-            mUser = getFlowInterface().getListUsers().get(position);
+            String  currentUser = args.getString(HGBConstants.BUNDLE_USER_JSON_POSITION);
+            for(UserProfileVO user : getFlowInterface().getListUsers()){
+                if(user.getFirstname().equalsIgnoreCase(currentUser)){
+                    mUser = user;
+                    break;
+                }
+            }
         }
 
         if (mUser != null) {
