@@ -443,3 +443,14 @@ Code changing:
     - Changed how select hotel scrolls
     - Enabled ProGuard
     - Changed version to 0.0.1
+
+     ------------------------------------------
+                       Version 0.0.2
+       ------------------------------------------
+        Fixed Bugs:
+        -----------
+        HEL-1670- checkout - step 3 - cvv get's deleted when clicking on "hazardous material notice
+        HEL-1671 - checkout . step 1 > add pictures for payment card types
+
+        Code changing:
+        --------------
