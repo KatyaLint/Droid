@@ -451,6 +451,9 @@ Code changing:
         -----------
         HEL-1670- checkout - step 3 - cvv get's deleted when clicking on "hazardous material notice
         HEL-1671 - checkout . step 1 > add pictures for payment card types
+        HEL-1574 - payment summery items, wrong icon for credit card
+        HEL-1632 - adding credit card by scanning > app. crashes
 
+        
         Code changing:
         --------------

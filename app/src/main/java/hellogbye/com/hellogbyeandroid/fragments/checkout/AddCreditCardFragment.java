@@ -367,32 +367,25 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == MY_SCAN_REQUEST_CODE) {
-            String resultDisplayStr;
             if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
                 CreditCard scanResult = data.getParcelableExtra(CardIOActivity.EXTRA_SCAN_RESULT);
 
                 // Never log a raw card number. Avoid displaying it, but if necessary use getFormattedCardNumber()
-                resultDisplayStr = "Card Number: " + scanResult.getRedactedCardNumber() + "\n";
                 mCardNumber.setCardNumber(scanResult.getRedactedCardNumber(), false);
 
                 if (scanResult.isExpiryValid()) {
-                    resultDisplayStr += "Expiration Date: " + scanResult.expiryMonth + "/" + scanResult.expiryYear + "\n";
-                    mCardExpiryMonth.setText(scanResult.expiryMonth);
-                    mCardExpiryYear.setText(scanResult.expiryYear);
+                    mCardExpiryMonth.setText(""+scanResult.expiryMonth);
+                    mCardExpiryYear.setText(""+scanResult.expiryYear);
                 }
 
                 if (scanResult.cvv != null) {
                     // Never log or display a CVV
-                    resultDisplayStr += "CVV has " + scanResult.cvv.length() + " digits.\n";
                     mCardCCV.setText(scanResult.cvv);
                 }
 
                 if (scanResult.postalCode != null) {
-                    resultDisplayStr += "Postal Code: " + scanResult.postalCode + "\n";
                     mCardPostal.setText(scanResult.postalCode);
                 }
-            } else {
-                resultDisplayStr = "Scan was canceled.";
             }
 
         }
