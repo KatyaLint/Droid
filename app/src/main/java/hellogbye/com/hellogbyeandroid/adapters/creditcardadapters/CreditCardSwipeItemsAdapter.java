@@ -19,6 +19,7 @@ import hellogbye.com.hellogbyeandroid.IClickedItem;
 import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
@@ -101,36 +102,27 @@ public class CreditCardSwipeItemsAdapter extends RecyclerSwipeAdapter<CreditCard
         viewHolder.mCardNumberText.setText(item.getLast4());
 
         String cardID = item.getCardtypeid();
-        if(cardID == null){
-            return;
-        }
+//        if(cardID == null){
+//            return;
+//        }
+//
+//        switch (item.getCardtypeid()){
+//            case "1":
+//                break;
+//            case "2":
+//                break;
+//            case "3":
+//                viewHolder.mCardImage.setBackgroundResource(R.drawable.master_card);
+//                break;
+//            case "4":
+//                viewHolder.mCardImage.setBackgroundResource(R.drawable.visa);
+//                break;
+//            default:
+//                viewHolder.mCardImage.setBackgroundResource(R.drawable.visa);
+//        }
 
-        switch (item.getCardtypeid()){
-            case "1":
-                break;
-            case "2":
-                break;
-            case "3":
-                viewHolder.mCardImage.setBackgroundResource(R.drawable.master_card);
-                break;
-            case "4":
-                viewHolder.mCardImage.setBackgroundResource(R.drawable.visa);
-                break;
-            default:
-                viewHolder.mCardImage.setBackgroundResource(R.drawable.visa);
-        }
+        HGBUtility.setCCIcon(viewHolder.mCardImage,cardID);
 
- /*       if(item.getCardtypeid().equals("1")){
-            //holder.mCardImage.setBackgroundResource(R.drawable.visa);
-        }else if (item.getCardtypeid().equals("2")){
-            // holder.mCardImage.setBackgroundResource(R.drawable.master_card);
-        }else if (item.getCardtypeid().equals("3")){
-            viewHolder.mCardImage.setBackgroundResource(R.drawable.master_card);
-        }else if (item.getCardtypeid().equals("4")){
-            viewHolder.mCardImage.setBackgroundResource(R.drawable.visa);
-        }else {
-            viewHolder.mCardImage.setBackgroundResource(R.drawable.visa);
-        }*/
 
         viewHolder.credit_card_layiut_rl.setTag(item.getToken());
         viewHolder.credit_card_layiut_rl.setOnClickListener(new View.OnClickListener() {

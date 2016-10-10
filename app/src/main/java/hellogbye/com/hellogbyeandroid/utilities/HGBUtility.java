@@ -1360,14 +1360,13 @@ public class HGBUtility {
     public static void setCCIcon(ImageView view, String cardid) {
 
         if ("1".equals(cardid)) {
-            view.setBackgroundResource(R.drawable.master_card);
+            view.setBackgroundResource(R.drawable.amex);
 
         } else if ("2".equals(cardid)) {
-            //TODO need DISCOVERY card
             view.setBackgroundResource(R.drawable.discover);
 
         } else if ("3".equals(cardid)) {
-            view.setBackgroundResource(R.drawable.amex);
+            view.setBackgroundResource(R.drawable.master_card);
 
         } else if ("4".equals(cardid)) {
             view.setBackgroundResource(R.drawable.visa);

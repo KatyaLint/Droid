@@ -427,7 +427,8 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
 
 
         String last4 = mCardNumber.getCreditCard().getCardNumber().toString();
-        last4 = last4.substring(last4.length() - 5, last4.length());
+        last4 = last4.replaceAll("\\s+", "");
+        last4 = last4.substring(last4.length() - 4, last4.length());
         final String strCardNumber = mCardNumber.getCreditCard().getCardNumber().replaceAll("\\s+", "");
         mCurrentCard.setCardNumber(strCardNumber);
         if (isFillPayment) {
@@ -440,7 +441,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
 
         //  last4 = last4.substring(last4.length() - 5, last4.length());
 
-        last4 = last4.replaceAll("\\s+", "");
+
         mCurrentCard.setLast4(last4);
         mCurrentCard.setCvv(mCardCCV.getText().toString());
 
@@ -448,7 +449,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         // CcnTypeEnum hh=  mCardNumber.validate();
 
             if (!isFillPayment) {
-                if (mCardNumber.isCreditCardValid()) {
+                if (mCardNumber.isCreditCardValid() || mCurrentCard.getCardtypeid().equalsIgnoreCase("1")) {//TODO this is a work around for AMEX
                 ConnectionManager.getInstance(getActivity()).getCCSession(new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
@@ -584,7 +585,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
             return "3";
         } else if ("VISA".equalsIgnoreCase(cardType)) {
             return "4";
-        } else if ("AMEX".equalsIgnoreCase(cardType)) {
+        } else if ("American Express".equalsIgnoreCase(cardType)) {
             return "1";
         } else if ("DISCOVER".equalsIgnoreCase(cardType)) {
             return "2";
