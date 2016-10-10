@@ -176,7 +176,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             @Override
             public void onClick(View v) {
 
-                HGBUtility.showPikerDialog(0,mTitle, getActivity(), SELECT_TITLE, getResources().getStringArray(R.array.title_array), 0, 1, null, true);
+                HGBUtility.showPikerDialog(0,mTitle, getActivity(), SELECT_TITLE, getResources().getStringArray(R.array.title_array), 0, 2, null, true);
 
 
                 // showTitleDialog();
