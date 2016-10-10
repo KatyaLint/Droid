@@ -1358,7 +1358,7 @@ public class HGBUtility {
     }
 
     public static void setCCIcon(ImageView view, String cardid) {
-       
+
         if ("1".equals(cardid)) {
             view.setBackgroundResource(R.drawable.master_card);
 
@@ -1372,7 +1372,11 @@ public class HGBUtility {
         } else if ("4".equals(cardid)) {
             view.setBackgroundResource(R.drawable.visa);
 
+        }else  {
+            view.setBackgroundResource(R.drawable.all_card_icon);
+
         }
+
 
     }
 

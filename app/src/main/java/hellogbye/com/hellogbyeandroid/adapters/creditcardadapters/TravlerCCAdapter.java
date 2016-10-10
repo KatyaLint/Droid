@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -130,6 +131,8 @@ public class TravlerCCAdapter extends RecyclerView.Adapter<TravlerCCAdapter.View
         if(item.getCvv()!= null){
             holder.mCVVEditText.setText(item.getCvv());
         }
+
+        HGBUtility.setCCIcon(holder.mCCImage,item.getCardtypeid());
 
         holder.mCVVEditText.addTextChangedListener(new TextWatcher() {
             @Override
