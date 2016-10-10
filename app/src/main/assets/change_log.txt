@@ -456,6 +456,7 @@ Code changing:
         HEL-1666 - traveler info - missing Mrs. option
         HEL-1665 - editing travelers profile (checkout, step 2 ) for 2 travelers
         HEL-1636 - checkout > step 2 > click on "edit" > travel info - screen changes needed
+        HEL-1633 - error when adding Amex credit card
 
 
         Code changing:
