@@ -43,7 +43,7 @@
         android:layout_below="@+id/trevel_details_underline_2"
         android:id="@+id/travel_detail_middle_name"
         style="@style/TravelerDetailsTextStyle"
-        android:hint="Middle Name" />
+        android:hint="Middle Name (optional)" />
     <View
         android:layout_below="@+id/travel_detail_middle_name"
         android:id="@+id/trevel_details_underline_3"
