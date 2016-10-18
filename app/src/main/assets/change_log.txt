@@ -461,3 +461,6 @@ Code changing:
 
         Code changing:
         --------------
+         - Changed location of map to Details tab
+         - Changed Gallery to Header of Hitel Details
+         - Removed Gallery tab
