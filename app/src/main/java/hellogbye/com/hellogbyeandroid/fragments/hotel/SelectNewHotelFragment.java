@@ -55,8 +55,6 @@ import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
-import static com.google.android.gms.analytics.internal.zzy.i;
-import static com.google.android.gms.analytics.internal.zzy.m;
 import static hellogbye.com.hellogbyeandroid.R.id.map;
 import static hellogbye.com.hellogbyeandroid.R.id.position;
 

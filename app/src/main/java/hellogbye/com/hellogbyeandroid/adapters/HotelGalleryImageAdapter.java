@@ -23,7 +23,6 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.AllImagesVO;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
-import static com.google.android.gms.analytics.internal.zzy.v;
 
 /**
  * Created by arisprung on 9/15/16.

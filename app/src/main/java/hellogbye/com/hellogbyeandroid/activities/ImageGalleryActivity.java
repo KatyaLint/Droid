@@ -10,9 +10,7 @@ import android.util.SparseArray;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +18,8 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.ImageFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.AllImagesVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 
-import static com.google.android.gms.analytics.internal.zzy.g;
 
 /**
  * Created by arisprung on 10/20/15.

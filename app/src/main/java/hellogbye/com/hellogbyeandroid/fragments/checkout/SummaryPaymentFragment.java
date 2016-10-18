@@ -47,7 +47,6 @@ import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
-import static com.google.android.gms.analytics.internal.zzy.k;
 
 /**
  * Created by arisprung on 12/2/15.
