@@ -13,17 +13,19 @@
             android:layout_height="match_parent">
 
 
-            <FrameLayout
-                android:id="@+id/map"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
+            <android.support.v4.view.ViewPager
+                android:id="@+id/hotel_image_view_pager"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/DP200" />
+                android:layout_height="@dimen/DP200"
+                android:clickable="true"
+                />
+
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/map">
+                android:layout_below="@id/hotel_image_view_pager">
 
 
                 <LinearLayout

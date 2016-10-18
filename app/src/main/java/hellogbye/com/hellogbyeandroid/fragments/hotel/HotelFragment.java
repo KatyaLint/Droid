@@ -37,8 +37,10 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelRoomAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.CustomAlternativeHotelAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.HotelImageAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.AllImagesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
@@ -55,12 +57,13 @@ import static hellogbye.com.hellogbyeandroid.R.id.position;
 /**
  * Created by arisprung on 9/30/15.
  */
-public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback {
+public class HotelFragment extends HGBAbstractFragment{
 
-    private SupportMapFragment fragment;
-    private GoogleMap mMap;
+
     private ViewPager mViewPager;
+    private ViewPager mHotelViewPager;
     private AlternativeHotelRoomAdapter mHotelRoomAdapter;
+    private HotelImageAdapter mHotelImageAdapter;
     private FontTextView mHotelNameFontTextView;
     private FontTextView mHotelPriceFontTextView;
     private FontTextView mHotelDaysFontTextView;
@@ -136,77 +139,18 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         return rootView;
     }
 
-    private void initializeMap() {
-
-        fragment.getMapAsync(this);
-    }
 
 
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        FragmentManager fm = getChildFragmentManager();
-
-        fragment = (SupportMapFragment) fm.findFragmentById(R.id.map); //((SupportMapFragment) activity.getFragmentManager().findFragmentById(R.id.map));//(SupportMapFragment) fm.findFragmentById(R.id.map);
-
-        if (fragment == null) {
-            fragment = SupportMapFragment.newInstance();
-            fm.beginTransaction().replace(R.id.map, fragment).commit();
-            fragment.getMapAsync(this);
-        }
-    }
-
-    boolean permissionDenied = true;
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-
-        if (requestCode == HGBConstants.MY_PERMISSION_ACCESS_COARSE_LOCATION) {
-            if (permissions.length == 1 &&
-                    permissions[0] == Manifest.permission.ACCESS_FINE_LOCATION &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                mMap.setMyLocationEnabled(true);
-                permissionDenied = false;
-            } else {
-                permissionDenied = true;
-            }
-            // Permission was denied. Display an error message.
-        }
-    }
 
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        initializeMap();
 
-    }
 
-    @Override
-    public boolean onMarkerClick(Marker marker) {
 
-        return false;
-    }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        loadMap();
-    }
 
-    private void loadMap() {
-        if(!permissionDenied){
-            mMap.setMyLocationEnabled(true);
-        }
 
-        mMap.getUiSettings().setCompassEnabled(true);
-        mMap.getUiSettings().setZoomControlsEnabled(false);
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
-        mMap.setOnMarkerClickListener(this);
-        setCurrentHotel();
 
-    }
 
     private void loadAlternativeHotels() {
 
@@ -247,6 +191,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         mHotelDaysFontTextView = (FontTextView) rootView.findViewById(R.id.days);
         mAlertnativeHotelFontTextView = (FontTextView) rootView.findViewById(R.id.show_alternative_hotel);
         mViewPager = (ViewPager) rootView.findViewById(R.id.rooms_view_pager);
+        mHotelViewPager= (ViewPager) rootView.findViewById(R.id.hotel_image_view_pager);
 
 
 
@@ -268,6 +213,7 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         String result = String.format("%.2f", iCharge);
         mHotelPriceFontTextView.setText("$" + node.getmMinimumAmount());
         mHotelDaysFontTextView.setText(diff + " Nights");
+        initHotelImages(node.getAllImagesVOs());
 
 
 
@@ -290,28 +236,22 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         });
     }
 
+    private void initHotelImages(ArrayList<AllImagesVO> allImagesVOs) {
 
+        mHotelImageAdapter = new HotelImageAdapter(allImagesVOs,getActivity().getApplicationContext());
+        mHotelViewPager.setAdapter(mHotelImageAdapter);
+        mHotelImageAdapter.SetOnItemClickListener(new HotelImageAdapter.OnLinearLayoutClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
 
-
-    private Marker setCurrentHotel() {
-        if(mMap != null){
-            mMap.clear();
-        }
-
-        LatLng currentHotelLatLon = new LatLng(currentSelectedNode.getmLatitude(), currentSelectedNode.getmLongitude());
-        Marker currentHotel = mMap.addMarker(new MarkerOptions()
-                .position(currentHotelLatLon)
-                .icon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMyHotelMarkerBitmap(currentSelectedNode.getmStarRating(), currentSelectedNode.getmMinimumAmount(), getActivity()))));
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(currentHotelLatLon)      // Sets the center of the map to Mountain View
-                .zoom(11)                   // Sets the zoom
-                .bearing(90)                // Sets the orientation of the camera to east
-                .tilt(30)                   // Sets the tilt of the camera to 30 degrees
-                .build();                   // Creates a CameraPosition from the builder
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        return currentHotel;
-
+            }
+        });
     }
+
+
+
+
+
 
     private void loadRoomsList() {
 
@@ -345,8 +285,8 @@ public class HotelFragment extends HGBAbstractFragment implements GoogleMap.OnMa
         mTabHost = (FragmentTabHost)rootview.findViewById(android.R.id.tabhost);
 
         mTabHost.setup(getActivity(), getChildFragmentManager(), android.R.id.tabcontent);
-        mTabHost.addTab(mTabHost.newTabSpec(TAB_2_TAG).setIndicator(TAB_2_TAG),
-                GalleryHotelFragment.class, null);
+//        mTabHost.addTab(mTabHost.newTabSpec(TAB_2_TAG).setIndicator(TAB_2_TAG),
+//                GalleryHotelFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(TAB_1_TAG).setIndicator(TAB_1_TAG),
                 DetailsHotelFragment.class, null);
 
