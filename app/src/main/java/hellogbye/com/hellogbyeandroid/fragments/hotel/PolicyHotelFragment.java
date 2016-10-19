@@ -24,8 +24,8 @@ public class PolicyHotelFragment extends HGBAbstractFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.hotel_details_layout, container, false);
-        TextView policyTextView = (TextView) v.findViewById(R.id.hotel_detail_description);
+        View v = inflater.inflate(R.layout.hotel_policy_layout, container, false);
+        TextView policyTextView = (TextView) v.findViewById(R.id.hotel_policy);
         NodesVO nodesVO = getLegWithGuid(getActivityInterface().getTravelOrder());
         policyTextView .setText(Html.fromHtml(nodesVO.getRoomsVOs().get(0).getmCancellationPolicy()));
         return v;
