@@ -1,8 +1,6 @@
 package hellogbye.com.hellogbyeandroid.fragments.cnc;
 
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,8 +19,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
@@ -42,8 +38,6 @@ import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
-import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportResultsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportServerResultVO;

@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -25,7 +24,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -34,14 +32,10 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
@@ -56,7 +50,6 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 import static hellogbye.com.hellogbyeandroid.R.id.map;
-import static hellogbye.com.hellogbyeandroid.R.id.position;
 
 
 /**

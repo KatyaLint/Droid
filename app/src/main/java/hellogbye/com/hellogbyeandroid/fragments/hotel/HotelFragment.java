@@ -1,42 +1,30 @@
 package hellogbye.com.hellogbyeandroid.fragments.hotel;
 
-import android.Manifest;
 import android.app.Activity;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
+
 import com.google.gson.Gson;
+
 import java.util.ArrayList;
+
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelRoomAdapter;
-import hellogbye.com.hellogbyeandroid.adapters.CustomAlternativeHotelAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.HotelImageAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -50,17 +38,16 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
-
-import static hellogbye.com.hellogbyeandroid.R.id.position;
+import hellogbye.com.hellogbyeandroid.views.WrapContentViewPager;
 
 
 /**
  * Created by arisprung on 9/30/15.
  */
-public class HotelFragment extends HGBAbstractFragment{
+public class HotelFragment extends HGBAbstractFragment {
 
 
-    private ViewPager mViewPager;
+    private WrapContentViewPager mViewPager;
     private ViewPager mHotelViewPager;
     private AlternativeHotelRoomAdapter mHotelRoomAdapter;
     private HotelImageAdapter mHotelImageAdapter;
@@ -133,23 +120,10 @@ public class HotelFragment extends HGBAbstractFragment{
         });
 
 
-
         HGBUtility.checkPermissions(getActivity());
 
         return rootView;
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     private void loadAlternativeHotels() {
@@ -190,14 +164,12 @@ public class HotelFragment extends HGBAbstractFragment{
         mHotelPriceFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_price);
         mHotelDaysFontTextView = (FontTextView) rootView.findViewById(R.id.days);
         mAlertnativeHotelFontTextView = (FontTextView) rootView.findViewById(R.id.show_alternative_hotel);
-        mViewPager = (ViewPager) rootView.findViewById(R.id.rooms_view_pager);
-        mHotelViewPager= (ViewPager) rootView.findViewById(R.id.hotel_image_view_pager);
-
+        mViewPager = (WrapContentViewPager) rootView.findViewById(R.id.rooms_view_pager);
+        mHotelViewPager = (ViewPager) rootView.findViewById(R.id.hotel_image_view_pager);
 
 
         return rootView;
     }
-
 
 
     private void initHotel(NodesVO node) {
@@ -216,12 +188,11 @@ public class HotelFragment extends HGBAbstractFragment{
         initHotelImages(node.getAllImagesVOs());
 
 
-
     }
 
     private void initAlternativeRoomList(final ArrayList<RoomsVO> roomlist) {
 
-        mHotelRoomAdapter = new AlternativeHotelRoomAdapter(roomlist,getActivity().getApplicationContext());
+        mHotelRoomAdapter = new AlternativeHotelRoomAdapter(roomlist, getActivity().getApplicationContext());
         mViewPager.setAdapter(mHotelRoomAdapter);
         mHotelRoomAdapter.SetOnItemClickListener(new AlternativeHotelRoomAdapter.OnLinearLayoutClickListener() {
             @Override
@@ -234,11 +205,27 @@ public class HotelFragment extends HGBAbstractFragment{
                 getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_ROOM_FRAGMENT.getNavNumber(), args);
             }
         });
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mViewPager.reMeasureCurrentPage(mViewPager.getCurrentItem());
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void initHotelImages(ArrayList<AllImagesVO> allImagesVOs) {
 
-        mHotelImageAdapter = new HotelImageAdapter(allImagesVOs,getActivity().getApplicationContext());
+        mHotelImageAdapter = new HotelImageAdapter(allImagesVOs, getActivity().getApplicationContext());
         mHotelViewPager.setAdapter(mHotelImageAdapter);
         mHotelImageAdapter.SetOnItemClickListener(new HotelImageAdapter.OnLinearLayoutClickListener() {
             @Override
@@ -247,10 +234,6 @@ public class HotelFragment extends HGBAbstractFragment{
             }
         });
     }
-
-
-
-
 
 
     private void loadRoomsList() {
@@ -277,12 +260,12 @@ public class HotelFragment extends HGBAbstractFragment{
 
     }
 
-    private void initHotelTabs(View rootview){
+    private void initHotelTabs(View rootview) {
 
 
 //        Bundle detailBundle = new Bundle();
 //        detailBundle.putString("hotel_desc", currentSelectedNode.getmShortDescription());
-        mTabHost = (FragmentTabHost)rootview.findViewById(android.R.id.tabhost);
+        mTabHost = (FragmentTabHost) rootview.findViewById(android.R.id.tabhost);
 
         mTabHost.setup(getActivity(), getChildFragmentManager(), android.R.id.tabcontent);
 //        mTabHost.addTab(mTabHost.newTabSpec(TAB_2_TAG).setIndicator(TAB_2_TAG),
@@ -303,14 +286,14 @@ public class HotelFragment extends HGBAbstractFragment{
                 Typeface textFont = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + "dinnextltpro_medium.otf");
                 for (int i = 0; i < mTabHost.getTabWidget().getChildCount(); i++) {
                     TextView tv = (TextView) mTabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
-                    tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_999999));
+                    tv.setTextColor(ContextCompat.getColor(getActivity(), R.color.COLOR_999999));
                     tv.setTypeface(textFont);
                     tv.setTransformationMethod(null);
 
                 }
 
                 TextView tv = (TextView) mTabHost.getCurrentTabView().findViewById(android.R.id.title); //for Selected Tab
-                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_565656));
+                tv.setTextColor(ContextCompat.getColor(getActivity(), R.color.COLOR_565656));
                 tv.setTypeface(textFont);
                 tv.setTransformationMethod(null);
 

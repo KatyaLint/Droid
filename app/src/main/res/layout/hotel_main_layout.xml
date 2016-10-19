@@ -249,10 +249,10 @@
                             android:layout_height="@dimen/DP1"
                             android:background="@color/COLOR_565656" />
 
-                        <android.support.v4.view.ViewPager
+                        <hellogbye.com.hellogbyeandroid.views.WrapContentViewPager
                             android:id="@+id/rooms_view_pager"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/DP150"
+                            android:layout_height="wrap_content"
                             android:layout_margin="@dimen/DP10"
                             android:clickable="true"
                             />

@@ -2,19 +2,16 @@ package hellogbye.com.hellogbyeandroid.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
 import android.view.ViewGroup;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.ImageFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.AllImagesVO;
