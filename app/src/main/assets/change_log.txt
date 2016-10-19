@@ -446,7 +446,7 @@ Code changing:
 
      ------------------------------------------
                        Version 0.0.2
-       ------------------------------------------
+     ------------------------------------------
         Fixed Bugs:
         -----------
         HEL-1670- checkout - step 3 - cvv get's deleted when clicking on "hazardous material notice
@@ -457,7 +457,7 @@ Code changing:
         HEL-1665 - editing travelers profile (checkout, step 2 ) for 2 travelers
         HEL-1636 - checkout > step 2 > click on "edit" > travel info - screen changes needed
         HEL-1633 - error when adding Amex credit card
-
+        HEL-1672 - flight details screen - 4 digit price, USD shown incorrectly
 
         Code changing:
         --------------
