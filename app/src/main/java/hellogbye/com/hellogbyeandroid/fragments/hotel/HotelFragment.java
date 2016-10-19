@@ -40,6 +40,8 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.WrapContentViewPager;
 
+import static android.R.id.list;
+
 
 /**
  * Created by arisprung on 9/30/15.
@@ -192,8 +194,11 @@ public class HotelFragment extends HGBAbstractFragment {
 
     private void initAlternativeRoomList(final ArrayList<RoomsVO> roomlist) {
 
-        mHotelRoomAdapter = new AlternativeHotelRoomAdapter(roomlist, getActivity().getApplicationContext());
+
+
+        mHotelRoomAdapter = new AlternativeHotelRoomAdapter(initRoomList(roomlist), getActivity().getApplicationContext());
         mViewPager.setAdapter(mHotelRoomAdapter);
+
         mHotelRoomAdapter.SetOnItemClickListener(new AlternativeHotelRoomAdapter.OnLinearLayoutClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -205,22 +210,42 @@ public class HotelFragment extends HGBAbstractFragment {
                 getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_ROOM_FRAGMENT.getNavNumber(), args);
             }
         });
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        mViewPager.setCurrentItem(0,true);
+//        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                mViewPager.reMeasureCurrentPage(mViewPager.getCurrentItem());
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
+    }
 
+    private ArrayList<RoomsVO> initRoomList(ArrayList<RoomsVO> roomlist){
+
+
+        ArrayList<RoomsVO> newList = new ArrayList<>(roomlist);
+        for (int i = 0; i <newList.size() ; i++) {
+
+            if(!newList.get(i).ismIsAlternative()){
+                RoomsVO room = newList.get(i);
+                newList.remove(i);
+                newList.add(0,room);
+                return newList;
             }
 
-            @Override
-            public void onPageSelected(int position) {
-                mViewPager.reMeasureCurrentPage(mViewPager.getCurrentItem());
-            }
 
-            @Override
-            public void onPageScrollStateChanged(int state) {
+        }
+        return newList;
 
-            }
-        });
     }
 
     private void initHotelImages(ArrayList<AllImagesVO> allImagesVOs) {
