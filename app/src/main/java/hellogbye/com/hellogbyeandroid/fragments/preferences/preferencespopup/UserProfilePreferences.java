@@ -23,6 +23,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -35,7 +36,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
     private int radioButtonSelected = -1;
     private PreferencesSettingsPreferencesCheckAdapter mRadioPreferencesAdapter;
     private ArrayList<DefaultsProfilesVO> accountDefaultSettings;
-
+    private boolean isDefaultProfile = false;
 
 
     public void getAccountsProfiles(Activity context,final HGBMainInterface activityInterface){
@@ -55,9 +56,30 @@ public class UserProfilePreferences extends HGBAbstractFragment {
     }
 
 
+    public void getUserDefaultSettings(final Activity context, final HGBFlowInterface flowInterface,final HGBMainInterface activityInterface){
+        // getPreferenceProfiles(final ServerRequestListener listener)
+        isDefaultProfile = true;
+        ConnectionManager.getInstance(context).getDefaultProfiles(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                if (data != null) {
+                    accountDefaultSettings = (ArrayList<DefaultsProfilesVO>) data;
+                    //     List<AccountDefaultSettingsVO> accountDefaultSettings = (List<AccountDefaultSettingsVO>) data;
+                    profilesDialog(accountDefaultSettings, context, flowInterface, activityInterface);
+                }
+            }
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
+
+
 
     public void getUserSettings(final Activity context, final HGBFlowInterface flowInterface,final HGBMainInterface activityInterface){
         // getPreferenceProfiles(final ServerRequestListener listener)
+        isDefaultProfile = false;
         ConnectionManager.getInstance(context).getPreferenceProfiles(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
@@ -90,7 +112,11 @@ public class UserProfilePreferences extends HGBAbstractFragment {
         for(DefaultsProfilesVO defaultsProfilesVO: userProfileVOs){
             AccountDefaultSettingsVO accountDefaultSettingsVO = new AccountDefaultSettingsVO();
             accountDefaultSettingsVO.setmId(defaultsProfilesVO.getId());
-            accountDefaultSettingsVO.setmProfileName(defaultsProfilesVO.getProfilename());
+            String profileName = defaultsProfilesVO.getProfilename();
+            if(profileName == null){
+                profileName = defaultsProfilesVO.getName();
+            }
+            accountDefaultSettingsVO.setmProfileName(profileName);
             accountAttributes.add(accountDefaultSettingsVO);
         }
 
@@ -131,24 +157,15 @@ public class UserProfilePreferences extends HGBAbstractFragment {
         dialogBuilder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 if(radioButtonSelected != -1) {
-                    final DefaultsProfilesVO selected = accountDefaultSettings.get(radioButtonSelected);
 
-                    String userEmail = activityInterface.getPersonalUserInformation().getUserEmailLogIn();
+                    if(isDefaultProfile){
+                        final DefaultsProfilesVO selected = accountDefaultSettings.get(radioButtonSelected);
+                        postDefaultProfile(String.valueOf(selected.getId()), selected.getName(), activity, activityInterface);
+                    }else{
+                        putAccoutToServer(activity, activityInterface);
+                    }
 
-                    ConnectionManager.getInstance(activity).putAccountsPreferences(userEmail, selected.getId(), new ConnectionManager.ServerRequestListener() {
-                        @Override
-                        public void onSuccess(Object data) {
-                            FontTextView my_trip_profile = ((MainActivityBottomTabs) activity).getMyTripProfile();
-                            my_trip_profile.setTag(selected.getId());
-                            //   FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
-                            //   my_trip_profile.setText(selected.getProfilename());
-                        }
 
-                        @Override
-                        public void onError(Object data) {
-                            ErrorMessage(data);
-                        }
-                    });
                     selectDefaultProfileDialog.dismiss();
                 }
             } });
@@ -166,6 +183,59 @@ public class UserProfilePreferences extends HGBAbstractFragment {
 
     }
 
+    private void postDefaultProfile(String profileId, String profileName, final Activity activity, final HGBMainInterface activityInterface) {
+        ConnectionManager.getInstance(activity).postDefaultProfile(profileId, profileName, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                if (data != null) {
+                    AccountDefaultSettingsVO accountDefault = (AccountDefaultSettingsVO) data;
+                    putNewPreferencesForUser(activityInterface.getPersonalUserInformation().getUserEmailLogIn(), accountDefault.getmId(), activity);
+                }
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+
+    }
+
+    private void putNewPreferencesForUser(final String userEmail, final String accountID,final Activity activity) {
+        ConnectionManager.getInstance(activity).putAccountsPreferences(userEmail, accountID, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                HGBPreferencesManager hgbPrefrenceManager = HGBPreferencesManager.getInstance(activity);
+                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, accountID);
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
+
+    private void putAccoutToServer(final Activity activity,final HGBMainInterface activityInterface){
+        final DefaultsProfilesVO selected = accountDefaultSettings.get(radioButtonSelected);
+
+        String userEmail = activityInterface.getPersonalUserInformation().getUserEmailLogIn();
+
+        ConnectionManager.getInstance(activity).putAccountsPreferences(userEmail, selected.getId(), new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                FontTextView my_trip_profile = ((MainActivityBottomTabs) activity).getMyTripProfile();
+                my_trip_profile.setTag(selected.getId());
+                //   FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
+                //   my_trip_profile.setText(selected.getProfilename());
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
 
     private void selectedRadioPreference(Activity activity){
 

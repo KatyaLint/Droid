@@ -62,6 +62,7 @@ import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesCheckList
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesDragListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSearchListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesTabWidgetFragment;
+import hellogbye.com.hellogbyeandroid.fragments.preferences.preferencespopup.UserProfilePreferences;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoHelpAndFeedbackFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountSettingsFragment;
@@ -98,13 +99,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private HGBPreferencesManager hgbPrefrenceManager;
     private UserProfileVO mCurrentUser;
     private OnBackPressedListener onBackPressedListener;
-
     private HGBSaveDataClass hgbSaveDataClass = new HGBSaveDataClass();
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
-
     private ArrayList<String> mCvvList;
-
-
     private ArrayList<UserProfileVO> mTravelList = new ArrayList<>();
     private ArrayList<CountryItemVO> mEligabileCountryList = new ArrayList<>();
     private ArrayList<CreditCardItem> mCreditCardList = new ArrayList<>();
@@ -113,11 +110,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private FontTextView preference_save_changes;
     private AlertDialog selectDefaultProfileDialog;
     private ArrayList<DefaultsProfilesVO> userDefaultProfiles;
-
     private HashSet<CreditCardItem> mSelectedCreditCards = new HashSet<>();
-
     private HashMap<String, String> mBookingHashMap = new HashMap<>();
-
     private BottomBar mBottomBar;
 
     private final int BOTTOM_BAR_FIRST_INDEX = 0;
@@ -508,6 +502,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
                 //showUserProfiles();
                 if (!mCurrentUser.getIsTravelprofile()) {
+                    userProfilePreferences = new UserProfilePreferences();
                     showUserProfiles();
                 }
 
@@ -563,20 +558,25 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         }
     }
 
+    private UserProfilePreferences userProfilePreferences;
     private void showUserProfiles() {
 
         //     https://apiuat.hellogbye.com/uat/rest/TravelPreference/Profiles/Defaults
 
+        userProfilePreferences.getUserDefaultSettings(MainActivityBottomTabs.this, MainActivityBottomTabs.this, hgbSaveDataClass);
 
-        ConnectionManager.getInstance(MainActivityBottomTabs.this).getDefaultProfiles(new ConnectionManager.ServerRequestListener() {
+   /*     ConnectionManager.getInstance(MainActivityBottomTabs.this).getDefaultProfiles(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
 
                 ArrayList<DefaultsProfilesVO> userProfileVO = (ArrayList<DefaultsProfilesVO>) data;
-                if (!userProfileVO.isEmpty()) {
+           //     if (!userProfileVO.isEmpty()) {
                     setUserDefaultProfiles(userProfileVO);
-                    showAlertProfilesDialog(userProfileVO);
-                }
+
+
+
+                    //showAlertProfilesDialog(userProfileVO);
+          //      }
 
 
             }
@@ -585,12 +585,13 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             public void onError(Object data) {
                 ErrorMessage(data);
             }
-        });
+        });*/
 
     }
 
 
     private void showAlertProfilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs) {
+     //   kate
         LayoutInflater li = LayoutInflater.from(MainActivityBottomTabs.this);
         View promptsView = li.inflate(R.layout.popup_custom_title, null);
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivityBottomTabs.this);
