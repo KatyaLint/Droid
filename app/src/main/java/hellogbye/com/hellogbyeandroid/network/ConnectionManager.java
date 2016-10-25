@@ -151,6 +151,35 @@ public class ConnectionManager {
         });
 
     }
+    public void postAutocompleteCity(String word, String country, String State,final ServerRequestListener listener) {
+        String url = getURL(Services.STATIC_CITY_AUTOCOMPLETE);
+
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("words", word);
+            jsonObject.put("countrycode", country);
+            jsonObject.put("statecode", State);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.getCityList(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        },false);
+
+    }
+
 
 
     public void postUserActivation(String userActivationKey, final ServerRequestListener listener) {
@@ -1992,6 +2021,7 @@ public class ConnectionManager {
                 USER_ACTIVATION_PIN("UserProfile/Activate?activationKey="),
                 HOTEL_SEARCH("hotel/Search"),
                 DEFAULT_PROFILES("TravelPreference/Profiles/Defaults"),
+                STATIC_CITY_AUTOCOMPLETE("statics/cityautocomplete"),
                 COMPANION_SEARCH("UserProfile/Search?count=5&excludeCompanions=false&");
 
                 String url;

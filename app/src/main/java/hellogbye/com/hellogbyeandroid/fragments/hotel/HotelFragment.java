@@ -205,8 +205,6 @@ public class HotelFragment extends HGBAbstractFragment {
         mHotelPriceFontTextView.setText("$" + node.getmMinimumAmount());
         mHotelDaysFontTextView.setText(diff + " Nights");
         initHotelImages(node.getAllImagesVOs());
-
-
     }
 
     private void initAlternativeRoomList(final ArrayList<RoomsVO> roomlist) {

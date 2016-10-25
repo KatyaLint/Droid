@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.models.CreditCardSessionItem;
@@ -128,6 +129,21 @@ public class Parser {
         }
         return acountDefaultSettings;
     }
+
+    public static Object getCityList(String response){
+        ArrayList<String> list = null;
+        try {
+            String replace = response.replace("[","");
+            String replace1 = replace.replace("]","");
+            String replace2 = replace1.replace("\"", "");
+            list = new ArrayList<String>(Arrays.asList(replace2.split(",")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
 
     public static Object getSettingsDefault(String response){
         List<AccountDefaultSettingsVO> acountDefaultSettings = null;
