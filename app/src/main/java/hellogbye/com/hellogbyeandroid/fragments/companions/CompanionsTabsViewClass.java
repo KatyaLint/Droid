@@ -69,6 +69,8 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
     private ImageButton search_maginfy;
     private FontTextView titleBar;
     private ImageButton toolbar_add_companion;
+    private LinearLayout companion_search_new_companion_view;
+
 
     private void searchListInitialization(){
 
@@ -92,9 +94,11 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
         searchCloseText.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
         searchCloseText.setHintTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
 
+        closeSearchBar();
         search_maginfy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 openSearchBar();
             }
         });
@@ -115,16 +119,25 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
         search_maginfy.setVisibility(View.VISIBLE);
         search_view.setVisibility(View.GONE);
 
+
+        companion_search_new_companion_view.setVisibility(View.GONE);
+        searchRecyclerView.setVisibility(View.VISIBLE);
     }
 
 
     private void openSearchBar() {
+        companion_search_new_companion_view.setVisibility(View.VISIBLE);
+
         titleBar.setVisibility(View.GONE);
+
         toolbar_add_companion.setVisibility(View.GONE);
      //   toolbar_new_iternerary.setVisibility(View.GONE);
         search_maginfy.setVisibility(View.GONE);
         search_view.setVisibility(View.VISIBLE);
         search_view.setIconified(false);
+
+
+        searchRecyclerView.setVisibility(View.INVISIBLE);
 
     }
 
@@ -167,8 +180,6 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
         popup_companion_new = inflater.inflate(R.layout.popup_layout_log_out, null);
 
 
-
-
 /*        companion_editTextDialog_name = (FontEditTextView)popup_companion_new.findViewById(R.id.companion_editTextDialog_name);
         companion_editTextDialog_last_name = (FontEditTextView)popup_companion_new.findViewById(R.id.companion_editTextDialog_last_name);*/
 
@@ -187,7 +198,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
             }
         });*/
 
-       ImageButton toolbar_add_companion = ((MainActivityBottomTabs) getActivity()).getAddCompanionButton();
+        ImageButton toolbar_add_companion = ((MainActivityBottomTabs) getActivity()).getAddCompanionButton();
         toolbar_add_companion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -199,14 +210,16 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
     }
 
 
-    public void setSearchView(RecyclerView searchRecyclerView, LinearLayout companion_empty_view, final boolean addCompanionsToCNCScreen){
+    public void setSearchView(RecyclerView searchRecyclerView, LinearLayout companion_empty_view, final boolean addCompanionsToCNCScreen,
+                              LinearLayout companion_search_new_companion ){
 
       //  this.mSearchView = searchView;
         this.searchRecyclerView = searchRecyclerView;
         this.companion_empty_view = companion_empty_view;
 
         //emptyCompanionsView();
-
+        companion_search_new_companion_view = companion_search_new_companion;
+        companion_search_new_companion_view.setVisibility(View.GONE);
 
         searchListAdapter = new CompanionsSwipeItemsAdapter(getActivity().getApplicationContext(), companionsVOPending);
 
@@ -477,15 +490,19 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
             return false;
         }
 
+        searchRecyclerView.setVisibility(View.VISIBLE);
 
         if(query.isEmpty()){
             searchIsOpen = false;
             searchListAdapter.updateItems(mCurrItemsSearchList);
             searchListAdapter.animateTo(mCurrItemsSearchList);
             searchListAdapter.notifyDataSetChanged();
-            searchRecyclerView.scrollToPosition(0);
-        }else {
+            searchRecyclerView.setVisibility(View.INVISIBLE);
+            companion_search_new_companion_view.setVisibility(View.VISIBLE);
 
+
+        }else {
+            searchRecyclerView.setVisibility(View.VISIBLE);
             ConnectionManager.getInstance(getActivity()).getCompanionsForSearch(query, new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
@@ -496,6 +513,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
                     //searchListAdapter.animateTo(mItemsList.getmNodes());
                     searchListAdapter.notifyDataSetChanged();
                     searchIsOpen = true;
+                    companion_search_new_companion_view.setVisibility(View.GONE);
                     //searchRecyclerView.scrollToPosition(0);
                 }
 

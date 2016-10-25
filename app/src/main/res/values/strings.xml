@@ -162,7 +162,7 @@
     <string name="component_add_new_email">Add New Email</string>
     <string name="component_confirmation_email">will receive a confirmation email shortly.</string>
     <string name="component_select_your_relationship">Select </string>
-
+    <string name="companion_search_new_search_str">Search For New\nCompanions</string>
 
     <string name="component_log_out">Log Out</string>
     <string name="component_log_sure">Are you sure you want to log out?</string>

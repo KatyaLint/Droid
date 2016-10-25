@@ -13,11 +13,14 @@
         android:layout_height="wrap_content"/>-->
 
     <include layout="@layout/companion_empty_view"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-
         android:layout_centerHorizontal="true" />
 
+    <include   android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        layout="@layout/companion_search_new_search"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/companion_travel_recycle_list"

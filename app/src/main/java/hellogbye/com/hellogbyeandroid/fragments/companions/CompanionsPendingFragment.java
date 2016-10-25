@@ -39,7 +39,10 @@ public class CompanionsPendingFragment extends CompanionsTabsViewClass {
        // SearchView searchView = (SearchView)rootView.findViewById(R.id.companion_search_pending_view);
         RecyclerView searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.companion_search_recycle_list_pending);
         LinearLayout companion_empty_view = (LinearLayout) rootView.findViewById(R.id.companion_empty_view);
-        setSearchView(searchRecyclerView, companion_empty_view, false);
+
+        LinearLayout companion_search_new_companion = (LinearLayout) rootView.findViewById(R.id.companion_search_new_companion);
+
+        setSearchView(searchRecyclerView, companion_empty_view, false, companion_search_new_companion);
 
         return rootView;
     }
