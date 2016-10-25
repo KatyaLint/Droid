@@ -65,6 +65,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
                 if (data != null) {
                     accountDefaultSettings = (ArrayList<DefaultsProfilesVO>) data;
                     //     List<AccountDefaultSettingsVO> accountDefaultSettings = (List<AccountDefaultSettingsVO>) data;
+                    accountDefaultSettings.remove(accountDefaultSettings.size()-1);
                     profilesDialog(accountDefaultSettings, context, flowInterface, activityInterface);
                 }
             }

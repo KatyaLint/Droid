@@ -989,6 +989,24 @@ public class ConnectionManager {
 
     }
 
+        public void getUserSettingsDefault(final ServerRequestListener listener) {
+        String url = getURL(Services.USER_GET_TRAVEL_PROFILES);
+        JSONObject jsonObject = new JSONObject();
+
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.getSettingsDefault(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
 
     public void getPreferencesForProfileId(String profileid, final ServerRequestListener listener) {
         String url = getURL(Services.USER_TRAVEL_PROFILES) + profileid + "/Preferences";
@@ -1007,25 +1025,6 @@ public class ConnectionManager {
             }
         });
 
-    }
-
-
-    public void getPreference(final ServerRequestListener listener) {
-        String url = getURL(Services.USER_GET_TRAVEL_PROFILES);
-        JSONObject jsonObject = new JSONObject();
-
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
-                jsonObject, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listener.onSuccess(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
-            }
-        });
     }
 
 
@@ -1190,24 +1189,7 @@ public class ConnectionManager {
     }
 
 
-    public void getUserSettingsDefault(final ServerRequestListener listener) {
-        String url = getURL(Services.USER_GET_TRAVEL_PROFILES);
-        JSONObject jsonObject = new JSONObject();
 
-
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
-                jsonObject, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listener.onSuccess(Parser.getSettingsDefault(response));
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
-            }
-        });
-    }
 
     public void getAlternateFlightsForFlight(String solutionid, String paxid, String flightid, final ServerRequestListener listener) {
 

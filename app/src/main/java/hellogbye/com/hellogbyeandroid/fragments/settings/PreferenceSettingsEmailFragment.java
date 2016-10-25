@@ -186,7 +186,7 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
 
 
     private void getUserProfiles() {
-        ConnectionManager.getInstance(getActivity()).getUserSettingsDefault(new ConnectionManager.ServerRequestListener() {
+        ConnectionManager.getInstance(getActivity()).getPreferenceProfiles(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {

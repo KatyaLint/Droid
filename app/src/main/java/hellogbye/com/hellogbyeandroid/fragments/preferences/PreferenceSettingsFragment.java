@@ -51,7 +51,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
     private List<SettingsAttributeParamVO> accountSettingsAttributes;
     private FontEditTextView input;
     private View popup_preferences_layout;
-    private static int MIN_PREFERENCE_SIZE = 1;
+    private int MIN_PREFERENCE_SIZE = 1;
     private View preferences_at_least_one_preference;
     private String edit_mode;
     private int radioButtonSelected = -1;
@@ -174,7 +174,6 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
 
             }else{
                 mAdapter = new PreferencesSettingsPreferencesCheckAdapter(getActivity(), accountDefaultSettings);
-
                 mDynamicListView.setAdapter((PreferencesSettingsPreferencesCheckAdapter)mAdapter);
             }
 
@@ -358,6 +357,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
             public void onSuccess(Object data) {
                 if (data != null) {
                     accountDefaultSettings = (List<AccountDefaultSettingsVO>) data;
+                  //  System.out.println("Kate accountDefaultSettings =" + accountDefaultSettings.size());
                     createListAdapter();
                 }
             }
