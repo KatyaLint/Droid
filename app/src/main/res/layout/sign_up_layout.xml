@@ -67,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+    <AutoCompleteTextView
         android:id="@+id/sign_up_city"
         style="@style/Sign_up_text_color"
         android:hint="@string/sign_up_city"
