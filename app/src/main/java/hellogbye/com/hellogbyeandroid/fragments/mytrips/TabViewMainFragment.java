@@ -238,6 +238,7 @@ public class TabViewMainFragment extends HGBAbstractFragment implements SearchVi
                 favoriteTrips();
                 break;
         }
+        mAdapter.setTabPosition(tabPosition);
     }
 
 

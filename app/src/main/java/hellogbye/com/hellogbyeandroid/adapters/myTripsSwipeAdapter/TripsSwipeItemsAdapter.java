@@ -32,9 +32,13 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
     private ISwipeAdapterExecution swipeAdapterExecution;
     private Context mContext;
     private ArrayList<MyTripItem> mDataset;
-
+    private int tabPosition;
     public void addClickeListeners(ISwipeAdapterExecution swipeAdapterExecution) {
         this.swipeAdapterExecution = swipeAdapterExecution;
+    }
+
+    public void setTabPosition(int tabPosition) {
+        this.tabPosition = tabPosition;
     }
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {
@@ -109,13 +113,7 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
         HGBUtility.loadRoundedImage( item.getTripimage(),  viewHolder.my_trip_user_image, R.drawable.city_avatar_a_2);
         viewHolder.my_trip_name.setText(item.getName());
         viewHolder.my_trip_dates.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(item.getStartdate())+" - "+HGBUtilityDate.parseDateToddMMyyyyMyTrip(item.getEnddate()));
-        if(item.getPaymentstatus().equals("UPD")){
-            viewHolder.my_trip_paid.setText("UNPAID");
-            viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.COLOR_EE3A3C));
-        }else{
-            viewHolder.my_trip_paid.setText("PAID");
-            viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.paid_green));
-        }
+
         viewHolder.mytrips_rl.setTag(item.getSolutionid());
 
         viewHolder.mytrips_rl.setOnClickListener(new SwipeLayout.OnClickListener() {
@@ -125,6 +123,19 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
 
             }
         });
+
+        if(tabPosition == 2){
+            return;
+        }
+
+        if(item.getPaymentstatus().equals("UPD")){
+            viewHolder.my_trip_paid.setText("UNPAID");
+            viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.COLOR_EE3A3C));
+        }else{
+            viewHolder.my_trip_paid.setText("PAID");
+            viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.paid_green));
+        }
+
 
 //        viewHolder.textViewPos.setText((position + 1) + ".");
 //        viewHolder.textViewData.setText(item);
