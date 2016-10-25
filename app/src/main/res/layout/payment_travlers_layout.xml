@@ -33,7 +33,7 @@
         android:id="@+id/traveler_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/selector_red_button"
+        android:background="@drawable/selector_red_button_no_radius"
         android:textColor="@color/COLOR_WHITE"
         android:gravity="center"
         app:fontName="dinnextltpro_medium.otf"

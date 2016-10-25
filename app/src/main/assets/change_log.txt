@@ -461,6 +461,7 @@ Code changing:
         HEL-1581 - In first enter, change profile , should be like new design instead of old
         HEL-1583 - Companion screen, when searching , should appear search for new companions screen
         HEL-972 - Can't save changes on "Personal Info"
+        HEL-1590 - Make Payment screen, I understand button is too low, and too much padding on the top
 
 
         Code changing:

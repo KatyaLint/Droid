@@ -1,56 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/COLOR_F5F5F5">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/confirm_read">
-
+        android:layout_weight="1"
+        android:layout_marginTop="@dimen/DP10"
+        android:layout_marginBottom="@dimen/DP10"
+        android:layout_height="@dimen/DP0">
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/hazard_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/DP10"
+            android:gravity="center"
             android:text="@string/payment_itirnerary_payment"
             android:textColor="@color/COLOR_565656"
-            android:textSize="@dimen/SP10"
-            app:fontName="dinnextltpro_regular.otf" />
+            android:textSize="@dimen/SP14"
+            app:fontName="dinnextltpro_mediumcond.ttf" />
 
-
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/hazard_text"
+    </LinearLayout>
+    <ScrollView
         android:layout_width="match_parent"
+        android:layout_weight="20"
+        android:fillViewport="true"
         android:background="@color/COLOR_WHITE"
-        android:layout_height="wrap_content"
-        android:lineSpacingExtra="@dimen/SP10"
-        android:padding="@dimen/DP20"
-        android:scrollbars="vertical"
-        android:scrollbarStyle="outsideOverlay"
-        android:text="@string/payment_hazardous"
-        android:textColor="@color/COLOR_565656"
-        android:textSize="@dimen/SP14"
-        app:fontName="dinnextltpro_mediumcond.ttf" />
+        android:layout_height="@dimen/DP0">
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/hazard_text"
+            android:layout_width="match_parent"
+            android:padding="@dimen/DP6"
+            android:background="@color/COLOR_WHITE"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/SP8"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_hazardous"
+            android:textColor="@color/COLOR_565656"
+            android:textSize="@dimen/SP14"
+            app:fontName="dinnextltpro_mediumcond.ttf" />
 
-       <!-- android:layout_height="@dimen/DP340"-->
+    </ScrollView>
+
+
+
+
+
+        <!-- android:layout_height="@dimen/DP340"-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="3"
+        android:layout_marginTop="@dimen/DP10"
+        android:layout_marginBottom="@dimen/DP10"
+        android:layout_height="@dimen/DP0">
+        <hellogbye.com.hellogbyeandroid.views.FontButtonView
+            android:id="@+id/confirm_read"
+            android:layout_gravity="center"
+            style="@style/RedCustomButtonStyle"
+            android:text="@string/i_understand"
+            android:textAllCaps="false"
+            android:textColor="@color/COLOR_WHITE"
+            android:textSize="@dimen/SP20"
+            app:fontName="dinnextltpro_medium.otf" />
 
     </LinearLayout>
 
-    <hellogbye.com.hellogbyeandroid.views.FontButtonView
-        android:layout_alignParentBottom="true"
-        android:id="@+id/confirm_read"
-        app:fontName="dinnextltpro_medium.otf"
-        style="@style/RedCustomButtonStyle"
-        android:textAllCaps="false"
-        android:layout_margin="@dimen/DP20"
-        android:textSize="@dimen/SP20"
-        android:text="@string/i_understand"
-        android:textColor="@color/COLOR_WHITE" />
+
+</LinearLayout>
 
 
-</RelativeLayout>
