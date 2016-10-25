@@ -459,6 +459,7 @@ Code changing:
         HEL-1633 - error when adding Amex credit card
         HEL-1672 - flight details screen - 4 digit price, USD shown incorrectly
         HEL-1581 - In first enter, change profile , should be like new design instead of old
+        HEL-1583 - Companion screen, when searching , should appear search for new companions screen
 
         Code changing:
         --------------
