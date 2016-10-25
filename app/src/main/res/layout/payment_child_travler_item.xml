@@ -21,7 +21,7 @@
         android:id="@+id/travel_data_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/DP44"
+        android:layout_marginLeft="@dimen/DP34"
         android:layout_marginTop="@dimen/DP38"
         layout="@layout/travler_items_layout"/>
 
@@ -40,13 +40,17 @@
         android:background="@color/COLOR_999999" />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:layout_below="@+id/travler_line"
-        android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:layout_marginTop="@dimen/DP16"
+        android:layout_marginTop="@dimen/DP10"
         app:fontName="dinnextltpro_regular.otf"
         style="@style/TextViewTravlerCheckoutDetails"
         android:textColor="@color/COLOR_565656"
-        android:text="@string/payment_billing" />
+        android:text="@string/payment_billing"
+        android:layout_below="@+id/travler_line"
+        android:id="@+id/fontTextView"
+        android:layout_alignLeft="@+id/travler_line"
+        android:layout_alignStart="@+id/travler_line"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

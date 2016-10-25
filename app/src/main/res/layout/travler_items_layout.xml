@@ -12,6 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/travler_name"
             style="@style/TextViewTravlerCheckoutDetails"
@@ -19,6 +21,9 @@
             android:layout_height="wrap_content"
             android:text="Name :"
             app:fontName="dinnextltpro_regular.otf" />
+
+
+
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/travler_dob"
@@ -66,10 +71,12 @@
             android:id="@+id/travler_name_entry"
             style="@style/TextViewTravlerCheckoutDetails"
             android:layout_toRightOf="@+id/travler_name"
+            android:text="sfdfsfsdf"
             app:fontName="dinnextltpro_regular.otf" />
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/travler_dob_entry"
+            android:text="ro"
             style="@style/TextViewTravlerCheckoutDetails"
             android:layout_alignLeft="@+id/travler_name_entry"
             android:layout_below="@+id/travler_name_entry"
@@ -77,6 +84,7 @@
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/travler_email_entry"
+            android:text="email"
             style="@style/TextViewTravlerCheckoutDetails"
             android:layout_alignLeft="@+id/travler_dob_entry"
             android:layout_below="@+id/travler_dob_entry"
@@ -85,6 +93,7 @@
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/travler_phone_entry"
+            android:text="054972487"
             style="@style/TextViewTravlerCheckoutDetails"
             android:layout_alignLeft="@+id/travler_email_entry"
             android:layout_below="@+id/travler_email_entry"
