@@ -122,13 +122,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+                <AutoCompleteTextView
                     android:id="@+id/companion_personal_settings_location_city"
                     style="@style/PersonalInformationEditText"
                     android:layout_width="@dimen/DP0"
                     android:layout_weight="1"
                     android:hint="City"
-                    app:fontName="dinnextltpro_regular.otf" />
+                     />
 
                 <hellogbye.com.hellogbyeandroid.views.FontEditTextView
                     android:id="@+id/companion_personal_settings_location_country"

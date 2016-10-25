@@ -1,15 +1,9 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -18,13 +12,11 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +25,6 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
-import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
@@ -52,7 +43,7 @@ public class SignUpActivity extends BaseActivity {
     private FontEditTextView sign_up_email;
     private FontEditTextView sign_up_last_name;
     private FontEditTextView sign_up_first_name;
-    private FontEditTextView sign_up_city;
+    private AutoCompleteTextView sign_up_city;
     private FontTextView sign_up_country;
     private FontTextView sign_up_province_name;
     private BookingRequestVO bookingResponse;
@@ -61,6 +52,7 @@ public class SignUpActivity extends BaseActivity {
     private HGBPreferencesManager hgbPrefrenceManager;
     private LinearLayout sign_up_layout_ll;
     private View pin_code_verification_layout;
+    private ArrayAdapter adapter;
     private FontTextView pin_code_verification_next;
     private FontEditTextView pin_code_verification_pin;
 
@@ -74,23 +66,23 @@ public class SignUpActivity extends BaseActivity {
 
         getStaticBooking();
 
-        sign_up_button = (Button)findViewById(R.id.sign_up_button);
+        sign_up_button = (Button) findViewById(R.id.sign_up_button);
         sign_up_button.setEnabled(false);
 
 
-        sign_up_password = (FontEditTextView)findViewById(R.id.sign_up_password);
-        sign_up_confirm_password = (FontEditTextView)findViewById(R.id.sign_up_confirm_password);
+        sign_up_password = (FontEditTextView) findViewById(R.id.sign_up_password);
+        sign_up_confirm_password = (FontEditTextView) findViewById(R.id.sign_up_confirm_password);
 
 
-        sign_up_first_name = (FontEditTextView)findViewById(R.id.sign_up_first_name);
-        sign_up_last_name = (FontEditTextView)findViewById(R.id.sign_up_last_name);
+        sign_up_first_name = (FontEditTextView) findViewById(R.id.sign_up_first_name);
+        sign_up_last_name = (FontEditTextView) findViewById(R.id.sign_up_last_name);
 
-        sign_up_email = (FontEditTextView)findViewById(R.id.sign_up_email);
+        sign_up_email = (FontEditTextView) findViewById(R.id.sign_up_email);
 
 
-        sign_up_city = (FontEditTextView)findViewById(R.id.sign_up_city);
-        sign_up_country = (FontTextView)findViewById(R.id.sign_up_country);
-        sign_up_province_name = (FontTextView)findViewById(R.id.sign_up_province_name);
+        sign_up_city = (AutoCompleteTextView) findViewById(R.id.sign_up_city);
+        sign_up_country = (FontTextView) findViewById(R.id.sign_up_country);
+        sign_up_province_name = (FontTextView) findViewById(R.id.sign_up_province_name);
 
 
         SpannableString ss = new SpannableString(getResources().getString(R.string.sign_up_term_of_use));
@@ -109,38 +101,45 @@ public class SignUpActivity extends BaseActivity {
         sign_up_hyperlink.setText(ss);
         sign_up_hyperlink.setMovementMethod(LinkMovementMethod.getInstance());
 
-        pin_code_verification_layout = (View)findViewById(R.id.pin_code_verification_layout);
-        sign_up_layout_ll = (LinearLayout)findViewById(R.id.sign_up_layout_ll);
+        pin_code_verification_layout = (View) findViewById(R.id.pin_code_verification_layout);
+        sign_up_layout_ll = (LinearLayout) findViewById(R.id.sign_up_layout_ll);
         sign_up_layout_ll.setVisibility(View.VISIBLE);
         pin_code_verification_layout.setVisibility(View.GONE);
 
-        pin_code_verification_next = (FontTextView)pin_code_verification_layout.findViewById(R.id.pin_code_verification_next);
-        pin_code_verification_pin = (FontEditTextView)pin_code_verification_layout.findViewById(R.id.pin_code_verification_pin);
+        pin_code_verification_next = (FontTextView) pin_code_verification_layout.findViewById(R.id.pin_code_verification_next);
+        pin_code_verification_pin = (FontEditTextView) pin_code_verification_layout.findViewById(R.id.pin_code_verification_pin);
 
-        pin_code_verification_next.setOnClickListener(new View.OnClickListener(){
+        pin_code_verification_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 activateUserWithKey();
             }
         });
 
-                sign_up_confirm_password.addTextChangedListener(new TextWatcher(){
+        sign_up_confirm_password.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 String password = sign_up_password.getText().toString();
                 String confirm_password = sign_up_confirm_password.getText().toString();
-                if(password.equals(confirm_password)
+                if (password.equals(confirm_password)
                         && HGBUtility.isValidEmail(sign_up_email.getText().toString().trim())
                         && !sign_up_first_name.getText().toString().isEmpty()
-                        && !sign_up_last_name.getText().toString().isEmpty()){
+                        && !sign_up_last_name.getText().toString().isEmpty()) {
 
                     sign_up_button.setEnabled(true);
-                }else {
+                } else {
                     sign_up_button.setEnabled(false);
                 }
             }
-            public void beforeTextChanged(CharSequence s, int start, int count, int after){}
-            public void onTextChanged(CharSequence s, int start, int before, int count){}
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
         });
+
+        initAutoCityComplete();
+
 
 
         sign_up_button.setOnClickListener(new View.OnClickListener() {
@@ -156,10 +155,10 @@ public class SignUpActivity extends BaseActivity {
                 userData.setPassword(sign_up_password.getText().toString());
 
 
-                ConnectionManager.getInstance(SignUpActivity.this).postUserCreateAccount(userData,new ConnectionManager.ServerRequestListener() {
+                ConnectionManager.getInstance(SignUpActivity.this).postUserCreateAccount(userData, new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
-                        hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER,false);
+                        hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
 
                         resetPassword();
                         sign_up_layout_ll.setVisibility(View.GONE);
@@ -191,16 +190,16 @@ public class SignUpActivity extends BaseActivity {
                     countryarray[i] = countries.get(i).getName();
                 }
 
-                HGBUtility.showPikerDialog(0,sign_up_country, SignUpActivity.this, "Choose country",
+                HGBUtility.showPikerDialog(0, sign_up_country, SignUpActivity.this, "Choose country",
                         countryarray, 0, countries.size() - 1, new PopUpAlertStringCB() {
                             @Override
                             public void itemSelected(String inputItem) {
-                                for (CountryItemVO countrie: countries) {
-                                    if(countrie.getName().equals(inputItem)){
+                                for (CountryItemVO countrie : countries) {
+                                    if (countrie.getName().equals(inputItem)) {
                                         userData.setCountry(countrie.getCode());
                                         getStaticProvince();
                                         //userData.setCountryID();
-                                    //    sign_up_province_name.setOnClickListener(provinceClicked);
+                                        //    sign_up_province_name.setOnClickListener(provinceClicked);
 
                                         break;
                                     }
@@ -217,12 +216,57 @@ public class SignUpActivity extends BaseActivity {
         });
     }
 
+    private void initAutoCityComplete() {
+        sign_up_city.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                HGBUtility.hideKeyboard(getApplicationContext(), sign_up_city);
 
-    private void activateUserWithKey(){
+            }
+        });
+
+        sign_up_city.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                ConnectionManager.getInstance(SignUpActivity.this).postAutocompleteCity(editable.toString(), userData.getCountry(),
+                        userData.getCountryProvince()
+                        , new ConnectionManager.ServerRequestListener() {
+                            @Override
+                            public void onSuccess(Object data) {
+                                adapter = new ArrayAdapter(SignUpActivity.this, android.R.layout.simple_list_item_1, (ArrayList<String>) data);
+                                sign_up_city.setAdapter(adapter);
+                            }
+
+                            @Override
+                            public void onError(Object data) {
+                                // ErrorMessage(data);
+
+                            }
+                        });
+
+
+            }
+        });
+
+    }
+
+
+    private void activateUserWithKey() {
 
         String userPinCode = pin_code_verification_pin.getText().toString();
 
-        ConnectionManager.getInstance(SignUpActivity.this).postUserActivation(userPinCode,new ConnectionManager.ServerRequestListener() {
+        ConnectionManager.getInstance(SignUpActivity.this).postUserActivation(userPinCode, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 sign_up_layout_ll.setVisibility(View.VISIBLE);
@@ -231,7 +275,7 @@ public class SignUpActivity extends BaseActivity {
                 hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
                 hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
 
-                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER,false);
+                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
                 hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, null);
                 hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, null);
 
@@ -255,10 +299,10 @@ public class SignUpActivity extends BaseActivity {
     private void resetPassword() {
 
         LayoutInflater li = LayoutInflater.from(SignUpActivity.this);
-        final  View promptsView = li.inflate(R.layout.popup_confirm_email_sent, null);
+        final View promptsView = li.inflate(R.layout.popup_confirm_email_sent, null);
 
-        HGBUtility.showAlertPopUp(SignUpActivity.this,  null, promptsView,
-                getResources().getString(R.string.popup_confirm_account_title),getResources().getString(R.string.ok_button), new PopUpAlertStringCB() {
+        HGBUtility.showAlertPopUp(SignUpActivity.this, null, promptsView,
+                getResources().getString(R.string.popup_confirm_account_title), getResources().getString(R.string.ok_button), new PopUpAlertStringCB() {
                     @Override
                     public void itemSelected(String inputItem) {
 
@@ -270,7 +314,6 @@ public class SignUpActivity extends BaseActivity {
                     }
                 });
     }
-
 
 
     public class myClickableSpan extends ClickableSpan {
@@ -302,9 +345,7 @@ public class SignUpActivity extends BaseActivity {
     }
 
 
-
-
-    private View.OnClickListener provinceClicked = new View.OnClickListener(){
+    private View.OnClickListener provinceClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             getStaticProvince();
@@ -312,49 +353,49 @@ public class SignUpActivity extends BaseActivity {
     };
 
 
-    private void getStaticBooking(){
+    private void getStaticBooking() {
 
-            ConnectionManager.getInstance(SignUpActivity.this).getBookingOptions(new ConnectionManager.ServerRequestListener() {
-                @Override
-                public void onSuccess(Object data) {
-                    bookingResponse = (BookingRequestVO)data;
-                    sortCountryItems();
-                    //BookingRequest bookingrequest = (BookingRequest)data;
-                }
+        ConnectionManager.getInstance(SignUpActivity.this).getBookingOptions(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                bookingResponse = (BookingRequestVO) data;
+                sortCountryItems();
+                //BookingRequest bookingrequest = (BookingRequest)data;
+            }
 
-                @Override
-                public void onError(Object data) {
-                    HGBErrorHelper errorHelper = new HGBErrorHelper();
-                    errorHelper.setMessageForError((String) data);
-                    errorHelper.show(getFragmentManager(), (String) data);
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
 
-                }
-            });
-        }
+            }
+        });
+    }
 
 
-    public void sortCountryItems(){
+    public void sortCountryItems() {
         ArrayList<CountryItemVO> countries = bookingResponse.getCountries();
         ArrayList<CountryItemVO> firstItems = new ArrayList<>();
-        for (CountryItemVO countryItemVO : countries){
-            if(countryItemVO.getCode().equals("CA") ||countryItemVO.getCode().equals("US")){
+        for (CountryItemVO countryItemVO : countries) {
+            if (countryItemVO.getCode().equals("CA") || countryItemVO.getCode().equals("US")) {
                 firstItems.add(countryItemVO);
             }
         }
         countries.removeAll(firstItems);
-        countries.addAll(0,firstItems);
+        countries.addAll(0, firstItems);
     }
 
-    private void getStaticProvince(){
-        String countryID =  userData.getCountry();
+    private void getStaticProvince() {
+        String countryID = userData.getCountry();
         ConnectionManager.getInstance(SignUpActivity.this).getStaticBookingProvince(countryID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                List<ProvincesItem> provinceItems = (List<ProvincesItem>)data;
-                if(provinceItems.size() > 0){
+                List<ProvincesItem> provinceItems = (List<ProvincesItem>) data;
+                if (provinceItems.size() > 0) {
                     setDropDownItems(provinceItems);
                     sign_up_province_name.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     sign_up_province_name.setVisibility(View.GONE);
                 }
             }
@@ -369,19 +410,19 @@ public class SignUpActivity extends BaseActivity {
     }
 
 
-    private void setDropDownItems(final List<ProvincesItem> provinceItems){
-      //  final ArrayList<CountryItemVO> countries = bookingResponse.getCountries();
+    private void setDropDownItems(final List<ProvincesItem> provinceItems) {
+        //  final ArrayList<CountryItemVO> countries = bookingResponse.getCountries();
         String[] countryarray = new String[provinceItems.size()];
         for (int i = 0; i < provinceItems.size(); i++) {
             countryarray[i] = provinceItems.get(i).getProvincename();
         }
 
-        HGBUtility.showPikerDialog(0,sign_up_province_name, SignUpActivity.this, "Choose province",
+        HGBUtility.showPikerDialog(0, sign_up_province_name, SignUpActivity.this, "Choose province",
                 countryarray, 0, provinceItems.size() - 1, new PopUpAlertStringCB() {
                     @Override
                     public void itemSelected(String inputItem) {
-                        for (ProvincesItem province: provinceItems) {
-                            if(province.getProvincename().equals(inputItem)){
+                        for (ProvincesItem province : provinceItems) {
+                            if (province.getProvincename().equals(inputItem)) {
                                 userData.setCountryProvince(province.getProvincecode());
                                 break;
                             }
