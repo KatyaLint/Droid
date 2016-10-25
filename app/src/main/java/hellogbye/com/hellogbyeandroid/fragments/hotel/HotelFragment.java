@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
@@ -33,6 +34,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.RoomsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -40,7 +42,9 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.WrapContentViewPager;
 
+import static android.R.attr.value;
 import static android.R.id.list;
+import static hellogbye.com.hellogbyeandroid.R.id.map;
 
 
 /**
@@ -177,9 +181,22 @@ public class HotelFragment extends HGBAbstractFragment {
     private void initHotel(NodesVO node) {
 
         mListForGallery = new ArrayList<>();
-        NodesVO nodesVO = getNodeWithGuidAndPaxID(node.getmGuid());
         mHotelNameFontTextView.setText(node.getmHotelName());
-        mRoomName.setText(nodesVO.getUserName());
+
+        UserTravelMainVO userOrder = getActivityInterface().getTravelOrder();
+        Map<String, NodesVO> items = userOrder.getItems();
+        ArrayList<PassengersVO> passangers = userOrder.getPassengerses();
+        for (PassengersVO passenger: passangers){
+            ArrayList<String> ItineraryItems = passenger.getmItineraryItems();
+            for (String itineraryItem :ItineraryItems){
+                NodesVO node1 = items.get(itineraryItem);
+                if(node.getmPaxguid().equalsIgnoreCase(node1.getmPaxguid())){
+                    mRoomName.setText(passenger.getmName());
+                    break;
+                }
+            }
+        }
+
         mChckInDate.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(node.getmCheckIn()));
         mChckOutDate.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(node.getmCheckOut()));
         long diff = HGBUtilityDate.dayDifference(node.getmCheckIn(), node.getmCheckOut());
@@ -193,8 +210,6 @@ public class HotelFragment extends HGBAbstractFragment {
     }
 
     private void initAlternativeRoomList(final ArrayList<RoomsVO> roomlist) {
-
-
 
         mHotelRoomAdapter = new AlternativeHotelRoomAdapter(initRoomList(roomlist), getActivity().getApplicationContext());
         mViewPager.setAdapter(mHotelRoomAdapter);
