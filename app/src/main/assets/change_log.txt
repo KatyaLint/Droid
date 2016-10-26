@@ -472,3 +472,4 @@ Code changing:
          - Changed location of map to Details tab
          - Changed Gallery to Header of Hitel Details
          - Removed Gallery tab
+         - Changed UI in Payment Screen (Child layout)
