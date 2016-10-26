@@ -465,6 +465,7 @@ Code changing:
         HEL-1634 - my trips - should not have "unpaid" trips
         HEL-1584 - companion screen, when nothing found in search should appear screen can't find
         HEL-1593 - for all check out screens, need to be back
+        HEL-1640 - Flight Details screen - usd cuts off and "operated by" icon
 
         Code changing:
         --------------

@@ -39,7 +39,7 @@
         <ImageView
             android:id="@+id/airplane_details_operated_image"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/DP38"
             android:src="@drawable/remove_icon"
             android:layout_alignParentRight="true"
             android:layout_weight="200" />
