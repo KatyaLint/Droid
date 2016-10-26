@@ -99,7 +99,7 @@
 
 
     <string name="preferences_prefered_aircraft">Preferred Aircraft Type</string>
-    <string name="preferences_prefered_aircraft_favorite">Tell us which airline you prefer\n(if that\'s important to you)</string>
+    <string name="preferences_prefered_aircraft_favorite">Tell us which aircraft you prefer\n(if that\'s important to you)</string>
 
     <string name="preferences_prefered_flight_carrier">Preferred Airline</string>
     <string name="preferences_prefered_flight_carrier_favorite">Tell us which airlines you like best</string>

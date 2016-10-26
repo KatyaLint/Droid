@@ -466,6 +466,8 @@ Code changing:
         HEL-1584 - companion screen, when nothing found in search should appear screen can't find
         HEL-1593 - for all check out screens, need to be back
         HEL-1640 - Flight Details screen - usd cuts off and "operated by" icon
+        HEL-1664 - travel profile - change text on aircraft
+
 
         Code changing:
         --------------
