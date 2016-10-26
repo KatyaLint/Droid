@@ -67,8 +67,9 @@ public class CompanionsTravelers extends CompanionsTabsViewClass {
 
         boolean addCompanionsToCNCScreen = addingCompanionsToCNCView();
         LinearLayout companion_search_new_companion = (LinearLayout) rootView.findViewById(R.id.companion_search_new_companion);
+        LinearLayout companion_search_not_found = (LinearLayout)rootView.findViewById(R.id.companion_search_not_found_ll);
 
-        setSearchView(searchRecyclerView, companion_empty_view, addCompanionsToCNCScreen, companion_search_new_companion);
+        setSearchView(rootView, addCompanionsToCNCScreen);
 
 
         return rootView;

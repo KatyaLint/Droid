@@ -37,12 +37,12 @@ public class CompanionsPendingFragment extends CompanionsTabsViewClass {
         // Inflate the layout for this fragment
         View rootView = createViewForTab(R.layout.companions_pending, getContext(), true);
        // SearchView searchView = (SearchView)rootView.findViewById(R.id.companion_search_pending_view);
-        RecyclerView searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.companion_search_recycle_list_pending);
+        RecyclerView searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.companion_search_recycle_list);
         LinearLayout companion_empty_view = (LinearLayout) rootView.findViewById(R.id.companion_empty_view);
-
         LinearLayout companion_search_new_companion = (LinearLayout) rootView.findViewById(R.id.companion_search_new_companion);
+        LinearLayout companion_search_not_found = (LinearLayout)rootView.findViewById(R.id.companion_search_not_found_ll);
 
-        setSearchView(searchRecyclerView, companion_empty_view, false, companion_search_new_companion);
+        setSearchView(rootView, false);
 
         return rootView;
     }

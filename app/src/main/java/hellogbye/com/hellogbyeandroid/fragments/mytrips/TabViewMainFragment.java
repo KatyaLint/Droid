@@ -54,7 +54,7 @@ public class TabViewMainFragment extends HGBAbstractFragment implements SearchVi
     private ImageButton search_maginfy;
     private ImageButton toolbar_new_iternerary;
     private FontTextView titleBar;
-
+    private Bundle args;
 
     @Nullable
     @Override
@@ -173,7 +173,7 @@ public class TabViewMainFragment extends HGBAbstractFragment implements SearchVi
             }
         });
     }
-    private Bundle args;
+
 
     private void adapterClickListener(){
         mAdapter.addClickeListeners(new ISwipeAdapterExecution(){

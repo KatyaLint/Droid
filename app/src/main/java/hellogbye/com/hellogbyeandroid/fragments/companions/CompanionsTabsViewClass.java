@@ -45,6 +45,8 @@ import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
+import static hellogbye.com.hellogbyeandroid.R.layout.companion_search_not_found;
+
 /**
  * Created by nyawka on 4/20/16.
  */
@@ -70,6 +72,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
     private FontTextView titleBar;
     private ImageButton toolbar_add_companion;
     private LinearLayout companion_search_new_companion_view;
+    private LinearLayout companion_search_not_found;
 
 
     private void searchListInitialization(){
@@ -210,16 +213,31 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
     }
 
 
-    public void setSearchView(RecyclerView searchRecyclerView, LinearLayout companion_empty_view, final boolean addCompanionsToCNCScreen,
-                              LinearLayout companion_search_new_companion ){
+    public void setSearchView(View rootView,  final boolean addCompanionsToCNCScreen ){
 
-      //  this.mSearchView = searchView;
-        this.searchRecyclerView = searchRecyclerView;
-        this.companion_empty_view = companion_empty_view;
+        this.searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.companion_travel_recycle_list);
+        this.companion_empty_view = (LinearLayout)rootView.findViewById(R.id.companion_empty_view);
+        this.companion_search_new_companion_view = (LinearLayout) rootView.findViewById(R.id.companion_search_new_companion);
+        this.companion_search_not_found = (LinearLayout)rootView.findViewById(R.id.companion_search_not_found_ll);
+
+       // this.mSearchView = searchView;
+       // this.searchRecyclerView = searchRecyclerView;
+       // this.companion_empty_view = companion_empty_view;
 
         //emptyCompanionsView();
-        companion_search_new_companion_view = companion_search_new_companion;
+      //  companion_search_new_companion_view = companion_search_new_companion;
         companion_search_new_companion_view.setVisibility(View.GONE);
+        companion_search_not_found.setVisibility(View.GONE);
+
+        companion_search_not_found.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addTravelCompanion();
+            }
+        });
+
+
+
 
         searchListAdapter = new CompanionsSwipeItemsAdapter(getActivity().getApplicationContext(), companionsVOPending);
 
@@ -386,6 +404,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
             search_view.setQuery("", false);
             searchIsOpen = false;
         }
+
         ConnectionManager.getInstance(getActivity()).getCompanions(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
@@ -442,8 +461,6 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
     }
 
     private void addTravelCompanion() {
-
-
         HGBUtility.showAlertPopUp(getActivity(), companion_editTextDialog, popup_companion_new, getResources().getString(R.string.component_invite)
                 ,getResources().getString(R.string.save_button),
                 new PopUpAlertStringCB() {
@@ -487,11 +504,12 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
     public boolean onQueryTextChange(String query) {
         if(mCurrItemsSearchList == null){ //list empty
             searchIsOpen = false;
+
             return false;
         }
 
-        searchRecyclerView.setVisibility(View.VISIBLE);
-
+       // searchRecyclerView.setVisibility(View.VISIBLE);
+        companion_search_not_found.setVisibility(View.GONE);
         if(query.isEmpty()){
             searchIsOpen = false;
             searchListAdapter.updateItems(mCurrItemsSearchList);
@@ -514,6 +532,10 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
                     searchListAdapter.notifyDataSetChanged();
                     searchIsOpen = true;
                     companion_search_new_companion_view.setVisibility(View.GONE);
+                    if(searchCompanionsVO.isEmpty()){
+                        searchRecyclerView.setVisibility(View.GONE);
+                        companion_search_not_found.setVisibility(View.VISIBLE);
+                    }
                     //searchRecyclerView.scrollToPosition(0);
                 }
 

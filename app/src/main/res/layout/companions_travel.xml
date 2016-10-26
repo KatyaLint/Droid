@@ -22,6 +22,11 @@
         android:layout_centerHorizontal="true"
         layout="@layout/companion_search_new_search"/>
 
+    <include   android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        layout="@layout/companion_search_not_found"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/companion_travel_recycle_list"
             android:layout_width="match_parent"
