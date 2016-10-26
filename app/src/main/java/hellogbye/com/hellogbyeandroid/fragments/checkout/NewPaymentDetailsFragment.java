@@ -44,6 +44,7 @@ import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 import static hellogbye.com.hellogbyeandroid.utilities.HGBUtility.setCCIcon;
+import static org.jcodec.SliceType.I;
 
 /**
  * Created by arisprung on 3/22/16.
@@ -171,19 +172,26 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                     if (nodesVO != null) {//&& list.size() > 0) {
                         PaymentChild paymentChild;
                         if (NodeTypeEnum.HOTEL.getType().equals(nodesVO.getmType())) {
-                            paymentChild = new PaymentChild(nodesVO.getmHotelName() +
-                                    "\n" + HGBUtilityDate.parseDateToMMddyyyyForPayment(nodesVO.getmCheckIn()) +
-                                    "-" + HGBUtilityDate.parseDateToMMddyyyyForPayment(nodesVO.getmCheckOut()) + "\n" +
-                                    nodesVO.getRoomsVOs().get(0).getmRoomType() + " " +
-                                    HGBUtilityDate.getDateDiffString(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()),
+                            paymentChild = new PaymentChild("Hotel",
                                     "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card),null);
+                            paymentChild.setHotelCheckIn(HGBUtilityDate.parseDateToMMddyyyyForPayment(nodesVO.getmCheckIn()));
+                            int days = Integer.valueOf(HGBUtilityDate.getDateDiffInt(nodesVO.getmCheckIn(),nodesVO.getmCheckOut()));
+                            double pricenight = nodesVO.getmMinimumAmount()/days;
+                            paymentChild.setHotelPricePerNight(String.valueOf(pricenight));
+                            paymentChild.setHotelRoomType(nodesVO.getRoomsVOs().get(0).getmRoomType());
+                            paymentChild.setHotelDuration(HGBUtilityDate.getDateDiffString(nodesVO.getmCheckIn(),nodesVO.getmCheckOut()));
+                            paymentChild.setHotelName(nodesVO.getmHotelName());
                             passengerChildArray.add(paymentChild);
                         } else if (NodeTypeEnum.FLIGHT.getType().equals(nodesVO.getmType())) {
 
-                            paymentChild = new PaymentChild(nodesVO.getmOrigin() + "-" + nodesVO.getmDestination() + "\n" +
-                                    nodesVO.getmOperatorName() + "" + nodesVO.getmEquipment() +
-                                    "\n" + nodesVO.getDateOfCell(),
+                            paymentChild = new PaymentChild("Flight",
                                     "$" + String.valueOf(nodesVO.getCost()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card),nodesVO.getParentflightid());
+                            paymentChild.setFlightPath(nodesVO.getmOriginCityName() + " to " + nodesVO.getmDestinationCityName() );
+                            paymentChild.setFlightDuraion(nodesVO.getmFlightTime());
+                            paymentChild.setFlighNumber(nodesVO.getmOperator()+nodesVO.getLegs().get(0).getmFlightNumber());
+                            paymentChild.setFlightClass(nodesVO.getmFareClass());
+                            paymentChild.setFlightDeparture(HGBUtilityDate.parseDateToDateHHmm(nodesVO.getmDeparture()));
+                            paymentChild.setFlightArrival(HGBUtilityDate.parseDateToDateHHmm(nodesVO.getmArrival()));
                             passengerChildArray.add(paymentChild);
                         }
                     }
@@ -556,11 +564,24 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
                 holder.childNametext = (FontTextView) convertView.findViewById(R.id.payment_child_name);
                 holder.childPricetext = (FontTextView) convertView.findViewById(R.id.payment_child_price);
-                holder.childCheckBox = (CheckBox) convertView.findViewById(R.id.payment_child_checkbox);
                 holder.childSelectCCText = (FontTextView) convertView.findViewById(R.id.passenger_select_cc);
                 holder.childSelectCCImage = (ImageView) convertView.findViewById(R.id.passenger_select_cc_image);
                 holder.childSelectCCDropDown = (ImageView) convertView.findViewById(R.id.passenger_select_cc_dropdown);
                 holder.childSelectCCLinearLayout = (LinearLayout) convertView.findViewById(R.id.passenger_select_cc_ll);
+                holder.childPlaneLinearLayout = (LinearLayout) convertView.findViewById(R.id.plane_ll);
+                holder.childHotelCCLinearLayout = (LinearLayout) convertView.findViewById(R.id.hotel_ll);
+                holder.childPath = (FontTextView) convertView.findViewById(R.id.payment_child_path);
+                holder.childDurationPricenight = (FontTextView) convertView.findViewById(R.id.payment_child_duration_pricenight);
+                holder.childHotelRoomType = (FontTextView) convertView.findViewById(R.id.hotel_room_type);
+                holder.childHotelCheckIn = (FontTextView) convertView.findViewById(R.id.hotel_checkin);
+                holder.childHotelDuration = (FontTextView) convertView.findViewById(R.id.hotel_duration);
+                holder.childPlaneFlightNumber = (FontTextView) convertView.findViewById(R.id.plane_flight_number);
+                holder.childPlaneFlightPath = (FontTextView) convertView.findViewById(R.id.plane_flight_path);
+                holder.childPlaneFlightClass = (FontTextView) convertView.findViewById(R.id.plane_flight_class);
+                holder.childPlaneFlightDeparture = (FontTextView) convertView.findViewById(R.id.plane_flight_departure);
+                holder.childImage = (ImageView) convertView.findViewById(R.id.node_image);
+                holder.childPlaneFlightArrival = (FontTextView) convertView.findViewById(R.id.plane_flight_arrival);
+
 
                 convertView.setTag(holder);
             } else {
@@ -599,6 +620,29 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
             }else{
                 holder.childSelectCCLinearLayout.setVisibility(View.INVISIBLE);
+            }
+
+            if(child.getNameText().equalsIgnoreCase("Hotel")){
+                holder.childPlaneLinearLayout.setVisibility(View.GONE);
+                holder.childHotelCCLinearLayout.setVisibility(View.VISIBLE);
+                holder.childPath.setText(child.getHotelName());
+                holder.childDurationPricenight.setText(child.getHotelPricePerNight());
+                holder.childHotelRoomType.setText(child.getHotelRoomType());
+                holder.childHotelCheckIn.setText(child.getHotelCheckIn());
+                holder.childHotelDuration.setText(child.getHotelDuration());
+                holder.childImage.setBackgroundResource(R.drawable.hotels);
+
+            }else{
+                holder.childPlaneLinearLayout.setVisibility(View.VISIBLE);
+                holder.childHotelCCLinearLayout.setVisibility(View.GONE);
+                holder.childPath.setText(child.getFlightPath());
+                holder.childDurationPricenight.setText(child.getFlightDuraion());
+                holder.childPlaneFlightNumber.setText("Flight: "+child.getFlighNumber());
+                holder.childPlaneFlightPath.setText(child.getFlightPath());
+                holder.childPlaneFlightClass.setText(child.getFlightClass());
+                holder.childPlaneFlightDeparture.setText("Departure: "+child.getFlightDeparture());
+                holder.childPlaneFlightArrival.setText("Arrival: "+child.getFlightArrival());
+                holder.childImage.setBackgroundResource(R.drawable.dlight_b_icon);
             }
 
             return convertView;
@@ -701,11 +745,24 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
             FontTextView childNametext;
             FontTextView childPricetext;
-            CheckBox childCheckBox;
             FontTextView childSelectCCText;
             ImageView childSelectCCImage;
             ImageView childSelectCCDropDown;
+            ImageView childImage;
             LinearLayout childSelectCCLinearLayout;
+            LinearLayout childPlaneLinearLayout;
+            LinearLayout childHotelCCLinearLayout;
+            FontTextView childPath;
+            FontTextView childDurationPricenight;
+            FontTextView childHotelRoomType;
+            FontTextView childHotelCheckIn;
+            FontTextView childHotelDuration;
+            FontTextView childPlaneFlightNumber;
+            FontTextView childPlaneFlightPath;
+            FontTextView childPlaneFlightClass;
+            FontTextView childPlaneFlightDeparture;
+            FontTextView childPlaneFlightArrival;
+
         }
 
 

@@ -635,4 +635,12 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     public String getmPaxguid() {
         return mPaxguid;
     }
+
+    public String getmOperator() {
+        return mOperator;
+    }
+
+    public void setmOperator(String mOperator) {
+        this.mOperator = mOperator;
+    }
 }

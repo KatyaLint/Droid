@@ -13,6 +13,17 @@ public class PaymentChild {
     private String creditcard;
     private String creditcardid;
     private String parentflight;
+    private String flightPath;
+    private String hotelName;
+    private String flightDuraion;
+    private String hotelPricePerNight;
+    private String flighNumber;
+    private String flightClass;
+    private String flightDeparture;
+    private String flightArrival;
+    private String hotelRoomType;
+    private String hotelCheckIn;
+    private String hotelDuration;
 
     public PaymentChild(String nameText, String totalText, boolean selected,String guid,String paxguid,String creditcard,String parentflight) {
         this.nameText = nameText;
@@ -22,6 +33,94 @@ public class PaymentChild {
         this.paxguid = paxguid;
         this.creditcard = creditcard;
         this.parentflight = parentflight;
+    }
+
+    public String getFlightPath() {
+        return flightPath;
+    }
+
+    public void setFlightPath(String flightPath) {
+        this.flightPath = flightPath;
+    }
+
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
+
+    public String getFlightDuraion() {
+        return flightDuraion;
+    }
+
+    public void setFlightDuraion(String flightDuraion) {
+        this.flightDuraion = flightDuraion;
+    }
+
+    public String getHotelPricePerNight() {
+        return hotelPricePerNight;
+    }
+
+    public void setHotelPricePerNight(String hotelPricePerNight) {
+        this.hotelPricePerNight = hotelPricePerNight;
+    }
+
+    public String getFlighNumber() {
+        return flighNumber;
+    }
+
+    public void setFlighNumber(String flighNumber) {
+        this.flighNumber = flighNumber;
+    }
+
+    public String getFlightClass() {
+        return flightClass;
+    }
+
+    public void setFlightClass(String flightClass) {
+        this.flightClass = flightClass;
+    }
+
+    public String getFlightDeparture() {
+        return flightDeparture;
+    }
+
+    public void setFlightDeparture(String flightDeparture) {
+        this.flightDeparture = flightDeparture;
+    }
+
+    public String getFlightArrival() {
+        return flightArrival;
+    }
+
+    public void setFlightArrival(String flightArrival) {
+        this.flightArrival = flightArrival;
+    }
+
+    public String getHotelRoomType() {
+        return hotelRoomType;
+    }
+
+    public void setHotelRoomType(String hotelRoomType) {
+        this.hotelRoomType = hotelRoomType;
+    }
+
+    public String getHotelCheckIn() {
+        return hotelCheckIn;
+    }
+
+    public void setHotelCheckIn(String hotelCheckIn) {
+        this.hotelCheckIn = hotelCheckIn;
+    }
+
+    public String getHotelDuration() {
+        return hotelDuration;
+    }
+
+    public void setHotelDuration(String hotelDuration) {
+        this.hotelDuration = hotelDuration;
     }
 
     public String getNameText() {

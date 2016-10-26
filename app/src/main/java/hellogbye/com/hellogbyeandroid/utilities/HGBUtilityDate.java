@@ -355,6 +355,25 @@ public class HGBUtilityDate {
         return str;
     }
 
+    public static String parseDateToDateHHmm(String time) {
+
+        String outputPattern = "MM/dd/yyyy HH:mm:ss";
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+        Date date = null;
+        String str = null;
+
+        try {
+            date = getDateFromServer(time);
+            str = outputFormat.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
+
+
+
 
     public static String getDateDiffString(String strDate1, String strDate2)
     {
@@ -372,6 +391,24 @@ public class HGBUtilityDate {
         else {
             delta *= -1;
             return delta + " Nights";
+        }
+    }
+    public static int getDateDiffInt(String strDate1, String strDate2)
+    {
+
+        Date date1 = getDateFromServer(strDate1);
+        Date date2 = getDateFromServer(strDate2);
+        long timeOne = date1.getTime();
+        long timeTwo = date2.getTime();
+        long oneDay = 1000 * 60 * 60 * 24;
+        long delta = (timeTwo - timeOne) / oneDay;
+
+        if (delta > 0) {
+            return (int)delta;
+        }
+        else {
+            delta *= -1;
+            return (int)delta;
         }
     }
 

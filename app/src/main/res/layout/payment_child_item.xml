@@ -7,38 +7,145 @@
     android:clickable="true"
     android:paddingLeft="@dimen/DP26">
 
-    <CheckBox
-        android:id="@+id/payment_child_checkbox"
-        style="@style/PaymentCheckBoxStyle"
-        android:visibility="gone"
+    <!--<CheckBox-->
+    <!--android:id="@+id/payment_child_checkbox"-->
+    <!--style="@style/PaymentCheckBoxStyle"-->
+    <!--android:visibility="gone"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--/>-->
+    <ImageView
+        android:id="@+id/node_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/DP6"
         android:layout_alignParentLeft="true"
-        />
+        android:background="@drawable/dlight_b_icon"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/node_image"
+        android:orientation="vertical">
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/payment_child_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/COLOR_00516f"
+            android:textSize="@dimen/SP18"
+            app:fontName="dinnextltpro_bold.otf" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/payment_child_path"
+            style="@style/PaymentItemStyle"
+            android:textSize="@dimen/SP14"
+            app:fontName="dinnextltpro_light.otf" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/payment_child_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/COLOR_00516f"
+            android:textSize="@dimen/SP18"
+            app:fontName="dinnextltpro_bold.otf" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/payment_child_duration_pricenight"
+            style="@style/PaymentItemStyle"
+            android:textSize="@dimen/SP14"
+            app:fontName="dinnextltpro_light.otf" />
+
+        <LinearLayout
+            android:id="@+id/hotel_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/hotel_room_type_label"
+                style="@style/PaymentItemStyle"
+                android:textSize="@dimen/SP14"
+                android:text="ROOM TYPE"
+                app:fontName="dinnextltpro_bold.otf" />
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/hotel_room_type"
+                style="@style/PaymentItemStyle"
+                android:textSize="@dimen/SP14"
+                app:fontName="dinnextltpro_light.otf" />
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/hotel_checkin_label"
+                style="@style/PaymentItemStyle"
+                android:textSize="@dimen/SP14"
+                android:text="CHECK IN"
+                app:fontName="dinnextltpro_bold.otf" />
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/hotel_checkin"
+                style="@style/PaymentItemStyle"
+                android:textSize="@dimen/SP14"
+                app:fontName="dinnextltpro_light.otf" />
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/hotel_duration_label"
+                style="@style/PaymentItemStyle"
+                android:textSize="@dimen/SP14"
+                android:text="DURATION"
+                app:fontName="dinnextltpro_bold.otf" />
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/hotel_duration"
+                style="@style/PaymentItemStyle"
+                android:textSize="@dimen/SP14"
+                app:fontName="dinnextltpro_light.otf" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/plane_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/plane_flight_number"
+                style="@style/PaymentItemStyle"
+                android:textSize="@dimen/SP14"
+                app:fontName="dinnextltpro_bold.otf" />
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/plane_flight_path"
+                style="@style/PaymentItemStyle"
+                android:textSize="@dimen/SP14"
+                app:fontName="dinnextltpro_light.otf" />
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/plane_flight_class"
+                style="@style/PaymentItemStyle"
+                android:textSize="@dimen/SP14"
+                app:fontName="dinnextltpro_light.otf" />
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/plane_flight_departure"
+                style="@style/PaymentItemStyle"
+                android:textSize="@dimen/SP14"
+                app:fontName="dinnextltpro_light.otf" />
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/plane_flight_arrival"
+                style="@style/PaymentItemStyle"
+                android:textSize="@dimen/SP14"
+                app:fontName="dinnextltpro_light.otf" />
+
+        </LinearLayout>
 
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/payment_child_name"
-        style="@style/PaymentItemStyle"
-        android:textSize="@dimen/SP14"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/payment_child_price"
-        android:layout_centerVertical="true"
-        app:fontName="dinnextltpro_light.otf" />
+    </LinearLayout>
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/payment_child_price"
-        style="@style/PaymentItemStyle"
-        android:textSize="@dimen/SP14"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/passenger_select_cc_ll"
-        app:fontName="dinnextltpro_light.otf" />
 
     <include
         layout="@layout/cc_layout"
-        android:layout_marginRight="@dimen/SP10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/SP10"
 
         />
 
