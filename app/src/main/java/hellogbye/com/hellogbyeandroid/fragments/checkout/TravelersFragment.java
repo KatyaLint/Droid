@@ -66,7 +66,7 @@ public class TravelersFragment extends HGBAbstractFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.payment_travlers_layout, container, false);
-
+        getFlowInterface().enableFullScreen(true);
         return rootView;
     }
 

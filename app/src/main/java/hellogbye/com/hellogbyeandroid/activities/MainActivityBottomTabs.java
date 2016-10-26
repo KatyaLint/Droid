@@ -871,12 +871,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     public void enableFullScreen(boolean fullscreen) {
         if (fullscreen) {
             mBottomBar.hide();
-       //     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
 
         } else {
             mBottomBar.show();
-        //    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setHomeButtonEnabled(false);
         }
 

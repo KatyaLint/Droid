@@ -464,7 +464,7 @@ Code changing:
         HEL-1590 - Make Payment screen, I understand button is too low, and too much padding on the top
         HEL-1634 - my trips - should not have "unpaid" trips
         HEL-1584 - companion screen, when nothing found in search should appear screen can't find
-
+        HEL-1593 - for all check out screens, need to be back
 
         Code changing:
         --------------

@@ -805,6 +805,7 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getFlowInterface().enableFullScreen(true);
         cellHieght = (int) getResources().getDimension(R.dimen.DP150);
         activity = getActivity();
 
