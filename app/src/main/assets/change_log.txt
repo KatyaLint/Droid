@@ -469,6 +469,7 @@ Code changing:
         HEL-1592 - second screen of payment should be changed
         HEL-1591 - Change for first screen of payment, after pressing plus
         HEL-1664 - travel profile - change text on aircraft
+        HEL-1589 Traveler screen, the images of dots not connected
 
 
         Code changing:
