@@ -479,10 +479,6 @@ Code changing:
          - Removed Gallery tab
          - Changed UI in Payment Screen (Child layout)
 
-
-
-
-
      ------------------------------------------
                          Version 0.0.3
      ------------------------------------------
@@ -490,7 +486,7 @@ Code changing:
       -----------
         HEL-414 - copy text
         HEL-1659 - anonymous user - profile picture
-
+        HEL-1663 - selecting travel profile from CNC
 
       Code changing:
       --------------

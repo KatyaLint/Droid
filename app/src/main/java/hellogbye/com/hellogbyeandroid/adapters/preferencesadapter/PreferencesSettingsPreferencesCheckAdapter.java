@@ -115,12 +115,12 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
                 settings_flight_title.setText(attribute.getmProfileName());
                 settings_flight_title.setTag(attribute.getmId());
 
-            FontTextView settings_check_active_profile = (FontTextView)v.findViewById(R.id.settings_check_active_profile);
+ /*           FontTextView settings_check_active_profile = (FontTextView)v.findViewById(R.id.settings_check_active_profile);
             if(attribute.isActiveProfile()){
                 settings_check_active_profile.setVisibility(View.VISIBLE);
             }else{
                 settings_check_active_profile.setVisibility(View.GONE);
-            }
+            }*/
 
             RelativeLayout settings_item_check_ll = (RelativeLayout)v.findViewById(R.id.settings_item_check_rl);
             settings_item_check_ll.setTag(attribute.getmId());
