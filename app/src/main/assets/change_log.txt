@@ -478,3 +478,18 @@ Code changing:
          - Changed Gallery to Header of Hitel Details
          - Removed Gallery tab
          - Changed UI in Payment Screen (Child layout)
+
+
+
+
+
+     ------------------------------------------
+                         Version 0.0.3
+     ------------------------------------------
+      Fixed Bugs:
+      -----------
+        HEL-414 - copy text
+
+
+      Code changing:
+      --------------

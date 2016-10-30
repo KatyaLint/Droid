@@ -18,6 +18,7 @@
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/cnc_hgb_input"
         style="@style/CNCStyle"
+        android:textIsSelectable="true"
         android:text="HGB"
         android:gravity="left"
         android:textSize="@dimen/SP16"
