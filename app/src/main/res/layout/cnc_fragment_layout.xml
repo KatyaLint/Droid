@@ -67,7 +67,7 @@
            android:padding="@dimen/DP6"
            android:visibility="gone"
            android:textColor="@color/COLOR_999999"
-           android:drawableRight="@drawable/new_trip"
+           android:drawableRight="@drawable/add_chat"
            android:drawablePadding="@dimen/DP6"
            app:fontName="dinnextltpro_medium.otf"
            android:text="@string/cnc_start_planning_msg"/>
