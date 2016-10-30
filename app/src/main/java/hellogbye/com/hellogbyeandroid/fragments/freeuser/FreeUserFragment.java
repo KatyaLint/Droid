@@ -40,6 +40,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -47,11 +48,13 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  * Created by nyawka on 4/14/16.
  */
 public class FreeUserFragment extends HGBAbstractFragment {
+    private FontButtonView free_user_sign_in_btn;
+    private FontButtonView free_user_create_new_account_btn;
 
 
 /*    private FontTextView free_user_free;
     private FontTextView free_user_already_a_member;
-    private FontTextView free_user_premium;*/
+    private FontTextView free_user_premium;*//*
 
 
     private Button sign_up_button;
@@ -71,7 +74,7 @@ public class FreeUserFragment extends HGBAbstractFragment {
     private View pin_code_verification_layout;
     private ArrayAdapter adapter;
     private FontTextView pin_code_verification_next;
-    private FontEditTextView pin_code_verification_pin;
+    private FontEditTextView pin_code_verification_pin;*/
 
 
 
@@ -90,8 +93,8 @@ public class FreeUserFragment extends HGBAbstractFragment {
                              Bundle savedInstanceState) {
         getFlowInterface().enableFullScreen(true);
         getFlowInterface().getToolBar().setVisibility(View.GONE);
-      //  View rootView = inflater.inflate(R.layout.free_user_layout, container, false);
-        View rootView = inflater.inflate(R.layout.sign_up_layout, container, false);
+        View rootView = inflater.inflate(R.layout.free_user_layout, container, false);
+      /*  View rootView = inflater.inflate(R.layout.sign_up_layout, container, false);
 
 
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getContext());
@@ -237,29 +240,28 @@ public class FreeUserFragment extends HGBAbstractFragment {
                         }, false);
             }
         });
+*/
 
 
-
-
-
-   /*     free_user_free = (FontTextView)rootView.findViewById(R.id.free_user_free);
-        free_user_free.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-            //    getFlowInterface().goToFragment(ToolBarNavEnum.HOTEL.getNavNumber(),null);
-                Intent intent = new Intent(getActivity(), SignUpActivity.class);
-                startActivity(intent);
-            }
-        });
-        free_user_already_a_member = (FontTextView)rootView.findViewById(R.id.free_user_already_a_member);
-        free_user_already_a_member.setOnClickListener(new View.OnClickListener() {
+        free_user_sign_in_btn = (FontButtonView)rootView.findViewById(R.id.free_user_sign_in_btn);
+        free_user_sign_in_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
+            //    getFlowInterface().goToFragment(ToolBarNavEnum.HOTEL.getNavNumber(),null);
+
             }
         });
-        free_user_premium = (FontTextView)rootView.findViewById(R.id.free_user_premium);
+        free_user_create_new_account_btn = (FontButtonView)rootView.findViewById(R.id.free_user_create_new_account_btn);
+        free_user_create_new_account_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
+   /*     free_user_premium = (FontTextView)rootView.findViewById(R.id.free_user_premium);
         free_user_premium.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -271,7 +273,7 @@ public class FreeUserFragment extends HGBAbstractFragment {
         return rootView;
     }
 
-    private void getStaticProvince() {
+  /*  private void getStaticProvince() {
         String countryID = userData.getCountry();
         ConnectionManager.getInstance(getActivity()).getStaticBookingProvince(countryID, new ConnectionManager.ServerRequestListener() {
             @Override
@@ -441,7 +443,7 @@ public class FreeUserFragment extends HGBAbstractFragment {
         }
         countries.removeAll(firstItems);
         countries.addAll(0, firstItems);
-    }
+    }*/
 
 
 

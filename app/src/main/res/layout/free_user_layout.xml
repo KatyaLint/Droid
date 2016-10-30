@@ -7,9 +7,27 @@
     android:gravity="center"
     android:layout_margin="@dimen/DP10">
 
+<hellogbye.com.hellogbyeandroid.views.FontButtonView
+    android:id="@+id/free_user_sign_in_btn"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Sign In"
+
+    android:textColor="@color/COLOR_WHITE"
+    android:background="@drawable/red_button"/>
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:layout_marginTop="@dimen/DP10"
+        android:id="@+id/free_user_create_new_account_btn"
+        android:layout_below="@+id/free_user_sign_in_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create a new Account"
+        android:textColor="@color/COLOR_WHITE"
+        />
 
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
+  <!--  <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/free_user_premium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,6 +63,6 @@
         android:gravity="center"
         app:fontName="dinnextltpro_regular.otf"
         android:layout_margin="@dimen/DP20"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"/>-->
 
 </LinearLayout>
