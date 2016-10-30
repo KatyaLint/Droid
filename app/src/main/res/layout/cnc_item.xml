@@ -14,7 +14,6 @@
         style="@style/CNCStyle"
         android:layout_marginRight="@dimen/DP10"
         android:text="HGB"
-        android:textIsSelectable="true"
         android:textSize="@dimen/SP16"
         android:gravity="left"
         app:fontName="dinnextltpro_regular.otf"

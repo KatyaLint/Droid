@@ -177,10 +177,12 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_00516f));
                     hgbholder.itemHGB.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
                     hgbholder.itemHGB.setPaintFlags(hgbholder.itemHGB.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                    hgbholder.itemHGB.setSelected(false);
                 } else {
                     hgbholder.itemHGB.setBackgroundResource(R.drawable.hgb_cnc_backround);
                     hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_00516f));
                     hgbholder.itemHGB.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
+                    hgbholder.itemHGB.setSelected(true);
                 }
 
                 hgbholder.itemHGB.setText(strMessage);

@@ -76,9 +76,12 @@ public class DetailsHotelFragment extends HGBAbstractFragment  implements  OnMap
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        CustomDetailAmenitiesGridAdapter adapter = new CustomDetailAmenitiesGridAdapter(getActivity(),mNodesVO.getmAmenities() );
 
-        mGridView.setAdapter(adapter);
+        if(mNodesVO.getmAmenities() != null){
+            CustomDetailAmenitiesGridAdapter adapter = new CustomDetailAmenitiesGridAdapter(getActivity(),mNodesVO.getmAmenities() );
+            mGridView.setAdapter(adapter);
+        }
+
         FragmentManager fm = getChildFragmentManager();
 
         fragment = (SupportMapFragment) fm.findFragmentById(R.id.map); //((SupportMapFragment)
