@@ -823,6 +823,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             case FREE_USER_FRAGMENT:
                 fragment = FreeUserFragment.newInstance(navPosition);
                 stashToBack = false;
+                isAddAnimation = true;
                 break;
             case CHECKOUT_CONFIRMATION:
                 fragment = CheckoutConfirmationFragment.newInstance(navPosition);
@@ -898,6 +899,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         this.onBackPressedListener = onBackPressedListener;
     }
 
+    public boolean getIsFreeUser(){
+        return isFreeUser;
+    }
 
     private Fragment isFreeUser(Fragment fragment, int navPosition) {
 

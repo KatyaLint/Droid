@@ -31,6 +31,7 @@ import java.io.IOException;
 
 import hellogbye.com.hellogbyeandroid.R;
 //import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.settingaccount.AccountSettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
@@ -55,6 +56,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
     private UserProfileVO currentUser;
     private String userChoosenTask;
     private Bitmap thumbnail;
+    private boolean isFreeUser;
 
     public AccountSettingsFragment() {
         // Empty constructor required for fragment subclasses
@@ -233,7 +235,12 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
         //getCountries();
 
 
+
+
         account_details_image.setOnClickListener(imageClickListener);
+        //getIsFreeUser
+        isFreeUser = ((MainActivityBottomTabs)getActivity()).getIsFreeUser();
+
 
 
         return rootView;
@@ -244,7 +251,14 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
    private View.OnClickListener imageClickListener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            selectImage();
+
+
+            if(isFreeUser){
+                getFlowInterface().goToFragment(ToolBarNavEnum.FREE_USER_FRAGMENT.getNavNumber(), null);
+            }
+            else {
+                selectImage();
+            }
          /*   boolean permissionGainedStorage = HGBUtility.isStoragePermissionGranted(getActivity());
             boolean permissionGainedCamera = HGBUtility.isCameraPermissionGranted(getActivity());
 

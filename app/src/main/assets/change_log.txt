@@ -489,6 +489,7 @@ Code changing:
       Fixed Bugs:
       -----------
         HEL-414 - copy text
+        HEL-1659 - anonymous user - profile picture
 
 
       Code changing:
