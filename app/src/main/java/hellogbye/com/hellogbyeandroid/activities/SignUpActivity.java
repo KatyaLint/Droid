@@ -374,7 +374,7 @@ public class SignUpActivity extends BaseActivity {
     }
 
 
-    public void sortCountryItems() {
+    private void sortCountryItems() {
         ArrayList<CountryItemVO> countries = bookingResponse.getCountries();
         ArrayList<CountryItemVO> firstItems = new ArrayList<>();
         for (CountryItemVO countryItemVO : countries) {

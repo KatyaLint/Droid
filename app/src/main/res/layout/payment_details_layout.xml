@@ -7,7 +7,6 @@
 
     <include
         android:id="@+id/steps_layout"
-
         layout="@layout/credit_card_steps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

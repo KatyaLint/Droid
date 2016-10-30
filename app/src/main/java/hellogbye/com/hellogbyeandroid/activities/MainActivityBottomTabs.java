@@ -854,7 +854,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 navBar.equals(ToolBarNavEnum.PAYMENT_DETAILS) ||
                 navBar.equals(ToolBarNavEnum.COMPANIONS) ||
                 navBar.equals(ToolBarNavEnum.ALL_COMPANIONS_VIEW) ||
-                navBar.equals(ToolBarNavEnum.CREDIT_CARD_LIST))) {
+                navBar.equals(ToolBarNavEnum.CREDIT_CARD_LIST) ||
+                navBar.equals(ToolBarNavEnum.NOTIFICATIONS))) {
 
             isAddAnimation = true;
             fragment = isFreeUser(fragment, navPosition);
@@ -901,8 +902,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private Fragment isFreeUser(Fragment fragment, int navPosition) {
 
         if (isFreeUser) {
+
+          //  Intent intent = new Intent(getBaseContext(), SignUpActivity.class);
+          //  startActivity(intent);
+
             fragment = FreeUserFragment.newInstance(navPosition);
-            //  mToolbar.setVisibility(View.GONE);
+            mToolbar.setVisibility(View.GONE);
         }
        /* else {
             mToolbar.setVisibility(View.VISIBLE);
