@@ -466,7 +466,10 @@ Code changing:
         HEL-1584 - companion screen, when nothing found in search should appear screen can't find
         HEL-1593 - for all check out screens, need to be back
         HEL-1640 - Flight Details screen - usd cuts off and "operated by" icon
+        HEL-1592 - second screen of payment should be changed
+        HEL-1591 - Change for first screen of payment, after pressing plus
         HEL-1664 - travel profile - change text on aircraft
+        HEL-1589 Traveler screen, the images of dots not connected
 
 
         Code changing:

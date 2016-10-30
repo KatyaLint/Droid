@@ -39,6 +39,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.PinnedHeaderListView;
 
 import static android.R.attr.data;
+import static android.R.attr.editable;
 
 //import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 
@@ -336,13 +337,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                ConnectionManager.getInstance(getActivity()).postAutocompleteCity(editable.toString(), companion_personal_settings_location_country.getText().toString(),
+                ConnectionManager.getInstance(getActivity()).postAutocompleteCity(charSequence.toString(), companion_personal_settings_location_country.getText().toString(),
                         companion_personal_settings_location_province.getText().toString()
                         , new ConnectionManager.ServerRequestListener() {
                             @Override
@@ -357,6 +352,12 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
                             }
                         });
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
 
 
             }
