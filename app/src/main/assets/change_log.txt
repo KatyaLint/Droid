@@ -487,6 +487,7 @@ Code changing:
         HEL-414 - copy text
         HEL-1659 - anonymous user - profile picture
         HEL-1663 - selecting travel profile from CNC
+        HEL-1669 - anonymous user - missing travel profile
 
       Code changing:
       --------------

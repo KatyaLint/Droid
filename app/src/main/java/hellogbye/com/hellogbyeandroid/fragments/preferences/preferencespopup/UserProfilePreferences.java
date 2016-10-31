@@ -98,7 +98,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
     }
 
 
-    private void profilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs, final Activity activity, final HGBFlowInterface flowInterface, final HGBMainInterface activityInterface) {
+    private void profilesDialog(final ArrayList<DefaultsProfilesVO> userProfileVOs, final Activity activity, final HGBFlowInterface flowInterface, final HGBMainInterface activityInterface) {
         LayoutInflater li = LayoutInflater.from(activity);
         View promptsView = li.inflate(R.layout.popup_custom_title, null);
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
@@ -161,7 +161,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
 
                     if(isDefaultProfile){
                         final DefaultsProfilesVO selected = accountDefaultSettings.get(radioButtonSelected);
-                        postDefaultProfile(String.valueOf(selected.getId()), selected.getName(), activity, activityInterface);
+                        postDefaultProfile(String.valueOf(selected.getId()), selected.getName(), activity, activityInterface, userProfileVOs);
                     }else{
                         putAccoutToServer(activity, activityInterface);
                     }
@@ -184,13 +184,25 @@ public class UserProfilePreferences extends HGBAbstractFragment {
 
     }
 
-    private void postDefaultProfile(String profileId, String profileName, final Activity activity, final HGBMainInterface activityInterface) {
+    DefaultsProfilesVO notChoosenProfileVO;
+
+    private void postDefaultProfile(final String profileId, String profileName, final Activity activity, final HGBMainInterface activityInterface,final ArrayList<DefaultsProfilesVO> userProfileVOs) {
+
+
+
         ConnectionManager.getInstance(activity).postDefaultProfile(profileId, profileName, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
+
                     AccountDefaultSettingsVO accountDefault = (AccountDefaultSettingsVO) data;
-                    putNewPreferencesForUser(activityInterface.getPersonalUserInformation().getUserEmailLogIn(), accountDefault.getmId(), activity);
+                    putNewPreferencesForUser(activityInterface.getPersonalUserInformation().getUserEmailLogIn(), accountDefault.getmId(), activity, userProfileVOs);
+                    for(DefaultsProfilesVO userProfile : userProfileVOs){
+                        if(!userProfile.getId().equals(profileId)){
+                            notChoosenProfileVO = userProfile;
+                            return;
+                        }
+                    }
                 }
             }
 
@@ -200,14 +212,32 @@ public class UserProfilePreferences extends HGBAbstractFragment {
             }
         });
 
+
     }
 
-    private void putNewPreferencesForUser(final String userEmail, final String accountID,final Activity activity) {
+
+    private void postNotChoosenDefaultProfile(final Activity activity, ArrayList<DefaultsProfilesVO> userProfileVOs){
+        ConnectionManager.getInstance(activity).postDefaultProfile(notChoosenProfileVO.getId(), notChoosenProfileVO.getName(), new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                AccountDefaultSettingsVO accountDefault = (AccountDefaultSettingsVO) data;
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
+
+
+    private void putNewPreferencesForUser(final String userEmail, final String accountID, final Activity activity, final ArrayList<DefaultsProfilesVO> userProfileVOs) {
         ConnectionManager.getInstance(activity).putAccountsPreferences(userEmail, accountID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 HGBPreferencesManager hgbPrefrenceManager = HGBPreferencesManager.getInstance(activity);
                 hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, accountID);
+                postNotChoosenDefaultProfile(activity, userProfileVOs);
             }
 
             @Override
