@@ -77,8 +77,8 @@ public class DetailsHotelFragment extends HGBAbstractFragment  implements  OnMap
         super.onActivityCreated(savedInstanceState);
 
 
-        if(mNodesVO.getmAmenities() != null){
-            CustomDetailAmenitiesGridAdapter adapter = new CustomDetailAmenitiesGridAdapter(getActivity(),mNodesVO.getmAmenities() );
+        if(mNodesVO.getRoomsVOs().get(0) != null){
+            CustomDetailAmenitiesGridAdapter adapter = new CustomDetailAmenitiesGridAdapter(getActivity(),mNodesVO.getRoomsVOs().get(0).getmAmenities() );
             mGridView.setAdapter(adapter);
         }
 

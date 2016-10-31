@@ -31,7 +31,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 public class SelectNewRoomFragment extends HGBAbstractFragment {
 
 
-    private static final int NUMBER_OF_SHORT_AMNITIES = 8;
+    private static  int NUMBER_OF_SHORT_AMNITIES = 8;
     private ExpandableHeightGridView mGridViewLong;
     private ExpandableHeightGridView mGridViewShort;
     private ImageView mMainImageView;
@@ -158,6 +158,9 @@ public class SelectNewRoomFragment extends HGBAbstractFragment {
 
     private ArrayList<Amenities> getShortAdapter(ArrayList<Amenities> amenities) {
         ArrayList<Amenities> list = new ArrayList<>();
+        if(NUMBER_OF_SHORT_AMNITIES >= amenities.size()){
+            NUMBER_OF_SHORT_AMNITIES = amenities.size();
+        }
         for (int i = 0; i < NUMBER_OF_SHORT_AMNITIES; i++) {
             list.add(amenities.get(i));
         }
