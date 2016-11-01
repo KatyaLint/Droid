@@ -488,6 +488,7 @@ Code changing:
         HEL-1659 - anonymous user - profile picture
         HEL-1663 - selecting travel profile from CNC
         HEL-1669 - anonymous user - missing travel profile
+        HEL-1759 - app crashes when opening companion info in checkout step 2
 
       Code changing:
       --------------

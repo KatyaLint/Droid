@@ -157,7 +157,7 @@ public class TravelersFragment extends HGBAbstractFragment {
                     String name1 = mGroups.get(z).getNameText();
                     String name2 = user.getFirstname();
 
-                    if(mGroups.get(z).getNameText().equals(user.getFirstname())){
+                    if(mGroups.get(z).getNameText().equalsIgnoreCase(user.getFirstname())){
                         ArrayList<UserProfileVO> passengerChildArray = new ArrayList<>();
                         UserProfileVO userInfo = userList.get(z);
                         passengerChildArray.add(userInfo);
