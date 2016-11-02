@@ -32,9 +32,19 @@ android {
         multiDexEnabled false
 
     }
+    signingConfigs {
+        release {
+            keyAlias "com.hellogbye"
+            keyPassword "hellogbye123456"
+            storeFile file("//Volumes/code/HelloGbye/HelloGByeDroid/certificate.jks")
+            storePassword "hellogbye123456"
+        }
+    }
+
     buildTypes {
         release {
-
+            debuggable false
+            signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
