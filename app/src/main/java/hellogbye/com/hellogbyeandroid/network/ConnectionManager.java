@@ -848,7 +848,7 @@ public class ConnectionManager {
             public void onErrorResponse(VolleyError error) {
                 listener.onError(Parser.parseErrorMessage(error));
             }
-        });
+        }, false);
        // https://apiuat.hellogbye.com/uat/rest/UserProfile/Search?count=5&excludeCompanions=false&searchParam=a&skip=0
     }
 

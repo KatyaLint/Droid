@@ -56,7 +56,7 @@
         <item name="android:textCursorDrawable">@null</item>
         <item name="android:textSize">@dimen/SP16</item>
         <item name="android:paddingBottom">@dimen/DP10</item>
-        <item name="android:textColorHint">@color/COLOR_F5F5F5</item>
+        <item name="android:textColorHint">@color/COLOR_999999</item>
         <item name="android:textColor">@color/COLOR_BLACK</item>
         <item name="android:background">@drawable/cc_edit_text_border</item>
     </style>
@@ -67,7 +67,7 @@
         <item name="android:textCursorDrawable">@null</item>
         <item name="android:textSize">@dimen/SP16</item>
         <item name="android:paddingBottom">@dimen/DP10</item>
-        <item name="android:textColorHint">@color/COLOR_999999</item>
+        <item name="android:textColorHint">@color/COLOR_565656</item>
         <item name="android:textColor">@color/COLOR_BLACK</item>
     </style>
 
