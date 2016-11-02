@@ -34,10 +34,10 @@ android {
     }
     signingConfigs {
         release {
-            keyAlias "com.hellogbye"
-            keyPassword "hellogbye123456"
-            storeFile file("//Volumes/code/HelloGbye/HelloGByeDroid/certificate.jks")
-            storePassword "hellogbye123456"
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
         }
     }
 
