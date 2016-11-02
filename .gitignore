@@ -42,3 +42,5 @@ libs/libs.iml
 
 
 *.apk
+
+gradle.properties
