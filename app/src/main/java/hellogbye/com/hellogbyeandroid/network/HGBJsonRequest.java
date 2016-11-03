@@ -46,10 +46,10 @@ public class HGBJsonRequest extends Request<String> {
     private String url;
     private String service;
     private static Context mContext;
-    private Listener<String> listener;
     private ErrorListener errorListener;
     private JSONArray jsonArrayParams;
     private JSONObject jsonParams;
+    private Listener<String> listener;
     private static String token;
     private boolean showLoader;
     private ProgressDialog progressDialog;
