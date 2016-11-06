@@ -10,6 +10,7 @@
         android:id="@+id/credit_card_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:scrollbars="vertical" />
 
 
@@ -41,10 +42,11 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        app:backgroundTint="@color/COLOR_00516f"
-        android:src="@drawable/fab_plus"
-        android:layout_margin="@dimen/DP10"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/DP10"
+        android:clickable="true"
+        android:src="@drawable/fab_plus"
+        app:backgroundTint="@color/COLOR_00516f"
+        app:useCompatPadding="true" />
 </RelativeLayout>
