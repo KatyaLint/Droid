@@ -493,7 +493,7 @@ Code changing:
         HEL-1590 - Make Payment screen, I understand button is too low, and too much padding on the top
         HEL-1581 - In first enter, change profile , should be like new design instead of old
         HEL-1796 - forgot password in sign in screen isn't working
-        HEL-1796 - forgot password in sign in screen isn't working
+        HEL-1801 - when adding new companion relationship should show unspecified instead of empty
 
       Code changing:
       --------------

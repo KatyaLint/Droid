@@ -93,7 +93,11 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
 
 
         final FontTextView companion_add_relationship = (FontTextView) view.findViewById(R.id.companion_add_relationship);
-        companion_add_relationship.setText(companionVO.getRelationshiptype());
+        String companionRelationShip = companionVO.getRelationshiptype();
+        if(companionRelationShip == null || companionRelationShip.isEmpty()){
+            companionRelationShip = "Unspecified";
+        }
+        companion_add_relationship.setText(companionRelationShip);
 
 
         LayoutInflater li = LayoutInflater.from(getActivity());
