@@ -491,6 +491,7 @@ Code changing:
         HEL-1759 - app crashes when opening companion info in checkout step 2
         HEL-1576 - preferences wrong text at preferences screen
         HEL-1590 - Make Payment screen, I understand button is too low, and too much padding on the top
+        HEL-1581 - In first enter, change profile , should be like new design instead of old
 
       Code changing:
       --------------

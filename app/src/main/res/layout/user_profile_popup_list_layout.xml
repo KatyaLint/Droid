@@ -23,7 +23,7 @@
        android:background="@color/COLOR_999999" />-->
 
     <LinearLayout
-        android:layout_margin="@dimen/DP10"
+        android:layout_marginTop="@dimen/DP10"
         android:id="@+id/manage_profile_ll"
         android:layout_below="@+id/user_profile_popup_list_view"
         android:layout_width="match_parent"
@@ -37,6 +37,7 @@
                android:background="@color/COLOR_999999" />
 
         <LinearLayout
+            android:layout_marginLeft="@dimen/DP10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
