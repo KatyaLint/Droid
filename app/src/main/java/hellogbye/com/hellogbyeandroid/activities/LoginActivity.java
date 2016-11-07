@@ -132,7 +132,8 @@ public class LoginActivity extends BaseActivity {
                 getResources().getString(R.string.reset_your_password),getResources().getString(R.string.save_button), new PopUpAlertStringCB() {
                     @Override
                     public void itemSelected(String inputItem) {
-                        ConnectionManager.getInstance(LoginActivity.this).resetPasswordWithEmail(userInput.getText().toString(),
+
+                        ConnectionManager.getInstance(LoginActivity.this).resetPasswordWithEmail(inputItem,
                                 new ConnectionManager.ServerRequestListener() {
                             @Override
                             public void onSuccess(Object data) {
