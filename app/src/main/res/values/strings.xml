@@ -83,7 +83,7 @@
     <string name="preferences_stops_prefer">Tell us if you prefer direct flights or if you\'d\nrather save money on non-direct flights</string>
 
     <string name="preferences_stars">Preferred Star Rating</string>
-    <string name="preferences_stars_prefer">Tell us what hotel star retings\nyou prefer when traveling</string>
+    <string name="preferences_stars_prefer">Tell us what star ratings\nyou\'d consider when traveling</string>
 
     <string name="preferences_class">Preferred Flight Class</string>
     <string name="preferences_class_prefer">Rank the importance of cabin class\nfrom most to least important.</string>

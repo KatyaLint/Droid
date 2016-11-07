@@ -489,6 +489,7 @@ Code changing:
         HEL-1663 - selecting travel profile from CNC
         HEL-1669 - anonymous user - missing travel profile
         HEL-1759 - app crashes when opening companion info in checkout step 2
+        HEL-1576 - preferences wrong text at preferences screen
 
       Code changing:
       --------------
