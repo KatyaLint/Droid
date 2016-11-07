@@ -124,15 +124,18 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
             }
         });
 
-        if(tabPosition == 2){
+        if(tabPosition == 2 || tabPosition == 1){
             return;
         }
 
         if(item.getPaymentstatus().equals("UPD")){
             viewHolder.my_trip_paid.setText("UNPAID");
             viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.COLOR_EE3A3C));
-        }else{
+        }else if(item.getPaymentstatus().equals("FPD")){
             viewHolder.my_trip_paid.setText("PAID");
+            viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.paid_green));
+        }else if((item.getPaymentstatus().equals("FPD"))){
+            viewHolder.my_trip_paid.setText("PARTIALLY PAID");
             viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.paid_green));
         }
 
