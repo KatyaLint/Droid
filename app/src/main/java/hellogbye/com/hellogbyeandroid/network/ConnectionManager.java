@@ -90,13 +90,15 @@ public class ConnectionManager {
     // POST
     ///////////////////////////////
 
-    public void postSubmitFeedback(String message,final ServerRequestListener listener) {
+    public void postSubmitFeedback(String message , String preferenceID, final ServerRequestListener listener) {
         String url = getURL(Services.SUBMIT_FEEDBACK);
 
         JSONObject jsonObject = new JSONObject();
 
         try {
             jsonObject.put("message", message);
+            jsonObject.put("preference", preferenceID);
+
 
 
         } catch (Exception e) {

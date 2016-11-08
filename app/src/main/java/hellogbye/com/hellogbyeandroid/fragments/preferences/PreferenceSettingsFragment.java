@@ -70,30 +70,40 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
     }
 
 
+    private void sendPreferenceChooseToServer(){
+        if(radioButtonSelected != -1) {
+            AccountDefaultSettingsVO selected = accountDefaultSettings.get(radioButtonSelected);
+            final String selectedID = selected.getmId();
+            String userEmail = getActivityInterface().getPersonalUserInformation().getUserEmailLogIn();
+            ConnectionManager.getInstance(getActivity()).putAccountsPreferences(userEmail, selectedID, new ConnectionManager.ServerRequestListener() {
+                @Override
+                public void onSuccess(Object data) {
+                    FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
+                    my_trip_profile.setTag(selectedID);
+                }
+
+                @Override
+                public void onError(Object data) {
+                    ErrorMessage(data);
+                }
+            });
+        }
+    }
+
     private void onBackPressed(){
         ((MainActivityBottomTabs) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
             public void doBack() {
-                if(radioButtonSelected != -1) {
-                    AccountDefaultSettingsVO selected = accountDefaultSettings.get(radioButtonSelected);
-                    final String selectedID = selected.getmId();
-                    String userEmail = getActivityInterface().getPersonalUserInformation().getUserEmailLogIn();
-                    ConnectionManager.getInstance(getActivity()).putAccountsPreferences(userEmail, selectedID, new ConnectionManager.ServerRequestListener() {
-                        @Override
-                        public void onSuccess(Object data) {
-                            FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
-                            my_trip_profile.setTag(selectedID);
-                        }
-
-                        @Override
-                        public void onError(Object data) {
-                            ErrorMessage(data);
-                        }
-                    });
-                }
+                sendPreferenceChooseToServer();
             }
         });
     }
 
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        sendPreferenceChooseToServer();
+    }
 
 
     private void adapterClicked(String clickedItemID){
@@ -160,9 +170,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
 
     private void createListAdapter() {
 
-
         setActiveAccount();
-
 
         //Factory implementation :)
         Bundle args = getArguments();

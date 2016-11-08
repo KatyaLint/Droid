@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ScrollView;
 import hellogbye.com.hellogbyeandroid.R;
 //import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
@@ -22,6 +23,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
+import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by arisprung on 8/17/15.
@@ -32,10 +34,10 @@ public class AccountPersonalInfoHelpAndFeedbackFragment extends HGBAbstractFragm
     private View promptsView;
     private FontEditTextView account_submit_edit_text;
     private ScrollView mFeedbackRelativeLayout;
+    private String userPreferenceID;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new AccountPersonalInfoHelpAndFeedbackFragment();
-
         Bundle args = new Bundle();
         args.putInt(HGBConstants.ARG_NAV_NUMBER, position);
         fragment.setArguments(args);
@@ -47,6 +49,7 @@ public class AccountPersonalInfoHelpAndFeedbackFragment extends HGBAbstractFragm
 
         View rootView = inflater.inflate(R.layout.account_settings_help_feedback, container, false);
         mFeedbackRelativeLayout = (ScrollView)rootView.findViewById(R.id.feedback_rl);
+        getFlowInterface().enableFullScreen(false);
        // View rootView = inflater.inflate(R.layout.account_settings_help_feedback_test, container, false);
         return rootView;
     }
@@ -57,10 +60,10 @@ public class AccountPersonalInfoHelpAndFeedbackFragment extends HGBAbstractFragm
         LayoutInflater li = LayoutInflater.from(getActivity());
         promptsView = li.inflate(R.layout.popup_alert_layout, null);
 
-       final FontButtonView account_submit_feedback = (FontButtonView) rootView.findViewById(R.id.account_submit_feedback);
+        final FontButtonView account_submit_feedback = (FontButtonView) rootView.findViewById(R.id.account_submit_feedback);
         account_submit_feedback.setEnabled(false);
 
-      account_submit_edit_text = (FontEditTextView) rootView.findViewById(R.id.account_submit_edit_text);
+        account_submit_edit_text = (FontEditTextView) rootView.findViewById(R.id.account_submit_edit_text);
         account_submit_edit_text.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -100,12 +103,19 @@ public class AccountPersonalInfoHelpAndFeedbackFragment extends HGBAbstractFragm
             }
         });
 
+        //getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId();
+        //System.out.println("Kate userPreferenceID =" + userPreferenceID);
+
+        FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
+        userPreferenceID =  my_trip_profile.getTag().toString();
+        //System.out.println("Kate my_trip_profile = " + my_trip_profile.getTag());
+
     }
 
 
     private void sendFeedback(){
 
-        ConnectionManager.getInstance(getActivity()).postSubmitFeedback(account_submit_edit_text.getText().toString(),new ConnectionManager.ServerRequestListener() {
+        ConnectionManager.getInstance(getActivity()).postSubmitFeedback(account_submit_edit_text.getText().toString(), userPreferenceID,new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
 
