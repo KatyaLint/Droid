@@ -88,8 +88,33 @@
         <item name="android:background">@drawable/selector_red_button</item>
     </style>
 
+
+    <style name="CustomButtonTextStyleNew">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fontName">dinnextltpro_medium.otf</item>
+        <item name="android:textSize">@dimen/SP24</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingBottom">@dimen/DP10</item>
+        <item name="android:paddingTop">@dimen/DP10</item>
+        <item name="android:textColor">@color/COLOR_WHITE</item>
+        <item name="android:layout_marginLeft">@dimen/DP20</item>
+        <item name="android:layout_marginRight">@dimen/DP20</item>
+    </style>
+
+    <style name="RedButton" parent="CustomButtonTextStyleNew">
+        <item name="android:textColor">@color/COLOR_EE3A3C</item>
+        <item name="android:background">@drawable/button_border</item>
+    </style>
+
+    <style name="BlueButton" parent="CustomButtonTextStyleNew">
+        <item name="android:textColor">@color/COLOR_003D4C</item>
+        <item name="android:background">@drawable/blue_button_border</item>
+    </style>
+
+
     <style name="RedCustomButtonStyleNoRadius" parent="CustomButtonTextStyle">
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/COLOR_WHITE</item>
         <item name="android:background">@drawable/selector_red_button_no_radius</item>
     </style>
 

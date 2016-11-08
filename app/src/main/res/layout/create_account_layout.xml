@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+    <ImageView
+        android:id="@+id/arrow_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/DP20"
+        android:visibility="gone"
+        android:background="@drawable/arrow_back" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/DP20"
+        android:text="@string/login"
+        android:textColor="@color/COLOR_003D4C"
+        app:fontName="dinnextltpro_medium.otf" />
+
+
+
+    <ImageView
+        android:id="@+id/cloud_02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/cloud_02" />
+
+    <ImageView
+        android:id="@+id/sun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sun" />
+
+    <ImageView
+        android:id="@+id/cloud_01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/DP16"
+        android:background="@drawable/cloud_01" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/DP100"
+        android:text="Welcome"
+        android:textColor="@color/COLOR_003D4C"
+        android:textSize="@dimen/SP24"
+        app:fontName="dinweb_condmedium.ttf" />
+
+    <ImageView
+        android:id="@+id/cloud_03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cloud_03"
+        android:layout_below="@+id/logo_onboardong"
+        android:layout_marginTop="@dimen/DP50"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:id="@+id/building"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationX="@dimen/DP100"
+        android:layout_below="@+id/cloud_03"
+        android:layout_marginTop="-30dp"
+        android:background="@drawable/building" />
+
+
+    <ImageView
+        android:id="@+id/cloud_05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignBottom="@+id/building"
+        android:background="@drawable/cloud_05" />
+
+    <ImageView
+        android:id="@+id/cloud_07"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/building"
+        android:background="@drawable/cloud_07" />
+    <ImageView
+        android:id="@+id/cloud_06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/building"
+        android:background="@drawable/cloud_06" />
+
+    <ImageView
+        android:id="@+id/cloud_08"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/sign_up_hyperlink"
+        android:background="@drawable/cloud_08" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/sign_up_hyperlink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:autoLink="all"
+        android:gravity="center"
+        android:linksClickable="true"
+        android:paddingBottom="@dimen/DP10"
+        android:paddingLeft="@dimen/DP10"
+        android:paddingRight="@dimen/DP10"
+        android:text="@string/sign_up_term_of_use"
+        android:textColor="@color/COLOR_00516f"
+        android:textSize="@dimen/SP12"
+        app:fontName="dinnextltpro_regular.otf" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        style="@style/RedButton"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/cloud_08"
+        android:id="@+id/create_account"
+        app:fontName="dinnextltpro_medium.otf"
+        android:text="@string/create_account"/>
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:id="@+id/try_now"
+        style="@style/BlueButton"
+        android:layout_above="@+id/create_account"
+        android:layout_marginBottom="@dimen/DP20"
+        app:fontName="dinnextltpro_medium.otf"
+        android:text="@string/try_it_now"/>
+
+
+
+    <ImageView
+        android:id="@+id/cloud_04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cloud_04"
+        android:layout_alignBottom="@+id/building"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/logo_onboardong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/logo_onboardong"
+        android:layout_below="@+id/welcome"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/airplane_01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/airplane_01"
+        android:layout_above="@+id/cloud_05"
+        android:layout_alignLeft="@+id/try_now"
+        android:layout_alignStart="@+id/try_now"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp" />
+
+
+</RelativeLayout>
