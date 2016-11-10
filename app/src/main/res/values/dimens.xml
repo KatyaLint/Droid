@@ -45,6 +45,8 @@
     <dimen name="DP160">160dp</dimen>
     <dimen name="DP180">180dp</dimen>
     <dimen name="DP200">200dp</dimen>
+    <dimen name="DP220">220dp</dimen>
+    <dimen name="DP230">230dp</dimen>
     <dimen name="DP250">250dp</dimen>
     <dimen name="DP280">280dp</dimen>
     <dimen name="DP300">300dp</dimen>
