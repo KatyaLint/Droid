@@ -12,7 +12,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/DP20"
-        android:background="@drawable/arrow_back"
+        android:src="@drawable/arrow_back"
         android:visibility="gone" />
 
 
@@ -34,21 +34,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/cloud_02"
+        android:src="@drawable/cloud_02"
         android:translationX="@dimen/DP50" />
 
     <ImageView
         android:id="@+id/sun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/sun" />
+        android:src="@drawable/sun" />
 
     <ImageView
         android:id="@+id/cloud_01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/DP16"
-        android:background="@drawable/cloud_01" />
+        android:src="@drawable/cloud_01" />
 
     <ImageView
         android:id="@+id/cloud_1_b"
@@ -56,8 +56,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/DP200"
         android:layout_marginTop="@dimen/DP150"
-        android:background="@drawable/cloud_01"
-        android:translationX="-360dp" />
+        android:src="@drawable/cloud_01"
+        android:translationX="@dimen/MINUS_DP360" />
 
     <ImageView
         android:id="@+id/cloud_03"
@@ -66,7 +66,7 @@
 
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/cloud_03"
+        android:src="@drawable/cloud_03"
         android:translationX="@dimen/DP100" />
 
     <ImageView
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/cloud_03"
         android:layout_marginTop="-30dp"
-        android:background="@drawable/building"
+        android:src="@drawable/building"
         android:translationX="@dimen/DP200" />
 
 
@@ -110,14 +110,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/welcome"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/logo_onboardong" />
+        android:src="@drawable/logo_onboardong" />
 
     <ImageView
         android:id="@+id/airplane_01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/building_01"
-        android:background="@drawable/airplane_01" />
+        android:src="@drawable/airplane_01" />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/welcome"
@@ -125,7 +125,7 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/sun"
         android:layout_below="@+id/cloud_01"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/DP20"
         android:text="Welcome"
 
         android:textColor="@color/COLOR_003D4C"
@@ -136,12 +136,10 @@
         android:id="@+id/label_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/sun"
-        android:layout_alignRight="@+id/sun"
         android:layout_below="@+id/cloud_01"
-        android:layout_marginTop="24dp"
-        android:gravity="center"
+        android:layout_marginTop="@dimen/DP24"
         android:text="LABEL_1"
+        android:layout_centerHorizontal="true"
         android:textColor="@color/COLOR_003D4C"
         android:textSize="@dimen/SP32"
         android:visibility="gone"
@@ -153,7 +151,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/label_1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/DP24"
         android:gravity="center"
         android:text="LABEL_2"
         android:textColor="@color/COLOR_003D4C"
@@ -176,17 +174,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cloud_03"
-        android:background="@drawable/cloud_04"
+        android:src="@drawable/cloud_04"
         android:translationX="@dimen/DP90" />
 
     <ImageView
         android:id="@+id/cloud_4_b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/building_01"
-        android:background="@drawable/cloud_04"
-        android:translationX="-380dp"
-        android:translationY="@dimen/DP60"
+        android:layout_below="@+id/cloud_03"
+        android:src="@drawable/cloud_04"
+        android:translationX="@dimen/MINUS_DP380"
+
 
         />
 
@@ -194,7 +192,7 @@
         android:id="@+id/cloud_7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/cloud_07"
+        android:src="@drawable/cloud_07"
         android:layout_below="@id/building_01"
         android:translationX="@dimen/DP200"
 
@@ -205,10 +203,9 @@
         android:id="@+id/cloud_5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/DP200"
-        android:background="@drawable/cloud_05"
-        android:translationX="-220dp" />
+        android:layout_below="@id/building_01"
+        android:src="@drawable/cloud_05"
+        android:translationX="@dimen/MINUS_DP220" />
 
     <ImageView
         android:id="@+id/cloud_6"
@@ -216,8 +213,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/DP200"
-        android:background="@drawable/cloud_06"
-        android:translationX="-360dp" />
+        android:src="@drawable/cloud_06"
+        android:translationX="@dimen/MINUS_DP360" />
 
 
     <hellogbye.com.hellogbyeandroid.views.FontButtonView
@@ -234,8 +231,8 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/cloud_03"
         android:alpha="0.58"
-        android:background="@drawable/building"
-        android:translationX="-200dp" />
+        android:src="@drawable/building"
+        android:translationX="@dimen/MINUS_DP200"  />
 
 
 </RelativeLayout>

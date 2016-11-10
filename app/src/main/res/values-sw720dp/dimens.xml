@@ -64,6 +64,11 @@
     <dimen name="SP32">64sp</dimen>
     <dimen name="SP36">72sp</dimen>
     <dimen name="SP46">92sp</dimen>
+
+    <dimen name="MINUS_DP360">-720dp</dimen>
+    <dimen name="MINUS_DP380">-760dp</dimen>
+    <dimen name="MINUS_DP220">-440dp</dimen>
+    <dimen name="MINUS_DP200">-400dp</dimen>
 <!--    <dimen name="SP10">20dip</dimen>
     <dimen name="SP12">24dip</dimen>
     <dimen name="SP13">26dip</dimen>

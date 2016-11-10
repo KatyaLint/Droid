@@ -112,11 +112,11 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     private void animateWelcomeView() {
         CURRENT_STATE = WELCOME_STATE;
-        Animation animSlide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_create_screen_1_plane);
-        mPlane.startAnimation(animSlide);
-
-        HGBAnimationUtility.FadInView(getApplicationContext(), mWelcomeTextView);
-        HGBAnimationUtility.FadInView(getApplicationContext(), mLogoOnBoarding);
+//        Animation animSlide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_create_screen_1_plane);
+//        mPlane.startAnimation(animSlide);
+//
+//        HGBAnimationUtility.FadInView(getApplicationContext(), mWelcomeTextView);
+//        HGBAnimationUtility.FadInView(getApplicationContext(), mLogoOnBoarding);
     }
 
     private void animateNameView() {
@@ -131,7 +131,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         mSignInTextView.setText("Next");
         HGBAnimationUtility.FadInView(getApplicationContext(), mArrowBack);
         mArrowBack.bringToFront();
-
+        mSignInTextView.bringToFront();
         HGBAnimationUtility.FadeOutView(getApplicationContext(), mWelcomeTextView);
         HGBAnimationUtility.FadeOutView(getApplicationContext(), mLogoOnBoarding);
         HGBAnimationUtility.FadeOutView(getApplicationContext(), mCreateAccount);
