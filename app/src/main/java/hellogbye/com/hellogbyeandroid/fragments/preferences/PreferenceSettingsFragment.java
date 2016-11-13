@@ -413,7 +413,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
 
     private void editSettingsPreferencesPopUp() {
 
-        HGBUtility.showAlertPopUp(getActivity(), input, popup_preferences_layout, getString(R.string.preferences_add_button),
+        HGBUtility.showAlertPopUp(getActivity(), input, popup_preferences_layout, null,
                getString(R.string.ok_button), new PopUpAlertStringCB() {
                     @Override
                     public void itemSelected(String inputItem) {

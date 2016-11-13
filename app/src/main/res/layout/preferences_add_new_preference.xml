@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_root" android:orientation="vertical"
-    android:layout_width="fill_parent" android:layout_height="fill_parent"
-    android:paddingLeft="@dimen/DP20" android:paddingRight="@dimen/DP20" android:paddingBottom="@dimen/DP20" android:paddingTop="@dimen/DP14" android:layout_gravity="top">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:paddingLeft="@dimen/DP20" android:paddingRight="@dimen/DP20"
+    android:paddingBottom="@dimen/DP20" android:paddingTop="@dimen/DP14"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="top">
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:fontName="dinnextltpro_medium.otf"
+        android:textSize="@dimen/SP18"
+        android:textColor="@color/COLOR_003D4C"
+        android:text="@string/preferences_add_button"/>
 
     <TextView android:id="@+id/text" android:layout_width="wrap_content"
         android:layout_height="wrap_content" android:textColor="#FFF"
@@ -13,6 +26,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/preferences_hint_add_name"
+        android:textSize="@dimen/SP16"
+        app:fontName="dinnextltpro_regular.otf"
         android:textColorHint="@color/COLOR_999999"/>
 
 </LinearLayout>
