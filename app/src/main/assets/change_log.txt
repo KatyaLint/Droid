@@ -496,5 +496,8 @@ Code changing:
         HEL-1801 - when adding new companion relationship should show unspecified instead of empty
         HEL-1803 - can't create a feedback
 
+
       Code changing:
       --------------
+        - Checkout - thank
+        - onboarding

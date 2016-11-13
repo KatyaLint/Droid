@@ -229,7 +229,7 @@
     <string name="continue_to_checkout">Checkout</string>
     <string name="continue_to_checkout_flight_baggage">Flight Baggage &amp; Hotel info</string>
     <string name="continue_to_checkout_price">PRICE :</string>
-    <string name="continue_to_checkout_last_screen">A mail confirmation has been\nsent to the email address above</string>
+    <string name="continue_to_checkout_last_screen">An email confirmation has been\nsent to the email address above.</string>
     <string name="edit_trip_name">Edit Trip Name</string>
 
     <string name="onBoarding_just_type">Just type or say\nsomething like:</string>
@@ -245,7 +245,7 @@
 
     <string name="trip_no_trips_title">Start planning your trips here</string>
     <string name="trip_no_trips_explanation">Start planning your trip below.\nAnytime you create a trip you can\naccess it from here</string>
-    <string name="done">done</string>
+    <string name="done">Done</string>
     <string name="avreage_per_night">Average per night</string>
     <string name="electronic_ticket">Electronic Ticket:</string>
     <string name="press_here">Press here</string>
