@@ -6,7 +6,11 @@
     android:fillAfter="true">
 
     <translate
-        android:fromXDelta="0%p"
-        android:toXDelta="10%p"
+        android:fromXDelta="90%p"
+        android:toXDelta="120%p"
+        />
+    <alpha
+        android:fromAlpha="1.0"
+        android:toAlpha="0.5"
         />
 </set>

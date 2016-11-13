@@ -13,16 +13,51 @@ import hellogbye.com.hellogbyeandroid.R;
 
 public class HGBAnimationUtility {
 
-    public static void FadInView(Context context,View view){
-        Animation animSlide = AnimationUtils.loadAnimation(context,
+    public static void FadInView(Context context,final View view){
+        Animation fadeIn = AnimationUtils.loadAnimation(context,
                 R.anim.fade_in);
-        view.startAnimation(animSlide);
+        view.startAnimation(fadeIn);
+//        fadeIn.setAnimationListener(new Animation.AnimationListener() {
+//            @Override
+//            public void onAnimationStart(Animation animation) {
+//
+//            }
+//
+//            @Override
+//            public void onAnimationEnd(Animation animation) {
+//                view.setVisibility(View.GONE);
+//
+//            }
+//
+//            @Override
+//            public void onAnimationRepeat(Animation animation) {
+//
+//            }
+//        });
 
     }
 
-    public static void FadeOutView(Context context,View view){
-        Animation animSlide = AnimationUtils.loadAnimation(context,
+    public static void FadeOutView(Context context,final View view){
+        Animation fadeout = AnimationUtils.loadAnimation(context,
                 R.anim.fade_out);
-        view.startAnimation(animSlide);
+        view.startAnimation(fadeout);
+
+//        fadeout.setAnimationListener(new Animation.AnimationListener() {
+//            @Override
+//            public void onAnimationStart(Animation animation) {
+//
+//            }
+//
+//            @Override
+//            public void onAnimationEnd(Animation animation) {
+//                view.setVisibility(View.GONE);
+//
+//            }
+//
+//            @Override
+//            public void onAnimationRepeat(Animation animation) {
+//
+//            }
+//        });
     }
 }
