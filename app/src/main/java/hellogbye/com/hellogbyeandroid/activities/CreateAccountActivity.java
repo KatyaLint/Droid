@@ -274,6 +274,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         CURRENT_STATE = EMAIL_STATE;
         HGBAnimationUtility.FadeOutView(getApplicationContext(), mFirstName);
         HGBAnimationUtility.FadeOutView(getApplicationContext(), mLastName);
+        mLastName.setFocusable(false);
+        mFirstName.setFocusable(false);
         mEmail.setVisibility(View.VISIBLE);
         HGBAnimationUtility.FadInView(getApplicationContext(), mEmail);
         mLabel1.setText("What's your email?");
@@ -297,7 +299,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     private void animatePasswordView() {
         CURRENT_STATE = PASSWORD_STATE;
+
         HGBAnimationUtility.FadeOutView(getApplicationContext(), mEmail);
+        mEmail.setFocusable(false);
         mPassword1.setVisibility(View.VISIBLE);
         mPassword2.setVisibility(View.VISIBLE);
         HGBAnimationUtility.FadInView(getApplicationContext(), mPassword1);
@@ -310,6 +314,12 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         mPlane2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane02_3_4));
         mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_3_4));
         mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_3_4));
+        mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_3_4));
+        mCloud03.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud03_3_4));
+        mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_3_4));
+        mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_3_4));
+        mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_3_4));
+        mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_3_4));
 
 
 

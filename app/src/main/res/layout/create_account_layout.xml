@@ -69,11 +69,10 @@
         android:id="@+id/cloud_1_b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/DP200"
         android:layout_marginTop="@dimen/DP150"
         android:src="@drawable/cloud_01"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="@dimen/MINUS_DP200" />
+        android:layout_marginLeft="@dimen/MINUS_DP240" />
 
     <ImageView
         android:id="@+id/cloud_03"
@@ -180,8 +179,8 @@
         style="@style/new_sign_up_text_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/DP50"
         android:layout_below="@+id/label_2"
-        android:layout_centerHorizontal="true"
         android:imeOptions="actionNext"
         android:maxLines="1"
         android:singleLine="true"
@@ -314,9 +313,9 @@
         android:id="@+id/birds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/cloud_5"
+        android:layout_alignBottom="@+id/building_01"
         android:layout_alignParentRight="true"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginRight="@dimen/DP80"
         android:src="@drawable/birds"
           />
