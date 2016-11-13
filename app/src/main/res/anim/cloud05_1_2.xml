@@ -7,6 +7,6 @@
 
     <translate
         android:fromXDelta="0%p"
-        android:toXDelta="45%p"
+        android:toXDelta="55%p"
        />
 </set>

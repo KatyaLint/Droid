@@ -33,9 +33,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
         android:src="@drawable/cloud_02"
-        android:translationX="@dimen/DP50" />
+        android:layout_marginTop="@dimen/DP20"
+        android:layout_marginRight="@dimen/MINUS_DP70" />
 
     <ImageView
         android:id="@+id/sun"
@@ -47,7 +47,9 @@
         android:id="@+id/cloud_01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/DP16"
+        android:layout_marginTop="@dimen/DP30"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/MINUS_DP30"
         android:src="@drawable/cloud_01" />
 
     <ImageView
@@ -57,7 +59,8 @@
         android:layout_marginBottom="@dimen/DP200"
         android:layout_marginTop="@dimen/DP150"
         android:src="@drawable/cloud_01"
-        android:translationX="@dimen/MINUS_DP360" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/MINUS_DP200" />
 
     <ImageView
         android:id="@+id/cloud_03"
@@ -67,7 +70,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:src="@drawable/cloud_03"
-        android:translationX="@dimen/DP100" />
+        android:layout_marginRight="@dimen/MINUS_DP70" />
 
     <ImageView
         android:id="@+id/building_02"
@@ -77,7 +80,7 @@
         android:layout_marginTop="@dimen/MINUS_DP30"
         android:src="@drawable/building"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="-320dp"
+        android:layout_marginRight="@dimen/MINUS_DP320"
          />
 
 
@@ -177,7 +180,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/cloud_03"
         android:src="@drawable/cloud_04"
-        android:translationX="@dimen/DP90" />
+        android:layout_marginLeft="@dimen/MINUS_DP580"
+
+         />
 
     <ImageView
         android:id="@+id/cloud_4_b"
@@ -185,7 +190,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/cloud_03"
         android:src="@drawable/cloud_04"
-        android:translationX="@dimen/MINUS_DP380"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/DP10"
+        android:layout_marginRight="@dimen/MINUS_DP150"
 
 
         />
@@ -196,7 +203,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/cloud_07"
         android:layout_below="@id/building_01"
-        android:translationX="@dimen/DP200"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="-30dp"
 
 
         />
@@ -207,7 +215,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/building_01"
         android:src="@drawable/cloud_05"
-        android:translationX="@dimen/MINUS_DP220" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/MINUS_DP250" />
 
     <ImageView
         android:id="@+id/cloud_6"
@@ -216,7 +225,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/DP200"
         android:src="@drawable/cloud_06"
-        android:translationX="@dimen/MINUS_DP360" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/MINUS_DP220" />
 
 
     <hellogbye.com.hellogbyeandroid.views.FontButtonView
@@ -234,7 +244,7 @@
         android:layout_alignTop="@+id/cloud_03"
         android:alpha="0.58"
         android:src="@drawable/building"
-        android:translationX="@dimen/MINUS_DP200"  />
+        android:layout_marginLeft="@dimen/MINUS_DP300"  />
 
 
 </RelativeLayout>
