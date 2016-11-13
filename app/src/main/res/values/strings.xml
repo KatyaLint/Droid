@@ -320,4 +320,22 @@
     <string name="show_more">Show more</string>
     <string name="show_less">Show Less</string>
 
+    <string name="pin_code_title">Didn\'t recived the text message?</string>
+    <string name="pin_code_resend"><u>Resend the message</u></string>
+    <string name="pin_code_send_email"><u>Send the code to my email</u></string>
+
+    <string name="free_user_options">This option is available \nonly for registered users</string>
+
+    <string name="onboarding_title_1">Just type or speak</string>
+    <string name="onboarding_explanation_1">Touch the speech bubble icon to start\nplannin a new trip.</string>
+
+    <string name="onboarding_title_2">Here\'s how you search</string>
+    <string name="onboarding_explanation_2">In your own words tell us where\nyou want to go.</string>
+
+    <string name="onboarding_title_3">Customize your itinerary</string>
+    <string name="onboarding_explanation_3">Touch the tiles to see more flight\nand hotel options.</string>
+
+    <string name="onboarding_title_4">Make changes in a flash</string>
+    <string name="onboarding_explanation_4">Use the back button to ask for more\noptions in your own words.</string>
+
 </resources>

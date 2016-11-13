@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<root>
-  <item name="com.roughike.bottombar.scrollsweetness.VerticalScrollingBehavior.ScrollDirection">
-    <annotation name="android.support.annotation.IntDef">
-      <val name="value" val="{com.roughike.bottombar.scrollsweetness.VerticalScrollingBehavior.ScrollDirection.SCROLL_DIRECTION_UP, com.roughike.bottombar.scrollsweetness.VerticalScrollingBehavior.ScrollDirection.SCROLL_DIRECTION_DOWN}" />
-    </annotation>
-  </item>
-</root>
-

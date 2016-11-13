@@ -14,6 +14,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.onboarding.OnBoardingPager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -110,7 +111,8 @@ public class LoginActivity extends BaseActivity {
             Intent intent = new Intent(getApplicationContext(), MainActivityBottomTabs.class);
             startActivity(intent);
         } else {
-            Intent intent = new Intent(getApplicationContext(), TravelPrefrenceStartingActivity.class);
+ //           Intent intent = new Intent(getApplicationContext(), TravelPrefrenceStartingActivity.class);
+            Intent intent = new Intent(getApplicationContext(), OnBoardingPager.class);
             startActivity(intent);
         }
 

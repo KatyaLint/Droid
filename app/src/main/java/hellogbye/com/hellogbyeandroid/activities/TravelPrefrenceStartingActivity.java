@@ -3,7 +3,10 @@ package hellogbye.com.hellogbyeandroid.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.View;
+
+import com.viewpagerindicator.TitlePageIndicator;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
@@ -39,6 +42,15 @@ public class TravelPrefrenceStartingActivity extends BaseActivity {
 //                startActivity(intent);
 //            }
 //        });
+
+        //Set the pager with an adapter
+/*        ViewPager pager = (ViewPager)findViewById(R.id.pager);
+        pager.setAdapter(new CustomAdapter(getSupportFragmentManager()));
+
+//Bind the title indicator to the adapter
+        TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.titles);
+        titleIndicator.setViewPager(pager);*/
+
 
         mButtonTextView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -27,6 +27,28 @@
         android:textSize="@dimen/SP30"
         android:text="@string/onBoarding_search_flight_example"/>
 
+
+
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <com.jakewharton.android.viewpagerindicator.TitlePageIndicator
+            android:id="@+id/indicator"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+          />
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
