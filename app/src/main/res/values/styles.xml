@@ -112,6 +112,16 @@
         <item name="android:background">@drawable/blue_button_border</item>
     </style>
 
+    <style name="CountryButton" >
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fontName">dinnextltpro_medium.otf</item>
+        <item name="android:textSize">@dimen/SP13</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/COLOR_999999</item>
+        <item name="android:background">@drawable/blue_button_border</item>
+    </style>
+
 
     <style name="RedCustomButtonStyleNoRadius" parent="CustomButtonTextStyle">
         <item name="android:textColor">@color/COLOR_WHITE</item>

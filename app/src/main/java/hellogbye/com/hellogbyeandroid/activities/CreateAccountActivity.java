@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ClickableSpan;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +50,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private ImageView mArrowBack;
     private ImageView mBirds;
 
+    private ProgressBar mProgressBar;
+
 
     private FontTextView mLabel1;
     private FontTextView mLabel2;
@@ -62,6 +67,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private FontEditTextView mPassword1;
     private FontEditTextView mPassword2;
 
+    private RelativeLayout mRoot;
+
 
     private int CURRENT_STATE = 0;
     private final int WELCOME_STATE = 1;
@@ -69,22 +76,26 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private final int EMAIL_STATE = 3;
     private final int PASSWORD_STATE = 4;
     private final int ADDRESS_STATE = 5;
-
+    private final int NUMBER_STAGES = 5;
+    private int mProgress;
+    private CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account_layout);
         initView();
-
+        countDownTimer = new AnimationCountDownTimer(5000, 1000);
         animateWelcomeView();
     }
 
     private void initView() {
         mPlane = (ImageView) findViewById(R.id.airplane_01);
-        mPlane2= (ImageView) findViewById(R.id.airplane_02);
+        mPlane2 = (ImageView) findViewById(R.id.airplane_02);
         mSun = (ImageView) findViewById(R.id.sun);
         mLogoOnBoarding = (ImageView) findViewById(R.id.logo_onboardong);
+
+        mRoot = (RelativeLayout) findViewById(R.id.create_account_root);
 
         mBiulding2 = (ImageView) findViewById(R.id.building_02);
         mBiulding1 = (ImageView) findViewById(R.id.building_01);
@@ -98,7 +109,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         mCloud06 = (ImageView) findViewById(R.id.cloud_6);
         mCloud07 = (ImageView) findViewById(R.id.cloud_7);
         mArrowBack = (ImageView) findViewById(R.id.arrow_back);
-        mBirds= (ImageView) findViewById(R.id.birds);
+        mBirds = (ImageView) findViewById(R.id.birds);
+
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         mSignInTextView = (FontTextView) findViewById(R.id.sign_in);
         mLabel1 = (FontTextView) findViewById(R.id.label_1);
@@ -108,10 +121,10 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         mCreateAccount = (FontButtonView) findViewById(R.id.create_account);
 
         mTryNow = (FontButtonView) findViewById(R.id.try_now);
-        mFirstName =  (FontEditTextView)findViewById(R.id.first_name);
-        mLastName =  (FontEditTextView)findViewById(R.id.last_name);
-        mPassword1 =  (FontEditTextView)findViewById(R.id.password1);
-        mPassword2 =  (FontEditTextView)findViewById(R.id.password2);
+        mFirstName = (FontEditTextView) findViewById(R.id.first_name);
+        mLastName = (FontEditTextView) findViewById(R.id.last_name);
+        mPassword1 = (FontEditTextView) findViewById(R.id.password1);
+        mPassword2 = (FontEditTextView) findViewById(R.id.password2);
 
         mPassword2.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -143,7 +156,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
             }
         });
 
-        mEmail=  (FontEditTextView)findViewById(R.id.email);
+        mEmail = (FontEditTextView) findViewById(R.id.email);
         mEmail.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
@@ -168,50 +181,48 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     }
 
     private void goToAddressView(View textView) {
-        HGBUtility.hideKeyboard(getApplicationContext(),textView);
+        HGBUtility.hideKeyboard(getApplicationContext(), textView);
 
-        if(true){
+        if (true) {
             animateAddressView();
-        }else{
-            Toast.makeText(getApplicationContext(),"Password not valid",Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
+        } else {
+            Toast.makeText(getApplicationContext(), "Password not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
         }
 
     }
 
 
-
-
     private void goToEmailView(View textView) {
-        HGBUtility.hideKeyboard(getApplicationContext(),textView);
+        HGBUtility.hideKeyboard(getApplicationContext(), textView);
 
-        if(true){
+        if (true) {
             animateEmailView();
-        }else{
-            Toast.makeText(getApplicationContext(),"Name not valid",Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
+        } else {
+            Toast.makeText(getApplicationContext(), "Name not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
         }
     }
 
     private boolean checkNameIsValid() {
 
-        if(mFirstName.getText().length() >1 && mLastName.getText().length() >1){
+        if (mFirstName.getText().length() > 1 && mLastName.getText().length() > 1) {
             return true;
         }
         return false;
     }
 
     private boolean checkEmailIsValid() {
-        if(mEmail.getText().length() >1){
+        if (mEmail.getText().length() > 1) {
             return true;
         }
         return false;
     }
 
     private void gotoPasswordView(View textView) {
-        HGBUtility.hideKeyboard(getApplicationContext(),textView);
-        if(true){
+        HGBUtility.hideKeyboard(getApplicationContext(), textView);
+        if (true) {
             animatePasswordView();
-        }else{
-            Toast.makeText(getApplicationContext(),"Password not valid",Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
+        } else {
+            Toast.makeText(getApplicationContext(), "Password not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
         }
 
     }
@@ -225,6 +236,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     private void animateWelcomeView() {
         CURRENT_STATE = WELCOME_STATE;
+        updateProgressBar();
 //        Animation animSlide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_create_screen_1_plane);
 //        mPlane.startAnimation(animSlide);
 //
@@ -233,7 +245,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     }
 
     private void animateNameView() {
+        disableScreen();
         CURRENT_STATE = NAME_STATE;
+        updateProgressBar();
         mLabel1.setVisibility(View.VISIBLE);
         mLabel2.setVisibility(View.VISIBLE);
         HGBAnimationUtility.FadInView(getApplicationContext(), mLabel2);
@@ -255,23 +269,15 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         HGBAnimationUtility.FadeOutView(getApplicationContext(), mLogoOnBoarding);
         HGBAnimationUtility.FadeOutView(getApplicationContext(), mCreateAccount);
         HGBAnimationUtility.FadeOutView(getApplicationContext(), mTryNow);
-        mPlane.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane01_1_2));//
-        mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_1_2));
-        mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_1_2));
-        mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_1_2));
-        mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_1_2));
-        mCloud03.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud03_1_2));
-        mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_1_2));
-        mCloud04B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud4b_1_2));
-        mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_1_2));
-        mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_1_2));
-        mBiulding1.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding01_1_2));
-        mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_1_2));
 
+        animateNameStaticViews();
     }
 
+
     private void animateEmailView() {
+        disableScreen();
         CURRENT_STATE = EMAIL_STATE;
+        updateProgressBar();
         HGBAnimationUtility.FadeOutView(getApplicationContext(), mFirstName);
         HGBAnimationUtility.FadeOutView(getApplicationContext(), mLastName);
         mLastName.setFocusable(false);
@@ -280,50 +286,58 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         HGBAnimationUtility.FadInView(getApplicationContext(), mEmail);
         mLabel1.setText("What's your email?");
         mLabel2.setText("We need your email to securely  ");
-        mPlane2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane02_2_3));
-        mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_2_3));
-        mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_2_3));
-        mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_2_3));
-        mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_2_3));
-        mCloud03.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud03_2_3));
-        mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_2_3));
-        mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_2_3));
-        mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_2_3));
-        mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_2_3));
-        mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_2_3));
+
+        animateEmailStaticView();
     }
 
+
     private void animateAddressView() {
+        disableScreen();
         CURRENT_STATE = ADDRESS_STATE;
+        updateProgressBar();
+        mLabel1.setText("We need your Address");
+        mLabel2.setText("This will be used for better targeting of your geo-location");
+        mPassword1.setVisibility(View.GONE);
+        mPassword2.setVisibility(View.GONE);
+
     }
 
     private void animatePasswordView() {
+        disableScreen();
         CURRENT_STATE = PASSWORD_STATE;
+        updateProgressBar();
 
         HGBAnimationUtility.FadeOutView(getApplicationContext(), mEmail);
-        mEmail.setFocusable(false);
         mPassword1.setVisibility(View.VISIBLE);
         mPassword2.setVisibility(View.VISIBLE);
         HGBAnimationUtility.FadInView(getApplicationContext(), mPassword1);
         HGBAnimationUtility.FadInView(getApplicationContext(), mPassword2);
         mLabel1.setText("Create your password");
         mLabel2.setText("Please choose a password that is at least 8 characters in length");
-        mBirds.setVisibility(View.VISIBLE);
-        mBirds.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.birds_3_4));
-        mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_3_4));
-        mPlane2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane02_3_4));
-        mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_3_4));
-        mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_3_4));
-        mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_3_4));
-        mCloud03.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud03_3_4));
-        mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_3_4));
-        mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_3_4));
-        mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_3_4));
-        mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_3_4));
+
+        animatePasswordStaticViews();
+    }
 
 
+    private void disableScreen() {
+        mRoot.setClickable(true);
+        countDownTimer.start();
+    }
 
+    public class AnimationCountDownTimer extends CountDownTimer {
+        public AnimationCountDownTimer(long startTime, long interval) {
+            super(startTime, interval);
+        }
 
+        @Override
+        public void onFinish() {
+            mRoot.setClickable(false);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            // mRoot.setClickable(false);
+        }
     }
 
     @Override
@@ -337,16 +351,16 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                 animateNameView();
                 break;
             case R.id.sign_in:
-                if(CURRENT_STATE != WELCOME_STATE ){
-                    if(CURRENT_STATE== NAME_STATE){
+                if (CURRENT_STATE != WELCOME_STATE) {
+                    if (CURRENT_STATE == NAME_STATE) {
                         goToEmailView(view);
-                    }else if(CURRENT_STATE == EMAIL_STATE){
+                    } else if (CURRENT_STATE == EMAIL_STATE) {
                         gotoPasswordView(view);
-                    }else if(CURRENT_STATE == PASSWORD_STATE){
+                    } else if (CURRENT_STATE == PASSWORD_STATE) {
                         goToAddressView(view);
                     }
 
-                }else{
+                } else {
                     //TODO Sign in
                 }
                 break;
@@ -355,33 +369,79 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                 break;
 
 
-
         }
     }
 
-        public class myClickableSpan extends ClickableSpan {
-            int pos;
+    public class myClickableSpan extends ClickableSpan {
+        int pos;
 
-            public myClickableSpan(int position) {
-                this.pos = position;
-            }
-
-            @Override
-            public void onClick(View widget) {
-                String url = "";
-                switch (pos) {
-                    case 1:
-                        url = getString(R.string.url_user_agreement);
-                        break;
-                    case 2:
-                        url = getString(R.string.url_pp);
-                        break;
-
-                }
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(browserIntent);
-            }
+        public myClickableSpan(int position) {
+            this.pos = position;
         }
 
+        @Override
+        public void onClick(View widget) {
+            String url = "";
+            switch (pos) {
+                case 1:
+                    url = getString(R.string.url_user_agreement);
+                    break;
+                case 2:
+                    url = getString(R.string.url_pp);
+                    break;
 
+            }
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(browserIntent);
+        }
     }
+
+    private void updateProgressBar() {
+        mProgressBar.setProgress((100 / NUMBER_STAGES) * CURRENT_STATE);
+    }
+
+
+    private void animateNameStaticViews() {
+        mPlane.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane01_1_2));//
+        mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_1_2));
+        mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_1_2));
+        mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_1_2));
+        mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_1_2));
+        mCloud03.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud03_1_2));
+        mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_1_2));
+        mCloud04B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud4b_1_2));
+        mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_1_2));
+        mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_1_2));
+        mBiulding1.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding01_1_2));
+        mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_1_2));
+    }
+
+    private void animateEmailStaticView() {
+        mPlane2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane02_2_3));
+        mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_2_3));
+        mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_2_3));
+        mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_2_3));
+        mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_2_3));
+        mCloud03.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud03_2_3));
+        mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_2_3));
+        mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_2_3));
+        mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_2_3));
+        mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_2_3));
+        mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_2_3));
+    }
+
+    private void animatePasswordStaticViews() {
+        mBirds.setVisibility(View.VISIBLE);
+        mBirds.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.birds_3_4));
+        mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_3_4));
+        mPlane2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane02_3_4));
+        mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_3_4));
+        mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_3_4));
+        mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_3_4));
+        mCloud03.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud03_3_4));
+        mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_3_4));
+        mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_3_4));
+        mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_3_4));
+        mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_3_4));
+    }
+}

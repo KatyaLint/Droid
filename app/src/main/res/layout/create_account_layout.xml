@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:translationZ="@dimen/DP1"
+        android:progressDrawable="@drawable/progressbar"
+        android:layout_height="@dimen/DP4"
+        android:layout_alignParentTop="true"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/create_account_root"
+        android:background="@android:color/transparent"
+        android:translationZ="100dp"
+        android:layout_height="match_parent">
+
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/arrow_back"
@@ -15,10 +34,19 @@
         android:src="@drawable/arrow_back"
         android:visibility="gone" />
 
+    <include android:id="@+id/country_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cloud_1_b"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"
+        layout="@layout/country_selection_layout"/>
+
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/sign_in"
         android:layout_width="wrap_content"
+
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
@@ -184,6 +212,7 @@
         android:imeOptions="actionNext"
         android:maxLines="1"
         android:singleLine="true"
+        android:inputType="textPassword"
         android:hint="@string/password"
         android:visibility="gone" />
 
@@ -193,6 +222,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/password1"
+        android:inputType="textPassword"
         android:layout_centerHorizontal="true"
         android:maxLines="1"
         android:singleLine="true"
@@ -300,6 +330,9 @@
         android:text="@string/create_account"
         app:fontName="dinnextltpro_medium.otf" />
 
+
+
+
     <ImageView
         android:id="@+id/building_01"
         android:layout_width="wrap_content"
@@ -315,7 +348,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/building_01"
         android:layout_alignParentRight="true"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_marginRight="@dimen/DP80"
         android:src="@drawable/birds"
           />
