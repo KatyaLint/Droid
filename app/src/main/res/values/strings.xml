@@ -238,6 +238,7 @@
 
     <string name="companion_empty_view_text">No Companions\nRequests</string>
     <string name="companion_empty_search">Search for travel companions  \nin the HelloGbye system above,\nor Invite a new travel companion\nto HelloGbye</string>
+    <string name="companion_empty_view_travel_title">You don\'t have any\nTravel Companions</string>
     <string name="companion_pending">Pending Companions</string>
     <string name="companion_travel">Travel Companions</string>
     <string name="companion_delete">DELETE</string>

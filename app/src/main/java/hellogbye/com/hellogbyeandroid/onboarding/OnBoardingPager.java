@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.BaseActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
+import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 
 /**
  * Created by nyawka on 11/10/16.
@@ -45,6 +46,7 @@ public class OnBoardingPager extends BaseActivity implements ViewPager.OnPageCha
             R.drawable.illustration_make_changes_in_a_flash
 
     };
+    private HGBPreferencesManager hgbPrefrenceManager;
 
 /*    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,12 +115,15 @@ public class OnBoardingPager extends BaseActivity implements ViewPager.OnPageCha
 
   /*      btnNext.setOnClickListener(this);
         btnFinish.setOnClickListener(this);*/
-
+        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         mAdapter = new ViewPagerAdapter(OnBoardingPager.this, onboardingPagerTextVOArrayList);
         mAdapter.setClickListener(new IOnBoardingNextClickListener(){
 
             @Override
             public void onClickNext() {
+
+                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY,true);
+
                 Intent intent = new Intent(getApplicationContext(),MainActivityBottomTabs.class);
                 startActivity(intent);
             }

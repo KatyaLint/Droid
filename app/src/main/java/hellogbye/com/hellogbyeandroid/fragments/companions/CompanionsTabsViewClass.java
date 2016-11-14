@@ -73,6 +73,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
     private ImageButton toolbar_add_companion;
     private LinearLayout companion_search_new_companion_view;
     private LinearLayout companion_search_not_found;
+    private LinearLayout companion_empty_view_travel_companion_ll;
 
 
     private void searchListInitialization(){
@@ -217,6 +218,8 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
 
         this.searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.companion_travel_recycle_list);
         this.companion_empty_view = (LinearLayout)rootView.findViewById(R.id.companion_empty_view);
+        this.companion_empty_view_travel_companion_ll = (LinearLayout)rootView.findViewById(R.id.companion_empty_view_travel_companion_ll);
+        System.out.println("Kate companion_empty_view_travel_companion =" + companion_empty_view_travel_companion_ll);
         this.companion_search_new_companion_view = (LinearLayout) rootView.findViewById(R.id.companion_search_new_companion);
         this.companion_search_not_found = (LinearLayout)rootView.findViewById(R.id.companion_search_not_found_ll);
 
@@ -358,14 +361,25 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
     }
 
 
+    private void emptyView(){
+        if(isPending){
+            companion_empty_view.setVisibility(View.VISIBLE);
+            companion_empty_view_travel_companion_ll.setVisibility(View.GONE);
+        }else{
+            companion_empty_view.setVisibility(View.GONE);
+            companion_empty_view_travel_companion_ll.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void emptyCompanionsView(){
         if(companionsVOPending == null || companionsVOPending.isEmpty()){
-            companion_empty_view.setVisibility(View.VISIBLE);
+            emptyView();
             searchRecyclerView.setVisibility(View.GONE);
         }else{
             mCurrItemsSearchList = new ArrayList<CompanionVO>(companionsVOPending);
             searchRecyclerView.setVisibility(View.VISIBLE);
             companion_empty_view.setVisibility(View.GONE);
+            companion_empty_view_travel_companion_ll.setVisibility(View.GONE);
         }
     }
 
