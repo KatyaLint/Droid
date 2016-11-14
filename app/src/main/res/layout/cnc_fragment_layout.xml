@@ -81,7 +81,11 @@
                    android:layout_marginLeft="@dimen/DP54"
                    android:layout_marginRight="@dimen/DP54"
                    android:orientation="vertical">
+
+                   <include layout="@layout/bottom_separator"/>
+
                <hellogbye.com.hellogbyeandroid.views.FontTextView
+                   android:layout_marginTop="@dimen/DP4"
                    android:id="@+id/text_tutorial_header"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
