@@ -75,11 +75,8 @@ public class ViewPagerAdapter extends PagerAdapter {
         return itemView;
     }
 
-
-
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((RelativeLayout) object);
-        System.out.println("Kate destry Item");
     }
 }

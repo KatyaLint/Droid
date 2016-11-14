@@ -219,7 +219,6 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
         this.searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.companion_travel_recycle_list);
         this.companion_empty_view = (LinearLayout)rootView.findViewById(R.id.companion_empty_view);
         this.companion_empty_view_travel_companion_ll = (LinearLayout)rootView.findViewById(R.id.companion_empty_view_travel_companion_ll);
-        System.out.println("Kate companion_empty_view_travel_companion =" + companion_empty_view_travel_companion_ll);
         this.companion_search_new_companion_view = (LinearLayout) rootView.findViewById(R.id.companion_search_new_companion);
         this.companion_search_not_found = (LinearLayout)rootView.findViewById(R.id.companion_search_not_found_ll);
 

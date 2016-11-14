@@ -496,6 +496,7 @@ Code changing:
         HEL-1801 - when adding new companion relationship should show unspecified instead of empty
         HEL-1803 - can't create a feedback
         HEL-1862 - change top part of companions as in design
+        HEL-1835 - select flight button is not supposed to be round
 
 
       Code changing:
