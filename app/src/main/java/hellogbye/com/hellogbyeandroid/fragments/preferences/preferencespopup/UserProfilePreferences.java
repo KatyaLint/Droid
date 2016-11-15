@@ -37,6 +37,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
     private PreferencesSettingsPreferencesCheckAdapter mRadioPreferencesAdapter;
     private ArrayList<DefaultsProfilesVO> accountDefaultSettings;
     private boolean isDefaultProfile = false;
+    private DefaultsProfilesVO notChoosenProfileVO;
 
 
     public void getAccountsProfiles(Activity context,final HGBMainInterface activityInterface){
@@ -184,7 +185,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
 
     }
 
-    DefaultsProfilesVO notChoosenProfileVO;
+
 
     private void postDefaultProfile(final String profileId, String profileName, final Activity activity, final HGBMainInterface activityInterface,final ArrayList<DefaultsProfilesVO> userProfileVOs) {
 

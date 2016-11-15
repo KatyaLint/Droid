@@ -1,9 +1,11 @@
 <resources>
+    <!--in values-v21-->
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/COLOR_003D4C</item>
     </style>
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
@@ -233,15 +235,13 @@
         <item name="android:background">@color/COLOR_WHITE</item>
     </style>
 
-
     <style name="GridViewPassangersTextStyle">
-    <item name="android:textSize">@dimen/SP16</item>
-    <item name="android:fontFamily">dinnextltpro_regular.otf</item>
-    <item name="android:textColor">@color/COLOR_WHITE</item>
-    <item name="android:gravity">center</item>
-    <item name="android:weightSum">1</item>
-
-</style>
+        <item name="android:textSize">@dimen/SP16</item>
+        <item name="android:fontFamily">dinnextltpro_regular.otf</item>
+        <item name="android:textColor">@color/COLOR_WHITE</item>
+        <item name="android:gravity">center</item>
+        <item name="android:weightSum">1</item>
+    </style>
 
     <style name="PersonalInformationEditText">
         <item name="android:textSize">@dimen/SP16</item>

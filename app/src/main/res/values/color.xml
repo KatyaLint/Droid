@@ -20,6 +20,8 @@
     <color name="COLOR_565656">#565656</color>
     <color name="COLOR_BLACK">#000000</color>
     <color name="COLOR_22999999">#22999999</color>
-    <color name="BLACK_OPACITY_10_PERCENT">#80FFFFFF</color>
+    <color name="COLOR_80FFFFFF">#80FFFFFF</color>
+
+    <color name="COLOR_E7E7E7">#E7E7E7</color>
 
 </resources>

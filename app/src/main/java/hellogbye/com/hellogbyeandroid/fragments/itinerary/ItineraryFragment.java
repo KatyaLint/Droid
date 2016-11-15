@@ -70,6 +70,7 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
     private FontTextView continue_to_checkout_flight_baggage;
     private ImageButton up_bar_favorite;
     private FontTextView itirnarary_title_Bar;
+    private FontTextView grid_total_price_currency;
 
     public ItineraryFragment() {
 
@@ -131,7 +132,7 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
         FontTextView textView = new FontTextView(activity);
 
         textView.setTextAppearance(activity, R.style.GridViewPassangersTextStyle);
-        textView.setText(passenger.getmName() +" - " + "$" + HGBUtility.roundNumber(passenger.getmTotalPrice()) + "USD");
+        textView.setText(passenger.getmName() + " - " + "$" + HGBUtility.roundNumber(passenger.getmTotalPrice()));
         textView.setGravity(Gravity.CENTER);
      //   textView.setTextSize(R.dimen.SP16);
     //    LayoutParams params = new LayoutParams((int) getResources().getDimension(R.dimen.DP150),LayoutParams.WRAP_CONTENT); //width 150
@@ -708,7 +709,7 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
     private LinearLayout dateLayout(String date){
         View child = activity.getLayoutInflater().inflate(R.layout.new_grid_view_inner_date_item, null);
 
-        TextView date_text_layout = (TextView)child.findViewById(R.id.date_text_layout);
+        FontTextView date_text_layout = (FontTextView) child.findViewById(R.id.date_text_layout);
       //  String correctDate = HGBUtility.parseDateFromddMMyyyyToddmmYYYY(date);
         String correctDate  = HGBUtilityDate.parseDateFromddMMyyyyToddmmYYYY(date);
         date_text_layout.setText(correctDate.toUpperCase());
@@ -779,7 +780,8 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
             itineraryLayout.addView(mainView);
             cnc_empty_view.setVisibility(View.GONE);
             grid_make_payment.setEnabled(true);
-            grid_total_price.setText("$" + HGBUtility.roundNumber(Double.parseDouble(userOrder.getmTotalPrice())) + "USD");
+            grid_total_price.setText("$" + HGBUtility.roundNumber(Double.parseDouble(userOrder.getmTotalPrice())));
+            grid_total_price_currency.setText("USD");
         }else{  // server returning wrong data
             itineraryLayout.setVisibility(View.GONE);
             cnc_empty_view.setVisibility(View.VISIBLE);
@@ -811,6 +813,7 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
 
         View rootView = inflater.inflate(R.layout.new_grid_main_table, container, false);
         grid_total_price = (FontTextView)rootView.findViewById(R.id.grid_total_price);
+        grid_total_price_currency = (FontTextView)rootView.findViewById(R.id.grid_total_price_currency);
         continue_to_checkout_flight_baggage = (FontTextView)rootView.findViewById(R.id.continue_to_checkout_flight_baggage);
         continue_to_checkout_flight_baggage.setOnClickListener(new View.OnClickListener() {
             @Override

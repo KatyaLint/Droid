@@ -19,22 +19,7 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     private boolean isEmpty = false;
 
 
-    public NodesVO getClone(){
-        try { // call clone in Object.
-        return (NodesVO) super.clone();
-        } catch (CloneNotSupportedException e) {
-            System.out.println (" Cloning not allowed. " );
-            return this;
-        }
-    }
 
-    public String getDateOfCell() {
-        return dateOfCell;
-    }
-
-    public void setDateOfCell(String dateOfCell) {
-            this.dateOfCell = dateOfCell;
-    }
 
     private String dateOfCell = "";
     private String calenderDay = "";
@@ -182,7 +167,22 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     private AirportCoordinatesVO destinationairportcoordinates = new AirportCoordinatesVO();
 
 
+    public NodesVO getClone(){
+        try { // call clone in Object.
+            return (NodesVO) super.clone();
+        } catch (CloneNotSupportedException e) {
+            System.out.println (" Cloning not allowed. " );
+            return this;
+        }
+    }
 
+    public String getDateOfCell() {
+        return dateOfCell;
+    }
+
+    public void setDateOfCell(String dateOfCell) {
+        this.dateOfCell = dateOfCell;
+    }
     public float getmStarRating() {
         return mStarRating;
     }

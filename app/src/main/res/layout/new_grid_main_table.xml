@@ -43,10 +43,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/SP12"
+            android:visibility="gone"
             android:textColor="@color/COLOR_00516f"
             app:fontName="dinnextltpro_medium.otf"
             android:text="@string/continue_to_checkout_price"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/grid_total_price"
                 android:layout_width="wrap_content"
@@ -55,6 +60,19 @@
                 android:textColor="@color/COLOR_00516f"
                 app:fontName="dinnextltpro_boldcondensed.otf"
                 android:text="@string/continue_to_checkout_price"/>
+
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/grid_total_price_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/SP24"
+                android:textColor="@color/COLOR_00516f"
+                app:fontName="dinnextltpro_light.otf"
+                android:text="@string/continue_to_checkout_price"/>
+
+            </LinearLayout>
+
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
 

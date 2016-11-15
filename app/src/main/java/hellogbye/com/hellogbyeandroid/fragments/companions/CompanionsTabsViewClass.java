@@ -210,6 +210,9 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
             }
         });
 
+
+
+
         return rootView;
     }
 
@@ -221,8 +224,14 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
         this.companion_empty_view_travel_companion_ll = (LinearLayout)rootView.findViewById(R.id.companion_empty_view_travel_companion_ll);
         this.companion_search_new_companion_view = (LinearLayout) rootView.findViewById(R.id.companion_search_new_companion);
         this.companion_search_not_found = (LinearLayout)rootView.findViewById(R.id.companion_search_not_found_ll);
-
-       // this.mSearchView = searchView;
+        FontTextView companion_invite_travel_companion = (FontTextView)rootView.findViewById(R.id.companion_invite_travel_companion);
+        companion_invite_travel_companion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addTravelCompanion();
+            }
+        });
+                // this.mSearchView = searchView;
        // this.searchRecyclerView = searchRecyclerView;
        // this.companion_empty_view = companion_empty_view;
 
@@ -484,7 +493,6 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
                             @Override
                             public void onSuccess(Object data) {
                                 getCompanions();
-
                             }
 
                             @Override

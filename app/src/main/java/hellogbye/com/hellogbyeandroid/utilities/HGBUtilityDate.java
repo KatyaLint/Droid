@@ -119,7 +119,7 @@ public class HGBUtilityDate {
 
 
     public static String parseDateFromddMMyyyyToddmmYYYY(String time) {
-        String outputPattern = "EEE, MMM dd, yyyy";
+        String outputPattern = "EEE dd MMMM yyyy";
         String inputPattern = "MM/dd/yyyy";
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
 

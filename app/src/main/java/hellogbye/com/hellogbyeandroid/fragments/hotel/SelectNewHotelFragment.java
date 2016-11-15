@@ -48,6 +48,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityHotel;
 
 import static hellogbye.com.hellogbyeandroid.R.id.map;
 
@@ -440,13 +441,13 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
                     publishProgress(new MarkerOptions()
                             .zIndex(1.0f)
                             .position(new LatLng(mNodesList.get(i).getmLatitude(), mNodesList.get(i).getmLongitude()))
-                            .icon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(true, i + 1, mNodesList.get(i).getmStarRating(), mNodesList.get(i).getmMinimumAmount(), getActivity()))));
+                            .icon(BitmapDescriptorFactory.fromBitmap(HGBUtilityHotel.getMarkerBitmap(true, i + 1, mNodesList.get(i).getmStarRating(), mNodesList.get(i).getmMinimumAmount(), getActivity()))));
                 } else {
 
                     publishProgress(new MarkerOptions()
                             .zIndex(0)
                             .position(new LatLng(mNodesList.get(i).getmLatitude(), mNodesList.get(i).getmLongitude()))
-                            .icon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(false, i + 1, mNodesList.get(i).getmStarRating(), mNodesList.get(i).getmMinimumAmount(), getActivity()))));
+                            .icon(BitmapDescriptorFactory.fromBitmap(HGBUtilityHotel.getMarkerBitmap(false, i + 1, mNodesList.get(i).getmStarRating(), mNodesList.get(i).getmMinimumAmount(), getActivity()))));
                 }
             }
 
@@ -499,7 +500,7 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
             if(values[0].isSelected()){
                 marker.setZIndex(1.0f);
             }
-            marker.setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(values[0].isSelected(),
+            marker.setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtilityHotel.getMarkerBitmap(values[0].isSelected(),
                     values[0].getIndex() + 1, mNodesList.get(values[0].getIndex()).getmStarRating(),
                     mNodesList.get(values[0].getIndex()).getmMinimumAmount(), getActivity())));
         }

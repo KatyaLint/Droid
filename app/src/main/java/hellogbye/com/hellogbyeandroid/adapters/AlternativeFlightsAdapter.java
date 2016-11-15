@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 
+import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightsDetailsFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -33,6 +35,7 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
     private  List<NodesVO> itemsData;
 
     private OnItemClickListener mItemClickListener;
+    private AlternativeFlightsDetailsFragment.ISortClickCB onSortClickCB;
 
     public void setData(List<NodesVO> itemsData){
         this.itemsData = itemsData;
@@ -57,6 +60,7 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
         if(position == getItemCount()){
             viewHolder.viewDivider.setVisibility(View.GONE);
         }
+        System.out.println("Kate itemsData =" + itemsData.size());
         NodesVO itemData = itemsData.get(position);
 
         ArrayList<LegsVO> legs = itemData.getLegs();
@@ -98,6 +102,30 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
         viewHolder.alternative_date_from.setText(HGBUtilityDate.parseDateToddMMyyyy(itemData.getmDeparture()));
         viewHolder.alternative_date_to.setText(HGBUtilityDate.parseDateToddMMyyyy(itemData.getmArrival()));
 
+        if(position == 0){
+            viewHolder.alternative_flight_title_ll.setVisibility(View.VISIBLE);
+            viewHolder.alternative_flight_sort_ll.setVisibility(View.GONE);
+            viewHolder.alternative_flight_title_text.setVisibility(View.VISIBLE);
+            viewHolder.alternative_flight_title_text.setText("CURRENT FLiGHT");
+        }else if(position == 1){
+            viewHolder.alternative_flight_title_ll.setVisibility(View.VISIBLE);
+            viewHolder.alternative_flight_sort_ll.setVisibility(View.VISIBLE);
+            viewHolder.alternative_flight_title_text.setVisibility(View.VISIBLE);
+            viewHolder.alternative_flight_title_text.setText("ALTERNATIVE FLiGHT");
+
+            viewHolder.alternative_flight_sort_ll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onSortClickCB.onSortClick();
+                }
+            });
+
+        }else {
+            viewHolder.alternative_flight_title_ll.setVisibility(View.GONE);
+            viewHolder.alternative_flight_sort_ll.setVisibility(View.GONE);
+        }
+
+
   /*      if(itemData.getLegs().size() > 1)
         {
             viewHolder.alternative_flight_multiple.setText("Multiple");
@@ -112,6 +140,9 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
         return (null != itemsData ? itemsData.size() : 0);
     }
 
+    public void setOnSortClick(AlternativeFlightsDetailsFragment.ISortClickCB onSortClickCB) {
+        this.onSortClickCB = onSortClickCB;
+    }
 
 
     // inner class to hold a reference to each item of RecyclerView
@@ -140,6 +171,10 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
         private FontTextView alternative_date_from;
         private FontTextView alternative_date_to;
 
+        private RelativeLayout alternative_flight_title_ll;
+        private LinearLayout alternative_flight_sort_ll;
+        private FontTextView alternative_flight_title_text;
+
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
        //     alternative_flight_guid = (FontTextView)itemLayoutView.findViewById(R.id.alternative_flight_guid);
@@ -165,6 +200,9 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
             alternative_date_from = (FontTextView)itemLayoutView.findViewById(R.id.alternative_date_from);
             alternative_date_to = (FontTextView)itemLayoutView.findViewById(R.id.alternative_date_to);
 
+            alternative_flight_title_ll = (RelativeLayout)itemLayoutView.findViewById(R.id.alternative_flight_title_ll);
+            alternative_flight_sort_ll = (LinearLayout)itemLayoutView.findViewById(R.id.alternative_flight_sort_ll);
+            alternative_flight_title_text = (FontTextView)itemLayoutView.findViewById(R.id.alternative_flight_title_text);
 
             itemLayoutView.setOnClickListener(this);
         }
@@ -177,7 +215,6 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
         }
 
     }
-
 
 
     public interface OnItemClickListener {

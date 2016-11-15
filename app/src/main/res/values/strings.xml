@@ -59,6 +59,7 @@
     <string name="alternative_hotel_photo_gallery">PHOTO GALLERY</string>
     <string name="alternative_hotel_amenities">AMENITIES</string>
     <string name="alternative_hotel_nearby_attractions">NEARBY ATTRACTIONS</string>
+    <string name="alternative_sort">Sort By</string>
 
 
 
@@ -121,7 +122,7 @@
 
     <string name="closeDrawer">Navigation View</string>
     <string name="openDrawer">Navigation View Closed</string>
-    <string name="type_message">Type to search or press the mic to speak</string>
+    <string name="type_message">Type to search or press the mic</string>
     <string name="send">Go</string>
     <!--<string name="default_cnc_message"> welcome to\nHelloGbye. Tell us in your own words where and when you'd\nlike to go.</string>-->
     <string name="default_cnc_message">Hello %1$s, welcome to\nHelloGbye. Tell us in your own words where and when you\'d like to go.</string>
@@ -237,7 +238,7 @@
     <string name="onBoarding_got_it_button">Got it</string>
 
     <string name="companion_empty_view_text">No Companions\nRequests</string>
-    <string name="companion_empty_search">Search for travel companions  \nin the HelloGbye system above,\nor Invite a new travel companion\nto HelloGbye</string>
+    <string name="companion_empty_search">Search for travel companions\nin the HelloGbye system above,\nor Invite a new travel companion\nto HelloGbye</string>
     <string name="companion_empty_view_travel_title">You don\'t have any\nTravel Companions</string>
     <string name="companion_pending">Pending Companions</string>
     <string name="companion_travel">Travel Companions</string>

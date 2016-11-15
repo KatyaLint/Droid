@@ -14,7 +14,7 @@
 
         <TabWidget
             android:id="@android:id/tabs"
-            android:background="@color/COLOR_003D4C"
+            android:background="@color/COLOR_00516f"
             android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
