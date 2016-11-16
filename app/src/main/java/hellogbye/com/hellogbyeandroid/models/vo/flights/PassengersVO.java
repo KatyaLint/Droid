@@ -130,4 +130,11 @@ public class PassengersVO {
     }
 
 
+    public String getAvatarurl() {
+        return avatarurl;
+    }
+
+    public void setAvatarurl(String avatarurl) {
+        this.avatarurl = avatarurl;
+    }
 }

@@ -49,6 +49,8 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
+import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
+
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -115,32 +117,63 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
         return airplaneDataVO;
     }
 
-    /**
-     * Create passanger names layout
-     * @param scrollViewLinearLayout
-     * @param user
-     */
+
+
     private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO user){
 
-    LinearLayout passengersNames = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.passangers_names_ll);
-    Typeface textFont = Typeface.createFromAsset(activity.getAssets(), "fonts/" + "dinnextltpro_regular.otf");
 
-    LayoutParams params = new LayoutParams((int) iScreenSize,LayoutParams.WRAP_CONTENT);
-    params.gravity = Gravity.CENTER_VERTICAL;
-    ArrayList<PassengersVO> passengers = user.getPassengerses();
-    for (PassengersVO passenger:passengers){
-        FontTextView textView = new FontTextView(activity);
+        LinearLayout passengersNames = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.passangers_names_ll);
+        Typeface textFont = Typeface.createFromAsset(activity.getAssets(), "fonts/" + "dinnextltpro_regular.otf");
 
-        textView.setTextAppearance(activity, R.style.GridViewPassangersTextStyle);
-        textView.setText(passenger.getmName() + " - " + "$" + HGBUtility.roundNumber(passenger.getmTotalPrice()));
-        textView.setGravity(Gravity.CENTER);
-     //   textView.setTextSize(R.dimen.SP16);
-    //    LayoutParams params = new LayoutParams((int) getResources().getDimension(R.dimen.DP150),LayoutParams.WRAP_CONTENT); //width 150
+        LayoutParams params = new LayoutParams((int) iScreenSize,LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.CENTER_VERTICAL;
+        ArrayList<PassengersVO> passengers = user.getPassengerses();
 
-        textView.setLayoutParams(params);
-        textView.setTypeface(textFont);
-        passengersNames.addView(textView);
-    }
+        LinearLayout.LayoutParams imageLayoutParam = new LinearLayout.LayoutParams((int) getResources().getDimension(R.dimen.DP26), (int) getResources().getDimension(R.dimen.DP26));
+        LinearLayout inner = new LinearLayout(activity);
+
+        for (PassengersVO passenger:passengers){
+            View child = activity.getLayoutInflater().inflate(R.layout.new_grid_passanger_name, null);
+            FontTextView text = (FontTextView)child.findViewById(R.id.grid_passanger_name);
+            text.setText(passenger.getmName() + " - " + "$" + HGBUtility.roundNumber(passenger.getmTotalPrice()));
+
+            RoundedImageView grid_round_image = (RoundedImageView)child.findViewById(R.id.grid_round_image);
+            System.out.println("Kate passenger.getAvatarurl() =" + passenger.getAvatarurl());
+            HGBUtility.loadRoundedImage(passenger.getAvatarurl(), grid_round_image, R.drawable.avatar_companions);
+
+         /*   RoundedImageView roundedImageView = new RoundedImageView(activity);
+            roundedImageView.setLayoutParams(imageLayoutParam);
+            HGBUtility.loadRoundedImage(passenger.getAvatarurl(), roundedImageView, R.drawable.avatar_companions);
+
+
+
+            FontTextView textView = new FontTextView(activity);
+
+            textView.setTextAppearance(activity, R.style.GridViewPassangersTextStyle);
+            textView.setText(passenger.getmName() + " - " + "$" + HGBUtility.roundNumber(passenger.getmTotalPrice()));
+            textView.setGravity(Gravity.CENTER);
+            //   textView.setTextSize(R.dimen.SP16);
+            //    LayoutParams params = new LayoutParams((int) getResources().getDimension(R.dimen.DP150),LayoutParams.WRAP_CONTENT); //width 150
+
+            textView.setLayoutParams(params);
+            textView.setTypeface(textFont);
+
+            passengersNames.addView(roundedImageView);
+            passengersNames.addView(textView);*/
+
+            // passengersNames.addView(textView);
+
+            LinearLayout outer = new LinearLayout(activity);
+
+            outer.setLayoutParams(params);
+
+            outer.setOrientation(LinearLayout.VERTICAL);
+
+            outer.addView(child);
+            inner.addView(outer);
+
+        }
+        passengersNames.addView(inner);
 
         LayoutInflater li = LayoutInflater.from(activity);
         View promptsView = li.inflate(R.layout.new_grid_add_companion, null);
@@ -158,6 +191,66 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
         });
         passengersNames.addView(promptsView);
     }
+
+
+    /**
+     * Create passanger names layout
+     * @param scrollViewLinearLayout
+     * @param user
+     */
+    /*private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO user){
+
+    LinearLayout passengersNames = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.passangers_names_ll);
+    Typeface textFont = Typeface.createFromAsset(activity.getAssets(), "fonts/" + "dinnextltpro_regular.otf");
+
+    LayoutParams params = new LayoutParams((int) iScreenSize,LayoutParams.WRAP_CONTENT);
+    params.gravity = Gravity.CENTER_VERTICAL;
+    ArrayList<PassengersVO> passengers = user.getPassengerses();
+
+    LinearLayout.LayoutParams imageLayoutParam = new LinearLayout.LayoutParams((int) getResources().getDimension(R.dimen.DP26), (int) getResources().getDimension(R.dimen.DP26));
+
+
+    for (PassengersVO passenger:passengers){
+
+        RoundedImageView roundedImageView = new RoundedImageView(activity);
+       roundedImageView.setLayoutParams(imageLayoutParam);
+        HGBUtility.loadRoundedImage(passenger.getAvatarurl(), roundedImageView, R.drawable.avatar_companions);
+
+
+
+        FontTextView textView = new FontTextView(activity);
+kate
+        textView.setTextAppearance(activity, R.style.GridViewPassangersTextStyle);
+        textView.setText(passenger.getmName() + " - " + "$" + HGBUtility.roundNumber(passenger.getmTotalPrice()));
+        textView.setGravity(Gravity.CENTER);
+     //   textView.setTextSize(R.dimen.SP16);
+    //    LayoutParams params = new LayoutParams((int) getResources().getDimension(R.dimen.DP150),LayoutParams.WRAP_CONTENT); //width 150
+
+        textView.setLayoutParams(params);
+        textView.setTypeface(textFont);
+
+        passengersNames.addView(roundedImageView);
+        passengersNames.addView(textView);
+
+       // passengersNames.addView(textView);
+    }
+
+        LayoutInflater li = LayoutInflater.from(activity);
+        View promptsView = li.inflate(R.layout.new_grid_add_companion, null);
+
+        LinearLayout new_grid_add_companion_ll = (LinearLayout) promptsView.findViewById(R.id.new_grid_add_companion_ll);
+        new_grid_add_companion_ll.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                Bundle args = new Bundle();
+
+                args.putString("class_name", ItineraryFragment.class.toString());
+                getFlowInterface().goToFragment(ToolBarNavEnum.ALL_COMPANIONS_VIEW.getNavNumber(), args);
+            }
+        });
+        passengersNames.addView(promptsView);
+    }*/
 
 
 
@@ -781,6 +874,7 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
             cnc_empty_view.setVisibility(View.GONE);
             grid_make_payment.setEnabled(true);
             grid_total_price.setText("$" + HGBUtility.roundNumber(Double.parseDouble(userOrder.getmTotalPrice())));
+
             grid_total_price_currency.setText("USD");
         }else{  // server returning wrong data
             itineraryLayout.setVisibility(View.GONE);

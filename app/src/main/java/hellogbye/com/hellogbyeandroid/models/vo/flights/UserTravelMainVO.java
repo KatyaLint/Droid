@@ -43,6 +43,8 @@ public class UserTravelMainVO {
     private ArrayList<ConversationVO> conversation = new ArrayList<ConversationVO>();
 
 
+
+
     //items
     //conversation
 
@@ -100,4 +102,5 @@ public class UserTravelMainVO {
     public void setmTotalPrice(String mTotalPrice) {
         this.mTotalPrice = mTotalPrice;
     }
+
 }
