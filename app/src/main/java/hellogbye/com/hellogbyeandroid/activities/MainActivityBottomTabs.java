@@ -939,22 +939,22 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     private boolean isLogoutExit = false;
 
+
+    
+
     @Override
     public void gotToStartMenuActivity() {
-        HGBUtility.removeAllFragments(getSupportFragmentManager());
+        finish();
+
         //  hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER, "");
         isLogoutExit = true;
-/*        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO,"");
-        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST,""); */
+        HGBUtility.removeAllFragments(getSupportFragmentManager());
 
-        Intent intent = new Intent(getApplicationContext(), StartingMenuActivity.class);
 
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
 
-        finish();
+
     }
 
     @Override

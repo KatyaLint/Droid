@@ -114,8 +114,9 @@ public class LoginActivity extends BaseActivity {
  //           Intent intent = new Intent(getApplicationContext(), TravelPrefrenceStartingActivity.class);
             Intent intent = new Intent(getApplicationContext(), OnBoardingPager.class);
             startActivity(intent);
-        }
 
+        }
+        finish();
     }
 
     private void resetPassword() {

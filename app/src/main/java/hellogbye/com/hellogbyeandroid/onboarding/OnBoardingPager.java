@@ -126,6 +126,8 @@ public class OnBoardingPager extends BaseActivity implements ViewPager.OnPageCha
 
                 Intent intent = new Intent(getApplicationContext(),MainActivityBottomTabs.class);
                 startActivity(intent);
+                finish();
+
             }
         });
         intro_images.setAdapter(mAdapter);

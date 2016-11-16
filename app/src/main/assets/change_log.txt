@@ -506,3 +506,4 @@ Code changing:
         - grid round image
         - color fix
         - alternative sort
+        - new logout button, logout popup removed

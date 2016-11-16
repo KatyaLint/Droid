@@ -43,6 +43,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityPermissions;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
+import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
@@ -145,13 +146,14 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
                 .findViewById(R.id.component_popup_logout_text);
 
 
-        LinearLayout btn_account_logout_button = (LinearLayout)rootView.findViewById(R.id.account_logout_button);
+        FontButtonView btn_account_logout_button = (FontButtonView)rootView.findViewById(R.id.account_logout_button);
         btn_account_logout_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
              //logout
                 //popup
-                text.setVisibility(View.VISIBLE);
+                getFlowInterface().gotToStartMenuActivity();
+/*                text.setVisibility(View.VISIBLE);
                 text.setText(getResources().getString(R.string.component_log_sure));
 
                 HGBUtility.showAlertPopUp(getActivity(), input, promptsView,
@@ -166,7 +168,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
                             public void itemCanceled() {
 
                             }
-                        });
+                        });*/
             }
 
         });

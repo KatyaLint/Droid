@@ -135,10 +135,10 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
         for (PassengersVO passenger:passengers){
             View child = activity.getLayoutInflater().inflate(R.layout.new_grid_passanger_name, null);
             FontTextView text = (FontTextView)child.findViewById(R.id.grid_passanger_name);
-            text.setText(passenger.getmName() + " - " + "$" + HGBUtility.roundNumber(passenger.getmTotalPrice()));
+            text.setText(passenger.getmName() + " - " +  HGBUtility.roundNumber(passenger.getmTotalPrice()));
 
             RoundedImageView grid_round_image = (RoundedImageView)child.findViewById(R.id.grid_round_image);
-            System.out.println("Kate passenger.getAvatarurl() =" + passenger.getAvatarurl());
+
             HGBUtility.loadRoundedImage(passenger.getAvatarurl(), grid_round_image, R.drawable.avatar_companions);
 
          /*   RoundedImageView roundedImageView = new RoundedImageView(activity);
