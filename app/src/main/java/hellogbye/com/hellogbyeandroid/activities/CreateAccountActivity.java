@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ClickableSpan;
@@ -13,13 +14,20 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
+import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBAnimationUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
@@ -50,6 +58,10 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private ImageView mArrowBack;
     private ImageView mBirds;
 
+    private ImageView mCanadaCheck;
+    private ImageView mUSCheck;
+
+
     private ProgressBar mProgressBar;
 
 
@@ -58,14 +70,27 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private FontTextView mSignInTextView;
     private FontTextView mWelcomeTextView;
     private FontTextView mHyperlink;
+    private FontTextView mStateProvince;
+    private FontEditTextView mCityProvince;
+    private FontEditTextView mZip;
+
     private FontButtonView mCreateAccount;
     private FontButtonView mTryNow;
+
+    private FontTextView mUSText;
+    private FontTextView mCanadaText;
+
+
 
     private FontEditTextView mFirstName;
     private FontEditTextView mLastName;
     private FontEditTextView mEmail;
     private FontEditTextView mPassword1;
     private FontEditTextView mPassword2;
+
+    private LinearLayout mAddressLayout;
+    private LinearLayout mUSLayout;
+    private LinearLayout mCanadaLayout;
 
     private RelativeLayout mRoot;
 
@@ -111,12 +136,19 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         mArrowBack = (ImageView) findViewById(R.id.arrow_back);
         mBirds = (ImageView) findViewById(R.id.birds);
 
+        mUSCheck = (ImageView) findViewById(R.id.us_check);
+        mCanadaCheck= (ImageView) findViewById(R.id.canada_check);
+
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         mSignInTextView = (FontTextView) findViewById(R.id.sign_in);
         mLabel1 = (FontTextView) findViewById(R.id.label_1);
         mLabel2 = (FontTextView) findViewById(R.id.label_2);
         mWelcomeTextView = (FontTextView) findViewById(R.id.welcome);
+
+        mCanadaText= (FontTextView) findViewById(R.id.canada);
+        mUSText= (FontTextView) findViewById(R.id.usa);
+
         mHyperlink = (FontTextView) findViewById(R.id.sign_up_hyperlink);
         mCreateAccount = (FontButtonView) findViewById(R.id.create_account);
 
@@ -125,6 +157,19 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         mLastName = (FontEditTextView) findViewById(R.id.last_name);
         mPassword1 = (FontEditTextView) findViewById(R.id.password1);
         mPassword2 = (FontEditTextView) findViewById(R.id.password2);
+
+        mUSLayout = (LinearLayout)findViewById(R.id.us_layout);
+        mCanadaLayout= (LinearLayout)findViewById(R.id.canada_layout);
+        mUSLayout.setOnClickListener(this);
+        mCanadaLayout.setOnClickListener(this);
+
+        mCityProvince = (FontEditTextView) findViewById(R.id.city);
+        mZip = (FontEditTextView) findViewById(R.id.zip);
+        mStateProvince = (FontTextView) findViewById(R.id.state_province);
+
+
+        mAddressLayout = (LinearLayout)findViewById(R.id.country_layout);
+
 
         mPassword2.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -297,8 +342,12 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         updateProgressBar();
         mLabel1.setText("We need your Address");
         mLabel2.setText("This will be used for better targeting of your geo-location");
-        mPassword1.setVisibility(View.GONE);
-        mPassword2.setVisibility(View.GONE);
+        HGBAnimationUtility.FadeOutView(getApplicationContext(), mPassword1);
+        HGBAnimationUtility.FadeOutView(getApplicationContext(), mPassword2);
+        mAddressLayout.setVisibility(View.VISIBLE);
+        mAddressLayout.bringToFront();
+        HGBAnimationUtility.FadInView(getApplicationContext(), mAddressLayout);
+        animateAddressStaticViews();
 
     }
 
@@ -368,7 +417,30 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
                 break;
 
+            case R.id.us_layout:
+                setUSSelected(true);
+                break;
 
+            case R.id.canada_layout:
+                setUSSelected(false);
+                break;
+
+
+        }
+    }
+
+    private void setUSSelected(boolean b) {
+
+        if(b){
+            mUSText.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_00516f));
+            mCanadaText.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_999999));
+            mCanadaCheck.setVisibility(View.GONE);
+            mUSCheck.setVisibility(View.VISIBLE);
+        }else{
+            mCanadaText.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_00516f));
+            mUSText.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_999999));
+            mUSCheck.setVisibility(View.GONE);
+            mCanadaCheck.setVisibility(View.VISIBLE);
         }
     }
 
@@ -444,4 +516,68 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_3_4));
         mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_3_4));
     }
+
+    private void animateAddressStaticViews() {
+
+        mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_4_5));
+        HGBAnimationUtility.FadeOutView(getApplicationContext(),mBirds);
+        mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_4_5));
+        mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_4_5));
+        mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_4_5));
+        mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_4_5));
+        mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_4_5));
+
+    }
+//
+//    private void getStaticProvince() {
+//       // String countryID = userData.getCountry();
+//        ConnectionManager.getInstance(CreateAccountActivity.this).getStaticBookingProvince("", new ConnectionManager.ServerRequestListener() {
+//            @Override
+//            public void onSuccess(Object data) {
+//                List<ProvincesItem> provinceItems = (List<ProvincesItem>) data;
+//                if (provinceItems.size() > 0) {
+//                    setDropDownItems(provinceItems);
+//                    sign_up_province_name.setVisibility(View.VISIBLE);
+//                } else {
+//                    sign_up_province_name.setVisibility(View.GONE);
+//                }
+//            }
+//
+//            @Override
+//            public void onError(Object data) {
+//                HGBErrorHelper errorHelper = new HGBErrorHelper();
+//                errorHelper.setMessageForError((String) data);
+//                errorHelper.show(getFragmentManager(), (String) data);
+//            }
+//        });
+//    }
+//
+//
+//    private void setDropDownItems(final List<ProvincesItem> provinceItems) {
+//        //  final ArrayList<CountryItemVO> countries = bookingResponse.getCountries();
+//        String[] countryarray = new String[provinceItems.size()];
+//        for (int i = 0; i < provinceItems.size(); i++) {
+//            countryarray[i] = provinceItems.get(i).getProvincename();
+//        }
+//
+//        HGBUtility.showPikerDialog(0, sign_up_province_name, CreateAccountActivity.this, "Choose province",
+//                countryarray, 0, provinceItems.size() - 1, new PopUpAlertStringCB() {
+//                    @Override
+//                    public void itemSelected(String inputItem) {
+//                        for (ProvincesItem province : provinceItems) {
+//                            if (province.getProvincename().equals(inputItem)) {
+//                                userData.setCountryProvince(province.getProvincecode());
+//                                break;
+//                            }
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void itemCanceled() {
+//
+//                    }
+//                }, false);
+//
+//    }
 }

@@ -287,6 +287,14 @@
         <item name="android:layout_margin">@dimen/DP10</item>
     </style>
 
+    <style name="adress_edit_text">
+        <item name="android:textColor">@color/COLOR_BLACK</item>
+        <item name="android:textColorHint">@color/COLOR_999999</item>
+        <item name="android:textSize">@dimen/SP16</item>
+        <item name="android:textColorHighlight">@color/COLOR_999999</item>
+        <item name="fontName">dinnextltpro_regular.otf</item>
+    </style>
+
     <style name="TutAppTheme" parent="@android:style/Theme.Translucent.NoTitleBar">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
