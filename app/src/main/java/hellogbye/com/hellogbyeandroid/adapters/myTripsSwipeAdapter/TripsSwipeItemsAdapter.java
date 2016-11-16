@@ -61,7 +61,6 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
             my_trip_dates = (FontTextView) itemView.findViewById(R.id.my_trip_dates);
             my_trip_paid = (FontTextView) itemView.findViewById(R.id.my_trip_paid);
 
-
         }
     }
 

@@ -77,7 +77,9 @@ public class AlternativeFlightsDetailsFragment extends HGBAbstractFragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     String sortType = data.get(position);
-                    hgbUtilitySort.sortData(sortType, alternativeFlights);
+                    alternativeFlights = hgbUtilitySort.sortData(sortType, alternativeFlights);
+                    mAdapter.notifyDataSetChanged();
+                    alertDialog.dismiss();
                     System.out.println("Kate onItem Clik");
                 }
             });

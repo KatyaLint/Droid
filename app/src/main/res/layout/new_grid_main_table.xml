@@ -59,17 +59,19 @@
                 android:textSize="@dimen/SP24"
                 android:textColor="@color/COLOR_00516f"
                 app:fontName="dinnextltpro_boldcondensed.otf"
-                android:text="@string/continue_to_checkout_price"/>
+                android:text="@string/continue_to_checkout_price"
+                android:layout_marginRight="@dimen/DP6"/>
 
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
+
                 android:id="@+id/grid_total_price_currency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/SP24"
                 android:textColor="@color/COLOR_00516f"
                 app:fontName="dinnextltpro_light.otf"
-                android:text="@string/continue_to_checkout_price"/>
+                android:text="USD"/>
 
             </LinearLayout>
 
