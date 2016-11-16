@@ -4,7 +4,7 @@
     android:interpolator="@android:anim/linear_interpolator">
 
     <alpha
-        android:duration="@integer/create_account_animation_duration"
+        android:duration="2500"
         android:fromAlpha="1.0"
         android:toAlpha="0.0" />
 </set>

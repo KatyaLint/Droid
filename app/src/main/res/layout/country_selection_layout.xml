@@ -82,11 +82,10 @@
         android:maxLines="1"
         android:layout_marginTop="@dimen/DP20"
         android:singleLine="true"
-        android:inputType="textPassword"
         android:hint="State/Province"
         android:visibility="visible" />
 
-    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+    <AutoCompleteTextView
         android:id="@+id/city"
         style="@style/adress_edit_text"
         android:layout_width="match_parent"
@@ -94,7 +93,6 @@
         android:maxLines="1"
         android:layout_marginTop="@dimen/DP10"
         android:singleLine="true"
-        android:inputType="textPassword"
         android:hint="City"
         android:visibility="visible" />
 

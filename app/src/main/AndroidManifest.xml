@@ -163,11 +163,11 @@
             android:name="io.fabric.ApiKey"
             android:value="36d36acddb6b8aaa2983590bed7a69638ca0b7c8" />
 
-        <activity
-            android:name=".activities.SignUpActivity"
-            android:label="@string/title_activity_sign_up"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+        <!--<activity-->
+            <!--android:name=".activities.SignUpActivity"-->
+            <!--android:label="@string/title_activity_sign_up"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:theme="@style/AppTheme"/>-->
     </application>
 
 </manifest>

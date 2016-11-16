@@ -6,13 +6,20 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextWatcher;
 import android.text.style.ClickableSpan;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -20,11 +27,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
+import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBAnimationUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
@@ -71,7 +80,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private FontTextView mWelcomeTextView;
     private FontTextView mHyperlink;
     private FontTextView mStateProvince;
-    private FontEditTextView mCityProvince;
+    private AutoCompleteTextView mCity;
     private FontEditTextView mZip;
 
     private FontButtonView mCreateAccount;
@@ -79,7 +88,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     private FontTextView mUSText;
     private FontTextView mCanadaText;
-
 
 
     private FontEditTextView mFirstName;
@@ -104,12 +112,18 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private final int NUMBER_STAGES = 5;
     private int mProgress;
     private CountDownTimer countDownTimer;
+    private String[] countryarray;
+    private List<ProvincesItem> mProvinceItems;
+    private ArrayAdapter adapter;
+    private UserSignUpDataVO userData;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account_layout);
         initView();
+        userData = new UserSignUpDataVO();
         countDownTimer = new AnimationCountDownTimer(5000, 1000);
         animateWelcomeView();
     }
@@ -137,7 +151,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         mBirds = (ImageView) findViewById(R.id.birds);
 
         mUSCheck = (ImageView) findViewById(R.id.us_check);
-        mCanadaCheck= (ImageView) findViewById(R.id.canada_check);
+        mCanadaCheck = (ImageView) findViewById(R.id.canada_check);
 
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -146,8 +160,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         mLabel2 = (FontTextView) findViewById(R.id.label_2);
         mWelcomeTextView = (FontTextView) findViewById(R.id.welcome);
 
-        mCanadaText= (FontTextView) findViewById(R.id.canada);
-        mUSText= (FontTextView) findViewById(R.id.usa);
+        mCanadaText = (FontTextView) findViewById(R.id.canada);
+        mUSText = (FontTextView) findViewById(R.id.usa);
 
         mHyperlink = (FontTextView) findViewById(R.id.sign_up_hyperlink);
         mCreateAccount = (FontButtonView) findViewById(R.id.create_account);
@@ -158,17 +172,18 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         mPassword1 = (FontEditTextView) findViewById(R.id.password1);
         mPassword2 = (FontEditTextView) findViewById(R.id.password2);
 
-        mUSLayout = (LinearLayout)findViewById(R.id.us_layout);
-        mCanadaLayout= (LinearLayout)findViewById(R.id.canada_layout);
+        mUSLayout = (LinearLayout) findViewById(R.id.us_layout);
+        mCanadaLayout = (LinearLayout) findViewById(R.id.canada_layout);
         mUSLayout.setOnClickListener(this);
         mCanadaLayout.setOnClickListener(this);
 
-        mCityProvince = (FontEditTextView) findViewById(R.id.city);
+        mCity = (AutoCompleteTextView) findViewById(R.id.city);
         mZip = (FontEditTextView) findViewById(R.id.zip);
         mStateProvince = (FontTextView) findViewById(R.id.state_province);
+        mStateProvince.setOnClickListener(this);
 
 
-        mAddressLayout = (LinearLayout)findViewById(R.id.country_layout);
+        mAddressLayout = (LinearLayout) findViewById(R.id.country_layout);
 
 
         mPassword2.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -282,40 +297,41 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private void animateWelcomeView() {
         CURRENT_STATE = WELCOME_STATE;
         updateProgressBar();
-//        Animation animSlide = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_create_screen_1_plane);
-//        mPlane.startAnimation(animSlide);
-//
-//        HGBAnimationUtility.FadInView(getApplicationContext(), mWelcomeTextView);
-//        HGBAnimationUtility.FadInView(getApplicationContext(), mLogoOnBoarding);
+
     }
 
     private void animateNameView() {
         disableScreen();
         CURRENT_STATE = NAME_STATE;
         updateProgressBar();
-        mLabel1.setVisibility(View.VISIBLE);
-        mLabel2.setVisibility(View.VISIBLE);
-        HGBAnimationUtility.FadInView(getApplicationContext(), mLabel2);
-        HGBAnimationUtility.FadInView(getApplicationContext(), mLabel1);
-        HGBAnimationUtility.FadInView(getApplicationContext(), mFirstName);
-        HGBAnimationUtility.FadInView(getApplicationContext(), mLastName);
 
         mLabel1.setText("Tell us your name");
         mLabel2.setText("Your name will allow you to book travel on our platform");
-        mFirstName.setVisibility(View.VISIBLE);
-        mArrowBack.setVisibility(View.VISIBLE);
-        mLastName.setVisibility(View.VISIBLE);
+
         mSignInTextView.setText("Next");
         mSignInTextView.bringToFront();
-        HGBAnimationUtility.FadInView(getApplicationContext(), mArrowBack);
+
         mArrowBack.bringToFront();
         mSignInTextView.bringToFront();
-        HGBAnimationUtility.FadeOutView(getApplicationContext(), mWelcomeTextView);
-        HGBAnimationUtility.FadeOutView(getApplicationContext(), mLogoOnBoarding);
-        HGBAnimationUtility.FadeOutView(getApplicationContext(), mCreateAccount);
-        HGBAnimationUtility.FadeOutView(getApplicationContext(), mTryNow);
+
+        ArrayList<View> inView = new ArrayList<>();
+        inView.add(mLabel2);
+        inView.add(mLabel1);
+        inView.add(mFirstName);
+        inView.add(mLastName);
+        inView.add(mArrowBack);
+
+        ArrayList<View> outView = new ArrayList<>();
+        outView.add(mWelcomeTextView);
+        outView.add(mLogoOnBoarding);
+        outView.add(mCreateAccount);
+        outView.add(mTryNow);
+
+
+        HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),outView,inView);
 
         animateNameStaticViews();
+
     }
 
 
@@ -323,30 +339,43 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         disableScreen();
         CURRENT_STATE = EMAIL_STATE;
         updateProgressBar();
-        HGBAnimationUtility.FadeOutView(getApplicationContext(), mFirstName);
-        HGBAnimationUtility.FadeOutView(getApplicationContext(), mLastName);
-        mLastName.setFocusable(false);
-        mFirstName.setFocusable(false);
-        mEmail.setVisibility(View.VISIBLE);
-        HGBAnimationUtility.FadInView(getApplicationContext(), mEmail);
-        mLabel1.setText("What's your email?");
-        mLabel2.setText("We need your email to securely  ");
 
+
+        ArrayList<View> outView = new ArrayList<>();
+        outView.add(mFirstName);
+        outView.add(mLastName);
+
+
+        ArrayList<View> inView = new ArrayList<>();
+        inView.add(mEmail);
+
+
+        animateLabels("What's your email?","We need your email to securely");
+
+        HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),outView,inView);
         animateEmailStaticView();
     }
+
 
 
     private void animateAddressView() {
         disableScreen();
         CURRENT_STATE = ADDRESS_STATE;
         updateProgressBar();
-        mLabel1.setText("We need your Address");
-        mLabel2.setText("This will be used for better targeting of your geo-location");
-        HGBAnimationUtility.FadeOutView(getApplicationContext(), mPassword1);
-        HGBAnimationUtility.FadeOutView(getApplicationContext(), mPassword2);
-        mAddressLayout.setVisibility(View.VISIBLE);
-        mAddressLayout.bringToFront();
-        HGBAnimationUtility.FadInView(getApplicationContext(), mAddressLayout);
+
+
+        ArrayList<View> outView = new ArrayList<>();
+        outView.add(mPassword1);
+        outView.add(mPassword2);
+
+
+        ArrayList<View> inView = new ArrayList<>();
+        inView.add(mAddressLayout);
+
+
+        animateLabels("We need your Address","This will be used for better targeting of your geo-location");
+
+        HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),outView,inView);
         animateAddressStaticViews();
 
     }
@@ -356,13 +385,16 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         CURRENT_STATE = PASSWORD_STATE;
         updateProgressBar();
 
-        HGBAnimationUtility.FadeOutView(getApplicationContext(), mEmail);
-        mPassword1.setVisibility(View.VISIBLE);
-        mPassword2.setVisibility(View.VISIBLE);
-        HGBAnimationUtility.FadInView(getApplicationContext(), mPassword1);
-        HGBAnimationUtility.FadInView(getApplicationContext(), mPassword2);
-        mLabel1.setText("Create your password");
-        mLabel2.setText("Please choose a password that is at least 8 characters in length");
+        ArrayList<View> outView = new ArrayList<>();
+        outView.add(mEmail);
+
+        ArrayList<View> inView = new ArrayList<>();
+        inView.add(mPassword1);
+        inView.add(mPassword2);
+
+
+        animateLabels("Create your password","Please choose a password that is at least 8 characters in length");
+        HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),outView,inView);
 
         animatePasswordStaticViews();
     }
@@ -402,10 +434,15 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
             case R.id.sign_in:
                 if (CURRENT_STATE != WELCOME_STATE) {
                     if (CURRENT_STATE == NAME_STATE) {
+                        userData.setFirstName(mFirstName.getText().toString());
+                        userData.setLastName(mFirstName.getText().toString());
                         goToEmailView(view);
                     } else if (CURRENT_STATE == EMAIL_STATE) {
+                        userData.setUserEmail(mEmail.getText().toString());
                         gotoPasswordView(view);
                     } else if (CURRENT_STATE == PASSWORD_STATE) {
+                        userData.setPassword(mPassword1.getText().toString());
+                        userData.setConfirmPassword(mPassword2.getText().toString());
                         goToAddressView(view);
                     }
 
@@ -419,10 +456,41 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
             case R.id.us_layout:
                 setUSSelected(true);
+                getStaticProvince("US");
+                userData.setCountry("US");
                 break;
 
             case R.id.canada_layout:
                 setUSSelected(false);
+                getStaticProvince("CA");
+                userData.setCountry("CA");
+                break;
+            case R.id.state_province:
+                if (userData.getCountry() != null) {
+                    HGBUtility.showPikerDialog(0, mStateProvince, CreateAccountActivity.this, "Choose province",
+                            countryarray, 0, mProvinceItems.size() - 1, new PopUpAlertStringCB() {
+                                @Override
+                                public void itemSelected(String inputItem) {
+                                    for (ProvincesItem province : mProvinceItems) {
+                                        if (province.getProvincename().equals(inputItem)) {
+                                            mStateProvince.setText(province.getProvincename());
+                                            userData.setCountryProvince(province.getProvincecode());
+                                            initAutoCityComplete();
+                                            break;
+                                        }
+                                    }
+
+                                }
+
+                                @Override
+                                public void itemCanceled() {
+
+                                }
+                            }, false);
+                } else {
+                    Toast.makeText(getApplicationContext(), "PLease select Country first", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
 
 
@@ -431,12 +499,12 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     private void setUSSelected(boolean b) {
 
-        if(b){
+        if (b) {
             mUSText.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_00516f));
             mCanadaText.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_999999));
             mCanadaCheck.setVisibility(View.GONE);
             mUSCheck.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             mCanadaText.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_00516f));
             mUSText.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_999999));
             mUSCheck.setVisibility(View.GONE);
@@ -520,7 +588,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private void animateAddressStaticViews() {
 
         mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_4_5));
-        HGBAnimationUtility.FadeOutView(getApplicationContext(),mBirds);
+        HGBAnimationUtility.FadeOutView(getApplicationContext(), mBirds);
         mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_4_5));
         mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_4_5));
         mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_4_5));
@@ -528,56 +596,133 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_4_5));
 
     }
-//
-//    private void getStaticProvince() {
-//       // String countryID = userData.getCountry();
-//        ConnectionManager.getInstance(CreateAccountActivity.this).getStaticBookingProvince("", new ConnectionManager.ServerRequestListener() {
-//            @Override
-//            public void onSuccess(Object data) {
-//                List<ProvincesItem> provinceItems = (List<ProvincesItem>) data;
-//                if (provinceItems.size() > 0) {
-//                    setDropDownItems(provinceItems);
-//                    sign_up_province_name.setVisibility(View.VISIBLE);
-//                } else {
-//                    sign_up_province_name.setVisibility(View.GONE);
-//                }
-//            }
-//
-//            @Override
-//            public void onError(Object data) {
-//                HGBErrorHelper errorHelper = new HGBErrorHelper();
-//                errorHelper.setMessageForError((String) data);
-//                errorHelper.show(getFragmentManager(), (String) data);
-//            }
-//        });
-//    }
-//
-//
-//    private void setDropDownItems(final List<ProvincesItem> provinceItems) {
-//        //  final ArrayList<CountryItemVO> countries = bookingResponse.getCountries();
-//        String[] countryarray = new String[provinceItems.size()];
-//        for (int i = 0; i < provinceItems.size(); i++) {
-//            countryarray[i] = provinceItems.get(i).getProvincename();
-//        }
-//
-//        HGBUtility.showPikerDialog(0, sign_up_province_name, CreateAccountActivity.this, "Choose province",
-//                countryarray, 0, provinceItems.size() - 1, new PopUpAlertStringCB() {
-//                    @Override
-//                    public void itemSelected(String inputItem) {
-//                        for (ProvincesItem province : provinceItems) {
-//                            if (province.getProvincename().equals(inputItem)) {
-//                                userData.setCountryProvince(province.getProvincecode());
-//                                break;
-//                            }
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void itemCanceled() {
-//
-//                    }
-//                }, false);
-//
-//    }
+
+    private void getStaticProvince(String id) {
+        // String countryID = userData.getCountry();
+        ConnectionManager.getInstance(CreateAccountActivity.this).getStaticBookingProvince(id, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                mProvinceItems = (List<ProvincesItem>) data;
+                if (mProvinceItems.size() > 0) {
+
+                    setDropDownItems();
+                }
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
+    }
+
+
+    private void setDropDownItems() {
+        countryarray = new String[mProvinceItems.size()];
+        for (int i = 0; i < mProvinceItems.size(); i++) {
+            countryarray[i] = mProvinceItems.get(i).getProvincename();
+        }
+    }
+
+    private void initAutoCityComplete() {
+        mCity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                HGBUtility.hideKeyboard(getApplicationContext(), mCity);
+                userData.setCity(mCity.getText().toString());
+            }
+        });
+
+        mCity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                ConnectionManager.getInstance(CreateAccountActivity.this).postAutocompleteCity(charSequence.toString(), userData.getCountry(),
+                        userData.getCountryProvince()
+                        , new ConnectionManager.ServerRequestListener() {
+                            @Override
+                            public void onSuccess(Object data) {
+                                adapter = new ArrayAdapter(CreateAccountActivity.this, android.R.layout.simple_list_item_1, (ArrayList<String>) data);
+                                mCity.setAdapter(adapter);
+                            }
+
+                            @Override
+                            public void onError(Object data) {
+                            }
+                        });
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+
+            }
+        });
+
+    }
+
+    private void animateLabels(final String s,final String s1) {
+
+        mLabel1.clearAnimation();
+        mLabel2.clearAnimation();
+        AlphaAnimation fadeoutLabel1 = new AlphaAnimation(1.0f,0.0f);
+        fadeoutLabel1.setDuration(2500);
+        fadeoutLabel1.setFillAfter(true);
+
+        mLabel1.startAnimation(fadeoutLabel1);
+        fadeoutLabel1.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mLabel1.setText(s);
+                AlphaAnimation fadeinLabel1 = new AlphaAnimation(0.0f,1.0f);
+                fadeinLabel1.setDuration(2500);
+                fadeinLabel1.setFillAfter(true);
+                mLabel1.startAnimation(fadeinLabel1);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        AlphaAnimation fadeoutLabel2 = new AlphaAnimation(1.0f,0.0f);
+        fadeoutLabel1.setDuration(2500);
+        fadeoutLabel1.setFillAfter(true);
+
+        mLabel2.startAnimation(fadeoutLabel1);
+        fadeoutLabel2.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mLabel2.setText(s1);
+                AlphaAnimation fadeinLabel2 = new AlphaAnimation(0.0f,1.0f);
+                fadeinLabel2.setDuration(2500);
+                fadeinLabel2.setFillAfter(true);
+                mLabel2.startAnimation(fadeinLabel2);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+    }
+
+
 }
