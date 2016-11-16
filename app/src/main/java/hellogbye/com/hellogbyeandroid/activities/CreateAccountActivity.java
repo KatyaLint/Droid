@@ -85,6 +85,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     private FontButtonView mCreateAccount;
     private FontButtonView mTryNow;
+    private FontButtonView mCreate;
+
+
 
     private FontTextView mUSText;
     private FontTextView mCanadaText;
@@ -165,6 +168,10 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
         mHyperlink = (FontTextView) findViewById(R.id.sign_up_hyperlink);
         mCreateAccount = (FontButtonView) findViewById(R.id.create_account);
+        mCreate = (FontButtonView) findViewById(R.id.create_user);
+        mCreate.setOnClickListener(this);
+
+
 
         mTryNow = (FontButtonView) findViewById(R.id.try_now);
         mFirstName = (FontEditTextView) findViewById(R.id.first_name);
@@ -451,6 +458,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                 }
                 break;
             case R.id.arrow_back:
+
+                break;
+            case R.id.create_user:
 
                 break;
 

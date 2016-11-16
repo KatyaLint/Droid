@@ -84,6 +84,7 @@
         android:layout_marginTop="@dimen/DP20"
         android:singleLine="true"
         android:hint="State/Province"
+        android:drawableRight="@drawable/dropdown_lightblue"
         android:visibility="visible" />
 
     <AutoCompleteTextView
@@ -110,7 +111,13 @@
         android:hint="Zip/Postal code"
         android:visibility="visible" />
 
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:id="@+id/create_user"
+        style="@style/BlueButton"
+        android:layout_marginTop="@dimen/DP50"
+        android:text="Create Account"
 
+        app:fontName="dinnextltpro_medium.otf" />
 
 
 
