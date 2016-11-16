@@ -503,3 +503,6 @@ Code changing:
       --------------
         - Checkout - thank
         - onboarding
+        - grid round image
+        - color fix
+        - alternative sort
