@@ -79,7 +79,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private FontTextView mSignInTextView;
     private FontTextView mWelcomeTextView;
     private FontTextView mHyperlink;
-    private FontTextView mStateProvince;
+    private FontEditTextView mStateProvince;
     private AutoCompleteTextView mCity;
     private FontEditTextView mZip;
 
@@ -179,7 +179,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
         mCity = (AutoCompleteTextView) findViewById(R.id.city);
         mZip = (FontEditTextView) findViewById(R.id.zip);
-        mStateProvince = (FontTextView) findViewById(R.id.state_province);
+        mStateProvince = (FontEditTextView) findViewById(R.id.state_province);
         mStateProvince.setOnClickListener(this);
 
 
@@ -467,7 +467,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                 break;
             case R.id.state_province:
                 if (userData.getCountry() != null) {
-                    HGBUtility.showPikerDialog(0, mStateProvince, CreateAccountActivity.this, "Choose province",
+
+                    HGBUtility.showPikerDialogEditText(mStateProvince, CreateAccountActivity.this, "Choose province",
                             countryarray, 0, mProvinceItems.size() - 1, new PopUpAlertStringCB() {
                                 @Override
                                 public void itemSelected(String inputItem) {
@@ -487,6 +488,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
                                 }
                             }, false);
+
                 } else {
                     Toast.makeText(getApplicationContext(), "PLease select Country first", Toast.LENGTH_SHORT).show();
                 }
@@ -672,7 +674,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         mLabel1.clearAnimation();
         mLabel2.clearAnimation();
         AlphaAnimation fadeoutLabel1 = new AlphaAnimation(1.0f,0.0f);
-        fadeoutLabel1.setDuration(2500);
+        fadeoutLabel1.setDuration(getResources().getInteger(R.integer.create_account_animation_duration)/2);
         fadeoutLabel1.setFillAfter(true);
 
         mLabel1.startAnimation(fadeoutLabel1);
@@ -686,7 +688,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
             public void onAnimationEnd(Animation animation) {
                 mLabel1.setText(s);
                 AlphaAnimation fadeinLabel1 = new AlphaAnimation(0.0f,1.0f);
-                fadeinLabel1.setDuration(2500);
+                fadeinLabel1.setDuration(getResources().getInteger(R.integer.create_account_animation_duration)/2);
                 fadeinLabel1.setFillAfter(true);
                 mLabel1.startAnimation(fadeinLabel1);
             }
@@ -698,7 +700,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         });
 
         AlphaAnimation fadeoutLabel2 = new AlphaAnimation(1.0f,0.0f);
-        fadeoutLabel1.setDuration(2500);
+        fadeoutLabel1.setDuration(getResources().getInteger(R.integer.create_account_animation_duration)/2);
         fadeoutLabel1.setFillAfter(true);
 
         mLabel2.startAnimation(fadeoutLabel1);

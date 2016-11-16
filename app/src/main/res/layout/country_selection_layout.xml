@@ -74,11 +74,12 @@
     </LinearLayout>
 
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/state_province"
         style="@style/adress_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:focusableInTouchMode="false"
         android:maxLines="1"
         android:layout_marginTop="@dimen/DP20"
         android:singleLine="true"
