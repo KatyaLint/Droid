@@ -270,6 +270,7 @@
     <style name="Sign_up_text_color">
         <item name="android:textColor">@color/COLOR_WHITE</item>
         <item name="android:textColorHint">@color/COLOR_00516f</item>
+
         <item name="android:textSize">@dimen/SP16</item>
         <item name="android:textColorHighlight">@color/COLOR_WHITE</item>
         <item name="fontName">dinnextltpro_regular.otf</item>
@@ -279,12 +280,14 @@
 
     <style name="new_sign_up_text_color">
         <item name="android:textColor">@color/COLOR_BLACK</item>
+        <item name="android:layout_width">@dimen/DP340</item>
         <item name="android:textColorHint">@color/COLOR_999999</item>
         <item name="android:textSize">@dimen/SP16</item>
         <item name="android:textColorHighlight">@color/COLOR_999999</item>
         <item name="fontName">dinnextltpro_regular.otf</item>
         <item name="android:padding">@dimen/DP10</item>
         <item name="android:layout_margin">@dimen/DP10</item>
+
     </style>
 
     <style name="adress_edit_text">

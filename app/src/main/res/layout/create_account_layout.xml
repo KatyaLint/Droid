@@ -206,21 +206,19 @@
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/password1"
         style="@style/new_sign_up_text_color"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/DP50"
         android:layout_below="@+id/label_2"
-        android:imeOptions="actionNext"
+        android:inputType="textPassword"
+        android:layout_centerHorizontal="true"
         android:maxLines="1"
         android:singleLine="true"
-        android:inputType="textPassword"
-        android:hint="@string/password"
-        android:visibility="gone" />
+        android:imeOptions="actionDone"
+        android:hint="Password"
+        android:visibility="gone"/>
 
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/password2"
         style="@style/new_sign_up_text_color"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/password1"
         android:inputType="textPassword"
@@ -234,7 +232,6 @@
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/first_name"
         style="@style/new_sign_up_text_color"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/label_2"
         android:layout_centerHorizontal="true"
@@ -247,7 +244,6 @@
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/last_name"
         style="@style/new_sign_up_text_color"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/first_name"
         android:layout_centerHorizontal="true"
@@ -260,7 +256,6 @@
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/email"
         style="@style/new_sign_up_text_color"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/label_2"
         android:layout_centerHorizontal="true"

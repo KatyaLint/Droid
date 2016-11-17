@@ -337,7 +337,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
         HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),outView,inView);
 
-        animateNameStaticViews();
+        animateFirstToSecondStaticViews();
 
     }
 
@@ -360,7 +360,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         animateLabels("What's your email?","We need your email to securely");
 
         HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),outView,inView);
-        animateEmailStaticView();
+        animateSecondToThirdStaticView();
     }
 
 
@@ -383,7 +383,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         animateLabels("We need your Address","This will be used for better targeting of your geo-location");
 
         HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),outView,inView);
-        animateAddressStaticViews();
+        animateFourthToFifthStaticViews();
 
     }
 
@@ -459,6 +459,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                 break;
             case R.id.arrow_back:
 
+                processBackPressed();
+
                 break;
             case R.id.create_user:
 
@@ -476,7 +478,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                 userData.setCountry("CA");
                 break;
             case R.id.state_province:
-                if (userData.getCountry() != null) {
+                if (userData.getCountry() != null && mProvinceItems != null) {
 
                     HGBUtility.showPikerDialogEditText(mStateProvince, CreateAccountActivity.this, "Choose province",
                             countryarray, 0, mProvinceItems.size() - 1, new PopUpAlertStringCB() {
@@ -500,11 +502,31 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                             }, false);
 
                 } else {
-                    Toast.makeText(getApplicationContext(), "PLease select Country first", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please select Country first", Toast.LENGTH_SHORT).show();
                 }
+                break;
+        }
+    }
+
+    private void processBackPressed() {
+        switch (CURRENT_STATE) {
+            case WELCOME_STATE:
 
                 break;
+            case NAME_STATE:
 
+                animateWelcomeView();
+
+                break;
+            case EMAIL_STATE:
+
+                break;
+            case PASSWORD_STATE:
+
+                break;
+            case ADDRESS_STATE:
+
+                break;
 
         }
     }
@@ -553,7 +575,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     }
 
 
-    private void animateNameStaticViews() {
+    private void animateFirstToSecondStaticViews() {
         mPlane.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane01_1_2));//
         mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_1_2));
         mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_1_2));
@@ -568,7 +590,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_1_2));
     }
 
-    private void animateEmailStaticView() {
+    private void animateSecondToThirdStaticView() {
         mPlane2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane02_2_3));
         mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_2_3));
         mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_2_3));
@@ -597,7 +619,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_3_4));
     }
 
-    private void animateAddressStaticViews() {
+    private void animateFourthToFifthStaticViews() {
 
         mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_4_5));
         HGBAnimationUtility.FadeOutView(getApplicationContext(), mBirds);
