@@ -100,11 +100,11 @@ public class Parser {
 
         try{
             JSONObject obj = new JSONObject(json);
-            JSONObject obj2 = obj.getJSONObject("errormessages");
-            JSONArray obj3 = obj2.getJSONArray("messagedtos");
+           // JSONObject obj2 = obj.getJSONObject("error");
+           /* JSONArray obj3 = obj2.getJSONArray("messagedtos");
             JSONObject objtrimmedString = obj3.getJSONObject(0);
-            Object str = objtrimmedString.get("messageid");
-            trimmedString = (String) str;
+            Object str = objtrimmedString.get("messageid");*/
+            trimmedString = obj.getString("error"); //(String) str;
 
         } catch(JSONException e){
             e.printStackTrace();

@@ -507,3 +507,4 @@ Code changing:
         - color fix
         - alternative sort
         - new logout button, logout popup removed
+        - new error parser
