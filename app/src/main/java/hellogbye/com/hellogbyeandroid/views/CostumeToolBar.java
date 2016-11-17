@@ -305,6 +305,7 @@ public class CostumeToolBar extends Toolbar {
             case PREFERENCES_MEMBERSHIP:
             case ALTERNATIVE_FLIGHT_ONE_WAY_TRIP:
             case ALTERNATIVE_FLIGHT_ROUND_TRIP:
+            case COMPANIONS_DETAILS:
                 titleBar.setVisibility(View.VISIBLE);
                 break;
             case SELECT_HOTEL_FRAGMENT:

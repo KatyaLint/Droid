@@ -508,3 +508,4 @@ Code changing:
         - alternative sort
         - new logout button, logout popup removed
         - new error parser
+        - comapanion details change
