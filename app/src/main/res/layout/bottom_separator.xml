@@ -7,6 +7,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
         android:layout_weight="1"
-        android:background="@color/COLOR_f4f4f4" />
+        android:background="@color/COLOR_22999999" />
 
 </LinearLayout>

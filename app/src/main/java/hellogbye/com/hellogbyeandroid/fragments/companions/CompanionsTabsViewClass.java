@@ -535,7 +535,6 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
        // searchRecyclerView.setVisibility(View.VISIBLE);
         companion_search_not_found.setVisibility(View.GONE);
         companion_empty_view_travel_companion_ll.setVisibility(View.GONE);
-        System.out.println("Kate query.isEmpty() =" + query.isEmpty());
         if(query.isEmpty()){
             searchIsOpen = false;
             searchListAdapter.updateItems(mCurrItemsSearchList);

@@ -121,9 +121,7 @@ public class OnBoardingPager extends BaseActivity implements ViewPager.OnPageCha
 
             @Override
             public void onClickNext() {
-
-                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY,true);
-
+                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY, true);
                 Intent intent = new Intent(getApplicationContext(),MainActivityBottomTabs.class);
                 startActivity(intent);
                 finish();

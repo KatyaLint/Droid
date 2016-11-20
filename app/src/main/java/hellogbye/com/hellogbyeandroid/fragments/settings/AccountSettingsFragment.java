@@ -152,8 +152,8 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
             public void onClick(View view) {
              //logout
                 //popup
-                getFlowInterface().gotToStartMenuActivity();
-/*                text.setVisibility(View.VISIBLE);
+             //   getFlowInterface().gotToStartMenuActivity();
+                text.setVisibility(View.VISIBLE);
                 text.setText(getResources().getString(R.string.component_log_sure));
 
                 HGBUtility.showAlertPopUp(getActivity(), input, promptsView,
@@ -168,7 +168,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
                             public void itemCanceled() {
 
                             }
-                        });*/
+                        });
             }
 
         });

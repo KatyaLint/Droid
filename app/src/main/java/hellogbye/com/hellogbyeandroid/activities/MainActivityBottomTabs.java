@@ -944,16 +944,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     @Override
     public void gotToStartMenuActivity() {
-        finish();
-
         //  hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER, "");
         isLogoutExit = true;
         HGBUtility.removeAllFragments(getSupportFragmentManager());
-
-
-
+        finish();
 
     }
 

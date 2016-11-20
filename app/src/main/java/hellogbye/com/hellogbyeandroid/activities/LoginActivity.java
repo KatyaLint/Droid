@@ -106,7 +106,8 @@ public class LoginActivity extends BaseActivity {
     private void goToMainActivity() {
 
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
-        boolean doesExist = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY, false);
+        boolean doesExist = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY, true);
+
         if (doesExist) {
             Intent intent = new Intent(getApplicationContext(), MainActivityBottomTabs.class);
             startActivity(intent);
