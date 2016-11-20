@@ -60,7 +60,7 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
         if(position == getItemCount()){
             viewHolder.viewDivider.setVisibility(View.GONE);
         }
-        System.out.println("Kate itemsData =" + itemsData.size());
+
         NodesVO itemData = itemsData.get(position);
 
         ArrayList<LegsVO> legs = itemData.getLegs();

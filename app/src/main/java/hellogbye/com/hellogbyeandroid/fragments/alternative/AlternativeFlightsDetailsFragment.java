@@ -80,7 +80,7 @@ public class AlternativeFlightsDetailsFragment extends HGBAbstractFragment {
                     alternativeFlights = hgbUtilitySort.sortData(sortType, alternativeFlights);
                     mAdapter.notifyDataSetChanged();
                     alertDialog.dismiss();
-                    System.out.println("Kate onItem Clik");
+
                 }
             });
 
