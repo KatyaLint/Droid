@@ -497,6 +497,7 @@ Code changing:
         HEL-1803 - can't create a feedback
         HEL-1862 - change top part of companions as in design
         HEL-1835 - select flight button is not supposed to be round
+        HEL-1836 - name of the hotel covers the bed icon on grid
 
 
       Code changing:

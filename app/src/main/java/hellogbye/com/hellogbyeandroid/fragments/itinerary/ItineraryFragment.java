@@ -118,18 +118,19 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
     }
 
 
-
+    /**
+     * Create passanger names layout
+     * @param scrollViewLinearLayout
+     * @param user
+     */
     private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO user){
 
-
         LinearLayout passengersNames = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.passangers_names_ll);
-        Typeface textFont = Typeface.createFromAsset(activity.getAssets(), "fonts/" + "dinnextltpro_regular.otf");
 
         LayoutParams params = new LayoutParams((int) iScreenSize,LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.CENTER_VERTICAL;
         ArrayList<PassengersVO> passengers = user.getPassengerses();
 
-        LinearLayout.LayoutParams imageLayoutParam = new LinearLayout.LayoutParams((int) getResources().getDimension(R.dimen.DP26), (int) getResources().getDimension(R.dimen.DP26));
         LinearLayout inner = new LinearLayout(activity);
 
         for (PassengersVO passenger:passengers){
@@ -140,28 +141,6 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
             RoundedImageView grid_round_image = (RoundedImageView)child.findViewById(R.id.grid_round_image);
 
             HGBUtility.loadRoundedImage(passenger.getAvatarurl(), grid_round_image, R.drawable.avatar_companions);
-
-         /*   RoundedImageView roundedImageView = new RoundedImageView(activity);
-            roundedImageView.setLayoutParams(imageLayoutParam);
-            HGBUtility.loadRoundedImage(passenger.getAvatarurl(), roundedImageView, R.drawable.avatar_companions);
-
-
-
-            FontTextView textView = new FontTextView(activity);
-
-            textView.setTextAppearance(activity, R.style.GridViewPassangersTextStyle);
-            textView.setText(passenger.getmName() + " - " + "$" + HGBUtility.roundNumber(passenger.getmTotalPrice()));
-            textView.setGravity(Gravity.CENTER);
-            //   textView.setTextSize(R.dimen.SP16);
-            //    LayoutParams params = new LayoutParams((int) getResources().getDimension(R.dimen.DP150),LayoutParams.WRAP_CONTENT); //width 150
-
-            textView.setLayoutParams(params);
-            textView.setTypeface(textFont);
-
-            passengersNames.addView(roundedImageView);
-            passengersNames.addView(textView);*/
-
-            // passengersNames.addView(textView);
 
             LinearLayout outer = new LinearLayout(activity);
 
@@ -193,11 +172,7 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
     }
 
 
-    /**
-     * Create passanger names layout
-     * @param scrollViewLinearLayout
-     * @param user
-     */
+
     /*private void createPassengersName(View scrollViewLinearLayout, UserTravelMainVO user){
 
     LinearLayout passengersNames = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.passangers_names_ll);
