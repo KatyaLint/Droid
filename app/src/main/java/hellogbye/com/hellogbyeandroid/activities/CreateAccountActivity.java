@@ -1,5 +1,4 @@
 package hellogbye.com.hellogbyeandroid.activities;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,6 +11,7 @@ import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.style.ClickableSpan;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -37,17 +37,20 @@ import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBAnimationUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
+import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
+
+import static hellogbye.com.hellogbyeandroid.R.id.pin_code_verification_layout;
+import static hellogbye.com.hellogbyeandroid.R.id.sign_up_layout_ll;
 
 /**
  * Created by arisprung on 11/8/16.
  */
 
 public class CreateAccountActivity extends Activity implements View.OnClickListener {
-
 
     private ImageView mPlane;
     private ImageView mPlane2;
@@ -66,14 +69,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private ImageView mCloud07;
     private ImageView mArrowBack;
     private ImageView mBirds;
-
     private ImageView mCanadaCheck;
     private ImageView mUSCheck;
-
-
     private ProgressBar mProgressBar;
-
-
     private FontTextView mLabel1;
     private FontTextView mLabel2;
     private FontTextView mSignInTextView;
@@ -82,29 +80,22 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private FontEditTextView mStateProvince;
     private AutoCompleteTextView mCity;
     private FontEditTextView mZip;
-
     private FontButtonView mCreateAccount;
     private FontButtonView mTryNow;
     private FontButtonView mCreate;
-
-
-
     private FontTextView mUSText;
     private FontTextView mCanadaText;
-
-
     private FontEditTextView mFirstName;
     private FontEditTextView mLastName;
     private FontEditTextView mEmail;
     private FontEditTextView mPassword1;
     private FontEditTextView mPassword2;
-
     private LinearLayout mAddressLayout;
     private LinearLayout mUSLayout;
     private LinearLayout mCanadaLayout;
-
     private RelativeLayout mRoot;
 
+    private final int NUMBER_OF_STAGES = 5;
 
     private int CURRENT_STATE = 0;
     private final int WELCOME_STATE = 1;
@@ -112,8 +103,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private final int EMAIL_STATE = 3;
     private final int PASSWORD_STATE = 4;
     private final int ADDRESS_STATE = 5;
-    private final int NUMBER_STAGES = 5;
-    private int mProgress;
+
+    private HGBPreferencesManager hgbPrefrenceManager;
     private CountDownTimer countDownTimer;
     private String[] countryarray;
     private List<ProvincesItem> mProvinceItems;
@@ -127,6 +118,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         setContentView(R.layout.create_account_layout);
         initView();
         userData = new UserSignUpDataVO();
+        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         countDownTimer = new AnimationCountDownTimer(5000, 1000);
         animateWelcomeView();
     }
@@ -136,9 +128,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         mPlane2 = (ImageView) findViewById(R.id.airplane_02);
         mSun = (ImageView) findViewById(R.id.sun);
         mLogoOnBoarding = (ImageView) findViewById(R.id.logo_onboardong);
-
-        mRoot = (RelativeLayout) findViewById(R.id.create_account_root);
-
         mBiulding2 = (ImageView) findViewById(R.id.building_02);
         mBiulding1 = (ImageView) findViewById(R.id.building_01);
         mCloud01 = (ImageView) findViewById(R.id.cloud_01);
@@ -152,7 +141,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         mCloud07 = (ImageView) findViewById(R.id.cloud_7);
         mArrowBack = (ImageView) findViewById(R.id.arrow_back);
         mBirds = (ImageView) findViewById(R.id.birds);
-
         mUSCheck = (ImageView) findViewById(R.id.us_check);
         mCanadaCheck = (ImageView) findViewById(R.id.canada_check);
 
@@ -162,37 +150,40 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         mLabel1 = (FontTextView) findViewById(R.id.label_1);
         mLabel2 = (FontTextView) findViewById(R.id.label_2);
         mWelcomeTextView = (FontTextView) findViewById(R.id.welcome);
-
         mCanadaText = (FontTextView) findViewById(R.id.canada);
         mUSText = (FontTextView) findViewById(R.id.usa);
-
+        mEmail = (FontEditTextView) findViewById(R.id.email);
         mHyperlink = (FontTextView) findViewById(R.id.sign_up_hyperlink);
         mCreateAccount = (FontButtonView) findViewById(R.id.create_account);
         mCreate = (FontButtonView) findViewById(R.id.create_user);
-        mCreate.setOnClickListener(this);
-
-
-
         mTryNow = (FontButtonView) findViewById(R.id.try_now);
         mFirstName = (FontEditTextView) findViewById(R.id.first_name);
         mLastName = (FontEditTextView) findViewById(R.id.last_name);
         mPassword1 = (FontEditTextView) findViewById(R.id.password1);
         mPassword2 = (FontEditTextView) findViewById(R.id.password2);
-
-        mUSLayout = (LinearLayout) findViewById(R.id.us_layout);
-        mCanadaLayout = (LinearLayout) findViewById(R.id.canada_layout);
-        mUSLayout.setOnClickListener(this);
-        mCanadaLayout.setOnClickListener(this);
-
         mCity = (AutoCompleteTextView) findViewById(R.id.city);
         mZip = (FontEditTextView) findViewById(R.id.zip);
         mStateProvince = (FontEditTextView) findViewById(R.id.state_province);
-        mStateProvince.setOnClickListener(this);
 
-
+        mCanadaLayout = (LinearLayout) findViewById(R.id.canada_layout);
         mAddressLayout = (LinearLayout) findViewById(R.id.country_layout);
+        mRoot = (RelativeLayout) findViewById(R.id.create_account_root);
+        mUSLayout = (LinearLayout) findViewById(R.id.us_layout);
 
 
+        editTextViewListners();
+        mUSLayout.setOnClickListener(this);
+        mCanadaLayout.setOnClickListener(this);
+        mCreateAccount.setOnClickListener(this);
+        mStateProvince.setOnClickListener(this);
+        mArrowBack.setOnClickListener(this);
+        mCreate.setOnClickListener(this);
+        mTryNow.setOnClickListener(this);
+        mSignInTextView.setOnClickListener(this);
+        initSpannableText();
+    }
+
+    private void editTextViewListners() {
         mPassword2.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
@@ -203,7 +194,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                     goToAddressView(textView);
                     return true;
                 }
-                // Return true if you have consumed the action, else false.
                 return false;
             }
         });
@@ -223,7 +213,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
             }
         });
 
-        mEmail = (FontEditTextView) findViewById(R.id.email);
         mEmail.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
@@ -238,39 +227,27 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                 return false;
             }
         });
-
-
-        mCreateAccount.setOnClickListener(this);
-        mTryNow.setOnClickListener(this);
-        mSignInTextView.setOnClickListener(this);
-        initSpannableText();
-
     }
 
     private void goToAddressView(View textView) {
         HGBUtility.hideKeyboard(getApplicationContext(), textView);
-
         if (true) {
             animateAddressView();
         } else {
             Toast.makeText(getApplicationContext(), "Password not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
         }
-
     }
-
 
     private void goToEmailView(View textView) {
         HGBUtility.hideKeyboard(getApplicationContext(), textView);
-
         if (true) {
-            animateEmailView();
+            animateEmailView(true);
         } else {
             Toast.makeText(getApplicationContext(), "Name not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
         }
     }
 
     private boolean checkNameIsValid() {
-
         if (mFirstName.getText().length() > 1 && mLastName.getText().length() > 1) {
             return true;
         }
@@ -291,7 +268,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         } else {
             Toast.makeText(getApplicationContext(), "Password not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
         }
-
     }
 
     private void initSpannableText() {
@@ -307,60 +283,72 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     }
 
-    private void animateNameView() {
+    private void animateNameView(boolean animateFoward) {
         disableScreen();
-        CURRENT_STATE = NAME_STATE;
-        updateProgressBar();
+        if(animateFoward){
 
+        }else{
+
+        }
+
+        ArrayList<View> secondViewViews = new ArrayList<>();
+        secondViewViews.add(mLabel2);
+        secondViewViews.add(mLabel1);
+        secondViewViews.add(mFirstName);
+        secondViewViews.add(mLastName);
+        secondViewViews.add(mArrowBack);
+
+        ArrayList<View> firstViewViews = new ArrayList<>();
+        firstViewViews.add(mWelcomeTextView);
+        firstViewViews.add(mLogoOnBoarding);
+        firstViewViews.add(mCreateAccount);
+        firstViewViews.add(mTryNow);
         mLabel1.setText("Tell us your name");
         mLabel2.setText("Your name will allow you to book travel on our platform");
 
-        mSignInTextView.setText("Next");
-        mSignInTextView.bringToFront();
+        if(animateFoward){
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),firstViewViews,secondViewViews);
+            mSignInTextView.setText("Next");
+            CURRENT_STATE = NAME_STATE;
 
-        mArrowBack.bringToFront();
-        mSignInTextView.bringToFront();
-
-        ArrayList<View> inView = new ArrayList<>();
-        inView.add(mLabel2);
-        inView.add(mLabel1);
-        inView.add(mFirstName);
-        inView.add(mLastName);
-        inView.add(mArrowBack);
-
-        ArrayList<View> outView = new ArrayList<>();
-        outView.add(mWelcomeTextView);
-        outView.add(mLogoOnBoarding);
-        outView.add(mCreateAccount);
-        outView.add(mTryNow);
-
-
-        HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),outView,inView);
-
-        animateFirstToSecondStaticViews();
-
+        }else{
+            mSignInTextView.setText("Login");
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),secondViewViews,firstViewViews);
+            CURRENT_STATE = WELCOME_STATE;
+        }
+        updateProgressBar();
+        animateFirstToSecondStaticViews(animateFoward);
     }
 
-
-    private void animateEmailView() {
+    private void animateEmailView(boolean animateFoward) {
         disableScreen();
-        CURRENT_STATE = EMAIL_STATE;
+
+        ArrayList<View> firstViewViews = new ArrayList<>();
+        firstViewViews.add(mFirstName);
+        firstViewViews.add(mLastName);
+
+
+        ArrayList<View> secondViewViews = new ArrayList<>();
+        secondViewViews.add(mEmail);
+
+
+
+        if(animateFoward){
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),firstViewViews,secondViewViews);
+            animateLabels("What's your email?","We need your email to securely");
+            CURRENT_STATE = EMAIL_STATE;
+
+        }else{
+
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),secondViewViews,firstViewViews);
+//            mLabel1.setText("Tell us your name");
+//            mLabel2.setVisibility(View.VISIBLE);
+//            mLabel2.setText("Your name will allow you to book travel on our platform");
+            animateLabels("Tell us your name","Your name will allow you to book travel on our platform");
+            CURRENT_STATE = NAME_STATE;
+        }
         updateProgressBar();
-
-
-        ArrayList<View> outView = new ArrayList<>();
-        outView.add(mFirstName);
-        outView.add(mLastName);
-
-
-        ArrayList<View> inView = new ArrayList<>();
-        inView.add(mEmail);
-
-
-        animateLabels("What's your email?","We need your email to securely");
-
-        HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),outView,inView);
-        animateSecondToThirdStaticView();
+        animateSecondToThirdStaticView(animateFoward);
     }
 
 
@@ -369,8 +357,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         disableScreen();
         CURRENT_STATE = ADDRESS_STATE;
         updateProgressBar();
-
-
         ArrayList<View> outView = new ArrayList<>();
         outView.add(mPassword1);
         outView.add(mPassword2);
@@ -406,7 +392,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         animatePasswordStaticViews();
     }
 
-
     private void disableScreen() {
         mRoot.setClickable(true);
         countDownTimer.start();
@@ -424,7 +409,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
         @Override
         public void onTick(long millisUntilFinished) {
-            // mRoot.setClickable(false);
         }
     }
 
@@ -436,7 +420,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
                 break;
             case R.id.create_account:
-                animateNameView();
+                animateNameView(true);
                 break;
             case R.id.sign_in:
                 if (CURRENT_STATE != WELCOME_STATE) {
@@ -463,7 +447,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
                 break;
             case R.id.create_user:
-
+                sendSignUpDataToServer();
                 break;
 
             case R.id.us_layout:
@@ -478,33 +462,33 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                 userData.setCountry("CA");
                 break;
             case R.id.state_province:
-                if (userData.getCountry() != null && mProvinceItems != null) {
-
-                    HGBUtility.showPikerDialogEditText(mStateProvince, CreateAccountActivity.this, "Choose province",
-                            countryarray, 0, mProvinceItems.size() - 1, new PopUpAlertStringCB() {
-                                @Override
-                                public void itemSelected(String inputItem) {
-                                    for (ProvincesItem province : mProvinceItems) {
-                                        if (province.getProvincename().equals(inputItem)) {
-                                            mStateProvince.setText(province.getProvincename());
-                                            userData.setCountryProvince(province.getProvincecode());
-                                            initAutoCityComplete();
-                                            break;
-                                        }
-                                    }
-
-                                }
-
-                                @Override
-                                public void itemCanceled() {
-
-                                }
-                            }, false);
-
-                } else {
-                    Toast.makeText(getApplicationContext(), "Please select Country first", Toast.LENGTH_SHORT).show();
-                }
+                userSelectedState();
                 break;
+        }
+    }
+
+    private void userSelectedState() {
+        if (userData.getCountry() != null && mProvinceItems != null) {
+            HGBUtility.showPikerDialogEditText(mStateProvince, CreateAccountActivity.this, "Choose province",
+                    countryarray, 0, mProvinceItems.size() - 1, new PopUpAlertStringCB() {
+                        @Override
+                        public void itemSelected(String inputItem) {
+                            for (ProvincesItem province : mProvinceItems) {
+                                if (province.getProvincename().equals(inputItem)) {
+                                    mStateProvince.setText(province.getProvincename());
+                                    userData.setCountryProvince(province.getProvincecode());
+                                    initAutoCityComplete();
+                                    break;
+                                }
+                            }
+                        }
+                        @Override
+                        public void itemCanceled() {
+                        }
+                    }, false);
+
+        } else {
+            Toast.makeText(getApplicationContext(), "Please select Country first", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -514,12 +498,10 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
                 break;
             case NAME_STATE:
-
-                animateWelcomeView();
-
+                animateNameView(false);
                 break;
             case EMAIL_STATE:
-
+                animateEmailView(false);
                 break;
             case PASSWORD_STATE:
 
@@ -527,12 +509,10 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
             case ADDRESS_STATE:
 
                 break;
-
         }
     }
 
     private void setUSSelected(boolean b) {
-
         if (b) {
             mUSText.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_00516f));
             mCanadaText.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_999999));
@@ -552,7 +532,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         public myClickableSpan(int position) {
             this.pos = position;
         }
-
         @Override
         public void onClick(View widget) {
             String url = "";
@@ -571,37 +550,69 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     }
 
     private void updateProgressBar() {
-        mProgressBar.setProgress((100 / NUMBER_STAGES) * CURRENT_STATE);
+        mProgressBar.setProgress((100 / NUMBER_OF_STAGES) * CURRENT_STATE);
     }
 
 
-    private void animateFirstToSecondStaticViews() {
-        mPlane.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane01_1_2));//
-        mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_1_2));
-        mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_1_2));
-        mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_1_2));
-        mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_1_2));
-        mCloud03.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud03_1_2));
-        mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_1_2));
-        mCloud04B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud4b_1_2));
-        mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_1_2));
-        mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_1_2));
-        mBiulding1.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding01_1_2));
-        mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_1_2));
+    private void animateFirstToSecondStaticViews(boolean animateFoward) {
+        if(animateFoward){
+            mPlane.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane01_1_2));//
+            mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_1_2));
+            mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_1_2));
+            mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_1_2));
+            mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_1_2));
+            mCloud03.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud03_1_2));
+            mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_1_2));
+            mCloud04B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud4b_1_2));
+            mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_1_2));
+            mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_1_2));
+            mBiulding1.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding01_1_2));
+            mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_1_2));
+        }else{
+
+            mPlane.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane01_2_1));//
+            mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_2_1));
+            mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_2_1));
+            mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_2_1));
+            mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_2_1));
+            mCloud03.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud03_2_1));
+            mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_2_1));
+            mCloud04B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud4b_2_1));
+            mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_2_1));
+            mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_2_1));
+            mBiulding1.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding01_2_1));
+            mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_2_1));
+        }
+
     }
 
-    private void animateSecondToThirdStaticView() {
-        mPlane2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane02_2_3));
-        mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_2_3));
-        mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_2_3));
-        mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_2_3));
-        mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_2_3));
-        mCloud03.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud03_2_3));
-        mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_2_3));
-        mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_2_3));
-        mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_2_3));
-        mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_2_3));
-        mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_2_3));
+    private void animateSecondToThirdStaticView(boolean animateFoward) {
+        if(animateFoward){
+            mPlane2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane02_2_3));
+            mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_2_3));
+            mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_2_3));
+            mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_2_3));
+            mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_2_3));
+            mCloud03.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud03_2_3));
+            mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_2_3));
+            mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_2_3));
+            mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_2_3));
+            mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_2_3));
+            mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_2_3));
+        }else{
+            mPlane2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane02_3_2));
+            mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_3_2));
+            mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_3_2));
+            mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_3_2));
+            mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_3_2));
+            mCloud03.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud03_3_2));
+            mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_3_2));
+            mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_3_2));
+            mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_3_2));
+            mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_3_2));
+            mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_3_2));
+        }
+
     }
 
     private void animatePasswordStaticViews() {
@@ -620,7 +631,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     }
 
     private void animateFourthToFifthStaticViews() {
-
         mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_4_5));
         HGBAnimationUtility.FadeOutView(getApplicationContext(), mBirds);
         mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_4_5));
@@ -651,7 +661,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
             }
         });
     }
-
 
     private void setDropDownItems() {
         countryarray = new String[mProvinceItems.size()];
@@ -732,10 +741,10 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         });
 
         AlphaAnimation fadeoutLabel2 = new AlphaAnimation(1.0f,0.0f);
-        fadeoutLabel1.setDuration(getResources().getInteger(R.integer.create_account_animation_duration)/2);
-        fadeoutLabel1.setFillAfter(true);
+        fadeoutLabel2.setDuration(getResources().getInteger(R.integer.create_account_animation_duration)/2);
+        fadeoutLabel2.setFillAfter(true);
 
-        mLabel2.startAnimation(fadeoutLabel1);
+        mLabel2.startAnimation(fadeoutLabel2);
         fadeoutLabel2.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -746,7 +755,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
             public void onAnimationEnd(Animation animation) {
                 mLabel2.setText(s1);
                 AlphaAnimation fadeinLabel2 = new AlphaAnimation(0.0f,1.0f);
-                fadeinLabel2.setDuration(2500);
+                fadeinLabel2.setDuration(getResources().getInteger(R.integer.create_account_animation_duration)/2);
                 fadeinLabel2.setFillAfter(true);
                 mLabel2.startAnimation(fadeinLabel2);
             }
@@ -758,5 +767,46 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         });
     }
 
+    private void sendSignUpDataToServer(){
 
+        ConnectionManager.getInstance(CreateAccountActivity.this).postUserCreateAccount(userData, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
+                resetPassword();
+                //sign_up_layout_ll.setVisibility(View.GONE);
+               // pin_code_verification_layout.setVisibility(View.VISIBLE);
+
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+
+            }
+        });
+    }
+
+
+    private void resetPassword() {
+
+        LayoutInflater li = LayoutInflater.from(CreateAccountActivity.this);
+        final View promptsView = li.inflate(R.layout.popup_confirm_email_sent, null);
+
+        HGBUtility.showAlertPopUp(CreateAccountActivity.this, null, promptsView,
+                getResources().getString(R.string.popup_confirm_account_title), getResources().getString(R.string.ok_button), new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+
+                    }
+
+                    @Override
+                    public void itemCanceled() {
+
+                    }
+                });
+    }
 }

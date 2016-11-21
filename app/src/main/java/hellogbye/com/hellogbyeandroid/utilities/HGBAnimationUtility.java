@@ -1,5 +1,6 @@
 package hellogbye.com.hellogbyeandroid.utilities;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -24,6 +25,7 @@ public class HGBAnimationUtility {
         AlphaAnimation fadeOut = new AlphaAnimation (1.0f, 0.0f);
         fadeOut.setDuration(time);
         fadeOut.setFillAfter(true);
+
         for (int i = 0; i < outviews.size(); i++) {
             outviews.get(i).setClickable(false);
             outviews.get(i).setEnabled(false);
@@ -32,15 +34,18 @@ public class HGBAnimationUtility {
             outviews.get(i).startAnimation(fadeOut);
         }
 
-
         AlphaAnimation fadeIn = new AlphaAnimation (0.0f, 1.0f);
         fadeIn.setStartOffset(time);
         fadeIn.setDuration(time);
         fadeIn.setFillAfter(true);
         for (int i = 0; i < inviews.size(); i++) {
             final View view = inviews.get(i);
+            view.setClickable(true);
+            view.setEnabled(true);
+            view.setFocusable(true);
             view.setVisibility(View.VISIBLE);
             view.bringToFront();
+
             view.startAnimation(fadeIn);
 
         }
