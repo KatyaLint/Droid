@@ -232,7 +232,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private void goToAddressView(View textView) {
         HGBUtility.hideKeyboard(getApplicationContext(), textView);
         if (true) {
-            animateAddressView();
+            animateAddressView(true);
         } else {
             Toast.makeText(getApplicationContext(), "Password not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
         }
@@ -264,7 +264,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private void gotoPasswordView(View textView) {
         HGBUtility.hideKeyboard(getApplicationContext(), textView);
         if (true) {
-            animatePasswordView();
+            animatePasswordView(true);
         } else {
             Toast.makeText(getApplicationContext(), "Password not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
         }
@@ -341,9 +341,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         }else{
 
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),secondViewViews,firstViewViews);
-//            mLabel1.setText("Tell us your name");
-//            mLabel2.setVisibility(View.VISIBLE);
-//            mLabel2.setText("Your name will allow you to book travel on our platform");
             animateLabels("Tell us your name","Your name will allow you to book travel on our platform");
             CURRENT_STATE = NAME_STATE;
         }
@@ -351,46 +348,62 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         animateSecondToThirdStaticView(animateFoward);
     }
 
-
-
-    private void animateAddressView() {
+    private void animatePasswordView(boolean animateFoward) {
         disableScreen();
-        CURRENT_STATE = ADDRESS_STATE;
+
+
+        ArrayList<View> firstViewViews = new ArrayList<>();
+        firstViewViews.add(mEmail);
+
+        ArrayList<View> secondViewViews = new ArrayList<>();
+        secondViewViews.add(mPassword1);
+        secondViewViews.add(mPassword2);
+
+
+        if(animateFoward){
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),firstViewViews,secondViewViews);
+            animateLabels("Create your password","Please choose a password that is at least 8 characters in length");
+            CURRENT_STATE = PASSWORD_STATE;
+
+        }else{
+
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),secondViewViews,firstViewViews);
+            animateLabels("What's your email?","We need your email to securely");
+            CURRENT_STATE = EMAIL_STATE;
+        }
+        animatePasswordStaticViews(animateFoward);
         updateProgressBar();
-        ArrayList<View> outView = new ArrayList<>();
-        outView.add(mPassword1);
-        outView.add(mPassword2);
+    }
 
 
-        ArrayList<View> inView = new ArrayList<>();
-        inView.add(mAddressLayout);
+    private void animateAddressView(boolean animateFoward) {
+        disableScreen();
+
+        ArrayList<View> firstViewViews = new ArrayList<>();
+        firstViewViews.add(mPassword1);
+        firstViewViews.add(mPassword2);
 
 
-        animateLabels("We need your Address","This will be used for better targeting of your geo-location");
+        ArrayList<View> secondViewViews = new ArrayList<>();
+        secondViewViews.add(mAddressLayout);
 
-        HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),outView,inView);
-        animateFourthToFifthStaticViews();
+
+        if(animateFoward){
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),firstViewViews,secondViewViews);
+            animateLabels("We need your Address","This will be used for better targeting of your geo-location");
+            CURRENT_STATE = ADDRESS_STATE;
+
+        }else{
+
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),secondViewViews,firstViewViews);
+            animateLabels("Create your password","Please choose a password that is at least 8 characters in length");
+            CURRENT_STATE = PASSWORD_STATE;
+        }
+        animateFourthToFifthStaticViews(animateFoward);
+        updateProgressBar();
 
     }
 
-    private void animatePasswordView() {
-        disableScreen();
-        CURRENT_STATE = PASSWORD_STATE;
-        updateProgressBar();
-
-        ArrayList<View> outView = new ArrayList<>();
-        outView.add(mEmail);
-
-        ArrayList<View> inView = new ArrayList<>();
-        inView.add(mPassword1);
-        inView.add(mPassword2);
-
-
-        animateLabels("Create your password","Please choose a password that is at least 8 characters in length");
-        HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),outView,inView);
-
-        animatePasswordStaticViews();
-    }
 
     private void disableScreen() {
         mRoot.setClickable(true);
@@ -504,10 +517,10 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                 animateEmailView(false);
                 break;
             case PASSWORD_STATE:
-
+                animatePasswordView(false);
                 break;
             case ADDRESS_STATE:
-
+                animateAddressView(false);
                 break;
         }
     }
@@ -615,29 +628,58 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     }
 
-    private void animatePasswordStaticViews() {
-        mBirds.setVisibility(View.VISIBLE);
-        mBirds.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.birds_3_4));
-        mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_3_4));
-        mPlane2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane02_3_4));
-        mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_3_4));
-        mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_3_4));
-        mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_3_4));
-        mCloud03.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud03_3_4));
-        mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_3_4));
-        mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_3_4));
-        mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_3_4));
-        mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_3_4));
+    private void animatePasswordStaticViews(boolean animateFoward) {
+
+        if(animateFoward){
+            mBirds.setVisibility(View.VISIBLE);
+            mBirds.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.birds_3_4));
+            mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_3_4));
+            mPlane2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane02_3_4));
+            mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_3_4));
+            mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_3_4));
+            mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_3_4));
+            mCloud03.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud03_3_4));
+            mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_3_4));
+            mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_3_4));
+            mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_3_4));
+            mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_3_4));
+        }else{
+            mBirds.setVisibility(View.VISIBLE);
+            mBirds.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.birds_4_3));
+            mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_4_3));
+            mPlane2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane02_4_3));
+            mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_4_3));
+            mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_4_3));
+            mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_4_3));
+            mCloud03.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud03_4_3));
+            mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_4_3));
+            mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_4_3));
+            mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_4_3));
+            mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_4_3));
+        }
+
     }
 
-    private void animateFourthToFifthStaticViews() {
-        mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_4_5));
-        HGBAnimationUtility.FadeOutView(getApplicationContext(), mBirds);
-        mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_4_5));
-        mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_4_5));
-        mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_4_5));
-        mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_4_5));
-        mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_4_5));
+    private void animateFourthToFifthStaticViews(boolean animateFoward) {
+
+        if(animateFoward){
+            mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_4_5));
+            HGBAnimationUtility.FadeOutView(getApplicationContext(), mBirds);
+            mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_4_5));
+            mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_4_5));
+            mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_4_5));
+            mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_4_5));
+            mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_4_5));
+        }else{
+            mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_5_4));
+            HGBAnimationUtility.FadInView(getApplicationContext(), mBirds);
+            mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_5_4));
+            mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_5_4));
+            mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_5_4));
+            mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_5_4));
+            mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_5_4));
+        }
+
 
     }
 
