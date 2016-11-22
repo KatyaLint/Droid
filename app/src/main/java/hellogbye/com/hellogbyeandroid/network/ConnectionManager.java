@@ -77,7 +77,7 @@ public class ConnectionManager {
         String choosenServer = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER,"");
 
         if(choosenServer == null || choosenServer.isEmpty()){
-            BASE_URL = "https://apiprod.hellogbye.com/prod/rest/";//"https://dev.hellogbye.com/uat/rest/";// "https://apiuat.hellogbye.com/uat/rest/";//This is default server
+            BASE_URL = "http://apidev.hellogbye.com/dev/rest/";//"https://dev.hellogbye.com/uat/rest/";// "https://apiuat.hellogbye.com/uat/rest/";//This is default server
         }else{
             BASE_URL = choosenServer;
         }
@@ -222,7 +222,7 @@ public class ConnectionManager {
             jsonObject.put("firstname", userData.getFirstName());
             jsonObject.put("lastname", userData.getLastName());
             jsonObject.put("password", userData.getPassword());
-            jsonObject.put("state", userData.getState());
+            jsonObject.put("state", userData.getCountryProvince());
             jsonObject.put("username", userData.getUserEmail());
 
         } catch (Exception e) {

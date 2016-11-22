@@ -35,6 +35,7 @@ import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
 import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.onboarding.OnBoardingPager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBAnimationUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
@@ -116,12 +117,15 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account_layout);
+        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
+        checkFlow();
         initView();
         userData = new UserSignUpDataVO();
-        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         countDownTimer = new AnimationCountDownTimer(getResources().getInteger(R.integer.create_account_animation_duration), 1000);
         animateWelcomeView();
     }
+
+
 
     private void initView() {
         mPlane = (ImageView) findViewById(R.id.airplane_01);
@@ -797,9 +801,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
             @Override
             public void onSuccess(Object data) {
                 hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
-                resetPassword();
-                //sign_up_layout_ll.setVisibility(View.GONE);
-               // pin_code_verification_layout.setVisibility(View.VISIBLE);
+                Intent intent = new Intent(getBaseContext(), EnterPinActivity.class);
+                startActivity(intent);
+                finish();
             }
 
             @Override
@@ -812,20 +816,34 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         });
     }
 
-    private void resetPassword() {
-        LayoutInflater li = LayoutInflater.from(CreateAccountActivity.this);
-        final View promptsView = li.inflate(R.layout.popup_confirm_email_sent, null);
+    private void checkFlow() {
+        if(!HGBUtility.haveNetworkConnection(getApplicationContext())){
 
-        HGBUtility.showAlertPopUp(CreateAccountActivity.this, null, promptsView,
-                getResources().getString(R.string.popup_confirm_account_title), getResources().getString(R.string.ok_button), new PopUpAlertStringCB() {
-                    @Override
-                    public void itemSelected(String inputItem) {
+            Toast.makeText(getApplicationContext(),"There is no network please connect in order to continue",Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
 
-                    }
-                    @Override
-                    public void itemCanceled() {
-
-                    }
-                });
+        String strToken = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
+        if (!strToken.equals("")) {
+            goToMainActivity();
+        }
     }
+
+    private void goToMainActivity() {
+
+        hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
+        boolean doesExist = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY, false);
+
+        if (doesExist) {
+            Intent intent = new Intent(getApplicationContext(), MainActivityBottomTabs.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(getApplicationContext(), OnBoardingPager.class);
+            startActivity(intent);
+        }
+        finish();
+    }
+
+
 }
