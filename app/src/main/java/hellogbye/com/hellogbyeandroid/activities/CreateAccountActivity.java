@@ -500,7 +500,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         switch (CURRENT_STATE) {
             case WELCOME_STATE:
                 finish();
-
                 break;
             case NAME_STATE:
                 animateNameView(false);
