@@ -39,7 +39,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
-import hellogbye.com.hellogbyeandroid.adapters.CustomAlternativeHotelAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.hotel.CustomAlternativeHotelAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.PlaceAutocompleteAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -47,7 +47,6 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityHotel;
 
 import static hellogbye.com.hellogbyeandroid.R.id.map;

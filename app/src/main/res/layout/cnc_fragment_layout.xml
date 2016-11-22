@@ -39,6 +39,7 @@
 
 
     <View
+        android:id="@+id/cnc_view_border_line"
         android:layout_above="@+id/cnc_message_rl"
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
@@ -150,6 +151,7 @@
     </RelativeLayout>
 
     <ScrollView
+        android:layout_above="@+id/cnc_view_border_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -180,7 +182,7 @@
          android:id="@+id/cnc_recycler_view"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:layout_above="@+id/cnc_message_rl"
+
          android:layout_alignParentTop="true" />
 
             <RelativeLayout
@@ -216,8 +218,7 @@
                     android:orientation="vertical">
 
                     <include
-                        layout="@layout/bottom_separator"
-                       />
+                        layout="@layout/bottom_separator" />
 
                 <hellogbye.com.hellogbyeandroid.views.FontTextView
 

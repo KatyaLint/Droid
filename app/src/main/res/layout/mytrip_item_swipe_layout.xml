@@ -73,10 +73,10 @@
             android:textColor="@color/COLOR_999999"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/SP10"
+            android:textSize="@dimen/SP16"
             android:layout_marginTop="@dimen/DP2"
             android:text="dates"
-            app:fontName="dinnextltpro_light.otf" />
+            app:fontName="dinnextltpro_regular.otf" />
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/my_trip_paid"
             android:layout_marginTop="@dimen/DP2"

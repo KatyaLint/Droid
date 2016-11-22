@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.adapters.AlternativeFlightsAdapter;
-import hellogbye.com.hellogbyeandroid.adapters.alternativeflights.AlternativeFlightsSortAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.flights.AlternativeFlightsAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.flights.AlternativeFlightsSortAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;

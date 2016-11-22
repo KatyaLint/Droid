@@ -123,6 +123,16 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
             }
         });
 
+        String startDate = item.getStartdate();
+        String itemEndDate = item.getEnddate();
+
+        viewHolder.my_trip_dates.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(startDate)+" - "+HGBUtilityDate.parseDateToddMMyyyyMyTrip(itemEndDate));
+
+        if(tabPosition == 2 && (startDate == null || startDate.isEmpty() || itemEndDate == null || itemEndDate.isEmpty())) {
+            viewHolder.my_trip_dates.setText(" No Information Provided");
+        }
+
+
         if(tabPosition == 2 || tabPosition == 1){
             return;
         }

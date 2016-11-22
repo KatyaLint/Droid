@@ -30,9 +30,9 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 public class TripsTabsView extends HGBAbstractFragment {
 
     private FragmentTabHost mTabHost;
-    private static final String TAB_1_TAG = "Upcoming trips";
-    private static final String TAB_2_TAG = "Favorites";
-    private static final String TAB_3_TAG = "History";
+    private static final String TAB_1_TAG = "UPCOMING TRIPS";
+    private static final String TAB_2_TAG = "FAVORITES";
+    private static final String TAB_3_TAG = "HISTORY";
     private Typeface textFont;
     private ImageButton newIteneraryImageButton;
 
@@ -132,7 +132,7 @@ public class TripsTabsView extends HGBAbstractFragment {
 
 
     private void setNewIteneraryImageButtonClickListener(){
-    newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
+        newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             clearCNCItems();

@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.ImageGalleryActivity;
-import hellogbye.com.hellogbyeandroid.adapters.HotelGalleryImageAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.hotel.HotelGalleryImageAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 

@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/room_card"
+    android:id="@+id/flight_details_card"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     card_view:cardElevation="@dimen/DP4"
@@ -19,14 +19,13 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:id="@+id/top_room_card"
+            android:id="@+id/flight_details_top_card"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:padding="@dimen/DP1">
 
             <ImageView
-                android:id="@+id/room_image"
-
+                android:id="@+id/flight_details_fareclass_image"
                 android:layout_width="@dimen/DP300"
                 android:layout_height="@dimen/DP150"
                 android:scaleType="centerCrop"
@@ -35,29 +34,29 @@
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/DP60"
-                android:layout_alignBottom="@+id/room_image"
-                android:background="@drawable/trending_gradient_shape" />
+                android:layout_alignBottom="@+id/flight_details_fareclass_image"
+                />
 
-
+            <!--android:background="@drawable/trending_gradient_shape"-->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/room_image"
+                android:layout_alignBottom="@+id/flight_details_fareclass_image"
                 android:layout_margin="@dimen/DP6"
                 android:orientation="vertical">
 
                 <hellogbye.com.hellogbyeandroid.views.FontTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Price per night"
-                    android:textColor="@color/COLOR_WHITE"
+                    android:text="Price"
+                    android:textColor="@color/COLOR_BLACK"
                     android:textSize="@dimen/DP10" />
 
                 <hellogbye.com.hellogbyeandroid.views.FontTextView
-                    android:id="@+id/room_price"
+                    android:id="@+id/flight_details_fareclass_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/COLOR_WHITE"
+                    android:textColor="@color/COLOR_BLACK"
                     android:textSize="@dimen/DP20" />
 
             </LinearLayout>
@@ -71,7 +70,7 @@
             android:padding="@dimen/DP6">
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
-                android:id="@+id/room_type"
+                android:id="@+id/flight_details_fareclass_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/SP16"
@@ -81,7 +80,7 @@
                 android:textColor="@color/COLOR_00516f" />
 
             <ImageView
-                android:id="@+id/room_selected"
+                android:id="@+id/flight_details_fareclass_selected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

@@ -195,7 +195,7 @@ public class StartingMenuActivity extends BaseActivity {
 
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         boolean doesExist = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY, true);
-        System.out.println("Kate doesExist = " + doesExist);
+
         if (doesExist) {
             Intent intent = new Intent(getApplicationContext(), MainActivityBottomTabs.class);
             startActivity(intent);

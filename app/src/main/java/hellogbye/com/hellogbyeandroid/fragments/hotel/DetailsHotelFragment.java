@@ -9,8 +9,6 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
-import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -23,15 +21,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.adapters.flights.AlternativeFlightFareClassAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.hotel.AlternativeHotelRoomAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityHotel;
 import hellogbye.com.hellogbyeandroid.views.ExpandableHeightGridView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
-
-import static hellogbye.com.hellogbyeandroid.R.id.hotel_detail_location_label;
 
 /**
  * Created by arisprung on 9/15/16.
@@ -43,6 +40,7 @@ public class DetailsHotelFragment extends HGBAbstractFragment  implements  OnMap
     private  NodesVO mNodesVO;
     private GoogleMap mMap;
     private boolean permissionDenied = true;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

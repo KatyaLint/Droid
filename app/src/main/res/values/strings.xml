@@ -43,7 +43,7 @@
 
     <string name="flight_select_flight">Select Flight</string>
     <string name="flight_select_my_flight">My Flight</string>
-    <string name="flight_show_alternate_flights">More Flights</string>
+    <string name="flight_show_alternate_flights">MORE FLIGHTS</string>
     <string name="flight_stop_over">STOPOVER: </string>
     <string name="flight_details_include_tax">incl taxes &amp; fees</string>
     <string name="flight_grid_more_options">Flight details and more options</string>
@@ -155,7 +155,7 @@
     <string name="component_second">Second : </string>
     <string name="component_email">EMAIL </string>
     <string name="component_first_name">Name</string>
-    <string name="component_invite">Invite Travel Companion</string>
+    <string name="component_invite">INVITE TRAVEL COMPANIONS</string>
     <string name="component_invite_new_companion">Invite New Travel Companion</string>
     <string name="component_invite_hint">Email Address</string>
     <string name="component_invite_hint_name">First Name</string>
@@ -312,7 +312,7 @@
                                         Hotel prices do not include taxes, fees\nand charges.</string>
 
 
-    <string name="my_trip_plan_trip">Plan a Trip</string>
+    <string name="my_trip_plan_trip">PLAN A TRIP</string>
     <string name="my_trips">My Trips</string>
     <string name="companions">Companions</string>
     <string name="notification">Notification</string>
