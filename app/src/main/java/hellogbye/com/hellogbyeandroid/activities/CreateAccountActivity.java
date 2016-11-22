@@ -444,7 +444,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
                 } else {
                     Intent intent = new Intent(getApplicationContext(), NewLoginActivity.class);
-                    startActivity(intent); 
+                    startActivity(intent);
                 }
                 break;
             case R.id.arrow_back:
@@ -499,6 +499,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private void processBackPressed() {
         switch (CURRENT_STATE) {
             case WELCOME_STATE:
+                finish();
 
                 break;
             case NAME_STATE:
@@ -846,5 +847,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         finish();
     }
 
-
+    @Override
+    public void onBackPressed() {
+        processBackPressed();
+    }
 }
