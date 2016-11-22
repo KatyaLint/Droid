@@ -26,8 +26,8 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 public class TravelCompanionTabsWidgetFragment extends HGBAbstractFragment {
 
     private FragmentTabHost mTabHost;
-    private static final String TAB_1_TAG = "Travel Companions";
-    private static final String TAB_2_TAG = "Pending Companions";
+    private static final String TAB_1_TAG = "TRAVEL COMPANIONS";
+    private static final String TAB_2_TAG = "PENDING COMPANIONS";
     private Typeface textFont;
 
     public static Fragment newInstance(int position) {

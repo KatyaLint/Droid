@@ -3,16 +3,17 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-
-    android:background="@drawable/background">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_pin_code">
 
 <hellogbye.com.hellogbyeandroid.views.FontTextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textColor="@color/COLOR_WHITE"
+    android:textColor="@color/COLOR_00516f"
     android:gravity="center"
-    android:textSize="@dimen/SP18"
+    android:textSize="@dimen/SP32"
     android:layout_margin="@dimen/DP10"
+    app:fontName="dinnextltpro_mediumcond.ttf"
     android:text="Enter Pin"/>
 
 
@@ -25,11 +26,42 @@
     android:layout_height="wrap_content" />
 
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        style="@style/RedCustomButtonStyle"
-        android:layout_margin="@dimen/DP10"
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        style="@style/RedButton"
         android:id="@+id/pin_code_verification_next"
         android:text="Next"/>
 
+    <View
+        android:id="@+id/bottom_separator"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/DP20"
+        android:layout_height="@dimen/DP1"
+        android:background="@color/COLOR_00516f" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:fontName="dinnextltpro_condensed.ttf"
+        android:textSize="@dimen/SP24"
+        android:textColor="@color/COLOR_00516f"
+        android:text="@string/pin_code_title"/>
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_margin="@dimen/DP20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/SP16"
+        android:textColor="@color/COLOR_00516f"
+        android:text="@string/pin_code_resend"/>
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/SP16"
+        android:textColor="@color/COLOR_00516f"
+        android:text="@string/pin_code_send_email"/>
 
 </LinearLayout>

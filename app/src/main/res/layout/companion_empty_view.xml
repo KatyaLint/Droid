@@ -26,15 +26,6 @@
         android:text="@string/companion_empty_view_text"
         android:padding="@dimen/DP20"/>
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/SP18"
-        android:gravity="center"
-        app:fontName="dinnextltpro_light.otf"
-        android:textColor="@color/COLOR_999999"
-        android:text="@string/companion_empty_search"
-        />
+
 
 </LinearLayout>

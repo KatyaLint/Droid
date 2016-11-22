@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/DP20"
     android:orientation="vertical">
 
 
@@ -10,7 +11,7 @@
         android:id="@+id/account_image_view_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/COLOR_003D4C"
+        android:background="@color/COLOR_00516f"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -70,7 +71,7 @@
         android:layout_below="@+id/account_image_view_ll" />
 
 
-    <LinearLayout
+<!--    <LinearLayout
         android:id="@+id/account_logout_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -88,6 +89,20 @@
             android:textSize="@dimen/SP16"
             app:fontName="dinnextltpro_regular.otf" />
 
-    </LinearLayout>
+    </LinearLayout>-->
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+
+        android:id="@+id/account_logout_button"
+        android:layout_marginBottom="@dimen/DP20"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="@string/component_log_out"
+        style="@style/RedButton"/>
+
+
 
 </RelativeLayout>

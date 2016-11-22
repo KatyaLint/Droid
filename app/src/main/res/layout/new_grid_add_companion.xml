@@ -5,7 +5,7 @@
     android:gravity="center"
     android:paddingLeft="@dimen/DP20"
     android:paddingRight="@dimen/DP20"
-    android:layout_marginTop="0dp"
+    android:layout_marginTop="@dimen/DP0"
     android:orientation="horizontal"
     android:layout_height="match_parent">
 
@@ -17,7 +17,7 @@
         android:layout_marginLeft="@dimen/DP10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/COLOR_00516f"
+        android:textColor="@color/COLOR_079DE0"
         style="@style/GridViewPassangersTextStyle"
         android:text="@string/itinerary_add_companion" />
 

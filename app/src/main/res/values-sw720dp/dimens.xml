@@ -81,6 +81,7 @@
     <dimen name="MINUS_DP240">-480dp</dimen>
     <dimen name="MINUS_DP580">-1160dp</dimen>
 
+    <dimen name="SP60">120sp</dimen>
 <!--    <dimen name="SP10">20dip</dimen>
     <dimen name="SP12">24dip</dimen>
     <dimen name="SP13">26dip</dimen>

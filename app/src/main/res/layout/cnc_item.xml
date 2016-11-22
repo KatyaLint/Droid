@@ -24,7 +24,7 @@
     <hellogbye.com.hellogbyeandroid.views.RoundedImageView
 
         android:id="@+id/cnc_image_view_user"
-        android:layout_width="@dimen/DP18"
-        android:layout_height="@dimen/DP18" />
+        android:layout_width="@dimen/DP34"
+        android:layout_height="@dimen/DP34" />
 
 </LinearLayout>

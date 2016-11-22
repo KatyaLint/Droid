@@ -101,7 +101,7 @@ public class CNCFragment extends HGBAbstractFragment implements TitleNameChange 
 
    // private LinearLayout tool_bar_profile_name;
 
-    private FontTextView cnc_start_planing_text;
+//    private FontTextView cnc_start_planing_text;
     private FontTextView itirnarary_title_Bar;
     private PreferencesSettingsPreferencesCheckAdapter mRadioPreferencesAdapter;
     private ArrayList<DefaultsProfilesVO> accountDefaultSettings;
@@ -471,7 +471,7 @@ private void setTextForTrip(String name){
         mTextTutoralBody = (FontTextView)view.findViewById(R.id.text_tutorial_body);
         cnc_text_tutorial_ll = (LinearLayout)view.findViewById(R.id.cnc_text_tutorial_ll);
 
-        cnc_start_planing_text = (FontTextView)view.findViewById(R.id.cnc_start_planing_text);
+      //  cnc_start_planing_text = (FontTextView)view.findViewById(R.id.cnc_start_planing_text);
 
         mSendTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -522,10 +522,10 @@ private void setTextForTrip(String name){
 
     private void setTutorialTextVisibility(boolean isVisible){
         if(isVisible){
-            cnc_start_planing_text.setVisibility(View.GONE);
+         //   cnc_start_planing_text.setVisibility(View.GONE);
             cnc_text_tutorial_ll.setVisibility(View.VISIBLE);
         }else{
-            cnc_start_planing_text.setVisibility(View.VISIBLE);
+        //    cnc_start_planing_text.setVisibility(View.VISIBLE);
             cnc_text_tutorial_ll.setVisibility(View.GONE);
         }
     }

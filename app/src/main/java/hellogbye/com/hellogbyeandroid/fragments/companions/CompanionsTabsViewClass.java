@@ -65,7 +65,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
     private View rootView;
     private ArrayList<CompanionVO> companionsVOPending = new ArrayList<>();
     private ArrayList<CompanionVO> searchCompanionsVO = new ArrayList<>();
-    private ArrayList mCurrItemsSearchList ;
+    private ArrayList mCurrItemsSearchList = new ArrayList();
     public static boolean isPending;
     private android.support.v7.widget.SearchView search_view;
     private ImageButton search_maginfy;
@@ -73,6 +73,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
     private ImageButton toolbar_add_companion;
     private LinearLayout companion_search_new_companion_view;
     private LinearLayout companion_search_not_found;
+    private LinearLayout companion_empty_view_travel_companion_ll;
 
 
     private void searchListInitialization(){
@@ -209,6 +210,9 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
             }
         });
 
+
+
+
         return rootView;
     }
 
@@ -217,10 +221,17 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
 
         this.searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.companion_travel_recycle_list);
         this.companion_empty_view = (LinearLayout)rootView.findViewById(R.id.companion_empty_view);
+        this.companion_empty_view_travel_companion_ll = (LinearLayout)rootView.findViewById(R.id.companion_empty_view_travel_companion_ll);
         this.companion_search_new_companion_view = (LinearLayout) rootView.findViewById(R.id.companion_search_new_companion);
         this.companion_search_not_found = (LinearLayout)rootView.findViewById(R.id.companion_search_not_found_ll);
-
-       // this.mSearchView = searchView;
+        FontTextView companion_invite_travel_companion = (FontTextView)rootView.findViewById(R.id.companion_invite_travel_companion);
+        companion_invite_travel_companion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addTravelCompanion();
+            }
+        });
+                // this.mSearchView = searchView;
        // this.searchRecyclerView = searchRecyclerView;
        // this.companion_empty_view = companion_empty_view;
 
@@ -281,6 +292,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
 
 
         search_view =  ((MainActivityBottomTabs)getActivity()).getSearchView();
+        search_view.setQueryHint("Search Companions");
         search_maginfy =  ((MainActivityBottomTabs)getActivity()).getSearchMagifyImage();
         titleBar =  ((MainActivityBottomTabs)getActivity()).getTitleBar();
         toolbar_add_companion = ((MainActivityBottomTabs)getActivity()).getAddCompanionButton();
@@ -358,14 +370,25 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
     }
 
 
+    private void emptyView(){
+        if(isPending){
+            companion_empty_view.setVisibility(View.VISIBLE);
+            companion_empty_view_travel_companion_ll.setVisibility(View.GONE);
+        }else{
+            companion_empty_view.setVisibility(View.GONE);
+            companion_empty_view_travel_companion_ll.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void emptyCompanionsView(){
         if(companionsVOPending == null || companionsVOPending.isEmpty()){
-            companion_empty_view.setVisibility(View.VISIBLE);
+            emptyView();
             searchRecyclerView.setVisibility(View.GONE);
         }else{
             mCurrItemsSearchList = new ArrayList<CompanionVO>(companionsVOPending);
             searchRecyclerView.setVisibility(View.VISIBLE);
             companion_empty_view.setVisibility(View.GONE);
+            companion_empty_view_travel_companion_ll.setVisibility(View.GONE);
         }
     }
 
@@ -377,7 +400,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
                 if(data == null){
                     return;
                 }
-                ArrayList<CompanionVO> companionsInvitation =(ArrayList<CompanionVO>)data;
+                ArrayList<CompanionVO> companionsInvitation = (ArrayList<CompanionVO>)data;
                 getActivityInterface().setCompanionsInvintation(companionsInvitation);
                 addInvitationsToPanding(companionsInvitation);
                 /*if(isPending){
@@ -411,7 +434,6 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
 
                 ArrayList<CompanionVO> companions =(ArrayList<CompanionVO>)data;
                 getActivityInterface().setCompanions(companions);
-
                 if(isPending){
                     pendingCompanions(companions);
                     getCompanionsInvitation();
@@ -419,7 +441,6 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
                     acceptedCompanions(companions);
                     emptyCompanionsView();
                 }
-
                 searchListAdapter.updateItems(companionsVOPending);
 
             }
@@ -445,11 +466,17 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
         });
     }
 
-    public void deleteComapanion(String companion_id){
+    public void deleteComapanion(final String companion_id){
 
         ConnectionManager.getInstance(getActivity()).deleteUserCompanion(companion_id, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
+                for(CompanionVO companionVO : companionsVOPending){
+                    if(companionVO.getmCompanionid().equals(companion_id)){
+                        companionsVOPending.remove(companionVO);
+                        break;
+                    }
+                }
                 getCompanions();
             }
 
@@ -471,7 +498,6 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
                             @Override
                             public void onSuccess(Object data) {
                                 getCompanions();
-
                             }
 
                             @Override
@@ -502,14 +528,14 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
 
     @Override
     public boolean onQueryTextChange(String query) {
-        if(mCurrItemsSearchList == null){ //list empty
+      /*  if(mCurrItemsSearchList == null){ //list empty
             searchIsOpen = false;
-
             return false;
-        }
+        }*/
 
        // searchRecyclerView.setVisibility(View.VISIBLE);
         companion_search_not_found.setVisibility(View.GONE);
+        companion_empty_view_travel_companion_ll.setVisibility(View.GONE);
         if(query.isEmpty()){
             searchIsOpen = false;
             searchListAdapter.updateItems(mCurrItemsSearchList);
@@ -517,7 +543,6 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
             searchListAdapter.notifyDataSetChanged();
             searchRecyclerView.setVisibility(View.INVISIBLE);
             companion_search_new_companion_view.setVisibility(View.VISIBLE);
-
 
         }else {
             searchRecyclerView.setVisibility(View.VISIBLE);

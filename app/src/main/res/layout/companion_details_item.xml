@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,7 +12,7 @@
 
 
     <LinearLayout
-        android:background="@color/COLOR_003D4C"
+        android:background="@color/COLOR_00516f"
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,20 +69,11 @@
             app:fontName="dinnextltpro_light.otf"
             android:textColor="@color/COLOR_WHITE"
             android:textSize="@dimen/SP14"
+            android:visibility="gone"
             android:text="@string/account_relationship" />
 
 
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:background="@color/COLOR_WHITE"
-            android:id="@+id/companion_add_relationship"
-            android:layout_margin="@dimen/DP10"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/DP34"
-            app:fontName="dinnextltpro_light.otf"
-            android:textColor="@color/COLOR_BLACK"
-            android:textSize="@dimen/SP14"
-            android:text="@string/account_relationship" />
+
 
         <!--<Button-->
         <!--android:layout_width="match_parent"-->
@@ -107,9 +97,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:fontName="dinnextltpro_regular.otf"
-            android:textColor="@color/COLOR_999999"
+            android:textColor="@color/COLOR_565656"
             android:textSize="@dimen/SP12"
-            android:text="@string/component_name" />
+            android:text="@string/component_relationship" />
     </LinearLayout>
 
     <include layout="@layout/bottom_separator" />
@@ -145,13 +135,41 @@
 
 
     <LinearLayout
+        android:visibility="visible"
         android:background="@color/COLOR_WHITE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+
+
+        <RelativeLayout
+            android:layout_margin="@dimen/DP10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/companion_add_relationship"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fontName="dinnextltpro_light.otf"
+            android:textColor="@color/COLOR_003D4C"
+            android:textSize="@dimen/SP12"
+            android:text="@string/account_relationship" />
+            <ImageView
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/expand_more_a_1"/>
+        </RelativeLayout>
+
+
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_width="wrap_content"
             android:layout_margin="@dimen/DP10"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             app:fontName="dinnextltpro_regular.otf"
             android:textColor="@color/COLOR_999999"
@@ -165,11 +183,13 @@
             app:fontName="dinnextltpro_regular.otf"
             android:textColor="@color/COLOR_003D4C"
             android:textSize="@dimen/SP12"
+            android:visibility="gone"
             android:text="Sandra" />
     </LinearLayout>
 
-    <include layout="@layout/bottom_separator" />
+    <include android:visibility="gone" layout="@layout/bottom_separator" />
     <LinearLayout
+        android:visibility="gone"
         android:background="@color/COLOR_WHITE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -204,7 +224,7 @@
             android:layout_width="match_parent"
             android:layout_margin="@dimen/DP10"
             app:fontName="dinnextltpro_regular.otf"
-            android:textColor="@color/COLOR_999999"
+            android:textColor="@color/COLOR_565656"
             android:textSize="@dimen/SP12"
             android:layout_height="wrap_content"
             android:text="@string/component_email" />

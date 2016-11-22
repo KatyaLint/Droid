@@ -32,10 +32,11 @@
         style="@style/GridTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:text="Table Bay Hotel"
-        android:textColor="@color/COLOR_003D4C"
-        app:fontName="dinnextltpro_regular.otf" />
+        android:text="Hotel name"
+        android:textColor="@color/COLOR_00516f"
+        app:fontName="dinnextltpro_regular.otf"
+        android:layout_toLeftOf="@+id/hotel_bad_image"
+        android:layout_toStartOf="@+id/hotel_bad_image" />
 
 
         <ImageView
@@ -51,6 +52,7 @@
         style="@style/GridTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:text="Cape Town"
         android:textColor="@color/COLOR_003D4C"
         app:fontName="dinnextltpro_regular.otf" />
@@ -87,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="/Night"
-            android:textColor="@color/COLOR_003D4C"
+            android:textColor="@color/COLOR_565656"
             app:fontName="dinnextltpro_regular.otf" />
 
     </LinearLayout>

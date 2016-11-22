@@ -43,7 +43,7 @@
 
     <string name="flight_select_flight">Select Flight</string>
     <string name="flight_select_my_flight">My Flight</string>
-    <string name="flight_show_alternate_flights">More Flights</string>
+    <string name="flight_show_alternate_flights">MORE FLIGHTS</string>
     <string name="flight_stop_over">STOPOVER: </string>
     <string name="flight_details_include_tax">incl taxes &amp; fees</string>
     <string name="flight_grid_more_options">Flight details and more options</string>
@@ -59,6 +59,7 @@
     <string name="alternative_hotel_photo_gallery">PHOTO GALLERY</string>
     <string name="alternative_hotel_amenities">AMENITIES</string>
     <string name="alternative_hotel_nearby_attractions">NEARBY ATTRACTIONS</string>
+    <string name="alternative_sort">Sort By</string>
 
 
 
@@ -104,9 +105,9 @@
     <string name="preferences_prefered_flight_carrier">Preferred Airline</string>
     <string name="preferences_prefered_flight_carrier_favorite">Tell us which airlines you like best</string>
 
-    <string name="preferences_hint_add_name">Name your profile</string>
+    <string name="preferences_hint_add_name">Profile name</string>
 
-    <string name="preferences_add_button">Create New Profile</string>
+    <string name="preferences_add_button">Create new profile</string>
     <string name="preferences_remove_email">Remove Email Address</string>
     <string name="preferences_add_new_preferences">Add New Preferences</string>
     <string name="preferences_at_least_one_preference">You must have at least one\ntravel preference.</string>
@@ -121,7 +122,7 @@
 
     <string name="closeDrawer">Navigation View</string>
     <string name="openDrawer">Navigation View Closed</string>
-    <string name="type_message">Type to search or press the mic to speak</string>
+    <string name="type_message">Type to search or press the mic</string>
     <string name="send">Go</string>
     <!--<string name="default_cnc_message"> welcome to\nHelloGbye. Tell us in your own words where and when you'd\nlike to go.</string>-->
     <string name="default_cnc_message">Hello %1$s, welcome to\nHelloGbye. Tell us in your own words where and when you\'d like to go.</string>
@@ -148,12 +149,13 @@
 
 
     <string name="component_name">NAME</string>
+    <string name="component_relationship">RELATIONSHIP</string>
     <string name="component_title">Title : </string>
     <string name="component_first">First : </string>
     <string name="component_second">Second : </string>
-    <string name="component_email">Email </string>
+    <string name="component_email">EMAIL </string>
     <string name="component_first_name">Name</string>
-    <string name="component_invite">Invite Travel Companion</string>
+    <string name="component_invite">INVITE TRAVEL COMPANIONS</string>
     <string name="component_invite_new_companion">Invite New Travel Companion</string>
     <string name="component_invite_hint">Email Address</string>
     <string name="component_invite_hint_name">First Name</string>
@@ -229,7 +231,7 @@
     <string name="continue_to_checkout">Checkout</string>
     <string name="continue_to_checkout_flight_baggage">Flight Baggage &amp; Hotel info</string>
     <string name="continue_to_checkout_price">PRICE :</string>
-    <string name="continue_to_checkout_last_screen">A mail confirmation has been\nsent to the email address above</string>
+    <string name="continue_to_checkout_last_screen">An email confirmation has been\nsent to the email address above.</string>
     <string name="edit_trip_name">Edit Trip Name</string>
 
     <string name="onBoarding_just_type">Just type or say\nsomething like:</string>
@@ -237,7 +239,8 @@
     <string name="onBoarding_got_it_button">Got it</string>
 
     <string name="companion_empty_view_text">No Companions\nRequests</string>
-    <string name="companion_empty_search">Search for travel companions  \nin the HelloGbye system above,\nor Invite a new travel companion\nto HelloGbye</string>
+    <string name="companion_empty_search">Search for travel companions\nin the HelloGbye system above,\nor Invite a new travel companion\nto HelloGbye</string>
+    <string name="companion_empty_view_travel_title">You don\'t have any\nTravel Companions</string>
     <string name="companion_pending">Pending Companions</string>
     <string name="companion_travel">Travel Companions</string>
     <string name="companion_delete">DELETE</string>
@@ -245,7 +248,7 @@
 
     <string name="trip_no_trips_title">Start planning your trips here</string>
     <string name="trip_no_trips_explanation">Start planning your trip below.\nAnytime you create a trip you can\naccess it from here</string>
-    <string name="done">done</string>
+    <string name="done">Done</string>
     <string name="avreage_per_night">Average per night</string>
     <string name="electronic_ticket">Electronic Ticket:</string>
     <string name="press_here">Press here</string>
@@ -309,7 +312,7 @@
                                         Hotel prices do not include taxes, fees\nand charges.</string>
 
 
-    <string name="my_trip_plan_trip">Plan a Trip</string>
+    <string name="my_trip_plan_trip">PLAN A TRIP</string>
     <string name="my_trips">My Trips</string>
     <string name="companions">Companions</string>
     <string name="notification">Notification</string>
@@ -330,5 +333,23 @@
     <string name="choose_password">Please choose a password that is at least 8 characters in length</string>
     <string name="need_address">We need your Address</string>
     <string name="used_geo_location">This will be used for better targeting of your geo-location</string>
+
+    <string name="pin_code_title">Didn\'t recived the text message?</string>
+    <string name="pin_code_resend"><u>Resend the message</u></string>
+    <string name="pin_code_send_email"><u>Send the code to my email</u></string>
+
+    <string name="free_user_options">This option is available \nonly for registered users</string>
+
+    <string name="onboarding_title_1">Just type or speak</string>
+    <string name="onboarding_explanation_1">Touch the speech bubble icon to start\nplannin a new trip.</string>
+
+    <string name="onboarding_title_2">Here\'s how you search</string>
+    <string name="onboarding_explanation_2">In your own words tell us where\nyou want to go.</string>
+
+    <string name="onboarding_title_3">Customize your itinerary</string>
+    <string name="onboarding_explanation_3">Touch the tiles to see more flight\nand hotel options.</string>
+
+    <string name="onboarding_title_4">Make changes in a flash</string>
+    <string name="onboarding_explanation_4">Use the back button to ask for more\noptions in your own words.</string>
 
 </resources>

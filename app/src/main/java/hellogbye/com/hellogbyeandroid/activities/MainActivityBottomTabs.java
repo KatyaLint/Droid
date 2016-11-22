@@ -16,6 +16,8 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -937,22 +939,18 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     private boolean isLogoutExit = false;
 
+
+    
+
     @Override
     public void gotToStartMenuActivity() {
-        HGBUtility.removeAllFragments(getSupportFragmentManager());
         //  hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
         hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER, "");
         isLogoutExit = true;
-/*        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO,"");
-        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST,""); */
-
-        Intent intent = new Intent(getApplicationContext(), StartingMenuActivity.class);
-
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-
+        HGBUtility.removeAllFragments(getSupportFragmentManager());
         finish();
+
     }
 
     @Override

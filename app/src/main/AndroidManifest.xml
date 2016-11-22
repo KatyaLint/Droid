@@ -31,13 +31,12 @@
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
-
         android:theme="@style/AppTheme">
-        maps_key" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
 
         <!--<activity-->
 
@@ -88,7 +87,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
-          >
+            >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -134,6 +133,7 @@
             android:name=".activities.TravelPrefrenceStartingActivity"
             android:label="@string/app_name">
 
+
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
 
@@ -168,6 +168,15 @@
             <!--android:label="@string/title_activity_sign_up"-->
             <!--android:screenOrientation="portrait"-->
             <!--android:theme="@style/AppTheme"/>-->
+
+        <activity
+            android:name=".activities.SignUpActivity"
+            android:label="@string/title_activity_sign_up"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
+        <activity android:name=".onboarding.OnBoardingPager" />
+
     </application>
 
 </manifest>

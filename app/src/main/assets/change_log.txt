@@ -494,6 +494,20 @@ Code changing:
         HEL-1581 - In first enter, change profile , should be like new design instead of old
         HEL-1796 - forgot password in sign in screen isn't working
         HEL-1801 - when adding new companion relationship should show unspecified instead of empty
+        HEL-1803 - can't create a feedback
+        HEL-1862 - change top part of companions as in design
+        HEL-1835 - select flight button is not supposed to be round
+        HEL-1836 - name of the hotel covers the bed icon on grid
+
 
       Code changing:
       --------------
+        - Checkout - thank
+        - onboarding
+        - grid round image
+        - color fix
+        - alternative sort
+        - new logout button, logout popup removed
+        - new error parser
+        - comapanion details change
+        - companion search fix

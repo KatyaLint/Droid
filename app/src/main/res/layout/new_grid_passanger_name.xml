@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/new_grid_main_ll"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    android:gravity="center"
+
+    android:orientation="horizontal">
+
+   
+   <hellogbye.com.hellogbyeandroid.views.RoundedImageView
+       android:layout_marginLeft="@dimen/DP30"
+       android:id="@+id/grid_round_image"
+       android:layout_width="@dimen/DP26"
+       android:layout_height="@dimen/DP26"
+       android:layout_marginRight="@dimen/DP10"
+     />
+   
+   <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="sdfsdfds"
+       android:textAllCaps="true"
+       android:textSize="@dimen/SP14"
+       android:textColor="@color/COLOR_WHITE"
+       app:fontName="dinnextltpro_regular.otf"
+       android:id="@+id/grid_passanger_name"/>
+</LinearLayout>

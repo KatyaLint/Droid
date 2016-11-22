@@ -18,6 +18,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.onboarding.OnBoardingPager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -52,7 +53,7 @@ public class StartingMenuActivity extends BaseActivity {
         String strToken = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
         if (!strToken.equals("")) {
             goToMainActivity();
-            finish();
+
         }
 
         setContentView(R.layout.starting_menu_layout);
@@ -184,8 +185,6 @@ public class StartingMenuActivity extends BaseActivity {
                     break;
 
             }
-
-
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(browserIntent);
         }
@@ -195,14 +194,19 @@ public class StartingMenuActivity extends BaseActivity {
     private void goToMainActivity() {
 
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
-        boolean doesExist = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY, false);
+        boolean doesExist = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY, true);
+
         if (doesExist) {
             Intent intent = new Intent(getApplicationContext(), MainActivityBottomTabs.class);
             startActivity(intent);
+           // finish();
         } else {
-            Intent intent = new Intent(getApplicationContext(), TravelPrefrenceStartingActivity.class);
+         //   Intent intent = new Intent(getApplicationContext(), TravelPrefrenceStartingActivity.class);
+            Intent intent = new Intent(getApplicationContext(), OnBoardingPager.class);
             startActivity(intent);
+           // finish();
         }
+        finish();
     }
 
 }

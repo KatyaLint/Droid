@@ -15,6 +15,7 @@ import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -130,6 +131,8 @@ public class TabViewMainFragment extends HGBAbstractFragment implements SearchVi
         mRecyclerView.setAdapter(mAdapter);
 
         search_view =  ((MainActivityBottomTabs)getActivity()).getSearchView();
+        search_view.setQueryHint("Search Trip");
+
         search_maginfy =  ((MainActivityBottomTabs)getActivity()).getSearchMagifyImage();
         toolbar_new_iternerary =  ((MainActivityBottomTabs)getActivity()).getNewIternararyButton();
         titleBar =  ((MainActivityBottomTabs)getActivity()).getTitleBar();

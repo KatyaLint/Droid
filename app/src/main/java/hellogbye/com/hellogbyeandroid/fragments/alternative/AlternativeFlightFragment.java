@@ -13,12 +13,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -40,7 +38,8 @@ import java.util.Map;
 
 import hellogbye.com.hellogbyeandroid.R;
 //import hellogbye.com.hellogbyeandroid.activities.MainActivity;
-import hellogbye.com.hellogbyeandroid.adapters.FlightAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.flights.AlternativeFlightFareClassAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.hotel.FlightAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.AirportCoordinatesVO;
@@ -65,13 +64,13 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
     private SlidingUpPanelLayout mSlidingPanels;
     public final float PANEL_HIGHT = 0.5f;
  //   private ProgressDialog progressDialog;
-    private RelativeLayout pull_down;
+  //  private RelativeLayout pull_down;
     private FlightAdapter mAdapter;
     private View rootView;
     private FontTextView select_flight;
     private boolean isInbound;
     private NodesVO currentNodeVO;
-
+    private AlternativeFlightFareClassAdapter mFlightDetailsAdapter;
 
     public AlternativeFlightFragment() {
         // Empty constructor required for fragment subclasses
@@ -105,7 +104,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         mSlidingPanels.setCoveredFadeColor(Color.TRANSPARENT);
         mSlidingPanels.setAnchorPoint(PANEL_HIGHT);
         mSlidingPanels.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
-        mSlidingPanels.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+       /* mSlidingPanels.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
             @Override
             public void onPanelSlide(View panel, float slideOffset) {
                 pull_down.setVisibility(View.GONE);
@@ -130,7 +129,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
             public void onPanelHidden(View panel) {
 
             }
-        });
+        });*/
         mSlidingPanels.setVisibility(View.VISIBLE);
     }
 
@@ -278,7 +277,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         LayoutInflater inflater = LayoutInflater.from(getContext());
         rootView = inflater.inflate(R.layout.flight_layout_details, null, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.flightRecyclerView);
-        pull_down = (RelativeLayout) rootView.findViewById(R.id.pull_down);
+      //  pull_down = (RelativeLayout) rootView.findViewById(R.id.pull_down);
 
         select_flight = (FontTextView)rootView.findViewById(R.id.select_flight);
 

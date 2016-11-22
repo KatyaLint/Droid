@@ -19,8 +19,6 @@
             android:gravity="left"
             android:weightSum="10">
 
-
-
             <ImageButton
                 android:layout_weight="1"
                 android:gravity="center"
@@ -44,12 +42,14 @@
 
     <hellogbye.com.hellogbyeandroid.views.RoundedImageView
         android:layout_weight="0"
+        android:layout_gravity="center"
         android:layout_marginRight="@dimen/DP10"
         android:id="@+id/my_trip_user_image"
         android:layout_width="@dimen/DP60"
         android:layout_height="@dimen/DP60" />
 
     <LinearLayout
+        android:layout_gravity="center"
         android:layout_marginLeft="@dimen/DP10"
         android:layout_weight="2"
         android:id="@+id/my_trips_details_ll"
@@ -73,10 +73,10 @@
             android:textColor="@color/COLOR_999999"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/SP10"
+            android:textSize="@dimen/SP16"
             android:layout_marginTop="@dimen/DP2"
             android:text="dates"
-            app:fontName="dinnextltpro_light.otf" />
+            app:fontName="dinnextltpro_regular.otf" />
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/my_trip_paid"
             android:layout_marginTop="@dimen/DP2"
@@ -84,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/SP10"
-
+            android:visibility="gone"
             app:fontName="dinnextltpro_light.otf" />
 
     </LinearLayout>

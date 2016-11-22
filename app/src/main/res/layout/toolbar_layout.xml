@@ -4,7 +4,7 @@
     android:id="@+id/toolbar_costume"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/COLOR_003D4C"
+    android:background="@color/COLOR_00516f"
     android:minHeight="?attr/actionBarSize">
 
 
@@ -210,18 +210,19 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/toolbar_new_iternerary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/add_trip"
-            android:visibility="gone" />
-
-        <ImageButton
             android:id="@+id/search_maginfy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/DP20"
+            android:layout_marginRight="@dimen/DP20"
             android:background="@drawable/search_icon"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/toolbar_new_iternerary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/add_trip"
             android:visibility="gone" />
 
     </LinearLayout>

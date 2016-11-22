@@ -1,0 +1,52 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="@dimen/DP20"
+    android:id="@+id/companion_empty_view_travel_companion_ll"
+    android:visibility="visible"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+
+    android:gravity="center">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/companions_main_icons"/>
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/SP32"
+        android:textColor="@color/COLOR_00516f"
+        android:gravity="center"
+        app:fontName="dinnextltpro_boldcondensed.otf"
+        android:text="@string/companion_empty_view_travel_title"
+        android:padding="@dimen/DP20"/>
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/SP18"
+        android:gravity="center"
+        app:fontName="dinnextltpro_light.otf"
+        android:textColor="@color/COLOR_999999"
+        android:text="@string/companion_empty_search" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/companion_invite_travel_companion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/CustomButtonTextStyle"
+        android:background="@drawable/selector_red_button"
+        android:text="@string/component_invite"
+        android:textSize="@dimen/SP20"
+        android:layout_margin="@dimen/DP30"
+        app:fontName="dinnextltpro_medium.otf" />
+
+
+</LinearLayout>

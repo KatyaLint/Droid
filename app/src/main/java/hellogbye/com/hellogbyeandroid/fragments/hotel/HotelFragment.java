@@ -25,8 +25,8 @@ import java.util.Map;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
-import hellogbye.com.hellogbyeandroid.adapters.AlternativeHotelRoomAdapter;
-import hellogbye.com.hellogbyeandroid.adapters.HotelImageAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.hotel.AlternativeHotelRoomAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.hotel.HotelImageAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.AllImagesVO;
@@ -41,10 +41,6 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.WrapContentViewPager;
-
-import static android.R.attr.value;
-import static android.R.id.list;
-import static hellogbye.com.hellogbyeandroid.R.id.map;
 
 
 /**

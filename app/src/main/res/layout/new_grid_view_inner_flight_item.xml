@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Toronto to"
-            android:textColor="@color/COLOR_003D4C"
+            android:textColor="@color/COLOR_00516f"
             app:fontName="dinnextltpro_regular.otf"
             />
         
@@ -89,8 +89,8 @@
             android:layout_marginBottom="@dimen/DP2"
             android:layout_marginTop="@dimen/DP4"
             android:text="YYZ"
-            android:textColor="@color/COLOR_003D4C"
-            app:fontName="dinnextltpro_regular.otf" />
+            android:textColor="@color/COLOR_00516f"
+            app:fontName="dinnextltpro_medium.otf" />
 
 
             <ImageView
@@ -109,8 +109,8 @@
                 android:layout_marginBottom="@dimen/DP2"
                 android:layout_marginTop="@dimen/DP4"
                 android:text="CPT"
-                android:textColor="@color/COLOR_003D4C"
-                app:fontName="dinnextltpro_regular.otf" />
+                android:textColor="@color/COLOR_00516f"
+                app:fontName="dinnextltpro_medium.otf" />
 
             <ImageView
                 android:id="@+id/grid_airplane_logo"
@@ -166,9 +166,6 @@
             android:text="14:32"
             android:textColor="@color/COLOR_565656"
             app:fontName="dinnextltpro_light.otf" />
-
-
-
     </RelativeLayout>
 
 

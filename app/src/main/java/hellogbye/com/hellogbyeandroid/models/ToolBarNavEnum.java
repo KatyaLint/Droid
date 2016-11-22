@@ -2,7 +2,7 @@ package hellogbye.com.hellogbyeandroid.models;
 
 public enum ToolBarNavEnum {
     TRIPS (0,"My Trips"),
-    COMPANIONS(1,"My Companions"),
+    COMPANIONS(1,"Companions"),
     ACCOUNT(2,"My Account"),
     NOTIFICATIONS(3,"Notifications"),
     CNC(4,"CNC"),
@@ -12,7 +12,7 @@ public enum ToolBarNavEnum {
     ITINARERY(8,"Current Itinerary"),
     ALTERNATIVE_FLIGHT_ROUND_TRIP(9,"Flight Details"),
     HOTEL(10,"Hotel Details"),
-    ALTERNATIVE_FLIGHT_DETAILS(11,"Alternative Flights"),
+    ALTERNATIVE_FLIGHT_DETAILS(11,"Alternate Flights"),
     PAYMENT_DETAILS(12,"Payment Info"),
 
     PREFERENCES_TAB_SETTINGS(13,""),
@@ -33,7 +33,7 @@ public enum ToolBarNavEnum {
     CHECKOUT_CONFIRMATION(27,"Checkout confirmation"),
     CNC_TUTORIAL(28,"CNC Tutorial"),
     HAZARDOUS_NOTICE(29,"Make Payment"),
-    ALL_COMPANIONS_VIEW(30,"My Companions"),
+    ALL_COMPANIONS_VIEW(30,"Companions"),
     COMPANION_HELP_FEEDBACK(31,"Help & Feedback"),
     PREFERENCES_CHECK_AS_RADIO_SETTINGS(32,"Preferences Settings"),
     PREFERENCES_MEMBERSHIP(33,"Membership"),
