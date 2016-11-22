@@ -57,7 +57,6 @@ public class SignUpActivity extends BaseActivity {
     private ArrayAdapter adapter;
     private FontTextView pin_code_verification_next;
     private FontEditTextView pin_code_verification_pin;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

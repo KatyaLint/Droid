@@ -70,9 +70,24 @@
     <dimen name="SP32">48sp</dimen>
     <dimen name="SP36">54sp</dimen>
     <dimen name="SP46">69sp</dimen>
+    <dimen name="MINUS_DP360">-540dp</dimen>
+    <dimen name="MINUS_DP380">-570dp</dimen>
+    <dimen name="MINUS_DP220">-330dp</dimen>
+    <dimen name="MINUS_DP200">-300dp</dimen>
+    <dimen name="MINUS_DP30">-45dp</dimen>
+    <dimen name="MINUS_DP300">-450dp</dimen>
+    <dimen name="MINUS_DP320">-480dp</dimen>
+    <dimen name="MINUS_DP70">-105dp</dimen>
+    <dimen name="MINUS_DP170">-255dp</dimen>
+    <dimen name="MINUS_DP440">-660dp</dimen>
+    <dimen name="MINUS_DP520">-780dp</dimen>
+    <dimen name="MINUS_DP150">-225dp</dimen>
+    <dimen name="MINUS_DP240">-360dp</dimen>
+    <dimen name="MINUS_DP250">-375dp</dimen>
+    <dimen name="MINUS_DP580">-870dp</dimen>
     <dimen name="SP60">90sp</dimen>
 
-<!--    <dimen name="SP10">15dip</dimen>
+    <!--    <dimen name="SP10">15dip</dimen>
     <dimen name="SP12">18dip</dimen>
     <dimen name="SP13">20dip</dimen>
     <dimen name="SP14">21dip</dimen>

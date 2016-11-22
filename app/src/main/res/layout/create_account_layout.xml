@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:translationZ="@dimen/DP1"
+        android:progressDrawable="@drawable/progressbar"
+        android:layout_height="@dimen/DP4"
+        android:layout_alignParentTop="true"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/create_account_root"
+        android:background="@android:color/transparent"
+        android:translationZ="100dp"
+        android:layout_height="match_parent">
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/arrow_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/DP20"
+        android:src="@drawable/arrow_back"
+        android:visibility="gone" />
+
+    <include android:id="@+id/country_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_2"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/DP20"
+        layout="@layout/country_selection_layout"/>
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/sign_in"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:translationZ="1dp"
+        android:layout_margin="@dimen/DP20"
+        android:text="@string/login"
+        android:textColor="@color/COLOR_003D4C"
+        app:fontName="dinnextltpro_medium.otf" />
+
+
+    <ImageView
+        android:id="@+id/cloud_02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/cloud_02"
+        android:layout_marginTop="@dimen/DP20"
+        android:layout_marginRight="@dimen/MINUS_DP70" />
+
+
+    <ImageView
+        android:id="@+id/airplane_02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/airplane_02"
+        android:layout_alignTop="@+id/cloud_01"
+        android:layout_alignBottom="@+id/cloud_01"
+        android:layout_marginRight="@dimen/MINUS_DP200"
+       />
+
+    <ImageView
+        android:id="@+id/sun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sun" />
+
+    <ImageView
+        android:id="@+id/cloud_01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/DP30"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/MINUS_DP30"
+        android:src="@drawable/cloud_01" />
+
+    <ImageView
+        android:id="@+id/cloud_1_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/DP150"
+        android:src="@drawable/cloud_01"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/MINUS_DP240" />
+
+    <ImageView
+        android:id="@+id/cloud_03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/cloud_03"
+        android:layout_marginRight="@dimen/MINUS_DP70" />
+
+    <ImageView
+        android:id="@+id/building_02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cloud_03"
+        android:layout_marginTop="@dimen/MINUS_DP30"
+        android:src="@drawable/building"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/MINUS_DP320"
+         />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/sign_up_hyperlink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:autoLink="all"
+        android:gravity="center"
+        android:linksClickable="true"
+        android:paddingBottom="@dimen/DP10"
+        android:paddingLeft="@dimen/DP10"
+        android:paddingRight="@dimen/DP10"
+        android:text="@string/sign_up_term_of_use"
+        android:textColor="@color/COLOR_00516f"
+        android:textSize="@dimen/SP12"
+        app:fontName="dinnextltpro_regular.otf" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:id="@+id/try_now"
+        style="@style/BlueButton"
+        android:layout_above="@+id/create_account"
+        android:layout_marginBottom="@dimen/DP20"
+        android:text="@string/try_it_now"
+        app:fontName="dinnextltpro_medium.otf" />
+
+
+    <ImageView
+        android:id="@+id/logo_onboardong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/welcome"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo_onboardong" />
+
+    <ImageView
+        android:id="@+id/airplane_01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/building_01"
+        android:src="@drawable/airplane_01" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/sun"
+        android:layout_below="@+id/cloud_01"
+        android:layout_marginTop="@dimen/DP20"
+        android:text="Welcome"
+        android:textColor="@color/COLOR_003D4C"
+        android:textSize="@dimen/SP24"
+        app:fontName="dinweb_condmedium.ttf" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/label_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cloud_01"
+        android:text="LABEL_1"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/COLOR_003D4C"
+        android:textSize="@dimen/SP32"
+        android:visibility="gone"
+        app:fontName="dinweb_condmedium.ttf" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/label_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_1"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="LABEL_2"
+        android:layout_marginTop="@dimen/DP8"
+        android:textColor="@color/COLOR_003D4C"
+        android:textSize="@dimen/SP18"
+        android:visibility="gone"
+        app:fontName="dinweb_condmedium.ttf" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+        android:id="@+id/password1"
+        style="@style/new_sign_up_text_color"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_2"
+        android:inputType="textPassword"
+        android:layout_centerHorizontal="true"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
+        android:hint="Password"
+        android:visibility="gone"/>
+
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+        android:id="@+id/password2"
+        style="@style/new_sign_up_text_color"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password1"
+        android:inputType="textPassword"
+        android:layout_centerHorizontal="true"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
+        android:hint="Confirm Password"
+        android:visibility="gone"  />
+
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+        android:id="@+id/first_name"
+        style="@style/new_sign_up_text_color"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_2"
+        android:layout_centerHorizontal="true"
+        android:imeOptions="actionNext"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:hint="First Name"
+        android:visibility="gone" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+        android:id="@+id/last_name"
+        style="@style/new_sign_up_text_color"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/first_name"
+        android:layout_centerHorizontal="true"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
+        android:hint="Last Name"
+        android:visibility="gone" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+        android:id="@+id/email"
+        style="@style/new_sign_up_text_color"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_2"
+        android:layout_centerHorizontal="true"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
+        android:hint="Email"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/cloud_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cloud_03"
+        android:src="@drawable/cloud_04"
+        android:layout_marginLeft="@dimen/MINUS_DP580"
+
+         />
+
+    <ImageView
+        android:id="@+id/cloud_4_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cloud_03"
+        android:src="@drawable/cloud_04"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/DP10"
+        android:layout_marginRight="@dimen/MINUS_DP150"
+
+
+        />
+
+    <ImageView
+        android:id="@+id/cloud_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/cloud_07"
+        android:layout_below="@id/building_01"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/MINUS_DP30"
+
+
+        />
+
+    <ImageView
+        android:id="@+id/cloud_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/building_01"
+        android:src="@drawable/cloud_05"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/MINUS_DP250" />
+
+    <ImageView
+        android:id="@+id/cloud_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/building_01"
+        android:src="@drawable/cloud_06"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/MINUS_DP220" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:id="@+id/create_account"
+        style="@style/RedButton"
+        android:layout_below="@+id/building_02"
+        android:layout_marginTop="@dimen/DP10"
+        android:text="@string/create_account"
+        app:fontName="dinnextltpro_medium.otf" />
+
+
+
+
+    <ImageView
+        android:id="@+id/building_01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/cloud_03"
+        android:alpha="0.58"
+        android:src="@drawable/building"
+        android:layout_marginLeft="@dimen/MINUS_DP300"  />
+
+    <ImageView
+        android:id="@+id/birds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/building_01"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        android:layout_marginRight="@dimen/DP80"
+        android:src="@drawable/birds"
+          />
+
+
+</RelativeLayout>

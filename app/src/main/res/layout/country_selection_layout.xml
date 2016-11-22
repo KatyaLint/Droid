@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/canada_layout"
+            style="@style/CountryButton"
+            android:orientation="horizontal"
+            android:padding="@dimen/DP20"
+            android:layout_width="@dimen/DP120">
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/canada_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/check" />
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/canada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/DP10"
+                android:text="CANADA"
+                app:fontName="dinnextltpro_regular.otf" />
+
+        </LinearLayout>
+
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/or"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OR"
+            android:layout_marginLeft="@dimen/DP10"
+            android:layout_marginRight="@dimen/DP10"
+            android:textColor="@color/COLOR_003D4C"
+            app:fontName="dinnextltpro_medium.otf" />
+
+
+        <LinearLayout
+            android:id="@+id/us_layout"
+            style="@style/CountryButton"
+            android:orientation="horizontal"
+            android:padding="@dimen/DP20"
+            android:layout_width="@dimen/DP120">
+
+            <ImageView
+                android:id="@+id/us_check"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/check" />
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/usa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/DP10"
+                android:text="USA"
+                app:fontName="dinnextltpro_regular.otf" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+        android:id="@+id/state_province"
+        style="@style/adress_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="false"
+        android:maxLines="1"
+        android:layout_marginTop="@dimen/DP20"
+        android:singleLine="true"
+        android:hint="State/Province"
+        android:drawableRight="@drawable/dropdown_lightblue"
+        android:visibility="visible" />
+
+    <AutoCompleteTextView
+        android:id="@+id/city"
+        style="@style/adress_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:layout_marginTop="@dimen/DP10"
+        android:singleLine="true"
+        android:hint="City"
+        android:visibility="visible" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+        android:id="@+id/zip"
+        style="@style/adress_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:layout_marginTop="@dimen/DP10"
+        android:singleLine="true"
+        android:inputType="textPassword"
+        android:hint="Zip/Postal code"
+        android:visibility="visible" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:id="@+id/create_user"
+        style="@style/BlueButton"
+        android:layout_marginTop="@dimen/DP50"
+        android:text="Create Account"
+
+        app:fontName="dinnextltpro_medium.otf" />
+
+
+
+</LinearLayout>
