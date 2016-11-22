@@ -125,8 +125,6 @@
         <item name="android:background">@drawable/blue_button_border</item>
     </style>
 
-=======
->>>>>>> master
 
     <style name="RedCustomButtonStyleNoRadius" parent="CustomButtonTextStyle">
         <item name="android:textColor">@color/COLOR_WHITE</item>
