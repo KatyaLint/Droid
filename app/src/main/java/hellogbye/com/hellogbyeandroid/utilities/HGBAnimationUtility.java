@@ -21,7 +21,7 @@ public class HGBAnimationUtility {
 
     public static void CreateAccountDynamicViews(Context context,final ArrayList<View> outviews,
                                                  final ArrayList<View> inviews){
-        long time = context.getResources().getInteger(R.integer.create_account_animation_duration)/2;
+       final long time = context.getResources().getInteger(R.integer.create_account_animation_duration)/2;
         AlphaAnimation fadeOut = new AlphaAnimation (1.0f, 0.0f);
         fadeOut.setDuration(time);
         fadeOut.setFillAfter(true);
@@ -29,26 +29,40 @@ public class HGBAnimationUtility {
         for (int i = 0; i < outviews.size(); i++) {
             outviews.get(i).setClickable(false);
             outviews.get(i).setEnabled(false);
-            outviews.get(i).setFocusable(false);
+            //outviews.get(i).setFocusable(false);
             outviews.get(i).setVisibility(View.GONE);
             outviews.get(i).startAnimation(fadeOut);
+            if(i==0){
+                fadeOut.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        AlphaAnimation fadeIn = new AlphaAnimation (0.0f, 1.0f);
+                        fadeIn.setDuration(time);
+                        fadeIn.setFillAfter(true);
+                        for (int i = 0; i < inviews.size(); i++) {
+                            inviews.get(i).setClickable(true);
+                            inviews.get(i).setFocusable(true);
+                            inviews.get(i).setVisibility(View.VISIBLE);
+                            inviews.get(i).bringToFront();
+                            inviews.get(i).startAnimation(fadeIn);
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+            }
         }
 
-        AlphaAnimation fadeIn = new AlphaAnimation (0.0f, 1.0f);
-        fadeIn.setStartOffset(time);
-        fadeIn.setDuration(time);
-        fadeIn.setFillAfter(true);
-        for (int i = 0; i < inviews.size(); i++) {
-            final View view = inviews.get(i);
-            view.setClickable(true);
-            view.setEnabled(true);
-            view.setFocusable(true);
-            view.setVisibility(View.VISIBLE);
-            view.bringToFront();
-
-            view.startAnimation(fadeIn);
-
-        }
 
 
 
