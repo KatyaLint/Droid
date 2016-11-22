@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
@@ -13,6 +14,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
+import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by arisprung on 11/22/16.
@@ -21,6 +23,7 @@ import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 public class EnterPinActivity extends Activity {
     private FontButtonView pin_code_verification_next;
     private FontEditTextView pin_code_verification_pin;
+    private FontTextView resend_text;
     private HGBPreferencesManager hgbPrefrenceManager;
 
     @Override
@@ -29,12 +32,34 @@ public class EnterPinActivity extends Activity {
         setContentView(R.layout.pin_code_verification);
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         pin_code_verification_next = (FontButtonView) findViewById(R.id.pin_code_verification_next);
+        resend_text = (FontTextView)findViewById(R.id.resend_text);
         pin_code_verification_pin = (FontEditTextView) findViewById(R.id.pin_code_verification_pin);
 
         pin_code_verification_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 activateUserWithKey();
+            }
+        });
+
+        resend_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ConnectionManager.getInstance(EnterPinActivity.this).postUserActivation(
+                        hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL,""), new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        Toast.makeText(getApplicationContext(),"Activation code sent",Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onError(Object data) {
+                        HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.setMessageForError((String) data);
+                        errorHelper.show(getFragmentManager(), (String) data);
+
+                    }
+                });
+
             }
         });
     }

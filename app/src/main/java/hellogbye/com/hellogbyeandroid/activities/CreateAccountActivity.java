@@ -443,7 +443,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                     }
 
                 } else {
-                    //TODO Sign in
+                    Intent intent = new Intent(getApplicationContext(), NewLoginActivity.class);
+                    startActivity(intent); 
                 }
                 break;
             case R.id.arrow_back:

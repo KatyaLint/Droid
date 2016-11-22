@@ -26,12 +26,13 @@
 
     <ImageView
         android:id="@+id/arrow_back"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:layout_margin="@dimen/DP20"
-        android:src="@drawable/arrow_back"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/arrow_back"
         android:visibility="gone" />
 
     <include android:id="@+id/country_layout"

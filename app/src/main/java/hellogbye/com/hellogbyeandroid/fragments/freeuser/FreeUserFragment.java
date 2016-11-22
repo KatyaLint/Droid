@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.LoginActivity;
+import hellogbye.com.hellogbyeandroid.activities.NewLoginActivity;
 import hellogbye.com.hellogbyeandroid.activities.SignUpActivity;
 
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
@@ -247,7 +247,7 @@ public class FreeUserFragment extends HGBAbstractFragment {
         free_user_sign_in_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                Intent intent = new Intent(getActivity(), NewLoginActivity.class);
                 startActivity(intent);
             //    getFlowInterface().goToFragment(ToolBarNavEnum.HOTEL.getNavNumber(),null);
 

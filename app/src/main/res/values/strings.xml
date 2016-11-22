@@ -335,7 +335,7 @@
     <string name="used_geo_location">This will be used for better targeting of your geo-location</string>
 
     <string name="pin_code_title">Didn\'t recived the text message?</string>
-    <string name="pin_code_resend"><u>Resend the message</u></string>
+    <string name="pin_code_resend"><u>Resend the message\nSend the code to my email</u></string>
     <string name="pin_code_send_email"><u>Send the code to my email</u></string>
 
     <string name="free_user_options">This option is available \nonly for registered users</string>

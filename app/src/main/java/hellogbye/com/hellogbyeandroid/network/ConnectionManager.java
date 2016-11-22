@@ -210,6 +210,32 @@ public class ConnectionManager {
         }, true);
     }
 
+    public void postResendActivateEmail(String email, final ServerRequestListener listener) {
+
+        String url = getURL(Services.RESEND_ACTIVATION);
+        url = url+email;
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, true);
+    }
+
     public void postUserCreateAccount(UserSignUpDataVO userData, final ServerRequestListener listener) {
 
         String url = getURL(Services.USER_PROFILE_REGISTER);
@@ -2024,7 +2050,8 @@ public class ConnectionManager {
                 HOTEL_SEARCH("hotel/Search"),
                 DEFAULT_PROFILES("TravelPreference/Profiles/Defaults"),
                 STATIC_CITY_AUTOCOMPLETE("statics/cityautocomplete"),
-                COMPANION_SEARCH("UserProfile/Search?count=5&excludeCompanions=false&");
+                COMPANION_SEARCH("UserProfile/Search?count=5&excludeCompanions=false&"),
+                RESEND_ACTIVATION("UserProfile/ResendWelcomeEmail?email=");
 
                 String url;
                 Services(String url){

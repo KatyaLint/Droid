@@ -279,7 +279,7 @@ public class SignUpActivity extends BaseActivity {
                 hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, null);
                 hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, null);
 
-                Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+                Intent intent = new Intent(getBaseContext(), NewLoginActivity.class);
                 startActivity(intent);
                 finish();
 
