@@ -119,7 +119,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         initView();
         userData = new UserSignUpDataVO();
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
-        countDownTimer = new AnimationCountDownTimer(5000, 1000);
+        countDownTimer = new AnimationCountDownTimer(getResources().getInteger(R.integer.create_account_animation_duration), 1000);
         animateWelcomeView();
     }
 
@@ -231,7 +231,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     private void goToAddressView(View textView) {
         HGBUtility.hideKeyboard(getApplicationContext(), textView);
-        if (true) {
+        if (true) {//TODO checkAdressValid
             animateAddressView(true);
         } else {
             Toast.makeText(getApplicationContext(), "Password not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
@@ -240,7 +240,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     private void goToEmailView(View textView) {
         HGBUtility.hideKeyboard(getApplicationContext(), textView);
-        if (true) {
+        if (true) {//TODO checkEmailIsValid
             animateEmailView(true);
         } else {
             Toast.makeText(getApplicationContext(), "Name not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
@@ -263,10 +263,10 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     private void gotoPasswordView(View textView) {
         HGBUtility.hideKeyboard(getApplicationContext(), textView);
-        if (true) {
+        if (true) {// TODO checkpassword()
             animatePasswordView(true);
         } else {
-            Toast.makeText(getApplicationContext(), "Password not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
+            Toast.makeText(getApplicationContext(), R.string.password_not_valid, Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
         }
     }
 
@@ -285,11 +285,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     private void animateNameView(boolean animateFoward) {
         disableScreen();
-        if(animateFoward){
-
-        }else{
-
-        }
 
         ArrayList<View> secondViewViews = new ArrayList<>();
         secondViewViews.add(mLabel2);
@@ -303,16 +298,16 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         firstViewViews.add(mLogoOnBoarding);
         firstViewViews.add(mCreateAccount);
         firstViewViews.add(mTryNow);
-        mLabel1.setText("Tell us your name");
-        mLabel2.setText("Your name will allow you to book travel on our platform");
+        mLabel1.setText(R.string.tell_name);
+        mLabel2.setText(R.string.allow_book);
 
         if(animateFoward){
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),firstViewViews,secondViewViews);
-            mSignInTextView.setText("Next");
+            mSignInTextView.setText(R.string.next);
             CURRENT_STATE = NAME_STATE;
 
         }else{
-            mSignInTextView.setText("Login");
+            mSignInTextView.setText(R.string.login_);
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),secondViewViews,firstViewViews);
             CURRENT_STATE = WELCOME_STATE;
         }
@@ -327,21 +322,18 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         firstViewViews.add(mFirstName);
         firstViewViews.add(mLastName);
 
-
         ArrayList<View> secondViewViews = new ArrayList<>();
         secondViewViews.add(mEmail);
 
-
-
         if(animateFoward){
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),firstViewViews,secondViewViews);
-            animateLabels("What's your email?","We need your email to securely");
+            animateLabels(getString(R.string.whats_email),getString(R.string.email_secure));
             CURRENT_STATE = EMAIL_STATE;
 
         }else{
 
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),secondViewViews,firstViewViews);
-            animateLabels("Tell us your name","Your name will allow you to book travel on our platform");
+            animateLabels(getString(R.string.tell_name),getString(R.string.allow_book));
             CURRENT_STATE = NAME_STATE;
         }
         updateProgressBar();
@@ -362,19 +354,18 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
         if(animateFoward){
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),firstViewViews,secondViewViews);
-            animateLabels("Create your password","Please choose a password that is at least 8 characters in length");
+            animateLabels(getString(R.string.create_password),getString(R.string.choose_password));
             CURRENT_STATE = PASSWORD_STATE;
 
         }else{
 
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),secondViewViews,firstViewViews);
-            animateLabels("What's your email?","We need your email to securely");
+            animateLabels(getString(R.string.whats_email),getString(R.string.email_secure));
             CURRENT_STATE = EMAIL_STATE;
         }
         animatePasswordStaticViews(animateFoward);
         updateProgressBar();
     }
-
 
     private void animateAddressView(boolean animateFoward) {
         disableScreen();
@@ -383,25 +374,22 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         firstViewViews.add(mPassword1);
         firstViewViews.add(mPassword2);
 
-
         ArrayList<View> secondViewViews = new ArrayList<>();
         secondViewViews.add(mAddressLayout);
 
-
         if(animateFoward){
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),firstViewViews,secondViewViews);
-            animateLabels("We need your Address","This will be used for better targeting of your geo-location");
+                animateLabels(getString(R.string.need_address),getString(R.string.used_geo_location));
             CURRENT_STATE = ADDRESS_STATE;
 
         }else{
 
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),secondViewViews,firstViewViews);
-            animateLabels("Create your password","Please choose a password that is at least 8 characters in length");
+            animateLabels(getString(R.string.create_password),getString(R.string.choose_password));
             CURRENT_STATE = PASSWORD_STATE;
         }
         animateFourthToFifthStaticViews(animateFoward);
         updateProgressBar();
-
     }
 
 
@@ -455,9 +443,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                 }
                 break;
             case R.id.arrow_back:
-
                 processBackPressed();
-
                 break;
             case R.id.create_user:
                 sendSignUpDataToServer();
@@ -690,7 +676,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
             public void onSuccess(Object data) {
                 mProvinceItems = (List<ProvincesItem>) data;
                 if (mProvinceItems.size() > 0) {
-
                     setDropDownItems();
                 }
             }
@@ -745,15 +730,12 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
             @Override
             public void afterTextChanged(Editable editable) {
-
-
             }
         });
 
     }
 
     private void animateLabels(final String s,final String s1) {
-
         mLabel1.clearAnimation();
         mLabel2.clearAnimation();
         AlphaAnimation fadeoutLabel1 = new AlphaAnimation(1.0f,0.0f);
@@ -818,8 +800,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                 resetPassword();
                 //sign_up_layout_ll.setVisibility(View.GONE);
                // pin_code_verification_layout.setVisibility(View.VISIBLE);
-
-
             }
 
             @Override
@@ -832,9 +812,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         });
     }
 
-
     private void resetPassword() {
-
         LayoutInflater li = LayoutInflater.from(CreateAccountActivity.this);
         final View promptsView = li.inflate(R.layout.popup_confirm_email_sent, null);
 
@@ -844,7 +822,6 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                     public void itemSelected(String inputItem) {
 
                     }
-
                     @Override
                     public void itemCanceled() {
 

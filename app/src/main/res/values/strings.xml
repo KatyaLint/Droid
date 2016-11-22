@@ -319,5 +319,16 @@
     <string name="change_hotel">CHANGE HOTEL</string>
     <string name="show_more">Show more</string>
     <string name="show_less">Show Less</string>
+    <string name="password_not_valid">Password not valid</string>
+    <string name="tell_name">Tell us your name</string>
+    <string name="allow_book">Your name will allow you to book travel on our platform</string>
+    <string name="next">Next</string>
+    <string name="login_">Login</string>
+    <string name="whats_email">What\'s your email?</string>
+    <string name="email_secure">We need your email to securely</string>
+    <string name="create_password">Create your password</string>
+    <string name="choose_password">Please choose a password that is at least 8 characters in length</string>
+    <string name="need_address">We need your Address</string>
+    <string name="used_geo_location">This will be used for better targeting of your geo-location</string>
 
 </resources>
