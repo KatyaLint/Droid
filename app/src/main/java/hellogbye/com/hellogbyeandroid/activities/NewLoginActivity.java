@@ -43,7 +43,7 @@ public class NewLoginActivity extends Activity {
         mEmailEditText = (FontEditTextView) findViewById(R.id.username);
         mPasswordEditText = (FontEditTextView) findViewById(R.id.login_password);
         mRemmeberMeCheckbox = (CheckBox) findViewById(R.id.remmember_me_checkbox);
-        mForgotPasswordTextView = (FontTextView) findViewById(R.id.forgotpassword);
+        ///mForgotPasswordTextView = (FontTextView) findViewById(R.id.forgotpassword);
         login = (FontButtonView)findViewById(R.id.login_button);
 
         remember_me = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME,false);
@@ -59,13 +59,13 @@ public class NewLoginActivity extends Activity {
         }
 
 
-        mForgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO forgot password
-                resetPassword();
-            }
-        });
+//        mForgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //TODO forgot password
+//                resetPassword();
+//            }
+//        });
 
 
         login.setOnClickListener(new View.OnClickListener() {

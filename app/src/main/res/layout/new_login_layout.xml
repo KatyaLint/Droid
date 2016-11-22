@@ -17,6 +17,8 @@
         android:textSize="@dimen/SP32"
         app:fontName="dinnextltpro_mediumcond.ttf" />
 
+
+
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/username"
         style="@style/new_sign_up_text_color"
