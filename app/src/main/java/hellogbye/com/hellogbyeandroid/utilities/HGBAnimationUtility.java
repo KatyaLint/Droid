@@ -24,12 +24,10 @@ public class HGBAnimationUtility {
        final long time = context.getResources().getInteger(R.integer.create_account_animation_duration)/2;
         AlphaAnimation fadeOut = new AlphaAnimation (1.0f, 0.0f);
         fadeOut.setDuration(time);
-        fadeOut.setFillAfter(true);
 
         for (int i = 0; i < outviews.size(); i++) {
             outviews.get(i).setEnabled(false);
 //            outviews.get(i).setFocusable(false);
-            outviews.get(i).setVisibility(View.GONE);
             outviews.get(i).startAnimation(fadeOut);
             if(i==0){
                 fadeOut.setAnimationListener(new Animation.AnimationListener() {
@@ -43,6 +41,11 @@ public class HGBAnimationUtility {
                         AlphaAnimation fadeIn = new AlphaAnimation (0.0f, 1.0f);
                         fadeIn.setDuration(time);
                         fadeIn.setFillAfter(true);
+                        for (int i = 0; i < outviews.size(); i++) {
+
+                            outviews.get(i).setVisibility(View.GONE);
+
+                        }
                         for (int i = 0; i < inviews.size(); i++) {
                             inviews.get(i).setEnabled(true);
                             inviews.get(i).setFocusable(true);
@@ -50,6 +53,8 @@ public class HGBAnimationUtility {
                             inviews.get(i).bringToFront();
                             inviews.get(i).startAnimation(fadeIn);
                         }
+
+
                     }
                     @Override
                     public void onAnimationRepeat(Animation animation) {
