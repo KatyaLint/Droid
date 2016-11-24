@@ -24,10 +24,9 @@ public class HGBAnimationUtility {
        final long time = context.getResources().getInteger(R.integer.create_account_animation_duration)/2;
         AlphaAnimation fadeOut = new AlphaAnimation (1.0f, 0.0f);
         fadeOut.setDuration(time);
-
+        //START FADING OUT ALL VISIBLE  VIEWS
         for (int i = 0; i < outviews.size(); i++) {
             outviews.get(i).setEnabled(false);
-//            outviews.get(i).setFocusable(false);
             outviews.get(i).startAnimation(fadeOut);
             if(i==0){
                 fadeOut.setAnimationListener(new Animation.AnimationListener() {
@@ -35,17 +34,18 @@ public class HGBAnimationUtility {
                     public void onAnimationStart(Animation animation) {
 
                     }
-
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         AlphaAnimation fadeIn = new AlphaAnimation (0.0f, 1.0f);
                         fadeIn.setDuration(time);
                         fadeIn.setFillAfter(true);
+                        //THIS IS BECAUSE OF ANNOYING FLASHING BUG
                         for (int i = 0; i < outviews.size(); i++) {
 
                             outviews.get(i).setVisibility(View.GONE);
 
                         }
+                        //START FADE IN VIEWS
                         for (int i = 0; i < inviews.size(); i++) {
                             inviews.get(i).setEnabled(true);
                             inviews.get(i).setFocusable(true);
@@ -53,8 +53,6 @@ public class HGBAnimationUtility {
                             inviews.get(i).bringToFront();
                             inviews.get(i).startAnimation(fadeIn);
                         }
-
-
                     }
                     @Override
                     public void onAnimationRepeat(Animation animation) {
@@ -63,10 +61,6 @@ public class HGBAnimationUtility {
                 });
             }
         }
-
-
-
-
     }
 
     public static void FadInView(Context context,final View view){
@@ -76,17 +70,12 @@ public class HGBAnimationUtility {
         fadeIn.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-
             }
-
             @Override
             public void onAnimationEnd(Animation animation) {
-
             }
-
             @Override
             public void onAnimationRepeat(Animation animation) {
-
             }
         });
 
