@@ -27,9 +27,8 @@ public class HGBAnimationUtility {
         fadeOut.setFillAfter(true);
 
         for (int i = 0; i < outviews.size(); i++) {
-            outviews.get(i).setClickable(false);
             outviews.get(i).setEnabled(false);
-            //outviews.get(i).setFocusable(false);
+//            outviews.get(i).setFocusable(false);
             outviews.get(i).setVisibility(View.GONE);
             outviews.get(i).startAnimation(fadeOut);
             if(i==0){
@@ -45,16 +44,13 @@ public class HGBAnimationUtility {
                         fadeIn.setDuration(time);
                         fadeIn.setFillAfter(true);
                         for (int i = 0; i < inviews.size(); i++) {
-                            inviews.get(i).setClickable(true);
+                            inviews.get(i).setEnabled(true);
                             inviews.get(i).setFocusable(true);
                             inviews.get(i).setVisibility(View.VISIBLE);
                             inviews.get(i).bringToFront();
                             inviews.get(i).startAnimation(fadeIn);
-
                         }
-
                     }
-
                     @Override
                     public void onAnimationRepeat(Animation animation) {
 

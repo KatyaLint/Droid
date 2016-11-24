@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:hint="Password"
-        android:inputType="textVisiblePassword"
+        android:inputType="textPassword"
         android:imeOptions="actionDone"
         android:maxLines="1"
         android:singleLine="true" />

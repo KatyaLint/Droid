@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.SpannableString;
@@ -34,6 +35,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
+import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.onboarding.OnBoardingPager;
@@ -114,13 +116,14 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private List<ProvincesItem> mProvinceItems;
     private ArrayAdapter adapter;
     private UserSignUpDataVO userData;
-
-
+    private   String android_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account_layout);
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
+         android_id = Settings.Secure.getString(CreateAccountActivity.this.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
         checkFlow();
         initView();
         userData = new UserSignUpDataVO();
@@ -163,7 +166,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         mHyperlink = (FontTextView) findViewById(R.id.sign_up_hyperlink);
         mCreateAccount = (FontButtonView) findViewById(R.id.create_account);
         mCreate = (FontButtonView) findViewById(R.id.create_user);
-        mTryNow = (FontButtonView) findViewById(R.id.try_now);
+        mTryNow = (FontButtonView) findViewById(R.id.try_now_new_create);
         mFirstName = (FontEditTextView) findViewById(R.id.first_name);
         mLastName = (FontEditTextView) findViewById(R.id.last_name);
         mPassword1 = (FontEditTextView) findViewById(R.id.password1);
@@ -180,6 +183,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
         editTextViewListners();
         mUSLayout.setOnClickListener(this);
+        mTryNow.setOnClickListener(this);
         mCanadaLayout.setOnClickListener(this);
         mCreateAccount.setOnClickListener(this);
         mStateProvince.setOnClickListener(this);
@@ -198,6 +202,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                         || actionId == EditorInfo.IME_ACTION_DONE
                         || keyEvent.getAction() == KeyEvent.ACTION_DOWN
                         && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                    userData.setPassword(mPassword1.getText().toString());
+                    userData.setConfirmPassword(mPassword2.getText().toString());
                     goToAddressView(textView);
                     return true;
                 }
@@ -212,6 +218,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                         || actionId == EditorInfo.IME_ACTION_DONE
                         || keyEvent.getAction() == KeyEvent.ACTION_DOWN
                         && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                    userData.setFirstName(mFirstName.getText().toString());
+                    userData.setLastName(mLastName.getText().toString());
                     goToEmailView();
                     return true;
                 }
@@ -227,6 +235,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                         || actionId == EditorInfo.IME_ACTION_DONE
                         || keyEvent.getAction() == KeyEvent.ACTION_DOWN
                         && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                    userData.setUserEmail(mEmail.getText().toString());
                     gotoPasswordView(textView);
                     return true;
                 }
@@ -238,7 +247,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     private void goToAddressView(View textView) {
         HGBUtility.hideKeyboard(getApplicationContext(), textView);
-        if (checkPasswordValid()) {//TODO checkAdressValid
+        if (checkPasswordValid()) {//TODO checkPasswordValid()
             animateAddressView(true);
         } else {
             Toast.makeText(getApplicationContext(), "Address not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
@@ -247,7 +256,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     private void goToEmailView() {
         HGBUtility.hideKeyboard(getApplicationContext(), mEmail);
-        if (checkNameIsValid()) {
+        if (checkNameIsValid()) {//checkNameIsValid()
             animateEmailView(true);
         } else {
             Toast.makeText(getApplicationContext(), "Please enter name", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
@@ -264,7 +273,14 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     private boolean checkPasswordValid() {
         if (mPassword1.getText().length() > 1 && mPassword2.getText().length() > 1) {
             if(mPassword1.getText().toString().equalsIgnoreCase(mPassword2.getText().toString())){
-                return true;
+
+                if(mPassword1.getText().toString().matches( "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,12}$")){
+                    return true;
+                }else{
+                    Toast.makeText(getApplicationContext(), "Password must contain 8-12 characters, with at least one number, one uppercase letter, one lowercase letter", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
+                    return false;
+                }
+
             }else{
                 Toast.makeText(getApplicationContext(), "Passwords dont match", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
                 return false;
@@ -280,7 +296,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     private void gotoPasswordView(View textView) {
         HGBUtility.hideKeyboard(getApplicationContext(), textView);
-        if (HGBUtility.checkEmailIsValid(mEmail.getText())) {// TODO checkpassword()
+        if (HGBUtility.checkEmailIsValid(mEmail.getText())) {// TODO HGBUtility.checkEmailIsValid(mEmail.getText()()
             animatePasswordView(true);
         } else {
             Toast.makeText(getApplicationContext(), "Email not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
@@ -327,6 +343,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
             mSignInTextView.setText(R.string.login_);
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),secondViewViews,firstViewViews);
             CURRENT_STATE = WELCOME_STATE;
+
         }
         updateProgressBar();
         animateFirstToSecondStaticViews(animateFoward);
@@ -444,7 +461,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                 if (CURRENT_STATE != WELCOME_STATE) {
                     if (CURRENT_STATE == NAME_STATE) {
                         userData.setFirstName(mFirstName.getText().toString());
-                        userData.setLastName(mFirstName.getText().toString());
+                        userData.setLastName(mLastName.getText().toString());
+
                         goToEmailView();
                     } else if (CURRENT_STATE == EMAIL_STATE) {
                         userData.setUserEmail(mEmail.getText().toString());
@@ -452,6 +470,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                     } else if (CURRENT_STATE == PASSWORD_STATE) {
                         userData.setPassword(mPassword1.getText().toString());
                         userData.setConfirmPassword(mPassword2.getText().toString());
+
                         goToAddressView(view);
                     }
 
@@ -481,6 +500,33 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
             case R.id.state_province:
                 userSelectedState();
                 break;
+
+            case R.id.try_now_new_create:
+
+                ConnectionManager.getInstance(CreateAccountActivity.this).
+                        deviceAuthentication(android_id, new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        UserLoginCredentials user = (UserLoginCredentials) data;
+                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
+                        hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER,true);
+                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
+                        String freeUserEmail = "demo"+ user.getUserprofileid()+"@hellogbye.com";
+                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, freeUserEmail);
+//                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
+                        goToMainActivity();
+
+                    }
+
+                    @Override
+                    public void onError(Object data) {
+                        HGBErrorHelper errorHelper = new HGBErrorHelper();
+                        errorHelper.setMessageForError((String) data);
+                        errorHelper.show(getFragmentManager(), (String) data);
+                    }
+                });
+                break;
+
         }
     }
 

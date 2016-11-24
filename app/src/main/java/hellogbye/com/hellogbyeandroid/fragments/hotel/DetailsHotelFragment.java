@@ -37,7 +37,7 @@ public class DetailsHotelFragment extends HGBAbstractFragment  implements  OnMap
 
     private SupportMapFragment fragment;
     private ExpandableHeightGridView mGridView;
-    private  NodesVO mNodesVO;
+    private NodesVO mNodesVO;
     private GoogleMap mMap;
     private boolean permissionDenied = true;
 
