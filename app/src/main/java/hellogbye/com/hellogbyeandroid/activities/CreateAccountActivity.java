@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ClickableSpan;
 import android.view.KeyEvent;
@@ -44,8 +45,10 @@ import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
+import static hellogbye.com.hellogbyeandroid.R.id.email;
 import static hellogbye.com.hellogbyeandroid.R.id.pin_code_verification_layout;
 import static hellogbye.com.hellogbyeandroid.R.id.sign_up_layout_ll;
+import static hellogbye.com.hellogbyeandroid.R.id.textView;
 
 /**
  * Created by arisprung on 11/8/16.
@@ -209,7 +212,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                         || actionId == EditorInfo.IME_ACTION_DONE
                         || keyEvent.getAction() == KeyEvent.ACTION_DOWN
                         && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                    goToEmailView(textView);
+                    goToEmailView();
                     return true;
                 }
                 // Return true if you have consumed the action, else false.
@@ -235,19 +238,19 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     private void goToAddressView(View textView) {
         HGBUtility.hideKeyboard(getApplicationContext(), textView);
-        if (true) {//TODO checkAdressValid
+        if (checkPasswordValid()) {//TODO checkAdressValid
             animateAddressView(true);
         } else {
-            Toast.makeText(getApplicationContext(), "Password not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
+            Toast.makeText(getApplicationContext(), "Address not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
         }
     }
 
-    private void goToEmailView(View textView) {
-        HGBUtility.hideKeyboard(getApplicationContext(), textView);
-        if (true) {//TODO checkEmailIsValid
+    private void goToEmailView() {
+        HGBUtility.hideKeyboard(getApplicationContext(), mEmail);
+        if (checkNameIsValid()) {
             animateEmailView(true);
         } else {
-            Toast.makeText(getApplicationContext(), "Name not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
+            Toast.makeText(getApplicationContext(), "Please enter name", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
         }
     }
 
@@ -258,19 +261,29 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         return false;
     }
 
-    private boolean checkEmailIsValid() {
-        if (mEmail.getText().length() > 1) {
-            return true;
+    private boolean checkPasswordValid() {
+        if (mPassword1.getText().length() > 1 && mPassword2.getText().length() > 1) {
+            if(mPassword1.getText().toString().equalsIgnoreCase(mPassword2.getText().toString())){
+                return true;
+            }else{
+                Toast.makeText(getApplicationContext(), "Passwords dont match", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
+                return false;
+            }
+
+        }else{
+            Toast.makeText(getApplicationContext(), "Passwords not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
+            return false;
         }
-        return false;
+
     }
+
 
     private void gotoPasswordView(View textView) {
         HGBUtility.hideKeyboard(getApplicationContext(), textView);
-        if (true) {// TODO checkpassword()
+        if (HGBUtility.checkEmailIsValid(mEmail.getText())) {// TODO checkpassword()
             animatePasswordView(true);
         } else {
-            Toast.makeText(getApplicationContext(), R.string.password_not_valid, Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
+            Toast.makeText(getApplicationContext(), "Email not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
         }
     }
 
@@ -432,7 +445,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
                     if (CURRENT_STATE == NAME_STATE) {
                         userData.setFirstName(mFirstName.getText().toString());
                         userData.setLastName(mFirstName.getText().toString());
-                        goToEmailView(view);
+                        goToEmailView();
                     } else if (CURRENT_STATE == EMAIL_STATE) {
                         userData.setUserEmail(mEmail.getText().toString());
                         gotoPasswordView(view);

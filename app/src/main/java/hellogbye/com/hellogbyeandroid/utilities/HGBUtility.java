@@ -136,6 +136,10 @@ public class HGBUtility {
         return bitmap;
     }
 
+    public final static boolean checkEmailIsValid(CharSequence target) {
+        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
+
     public static void getAndSaveUserImage(String imageUrl, ImageView imageView,final ImageView imageViewSec){
 
         DisplayImageOptions options = new DisplayImageOptions.Builder()
