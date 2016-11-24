@@ -861,6 +861,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
             @Override
             public void onSuccess(Object data) {
                 hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
+                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, userData.getUserEmail());
                 Intent intent = new Intent(getBaseContext(), EnterPinActivity.class);
                 startActivity(intent);
                 finish();

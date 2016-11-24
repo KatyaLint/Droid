@@ -511,3 +511,4 @@ Code changing:
         - new error parser
         - comapanion details change
         - companion search fix
+        - NEW Create user flow!
