@@ -34,6 +34,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.userprofilesadapter.UserProfilesAdapter;
+import hellogbye.com.hellogbyeandroid.fragments.alternative.FareClassFragment;
 import hellogbye.com.hellogbyeandroid.fragments.cnc.CNCFragment;
 import hellogbye.com.hellogbyeandroid.fragments.hotel.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.hotel.SelectNewHotelFragment;
@@ -778,6 +779,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             case ALTERNATIVE_FLIGHT_ONE_WAY_TRIP:
                 fragment = AlternativeFlightFragment.newInstance(navPosition);
                 stashToBack = false;
+                break;
+            case FARE_CLASS_FRAGMENT:
+                fragment = FareClassFragment.newInstance(navPosition);
                 break;
             case HOTEL:
                 fragment = HotelFragment.newInstance(navPosition);

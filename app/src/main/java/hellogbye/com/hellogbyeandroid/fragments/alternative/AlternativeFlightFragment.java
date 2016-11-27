@@ -16,7 +16,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -29,6 +28,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.gson.Gson;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import java.io.File;
 import java.util.ArrayList;
@@ -43,6 +43,7 @@ import hellogbye.com.hellogbyeandroid.adapters.hotel.FlightAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.AirportCoordinatesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.FairclassPreferencesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
@@ -134,7 +135,9 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
     }
 
 
-
+    public interface IFareClassClickListener{
+        void onFareClassClicked(String position);
+    }
 
     public void initializeAdapter(final NodesVO currentNode){
 
@@ -147,7 +150,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         ArrayList<LegsVO> legsFlights = currentNode.getLegs();
         String allFlights =  setAllFlights(currentNode);
 
-        mAdapter = new FlightAdapter(currentNode, legsFlights);
+        mAdapter = new FlightAdapter(currentNode, legsFlights, getContext());
 
         mAdapter.setWebViewLinkClicked(new IWebViewClicked(){
             @Override
@@ -157,6 +160,26 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
                 startActivity(intent);
             }
         });
+
+
+        mAdapter.setOnFareClassClickListener(new IFareClassClickListener(){
+
+            @Override
+            public void onFareClassClicked(String position) {
+
+
+                int positionNumber = Integer.parseInt(position);
+                ArrayList<FairclassPreferencesVO> dropDown = currentNode.getDropdownoptions();
+                FairclassPreferencesVO flightFareClass = dropDown.get(positionNumber);
+                flightFareClass.setCurrencyType(currentNode.getmCurrency());
+                Bundle args = new Bundle();
+                Gson gson = new Gson();
+                String json = gson.toJson(flightFareClass);
+                args.putString("alternative_rooms", json);
+                getFlowInterface().goToFragment(ToolBarNavEnum.FARE_CLASS_FRAGMENT.getNavNumber(), args);
+            }
+        });
+
 
         if(!currentNode.ismIsAlternative()){
             select_flight.setVisibility(View.GONE);

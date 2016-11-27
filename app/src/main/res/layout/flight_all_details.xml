@@ -6,9 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
+
     <include
 
         layout="@layout/flight_ticket_details"/>
+
+
+  <include layout="@layout/flight_details_fare_class"/>
 
   <!--  android:id="@+id/flight_ticket_details_layout"
     android:layout_width="fill_parent"

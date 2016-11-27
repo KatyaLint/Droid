@@ -14,30 +14,37 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.FairclassPreferencesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.RoomsVO;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
 public class AlternativeFlightFareClassAdapter extends PagerAdapter {
 
-    private ArrayList<RoomsVO> mArrayList;
+  //  private LegsVO mDataset;
     private ImageLoader imageLoader;
     private Context mContext;
     private LayoutInflater layoutInflater;
-    private AlternativeFlightFareClassAdapter.OnLinearLayoutClickListener onLinearLayoutClickListner;
+    private ArrayList<FairclassPreferencesVO> dataset;
+    private AlternativeFlightFragment.IFareClassClickListener onClickFareClass;
 
 
-
-
-    public AlternativeFlightFareClassAdapter(ArrayList<RoomsVO> myDataset, Context context) {
-        mArrayList = myDataset;
+    public AlternativeFlightFareClassAdapter(Context context) {
+      //  this.mDataset = dataset;
         mContext = context;
     }
 
-    @Override
-    public int getCount() {
-        return mArrayList.size();
+    public AlternativeFlightFareClassAdapter(ArrayList<FairclassPreferencesVO> dropDownOptions, Context mContext) {
+        this.dataset = dropDownOptions;
+        this.mContext = mContext;
     }
+
+    public void setDataset(ArrayList<FairclassPreferencesVO> dataset){
+        this.dataset = dataset;
+    }
+
 
     @Override
     public int getItemPosition(Object object){
@@ -45,12 +52,17 @@ public class AlternativeFlightFareClassAdapter extends PagerAdapter {
     }
 
 
-    @Override public float getPageWidth(int position) { return(0.8f); }
+    @Override public float getPageWidth(int position) { return(0.6f); }
+
+    @Override
+    public int getCount() {
+        return this.dataset.size();
+    }
 
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
 
-         ImageView flight_details_fareclass_image;
+         final ImageView flight_details_fareclass_image;
          FontTextView flight_details_fareclass_type;
          FontTextView flight_details_fareclass_price;
          ImageView flight_details_fareclass_selected;
@@ -59,10 +71,41 @@ public class AlternativeFlightFareClassAdapter extends PagerAdapter {
         View itemLayoutView = layoutInflater.inflate(R.layout.flight_details_gallery, container,
                 false);
 
+
+        FairclassPreferencesVO fareClassPreference = this.dataset.get(position);
         flight_details_fareclass_image = (ImageView) itemLayoutView.findViewById(R.id.flight_details_fareclass_image);
         flight_details_fareclass_type = (FontTextView) itemLayoutView.findViewById(R.id.flight_details_fareclass_type);
         flight_details_fareclass_price= (FontTextView) itemLayoutView.findViewById(R.id.flight_details_fareclass_price);
         flight_details_fareclass_selected = (ImageView)itemLayoutView.findViewById(R.id.flight_details_fareclass_selected);
+
+
+        flight_details_fareclass_price.setText("" + fareClassPreference.getCost());
+
+        String fareClassType = fareClassPreference.getFareclass();
+        if(fareClassType.equals("Economy")){
+            flight_details_fareclass_image.setImageDrawable(mContext.getResources().getDrawable(R.drawable.economy_class));
+        }else{
+            flight_details_fareclass_image.setImageDrawable(mContext.getResources().getDrawable(R.drawable.business_class));
+        }
+
+
+        flight_details_fareclass_type.setText(fareClassPreference.getFarepreference());
+
+
+        if(fareClassPreference.isalternative()){
+            flight_details_fareclass_selected.setVisibility(View.GONE);
+        }else{
+            flight_details_fareclass_selected.setVisibility(View.VISIBLE);
+        }
+        flight_details_fareclass_image.setTag(position);
+        flight_details_fareclass_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String position = flight_details_fareclass_image.getTag().toString();
+                onClickFareClass.onFareClassClicked(position);
+            }
+        });
+/*
         RoomsVO room = mArrayList.get(position);
         if(imageLoader == null){
             imageLoader = ImageLoader.getInstance();
@@ -74,6 +117,7 @@ public class AlternativeFlightFareClassAdapter extends PagerAdapter {
         else{
             flight_details_fareclass_image.setBackgroundResource(R.drawable.room_placeholder);
         }
+*/
 
 
 
@@ -110,18 +154,9 @@ public class AlternativeFlightFareClassAdapter extends PagerAdapter {
         return view == ((View)object);
     }
 
-
-
-    public interface OnLinearLayoutClickListener {
-        void onItemClick(View view, int position);
+    public void setOnClickFareClass(AlternativeFlightFragment.IFareClassClickListener onClickFareClass) {
+        this.onClickFareClass = onClickFareClass;
     }
-
-
-
-    public void SetOnItemClickListener(final AlternativeFlightFareClassAdapter.OnLinearLayoutClickListener mItemClickListener) {
-        onLinearLayoutClickListner = mItemClickListener;
-    }
-
 
 
 }

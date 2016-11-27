@@ -12,7 +12,10 @@
     android:src="@drawable/b_g_android" >
 
 
-    <include android:visibility="gone" android:id="@+id/pin_code_verification_layout" layout="@layout/pin_code_verification"/>
+    <include
+        android:visibility="gone"
+        android:id="@+id/pin_code_verification_layout"
+        layout="@layout/pin_code_verification"/>
 
 
     <LinearLayout

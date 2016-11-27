@@ -41,7 +41,8 @@ public enum ToolBarNavEnum {
     ALTERNATIVE_FLIGHT_ONE_WAY_TRIP(35,"Flight Details"),
     FREE_USER_FRAGMENT(36,"Member Only"),
     SELECT_HOTEL_FRAGMENT(37,"Select Hotel"),
-    SELECT_ROOM_FRAGMENT(38,"Room Type");
+    SELECT_ROOM_FRAGMENT(38,"Room Type"),
+    FARE_CLASS_FRAGMENT(39,"Fare Class");
 
 
 

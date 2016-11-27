@@ -26,11 +26,11 @@
 
             <ImageView
                 android:id="@+id/flight_details_fareclass_image"
-                android:layout_width="@dimen/DP300"
-                android:layout_height="@dimen/DP150"
-                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-                />
+                android:scaleType="fitXY" />
+
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/DP60"

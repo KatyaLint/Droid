@@ -24,6 +24,9 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     private String dateOfCell = "";
     private String calenderDay = "";
 
+    @SerializedName("currency")
+    private String mCurrency;
+
     @SerializedName("totalpenalty")
     private double totalpenalty;
 
@@ -33,6 +36,10 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     //-------Flight-----------------------
     @SerializedName("legs")
     private ArrayList<LegsVO> legs = new ArrayList<LegsVO>();
+
+    @SerializedName("dropdownoptions")
+    private ArrayList<FairclassPreferencesVO> dropdownoptions = new ArrayList<>();
+
 
     @SerializedName("flighttime")
     private String mFlightTime;
@@ -642,5 +649,21 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
 
     public void setmOperator(String mOperator) {
         this.mOperator = mOperator;
+    }
+
+    public ArrayList<FairclassPreferencesVO> getDropdownoptions() {
+        return dropdownoptions;
+    }
+
+    public void setDropdownoptions(ArrayList<FairclassPreferencesVO> dropdownoptions) {
+        this.dropdownoptions = dropdownoptions;
+    }
+
+    public String getmCurrency() {
+        return mCurrency;
+    }
+
+    public void setmCurrency(String mCurrency) {
+        this.mCurrency = mCurrency;
     }
 }

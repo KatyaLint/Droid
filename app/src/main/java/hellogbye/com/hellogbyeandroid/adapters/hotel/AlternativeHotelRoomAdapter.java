@@ -94,6 +94,7 @@ public class AlternativeHotelRoomAdapter extends PagerAdapter {
                 }
             }
         });
+
         container.addView(itemLayoutView);
         return itemLayoutView;
     }

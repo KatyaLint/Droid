@@ -1,5 +1,6 @@
 package hellogbye.com.hellogbyeandroid.adapters.hotel;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,13 +12,16 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.adapters.flights.AlternativeFlightFareClassAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.IWebViewClicked;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.FairclassPreferencesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
+import hellogbye.com.hellogbyeandroid.views.WrapContentViewPager;
 
 /**
  * Created by nyawka on 10/7/15.
@@ -31,9 +35,18 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
     private boolean alternativeButtonDisable;
     private String paid;
     private IWebViewClicked webViewLinkClicked;
+    private Context mContext;
+    private NodesVO currentNode;
 
-    public FlightAdapter(NodesVO currentNode, ArrayList<LegsVO> itemsData) {
+    private AlternativeFlightFareClassAdapter mFlightFareClassAdapter;
+    private AlternativeFlightFragment.IFareClassClickListener onFareClassClickListener;
+
+    public FlightAdapter(NodesVO currentNode, ArrayList<LegsVO> itemsData, Context context) {
         this.itemsData = itemsData;
+        this.mContext = context;
+        this.currentNode = currentNode;
+        mFlightFareClassAdapter = new AlternativeFlightFareClassAdapter(currentNode.getDropdownoptions(), mContext);
+
     }
 
     public void updateMyFlight(boolean mIsMyFlight) {
@@ -58,12 +71,22 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         LegsVO legFlightVO = itemsData.get(position);
         if (position != 0) {
             viewHolder.flight_tickets_rl.setVisibility(View.GONE);
+            viewHolder.flight_details_fare_class_ll.setVisibility(View.GONE);
         }
         else
         {
-            viewHolder.flight_cost.setText("$" + HGBUtility.roundNumber(getFlightCost()) + "USD");
+            viewHolder.flight_cost.setText("$" + HGBUtility.roundNumber(getFlightCost()) + currentNode.getmCurrency());
             viewHolder.flight_direction.setText(destinationFlights);
             viewHolder.flight_tickets_rl.setVisibility(View.VISIBLE);
+
+          //  ArrayList<FairclassPreferencesVO> dropDownOptions = currentNode.getDropdownoptions();
+
+            viewHolder.flight_details_fare_class_ll.setVisibility(View.VISIBLE);
+            viewHolder.flight_details_view_pager.setAdapter(mFlightFareClassAdapter);
+
+
+           // viewHolder.mFlightFareClassAdapter.setDataset(dropDownOptions);
+
         }
      /*   if (position != itemsData.size() - 1) {
             viewHolder.show_alternative_flights.setVisibility(View.GONE);
@@ -170,6 +193,11 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         this.webViewLinkClicked = webViewLinkClicked;
     }
 
+    public void setOnFareClassClickListener(AlternativeFlightFragment.IFareClassClickListener onFareClassClickListener) {
+        this.onFareClassClickListener = onFareClassClickListener;
+        mFlightFareClassAdapter.setOnClickFareClass(onFareClassClickListener);
+    }
+
     // inner class to hold a reference to each item of RecyclerView
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -209,6 +237,9 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
 
         private RelativeLayout flight_tickets_rl;
         private LinearLayout airplane_details_ll;
+        private WrapContentViewPager flight_details_view_pager;
+
+        private LinearLayout flight_details_fare_class_ll;
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
@@ -250,8 +281,16 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
                 }
             });
 
+            initializeViewPager(itemLayoutView);
+
+
         }
 
+
+        private void initializeViewPager(View mainView){
+            flight_details_view_pager = (WrapContentViewPager) mainView.findViewById(R.id.flight_details_view_pager);
+            flight_details_fare_class_ll = (LinearLayout)mainView.findViewById(R.id.flight_details_fare_class_ll);
+        }
 
         private void initializeSelecteOrMyFlight(View mainView) {
 /*            image_my_flight = (ImageView) mainView.findViewById(R.id.image_my_flight);

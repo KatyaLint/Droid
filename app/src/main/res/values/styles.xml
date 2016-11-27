@@ -76,8 +76,8 @@
     <style name="CustomButtonTextStyle">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="fontName">dinnextltpro_light.otf</item>
-        <item name="android:textSize">@dimen/SP20</item>
+        <item name="fontName">dinnextltpro_medium.otf</item>
+        <item name="android:textSize">@dimen/SP18</item>
         <item name="android:paddingBottom">@dimen/DP10</item>
         <item name="android:paddingTop">@dimen/DP10</item>
         <item name="android:gravity">center</item>

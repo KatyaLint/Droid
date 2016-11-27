@@ -168,6 +168,7 @@ public class HotelFragment extends HGBAbstractFragment {
         mHotelPriceFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_price);
         mHotelDaysFontTextView = (FontTextView) rootView.findViewById(R.id.days);
         mAlertnativeHotelFontTextView = (FontTextView) rootView.findViewById(R.id.show_alternative_hotel);
+
         mViewPager = (WrapContentViewPager) rootView.findViewById(R.id.rooms_view_pager);
         mHotelViewPager = (ViewPager) rootView.findViewById(R.id.hotel_image_view_pager);
 

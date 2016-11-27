@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+   <ScrollView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_above="@+id/flight_details_fare_class_select">
+
+       <include layout="@layout/flight_details_fare_class_item"/>
+
+   </ScrollView>
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:id="@+id/flight_details_fare_class_select"
+        android:layout_alignParentBottom="true"
+        style="@style/RedCustomButtonStyle"
+        android:text="SELECT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>
