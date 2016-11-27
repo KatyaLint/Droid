@@ -1,6 +1,7 @@
 package hellogbye.com.hellogbyeandroid.fragments.hotel;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -24,6 +25,7 @@ import java.util.Map;
 
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.ImageGalleryActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.hotel.AlternativeHotelRoomAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.hotel.HotelImageAdapter;
@@ -264,6 +266,12 @@ public class HotelFragment extends HGBAbstractFragment {
         mHotelImageAdapter.SetOnItemClickListener(new HotelImageAdapter.OnLinearLayoutClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+
+                Gson gson = new Gson();
+                String json = gson.toJson(getLegWithGuid(getActivityInterface().getTravelOrder()).getAllImagesVOs());
+                Intent intent = new Intent(getActivity().getApplicationContext(),ImageGalleryActivity.class);
+                intent.putExtra("images",json);
+                startActivity(intent);
 
             }
         });
