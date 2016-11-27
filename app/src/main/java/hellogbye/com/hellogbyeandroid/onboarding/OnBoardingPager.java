@@ -140,7 +140,7 @@ public class OnBoardingPager extends BaseActivity implements ViewPager.OnPageCha
                 // do transformation here
 
                     ImageView image = (ImageView) page.findViewById(R.id.img_pager_item);
-                    Animation fadeInAnimation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.fade_in);
+                    Animation fadeInAnimation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.onboarding_fade_in);
                     image.startAnimation(fadeInAnimation);
 
             }

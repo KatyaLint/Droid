@@ -145,14 +145,12 @@ public class NewLoginActivity extends Activity {
                                     public void onError(Object data) {
                                         HGBUtility.showAlertPopUpOneButton(NewLoginActivity.this,  null, popupView,
                                                 (String)data, null);
-
                                     }
                                 });
                     }
 
                     @Override
                     public void itemCanceled() {
-
                     }
                 });
 
