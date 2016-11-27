@@ -498,6 +498,7 @@ Code changing:
         HEL-1862 - change top part of companions as in design
         HEL-1835 - select flight button is not supposed to be round
         HEL-1836 - name of the hotel covers the bed icon on grid
+        HEL-1908 - the photos on the top of hotel details should be enlarged when tapping on them
 
 
       Code changing:
