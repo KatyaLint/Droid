@@ -25,6 +25,13 @@ public class FairclassPreferencesVO {
 
     private String currencyType;
 
+    private String solutionID;
+
+    private String flightID;
+
+    private String paxID;
+
+
     public String getId() {
         return id;
     }
@@ -71,5 +78,29 @@ public class FairclassPreferencesVO {
 
     public void setCurrencyType(String currencyType) {
         this.currencyType = currencyType;
+    }
+
+    public String getSolutionID() {
+        return solutionID;
+    }
+
+    public void setSolutionID(String solutionID) {
+        this.solutionID = solutionID;
+    }
+
+    public String getFlightID() {
+        return flightID;
+    }
+
+    public void setFlightID(String flightID) {
+        this.flightID = flightID;
+    }
+
+    public String getPaxID() {
+        return paxID;
+    }
+
+    public void setPaxID(String paxID) {
+        this.paxID = paxID;
     }
 }

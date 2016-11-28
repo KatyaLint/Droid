@@ -1752,9 +1752,6 @@ public class ConnectionManager {
 
 
 
-
-
-
     public void putUserSettings(UserProfileVO user, final ServerRequestListener listener){
 
         String url = getURL(Services.USER_GET_PROFILE);
@@ -2052,6 +2049,7 @@ public class ConnectionManager {
                 STATIC_CITY_AUTOCOMPLETE("statics/cityautocomplete"),
                 COMPANION_SEARCH("UserProfile/Search?count=5&excludeCompanions=false&"),
                 RESEND_ACTIVATION("UserProfile/ResendWelcomeEmail?email=");
+
 
                 String url;
                 Services(String url){

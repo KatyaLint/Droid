@@ -170,12 +170,18 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
                 int positionNumber = Integer.parseInt(position);
                 ArrayList<FairclassPreferencesVO> dropDown = currentNode.getDropdownoptions();
+
                 FairclassPreferencesVO flightFareClass = dropDown.get(positionNumber);
+                flightFareClass.setPaxID(currentNode.getmPaxguid());
+                flightFareClass.setFlightID(currentNode.getmGuid());
+                flightFareClass.setSolutionID(currentNode.getAccountID());
+
+                ;
                 flightFareClass.setCurrencyType(currentNode.getmCurrency());
                 Bundle args = new Bundle();
                 Gson gson = new Gson();
                 String json = gson.toJson(flightFareClass);
-                args.putString("alternative_rooms", json);
+                args.putString("flight_class_fare", json);
                 getFlowInterface().goToFragment(ToolBarNavEnum.FARE_CLASS_FRAGMENT.getNavNumber(), args);
             }
         });

@@ -788,7 +788,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 break;
             case ALTERNATIVE_FLIGHT_DETAILS:
                 fragment = AlternativeFlightsDetailsFragment.newInstance(navPosition);
-                stashToBack = false;
+              //  stashToBack = false;
                 break;
             case ALTERNATIVE_FLIGHT_FACTORY:
                 fragment = FactoryAlternativeFlight.newInstance(navPosition);

@@ -8,16 +8,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.FairclassPreferencesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.RoomsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.network.HGBJsonRequest;
+import hellogbye.com.hellogbyeandroid.network.Parser;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -25,6 +36,8 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  */
 
 public class FareClassFragment extends HGBAbstractFragment {
+
+    private FairclassPreferencesVO fareClass;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new FareClassFragment();
@@ -41,12 +54,12 @@ public class FareClassFragment extends HGBAbstractFragment {
 
         View rootView = inflater.inflate(R.layout.flight_details_fare_class_details, container, false);
 
-        String strValue = getArguments().getString("alternative_rooms", "");
+        String strValue = getArguments().getString("flight_class_fare", "");
         Type fareClassType = new TypeToken<FairclassPreferencesVO>() {
         }.getType();
 
         Gson gson = new Gson();
-        FairclassPreferencesVO fareClass = gson.fromJson(strValue, fareClassType);
+        fareClass = gson.fromJson(strValue, fareClassType);
 
 
         ImageView flight_details_fareclass_image = (ImageView)rootView.findViewById(R.id.flight_details_fareclass_image);
@@ -68,7 +81,63 @@ public class FareClassFragment extends HGBAbstractFragment {
         FontTextView flight_details_cancelation_title = (FontTextView)rootView.findViewById(R.id.flight_details_cancelation_title);
         flight_details_cancelation_title.setText(fareClass.getFarepreference());
 
+
+        final FontButtonView flight_details_fare_class_select = (FontButtonView)rootView.findViewById(R.id.flight_details_fare_class_select);
+        flight_details_fare_class_select.setTag(fareClass.getId());
+        if(!fareClass.isalternative()){
+            flight_details_fare_class_select.setVisibility(View.GONE);
+        }else{
+            flight_details_fare_class_select.setVisibility(View.VISIBLE);
+        }
+
+        flight_details_fare_class_select.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                String clickedID = flight_details_fare_class_select.getTag().toString();
+                getCurrentItinerary(clickedID);
+
+
+            }
+        });
+
+
         return rootView;
+    }
+
+    private void getCurrentItinerary(String newflight) {
+     //   (String solutioid, String paxid, String bookedflight, String newflight,
+
+
+        ConnectionManager.getInstance(getActivity()).putFlight(getActivityInterface().getTravelOrder().getmSolutionID(), fareClass.getPaxID(),  fareClass.getFlightID(), newflight, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                getFlight();
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
+
+
+    private void getFlight(){
+
+        ConnectionManager.getInstance(getActivity()).getItinerary(getActivityInterface().getTravelOrder().getmSolutionID(),  new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                UserTravelMainVO userTravelMainVO = (UserTravelMainVO) data;
+                getActivityInterface().setTravelOrder(userTravelMainVO);
+                ((MainActivityBottomTabs)getActivity()).onBackPressed();
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
     }
 
 }
