@@ -10,8 +10,6 @@ import java.util.HashSet;
  */
 public class UserProfileVO {
 
-
-
     @SerializedName("userprofileid")
     private String userprofileid;
 
@@ -69,6 +67,8 @@ public class UserProfileVO {
     @SerializedName("middlename")
     private String middlename;
 
+    @SerializedName("currency")
+    private String currency;
 
     private HashSet<String> bookingItems;
 
@@ -275,5 +275,13 @@ public class UserProfileVO {
 
     public void setMiddlename(String middlename) {
         this.middlename = middlename;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }

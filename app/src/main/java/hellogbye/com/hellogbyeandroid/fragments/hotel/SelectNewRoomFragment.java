@@ -88,7 +88,7 @@ public class SelectNewRoomFragment extends HGBAbstractFragment {
         mSelectedRoom = gson.fromJson(strValue, roomType);
         mPax = getArguments().getString("paxid", "");
         mType.setText(mSelectedRoom.getmRoomType());
-        mPrice.setText(mSelectedRoom.getmCost()+" USD/NIGHT");
+        mPrice.setText(mSelectedRoom.getmCost()+ " USD/NIGHT");
 
         mCapaity.setText(mSelectedRoom.getMaxroomoccupancy()+" people capacity");
         mPolicy.setText(mSelectedRoom.getmCancellationPolicy());

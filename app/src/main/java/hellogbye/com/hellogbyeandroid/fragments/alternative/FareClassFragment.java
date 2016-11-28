@@ -106,9 +106,6 @@ public class FareClassFragment extends HGBAbstractFragment {
     }
 
     private void getCurrentItinerary(String newflight) {
-     //   (String solutioid, String paxid, String bookedflight, String newflight,
-
-
         ConnectionManager.getInstance(getActivity()).putFlight(getActivityInterface().getTravelOrder().getmSolutionID(), fareClass.getPaxID(),  fareClass.getFlightID(), newflight, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {

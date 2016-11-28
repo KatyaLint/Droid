@@ -25,7 +25,7 @@
 
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/companion_editTextDialog"
+        android:id="@+id/popup_flight_baggage_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/SP16"

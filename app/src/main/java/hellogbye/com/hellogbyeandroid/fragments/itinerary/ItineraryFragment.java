@@ -38,6 +38,7 @@ import hellogbye.com.hellogbyeandroid.fragments.TitleNameChange;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
@@ -546,7 +547,7 @@ kate
         TextView grid_traveler_continued_flight = (TextView)child.findViewById(R.id.grid_traveler_continued_flight);
         if(counter == 0){
 
-            grid_traveler_flight_price.setText("$" + HGBUtility.roundNumber(node.getCost()) + " USD");
+            grid_traveler_flight_price.setText("$" + HGBUtility.roundNumber(node.getCost()) + node.getmCurrency());
             grid_traveler_flight_price.setVisibility(View.VISIBLE);
             grid_traveler_continued_flight.setVisibility(View.INVISIBLE);
         }else{
@@ -682,7 +683,7 @@ kate
         long diff = HGBUtilityDate.dayDifference(node.getmCheckIn(), node.getmCheckOut());//HGBUtility.getDateDiff(node.getmCheckIn(), node.getmCheckOut());
         double iCharge = node.getmMinimumAmount()/(diff+1);
         String result = String.format("%.2f", iCharge);
-        grid_hotel_price.setText("$" + HGBUtility.roundNumber(iCharge) +"USD");
+        grid_hotel_price.setText("$" + HGBUtility.roundNumber(iCharge) + node.getmCurrency());
 
         //type
         grid_hotel_price.setTag(node.getmType());
@@ -849,8 +850,8 @@ kate
             cnc_empty_view.setVisibility(View.GONE);
             grid_make_payment.setEnabled(true);
             grid_total_price.setText("$" + HGBUtility.roundNumber(Double.parseDouble(userOrder.getmTotalPrice())));
-
-            grid_total_price_currency.setText("USD");
+            UserProfileVO currentUser = getActivityInterface().getCurrentUser();
+            grid_total_price_currency.setText(currentUser.getCurrency());
         }else{  // server returning wrong data
             itineraryLayout.setVisibility(View.GONE);
             cnc_empty_view.setVisibility(View.VISIBLE);
@@ -916,6 +917,10 @@ kate
     private void priceInformationPopup(){
         LayoutInflater li = LayoutInflater.from(getContext());
         final  View popupView = li.inflate(R.layout.popup_flight_baggage_info, null);
+        FontTextView popup_flight_baggage_text = (FontTextView) popupView.findViewById(R.id.popup_flight_baggage_text);
+        String currency = getActivityInterface().getCurrentUser().getCurrency();
+        String text = String.format(getActivity().getResources().getString(R.string.popup_flight_baggage_info_text),currency );
+        popup_flight_baggage_text.setText(text);
         HGBUtility.showAlertPopUpOneButton(getActivity(),  null, popupView,
                 null, null);
     }
