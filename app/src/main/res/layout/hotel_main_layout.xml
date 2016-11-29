@@ -12,20 +12,42 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <android.support.v4.view.ViewPager
-                android:id="@+id/hotel_image_view_pager"
+            <RelativeLayout
+                android:id="@+id/hotel_image_view_pager_rl"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/DP200"
-                android:clickable="true"
-                />
+                android:layout_height="wrap_content">
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/hotel_image_view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/DP200"
+                    android:clickable="true"
+                    />
+
+
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+                    android:id="@+id/gallery_number_images"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/DP10"
+                    app:fontName="dinnextltpro_regular.otf"
+                    android:drawableLeft="@drawable/images_icon"
+                    android:drawablePadding="@dimen/DP6"
+                    android:textColor="@color/COLOR_WHITE"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+
+                    android:textSize="@dimen/SP10" />
+            </RelativeLayout>
+
+
+
 
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/hotel_image_view_pager">
+                android:layout_below="@id/hotel_image_view_pager_rl">
 
 
                 <LinearLayout
