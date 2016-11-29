@@ -246,7 +246,9 @@ public class HotelFragment extends HGBAbstractFragment {
     }
 
     private ArrayList<RoomsVO> initRoomList(ArrayList<RoomsVO> roomlist){
-
+        if(roomlist == null){
+            return null;
+        }
 
         ArrayList<RoomsVO> newList = new ArrayList<>(roomlist);
         for (int i = 0; i <newList.size() ; i++) {
@@ -310,6 +312,9 @@ public class HotelFragment extends HGBAbstractFragment {
                     @Override
                     public void onSuccess(Object data) {
                         NodesVO node = (NodesVO) data;
+                        if(node == null){
+                            return;
+                        }
                         if (node.getRoomsVOs().size() > 0) {
                             initAlternativeRoomList(node.getRoomsVOs());
                         }
