@@ -74,7 +74,7 @@ public class Parser {
             switch(response.statusCode){
                 case 400:
                     json = new String(response.data);
-                    json = trimMessage(json, "messageid");
+                    json = trimMessageJson(json, "messageid");
                     break;
                 case 405:
                     json = new String(response.data);
@@ -94,6 +94,25 @@ public class Parser {
         return json;
     }
 
+    public static String trimMessageJson(String json, String key){
+        String trimmedString = null;
+
+        try{
+            JSONObject obj = new JSONObject(json);
+             JSONObject obj2 = obj.getJSONObject("ErrorMessages");
+            JSONArray obj3 = obj2.getJSONArray("MessageDtos");
+            JSONObject objtrimmedString = obj3.getJSONObject(0);
+            Object str = objtrimmedString.get("MessageID");
+            trimmedString = (String) str;
+           // trimmedString = obj.getString("error"); //(String) str;
+
+        } catch(JSONException e){
+            e.printStackTrace();
+            return null;
+        }
+
+        return trimmedString;
+    }
 
     public static String trimMessage(String json, String key){
         String trimmedString = null;
