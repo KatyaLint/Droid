@@ -108,6 +108,7 @@
                     android:text="@string/flight_details_include_tax"
                     android:textColor="@color/COLOR_003D4C"
                     android:textSize="@dimen/SP12"
+
                     app:fontName="dinnextltpro_regular.otf" />
 
                 <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -213,13 +214,13 @@
 
     </RelativeLayout>
 
-    <View
+<!--    <View
         android:id="@+id/footer_separator"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/DP1"
         android:layout_below="@+id/main_flight_details_layout_rl"
         android:layout_marginTop="@dimen/DP10"
-        android:background="@color/COLOR_999999" />
+        android:background="@color/COLOR_999999" />-->
 
 
 </RelativeLayout>
