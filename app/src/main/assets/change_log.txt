@@ -504,6 +504,7 @@ Code changing:
         HEL-1906 - change 2 tabs under hotel details as in design
         HEL-1904 -  change hotel and and price places according to design
         HEL-1816 - crash at hotel details
+        HEL-1821 - all frames in checkout phase 1 should be the same size
 
 
       Code changing:
