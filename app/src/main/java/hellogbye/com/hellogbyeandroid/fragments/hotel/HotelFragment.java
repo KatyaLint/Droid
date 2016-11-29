@@ -59,7 +59,7 @@ public class HotelFragment extends HGBAbstractFragment {
     private HotelImageAdapter mHotelImageAdapter;
     private FontTextView mHotelNameFontTextView;
     private FontTextView mHotelPriceFontTextView;
-    private FontTextView mHotelDaysFontTextView;
+  //  private FontTextView mHotelDaysFontTextView;
     private FontTextView mAlertnativeHotelFontTextView;
     private FontTextView mRoomName;
     private FontTextView mChckInDate;
@@ -169,7 +169,7 @@ public class HotelFragment extends HGBAbstractFragment {
         mChckOutDate = (FontTextView) rootView.findViewById(R.id.checkout_date);
         mHotelNameFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_name);
         mHotelPriceFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_price);
-        mHotelDaysFontTextView = (FontTextView) rootView.findViewById(R.id.days);
+        //mHotelDaysFontTextView = (FontTextView) rootView.findViewById(R.id.days);
         mAlertnativeHotelFontTextView = (FontTextView) rootView.findViewById(R.id.show_alternative_hotel);
 
         mViewPager = (WrapContentViewPager) rootView.findViewById(R.id.rooms_view_pager);
@@ -206,7 +206,7 @@ public class HotelFragment extends HGBAbstractFragment {
         double iCharge = node.getmMinimumAmount() / diff;
         String result = String.format("%.2f", iCharge);
         mHotelPriceFontTextView.setText("$" + node.getmMinimumAmount());
-        mHotelDaysFontTextView.setText(diff + " Nights");
+        //mHotelDaysFontTextView.setText(diff + " Nights");
         initHotelImages(node.getAllImagesVOs());
     }
 

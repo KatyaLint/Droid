@@ -45,7 +45,7 @@ public class AlternativeHotelRoomAdapter extends PagerAdapter {
     }
 
 
-    @Override public float getPageWidth(int position) { return(0.6f); }
+    @Override public float getPageWidth(int position) { return(0.65f); }
 
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {

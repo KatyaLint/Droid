@@ -502,6 +502,7 @@ Code changing:
         HEL-1903 - the small icon that shows number of picture should be sticky
         HEL-1905 -  make the room type more in a shape of square
         HEL-1906 - change 2 tabs under hotel details as in design
+        HEL-1904 -  change hotel and and price places according to design
 
 
       Code changing:
