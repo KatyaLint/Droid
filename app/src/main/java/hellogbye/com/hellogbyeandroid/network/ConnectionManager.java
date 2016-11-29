@@ -77,7 +77,7 @@ public class ConnectionManager {
         String choosenServer = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER,"");
 
         if(choosenServer == null || choosenServer.isEmpty()){
-            BASE_URL =  "https://apiprod.hellogbye.com/prod/rest/"; //"https://apiuat.hellogbye.com/uat/rest/";//This is default server
+            BASE_URL =  "http://apidev.hellogbye.com/dev/rest/"; //"https://apiuat.hellogbye.com/uat/rest/";//This is default server
         }else{
             BASE_URL = choosenServer;
         }

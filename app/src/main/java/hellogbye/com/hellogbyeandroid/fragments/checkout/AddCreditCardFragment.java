@@ -371,7 +371,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
                 CreditCard scanResult = data.getParcelableExtra(CardIOActivity.EXTRA_SCAN_RESULT);
 
                 // Never log a raw card number. Avoid displaying it, but if necessary use getFormattedCardNumber()
-                mCardNumber.setCardNumber(scanResult.getRedactedCardNumber(), false);
+                mCardNumber.setCardNumber(scanResult.getFormattedCardNumber(), false);
 
                 if (scanResult.isExpiryValid()) {
                     mCardExpiryMonth.setText(""+scanResult.expiryMonth);
@@ -449,7 +449,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         // CcnTypeEnum hh=  mCardNumber.validate();
 
             if (!isFillPayment) {
-                if (mCardNumber.isCreditCardValid() || mCurrentCard.getCardtypeid().equalsIgnoreCase("1")) {//TODO this is a work around for AMEX
+                if (true) {//TODO this is a work around for AMEX
                 ConnectionManager.getInstance(getActivity()).getCCSession(new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {

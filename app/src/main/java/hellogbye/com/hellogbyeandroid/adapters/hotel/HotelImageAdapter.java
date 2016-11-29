@@ -44,7 +44,7 @@ public class HotelImageAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, final int position) {
 
          ImageView mHotelImage;
-         FontTextView mHotelImageCount;
+         //FontTextView mHotelImageCount;
 
 
         layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -52,14 +52,14 @@ public class HotelImageAdapter extends PagerAdapter {
                 false);
 
         mHotelImage = (ImageView) itemLayoutView.findViewById(R.id.hotel_image);
-        mHotelImageCount = (FontTextView) itemLayoutView.findViewById(R.id.gallery_number_images);
+       // mHotelImageCount = (FontTextView) itemLayoutView.findViewById(R.id.gallery_number_images);
 
         AllImagesVO image = mArrayList.get(position);
         if(imageLoader == null){
             imageLoader = ImageLoader.getInstance();
         }
         imageLoader.displayImage(image.getmImage(), mHotelImage);
-        mHotelImageCount.setText(position+1+"/"+mArrayList.size());
+
 
 
         mHotelImage.setOnClickListener(new View.OnClickListener() {

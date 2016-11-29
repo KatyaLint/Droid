@@ -44,6 +44,8 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.WrapContentViewPager;
 
+import static hellogbye.com.hellogbyeandroid.R.id.position;
+
 
 /**
  * Created by arisprung on 9/30/15.
@@ -57,7 +59,7 @@ public class HotelFragment extends HGBAbstractFragment {
     private HotelImageAdapter mHotelImageAdapter;
     private FontTextView mHotelNameFontTextView;
     private FontTextView mHotelPriceFontTextView;
-    private FontTextView mHotelDaysFontTextView;
+  //  private FontTextView mHotelDaysFontTextView;
     private FontTextView mAlertnativeHotelFontTextView;
     private FontTextView mRoomName;
     private FontTextView mChckInDate;
@@ -77,6 +79,7 @@ public class HotelFragment extends HGBAbstractFragment {
     private static final String TAB_1_TAG = "DETAILS";
     private static final String TAB_2_TAG = "GALLERY";
     private static final String TAB_3_TAG = "Hotel Policies";
+    private FontTextView mNumberImages;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new HotelFragment();
@@ -166,11 +169,12 @@ public class HotelFragment extends HGBAbstractFragment {
         mChckOutDate = (FontTextView) rootView.findViewById(R.id.checkout_date);
         mHotelNameFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_name);
         mHotelPriceFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_price);
-        mHotelDaysFontTextView = (FontTextView) rootView.findViewById(R.id.days);
+        //mHotelDaysFontTextView = (FontTextView) rootView.findViewById(R.id.days);
         mAlertnativeHotelFontTextView = (FontTextView) rootView.findViewById(R.id.show_alternative_hotel);
 
         mViewPager = (WrapContentViewPager) rootView.findViewById(R.id.rooms_view_pager);
         mHotelViewPager = (ViewPager) rootView.findViewById(R.id.hotel_image_view_pager);
+        mNumberImages = (FontTextView) rootView.findViewById(R.id.gallery_number_images);
 
 
         return rootView;
@@ -202,7 +206,7 @@ public class HotelFragment extends HGBAbstractFragment {
         double iCharge = node.getmMinimumAmount() / diff;
         String result = String.format("%.2f", iCharge);
         mHotelPriceFontTextView.setText("$" + node.getmMinimumAmount());
-        mHotelDaysFontTextView.setText(diff + " Nights");
+        //mHotelDaysFontTextView.setText(diff + " Nights");
         initHotelImages(node.getAllImagesVOs());
     }
 
@@ -242,7 +246,9 @@ public class HotelFragment extends HGBAbstractFragment {
     }
 
     private ArrayList<RoomsVO> initRoomList(ArrayList<RoomsVO> roomlist){
-
+        if(roomlist == null){
+            return null;
+        }
 
         ArrayList<RoomsVO> newList = new ArrayList<>(roomlist);
         for (int i = 0; i <newList.size() ; i++) {
@@ -260,7 +266,7 @@ public class HotelFragment extends HGBAbstractFragment {
 
     }
 
-    private void initHotelImages(ArrayList<AllImagesVO> allImagesVOs) {
+    private void initHotelImages( final ArrayList<AllImagesVO> allImagesVOs) {
 
         mHotelImageAdapter = new HotelImageAdapter(allImagesVOs, getActivity().getApplicationContext());
         mHotelViewPager.setAdapter(mHotelImageAdapter);
@@ -276,6 +282,24 @@ public class HotelFragment extends HGBAbstractFragment {
 
             }
         });
+
+        mHotelViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mNumberImages.setText(position+1+"/"+allImagesVOs.size());
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        mNumberImages.setText(1+"/"+allImagesVOs.size());
     }
 
 
@@ -288,6 +312,9 @@ public class HotelFragment extends HGBAbstractFragment {
                     @Override
                     public void onSuccess(Object data) {
                         NodesVO node = (NodesVO) data;
+                        if(node == null){
+                            return;
+                        }
                         if (node.getRoomsVOs().size() > 0) {
                             initAlternativeRoomList(node.getRoomsVOs());
                         }

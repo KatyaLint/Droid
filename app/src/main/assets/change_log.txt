@@ -500,6 +500,13 @@ Code changing:
         HEL-1836 - name of the hotel covers the bed icon on grid
         HEL-1908 - the photos on the top of hotel details should be enlarged when tapping on them
         HEL-1857 - change text on cnc bubble
+        HEL-1903 - the small icon that shows number of picture should be sticky
+        HEL-1905 -  make the room type more in a shape of square
+        HEL-1906 - change 2 tabs under hotel details as in design
+        HEL-1904 -  change hotel and and price places according to design
+        HEL-1816 - crash at hotel details
+        HEL-1821 - all frames in checkout phase 1 should be the same size
+
 
 
       Code changing:

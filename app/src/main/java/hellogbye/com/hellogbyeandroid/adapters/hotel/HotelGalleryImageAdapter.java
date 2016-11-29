@@ -82,7 +82,7 @@ public class HotelGalleryImageAdapter extends RecyclerView.Adapter<HotelGalleryI
                 viewHolder.mRelativeLayout.setVisibility(View.VISIBLE);
                 imageLoader.displayImage(image1.getmImage(), viewHolder.mImageView1);
                 imageLoader.displayImage(image2.getmImage(), viewHolder.mImageViewRL);
-                viewHolder.mNumberImages.setText("+"+(itemsData.size()-6));
+            //    viewHolder.mNumberImages.setText("+"+(itemsData.size()-6));
                 break;
         }
 
@@ -115,7 +115,7 @@ public class HotelGalleryImageAdapter extends RecyclerView.Adapter<HotelGalleryI
         private ImageView mImageView1;
         private ImageView mImageView2;
         private ImageView mImageViewRL;
-      private FontTextView mNumberImages;
+     //  private FontTextView mNumberImages;
         private RelativeLayout mRelativeLayout;
 
 
@@ -124,7 +124,7 @@ public class HotelGalleryImageAdapter extends RecyclerView.Adapter<HotelGalleryI
             mImageView1 = (ImageView) itemLayoutView.findViewById(R.id.gallery_image_1_1);
             mImageView2 = (ImageView) itemLayoutView.findViewById(R.id.gallery_image_1_2);
             mImageViewRL = (ImageView) itemLayoutView.findViewById(R.id.gallery_image_rl);
-            mNumberImages = (FontTextView) itemLayoutView.findViewById(R.id.gallery_number_images);
+          //  mNumberImages = (FontTextView) itemLayoutView.findViewById(R.id.gallery_number_images);
             mRelativeLayout= (RelativeLayout) itemLayoutView.findViewById(R.id.second_image_rl);
             itemLayoutView.setOnClickListener(this);
         }

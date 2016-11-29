@@ -22,16 +22,6 @@
 
 
 
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:id="@+id/gallery_number_images"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/DP10"
-            app:fontName="dinnextltpro_regular.otf"
-            android:drawableLeft="@drawable/images_icon"
-            android:drawablePadding="@dimen/DP6"
-            android:textColor="@color/COLOR_WHITE"
-            android:textSize="@dimen/SP10" />
 
     </FrameLayout>
 

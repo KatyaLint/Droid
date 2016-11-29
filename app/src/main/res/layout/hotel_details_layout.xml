@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:orientation="vertical"
     >
 
@@ -11,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CONTACT"
+        android:layout_marginLeft="@dimen/DP10"
         android:textSize="@dimen/SP12"
         android:visibility="gone"
         app:fontName="dinnextltpro_regular.otf" />
@@ -22,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/DP10"
+        android:layout_marginLeft="@dimen/DP10"
         android:textSize="@dimen/SP12"
 
         app:fontName="dinnextltpro_regular.otf" />
@@ -31,6 +34,7 @@
         android:layout_height="wrap_content"
         android:text="Hotel Location"
         android:layout_marginTop="@dimen/DP10"
+        android:layout_marginLeft="@dimen/DP10"
         android:textSize="@dimen/SP12"
         android:visibility="gone"
         app:fontName="dinnextltpro_regular.otf" />
@@ -46,6 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/SP20"
         android:text="DESCRIPTION"
+        android:layout_marginLeft="@dimen/DP10"
         android:textSize="@dimen/SP12"
         android:visibility="gone"
         app:fontName="dinnextltpro_regular.otf" />
@@ -56,6 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/DP10"
+        android:layout_marginLeft="@dimen/DP10"
         android:textSize="@dimen/SP12"
         app:fontName="dinnextltpro_regular.otf" />
 
@@ -65,6 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/DP20"
         android:gravity="center"
+        android:layout_marginLeft="@dimen/DP10"
         android:isScrollContainer="false"
         android:numColumns="4"
         android:stretchMode="columnWidth"
