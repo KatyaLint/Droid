@@ -77,7 +77,6 @@ public class AccountPersonalInfoHelpAndFeedbackFragment extends HGBAbstractFragm
                 }else{
                     account_submit_feedback.setEnabled(false);
                 }
-
             }
 
             public void afterTextChanged(Editable s) {
@@ -103,18 +102,12 @@ public class AccountPersonalInfoHelpAndFeedbackFragment extends HGBAbstractFragm
             }
         });
 
-        //getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId();
-        //System.out.println("Kate userPreferenceID =" + userPreferenceID);
-
         FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
         userPreferenceID =  my_trip_profile.getTag().toString();
-        //System.out.println("Kate my_trip_profile = " + my_trip_profile.getTag());
-
     }
 
 
     private void sendFeedback(){
-
         ConnectionManager.getInstance(getActivity()).postSubmitFeedback(account_submit_edit_text.getText().toString(), userPreferenceID,new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
@@ -125,8 +118,6 @@ public class AccountPersonalInfoHelpAndFeedbackFragment extends HGBAbstractFragm
                             public void itemSelected(String inputItem) {
                                 IBinder token = account_submit_edit_text.getWindowToken();
                                 ((InputMethodManager) getActivity().getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
-
-
                                 getActivity().onBackPressed();
                             }
                             @Override
@@ -135,12 +126,9 @@ public class AccountPersonalInfoHelpAndFeedbackFragment extends HGBAbstractFragm
                         });
             }
 
-
-
             @Override
             public void onError(Object data) {
                 ErrorMessage(data);
-
             }
         });
     }

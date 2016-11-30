@@ -8,12 +8,12 @@
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/login"
-        android:layout_marginTop="@dimen/DP100"
+        android:layout_marginTop="@dimen/DP80"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Login"
-        android:textColor="@color/COLOR_00516f"
+
         android:textSize="@dimen/SP32"
         app:fontName="dinnextltpro_mediumcond.ttf" />
 
@@ -24,7 +24,8 @@
         style="@style/new_sign_up_text_color"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:hint="Username"
+        android:hint="Email"
+        android:textColor="@color/COLOR_00516f"
         android:imeOptions="actionNext"
         android:maxLines="1"
         android:singleLine="true" />
@@ -46,13 +47,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/DP10"
-        android:layout_marginLeft="@dimen/DP30"
+        android:layout_marginLeft="@dimen/DP8"
        >
         <CheckBox
             android:id="@+id/remmember_me_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/DP16"
             android:button="@drawable/selector_hgb_checkbox"
             android:checked="true"
             />
@@ -61,9 +61,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fontName="dinnextltpro_light.otf"
-            android:textColor="@color/COLOR_999999"
+            android:textColor="@color/COLOR_00516f"
             android:text="@string/remmeber_me"
             android:layout_marginLeft="@dimen/DP10"
+
             android:layout_alignTop="@+id/remmember_me_checkbox"
             android:layout_alignBottom="@+id/remmember_me_checkbox"
             android:layout_toRightOf="@+id/remmember_me_checkbox"
@@ -77,6 +78,19 @@
         android:layout_marginTop="@dimen/DP20"
         style="@style/RedButton"
         android:text="Log in" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/forgotpassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_button"
+        app:fontName="dinnextltpro_light.otf"
+        android:layout_marginTop="@dimen/DP18"
+        android:text="@string/forgot_password"
+        android:textColor="@color/COLOR_00516f"
+        android:layout_gravity="center_horizontal"
+        />
 
 
 </LinearLayout>

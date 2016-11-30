@@ -29,12 +29,9 @@ public class CreditCardAdapter extends RecyclerView.Adapter<CreditCardAdapter.Vi
 
     public  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
+
         public ImageView mCardImage;
         public FontTextView mCardNumberText;
-       // public ImageView mNext;
-
-
-
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
             mCardImage= (ImageView)itemLayoutView.findViewById(R.id.cc_image);

@@ -21,6 +21,8 @@ import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
+import static hellogbye.com.hellogbyeandroid.R.id.forgotpassword;
+
 /**
  * Created by arisprung on 11/22/16.
  */
@@ -43,8 +45,10 @@ public class NewLoginActivity extends Activity {
         mEmailEditText = (FontEditTextView) findViewById(R.id.username);
         mPasswordEditText = (FontEditTextView) findViewById(R.id.login_password);
         mRemmeberMeCheckbox = (CheckBox) findViewById(R.id.remmember_me_checkbox);
-        ///mForgotPasswordTextView = (FontTextView) findViewById(R.id.forgotpassword);
+        mForgotPasswordTextView = (FontTextView) findViewById(R.id.forgotpassword);
         login = (FontButtonView)findViewById(R.id.login_button);
+
+
 
         remember_me = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME,false);
         String email = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, null);
@@ -59,13 +63,12 @@ public class NewLoginActivity extends Activity {
         }
 
 
-//        mForgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //TODO forgot password
-//                resetPassword();
-//            }
-//        });
+        mForgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetPassword();
+            }
+        });
 
 
         login.setOnClickListener(new View.OnClickListener() {
