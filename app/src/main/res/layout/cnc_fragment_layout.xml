@@ -81,8 +81,8 @@
             android:gravity="center_vertical"
             android:hint="@string/type_message"
             android:minHeight="@dimen/DP44"
-            android:textColor="@color/COLOR_003D4C"
-            android:textColorHint="@color/COLOR_003D4C"
+            android:textColor="@color/COLOR_565656"
+            android:textColorHint="@color/COLOR_565656"
             android:textSize="@dimen/SP16"
             app:fontName="dinnextltpro_regular.otf" />
 
@@ -114,35 +114,37 @@
         <!--android:text="Fly Sam from NYC to Vegas on Nov 15th for 3 nights in the morning then back to NYC. Fly Warren from Miami to Vegas on Nov 15th before 5PM for 3 nights then on to Toronto for a 1 night then back to Miami. Fly me from Toronto to Vegas, on the earliest flight available for 3 nights on Nov 15th then back to Toronto."-->
         ​
         ​
+
         <LinearLayout
             android:id="@+id/send_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/DP6"
-            android:layout_marginBottom="@dimen/DP10"
-            android:orientation="horizontal">
+            android:layout_alignParentEnd="true">
             ​
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/cnc_send"
                 android:layout_width="@dimen/DP50"
                 android:layout_height="@dimen/DP34"
-                android:background="@drawable/grey_button"
+                android:background="@drawable/blue_button_border_cnc"
                 android:gravity="center"
                 android:padding="@dimen/DP10"
                 android:text="@string/send"
                 android:textColor="@color/COLOR_003D4C"
                 app:fontName="dinnextltpro_medium.otf"
-                android:textSize="@dimen/SP14"
+                android:textSize="@dimen/SP16"
                 android:visibility="gone" />
             ​
             <ImageView
                 android:gravity="center"
                 android:id="@+id/cnc_mic"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/microphone_icon"
+                android:background="@drawable/microphone"
+                android:layout_margin="@dimen/DP10"
                 android:visibility="visible" />
             ​
         </LinearLayout>

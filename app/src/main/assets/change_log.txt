@@ -516,8 +516,11 @@ Code changing:
         - grid round image
         - color fix
         - alternative sort
-        - new logout button, logout popup removed
+        - new logout button, logout popup removed - redone to old
         - new error parser
         - comapanion details change
         - companion search fix
         - NEW Create user flow!
+        - New onBoarding
+        - new microfone icon
+
