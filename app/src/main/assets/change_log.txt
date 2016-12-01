@@ -480,7 +480,7 @@ Code changing:
          - Changed UI in Payment Screen (Child layout)
 
      ------------------------------------------
-                         Version 0.0.3
+                         Version 0.0.4
      ------------------------------------------
       Fixed Bugs:
       -----------
