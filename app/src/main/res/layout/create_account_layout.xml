@@ -148,6 +148,8 @@
         android:layout_above="@+id/create_account"
         android:layout_marginBottom="@dimen/DP20"
         android:text="@string/try_it_now"
+        android:layout_centerHorizontal="true"
+        android:layout_width="@dimen/DP340"
         app:fontName="dinnextltpro_medium.otf" />
 
 
@@ -163,20 +165,30 @@
         android:id="@+id/airplane_01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_alignBottom="@+id/building_01"
+        android:src="@drawable/airplane_01" />
+
+    <ImageView
+        android:id="@+id/airplane_01_01"
+        android:layout_below="@+id/cloud_01"
+        android:layout_marginTop="@dimen/DP80"
+        android:layout_marginLeft="@dimen/DP50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/airplane_01" />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/sun"
         android:layout_below="@+id/cloud_01"
-        android:layout_marginTop="@dimen/DP20"
-        android:text="Welcome"
+        android:layout_marginTop="@dimen/DP80"
+        android:text="Welcome to"
+        android:layout_centerHorizontal="true"
         android:textColor="@color/COLOR_003D4C"
         android:textSize="@dimen/SP24"
-        app:fontName="dinweb_condmedium.ttf" />
+        app:fontName="dinweb_condmedium.ttf"/>
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/label_1"
@@ -323,6 +335,8 @@
     <hellogbye.com.hellogbyeandroid.views.FontButtonView
         android:id="@+id/create_account"
         style="@style/RedButton"
+        android:layout_centerHorizontal="true"
+        android:layout_width="@dimen/DP340"
         android:layout_below="@+id/building_02"
         android:layout_marginTop="@dimen/DP10"
         android:text="@string/create_account"

@@ -9,8 +9,10 @@ import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -58,7 +60,8 @@ import static hellogbye.com.hellogbyeandroid.R.id.textView;
 
 public class CreateAccountActivity extends Activity implements View.OnClickListener {
 
-    private ImageView mPlane;
+    //private ImageView mPlane;
+    private ImageView mPlane1;
     private ImageView mPlane2;
     private ImageView mSun;
     private ImageView mLogoOnBoarding;
@@ -134,7 +137,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
 
     private void initView() {
-        mPlane = (ImageView) findViewById(R.id.airplane_01);
+       // mPlane = (ImageView) findViewById(R.id.airplane_01);
+        mPlane1 = (ImageView) findViewById(R.id.airplane_01_01);
         mPlane2 = (ImageView) findViewById(R.id.airplane_02);
         mSun = (ImageView) findViewById(R.id.sun);
         mLogoOnBoarding = (ImageView) findViewById(R.id.logo_onboardong);
@@ -247,7 +251,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     private void goToAddressView(View textView) {
         HGBUtility.hideKeyboard(getApplicationContext(), textView);
-        if (checkPasswordValid()) {//TODO checkPasswordValid()
+        if (true) {//TODO checkPasswordValid()
             animateAddressView(true);
         } else {
             Toast.makeText(getApplicationContext(), "Address not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
@@ -256,7 +260,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     private void goToEmailView() {
         HGBUtility.hideKeyboard(getApplicationContext(), mEmail);
-        if (checkNameIsValid()) {//checkNameIsValid()
+        if (true) {//checkNameIsValid()
             animateEmailView(true);
         } else {
             Toast.makeText(getApplicationContext(), "Please enter name", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
@@ -264,7 +268,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
     }
 
     private boolean checkNameIsValid() {
-        if (mFirstName.getText().length() > 1 && mLastName.getText().length() > 1) {
+        if (true) {
             return true;
         }
         return false;
@@ -296,7 +300,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     private void gotoPasswordView(View textView) {
         HGBUtility.hideKeyboard(getApplicationContext(), textView);
-        if (HGBUtility.checkEmailIsValid(mEmail.getText())) {// TODO HGBUtility.checkEmailIsValid(mEmail.getText()()
+        if (true) {// TODO HGBUtility.checkEmailIsValid(mEmail.getText()()
             animatePasswordView(true);
         } else {
             Toast.makeText(getApplicationContext(), "Email not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
@@ -308,6 +312,8 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         ss.setSpan(new myClickableSpan(1), 52, 61, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         ss.setSpan(new myClickableSpan(2), 66, 80, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mHyperlink.setText(ss);
+        mHyperlink.setAlpha(0.4f);
+        mHyperlink.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     private void animateWelcomeView() {
@@ -595,6 +601,14 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         public myClickableSpan(int position) {
             this.pos = position;
         }
+
+        @Override
+        public void updateDrawState(TextPaint ds) {
+            ds.setColor(getColor(R.color.COLOR_00516f));
+            ds.setUnderlineText(true);
+
+        }
+
         @Override
         public void onClick(View widget) {
             String url = "";
@@ -619,7 +633,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
 
     private void animateFirstToSecondStaticViews(boolean animateFoward) {
         if(animateFoward){
-            mPlane.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane01_1_2));//
+            mPlane1.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane01_1_2));//
             mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_1_2));
             mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_1_2));
             mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_1_2));
@@ -633,7 +647,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
             mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_1_2));
         }else{
 
-            mPlane.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane01_2_1));//
+            mPlane1.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane01_2_1));//
             mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_2_1));
             mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_2_1));
             mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_2_1));

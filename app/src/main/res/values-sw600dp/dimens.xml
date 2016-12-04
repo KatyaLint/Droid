@@ -5,6 +5,7 @@
 
     <dimen name="DP0">0dp</dimen>
     <dimen name="DP1">2dp</dimen>
+    <dimen name="DP1.5">3dp</dimen>
     <dimen name="DP2">3dp</dimen>
     <dimen name="DP4">6dp</dimen>
     <dimen name="DP6">9dp</dimen>

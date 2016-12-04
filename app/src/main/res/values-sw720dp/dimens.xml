@@ -2,6 +2,7 @@
     <!-- Sizes 2x. -->
     <dimen name="DP0">0dp</dimen>
     <dimen name="DP1">2dp</dimen>
+    <dimen name="DP1.5">3dp</dimen>
     <dimen name="DP2">4dp</dimen>
     <dimen name="DP4">8dp</dimen>
     <dimen name="DP6">12dp</dimen>
