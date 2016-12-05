@@ -3,6 +3,7 @@ import android.animation.AnimatorSet;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -82,7 +83,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private ImageView mCloud06;
     private ImageView mCloud07;
     private ImageView mArrowBack;
-    private ImageView mBirds;
+    private LinearLayout mBirds;
     private ImageView mCanadaCheck;
     private ImageView mUSCheck;
     private ProgressBar mProgressBar;
@@ -108,6 +109,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private LinearLayout mUSLayout;
     private LinearLayout mCanadaLayout;
     private RelativeLayout mRoot;
+    private ImageView mBird1;
+    private ImageView mBird2;
 
     private final int NUMBER_OF_STAGES = 5;
 
@@ -164,9 +167,12 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mCloud06 = (ImageView) findViewById(R.id.cloud_6);
         mCloud07 = (ImageView) findViewById(R.id.cloud_7);
         mArrowBack = (ImageView) findViewById(R.id.arrow_back);
-        mBirds = (ImageView) findViewById(R.id.birds);
+        mBirds = (LinearLayout) findViewById(R.id.birds);
         mUSCheck = (ImageView) findViewById(R.id.us_check);
         mCanadaCheck = (ImageView) findViewById(R.id.canada_check);
+
+        mBird1 = (ImageView)findViewById(R.id.bird_1);
+        mBird2 = (ImageView)findViewById(R.id.bird_2);
 
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -706,7 +712,33 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
         if(animateFoward){
             mBirds.setVisibility(View.VISIBLE);
-            mBirds.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.birds_3_4));
+            Animation set = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.birds_3_4);
+            set.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+
+
+                    mBird1.setBackgroundResource(R.drawable.animation_bird);
+                    AnimationDrawable rocketAnimation1 = (AnimationDrawable) mBird1.getBackground();
+                    rocketAnimation1.start();
+
+                    mBird2.setBackgroundResource(R.drawable.animation_bird);
+                    AnimationDrawable rocketAnimation2 = (AnimationDrawable) mBird2.getBackground();
+                    rocketAnimation2.start();
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            mBirds.setAnimation(set);
             mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_3_4));
             mPlane2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane02_3_4));
             mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_3_4));

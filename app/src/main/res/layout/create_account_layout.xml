@@ -363,16 +363,18 @@
             android:layout_marginLeft="@dimen/MINUS_DP300"
             android:alpha="0.58"
             android:src="@drawable/building" />
-
-        <ImageView
+        <include
             android:id="@+id/birds"
+            layout="@layout/bird_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/building_01"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/DP80"
-            android:src="@drawable/birds"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/DP80" />
+
+
+
 
     </RelativeLayout>
 </LinearLayout>
