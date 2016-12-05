@@ -5,6 +5,6 @@ package hellogbye.com.hellogbyeandroid.utilities;
  */
 public interface HGBTranslateInterface {
 
-    public void onSuccess(String message);
-    public void onError(String error);
+     void onSuccess(String message);
+     void onError(String error);
 }

@@ -1,5 +1,6 @@
 package hellogbye.com.hellogbyeandroid.fragments.settings;
 
+import android.Manifest;
 import android.app.Activity;
 
 import android.content.DialogInterface;
@@ -12,7 +13,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -188,7 +192,6 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
 
         account_details_image = (RoundedImageView) rootView.findViewById(R.id.account_details_image);
 
-
         account_settings_details_name = (FontTextView) rootView.findViewById(R.id.account_settings_details_name);
 
         account_settings_details_city = (FontTextView) rootView.findViewById(R.id.account_settings_details_city);
@@ -281,6 +284,83 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
             selectImage();
         }
     }
+    private void showAlert() {
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle("Alert");
+        alertDialog.setMessage("App needs to access the Camera.");
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "DONT ALLOW",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                      //  finish();
+                    }
+                });
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "ALLOW",
+                new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        ActivityCompat.requestPermissions(getActivity(),
+                                new String[]{Manifest.permission.CAMERA},
+                                HGBUtilityPermissions.MY_PERMISSIONS_REQUEST_CAMERA);
+                    }
+                });
+        alertDialog.show();
+    }
+
+    private void showSettingsAlert() {
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle("Alert");
+        alertDialog.setMessage("App needs to access the Camera.");
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "DONT ALLOW",
+                new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        //finish();
+                    }
+                });
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "SETTINGS",
+                new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        HGBUtilityPermissions.startInstalledAppDetailsActivity(getActivity());
+                    }
+                });
+
+        alertDialog.show();
+    }
+
+    private void takePicture(){
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            if (HGBUtilityPermissions.getFromPref(getActivity(), HGBUtilityPermissions.ALLOW_KEY)) {
+                showSettingsAlert();
+            } else if (ContextCompat.checkSelfPermission(getActivity(),
+                    Manifest.permission.CAMERA)
+
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                // Should we show an explanation?
+                if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                        Manifest.permission.CAMERA)) {
+                    showAlert();
+                } else {
+                    // No explanation needed, we can request the permission.
+                    ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{Manifest.permission.CAMERA},
+                            HGBUtilityPermissions.MY_PERMISSIONS_REQUEST_CAMERA);
+                }
+            }
+        } else {
+            cameraIntent();
+            //openCamera();
+        }
+    }
 
     private void selectImage() {
 
@@ -292,7 +372,21 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
             @Override
             public void onClick(DialogInterface dialog, int item) {
 
-                boolean result= HGBUtilityPermissions.checkPermission(getActivity());
+                String selectedItem = items[item].toString();
+                switch (selectedItem){
+                    case "Take Photo":
+                        takePicture();
+                        break;
+                    case "Choose from Library":
+                        galleryIntent();
+                        break;
+                    case "Cancel":
+                        dialog.dismiss();
+                        break;
+                }
+
+
+/*                boolean result= HGBUtilityPermissions.checkPermission(getActivity());
 
 
                 if (items[item].equals("Take Photo")) {
@@ -302,8 +396,8 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
                         cameraIntent();
                     }
 
-                /*    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent, REQUEST_CAMERA);*/
+                *//*    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, REQUEST_CAMERA);*//*
 
                 } else if (items[item].equals("Choose from Library")) {
 
@@ -312,20 +406,20 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
                         galleryIntent();
                     }
 
-                   /* Intent intent = new Intent(
+                   *//* Intent intent = new Intent(
                             Intent.ACTION_PICK,
                             android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    intent.setType("image*//*");
+                    intent.setType("image*//**//*");
 
                     startActivityForResult(intent,
-                            SELECT_FILE);*/
+                            SELECT_FILE);*//*
 
-                   /* startActivityForResult(
+                   *//* startActivityForResult(
                             Intent.createChooser(intent, "Select File"),
-                           SELECT_FILE);*/
+                           SELECT_FILE);*//*
                 } else if (items[item].equals("Cancel")) {
                     dialog.dismiss();
-                }
+                }*/
             }
         });
         builder.show();
@@ -358,6 +452,10 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
         return  thumbnail;
     }
 
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -366,6 +464,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
             if (requestCode == SELECT_FILE)
                 onSelectFromGalleryResult(data);
             else if (requestCode == REQUEST_CAMERA)
+
                 onCaptureImageResult(data);
         }
     }
@@ -397,13 +496,18 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
     private void onCaptureImageResult(Intent data) {
         thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        thumbnail.compress(Bitmap.CompressFormat.PNG, 90, bytes);
 
         byte[] b = bytes.toByteArray();
         String encodedString = Base64.encodeToString(b, Base64.DEFAULT);
 
-        File destination = new File(Environment.getExternalStorageDirectory(),
-                System.currentTimeMillis() + ".jpg");
+
+
+        String root = Environment.getExternalStorageDirectory().toString();
+        File destination = new File(root + "/DCIM/HGB/mainusername" + ".png");
+
+     /*   File destination = new File(Environment.getExternalStorageDirectory(),
+                System.currentTimeMillis() + ".png");*/
 
         FileOutputStream fo;
         try {
