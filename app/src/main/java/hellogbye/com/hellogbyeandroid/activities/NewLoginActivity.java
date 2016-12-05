@@ -117,7 +117,7 @@ public class NewLoginActivity extends Activity {
             startActivity(intent);
 
         }
-        finish();
+     //   finish();
     }
 
     private void resetPassword() {

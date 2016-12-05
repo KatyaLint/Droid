@@ -924,7 +924,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             Intent intent = new Intent(getApplicationContext(), OnBoardingPager.class);
             startActivity(intent);
         }
-        finish();
+        //finish();
     }
 
     @Override
