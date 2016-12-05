@@ -17,7 +17,8 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_gravity="center"
-            android:padding="@dimen/DP20"
+            android:paddingBottom="@dimen/DP10"
+            android:paddingTop="@dimen/DP10"
             android:layout_width="@dimen/DP120">
 
             <ImageView
@@ -57,7 +58,8 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_gravity="center"
-            android:padding="@dimen/DP20"
+            android:paddingBottom="@dimen/DP10"
+            android:paddingTop="@dimen/DP10"
             android:layout_width="@dimen/DP120">
 
             <ImageView
