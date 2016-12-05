@@ -45,7 +45,7 @@ public class EnterPinActivity extends Activity {
         resend_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ConnectionManager.getInstance(EnterPinActivity.this).postUserActivation(
+                ConnectionManager.getInstance(EnterPinActivity.this).postResendActivateEmail(
                         hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL,""), new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {

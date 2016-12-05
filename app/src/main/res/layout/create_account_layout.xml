@@ -284,6 +284,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/DP50"
             android:hint="Email"
+            android:inputType="textEmailAddress"
             android:imeOptions="actionDone"
             android:maxLines="1"
             android:singleLine="true"
