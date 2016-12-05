@@ -534,6 +534,7 @@ Code changing:
         HEL-1959 - fare class images disappears after pressing on them or entering alternative flight and selecting flight
         HEL-1947 - on a round trip the filght back gets a headline of a continued flight
         HEL-1854 - take photo crashes(pressing on my account picture -> take photo)
+        HEL-1969 - error on enter pin page
 
       Code changing:
       --------------

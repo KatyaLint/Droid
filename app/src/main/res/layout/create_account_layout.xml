@@ -3,8 +3,8 @@
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,12 +15,12 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/DP4"
-            android:layout_alignParentTop="true"
+            android:layout_marginTop="@*android:dimen/status_bar_height"
             android:progressDrawable="@drawable/progressbar"
             android:translationZ="@dimen/DP1" />
 
         <RelativeLayout
-            android:id="@+id/create_account_root"
+            android:id="@+id/create_account_disable_while_animating"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
@@ -30,12 +30,12 @@
 
         <ImageView
             android:id="@+id/arrow_back"
-
+            android:layout_marginTop="@dimen/DP50"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_margin="@dimen/DP20"
+            android:layout_marginLeft="@dimen/DP20"
             android:background="@drawable/arrow_back"
             android:visibility="gone" />
 
@@ -53,11 +53,11 @@
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/sign_in"
             android:layout_width="wrap_content"
-
+            android:layout_marginTop="@dimen/DP50"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_margin="@dimen/DP20"
+            android:layout_marginRight="@dimen/DP20"
             android:text="@string/login"
             android:textColor="@color/COLOR_003D4C"
             android:translationZ="1dp"
@@ -87,6 +87,8 @@
         <ImageView
             android:id="@+id/sun"
             android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/MINUS_DP80"
+            android:translationZ="-1dp"
             android:layout_height="wrap_content"
             android:src="@drawable/sun" />
 
@@ -177,7 +179,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cloud_01"
-            android:layout_marginLeft="@dimen/DP50"
+            android:layout_marginLeft="@dimen/DP30"
             android:layout_marginTop="@dimen/DP80"
             android:src="@drawable/airplane_01" />
 
@@ -198,6 +200,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cloud_01"
+            android:layout_marginTop="@dimen/DP10"
             android:layout_centerHorizontal="true"
             android:text="LABEL_1"
             android:textColor="@color/COLOR_003D4C"
@@ -239,9 +242,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/password1"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/DP20"
             android:hint="Confirm Password"
             android:imeOptions="actionDone"
-            android:layout_marginTop="@dimen/DP20"
             android:inputType="textPassword"
             android:maxLines="1"
             android:singleLine="true"
@@ -251,8 +254,8 @@
             android:id="@+id/first_name"
             style="@style/new_sign_up_text_color"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_below="@+id/label_2"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/DP50"
             android:hint="First Name"
             android:imeOptions="actionNext"
@@ -266,8 +269,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/first_name"
             android:layout_centerHorizontal="true"
-            android:hint="Last Name"
             android:layout_marginTop="@dimen/DP20"
+            android:hint="Last Name"
             android:imeOptions="actionDone"
             android:maxLines="1"
             android:singleLine="true"
@@ -281,6 +284,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/DP50"
             android:hint="Email"
+            android:inputType="textEmailAddress"
             android:imeOptions="actionDone"
             android:maxLines="1"
             android:singleLine="true"
@@ -359,16 +363,18 @@
             android:layout_marginLeft="@dimen/MINUS_DP300"
             android:alpha="0.58"
             android:src="@drawable/building" />
-
-        <ImageView
+        <include
             android:id="@+id/birds"
+            layout="@layout/bird_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/building_01"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/DP80"
-            android:src="@drawable/birds"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/DP80" />
+
+
+
 
     </RelativeLayout>
 </LinearLayout>

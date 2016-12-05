@@ -71,9 +71,12 @@
     <dimen name="MINUS_DP220">-440dp</dimen>
     <dimen name="MINUS_DP200">-400dp</dimen>
     <dimen name="MINUS_DP30">-60dp</dimen>
+    <dimen name="MINUS_DP10">-20dp</dimen>
     <dimen name="MINUS_DP300">-600dp</dimen>
     <dimen name="MINUS_DP320">-640dp</dimen>
     <dimen name="MINUS_DP70">-140dp</dimen>
+    <dimen name="MINUS_DP80">-160dp</dimen>
+    <dimen name="MINUS_DP100">-200dp</dimen>
     <dimen name="MINUS_DP170">-320dp</dimen>
     <dimen name="MINUS_DP440">-880dp</dimen>
     <dimen name="MINUS_DP520">-1040dp</dimen>
