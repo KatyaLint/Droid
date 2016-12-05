@@ -76,7 +76,7 @@ public class StartingMenuActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getBaseContext(), NewLoginActivity.class);
+                Intent intent = new Intent(getBaseContext(), CreateAccountActivity.class);
             //    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
                 //finish();

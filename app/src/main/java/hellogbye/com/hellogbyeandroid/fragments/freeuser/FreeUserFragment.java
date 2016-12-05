@@ -4,45 +4,16 @@ package hellogbye.com.hellogbyeandroid.fragments.freeuser;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.TextWatcher;
-import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.LinearLayout;
-
-
-import java.util.ArrayList;
-import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.NewLoginActivity;
+import hellogbye.com.hellogbyeandroid.activities.CreateAccountActivity;
 import hellogbye.com.hellogbyeandroid.activities.SignUpActivity;
-
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
-
-import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
-import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
-import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
-import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
-import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
-import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
-import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
-
-import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
-import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
-import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
-import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
-import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by nyawka on 4/14/16.
@@ -247,7 +218,7 @@ public class FreeUserFragment extends HGBAbstractFragment {
         free_user_sign_in_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), NewLoginActivity.class);
+                Intent intent = new Intent(getActivity(), CreateAccountActivity.class);
                 startActivity(intent);
             //    getFlowInterface().goToFragment(ToolBarNavEnum.HOTEL.getNavNumber(),null);
 

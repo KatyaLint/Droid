@@ -31,7 +31,7 @@
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme.ActionBar">
+        android:theme="@style/AppTheme">
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -107,11 +107,7 @@
             <!--android:name=".activities.LoginActivity"-->
             <!--android:screenOrientation="portrait"-->
             <!--android:label="@string/app_name"/>-->
-        <activity
-            android:name=".activities.NewLoginActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.ActionBar.Transparent"
-            android:label="@string/app_name"/>
+
 
 
         <activity
@@ -139,19 +135,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         <!--</activity>-->
-        <activity
-
-            android:name=".activities.TravelPrefrenceStartingActivity"
-            android:label="@string/app_name">
-
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
+x
         <!--<activity-->
             <!--android:name=".activities.OnBoardingActivity"-->
             <!--android:label="@string/app_name">-->
