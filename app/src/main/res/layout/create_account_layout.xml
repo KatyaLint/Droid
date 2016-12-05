@@ -58,6 +58,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="@dimen/DP20"
+            android:textSize="@dimen/SP18"
             android:text="@string/login"
             android:textColor="@color/COLOR_003D4C"
             android:translationZ="1dp"
@@ -372,6 +373,15 @@
             android:layout_alignParentRight="true"
             android:visibility="gone"
             android:layout_marginRight="@dimen/DP80" />
+
+        <include
+            android:id="@+id/login"
+            layout="@layout/new_login_layout"
+            android:layout_below="@+id/cloud_01"
+            android:layout_marginTop="@dimen/DP10"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            />
 
 
 

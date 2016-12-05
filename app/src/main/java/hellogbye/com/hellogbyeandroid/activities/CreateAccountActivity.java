@@ -1,8 +1,6 @@
 package hellogbye.com.hellogbyeandroid.activities;
-import android.animation.AnimatorSet;
-import android.app.Activity;
+
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -14,7 +12,6 @@ import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
@@ -30,6 +27,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -55,11 +54,6 @@ import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
-import static hellogbye.com.hellogbyeandroid.R.id.email;
-import static hellogbye.com.hellogbyeandroid.R.id.pin_code_verification_layout;
-import static hellogbye.com.hellogbyeandroid.R.id.sign_up_layout_ll;
-import static hellogbye.com.hellogbyeandroid.R.id.textView;
-
 /**
  * Created by arisprung on 11/8/16.
  */
@@ -84,6 +78,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private ImageView mCloud07;
     private ImageView mArrowBack;
     private LinearLayout mBirds;
+    private FontButtonView login;
     private ImageView mCanadaCheck;
     private ImageView mUSCheck;
     private ProgressBar mProgressBar;
@@ -92,6 +87,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private FontTextView mSignInTextView;
     private FontTextView mWelcomeTextView;
     private FontTextView mHyperlink;
+    private FontEditTextView mLoginEmail;
+    private FontEditTextView mLoginPassword;
     private FontEditTextView mStateProvince;
     private AutoCompleteTextView mCity;
     private FontEditTextView mZip;
@@ -108,10 +105,13 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private LinearLayout mAddressLayout;
     private LinearLayout mUSLayout;
     private LinearLayout mCanadaLayout;
+    private LinearLayout mLogin;
     private RelativeLayout mRoot;
     private ImageView mBird1;
     private ImageView mBird2;
-
+    private CheckBox mRemmeberMeCheckbox;
+    private FontTextView mForgotPasswordTextView;
+    private boolean remember_me;
     private final int NUMBER_OF_STAGES = 5;
 
     private int CURRENT_STATE = 0;
@@ -120,6 +120,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private final int EMAIL_STATE = 3;
     private final int PASSWORD_STATE = 4;
     private final int ADDRESS_STATE = 5;
+    private final int LOGIN_STATE = 6;
 
     private HGBPreferencesManager hgbPrefrenceManager;
     private CountDownTimer countDownTimer;
@@ -170,10 +171,10 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mBirds = (LinearLayout) findViewById(R.id.birds);
         mUSCheck = (ImageView) findViewById(R.id.us_check);
         mCanadaCheck = (ImageView) findViewById(R.id.canada_check);
-
+        mForgotPasswordTextView = (FontTextView) findViewById(R.id.forgotpassword);
         mBird1 = (ImageView)findViewById(R.id.bird_1);
         mBird2 = (ImageView)findViewById(R.id.bird_2);
-
+        mRemmeberMeCheckbox = (CheckBox) findViewById(R.id.remmember_me_checkbox);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         mSignInTextView = (FontTextView) findViewById(R.id.sign_in);
@@ -194,12 +195,14 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mCity = (AutoCompleteTextView) findViewById(R.id.city);
         mZip = (FontEditTextView) findViewById(R.id.zip);
         mStateProvince = (FontEditTextView) findViewById(R.id.state_province);
-
+        mLogin=  (LinearLayout) findViewById(R.id.login);
         mCanadaLayout = (LinearLayout) findViewById(R.id.canada_layout);
         mAddressLayout = (LinearLayout) findViewById(R.id.country_layout);
         mRoot = (RelativeLayout) findViewById(R.id.create_account_disable_while_animating);
         mUSLayout = (LinearLayout) findViewById(R.id.us_layout);
-
+        mLoginEmail = (FontEditTextView) findViewById(R.id.username);
+        mLoginPassword = (FontEditTextView) findViewById(R.id.login_password);
+        login = (FontButtonView)findViewById(R.id.login_button);
 
         editTextViewListners();
         mUSLayout.setOnClickListener(this);
@@ -212,6 +215,43 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mTryNow.setOnClickListener(this);
         mSignInTextView.setOnClickListener(this);
         initSpannableText();
+
+        mForgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetPassword();
+            }
+        });
+
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME, mRemmeberMeCheckbox.isChecked());
+                ConnectionManager.getInstance(CreateAccountActivity.this).login(mLoginEmail.getText().toString(), mLoginPassword.getText().toString(),
+                        new ConnectionManager.ServerRequestListener() {
+                            @Override
+                            public void onSuccess(Object data) {
+                                UserLoginCredentials user = (UserLoginCredentials) data;
+                                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_USER_IS_LOGIN_IN_PAST, true);
+                                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
+                                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
+
+                                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, mLoginEmail.getText().toString());
+                                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, mLoginPassword.getText().toString());
+                                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER,false);
+                                goToMainActivity();
+                            }
+
+                            @Override
+                            public void onError(Object data) {
+                                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                                errorHelper.setMessageForError((String) data);
+                                errorHelper.show(getFragmentManager(), (String) data);
+                            }
+                        });
+            }
+        });
     }
 
     private void editTextViewListners() {
@@ -454,6 +494,46 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         countDownTimer.start();
     }
 
+
+    private void resetPassword() {
+
+        LayoutInflater li = LayoutInflater.from(getApplicationContext());
+        final View promptsView = li.inflate(R.layout.popup_forgotpassword_layout, null);
+
+        final EditText userInput = (EditText) promptsView
+                .findViewById(R.id.editTextDialogUserInput);
+
+        final  View popupView = li.inflate(R.layout.popup_layout_log_out, null);
+
+
+
+        HGBUtility.showAlertPopUp(CreateAccountActivity.this,  userInput, promptsView,
+                getResources().getString(R.string.reset_your_password),getResources().getString(R.string.save_button), new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+
+                        ConnectionManager.getInstance(CreateAccountActivity.this).resetPasswordWithEmail(inputItem,
+                                new ConnectionManager.ServerRequestListener() {
+                                    @Override
+                                    public void onSuccess(Object data) {
+                                        Toast.makeText(getApplicationContext(), R.string.email_reset_succesfully, Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onError(Object data) {
+                                        HGBUtility.showAlertPopUpOneButton(CreateAccountActivity.this,  null, popupView,
+                                                (String)data, null);
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void itemCanceled() {
+                    }
+                });
+
+    }
+
     public class AnimationCountDownTimer extends CountDownTimer {
         public AnimationCountDownTimer(long startTime, long interval) {
             super(startTime, interval);
@@ -497,8 +577,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                     }
 
                 } else {
-                    Intent intent = new Intent(getApplicationContext(), NewLoginActivity.class);
-                    startActivity(intent);
+
+                    goToLoginState(true);
+
                 }
                 break;
             case R.id.arrow_back:
@@ -552,6 +633,49 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         }
     }
 
+    private void goToLoginState(boolean animateFoward) {
+
+        disableScreen();
+
+        ArrayList<View> secondViewViews = new ArrayList<>();
+        secondViewViews.add(mArrowBack);
+        secondViewViews.add(mLogin);
+
+        ArrayList<View> firstViewViews = new ArrayList<>();
+        firstViewViews.add(mWelcomeTextView);
+        firstViewViews.add(mLogoOnBoarding);
+        firstViewViews.add(mCreateAccount);
+        firstViewViews.add(mTryNow);
+
+
+        if(animateFoward){
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),firstViewViews,secondViewViews);
+            mSignInTextView.setText(R.string.next);
+
+            remember_me = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME,false);
+            String email = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, null);
+            if(remember_me && email != null){
+                mLoginEmail.setText(email);
+                String pswd = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, null);
+                if(pswd != null){
+                    mLoginPassword.setText(pswd);
+                }
+            }
+            CURRENT_STATE = LOGIN_STATE;
+
+        }else{
+            mSignInTextView.setText(R.string.login_);
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),secondViewViews,firstViewViews);
+            HGBUtility.hideKeyboard(getApplicationContext(),mLoginEmail);
+            CURRENT_STATE = WELCOME_STATE;
+
+        }
+        updateProgressBar();
+        animateFirstToLoginStaticViews(animateFoward);
+
+
+    }
+
     private void userSelectedState() {
         if (userData.getCountry() != null && mProvinceItems != null) {
             HGBUtility.showPikerDialogEditText(mStateProvince, CreateAccountActivity.this, "Choose province",
@@ -593,6 +717,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                 break;
             case ADDRESS_STATE:
                 animateAddressView(false);
+                break;
+            case LOGIN_STATE:
+                goToLoginState(false);
                 break;
         }
     }
@@ -644,6 +771,38 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     private void updateProgressBar() {
         mProgressBar.setProgress((100 / NUMBER_OF_STAGES) * CURRENT_STATE);
+    }
+
+    private void animateFirstToLoginStaticViews(boolean animateFoward) {
+        if(animateFoward){
+            mPlane1.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane01_1_2));//
+            Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane01_1_2);
+            anim.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    HGBUtility.showKeyboard(getApplicationContext(),mLoginEmail);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            mPlane1.setAnimation(anim);
+            mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding01_1_login));
+            mBiulding1.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding01_1_login));
+        }else{
+
+            mPlane1.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane01_2_1));//
+            mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding01_login_1));
+            mBiulding1.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding01_login_1));
+        }
+
     }
 
 

@@ -560,10 +560,18 @@ public class HGBUtility {
         }
     }
 
-    public static void showKeyboard(Context context,View view) {
+    public static void showKeyboard(Context context,final View view) {
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+            final InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            view.postDelayed(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    view.requestFocus();
+                    imm.showSoftInput(view, 0);
+                }
+            }, 100);
         }
     }
 
