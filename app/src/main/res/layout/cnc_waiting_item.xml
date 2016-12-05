@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/DP10"
-        android:background="@drawable/hello_gbye_icon_r_g_b_red"/>
+        android:background="@drawable/avatar"/>
 
     <pl.tajchert.sample.DotsTextView
         android:layout_toRightOf="@+id/cnc_image_view"

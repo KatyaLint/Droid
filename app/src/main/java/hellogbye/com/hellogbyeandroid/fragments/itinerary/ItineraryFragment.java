@@ -552,6 +552,13 @@ kate
             grid_traveler_continued_flight.setVisibility(View.INVISIBLE);
         }else{
             grid_traveler_continued_flight.setVisibility(View.VISIBLE);
+            if(node.getParentflightid() != null){
+                grid_traveler_continued_flight.setText("Return Flight");
+            }else{
+                grid_traveler_continued_flight.setText("Continued Flight");
+            }
+
+
             grid_traveler_flight_price.setVisibility(View.INVISIBLE);
         }
 

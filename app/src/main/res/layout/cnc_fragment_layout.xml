@@ -130,7 +130,7 @@
                 android:layout_height="@dimen/DP34"
                 android:background="@drawable/blue_button_border_cnc"
                 android:gravity="center"
-                android:padding="@dimen/DP10"
+                android:layout_margin="@dimen/DP10"
                 android:text="@string/send"
                 android:textColor="@color/COLOR_003D4C"
                 app:fontName="dinnextltpro_medium.otf"

@@ -526,12 +526,13 @@ Code changing:
 
 
      ------------------------------------------
-                         Version 0.0.4
+                         Version 0.0.5
      ------------------------------------------
       Fixed Bugs:
       -----------
 
         HEL-1959 - fare class images disappears after pressing on them or entering alternative flight and selecting flight
+        HEL-1947 - on a round trip the filght back gets a headline of a continued flight
 
       Code changing:
       --------------
