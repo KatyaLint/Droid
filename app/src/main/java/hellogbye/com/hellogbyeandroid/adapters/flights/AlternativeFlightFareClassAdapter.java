@@ -66,11 +66,12 @@ public class AlternativeFlightFareClassAdapter extends PagerAdapter {
          FontTextView flight_details_fareclass_type;
          FontTextView flight_details_fareclass_price;
          ImageView flight_details_fareclass_selected;
-
         layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemLayoutView = layoutInflater.inflate(R.layout.flight_details_gallery, container,
-                false);
-
+        View itemLayoutView = layoutInflater.inflate(R.layout.flight_details_gallery, container, false);
+    /*    if(!dataset.isEmpty())
+        {
+            itemLayoutView.setVisibility(View.VISIBLE);
+        }*/
 
         FairclassPreferencesVO fareClassPreference = this.dataset.get(position);
         flight_details_fareclass_image = (ImageView) itemLayoutView.findViewById(R.id.flight_details_fareclass_image);

@@ -525,4 +525,13 @@ Code changing:
         - new microfone icon
 
 
+     ------------------------------------------
+                         Version 0.0.4
+     ------------------------------------------
+      Fixed Bugs:
+      -----------
 
+        HEL-1959 - fare class images disappears after pressing on them or entering alternative flight and selecting flight
+
+      Code changing:
+      --------------

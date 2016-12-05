@@ -45,7 +45,9 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         this.itemsData = itemsData;
         this.mContext = context;
         this.currentNode = currentNode;
+
         mFlightFareClassAdapter = new AlternativeFlightFareClassAdapter(currentNode.getDropdownoptions(), mContext);
+
 
     }
 
@@ -80,8 +82,11 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             viewHolder.flight_tickets_rl.setVisibility(View.VISIBLE);
 
           //  ArrayList<FairclassPreferencesVO> dropDownOptions = currentNode.getDropdownoptions();
-
-            viewHolder.flight_details_fare_class_ll.setVisibility(View.VISIBLE);
+            if(!currentNode.getDropdownoptions().isEmpty()) {
+                viewHolder.flight_details_fare_class_ll.setVisibility(View.VISIBLE);
+            }else{
+                viewHolder.flight_details_fare_class_ll.setVisibility(View.GONE);
+            }
             viewHolder.flight_details_view_pager.setAdapter(mFlightFareClassAdapter);
 
 
@@ -281,6 +286,8 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
                 }
             });
 
+
+
             initializeViewPager(itemLayoutView);
 
 
@@ -288,8 +295,18 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
 
 
         private void initializeViewPager(View mainView){
+
             flight_details_view_pager = (WrapContentViewPager) mainView.findViewById(R.id.flight_details_view_pager);
             flight_details_fare_class_ll = (LinearLayout)mainView.findViewById(R.id.flight_details_fare_class_ll);
+            if(currentNode.getDropdownoptions().isEmpty()){
+             //   flight_details_view_pager.setVisibility(View.GONE);
+                flight_details_fare_class_ll.setVisibility(View.GONE);
+            }else{
+              //  flight_details_view_pager.setVisibility(View.VISIBLE);
+                flight_details_fare_class_ll.setVisibility(View.VISIBLE);
+            }
+
+
         }
 
         private void initializeSelecteOrMyFlight(View mainView) {
