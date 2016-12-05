@@ -1,7 +1,10 @@
 package hellogbye.com.hellogbyeandroid.activities;
+import android.animation.AnimatorSet;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.Settings;
@@ -17,6 +20,8 @@ import android.text.style.ClickableSpan;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -58,7 +63,7 @@ import static hellogbye.com.hellogbyeandroid.R.id.textView;
  * Created by arisprung on 11/8/16.
  */
 
-public class CreateAccountActivity extends Activity implements View.OnClickListener {
+public class CreateAccountActivity extends BaseActivity implements View.OnClickListener {
 
     //private ImageView mPlane;
     private ImageView mPlane1;
@@ -132,6 +137,7 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
         userData = new UserSignUpDataVO();
         countDownTimer = new AnimationCountDownTimer(getResources().getInteger(R.integer.create_account_animation_duration), 1000);
         animateWelcomeView();
+
     }
 
 
@@ -708,8 +714,9 @@ public class CreateAccountActivity extends Activity implements View.OnClickListe
             mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_3_4));
             mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_3_4));
         }else{
-            mBirds.setVisibility(View.VISIBLE);
-            mBirds.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.birds_4_3));
+            mBirds.setVisibility(View.GONE);
+            Animation set = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.birds_4_3);
+            mBirds.setAnimation(set);
             mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_4_3));
             mPlane2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane02_4_3));
             mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_4_3));

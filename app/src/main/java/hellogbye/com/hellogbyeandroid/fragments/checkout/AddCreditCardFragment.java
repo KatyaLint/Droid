@@ -134,7 +134,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
                 scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_EXPIRY, true); // default: false
                 scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, true); // default: false
                 scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_POSTAL_CODE, true); // default: false
-
+                scanIntent.putExtra(CardIOActivity.EXTRA_GUIDE_COLOR,0x000000); // default:  0x000000
                 startActivityForResult(scanIntent, MY_SCAN_REQUEST_CODE);
             }
         });
