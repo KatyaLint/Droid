@@ -539,6 +539,7 @@ Code changing:
         HEL-1982 - different prices in grid and in hotel details
         HEL-1973 - crash at create credit card
         HEL-1971 - create forgot password screen implement
+        HEL-1906 -change 2 tabs under hotel details as in design
 
       Code changing:
       --------------

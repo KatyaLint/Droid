@@ -81,7 +81,7 @@ public class HotelFragment extends HGBAbstractFragment {
     private FragmentTabHost mTabHost;
     private static final String TAB_1_TAG = "DETAILS";
     private static final String TAB_2_TAG = "GALLERY";
-    private static final String TAB_3_TAG = "Hotel Policies";
+    private static final String TAB_3_TAG = "HOTEL POLICIES";
     private FontTextView mNumberImages;
 
     public static Fragment newInstance(int position) {
