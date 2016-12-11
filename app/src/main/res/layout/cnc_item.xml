@@ -16,8 +16,10 @@
         android:text="HGB"
         android:textSize="@dimen/SP16"
         android:gravity="left"
+        android:textIsSelectable="true"
         app:fontName="dinnextltpro_regular.otf"
         android:textColor="@color/COLOR_WHITE"
+
         android:background="@drawable/cnc_backround"
         android:layout_alignParentRight="true"/>
 
