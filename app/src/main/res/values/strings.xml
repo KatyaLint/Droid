@@ -86,7 +86,7 @@
     <string name="preferences_stars">Preferred Star Rating</string>
     <string name="preferences_stars_prefer">Tell us what star ratings\nyou\'d consider when traveling</string>
 
-    <string name="preferences_class">Preferred Flight Class</string>
+    <string name="preferences_class">Preferred Cabin Class</string>
     <string name="preferences_class_prefer">Rank the importance of cabin class\nfrom most to least important.</string>
 
 
