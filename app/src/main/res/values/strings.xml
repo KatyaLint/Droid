@@ -8,7 +8,7 @@
 
 
     <string name="tool_bar">Edit</string>
-    <string name="tool_bar_preferences_save_button">Save</string>
+    <string name="tool_bar_preferences_save_button">SAVE</string>
     <string name="remmeber_me">Remember Me</string>
     <string name="password">Password</string>
     <string name="email_address">Email Address</string>
