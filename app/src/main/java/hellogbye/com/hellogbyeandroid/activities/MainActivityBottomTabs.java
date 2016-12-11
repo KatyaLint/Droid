@@ -1218,6 +1218,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         errorHelper.setMessageForError((String) data);
         errorHelper.show(getFragmentManager(), (String) data);
     }
+
     public AutoCompleteTextView getmAutoComplete() {
         return mAutoComplete;
     }
