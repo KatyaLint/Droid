@@ -549,6 +549,7 @@ Code changing:
         HEL-1876 - change text in star ratings
         HEL-1952 - can't enter the agreement and privacy policy links
         HEL-1955 - change text and make it upper case in profile menu
+        HEL-1978 - name of trip in cnc appears when not supposed to
 
       Code changing:
       --------------

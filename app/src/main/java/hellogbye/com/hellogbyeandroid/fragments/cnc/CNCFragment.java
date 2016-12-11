@@ -247,7 +247,7 @@ public class CNCFragment extends HGBAbstractFragment implements TitleNameChange 
 
         //Kate check
         args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
-     //   getActivityInterface().setTravelOrder(null);
+        getActivityInterface().setTravelOrder(new UserTravelMainVO());
         setTextForTrip("New Trip");
         mHGBPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
         mHGBPrefrenceManager.removeKey(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
