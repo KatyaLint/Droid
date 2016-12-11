@@ -530,6 +530,9 @@ kate
      * @param node
      * @return view of flight
      */
+
+    private String nodeBeforeID = "";
+
     private View flightLayout(NodesVO node, int counter){
 
         View child = activity.getLayoutInflater().inflate(R.layout.new_grid_view_inner_flight_item, null);
@@ -545,22 +548,39 @@ kate
 
         TextView grid_traveler_flight_price = (TextView)child.findViewById(R.id.grid_traveler_flight_price);
         TextView grid_traveler_continued_flight = (TextView)child.findViewById(R.id.grid_traveler_continued_flight);
-        if(counter == 0){
+
+        grid_traveler_flight_price.setText("$" + HGBUtility.roundNumber(node.getCost()) + node.getmCurrency());
+        grid_traveler_flight_price.setVisibility(View.VISIBLE);
+        grid_traveler_continued_flight.setVisibility(View.INVISIBLE);
+
+      /*  if(counter == 0){
 
             grid_traveler_flight_price.setText("$" + HGBUtility.roundNumber(node.getCost()) + node.getmCurrency());
             grid_traveler_flight_price.setVisibility(View.VISIBLE);
             grid_traveler_continued_flight.setVisibility(View.INVISIBLE);
         }else{
-            grid_traveler_continued_flight.setVisibility(View.VISIBLE);
+           */
             if(node.getParentflightid() != null){
+                grid_traveler_continued_flight.setVisibility(View.VISIBLE);
+                grid_traveler_flight_price.setVisibility(View.INVISIBLE);
                 grid_traveler_continued_flight.setText("Return Flight");
-            }else{
-                grid_traveler_continued_flight.setText("Continued Flight");
             }
 
+            if(nodeBeforeID.equals(node.getmPrimaryguid())){
+                grid_traveler_continued_flight.setVisibility(View.VISIBLE);
+                grid_traveler_flight_price.setVisibility(View.INVISIBLE);
+                grid_traveler_continued_flight.setText("Continued Flight");
+            }else{
+                nodeBeforeID = node.getmPrimaryguid();
+            }
 
-            grid_traveler_flight_price.setVisibility(View.INVISIBLE);
-        }
+           /* else {
+                grid_traveler_continued_flight.setText("Continued Flight");
+            }
+*/
+
+
+       /* }*/
 
 
         //guid

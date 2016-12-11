@@ -540,6 +540,7 @@ Code changing:
         HEL-1973 - crash at create credit card
         HEL-1971 - create forgot password screen implement
         HEL-1906 -change 2 tabs under hotel details as in design
+        HEL-1985 - text instead of price on companion added to trip
 
       Code changing:
       --------------
