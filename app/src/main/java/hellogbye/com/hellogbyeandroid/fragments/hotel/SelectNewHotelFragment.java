@@ -374,8 +374,11 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
                         CellsVO cellsVO = (CellsVO) data;
                         mNodesList.clear();
                         mNodesList.addAll(cellsVO.getmNodes());
+                        mNodesList.add(0,mCurrentSelectedNode);
+                        loadMap();
                         mAdapter.notifyDataSetChanged();
                         resetSelectedNode(mNodesList.get(0));
+
                     }
 
                     @Override

@@ -31,7 +31,7 @@ public class AlternativeHotelFragment extends android.support.v4.app.Fragment
     private FontTextView mHotelPriceTextView;
     private FontTextView mHotelNameTextView;
     private FontTextView mSelectTextView;
-    private  View mTopView;
+    private View mTopView;
 
 
 
@@ -82,19 +82,14 @@ public class AlternativeHotelFragment extends android.support.v4.app.Fragment
         mHotelNameTextView.setText(mHotelName);
         mHotelPriceTextView.setText(mPrice);
         if (mMyHotel) {
-
             mSelectTextView.setText("MY HOTEL");
             mSelectTextView.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.COLOR_EE3A3C));
             mSelectTextView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.check, 0, 0, 0);
-
-
         } else {
             mSelectTextView.setText("SELECT");
             mSelectTextView.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.COLOR_565656));
             mSelectTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         }
-
-
     }
 
     private void setStarRating(boolean isSelected, View view, float star) {
