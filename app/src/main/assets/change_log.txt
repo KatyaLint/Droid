@@ -546,6 +546,8 @@ Code changing:
         HEL-1970 - there isn't any text shown for ileagel email in forgot password( no fix solved with HEL-1971)
         HEL-1945 - hotel details showing price for all of the nights instead of for 1 night
         HEL-1876 - change text in star ratings
+        HEL-1952 - can't enter the agreement and privacy policy links
+        HEL-1955 - change text and make it upper case in profile menu
 
       Code changing:
       --------------
