@@ -886,7 +886,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                     AnimationDrawable rocketAnimation1 = (AnimationDrawable) mBird1.getBackground();
                     rocketAnimation1.start();
 
-                    mBird2.setBackgroundResource(R.drawable.animation_bird);
+                    mBird2.setBackgroundResource(R.drawable.animation_bird2);
                     AnimationDrawable rocketAnimation2 = (AnimationDrawable) mBird2.getBackground();
                     rocketAnimation2.start();
 

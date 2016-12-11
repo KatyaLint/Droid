@@ -89,7 +89,7 @@ public class AlternativeHotelFragment extends android.support.v4.app.Fragment
 
 
         } else {
-            mSelectTextView.setText("SELECTED");
+            mSelectTextView.setText("SELECT");
             mSelectTextView.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.COLOR_565656));
             mSelectTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         }
