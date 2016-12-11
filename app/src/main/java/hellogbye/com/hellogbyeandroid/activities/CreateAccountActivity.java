@@ -496,42 +496,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
 
     private void resetPassword() {
-
-        LayoutInflater li = LayoutInflater.from(getApplicationContext());
-        final View promptsView = li.inflate(R.layout.popup_forgotpassword_layout, null);
-
-        final EditText userInput = (EditText) promptsView
-                .findViewById(R.id.editTextDialogUserInput);
-
-        final  View popupView = li.inflate(R.layout.popup_layout_log_out, null);
-
-
-
-        HGBUtility.showAlertPopUp(CreateAccountActivity.this,  userInput, promptsView,
-                getResources().getString(R.string.reset_your_password),getResources().getString(R.string.save_button), new PopUpAlertStringCB() {
-                    @Override
-                    public void itemSelected(String inputItem) {
-
-                        ConnectionManager.getInstance(CreateAccountActivity.this).resetPasswordWithEmail(inputItem,
-                                new ConnectionManager.ServerRequestListener() {
-                                    @Override
-                                    public void onSuccess(Object data) {
-                                        Toast.makeText(getApplicationContext(), R.string.email_reset_succesfully, Toast.LENGTH_SHORT).show();
-                                    }
-
-                                    @Override
-                                    public void onError(Object data) {
-                                        HGBUtility.showAlertPopUpOneButton(CreateAccountActivity.this,  null, popupView,
-                                                (String)data, null);
-                                    }
-                                });
-                    }
-
-                    @Override
-                    public void itemCanceled() {
-                    }
-                });
-
+        startActivity(new Intent(getApplicationContext(),ForgotPasswordActivity.class));
     }
 
     public class AnimationCountDownTimer extends CountDownTimer {
