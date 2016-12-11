@@ -44,6 +44,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.WrapContentViewPager;
 
+import static hellogbye.com.hellogbyeandroid.R.id.grid_hotel_price;
 import static hellogbye.com.hellogbyeandroid.R.id.position;
 
 
@@ -58,6 +59,8 @@ public class HotelFragment extends HGBAbstractFragment {
     private AlternativeHotelRoomAdapter mHotelRoomAdapter;
     private HotelImageAdapter mHotelImageAdapter;
     private FontTextView mHotelNameFontTextView;
+    private FontTextView mHotelCurrencyFontTextView;
+
     private FontTextView mHotelPriceFontTextView;
   //  private FontTextView mHotelDaysFontTextView;
     private FontTextView mAlertnativeHotelFontTextView;
@@ -169,6 +172,8 @@ public class HotelFragment extends HGBAbstractFragment {
         mChckOutDate = (FontTextView) rootView.findViewById(R.id.checkout_date);
         mHotelNameFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_name);
         mHotelPriceFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_price);
+        mHotelCurrencyFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_currency);
+
         //mHotelDaysFontTextView = (FontTextView) rootView.findViewById(R.id.days);
         mAlertnativeHotelFontTextView = (FontTextView) rootView.findViewById(R.id.show_alternative_hotel);
 
@@ -202,10 +207,10 @@ public class HotelFragment extends HGBAbstractFragment {
 
         mChckInDate.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(node.getmCheckIn()));
         mChckOutDate.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(node.getmCheckOut()));
-        long diff = HGBUtilityDate.dayDifference(node.getmCheckIn(), node.getmCheckOut());
-        double iCharge = node.getmMinimumAmount() / diff;
-        String result = String.format("%.2f", iCharge);
-        mHotelPriceFontTextView.setText("$" + node.getmMinimumAmount());
+        long diff = HGBUtilityDate.dayDifference(node.getmCheckIn(), node.getmCheckOut());//HGBUtility.getDateDiff(node.getmCheckIn(), node.getmCheckOut());
+        double iCharge = node.getmMinimumAmount()/(diff+1);
+        mHotelPriceFontTextView.setText("$" + HGBUtility.roundNumber(iCharge)+" ");
+        mHotelCurrencyFontTextView.setText(node.getmCurrency()+"/Night");
         //mHotelDaysFontTextView.setText(diff + " Nights");
         initHotelImages(node.getAllImagesVOs());
     }

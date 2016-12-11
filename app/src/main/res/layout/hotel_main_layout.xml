@@ -115,10 +115,10 @@
                                 app:fontName="dinnextltpro_medium.otf" />
 
                             <hellogbye.com.hellogbyeandroid.views.FontTextView
-
+                                android:id="@+id/hotel_currency"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=" USD/Night"
+                                android:text="/Night"
                                 android:textColor="@color/COLOR_00516f"
                                 android:textSize="@dimen/SP14"
                                 app:fontName="dinnextltpro_regular.otf" />
