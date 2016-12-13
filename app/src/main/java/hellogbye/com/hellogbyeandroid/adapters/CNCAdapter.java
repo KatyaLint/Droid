@@ -160,6 +160,7 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 ViewHolderMe meholder = (ViewHolderMe) holder;
                 meholder.itemME.setText(strMessage);
                 HGBUtility.getAndSaveUserImage(avatarUrl,  meholder.cnc_image_view_user, null);
+                meholder.itemME.setTextIsSelectable(true);
               //  meholder.cnc_image_view_user.setImageBitmap(HGBUtility.getBitmapFromCache(mContext));
                 break;
             case HGB_ERROR_ITEM:
@@ -167,6 +168,7 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 hgbholderError.itemHGB.setBackgroundResource(R.drawable.hgb_red_cnc_backround);
                 hgbholderError.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_BLACK));
                 hgbholderError.itemHGB.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
+                hgbholderError.itemHGB.setTextIsSelectable(true);
                 break;
             case HGB_ITEM:
             case HGB_ITEM_NO_ICON:
@@ -178,11 +180,13 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     hgbholder.itemHGB.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
                     hgbholder.itemHGB.setPaintFlags(hgbholder.itemHGB.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                     hgbholder.itemHGB.setSelected(false);
+                    hgbholder.itemHGB.setTextIsSelectable(false);
                 } else {
                     hgbholder.itemHGB.setBackgroundResource(R.drawable.hgb_cnc_backround);
                     hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_00516f));
                     hgbholder.itemHGB.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
                     hgbholder.itemHGB.setSelected(true);
+                    hgbholder.itemHGB.setTextIsSelectable(true);
                 }
 
                 hgbholder.itemHGB.setText(strMessage);

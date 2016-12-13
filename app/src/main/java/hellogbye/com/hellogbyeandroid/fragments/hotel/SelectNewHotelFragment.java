@@ -276,20 +276,8 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
             return;
         }
 
-
-//        for (int i = 0; i < mNodesList.size(); i++) {
-//            Marker marker = mMap.addMarker(new MarkerOptions()
-//                    .position(new LatLng(mNodesList.get(i).getmLatitude(), mNodesList.get(i).getmLongitude())));
-//            if (mCurrentSelectedNode.getmHotelCode().equals(mNodesList.get(i).getmHotelCode())) {
-//                marker.setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(true, i + 1, mNodesList.get(i).getmStarRating(), mNodesList.get(i).getmMinimumAmount(), getActivity())));
-//
-//            } else {
-//                marker.setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtility.getMarkerBitmap(false, i + 1, mNodesList.get(i).getmStarRating(), mNodesList.get(i).getmMinimumAmount(), getActivity())));
-//            }
-//
         ResetMarkersAsyncTask task = new ResetMarkersAsyncTask();
         task.execute();
-
 
     }
 
