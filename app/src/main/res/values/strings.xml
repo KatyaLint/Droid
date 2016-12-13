@@ -313,10 +313,10 @@
 
 
     <string name="my_trip_plan_trip">PLAN A TRIP</string>
-    <string name="my_trips">My Trips</string>
-    <string name="companions">Companions</string>
-    <string name="notification">Notifications</string>
-    <string name="my_account">My Account</string>
+    <string name="my_trips">MY TRIPS</string>
+    <string name="companions">COMPANIONS</string>
+    <string name="notification">NOTIFICATION</string>
+    <string name="my_account">MY ACCOUNT</string>
     <string name="search">search</string>
     <string name="appsee_api_key">dce204a44e3c4e1196b8546b768781fc</string>
     <string name="change_hotel">CHANGE HOTEL</string>

@@ -2960,15 +2960,7 @@
                     "endOffset": 40972
                 },
                 "from": {
-                    "file": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/src/main/res/values/styles.xml",
-                    "position": {
-                        "startLine": 22,
-                        "startColumn": 4,
-                        "startOffset": 948,
-                        "endLine": 24,
-                        "endColumn": 12,
-                        "endOffset": 1104
-                    }
+                    "file": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/src/main/res/values/styles.xml"
                 }
             },
             {
