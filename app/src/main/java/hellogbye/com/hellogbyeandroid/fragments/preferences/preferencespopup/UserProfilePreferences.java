@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -38,9 +40,12 @@ public class UserProfilePreferences extends HGBAbstractFragment {
     private ArrayList<DefaultsProfilesVO> accountDefaultSettings;
     private boolean isDefaultProfile = false;
     private DefaultsProfilesVO notChoosenProfileVO;
+    //private HGBPreferencesManager hgbPrefrenceManager;
 
 
-    public void getAccountsProfiles(Activity context,final HGBMainInterface activityInterface){
+
+
+    public void getAccountsProfiles(Activity context, final HGBMainInterface activityInterface){
         ConnectionManager.getInstance(context).getUserProfileAccounts(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
@@ -197,7 +202,10 @@ public class UserProfilePreferences extends HGBAbstractFragment {
                 if (data != null) {
 
                     AccountDefaultSettingsVO accountDefault = (AccountDefaultSettingsVO) data;
-                    putNewPreferencesForUser(activityInterface.getPersonalUserInformation().getUserEmailLogIn(), accountDefault.getmId(), activity, userProfileVOs);
+                    HGBPreferencesManager hgbPrefrenceManager = HGBPreferencesManager.getInstance(getContext());
+                    String logInEmail = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, "");
+                    System.out.println("Kate logInEmail =" + logInEmail);
+                    putNewPreferencesForUser(logInEmail, accountDefault.getmId(), activity, userProfileVOs);
                     for(DefaultsProfilesVO userProfile : userProfileVOs){
                         if(!userProfile.getId().equals(profileId)){
                             notChoosenProfileVO = userProfile;
@@ -236,7 +244,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
         ConnectionManager.getInstance(activity).putAccountsPreferences(userEmail, accountID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                HGBPreferencesManager hgbPrefrenceManager = HGBPreferencesManager.getInstance(activity);
+                HGBPreferencesManager hgbPrefrenceManager = HGBPreferencesManager.getInstance(getContext());
                 hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, accountID);
                 postNotChoosenDefaultProfile(activity, userProfileVOs);
             }

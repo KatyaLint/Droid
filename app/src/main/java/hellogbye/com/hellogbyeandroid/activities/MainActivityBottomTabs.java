@@ -195,7 +195,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         }
 
 
-
+        String pref = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, "");
 
         //INIT Location
 
@@ -497,9 +497,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             public void onSuccess(Object data) {
 
                 UserProfileVO mCurrentUser = (UserProfileVO) data;
-                String logInEmail = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, "");
 
+                String logInEmail = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, "");
                 hgbSaveDataClass.getPersonalUserInformation().setUserEmailLogIn(logInEmail);
+
                 hgbSaveDataClass.setCurrentUser(mCurrentUser);
 
 

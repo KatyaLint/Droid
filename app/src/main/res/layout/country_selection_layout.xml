@@ -115,7 +115,6 @@
         android:maxLines="1"
         android:layout_marginTop="@dimen/DP10"
         android:singleLine="true"
-        android:inputType="textPassword"
         android:hint="Zip/Postal code"
         android:visibility="visible" />
 

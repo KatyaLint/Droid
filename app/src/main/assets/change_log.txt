@@ -541,7 +541,7 @@ Code changing:
         HEL-1971 - create forgot password screen implement
         HEL-1906 -change 2 tabs under hotel details as in design
         HEL-1980 - search places in alternative hotels doesn't do anything
-        HEL-414   - copy text
+        HEL-414  - copy text
         HEL-1985 - text instead of price on companion added to trip
         HEL-1977 - photo appeared when not supposed to
         HEL-1970 - there isn't any text shown for ileagel email in forgot password( no fix solved with HEL-1971)
@@ -552,6 +552,9 @@ Code changing:
         HEL-1978 - name of trip in cnc appears when not supposed to
         HEL-1957  - make the save button inside profile preferences uppercase
         HEL-1960 - name of the hotel istead of going down a line dissapears on grid
+        HEL-1641 - grid - hotel icon goes over text
+        HEL-1832 - on a new user i can't find companions through search
+        HEL-1968 - crash at first entery to the app after sign up
 
       Code changing:
       --------------

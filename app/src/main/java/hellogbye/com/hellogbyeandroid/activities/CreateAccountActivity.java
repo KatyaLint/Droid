@@ -296,6 +296,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                         || keyEvent.getAction() == KeyEvent.ACTION_DOWN
                         && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
                     userData.setUserEmail(mEmail.getText().toString());
+
                     gotoPasswordView(textView);
                     return true;
                 }
@@ -421,6 +422,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         ArrayList<View> secondViewViews = new ArrayList<>();
         secondViewViews.add(mEmail);
 
+
         if(animateFoward){
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),firstViewViews,secondViewViews);
             animateLabels(getString(R.string.whats_email),getString(R.string.email_secure));
@@ -442,6 +444,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
         ArrayList<View> firstViewViews = new ArrayList<>();
         firstViewViews.add(mEmail);
+        String email = mEmail.getText().toString();
+        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, email);
 
         ArrayList<View> secondViewViews = new ArrayList<>();
         secondViewViews.add(mPassword1);

@@ -99,6 +99,26 @@ public class Parser {
 
         try{
             JSONObject obj = new JSONObject(json);
+           // JSONObject obj2 = obj.getJSONObject("errormessages");
+            JSONArray obj3 = obj.getJSONArray("errormessages");
+            JSONObject objtrimmedString = obj3.getJSONObject(0);
+            Object str = objtrimmedString.get("messageid");
+            trimmedString = (String) str;
+            // trimmedString = obj.getString("error"); //(String) str;
+
+        } catch(JSONException e){
+            e.printStackTrace();
+            return null;
+        }
+
+        return trimmedString;
+    }
+
+/*    public static String trimMessageJson(String json, String key){
+        String trimmedString = null;
+
+        try{
+            JSONObject obj = new JSONObject(json);
              JSONObject obj2 = obj.getJSONObject("ErrorMessages");
             JSONArray obj3 = obj2.getJSONArray("MessageDtos");
             JSONObject objtrimmedString = obj3.getJSONObject(0);
@@ -112,7 +132,7 @@ public class Parser {
         }
 
         return trimmedString;
-    }
+    }*/
 
     public static String trimMessage(String json, String key){
         String trimmedString = null;
