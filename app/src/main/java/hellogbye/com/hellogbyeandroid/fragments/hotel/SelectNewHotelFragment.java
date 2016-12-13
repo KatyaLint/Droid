@@ -172,6 +172,7 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
 
     private void initAutoComplete() {
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                .enableAutoManage(getActivity(), 0, this)
                 .addApi(Places.GEO_DATA_API)
                 .build();
         mAutocomplete = ((MainActivityBottomTabs) getActivity()).getmAutoComplete();

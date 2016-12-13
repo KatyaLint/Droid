@@ -556,6 +556,7 @@ Code changing:
         HEL-1832 - on a new user i can't find companions through search
         HEL-1968 - crash at first entery to the app after sign up
         HEL-2039 - Auto complete city name in create account bug
+        HEL-1826 - navbar text isn't shown on nexus 5
 
 
       Code changing:
