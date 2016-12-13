@@ -15,8 +15,8 @@ import android.text.TextPaint;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -28,7 +28,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -54,12 +53,21 @@ import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
+import static android.R.id.list;
+
 /**
  * Created by arisprung on 11/8/16.
  */
 
 public class CreateAccountActivity extends BaseActivity implements View.OnClickListener {
 
+    private final int NUMBER_OF_STAGES = 5;
+    private final int WELCOME_STATE = 1;
+    private final int NAME_STATE = 2;
+    private final int EMAIL_STATE = 3;
+    private final int PASSWORD_STATE = 4;
+    private final int ADDRESS_STATE = 5;
+    private final int LOGIN_STATE = 6;
     //private ImageView mPlane;
     private ImageView mPlane1;
     private ImageView mPlane2;
@@ -112,29 +120,23 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private CheckBox mRemmeberMeCheckbox;
     private FontTextView mForgotPasswordTextView;
     private boolean remember_me;
-    private final int NUMBER_OF_STAGES = 5;
-
     private int CURRENT_STATE = 0;
-    private final int WELCOME_STATE = 1;
-    private final int NAME_STATE = 2;
-    private final int EMAIL_STATE = 3;
-    private final int PASSWORD_STATE = 4;
-    private final int ADDRESS_STATE = 5;
-    private final int LOGIN_STATE = 6;
-
     private HGBPreferencesManager hgbPrefrenceManager;
     private CountDownTimer countDownTimer;
     private String[] countryarray;
     private List<ProvincesItem> mProvinceItems;
     private ArrayAdapter adapter;
     private UserSignUpDataVO userData;
-    private   String android_id;
+    private String android_id;
+    private ArrayList<String> mCityList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account_layout);
+        mCityList = new ArrayList<>();
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
-         android_id = Settings.Secure.getString(CreateAccountActivity.this.getContentResolver(),
+        android_id = Settings.Secure.getString(CreateAccountActivity.this.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
         checkFlow();
         initView();
@@ -149,9 +151,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     }
 
 
-
     private void initView() {
-       // mPlane = (ImageView) findViewById(R.id.airplane_01);
+        // mPlane = (ImageView) findViewById(R.id.airplane_01);
         mPlane1 = (ImageView) findViewById(R.id.airplane_01_01);
         mPlane2 = (ImageView) findViewById(R.id.airplane_02);
         mSun = (ImageView) findViewById(R.id.sun);
@@ -172,8 +173,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mUSCheck = (ImageView) findViewById(R.id.us_check);
         mCanadaCheck = (ImageView) findViewById(R.id.canada_check);
         mForgotPasswordTextView = (FontTextView) findViewById(R.id.forgotpassword);
-        mBird1 = (ImageView)findViewById(R.id.bird_1);
-        mBird2 = (ImageView)findViewById(R.id.bird_2);
+        mBird1 = (ImageView) findViewById(R.id.bird_1);
+        mBird2 = (ImageView) findViewById(R.id.bird_2);
         mRemmeberMeCheckbox = (CheckBox) findViewById(R.id.remmember_me_checkbox);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -193,16 +194,17 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mPassword1 = (FontEditTextView) findViewById(R.id.password1);
         mPassword2 = (FontEditTextView) findViewById(R.id.password2);
         mCity = (AutoCompleteTextView) findViewById(R.id.city);
+        mCity.setThreshold(1);
         mZip = (FontEditTextView) findViewById(R.id.zip);
         mStateProvince = (FontEditTextView) findViewById(R.id.state_province);
-        mLogin=  (LinearLayout) findViewById(R.id.login);
+        mLogin = (LinearLayout) findViewById(R.id.login);
         mCanadaLayout = (LinearLayout) findViewById(R.id.canada_layout);
         mAddressLayout = (LinearLayout) findViewById(R.id.country_layout);
         mRoot = (RelativeLayout) findViewById(R.id.create_account_disable_while_animating);
         mUSLayout = (LinearLayout) findViewById(R.id.us_layout);
         mLoginEmail = (FontEditTextView) findViewById(R.id.username);
         mLoginPassword = (FontEditTextView) findViewById(R.id.login_password);
-        login = (FontButtonView)findViewById(R.id.login_button);
+        login = (FontButtonView) findViewById(R.id.login_button);
 
         editTextViewListners();
         mUSLayout.setOnClickListener(this);
@@ -215,6 +217,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mTryNow.setOnClickListener(this);
         mSignInTextView.setOnClickListener(this);
         initSpannableText();
+
+
 
         mForgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -239,7 +243,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
                                 hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, mLoginEmail.getText().toString());
                                 hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, mLoginPassword.getText().toString());
-                                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER,false);
+                                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
                                 goToMainActivity();
                             }
 
@@ -332,21 +336,21 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     private boolean checkPasswordValid() {
         if (mPassword1.getText().length() > 1 && mPassword2.getText().length() > 1) {
-            if(mPassword1.getText().toString().equalsIgnoreCase(mPassword2.getText().toString())){
+            if (mPassword1.getText().toString().equalsIgnoreCase(mPassword2.getText().toString())) {
 
-                if(mPassword1.getText().toString().matches( "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,12}$")){
+                if (mPassword1.getText().toString().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,12}$")) {
                     return true;
-                }else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Password must contain 8-12 characters, with at least one number, one uppercase letter, one lowercase letter", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
                     return false;
                 }
 
-            }else{
+            } else {
                 Toast.makeText(getApplicationContext(), "Passwords dont match", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
                 return false;
             }
 
-        }else{
+        } else {
             Toast.makeText(getApplicationContext(), "Passwords not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
             return false;
         }
@@ -396,14 +400,14 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mLabel1.setText(R.string.tell_name);
         mLabel2.setText(R.string.allow_book);
 
-        if(animateFoward){
-            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),firstViewViews,secondViewViews);
+        if (animateFoward) {
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), firstViewViews, secondViewViews);
             mSignInTextView.setText(R.string.next);
             CURRENT_STATE = NAME_STATE;
 
-        }else{
+        } else {
             mSignInTextView.setText(R.string.login_);
-            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),secondViewViews,firstViewViews);
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), secondViewViews, firstViewViews);
             CURRENT_STATE = WELCOME_STATE;
 
         }
@@ -421,15 +425,15 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         ArrayList<View> secondViewViews = new ArrayList<>();
         secondViewViews.add(mEmail);
 
-        if(animateFoward){
-            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),firstViewViews,secondViewViews);
-            animateLabels(getString(R.string.whats_email),getString(R.string.email_secure));
+        if (animateFoward) {
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), firstViewViews, secondViewViews);
+            animateLabels(getString(R.string.whats_email), getString(R.string.email_secure));
             CURRENT_STATE = EMAIL_STATE;
 
-        }else{
+        } else {
 
-            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),secondViewViews,firstViewViews);
-            animateLabels(getString(R.string.tell_name),getString(R.string.allow_book));
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), secondViewViews, firstViewViews);
+            animateLabels(getString(R.string.tell_name), getString(R.string.allow_book));
             CURRENT_STATE = NAME_STATE;
         }
         updateProgressBar();
@@ -448,15 +452,15 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         secondViewViews.add(mPassword2);
 
 
-        if(animateFoward){
-            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),firstViewViews,secondViewViews);
-            animateLabels(getString(R.string.create_password),getString(R.string.choose_password));
+        if (animateFoward) {
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), firstViewViews, secondViewViews);
+            animateLabels(getString(R.string.create_password), getString(R.string.choose_password));
             CURRENT_STATE = PASSWORD_STATE;
 
-        }else{
+        } else {
 
-            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),secondViewViews,firstViewViews);
-            animateLabels(getString(R.string.whats_email),getString(R.string.email_secure));
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), secondViewViews, firstViewViews);
+            animateLabels(getString(R.string.whats_email), getString(R.string.email_secure));
             CURRENT_STATE = EMAIL_STATE;
         }
         animatePasswordStaticViews(animateFoward);
@@ -473,15 +477,15 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         ArrayList<View> secondViewViews = new ArrayList<>();
         secondViewViews.add(mAddressLayout);
 
-        if(animateFoward){
-            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),firstViewViews,secondViewViews);
-                animateLabels(getString(R.string.need_address),getString(R.string.used_geo_location));
+        if (animateFoward) {
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), firstViewViews, secondViewViews);
+            animateLabels(getString(R.string.need_address), getString(R.string.used_geo_location));
             CURRENT_STATE = ADDRESS_STATE;
 
-        }else{
+        } else {
 
-            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),secondViewViews,firstViewViews);
-            animateLabels(getString(R.string.create_password),getString(R.string.choose_password));
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), secondViewViews, firstViewViews);
+            animateLabels(getString(R.string.create_password), getString(R.string.choose_password));
             CURRENT_STATE = PASSWORD_STATE;
         }
         animateFourthToFifthStaticViews(animateFoward);
@@ -496,22 +500,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
 
     private void resetPassword() {
-        startActivity(new Intent(getApplicationContext(),ForgotPasswordActivity.class));
-    }
-
-    public class AnimationCountDownTimer extends CountDownTimer {
-        public AnimationCountDownTimer(long startTime, long interval) {
-            super(startTime, interval);
-        }
-
-        @Override
-        public void onFinish() {
-            mRoot.setClickable(false);
-        }
-
-        @Override
-        public void onTick(long millisUntilFinished) {
-        }
+        startActivity(new Intent(getApplicationContext(), ForgotPasswordActivity.class));
     }
 
     @Override
@@ -573,26 +562,26 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
                 ConnectionManager.getInstance(CreateAccountActivity.this).
                         deviceAuthentication(android_id, new ConnectionManager.ServerRequestListener() {
-                    @Override
-                    public void onSuccess(Object data) {
-                        UserLoginCredentials user = (UserLoginCredentials) data;
-                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
-                        hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER,true);
-                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
-                        String freeUserEmail = "demo"+ user.getUserprofileid()+"@hellogbye.com";
-                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, freeUserEmail);
+                            @Override
+                            public void onSuccess(Object data) {
+                                UserLoginCredentials user = (UserLoginCredentials) data;
+                                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
+                                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, true);
+                                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
+                                String freeUserEmail = "demo" + user.getUserprofileid() + "@hellogbye.com";
+                                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, freeUserEmail);
 //                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
-                        goToMainActivity();
+                                goToMainActivity();
 
-                    }
+                            }
 
-                    @Override
-                    public void onError(Object data) {
-                        HGBErrorHelper errorHelper = new HGBErrorHelper();
-                        errorHelper.setMessageForError((String) data);
-                        errorHelper.show(getFragmentManager(), (String) data);
-                    }
-                });
+                            @Override
+                            public void onError(Object data) {
+                                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                                errorHelper.setMessageForError((String) data);
+                                errorHelper.show(getFragmentManager(), (String) data);
+                            }
+                        });
                 break;
 
         }
@@ -613,25 +602,25 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         firstViewViews.add(mTryNow);
 
 
-        if(animateFoward){
-            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),firstViewViews,secondViewViews);
+        if (animateFoward) {
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), firstViewViews, secondViewViews);
             mSignInTextView.setText(R.string.next);
 
-            remember_me = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME,false);
+            remember_me = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME, false);
             String email = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, null);
-            if(remember_me && email != null){
+            if (remember_me && email != null) {
                 mLoginEmail.setText(email);
                 String pswd = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, null);
-                if(pswd != null){
+                if (pswd != null) {
                     mLoginPassword.setText(pswd);
                 }
             }
             CURRENT_STATE = LOGIN_STATE;
 
-        }else{
+        } else {
             mSignInTextView.setText(R.string.login_);
-            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),secondViewViews,firstViewViews);
-            HGBUtility.hideKeyboard(getApplicationContext(),mLoginEmail);
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), secondViewViews, firstViewViews);
+            HGBUtility.hideKeyboard(getApplicationContext(), mLoginEmail);
             CURRENT_STATE = WELCOME_STATE;
 
         }
@@ -656,6 +645,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                                 }
                             }
                         }
+
                         @Override
                         public void itemCanceled() {
                         }
@@ -703,43 +693,12 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         }
     }
 
-    public class myClickableSpan extends ClickableSpan {
-        int pos;
-
-        public myClickableSpan(int position) {
-            this.pos = position;
-        }
-
-        @Override
-        public void updateDrawState(TextPaint ds) {
-            ds.setColor(getColor(R.color.COLOR_00516f));
-            ds.setUnderlineText(true);
-
-        }
-
-        @Override
-        public void onClick(View widget) {
-            String url = "";
-            switch (pos) {
-                case 1:
-                    url = getString(R.string.url_user_agreement);
-                    break;
-                case 2:
-                    url = getString(R.string.url_pp);
-                    break;
-
-            }
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            startActivity(browserIntent);
-        }
-    }
-
     private void updateProgressBar() {
         mProgressBar.setProgress((100 / NUMBER_OF_STAGES) * CURRENT_STATE);
     }
 
     private void animateFirstToLoginStaticViews(boolean animateFoward) {
-        if(animateFoward){
+        if (animateFoward) {
             mPlane1.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane01_1_2));//
             Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane01_1_2);
             anim.setAnimationListener(new Animation.AnimationListener() {
@@ -750,7 +709,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    HGBUtility.showKeyboard(getApplicationContext(),mLoginEmail);
+                    HGBUtility.showKeyboard(getApplicationContext(), mLoginEmail);
                 }
 
                 @Override
@@ -761,7 +720,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             mPlane1.setAnimation(anim);
             mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding01_1_login));
             mBiulding1.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding01_1_login));
-        }else{
+        } else {
 
             mPlane1.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane01_2_1));//
             mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding01_login_1));
@@ -770,9 +729,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     }
 
-
     private void animateFirstToSecondStaticViews(boolean animateFoward) {
-        if(animateFoward){
+        if (animateFoward) {
             mPlane1.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane01_1_2));//
             mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_1_2));
             mCloud01B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01b_1_2));
@@ -785,7 +743,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_1_2));
             mBiulding1.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding01_1_2));
             mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_1_2));
-        }else{
+        } else {
 
             mPlane1.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane01_2_1));//
             mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_2_1));
@@ -804,7 +762,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     }
 
     private void animateSecondToThirdStaticView(boolean animateFoward) {
-        if(animateFoward){
+        if (animateFoward) {
             mPlane2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane02_2_3));
             mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_2_3));
             mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_2_3));
@@ -816,7 +774,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_2_3));
             mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_2_3));
             mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_2_3));
-        }else{
+        } else {
             mPlane2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.plane02_3_2));
             mCloud01.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud01_3_2));
             mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_3_2));
@@ -834,7 +792,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     private void animatePasswordStaticViews(boolean animateFoward) {
 
-        if(animateFoward){
+        if (animateFoward) {
             mBirds.setVisibility(View.VISIBLE);
             Animation set = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.birds_3_4);
             set.setAnimationListener(new Animation.AnimationListener() {
@@ -873,7 +831,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_3_4));
             mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_3_4));
             mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_3_4));
-        }else{
+        } else {
             mBirds.setVisibility(View.GONE);
             Animation set = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.birds_4_3);
             mBirds.setAnimation(set);
@@ -893,7 +851,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     private void animateFourthToFifthStaticViews(boolean animateFoward) {
 
-        if(animateFoward){
+        if (animateFoward) {
             mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_4_5));
             HGBAnimationUtility.FadeOutView(getApplicationContext(), mBirds);
             mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_4_5));
@@ -901,7 +859,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_4_5));
             mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_4_5));
             mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_4_5));
-        }else{
+        } else {
             mSun.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.sun_5_4));
             HGBAnimationUtility.FadInView(getApplicationContext(), mBirds);
             mCloud02.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud02_5_4));
@@ -963,8 +921,21 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                         , new ConnectionManager.ServerRequestListener() {
                             @Override
                             public void onSuccess(Object data) {
-                                adapter = new ArrayAdapter(CreateAccountActivity.this, android.R.layout.simple_list_item_1, (ArrayList<String>) data);
+
+                                mCityList = (ArrayList<String>) data;
+                                Log.e("- onSuccessA",mCityList.toString());
+//                                Log.e("- onSuccessB",list.toString());
+//                                if ((list.size() > 10)){
+//                                    ArrayList<String> tempList = new ArrayList<String>();
+//                                    for (int j = 0; j < 20; j++) {
+//                                        tempList.add(list.get(j));
+//                                    }
+//                                    list = tempList;
+//                                }
+                                adapter = new ArrayAdapter(CreateAccountActivity.this, android.R.layout.simple_list_item_1, mCityList);
                                 mCity.setAdapter(adapter);
+                                mCity.showDropDown();
+
                             }
 
                             @Override
@@ -980,11 +951,11 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     }
 
-    private void animateLabels(final String s,final String s1) {
+    private void animateLabels(final String s, final String s1) {
         mLabel1.clearAnimation();
         mLabel2.clearAnimation();
-        AlphaAnimation fadeoutLabel1 = new AlphaAnimation(1.0f,0.0f);
-        fadeoutLabel1.setDuration(getResources().getInteger(R.integer.create_account_animation_duration)/2);
+        AlphaAnimation fadeoutLabel1 = new AlphaAnimation(1.0f, 0.0f);
+        fadeoutLabel1.setDuration(getResources().getInteger(R.integer.create_account_animation_duration) / 2);
         fadeoutLabel1.setFillAfter(true);
 
         mLabel1.startAnimation(fadeoutLabel1);
@@ -997,8 +968,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             @Override
             public void onAnimationEnd(Animation animation) {
                 mLabel1.setText(s);
-                AlphaAnimation fadeinLabel1 = new AlphaAnimation(0.0f,1.0f);
-                fadeinLabel1.setDuration(getResources().getInteger(R.integer.create_account_animation_duration)/2);
+                AlphaAnimation fadeinLabel1 = new AlphaAnimation(0.0f, 1.0f);
+                fadeinLabel1.setDuration(getResources().getInteger(R.integer.create_account_animation_duration) / 2);
                 fadeinLabel1.setFillAfter(true);
                 mLabel1.startAnimation(fadeinLabel1);
             }
@@ -1009,8 +980,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             }
         });
 
-        AlphaAnimation fadeoutLabel2 = new AlphaAnimation(1.0f,0.0f);
-        fadeoutLabel2.setDuration(getResources().getInteger(R.integer.create_account_animation_duration)/2);
+        AlphaAnimation fadeoutLabel2 = new AlphaAnimation(1.0f, 0.0f);
+        fadeoutLabel2.setDuration(getResources().getInteger(R.integer.create_account_animation_duration) / 2);
         fadeoutLabel2.setFillAfter(true);
 
         mLabel2.startAnimation(fadeoutLabel2);
@@ -1023,8 +994,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             @Override
             public void onAnimationEnd(Animation animation) {
                 mLabel2.setText(s1);
-                AlphaAnimation fadeinLabel2 = new AlphaAnimation(0.0f,1.0f);
-                fadeinLabel2.setDuration(getResources().getInteger(R.integer.create_account_animation_duration)/2);
+                AlphaAnimation fadeinLabel2 = new AlphaAnimation(0.0f, 1.0f);
+                fadeinLabel2.setDuration(getResources().getInteger(R.integer.create_account_animation_duration) / 2);
                 fadeinLabel2.setFillAfter(true);
                 mLabel2.startAnimation(fadeinLabel2);
             }
@@ -1036,7 +1007,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         });
     }
 
-    private void sendSignUpDataToServer(){
+    private void sendSignUpDataToServer() {
 
         ConnectionManager.getInstance(CreateAccountActivity.this).postUserCreateAccount(userData, new ConnectionManager.ServerRequestListener() {
             @Override
@@ -1059,9 +1030,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     }
 
     private void checkFlow() {
-        if(!HGBUtility.haveNetworkConnection(getApplicationContext())){
+        if (!HGBUtility.haveNetworkConnection(getApplicationContext())) {
 
-            Toast.makeText(getApplicationContext(),"There is no network please connect in order to continue",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "There is no network please connect in order to continue", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -1090,5 +1061,51 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     @Override
     public void onBackPressed() {
         processBackPressed();
+    }
+
+    public class AnimationCountDownTimer extends CountDownTimer {
+        public AnimationCountDownTimer(long startTime, long interval) {
+            super(startTime, interval);
+        }
+
+        @Override
+        public void onFinish() {
+            mRoot.setClickable(false);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+        }
+    }
+
+    public class myClickableSpan extends ClickableSpan {
+        int pos;
+
+        public myClickableSpan(int position) {
+            this.pos = position;
+        }
+
+        @Override
+        public void updateDrawState(TextPaint ds) {
+            ds.setColor(getColor(R.color.COLOR_00516f));
+            ds.setUnderlineText(true);
+
+        }
+
+        @Override
+        public void onClick(View widget) {
+            String url = "";
+            switch (pos) {
+                case 1:
+                    url = getString(R.string.url_user_agreement);
+                    break;
+                case 2:
+                    url = getString(R.string.url_pp);
+                    break;
+
+            }
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(browserIntent);
+        }
     }
 }

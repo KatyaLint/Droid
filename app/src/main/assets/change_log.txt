@@ -552,6 +552,7 @@ Code changing:
         HEL-1978 - name of trip in cnc appears when not supposed to
         HEL-1957  - make the save button inside profile preferences uppercase
         HEL-1960 - name of the hotel istead of going down a line dissapears on grid
+        HEL-2039 - Auto complete city name in create account bug
 
       Code changing:
       --------------
