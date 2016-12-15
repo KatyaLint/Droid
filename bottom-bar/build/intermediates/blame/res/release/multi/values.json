@@ -4597,10 +4597,10 @@
                     "position": {
                         "startLine": 41,
                         "startColumn": 4,
-                        "startOffset": 1761,
+                        "startOffset": 1680,
                         "endLine": 43,
                         "endColumn": 12,
-                        "endOffset": 1905
+                        "endOffset": 1824
                     }
                 }
             },
@@ -4611,7 +4611,7 @@
                     "startOffset": 40245,
                     "endLine": 302,
                     "endColumn": 12,
-                    "endOffset": 40625
+                    "endOffset": 40544
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/src/main/res/values/styles.xml",
@@ -4621,7 +4621,7 @@
                         "startOffset": 55,
                         "endLine": 8,
                         "endColumn": 12,
-                        "endOffset": 435
+                        "endOffset": 354
                     }
                 }
             },
@@ -4629,20 +4629,20 @@
                 "to": {
                     "startLine": 303,
                     "startColumn": 4,
-                    "startOffset": 40630,
+                    "startOffset": 40549,
                     "endLine": 306,
                     "endColumn": 12,
-                    "endOffset": 40811
+                    "endOffset": 40730
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
-                        "startOffset": 441,
+                        "startOffset": 360,
                         "endLine": 13,
                         "endColumn": 12,
-                        "endOffset": 622
+                        "endOffset": 541
                     }
                 }
             },
@@ -4650,20 +4650,20 @@
                 "to": {
                     "startLine": 307,
                     "startColumn": 4,
-                    "startOffset": 40816,
+                    "startOffset": 40735,
                     "endLine": 309,
                     "endColumn": 12,
-                    "endOffset": 40972
+                    "endOffset": 40891
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 22,
                         "startColumn": 4,
-                        "startOffset": 948,
+                        "startOffset": 867,
                         "endLine": 24,
                         "endColumn": 12,
-                        "endOffset": 1104
+                        "endOffset": 1023
                     }
                 }
             },
@@ -4671,20 +4671,20 @@
                 "to": {
                     "startLine": 310,
                     "startColumn": 4,
-                    "startOffset": 40977,
+                    "startOffset": 40896,
                     "endLine": 313,
                     "endColumn": 12,
-                    "endOffset": 41175
+                    "endOffset": 41094
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 26,
                         "startColumn": 4,
-                        "startOffset": 1110,
+                        "startOffset": 1029,
                         "endLine": 29,
                         "endColumn": 12,
-                        "endOffset": 1308
+                        "endOffset": 1227
                     }
                 }
             },
@@ -4692,20 +4692,20 @@
                 "to": {
                     "startLine": 314,
                     "startColumn": 4,
-                    "startOffset": 41180,
+                    "startOffset": 41099,
                     "endLine": 316,
                     "endColumn": 12,
-                    "endOffset": 41351
+                    "endOffset": 41270
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 31,
                         "startColumn": 4,
-                        "startOffset": 1314,
+                        "startOffset": 1233,
                         "endLine": 33,
                         "endColumn": 12,
-                        "endOffset": 1485
+                        "endOffset": 1404
                     }
                 }
             },
@@ -4713,20 +4713,20 @@
                 "to": {
                     "startLine": 317,
                     "startColumn": 4,
-                    "startOffset": 41356,
+                    "startOffset": 41275,
                     "endLine": 321,
                     "endColumn": 12,
-                    "endOffset": 41620
+                    "endOffset": 41539
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 35,
                         "startColumn": 4,
-                        "startOffset": 1491,
+                        "startOffset": 1410,
                         "endLine": 39,
                         "endColumn": 12,
-                        "endOffset": 1755
+                        "endOffset": 1674
                     }
                 }
             },
@@ -4734,20 +4734,20 @@
                 "to": {
                     "startLine": 322,
                     "startColumn": 4,
-                    "startOffset": 41625,
+                    "startOffset": 41544,
                     "endLine": 327,
                     "endColumn": 12,
-                    "endOffset": 41939
+                    "endOffset": 41858
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/src/main/res/values/styles.xml",
                     "position": {
                         "startLine": 15,
                         "startColumn": 4,
-                        "startOffset": 628,
+                        "startOffset": 547,
                         "endLine": 20,
                         "endColumn": 12,
-                        "endOffset": 942
+                        "endOffset": 861
                     }
                 }
             },
@@ -4755,10 +4755,10 @@
                 "to": {
                     "startLine": 328,
                     "startColumn": 4,
-                    "startOffset": 41944,
+                    "startOffset": 41863,
                     "endLine": 334,
                     "endColumn": 12,
-                    "endOffset": 42440
+                    "endOffset": 42359
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -4776,9 +4776,9 @@
                 "to": {
                     "startLine": 335,
                     "startColumn": 4,
-                    "startOffset": 42445,
+                    "startOffset": 42364,
                     "endColumn": 88,
-                    "endOffset": 42529
+                    "endOffset": 42448
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -4795,10 +4795,10 @@
                 "to": {
                     "startLine": 336,
                     "startColumn": 4,
-                    "startOffset": 42534,
+                    "startOffset": 42453,
                     "endLine": 339,
                     "endColumn": 12,
-                    "endOffset": 42776
+                    "endOffset": 42695
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -4816,10 +4816,10 @@
                 "to": {
                     "startLine": 340,
                     "startColumn": 4,
-                    "startOffset": 42781,
+                    "startOffset": 42700,
                     "endLine": 343,
                     "endColumn": 12,
-                    "endOffset": 43057
+                    "endOffset": 42976
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -4837,10 +4837,10 @@
                 "to": {
                     "startLine": 344,
                     "startColumn": 4,
-                    "startOffset": 43062,
+                    "startOffset": 42981,
                     "endLine": 348,
                     "endColumn": 12,
-                    "endOffset": 43342
+                    "endOffset": 43261
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -4858,10 +4858,10 @@
                 "to": {
                     "startLine": 349,
                     "startColumn": 4,
-                    "startOffset": 43347,
+                    "startOffset": 43266,
                     "endLine": 354,
                     "endColumn": 12,
-                    "endOffset": 43735
+                    "endOffset": 43654
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -4879,10 +4879,10 @@
                 "to": {
                     "startLine": 355,
                     "startColumn": 4,
-                    "startOffset": 43740,
+                    "startOffset": 43659,
                     "endLine": 361,
                     "endColumn": 12,
-                    "endOffset": 44212
+                    "endOffset": 44131
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -4900,10 +4900,10 @@
                 "to": {
                     "startLine": 362,
                     "startColumn": 4,
-                    "startOffset": 44217,
+                    "startOffset": 44136,
                     "endLine": 365,
                     "endColumn": 12,
-                    "endOffset": 44434
+                    "endOffset": 44353
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -4921,10 +4921,10 @@
                 "to": {
                     "startLine": 366,
                     "startColumn": 4,
-                    "startOffset": 44439,
+                    "startOffset": 44358,
                     "endLine": 369,
                     "endColumn": 12,
-                    "endOffset": 44656
+                    "endOffset": 44575
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -4942,10 +4942,10 @@
                 "to": {
                     "startLine": 370,
                     "startColumn": 4,
-                    "startOffset": 44661,
+                    "startOffset": 44580,
                     "endLine": 374,
                     "endColumn": 12,
-                    "endOffset": 44924
+                    "endOffset": 44843
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -4963,10 +4963,10 @@
                 "to": {
                     "startLine": 375,
                     "startColumn": 4,
-                    "startOffset": 44929,
+                    "startOffset": 44848,
                     "endLine": 378,
                     "endColumn": 12,
-                    "endOffset": 45151
+                    "endOffset": 45070
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -4984,10 +4984,10 @@
                 "to": {
                     "startLine": 379,
                     "startColumn": 4,
-                    "startOffset": 45156,
+                    "startOffset": 45075,
                     "endLine": 382,
                     "endColumn": 12,
-                    "endOffset": 45381
+                    "endOffset": 45300
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5005,10 +5005,10 @@
                 "to": {
                     "startLine": 383,
                     "startColumn": 4,
-                    "startOffset": 45386,
+                    "startOffset": 45305,
                     "endLine": 386,
                     "endColumn": 12,
-                    "endOffset": 45611
+                    "endOffset": 45530
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5026,10 +5026,10 @@
                 "to": {
                     "startLine": 387,
                     "startColumn": 4,
-                    "startOffset": 45616,
+                    "startOffset": 45535,
                     "endLine": 390,
                     "endColumn": 12,
-                    "endOffset": 45841
+                    "endOffset": 45760
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5047,10 +5047,10 @@
                 "to": {
                     "startLine": 391,
                     "startColumn": 4,
-                    "startOffset": 45846,
+                    "startOffset": 45765,
                     "endLine": 394,
                     "endColumn": 12,
-                    "endOffset": 46071
+                    "endOffset": 45990
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5068,10 +5068,10 @@
                 "to": {
                     "startLine": 395,
                     "startColumn": 4,
-                    "startOffset": 46076,
+                    "startOffset": 45995,
                     "endLine": 398,
                     "endColumn": 12,
-                    "endOffset": 46298
+                    "endOffset": 46217
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5089,10 +5089,10 @@
                 "to": {
                     "startLine": 399,
                     "startColumn": 4,
-                    "startOffset": 46303,
+                    "startOffset": 46222,
                     "endLine": 402,
                     "endColumn": 12,
-                    "endOffset": 46537
+                    "endOffset": 46456
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5110,10 +5110,10 @@
                 "to": {
                     "startLine": 403,
                     "startColumn": 4,
-                    "startOffset": 46542,
+                    "startOffset": 46461,
                     "endLine": 406,
                     "endColumn": 12,
-                    "endOffset": 46763
+                    "endOffset": 46682
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5131,10 +5131,10 @@
                 "to": {
                     "startLine": 407,
                     "startColumn": 4,
-                    "startOffset": 46768,
+                    "startOffset": 46687,
                     "endLine": 410,
                     "endColumn": 12,
-                    "endOffset": 47008
+                    "endOffset": 46927
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5152,10 +5152,10 @@
                 "to": {
                     "startLine": 411,
                     "startColumn": 4,
-                    "startOffset": 47013,
+                    "startOffset": 46932,
                     "endLine": 412,
                     "endColumn": 12,
-                    "endOffset": 47138
+                    "endOffset": 47057
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5173,10 +5173,10 @@
                 "to": {
                     "startLine": 413,
                     "startColumn": 4,
-                    "startOffset": 47143,
+                    "startOffset": 47062,
                     "endLine": 414,
                     "endColumn": 12,
-                    "endOffset": 47268
+                    "endOffset": 47187
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5194,10 +5194,10 @@
                 "to": {
                     "startLine": 415,
                     "startColumn": 4,
-                    "startOffset": 47273,
+                    "startOffset": 47192,
                     "endLine": 418,
                     "endColumn": 12,
-                    "endOffset": 47498
+                    "endOffset": 47417
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5215,10 +5215,10 @@
                 "to": {
                     "startLine": 419,
                     "startColumn": 4,
-                    "startOffset": 47503,
+                    "startOffset": 47422,
                     "endLine": 422,
                     "endColumn": 12,
-                    "endOffset": 47746
+                    "endOffset": 47665
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5236,10 +5236,10 @@
                 "to": {
                     "startLine": 423,
                     "startColumn": 4,
-                    "startOffset": 47751,
+                    "startOffset": 47670,
                     "endLine": 426,
                     "endColumn": 12,
-                    "endOffset": 47965
+                    "endOffset": 47884
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5257,10 +5257,10 @@
                 "to": {
                     "startLine": 427,
                     "startColumn": 4,
-                    "startOffset": 47970,
+                    "startOffset": 47889,
                     "endLine": 431,
                     "endColumn": 12,
-                    "endOffset": 48248
+                    "endOffset": 48167
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5278,10 +5278,10 @@
                 "to": {
                     "startLine": 432,
                     "startColumn": 4,
-                    "startOffset": 48253,
+                    "startOffset": 48172,
                     "endLine": 435,
                     "endColumn": 12,
-                    "endOffset": 48456
+                    "endOffset": 48375
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5299,10 +5299,10 @@
                 "to": {
                     "startLine": 436,
                     "startColumn": 4,
-                    "startOffset": 48461,
+                    "startOffset": 48380,
                     "endLine": 438,
                     "endColumn": 12,
-                    "endOffset": 48587
+                    "endOffset": 48506
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5320,10 +5320,10 @@
                 "to": {
                     "startLine": 439,
                     "startColumn": 4,
-                    "startOffset": 48592,
+                    "startOffset": 48511,
                     "endLine": 442,
                     "endColumn": 12,
-                    "endOffset": 48814
+                    "endOffset": 48733
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5341,10 +5341,10 @@
                 "to": {
                     "startLine": 443,
                     "startColumn": 4,
-                    "startOffset": 48819,
+                    "startOffset": 48738,
                     "endLine": 446,
                     "endColumn": 12,
-                    "endOffset": 49060
+                    "endOffset": 48979
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5362,10 +5362,10 @@
                 "to": {
                     "startLine": 447,
                     "startColumn": 4,
-                    "startOffset": 49065,
+                    "startOffset": 48984,
                     "endLine": 450,
                     "endColumn": 12,
-                    "endOffset": 49285
+                    "endOffset": 49204
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5383,10 +5383,10 @@
                 "to": {
                     "startLine": 451,
                     "startColumn": 4,
-                    "startOffset": 49290,
+                    "startOffset": 49209,
                     "endLine": 454,
                     "endColumn": 12,
-                    "endOffset": 49532
+                    "endOffset": 49451
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5404,10 +5404,10 @@
                 "to": {
                     "startLine": 455,
                     "startColumn": 4,
-                    "startOffset": 49537,
+                    "startOffset": 49456,
                     "endLine": 458,
                     "endColumn": 12,
-                    "endOffset": 49753
+                    "endOffset": 49672
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5425,10 +5425,10 @@
                 "to": {
                     "startLine": 459,
                     "startColumn": 4,
-                    "startOffset": 49758,
+                    "startOffset": 49677,
                     "endLine": 462,
                     "endColumn": 12,
-                    "endOffset": 49998
+                    "endOffset": 49917
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5446,10 +5446,10 @@
                 "to": {
                     "startLine": 463,
                     "startColumn": 4,
-                    "startOffset": 50003,
+                    "startOffset": 49922,
                     "endLine": 466,
                     "endColumn": 12,
-                    "endOffset": 50274
+                    "endOffset": 50193
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5467,10 +5467,10 @@
                 "to": {
                     "startLine": 467,
                     "startColumn": 4,
-                    "startOffset": 50279,
+                    "startOffset": 50198,
                     "endLine": 470,
                     "endColumn": 12,
-                    "endOffset": 50575
+                    "endOffset": 50494
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5488,10 +5488,10 @@
                 "to": {
                     "startLine": 471,
                     "startColumn": 4,
-                    "startOffset": 50580,
+                    "startOffset": 50499,
                     "endLine": 474,
                     "endColumn": 12,
-                    "endOffset": 50899
+                    "endOffset": 50818
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5509,10 +5509,10 @@
                 "to": {
                     "startLine": 475,
                     "startColumn": 4,
-                    "startOffset": 50904,
+                    "startOffset": 50823,
                     "endLine": 478,
                     "endColumn": 12,
-                    "endOffset": 51190
+                    "endOffset": 51109
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5530,10 +5530,10 @@
                 "to": {
                     "startLine": 479,
                     "startColumn": 4,
-                    "startOffset": 51195,
+                    "startOffset": 51114,
                     "endLine": 482,
                     "endColumn": 12,
-                    "endOffset": 51504
+                    "endOffset": 51423
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5551,9 +5551,9 @@
                 "to": {
                     "startLine": 483,
                     "startColumn": 4,
-                    "startOffset": 51509,
+                    "startOffset": 51428,
                     "endColumn": 136,
-                    "endOffset": 51641
+                    "endOffset": 51560
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5570,9 +5570,9 @@
                 "to": {
                     "startLine": 484,
                     "startColumn": 4,
-                    "startOffset": 51646,
+                    "startOffset": 51565,
                     "endColumn": 130,
-                    "endOffset": 51772
+                    "endOffset": 51691
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5589,9 +5589,9 @@
                 "to": {
                     "startLine": 485,
                     "startColumn": 4,
-                    "startOffset": 51777,
+                    "startOffset": 51696,
                     "endColumn": 104,
-                    "endOffset": 51877
+                    "endOffset": 51796
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5608,10 +5608,10 @@
                 "to": {
                     "startLine": 486,
                     "startColumn": 4,
-                    "startOffset": 51882,
+                    "startOffset": 51801,
                     "endLine": 488,
                     "endColumn": 12,
-                    "endOffset": 52081
+                    "endOffset": 52000
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5629,10 +5629,10 @@
                 "to": {
                     "startLine": 489,
                     "startColumn": 4,
-                    "startOffset": 52086,
+                    "startOffset": 52005,
                     "endLine": 491,
                     "endColumn": 12,
-                    "endOffset": 52289
+                    "endOffset": 52208
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5650,10 +5650,10 @@
                 "to": {
                     "startLine": 492,
                     "startColumn": 4,
-                    "startOffset": 52294,
+                    "startOffset": 52213,
                     "endLine": 493,
                     "endColumn": 12,
-                    "endOffset": 52413
+                    "endOffset": 52332
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5671,10 +5671,10 @@
                 "to": {
                     "startLine": 494,
                     "startColumn": 4,
-                    "startOffset": 52418,
+                    "startOffset": 52337,
                     "endLine": 495,
                     "endColumn": 12,
-                    "endOffset": 52537
+                    "endOffset": 52456
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5692,9 +5692,9 @@
                 "to": {
                     "startLine": 496,
                     "startColumn": 4,
-                    "startOffset": 52542,
+                    "startOffset": 52461,
                     "endColumn": 104,
-                    "endOffset": 52642
+                    "endOffset": 52561
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5711,9 +5711,9 @@
                 "to": {
                     "startLine": 497,
                     "startColumn": 4,
-                    "startOffset": 52647,
+                    "startOffset": 52566,
                     "endColumn": 116,
-                    "endOffset": 52759
+                    "endOffset": 52678
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5730,10 +5730,10 @@
                 "to": {
                     "startLine": 498,
                     "startColumn": 4,
-                    "startOffset": 52764,
+                    "startOffset": 52683,
                     "endLine": 500,
                     "endColumn": 12,
-                    "endOffset": 52973
+                    "endOffset": 52892
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5751,10 +5751,10 @@
                 "to": {
                     "startLine": 501,
                     "startColumn": 4,
-                    "startOffset": 52978,
+                    "startOffset": 52897,
                     "endLine": 502,
                     "endColumn": 12,
-                    "endOffset": 53119
+                    "endOffset": 53038
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5772,10 +5772,10 @@
                 "to": {
                     "startLine": 503,
                     "startColumn": 4,
-                    "startOffset": 53124,
+                    "startOffset": 53043,
                     "endLine": 504,
                     "endColumn": 12,
-                    "endOffset": 53259
+                    "endOffset": 53178
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5793,10 +5793,10 @@
                 "to": {
                     "startLine": 505,
                     "startColumn": 4,
-                    "startOffset": 53264,
+                    "startOffset": 53183,
                     "endLine": 506,
                     "endColumn": 12,
-                    "endOffset": 53345
+                    "endOffset": 53264
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5814,10 +5814,10 @@
                 "to": {
                     "startLine": 507,
                     "startColumn": 4,
-                    "startOffset": 53350,
+                    "startOffset": 53269,
                     "endLine": 511,
                     "endColumn": 12,
-                    "endOffset": 53693
+                    "endOffset": 53612
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5835,9 +5835,9 @@
                 "to": {
                     "startLine": 512,
                     "startColumn": 4,
-                    "startOffset": 53698,
+                    "startOffset": 53617,
                     "endColumn": 87,
-                    "endOffset": 53781
+                    "endOffset": 53700
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5854,10 +5854,10 @@
                 "to": {
                     "startLine": 513,
                     "startColumn": 4,
-                    "startOffset": 53786,
+                    "startOffset": 53705,
                     "endLine": 516,
                     "endColumn": 12,
-                    "endOffset": 54011
+                    "endOffset": 53930
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5875,10 +5875,10 @@
                 "to": {
                     "startLine": 517,
                     "startColumn": 4,
-                    "startOffset": 54016,
+                    "startOffset": 53935,
                     "endLine": 522,
                     "endColumn": 12,
-                    "endOffset": 54429
+                    "endOffset": 54348
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5896,10 +5896,10 @@
                 "to": {
                     "startLine": 523,
                     "startColumn": 4,
-                    "startOffset": 54434,
+                    "startOffset": 54353,
                     "endLine": 526,
                     "endColumn": 12,
-                    "endOffset": 54662
+                    "endOffset": 54581
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5917,9 +5917,9 @@
                 "to": {
                     "startLine": 527,
                     "startColumn": 4,
-                    "startOffset": 54667,
+                    "startOffset": 54586,
                     "endColumn": 81,
-                    "endOffset": 54744
+                    "endOffset": 54663
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5936,10 +5936,10 @@
                 "to": {
                     "startLine": 528,
                     "startColumn": 4,
-                    "startOffset": 54749,
+                    "startOffset": 54668,
                     "endLine": 529,
                     "endColumn": 12,
-                    "endOffset": 54842
+                    "endOffset": 54761
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5957,10 +5957,10 @@
                 "to": {
                     "startLine": 530,
                     "startColumn": 4,
-                    "startOffset": 54847,
+                    "startOffset": 54766,
                     "endLine": 540,
                     "endColumn": 12,
-                    "endOffset": 55459
+                    "endOffset": 55378
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5978,9 +5978,9 @@
                 "to": {
                     "startLine": 541,
                     "startColumn": 4,
-                    "startOffset": 55464,
+                    "startOffset": 55383,
                     "endColumn": 99,
-                    "endOffset": 55559
+                    "endOffset": 55478
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -5997,10 +5997,10 @@
                 "to": {
                     "startLine": 542,
                     "startColumn": 4,
-                    "startOffset": 55564,
+                    "startOffset": 55483,
                     "endLine": 545,
                     "endColumn": 12,
-                    "endOffset": 55795
+                    "endOffset": 55714
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6018,10 +6018,10 @@
                 "to": {
                     "startLine": 546,
                     "startColumn": 4,
-                    "startOffset": 55800,
+                    "startOffset": 55719,
                     "endLine": 551,
                     "endColumn": 12,
-                    "endOffset": 56219
+                    "endOffset": 56138
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6039,10 +6039,10 @@
                 "to": {
                     "startLine": 552,
                     "startColumn": 4,
-                    "startOffset": 56224,
+                    "startOffset": 56143,
                     "endLine": 555,
                     "endColumn": 12,
-                    "endOffset": 56458
+                    "endOffset": 56377
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6060,9 +6060,9 @@
                 "to": {
                     "startLine": 556,
                     "startColumn": 4,
-                    "startOffset": 56463,
+                    "startOffset": 56382,
                     "endColumn": 93,
-                    "endOffset": 56552
+                    "endOffset": 56471
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6079,9 +6079,9 @@
                 "to": {
                     "startLine": 557,
                     "startColumn": 4,
-                    "startOffset": 56557,
+                    "startOffset": 56476,
                     "endColumn": 88,
-                    "endOffset": 56641
+                    "endOffset": 56560
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6098,10 +6098,10 @@
                 "to": {
                     "startLine": 558,
                     "startColumn": 4,
-                    "startOffset": 56646,
+                    "startOffset": 56565,
                     "endLine": 561,
                     "endColumn": 12,
-                    "endOffset": 56878
+                    "endOffset": 56797
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6119,10 +6119,10 @@
                 "to": {
                     "startLine": 562,
                     "startColumn": 4,
-                    "startOffset": 56883,
+                    "startOffset": 56802,
                     "endLine": 587,
                     "endColumn": 12,
-                    "endOffset": 58829
+                    "endOffset": 58748
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6140,10 +6140,10 @@
                 "to": {
                     "startLine": 588,
                     "startColumn": 4,
-                    "startOffset": 58834,
+                    "startOffset": 58753,
                     "endLine": 591,
                     "endColumn": 12,
-                    "endOffset": 59071
+                    "endOffset": 58990
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6161,10 +6161,10 @@
                 "to": {
                     "startLine": 592,
                     "startColumn": 4,
-                    "startOffset": 59076,
+                    "startOffset": 58995,
                     "endLine": 618,
                     "endColumn": 12,
-                    "endOffset": 61153
+                    "endOffset": 61072
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6182,10 +6182,10 @@
                 "to": {
                     "startLine": 619,
                     "startColumn": 4,
-                    "startOffset": 61158,
+                    "startOffset": 61077,
                     "endLine": 773,
                     "endColumn": 12,
-                    "endOffset": 71019
+                    "endOffset": 70938
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6203,10 +6203,10 @@
                 "to": {
                     "startLine": 774,
                     "startColumn": 4,
-                    "startOffset": 71024,
+                    "startOffset": 70943,
                     "endLine": 795,
                     "endColumn": 12,
-                    "endOffset": 72286
+                    "endOffset": 72205
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6224,10 +6224,10 @@
                 "to": {
                     "startLine": 796,
                     "startColumn": 4,
-                    "startOffset": 72291,
+                    "startOffset": 72210,
                     "endLine": 950,
                     "endColumn": 12,
-                    "endOffset": 82262
+                    "endOffset": 82181
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6245,10 +6245,10 @@
                 "to": {
                     "startLine": 951,
                     "startColumn": 4,
-                    "startOffset": 82267,
+                    "startOffset": 82186,
                     "endLine": 972,
                     "endColumn": 12,
-                    "endOffset": 83543
+                    "endOffset": 83462
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6266,10 +6266,10 @@
                 "to": {
                     "startLine": 973,
                     "startColumn": 4,
-                    "startOffset": 83548,
+                    "startOffset": 83467,
                     "endLine": 979,
                     "endColumn": 12,
-                    "endOffset": 84079
+                    "endOffset": 83998
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6287,10 +6287,10 @@
                 "to": {
                     "startLine": 980,
                     "startColumn": 4,
-                    "startOffset": 84084,
+                    "startOffset": 84003,
                     "endLine": 984,
                     "endColumn": 12,
-                    "endOffset": 84409
+                    "endOffset": 84328
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6308,10 +6308,10 @@
                 "to": {
                     "startLine": 985,
                     "startColumn": 4,
-                    "startOffset": 84414,
+                    "startOffset": 84333,
                     "endLine": 1005,
                     "endColumn": 12,
-                    "endOffset": 85532
+                    "endOffset": 85451
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6329,10 +6329,10 @@
                 "to": {
                     "startLine": 1006,
                     "startColumn": 4,
-                    "startOffset": 85537,
+                    "startOffset": 85456,
                     "endLine": 1010,
                     "endColumn": 12,
-                    "endOffset": 85788
+                    "endOffset": 85707
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6350,10 +6350,10 @@
                 "to": {
                     "startLine": 1011,
                     "startColumn": 4,
-                    "startOffset": 85793,
+                    "startOffset": 85712,
                     "endLine": 1015,
                     "endColumn": 12,
-                    "endOffset": 86024
+                    "endOffset": 85943
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6371,10 +6371,10 @@
                 "to": {
                     "startLine": 1016,
                     "startColumn": 4,
-                    "startOffset": 86029,
+                    "startOffset": 85948,
                     "endLine": 1025,
                     "endColumn": 12,
-                    "endOffset": 86571
+                    "endOffset": 86490
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6392,10 +6392,10 @@
                 "to": {
                     "startLine": 1026,
                     "startColumn": 4,
-                    "startOffset": 86576,
+                    "startOffset": 86495,
                     "endLine": 1034,
                     "endColumn": 12,
-                    "endOffset": 87065
+                    "endOffset": 86984
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6413,10 +6413,10 @@
                 "to": {
                     "startLine": 1035,
                     "startColumn": 4,
-                    "startOffset": 87070,
+                    "startOffset": 86989,
                     "endLine": 1043,
                     "endColumn": 12,
-                    "endOffset": 87670
+                    "endOffset": 87589
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6434,10 +6434,10 @@
                 "to": {
                     "startLine": 1044,
                     "startColumn": 4,
-                    "startOffset": 87675,
+                    "startOffset": 87594,
                     "endLine": 1046,
                     "endColumn": 12,
-                    "endOffset": 87818
+                    "endOffset": 87737
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6455,10 +6455,10 @@
                 "to": {
                     "startLine": 1047,
                     "startColumn": 4,
-                    "startOffset": 87823,
+                    "startOffset": 87742,
                     "endLine": 1053,
                     "endColumn": 12,
-                    "endOffset": 88406
+                    "endOffset": 88325
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6476,10 +6476,10 @@
                 "to": {
                     "startLine": 1054,
                     "startColumn": 4,
-                    "startOffset": 88411,
+                    "startOffset": 88330,
                     "endLine": 1061,
                     "endColumn": 12,
-                    "endOffset": 88970
+                    "endOffset": 88889
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6497,10 +6497,10 @@
                 "to": {
                     "startLine": 1062,
                     "startColumn": 4,
-                    "startOffset": 88975,
+                    "startOffset": 88894,
                     "endLine": 1068,
                     "endColumn": 12,
-                    "endOffset": 89345
+                    "endOffset": 89264
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6518,9 +6518,9 @@
                 "to": {
                     "startLine": 1069,
                     "startColumn": 4,
-                    "startOffset": 89350,
+                    "startOffset": 89269,
                     "endColumn": 117,
-                    "endOffset": 89463
+                    "endOffset": 89382
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6537,10 +6537,10 @@
                 "to": {
                     "startLine": 1070,
                     "startColumn": 4,
-                    "startOffset": 89468,
+                    "startOffset": 89387,
                     "endLine": 1078,
                     "endColumn": 12,
-                    "endOffset": 90001
+                    "endOffset": 89920
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6558,10 +6558,10 @@
                 "to": {
                     "startLine": 1079,
                     "startColumn": 4,
-                    "startOffset": 90006,
+                    "startOffset": 89925,
                     "endLine": 1081,
                     "endColumn": 12,
-                    "endOffset": 90158
+                    "endOffset": 90077
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6579,10 +6579,10 @@
                 "to": {
                     "startLine": 1082,
                     "startColumn": 4,
-                    "startOffset": 90163,
+                    "startOffset": 90082,
                     "endLine": 1084,
                     "endColumn": 12,
-                    "endOffset": 90302
+                    "endOffset": 90221
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6600,10 +6600,10 @@
                 "to": {
                     "startLine": 1085,
                     "startColumn": 4,
-                    "startOffset": 90307,
+                    "startOffset": 90226,
                     "endLine": 1089,
                     "endColumn": 12,
-                    "endOffset": 90622
+                    "endOffset": 90541
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6621,10 +6621,10 @@
                 "to": {
                     "startLine": 1090,
                     "startColumn": 4,
-                    "startOffset": 90627,
+                    "startOffset": 90546,
                     "endLine": 1093,
                     "endColumn": 12,
-                    "endOffset": 90878
+                    "endOffset": 90797
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6642,10 +6642,10 @@
                 "to": {
                     "startLine": 1094,
                     "startColumn": 4,
-                    "startOffset": 90883,
+                    "startOffset": 90802,
                     "endLine": 1097,
                     "endColumn": 12,
-                    "endOffset": 91048
+                    "endOffset": 90967
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6663,10 +6663,10 @@
                 "to": {
                     "startLine": 1098,
                     "startColumn": 4,
-                    "startOffset": 91053,
+                    "startOffset": 90972,
                     "endLine": 1100,
                     "endColumn": 12,
-                    "endOffset": 91189
+                    "endOffset": 91108
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6684,9 +6684,9 @@
                 "to": {
                     "startLine": 1101,
                     "startColumn": 4,
-                    "startOffset": 91194,
+                    "startOffset": 91113,
                     "endColumn": 63,
-                    "endOffset": 91253
+                    "endOffset": 91172
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6703,10 +6703,10 @@
                 "to": {
                     "startLine": 1102,
                     "startColumn": 4,
-                    "startOffset": 91258,
+                    "startOffset": 91177,
                     "endLine": 1105,
                     "endColumn": 12,
-                    "endOffset": 91535
+                    "endOffset": 91454
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6724,10 +6724,10 @@
                 "to": {
                     "startLine": 1106,
                     "startColumn": 4,
-                    "startOffset": 91540,
+                    "startOffset": 91459,
                     "endLine": 1109,
                     "endColumn": 12,
-                    "endOffset": 91821
+                    "endOffset": 91740
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6745,10 +6745,10 @@
                 "to": {
                     "startLine": 1110,
                     "startColumn": 4,
-                    "startOffset": 91826,
+                    "startOffset": 91745,
                     "endLine": 1119,
                     "endColumn": 12,
-                    "endOffset": 92497
+                    "endOffset": 92416
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6766,10 +6766,10 @@
                 "to": {
                     "startLine": 1120,
                     "startColumn": 4,
-                    "startOffset": 92502,
+                    "startOffset": 92421,
                     "endLine": 1124,
                     "endColumn": 12,
-                    "endOffset": 92761
+                    "endOffset": 92680
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6787,10 +6787,10 @@
                 "to": {
                     "startLine": 1125,
                     "startColumn": 4,
-                    "startOffset": 92766,
+                    "startOffset": 92685,
                     "endLine": 1131,
                     "endColumn": 12,
-                    "endOffset": 93099
+                    "endOffset": 93018
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6808,10 +6808,10 @@
                 "to": {
                     "startLine": 1132,
                     "startColumn": 4,
-                    "startOffset": 93104,
+                    "startOffset": 93023,
                     "endLine": 1137,
                     "endColumn": 12,
-                    "endOffset": 93452
+                    "endOffset": 93371
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6829,9 +6829,9 @@
                 "to": {
                     "startLine": 1138,
                     "startColumn": 4,
-                    "startOffset": 93457,
+                    "startOffset": 93376,
                     "endColumn": 93,
-                    "endOffset": 93546
+                    "endOffset": 93465
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6848,10 +6848,10 @@
                 "to": {
                     "startLine": 1139,
                     "startColumn": 4,
-                    "startOffset": 93551,
+                    "startOffset": 93470,
                     "endLine": 1141,
                     "endColumn": 12,
-                    "endOffset": 93732
+                    "endOffset": 93651
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6869,10 +6869,10 @@
                 "to": {
                     "startLine": 1142,
                     "startColumn": 4,
-                    "startOffset": 93737,
+                    "startOffset": 93656,
                     "endLine": 1145,
                     "endColumn": 12,
-                    "endOffset": 94038
+                    "endOffset": 93957
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6890,10 +6890,10 @@
                 "to": {
                     "startLine": 1146,
                     "startColumn": 4,
-                    "startOffset": 94043,
+                    "startOffset": 93962,
                     "endLine": 1150,
                     "endColumn": 12,
-                    "endOffset": 94300
+                    "endOffset": 94219
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6911,10 +6911,10 @@
                 "to": {
                     "startLine": 1151,
                     "startColumn": 4,
-                    "startOffset": 94305,
+                    "startOffset": 94224,
                     "endLine": 1152,
                     "endColumn": 12,
-                    "endOffset": 94425
+                    "endOffset": 94344
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6932,10 +6932,10 @@
                 "to": {
                     "startLine": 1153,
                     "startColumn": 4,
-                    "startOffset": 94430,
+                    "startOffset": 94349,
                     "endLine": 1154,
                     "endColumn": 12,
-                    "endOffset": 94552
+                    "endOffset": 94471
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6953,10 +6953,10 @@
                 "to": {
                     "startLine": 1155,
                     "startColumn": 4,
-                    "startOffset": 94557,
+                    "startOffset": 94476,
                     "endLine": 1157,
                     "endColumn": 12,
-                    "endOffset": 94791
+                    "endOffset": 94710
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6974,10 +6974,10 @@
                 "to": {
                     "startLine": 1158,
                     "startColumn": 4,
-                    "startOffset": 94796,
+                    "startOffset": 94715,
                     "endLine": 1160,
                     "endColumn": 12,
-                    "endOffset": 95002
+                    "endOffset": 94921
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -6995,10 +6995,10 @@
                 "to": {
                     "startLine": 1161,
                     "startColumn": 4,
-                    "startOffset": 95007,
+                    "startOffset": 94926,
                     "endLine": 1162,
                     "endColumn": 12,
-                    "endOffset": 95121
+                    "endOffset": 95040
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7016,10 +7016,10 @@
                 "to": {
                     "startLine": 1163,
                     "startColumn": 4,
-                    "startOffset": 95126,
+                    "startOffset": 95045,
                     "endLine": 1166,
                     "endColumn": 12,
-                    "endOffset": 95314
+                    "endOffset": 95233
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7037,10 +7037,10 @@
                 "to": {
                     "startLine": 1167,
                     "startColumn": 4,
-                    "startOffset": 95319,
+                    "startOffset": 95238,
                     "endLine": 1173,
                     "endColumn": 12,
-                    "endOffset": 95769
+                    "endOffset": 95688
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7058,10 +7058,10 @@
                 "to": {
                     "startLine": 1174,
                     "startColumn": 4,
-                    "startOffset": 95774,
+                    "startOffset": 95693,
                     "endLine": 1176,
                     "endColumn": 12,
-                    "endOffset": 95950
+                    "endOffset": 95869
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7079,10 +7079,10 @@
                 "to": {
                     "startLine": 1177,
                     "startColumn": 4,
-                    "startOffset": 95955,
+                    "startOffset": 95874,
                     "endLine": 1179,
                     "endColumn": 12,
-                    "endOffset": 96072
+                    "endOffset": 95991
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7100,10 +7100,10 @@
                 "to": {
                     "startLine": 1180,
                     "startColumn": 4,
-                    "startOffset": 96077,
+                    "startOffset": 95996,
                     "endLine": 1183,
                     "endColumn": 12,
-                    "endOffset": 96331
+                    "endOffset": 96250
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7121,10 +7121,10 @@
                 "to": {
                     "startLine": 1184,
                     "startColumn": 4,
-                    "startOffset": 96336,
+                    "startOffset": 96255,
                     "endLine": 1185,
                     "endColumn": 12,
-                    "endOffset": 96444
+                    "endOffset": 96363
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7142,10 +7142,10 @@
                 "to": {
                     "startLine": 1186,
                     "startColumn": 4,
-                    "startOffset": 96449,
+                    "startOffset": 96368,
                     "endLine": 1189,
                     "endColumn": 12,
-                    "endOffset": 96631
+                    "endOffset": 96550
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7163,10 +7163,10 @@
                 "to": {
                     "startLine": 1190,
                     "startColumn": 4,
-                    "startOffset": 96636,
+                    "startOffset": 96555,
                     "endLine": 1191,
                     "endColumn": 12,
-                    "endOffset": 96733
+                    "endOffset": 96652
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7184,10 +7184,10 @@
                 "to": {
                     "startLine": 1192,
                     "startColumn": 4,
-                    "startOffset": 96738,
+                    "startOffset": 96657,
                     "endLine": 1197,
                     "endColumn": 12,
-                    "endOffset": 97177
+                    "endOffset": 97096
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7205,10 +7205,10 @@
                 "to": {
                     "startLine": 1198,
                     "startColumn": 4,
-                    "startOffset": 97182,
+                    "startOffset": 97101,
                     "endLine": 1199,
                     "endColumn": 12,
-                    "endOffset": 97301
+                    "endOffset": 97220
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7226,10 +7226,10 @@
                 "to": {
                     "startLine": 1200,
                     "startColumn": 4,
-                    "startOffset": 97306,
+                    "startOffset": 97225,
                     "endLine": 1203,
                     "endColumn": 12,
-                    "endOffset": 97586
+                    "endOffset": 97505
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7247,10 +7247,10 @@
                 "to": {
                     "startLine": 1204,
                     "startColumn": 4,
-                    "startOffset": 97591,
+                    "startOffset": 97510,
                     "endLine": 1211,
                     "endColumn": 12,
-                    "endOffset": 98094
+                    "endOffset": 98013
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7268,10 +7268,10 @@
                 "to": {
                     "startLine": 1212,
                     "startColumn": 4,
-                    "startOffset": 98099,
+                    "startOffset": 98018,
                     "endLine": 1219,
                     "endColumn": 12,
-                    "endOffset": 98590
+                    "endOffset": 98509
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7289,10 +7289,10 @@
                 "to": {
                     "startLine": 1220,
                     "startColumn": 4,
-                    "startOffset": 98595,
+                    "startOffset": 98514,
                     "endLine": 1231,
                     "endColumn": 12,
-                    "endOffset": 99477
+                    "endOffset": 99396
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7310,10 +7310,10 @@
                 "to": {
                     "startLine": 1232,
                     "startColumn": 4,
-                    "startOffset": 99482,
+                    "startOffset": 99401,
                     "endLine": 1237,
                     "endColumn": 12,
-                    "endOffset": 99771
+                    "endOffset": 99690
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7331,10 +7331,10 @@
                 "to": {
                     "startLine": 1238,
                     "startColumn": 4,
-                    "startOffset": 99776,
+                    "startOffset": 99695,
                     "endLine": 1246,
                     "endColumn": 12,
-                    "endOffset": 100341
+                    "endOffset": 100260
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7352,10 +7352,10 @@
                 "to": {
                     "startLine": 1247,
                     "startColumn": 4,
-                    "startOffset": 100346,
+                    "startOffset": 100265,
                     "endLine": 1257,
                     "endColumn": 12,
-                    "endOffset": 101073
+                    "endOffset": 100992
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7373,10 +7373,10 @@
                 "to": {
                     "startLine": 1258,
                     "startColumn": 4,
-                    "startOffset": 101078,
+                    "startOffset": 100997,
                     "endLine": 1260,
                     "endColumn": 12,
-                    "endOffset": 101245
+                    "endOffset": 101164
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7394,10 +7394,10 @@
                 "to": {
                     "startLine": 1261,
                     "startColumn": 4,
-                    "startOffset": 101250,
+                    "startOffset": 101169,
                     "endLine": 1265,
                     "endColumn": 12,
-                    "endOffset": 101581
+                    "endOffset": 101500
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7415,10 +7415,10 @@
                 "to": {
                     "startLine": 1266,
                     "startColumn": 4,
-                    "startOffset": 101586,
+                    "startOffset": 101505,
                     "endLine": 1277,
                     "endColumn": 12,
-                    "endOffset": 102489
+                    "endOffset": 102408
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7436,10 +7436,10 @@
                 "to": {
                     "startLine": 1278,
                     "startColumn": 4,
-                    "startOffset": 102494,
+                    "startOffset": 102413,
                     "endLine": 1282,
                     "endColumn": 12,
-                    "endOffset": 102767
+                    "endOffset": 102686
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7457,10 +7457,10 @@
                 "to": {
                     "startLine": 1283,
                     "startColumn": 4,
-                    "startOffset": 102772,
+                    "startOffset": 102691,
                     "endLine": 1292,
                     "endColumn": 12,
-                    "endOffset": 103358
+                    "endOffset": 103277
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -7478,10 +7478,10 @@
                 "to": {
                     "startLine": 1293,
                     "startColumn": 4,
-                    "startOffset": 103363,
+                    "startOffset": 103282,
                     "endLine": 1330,
                     "endColumn": 12,
-                    "endOffset": 106220
+                    "endOffset": 106139
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7499,10 +7499,10 @@
                 "to": {
                     "startLine": 1331,
                     "startColumn": 4,
-                    "startOffset": 106225,
+                    "startOffset": 106144,
                     "endLine": 1369,
                     "endColumn": 12,
-                    "endOffset": 109222
+                    "endOffset": 109141
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7520,9 +7520,9 @@
                 "to": {
                     "startLine": 1370,
                     "startColumn": 4,
-                    "startOffset": 109227,
+                    "startOffset": 109146,
                     "endColumn": 61,
-                    "endOffset": 109284
+                    "endOffset": 109203
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7539,10 +7539,10 @@
                 "to": {
                     "startLine": 1371,
                     "startColumn": 4,
-                    "startOffset": 109289,
+                    "startOffset": 109208,
                     "endLine": 1380,
                     "endColumn": 12,
-                    "endOffset": 109914
+                    "endOffset": 109833
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7560,10 +7560,10 @@
                 "to": {
                     "startLine": 1381,
                     "startColumn": 4,
-                    "startOffset": 109919,
+                    "startOffset": 109838,
                     "endLine": 1389,
                     "endColumn": 12,
-                    "endOffset": 110528
+                    "endOffset": 110447
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7581,9 +7581,9 @@
                 "to": {
                     "startLine": 1390,
                     "startColumn": 4,
-                    "startOffset": 110533,
+                    "startOffset": 110452,
                     "endColumn": 85,
-                    "endOffset": 110614
+                    "endOffset": 110533
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7600,10 +7600,10 @@
                 "to": {
                     "startLine": 1391,
                     "startColumn": 4,
-                    "startOffset": 110619,
+                    "startOffset": 110538,
                     "endLine": 1392,
                     "endColumn": 12,
-                    "endOffset": 110727
+                    "endOffset": 110646
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7621,10 +7621,10 @@
                 "to": {
                     "startLine": 1393,
                     "startColumn": 4,
-                    "startOffset": 110732,
+                    "startOffset": 110651,
                     "endLine": 1396,
                     "endColumn": 12,
-                    "endOffset": 110956
+                    "endOffset": 110875
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7642,10 +7642,10 @@
                 "to": {
                     "startLine": 1397,
                     "startColumn": 4,
-                    "startOffset": 110961,
+                    "startOffset": 110880,
                     "endLine": 1399,
                     "endColumn": 12,
-                    "endOffset": 111116
+                    "endOffset": 111035
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7663,10 +7663,10 @@
                 "to": {
                     "startLine": 1400,
                     "startColumn": 4,
-                    "startOffset": 111121,
+                    "startOffset": 111040,
                     "endLine": 1402,
                     "endColumn": 12,
-                    "endOffset": 111268
+                    "endOffset": 111187
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7684,10 +7684,10 @@
                 "to": {
                     "startLine": 1403,
                     "startColumn": 4,
-                    "startOffset": 111273,
+                    "startOffset": 111192,
                     "endLine": 1405,
                     "endColumn": 12,
-                    "endOffset": 111439
+                    "endOffset": 111358
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7705,10 +7705,10 @@
                 "to": {
                     "startLine": 1406,
                     "startColumn": 4,
-                    "startOffset": 111444,
+                    "startOffset": 111363,
                     "endLine": 1408,
                     "endColumn": 12,
-                    "endOffset": 111606
+                    "endOffset": 111525
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7726,10 +7726,10 @@
                 "to": {
                     "startLine": 1409,
                     "startColumn": 4,
-                    "startOffset": 111611,
+                    "startOffset": 111530,
                     "endLine": 1412,
                     "endColumn": 12,
-                    "endOffset": 111849
+                    "endOffset": 111768
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7747,10 +7747,10 @@
                 "to": {
                     "startLine": 1413,
                     "startColumn": 4,
-                    "startOffset": 111854,
+                    "startOffset": 111773,
                     "endLine": 1415,
                     "endColumn": 12,
-                    "endOffset": 112019
+                    "endOffset": 111938
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7768,10 +7768,10 @@
                 "to": {
                     "startLine": 1416,
                     "startColumn": 4,
-                    "startOffset": 112024,
+                    "startOffset": 111943,
                     "endLine": 1418,
                     "endColumn": 12,
-                    "endOffset": 112192
+                    "endOffset": 112111
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7789,10 +7789,10 @@
                 "to": {
                     "startLine": 1419,
                     "startColumn": 4,
-                    "startOffset": 112197,
+                    "startOffset": 112116,
                     "endLine": 1421,
                     "endColumn": 12,
-                    "endOffset": 112363
+                    "endOffset": 112282
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7810,10 +7810,10 @@
                 "to": {
                     "startLine": 1422,
                     "startColumn": 4,
-                    "startOffset": 112368,
+                    "startOffset": 112287,
                     "endLine": 1425,
                     "endColumn": 12,
-                    "endOffset": 112637
+                    "endOffset": 112556
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7831,10 +7831,10 @@
                 "to": {
                     "startLine": 1426,
                     "startColumn": 4,
-                    "startOffset": 112642,
+                    "startOffset": 112561,
                     "endLine": 1428,
                     "endColumn": 12,
-                    "endOffset": 112836
+                    "endOffset": 112755
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7852,10 +7852,10 @@
                 "to": {
                     "startLine": 1429,
                     "startColumn": 4,
-                    "startOffset": 112841,
+                    "startOffset": 112760,
                     "endLine": 1432,
                     "endColumn": 12,
-                    "endOffset": 113041
+                    "endOffset": 112960
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7873,10 +7873,10 @@
                 "to": {
                     "startLine": 1433,
                     "startColumn": 4,
-                    "startOffset": 113046,
+                    "startOffset": 112965,
                     "endLine": 1436,
                     "endColumn": 12,
-                    "endOffset": 113371
+                    "endOffset": 113290
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7894,9 +7894,9 @@
                 "to": {
                     "startLine": 1437,
                     "startColumn": 4,
-                    "startOffset": 113376,
+                    "startOffset": 113295,
                     "endColumn": 83,
-                    "endOffset": 113455
+                    "endOffset": 113374
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7913,9 +7913,9 @@
                 "to": {
                     "startLine": 1438,
                     "startColumn": 4,
-                    "startOffset": 113460,
+                    "startOffset": 113379,
                     "endColumn": 95,
-                    "endOffset": 113551
+                    "endOffset": 113470
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7932,9 +7932,9 @@
                 "to": {
                     "startLine": 1439,
                     "startColumn": 4,
-                    "startOffset": 113556,
+                    "startOffset": 113475,
                     "endColumn": 95,
-                    "endOffset": 113647
+                    "endOffset": 113566
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7951,9 +7951,9 @@
                 "to": {
                     "startLine": 1440,
                     "startColumn": 4,
-                    "startOffset": 113652,
+                    "startOffset": 113571,
                     "endColumn": 97,
-                    "endOffset": 113745
+                    "endOffset": 113664
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7970,9 +7970,9 @@
                 "to": {
                     "startLine": 1441,
                     "startColumn": 4,
-                    "startOffset": 113750,
+                    "startOffset": 113669,
                     "endColumn": 99,
-                    "endOffset": 113845
+                    "endOffset": 113764
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -7989,9 +7989,9 @@
                 "to": {
                     "startLine": 1442,
                     "startColumn": 4,
-                    "startOffset": 113850,
+                    "startOffset": 113769,
                     "endColumn": 101,
-                    "endOffset": 113947
+                    "endOffset": 113866
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8008,9 +8008,9 @@
                 "to": {
                     "startLine": 1443,
                     "startColumn": 4,
-                    "startOffset": 113952,
+                    "startOffset": 113871,
                     "endColumn": 101,
-                    "endOffset": 114049
+                    "endOffset": 113968
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8027,9 +8027,9 @@
                 "to": {
                     "startLine": 1444,
                     "startColumn": 4,
-                    "startOffset": 114054,
+                    "startOffset": 113973,
                     "endColumn": 101,
-                    "endOffset": 114151
+                    "endOffset": 114070
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8046,9 +8046,9 @@
                 "to": {
                     "startLine": 1445,
                     "startColumn": 4,
-                    "startOffset": 114156,
+                    "startOffset": 114075,
                     "endColumn": 101,
-                    "endOffset": 114253
+                    "endOffset": 114172
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8065,9 +8065,9 @@
                 "to": {
                     "startLine": 1446,
                     "startColumn": 4,
-                    "startOffset": 114258,
+                    "startOffset": 114177,
                     "endColumn": 101,
-                    "endOffset": 114355
+                    "endOffset": 114274
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8084,9 +8084,9 @@
                 "to": {
                     "startLine": 1447,
                     "startColumn": 4,
-                    "startOffset": 114360,
+                    "startOffset": 114279,
                     "endColumn": 99,
-                    "endOffset": 114455
+                    "endOffset": 114374
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8103,9 +8103,9 @@
                 "to": {
                     "startLine": 1448,
                     "startColumn": 4,
-                    "startOffset": 114460,
+                    "startOffset": 114379,
                     "endColumn": 95,
-                    "endOffset": 114551
+                    "endOffset": 114470
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8122,9 +8122,9 @@
                 "to": {
                     "startLine": 1449,
                     "startColumn": 4,
-                    "startOffset": 114556,
+                    "startOffset": 114475,
                     "endColumn": 111,
-                    "endOffset": 114663
+                    "endOffset": 114582
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8141,9 +8141,9 @@
                 "to": {
                     "startLine": 1450,
                     "startColumn": 4,
-                    "startOffset": 114668,
+                    "startOffset": 114587,
                     "endColumn": 128,
-                    "endOffset": 114792
+                    "endOffset": 114711
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8160,9 +8160,9 @@
                 "to": {
                     "startLine": 1451,
                     "startColumn": 4,
-                    "startOffset": 114797,
+                    "startOffset": 114716,
                     "endColumn": 122,
-                    "endOffset": 114915
+                    "endOffset": 114834
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8179,10 +8179,10 @@
                 "to": {
                     "startLine": 1452,
                     "startColumn": 4,
-                    "startOffset": 114920,
+                    "startOffset": 114839,
                     "endLine": 1453,
                     "endColumn": 12,
-                    "endOffset": 115069
+                    "endOffset": 114988
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8200,10 +8200,10 @@
                 "to": {
                     "startLine": 1454,
                     "startColumn": 4,
-                    "startOffset": 115074,
+                    "startOffset": 114993,
                     "endLine": 1455,
                     "endColumn": 12,
-                    "endOffset": 115223
+                    "endOffset": 115142
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8221,9 +8221,9 @@
                 "to": {
                     "startLine": 1456,
                     "startColumn": 4,
-                    "startOffset": 115228,
+                    "startOffset": 115147,
                     "endColumn": 97,
-                    "endOffset": 115321
+                    "endOffset": 115240
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8240,9 +8240,9 @@
                 "to": {
                     "startLine": 1457,
                     "startColumn": 4,
-                    "startOffset": 115326,
+                    "startOffset": 115245,
                     "endColumn": 113,
-                    "endOffset": 115435
+                    "endOffset": 115354
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8259,9 +8259,9 @@
                 "to": {
                     "startLine": 1458,
                     "startColumn": 4,
-                    "startOffset": 115440,
+                    "startOffset": 115359,
                     "endColumn": 93,
-                    "endOffset": 115529
+                    "endOffset": 115448
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8278,10 +8278,10 @@
                 "to": {
                     "startLine": 1459,
                     "startColumn": 4,
-                    "startOffset": 115534,
+                    "startOffset": 115453,
                     "endLine": 1460,
                     "endColumn": 12,
-                    "endOffset": 115669
+                    "endOffset": 115588
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8299,10 +8299,10 @@
                 "to": {
                     "startLine": 1461,
                     "startColumn": 4,
-                    "startOffset": 115674,
+                    "startOffset": 115593,
                     "endLine": 1462,
                     "endColumn": 12,
-                    "endOffset": 115803
+                    "endOffset": 115722
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8320,9 +8320,9 @@
                 "to": {
                     "startLine": 1463,
                     "startColumn": 4,
-                    "startOffset": 115808,
+                    "startOffset": 115727,
                     "endColumn": 95,
-                    "endOffset": 115899
+                    "endOffset": 115818
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8339,9 +8339,9 @@
                 "to": {
                     "startLine": 1464,
                     "startColumn": 4,
-                    "startOffset": 115904,
+                    "startOffset": 115823,
                     "endColumn": 111,
-                    "endOffset": 116011
+                    "endOffset": 115930
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8358,9 +8358,9 @@
                 "to": {
                     "startLine": 1465,
                     "startColumn": 4,
-                    "startOffset": 116016,
+                    "startOffset": 115935,
                     "endColumn": 99,
-                    "endOffset": 116111
+                    "endOffset": 116030
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8377,9 +8377,9 @@
                 "to": {
                     "startLine": 1466,
                     "startColumn": 4,
-                    "startOffset": 116116,
+                    "startOffset": 116035,
                     "endColumn": 115,
-                    "endOffset": 116227
+                    "endOffset": 116146
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8396,9 +8396,9 @@
                 "to": {
                     "startLine": 1467,
                     "startColumn": 4,
-                    "startOffset": 116232,
+                    "startOffset": 116151,
                     "endColumn": 95,
-                    "endOffset": 116323
+                    "endOffset": 116242
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8415,9 +8415,9 @@
                 "to": {
                     "startLine": 1468,
                     "startColumn": 4,
-                    "startOffset": 116328,
+                    "startOffset": 116247,
                     "endColumn": 111,
-                    "endOffset": 116435
+                    "endOffset": 116354
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8434,10 +8434,10 @@
                 "to": {
                     "startLine": 1469,
                     "startColumn": 4,
-                    "startOffset": 116440,
+                    "startOffset": 116359,
                     "endLine": 1470,
                     "endColumn": 12,
-                    "endOffset": 116575
+                    "endOffset": 116494
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8455,9 +8455,9 @@
                 "to": {
                     "startLine": 1471,
                     "startColumn": 4,
-                    "startOffset": 116580,
+                    "startOffset": 116499,
                     "endColumn": 135,
-                    "endOffset": 116711
+                    "endOffset": 116630
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8474,10 +8474,10 @@
                 "to": {
                     "startLine": 1472,
                     "startColumn": 4,
-                    "startOffset": 116716,
+                    "startOffset": 116635,
                     "endLine": 1473,
                     "endColumn": 12,
-                    "endOffset": 116875
+                    "endOffset": 116794
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8495,9 +8495,9 @@
                 "to": {
                     "startLine": 1474,
                     "startColumn": 4,
-                    "startOffset": 116880,
+                    "startOffset": 116799,
                     "endColumn": 129,
-                    "endOffset": 117005
+                    "endOffset": 116924
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8514,10 +8514,10 @@
                 "to": {
                     "startLine": 1475,
                     "startColumn": 4,
-                    "startOffset": 117010,
+                    "startOffset": 116929,
                     "endLine": 1476,
                     "endColumn": 12,
-                    "endOffset": 117163
+                    "endOffset": 117082
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8535,10 +8535,10 @@
                 "to": {
                     "startLine": 1477,
                     "startColumn": 4,
-                    "startOffset": 117168,
+                    "startOffset": 117087,
                     "endLine": 1478,
                     "endColumn": 12,
-                    "endOffset": 117313
+                    "endOffset": 117232
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8556,9 +8556,9 @@
                 "to": {
                     "startLine": 1479,
                     "startColumn": 4,
-                    "startOffset": 117318,
+                    "startOffset": 117237,
                     "endColumn": 140,
-                    "endOffset": 117454
+                    "endOffset": 117373
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8575,10 +8575,10 @@
                 "to": {
                     "startLine": 1480,
                     "startColumn": 4,
-                    "startOffset": 117459,
+                    "startOffset": 117378,
                     "endLine": 1481,
                     "endColumn": 12,
-                    "endOffset": 117598
+                    "endOffset": 117517
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8596,9 +8596,9 @@
                 "to": {
                     "startLine": 1482,
                     "startColumn": 4,
-                    "startOffset": 117603,
+                    "startOffset": 117522,
                     "endColumn": 134,
-                    "endOffset": 117733
+                    "endOffset": 117652
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8615,9 +8615,9 @@
                 "to": {
                     "startLine": 1483,
                     "startColumn": 4,
-                    "startOffset": 117738,
+                    "startOffset": 117657,
                     "endColumn": 111,
-                    "endOffset": 117845
+                    "endOffset": 117764
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8634,9 +8634,9 @@
                 "to": {
                     "startLine": 1484,
                     "startColumn": 4,
-                    "startOffset": 117850,
+                    "startOffset": 117769,
                     "endColumn": 127,
-                    "endOffset": 117973
+                    "endOffset": 117892
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8653,10 +8653,10 @@
                 "to": {
                     "startLine": 1485,
                     "startColumn": 4,
-                    "startOffset": 117978,
+                    "startOffset": 117897,
                     "endLine": 1486,
                     "endColumn": 12,
-                    "endOffset": 118109
+                    "endOffset": 118028
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8674,10 +8674,10 @@
                 "to": {
                     "startLine": 1487,
                     "startColumn": 4,
-                    "startOffset": 118114,
+                    "startOffset": 118033,
                     "endLine": 1488,
                     "endColumn": 12,
-                    "endOffset": 118251
+                    "endOffset": 118170
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8695,10 +8695,10 @@
                 "to": {
                     "startLine": 1489,
                     "startColumn": 4,
-                    "startOffset": 118256,
+                    "startOffset": 118175,
                     "endLine": 1490,
                     "endColumn": 12,
-                    "endOffset": 118393
+                    "endOffset": 118312
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8716,9 +8716,9 @@
                 "to": {
                     "startLine": 1491,
                     "startColumn": 4,
-                    "startOffset": 118398,
+                    "startOffset": 118317,
                     "endColumn": 111,
-                    "endOffset": 118505
+                    "endOffset": 118424
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8735,9 +8735,9 @@
                 "to": {
                     "startLine": 1492,
                     "startColumn": 4,
-                    "startOffset": 118510,
+                    "startOffset": 118429,
                     "endColumn": 139,
-                    "endOffset": 118645
+                    "endOffset": 118564
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8754,10 +8754,10 @@
                 "to": {
                     "startLine": 1493,
                     "startColumn": 4,
-                    "startOffset": 118650,
+                    "startOffset": 118569,
                     "endLine": 1495,
                     "endColumn": 12,
-                    "endOffset": 118846
+                    "endOffset": 118765
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -8775,9 +8775,9 @@
                 "to": {
                     "startLine": 1496,
                     "startColumn": 4,
-                    "startOffset": 118851,
+                    "startOffset": 118770,
                     "endColumn": 91,
-                    "endOffset": 118938
+                    "endOffset": 118857
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -8794,10 +8794,10 @@
                 "to": {
                     "startLine": 1497,
                     "startColumn": 4,
-                    "startOffset": 118943,
+                    "startOffset": 118862,
                     "endLine": 1499,
                     "endColumn": 12,
-                    "endOffset": 119118
+                    "endOffset": 119037
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -8815,10 +8815,10 @@
                 "to": {
                     "startLine": 1500,
                     "startColumn": 4,
-                    "startOffset": 119123,
+                    "startOffset": 119042,
                     "endLine": 1502,
                     "endColumn": 12,
-                    "endOffset": 119287
+                    "endOffset": 119206
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -8836,10 +8836,10 @@
                 "to": {
                     "startLine": 1503,
                     "startColumn": 4,
-                    "startOffset": 119292,
+                    "startOffset": 119211,
                     "endLine": 1505,
                     "endColumn": 12,
-                    "endOffset": 119462
+                    "endOffset": 119381
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -8857,10 +8857,10 @@
                 "to": {
                     "startLine": 1506,
                     "startColumn": 4,
-                    "startOffset": 119467,
+                    "startOffset": 119386,
                     "endLine": 1509,
                     "endColumn": 12,
-                    "endOffset": 119715
+                    "endOffset": 119634
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -8878,10 +8878,10 @@
                 "to": {
                     "startLine": 1510,
                     "startColumn": 4,
-                    "startOffset": 119720,
+                    "startOffset": 119639,
                     "endLine": 1514,
                     "endColumn": 12,
-                    "endOffset": 120006
+                    "endOffset": 119925
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -8899,9 +8899,9 @@
                 "to": {
                     "startLine": 1515,
                     "startColumn": 4,
-                    "startOffset": 120011,
+                    "startOffset": 119930,
                     "endColumn": 67,
-                    "endOffset": 120074
+                    "endOffset": 119993
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8918,9 +8918,9 @@
                 "to": {
                     "startLine": 1516,
                     "startColumn": 4,
-                    "startOffset": 120079,
+                    "startOffset": 119998,
                     "endColumn": 72,
-                    "endOffset": 120147
+                    "endOffset": 120066
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8937,9 +8937,9 @@
                 "to": {
                     "startLine": 1517,
                     "startColumn": 4,
-                    "startOffset": 120152,
+                    "startOffset": 120071,
                     "endColumn": 73,
-                    "endOffset": 120221
+                    "endOffset": 120140
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8956,9 +8956,9 @@
                 "to": {
                     "startLine": 1518,
                     "startColumn": 4,
-                    "startOffset": 120226,
+                    "startOffset": 120145,
                     "endColumn": 72,
-                    "endOffset": 120294
+                    "endOffset": 120213
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8975,9 +8975,9 @@
                 "to": {
                     "startLine": 1519,
                     "startColumn": 4,
-                    "startOffset": 120299,
+                    "startOffset": 120218,
                     "endColumn": 73,
-                    "endOffset": 120368
+                    "endOffset": 120287
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -8994,10 +8994,10 @@
                 "to": {
                     "startLine": 1520,
                     "startColumn": 4,
-                    "startOffset": 120373,
+                    "startOffset": 120292,
                     "endLine": 1521,
                     "endColumn": 12,
-                    "endOffset": 120514
+                    "endOffset": 120433
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9015,10 +9015,10 @@
                 "to": {
                     "startLine": 1522,
                     "startColumn": 4,
-                    "startOffset": 120519,
+                    "startOffset": 120438,
                     "endLine": 1523,
                     "endColumn": 12,
-                    "endOffset": 120658
+                    "endOffset": 120577
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9036,10 +9036,10 @@
                 "to": {
                     "startLine": 1524,
                     "startColumn": 4,
-                    "startOffset": 120663,
+                    "startOffset": 120582,
                     "endLine": 1525,
                     "endColumn": 12,
-                    "endOffset": 120796
+                    "endOffset": 120715
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9057,9 +9057,9 @@
                 "to": {
                     "startLine": 1526,
                     "startColumn": 4,
-                    "startOffset": 120801,
+                    "startOffset": 120720,
                     "endColumn": 65,
-                    "endOffset": 120862
+                    "endOffset": 120781
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9076,9 +9076,9 @@
                 "to": {
                     "startLine": 1527,
                     "startColumn": 4,
-                    "startOffset": 120867,
+                    "startOffset": 120786,
                     "endColumn": 89,
-                    "endOffset": 120952
+                    "endOffset": 120871
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9095,9 +9095,9 @@
                 "to": {
                     "startLine": 1528,
                     "startColumn": 4,
-                    "startOffset": 120957,
+                    "startOffset": 120876,
                     "endColumn": 75,
-                    "endOffset": 121028
+                    "endOffset": 120947
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9114,9 +9114,9 @@
                 "to": {
                     "startLine": 1529,
                     "startColumn": 4,
-                    "startOffset": 121033,
+                    "startOffset": 120952,
                     "endColumn": 103,
-                    "endOffset": 121132
+                    "endOffset": 121051
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9133,9 +9133,9 @@
                 "to": {
                     "startLine": 1530,
                     "startColumn": 4,
-                    "startOffset": 121137,
+                    "startOffset": 121056,
                     "endColumn": 89,
-                    "endOffset": 121222
+                    "endOffset": 121141
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9152,9 +9152,9 @@
                 "to": {
                     "startLine": 1531,
                     "startColumn": 4,
-                    "startOffset": 121227,
+                    "startOffset": 121146,
                     "endColumn": 101,
-                    "endOffset": 121324
+                    "endOffset": 121243
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9171,9 +9171,9 @@
                 "to": {
                     "startLine": 1532,
                     "startColumn": 4,
-                    "startOffset": 121329,
+                    "startOffset": 121248,
                     "endColumn": 107,
-                    "endOffset": 121432
+                    "endOffset": 121351
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9190,9 +9190,9 @@
                 "to": {
                     "startLine": 1533,
                     "startColumn": 4,
-                    "startOffset": 121437,
+                    "startOffset": 121356,
                     "endColumn": 107,
-                    "endOffset": 121540
+                    "endOffset": 121459
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9209,9 +9209,9 @@
                 "to": {
                     "startLine": 1534,
                     "startColumn": 4,
-                    "startOffset": 121545,
+                    "startOffset": 121464,
                     "endColumn": 99,
-                    "endOffset": 121640
+                    "endOffset": 121559
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9228,9 +9228,9 @@
                 "to": {
                     "startLine": 1535,
                     "startColumn": 4,
-                    "startOffset": 121645,
+                    "startOffset": 121564,
                     "endColumn": 79,
-                    "endOffset": 121720
+                    "endOffset": 121639
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9247,9 +9247,9 @@
                 "to": {
                     "startLine": 1536,
                     "startColumn": 4,
-                    "startOffset": 121725,
+                    "startOffset": 121644,
                     "endColumn": 91,
-                    "endOffset": 121812
+                    "endOffset": 121731
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9266,9 +9266,9 @@
                 "to": {
                     "startLine": 1537,
                     "startColumn": 4,
-                    "startOffset": 121817,
+                    "startOffset": 121736,
                     "endColumn": 97,
-                    "endOffset": 121910
+                    "endOffset": 121829
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9285,10 +9285,10 @@
                 "to": {
                     "startLine": 1538,
                     "startColumn": 4,
-                    "startOffset": 121915,
+                    "startOffset": 121834,
                     "endLine": 1539,
                     "endColumn": 12,
-                    "endOffset": 122020
+                    "endOffset": 121939
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9306,9 +9306,9 @@
                 "to": {
                     "startLine": 1540,
                     "startColumn": 4,
-                    "startOffset": 122025,
+                    "startOffset": 121944,
                     "endColumn": 77,
-                    "endOffset": 122098
+                    "endOffset": 122017
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9325,9 +9325,9 @@
                 "to": {
                     "startLine": 1541,
                     "startColumn": 4,
-                    "startOffset": 122103,
+                    "startOffset": 122022,
                     "endColumn": 105,
-                    "endOffset": 122204
+                    "endOffset": 122123
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9344,9 +9344,9 @@
                 "to": {
                     "startLine": 1542,
                     "startColumn": 4,
-                    "startOffset": 122209,
+                    "startOffset": 122128,
                     "endColumn": 91,
-                    "endOffset": 122296
+                    "endOffset": 122215
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9363,9 +9363,9 @@
                 "to": {
                     "startLine": 1543,
                     "startColumn": 4,
-                    "startOffset": 122301,
+                    "startOffset": 122220,
                     "endColumn": 103,
-                    "endOffset": 122400
+                    "endOffset": 122319
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9382,9 +9382,9 @@
                 "to": {
                     "startLine": 1544,
                     "startColumn": 4,
-                    "startOffset": 122405,
+                    "startOffset": 122324,
                     "endColumn": 109,
-                    "endOffset": 122510
+                    "endOffset": 122429
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9401,10 +9401,10 @@
                 "to": {
                     "startLine": 1545,
                     "startColumn": 4,
-                    "startOffset": 122515,
+                    "startOffset": 122434,
                     "endLine": 1546,
                     "endColumn": 12,
-                    "endOffset": 122632
+                    "endOffset": 122551
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9422,10 +9422,10 @@
                 "to": {
                     "startLine": 1547,
                     "startColumn": 4,
-                    "startOffset": 122637,
+                    "startOffset": 122556,
                     "endLine": 1550,
                     "endColumn": 12,
-                    "endOffset": 122795
+                    "endOffset": 122714
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9443,10 +9443,10 @@
                 "to": {
                     "startLine": 1551,
                     "startColumn": 4,
-                    "startOffset": 122800,
+                    "startOffset": 122719,
                     "endLine": 1554,
                     "endColumn": 12,
-                    "endOffset": 122952
+                    "endOffset": 122871
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9464,10 +9464,10 @@
                 "to": {
                     "startLine": 1555,
                     "startColumn": 4,
-                    "startOffset": 122957,
+                    "startOffset": 122876,
                     "endLine": 1557,
                     "endColumn": 12,
-                    "endOffset": 123106
+                    "endOffset": 123025
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -9485,10 +9485,10 @@
                 "to": {
                     "startLine": 1558,
                     "startColumn": 4,
-                    "startOffset": 123111,
+                    "startOffset": 123030,
                     "endLine": 1562,
                     "endColumn": 12,
-                    "endOffset": 123464
+                    "endOffset": 123383
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -9506,10 +9506,10 @@
                 "to": {
                     "startLine": 1563,
                     "startColumn": 4,
-                    "startOffset": 123469,
+                    "startOffset": 123388,
                     "endLine": 1565,
                     "endColumn": 12,
-                    "endOffset": 123631
+                    "endOffset": 123550
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -9527,10 +9527,10 @@
                 "to": {
                     "startLine": 1566,
                     "startColumn": 4,
-                    "startOffset": 123636,
+                    "startOffset": 123555,
                     "endLine": 1570,
                     "endColumn": 12,
-                    "endOffset": 124001
+                    "endOffset": 123920
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -9548,10 +9548,10 @@
                 "to": {
                     "startLine": 1571,
                     "startColumn": 4,
-                    "startOffset": 124006,
+                    "startOffset": 123925,
                     "endLine": 1574,
                     "endColumn": 12,
-                    "endOffset": 124161
+                    "endOffset": 124080
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -9569,10 +9569,10 @@
                 "to": {
                     "startLine": 1575,
                     "startColumn": 4,
-                    "startOffset": 124166,
+                    "startOffset": 124085,
                     "endLine": 1578,
                     "endColumn": 12,
-                    "endOffset": 124315
+                    "endOffset": 124234
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -9590,9 +9590,9 @@
                 "to": {
                     "startLine": 1579,
                     "startColumn": 4,
-                    "startOffset": 124320,
+                    "startOffset": 124239,
                     "endColumn": 79,
-                    "endOffset": 124395
+                    "endOffset": 124314
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9609,9 +9609,9 @@
                 "to": {
                     "startLine": 1580,
                     "startColumn": 4,
-                    "startOffset": 124400,
+                    "startOffset": 124319,
                     "endColumn": 99,
-                    "endOffset": 124495
+                    "endOffset": 124414
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9628,9 +9628,9 @@
                 "to": {
                     "startLine": 1581,
                     "startColumn": 4,
-                    "startOffset": 124500,
+                    "startOffset": 124419,
                     "endColumn": 89,
-                    "endOffset": 124585
+                    "endOffset": 124504
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9647,9 +9647,9 @@
                 "to": {
                     "startLine": 1582,
                     "startColumn": 4,
-                    "startOffset": 124590,
+                    "startOffset": 124509,
                     "endColumn": 109,
-                    "endOffset": 124695
+                    "endOffset": 124614
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9666,9 +9666,9 @@
                 "to": {
                     "startLine": 1583,
                     "startColumn": 4,
-                    "startOffset": 124700,
+                    "startOffset": 124619,
                     "endColumn": 91,
-                    "endOffset": 124787
+                    "endOffset": 124706
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9685,10 +9685,10 @@
                 "to": {
                     "startLine": 1584,
                     "startColumn": 4,
-                    "startOffset": 124792,
+                    "startOffset": 124711,
                     "endLine": 1585,
                     "endColumn": 12,
-                    "endOffset": 124887
+                    "endOffset": 124806
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9706,10 +9706,10 @@
                 "to": {
                     "startLine": 1586,
                     "startColumn": 4,
-                    "startOffset": 124892,
+                    "startOffset": 124811,
                     "endLine": 1587,
                     "endColumn": 12,
-                    "endOffset": 124999
+                    "endOffset": 124918
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9727,10 +9727,10 @@
                 "to": {
                     "startLine": 1588,
                     "startColumn": 4,
-                    "startOffset": 125004,
+                    "startOffset": 124923,
                     "endLine": 1589,
                     "endColumn": 12,
-                    "endOffset": 125113
+                    "endOffset": 125032
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9748,10 +9748,10 @@
                 "to": {
                     "startLine": 1590,
                     "startColumn": 4,
-                    "startOffset": 125118,
+                    "startOffset": 125037,
                     "endLine": 1591,
                     "endColumn": 12,
-                    "endOffset": 125229
+                    "endOffset": 125148
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9769,10 +9769,10 @@
                 "to": {
                     "startLine": 1592,
                     "startColumn": 4,
-                    "startOffset": 125234,
+                    "startOffset": 125153,
                     "endLine": 1593,
                     "endColumn": 12,
-                    "endOffset": 125345
+                    "endOffset": 125264
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9790,9 +9790,9 @@
                 "to": {
                     "startLine": 1594,
                     "startColumn": 4,
-                    "startOffset": 125350,
+                    "startOffset": 125269,
                     "endColumn": 93,
-                    "endOffset": 125439
+                    "endOffset": 125358
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9809,9 +9809,9 @@
                 "to": {
                     "startLine": 1595,
                     "startColumn": 4,
-                    "startOffset": 125444,
+                    "startOffset": 125363,
                     "endColumn": 113,
-                    "endOffset": 125553
+                    "endOffset": 125472
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9828,9 +9828,9 @@
                 "to": {
                     "startLine": 1596,
                     "startColumn": 4,
-                    "startOffset": 125558,
+                    "startOffset": 125477,
                     "endColumn": 111,
-                    "endOffset": 125665
+                    "endOffset": 125584
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9847,10 +9847,10 @@
                 "to": {
                     "startLine": 1597,
                     "startColumn": 4,
-                    "startOffset": 125670,
+                    "startOffset": 125589,
                     "endLine": 1598,
                     "endColumn": 12,
-                    "endOffset": 125767
+                    "endOffset": 125686
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9868,10 +9868,10 @@
                 "to": {
                     "startLine": 1599,
                     "startColumn": 4,
-                    "startOffset": 125772,
+                    "startOffset": 125691,
                     "endLine": 1600,
                     "endColumn": 12,
-                    "endOffset": 125887
+                    "endOffset": 125806
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9889,10 +9889,10 @@
                 "to": {
                     "startLine": 1601,
                     "startColumn": 4,
-                    "startOffset": 125892,
+                    "startOffset": 125811,
                     "endLine": 1602,
                     "endColumn": 12,
-                    "endOffset": 126009
+                    "endOffset": 125928
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9910,9 +9910,9 @@
                 "to": {
                     "startLine": 1603,
                     "startColumn": 4,
-                    "startOffset": 126014,
+                    "startOffset": 125933,
                     "endColumn": 81,
-                    "endOffset": 126091
+                    "endOffset": 126010
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9929,9 +9929,9 @@
                 "to": {
                     "startLine": 1604,
                     "startColumn": 4,
-                    "startOffset": 126096,
+                    "startOffset": 126015,
                     "endColumn": 103,
-                    "endOffset": 126195
+                    "endOffset": 126114
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9948,9 +9948,9 @@
                 "to": {
                     "startLine": 1605,
                     "startColumn": 4,
-                    "startOffset": 126200,
+                    "startOffset": 126119,
                     "endColumn": 119,
-                    "endOffset": 126315
+                    "endOffset": 126234
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9967,9 +9967,9 @@
                 "to": {
                     "startLine": 1606,
                     "startColumn": 4,
-                    "startOffset": 126320,
+                    "startOffset": 126239,
                     "endColumn": 125,
-                    "endOffset": 126441
+                    "endOffset": 126360
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -9986,9 +9986,9 @@
                 "to": {
                     "startLine": 1607,
                     "startColumn": 4,
-                    "startOffset": 126446,
+                    "startOffset": 126365,
                     "endColumn": 97,
-                    "endOffset": 126539
+                    "endOffset": 126458
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10005,9 +10005,9 @@
                 "to": {
                     "startLine": 1608,
                     "startColumn": 4,
-                    "startOffset": 126544,
+                    "startOffset": 126463,
                     "endColumn": 93,
-                    "endOffset": 126633
+                    "endOffset": 126552
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10024,9 +10024,9 @@
                 "to": {
                     "startLine": 1609,
                     "startColumn": 4,
-                    "startOffset": 126638,
+                    "startOffset": 126557,
                     "endColumn": 87,
-                    "endOffset": 126721
+                    "endOffset": 126640
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10043,9 +10043,9 @@
                 "to": {
                     "startLine": 1610,
                     "startColumn": 4,
-                    "startOffset": 126726,
+                    "startOffset": 126645,
                     "endColumn": 111,
-                    "endOffset": 126833
+                    "endOffset": 126752
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10062,9 +10062,9 @@
                 "to": {
                     "startLine": 1611,
                     "startColumn": 4,
-                    "startOffset": 126838,
+                    "startOffset": 126757,
                     "endColumn": 115,
-                    "endOffset": 126949
+                    "endOffset": 126868
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10081,9 +10081,9 @@
                 "to": {
                     "startLine": 1612,
                     "startColumn": 4,
-                    "startOffset": 126954,
+                    "startOffset": 126873,
                     "endColumn": 121,
-                    "endOffset": 127071
+                    "endOffset": 126990
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10100,9 +10100,9 @@
                 "to": {
                     "startLine": 1613,
                     "startColumn": 4,
-                    "startOffset": 127076,
+                    "startOffset": 126995,
                     "endColumn": 111,
-                    "endOffset": 127183
+                    "endOffset": 127102
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10119,10 +10119,10 @@
                 "to": {
                     "startLine": 1614,
                     "startColumn": 4,
-                    "startOffset": 127188,
+                    "startOffset": 127107,
                     "endLine": 1616,
                     "endColumn": 12,
-                    "endOffset": 127358
+                    "endOffset": 127277
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10140,9 +10140,9 @@
                 "to": {
                     "startLine": 1617,
                     "startColumn": 4,
-                    "startOffset": 127363,
+                    "startOffset": 127282,
                     "endColumn": 115,
-                    "endOffset": 127474
+                    "endOffset": 127393
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10159,9 +10159,9 @@
                 "to": {
                     "startLine": 1618,
                     "startColumn": 4,
-                    "startOffset": 127479,
+                    "startOffset": 127398,
                     "endColumn": 85,
-                    "endOffset": 127560
+                    "endOffset": 127479
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10178,9 +10178,9 @@
                 "to": {
                     "startLine": 1619,
                     "startColumn": 4,
-                    "startOffset": 127565,
+                    "startOffset": 127484,
                     "endColumn": 91,
-                    "endOffset": 127652
+                    "endOffset": 127571
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10197,10 +10197,10 @@
                 "to": {
                     "startLine": 1620,
                     "startColumn": 4,
-                    "startOffset": 127657,
+                    "startOffset": 127576,
                     "endLine": 1621,
                     "endColumn": 12,
-                    "endOffset": 127764
+                    "endOffset": 127683
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10218,10 +10218,10 @@
                 "to": {
                     "startLine": 1622,
                     "startColumn": 4,
-                    "startOffset": 127769,
+                    "startOffset": 127688,
                     "endLine": 1623,
                     "endColumn": 12,
-                    "endOffset": 127888
+                    "endOffset": 127807
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10239,9 +10239,9 @@
                 "to": {
                     "startLine": 1624,
                     "startColumn": 4,
-                    "startOffset": 127893,
+                    "startOffset": 127812,
                     "endColumn": 66,
-                    "endOffset": 127955
+                    "endOffset": 127874
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10258,10 +10258,10 @@
                 "to": {
                     "startLine": 1625,
                     "startColumn": 4,
-                    "startOffset": 127960,
+                    "startOffset": 127879,
                     "endLine": 1626,
                     "endColumn": 12,
-                    "endOffset": 128081
+                    "endOffset": 128000
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10279,9 +10279,9 @@
                 "to": {
                     "startLine": 1627,
                     "startColumn": 4,
-                    "startOffset": 128086,
+                    "startOffset": 128005,
                     "endColumn": 67,
-                    "endOffset": 128149
+                    "endOffset": 128068
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10298,10 +10298,10 @@
                 "to": {
                     "startLine": 1628,
                     "startColumn": 4,
-                    "startOffset": 128154,
+                    "startOffset": 128073,
                     "endLine": 1629,
                     "endColumn": 12,
-                    "endOffset": 128277
+                    "endOffset": 128196
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10319,10 +10319,10 @@
                 "to": {
                     "startLine": 1630,
                     "startColumn": 4,
-                    "startOffset": 128282,
+                    "startOffset": 128201,
                     "endLine": 1631,
                     "endColumn": 12,
-                    "endOffset": 128421
+                    "endOffset": 128340
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10340,10 +10340,10 @@
                 "to": {
                     "startLine": 1632,
                     "startColumn": 4,
-                    "startOffset": 128426,
+                    "startOffset": 128345,
                     "endLine": 1633,
                     "endColumn": 12,
-                    "endOffset": 128549
+                    "endOffset": 128468
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10361,9 +10361,9 @@
                 "to": {
                     "startLine": 1634,
                     "startColumn": 4,
-                    "startOffset": 128554,
+                    "startOffset": 128473,
                     "endColumn": 68,
-                    "endOffset": 128618
+                    "endOffset": 128537
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10380,9 +10380,9 @@
                 "to": {
                     "startLine": 1635,
                     "startColumn": 4,
-                    "startOffset": 128623,
+                    "startOffset": 128542,
                     "endColumn": 94,
-                    "endOffset": 128713
+                    "endOffset": 128632
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10399,9 +10399,9 @@
                 "to": {
                     "startLine": 1636,
                     "startColumn": 4,
-                    "startOffset": 128718,
+                    "startOffset": 128637,
                     "endColumn": 114,
-                    "endOffset": 128828
+                    "endOffset": 128747
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10418,9 +10418,9 @@
                 "to": {
                     "startLine": 1637,
                     "startColumn": 4,
-                    "startOffset": 128833,
+                    "startOffset": 128752,
                     "endColumn": 112,
-                    "endOffset": 128941
+                    "endOffset": 128860
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10437,9 +10437,9 @@
                 "to": {
                     "startLine": 1638,
                     "startColumn": 4,
-                    "startOffset": 128946,
+                    "startOffset": 128865,
                     "endColumn": 98,
-                    "endOffset": 129040
+                    "endOffset": 128959
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10456,9 +10456,9 @@
                 "to": {
                     "startLine": 1639,
                     "startColumn": 4,
-                    "startOffset": 129045,
+                    "startOffset": 128964,
                     "endColumn": 108,
-                    "endOffset": 129149
+                    "endOffset": 129068
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10475,9 +10475,9 @@
                 "to": {
                     "startLine": 1640,
                     "startColumn": 4,
-                    "startOffset": 129154,
+                    "startOffset": 129073,
                     "endColumn": 110,
-                    "endOffset": 129260
+                    "endOffset": 129179
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10494,9 +10494,9 @@
                 "to": {
                     "startLine": 1641,
                     "startColumn": 4,
-                    "startOffset": 129265,
+                    "startOffset": 129184,
                     "endColumn": 110,
-                    "endOffset": 129371
+                    "endOffset": 129290
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10513,9 +10513,9 @@
                 "to": {
                     "startLine": 1642,
                     "startColumn": 4,
-                    "startOffset": 129376,
+                    "startOffset": 129295,
                     "endColumn": 100,
-                    "endOffset": 129472
+                    "endOffset": 129391
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10532,9 +10532,9 @@
                 "to": {
                     "startLine": 1643,
                     "startColumn": 4,
-                    "startOffset": 129477,
+                    "startOffset": 129396,
                     "endColumn": 104,
-                    "endOffset": 129577
+                    "endOffset": 129496
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10551,10 +10551,10 @@
                 "to": {
                     "startLine": 1644,
                     "startColumn": 4,
-                    "startOffset": 129582,
+                    "startOffset": 129501,
                     "endLine": 1645,
                     "endColumn": 12,
-                    "endOffset": 129689
+                    "endOffset": 129608
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10572,10 +10572,10 @@
                 "to": {
                     "startLine": 1646,
                     "startColumn": 4,
-                    "startOffset": 129694,
+                    "startOffset": 129613,
                     "endLine": 1647,
                     "endColumn": 12,
-                    "endOffset": 129819
+                    "endOffset": 129738
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10593,9 +10593,9 @@
                 "to": {
                     "startLine": 1648,
                     "startColumn": 4,
-                    "startOffset": 129824,
+                    "startOffset": 129743,
                     "endColumn": 90,
-                    "endOffset": 129910
+                    "endOffset": 129829
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10612,9 +10612,9 @@
                 "to": {
                     "startLine": 1649,
                     "startColumn": 4,
-                    "startOffset": 129915,
+                    "startOffset": 129834,
                     "endColumn": 122,
-                    "endOffset": 130033
+                    "endOffset": 129952
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10631,10 +10631,10 @@
                 "to": {
                     "startLine": 1650,
                     "startColumn": 4,
-                    "startOffset": 130038,
+                    "startOffset": 129957,
                     "endLine": 1651,
                     "endColumn": 12,
-                    "endOffset": 130145
+                    "endOffset": 130064
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10652,9 +10652,9 @@
                 "to": {
                     "startLine": 1652,
                     "startColumn": 4,
-                    "startOffset": 130150,
+                    "startOffset": 130069,
                     "endColumn": 85,
-                    "endOffset": 130231
+                    "endOffset": 130150
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10671,9 +10671,9 @@
                 "to": {
                     "startLine": 1653,
                     "startColumn": 4,
-                    "startOffset": 130236,
+                    "startOffset": 130155,
                     "endColumn": 103,
-                    "endOffset": 130335
+                    "endOffset": 130254
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10690,10 +10690,10 @@
                 "to": {
                     "startLine": 1654,
                     "startColumn": 4,
-                    "startOffset": 130340,
+                    "startOffset": 130259,
                     "endLine": 1655,
                     "endColumn": 12,
-                    "endOffset": 130443
+                    "endOffset": 130362
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10711,10 +10711,10 @@
                 "to": {
                     "startLine": 1656,
                     "startColumn": 4,
-                    "startOffset": 130448,
+                    "startOffset": 130367,
                     "endLine": 1657,
                     "endColumn": 12,
-                    "endOffset": 130543
+                    "endOffset": 130462
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10732,10 +10732,10 @@
                 "to": {
                     "startLine": 1658,
                     "startColumn": 4,
-                    "startOffset": 130548,
+                    "startOffset": 130467,
                     "endLine": 1659,
                     "endColumn": 12,
-                    "endOffset": 130661
+                    "endOffset": 130580
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10753,10 +10753,10 @@
                 "to": {
                     "startLine": 1660,
                     "startColumn": 4,
-                    "startOffset": 130666,
+                    "startOffset": 130585,
                     "endLine": 1661,
                     "endColumn": 12,
-                    "endOffset": 130765
+                    "endOffset": 130684
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10774,10 +10774,10 @@
                 "to": {
                     "startLine": 1662,
                     "startColumn": 4,
-                    "startOffset": 130770,
+                    "startOffset": 130689,
                     "endLine": 1663,
                     "endColumn": 12,
-                    "endOffset": 130869
+                    "endOffset": 130788
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10795,10 +10795,10 @@
                 "to": {
                     "startLine": 1664,
                     "startColumn": 4,
-                    "startOffset": 130874,
+                    "startOffset": 130793,
                     "endLine": 1665,
                     "endColumn": 12,
-                    "endOffset": 130995
+                    "endOffset": 130914
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10816,9 +10816,9 @@
                 "to": {
                     "startLine": 1666,
                     "startColumn": 4,
-                    "startOffset": 131000,
+                    "startOffset": 130919,
                     "endColumn": 87,
-                    "endOffset": 131083
+                    "endOffset": 131002
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10835,9 +10835,9 @@
                 "to": {
                     "startLine": 1667,
                     "startColumn": 4,
-                    "startOffset": 131088,
+                    "startOffset": 131007,
                     "endColumn": 107,
-                    "endOffset": 131191
+                    "endOffset": 131110
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10854,9 +10854,9 @@
                 "to": {
                     "startLine": 1668,
                     "startColumn": 4,
-                    "startOffset": 131196,
+                    "startOffset": 131115,
                     "endColumn": 99,
-                    "endOffset": 131291
+                    "endOffset": 131210
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10873,9 +10873,9 @@
                 "to": {
                     "startLine": 1669,
                     "startColumn": 4,
-                    "startOffset": 131296,
+                    "startOffset": 131215,
                     "endColumn": 89,
-                    "endOffset": 131381
+                    "endOffset": 131300
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10892,9 +10892,9 @@
                 "to": {
                     "startLine": 1670,
                     "startColumn": 4,
-                    "startOffset": 131386,
+                    "startOffset": 131305,
                     "endColumn": 109,
-                    "endOffset": 131491
+                    "endOffset": 131410
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10911,9 +10911,9 @@
                 "to": {
                     "startLine": 1671,
                     "startColumn": 4,
-                    "startOffset": 131496,
+                    "startOffset": 131415,
                     "endColumn": 83,
-                    "endOffset": 131575
+                    "endOffset": 131494
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10930,9 +10930,9 @@
                 "to": {
                     "startLine": 1672,
                     "startColumn": 4,
-                    "startOffset": 131580,
+                    "startOffset": 131499,
                     "endColumn": 83,
-                    "endOffset": 131659
+                    "endOffset": 131578
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10949,9 +10949,9 @@
                 "to": {
                     "startLine": 1673,
                     "startColumn": 4,
-                    "startOffset": 131664,
+                    "startOffset": 131583,
                     "endColumn": 53,
-                    "endOffset": 131713
+                    "endOffset": 131632
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10968,9 +10968,9 @@
                 "to": {
                     "startLine": 1674,
                     "startColumn": 4,
-                    "startOffset": 131718,
+                    "startOffset": 131637,
                     "endColumn": 63,
-                    "endOffset": 131777
+                    "endOffset": 131696
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -10987,9 +10987,9 @@
                 "to": {
                     "startLine": 1675,
                     "startColumn": 4,
-                    "startOffset": 131782,
+                    "startOffset": 131701,
                     "endColumn": 105,
-                    "endOffset": 131883
+                    "endOffset": 131802
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -11006,9 +11006,9 @@
                 "to": {
                     "startLine": 1676,
                     "startColumn": 4,
-                    "startOffset": 131888,
+                    "startOffset": 131807,
                     "endColumn": 109,
-                    "endOffset": 131993
+                    "endOffset": 131912
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -11025,9 +11025,9 @@
                 "to": {
                     "startLine": 1677,
                     "startColumn": 4,
-                    "startOffset": 131998,
+                    "startOffset": 131917,
                     "endColumn": 83,
-                    "endOffset": 132077
+                    "endOffset": 131996
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -11044,9 +11044,9 @@
                 "to": {
                     "startLine": 1678,
                     "startColumn": 4,
-                    "startOffset": 132082,
+                    "startOffset": 132001,
                     "endColumn": 119,
-                    "endOffset": 132197
+                    "endOffset": 132116
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values/values.xml",
@@ -11063,10 +11063,10 @@
                 "to": {
                     "startLine": 1679,
                     "startColumn": 4,
-                    "startOffset": 132202,
+                    "startOffset": 132121,
                     "endLine": 1682,
                     "endColumn": 12,
-                    "endOffset": 132415
+                    "endOffset": 132334
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -11084,10 +11084,10 @@
                 "to": {
                     "startLine": 1683,
                     "startColumn": 4,
-                    "startOffset": 132420,
+                    "startOffset": 132339,
                     "endLine": 1688,
                     "endColumn": 12,
-                    "endOffset": 132813
+                    "endOffset": 132732
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -11105,10 +11105,10 @@
                 "to": {
                     "startLine": 1689,
                     "startColumn": 4,
-                    "startOffset": 132818,
+                    "startOffset": 132737,
                     "endLine": 1692,
                     "endColumn": 12,
-                    "endOffset": 133020
+                    "endOffset": 132939
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -11126,10 +11126,10 @@
                 "to": {
                     "startLine": 1693,
                     "startColumn": 4,
-                    "startOffset": 133025,
+                    "startOffset": 132944,
                     "endLine": 1695,
                     "endColumn": 12,
-                    "endOffset": 133179
+                    "endOffset": 133098
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -11147,10 +11147,10 @@
                 "to": {
                     "startLine": 1696,
                     "startColumn": 4,
-                    "startOffset": 133184,
+                    "startOffset": 133103,
                     "endLine": 1704,
                     "endColumn": 12,
-                    "endOffset": 133746
+                    "endOffset": 133665
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -11168,10 +11168,10 @@
                 "to": {
                     "startLine": 1705,
                     "startColumn": 4,
-                    "startOffset": 133751,
+                    "startOffset": 133670,
                     "endLine": 1710,
                     "endColumn": 12,
-                    "endOffset": 134107
+                    "endOffset": 134026
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -11189,10 +11189,10 @@
                 "to": {
                     "startLine": 1711,
                     "startColumn": 4,
-                    "startOffset": 134112,
+                    "startOffset": 134031,
                     "endLine": 1713,
                     "endColumn": 12,
-                    "endOffset": 134236
+                    "endOffset": 134155
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -11210,10 +11210,10 @@
                 "to": {
                     "startLine": 1714,
                     "startColumn": 4,
-                    "startOffset": 134241,
+                    "startOffset": 134160,
                     "endLine": 1723,
                     "endColumn": 12,
-                    "endOffset": 134980
+                    "endOffset": 134899
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -11231,10 +11231,10 @@
                 "to": {
                     "startLine": 1724,
                     "startColumn": 4,
-                    "startOffset": 134985,
+                    "startOffset": 134904,
                     "endLine": 1727,
                     "endColumn": 12,
-                    "endOffset": 135160
+                    "endOffset": 135079
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",
@@ -11252,10 +11252,10 @@
                 "to": {
                     "startLine": 1728,
                     "startColumn": 4,
-                    "startOffset": 135165,
+                    "startOffset": 135084,
                     "endLine": 1733,
                     "endColumn": 12,
-                    "endOffset": 135601
+                    "endOffset": 135520
                 },
                 "from": {
                     "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/values/values.xml",

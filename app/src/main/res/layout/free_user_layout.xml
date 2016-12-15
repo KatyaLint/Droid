@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     android:background="@drawable/background_pin_code" >
 
 
@@ -12,26 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/registered_illustration"
-        android:layout_marginTop="20dp"
-        android:id="@+id/imageView3"
+        android:layout_marginTop="@dimen/DP30"
+        android:id="@+id/free_user_image_view"
         android:layout_centerHorizontal="true" />
 
-    <hellogbye.com.hellogbyeandroid.views.FontButtonView
-        android:id="@+id/free_user_sign_in_btn"
-        android:text="Sign In"
-        style="@style/RedButton"
-        android:layout_above="@+id/free_user_create_new_account_btn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/DP30" />
-
-    <hellogbye.com.hellogbyeandroid.views.FontButtonView
-        style="@style/BlueButton"
-        android:id="@+id/free_user_create_new_account_btn"
-        android:text="Create a new Account"
-        android:layout_marginBottom="@dimen/DP50"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_width="match_parent"
@@ -41,10 +24,37 @@
         android:textSize="@dimen/SP32"
         android:layout_height="wrap_content"
         android:text="@string/free_user_options"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/DP20"
+        android:layout_below="@+id/free_user_image_view"
+        android:id="@+id/free_user_title_text" />
+
+
+    <!--android:layout_centerVertical="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"-->
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:id="@+id/free_user_sign_in_btn"
+        android:text="Sign In"
+        style="@style/RedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/free_user_title_text"
+        android:layout_marginTop="@dimen/DP44" />
+
+
+    <!--style="@style/RedButton"-->
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        style="@style/BlueButton"
+        android:id="@+id/free_user_create_new_account_btn"
+        android:text="Create a new Account"
+        android:layout_below="@+id/free_user_sign_in_btn"
+        android:layout_marginTop="@dimen/DP30"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/fontTextView2" />
+        android:layout_alignParentStart="true" />
+
+
 
 
     <!--  <hellogbye.com.hellogbyeandroid.views.FontTextView
