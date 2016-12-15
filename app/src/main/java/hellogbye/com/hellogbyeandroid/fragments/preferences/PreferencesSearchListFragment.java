@@ -12,6 +12,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,7 +23,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.SearchView;
+
 import android.widget.TextView;
 
 
@@ -325,10 +326,12 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
 
 
     private void setupSearchView() {
-        mSearchView.setIconifiedByDefault(false);
+      /*  mSearchView.setIconifiedByDefault(false);
         mSearchView.setOnQueryTextListener(this);
-        mSearchView.setSubmitButtonEnabled(false);
+        mSearchView.setSubmitButtonEnabled(false);*/
+
         mSearchView.setQueryHint(getString(R.string.settings_search_hunt));
+        mSearchView.setOnQueryTextListener(this);
     }
 
 
@@ -396,7 +399,6 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
 
     @Override
     public boolean onQueryTextChange(String query) {
-
         // Here is where we are going to implement our filter logic
         final List<SettingsAttributesVO> filteredModelList = filter(accountAttributesTemp, query);
         searchListAdapter.animateTo(filteredModelList);

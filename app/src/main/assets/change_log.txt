@@ -559,6 +559,8 @@ Code changing:
         HEL-1826 - navbar text isn't shown on nexus 5
         HEL-1829 - uninstall and then install opens a user instead of getting me to the login screen
         HEL-1953 - anonymous->account->choose photo->there is a "?" that is nor supposed to be there
+        HEL-1954 - logout (anonymous & login) throws out from the app and not getting back to sign in page
+        HEL-1798 - can't add airlines, aircrafts and hotels to profile see video
 
 
       Code changing:

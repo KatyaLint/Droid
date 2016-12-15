@@ -12,11 +12,18 @@
         android:layout_height="wrap_content"/>
 
 
-    <SearchView
+    <android.support.v7.widget.SearchView
+        android:layout_below="@+id/title_instraction"
+        android:id="@+id/settings_search"
+        android:background="@color/COLOR_WHITE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+<!--    <SearchView
         android:layout_below="@+id/title_instraction"
         android:layout_width="match_parent"
         android:id="@+id/settings_search"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"/>-->
 
     <include
         android:layout_height="match_parent"
