@@ -10,6 +10,7 @@
         android:id="@+id/pager_introduction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/DP44"
         android:fitsSystemWindows="true"
         tools:listitem="@layout/pager_item" />
 
@@ -18,7 +19,7 @@
         android:id="@+id/viewPagerIndicator"
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP60"
-        android:layout_marginBottom="@dimen/DP200"
+        android:layout_marginBottom="@dimen/DP220"
         android:layout_alignParentBottom="true" >
 
         <LinearLayout

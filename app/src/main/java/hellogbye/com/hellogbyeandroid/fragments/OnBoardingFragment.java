@@ -1,3 +1,4 @@
+/*
 package hellogbye.com.hellogbyeandroid.fragments;
 
 import android.os.Bundle;
@@ -13,9 +14,11 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.TravelPreference;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
+*/
 /**
  * Created by arisprung on 9/9/15.
- */
+ *//*
+
 public class OnBoardingFragment extends Fragment {
 
     private FontTextView mTitleTextView;
@@ -41,4 +44,4 @@ public class OnBoardingFragment extends Fragment {
 
         return rootView;
     }
-}
+}*/

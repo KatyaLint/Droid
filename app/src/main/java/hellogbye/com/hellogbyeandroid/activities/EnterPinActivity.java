@@ -2,8 +2,11 @@ package hellogbye.com.hellogbyeandroid.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import hellogbye.com.hellogbyeandroid.R;
@@ -29,6 +32,12 @@ public class EnterPinActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow(); // in Activity's onCreate() for instance
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
+
+
         setContentView(R.layout.pin_code_verification);
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         pin_code_verification_next = (FontButtonView) findViewById(R.id.pin_code_verification_next);

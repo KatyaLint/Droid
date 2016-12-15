@@ -594,7 +594,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
 
-    private void showAlertProfilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs) {
+/*    private void showAlertProfilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs) {
      //   kate
         LayoutInflater li = LayoutInflater.from(MainActivityBottomTabs.this);
         View promptsView = li.inflate(R.layout.popup_custom_title, null);
@@ -623,7 +623,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         selectDefaultProfileDialog = dialogBuilder.create();
         selectDefaultProfileDialog.setCancelable(false);
         selectDefaultProfileDialog.show();
-    }
+    }*/
 
 
     private void postDefaultProfile(String profileId, String profileName) {

@@ -128,8 +128,15 @@ public class UserProfilePreferences extends HGBAbstractFragment {
         }
 
         mRadioPreferencesAdapter = new PreferencesSettingsPreferencesCheckAdapter(activity, accountAttributes);
+        System.out.println("Kate accountAttributes.get(0).getmId() =" + accountAttributes.get(0).getmId());
+       // mRadioPreferencesAdapter.selectedItemID(accountAttributes.get(0).getmId());
+        mRadioPreferencesAdapter.setSelectedPosition(0);
+
+        radioButtonSelected = 0;
+        mRadioPreferencesAdapter.notifyDataSetChanged();
 
         View promptsViewTeest = li.inflate(R.layout.user_profile_popup_list_layout, null);
+        System.out.println("Kate userProfile");
         ListView user_profile_popup_list_view = (ListView) promptsViewTeest.findViewById(R.id.user_profile_popup_list_view);
         user_profile_popup_list_view.setAdapter(mRadioPreferencesAdapter);
 
@@ -163,9 +170,12 @@ public class UserProfilePreferences extends HGBAbstractFragment {
 
         dialogBuilder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+
+                System.out.println("Kate radioButtonSelected =" + radioButtonSelected);
                 if(radioButtonSelected != -1) {
 
                     if(isDefaultProfile){
+                        System.out.println("Kate radioButtonSelected = " + radioButtonSelected);
                         final DefaultsProfilesVO selected = accountDefaultSettings.get(radioButtonSelected);
                         postDefaultProfile(String.valueOf(selected.getId()), selected.getName(), activity, activityInterface, userProfileVOs);
                     }else{

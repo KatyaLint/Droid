@@ -1,3 +1,4 @@
+/*
 package hellogbye.com.hellogbyeandroid.fragments.cnc;
 
 import android.app.Activity;
@@ -21,9 +22,11 @@ import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
+*/
 /**
  * Created by nyawka on 9/25/16.
- */
+ *//*
+
 public class ProfileDialogPopup  extends HGBAbstractFragment {
 
     private AlertDialog selectDefaultProfileDialog;
@@ -141,7 +144,8 @@ public class ProfileDialogPopup  extends HGBAbstractFragment {
 
 
 
-       /* AccountDefaultSettingsVO selected = accountDefaultSettings.get(radioButtonSelected);
+       */
+/* AccountDefaultSettingsVO selected = accountDefaultSettings.get(radioButtonSelected);
 
         String userEmail = getActivityInterface().getPersonalUserInformation().getUserEmailLogIn();
         ConnectionManager.getInstance(getActivity()).putAccountsPreferences(userEmail, selected.getmId(), new ConnectionManager.ServerRequestListener() {
@@ -154,6 +158,8 @@ public class ProfileDialogPopup  extends HGBAbstractFragment {
             public void onError(Object data) {
                 ErrorMessage(data);
             }
-        });*/
+        });*//*
+
     }
 }
+*/

@@ -59,6 +59,11 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
         this.listRadioButtonClickedClicked = listRadioButtonClicked;
     }
 
+
+    public void setSelectedPosition(int positionRadioBtn){
+        selectedPosition = positionRadioBtn;
+    }
+
     @Override
     public void selectedItemID(String id) {
         this.selectedPreferebcesID = id;
@@ -141,6 +146,7 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
 
             if(selectedPreferebcesID.equals(attribute.getmId())){
                 selectedPosition = position;
+                System.out.println("Kate selectedPosition =" + selectedPosition);
                 selectedPreferebcesID = "";
 
             }
