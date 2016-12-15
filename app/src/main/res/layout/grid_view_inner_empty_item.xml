@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/grid_squer_empty"
-        android:background="@color/paid_green">
+        android:background="@color/COLOR_38b77f">
 
 
         <LinearLayout

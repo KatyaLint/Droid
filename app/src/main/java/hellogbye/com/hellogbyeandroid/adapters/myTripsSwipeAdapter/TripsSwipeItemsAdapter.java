@@ -142,10 +142,10 @@ public class TripsSwipeItemsAdapter extends RecyclerSwipeAdapter<TripsSwipeItems
             viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.COLOR_EE3A3C));
         }else if(item.getPaymentstatus().equals("FPD")){
             viewHolder.my_trip_paid.setText("PAID");
-            viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.paid_green));
+            viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.COLOR_38b77f));
         }else if((item.getPaymentstatus().equals("FPD"))){
             viewHolder.my_trip_paid.setText("PARTIALLY PAID");
-            viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.paid_green));
+            viewHolder.my_trip_paid.setTextColor(mContext.getResources().getColor(R.color.COLOR_38b77f));
         }
 
 

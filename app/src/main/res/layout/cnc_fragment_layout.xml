@@ -43,7 +43,7 @@
         android:layout_above="@+id/cnc_message_rl"
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
-        android:background="@color/COLOR_999999"
+        android:background="@color/COLOR_80999999"
         android:layout_marginBottom="@dimen/DP10"/>
     ​
     <RelativeLayout

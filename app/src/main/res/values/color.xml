@@ -15,8 +15,9 @@
     <color name="COLOR_f9fbfd">#f9fbfd</color>
     <color name="COLOR_F5F5F5">#F5F5F5</color>
     <color name="COLOR_WHITE">#ffffff</color>
-    <color name="paid_green">#38b77f</color>
+    <color name="COLOR_38b77f">#38b77f</color>
     <color name="COLOR_999999">#999999</color>
+    <color name="COLOR_80999999">#80999999</color>
     <color name="COLOR_565656">#565656</color>
     <color name="COLOR_BLACK">#000000</color>
     <color name="COLOR_22999999">#22999999</color>
