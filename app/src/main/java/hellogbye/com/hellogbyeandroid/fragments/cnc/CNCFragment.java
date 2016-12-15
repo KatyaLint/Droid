@@ -53,6 +53,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBTranslate;
 import hellogbye.com.hellogbyeandroid.utilities.HGBTranslateInterface;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityNetwork;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -676,7 +677,8 @@ private void setTextForTrip(String name){
             for (AirportResultsVO result : results){
                 if(result.getId().equals(choosenAirport.getId())) {
                     airportSendValuesVO.setId(choosenAirport.getId());
-                    String location = HGBUtility.getLocation(getActivity(), false);
+
+                    String location = HGBUtilityNetwork.getLocation(getActivity(), false);
 
 
                     if (location != null && getActivityInterface().getTravelOrder() != null) {

@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.annotation.IdRes;
@@ -16,8 +16,6 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -33,7 +31,6 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.adapters.userprofilesadapter.UserProfilesAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.FareClassFragment;
 import hellogbye.com.hellogbyeandroid.fragments.cnc.CNCFragment;
 import hellogbye.com.hellogbyeandroid.fragments.hotel.HotelFragment;
@@ -85,10 +82,12 @@ import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.network.Parser;
+import hellogbye.com.hellogbyeandroid.utilities.GPSTracker;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityNetwork;
 import hellogbye.com.hellogbyeandroid.utilities.SpeechRecognitionUtil;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -200,12 +199,23 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         //INIT Location
 
         boolean locationToken = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.HGB_LOCATION_TOKEN, true);
-        String location = HGBUtility.getLocation(MainActivityBottomTabs.this, locationToken);
-        if (location != null && hgbSaveDataClass.getTravelOrder() != null) {
+
+
+        boolean location = HGBUtilityNetwork.isGPSEnable(MainActivityBottomTabs.this);//getLocation(MainActivityBottomTabs.this, locationToken);
+        GPSTracker gpsTracker = new GPSTracker(getBaseContext());
+        if(location){
+            Location locationCoord = gpsTracker.getLocation();
+           // String[] locationArr = location.split("&");
+         //   hgbSaveDataClass.getTravelOrder().setLocation(locationArr);
+          //  hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_LOCATION_TOKEN, false);
+            System.out.println("Kate location enable");
+        }
+
+     /*   if (location != null && hgbSaveDataClass.getTravelOrder() != null) {
             String[] locationArr = location.split("&");
             hgbSaveDataClass.getTravelOrder().setLocation(locationArr);
             hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_LOCATION_TOKEN, false);
-        }
+        }*/
 
     }
 

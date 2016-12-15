@@ -170,7 +170,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
 
         dialogBuilder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                
+
                 if(radioButtonSelected != -1) {
 
                     if(isDefaultProfile){
