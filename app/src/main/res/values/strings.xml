@@ -338,7 +338,8 @@
     <string name="pin_code_resend"><u>Resend the message\nSend the code to my email</u></string>
     <string name="pin_code_send_email"><u>Send the code to my email</u></string>
 
-    <string name="free_user_options">This option is available \nonly for registered users</string>
+    <string name="free_user_options">This option is available\nonly for registered users</string>
+    <!--le  only for registered users-->
 
     <string name="onboarding_title_1">Just type or speak</string>
     <string name="onboarding_explanation_1">Touch the speech bubble icon to start\nplannin a new trip.</string>

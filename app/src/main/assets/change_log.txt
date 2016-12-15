@@ -558,6 +558,7 @@ Code changing:
         HEL-2039 - Auto complete city name in create account bug
         HEL-1826 - navbar text isn't shown on nexus 5
         HEL-1829 - uninstall and then install opens a user instead of getting me to the login screen
+        HEL-1953 - anonymous->account->choose photo->there is a "?" that is nor supposed to be there
 
 
       Code changing:
