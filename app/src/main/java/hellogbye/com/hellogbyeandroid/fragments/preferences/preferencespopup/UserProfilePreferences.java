@@ -130,9 +130,9 @@ public class UserProfilePreferences extends HGBAbstractFragment {
         mRadioPreferencesAdapter = new PreferencesSettingsPreferencesCheckAdapter(activity, accountAttributes);
         System.out.println("Kate accountAttributes.get(0).getmId() =" + accountAttributes.get(0).getmId());
        // mRadioPreferencesAdapter.selectedItemID(accountAttributes.get(0).getmId());
-        mRadioPreferencesAdapter.setSelectedPosition(0);
+        mRadioPreferencesAdapter.setSelectedPosition(1);
 
-        radioButtonSelected = 0;
+        radioButtonSelected = 1;
         mRadioPreferencesAdapter.notifyDataSetChanged();
 
         View promptsViewTeest = li.inflate(R.layout.user_profile_popup_list_layout, null);
