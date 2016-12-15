@@ -16,7 +16,6 @@
         android:layout_gravity="bottom|center_horizontal"
         android:letterSpacing="0.04"
         android:textSize="1sp"
-
         android:textAppearance="@style/BB_BottomBarItem_Fixed.TitleAppearance"
         style="@style/BB_BottomBarItem_TitleStyle"/>
 

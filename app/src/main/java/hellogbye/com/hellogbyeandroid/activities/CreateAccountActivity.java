@@ -1,5 +1,6 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -52,8 +54,6 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
-
-import static android.R.id.list;
 
 /**
  * Created by arisprung on 11/8/16.
@@ -129,6 +129,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private UserSignUpDataVO userData;
     private String android_id;
     private ArrayList<String> mCityList;
+    private AlertDialog levelDialog ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -217,7 +218,6 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mTryNow.setOnClickListener(this);
         mSignInTextView.setOnClickListener(this);
         initSpannableText();
-
 
 
         mForgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
@@ -426,9 +426,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         ArrayList<View> secondViewViews = new ArrayList<>();
         secondViewViews.add(mEmail);
 
-        if(animateFoward){
-            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(),firstViewViews,secondViewViews);
-            animateLabels(getString(R.string.whats_email),getString(R.string.email_secure));
+        if (animateFoward) {
+            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), firstViewViews, secondViewViews);
+            animateLabels(getString(R.string.whats_email), getString(R.string.email_secure));
             CURRENT_STATE = EMAIL_STATE;
 
         } else {
@@ -634,25 +634,50 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     }
 
     private void userSelectedState() {
-        if (userData.getCountry() != null && mProvinceItems != null) {
-            HGBUtility.showPikerDialogEditText(mStateProvince, CreateAccountActivity.this, "Choose province",
-                    countryarray, 0, mProvinceItems.size() - 1, new PopUpAlertStringCB() {
-                        @Override
-                        public void itemSelected(String inputItem) {
-                            for (ProvincesItem province : mProvinceItems) {
-                                if (province.getProvincename().equals(inputItem)) {
-                                    mStateProvince.setText(province.getProvincename());
-                                    userData.setCountryProvince(province.getProvincecode());
-                                    initAutoCityComplete();
-                                    break;
-                                }
-                            }
-                        }
 
-                        @Override
-                        public void itemCanceled() {
+        if (userData.getCountry() != null && mProvinceItems != null) {
+            ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
+                    CreateAccountActivity.this, R.layout.dialog_radio, countryarray);
+            // Creating and Building the Dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Which State/Province?");
+            builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                    Log.e("","");
+                    Log.e("","");
+                    for (ProvincesItem province : mProvinceItems) {
+                        if (countryarray[item].contains(province.getProvincename())) {
+                            mStateProvince.setText(province.getProvincename());
+                            userData.setCountryProvince(province.getProvincecode());
+                            initAutoCityComplete();
+                            break;
                         }
-                    }, false);
+                    }
+                    levelDialog.dismiss();
+                }
+            });
+            levelDialog = builder.create();
+            levelDialog.show();
+
+
+//            HGBUtility.showPikerDialogEditText(mStateProvince, CreateAccountActivity.this, "Choose province",
+//                    countryarray, 0, mProvinceItems.size() - 1, new PopUpAlertStringCB() {
+//                        @Override
+//                        public void itemSelected(String inputItem) {
+//                            for (ProvincesItem province : mProvinceItems) {
+//                                if (province.getProvincename().equals(inputItem)) {
+//                                    mStateProvince.setText(province.getProvincename());
+//                                    userData.setCountryProvince(province.getProvincecode());
+//                                    initAutoCityComplete();
+//                                    break;
+//                                }
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void itemCanceled() {
+//                        }
+//                    }, false);
 
         } else {
             Toast.makeText(getApplicationContext(), "Please select Country first", Toast.LENGTH_SHORT).show();
@@ -898,7 +923,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private void setDropDownItems() {
         countryarray = new String[mProvinceItems.size()];
         for (int i = 0; i < mProvinceItems.size(); i++) {
-            countryarray[i] = mProvinceItems.get(i).getProvincename();
+            countryarray[i] = mProvinceItems.get(i).getProvincecode()+" - "+ mProvinceItems.get(i).getProvincename() ;
         }
     }
 
@@ -926,7 +951,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                             public void onSuccess(Object data) {
 
                                 mCityList = (ArrayList<String>) data;
-                                Log.e("- onSuccessA",mCityList.toString());
+                                Log.e("- onSuccessA", mCityList.toString());
 //                                Log.e("- onSuccessB",list.toString());
 //                                if ((list.size() > 10)){
 //                                    ArrayList<String> tempList = new ArrayList<String>();
