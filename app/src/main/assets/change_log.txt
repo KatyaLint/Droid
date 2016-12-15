@@ -561,7 +561,7 @@ Code changing:
         HEL-1953 - anonymous->account->choose photo->there is a "?" that is nor supposed to be there
         HEL-1954 - logout (anonymous & login) throws out from the app and not getting back to sign in page
         HEL-1798 - can't add airlines, aircrafts and hotels to profile see video
-
+        HEL-1823 - companions ->travel companions remove picture in the background
 
       Code changing:
       --------------
