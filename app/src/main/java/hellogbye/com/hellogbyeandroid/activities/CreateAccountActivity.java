@@ -32,6 +32,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -636,49 +637,29 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private void userSelectedState() {
 
         if (userData.getCountry() != null && mProvinceItems != null) {
-            ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
-                    CreateAccountActivity.this, R.layout.dialog_radio, countryarray);
-            // Creating and Building the Dialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Which State/Province?");
-            builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int item) {
-                    Log.e("","");
-                    Log.e("","");
-                    for (ProvincesItem province : mProvinceItems) {
-                        if (countryarray[item].contains(province.getProvincename())) {
-                            mStateProvince.setText(province.getProvincename());
-                            userData.setCountryProvince(province.getProvincecode());
-                            initAutoCityComplete();
-                            break;
+
+            if(levelDialog == null){
+                ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
+                        CreateAccountActivity.this, R.layout.dialog_radio, countryarray);
+                // Creating and Building the Dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Which State/Province?");
+                builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) {
+                        for (ProvincesItem province : mProvinceItems) {
+                            if (countryarray[item].contains(province.getProvincename())) {
+                                mStateProvince.setText(province.getProvincename());
+                                userData.setCountryProvince(province.getProvincecode());
+                                initAutoCityComplete();
+                                break;
+                            }
                         }
+                        levelDialog.hide();
                     }
-                    levelDialog.dismiss();
-                }
-            });
-            levelDialog = builder.create();
+                });
+                levelDialog = builder.create();
+            }
             levelDialog.show();
-
-
-//            HGBUtility.showPikerDialogEditText(mStateProvince, CreateAccountActivity.this, "Choose province",
-//                    countryarray, 0, mProvinceItems.size() - 1, new PopUpAlertStringCB() {
-//                        @Override
-//                        public void itemSelected(String inputItem) {
-//                            for (ProvincesItem province : mProvinceItems) {
-//                                if (province.getProvincename().equals(inputItem)) {
-//                                    mStateProvince.setText(province.getProvincename());
-//                                    userData.setCountryProvince(province.getProvincecode());
-//                                    initAutoCityComplete();
-//                                    break;
-//                                }
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void itemCanceled() {
-//                        }
-//                    }, false);
-
         } else {
             Toast.makeText(getApplicationContext(), "Please select Country first", Toast.LENGTH_SHORT).show();
         }
