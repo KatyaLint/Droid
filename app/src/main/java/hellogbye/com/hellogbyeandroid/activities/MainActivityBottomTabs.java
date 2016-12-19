@@ -208,7 +208,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
            // String[] locationArr = location.split("&");
          //   hgbSaveDataClass.getTravelOrder().setLocation(locationArr);
           //  hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_LOCATION_TOKEN, false);
-            System.out.println("Kate location enable");
+
         }
 
      /*   if (location != null && hgbSaveDataClass.getTravelOrder() != null) {
@@ -936,8 +936,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         mToolbar.setVisibility(View.VISIBLE);
         return fragment;
     }
-
-
 
 
     /////////////////////////////////
