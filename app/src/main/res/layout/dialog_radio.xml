@@ -5,8 +5,8 @@
     android:layout_height="wrap_content"
     android:checkMark="?android:attr/listChoiceIndicatorSingle"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall"
-    android:textColor="?android:attr/textColorAlertDialogListItem"
-    android:paddingStart="@dimen/DP16"
     android:paddingEnd="@dimen/DP6"
-   />
+    android:paddingStart="@dimen/DP16"
+    android:textAppearance="?android:attr/textAppearanceListItemSmall"
+    android:textColor="?android:attr/textColorAlertDialogListItem" />
+

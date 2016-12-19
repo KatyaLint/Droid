@@ -221,6 +221,14 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         initSpannableText();
 
 
+        //FOR BOTTOM MARGIN OF NAVAGATION BUTTONS
+        int i = HGBUtility.getNavBarHight(getApplicationContext());
+        RelativeLayout.LayoutParams llp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        llp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        llp.setMargins(0, 0, 0,i);
+        mHyperlink.setLayoutParams(llp);
+
+
         mForgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
