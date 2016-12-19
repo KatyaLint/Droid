@@ -1499,7 +1499,7 @@
         <item name="android:gravity">center_horizontal</item>
         <item name="android:orientation">vertical</item>
     </style><color name="COLOR_WHITE">#FFFFFF</color><color name="bb_inActiveBottomBarItemColor">#747474</color><style name="BB_BottomBarItem">
-        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+      
         <item name="android:layout_width">wrap_content</item>
         
         <item name="android:layout_height">@dimen/bb_height</item>
