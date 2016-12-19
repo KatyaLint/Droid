@@ -32,6 +32,7 @@ import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -55,7 +56,7 @@ public class SignUpActivity extends BaseActivity {
     private LinearLayout sign_up_layout_ll;
     private View pin_code_verification_layout;
     private ArrayAdapter adapter;
-    private FontTextView pin_code_verification_next;
+    private FontButtonView pin_code_verification_next;
     private FontEditTextView pin_code_verification_pin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +108,7 @@ public class SignUpActivity extends BaseActivity {
         sign_up_layout_ll.setVisibility(View.VISIBLE);
         pin_code_verification_layout.setVisibility(View.GONE);
 
-        pin_code_verification_next = (FontTextView) pin_code_verification_layout.findViewById(R.id.pin_code_verification_next);
+        pin_code_verification_next = (FontButtonView) pin_code_verification_layout.findViewById(R.id.pin_code_verification_next);
         pin_code_verification_pin = (FontEditTextView) pin_code_verification_layout.findViewById(R.id.pin_code_verification_pin);
 
         pin_code_verification_next.setOnClickListener(new View.OnClickListener() {

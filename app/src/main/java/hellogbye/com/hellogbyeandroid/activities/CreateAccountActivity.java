@@ -540,9 +540,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     public void onClick(View view) {
 
         switch (view.getId()) {
-            case R.id.try_now:
-
-                break;
+        
             case R.id.create_account:
                 animateNameView(true);
                 break;

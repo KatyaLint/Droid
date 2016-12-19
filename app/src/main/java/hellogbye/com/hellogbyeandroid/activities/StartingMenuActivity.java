@@ -1,3 +1,4 @@
+/*
 package hellogbye.com.hellogbyeandroid.activities;
 
 import android.app.Activity;
@@ -25,9 +26,11 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityNetwork;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
+*/
 /**
  * Created by arisprung on 9/8/15.
- */
+ *//*
+
 public class StartingMenuActivity extends BaseActivity {
 
     private FontTextView mSignUp;
@@ -166,7 +169,8 @@ public class StartingMenuActivity extends BaseActivity {
         }
     };
 
- /*   public class myClickableSpan extends ClickableSpan {
+ */
+/*   public class myClickableSpan extends ClickableSpan {
 
         int pos;
 
@@ -190,7 +194,8 @@ public class StartingMenuActivity extends BaseActivity {
             startActivity(browserIntent);
         }
 
-    }*/
+    }*//*
+
 
     private void goToMainActivity() {
 
@@ -211,3 +216,4 @@ public class StartingMenuActivity extends BaseActivity {
     }
 
 }
+*/

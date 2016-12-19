@@ -27,8 +27,8 @@ android {
 
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 4
-        versionName "0.0.4"
+        versionCode 5
+        versionName "0.0.5"
         multiDexEnabled false
 
     }
@@ -55,12 +55,12 @@ android {
         dev {
             buildConfigField 'boolean', 'IS_DEV', 'true'
             applicationId "com.hellogbye.dev"
-            versionName "0.0.4-dev"
+            versionName "0.0.5-dev"
         }
         live {
             buildConfigField 'boolean', 'IS_DEV', 'false'
             applicationId "com.hellogbye"
-            versionName "0.0.4"
+            versionName "0.0.5"
         }
     }
 
