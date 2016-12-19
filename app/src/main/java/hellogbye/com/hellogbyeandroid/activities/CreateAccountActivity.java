@@ -430,12 +430,14 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mLabel2.setText(R.string.allow_book);
 
         if (animateFoward) {
+            mSignIn.setVisibility(View.GONE);
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), firstViewViews, secondViewViews);
             mNextTextView.setVisibility(View.VISIBLE);
             mNextTextView.setText(R.string.next);
             CURRENT_STATE = NAME_STATE;
 
         } else {
+            mSignIn.setVisibility(View.VISIBLE);
             mNextTextView.setVisibility(View.GONE);
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), secondViewViews, firstViewViews);
             CURRENT_STATE = WELCOME_STATE;
@@ -540,7 +542,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     public void onClick(View view) {
 
         switch (view.getId()) {
-        
+
             case R.id.create_account:
                 animateNameView(true);
                 break;
@@ -649,7 +651,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             CURRENT_STATE = LOGIN_STATE;
 
         } else {
-            mSignIn.setVisibility(View.VISIBLE);
+            mSignIn.setVisibility(View.GONE);
             mNextTextView.setText(R.string.login_);
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), secondViewViews, firstViewViews);
             HGBUtility.hideKeyboard(getApplicationContext(), mLoginEmail);
@@ -1190,11 +1192,14 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             this.pos = position;
         }
 
-
-
         @Override
         public void onClick(View widget) {
             goToLoginState(true);
+
+        }
+        @Override
+        public void updateDrawState(TextPaint ds) {
+            ds.setColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_00516f));
 
         }
     }
