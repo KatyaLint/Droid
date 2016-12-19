@@ -562,3 +562,12 @@ Code changing:
 
       Code changing:
       --------------
+   ------------------------------------------
+                         Version 0.0.6
+     ------------------------------------------
+      Fixed Bugs:
+      -----------
+        HEL-2085 - navigation bar in login page(and other pages in new design) override the user agreement and private policy
+
+      Code changing:
+      --------------
