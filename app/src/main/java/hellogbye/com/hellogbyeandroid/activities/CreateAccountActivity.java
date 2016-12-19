@@ -32,7 +32,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -42,7 +41,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
@@ -52,6 +50,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBAnimationUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityNetwork;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -1047,7 +1046,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     }
 
     private void checkFlow() {
-        if (!HGBUtility.haveNetworkConnection(getApplicationContext())) {
+        if (!HGBUtilityNetwork.haveNetworkConnection(getApplicationContext())) {
 
             Toast.makeText(getApplicationContext(), "There is no network please connect in order to continue", Toast.LENGTH_SHORT).show();
             finish();

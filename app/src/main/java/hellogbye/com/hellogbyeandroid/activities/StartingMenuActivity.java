@@ -22,6 +22,7 @@ import hellogbye.com.hellogbyeandroid.onboarding.OnBoardingPager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityNetwork;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -43,7 +44,7 @@ public class StartingMenuActivity extends BaseActivity {
                 Settings.Secure.ANDROID_ID);
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
 
-        if(!HGBUtility.haveNetworkConnection(getApplicationContext())){
+        if(!HGBUtilityNetwork.haveNetworkConnection(getApplicationContext())){
 
             Toast.makeText(getApplicationContext(),"There is no network please connect in order to continue",Toast.LENGTH_SHORT).show();
             finish();

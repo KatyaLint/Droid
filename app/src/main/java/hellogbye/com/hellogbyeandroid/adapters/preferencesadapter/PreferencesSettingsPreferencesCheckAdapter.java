@@ -146,9 +146,7 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
 
             if(selectedPreferebcesID.equals(attribute.getmId())){
                 selectedPosition = position;
-                System.out.println("Kate selectedPosition =" + selectedPosition);
                 selectedPreferebcesID = "";
-
             }
 
 

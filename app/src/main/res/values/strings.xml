@@ -134,7 +134,7 @@
     <string name="itinerary_inner_flight_item">(Incl.Taxes, fees &amp; charges)</string>
     <string name="cnc_start_planning_msg">Start planning a new itinerary by selecting</string>
 
-    <string name="settings_search_hunt">Looking for someone?</string>
+    <string name="settings_search_hunt">Looking for aircraft?</string>
     <string name="settings_empty_view_hotel">No favorite hotel chains selected\nUse the search bar to add them.</string>
     <string name="settings_empty_view_aircraft">No favorite airline type chains selected\nUse the search bar to add them.</string>
     <string name="settings_more_then_allowed_selected_title">Error</string>
@@ -338,7 +338,8 @@
     <string name="pin_code_resend"><u>Resend the message\nSend the code to my email</u></string>
     <string name="pin_code_send_email"><u>Send the code to my email</u></string>
 
-    <string name="free_user_options">This option is available \nonly for registered users</string>
+    <string name="free_user_options">This option is available\nonly for registered users</string>
+    <!--le  only for registered users-->
 
     <string name="onboarding_title_1">Just type or speak</string>
     <string name="onboarding_explanation_1">Touch the speech bubble icon to start\nplannin a new trip.</string>

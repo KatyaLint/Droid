@@ -2,11 +2,14 @@ package hellogbye.com.hellogbyeandroid.fragments.freeuser;
 
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.CreateAccountActivity;
@@ -62,8 +65,10 @@ public class FreeUserFragment extends HGBAbstractFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getFlowInterface().enableFullScreen(true);
-        getFlowInterface().getToolBar().setVisibility(View.GONE);
+     /*   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getActivity().getWindow(); // in Activity's onCreate() for instance
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }*/
         View rootView = inflater.inflate(R.layout.free_user_layout, container, false);
       /*  View rootView = inflater.inflate(R.layout.sign_up_layout, container, false);
 
