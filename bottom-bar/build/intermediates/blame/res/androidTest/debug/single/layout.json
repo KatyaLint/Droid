@@ -8,12 +8,12 @@
         "source": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/layout/notification_template_lines.xml"
     },
     {
-        "merged": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/layout/abc_list_menu_item_checkbox.xml",
-        "source": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/layout/abc_list_menu_item_checkbox.xml"
-    },
-    {
         "merged": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/layout/notification_template_part_time.xml",
         "source": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/layout/abc_list_menu_item_checkbox.xml",
+        "source": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/layout/abc_list_menu_item_checkbox.xml"
     },
     {
         "merged": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/layout/support_simple_spinner_dropdown_item.xml",
