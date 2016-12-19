@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -40,6 +41,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
@@ -59,7 +61,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  * Created by arisprung on 11/8/16.
  */
 
-public class CreateAccountActivity extends BaseActivity implements View.OnClickListener {
+public class CreateAccountActivity extends BaseActivity implements View.OnClickListener, TextWatcher {
 
     private final int NUMBER_OF_STAGES = 5;
     private final int WELCOME_STATE = 1;
@@ -92,12 +94,14 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private ProgressBar mProgressBar;
     private FontTextView mLabel1;
     private FontTextView mLabel2;
-    private FontTextView mSignInTextView;
+    private FontTextView mNextTextView;
     private FontTextView mWelcomeTextView;
     private FontTextView mHyperlink;
     private FontEditTextView mLoginEmail;
     private FontEditTextView mLoginPassword;
     private FontEditTextView mStateProvince;
+    private FontTextView mSignIn;
+
     private AutoCompleteTextView mCity;
     private FontEditTextView mZip;
     private FontButtonView mCreateAccount;
@@ -129,7 +133,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private UserSignUpDataVO userData;
     private String android_id;
     private ArrayList<String> mCityList;
-    private AlertDialog levelDialog ;
+    private AlertDialog levelDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,6 +152,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             Window w = getWindow(); // in Activity's onCreate() for instance
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
+
 
     }
 
@@ -179,7 +184,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mRemmeberMeCheckbox = (CheckBox) findViewById(R.id.remmember_me_checkbox);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
-        mSignInTextView = (FontTextView) findViewById(R.id.sign_in);
+        mNextTextView = (FontTextView) findViewById(R.id.sign_in);
         mLabel1 = (FontTextView) findViewById(R.id.label_1);
         mLabel2 = (FontTextView) findViewById(R.id.label_2);
         mWelcomeTextView = (FontTextView) findViewById(R.id.welcome);
@@ -194,6 +199,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mLastName = (FontEditTextView) findViewById(R.id.last_name);
         mPassword1 = (FontEditTextView) findViewById(R.id.password1);
         mPassword2 = (FontEditTextView) findViewById(R.id.password2);
+        mSignIn = (FontTextView) findViewById(R.id.create_login);
         mCity = (AutoCompleteTextView) findViewById(R.id.city);
         mCity.setThreshold(1);
         mZip = (FontEditTextView) findViewById(R.id.zip);
@@ -207,16 +213,23 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mLoginPassword = (FontEditTextView) findViewById(R.id.login_password);
         login = (FontButtonView) findViewById(R.id.login_button);
 
+        mEmail.addTextChangedListener(this);
+        mFirstName.addTextChangedListener(this);
+        mLastName.addTextChangedListener(this);
+        mPassword1.addTextChangedListener(this);
+        mPassword2.addTextChangedListener(this);
+
+
         editTextViewListners();
         mUSLayout.setOnClickListener(this);
-        mTryNow.setOnClickListener(this);
         mCanadaLayout.setOnClickListener(this);
         mCreateAccount.setOnClickListener(this);
         mStateProvince.setOnClickListener(this);
         mArrowBack.setOnClickListener(this);
         mCreate.setOnClickListener(this);
         mTryNow.setOnClickListener(this);
-        mSignInTextView.setOnClickListener(this);
+        mNextTextView.setOnClickListener(this);
+        mNextTextView.setClickable(BuildConfig.IS_DEV);
         initSpannableText();
 
 
@@ -224,7 +237,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         int i = HGBUtility.getNavBarHight(getApplicationContext());
         RelativeLayout.LayoutParams llp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         llp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        llp.setMargins(0, 0, 0,i);
+        llp.setMargins(0, 0, 0, i);
         mHyperlink.setLayoutParams(llp);
 
 
@@ -337,7 +350,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     }
 
     private boolean checkNameIsValid() {
-        if (true) {
+        if (mFirstName.length() > 0 && mLastName.length() > 0) {
             return true;
         }
         return false;
@@ -350,17 +363,17 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                 if (mPassword1.getText().toString().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,12}$")) {
                     return true;
                 } else {
-                    Toast.makeText(getApplicationContext(), "Password must contain 8-12 characters, with at least one number, one uppercase letter, one lowercase letter", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
+                 //   Toast.makeText(getApplicationContext(), "Password must contain 8-12 characters, with at least one number, one uppercase letter, one lowercase letter", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
                     return false;
                 }
 
             } else {
-                Toast.makeText(getApplicationContext(), "Passwords dont match", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
+               // Toast.makeText(getApplicationContext(), "Passwords dont match", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
                 return false;
             }
 
         } else {
-            Toast.makeText(getApplicationContext(), "Passwords not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
+            //Toast.makeText(getApplicationContext(), "Passwords not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
             return false;
         }
 
@@ -372,7 +385,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         if (true) {// TODO HGBUtility.checkEmailIsValid(mEmail.getText()()
             animatePasswordView(true);
         } else {
-            Toast.makeText(getApplicationContext(), "Email not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
+           // Toast.makeText(getApplicationContext(), "Email not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
         }
     }
 
@@ -383,6 +396,12 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mHyperlink.setText(ss);
         mHyperlink.setAlpha(0.4f);
         mHyperlink.setMovementMethod(LinkMovementMethod.getInstance());
+
+
+        SpannableString signin = new SpannableString(getResources().getString(R.string.already_have_an_account_sign_in));
+        signin.setSpan(new signInClickableSpan(1), 25, 32, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mSignIn.setText(signin);
+        mSignIn.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     private void animateWelcomeView() {
@@ -406,16 +425,18 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         firstViewViews.add(mLogoOnBoarding);
         firstViewViews.add(mCreateAccount);
         firstViewViews.add(mTryNow);
+        firstViewViews.add(mSignIn);
         mLabel1.setText(R.string.tell_name);
         mLabel2.setText(R.string.allow_book);
 
         if (animateFoward) {
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), firstViewViews, secondViewViews);
-            mSignInTextView.setText(R.string.next);
+            mNextTextView.setVisibility(View.VISIBLE);
+            mNextTextView.setText(R.string.next);
             CURRENT_STATE = NAME_STATE;
 
         } else {
-            mSignInTextView.setText(R.string.login_);
+            mNextTextView.setVisibility(View.GONE);
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), secondViewViews, firstViewViews);
             CURRENT_STATE = WELCOME_STATE;
 
@@ -492,9 +513,10 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), firstViewViews, secondViewViews);
             animateLabels(getString(R.string.need_address), getString(R.string.used_geo_location));
             CURRENT_STATE = ADDRESS_STATE;
+            mNextTextView.setVisibility(View.GONE);
 
         } else {
-
+            mNextTextView.setVisibility(View.VISIBLE);
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), secondViewViews, firstViewViews);
             animateLabels(getString(R.string.create_password), getString(R.string.choose_password));
             CURRENT_STATE = PASSWORD_STATE;
@@ -540,10 +562,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
                         goToAddressView(view);
                     }
-
-                } else {
-
-                    goToLoginState(true);
+                    setNextEnable(false);
 
                 }
                 break;
@@ -568,6 +587,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             case R.id.state_province:
                 userSelectedState();
                 break;
+
 
             case R.id.try_now_new_create:
 
@@ -611,11 +631,13 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         firstViewViews.add(mLogoOnBoarding);
         firstViewViews.add(mCreateAccount);
         firstViewViews.add(mTryNow);
+        firstViewViews.add(mSignIn);
 
 
         if (animateFoward) {
+            mSignIn.setVisibility(View.GONE);
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), firstViewViews, secondViewViews);
-            mSignInTextView.setText(R.string.next);
+            mNextTextView.setText(R.string.next);
 
             remember_me = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME, false);
             String email = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, null);
@@ -629,7 +651,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             CURRENT_STATE = LOGIN_STATE;
 
         } else {
-            mSignInTextView.setText(R.string.login_);
+            mSignIn.setVisibility(View.VISIBLE);
+            mNextTextView.setText(R.string.login_);
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), secondViewViews, firstViewViews);
             HGBUtility.hideKeyboard(getApplicationContext(), mLoginEmail);
             CURRENT_STATE = WELCOME_STATE;
@@ -645,7 +668,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
         if (userData.getCountry() != null && mProvinceItems != null) {
 
-            if(levelDialog == null){
+            if (levelDialog == null) {
                 ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
                         CreateAccountActivity.this, R.layout.dialog_radio, countryarray);
                 // Creating and Building the Dialog
@@ -911,7 +934,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private void setDropDownItems() {
         countryarray = new String[mProvinceItems.size()];
         for (int i = 0; i < mProvinceItems.size(); i++) {
-            countryarray[i] = mProvinceItems.get(i).getProvincecode()+" - "+ mProvinceItems.get(i).getProvincename() ;
+            countryarray[i] = mProvinceItems.get(i).getProvincecode() + " - " + mProvinceItems.get(i).getProvincename();
         }
     }
 
@@ -1079,6 +1102,42 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         processBackPressed();
     }
 
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
+        switch (CURRENT_STATE) {
+            case WELCOME_STATE:
+
+                break;
+            case NAME_STATE:
+                setNextEnable(checkNameIsValid());
+                break;
+            case EMAIL_STATE:
+                setNextEnable(HGBUtility.checkEmailIsValid(editable.toString()));
+                break;
+            case PASSWORD_STATE:
+                setNextEnable(checkPasswordValid());
+                break;
+            case ADDRESS_STATE:
+
+                break;
+            case LOGIN_STATE:
+
+                break;
+        }
+
+    }
+
     public class AnimationCountDownTimer extends CountDownTimer {
         public AnimationCountDownTimer(long startTime, long interval) {
             super(startTime, interval);
@@ -1103,7 +1162,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
         @Override
         public void updateDrawState(TextPaint ds) {
-            ds.setColor(getColor(R.color.COLOR_00516f));
+            ds.setColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_00516f));
             ds.setUnderlineText(true);
 
         }
@@ -1123,5 +1182,35 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(browserIntent);
         }
+    }
+
+
+    public class signInClickableSpan extends ClickableSpan {
+        int pos;
+
+        public signInClickableSpan(int position) {
+            this.pos = position;
+        }
+
+
+
+        @Override
+        public void onClick(View widget) {
+            goToLoginState(true);
+
+        }
+    }
+
+
+    private void setNextEnable(boolean isEnable) {
+        if (isEnable || BuildConfig.IS_DEV) {
+            mNextTextView.setAlpha(1.0f);
+            mNextTextView.setClickable(true);
+
+        } else {
+            mNextTextView.setAlpha(0.2f);
+            mNextTextView.setClickable(false);
+        }
+
     }
 }

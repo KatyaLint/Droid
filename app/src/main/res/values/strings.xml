@@ -325,7 +325,7 @@
     <string name="password_not_valid">Password not valid</string>
     <string name="tell_name">Tell us your name</string>
     <string name="allow_book">Your name will allow you to book travel on\nour platform</string>
-    <string name="next">Next</string>
+    <string name="next">NEXT</string>
     <string name="login_">Login</string>
     <string name="whats_email">What\'s your email?</string>
     <string name="email_secure">We need your email to securely activate\nyour account</string>
@@ -352,7 +352,7 @@
 
     <string name="onboarding_title_4">Make changes in a flash</string>
     <string name="onboarding_explanation_4">Use the back button to ask for more\noptions in your own words.</string>
-
+    <string name="already_have_an_account_sign_in">Already have an account? SIGN IN</string>
 
 
 </resources>

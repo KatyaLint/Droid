@@ -1,0 +1,41 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/COLOR_003D4C</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
+    </style>
+
+    <style name="bottom_bar_text">
+        <item name="android:textSize">@dimen/SP10</item>
+        <item name="android:fontFamily">dinnextltpro_regular.otf</item>
+    </style>
+
+    <style name="NavigationTextStyle">
+        <item name="android:textColor">@color/navigation_text_state</item>
+        <item name="android:textSize">@dimen/SP18</item>
+        <item name="android:fontFamily">dinnextltpro_regular.otf</item>
+    </style>
+
+    <style name="GridViewPassangersTextStyle">
+        <item name="android:textSize">@dimen/SP16</item>
+        <item name="android:fontFamily">dinnextltpro_regular.otf</item>
+        <item name="android:textColor">@color/COLOR_WHITE</item>
+        <item name="android:gravity">center</item>
+        <item name="android:weightSum">1</item>
+    </style>
+    <style name="AppTheme.ActionBar.Transparent" parent="AppTheme">
+
+
+
+    </style>
+
+    <style name="AppTheme.ActionBar" parent="AppTheme">
+        <item name="colorPrimaryDark">@color/COLOR_003D4C</item>
+        <item name="colorPrimary">@color/COLOR_003D4C</item>
+    </style>
+
+</resources>
