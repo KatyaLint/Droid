@@ -103,7 +103,10 @@ public class AccountPersonalInfoHelpAndFeedbackFragment extends HGBAbstractFragm
         });
 
         FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
-        userPreferenceID =  my_trip_profile.getTag().toString();
+        if(my_trip_profile.getTag()!=null){
+            userPreferenceID =  my_trip_profile.getTag().toString();
+        }
+
     }
 
 
