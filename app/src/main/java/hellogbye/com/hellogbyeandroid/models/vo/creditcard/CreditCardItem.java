@@ -47,6 +47,26 @@ public class CreditCardItem {
     @SerializedName("modifieddatetime")
     private String modifieddatetime;
 
+    @SerializedName("billingcountry")
+    private String billingcountry;
+
+    @SerializedName("billingprovince")
+    private String billingprovince;
+
+    @SerializedName("billingcity")
+    private String billingcity;
+
+
+
+
+
+
+
+
+
+
+
+
     private String cvv;
 
     private boolean isSelected;
@@ -214,4 +234,30 @@ public class CreditCardItem {
     public boolean isUpdateCard() {
         return updateCard;
     }
+
+    public String getBillingcountry() {
+        return billingcountry;
+    }
+
+    public void setBillingcountry(String billingcountry) {
+        this.billingcountry = billingcountry;
+    }
+
+    public String getBillingprovince() {
+        return billingprovince;
+    }
+
+    public void setBillingprovince(String billingprovince) {
+        this.billingprovince = billingprovince;
+    }
+
+    public String getBillingcity() {
+        return billingcity;
+    }
+
+    public void setBillingcity(String billingcity) {
+        this.billingcity = billingcity;
+    }
+
+
 }

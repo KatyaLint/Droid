@@ -149,7 +149,7 @@
             android:layout_above="@+id/try_now_new_create"
             android:text="@string/already_have_an_account_sign_in"
             android:textColor="@color/COLOR_00516f"
-            android:textSize="@dimen/SP12"
+            android:textSize="@dimen/SP16"
             android:layout_marginBottom="@dimen/DP6"
             android:translationZ="2dp"
             app:fontName="dinnextltpro_regular.otf" />

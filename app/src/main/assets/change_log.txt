@@ -564,6 +564,7 @@ Code changing:
         HEL-1823 - companions ->travel companions remove picture in the background
         HEL-1833 - on creating user if not choosing profile deletes money saver
         HEL-1831 - at every entrance to the app the enabled location pops out
+        HEL-2107 - user info in create credit card always uses user info and now what you type in billing info
 
 
    ------------------------------------------

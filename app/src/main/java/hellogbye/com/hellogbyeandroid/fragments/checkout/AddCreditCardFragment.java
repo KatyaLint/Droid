@@ -263,11 +263,12 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
 
     private void fillPaymentDetails(String creditCardToken) {
         mSave.setEnabled(true);
-        addFields();
+        mCurrentCard = new CreditCardItem();
+
         isFillPayment = true;
         mBillingCheckbox.setVisibility(View.GONE);
         ArrayList<CreditCardItem> creditCards = getFlowInterface().getCreditCards();
-        mCurrentCard = new CreditCardItem();
+
         for (CreditCardItem creditCard : creditCards) {
             if (creditCard.getToken() != null && creditCard.getToken().equals(creditCardToken)) {
                 mCurrentCard = creditCard;
@@ -284,6 +285,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         mCardCCV.setText(mCurrentCard.getCvv());
         mCardCCV.setEnabled(false);
         mSave.setEnabled(true);
+        addFields();
 
     }
 
@@ -308,13 +310,13 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
     private void addFields() {
 
         UserProfileVO currentUser = getActivityInterface().getCurrentUser();
-        mCardStreet.setText(currentUser.getAddress());
-        mCardCountry.setText(currentUser.getCountry());
-        mCardFirstName.setText(currentUser.getFirstname());
-        mCardLastName.setText(currentUser.getLastname());
-        mCardProvince.setText(currentUser.getState());
-        mCardPostal.setText(currentUser.getPostalcode());
-        mCardCity.setText(currentUser.getCity());
+        mCardStreet.setText(mCurrentCard.getBuyeraddress());
+        mCardCountry.setText(mCurrentCard.getBillingcountry());
+        mCardFirstName.setText(mCurrentCard.getBuyerfirstname());
+        mCardLastName.setText(mCurrentCard.getBuyerlastname());
+        mCardProvince.setText(mCurrentCard.getBillingprovince());
+        mCardPostal.setText(mCurrentCard.getBuyerzip());
+        mCardCity.setText(mCurrentCard.getBillingcity());
     }
 
     private void clearFields() {
