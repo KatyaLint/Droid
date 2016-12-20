@@ -273,15 +273,39 @@
             android:singleLine="true"
             android:visibility="gone" />
 
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/user_title"
+            style="@style/new_sign_up_text_color"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:maxLines="1"
+            android:layout_marginTop="@dimen/DP44"
+            android:layout_below="@+id/label_2"
+
+            android:singleLine="true"
+            android:layout_centerHorizontal="true"
+            android:hint="@string/title"
+            android:drawableRight="@drawable/dropdown_lightblue"
+            android:visibility="gone" />
+        <View
+            android:id="@+id/title_underline_1"
+            android:layout_width="337dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/user_title"
+            android:layout_marginTop="@dimen/DP4"
+            android:layout_height="@dimen/DP1"
+            android:visibility="gone"
+            android:background="@color/COLOR_999999"  />
         <hellogbye.com.hellogbyeandroid.views.FontEditTextView
             android:id="@+id/first_name"
             style="@style/new_sign_up_text_color"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/label_2"
+            android:layout_below="@+id/title_underline_1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/DP50"
             android:hint="First Name"
             android:imeOptions="actionNext"
+            android:layout_marginTop="@dimen/DP24"
             android:maxLines="1"
             android:singleLine="true"
             android:visibility="gone" />

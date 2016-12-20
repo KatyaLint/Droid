@@ -87,6 +87,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private ImageView mCloud06;
     private ImageView mCloud07;
     private ImageView mArrowBack;
+    private View mUnderlineTitle;
     private LinearLayout mBirds;
     private FontButtonView login;
     private ImageView mCanadaCheck;
@@ -114,6 +115,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private FontEditTextView mEmail;
     private FontEditTextView mPassword1;
     private FontEditTextView mPassword2;
+    private FontTextView mTitle;
     private LinearLayout mAddressLayout;
     private LinearLayout mUSLayout;
     private LinearLayout mCanadaLayout;
@@ -166,6 +168,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mBiulding2 = (ImageView) findViewById(R.id.building_02);
         mBiulding1 = (ImageView) findViewById(R.id.building_01);
         mCloud01 = (ImageView) findViewById(R.id.cloud_01);
+        mUnderlineTitle= (View) findViewById(R.id.title_underline_1);
         mCloud01B = (ImageView) findViewById(R.id.cloud_1_b);
         mCloud02 = (ImageView) findViewById(R.id.cloud_02);
         mCloud03 = (ImageView) findViewById(R.id.cloud_03);
@@ -200,6 +203,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mPassword1 = (FontEditTextView) findViewById(R.id.password1);
         mPassword2 = (FontEditTextView) findViewById(R.id.password2);
         mSignIn = (FontTextView) findViewById(R.id.create_login);
+        mTitle = (FontTextView) findViewById(R.id.user_title);
         mCity = (AutoCompleteTextView) findViewById(R.id.city);
         mCity.setThreshold(1);
         mZip = (FontEditTextView) findViewById(R.id.zip);
@@ -222,6 +226,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
         editTextViewListners();
         mUSLayout.setOnClickListener(this);
+        mTitle.setOnClickListener(this);
         mCanadaLayout.setOnClickListener(this);
         mCreateAccount.setOnClickListener(this);
         mStateProvince.setOnClickListener(this);
@@ -305,6 +310,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                         && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
                     userData.setFirstName(mFirstName.getText().toString());
                     userData.setLastName(mLastName.getText().toString());
+
                     goToEmailView();
                     return true;
                 }
@@ -418,6 +424,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         secondViewViews.add(mLabel1);
         secondViewViews.add(mFirstName);
         secondViewViews.add(mLastName);
+        secondViewViews.add(mUnderlineTitle);
+        secondViewViews.add(mTitle);
         secondViewViews.add(mArrowBack);
 
         ArrayList<View> firstViewViews = new ArrayList<>();
@@ -542,6 +550,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     public void onClick(View view) {
 
         switch (view.getId()) {
+            case R.id.user_title:
+                HGBUtility.showPikerDialog(0,mTitle, CreateAccountActivity.this, "SELECT TITLE", getResources().getStringArray(R.array.title_array), 0, 2, null, true);
+                break;
 
             case R.id.create_account:
                 animateNameView(true);

@@ -294,8 +294,6 @@
         <item name="android:textSize">@dimen/SP16</item>
         <item name="android:textColorHighlight">@color/COLOR_999999</item>
         <item name="fontName">dinnextltpro_regular.otf</item>
-        <item name="android:padding">@dimen/DP10</item>
-        <item name="android:layout_margin">@dimen/DP10</item>
 
     </style>
 
