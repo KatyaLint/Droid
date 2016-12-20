@@ -826,7 +826,6 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_3_2));
             mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_3_2));
         }
-
     }
 
     private void animatePasswordStaticViews(boolean animateFoward) {
