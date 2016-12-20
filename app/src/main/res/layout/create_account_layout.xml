@@ -8,6 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:id="@+id/root"
         android:layout_height="match_parent">
 
         <ProgressBar
@@ -255,6 +256,7 @@
             android:hint="Password"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
+            android:drawableRight="@drawable/pas_info_icon_on"
             android:maxLines="1"
             android:singleLine="true"
             android:visibility="gone" />

@@ -20,6 +20,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -37,6 +38,9 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.fenchtose.tooltip.Tooltip;
+import com.fenchtose.tooltip.TooltipAnimation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +60,8 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityNetwork;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
+
+import static android.R.attr.type;
 
 /**
  * Created by arisprung on 11/8/16.
@@ -136,6 +142,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private String android_id;
     private ArrayList<String> mCityList;
     private AlertDialog levelDialog;
+    private Tooltip mTooltip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,6 +161,12 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             Window w = getWindow(); // in Activity's onCreate() for instance
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
+
+
+
+
+
+
 
 
     }
@@ -244,6 +257,35 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         llp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         llp.setMargins(0, 0, 0, i);
         mHyperlink.setLayoutParams(llp);
+
+        mPassword1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+                if(b){
+                    showToolTip();
+                }
+
+            }
+        });
+
+        mPassword1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (mPassword1.getRight() - mPassword1.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        showToolTip();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
 
         mForgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
@@ -390,9 +432,26 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         HGBUtility.hideKeyboard(getApplicationContext(), textView);
         if (true) {// TODO HGBUtility.checkEmailIsValid(mEmail.getText()()
             animatePasswordView(true);
+
+
+
         } else {
            // Toast.makeText(getApplicationContext(), "Email not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
         }
+    }
+
+    private void showToolTip() {
+        View contentView1 = getLayoutInflater().inflate(R.layout.tooltip_layout, null);
+
+        mTooltip = new Tooltip.Builder(getApplicationContext())
+                .anchor(mPassword1, Tooltip.BOTTOM)
+                .content(contentView1)
+                .into((RelativeLayout)findViewById(R.id.root))
+                .animate(new TooltipAnimation(TooltipAnimation.REVEAL, 500))
+                .autoCancel(5000)
+                .withTip(new Tooltip.Tip(75, 35, ContextCompat.getColor(getApplicationContext(), R.color.COLOR_003D4C_40_percent_opacity)))
+                .show();
+        mTooltip.setAlpha(0.7f);
     }
 
     private void initSpannableText() {
@@ -461,6 +520,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         ArrayList<View> firstViewViews = new ArrayList<>();
         firstViewViews.add(mFirstName);
         firstViewViews.add(mLastName);
+        firstViewViews.add(mTitle);
+        firstViewViews.add(mUnderlineTitle);
+
 
         ArrayList<View> secondViewViews = new ArrayList<>();
         secondViewViews.add(mEmail);
@@ -861,7 +923,6 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                     mBird2.setBackgroundResource(R.drawable.animation_bird2);
                     AnimationDrawable rocketAnimation2 = (AnimationDrawable) mBird2.getBackground();
                     rocketAnimation2.start();
-
                 }
 
                 @Override
