@@ -575,6 +575,7 @@ Code changing:
         HEL-2085 - navigation bar in login page(and other pages in new design) override the user agreement and private policy
         HEL-2101 - crash on anonymous user
         HEL-1958 -crash at entering feedback
+        HEL-2104 - bug at create account (province select)
 
       Code changing:
       --------------

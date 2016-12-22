@@ -62,6 +62,7 @@ import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 import static android.R.attr.type;
+import static org.jcodec.SliceType.P;
 
 /**
  * Created by arisprung on 11/8/16.
@@ -108,6 +109,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private FontEditTextView mLoginPassword;
     private FontEditTextView mStateProvince;
     private FontTextView mSignIn;
+    private boolean isStateSelected= false;
 
     private AutoCompleteTextView mCity;
     private FontEditTextView mZip;
@@ -650,12 +652,14 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                 setUSSelected(true);
                 getStaticProvince("US");
                 userData.setCountry("US");
+                isStateSelected = true;
                 break;
 
             case R.id.canada_layout:
                 setUSSelected(false);
                 getStaticProvince("CA");
                 userData.setCountry("CA");
+                isStateSelected = true;
                 break;
             case R.id.state_province:
                 userSelectedState();
@@ -741,31 +745,37 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
         if (userData.getCountry() != null && mProvinceItems != null) {
 
-            if (levelDialog == null) {
-                ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
-                        CreateAccountActivity.this, R.layout.dialog_radio, countryarray);
-                // Creating and Building the Dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Which State/Province?");
-                builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int item) {
-                        for (ProvincesItem province : mProvinceItems) {
-                            if (countryarray[item].contains(province.getProvincename())) {
-                                mStateProvince.setText(province.getProvincename());
-                                userData.setCountryProvince(province.getProvincecode());
-                                initAutoCityComplete();
-                                break;
-                            }
-                        }
-                        levelDialog.hide();
-                    }
-                });
-                levelDialog = builder.create();
+            if (levelDialog == null || isStateSelected) {
+                buildProvinceDialog();
+
             }
             levelDialog.show();
         } else {
             Toast.makeText(getApplicationContext(), "Please select Country first", Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    private void buildProvinceDialog() {
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
+                CreateAccountActivity.this, R.layout.dialog_radio, countryarray);
+        // Creating and Building the Dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Which State/Province?");
+        builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                for (ProvincesItem province : mProvinceItems) {
+                    if (countryarray[item].contains(province.getProvincename())) {
+                        mStateProvince.setText(province.getProvincename());
+                        userData.setCountryProvince(province.getProvincecode());
+                        initAutoCityComplete();
+                        break;
+                    }
+                }
+                levelDialog.hide();
+            }
+        });
+        levelDialog = builder.create();
     }
 
     private void processBackPressed() {
