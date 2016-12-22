@@ -1023,8 +1023,11 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mCity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                mCity.dismissDropDown();
                 HGBUtility.hideKeyboard(getApplicationContext(), mCity);
                 userData.setCity(mCity.getText().toString());
+                mZip.requestFocus();
+
             }
         });
 
@@ -1036,25 +1039,24 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                ConnectionManager.getInstance(CreateAccountActivity.this).postAutocompleteCity(charSequence.toString(), userData.getCountry(),
+
+            }
+
+            @Override
+            public void afterTextChanged(final Editable editable) {
+
+                ConnectionManager.getInstance(CreateAccountActivity.this).postAutocompleteCity(editable.toString(), userData.getCountry(),
                         userData.getCountryProvince()
                         , new ConnectionManager.ServerRequestListener() {
                             @Override
                             public void onSuccess(Object data) {
 
                                 mCityList = (ArrayList<String>) data;
-                                Log.e("- onSuccessA", mCityList.toString());
-//                                Log.e("- onSuccessB",list.toString());
-//                                if ((list.size() > 10)){
-//                                    ArrayList<String> tempList = new ArrayList<String>();
-//                                    for (int j = 0; j < 20; j++) {
-//                                        tempList.add(list.get(j));
-//                                    }
-//                                    list = tempList;
-//                                }
                                 adapter = new ArrayAdapter(CreateAccountActivity.this, android.R.layout.simple_list_item_1, mCityList);
                                 mCity.setAdapter(adapter);
-                                mCity.showDropDown();
+                                if(editable.length()==1){
+                                    mCity.showDropDown();
+                                }
 
                             }
 
@@ -1062,10 +1064,6 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                             public void onError(Object data) {
                             }
                         });
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
             }
         });
 

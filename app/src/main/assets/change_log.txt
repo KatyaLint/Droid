@@ -577,6 +577,7 @@ Code changing:
         HEL-1958 -crash at entering feedback
         HEL-2104 - bug at create account (province select)
         HEL-2096 - crash after pressing on the second time on change hotel
+        HEL-2088 - pressing on a city name in autocomplete should make the list deasapear
 
       Code changing:
       --------------
