@@ -167,8 +167,10 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
     @Override
     public void onStop() {
         super.onStop();
+        mGoogleApiClient.stopAutoManage(getActivity());
         mGoogleApiClient.disconnect();
     }
+
 
     private void initAutoComplete() {
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
@@ -529,6 +531,8 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
             isSelected = selected;
         }
     }
+
+
 
 
 }

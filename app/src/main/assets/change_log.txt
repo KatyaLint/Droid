@@ -576,6 +576,7 @@ Code changing:
         HEL-2101 - crash on anonymous user
         HEL-1958 -crash at entering feedback
         HEL-2104 - bug at create account (province select)
+        HEL-2096 - crash after pressing on the second time on change hotel
 
       Code changing:
       --------------
