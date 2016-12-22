@@ -578,6 +578,7 @@ Code changing:
         HEL-2104 - bug at create account (province select)
         HEL-2096 - crash after pressing on the second time on change hotel
         HEL-2088 - pressing on a city name in autocomplete should make the list deasapear
+        HEL-2087 - wrong spelling of city should give a blank list, there shouldn't be anything
 
       Code changing:
       --------------
