@@ -579,7 +579,11 @@ Code changing:
         HEL-2096 - crash after pressing on the second time on change hotel
         HEL-2088 - pressing on a city name in autocomplete should make the list deasapear
         HEL-2087 - wrong spelling of city should give a blank list, there shouldn't be anything
+        HEL-2102 - wrong functionality to a sign in button in anonymous mode
 
       Code changing:
       --------------
         - free user layout update
+        - add Title in Create User
+        - add tooltip in password screen
+        -

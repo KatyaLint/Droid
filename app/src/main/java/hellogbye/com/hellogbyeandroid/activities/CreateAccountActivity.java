@@ -62,6 +62,7 @@ import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 import static android.R.attr.type;
+import static com.appsee.pc.e;
 import static org.jcodec.SliceType.P;
 
 /**
@@ -154,7 +155,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         android_id = Settings.Secure.getString(CreateAccountActivity.this.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
-        checkFlow();
+
         initView();
         userData = new UserSignUpDataVO();
         countDownTimer = new AnimationCountDownTimer(getResources().getInteger(R.integer.create_account_animation_duration), 1000);
@@ -163,16 +164,13 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             Window w = getWindow(); // in Activity's onCreate() for instance
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
-
-
-
-
-
-
-
-
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkFlow();
+    }
 
     private void initView() {
         // mPlane = (ImageView) findViewById(R.id.airplane_01);
@@ -1156,8 +1154,16 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         }
 
         String strToken = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
+
         if (!strToken.equals("")) {
-            goToMainActivity();
+            if(getIntent().hasExtra("free_user_sign_in") || getIntent().hasExtra("free_user_create_user")){
+                checkIfCameFromFreeUser();
+            }else{
+                goToMainActivity();
+            }
+
+
+
         }
     }
 
@@ -1293,6 +1299,19 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             mNextTextView.setAlpha(0.2f);
             mNextTextView.setClickable(false);
         }
+
+    }
+
+    private void checkIfCameFromFreeUser(){
+
+            if(getIntent().getBooleanExtra("free_user_sign_in",false)){
+                goToLoginState(true);
+            }
+
+            if(getIntent().getBooleanExtra("free_user_create_user",false)){
+                animateNameView(true);
+            }
+
 
     }
 }
