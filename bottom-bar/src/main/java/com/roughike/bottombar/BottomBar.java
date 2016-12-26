@@ -1391,6 +1391,11 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
             for (View bottomBarView : viewsToAdd) {
                 LinearLayout.LayoutParams params;
 
+                TextView textView = (TextView)bottomBarView.findViewById(R.id.bb_bottom_bar_title);
+                if(textView.getText().toString().equalsIgnoreCase("NOTIFICATIONS")){
+                    proposedItemWidth+=12;
+                }
+
                 if (mIsShiftingMode && !mIgnoreShiftingResize) {
                     if (TAG_BOTTOM_BAR_VIEW_ACTIVE.equals(bottomBarView.getTag())) {
                         params = new LinearLayout.LayoutParams(mActiveShiftingItemWidth, height);
