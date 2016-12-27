@@ -131,6 +131,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private FontTextView my_trip_profile;
     private FontTextView itirnarary_title_Bar;
     private ImageButton toolbar_new_iternerary_cnc;
+    private ImageButton toolbar_new_iternerary_cnc_chat_message;
     private SearchView search_view_tool_bar;
     private ImageButton search_maginfy;
     private FontTextView titleBar;
@@ -426,6 +427,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         preference_save_changes = (FontTextView) mToolbar.findViewById(R.id.preference_save_changes);
         toolbar_new_iternerary = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary);
         toolbar_new_iternerary_cnc = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary_cnc);
+        toolbar_new_iternerary_cnc_chat_message = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary_cnc_chat_message);
         search_view_tool_bar = (SearchView)mToolbar.findViewById(R.id.search_view_tool_bar);
         search_maginfy = (ImageButton)mToolbar.findViewById(R.id.search_maginfy);
         titleBar = (FontTextView)mToolbar.findViewById(R.id.titleBar);
@@ -455,6 +457,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     public ImageButton getToolbar_new_iterneraryCnc(){
         return toolbar_new_iternerary_cnc;
+    }
+
+    public ImageButton getToolbar_new_iterneraryCnc_Chat_Message(){
+        return toolbar_new_iternerary_cnc_chat_message;
     }
     public SearchView getSearchView(){
         return search_view_tool_bar;

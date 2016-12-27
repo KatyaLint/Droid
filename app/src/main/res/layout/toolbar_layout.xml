@@ -61,6 +61,15 @@
         android:background="@drawable/add_chat"
         android:visibility="gone" />
 
+    <ImageButton
+        android:id="@+id/toolbar_new_iternerary_cnc_chat_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/DP14"
+        android:background="@drawable/chat_message"
+        android:visibility="gone" />
+
 
     <ImageButton
         android:id="@+id/up_bar_favorite"

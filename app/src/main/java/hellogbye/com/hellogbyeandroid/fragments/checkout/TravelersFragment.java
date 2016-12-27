@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.google.gson.Gson;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.checkout.IExpandableViewSelected;
 import hellogbye.com.hellogbyeandroid.adapters.checkout.TravlerExpandableAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
@@ -139,8 +141,17 @@ public class TravelersFragment extends HGBAbstractFragment {
 
             }
         });
+        ImageButton newIteneraryImageButton = ((MainActivityBottomTabs) getActivity()).getToolbar_new_iterneraryCnc_Chat_Message();
+        newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), null);
+            }
+        });
 
         initCheckoutSteps();
+
+
     }
 
     private void setChildrenToView(){

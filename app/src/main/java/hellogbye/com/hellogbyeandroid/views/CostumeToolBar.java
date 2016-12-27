@@ -20,9 +20,12 @@ import hellogbye.com.hellogbyeandroid.application.HGBApplication;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
+import static hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum.SELECT_CREDIT_CARD;
+
 public class CostumeToolBar extends Toolbar {
 
     private ImageButton up_bar_favorite;
+    private ImageButton chat_message;
     private ImageButton toolbar_new_iternerary;
     private ImageButton favoriteButton;
     private ImageButton search_maginfy;
@@ -68,6 +71,9 @@ public class CostumeToolBar extends Toolbar {
 
         if(my_trip_profile == null){
             my_trip_profile = (FontTextView)findViewById(R.id.my_trip_profile);
+        }
+        if(chat_message == null){
+            chat_message = (ImageButton) findViewById(R.id.toolbar_new_iternerary_cnc_chat_message);
         }
         if (titleBar == null) {
             titleBar = (FontTextView) findViewById(R.id.titleBar);
@@ -242,6 +248,7 @@ public class CostumeToolBar extends Toolbar {
         search_view_tool_bar.setVisibility(View.GONE);
         auto_complete.setVisibility(View.GONE);
         toolbar_add_companion.setVisibility(View.GONE);
+        chat_message.setVisibility(View.GONE);
         toolbar_profile_popup.setVisibility(View.GONE);
 
 
@@ -295,10 +302,8 @@ public class CostumeToolBar extends Toolbar {
             case COMPANION_HELP_FEEDBACK:
             case ALTERNATIVE_FLIGHT_DETAILS:
             case ADD_CREDIT_CARD:
-            case PAYMENT_DETAILS:
+
             case HAZARDOUS_NOTICE:
-            case SELECT_CREDIT_CARD:
-            case PAYMENT_TRAVELERS:
             case CREDIT_CARD_LIST:
             case PAYMENT_TRAVELERS_DETAILS:
             case NOTIFICATIONS:
@@ -322,6 +327,21 @@ public class CostumeToolBar extends Toolbar {
             case SELECT_ROOM_FRAGMENT:
                 titleBar.setVisibility(View.VISIBLE);
                 break;
+
+            case PAYMENT_DETAILS:
+                chat_message.setVisibility(View.VISIBLE);
+                break;
+
+            case PAYMENT_TRAVELERS:
+                chat_message.setVisibility(View.VISIBLE);
+                break;
+
+            case SELECT_CREDIT_CARD:
+                chat_message.setVisibility(View.VISIBLE);
+                break;
+
+
+
 
         }
 

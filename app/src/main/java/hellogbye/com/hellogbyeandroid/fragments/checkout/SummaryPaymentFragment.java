@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import org.json.JSONArray;
@@ -31,6 +32,7 @@ import java.util.Map;
 
 import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.TravlerAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.creditcardadapters.TravlerCCAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
@@ -121,6 +123,14 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
         mHazerdiusText = (FontTextView) view.findViewById(R.id.hazerdus_text);
         mCheckBox = (CheckBox) view.findViewById(R.id.hazerdus_checkbox);
         mRecyclerViewCC = (RecyclerView) view.findViewById(R.id.summary_traveler_recyclerView_cc);
+
+        ImageButton newIteneraryImageButton = ((MainActivityBottomTabs) getActivity()).getToolbar_new_iterneraryCnc_Chat_Message();
+        newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), null);
+            }
+        });
 
 
         SpannableString ss = new SpannableString(getString(R.string.i_have_read_and_understood_the_hazardous_nmaterial_notice));
