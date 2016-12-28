@@ -1,12 +1,16 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.speech.RecognizerIntent;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
@@ -17,8 +21,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
 import com.roughike.bottombar.BottomBar;
@@ -82,6 +89,9 @@ import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.network.Parser;
+import hellogbye.com.hellogbyeandroid.signalr.HubConnectionFactory;
+/*import hellogbye.com.hellogbyeandroid.signalr.SignalRHubConnection;*/
+import hellogbye.com.hellogbyeandroid.signalr.SignalRService;
 import hellogbye.com.hellogbyeandroid.utilities.GPSTracker;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
@@ -91,6 +101,14 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityNetwork;
 import hellogbye.com.hellogbyeandroid.utilities.SpeechRecognitionUtil;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
+import microsoft.aspnet.signalr.client.Action;
+import microsoft.aspnet.signalr.client.ErrorCallback;
+import microsoft.aspnet.signalr.client.LogLevel;
+import microsoft.aspnet.signalr.client.Platform;
+import microsoft.aspnet.signalr.client.SignalRFuture;
+import microsoft.aspnet.signalr.client.http.android.AndroidPlatformComponent;
+import microsoft.aspnet.signalr.client.hubs.HubConnection;
+import microsoft.aspnet.signalr.client.hubs.HubProxy;
 
 /**
  * Created by arisprung on 8/7/16.
@@ -141,6 +159,11 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     private NodesVO mSelectedHotelNode;
     private ImageButton toolbar_profile_popup;
+
+   // private SignalRHubConnection mSignalRHubConnection;
+
+
+
     //private FontTextView toolbar_trip_name;
 
     public HGBSaveDataClass getHGBSaveDataClass() {
@@ -148,10 +171,105 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
 
+    private SignalRService mService;
+    private boolean mBound = false;
+
+
+    private void configConnectFuture(SignalRFuture<Void> connect) {
+        final HubConnectionFactory hcf = HubConnectionFactory.getInstance();
+
+        connect.onError(new ErrorCallback() {
+            @Override
+            public void onError(final Throwable error) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivityBottomTabs.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+        connect.done(new Action<Void>() {
+            @Override
+            public void run(Void obj) throws Exception {
+                HubConnection conn = hcf.getHubConnection();
+                final HubProxy chat = hcf.getChatHub();
+
+                chat.invoke("Send", "android", "joined chat").done(new Action<Void>() {
+                    @Override
+                    public void run(Void obj) throws Exception {
+                        runOnUiThread(new Runnable() {
+                            @SuppressLint("InlinedApi")
+                            public void run() {
+                                Toast.makeText(MainActivityBottomTabs.this, "Joined the chat!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+    public void Send_Click(View view)
+    {
+        final HubConnectionFactory hcf = HubConnectionFactory.getInstance();
+        HubConnection conn = hcf.getHubConnection();
+        final HubProxy chat = hcf.getChatHub();
+        chat.invoke("send", "android says", "hello!").done(new Action<Void>() {
+
+            @Override
+            public void run(Void obj) throws Exception {
+                runOnUiThread(new Runnable() {
+                    @SuppressLint("InlinedApi")
+                    public void run() {
+                        Toast.makeText(MainActivityBottomTabs.this, "Sent", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+//-----------------------------------------------------------------------------------
+
+      Intent intent = new Intent();
+        intent.setClass(getBaseContext(), SignalRService.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+
+
+  /*
+// crete connection with signalR hub
+        mSignalRHubConnection = new SignalRHubConnection(getBaseContext());
+        SignalRHubConnection.startSignalR();*/
+
+
+
+
+
+     //   setContentView(R.layout.activity_main);
+
+        // Create a new console logger
+  /*      microsoft.aspnet.signalr.client.Logger logger = new microsoft.aspnet.signalr.client.Logger() {
+            @Override
+            public void log(String message, LogLevel level) {
+                //System.out.println(message);
+                Log.d("SignalR", message);
+            }
+        };
+
+        Platform.loadPlatformComponent(new AndroidPlatformComponent());
+        final HubConnectionFactory hcf = HubConnectionFactory.getInstance();
+
+        SignalRFuture<Void> connect = hcf.connect("https://apiprod.hellogbye.com/prod/");
+        configConnectFuture(connect);
+*/
+
+
+
+//-----------------------------------------------------------------------------------
         getUserData();
         getCompanionsFromServer();
         getCountries();
@@ -347,6 +465,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     @Override
     protected void onStop() {
         super.onStop();
+
+        if (mBound) {
+            unbindService(mConnection);
+            mBound = false;
+        }
+
 
         if(isLogoutExit){
             hgbPrefrenceManager.deleteSharedPrefrence(HGBPreferencesManager.HGB_CNC_LIST);
@@ -953,7 +1077,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private boolean isLogoutExit = false;
 
 
-    
+
 
     @Override
     public void gotToStartMenuActivity() {
@@ -1231,4 +1355,39 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     public AutoCompleteTextView getmAutoComplete() {
         return mAutoComplete;
     }
+
+
+    public void sendMessage(View view) {
+        if (mBound) {
+            // Call a method from the SignalRService.
+            // However, if this call were something that might hang, then this request should
+            // occur in a separate thread to avoid slowing down the activity performance.
+         /*   EditText editText = (EditText) findViewById(R.id.edit_message);
+            if (editText != null && editText.getText().length() > 0) {*/
+            //    String message = editText.getText().toString();
+                mService.sendMessage("Kate test");
+           /* }*/
+        }
+    }
+
+
+    private final ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className,
+                                       IBinder service) {
+            // We've bound to SignalRService, cast the IBinder and get SignalRService instance
+            SignalRService.LocalBinder binder = (SignalRService.LocalBinder) service;
+            mService = binder.getService();
+            mBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBound = false;
+        }
+    };
+
+
+
 }

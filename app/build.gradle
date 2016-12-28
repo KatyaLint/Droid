@@ -82,7 +82,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
     compile 'com.mcxiaoke.volley:library:1.0.19'
-    compile 'com.google.code.gson:gson:2.4'
     compile 'com.viewpagerindicator:library:2.4.1@aar'
     compile 'com.sothree.slidinguppanel:library:3.2.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
@@ -107,5 +106,8 @@ dependencies {
     compile 'com.viewpagerindicator:library:2.4.1'
 
 
+    compile files('libs/gson-2.2.2.jar')
+    compile files('libs/signalr-client-sdk.jar')
+    compile files('libs/signalr-client-sdk-android.jar')
 
 }
