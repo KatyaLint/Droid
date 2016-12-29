@@ -53,7 +53,6 @@
             android:layout_width="wrap_content"
             android:textColor="@color/COLOR_003D4C"
             android:textSize="@dimen/SP16"
-            android:layout_marginLeft="@dimen/DP6"
             android:layout_gravity="center_vertical"
             android:layout_height="wrap_content" />
 
@@ -62,10 +61,11 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ccv_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/select_cc_border"
+        android:background="@drawable/cvv_shape"
         android:layout_alignParentRight="true">
 
 
@@ -74,7 +74,6 @@
             android:id="@+id/ccv_edittext"
             android:layout_width="wrap_content"
             android:hint="CVV"
-            android:textColorHint="@color/COLOR_EE3A3C"
             android:textColor="@color/COLOR_003D4C"
             android:textSize="@dimen/SP16"
             android:background="@android:color/transparent"
@@ -83,16 +82,11 @@
         <ImageView
             android:id="@+id/ccv_image"
             android:layout_marginLeft="@dimen/DP6"
-
             android:layout_width="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"
-            android:background="@drawable/error_icon"/>
-
-
-
+            android:background="@drawable/c_v_v_card"/>
     </LinearLayout>
-
-
 
 
 </RelativeLayout>
