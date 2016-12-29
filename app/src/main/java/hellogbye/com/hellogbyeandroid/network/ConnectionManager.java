@@ -1763,7 +1763,7 @@ public class ConnectionManager {
             json1.put("phone", user.getPhone());
             json1.put("postalcode", user.getPostalcode());
             json1.put("lastname", user.getLastname());
-            json1.put("dob", user.getDob());
+            json1.put("dob", HGBUtilityDate.parseDateToServertime(user.getDob()));
             json1.put("firstname", user.getFirstname());
             json1.put("title", user.getTitle());
             json1.put("address", user.getAddress());
