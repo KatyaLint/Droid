@@ -306,6 +306,9 @@ public class CostumeToolBar extends Toolbar {
             case HAZARDOUS_NOTICE:
             case CREDIT_CARD_LIST:
             case PAYMENT_TRAVELERS_DETAILS:
+                preference_save_changes.setVisibility(View.VISIBLE);
+                break;
+
             case NOTIFICATIONS:
             case PREFERENCES_MEMBERSHIP:
             case ALTERNATIVE_FLIGHT_ONE_WAY_TRIP:

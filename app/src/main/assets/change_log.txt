@@ -587,4 +587,4 @@ Code changing:
         - free user layout update
         - add Title in Create User
         - add tooltip in password screen
-        -
+        - New Travel Detail Fragment in Payment
