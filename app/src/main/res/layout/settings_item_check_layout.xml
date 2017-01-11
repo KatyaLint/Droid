@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/DP10"
         android:layout_marginRight="@dimen/DP10"
-        android:textColor="@color/COLOR_999999"
+        android:textColor="@color/COLOR_00516f"
         android:textSize="@dimen/SP16"
         android:text="prr"
         app:fontName="dinnextltpro_medium.otf" />
