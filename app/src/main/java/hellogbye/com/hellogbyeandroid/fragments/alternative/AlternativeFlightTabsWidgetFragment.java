@@ -46,7 +46,7 @@ public class AlternativeFlightTabsWidgetFragment extends HGBAbstractFragment {
             if (i == 0) { //selected
                 tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_WHITE));
             } else { //unselected
-                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_F5F5F5));
+                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_b6bec9));
             }
             tv.setTypeface(textFont);
             tv.setTransformationMethod(null);
@@ -94,7 +94,7 @@ public class AlternativeFlightTabsWidgetFragment extends HGBAbstractFragment {
 
                 for (int i = 0; i < mTabHost.getTabWidget().getChildCount(); i++) {
                     TextView tv = (TextView) mTabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
-                    tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_F5F5F5));
+                    tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_b6bec9));
                     tv.setTypeface(textFont);
                     tv.setTransformationMethod(null);
 

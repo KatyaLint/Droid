@@ -589,4 +589,6 @@ Code changing:
         - add tooltip in password screen
         - New Travel Detail Fragment in Payment
         - edit screen profile
+        - Tabs color change
+
 
