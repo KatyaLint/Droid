@@ -254,14 +254,6 @@ public class CostumeToolBar extends Toolbar {
 
         switch (navBar) {
 
-         //   case HOME:
-     /*           tool_bar_profile_name.setVisibility(View.VISIBLE);
-                toolbar_go_to_iternerary.setVisibility(View.VISIBLE);*/
-//             //   homeTitleImage.setVisibility(View.VISIBLE);
-//                my_trip_profile.setVisibility(View.VISIBLE);
-//                keyBoardImage.setVisibility(View.VISIBLE);
-//
-         //       break;
 
             case CNC:
            //     tool_bar_profile_name.setVisibility(View.VISIBLE);
@@ -273,16 +265,22 @@ public class CostumeToolBar extends Toolbar {
                 up_bar_favorite.setVisibility(View.VISIBLE);
                 itirnarary_title_Bar.setVisibility(View.VISIBLE);
                 break;
+            /**
+             * show title, preference edit
+             */
             case PREFERENCES_CHECK_LIST_SETTINGS:
             case PREFERENCES_SEARCH_LIST_SETTINGS:
             case PREFERENCES_SPECIFIC_LIST_SETTINGS:
             case PREFERENCES_DRAG_LIST_SETTINGS:
             case PREFERENCE_SETTINGS_EMAILS:
             case PREFERENCES_CHECK_AS_RADIO_SETTINGS:
+            case TRAVEL_PREFERENCE:
                 preference_save_changes.setVisibility(View.VISIBLE);
                 titleBar.setVisibility(View.VISIBLE);
                 edit_preferences.setVisibility(View.GONE);
             break;
+
+
 
             case TRIPS:
                 titleBar.setVisibility(View.VISIBLE);
@@ -290,15 +288,17 @@ public class CostumeToolBar extends Toolbar {
                 search_maginfy.setVisibility(View.VISIBLE);
                 break;
 
-            case COMPANIONS:
-                toolbar_add_companion.setVisibility(View.VISIBLE);
-                search_maginfy.setVisibility(View.VISIBLE);
+
+
+                /**
+                 * show save button
+                 */
             case ALL_COMPANIONS_VIEW:
             case COMPANIONS_PERSONAL_DETAILS:
             case HELP:
             case ACCOUNT:
             case PREFERENCES_TAB_SETTINGS:
-            case HOTEL:
+
             case COMPANION_HELP_FEEDBACK:
             case ALTERNATIVE_FLIGHT_DETAILS:
             case ADD_CREDIT_CARD:
@@ -309,42 +309,49 @@ public class CostumeToolBar extends Toolbar {
                 preference_save_changes.setVisibility(View.VISIBLE);
                 break;
 
+            /**
+             * show add companion, search, title
+             */
+            case COMPANIONS:
+                toolbar_add_companion.setVisibility(View.VISIBLE);
+                search_maginfy.setVisibility(View.VISIBLE);
+
+
+            case HOTEL:
+                chat_message.setVisibility(View.VISIBLE);
+            /**
+             * show title only
+             */
             case NOTIFICATIONS:
             case PREFERENCES_MEMBERSHIP:
             case ALTERNATIVE_FLIGHT_ONE_WAY_TRIP:
             case ALTERNATIVE_FLIGHT_ROUND_TRIP:
             case COMPANIONS_DETAILS:
             case FARE_CLASS_FRAGMENT:
+
+            case SELECT_ROOM_FRAGMENT:
                 titleBar.setVisibility(View.VISIBLE);
                 break;
+            /**
+             * show title and search bar
+             */
             case SELECT_HOTEL_FRAGMENT:
                 search_maginfy.setVisibility(View.VISIBLE);
                 titleBar.setVisibility(View.VISIBLE);
                 break;
 
-            case TRAVEL_PREFERENCE:
-                titleBar.setVisibility(View.VISIBLE);
-                preferences_edit_mode.setVisibility(View.VISIBLE);
-                edit_preferences.setVisibility(View.VISIBLE);
-                break;
-            case SELECT_ROOM_FRAGMENT:
-                titleBar.setVisibility(View.VISIBLE);
-                break;
 
-            case PAYMENT_DETAILS:
-                chat_message.setVisibility(View.VISIBLE);
-                break;
 
+            /**
+             * show chat message only
+             */
             case PAYMENT_TRAVELERS:
-                chat_message.setVisibility(View.VISIBLE);
-                break;
-
+            case PAYMENT_DETAILS:
             case SELECT_CREDIT_CARD:
+            case ALTERNATIVE_FLIGHT_FACTORY:
+                System.out.println("Kate visible");
                 chat_message.setVisibility(View.VISIBLE);
                 break;
-
-
-
 
         }
 

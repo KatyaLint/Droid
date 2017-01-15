@@ -590,5 +590,7 @@ Code changing:
         - New Travel Detail Fragment in Payment
         - edit screen profile
         - Tabs color change
+        - Flight details - new cnc icon
+        - Hotel fragment - new cnc icon
 
 

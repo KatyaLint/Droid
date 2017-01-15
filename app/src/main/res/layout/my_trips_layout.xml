@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
 
-    <LinearLayout
+<!--    <LinearLayout
         android:background="@color/COLOR_003D4C"
         android:gravity="center"
         android:paddingLeft="@dimen/DP10"
@@ -129,7 +129,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true" />
 
-    </RelativeLayout>
+    </RelativeLayout> -->
 
 
-</LinearLayout>
+    </LinearLayout>

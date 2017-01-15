@@ -4,11 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingTop="@dimen/DP20"
     android:id="@+id/my_trip_empty_view_ll"
-    android:visibility="gone"
+    android:visibility="visible"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
+    android:background="@color/COLOR_F5F5F5"
     android:gravity="center">
 
 

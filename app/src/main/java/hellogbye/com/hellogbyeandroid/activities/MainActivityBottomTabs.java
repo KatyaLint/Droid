@@ -462,6 +462,17 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     public ImageButton getToolbar_new_iterneraryCnc_Chat_Message(){
         return toolbar_new_iternerary_cnc_chat_message;
     }
+
+    public void goToCncScreeButton(){
+        toolbar_new_iternerary_cnc_chat_message.setVisibility(View.VISIBLE);
+        toolbar_new_iternerary_cnc_chat_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               goToFragment(ToolBarNavEnum.CNC.getNavNumber(),null);
+            }
+        });
+    }
+
     public SearchView getSearchView(){
         return search_view_tool_bar;
     }
