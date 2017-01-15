@@ -592,5 +592,6 @@ Code changing:
         - Tabs color change
         - Flight details - new cnc icon
         - Hotel fragment - new cnc icon
+        -  log out 
 
 

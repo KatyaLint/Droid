@@ -255,6 +255,7 @@
 
     <string name="save_button">Save</string>
     <string name="ok_button">Ok</string>
+    <string name="logout_button">LOG OUT</string>
 
     <string name="you_can_say_things_like">You can say things like:</string>
     <string name="cnc_error">Your query was not recognized.\nPlease try again.</string>

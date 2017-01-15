@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/logouot_pop_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/component_log_out"
+        android:textColor="@color/COLOR_00516f"
+        android:textSize="@dimen/SP18"
+        app:fontName="dinnextltpro_medium.otf"
+        android:layout_margin="@dimen/DP10"
+        android:layout_centerHorizontal="true"/>
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_margin="@dimen/DP10"
+        android:layout_below="@+id/logouot_pop_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fontName="dinnextltpro_regular.otf"
+        android:text="@string/component_log_sure"
+        android:textSize="@dimen/SP16"
+        android:textColor="@color/COLOR_565656"
+        android:layout_centerHorizontal="true"/>
+
+
+
+
+</RelativeLayout>

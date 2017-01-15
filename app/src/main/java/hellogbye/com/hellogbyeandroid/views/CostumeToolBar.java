@@ -298,11 +298,8 @@ public class CostumeToolBar extends Toolbar {
             case HELP:
             case ACCOUNT:
             case PREFERENCES_TAB_SETTINGS:
-
             case COMPANION_HELP_FEEDBACK:
-
             case ADD_CREDIT_CARD:
-
             case HAZARDOUS_NOTICE:
             case CREDIT_CARD_LIST:
             case PAYMENT_TRAVELERS_DETAILS:
@@ -325,7 +322,6 @@ public class CostumeToolBar extends Toolbar {
              */
             case NOTIFICATIONS:
             case PREFERENCES_MEMBERSHIP:
-
             case COMPANIONS_DETAILS:
             case FARE_CLASS_FRAGMENT:
             case SELECT_ROOM_FRAGMENT:

@@ -800,8 +800,26 @@ public class HGBUtility {
       if(popupTitle != null) {
           alert.setTitle(popupTitle);
       }
-      alert .setView(popupView)
-              .setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
+      alert .setView(popupView).
+
+       setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+              if (input != null) {
+                  input.setText("");
+                  IBinder token = input.getWindowToken();
+                  ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(token, 0);
+              }
+              if (alertCB != null) {
+                  alertCB.itemCanceled();
+              }
+              ((ViewGroup) popupView.getParent()).removeView(popupView);
+              dialog.cancel();
+          }
+      });
+
+      alert.setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
                   public void onClick(DialogInterface dialog, int which) {
                       String newName ="";
                     if(input != null){
@@ -822,22 +840,7 @@ public class HGBUtility {
          /*     if(isOneButton) {*/
 
 
-                  alert. setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
 
-                      @Override
-                      public void onClick(DialogInterface dialog, int which) {
-                          if (input != null) {
-                              input.setText("");
-                              IBinder token = input.getWindowToken();
-                              ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(token, 0);
-                          }
-                          if (alertCB != null) {
-                              alertCB.itemCanceled();
-                          }
-                          ((ViewGroup) popupView.getParent()).removeView(popupView);
-                          dialog.cancel();
-                      }
-                  });
         /*      }*/
       alert.create().show();
 
