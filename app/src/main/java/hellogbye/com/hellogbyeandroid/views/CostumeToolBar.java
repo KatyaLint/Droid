@@ -315,7 +315,8 @@ public class CostumeToolBar extends Toolbar {
             case COMPANIONS:
                 toolbar_add_companion.setVisibility(View.VISIBLE);
                 search_maginfy.setVisibility(View.VISIBLE);
-
+                titleBar.setVisibility(View.VISIBLE);
+                break;
 
             case HOTEL:
                 chat_message.setVisibility(View.VISIBLE);
