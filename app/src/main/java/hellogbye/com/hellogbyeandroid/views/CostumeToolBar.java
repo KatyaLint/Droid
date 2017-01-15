@@ -300,7 +300,7 @@ public class CostumeToolBar extends Toolbar {
             case PREFERENCES_TAB_SETTINGS:
 
             case COMPANION_HELP_FEEDBACK:
-            case ALTERNATIVE_FLIGHT_DETAILS:
+
             case ADD_CREDIT_CARD:
 
             case HAZARDOUS_NOTICE:
@@ -324,11 +324,9 @@ public class CostumeToolBar extends Toolbar {
              */
             case NOTIFICATIONS:
             case PREFERENCES_MEMBERSHIP:
-            case ALTERNATIVE_FLIGHT_ONE_WAY_TRIP:
-            case ALTERNATIVE_FLIGHT_ROUND_TRIP:
+
             case COMPANIONS_DETAILS:
             case FARE_CLASS_FRAGMENT:
-
             case SELECT_ROOM_FRAGMENT:
                 titleBar.setVisibility(View.VISIBLE);
                 break;
@@ -340,7 +338,12 @@ public class CostumeToolBar extends Toolbar {
                 titleBar.setVisibility(View.VISIBLE);
                 break;
 
-
+            case ALTERNATIVE_FLIGHT_ONE_WAY_TRIP:
+            case ALTERNATIVE_FLIGHT_ROUND_TRIP:
+            case ALTERNATIVE_FLIGHT_DETAILS:
+                chat_message.setVisibility(View.VISIBLE);
+                titleBar.setVisibility(View.VISIBLE);
+                break;
 
             /**
              * show chat message only
@@ -349,7 +352,6 @@ public class CostumeToolBar extends Toolbar {
             case PAYMENT_DETAILS:
             case SELECT_CREDIT_CARD:
             case ALTERNATIVE_FLIGHT_FACTORY:
-                System.out.println("Kate visible");
                 chat_message.setVisibility(View.VISIBLE);
                 break;
 
