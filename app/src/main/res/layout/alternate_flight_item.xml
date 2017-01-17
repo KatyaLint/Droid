@@ -8,8 +8,8 @@
 <RelativeLayout
     android:id="@+id/alternative_flight_title_ll"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/DP24"
-    android:background="@color/COLOR_999999"
+    android:layout_height="@dimen/DP34"
+    android:background="@color/COLOR_F5F5F5"
     android:orientation="horizontal">
 
 
@@ -19,19 +19,24 @@
         android:layout_marginRight="@dimen/DP10"
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/DP34"
         android:orientation="horizontal">
     <ImageButton
+        android:layout_gravity="center"
         android:clickable="true"
         android:layout_marginRight="@dimen/DP10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/add_chat" />
+        android:background="@drawable/sort_by_icon" />
 
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/SP12"
+            app:fontName="dinnextltpro_medium.otf"
+            android:textColor="@color/COLOR_00516f"
             android:text="Sort"/>
     </LinearLayout>
 
@@ -39,8 +44,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="CURRENT FLIGHT"
+        app:fontName="dinnextltpro_regular.otf"
+        android:textSize="@dimen/SP10"
+        android:textColor="@color/COLOR_565656"
         android:layout_centerVertical="true"
-
+        android:layout_marginLeft="@dimen/DP10"
         android:id="@+id/alternative_flight_title_text" />
 
 
@@ -65,10 +73,11 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/profile_image"
+                android:layout_width="@dimen/DP38"
+                android:layout_height="@dimen/DP24"
+                android:background="@drawable/border_image_grey"
                 android:layout_marginRight="@dimen/DP10"
+                android:padding="@dimen/DP2"
                 android:id="@+id/alternative_airplane_image"/>
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -77,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/SP16"
                 android:layout_toRightOf="@+id/alternative_airplane_image"
-                app:fontName="dinnextltpro_mediumcond.ttf"
+                app:fontName="dinnextltpro_medium.otf"
                 android:textColor="@color/COLOR_565656"
                 android:text="AIRFRANCE"/>
 
@@ -87,10 +96,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/COLOR_565656"
-                android:textSize="@dimen/SP20"
+                android:textSize="@dimen/SP18"
                 android:text="$1556.12"
                 android:layout_alignParentRight="true"
                 app:fontName="dinnextltpro_medium.otf"  />
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:layout_below="@+id/alternative_flight_price"
+                android:id="@+id/alternative_flight_refundable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/COLOR_565656"
+                android:textSize="@dimen/SP8"
+                android:text="Refundable"
+                android:layout_alignParentRight="true"
+                app:fontName="dinnextltpro_light.otf"  />
+
 
         </RelativeLayout>
 

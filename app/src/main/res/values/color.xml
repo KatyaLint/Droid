@@ -8,6 +8,7 @@
 <!-- Color in app -->
 
     <color name="COLOR_FF5A60">#FF5A60</color>
+    <color name="COLOR_80FF5A60">#80FF5A60</color>
     <color name="COLOR_EE3A3C">#EE3A3C</color>
     <color name="COLOR_003D4C">#003D4C</color>
     <color name="COLOR_00516f">#00516f</color>

@@ -86,16 +86,20 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
 
         viewHolder.alternative_flight_price.setText("$"+HGBUtility.roundNumber(itemData.getCost()) + itemData.getmCurrency());
         viewHolder.alternative_flight_price.setTag(itemData.getmGuid());
-        viewHolder.alternative_city_name_from.setText(itemData.getmOriginAirportName());
-        viewHolder.alternative_airport_name_from.setText("("+itemData.getmOrigin()+")");
+     //   viewHolder.alternative_city_name_from.setText(itemData.getmOriginAirportName());
+        viewHolder.alternative_airport_name_from.setText( itemData.getmOrigin() );
 
-        viewHolder.alternative_city_name_to.setText(itemData.getmDestinationAirportName());
-        viewHolder.alternative_airport_name_to.setText("("+itemData.getmDestination()+")");
+     //   viewHolder.alternative_city_name_to.setText(itemData.getmDestinationAirportName());
+        viewHolder.alternative_airport_name_to.setText(itemData.getmDestination());
         viewHolder.alternative_time_to.setText(legs.get(0).getmDepartureTime());
         viewHolder.alternative_time_from.setText(legs.get(legs.size()-1).getmArrivalTime());
 
-        viewHolder.alternative_date_from.setText(HGBUtilityDate.parseDateToddMMyyyy(itemData.getmDeparture()));
-        viewHolder.alternative_date_to.setText(HGBUtilityDate.parseDateToddMMyyyy(itemData.getmArrival()));
+        viewHolder.alternative_flight_time.setText(itemData.getmFlightTime());
+        viewHolder.alternative_class_type.setText(itemData.getmFareClass());
+        viewHolder.alternative_flight_refundable.setText(itemData.getmFarePreference());
+
+      /*  viewHolder.alternative_date_from.setText(HGBUtilityDate.parseDateToddMMyyyy(itemData.getmDeparture()));
+        viewHolder.alternative_date_to.setText(HGBUtilityDate.parseDateToddMMyyyy(itemData.getmArrival()));*/
 
         if(position == 0){
             viewHolder.alternative_flight_title_ll.setVisibility(View.VISIBLE);
@@ -157,18 +161,21 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
         private FontTextView alternative_flight_stops;
         private FontTextView alternative_airplane_name;
         private ImageView alternative_airplane_image;
-        private FontTextView alternative_city_name_from;
+      //  private FontTextView alternative_city_name_from;
         private FontTextView alternative_airport_name_from;
-        private FontTextView alternative_city_name_to;
+      //  private FontTextView alternative_city_name_to;
         private FontTextView alternative_airport_name_to;
         private FontTextView alternative_time_from;
         private FontTextView alternative_time_to;
-        private FontTextView alternative_date_from;
-        private FontTextView alternative_date_to;
+       // private FontTextView alternative_date_from;
+      //  private FontTextView alternative_date_to;
 
         private RelativeLayout alternative_flight_title_ll;
         private LinearLayout alternative_flight_sort_ll;
         private FontTextView alternative_flight_title_text;
+        private FontTextView alternative_flight_time;
+        private FontTextView alternative_class_type;
+        private FontTextView alternative_flight_refundable;
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
@@ -186,18 +193,23 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
 
             alternative_flight_stops = (FontTextView) itemLayoutView.findViewById(R.id.alternative_flight_stops);
             alternative_airplane_name = (FontTextView)itemLayoutView.findViewById(R.id.alternative_airplane_name);
-            alternative_city_name_from = (FontTextView)itemLayoutView.findViewById(R.id.alternative_city_name_from);
+       //     alternative_city_name_from = (FontTextView)itemLayoutView.findViewById(R.id.alternative_city_name_from);
             alternative_airport_name_from = (FontTextView)itemLayoutView.findViewById(R.id.alternative_airport_name_from);
-            alternative_city_name_to = (FontTextView)itemLayoutView.findViewById(R.id.alternative_city_name_to);
+        //    alternative_city_name_to = (FontTextView)itemLayoutView.findViewById(R.id.alternative_city_name_to);
             alternative_airport_name_to = (FontTextView)itemLayoutView.findViewById(R.id.alternative_airport_name_to);
             alternative_time_from = (FontTextView)itemLayoutView.findViewById(R.id.alternative_time_from);
             alternative_time_to = (FontTextView)itemLayoutView.findViewById(R.id.alternative_time_to);
-            alternative_date_from = (FontTextView)itemLayoutView.findViewById(R.id.alternative_date_from);
-            alternative_date_to = (FontTextView)itemLayoutView.findViewById(R.id.alternative_date_to);
+         //   alternative_date_from = (FontTextView)itemLayoutView.findViewById(R.id.alternative_date_from);
+        //    alternative_date_to = (FontTextView)itemLayoutView.findViewById(R.id.alternative_date_to);
 
             alternative_flight_title_ll = (RelativeLayout)itemLayoutView.findViewById(R.id.alternative_flight_title_ll);
             alternative_flight_sort_ll = (LinearLayout)itemLayoutView.findViewById(R.id.alternative_flight_sort_ll);
             alternative_flight_title_text = (FontTextView)itemLayoutView.findViewById(R.id.alternative_flight_title_text);
+
+            alternative_flight_time = (FontTextView)itemLayoutView.findViewById(R.id.alternative_flight_time) ;
+            alternative_class_type = (FontTextView)itemLayoutView.findViewById(R.id.alternative_class_type);
+            alternative_flight_refundable = (FontTextView)itemLayoutView.findViewById(R.id.alternative_flight_refundable);
+
 
             itemLayoutView.setOnClickListener(this);
         }
