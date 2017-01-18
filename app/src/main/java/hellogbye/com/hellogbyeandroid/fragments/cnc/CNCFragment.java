@@ -21,6 +21,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -48,6 +51,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.ConversationVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.signalr.SignalRService;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBTranslate;
@@ -478,6 +482,9 @@ private void setTextForTrip(String name){
             @Override
             public void onClick(View v) {
                 String strMessage = mEditText.getText().toString();
+
+
+
                 handleMyMessage(strMessage);
             }
         });
@@ -706,6 +713,8 @@ private void setTextForTrip(String name){
     }
 
 
+
+
     interface iAfterServer {
         void serverFinished(AirportServerResultVO airportResult);
     }
@@ -722,28 +731,26 @@ private void setTextForTrip(String name){
     }
 
     private void sendMessageToServer(final String strMessage,final iAfterServer iserverFinished) {
-        ConnectionManager.getInstance(getActivity()).getItineraryCNCSearch(strMessage, new ConnectionManager.ServerRequestListener() {
+        System.out.println("Kate sendCNCMessageToServer 2" );
 
-                    @Override
-                    public void onSuccess(Object data) {
-                        AirportServerResultVO airportResult = (AirportServerResultVO) data;
-                        iserverFinished.serverFinished(airportResult);
-
-                    }
-
-                    @Override
-                    public void onError(Object data) {
-                        handleHGBMessage(getResources().getString(R.string.cnc_error));
-                    //    ErrorMessage(data);
+        //   Kate
+        SignalRService service = ((MainActivityBottomTabs) getActivity()).getSignalRService();
 
 
-                    }
-                }
-        );
+        String preferencesProfileId = getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId();
+
+
+        try {
+            service.cncSubmitQueryR(strMessage, null, preferencesProfileId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
     private void sendCNCMessageToServer(String strMessage){
+        System.out.println("Kate sendCNCMessageToServer");
         ArrayList<AirportSendValuesVO> airportSendValuesVOsTemp = new ArrayList<AirportSendValuesVO>();
         AirportSendValuesVO airportSendValuesVO = new AirportSendValuesVO();
         ArrayList<CNCItem> cncItems = getActivityInterface().getCNCItems();
@@ -762,7 +769,20 @@ private void setTextForTrip(String name){
 
             airportSendValuesVOsTemp.add(airportSendValuesVO);
 
-            ConnectionManager.getInstance(getActivity()).ItineraryCNCAddCompanionPost(airportSendValuesVOsTemp,  new ConnectionManager.ServerRequestListener() {
+
+
+
+         //   Kate
+            SignalRService service = ((MainActivityBottomTabs) getActivity()).getSignalRService();
+
+            try {
+                service.cncSubmitQueryR(strMessage, airportSendValuesVOsTemp, getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+       /*     ConnectionManager.getInstance(getActivity()).ItineraryCNCAddCompanionPost(airportSendValuesVOsTemp,  new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
                     UserTravelMainVO userTraveler = (UserTravelMainVO) data;
@@ -776,7 +796,7 @@ private void setTextForTrip(String name){
                     handleHGBMessage(getResources().getString(R.string.cnc_error));
                     CNCFragment.this.airportSendValuesVOs.clear();
                 }
-            });
+            });*/
         }
     }
 

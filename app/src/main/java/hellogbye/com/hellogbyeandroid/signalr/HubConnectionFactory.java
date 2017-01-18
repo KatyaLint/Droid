@@ -2,6 +2,7 @@ package hellogbye.com.hellogbyeandroid.signalr;
 
 import android.util.Log;
 
+import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import microsoft.aspnet.signalr.client.ErrorCallback;
 import microsoft.aspnet.signalr.client.InvalidStateException;
 import microsoft.aspnet.signalr.client.LogLevel;
@@ -47,7 +48,9 @@ public class HubConnectionFactory {
 
     public void createObjects(String url, final SignalRFuture<Void> future){
 
-        mConnection = new HubConnection(url, "", true, new Logger() {
+
+
+        mConnection = new HubConnection(url, "" , true, new Logger() {
 
             @Override
             public void log(String message, LogLevel level) {

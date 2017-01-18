@@ -229,15 +229,22 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
     }
 
+
+    public SignalRService getSignalRService(){
+        return mService;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 //-----------------------------------------------------------------------------------
 
-      Intent intent = new Intent();
+        Intent intent = new Intent();
         intent.setClass(getBaseContext(), SignalRService.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+
+
 
 
   /*
