@@ -236,7 +236,7 @@ public class ConnectionManager {
         }, true);
     }
 
-    public void postUserCreateAccount(UserSignUpDataVO userData, final ServerRequestListener listener) {
+    public void postUserCreateAccount(UserSignUpDataVO userData,boolean hellopromtion,boolean thirdpatyboolean, final ServerRequestListener listener) {
 
         String url = getURL(Services.USER_PROFILE_REGISTER);
         JSONObject jsonObject = new JSONObject();
@@ -250,6 +250,10 @@ public class ConnectionManager {
             jsonObject.put("password", userData.getPassword());
             jsonObject.put("state", userData.getCountryProvince());
             jsonObject.put("username", userData.getUserEmail());
+            jsonObject.put("acceptHgbMarketing", hellopromtion);
+            jsonObject.put("acceptThirdPartyMarketing",thirdpatyboolean);
+
+
 
         } catch (Exception e) {
             e.printStackTrace();

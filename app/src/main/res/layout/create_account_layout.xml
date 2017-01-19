@@ -43,7 +43,7 @@
         <include
             android:id="@+id/country_layout"
             layout="@layout/country_selection_layout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/label_2"
             android:layout_centerHorizontal="true"
@@ -153,6 +153,9 @@
             android:layout_marginBottom="@dimen/DP6"
             android:translationZ="2dp"
             app:fontName="dinnextltpro_regular.otf" />
+
+
+
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/sign_up_hyperlink"
@@ -403,7 +406,6 @@
             android:text="@string/create_account"
             app:fontName="dinnextltpro_medium.otf" />
 
-
         <include
             android:id="@+id/birds"
             layout="@layout/bird_layout"
@@ -413,6 +415,7 @@
             android:layout_alignParentRight="true"
             android:visibility="gone"
             android:layout_marginRight="@dimen/DP80" />
+
 
         <include
             android:id="@+id/login"
@@ -427,13 +430,10 @@
             android:id="@+id/building_01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:alpha="0.58"
-            android:src="@drawable/building"
             android:layout_alignTop="@+id/cloud_03"
-            android:layout_alignRight="@+id/logo_onboardong"
-            android:layout_alignEnd="@+id/logo_onboardong"
-            android:layout_marginRight="24dp"
-            android:layout_marginEnd="24dp" />
+            android:layout_marginLeft="@dimen/MINUS_DP300"
+            android:alpha="0.58"
+            android:src="@drawable/building" />
 
 
     </RelativeLayout>

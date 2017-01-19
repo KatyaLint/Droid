@@ -36,6 +36,7 @@ import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
+import static android.R.attr.data;
 import static android.R.attr.editable;
 
 public class SignUpActivity extends BaseActivity {
@@ -157,7 +158,7 @@ public class SignUpActivity extends BaseActivity {
                 userData.setPassword(sign_up_password.getText().toString());
 
 
-                ConnectionManager.getInstance(SignUpActivity.this).postUserCreateAccount(userData, new ConnectionManager.ServerRequestListener() {
+                ConnectionManager.getInstance(SignUpActivity.this).postUserCreateAccount(userData, false,false,new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
                         hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);

@@ -111,6 +111,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private FontEditTextView mStateProvince;
     private FontTextView mSignIn;
     private boolean isStateSelected= false;
+    private CheckBox mHelloGbyePromotionCheckBox;
+    private CheckBox mThirdPartyPromotionCheckBox;
+
 
     private AutoCompleteTextView mCity;
     private FontEditTextView mZip;
@@ -229,6 +232,10 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mLoginEmail = (FontEditTextView) findViewById(R.id.username);
         mLoginPassword = (FontEditTextView) findViewById(R.id.login_password);
         login = (FontButtonView) findViewById(R.id.login_button);
+        mHelloGbyePromotionCheckBox = (CheckBox)findViewById(R.id.promotion_checkbox);
+        mThirdPartyPromotionCheckBox = (CheckBox)findViewById(R.id.special_offer_checkbox);
+
+
 
         mEmail.addTextChangedListener(this);
         mFirstName.addTextChangedListener(this);
@@ -257,6 +264,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         llp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         llp.setMargins(0, 0, 0, i);
         mHyperlink.setLayoutParams(llp);
+
+
 
         mPassword1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -1125,7 +1134,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     private void sendSignUpDataToServer() {
 
-        ConnectionManager.getInstance(CreateAccountActivity.this).postUserCreateAccount(userData, new ConnectionManager.ServerRequestListener() {
+        ConnectionManager.getInstance(CreateAccountActivity.this).postUserCreateAccount(userData,mHelloGbyePromotionCheckBox.isChecked(),mThirdPartyPromotionCheckBox.isChecked(), new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
