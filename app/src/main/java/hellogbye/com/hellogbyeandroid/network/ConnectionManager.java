@@ -835,6 +835,8 @@ public class ConnectionManager {
         }, false);
     }
 
+
+    
     public void getItineraryCNCSearch(String query, final ServerRequestListener listener) {
 
         String url = getURL(Services.ITINERARY_HIGHLIGHT);

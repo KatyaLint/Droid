@@ -746,6 +746,28 @@ private void setTextForTrip(String name){
             e.printStackTrace();
         }
 
+
+
+  /*      ConnectionManager.getInstance(getActivity()).getItineraryCNCSearch(strMessage, new ConnectionManager.ServerRequestListener() {
+
+                    @Override
+                    public void onSuccess(Object data) {
+                        AirportServerResultVO airportResult = (AirportServerResultVO) data;
+                        iserverFinished.serverFinished(airportResult);
+
+                    }
+
+                    @Override
+                    public void onError(Object data) {
+                        handleHGBMessage(getResources().getString(R.string.cnc_error));
+                        //    ErrorMessage(data);
+
+
+                    }
+                }
+        );*/
+
+
     }
 
 

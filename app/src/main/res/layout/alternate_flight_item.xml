@@ -92,6 +92,19 @@
                 android:layout_alignParentRight="true"
                 app:fontName="dinnextltpro_medium.otf"  />
 
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:layout_below="@+id/alternative_flight_price"
+                android:id="@+id/alternative_flight_refundable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/COLOR_565656"
+                android:textSize="@dimen/SP10"
+                android:text="Refundable"
+                android:layout_alignParentRight="true"
+                app:fontName="dinnextltpro_light.otf"  />
+
+
+
         </RelativeLayout>
 
         <include
@@ -171,12 +184,12 @@
 </RelativeLayout>
 
 
-    <View
+<!--    <View
         android:id="@+id/alternative_list_divider"
         android:layout_alignParentBottom="true"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/DP1"
         android:background="@color/COLOR_999999"
-        />
+        />-->
 
 </RelativeLayout>

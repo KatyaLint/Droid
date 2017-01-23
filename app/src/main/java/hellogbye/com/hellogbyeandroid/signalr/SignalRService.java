@@ -350,10 +350,13 @@ public class SignalRService extends Service {
        // getApplicationContext().get.getPersonalUserInformation().getmTravelPreferencesProfileId()
         if(selectedUserChoose != null) {
             jsonObject.put("travelpreferenceprofileId", selectedUserChoose.get(0).getTravelpreferenceprofileid());
+            jsonObject.put("itineraryid", selectedUserChoose.get(0).getId());
         }
 
         if(userProfileId != null) {
             jsonObject.put("travelpreferenceprofileId", userProfileId);
+
+
         }
 
 
