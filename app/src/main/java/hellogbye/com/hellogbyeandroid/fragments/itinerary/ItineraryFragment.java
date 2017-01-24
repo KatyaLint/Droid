@@ -923,7 +923,19 @@ kate
         grid_make_payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
+
+                ConnectionManager.getInstance(getActivity()).getTravellersInforWithSolutionId(getActivityInterface().getTravelOrder().getmSolutionID(),
+                        new ConnectionManager.ServerRequestListener() {
+                            @Override
+                            public void onSuccess(Object data) {
+                                getFlowInterface().setListUsers((ArrayList<UserProfileVO>) data);
+                                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS.getNavNumber(), null);
+                            }
+                            @Override
+                            public void onError(Object data) {
+                                ErrorMessage(data);
+                            }
+                        });
             }
         });
 

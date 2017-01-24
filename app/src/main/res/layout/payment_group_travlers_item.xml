@@ -51,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="$$$$"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/DP4"
                 android:textColor="@color/COLOR_003D4C"
                 android:textSize="@dimen/SP16"

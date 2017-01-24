@@ -11,14 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -31,7 +28,6 @@ import hellogbye.com.hellogbyeandroid.adapters.creditcardadapters.AlertCheckoutA
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymentChild;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymnentGroup;
@@ -46,7 +42,6 @@ import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 import static hellogbye.com.hellogbyeandroid.utilities.HGBUtility.setCCIcon;
-import static org.jcodec.SliceType.I;
 
 /**
  * Created by arisprung on 3/22/16.
@@ -223,19 +218,18 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
 
     private void getUsersList(){
-        ConnectionManager.getInstance(getActivity()).getTravellersInforWithSolutionId(getActivityInterface().getTravelOrder().getmSolutionID(),
-                new ConnectionManager.ServerRequestListener() {
+        ConnectionManager.getInstance(getActivity()).getCreditCards(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                getFlowInterface().setListUsers((ArrayList<UserProfileVO>) data);
-                Bundle args = new Bundle();
-                Gson gson = new Gson();
-                args.putString(HGBConstants.BUNDLE_PARENT_LIST, gson.toJson(groups));
-                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS.getNavNumber(), args);
+                ArrayList<CreditCardItem> creditCards = (ArrayList<CreditCardItem>) data;
+                getActivityInterface().setCreditCards(creditCards);
+                getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
+
             }
+
             @Override
             public void onError(Object data) {
-                        ErrorMessage(data);
+                ErrorMessage(data);
             }
         });
     }
@@ -850,8 +844,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         mPaymentTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
         mTravlerTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_565656));
         mReviewTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_565656));
-        mPaymentImageView.setBackgroundResource(R.drawable.step_menu_blue_on);
-        mTravlerImageView.setBackgroundResource(R.drawable.step_menu_gray);
+        mPaymentImageView.setBackgroundResource(R.drawable.step_menu_blue_stand);
+        mTravlerImageView.setBackgroundResource(R.drawable.step_menu_blue_on);
         mReviewImageView.setBackgroundResource(R.drawable.step_menu_gray);
 
     }

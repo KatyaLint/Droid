@@ -2022,7 +2022,7 @@ public class ConnectionManager {
                 USER_PUT_HOTEL("Hotel"),
                 USER_GET_BOOKING_OPTIONS("Statics/BookingOptions"),
                 USER_FLIGHT_SOLUTIONS("Flight"),
-                USER_GET_TRAVELER_INFO("Traveler/Get/"),
+                USER_GET_TRAVELER_INFO("Traveler/GetAll/"),
                 USER_GET_USER_PROFILE_ACCOUNTS("UserProfile/Accounts"),
                 USER_POST_USER_PROFILE_EMAIL("UserProfile/ResetPassword?email="),
                 USER_TRAVEL_PROFILES("TravelPreference/Profiles/"),
