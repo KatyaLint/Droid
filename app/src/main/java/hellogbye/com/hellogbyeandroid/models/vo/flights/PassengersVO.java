@@ -42,7 +42,7 @@ public class PassengersVO {
 
 
     public ArrayList<NodesVO> passengerNodes = new ArrayList<>();
-    private boolean selected;
+    private boolean selected = true;
     public HashMap<String,ArrayList<NodesVO> > hashMap = new HashMap<>();
 
 

@@ -149,12 +149,6 @@ public class TravlerExpandableAdapter extends BaseExpandableListAdapter {
         holder.groupNametext.setText(group.getmName());
 
 
-
-        if (group.isSelected()) {
-            holder.groupImageView.setBackgroundResource(R.drawable.expand_copy_3);
-        } else {
-            holder.groupImageView.setBackgroundResource(R.drawable.minimize);
-        }
         holder.groupImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
