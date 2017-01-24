@@ -110,8 +110,6 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         mProceed = (FontButtonView) view.findViewById(R.id.cc_proceed);
         mProceed.setEnabled(false);
-        // mProceedDisable = (FontTextView) view.findViewById(R.id.cc_proceed_disable);
-
 
         mPaymentTextView = (FontTextView) view.findViewById(R.id.steps_checkout_payment_text);
         mTravlerTextView = (FontTextView) view.findViewById(R.id.steps_checkout_travler_text);
