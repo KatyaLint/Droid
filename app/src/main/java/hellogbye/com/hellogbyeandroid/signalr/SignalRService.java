@@ -10,11 +10,16 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.ExecutionException;
 
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
@@ -40,37 +45,13 @@ import microsoft.aspnet.signalr.client.transport.ServerSentEventsTransport;
 
 public class SignalRService extends Service {
 
-    private HubConnection mHubConnection;
-    private HubProxy mHubProxy;
-    private Handler mHandler; // to display Toast message
     private final IBinder mBinder = new LocalBinder(); // Binder given to clients
     private HGBPreferencesManager hgbPrefrenceManager;
-    private String connectionID;
-    private ServiceCallbacks serviceCallbacks;
 
-
-    public void setCallbacks(ServiceCallbacks callbacks) {
-        serviceCallbacks = callbacks;
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        mHandler = new Handler(Looper.getMainLooper());
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        int result = super.onStartCommand(intent, flags, startId);
-        startSignalR();
-        return result;
-    }
-
-    @Override
-    public void onDestroy() {
-        mHubConnection.stop();
-        super.onDestroy();
-    }
+    private HubConnection _connection;
+    private HubProxy _hub;
+    private String serverUrl = "https://apiprod.hellogbye.com/prod/";
+    private String SERVER_HUB_CHAT = "cncHub";
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -90,65 +71,31 @@ public class SignalRService extends Service {
         }
     }
 
-    /**
-     * method for clients (activities)
-     */
-    public void sendMessage(String message) {
-        String SERVER_METHOD_SEND = "Send";
-        mHubProxy.invoke(SERVER_METHOD_SEND, message);
-    }
+
 
     private void startSignalR() {
         Platform.loadPlatformComponent(new AndroidPlatformComponent());
 
-
-        System.out.println("Kate signalr");
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
-        Credentials credentials = new Credentials() {
-            @Override
-            public void prepareRequest(Request request) {
-                String strToken = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
-                 request.addHeader("ssession_token", strToken);
-            }
-        };
-
-        String serverUrl = "https://apiprod.hellogbye.com/prod/";
-
-     /*   String strToken = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
-        String sessionToken = "session_token="+strToken;*/
-
-        //mHubConnection = new HubConnection(serverUrl);
-
 
         String strToken = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
        // request.addHeader("session_token", strToken);
+        String host = serverUrl; //The url from your web site
         String sessionToken = "session_token="+strToken;
 
-        mHubConnection = new HubConnection(serverUrl,sessionToken,true,new Logger() {
+        _connection = new HubConnection(host,sessionToken,true,new Logger() {
 
             @Override
             public void log(String message, LogLevel level) {
                 Log.d("SignalR", level.toString() + ": " + message);
-                /*if (level == LogLevel.Critical) {
-                    Log.d("SignalR", level.toString() + ": " + message);
-                }*/
+
             }
         });
 
-       // mHubConnection.setCredentials(credentials);
-       /* , sessionToken , true, new Logger() {
-
-            @Override
-            public void log(String message, LogLevel level) {
-                if (level == LogLevel.Critical) {
-                    Log.d("SignalR", level.toString() + ": " + message);
-                }
-            }
-        });*/
-
+        _hub = _connection.createHubProxy(SERVER_HUB_CHAT);
 
         // Subscribe to the connected event
-        mHubConnection.connected(new Runnable() {
+        _connection.connected(new Runnable() {
 
             @Override
             public void run() {
@@ -160,46 +107,23 @@ public class SignalRService extends Service {
 
 
 
-    /*    mHubConnection = HubConnection(serverUrl, sessionToken, true, new Logger() {
+        ClientTransport clientTransport = new ServerSentEventsTransport(_connection.getLogger());
 
-            @Override
-            public void log(String message, LogLevel level) {
-                if (level == LogLevel.Critical) {
-                    Log.d("SignalR", level.toString() + ": " + message);
-                }
-            }
-        });*/
-        
-        //mHubConnection = new HubConnection(serverUrl);
-      //  mHubConnection.setCredentials(credentials);
-        String SERVER_HUB_CHAT = "cncHub";
-        mHubProxy = mHubConnection.createHubProxy("cncHub");
-
-        ClientTransport clientTransport = new ServerSentEventsTransport(mHubConnection.getLogger());
-
-        SignalRFuture<Void> signalRFuture = mHubConnection.start(clientTransport).done(new Action<Void>() {
+        SignalRFuture<Void> signalRFuture = _connection.start(clientTransport).done(new Action<Void>() {
 
             @Override
             public void run(Void obj) throws Exception {
-                System.out.println("Kate Done Connecting!");
 
                 String userProfileID = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, "");
-                System.out.println("Kate mHubConnection.getConnectionId() =" + mHubConnection.getConnectionId());
-                System.out.println("Kate userProfileID =" + userProfileID);
-
-              /*  String reg = "signalRclientId="+ mHubConnection.getConnectionId();
-                String reg2 = "userId="+userProfileID;*/
-
-                JSONObject jsonObject = new JSONObject();
+                System.out.println("Kate Done Connecting! mHubConnection.getConnectionId() =" + _connection.getConnectionId()+ "Kate userProfileID =" + userProfileID);
 
 
-                    jsonObject.put("signalRclientId", mHubConnection.getConnectionId());
-                    jsonObject.put("userId", userProfileID);
+                Map<String, String> nameValuePairs = new HashMap<String, String>();
 
+                nameValuePairs.put("signalRclientId",_connection.getConnectionId());
+                nameValuePairs.put("userId",userProfileID);
 
-
-
-                    mHubProxy.invoke("cncClientRegisterR", jsonObject).done(new Action<Void>() {
+                    _hub.invoke("cncClientRegisterR", nameValuePairs).done(new Action<Void>() {
                     @Override
                     public void run(Void aVoid) throws Exception {
                         System.out.println("Kate cncClientRegisterR done!!!!");
@@ -225,31 +149,12 @@ public class SignalRService extends Service {
         }
 
 
-
- /*       String CLIENT_METHOD_BROADAST_MESSAGE = "broadcastMessage";
-        mHubProxy.on(CLIENT_METHOD_BROADAST_MESSAGE,
-                new SubscriptionHandler1<CustomMessage>() {
+        _hub.on("cncOnShowSolutionR",
+                new SubscriptionHandler1<Object>() {
                     @Override
-                    public void run(final CustomMessage msg) {
-                        final String finalMsg = msg.UserName + " says " + msg.Message;
-                        // display Toast message
-                        mHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(getApplicationContext(), finalMsg, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }
-                , CustomMessage.class);*/
-
-
-        mHubProxy.on("cncOnShowSolutionR",
-                new SubscriptionHandler1<JSONObject>() {
-                    @Override
-                    public void run(final JSONObject msg) {
+                    public void run(final Object msg) {
                       //  final String finalMsg = msg.UserName + " says " + msg.Message;
-                        System.out.println("Kate finalMsg =" + msg.toString());
+                        System.out.println("Kate finalMsg cncOnShowSolutionR=" + msg.toString());
                         // display Toast message
                        /* mHandler.post(new Runnable() {
                             @Override
@@ -259,73 +164,38 @@ public class SignalRService extends Service {
                         });*/
                     }
                 }
-                , JSONObject.class);
+                , Object.class);
 
-        mHubProxy.on("cncOnHighlightQueryR",
-                new SubscriptionHandler1<JSONObject>() {
+        _hub.on("cncOnHighlightQueryR",
+                new SubscriptionHandler1<Object>() {
                     @Override
-                    public void run(final JSONObject msg) {
+                    public void run(final Object msg) {
                         //  final String finalMsg = msg.UserName + " says " + msg.Message;
-                        System.out.println("Kate finalMsg =" + msg.toString());
+                        System.out.println("Kate finalMsg cncOnHighlightQueryR=" + msg.toString());
 
                     }
                 }
-                , JSONObject.class);
+                , Object.class);
 
-        mHubProxy.on("cncOnMessageToClientR",
-                new SubscriptionHandler1<JSONObject>() {
+        _hub.on("cncOnMessageToClientR",
+                new SubscriptionHandler1<Object>() {
                     @Override
-                    public void run(final JSONObject msg) {
+                    public void run(final Object msg) {
                         //  final String finalMsg = msg.UserName + " says " + msg.Message;
-                        System.out.println("Kate finalMsg =" + msg.toString());
+                        System.out.println("Kate finalMsg cncOnMessageToClientR =" + msg.toString());
 
                     }
                 }
-                , JSONObject.class);
+                , Object.class);
 
     }
 
 
-
-    /*@SuppressWarnings("deprecation")
-    @Override
-    public void onStart(Intent intent, int startId) {
-        super.onStart(intent, startId);
-        Toast.makeText(this, "Service Start", Toast.LENGTH_LONG).show();
-
-        String server = "https://apiprod.hellogbye.com/prod/";
-        HubConnection connection = new HubConnection(server);
-        HubProxy proxy = connection.createHubProxy("ptThroughputHub");
-
-        SignalRFuture<Void> awaitConnection = connection.start();
-        try {
-            awaitConnection.get();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        //--HERE IS MY SOLUTION-----------------------------------------------------------
-        //Invoke JoinGroup to start receiving broadcast messages
-        proxy.invoke("JoinGroup", "Group1");
-
-        //Then call on() to handle the messages when they are received.
-        proxy.on( "broadcastMessage", new SubscriptionHandler1<String>() {
-            @Override
-            public void run(String msg) {
-             //   Log.d("result := ", msg);
-            }
-        }, String.class);
-
-        //--------------------------------------------------------------------------------
-    }*/
-
-
     public void cncSubmitQueryR(String query, ArrayList<AirportSendValuesVO> airportSendValuesVOsTemp, String preferencesProfileId) throws JSONException {
-        JSONObject jsonObject =  createParams(query, airportSendValuesVOsTemp, preferencesProfileId);
+        Map<String, Object> jsonObject =  createParams(query, airportSendValuesVOsTemp, preferencesProfileId);
         System.out.println("Kate query =" + query + "Json" + jsonObject.toString());
 
-        mHubProxy.invoke("cncSubmitQueryR", jsonObject).onError(new ErrorCallback() {
+        _hub.invoke("cncSubmitQueryR", jsonObject).onError(new ErrorCallback() {
             @Override
             public void onError(Throwable throwable) {
                 System.out.println("Kate cncSubmitQueryR errro" );
@@ -334,33 +204,58 @@ public class SignalRService extends Service {
     }
 
 
-    /*-(void) cncSubmitQueryR:(NSString*)data
-    {
-        NSMutableDictionary* body = [self params:data tokens:nil];
+    private Map<String, Object> createParams(String query, ArrayList<AirportSendValuesVO> selectedUserChoose, String userProfileId) throws JSONException {
 
-        [_hub invoke:@"cncSubmitQueryR" withArgs:[NSArray arrayWithObject:body] completionHandler:nil];
-    }*/
+        Map<String, Object> nameValuePairs1 = new HashMap<String, Object>();
+        Map<String, Object> nameValuePairs2 = new HashMap<String, Object>();
 
-    private JSONObject createParams(String query, ArrayList<AirportSendValuesVO> selectedUserChoose, String userProfileId) throws JSONException {
+     /*   nameValuePairs.put("signalRclientId",_connection.getConnectionId());
+        nameValuePairs.put("userId",userProfileID);*/
+
+/*
         JSONObject jsonObject = new JSONObject();
 
-        jsonObject.put("clientContext", new JSONObject().put("currentHotelGuid",""));
+        jsonObject.put("clientContext", new JSONObject().put("currentHotelGuid",""));*/
+
+
+
+      /*  JsonObject jsonObject1 = new JsonObject();
+
+        JsonObject jObj22 = new JsonObject();
+        jObj22.addProperty("currentHotelGuid","");*/
+
+
+
+        nameValuePairs2.put("currentHotelGuid","");
+
+        nameValuePairs1.put("clientContext",nameValuePairs2);
+
+        //jsonObject1.add("clientContext",jObj22);
+
+
+
 
         //travel profile id
        // getApplicationContext().get.getPersonalUserInformation().getmTravelPreferencesProfileId()
         if(selectedUserChoose != null) {
-            jsonObject.put("travelpreferenceprofileId", selectedUserChoose.get(0).getTravelpreferenceprofileid());
-            jsonObject.put("itineraryid", selectedUserChoose.get(0).getId());
+            nameValuePairs1.put("travelpreferenceprofileId", selectedUserChoose.get(0).getTravelpreferenceprofileid());
+            nameValuePairs1.put("itineraryid", selectedUserChoose.get(0).getId());
+
+            /*jsonObject1.addProperty("travelpreferenceprofileId", selectedUserChoose.get(0).getTravelpreferenceprofileid());
+            jsonObject1.addProperty("itineraryid", selectedUserChoose.get(0).getId());*/
+    /*        jsonObject.put("travelpreferenceprofileId", selectedUserChoose.get(0).getTravelpreferenceprofileid());
+            jsonObject.put("itineraryid", selectedUserChoose.get(0).getId());*/
         }
 
         if(userProfileId != null) {
-            jsonObject.put("travelpreferenceprofileId", userProfileId);
-
+           // jsonObject.put("travelpreferenceprofileId", userProfileId);
+            nameValuePairs1.put("travelpreferenceprofileId", userProfileId);
+            //jsonObject1.addProperty("travelpreferenceprofileId", userProfileId);
 
         }
-
-
-        jsonObject.put("signalRclientId",mHubConnection.getConnectionId().toString());
+        nameValuePairs1.put("signalRclientId",_connection.getConnectionId().toString());
+       // jsonObject1.addProperty("signalRclientId",_connection.getConnectionId().toString());
+        //jsonObject.put("signalRclientId",_connection.getConnectionId().toString());
 
         /*if( [[UserSessionManager sharedManager] hasLocation] )
         {
@@ -374,9 +269,19 @@ public class SignalRService extends Service {
         }*/
 
 
-        jsonObject.put("latitude",37.785834);
+    /*    jsonObject1.addProperty("latitude",37.785834);
+        jsonObject1.addProperty("longitude",-122.406417);
+        jsonObject1.addProperty("query",query);*/
+
+
+
+        nameValuePairs1.put("query",query);
+        nameValuePairs1.put("latitude",37.785834);
+        nameValuePairs1.put("longitude",-122.406417);
+
+      /*  jsonObject.put("latitude",37.785834);
         jsonObject.put("longitude",-122.406417);
-        jsonObject.put("query",query);
+        jsonObject.put("query",query);*/
 
       /*  if(selectedUserChoose != null){
             JSONObject jsonObjectTokens = new JSONObject();
@@ -387,51 +292,26 @@ public class SignalRService extends Service {
             jsonObjectTokens.put("token",selectedUserChoose);
         }*/
 
-        return jsonObject;
+        return nameValuePairs1;
     }
 
 
-/*    -(NSMutableDictionary*) params:(NSString*) data tokens:(NSArray<HighlightCellOfHighlightPositionAndValue*> *) tokens
-    {
-        NSMutableDictionary* body = [[NSMutableDictionary alloc] init];
+    @Override
+    public void onCreate() {
+        super.onCreate();
 
-        body[@"clientContext"] = [self clientContext];
+    }
 
-        PreferenceProfile *selectedOrDefaultPreferenceProfile = [[UserProfileManager sharedManager] selectedOrDefaultPreferenceProfile];
-        NSString *profileId = selectedOrDefaultPreferenceProfile.profileId;
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        int result = super.onStartCommand(intent, flags, startId);
+        startSignalR();
+        return result;
+    }
 
-        if(profileId)
-        {
-            body[@"travelpreferenceprofileId"] = profileId;
-        }
-
-        body[@"signalRclientId"] = self.connectionId;
-
-        if( [[UserSessionManager sharedManager] hasLocation] )
-        {
-            body[@"latitude"] = [[UserSessionManager sharedManager] getUsersLatitude];
-            body[@"longitude"] = [[UserSessionManager sharedManager] getUsersLongitude];
-        }
-        else
-        {
-            body[@"latitude"] = @"0";
-            body[@"longitude"] = @"0";
-        }
-
-        body[@"query"] = data;
-
-        if( tokens )
-        {
-            NSMutableArray* dictTokens = [[NSMutableArray alloc] init];
-
-            for( HighlightCellOfHighlightPositionAndValue* cell in tokens )
-            {
-                [dictTokens addObject:[cell dictionary]];
-            }
-
-            body[@"token"] = dictTokens;
-        }
-
-        return body;
-    }*/
+    @Override
+    public void onDestroy() {
+        _connection.stop();
+        super.onDestroy();
+    }
 }

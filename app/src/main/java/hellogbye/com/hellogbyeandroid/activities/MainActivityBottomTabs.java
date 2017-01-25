@@ -1363,21 +1363,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         return mAutoComplete;
     }
 
-
-    public void sendMessage(View view) {
-        if (mBound) {
-            // Call a method from the SignalRService.
-            // However, if this call were something that might hang, then this request should
-            // occur in a separate thread to avoid slowing down the activity performance.
-         /*   EditText editText = (EditText) findViewById(R.id.edit_message);
-            if (editText != null && editText.getText().length() > 0) {*/
-            //    String message = editText.getText().toString();
-                mService.sendMessage("Kate test");
-           /* }*/
-        }
-    }
-
-
     private final ServiceConnection mConnection = new ServiceConnection() {
 
         @Override
