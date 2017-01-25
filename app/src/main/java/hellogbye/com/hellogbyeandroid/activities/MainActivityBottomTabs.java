@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
@@ -110,6 +111,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     public boolean isFreeUser;
     private CharSequence mTitle;
     private FontTextView preference_save_changes;
+    private ImageView preference_add_card;
     private AlertDialog selectDefaultProfileDialog;
     private ArrayList<DefaultsProfilesVO> userDefaultProfiles;
     private HashSet<CreditCardItem> mSelectedCreditCards = new HashSet<>();
@@ -425,6 +427,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         itirnarary_title_Bar = (FontTextView)mToolbar.findViewById(R.id.itirnarary_title_Bar);
         up_bar_favorite = (ImageButton)mToolbar.findViewById(R.id.up_bar_favorite);
         preference_save_changes = (FontTextView) mToolbar.findViewById(R.id.preference_save_changes);
+        preference_add_card = (ImageView) mToolbar.findViewById(R.id.add_cc);
         toolbar_new_iternerary = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary);
         toolbar_new_iternerary_cnc = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary_cnc);
         toolbar_new_iternerary_cnc_chat_message = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary_cnc_chat_message);
@@ -482,6 +485,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
     public FontTextView getPreferencesSaveButton(){
         return preference_save_changes;
+    }
+
+    public ImageView getPreference_add_card() {
+        return preference_add_card;
     }
 
     public ImageButton getAddCompanionButton() {

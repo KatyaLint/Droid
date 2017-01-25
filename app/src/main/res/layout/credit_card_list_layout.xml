@@ -10,43 +10,14 @@
         android:id="@+id/credit_card_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:scrollbars="vertical" />
 
+    <include
+        android:id="@+id/payment_missing_rl"
+        android:visibility="gone"
+        layout="@layout/new_add_cc_layout"/>
 
-    <LinearLayout
-        android:id="@+id/payment_missing_ll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/thin_0421_money_credit_card_coins_payment" />
 
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/DP10"
-            android:gravity="center"
-            android:text="@string/payment_no_payment_cards"
-            android:textColor="@color/COLOR_00516f"
-            android:textSize="@dimen/SP26" />
-    </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="@dimen/DP10"
-        android:clickable="true"
-        android:src="@drawable/fab_plus"
-        app:backgroundTint="@color/COLOR_00516f"
-        app:useCompatPadding="true" />
 </RelativeLayout>

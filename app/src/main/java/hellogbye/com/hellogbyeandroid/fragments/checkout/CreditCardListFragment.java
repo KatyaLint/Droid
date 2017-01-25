@@ -9,13 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.IClickedItem;
 import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.creditcardadapters.CreditCardSwipeItemsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -23,6 +26,8 @@ import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
+import hellogbye.com.hellogbyeandroid.views.FontButtonView;
+import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by arisprung on 12/2/15.
@@ -32,8 +37,9 @@ public class CreditCardListFragment extends HGBAbstractFragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private CreditCardSwipeItemsAdapter mAdapter;
-    private FloatingActionButton mAddImageView;
-    private LinearLayout mMissingLinearLayout;
+    private FontTextView mAdd;
+    //private FloatingActionButton mAddImageView;
+    private RelativeLayout mMissingLinearLayout;
     private Bundle bundle;
     public static Fragment newInstance(int position) {
         Fragment fragment = new CreditCardListFragment();
@@ -57,16 +63,29 @@ public class CreditCardListFragment extends HGBAbstractFragment {
         bundle = new Bundle();
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.credit_card_recycler_view);
-        mAddImageView = (FloatingActionButton) view.findViewById(R.id.fab);
-        mMissingLinearLayout = (LinearLayout) view.findViewById(R.id.payment_missing_ll);
+        mAdd = (FontTextView)view.findViewById(R.id.add_new_card);
+      //  mAddImageView = (FloatingActionButton) view.findViewById(R.id.fab);
+        mMissingLinearLayout = (RelativeLayout) view.findViewById(R.id.payment_missing_rl);
 
-
-        mAddImageView.setOnClickListener(new View.OnClickListener() {
+        ((MainActivityBottomTabs)getActivity()).getPreference_add_card().setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 getFlowInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(), null);
             }
         });
+
+        mAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFlowInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(), null);
+            }
+        });
+//        mAddImageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getFlowInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(), null);
+//            }
+//        });
 
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         // use this setting to improve performance if you know that changes

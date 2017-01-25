@@ -3,7 +3,6 @@ package hellogbye.com.hellogbyeandroid.views;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
-import android.content.Context;
 
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -19,8 +18,6 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.application.HGBApplication;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
-
-import static hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum.SELECT_CREDIT_CARD;
 
 public class CostumeToolBar extends Toolbar {
 
@@ -41,6 +38,7 @@ public class CostumeToolBar extends Toolbar {
     //private LinearLayout tool_bar_profile_name;
     private ImageButton toolbar_new_iternerary_cnc;
     private FontTextView preference_save_changes;
+    private ImageView preference_add_cc;
     private SearchView search_view_tool_bar;
     private AutoCompleteTextView auto_complete;
     private Activity mActivity;
@@ -101,6 +99,11 @@ public class CostumeToolBar extends Toolbar {
         if(preference_save_changes == null) {
             preference_save_changes = (FontTextView)findViewById(R.id.preference_save_changes);
         }
+        if(preference_add_cc == null) {
+            preference_add_cc = (ImageView) findViewById(R.id.add_cc);
+        }
+
+
 //        if(my_trips_button == null){
 //            my_trips_button = (ImageButton)findViewById(R.id.my_trips_button);
 //        }
@@ -250,6 +253,7 @@ public class CostumeToolBar extends Toolbar {
         toolbar_add_companion.setVisibility(View.GONE);
         chat_message.setVisibility(View.GONE);
         toolbar_profile_popup.setVisibility(View.GONE);
+        preference_add_cc.setVisibility(View.GONE);
 
 
         switch (navBar) {
@@ -300,8 +304,12 @@ public class CostumeToolBar extends Toolbar {
             case PREFERENCES_TAB_SETTINGS:
             case COMPANION_HELP_FEEDBACK:
             case ADD_CREDIT_CARD:
+                preference_save_changes.setVisibility(View.VISIBLE);
+                break;
             case HAZARDOUS_NOTICE:
             case CREDIT_CARD_LIST:
+                preference_add_cc.setVisibility(View.VISIBLE);
+                break;
             case PAYMENT_TRAVELERS_DETAILS:
                 preference_save_changes.setVisibility(View.VISIBLE);
                 break;
