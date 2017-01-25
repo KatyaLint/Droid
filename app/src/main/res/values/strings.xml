@@ -268,7 +268,7 @@
     <string name = "payment_select_payment_method">Select Payment Method</string>
     <string name = "payment_next_button">Next</string>
     <string name="payment_card_information">CARD INFORMATION</string>
-    <string name="payment_scan_card">Scan Card</string>
+    <string name="payment_scan_card">Scan</string>
     <string name="payment_card_number">Card Number</string>
     <string name="payment_exp_month">Exp. Month</string>
     <string name="payment_exp_year">Exp. Year</string>

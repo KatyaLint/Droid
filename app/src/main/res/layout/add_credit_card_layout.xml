@@ -40,8 +40,8 @@
             android:layout_height="wrap_content">
         <com.devmarvel.creditcardentry.library.CreditCardForm
             android:id="@+id/cc_number"
+            app:input_background="@android:color/transparent"
             style="@style/cc_number_edit_text"
-
             android:layout_width="match_parent"
             app:card_number_hint="@string/payment_card_number"
             android:hint="@string/payment_card_number"
@@ -56,12 +56,16 @@
             android:id="@+id/cc_scan"
             android:layout_alignParentTop="true"
             android:padding="@dimen/DP4"
+            android:background="@drawable/select_scan_cc_border"
             android:layout_height="match_parent"
             android:layout_width="wrap_content"
             android:layout_alignParentRight="true"
             android:textSize="@dimen/SP10"
+            android:gravity="center_vertical"
             android:layout_marginTop="@dimen/DP6"
             android:layout_marginRight="@dimen/DP6"
+            android:drawablePadding="@dimen/DP6"
+            android:drawableLeft="@drawable/scan_card"
             android:text="@string/payment_scan_card" />
      <!--       style="@style/GrayCustomButtonStyle"-->
         </RelativeLayout>
