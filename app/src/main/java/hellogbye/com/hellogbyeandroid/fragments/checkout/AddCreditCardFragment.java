@@ -239,7 +239,8 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    addFields();
+
+                    addCurrentUserFields();
 
                 } else {
                     clearFields();
@@ -257,6 +258,17 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
         }
 
 
+    }
+
+    private void addCurrentUserFields() {
+        UserProfileVO currentUser = getActivityInterface().getCurrentUser();
+        mCardStreet.setText(currentUser.getAddress());
+        mCardCountry.setText(currentUser.getCountry());
+        mCardFirstName.setText(currentUser.getFirstname());
+        mCardLastName.setText(currentUser.getLastname());
+        mCardProvince.setText(currentUser.getState());
+        mCardPostal.setText(currentUser.getPostalcode());
+        mCardCity.setText(currentUser.getCity());
     }
 
     private boolean isFillPayment = false;
@@ -309,7 +321,6 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
 
     private void addFields() {
 
-        UserProfileVO currentUser = getActivityInterface().getCurrentUser();
         mCardStreet.setText(mCurrentCard.getBuyeraddress());
         mCardCountry.setText(mCurrentCard.getBillingcountry());
         mCardFirstName.setText(mCurrentCard.getBuyerfirstname());

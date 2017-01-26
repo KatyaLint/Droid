@@ -581,6 +581,7 @@ Code changing:
         HEL-2087 - wrong spelling of city should give a blank list, there shouldn't be anything
         HEL-2102 - wrong functionality to a sign in button in anonymous mode
         HEL-1826 - navbar text isn't shown on nexus 5
+        HEL-2278 - Create User Agent for Andorid
 
       Code changing:
       --------------
