@@ -2,6 +2,7 @@ package hellogbye.com.hellogbyeandroid.network;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -19,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.squareup.okhttp.OkHttpClient;
 
+import org.apache.http.message.BasicHeader;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -211,6 +213,8 @@ public class HGBJsonRequest extends Request<String> {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Accept", "application/json");
         headers.put("Content-Type", "application/json; charset=utf-8");
+
+        headers.put("User-Agent", " (HelloGbyeAndroid/" + android.os.Build.MODEL + " Android" + Build.VERSION.SDK_INT + ")");
         HGBPreferencesManager sharedPreferences = HGBPreferencesManager.getInstance(mContext);
         String token = sharedPreferences.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
         Log.d("Token", token);
