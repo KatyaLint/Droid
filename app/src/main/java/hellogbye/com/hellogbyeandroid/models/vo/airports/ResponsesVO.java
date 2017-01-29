@@ -22,6 +22,12 @@ public class ResponsesVO {
 
 
 
+    @SerializedName("isplural")
+    private boolean mIsplural;
+
+    @SerializedName("needtoreplaceword")
+    private boolean mNeedtoreplaceword;
+
     @SerializedName("results")
     private ArrayList<AirportResultsVO> results = new ArrayList<AirportResultsVO>();
 

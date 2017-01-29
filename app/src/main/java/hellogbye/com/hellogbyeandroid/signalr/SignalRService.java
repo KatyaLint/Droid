@@ -23,6 +23,10 @@ import java.util.TreeMap;
 import java.util.concurrent.ExecutionException;
 
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportServerResultCNCVO;
+import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportServerResultVO;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.network.Parser;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import microsoft.aspnet.signalr.client.Action;
 import microsoft.aspnet.signalr.client.Credentials;
@@ -50,7 +54,8 @@ public class SignalRService extends Service {
 
     private HubConnection _connection;
     private HubProxy _hub;
-    private String serverUrl = "https://apiprod.hellogbye.com/prod/";
+    /*private String serverUrl = "https://apiprod.hellogbye.com/prod/";*/
+    private String serverUrl = "http://apidev.hellogbye.com/dev/"; //"https://apiprod.hellogbye.com/prod/";
     private String SERVER_HUB_CHAT = "cncHub";
 
     @Override
@@ -123,7 +128,7 @@ public class SignalRService extends Service {
                 nameValuePairs.put("signalRclientId",_connection.getConnectionId());
                 nameValuePairs.put("userId",userProfileID);
 
-                    _hub.invoke("cncClientRegisterR", nameValuePairs).done(new Action<Void>() {
+                _hub.invoke("cncClientRegisterR", nameValuePairs).done(new Action<Void>() {
                     @Override
                     public void run(Void aVoid) throws Exception {
                         System.out.println("Kate cncClientRegisterR done!!!!");
@@ -167,15 +172,22 @@ public class SignalRService extends Service {
                 , Object.class);
 
         _hub.on("cncOnHighlightQueryR",
-                new SubscriptionHandler1<Object>() {
+                new SubscriptionHandler1<String>() {
                     @Override
-                    public void run(final Object msg) {
+                    public void run(final String msg) {
+
+
+                        String json = msg.toString();
+                        AirportServerResultCNCVO airportServerResultVO = (AirportServerResultCNCVO) Parser.parseAirportCNCResult(msg);
+
                         //  final String finalMsg = msg.UserName + " says " + msg.Message;
-                        System.out.println("Kate finalMsg cncOnHighlightQueryR=" + msg.toString());
+                        System.out.println("Kate finalMsg cncOnHighlightQueryR=" + airportServerResultVO);
+
+
 
                     }
                 }
-                , Object.class);
+                , String.class);
 
         _hub.on("cncOnMessageToClientR",
                 new SubscriptionHandler1<Object>() {
@@ -209,88 +221,26 @@ public class SignalRService extends Service {
         Map<String, Object> nameValuePairs1 = new HashMap<String, Object>();
         Map<String, Object> nameValuePairs2 = new HashMap<String, Object>();
 
-     /*   nameValuePairs.put("signalRclientId",_connection.getConnectionId());
-        nameValuePairs.put("userId",userProfileID);*/
-
-/*
-        JSONObject jsonObject = new JSONObject();
-
-        jsonObject.put("clientContext", new JSONObject().put("currentHotelGuid",""));*/
-
-
-
-      /*  JsonObject jsonObject1 = new JsonObject();
-
-        JsonObject jObj22 = new JsonObject();
-        jObj22.addProperty("currentHotelGuid","");*/
-
-
-
         nameValuePairs2.put("currentHotelGuid","");
-
         nameValuePairs1.put("clientContext",nameValuePairs2);
 
-        //jsonObject1.add("clientContext",jObj22);
 
-
-
-
-        //travel profile id
-       // getApplicationContext().get.getPersonalUserInformation().getmTravelPreferencesProfileId()
         if(selectedUserChoose != null) {
             nameValuePairs1.put("travelpreferenceprofileId", selectedUserChoose.get(0).getTravelpreferenceprofileid());
             nameValuePairs1.put("itineraryid", selectedUserChoose.get(0).getId());
 
-            /*jsonObject1.addProperty("travelpreferenceprofileId", selectedUserChoose.get(0).getTravelpreferenceprofileid());
-            jsonObject1.addProperty("itineraryid", selectedUserChoose.get(0).getId());*/
-    /*        jsonObject.put("travelpreferenceprofileId", selectedUserChoose.get(0).getTravelpreferenceprofileid());
-            jsonObject.put("itineraryid", selectedUserChoose.get(0).getId());*/
         }
 
         if(userProfileId != null) {
-           // jsonObject.put("travelpreferenceprofileId", userProfileId);
             nameValuePairs1.put("travelpreferenceprofileId", userProfileId);
-            //jsonObject1.addProperty("travelpreferenceprofileId", userProfileId);
-
         }
         nameValuePairs1.put("signalRclientId",_connection.getConnectionId().toString());
-       // jsonObject1.addProperty("signalRclientId",_connection.getConnectionId().toString());
-        //jsonObject.put("signalRclientId",_connection.getConnectionId().toString());
-
-        /*if( [[UserSessionManager sharedManager] hasLocation] )
-        {
-            body[@"latitude"] = [[UserSessionManager sharedManager] getUsersLatitude];
-            body[@"longitude"] = [[UserSessionManager sharedManager] getUsersLongitude];
-        }
-        else
-        {
-            body[@"latitude"] = @"0";
-            body[@"longitude"] = @"0";
-        }*/
-
-
-    /*    jsonObject1.addProperty("latitude",37.785834);
-        jsonObject1.addProperty("longitude",-122.406417);
-        jsonObject1.addProperty("query",query);*/
-
 
 
         nameValuePairs1.put("query",query);
         nameValuePairs1.put("latitude",37.785834);
         nameValuePairs1.put("longitude",-122.406417);
 
-      /*  jsonObject.put("latitude",37.785834);
-        jsonObject.put("longitude",-122.406417);
-        jsonObject.put("query",query);*/
-
-      /*  if(selectedUserChoose != null){
-            JSONObject jsonObjectTokens = new JSONObject();
-            JSONArray jsonArray = new JSONArray();
-            for (AirportSendValuesVO airportSendValuesVO : selectedUserChoose) {
-                jsonArray.put(airportSendValuesVO.);
-            }
-            jsonObjectTokens.put("token",selectedUserChoose);
-        }*/
 
         return nameValuePairs1;
     }

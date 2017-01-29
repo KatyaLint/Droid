@@ -18,6 +18,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.models.CreditCardSessionItem;
 
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
+import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportServerResultCNCVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionsSearchItemsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
@@ -520,6 +521,21 @@ public class Parser {
         }
         return airportServerResultVO;
     }
+
+
+    public static Object parseAirportCNCResult(String response) {
+        AirportServerResultCNCVO  airportServerResultVO = null;
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<AirportServerResultCNCVO>() {
+            }.getType();
+            airportServerResultVO = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return airportServerResultVO;
+    }
+
 
     public static Object parseCCSession(String response) {
         CreditCardSessionItem ccItem = null;
