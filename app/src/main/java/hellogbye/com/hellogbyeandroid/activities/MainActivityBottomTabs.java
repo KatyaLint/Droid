@@ -39,7 +39,8 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.FareClassFragment;
-import hellogbye.com.hellogbyeandroid.fragments.cnc.CNCFragment;
+
+import hellogbye.com.hellogbyeandroid.fragments.cnc.CNCSignalRFragment;
 import hellogbye.com.hellogbyeandroid.fragments.hotel.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.hotel.SelectNewHotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
@@ -446,7 +447,14 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             return;
         }
 
-        if (count == 1 && str.equals(CNCFragment.class.toString())) {
+    /*    if (count == 1 && str.equals(CNCFragment.class.toString())) {
+            LogOutPopup();
+            return;
+        }
+*/
+
+
+        if (count == 1 && str.equals(CNCSignalRFragment.class.toString())) {
             LogOutPopup();
             return;
         }
@@ -865,7 +873,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
         switch (navBar) {
             case CNC:
-                fragment = CNCFragment.newInstance(navPosition);
+               // fragment = CNCFragment.newInstance(navPosition);
+                fragment = CNCSignalRFragment.newInstance(navPosition);
                 selectBottomBar(R.id.bb_menu_cnc);
 
                 break;
@@ -1337,9 +1346,15 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             //   Fragment currentFragment = getFragmentManager().findFragmentByTag(CNCFragment.class.toString());
 
 
-            Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(CNCFragment.class.toString());
+        //    Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(CNCFragment.class.toString());
 
-            ((CNCFragment) currentFragment).handleMyMessage(matches.get(0));
+
+            Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(CNCSignalRFragment.class.toString());
+
+
+
+            ((CNCSignalRFragment) currentFragment).handleMyMessage(matches.get(0));
+            //((CNCFragment) currentFragment).handleMyMessage(matches.get(0));
 //            if (currentFragment instanceof CNCFragment) {
 //                ((CNCFragment) currentFragment).handleMyMessage(matches.get(0));
 //            }

@@ -106,7 +106,7 @@ dependencies {
     compile 'com.viewpagerindicator:library:2.4.1'
 
 
-    compile files('libs/gson-2.2.2.jar')
+    compile files('libs/gson-2.2.3.jar')
     compile files('libs/signalr-client-sdk.jar')
     compile files('libs/signalr-client-sdk-android.jar')
 

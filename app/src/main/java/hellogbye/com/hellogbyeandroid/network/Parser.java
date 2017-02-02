@@ -18,7 +18,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.models.CreditCardSessionItem;
 
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
-import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportServerResultCNCVO;
+import hellogbye.com.hellogbyeandroid.signalr.AirportServerResultCNCVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionsSearchItemsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
@@ -37,6 +37,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
+import hellogbye.com.hellogbyeandroid.signalr.SignalRServerResponseForHighlightVO;
 
 public class Parser {
 
@@ -501,6 +502,19 @@ public class Parser {
         try {
             Gson gson = new Gson();
             Type listType = new TypeToken<List<CompanionStaticRelationshipTypesVO>>() {
+            }.getType();
+            mCompanionRelationshipTypes = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mCompanionRelationshipTypes;
+    }
+
+    public static Object parseSignalRHighlightResponse(String response) {
+        SignalRServerResponseForHighlightVO  mCompanionRelationshipTypes= null;
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<SignalRServerResponseForHighlightVO>() {
             }.getType();
             mCompanionRelationshipTypes = gson.fromJson((String) response, listType);
         } catch (Exception e) {
