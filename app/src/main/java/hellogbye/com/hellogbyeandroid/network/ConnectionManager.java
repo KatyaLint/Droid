@@ -1549,8 +1549,8 @@ public class ConnectionManager {
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
+            public void onErrorResponse(VolleyError SignalRRrror) {
+                listener.onError(Parser.parseErrorMessage(SignalRRrror));
             }
         });*/
     }

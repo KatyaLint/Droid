@@ -7,20 +7,11 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONStringer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -148,7 +139,7 @@ public class SignalRService extends Service {
                 }).onError(new ErrorCallback() {
 
                     @Override
-                    public void onError(Throwable error) {
+                    public void onError(Throwable SignalRRrror) {
                     }
                 });*/
 
@@ -174,7 +165,7 @@ public class SignalRService extends Service {
                         String response = msg.toString();
                         SignalRServerResponseForHighlightVO signalRServerResponseForHighlightVO = (SignalRServerResponseForHighlightVO) Parser.parseSignalRHighlightResponse(response);
 
-                        CNCHiglightResponceCB.answearFromServerToUserChooses(signalRServerResponseForHighlightVO);
+                        CNCHiglightResponceCB.AnswearFromServerToUserChooses(signalRServerResponseForHighlightVO);
 
 
                     }
@@ -190,7 +181,7 @@ public class SignalRService extends Service {
 
                         AirportServerResultCNCVO airportServerResultVO = (AirportServerResultCNCVO) Parser.parseAirportCNCResult(response);
 
-                        CNCHiglightResponceCB.higlightReceived(airportServerResultVO);
+                        CNCHiglightResponceCB.HiglightReceived(airportServerResultVO);
 
 
                     }
@@ -224,7 +215,7 @@ public class SignalRService extends Service {
         _hub.invoke("cncSubmitHighlightQueryR", jsonObject).onError(new ErrorCallback() {
             @Override
             public void onError(Throwable throwable) {
-
+                CNCHiglightResponceCB.SignalRRrror("Error int cncSubmitHiglight " +throwable.getMessage() );
             }
         });
     }
@@ -238,7 +229,7 @@ public class SignalRService extends Service {
         _hub.invoke("cncSubmitHighlightQueryCmR", jsonObject).onError(new ErrorCallback() {
             @Override
             public void onError(Throwable throwable) {
-
+                CNCHiglightResponceCB.SignalRRrror("Error int cncSubmitHighlightQueryCmR " +throwable.getMessage() );
             }
         });
 
@@ -254,7 +245,7 @@ public class SignalRService extends Service {
         _hub.invoke("cncSubmitQueryCmR", jsonObject).onError(new ErrorCallback() {
             @Override
             public void onError(Throwable throwable) {
-
+                CNCHiglightResponceCB.SignalRRrror("Error int cncSubmitQueryCmR " +throwable.getMessage() );
             }
         });
     }
@@ -266,7 +257,7 @@ public class SignalRService extends Service {
         _hub.invoke("cncSubmitQueryR", jsonObject).onError(new ErrorCallback() {
             @Override
             public void onError(Throwable throwable) {
-
+                CNCHiglightResponceCB.SignalRRrror("Error int cncSubmitQueryR " +throwable.getMessage() );
             }
         });
     }

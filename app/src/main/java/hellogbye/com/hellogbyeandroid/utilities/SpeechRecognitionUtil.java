@@ -145,16 +145,16 @@ public class SpeechRecognitionUtil
         switch (errorCode)
         {
             case SpeechRecognizer.ERROR_AUDIO:
-                message = "Audio recording error";
+                message = "Audio recording SignalRRrror";
                 break;
             case SpeechRecognizer.ERROR_CLIENT:
-                message = "Client side error";
+                message = "Client side SignalRRrror";
                 break;
             case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
                 message = "Insufficient permissions";
                 break;
             case SpeechRecognizer.ERROR_NETWORK:
-                message = "Network error";
+                message = "Network SignalRRrror";
                 break;
             case SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
                 message = "Network timeout";
@@ -166,7 +166,7 @@ public class SpeechRecognitionUtil
                 message = "RecognitionService busy";
                 break;
             case SpeechRecognizer.ERROR_SERVER:
-                message = "error from server";
+                message = "SignalRRrror from server";
                 break;
             case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
                 message = "No speech input";

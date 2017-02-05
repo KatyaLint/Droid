@@ -68,8 +68,8 @@ public class HubConnectionFactory {
         }
 
         //ClientTransport transport = new LongPollingTransport(mConnection.getLogger()); // works as expected
-        ClientTransport transport = new ServerSentEventsTransport(mConnection.getLogger()); // Works on WiFi, never connects on 3G, no error is thrown either
-        //ClientTransport transport = new WebsocketTransport(mConnection.getLogger()); // Never connects, not error is thrown
+        ClientTransport transport = new ServerSentEventsTransport(mConnection.getLogger()); // Works on WiFi, never connects on 3G, no SignalRRrror is thrown either
+        //ClientTransport transport = new WebsocketTransport(mConnection.getLogger()); // Never connects, not SignalRRrror is thrown
         SignalRFuture<Void> connectionFuture = mConnection.start(transport);
 
         mConnection.connected(new Runnable() {
@@ -83,7 +83,7 @@ public class HubConnectionFactory {
         mConnection.error(new ErrorCallback() {
             @Override
             public void onError(Throwable error) {
-                Log.d("SignalR", "Connection error: " + error.toString());
+                Log.d("SignalR", "Connection SignalRRrror: " + error.toString());
 
                 if (!future.isDone()) {
                     future.triggerError(error);

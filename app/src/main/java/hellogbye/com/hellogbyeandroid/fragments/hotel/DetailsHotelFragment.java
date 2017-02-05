@@ -155,7 +155,7 @@ public class DetailsHotelFragment extends HGBAbstractFragment  implements  OnMap
             } else {
                 permissionDenied = true;
             }
-            // Permission was denied. Display an error message.
+            // Permission was denied. Display an SignalRRrror message.
         }
     }
 }

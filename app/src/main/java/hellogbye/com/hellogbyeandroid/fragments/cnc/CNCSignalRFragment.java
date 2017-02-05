@@ -184,7 +184,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
                 /*new IHiglightReceivedFromServer(){
 
             @Override
-            public void higlightReceived( AirportServerResultCNCVO airportServerResultVO) {
+            public void HiglightReceived( AirportServerResultCNCVO airportServerResultVO) {
 
 
                 serverFinished(airportServerResultVO);
@@ -217,7 +217,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
     private void addUserConversation(){
         ArrayList<ConversationVO> conversations = getActivityInterface().getTravelOrder().getConversation();
         for(ConversationVO conversation : conversations){
-            handleHGBMessageMe(conversation.getmMessage());
+        //    handleHGBMessageMe(conversation.getmMessage());
             handleHGBMessage(getString(R.string.itinerary_created));
         }
     }
@@ -318,6 +318,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         airportSendValuesVOs.add(airportSendValuesVO);
         addCompanionToQuery(airportSendValuesVOs);
 
+        System.out.println("Kate JoinCompanion");
         handleHGBMessageMe(joinQuery);
         args.putString(HGBConstants.BUNDLE_ADD_COMPANION_ID, null);
     }
@@ -430,6 +431,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
 
         String strCNCList = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, "");
+        System.out.println("Kate loadCNCList = " + strCNCList);
         if((strCNCList.equals("") || strCNCList.equals("null")) &&  getActivityInterface().getCNCItems()== null){
             Resources res = getResources();
             String userName = "";
@@ -535,10 +537,12 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         }
     }
 
-    public void handleMyMessage(final String strMessageReceived) {
+    private void handleMyMessage(final String strMessageReceived) {
         //stopTextTutorial();
         //setTutorialTextVisibility(false);
 
+
+        System.out.println("Kate handleMyMessage = "+ strMessageReceived);
         getActivityInterface().addCNCItem(new CNCItem(strMessageReceived.trim(), CNCAdapter.ME_ITEM));
         addWaitingItem();
         mCNCAdapter.notifyDataSetChanged();
@@ -718,11 +722,14 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
 
     public void handleHGBMessage(String strMessage) {
+
+        System.out.println("Kate  handleHGBMessage =" + strMessage);
         getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.HGB_ITEM));
         removeWaitingItem();
     }
 
     public void handleHGBMessageMe(String strMessage) {
+        System.out.println("Kate  handleHGBMessageMe =" + strMessage);
         getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.ME_ITEM));
         addWaitingItem();
 
@@ -730,14 +737,15 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
 
     public interface IHiglightReceivedFromServer{
-        void higlightReceived( AirportServerResultCNCVO airportServerResultVO);
-        void answearFromServerToUserChooses(SignalRServerResponseForHighlightVO signalRServerResponseForHighlightVO);
+        void HiglightReceived(AirportServerResultCNCVO airportServerResultVO);
+        void AnswearFromServerToUserChooses(SignalRServerResponseForHighlightVO signalRServerResponseForHighlightVO);
+        void SignalRRrror(String error);
     }
 
     private IHiglightReceivedFromServer higlightReceivedFromServer = new IHiglightReceivedFromServer(){
 
         @Override
-        public void higlightReceived( final AirportServerResultCNCVO airportServerResultVO) {
+        public void HiglightReceived(final AirportServerResultCNCVO airportServerResultVO) {
 
             getActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -750,7 +758,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         }
 
         @Override
-        public void answearFromServerToUserChooses(final SignalRServerResponseForHighlightVO signalRServerResponseForHighlightVO) {
+        public void AnswearFromServerToUserChooses(final SignalRServerResponseForHighlightVO signalRServerResponseForHighlightVO) {
 
             getActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -764,6 +772,13 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
             });
 
 
+        }
+
+        @Override
+        public void SignalRRrror(String error) {
+            handleHGBMessage(getResources().getString(R.string.cnc_error));
+            airportSendValuesVOs.clear();
+          //  ErrorMessage(error);
         }
     };
 
@@ -906,8 +921,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
             @Override
             public void onError(Object data) {
                 //   ErrorMessage(data);
-                handleHGBMessage(getResources().getString(R.string.cnc_error));
-                airportSendValuesVOs.clear();
+
             }
         });*/
     }
@@ -1037,11 +1051,16 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
     @Override
     public void onDestroyView() {
 
+        System.out.println("Kate destroy");
+
+
         try {
             Gson gsonback = new Gson();
             String json = gsonback.toJson(getActivityInterface().getCNCItems());
+
             // When user exit the app, next time hi will see his itirnarary
             mHGBPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, json);
+       //     getActivityInterface().setCNCItems(null);
 
         } catch (Exception e) {
             e.printStackTrace();

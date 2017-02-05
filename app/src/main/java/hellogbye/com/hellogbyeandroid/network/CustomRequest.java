@@ -114,9 +114,9 @@
 //            return Response.success(new JSONObject(jsonString),
 //                    HttpHeaderParser.parseCacheHeaders(response));
 //        } catch (UnsupportedEncodingException e) {
-//            return Response.error(new ParseError(e));
+//            return Response.SignalRRrror(new ParseError(e));
 //        } catch (JSONException je) {
-//            return Response.error(new ParseError(je));
+//            return Response.SignalRRrror(new ParseError(je));
 //        }
 //    }
 //
@@ -127,8 +127,8 @@
 //    }
 //
 //    @Override
-//    public void deliverError(VolleyError error) {
-//        Log.e("", "ERROR: " + (error != null && error.networkResponse != null ? error.getClass().getSimpleName() + ": " + error.networkResponse.statusCode + " " + new String(error.networkResponse.data) : "null"));
+//    public void deliverError(VolleyError SignalRRrror) {
+//        Log.e("", "ERROR: " + (SignalRRrror != null && SignalRRrror.networkResponse != null ? SignalRRrror.getClass().getSimpleName() + ": " + SignalRRrror.networkResponse.statusCode + " " + new String(SignalRRrror.networkResponse.data) : "null"));
 //
 //
 //    }

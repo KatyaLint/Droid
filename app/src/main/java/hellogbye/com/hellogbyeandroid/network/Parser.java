@@ -48,22 +48,22 @@ public class Parser {
         String message = onErrorResponse(error);
         return message;
 //                try {
-//                    String body = new String(error.networkResponse.data, "UTF-8");
+//                    String body = new String(SignalRRrror.networkResponse.data, "UTF-8");
 //
-//                    if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-//                        return "Network timed out error " + error.networkResponse.statusCode;
-//                    } else if (error instanceof AuthFailureError) {
-//                        return "AuthFailureError error " + error.networkResponse.statusCode;
-//                    } else if (error instanceof ServerError) {
-//                        return "ServerError error " + error.networkResponse.statusCode;
-//                    } else if (error instanceof NetworkError) {
-//                        return "NetworkError error " + error.networkResponse.statusCode;
-//                    } else if (error instanceof ParseError) {
-//                        return "ParseError error " + error.networkResponse.statusCode;
+//                    if (SignalRRrror instanceof TimeoutError || SignalRRrror instanceof NoConnectionError) {
+//                        return "Network timed out SignalRRrror " + SignalRRrror.networkResponse.statusCode;
+//                    } else if (SignalRRrror instanceof AuthFailureError) {
+//                        return "AuthFailureError SignalRRrror " + SignalRRrror.networkResponse.statusCode;
+//                    } else if (SignalRRrror instanceof ServerError) {
+//                        return "ServerError SignalRRrror " + SignalRRrror.networkResponse.statusCode;
+//                    } else if (SignalRRrror instanceof NetworkError) {
+//                        return "NetworkError SignalRRrror " + SignalRRrror.networkResponse.statusCode;
+//                    } else if (SignalRRrror instanceof ParseError) {
+//                        return "ParseError SignalRRrror " + SignalRRrror.networkResponse.statusCode;
 //                    }
-//                    return "Error " + error.networkResponse.statusCode;
+//                    return "Error " + SignalRRrror.networkResponse.statusCode;
 //                } catch (Exception exception) {
-//                    return "NetworkError error ";
+//                    return "NetworkError SignalRRrror ";
 //                }
     }
 
@@ -106,7 +106,7 @@ public class Parser {
             JSONObject objtrimmedString = obj3.getJSONObject(0);
             Object str = objtrimmedString.get("messageid");
             trimmedString = (String) str;
-            // trimmedString = obj.getString("error"); //(String) str;
+            // trimmedString = obj.getString("SignalRRrror"); //(String) str;
 
         } catch(JSONException e){
             e.printStackTrace();
@@ -126,7 +126,7 @@ public class Parser {
             JSONObject objtrimmedString = obj3.getJSONObject(0);
             Object str = objtrimmedString.get("MessageID");
             trimmedString = (String) str;
-           // trimmedString = obj.getString("error"); //(String) str;
+           // trimmedString = obj.getString("SignalRRrror"); //(String) str;
 
         } catch(JSONException e){
             e.printStackTrace();
@@ -141,11 +141,11 @@ public class Parser {
 
         try{
             JSONObject obj = new JSONObject(json);
-           // JSONObject obj2 = obj.getJSONObject("error");
+           // JSONObject obj2 = obj.getJSONObject("SignalRRrror");
            /* JSONArray obj3 = obj2.getJSONArray("messagedtos");
             JSONObject objtrimmedString = obj3.getJSONObject(0);
             Object str = objtrimmedString.get("messageid");*/
-            trimmedString = obj.getString("error"); //(String) str;
+            trimmedString = obj.getString("SignalRRrror"); //(String) str;
 
         } catch(JSONException e){
             e.printStackTrace();

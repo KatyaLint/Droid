@@ -1352,8 +1352,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(CNCSignalRFragment.class.toString());
 
 
+            //Kate why is this here
+          //  ((CNCSignalRFragment) currentFragment).handleMyMessage(matches.get(0));
 
-            ((CNCSignalRFragment) currentFragment).handleMyMessage(matches.get(0));
+
+
+
             //((CNCFragment) currentFragment).handleMyMessage(matches.get(0));
 //            if (currentFragment instanceof CNCFragment) {
 //                ((CNCFragment) currentFragment).handleMyMessage(matches.get(0));

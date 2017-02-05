@@ -552,7 +552,7 @@ private void setTextForTrip(String name){
             }
 
             @Override
-            public void onError(String error) {
+            public void onError(String SignalRRrror) {
                 enterCNCMessage(strMessageReceived);
             }
         });
