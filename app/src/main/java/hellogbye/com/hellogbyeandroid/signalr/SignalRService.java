@@ -141,6 +141,19 @@ public class SignalRService extends Service {
                     }
                 });
 
+               /* _hub.invoke("cncClientReRegisterR", nameValuePairs).done(new Action<Void>() {
+                    @Override
+                    public void run(Void aVoid) throws Exception {
+                    }
+                }).onError(new ErrorCallback() {
+
+                    @Override
+                    public void onError(Throwable error) {
+                    }
+                });*/
+
+
+
 
             }
         });
@@ -161,8 +174,6 @@ public class SignalRService extends Service {
                         String response = msg.toString();
                         SignalRServerResponseForHighlightVO signalRServerResponseForHighlightVO = (SignalRServerResponseForHighlightVO) Parser.parseSignalRHighlightResponse(response);
 
-
-                        System.out.println("Kate finalMsg cncOnShowSolutionR=" + msg.toString());
                         CNCHiglightResponceCB.answearFromServerToUserChooses(signalRServerResponseForHighlightVO);
 
 
@@ -174,18 +185,10 @@ public class SignalRService extends Service {
                 new SubscriptionHandler1<JsonObject>() {
                     @Override
                     public void run(final JsonObject msg) {
-                        System.out.println("Kate finalMsg cncOnHighlightQueryR=" );
+
                         String response = msg.toString();
 
-                     //   AirportServerResultCNCVO airportServerResultCNCVO = (AirportServerResultCNCVO)msg;
-
-                     //   String json = msg;
                         AirportServerResultCNCVO airportServerResultVO = (AirportServerResultCNCVO) Parser.parseAirportCNCResult(response);
-
-                        //  final String finalMsg = msg.UserName + " says " + msg.Message;
-
-
-                        System.out.println("Kate finalMsg cncOnHighlightQueryR airportServerResultVO=" + airportServerResultVO.toString() );
 
                         CNCHiglightResponceCB.higlightReceived(airportServerResultVO);
 
@@ -193,6 +196,8 @@ public class SignalRService extends Service {
                     }
                 }
                 , JsonObject.class);
+
+
 
         _hub.on("cncOnMessageToClientR",
                 new SubscriptionHandler1<Object>() {
@@ -212,70 +217,60 @@ public class SignalRService extends Service {
 
         String query = airportSendValuesVO.get(0).getQuery();
         String userProfileId = airportSendValuesVO.get(0).getTravelpreferenceprofileid();
-        System.out.println("Kate sfds");
+
         JsonObject jsonObject =  createParams(query, userProfileId, preferencesProfileId, airportSendValuesVO);
-     //   System.out.println("Kate query =" + airportSendValuesVO.get(0).getQuery() + "Json" + jsonObject.toString());
-        //      String sendData = jsonObject.toString();
+
+
         _hub.invoke("cncSubmitHighlightQueryR", jsonObject).onError(new ErrorCallback() {
             @Override
             public void onError(Throwable throwable) {
-                System.out.println("Kate cncSubmitQueryR errro" );
+
             }
         });
     }
 
-    public void cncSubmitHighlightExist() {
+    public void cncSubmitHighlightExist(String query, String userProfileId, String preferencesProfileId,String solutionID) {
+
+        JsonObject jsonObject =  createParams(query, userProfileId, preferencesProfileId, null);
+
+        jsonObject.addProperty("solutionId",solutionID);
+
+        _hub.invoke("cncSubmitHighlightQueryCmR", jsonObject).onError(new ErrorCallback() {
+            @Override
+            public void onError(Throwable throwable) {
+
+            }
+        });
 
     }
 
 
-    public void cncSubmitQueryR(String query, String preferencesID, String preferencesProfileId) {
-      //  Map<String, Object> jsonObject =  createParams(query, airportSendValuesVOsTemp, preferencesProfileId);
-      //  ArrayList<AirportSendValuesVO> selectedUserChoose,
 
-        System.out.println("Kate cncSubmitQueryR");
+    public void cncSubmitQueryCmR(String query, String preferencesID, String preferencesProfileId, String solutionID) {
 
         JsonObject jsonObject =  createParams(query, preferencesID, preferencesProfileId, null);
-        System.out.println("Kate query =" + query + "Json" + jsonObject.toString());
-  //      String sendData = jsonObject.toString();
+        jsonObject.addProperty("solutionId",solutionID);
+
+        _hub.invoke("cncSubmitQueryCmR", jsonObject).onError(new ErrorCallback() {
+            @Override
+            public void onError(Throwable throwable) {
+
+            }
+        });
+    }
+
+    public void cncSubmitQueryR(String query, String preferencesID, String preferencesProfileId) {
+
+        JsonObject jsonObject =  createParams(query, preferencesID, preferencesProfileId, null);
+
         _hub.invoke("cncSubmitQueryR", jsonObject).onError(new ErrorCallback() {
             @Override
             public void onError(Throwable throwable) {
-                System.out.println("Kate cncSubmitQueryR errro" );
+
             }
         });
     }
 
-
- /*   private JSONObject createParams(String query, ArrayList<AirportSendValuesVO> selectedUserChoose, String userProfileId) throws JSONException {
-
-        JSONObject gsonResult = new JSONObject();
-        JSONObject gsonResult2 = new JSONObject();
-
-        gsonResult2.put("currentHotelGuid","");
-        gsonResult.put("clientContext",gsonResult2);
-
-        if(selectedUserChoose != null) {
-
-
-            gsonResult.put("travelpreferenceprofileId", selectedUserChoose.get(0).getTravelpreferenceprofileid());
-            gsonResult.put("itineraryid", selectedUserChoose.get(0).getId());
-        }
-
-        if(userProfileId != null) {
-            gsonResult.put("travelpreferenceprofileId", userProfileId);
-        }
-        gsonResult.put("signalRclientId",_connection.getConnectionId().toString());
-
-
-        gsonResult.put("query",query);
-        gsonResult.put("latitude","37.785834");
-        gsonResult.put("longitude","-122.406417");
-
-
-        return gsonResult;
-    }
-*/
 
     private JsonObject createParams(String query, String travelPreferenceProfileId,  String userProfileId,ArrayList<AirportSendValuesVO>  airportSendValuesVO)  {
 
@@ -308,16 +303,6 @@ public class SignalRService extends Service {
         if(airportSendValuesVO != null){
 
 
-            JsonObject jsonObjectPosition = new JsonObject();
-
-
-           /* JsonObject gsonResult = new JsonObject();
-            JsonObject gsonResult2 = new JsonObject();
-
-            gsonResult2.addProperty("currentHotelGuid","");
-            gsonResult.add("clientContext",gsonResult2);*/
-
-
             JsonArray jsonArray = new JsonArray();
             for(AirportSendValuesVO sendValuesVO : airportSendValuesVO) {
 
@@ -331,21 +316,7 @@ public class SignalRService extends Service {
                 jsonArray.add(jsonObjectToken);
             }
 
-         //   jsonObjectPosition.put()
-
- /*               JsonObject jsPositionArr =  new JsonObject();
-                jsPositionArr.add("position",jsonArray);
-                jsPositionArr.addProperty("type",airportSendValuesVO.get(0).getType());
-
-            JsonArray jsonTokenArray = new JsonArray();
-            jsonTokenArray.add(jsPositionArr);
-
-            jsPositionArr.add("toke",jsonTokenArray);*/
-
-
-         //   JsonObject jsonTokenObjMain = new JsonObject();
             JsonArray jsonTokenArrayMain = new JsonArray();
-          //  jsonTokenObjMain.add("token",jsonTokenArrayMain);
             JsonObject jsTokenMainObj=  new JsonObject();
             jsonTokenArrayMain.add(jsTokenMainObj);
 

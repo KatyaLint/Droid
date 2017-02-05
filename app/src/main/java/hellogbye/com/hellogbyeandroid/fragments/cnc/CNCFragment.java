@@ -62,10 +62,6 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityNetwork;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
-*/
-/**
- * Created by arisprung on 11/3/15.
- *//*
 
 public class CNCFragment extends HGBAbstractFragment implements TitleNameChange {
 
@@ -199,13 +195,12 @@ public class CNCFragment extends HGBAbstractFragment implements TitleNameChange 
         }
         titleChangeName();
 
-*/
-/*        itirnarary_title_Bar.setOnClickListener(new View.OnClickListener() {
+        itirnarary_title_Bar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                // clearCNCItems();
             }
-        });*//*
+        });
 
 
 
@@ -304,16 +299,6 @@ private void setTextForTrip(String name){
 
 
 
-       */
-/* for(AccountsVO account:accounts){
-            if(account.getTravelpreferenceprofile().getId().equals(user_id)){
-
-                userName = account.getTravelpreferenceprofile().getProfilename();
-                break;
-            }
-        }*//*
-
-
         joinQuery = joinQuery + userName + " to the trip";
 
         AirportSendValuesVO airportSendValuesVO = new AirportSendValuesVO();
@@ -357,8 +342,8 @@ private void setTextForTrip(String name){
 
 
 
-*/
-/*    private void startTutorial() {
+  */
+/*  private void startTutorial() {
 
         if(mHGBPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.HGB_CNC_FIRST_TIME,true)){
             mHGBPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_CNC_FIRST_TIME,false);
@@ -402,20 +387,20 @@ private void setTextForTrip(String name){
 
 
 
+
     public void initList() {
 
         loadCNCList();
         mRecyclerView.setHasFixedSize(true);
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getContext());
- */
-/*       mLayoutManager = new LinearLayoutManager(getContext()) {
+       mLayoutManager = new LinearLayoutManager(getContext()) {
             @Override
             public boolean canScrollVertically() {
                 return false;
             }
         };
-*//*
+
 
 
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -591,12 +576,11 @@ private void setTextForTrip(String name){
 
                     ArrayList<ResponsesVO> responses = airportResult.getResponses();
                     maxAirportSize = 0;//responses.size();
-                   */
-/* for (ResponsesVO response : responses) {
+                    for (ResponsesVO response : responses) {
                    //     if (response.getType().equals("City") || response.getType().equals("AirportCode") || response.getType().equals("AirportName") ) {
                             maxAirportSize = maxAirportSize + 1;
                      //   }
-                    }*//*
+                    }
 
                     maxAirportSize = responses.size();
 
@@ -744,34 +728,14 @@ private void setTextForTrip(String name){
     }
 
 
-    interface IHiglightReceivedFromServer{
-        void higlightReceived();
-    }
 
     private void sendMessageToServer(final String strMessage,final iAfterServer iserverFinished) {
         System.out.println("Kate sendCNCMessageToServer 2" );
 
         //   Kate
-  */
-/*      SignalRService service = ((MainActivityBottomTabs) getActivity()).getSignalRService();
-        service.setCNCHiglightResponceCB(new IHiglightReceivedFromServer(){
 
-            @Override
-            public void higlightReceived() {
-
-            }
-        });
 
         String preferencesProfileId = getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId();
-
-
-        try {
-            service.cncSubmitQueryR(strMessage, null, preferencesProfileId);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*//*
-
-
 
 
         ConnectionManager.getInstance(getActivity()).getItineraryCNCSearch(strMessage, new ConnectionManager.ServerRequestListener() {
@@ -821,19 +785,9 @@ private void setTextForTrip(String name){
 
 
          //   Kate
-            SignalRService service = ((MainActivityBottomTabs) getActivity()).getSignalRService();
-            String preferenceID = null;
-            if(airportSendValuesVOsTemp.get(0)!= null){
-                preferenceID = airportSendValuesVOsTemp.get(0).getTravelpreferenceprofileid();
-            }
 
 
-            service.cncSubmitQueryR(strMessage, preferenceID, getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId());
-
-
-
-       */
-/*     ConnectionManager.getInstance(getActivity()).ItineraryCNCAddCompanionPost(airportSendValuesVOsTemp,  new ConnectionManager.ServerRequestListener() {
+            ConnectionManager.getInstance(getActivity()).ItineraryCNCAddCompanionPost(airportSendValuesVOsTemp,  new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
                     UserTravelMainVO userTraveler = (UserTravelMainVO) data;
@@ -847,7 +801,7 @@ private void setTextForTrip(String name){
                     handleHGBMessage(getResources().getString(R.string.cnc_error));
                     CNCFragment.this.airportSendValuesVOs.clear();
                 }
-            });*//*
+            });
 
         }
     }
@@ -896,8 +850,7 @@ private void setTextForTrip(String name){
 
     private AirportResultsVO findChoosenAirport(String choosenAirport, ArrayList<AirportResultsVO> results){
 
- */
-/*       for(AirportSendValuesVO airportSendValueVO:airportSendValuesVOs){
+       for(AirportSendValuesVO airportSendValueVO:airportSendValuesVOs){
             ArrayList<AirportResultsVO> resultsValue = airportSendValueVO.getResults();
             for (AirportResultsVO airportResults : resultsValue){
                 if(airportResults.getAirportname().equals(choosenAirport)){
@@ -905,7 +858,7 @@ private void setTextForTrip(String name){
                 }
             }
 
-        }*//*
+        }
 
 
         for (AirportResultsVO airportResults : results){
