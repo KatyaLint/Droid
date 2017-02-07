@@ -52,16 +52,16 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
-        if(position == getItemCount()){
+     /*   if(position == getItemCount()){
             viewHolder.viewDivider.setVisibility(View.GONE);
-        }
+        }*/
 
         NodesVO itemData = itemsData.get(position);
 
         ArrayList<LegsVO> legs = itemData.getLegs();
         int stopOverCount = 0;
         for(LegsVO leg : legs){
-            if(leg.getmType().equals("Leg")){
+            if(leg.getmType().equals("Leg")) {
                 stopOverCount = stopOverCount + 1;
             }
         }
@@ -154,7 +154,7 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
         public FontTextView txtTravelTime;*/
    //     public FontTextView txtTravelCost;
      //   public GraphicsViewLayout view;
-        public View viewDivider;
+ //       public View viewDivider;
         private RelativeLayout mainRelativeItem;
    //     private FontTextView alternative_flight_guid;
 
@@ -185,7 +185,7 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
             txtEndTime = (FontTextView) itemLayoutView.findViewById(R.id.endTime);
             txtTravelTime = (FontTextView) itemLayoutView.findViewById(R.id.travelTime);*/
          //   view = (GraphicsViewLayout)itemLayoutView.findViewById(R.id.view);
-            viewDivider = (View)itemLayoutView.findViewById(R.id.alternative_list_divider);
+         //   viewDivider = (View)itemLayoutView.findViewById(R.id.alternative_list_divider);
          //   txtTravelCost = (FontTextView)itemLayoutView.findViewById(R.id.alternative_flight_price);
             alternative_flight_price = (FontTextView)itemLayoutView.findViewById(R.id.alternative_flight_price);
        //     alternative_flight_multiple = (FontTextView)itemLayoutView.findViewById(R.id.alternative_flight_multiple);

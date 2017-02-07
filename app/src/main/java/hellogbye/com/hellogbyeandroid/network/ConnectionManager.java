@@ -77,7 +77,7 @@ public class ConnectionManager {
         String choosenServer = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER,"");
 
         if(choosenServer == null || choosenServer.isEmpty()){
-            BASE_URL =  "http://apidev.hellogbye.com/dev/rest/"; //"https://apiuat.hellogbye.com/uat/rest/";//This is default server
+            BASE_URL = "http://apidev.hellogbye.com/dev/rest/"; // "https://apiprod.hellogbye.com/prod/rest/"; //"http://apidev.hellogbye.com/dev/rest/";// //"https://apiuat.hellogbye.com/uat/rest/";//This is default server
         }else{
             BASE_URL = choosenServer;
         }
@@ -675,6 +675,8 @@ public class ConnectionManager {
     }
 
 
+
+
     public void postItineraryCNCSearch(ArrayList<AirportSendValuesVO> airportSendValuesVOs, final ServerRequestListener listener) {
         String url = getURL(Services.ITINERARY);
         JSONObject jsonObjectMain = new JSONObject();
@@ -838,6 +840,8 @@ public class ConnectionManager {
             }
         }, false);
     }
+
+
 
     public void getItineraryCNCSearch(String query, final ServerRequestListener listener) {
 
@@ -1549,8 +1553,8 @@ public class ConnectionManager {
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
+            public void onErrorResponse(VolleyError SignalRRrror) {
+                listener.onError(Parser.parseErrorMessage(SignalRRrror));
             }
         });*/
     }

@@ -116,16 +116,16 @@ public class HGBTranslate {
 //                }
 //            }, new Response.ErrorListener() {
 //                @Override
-//                public void onErrorResponse(VolleyError error) {
-//                    listener.onError(Parser.parseErrorMessage(error));
+//                public void onErrorResponse(VolleyError SignalRRrror) {
+//                    listener.onError(Parser.parseErrorMessage(SignalRRrror));
 //                }
 //
 //            }, false);
 //        }
 //
 //        @Override
-//        public void onError(String error) {
-//            listener.onError(error);
+//        public void onError(String SignalRRrror) {
+//            listener.onError(SignalRRrror);
 //        }
 //    });
 

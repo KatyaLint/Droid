@@ -225,6 +225,16 @@
             android:layout_alignParentEnd="true" />-->
 
 
+
+<!--    </RelativeLayout>-->
+
+    </LinearLayout>
+<!--    <RelativeLayout
+        android:layout_gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+>>>>>>> Stashed changes
+=======
     </LinearLayout>
 
     <RelativeLayout
@@ -284,8 +294,12 @@
              />
 
     </RelativeLayout>
+>>>>>>> master
+
+    </RelativeLayout>-->
 
 
 
 
 </RelativeLayout>
+

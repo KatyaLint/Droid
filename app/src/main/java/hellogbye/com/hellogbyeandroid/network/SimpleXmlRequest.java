@@ -80,10 +80,10 @@
 //                    HttpHeaderParser.parseCacheHeaders(response));
 //        }
 //        catch (UnsupportedEncodingException e) {
-//            return Response.error(new ParseError(e));
+//            return Response.SignalRRrror(new ParseError(e));
 //        }
 //        catch (Exception e) {
-//            return Response.error(new VolleyError(e.getMessage()));
+//            return Response.SignalRRrror(new VolleyError(e.getMessage()));
 //        }
 //    }
 //}

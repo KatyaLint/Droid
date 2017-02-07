@@ -170,7 +170,7 @@ public class HGBUtility {
                 String message = null;
                 switch (failReason.getType()) {
                     case IO_ERROR:
-                        message = "Input/Output error";
+                        message = "Input/Output SignalRRrror";
                         break;
                     case DECODING_ERROR:
                         message = "Image can't be decoded";
@@ -179,10 +179,10 @@ public class HGBUtility {
                         message = "Downloads are denied";
                         break;
                     case OUT_OF_MEMORY:
-                        message = "Out Of Memory error";
+                        message = "Out Of Memory SignalRRrror";
                         break;
                     case UNKNOWN:
-                        message = "Unknown error";
+                        message = "Unknown SignalRRrror";
                         break;
                 }
             }

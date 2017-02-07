@@ -1,3 +1,4 @@
+/*
 package hellogbye.com.hellogbyeandroid.fragments.cnc;
 
 
@@ -21,6 +22,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -48,6 +52,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.ConversationVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.signalr.SignalRService;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBTranslate;
@@ -57,9 +62,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityNetwork;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
-/**
- * Created by arisprung on 11/3/15.
- */
+
 public class CNCFragment extends HGBAbstractFragment implements TitleNameChange {
 
     private RecyclerView mRecyclerView;
@@ -192,12 +195,13 @@ public class CNCFragment extends HGBAbstractFragment implements TitleNameChange 
         }
         titleChangeName();
 
-/*        itirnarary_title_Bar.setOnClickListener(new View.OnClickListener() {
+        itirnarary_title_Bar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                // clearCNCItems();
             }
-        });*/
+        });
+
 
 
       //  showMessagesToUser();
@@ -295,14 +299,6 @@ private void setTextForTrip(String name){
 
 
 
-       /* for(AccountsVO account:accounts){
-            if(account.getTravelpreferenceprofile().getId().equals(user_id)){
-
-                userName = account.getTravelpreferenceprofile().getProfilename();
-                break;
-            }
-        }*/
-
         joinQuery = joinQuery + userName + " to the trip";
 
         AirportSendValuesVO airportSendValuesVO = new AirportSendValuesVO();
@@ -346,7 +342,8 @@ private void setTextForTrip(String name){
 
 
 
-/*    private void startTutorial() {
+  */
+/*  private void startTutorial() {
 
         if(mHGBPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.HGB_CNC_FIRST_TIME,true)){
             mHGBPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_CNC_FIRST_TIME,false);
@@ -384,7 +381,9 @@ private void setTextForTrip(String name){
             }, SPLASH_TIME_OUT);
         }
 
-    }*/
+    }*//*
+
+
 
 
 
@@ -395,13 +394,14 @@ private void setTextForTrip(String name){
         mRecyclerView.setHasFixedSize(true);
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getContext());
- /*       mLayoutManager = new LinearLayoutManager(getContext()) {
+       mLayoutManager = new LinearLayoutManager(getContext()) {
             @Override
             public boolean canScrollVertically() {
                 return false;
             }
         };
-*/
+
+
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         ArrayList<CNCItem> cncItems = getActivityInterface().getCNCItems();
@@ -478,6 +478,9 @@ private void setTextForTrip(String name){
             @Override
             public void onClick(View v) {
                 String strMessage = mEditText.getText().toString();
+
+
+
                 handleMyMessage(strMessage);
             }
         });
@@ -549,7 +552,7 @@ private void setTextForTrip(String name){
             }
 
             @Override
-            public void onError(String error) {
+            public void onError(String SignalRRrror) {
                 enterCNCMessage(strMessageReceived);
             }
         });
@@ -573,11 +576,12 @@ private void setTextForTrip(String name){
 
                     ArrayList<ResponsesVO> responses = airportResult.getResponses();
                     maxAirportSize = 0;//responses.size();
-                   /* for (ResponsesVO response : responses) {
+                    for (ResponsesVO response : responses) {
                    //     if (response.getType().equals("City") || response.getType().equals("AirportCode") || response.getType().equals("AirportName") ) {
                             maxAirportSize = maxAirportSize + 1;
                      //   }
-                    }*/
+                    }
+
                     maxAirportSize = responses.size();
 
 
@@ -706,6 +710,8 @@ private void setTextForTrip(String name){
     }
 
 
+
+
     interface iAfterServer {
         void serverFinished(AirportServerResultVO airportResult);
     }
@@ -721,7 +727,17 @@ private void setTextForTrip(String name){
         //removeWaitingItem();
     }
 
+
+
     private void sendMessageToServer(final String strMessage,final iAfterServer iserverFinished) {
+        System.out.println("Kate sendCNCMessageToServer 2" );
+
+        //   Kate
+
+
+        String preferencesProfileId = getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId();
+
+
         ConnectionManager.getInstance(getActivity()).getItineraryCNCSearch(strMessage, new ConnectionManager.ServerRequestListener() {
 
                     @Override
@@ -734,16 +750,19 @@ private void setTextForTrip(String name){
                     @Override
                     public void onError(Object data) {
                         handleHGBMessage(getResources().getString(R.string.cnc_error));
-                    //    ErrorMessage(data);
+                        //    ErrorMessage(data);
 
 
                     }
                 }
         );
+
+
     }
 
 
     private void sendCNCMessageToServer(String strMessage){
+        System.out.println("Kate sendCNCMessageToServer");
         ArrayList<AirportSendValuesVO> airportSendValuesVOsTemp = new ArrayList<AirportSendValuesVO>();
         AirportSendValuesVO airportSendValuesVO = new AirportSendValuesVO();
         ArrayList<CNCItem> cncItems = getActivityInterface().getCNCItems();
@@ -762,6 +781,12 @@ private void setTextForTrip(String name){
 
             airportSendValuesVOsTemp.add(airportSendValuesVO);
 
+
+
+
+         //   Kate
+
+
             ConnectionManager.getInstance(getActivity()).ItineraryCNCAddCompanionPost(airportSendValuesVOsTemp,  new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
@@ -777,6 +802,7 @@ private void setTextForTrip(String name){
                     CNCFragment.this.airportSendValuesVOs.clear();
                 }
             });
+
         }
     }
 
@@ -824,7 +850,7 @@ private void setTextForTrip(String name){
 
     private AirportResultsVO findChoosenAirport(String choosenAirport, ArrayList<AirportResultsVO> results){
 
- /*       for(AirportSendValuesVO airportSendValueVO:airportSendValuesVOs){
+       for(AirportSendValuesVO airportSendValueVO:airportSendValuesVOs){
             ArrayList<AirportResultsVO> resultsValue = airportSendValueVO.getResults();
             for (AirportResultsVO airportResults : resultsValue){
                 if(airportResults.getAirportname().equals(choosenAirport)){
@@ -832,7 +858,8 @@ private void setTextForTrip(String name){
                 }
             }
 
-        }*/
+        }
+
 
         for (AirportResultsVO airportResults : results){
             if(airportResults.getName().equals(choosenAirport)){
@@ -953,3 +980,4 @@ private void setTextForTrip(String name){
         super.onDestroyView();
     }
 }
+*/
