@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/background"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/money_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/DP100"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/money_credit_card_coins_payment"/>
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/cc_no_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/SP32"
+        android:gravity="center"
+        android:layout_below="@+id/money_image"
+        android:textColor="@color/COLOR_003D4C"
+        android:layout_centerHorizontal="true"
+
+        android:text="You don't have any\ncredit cards."
+        app:fontName="dinnextltpro_bold.otf" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/add_new_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/SP18"
+        android:gravity="center"
+        android:paddingLeft="@dimen/DP50"
+        android:paddingRight="@dimen/DP50"
+        android:paddingBottom="@dimen/DP10"
+        android:paddingTop="@dimen/DP10"
+        android:textColor="@color/COLOR_EE3A3C"
+        android:background="@drawable/red_button_border"
+        android:layout_marginTop="@dimen/DP130"
+        android:layout_centerHorizontal="true"
+        android:text="@string/add_card"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/DP20"
+        app:fontName="dinnextltpro_medium.otf" />
+
+
+</RelativeLayout>

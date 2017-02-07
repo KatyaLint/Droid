@@ -8,6 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:id="@+id/root"
         android:layout_height="match_parent">
 
         <ProgressBar
@@ -42,7 +43,7 @@
         <include
             android:id="@+id/country_layout"
             layout="@layout/country_selection_layout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/label_2"
             android:layout_centerHorizontal="true"
@@ -148,10 +149,13 @@
             android:layout_above="@+id/try_now_new_create"
             android:text="@string/already_have_an_account_sign_in"
             android:textColor="@color/COLOR_00516f"
-            android:textSize="@dimen/SP12"
+            android:textSize="@dimen/SP16"
             android:layout_marginBottom="@dimen/DP6"
             android:translationZ="2dp"
             app:fontName="dinnextltpro_regular.otf" />
+
+
+
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/sign_up_hyperlink"
@@ -255,6 +259,7 @@
             android:hint="Password"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
+            android:drawableRight="@drawable/pas_info_icon_on"
             android:maxLines="1"
             android:singleLine="true"
             android:visibility="gone" />
@@ -273,15 +278,39 @@
             android:singleLine="true"
             android:visibility="gone" />
 
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/user_title"
+            style="@style/new_sign_up_text_color"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:maxLines="1"
+            android:layout_marginTop="@dimen/DP44"
+            android:layout_below="@+id/label_2"
+
+            android:singleLine="true"
+            android:layout_centerHorizontal="true"
+            android:hint="@string/title"
+            android:drawableRight="@drawable/dropdown_lightblue"
+            android:visibility="gone" />
+        <View
+            android:id="@+id/title_underline_1"
+            android:layout_width="337dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/user_title"
+            android:layout_marginTop="@dimen/DP4"
+            android:layout_height="@dimen/DP1"
+            android:visibility="gone"
+            android:background="@color/COLOR_999999"  />
         <hellogbye.com.hellogbyeandroid.views.FontEditTextView
             android:id="@+id/first_name"
             style="@style/new_sign_up_text_color"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/label_2"
+            android:layout_below="@+id/title_underline_1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/DP50"
             android:hint="First Name"
             android:imeOptions="actionNext"
+            android:layout_marginTop="@dimen/DP24"
             android:maxLines="1"
             android:singleLine="true"
             android:visibility="gone" />
@@ -377,7 +406,6 @@
             android:text="@string/create_account"
             app:fontName="dinnextltpro_medium.otf" />
 
-
         <include
             android:id="@+id/birds"
             layout="@layout/bird_layout"
@@ -387,6 +415,7 @@
             android:layout_alignParentRight="true"
             android:visibility="gone"
             android:layout_marginRight="@dimen/DP80" />
+
 
         <include
             android:id="@+id/login"
@@ -401,13 +430,10 @@
             android:id="@+id/building_01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:alpha="0.58"
-            android:src="@drawable/building"
             android:layout_alignTop="@+id/cloud_03"
-            android:layout_alignRight="@+id/logo_onboardong"
-            android:layout_alignEnd="@+id/logo_onboardong"
-            android:layout_marginRight="24dp"
-            android:layout_marginEnd="24dp" />
+            android:layout_marginLeft="@dimen/MINUS_DP300"
+            android:alpha="0.58"
+            android:src="@drawable/building" />
 
 
     </RelativeLayout>

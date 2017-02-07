@@ -142,26 +142,17 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
         RecyclerView account_settings_preferences_list = (RecyclerView)rootView.findViewById(R.id.account_settings_preferences_list);
 
         LayoutInflater li = LayoutInflater.from(getActivity());
-        final View promptsView = li.inflate(R.layout.popup_layout_log_out, null);
-        final EditText input = (EditText) promptsView
-                .findViewById(R.id.companion_editTextDialog);
+        final View promptsView = li.inflate(R.layout.popup_logout_layout, null);
 
-        final FontTextView text = (FontTextView) promptsView
-                .findViewById(R.id.component_popup_logout_text);
 
 
         FontButtonView btn_account_logout_button = (FontButtonView)rootView.findViewById(R.id.account_logout_button);
         btn_account_logout_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-             //logout
-                //popup
-             //   getFlowInterface().gotToStartMenuActivity();
-                text.setVisibility(View.VISIBLE);
-                text.setText(getResources().getString(R.string.component_log_sure));
 
-                HGBUtility.showAlertPopUp(getActivity(), input, promptsView,
-                        getResources().getString(R.string.component_log_out),getResources().getString(R.string.ok_button),
+                HGBUtility.showAlertPopUp(getActivity(), null, promptsView,
+                       null,getResources().getString(R.string.logout_button),
                         new PopUpAlertStringCB() {
                             @Override
                             public void itemSelected(String inputItem) {

@@ -61,6 +61,15 @@
         android:background="@drawable/add_chat"
         android:visibility="gone" />
 
+    <ImageButton
+        android:id="@+id/toolbar_new_iternerary_cnc_chat_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/DP14"
+        android:background="@drawable/chat_message"
+        android:visibility="gone" />
+
 
     <ImageButton
         android:id="@+id/up_bar_favorite"
@@ -202,6 +211,15 @@
         android:textColor="@color/COLOR_WHITE"
         android:visibility="gone" />
 
+    <ImageView
+        android:id="@+id/add_cc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/DP14"
+        android:background="@drawable/card"
+        android:visibility="gone" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -210,20 +228,23 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/search_maginfy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/DP20"
-            android:layout_marginRight="@dimen/DP20"
-            android:background="@drawable/search_icon"
-            android:visibility="gone" />
-
-        <ImageButton
             android:id="@+id/toolbar_new_iternerary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/add_trip"
+            android:layout_marginLeft="@dimen/DP20"
+            android:layout_marginRight="@dimen/DP20"
             android:visibility="gone" />
+
+
+        <ImageButton
+            android:id="@+id/search_maginfy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_icon"
+            android:visibility="gone" />
+
+
 
     </LinearLayout>
 

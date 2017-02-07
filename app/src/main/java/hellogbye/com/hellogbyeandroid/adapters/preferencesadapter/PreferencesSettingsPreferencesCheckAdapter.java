@@ -36,12 +36,10 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
     private PreferenceSettingsFragment.ListRadioButtonClicked listRadioButtonClickedClicked;
     private int selectedPosition = -1;
     private String selectedPreferebcesID="";
-    private List<AccountDefaultSettingsVO> accountAttributes;
 
     public PreferencesSettingsPreferencesCheckAdapter(Context context, List<AccountDefaultSettingsVO> accountAttributes) {
 
         super(accountAttributes);
-        this.accountAttributes = accountAttributes;
     }
 
 

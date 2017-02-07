@@ -21,7 +21,7 @@
                 android:id="@+id/steps_checkout_payment_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1.PAYMENT"
+                android:text="1.TRAVELER"
                 android:textSize="@dimen/SP8"
                 android:textColor="@color/COLOR_003D4C"
 
@@ -45,7 +45,7 @@
                 android:id="@+id/steps_checkout_travler_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2.TRAVELLER"
+                android:text="2.PAYMENT"
                 android:textSize="@dimen/SP8"
                 android:textColor="@color/COLOR_003D4C"
 

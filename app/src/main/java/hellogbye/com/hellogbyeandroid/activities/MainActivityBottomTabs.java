@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -129,6 +130,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     public boolean isFreeUser;
     private CharSequence mTitle;
     private FontTextView preference_save_changes;
+    private ImageView preference_add_card;
     private AlertDialog selectDefaultProfileDialog;
     private ArrayList<DefaultsProfilesVO> userDefaultProfiles;
     private HashSet<CreditCardItem> mSelectedCreditCards = new HashSet<>();
@@ -150,6 +152,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private FontTextView my_trip_profile;
     private FontTextView itirnarary_title_Bar;
     private ImageButton toolbar_new_iternerary_cnc;
+    private ImageButton toolbar_new_iternerary_cnc_chat_message;
     private SearchView search_view_tool_bar;
     private ImageButton search_maginfy;
     private FontTextView titleBar;
@@ -563,8 +566,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         itirnarary_title_Bar = (FontTextView)mToolbar.findViewById(R.id.itirnarary_title_Bar);
         up_bar_favorite = (ImageButton)mToolbar.findViewById(R.id.up_bar_favorite);
         preference_save_changes = (FontTextView) mToolbar.findViewById(R.id.preference_save_changes);
+        preference_add_card = (ImageView) mToolbar.findViewById(R.id.add_cc);
         toolbar_new_iternerary = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary);
         toolbar_new_iternerary_cnc = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary_cnc);
+        toolbar_new_iternerary_cnc_chat_message = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary_cnc_chat_message);
         search_view_tool_bar = (SearchView)mToolbar.findViewById(R.id.search_view_tool_bar);
         search_maginfy = (ImageButton)mToolbar.findViewById(R.id.search_maginfy);
         titleBar = (FontTextView)mToolbar.findViewById(R.id.titleBar);
@@ -595,6 +600,21 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     public ImageButton getToolbar_new_iterneraryCnc(){
         return toolbar_new_iternerary_cnc;
     }
+
+    public ImageButton getToolbar_new_iterneraryCnc_Chat_Message(){
+        return toolbar_new_iternerary_cnc_chat_message;
+    }
+
+    public void goToCncScreeButton(){
+        toolbar_new_iternerary_cnc_chat_message.setVisibility(View.VISIBLE);
+        toolbar_new_iternerary_cnc_chat_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               goToFragment(ToolBarNavEnum.CNC.getNavNumber(),null);
+            }
+        });
+    }
+
     public SearchView getSearchView(){
         return search_view_tool_bar;
     }
@@ -604,6 +624,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
     public FontTextView getPreferencesSaveButton(){
         return preference_save_changes;
+    }
+
+    public ImageView getPreference_add_card() {
+        return preference_add_card;
     }
 
     public ImageButton getAddCompanionButton() {

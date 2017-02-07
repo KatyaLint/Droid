@@ -26,7 +26,7 @@ public class PassengersVO {
 
     @SerializedName("avatarurl")
     private String avatarurl;
-
+    private boolean mChildDataMissing;
 
 
 
@@ -42,7 +42,7 @@ public class PassengersVO {
 
 
     public ArrayList<NodesVO> passengerNodes = new ArrayList<>();
-
+    private boolean selected = true;
     public HashMap<String,ArrayList<NodesVO> > hashMap = new HashMap<>();
 
 
@@ -136,5 +136,21 @@ public class PassengersVO {
 
     public void setAvatarurl(String avatarurl) {
         this.avatarurl = avatarurl;
+    }
+
+    public boolean ismChildDataMissing() {
+        return mChildDataMissing;
+    }
+
+    public void setmChildDataMissing(boolean mChildDataMissing) {
+        this.mChildDataMissing = mChildDataMissing;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }

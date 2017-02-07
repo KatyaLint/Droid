@@ -20,6 +20,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -37,6 +38,9 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.fenchtose.tooltip.Tooltip;
+import com.fenchtose.tooltip.TooltipAnimation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +60,10 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityNetwork;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
+
+import static android.R.attr.type;
+import static com.appsee.pc.e;
+import static org.jcodec.SliceType.P;
 
 /**
  * Created by arisprung on 11/8/16.
@@ -87,6 +95,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private ImageView mCloud06;
     private ImageView mCloud07;
     private ImageView mArrowBack;
+    private View mUnderlineTitle;
     private LinearLayout mBirds;
     private FontButtonView login;
     private ImageView mCanadaCheck;
@@ -101,6 +110,10 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private FontEditTextView mLoginPassword;
     private FontEditTextView mStateProvince;
     private FontTextView mSignIn;
+    private boolean isStateSelected= false;
+    private CheckBox mHelloGbyePromotionCheckBox;
+    private CheckBox mThirdPartyPromotionCheckBox;
+
 
     private AutoCompleteTextView mCity;
     private FontEditTextView mZip;
@@ -114,6 +127,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private FontEditTextView mEmail;
     private FontEditTextView mPassword1;
     private FontEditTextView mPassword2;
+    private FontTextView mTitle;
     private LinearLayout mAddressLayout;
     private LinearLayout mUSLayout;
     private LinearLayout mCanadaLayout;
@@ -134,6 +148,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private String android_id;
     private ArrayList<String> mCityList;
     private AlertDialog levelDialog;
+    private Tooltip mTooltip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,7 +158,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         android_id = Settings.Secure.getString(CreateAccountActivity.this.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
-        checkFlow();
+
         initView();
         userData = new UserSignUpDataVO();
         countDownTimer = new AnimationCountDownTimer(getResources().getInteger(R.integer.create_account_animation_duration), 1000);
@@ -152,10 +167,13 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             Window w = getWindow(); // in Activity's onCreate() for instance
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
-
-
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkFlow();
+    }
 
     private void initView() {
         // mPlane = (ImageView) findViewById(R.id.airplane_01);
@@ -166,6 +184,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mBiulding2 = (ImageView) findViewById(R.id.building_02);
         mBiulding1 = (ImageView) findViewById(R.id.building_01);
         mCloud01 = (ImageView) findViewById(R.id.cloud_01);
+        mUnderlineTitle= (View) findViewById(R.id.title_underline_1);
         mCloud01B = (ImageView) findViewById(R.id.cloud_1_b);
         mCloud02 = (ImageView) findViewById(R.id.cloud_02);
         mCloud03 = (ImageView) findViewById(R.id.cloud_03);
@@ -200,6 +219,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mPassword1 = (FontEditTextView) findViewById(R.id.password1);
         mPassword2 = (FontEditTextView) findViewById(R.id.password2);
         mSignIn = (FontTextView) findViewById(R.id.create_login);
+        mTitle = (FontTextView) findViewById(R.id.user_title);
         mCity = (AutoCompleteTextView) findViewById(R.id.city);
         mCity.setThreshold(1);
         mZip = (FontEditTextView) findViewById(R.id.zip);
@@ -212,6 +232,10 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mLoginEmail = (FontEditTextView) findViewById(R.id.username);
         mLoginPassword = (FontEditTextView) findViewById(R.id.login_password);
         login = (FontButtonView) findViewById(R.id.login_button);
+        mHelloGbyePromotionCheckBox = (CheckBox)findViewById(R.id.promotion_checkbox);
+        mThirdPartyPromotionCheckBox = (CheckBox)findViewById(R.id.special_offer_checkbox);
+
+
 
         mEmail.addTextChangedListener(this);
         mFirstName.addTextChangedListener(this);
@@ -222,6 +246,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
         editTextViewListners();
         mUSLayout.setOnClickListener(this);
+        mTitle.setOnClickListener(this);
         mCanadaLayout.setOnClickListener(this);
         mCreateAccount.setOnClickListener(this);
         mStateProvince.setOnClickListener(this);
@@ -239,6 +264,37 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         llp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         llp.setMargins(0, 0, 0, i);
         mHyperlink.setLayoutParams(llp);
+
+
+
+        mPassword1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+                if(b){
+                    showToolTip();
+                }
+
+            }
+        });
+
+        mPassword1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (mPassword1.getRight() - mPassword1.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        showToolTip();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
 
         mForgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
@@ -305,6 +361,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                         && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
                     userData.setFirstName(mFirstName.getText().toString());
                     userData.setLastName(mLastName.getText().toString());
+
                     goToEmailView();
                     return true;
                 }
@@ -384,9 +441,26 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         HGBUtility.hideKeyboard(getApplicationContext(), textView);
         if (true) {// TODO HGBUtility.checkEmailIsValid(mEmail.getText()()
             animatePasswordView(true);
+
+
+
         } else {
            // Toast.makeText(getApplicationContext(), "Email not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
         }
+    }
+
+    private void showToolTip() {
+        View contentView1 = getLayoutInflater().inflate(R.layout.tooltip_layout, null);
+
+        mTooltip = new Tooltip.Builder(getApplicationContext())
+                .anchor(mPassword1, Tooltip.BOTTOM)
+                .content(contentView1)
+                .into((RelativeLayout)findViewById(R.id.root))
+                .animate(new TooltipAnimation(TooltipAnimation.REVEAL, 500))
+                .autoCancel(5000)
+                .withTip(new Tooltip.Tip(75, 35, ContextCompat.getColor(getApplicationContext(), R.color.COLOR_003D4C_40_percent_opacity)))
+                .show();
+        mTooltip.setAlpha(0.7f);
     }
 
     private void initSpannableText() {
@@ -418,6 +492,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         secondViewViews.add(mLabel1);
         secondViewViews.add(mFirstName);
         secondViewViews.add(mLastName);
+        secondViewViews.add(mUnderlineTitle);
+        secondViewViews.add(mTitle);
         secondViewViews.add(mArrowBack);
 
         ArrayList<View> firstViewViews = new ArrayList<>();
@@ -453,6 +529,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         ArrayList<View> firstViewViews = new ArrayList<>();
         firstViewViews.add(mFirstName);
         firstViewViews.add(mLastName);
+        firstViewViews.add(mTitle);
+        firstViewViews.add(mUnderlineTitle);
+
 
         ArrayList<View> secondViewViews = new ArrayList<>();
         secondViewViews.add(mEmail);
@@ -542,6 +621,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     public void onClick(View view) {
 
         switch (view.getId()) {
+            case R.id.user_title:
+                HGBUtility.showPikerDialog(0,mTitle, CreateAccountActivity.this, "SELECT TITLE", getResources().getStringArray(R.array.title_array), 0, 2, null, true);
+                break;
 
             case R.id.create_account:
                 animateNameView(true);
@@ -577,12 +659,14 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                 setUSSelected(true);
                 getStaticProvince("US");
                 userData.setCountry("US");
+                isStateSelected = true;
                 break;
 
             case R.id.canada_layout:
                 setUSSelected(false);
                 getStaticProvince("CA");
                 userData.setCountry("CA");
+                isStateSelected = true;
                 break;
             case R.id.state_province:
                 userSelectedState();
@@ -668,31 +752,37 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
         if (userData.getCountry() != null && mProvinceItems != null) {
 
-            if (levelDialog == null) {
-                ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
-                        CreateAccountActivity.this, R.layout.dialog_radio, countryarray);
-                // Creating and Building the Dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Which State/Province?");
-                builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int item) {
-                        for (ProvincesItem province : mProvinceItems) {
-                            if (countryarray[item].contains(province.getProvincename())) {
-                                mStateProvince.setText(province.getProvincename());
-                                userData.setCountryProvince(province.getProvincecode());
-                                initAutoCityComplete();
-                                break;
-                            }
-                        }
-                        levelDialog.hide();
-                    }
-                });
-                levelDialog = builder.create();
+            if (levelDialog == null || isStateSelected) {
+                buildProvinceDialog();
+
             }
             levelDialog.show();
         } else {
             Toast.makeText(getApplicationContext(), "Please select Country first", Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    private void buildProvinceDialog() {
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
+                CreateAccountActivity.this, R.layout.dialog_radio, countryarray);
+        // Creating and Building the Dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Which State/Province?");
+        builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                for (ProvincesItem province : mProvinceItems) {
+                    if (countryarray[item].contains(province.getProvincename())) {
+                        mStateProvince.setText(province.getProvincename());
+                        userData.setCountryProvince(province.getProvincecode());
+                        initAutoCityComplete();
+                        break;
+                    }
+                }
+                levelDialog.hide();
+            }
+        });
+        levelDialog = builder.create();
     }
 
     private void processBackPressed() {
@@ -850,7 +940,6 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                     mBird2.setBackgroundResource(R.drawable.animation_bird2);
                     AnimationDrawable rocketAnimation2 = (AnimationDrawable) mBird2.getBackground();
                     rocketAnimation2.start();
-
                 }
 
                 @Override
@@ -941,8 +1030,11 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mCity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                mCity.dismissDropDown();
                 HGBUtility.hideKeyboard(getApplicationContext(), mCity);
                 userData.setCity(mCity.getText().toString());
+                mZip.requestFocus();
+
             }
         });
 
@@ -954,25 +1046,24 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                ConnectionManager.getInstance(CreateAccountActivity.this).postAutocompleteCity(charSequence.toString(), userData.getCountry(),
+
+            }
+
+            @Override
+            public void afterTextChanged(final Editable editable) {
+
+                ConnectionManager.getInstance(CreateAccountActivity.this).postAutocompleteCity(editable.toString(), userData.getCountry(),
                         userData.getCountryProvince()
                         , new ConnectionManager.ServerRequestListener() {
                             @Override
                             public void onSuccess(Object data) {
 
                                 mCityList = (ArrayList<String>) data;
-                                Log.e("- onSuccessA", mCityList.toString());
-//                                Log.e("- onSuccessB",list.toString());
-//                                if ((list.size() > 10)){
-//                                    ArrayList<String> tempList = new ArrayList<String>();
-//                                    for (int j = 0; j < 20; j++) {
-//                                        tempList.add(list.get(j));
-//                                    }
-//                                    list = tempList;
-//                                }
                                 adapter = new ArrayAdapter(CreateAccountActivity.this, android.R.layout.simple_list_item_1, mCityList);
                                 mCity.setAdapter(adapter);
-                                mCity.showDropDown();
+                                if(editable.length()==1){
+                                    mCity.showDropDown();
+                                }
 
                             }
 
@@ -980,10 +1071,6 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                             public void onError(Object data) {
                             }
                         });
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
             }
         });
 
@@ -1047,7 +1134,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     private void sendSignUpDataToServer() {
 
-        ConnectionManager.getInstance(CreateAccountActivity.this).postUserCreateAccount(userData, new ConnectionManager.ServerRequestListener() {
+        ConnectionManager.getInstance(CreateAccountActivity.this).postUserCreateAccount(userData,mHelloGbyePromotionCheckBox.isChecked(),mThirdPartyPromotionCheckBox.isChecked(), new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
@@ -1076,8 +1163,16 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         }
 
         String strToken = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
+
         if (!strToken.equals("")) {
-            goToMainActivity();
+            if(getIntent().hasExtra("free_user_sign_in") || getIntent().hasExtra("free_user_create_user")){
+                checkIfCameFromFreeUser();
+            }else{
+                goToMainActivity();
+            }
+
+
+
         }
     }
 
@@ -1213,6 +1308,19 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             mNextTextView.setAlpha(0.2f);
             mNextTextView.setClickable(false);
         }
+
+    }
+
+    private void checkIfCameFromFreeUser(){
+
+            if(getIntent().getBooleanExtra("free_user_sign_in",false)){
+                goToLoginState(true);
+            }
+
+            if(getIntent().getBooleanExtra("free_user_create_user",false)){
+                animateNameView(true);
+            }
+
 
     }
 }

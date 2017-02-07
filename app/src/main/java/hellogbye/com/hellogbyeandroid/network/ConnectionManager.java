@@ -236,7 +236,7 @@ public class ConnectionManager {
         }, true);
     }
 
-    public void postUserCreateAccount(UserSignUpDataVO userData, final ServerRequestListener listener) {
+    public void postUserCreateAccount(UserSignUpDataVO userData,boolean hellopromtion,boolean thirdpatyboolean, final ServerRequestListener listener) {
 
         String url = getURL(Services.USER_PROFILE_REGISTER);
         JSONObject jsonObject = new JSONObject();
@@ -250,6 +250,10 @@ public class ConnectionManager {
             jsonObject.put("password", userData.getPassword());
             jsonObject.put("state", userData.getCountryProvince());
             jsonObject.put("username", userData.getUserEmail());
+            jsonObject.put("acceptHgbMarketing", hellopromtion);
+            jsonObject.put("acceptThirdPartyMarketing",thirdpatyboolean);
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1767,7 +1771,7 @@ public class ConnectionManager {
             json1.put("phone", user.getPhone());
             json1.put("postalcode", user.getPostalcode());
             json1.put("lastname", user.getLastname());
-            json1.put("dob", user.getDob());
+            json1.put("dob", HGBUtilityDate.parseDateToServertime(user.getDob()));
             json1.put("firstname", user.getFirstname());
             json1.put("title", user.getTitle());
             json1.put("address", user.getAddress());
@@ -2022,7 +2026,7 @@ public class ConnectionManager {
                 USER_PUT_HOTEL("Hotel"),
                 USER_GET_BOOKING_OPTIONS("Statics/BookingOptions"),
                 USER_FLIGHT_SOLUTIONS("Flight"),
-                USER_GET_TRAVELER_INFO("Traveler/Get/"),
+                USER_GET_TRAVELER_INFO("Traveler/GetAll/"),
                 USER_GET_USER_PROFILE_ACCOUNTS("UserProfile/Accounts"),
                 USER_POST_USER_PROFILE_EMAIL("UserProfile/ResetPassword?email="),
                 USER_TRAVEL_PROFILES("TravelPreference/Profiles/"),

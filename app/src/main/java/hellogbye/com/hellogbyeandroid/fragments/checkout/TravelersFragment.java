@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.google.gson.Gson;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.checkout.IExpandableViewSelected;
 import hellogbye.com.hellogbyeandroid.adapters.checkout.TravlerExpandableAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
@@ -27,11 +29,16 @@ import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymnentGroup;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
+
+import static android.media.CamcorderProfile.get;
+import static hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum.PAYMENT_DETAILS;
 
 /**
  * Created by arisprung on 11/23/15.
@@ -42,7 +49,7 @@ public class TravelersFragment extends HGBAbstractFragment {
     private FontButtonView mNext;
    // private FontTextView mNextDisable;
 
-    private ArrayList<PaymnentGroup> mGroups;
+    private ArrayList<PassengersVO> passangers;
     private TravlerExpandableAdapter mAdapter;
 
     private ExpandableListView mRecyclerView;
@@ -74,14 +81,9 @@ public class TravelersFragment extends HGBAbstractFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Bundle args = getArguments();
-        if (args != null) {
-            String groups = args.getString(HGBConstants.BUNDLE_PARENT_LIST);
-            Gson gson = new Gson();
-            Type listType = new TypeToken<List<PaymnentGroup>>() {
-            }.getType();
-            mGroups = gson.fromJson((String) groups, listType);
-        }
+
+        UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
+        passangers = travelOrder.getPassengerses();
         mNext = (FontButtonView) view.findViewById(R.id.traveler_next);
         mNext.setEnabled(false);
       //  mNextDisable = (FontTextView) view.findViewById(R.id.traveler_next_disable);
@@ -121,26 +123,24 @@ public class TravelersFragment extends HGBAbstractFragment {
             @Override
             public void onClick(View v) {
 
-                ConnectionManager.getInstance(getActivity()).getCreditCards(new ConnectionManager.ServerRequestListener() {
-                    @Override
-                    public void onSuccess(Object data) {
-                        ArrayList<CreditCardItem>  creditCards = (ArrayList<CreditCardItem>) data;
-                        getActivityInterface().setCreditCards(creditCards);
-                        getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
 
-                    }
+                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
 
-                    @Override
-                    public void onError(Object data) {
-                        ErrorMessage(data);
-                    }
-                });
 
 
             }
         });
+        ImageButton newIteneraryImageButton = ((MainActivityBottomTabs) getActivity()).getToolbar_new_iterneraryCnc_Chat_Message();
+        newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), null);
+            }
+        });
 
         initCheckoutSteps();
+
+
     }
 
     private void setChildrenToView(){
@@ -152,28 +152,25 @@ public class TravelersFragment extends HGBAbstractFragment {
         if(userList.size() !=0 ){
             for (int i = 0; i < userList.size(); i++) {
                 UserProfileVO user = userList.get(i);
-                for (int z = 0; z <mGroups.size() ; z++) {
+                for (int z = 0; z <passangers.size() ; z++) {
 
-                    String name1 = mGroups.get(z).getNameText();
-                    String name2 = user.getFirstname();
 
-                    if(mGroups.get(z).getNameText().equalsIgnoreCase(user.getFirstname())){
+
+                    if(passangers.get(z).getmName().equalsIgnoreCase(user.getFirstname())){
                         ArrayList<UserProfileVO> passengerChildArray = new ArrayList<>();
                         UserProfileVO userInfo = userList.get(z);
                         passengerChildArray.add(userInfo);
                         children.add(passengerChildArray);
                         boolean isMissing = checkIfMissing(userInfo);
-                        mGroups.get(z).setmChildDataMissing(isMissing);
+                        passangers.get(z).setmChildDataMissing(isMissing);
                         if(isMissing){
 
                             mNext.setEnabled(false);
-                    /*        mNext.setVisibility(View.GONE);
-                            mNextDisable.setVisibility(View.VISIBLE);*/
+
                         }else{
 
                             mNext.setEnabled(true);
-                         /*   mNext.setVisibility(View.VISIBLE);
-                            mNextDisable.setVisibility(View.GONE);*/
+
                         }
                     }
 
@@ -181,18 +178,18 @@ public class TravelersFragment extends HGBAbstractFragment {
 
             }
 
-            mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), mGroups, children);
+            mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), passangers, children);
             mRecyclerView.setAdapter(mAdapter);
         }else{
 
-            for (int i = 0; i < mGroups.size(); i++) {
+            for (int i = 0; i < passangers.size(); i++) {
                 ArrayList<UserProfileVO> passengerChildArray = new ArrayList<>();
                 passengerChildArray.add(new UserProfileVO());
                 children.add(passengerChildArray);
-                mGroups.get(i).setmChildDataMissing(true);
+                passangers.get(i).setmChildDataMissing(true);
             }
 
-            mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), mGroups, children);
+            mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), passangers, children);
             mRecyclerView.setAdapter(mAdapter);
         }
         mAdapter.setGroupViewClickedInterface(new IExpandableViewSelected(){
@@ -212,7 +209,7 @@ public class TravelersFragment extends HGBAbstractFragment {
             @Override
             public void groupEditClicked(int groupPosition) {
                 Bundle args = new Bundle();
-                args.putString(HGBConstants.BUNDLE_USER_JSON_POSITION, mGroups.get(groupPosition).getNameText());
+                args.putString(HGBConstants.BUNDLE_USER_JSON_POSITION, passangers.get(groupPosition).getmName());
                 getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS_DETAILS.getNavNumber(), args);
             }
         });
@@ -269,8 +266,8 @@ public class TravelersFragment extends HGBAbstractFragment {
         mPaymentTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
         mTravlerTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_003D4C));
         mReviewTextView.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_565656));
-        mPaymentImageView.setBackgroundResource(R.drawable.step_menu_blue_stand);
-        mTravlerImageView.setBackgroundResource(R.drawable.step_menu_blue_on);
+        mPaymentImageView.setBackgroundResource(R.drawable.step_menu_blue_on);
+        mTravlerImageView.setBackgroundResource(R.drawable.step_menu_gray);
         mReviewImageView.setBackgroundResource(R.drawable.step_menu_gray);
 
     }

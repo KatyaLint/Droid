@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,6 +47,8 @@ public class TravlerCCAdapter extends RecyclerView.Adapter<TravlerCCAdapter.View
         private ImageView mCCImage ;
         private ImageView mCVVImage;
         private FontEditTextView mCVVEditText;
+        private LinearLayout mCVVLinearLayout;
+
 
 
 
@@ -57,6 +60,8 @@ public class TravlerCCAdapter extends RecyclerView.Adapter<TravlerCCAdapter.View
             mCCImage = (ImageView) view.findViewById(R.id.cc_image);
             mCVVImage = (ImageView) view.findViewById(R.id.ccv_image);
             mCVVEditText = (FontEditTextView) view.findViewById(R.id.ccv_edittext);
+            mCVVLinearLayout = (LinearLayout) view.findViewById(R.id.ccv_ll);
+
 
 
         }
@@ -142,10 +147,10 @@ public class TravlerCCAdapter extends RecyclerView.Adapter<TravlerCCAdapter.View
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.length()==3){
-                    holder.mCVVImage.setVisibility(View.GONE);
+                if(charSequence.length()>0){
+                    holder.mCVVLinearLayout.setBackgroundResource(R.drawable.cvv_shape_white);
                 }else{
-                    holder.mCVVImage.setVisibility(View.VISIBLE);
+                    holder.mCVVLinearLayout.setBackgroundResource(R.drawable.cvv_shape);
                 }
                 mOnCheck.onCheck();
 

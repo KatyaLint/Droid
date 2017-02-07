@@ -3,6 +3,8 @@ package hellogbye.com.hellogbyeandroid.fragments.alternative;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.google.gson.Gson;
 
@@ -10,6 +12,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
@@ -45,6 +48,10 @@ public class FactoryAlternativeFlight extends HGBAbstractFragment {
             args.putBoolean(HGBConstants.BUNDLE_ROUND_TRIP, false);
             getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_ONE_WAY_TRIP.getNavNumber(),args);
         }
+
+
+
+        ((MainActivityBottomTabs)getActivity()).goToCncScreeButton();
 
     }
 

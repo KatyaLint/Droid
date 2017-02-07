@@ -1,16 +1,21 @@
 package hellogbye.com.hellogbyeandroid.fragments.checkout;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.CreateAccountActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
@@ -25,6 +30,7 @@ import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 import static hellogbye.com.hellogbyeandroid.R.id.position;
+import static hellogbye.com.hellogbyeandroid.R.id.preference_save_changes;
 
 /**
  * Created by arisprung on 11/24/15.
@@ -32,12 +38,14 @@ import static hellogbye.com.hellogbyeandroid.R.id.position;
 public class TravelerDetailsFragment extends HGBAbstractFragment {
 
 
-    private FontTextView mTitle;
+    private FontEditTextView mTitle;
+    private FontEditTextView mSeatType;
     private FontEditTextView mFirstName;
     private FontEditTextView mLastName;
-    private FontTextView mDOB;
-    private FontTextView mSave;
-
+    private FontEditTextView mDOB;
+   // private FontTextView mSave;
+    private     String[] seatArray = {"No Preference","Window","Aisle"};
+    private AlertDialog mSeatTypeDialog;
    // private FontTextView mGender;
     private FontEditTextView mEmail;
     private FontEditTextView mPhone;
@@ -74,11 +82,12 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
      //   getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-        mTitle = (FontTextView) view.findViewById(R.id.travel_detail_title);
+        mTitle = (FontEditTextView) view.findViewById(R.id.travel_detail_title);
         mFirstName = (FontEditTextView) view.findViewById(R.id.travel_detail_first_name);
+        mSeatType= (FontEditTextView) view.findViewById(R.id.travel_seat_type);
         mLastName = (FontEditTextView) view.findViewById(R.id.travel_detail_last_name);
         travel_detail_middle_name = (FontEditTextView) view.findViewById(R.id.travel_detail_middle_name);
-        mDOB = (FontTextView) view.findViewById(R.id.travel_detail_dob);
+        mDOB = (FontEditTextView) view.findViewById(R.id.travel_detail_dob);
   //      mGender = (FontTextView) view.findViewById(R.id.travel_detail_gender);
         mEmail = (FontEditTextView) view.findViewById(R.id.travel_detail_email);
         mPhone = (FontEditTextView) view.findViewById(R.id.travel_detail_phone);
@@ -87,7 +96,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
         mCountry = (FontTextView) view.findViewById(R.id.travel_detail_country);
         mPostalCode = (FontEditTextView) view.findViewById(R.id.travel_detail_postal_code);
         mState = (FontTextView) view.findViewById(R.id.travel_detail_province);*/
-        mSave = (FontTextView) view.findViewById(R.id.travler_detail_save);
+       // mSave = (FontTextView) view.findViewById(R.id.travler_detail_save);
 
         //getStaticBooking();
         bookingResponse = getActivityInterface().getBookingRequest();
@@ -107,9 +116,9 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             initUser();
         }
 
-        setSaveButton();
+      //  setSaveButton();
         setClickListner();
-
+        buildSeatTypeDialog();
 
     }
 
@@ -183,10 +192,19 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             @Override
             public void onClick(View v) {
 
-                HGBUtility.showPikerDialog(0,mTitle, getActivity(), SELECT_TITLE, getResources().getStringArray(R.array.title_array), 0, 2, null, true);
+                HGBUtility.showPikerDialogEditText(mTitle, getActivity(), SELECT_TITLE, getResources().getStringArray(R.array.title_array), 0, 2, null, true);
 
 
                 // showTitleDialog();
+            }
+        });
+
+
+
+        mSeatType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSeatTypeDialog.show();
             }
         });
 
@@ -197,7 +215,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             }
         });
 
-        mSave.setOnClickListener(new View.OnClickListener() {
+        ((MainActivityBottomTabs)getActivity()).getPreferencesSaveButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -231,34 +249,35 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
                 ((MainActivityBottomTabs) getActivity()).onBackPressed();
 
 
-             /*   ConnectionManager.getInstance(getActivity()).putCompanion(mUser.getPaxid(), mUser, new ConnectionManager.ServerRequestListener() {
-                    @Override
-                    public void onSuccess(Object data) {
-                        getFragmentManager().popBackStack();
-                    }
 
-                    @Override
-                    public void onError(Object data) {
-                        Toast.makeText(getActivity().getApplicationContext(), "There was a problem saving your information please try again", Toast.LENGTH_SHORT).show();
-                        ErrorMessage(data);
-                    }
-                });
-*/
+//                ConnectionManager.getInstance(getActivity()).putCompanion(mUser.getPaxid(), mUser, new ConnectionManager.ServerRequestListener() {
+//                    @Override
+//                    public void onSuccess(Object data) {
+//                        getFragmentManager().popBackStack();
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Object data) {
+//                        Toast.makeText(getActivity().getApplicationContext(), "There was a problem saving your information please try again", Toast.LENGTH_SHORT).show();
+//                        ErrorMessage(data);
+//                    }
+//                });
 
 
             }
         });
     }
-
-    private void setSaveButton() {
-        if (HGBUtility.isUserDataValid(mUser)) {
-            mSave.setEnabled(true);
-        } else {
-            mSave.setEnabled(false);
-        }
-    //    mSave.setPadding(0, 30, 0, 30);
-
-    }
+//
+//      private void setSaveButton() {
+//        if (HGBUtility.isUserDataValid(mUser)) {
+//            mSave.setEnabled(true);
+//        } else {
+//            mSave.setEnabled(false);
+//        }
+//        //    mSave.setPadding(0, 30, 0, 30);
+//
+//    }
 
 
     /*final String[] genderArray = {"M", "F"};*/
@@ -323,7 +342,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                // mUser.setFirstname(s.toString());
-                setSaveButton();
+               // setSaveButton();
             }
 
             @Override
@@ -342,7 +361,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             //    mUser.setLastname(s.toString());
-                setSaveButton();
+             //   setSaveButton();
             }
 
             @Override
@@ -361,7 +380,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
              //  mUser.setMiddlename(s.toString());
-                setSaveButton();
+              ///  setSaveButton();
             }
 
             @Override
@@ -526,6 +545,23 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
                     }
                 }, false);*/
 
+    }
+
+    private void buildSeatTypeDialog() {
+
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
+                getActivity(), R.layout.dialog_radio, seatArray);
+        // Creating and Building the Dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Preferred Seat Type");
+        builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                mSeatType.setText(seatArray[item]);
+
+                mSeatTypeDialog.hide();
+            }
+        });
+        mSeatTypeDialog = builder.create();
     }
 
 

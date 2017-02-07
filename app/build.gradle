@@ -1,11 +1,13 @@
 buildscript {
     repositories {
+        jcenter()
         maven { url 'https://maven.fabric.io/public' }
-
+        mavenLocal()
     }
 
     dependencies {
         classpath 'io.fabric.tools:gradle:1.+'
+    //    classpath 'com.google.gms:google-services:3.0.0'
     }
 }
 apply plugin: 'com.android.application'
@@ -15,6 +17,14 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
     mavenCentral()
     maven { url "https://jitpack.io" }
+    maven { url  "http://dl.bintray.com/jayrambhia/maven" }
+
+}
+allprojects {
+    repositories {
+        jcenter()
+        mavenLocal()
+    }
 }
 
 android {
@@ -96,14 +106,15 @@ dependencies {
     compile 'io.card:android-sdk:5.1.2'
     compile 'com.github.dbachelder:CreditCardEntry:1.4.7'
     compile 'com.appsee:appsee-android:+'
-    compile 'com.google.android.gms:play-services-analytics:9.+'
-    compile 'com.google.android.gms:play-services-places:9.+'
-    compile 'com.google.android.gms:play-services-maps:9.+'
+    compile 'com.google.android.gms:play-services-analytics:10.0.0'
+    compile 'com.google.android.gms:play-services-places:10.0.0'
+    compile 'com.google.android.gms:play-services-maps:10.0.0'
     compile files('libs/AndroidSwipeLayout-v1.1.8.jar')
     //    compile 'com.android.support:multidex:1.0.1'
     compile project(':bottom-bar')
-
+    compile 'com.fenchtose:tooltip:0.1.5'
     compile 'com.viewpagerindicator:library:2.4.1'
+    compile 'com.google.firebase:firebase-messaging:10.0.0'
 
 
     compile files('libs/gson-2.2.3.jar')
@@ -111,3 +122,4 @@ dependencies {
     compile files('libs/signalr-client-sdk-android.jar')
 
 }
+//apply plugin: 'com.google.gms.google-services'

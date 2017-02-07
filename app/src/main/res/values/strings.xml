@@ -255,6 +255,7 @@
 
     <string name="save_button">Save</string>
     <string name="ok_button">Ok</string>
+    <string name="logout_button">LOG OUT</string>
 
     <string name="you_can_say_things_like">You can say things like:</string>
     <string name="cnc_error">Your query was not recognized.\nPlease try again.</string>
@@ -267,7 +268,7 @@
     <string name = "payment_select_payment_method">Select Payment Method</string>
     <string name = "payment_next_button">Next</string>
     <string name="payment_card_information">CARD INFORMATION</string>
-    <string name="payment_scan_card">Scan Card</string>
+    <string name="payment_scan_card">Scan</string>
     <string name="payment_card_number">Card Number</string>
     <string name="payment_exp_month">Exp. Month</string>
     <string name="payment_exp_year">Exp. Year</string>
@@ -302,6 +303,7 @@
     <string name="popup_confirm_account_title">Confirm Your Account to Continue</string>
 
     <string name = "profile_choose_between">Which Travel Profile?</string>
+    <string name="profile_choose_manage_profile">Manage Profile</string>
 
     <string name="grid_taxes">(Taxes &amp; Fees Extra)</string>
     <string name="itinerary_and_payment">ITINERARY AND PAYMENT</string>
@@ -319,7 +321,7 @@
     <string name="my_account">MY ACCOUNT</string>
     <string name="search">search</string>
     <string name="appsee_api_key">dce204a44e3c4e1196b8546b768781fc</string>
-    <string name="change_hotel">CHANGE HOTEL</string>
+    <string name="change_hotel">MORE HOTELS</string>
     <string name="show_more">Show more</string>
     <string name="show_less">Show Less</string>
     <string name="password_not_valid">Password not valid</string>

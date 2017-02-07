@@ -3,7 +3,6 @@ package hellogbye.com.hellogbyeandroid.views;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
-import android.content.Context;
 
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -23,6 +22,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 public class CostumeToolBar extends Toolbar {
 
     private ImageButton up_bar_favorite;
+    private ImageButton chat_message;
     private ImageButton toolbar_new_iternerary;
     private ImageButton favoriteButton;
     private ImageButton search_maginfy;
@@ -38,6 +38,7 @@ public class CostumeToolBar extends Toolbar {
     //private LinearLayout tool_bar_profile_name;
     private ImageButton toolbar_new_iternerary_cnc;
     private FontTextView preference_save_changes;
+    private ImageView preference_add_cc;
     private SearchView search_view_tool_bar;
     private AutoCompleteTextView auto_complete;
     private Activity mActivity;
@@ -69,6 +70,9 @@ public class CostumeToolBar extends Toolbar {
         if(my_trip_profile == null){
             my_trip_profile = (FontTextView)findViewById(R.id.my_trip_profile);
         }
+        if(chat_message == null){
+            chat_message = (ImageButton) findViewById(R.id.toolbar_new_iternerary_cnc_chat_message);
+        }
         if (titleBar == null) {
             titleBar = (FontTextView) findViewById(R.id.titleBar);
         }
@@ -95,6 +99,11 @@ public class CostumeToolBar extends Toolbar {
         if(preference_save_changes == null) {
             preference_save_changes = (FontTextView)findViewById(R.id.preference_save_changes);
         }
+        if(preference_add_cc == null) {
+            preference_add_cc = (ImageView) findViewById(R.id.add_cc);
+        }
+
+
 //        if(my_trips_button == null){
 //            my_trips_button = (ImageButton)findViewById(R.id.my_trips_button);
 //        }
@@ -242,19 +251,13 @@ public class CostumeToolBar extends Toolbar {
         search_view_tool_bar.setVisibility(View.GONE);
         auto_complete.setVisibility(View.GONE);
         toolbar_add_companion.setVisibility(View.GONE);
+        chat_message.setVisibility(View.GONE);
         toolbar_profile_popup.setVisibility(View.GONE);
+        preference_add_cc.setVisibility(View.GONE);
 
 
         switch (navBar) {
 
-         //   case HOME:
-     /*           tool_bar_profile_name.setVisibility(View.VISIBLE);
-                toolbar_go_to_iternerary.setVisibility(View.VISIBLE);*/
-//             //   homeTitleImage.setVisibility(View.VISIBLE);
-//                my_trip_profile.setVisibility(View.VISIBLE);
-//                keyBoardImage.setVisibility(View.VISIBLE);
-//
-         //       break;
 
             case CNC:
            //     tool_bar_profile_name.setVisibility(View.VISIBLE);
@@ -266,16 +269,22 @@ public class CostumeToolBar extends Toolbar {
                 up_bar_favorite.setVisibility(View.VISIBLE);
                 itirnarary_title_Bar.setVisibility(View.VISIBLE);
                 break;
+            /**
+             * show title, preference edit
+             */
             case PREFERENCES_CHECK_LIST_SETTINGS:
             case PREFERENCES_SEARCH_LIST_SETTINGS:
             case PREFERENCES_SPECIFIC_LIST_SETTINGS:
             case PREFERENCES_DRAG_LIST_SETTINGS:
             case PREFERENCE_SETTINGS_EMAILS:
             case PREFERENCES_CHECK_AS_RADIO_SETTINGS:
+            case TRAVEL_PREFERENCE:
                 preference_save_changes.setVisibility(View.VISIBLE);
                 titleBar.setVisibility(View.VISIBLE);
                 edit_preferences.setVisibility(View.GONE);
             break;
+
+
 
             case TRIPS:
                 titleBar.setVisibility(View.VISIBLE);
@@ -283,44 +292,72 @@ public class CostumeToolBar extends Toolbar {
                 search_maginfy.setVisibility(View.VISIBLE);
                 break;
 
-            case COMPANIONS:
-                toolbar_add_companion.setVisibility(View.VISIBLE);
-                search_maginfy.setVisibility(View.VISIBLE);
+
+
+                /**
+                 * show save button
+                 */
             case ALL_COMPANIONS_VIEW:
             case COMPANIONS_PERSONAL_DETAILS:
             case HELP:
             case ACCOUNT:
             case PREFERENCES_TAB_SETTINGS:
-            case HOTEL:
             case COMPANION_HELP_FEEDBACK:
-            case ALTERNATIVE_FLIGHT_DETAILS:
             case ADD_CREDIT_CARD:
-            case PAYMENT_DETAILS:
+                preference_save_changes.setVisibility(View.VISIBLE);
+                break;
             case HAZARDOUS_NOTICE:
-            case SELECT_CREDIT_CARD:
-            case PAYMENT_TRAVELERS:
             case CREDIT_CARD_LIST:
+                preference_add_cc.setVisibility(View.VISIBLE);
+                break;
             case PAYMENT_TRAVELERS_DETAILS:
-            case NOTIFICATIONS:
-            case PREFERENCES_MEMBERSHIP:
-            case ALTERNATIVE_FLIGHT_ONE_WAY_TRIP:
-            case ALTERNATIVE_FLIGHT_ROUND_TRIP:
-            case COMPANIONS_DETAILS:
-            case FARE_CLASS_FRAGMENT:
+                preference_save_changes.setVisibility(View.VISIBLE);
+                break;
+
+            /**
+             * show add companion, search, title
+             */
+            case COMPANIONS:
+                toolbar_add_companion.setVisibility(View.VISIBLE);
+                search_maginfy.setVisibility(View.VISIBLE);
                 titleBar.setVisibility(View.VISIBLE);
                 break;
+
+            case HOTEL:
+                chat_message.setVisibility(View.VISIBLE);
+            /**
+             * show title only
+             */
+            case NOTIFICATIONS:
+            case PREFERENCES_MEMBERSHIP:
+            case COMPANIONS_DETAILS:
+            case FARE_CLASS_FRAGMENT:
+            case SELECT_ROOM_FRAGMENT:
+                titleBar.setVisibility(View.VISIBLE);
+                break;
+            /**
+             * show title and search bar
+             */
             case SELECT_HOTEL_FRAGMENT:
                 search_maginfy.setVisibility(View.VISIBLE);
                 titleBar.setVisibility(View.VISIBLE);
                 break;
 
-            case TRAVEL_PREFERENCE:
+            case ALTERNATIVE_FLIGHT_ONE_WAY_TRIP:
+            case ALTERNATIVE_FLIGHT_ROUND_TRIP:
+            case ALTERNATIVE_FLIGHT_DETAILS:
+                chat_message.setVisibility(View.VISIBLE);
                 titleBar.setVisibility(View.VISIBLE);
-                preferences_edit_mode.setVisibility(View.VISIBLE);
-                edit_preferences.setVisibility(View.VISIBLE);
                 break;
-            case SELECT_ROOM_FRAGMENT:
-                titleBar.setVisibility(View.VISIBLE);
+
+            /**
+             * show chat message only
+             */
+            case PAYMENT_TRAVELERS:
+            case PAYMENT_DETAILS:
+            case SELECT_CREDIT_CARD:
+            case ALTERNATIVE_FLIGHT_FACTORY:
+                chat_message.setVisibility(View.VISIBLE);
                 break;
 
         }

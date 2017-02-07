@@ -15,6 +15,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymnentGroup;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -23,12 +24,12 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  */
 public class TravlerExpandableAdapter extends BaseExpandableListAdapter {
     private final LayoutInflater inf;
-    private final ArrayList<PaymnentGroup> groupsList;
+    private final ArrayList<PassengersVO> groupsList;
     private List<ArrayList<UserProfileVO>> childrenList = new ArrayList<>();
     private Context context;
     private IExpandableViewSelected groupViewClickedInterface;
 
-    public TravlerExpandableAdapter(Context context, ArrayList<PaymnentGroup> groups, List<ArrayList<UserProfileVO>> children) {
+    public TravlerExpandableAdapter(Context context, ArrayList<PassengersVO> groups, List<ArrayList<UserProfileVO>> children) {
         this.groupsList = groups;
         this.childrenList = children;
         this.inf = LayoutInflater.from(context);
@@ -144,16 +145,10 @@ public class TravlerExpandableAdapter extends BaseExpandableListAdapter {
 
         }
 
-        final PaymnentGroup group = (PaymnentGroup) getGroup(groupPosition);
-        holder.groupNametext.setText(group.getNameText());
-        holder.groupPricetext.setText(group.getTotalText());
+        final PassengersVO group = (PassengersVO) getGroup(groupPosition);
+        holder.groupNametext.setText(group.getmName());
 
 
-        if (group.isSelected()) {
-            holder.groupImageView.setBackgroundResource(R.drawable.expand_copy_3);
-        } else {
-            holder.groupImageView.setBackgroundResource(R.drawable.minimize);
-        }
         holder.groupImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

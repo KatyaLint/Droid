@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Manage Profile"
+            android:text="@string/profile_choose_manage_profile"
             android:textColor="@color/COLOR_00516f"
             android:textSize="@dimen/SP18"
             app:fontName="dinnextltpro_medium.otf" />
@@ -66,7 +66,7 @@
             android:layout_above="@+id/manage_profile_ll"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/DP1"
-            android:background="@color/COLOR_999999" />
+            android:background="@color/COLOR_80999999" />
     </LinearLayout>
 
 

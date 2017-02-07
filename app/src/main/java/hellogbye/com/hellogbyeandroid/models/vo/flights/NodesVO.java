@@ -666,4 +666,12 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     public void setmCurrency(String mCurrency) {
         this.mCurrency = mCurrency;
     }
+
+    public String getmFarePreference() {
+        return mFarePreference;
+    }
+
+    public void setmFarePreference(String mFarePreference) {
+        this.mFarePreference = mFarePreference;
+    }
 }

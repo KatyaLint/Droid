@@ -48,7 +48,7 @@ public class TripsTabsView extends HGBAbstractFragment {
 
 
 
-    private void firstTextInit(View rootView){
+    private void firstTextInit(){
 
         for (int i = 0; i < mTabHost.getTabWidget().getTabCount(); i++) {
             View view = mTabHost.getTabWidget().getChildAt(i);
@@ -58,7 +58,7 @@ public class TripsTabsView extends HGBAbstractFragment {
             if (i == 0) { //selected
                 tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_WHITE));
             } else { //unselected
-                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_F5F5F5));
+                tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_b6bec9));
             }
             tv.setTypeface(textFont);
             tv.setTransformationMethod(null);
@@ -90,7 +90,7 @@ public class TripsTabsView extends HGBAbstractFragment {
         mTabHost.setCurrentTab(0);
 
         textFont = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + "dinnextltpro_medium.otf");
-        firstTextInit(rootView);
+        firstTextInit();
         mTabHost.getTabWidget().getChildAt(mTabHost.getCurrentTab()).getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
 
         mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
@@ -101,7 +101,7 @@ public class TripsTabsView extends HGBAbstractFragment {
 
                 for (int i = 0; i < mTabHost.getTabWidget().getChildCount(); i++) {
                     TextView tv = (TextView) mTabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
-                    tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_F5F5F5));
+                    tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_b6bec9));
                     tv.setTypeface(textFont);
                   //  tv.setTextSize(R.dimen.SP16);
                     tv.setTransformationMethod(null);

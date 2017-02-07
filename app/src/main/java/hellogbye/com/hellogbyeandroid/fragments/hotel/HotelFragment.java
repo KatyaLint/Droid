@@ -130,7 +130,7 @@ public class HotelFragment extends HGBAbstractFragment {
             }
         });
 
-
+        ((MainActivityBottomTabs)getActivity()).goToCncScreeButton();
         HGBUtilityNetwork.checkPermissions(getActivity());
 
         return rootView;
