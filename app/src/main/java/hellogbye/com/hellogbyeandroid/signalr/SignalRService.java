@@ -99,7 +99,6 @@ public class SignalRService extends Service {
 
             @Override
             public void run() {
-                System.out.println("Kate CONNECTED");
 
             }
         });
@@ -114,14 +113,31 @@ public class SignalRService extends Service {
             @Override
             public void run(Void obj) throws Exception {
 
+                JsonObject jsonObject = new JsonObject();
+                String invokationFunctionName = null;
+                String connectionId = _connection.getConnectionId();
+                String signalrConnectionID = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_SIGNALR_CONNECTION_ID, "");
+
+                if(signalrConnectionID != null && !signalrConnectionID.isEmpty()){
+                    invokationFunctionName = "cncClientReRegisterR";
+                    jsonObject.addProperty("oldSignalRclientid",signalrConnectionID);
+                    jsonObject.addProperty("newSignalRclientid",connectionId);
+                }else{
+                    invokationFunctionName = "cncClientRegisterR";
+                    jsonObject.addProperty("signalRclientId",connectionId);
+                }
+
+                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_SIGNALR_CONNECTION_ID, connectionId);
+
+
+            //    jsonObject.addProperty(invokationFunctionName,_connection.getConnectionId());
+
                 String userProfileID = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, "");
 
-                Map<String, String> nameValuePairs = new HashMap<String, String>();
+                jsonObject.addProperty("userId",userProfileID);
 
-                nameValuePairs.put("signalRclientId",_connection.getConnectionId());
-                nameValuePairs.put("userId",userProfileID);
 
-                _hub.invoke("cncClientRegisterR", nameValuePairs).done(new Action<Void>() {
+                _hub.invoke(invokationFunctionName, jsonObject).done(new Action<Void>() {
                     @Override
                     public void run(Void aVoid) throws Exception {
                     }
@@ -131,20 +147,6 @@ public class SignalRService extends Service {
                     public void onError(Throwable error) {
                     }
                 });
-
-               /* _hub.invoke("cncClientReRegisterR", nameValuePairs).done(new Action<Void>() {
-                    @Override
-                    public void run(Void aVoid) throws Exception {
-                    }
-                }).onError(new ErrorCallback() {
-
-                    @Override
-                    public void onError(Throwable SignalRRrror) {
-                    }
-                });*/
-
-
-
 
             }
         });
@@ -195,7 +197,6 @@ public class SignalRService extends Service {
                     @Override
                     public void run(final Object msg) {
                         //  final String finalMsg = msg.UserName + " says " + msg.Message;
-                        System.out.println("Kate finalMsg cncOnMessageToClientR =" + msg.toString());
 
                     }
                 }
@@ -287,8 +288,8 @@ public class SignalRService extends Service {
 
 
         gsonResult.addProperty("query",query);
-        gsonResult.addProperty("latitude","37.785834");
-        gsonResult.addProperty("longitude","-122.406417");
+        gsonResult.addProperty("latitude",37.785834);
+        gsonResult.addProperty("longitude",-122.406417);
 
 
         if(airportSendValuesVO != null){

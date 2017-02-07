@@ -318,7 +318,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         airportSendValuesVOs.add(airportSendValuesVO);
         addCompanionToQuery(airportSendValuesVOs);
 
-        System.out.println("Kate JoinCompanion");
         handleHGBMessageMe(joinQuery);
         args.putString(HGBConstants.BUNDLE_ADD_COMPANION_ID, null);
     }
@@ -541,8 +540,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         //stopTextTutorial();
         //setTutorialTextVisibility(false);
 
-
-        System.out.println("Kate handleMyMessage = "+ strMessageReceived);
         getActivityInterface().addCNCItem(new CNCItem(strMessageReceived.trim(), CNCAdapter.ME_ITEM));
         addWaitingItem();
         mCNCAdapter.notifyDataSetChanged();
@@ -691,6 +688,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
             for (AirportResultsVO result : results){
                 if(result.getId().equals(choosenAirport.getId())) {
                     airportSendValuesVO.setId(choosenAirport.getId());
+                    airportSendValuesVO.setValue(choosenAirport.getAirportname());
 
                     String location = HGBUtilityNetwork.getLocation(getActivity(), false);
 
@@ -723,13 +721,12 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
     public void handleHGBMessage(String strMessage) {
 
-        System.out.println("Kate  handleHGBMessage =" + strMessage);
         getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.HGB_ITEM));
         removeWaitingItem();
     }
 
     public void handleHGBMessageMe(String strMessage) {
-        System.out.println("Kate  handleHGBMessageMe =" + strMessage);
+
         getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.ME_ITEM));
         addWaitingItem();
 
@@ -1050,9 +1047,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
     @Override
     public void onDestroyView() {
-
-        System.out.println("Kate destroy");
-
 
         try {
             Gson gsonback = new Gson();
