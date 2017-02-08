@@ -595,5 +595,15 @@ Code changing:
         - Hotel fragment - new cnc icon
         -  log out
         - alternative flight, sort - progress
+        - signalr
 
 
+   ------------------------------------------
+                         Version 0.0.7
+   ------------------------------------------
+      Fixed Bugs:
+      -----------
+
+
+      Code changing:
+      --------------
