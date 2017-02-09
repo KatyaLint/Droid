@@ -1,7 +1,10 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -9,8 +12,10 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -41,6 +46,7 @@ import android.widget.Toast;
 
 import com.fenchtose.tooltip.Tooltip;
 import com.fenchtose.tooltip.TooltipAnimation;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +67,10 @@ import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
+import static android.R.attr.id;
 import static android.R.attr.type;
 import static com.appsee.pc.e;
+import static java.lang.Long.parseLong;
 import static org.jcodec.SliceType.P;
 
 /**
@@ -158,7 +166,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         android_id = Settings.Secure.getString(CreateAccountActivity.this.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
-
+        String string = FirebaseInstanceId.getInstance().getToken();
         initView();
         userData = new UserSignUpDataVO();
         countDownTimer = new AnimationCountDownTimer(getResources().getInteger(R.integer.create_account_animation_duration), 1000);
@@ -308,31 +316,54 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME, mRemmeberMeCheckbox.isChecked());
-                ConnectionManager.getInstance(CreateAccountActivity.this).login(mLoginEmail.getText().toString(), mLoginPassword.getText().toString(),
-                        new ConnectionManager.ServerRequestListener() {
-                            @Override
-                            public void onSuccess(Object data) {
-                                UserLoginCredentials user = (UserLoginCredentials) data;
-                                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_USER_IS_LOGIN_IN_PAST, true);
-                                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
-                                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
 
-                                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, mLoginEmail.getText().toString());
-                                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, mLoginPassword.getText().toString());
-                                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
-                                goToMainActivity();
-                            }
+                sendLoginToServer();
 
-                            @Override
-                            public void onError(Object data) {
-                                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                                errorHelper.setMessageForError((String) data);
-                                errorHelper.show(getFragmentManager(), (String) data);
-                            }
-                        });
+
+
             }
         });
+    }
+
+    private void sendLoginToServer() {
+        try{
+//            int permissionCheck = ContextCompat.checkSelfPermission(CreateAccountActivity.this, Manifest.permission.READ_PHONE_STATE);
+//
+//            if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+//                ActivityCompat.requestPermissions(CreateAccountActivity.this, new String[]{Manifest.permission.READ_PHONE_STATE}, 002);
+//                return;
+//            } else {
+//                //TODO
+//            }
+           // TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME, mRemmeberMeCheckbox.isChecked());
+           // String strUdid = tm.getDeviceId();
+          //  long udid = Long.valueOf(strUdid);
+            ConnectionManager.getInstance(CreateAccountActivity.this).login(mLoginEmail.getText().toString(), mLoginPassword.getText().toString(),android_id.hashCode(),
+                    new ConnectionManager.ServerRequestListener() {
+                        @Override
+                        public void onSuccess(Object data) {
+                            UserLoginCredentials user = (UserLoginCredentials) data;
+                            hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_USER_IS_LOGIN_IN_PAST, true);
+                            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
+                            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
+
+                            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, mLoginEmail.getText().toString());
+                            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, mLoginPassword.getText().toString());
+                            hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
+                            goToMainActivity();
+                        }
+
+                        @Override
+                        public void onError(Object data) {
+                            HGBErrorHelper errorHelper = new HGBErrorHelper();
+                            errorHelper.setMessageForError((String) data);
+                            errorHelper.show(getFragmentManager(), (String) data);
+                        }
+                    });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void editTextViewListners() {
@@ -1322,5 +1353,19 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             }
 
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 002:
+                if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    sendLoginToServer();
+                }
+                break;
+
+            default:
+                break;
+        }
     }
 }

@@ -77,7 +77,7 @@ public class ConnectionManager {
         String choosenServer = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER,"");
 
         if(choosenServer == null || choosenServer.isEmpty()){
-            BASE_URL = "http://apidev.hellogbye.com/dev/rest/"; // "https://apiprod.hellogbye.com/prod/rest/"; //"http://apidev.hellogbye.com/dev/rest/";// //"https://apiuat.hellogbye.com/uat/rest/";//This is default server
+            BASE_URL = "http://apidev.hellogbye.com/dev/rest/"; // "http://apidev.hellogbye.com/dev/rest/ "https://apiprod.hellogbye.com/prod/rest/"; //"http://apidev.hellogbye.com/dev/rest/";// //"https://apiuat.hellogbye.com/uat/rest/";//This is default server
         }else{
             BASE_URL = choosenServer;
         }
@@ -208,6 +208,27 @@ public class ConnectionManager {
                 listener.onError(Parser.parseErrorMessage(error));
             }
         }, true);
+    }
+
+    public void postSendNOtificationToken(String key, final ServerRequestListener listener) {
+
+        String url = getURL(Services.ACTIVATE_NOTIFICATION);
+        url = url+key;
+        JSONObject jsonObject = new JSONObject();
+
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, false);
     }
 
     public void postResendActivateEmail(String email, final ServerRequestListener listener) {
@@ -469,12 +490,13 @@ public class ConnectionManager {
         });
     }
 
-    public void login(String email, String password, final ServerRequestListener listener) {
+    public void login(String email, String password,int id,final ServerRequestListener listener) {
         String url = getURL(Services.USER_POST_LOGIN);
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("password", password);
             jsonObject.put("username", email);
+           // jsonObject.put("DeviceUUID", "123e4567-e89b-12d3-a456-426655440000");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -2052,6 +2074,8 @@ public class ConnectionManager {
                 BOOKING_CONFIRMATION("Booking/flight/confirmation/pdf?"),
                 SUBMIT_FEEDBACK("Feedback"),
                 USER_ACTIVATION_PIN("UserProfile/Activate?activationKey="),
+                ACTIVATE_NOTIFICATION("PushNotifications/Enable/"),
+
                 HOTEL_SEARCH("hotel/Search"),
                 DEFAULT_PROFILES("TravelPreference/Profiles/Defaults"),
                 STATIC_CITY_AUTOCOMPLETE("statics/cityautocomplete"),

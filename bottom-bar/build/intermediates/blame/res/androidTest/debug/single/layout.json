@@ -16,12 +16,12 @@
         "source": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/layout/abc_search_view.xml"
     },
     {
-        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/layout/design_navigation_item_header.xml",
-        "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/layout/design_navigation_item_header.xml"
-    },
-    {
         "merged": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/layout/design_layout_tab_icon.xml",
         "source": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/layout/design_layout_tab_icon.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/layout/design_navigation_item_header.xml",
+        "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/layout/design_navigation_item_header.xml"
     },
     {
         "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/layout/design_navigation_item_separator.xml",
@@ -104,12 +104,12 @@
         "source": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/layout/abc_list_menu_item_radio.xml"
     },
     {
-        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/layout/notification_template_big_media_narrow.xml",
-        "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/layout/notification_template_big_media_narrow.xml"
-    },
-    {
         "merged": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/layout/abc_screen_simple_overlay_action_mode.xml",
         "source": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/layout/abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/layout/notification_template_big_media_narrow.xml",
+        "source": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/layout/notification_template_big_media_narrow.xml"
     },
     {
         "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/androidTest/debug/layout/abc_screen_content_include.xml",

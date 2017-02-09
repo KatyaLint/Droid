@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "541382595132",
-    "project_id": "ari-hellogbye"
+    "project_number": "897513118617",
+    "project_id": "hellogbye-live"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:541382595132:android:cb96802ffc9ffbfa",
+        "mobilesdk_app_id": "1:897513118617:android:c1198a442f954233",
         "android_client_info": {
-          "package_name": "hellogbye.com.hellogbyeandroid"
+          "package_name": "com.hellogbye"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAHdfDu6diYxdTq9szkaiUzQl9zeI-_BZM"
+          "current_key": "AIzaSyCpGsM6PuPiuNHYL_qH4Icd6Yn7S7UpEtc"
         }
       ],
       "services": {
