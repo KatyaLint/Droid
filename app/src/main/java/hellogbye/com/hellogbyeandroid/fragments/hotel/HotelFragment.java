@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.hotel.AlternativeHotelRoomAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.hotel.HotelImageAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.models.Occupant;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.AllImagesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
@@ -44,9 +46,6 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityNetwork;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.WrapContentViewPager;
-
-import static hellogbye.com.hellogbyeandroid.R.id.grid_hotel_price;
-import static hellogbye.com.hellogbyeandroid.R.id.position;
 
 
 /**
@@ -63,9 +62,10 @@ public class HotelFragment extends HGBAbstractFragment {
     private FontTextView mHotelCurrencyFontTextView;
 
     private FontTextView mHotelPriceFontTextView;
-  //  private FontTextView mHotelDaysFontTextView;
+    //  private FontTextView mHotelDaysFontTextView;
     private FontTextView mAlertnativeHotelFontTextView;
     private FontTextView mRoomName;
+    private FontTextView mShareEdit;
     private FontTextView mChckInDate;
     private FontTextView mChckOutDate;
     private ArrayList<String> mListForGallery;
@@ -130,7 +130,14 @@ public class HotelFragment extends HGBAbstractFragment {
             }
         });
 
-        ((MainActivityBottomTabs)getActivity()).goToCncScreeButton();
+        mShareEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO pop up
+            }
+        });
+
+        ((MainActivityBottomTabs) getActivity()).goToCncScreeButton();
         HGBUtilityNetwork.checkPermissions(getActivity());
 
         return rootView;
@@ -169,6 +176,8 @@ public class HotelFragment extends HGBAbstractFragment {
     private View initRootView(View rootView) {
 
         mRoomName = (FontTextView) rootView.findViewById(R.id.room_name);
+        mShareEdit = (FontTextView) rootView.findViewById(R.id.edit_share);
+
         mChckInDate = (FontTextView) rootView.findViewById(R.id.checkin_date);
         mChckOutDate = (FontTextView) rootView.findViewById(R.id.checkout_date);
         mHotelNameFontTextView = (FontTextView) rootView.findViewById(R.id.hotel_name);
@@ -193,25 +202,49 @@ public class HotelFragment extends HGBAbstractFragment {
         mHotelNameFontTextView.setText(node.getmHotelName());
 
         UserTravelMainVO userOrder = getActivityInterface().getTravelOrder();
+
+
         Map<String, NodesVO> items = userOrder.getItems();
         ArrayList<PassengersVO> passangers = userOrder.getPassengerses();
-        for (PassengersVO passenger: passangers){
-            ArrayList<String> ItineraryItems = passenger.getmItineraryItems();
-            for (String itineraryItem :ItineraryItems){
-                NodesVO node1 = items.get(itineraryItem);
-                if(node.getmPaxguid().equalsIgnoreCase(node1.getmPaxguid())){
-                    mRoomName.setText(passenger.getmName());
-                    break;
+        for (PassengersVO passenger : passangers) {
+
+            if (node.getmPaxguid().equals(passenger.getmPaxguid())) {
+                mRoomName.setText(node.getUserName());
+                for (Occupant occupant : node.getmOccupants()) {
+                    if (occupant.getId().equals(node.getmPaxguid())) {
+
+                    } else {
+                        mRoomName.setText(node.getUserName() + " + ");
+                        mShareEdit.setVisibility(View.VISIBLE);
+                    }
                 }
+            } else {
+                Log.d("", "");
             }
+
         }
+
+//        int i = 0;
+//        for (Occupant occupant : node.getmOccupants()) {
+//            if (occupant.getId().equals(node.getmPaxguid())) {
+//                mRoomName.setText(node.getUserName());
+//                break;
+//            } else {
+//                i++;
+//            }
+//        }
+//        if (i > 0) {
+//            mRoomName.setText(node.getUserName() + " + ");
+//            mShareEdit.setVisibility(View.VISIBLE);
+//        }
+
 
         mChckInDate.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(node.getmCheckIn()));
         mChckOutDate.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(node.getmCheckOut()));
         long diff = HGBUtilityDate.dayDifference(node.getmCheckIn(), node.getmCheckOut());//HGBUtility.getDateDiff(node.getmCheckIn(), node.getmCheckOut());
-        double iCharge = node.getmMinimumAmount()/(diff+1);
-        mHotelPriceFontTextView.setText("$" + HGBUtility.roundNumber(iCharge)+" ");
-        mHotelCurrencyFontTextView.setText(node.getmCurrency()+"/Night");
+        double iCharge = node.getmMinimumAmount() / (diff + 1);
+        mHotelPriceFontTextView.setText("$" + HGBUtility.roundNumber(iCharge) + " ");
+        mHotelCurrencyFontTextView.setText(node.getmCurrency() + "/Night");
         //mHotelDaysFontTextView.setText(diff + " Nights");
         initHotelImages(node.getAllImagesVOs());
     }
@@ -232,7 +265,7 @@ public class HotelFragment extends HGBAbstractFragment {
                 getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_ROOM_FRAGMENT.getNavNumber(), args);
             }
         });
-        mViewPager.setCurrentItem(0,true);
+        mViewPager.setCurrentItem(0, true);
 //        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 //            @Override
 //            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -251,18 +284,18 @@ public class HotelFragment extends HGBAbstractFragment {
 //        });
     }
 
-    private ArrayList<RoomsVO> initRoomList(ArrayList<RoomsVO> roomlist){
-        if(roomlist == null){
+    private ArrayList<RoomsVO> initRoomList(ArrayList<RoomsVO> roomlist) {
+        if (roomlist == null) {
             return null;
         }
 
         ArrayList<RoomsVO> newList = new ArrayList<>(roomlist);
-        for (int i = 0; i <newList.size() ; i++) {
+        for (int i = 0; i < newList.size(); i++) {
 
-            if(!newList.get(i).ismIsAlternative()){
+            if (!newList.get(i).ismIsAlternative()) {
                 RoomsVO room = newList.get(i);
                 newList.remove(i);
-                newList.add(0,room);
+                newList.add(0, room);
                 return newList;
             }
 
@@ -272,7 +305,7 @@ public class HotelFragment extends HGBAbstractFragment {
 
     }
 
-    private void initHotelImages( final ArrayList<AllImagesVO> allImagesVOs) {
+    private void initHotelImages(final ArrayList<AllImagesVO> allImagesVOs) {
 
         mHotelImageAdapter = new HotelImageAdapter(allImagesVOs, getActivity().getApplicationContext());
         mHotelViewPager.setAdapter(mHotelImageAdapter);
@@ -282,8 +315,8 @@ public class HotelFragment extends HGBAbstractFragment {
 
                 Gson gson = new Gson();
                 String json = gson.toJson(getLegWithGuid(getActivityInterface().getTravelOrder()).getAllImagesVOs());
-                Intent intent = new Intent(getActivity().getApplicationContext(),ImageGalleryActivity.class);
-                intent.putExtra("images",json);
+                Intent intent = new Intent(getActivity().getApplicationContext(), ImageGalleryActivity.class);
+                intent.putExtra("images", json);
                 startActivity(intent);
 
             }
@@ -297,7 +330,7 @@ public class HotelFragment extends HGBAbstractFragment {
 
             @Override
             public void onPageSelected(int position) {
-                mNumberImages.setText(position+1+"/"+allImagesVOs.size());
+                mNumberImages.setText(position + 1 + "/" + allImagesVOs.size());
             }
 
             @Override
@@ -305,7 +338,7 @@ public class HotelFragment extends HGBAbstractFragment {
 
             }
         });
-        mNumberImages.setText(1+"/"+allImagesVOs.size());
+        mNumberImages.setText(1 + "/" + allImagesVOs.size());
     }
 
 
@@ -318,7 +351,7 @@ public class HotelFragment extends HGBAbstractFragment {
                     @Override
                     public void onSuccess(Object data) {
                         NodesVO node = (NodesVO) data;
-                        if(node == null){
+                        if (node == null) {
                             return;
                         }
                         if (node.getRoomsVOs().size() > 0) {

@@ -190,13 +190,31 @@
                                     android:textSize="@dimen/SP14"
                                     app:fontName="dinnextltpro_medium.otf" />
 
-                                <hellogbye.com.hellogbyeandroid.views.FontTextView
-                                    android:id="@+id/room_name"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="@color/COLOR_565656"
-                                    android:textSize="@dimen/SP14"
-                                    app:fontName="dinnextltpro_medium.otf" />
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <hellogbye.com.hellogbyeandroid.views.FontTextView
+                                        android:id="@+id/room_name"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/COLOR_565656"
+                                        android:textSize="@dimen/SP14"
+                                        app:fontName="dinnextltpro_medium.otf" />
+
+                                    <hellogbye.com.hellogbyeandroid.views.FontTextView
+                                        android:id="@+id/edit_share"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/COLOR_EE3A3C"
+                                        android:textSize="@dimen/SP14"
+                                        android:text="EDIT"
+                                        android:layout_marginLeft="@dimen/DP4"
+                                        android:visibility="gone"
+                                        app:fontName="dinnextltpro_medium.otf" />
+                                </LinearLayout>
+
+
                             </LinearLayout>
 
                             <View

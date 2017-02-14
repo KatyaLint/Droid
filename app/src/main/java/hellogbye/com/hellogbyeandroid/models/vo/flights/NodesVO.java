@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.models.Amenities;
+import hellogbye.com.hellogbyeandroid.models.Occupant;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 
@@ -164,6 +165,9 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
 
     /*@SerializedName("isalternative")
     private boolean mIsAlternative;*/
+
+    @SerializedName("occupants")
+    private ArrayList<Occupant> mOccupants;
 
     @SerializedName("amenities")
     private ArrayList<Amenities> mAmenities;
@@ -673,5 +677,13 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
 
     public void setmFarePreference(String mFarePreference) {
         this.mFarePreference = mFarePreference;
+    }
+
+    public ArrayList<Occupant> getmOccupants() {
+        return mOccupants;
+    }
+
+    public void setmOccupants(ArrayList<Occupant> mOccupants) {
+        this.mOccupants = mOccupants;
     }
 }
