@@ -1,6 +1,7 @@
 package hellogbye.com.hellogbyeandroid.fragments.hotel;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -11,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
@@ -29,14 +32,18 @@ import hellogbye.com.hellogbyeandroid.activities.ImageGalleryActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.hotel.AlternativeHotelRoomAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.hotel.HotelImageAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.hotel.ShareRoomAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.models.ShareClass;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.AllImagesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.RoomsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
+import hellogbye.com.hellogbyeandroid.models.ShareClass;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -71,7 +78,7 @@ public class HotelFragment extends HGBAbstractFragment {
     private PassengersVO passengersVO;
     private NodesVO currentSelectedNode;
     private ImageView mConfirmBadge;
-
+    private ArrayList<String> mSharRoomList;
     public final float PANEL_HIGHT = 0.4f;
     private Activity activity;
 
@@ -131,7 +138,37 @@ public class HotelFragment extends HGBAbstractFragment {
         mShareEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO pop up
+
+                ArrayList<ShareClass> companionProfileList = new  ArrayList<ShareClass>();
+
+                for(CompanionVO companion: getActivityInterface ().getCompanions()){
+                    for(String id :mSharRoomList){
+                        if(companion.getmCompanionid().equals(id) ){
+                            companionProfileList.add(new ShareClass(companion.getCompanionUserProfile().getmFirstName(),companion.getCompanionUserProfile().getmAvatar()));
+                        }
+                    }
+                }
+                companionProfileList.add(new ShareClass(getActivityInterface().getCurrentUser().getFirstname(),getActivityInterface().getCurrentUser().getAvatar()));
+
+                ShareRoomAdapter shareRoomAdapter = new ShareRoomAdapter(getActivity(),companionProfileList);
+
+                new AlertDialog.Builder(getActivity())
+                        .setAdapter(shareRoomAdapter, new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //TODO - Code when list item is clicked (int which - is param that gives you the index of clicked item)
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .setTitle("Room Occupants")
+                        .setCancelable(false)
+                        .show();
             }
         });
 
@@ -195,7 +232,7 @@ public class HotelFragment extends HGBAbstractFragment {
 
 
     private void initHotel(NodesVO node) {
-
+        mSharRoomList = new ArrayList<>();
         mListForGallery = new ArrayList<>();
         mHotelNameFontTextView.setText(node.getmHotelName());
 
@@ -206,10 +243,13 @@ public class HotelFragment extends HGBAbstractFragment {
 
         ArrayList<PassengersVO> passangers = userOrder.getPassengerses();
         int i = 0;
+
         for (PassengersVO passenger : passangers) {
             ArrayList<String> ItineraryItems = passenger.getmItineraryItems();
             for (String itineraryItem : ItineraryItems) {
+
                 if (node.getmGuid().equalsIgnoreCase(itineraryItem)) {
+                    mSharRoomList.add(passenger.getmPaxguid());
                     i++;
                 }
             }
@@ -392,6 +432,8 @@ public class HotelFragment extends HGBAbstractFragment {
 
             }
         });
+
+
     }
 
 
