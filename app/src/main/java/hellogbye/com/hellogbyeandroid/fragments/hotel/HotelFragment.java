@@ -11,7 +11,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,6 @@ import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.hotel.AlternativeHotelRoomAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.hotel.HotelImageAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
-import hellogbye.com.hellogbyeandroid.models.Occupant;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.AllImagesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
@@ -205,38 +203,24 @@ public class HotelFragment extends HGBAbstractFragment {
 
 
         Map<String, NodesVO> items = userOrder.getItems();
+
         ArrayList<PassengersVO> passangers = userOrder.getPassengerses();
+        int i = 0;
         for (PassengersVO passenger : passangers) {
-
-            if (node.getmPaxguid().equals(passenger.getmPaxguid())) {
-                mRoomName.setText(node.getUserName());
-                for (Occupant occupant : node.getmOccupants()) {
-                    if (occupant.getId().equals(node.getmPaxguid())) {
-
-                    } else {
-                        mRoomName.setText(node.getUserName() + " + ");
-                        mShareEdit.setVisibility(View.VISIBLE);
-                    }
+            ArrayList<String> ItineraryItems = passenger.getmItineraryItems();
+            for (String itineraryItem : ItineraryItems) {
+                if (node.getmGuid().equalsIgnoreCase(itineraryItem)) {
+                    i++;
                 }
-            } else {
-                Log.d("", "");
             }
-
         }
 
-//        int i = 0;
-//        for (Occupant occupant : node.getmOccupants()) {
-//            if (occupant.getId().equals(node.getmPaxguid())) {
-//                mRoomName.setText(node.getUserName());
-//                break;
-//            } else {
-//                i++;
-//            }
-//        }
-//        if (i > 0) {
-//            mRoomName.setText(node.getUserName() + " + ");
-//            mShareEdit.setVisibility(View.VISIBLE);
-//        }
+        if (i > 1) {
+            mRoomName.setText(node.getUserName() + " + ");
+            mShareEdit.setVisibility(View.VISIBLE);
+        } else {
+            mRoomName.setText(node.getUserName());
+        }
 
 
         mChckInDate.setText(HGBUtilityDate.parseDateToddMMyyyyMyTrip(node.getmCheckIn()));
