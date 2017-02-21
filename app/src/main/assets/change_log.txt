@@ -607,6 +607,7 @@ Code changing:
         HEL-2381 - can't open the app crashes at opening
         HEL-2403 - checkout on anonymous user should redirect to
         HEL-2396 - next button on create account should always be enabled
+        HEL-2390 - user agreement and private policy go to a wrong url
 
 
 
