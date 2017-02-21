@@ -605,6 +605,7 @@ Code changing:
       -----------
         HEL-2044 - my trips - tab order
         HEL-2381 - can't open the app crashes at opening
+        HEL-2403 - checkout on anonymous user should redirect to
 
 
       Code changing:

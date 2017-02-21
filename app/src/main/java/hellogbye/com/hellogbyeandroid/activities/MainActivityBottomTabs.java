@@ -113,6 +113,8 @@ import microsoft.aspnet.signalr.client.http.android.AndroidPlatformComponent;
 import microsoft.aspnet.signalr.client.hubs.HubConnection;
 import microsoft.aspnet.signalr.client.hubs.HubProxy;
 
+import static hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum.PAYMENT_TRAVELERS;
+
 /**
  * Created by arisprung on 8/7/16.
  */
@@ -1003,6 +1005,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         if (isFreeUser && (navBar.equals(ToolBarNavEnum.COMPANIONS_PERSONAL_DETAILS) ||
                 navBar.equals(ToolBarNavEnum.PAYMENT_DETAILS) ||
                 navBar.equals(ToolBarNavEnum.COMPANIONS) ||
+                navBar.equals(ToolBarNavEnum.PAYMENT_TRAVELERS) ||
                 navBar.equals(ToolBarNavEnum.ALL_COMPANIONS_VIEW) ||
                 navBar.equals(ToolBarNavEnum.CREDIT_CARD_LIST) ||
                 navBar.equals(ToolBarNavEnum.NOTIFICATIONS))) {
