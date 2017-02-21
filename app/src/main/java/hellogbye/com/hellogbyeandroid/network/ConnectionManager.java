@@ -957,7 +957,7 @@ public class ConnectionManager {
 
     public void getMyTripsPaid(final ServerRequestListener listener) {
 
-        String url = getURL(Services.ITINERARY_MY_TRIP) + "?count=15&skip=0&upcomingtrips=true&paymentStatus=TPD,PPD";
+        String url = getURL(Services.ITINERARY_MY_TRIP) + "?count=15&skip=0&upcomingtrips=true&paymentStatus=FPD,PPD";
         //  http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/itinerary?count=15&skip=0
 
         JSONObject jsonObject = new JSONObject();

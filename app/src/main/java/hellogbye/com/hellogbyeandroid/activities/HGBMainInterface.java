@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
+import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.PersonalUserInformationVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
@@ -93,6 +94,11 @@ public interface HGBMainInterface {
 
     void setPersonalUserInformation(PersonalUserInformationVO personalUserInformationVO);
     PersonalUserInformationVO getPersonalUserInformation();
+
+
+    ArrayList<MyTripItem> getUpComingTrips();
+    void setUpComingTrips( ArrayList<MyTripItem> upComingTrips);
+
 
 
 }

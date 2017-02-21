@@ -77,6 +77,7 @@ import hellogbye.com.hellogbyeandroid.fragments.settings.AccountPersonalInfoSett
 import hellogbye.com.hellogbyeandroid.fragments.settings.AccountSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.settings.PreferenceSettingsEmailFragment;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
+import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.PersonalUserInformationVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -242,45 +243,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//-----------------------------------------------------------------------------------
-
         Intent intent = new Intent();
         intent.setClass(getBaseContext(), SignalRService.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
 
 
-
-
-  /*
-// crete connection with signalR hub
-        mSignalRHubConnection = new SignalRHubConnection(getBaseContext());
-        SignalRHubConnection.startSignalR();*/
-
-
-
-
-
-     //   setContentView(R.layout.activity_main);
-
-        // Create a new console logger
-  /*      microsoft.aspnet.signalr.client.Logger logger = new microsoft.aspnet.signalr.client.Logger() {
-            @Override
-            public void log(String message, LogLevel level) {
-                //System.out.println(message);
-                Log.d("SignalR", message);
-            }
-        };
-
-        Platform.loadPlatformComponent(new AndroidPlatformComponent());
-        final HubConnectionFactory hcf = HubConnectionFactory.getInstance();
-
-        SignalRFuture<Void> connect = hcf.connect("https://apiprod.hellogbye.com/prod/");
-        configConnectFuture(connect);
-*/
-
-
-
-//-----------------------------------------------------------------------------------
+        getUpComingTrips();
         getUserData();
         getCompanionsFromServer();
         getCountries();
@@ -1423,6 +1391,23 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         }
     };
 
+
+
+    private void getUpComingTrips(){
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).getMyTripsPaid(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                ArrayList<MyTripItem> mItemsList = (ArrayList<MyTripItem>) data;
+                hgbSaveDataClass.setUpComingTrips(mItemsList);
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+
+    }
 
 
 }

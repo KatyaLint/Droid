@@ -11,6 +11,7 @@ import java.util.List;
 
 
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
+import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.PersonalUserInformationVO;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
@@ -54,6 +55,7 @@ public class HGBSaveDataClass implements HGBMainInterface {
     private List<NodesVO> alternativeFlights;
     private HGBPreferencesManager hgbPrefrenceManager;
     private PersonalUserInformationVO personalUserInformationVO;
+    private ArrayList<MyTripItem> myUpcomingTrips;
 
 //    public HGBSaveDataClass(MainActivity mainActivity ,HGBPreferencesManager hgbPrefrenceManager) {
 //        this.hgbPrefrenceManager = hgbPrefrenceManager;
@@ -316,6 +318,16 @@ public class HGBSaveDataClass implements HGBMainInterface {
     @Override
     public PersonalUserInformationVO getPersonalUserInformation() {
         return personalUserInformationVO;
+    }
+
+    @Override
+    public ArrayList<MyTripItem> getUpComingTrips() {
+        return myUpcomingTrips;
+    }
+
+    @Override
+    public void setUpComingTrips(ArrayList<MyTripItem> upComingTrips) {
+        this.myUpcomingTrips = upComingTrips;
     }
 
  /*   @Override

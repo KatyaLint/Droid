@@ -17,10 +17,14 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 
@@ -68,28 +72,39 @@ public class TripsTabsView extends HGBAbstractFragment {
 
 
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.my_trips_tabwidget_view,container, false);
 
-        mTabHost = (FragmentTabHost)rootView.findViewById(android.R.id.tabhost);
 
-        mTabHost.setup(getActivity(), getChildFragmentManager(), android.R.id.tabcontent);
-
-        mTabHost.addTab(mTabHost.newTabSpec(TAB_2_TAG).setIndicator(TAB_2_TAG),
-                TabFavoritesView.class, null);
-
+    private void upComingFirst(){
         mTabHost.addTab(mTabHost.newTabSpec(TAB_1_TAG).setIndicator(TAB_1_TAG),
                 TabUpcomingTripsView.class, null);
 
         mTabHost.addTab(mTabHost.newTabSpec(TAB_3_TAG).setIndicator(TAB_3_TAG),
                 TabHistoryView.class, null);
 
+
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_2_TAG).setIndicator(TAB_2_TAG),
+                TabFavoritesView.class, null);
+    }
+
+
+    private void historyFirst(){
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_3_TAG).setIndicator(TAB_3_TAG),
+                TabHistoryView.class, null);
+
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_1_TAG).setIndicator(TAB_1_TAG),
+                TabUpcomingTripsView.class, null);
+
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_2_TAG).setIndicator(TAB_2_TAG),
+                TabFavoritesView.class, null);
+    }
+
+
+    private void initializeTabs(){
         mTabHost.setCurrentTab(0);
 
         textFont = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + "dinnextltpro_medium.otf");
+
         firstTextInit();
         mTabHost.getTabWidget().getChildAt(mTabHost.getCurrentTab()).getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
 
@@ -103,7 +118,7 @@ public class TripsTabsView extends HGBAbstractFragment {
                     TextView tv = (TextView) mTabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
                     tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_b6bec9));
                     tv.setTypeface(textFont);
-                  //  tv.setTextSize(R.dimen.SP16);
+                    //  tv.setTextSize(R.dimen.SP16);
                     tv.setTransformationMethod(null);
 
                 }
@@ -111,19 +126,49 @@ public class TripsTabsView extends HGBAbstractFragment {
                 TextView tv = (TextView) mTabHost.getCurrentTabView().findViewById(android.R.id.title); //for Selected Tab
                 tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.COLOR_WHITE));
                 tv.setTypeface(textFont);
-               // tv.setTextSize(R.dimen.SP16);
+                // tv.setTextSize(R.dimen.SP16);
                 tv.setTransformationMethod(null);
 
             }
         });
 
 
+
+
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getFlowInterface().enableFullScreen(false);
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.my_trips_tabwidget_view,container, false);
+
+        mTabHost = (FragmentTabHost)rootView.findViewById(android.R.id.tabhost);
+
+        mTabHost.setup(getActivity(), getChildFragmentManager(), android.R.id.tabcontent);
+
+        ArrayList<MyTripItem> upComingTrips = getActivityInterface().getUpComingTrips();
+        if(upComingTrips != null && !upComingTrips.isEmpty()){
+            upComingFirst();
+        }else{
+            historyFirst();
+        }
+
+
+        initializeTabs();
+
+        //  getUpComingTrips();
+
+
         newIteneraryImageButton =  ((MainActivityBottomTabs)getActivity()).getNewIternararyButton();
         setNewIteneraryImageButtonClickListener();
-
-
-
-
 
         return rootView;
     }
@@ -135,31 +180,28 @@ public class TripsTabsView extends HGBAbstractFragment {
         newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            clearCNCItems();
+            Bundle args = new Bundle();
+            args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
+            getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), args);
         }
     });
     }
 
 
-    private void clearCNCItems() {
+/*    private void clearCNCItems() {
 
-        getActivityInterface().setCNCItems(null);
+       *//* getActivityInterface().setCNCItems(null);
         getActivityInterface().setTravelOrder(null);
         HGBPreferencesManager sharedPreferences = HGBPreferencesManager.getInstance(getContext());
         sharedPreferences.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
-        sharedPreferences.removeKey(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
+        sharedPreferences.removeKey(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);*//*
         Bundle args = new Bundle();
         args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
         getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), args);
       //  selectItem(ToolBarNavEnum.CNC.getNavNumber(), null, true);
-    }
+    }*/
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-      //  getFlowInterface().selectBottomBar(R.id.bb_menu_my_trips);
-        getFlowInterface().enableFullScreen(false);
-    }
+
 
     @Override
     public void onDestroyView() {
