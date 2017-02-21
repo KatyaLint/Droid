@@ -604,6 +604,8 @@ Code changing:
       Fixed Bugs:
       -----------
         HEL-2044 - my trips - tab order
+        HEL-2381 - can't open the app crashes at opening
+
 
       Code changing:
       --------------
