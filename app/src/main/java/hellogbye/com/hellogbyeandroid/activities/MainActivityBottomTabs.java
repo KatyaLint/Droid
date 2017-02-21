@@ -1012,6 +1012,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             isAddAnimation = true;
             fragment = isFreeUser(fragment, navPosition);
+            mToolbar.setVisibility(View.GONE);
         }
 
 
