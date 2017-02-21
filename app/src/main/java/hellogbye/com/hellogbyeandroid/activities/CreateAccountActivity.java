@@ -1331,14 +1331,17 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
 
     private void setNextEnable(boolean isEnable) {
-        if (isEnable || BuildConfig.IS_DEV) {
-            mNextTextView.setAlpha(1.0f);
-            mNextTextView.setClickable(true);
-
-        } else {
-            mNextTextView.setAlpha(0.2f);
-            mNextTextView.setClickable(false);
-        }
+        //We might need this in the future. Its  to have the next button diabled if information was not added
+//        if (isEnable || BuildConfig.IS_DEV) {//
+//            mNextTextView.setAlpha(1.0f);
+//            mNextTextView.setClickable(true);
+//
+//        } else {
+//            mNextTextView.setAlpha(0.2f);
+//            mNextTextView.setClickable(false);
+//        }
+        mNextTextView.setAlpha(1.0f);
+        mNextTextView.setClickable(true);
 
     }
 
