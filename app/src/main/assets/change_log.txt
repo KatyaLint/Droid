@@ -609,6 +609,8 @@ Code changing:
         HEL-2396 - next button on create account should always be enabled
         HEL-2390 - user agreement and private policy go to a wrong url
         HEL-2405 - all register screens on anonymous should be clean of icons
+        HEL-2400 - sign in link text should be bold
+
 
 
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -1325,7 +1326,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         @Override
         public void updateDrawState(TextPaint ds) {
             ds.setColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_00516f));
-
+            ds.setTypeface(Typeface.DEFAULT_BOLD);
         }
     }
 
