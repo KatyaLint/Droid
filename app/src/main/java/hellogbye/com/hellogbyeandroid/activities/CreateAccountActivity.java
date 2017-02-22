@@ -271,6 +271,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         int i = HGBUtility.getNavBarHight(getApplicationContext());
         RelativeLayout.LayoutParams llp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         llp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        llp.addRule(RelativeLayout.CENTER_HORIZONTAL);
         llp.setMargins(0, 0, 0, i);
         mHyperlink.setLayoutParams(llp);
 
