@@ -611,6 +611,8 @@ Code changing:
         HEL-2405 - all register screens on anonymous should be clean of icons
         HEL-2400 - sign in link text should be bold
         HEL-2448 - can't add companions through the search
+        HEL-2397 - strange screen appears when going back in create account
+
 
 
 

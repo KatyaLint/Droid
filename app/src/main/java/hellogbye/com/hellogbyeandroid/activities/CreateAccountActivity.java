@@ -545,7 +545,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             CURRENT_STATE = NAME_STATE;
 
         } else {
-            mSignIn.setVisibility(View.VISIBLE);
+
             mNextTextView.setVisibility(View.GONE);
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), secondViewViews, firstViewViews);
             CURRENT_STATE = WELCOME_STATE;
