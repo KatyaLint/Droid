@@ -301,6 +301,8 @@ public class CostumeToolBar extends Toolbar {
             case COMPANIONS_PERSONAL_DETAILS:
             case HELP:
             case ACCOUNT:
+                preference_save_changes.setVisibility(View.GONE);
+                break;
             case PREFERENCES_TAB_SETTINGS:
             case COMPANION_HELP_FEEDBACK:
             case ADD_CREDIT_CARD:
