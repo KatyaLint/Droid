@@ -299,12 +299,19 @@ public class ConnectionManager {
 
         String url = getURL(Services.COMPANIONS);
         JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObjectStub = new JSONObject();
 
         try {
+
             jsonObject.put("addedvia", companionData.getmAddedvia());
-            jsonObject.put("emailaddress", companionData.getCompanionUserProfile().getmEmailAddress());
-            jsonObject.put("firstname", companionData.getCompanionUserProfile().getmFirstName());
-            jsonObject.put("lastname",  companionData.getCompanionUserProfile().getmLastName());
+            jsonObject.put("isAdult", true);
+            jsonObject.put("relationshiptypeid", companionData.getRelationshiptypeid());
+
+            jsonObjectStub.put("emailaddress", companionData.getCompanionUserProfile().getmEmailAddress());
+            jsonObjectStub.put("firstname", companionData.getCompanionUserProfile().getmFirstName());
+            jsonObjectStub.put("lastname",  companionData.getCompanionUserProfile().getmLastName());
+            jsonObjectStub.put("dob",  null);
+            jsonObject.put("stubcompanion",jsonObjectStub);
 
         } catch (Exception e) {
             e.printStackTrace();
