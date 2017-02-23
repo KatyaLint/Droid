@@ -623,3 +623,4 @@ Code changing:
 
       Code changing:
       --------------
+      Ability to show dropdown city in smaller phones (nexus-5 )
