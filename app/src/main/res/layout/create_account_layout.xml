@@ -6,10 +6,14 @@
     android:fitsSystemWindows="true"
     android:layout_height="match_parent">
 
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/root"
         android:layout_height="match_parent">
+
+
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -25,9 +29,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
-            android:translationZ="100dp">
+            android:translationZ="@dimen/DP100"/>
 
-        </RelativeLayout>
+
 
         <ImageView
             android:id="@+id/arrow_back"
@@ -61,18 +65,15 @@
             android:layout_alignParentTop="true"
             android:layout_marginRight="@dimen/DP20"
             android:textSize="@dimen/SP14"
-            android:paddingTop="@dimen/SP10"
-            android:paddingBottom="@dimen/SP10"
+            android:paddingTop="@dimen/DP10"
+            android:paddingBottom="@dimen/DP10"
             android:paddingRight="@dimen/DP20"
             android:paddingLeft="@dimen/DP20"
             android:text="@string/next"
             android:textColor="@color/COLOR_WHITE"
-            android:translationZ="1dp"
-
-            android:alpha="0.4"
+            android:translationZ="@dimen/DP1"
             android:visibility="gone"
             app:fontName="dinnextltpro_medium.otf" />
-
 
         <ImageView
             android:id="@+id/cloud_02"

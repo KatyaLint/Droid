@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/onboarding_next"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/create_user_next_selector"
+        android:layout_alignParentTop="true"
+
+        android:layout_marginTop="@dimen/DP44"
+        android:layout_marginRight="@dimen/DP20"
+
+        android:textSize="@dimen/SP14"
+        android:paddingTop="@dimen/DP10"
+        android:paddingBottom="@dimen/DP10"
+        android:paddingRight="@dimen/DP20"
+        android:paddingLeft="@dimen/DP20"
+        android:text="@string/next"
+        android:textColor="@color/COLOR_WHITE"
+
+        android:visibility="visible"
+        app:fontName="dinnextltpro_medium.otf" />
+
+</RelativeLayout>

@@ -6,7 +6,15 @@
     android:fitsSystemWindows="true"
     android:background="@drawable/background_pin_code" >
 
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/next_button_indecator"
+        layout="@layout/next_button_layout"/>
+
+
     <android.support.v4.view.ViewPager
+        android:layout_below="@+id/next_button_indecator"
         android:id="@+id/pager_introduction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,6 +23,7 @@
         tools:listitem="@layout/pager_item" />
 
     <RelativeLayout
+
 
         android:id="@+id/viewPagerIndicator"
         android:layout_width="match_parent"
@@ -29,7 +38,7 @@
             android:gravity="center"
             android:orientation="horizontal" />
 
-   <!--     <ImageButton
+<!--        <ImageButton
             android:id="@+id/btn_next"
             android:layout_width="42dip"
             android:layout_height="42dip"

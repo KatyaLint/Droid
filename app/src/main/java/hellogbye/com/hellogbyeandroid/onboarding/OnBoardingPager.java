@@ -22,6 +22,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.BaseActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
+import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by nyawka on 11/10/16.
@@ -36,7 +37,6 @@ public class OnBoardingPager extends BaseActivity implements ViewPager.OnPageCha
     private int dotsCount;
     private ImageView[] dots;
     private ViewPagerAdapter mAdapter;
-
     private ArrayList<OnboardingPagerTextVO> onboardingPagerTextVOArrayList;
 
 
@@ -48,6 +48,7 @@ public class OnBoardingPager extends BaseActivity implements ViewPager.OnPageCha
 
     };
     private HGBPreferencesManager hgbPrefrenceManager;
+    private FontTextView btnNext;
 
 /*    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -115,13 +116,13 @@ public class OnBoardingPager extends BaseActivity implements ViewPager.OnPageCha
         initializeScreenData();
 
         intro_images = (ViewPager) findViewById(R.id.pager_introduction);
-     /*   btnNext = (ImageButton) findViewById(R.id.btn_next);
-        btnFinish = (ImageButton) findViewById(R.id.btn_finish);*/
+        btnNext = (FontTextView) findViewById(R.id.onboarding_next);
+     /*   btnFinish = (ImageButton) findViewById(R.id.btn_finish);*/
 
         pager_indicator = (LinearLayout) findViewById(R.id.viewPagerCountDots);
 
-  /*      btnNext.setOnClickListener(this);
-        btnFinish.setOnClickListener(this);*/
+        btnNext.setOnClickListener(nextClickListener);
+  /*      btnFinish.setOnClickListener(this);*/
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         mAdapter = new ViewPagerAdapter(OnBoardingPager.this, onboardingPagerTextVOArrayList);
         mAdapter.setClickListener(new IOnBoardingNextClickListener(){
@@ -153,6 +154,18 @@ public class OnBoardingPager extends BaseActivity implements ViewPager.OnPageCha
             }
         });
     }
+
+    private View.OnClickListener nextClickListener = new View.OnClickListener() {
+        public void onClick(View v) {
+
+            int position = intro_images.getCurrentItem();
+            position = position + 1;
+            intro_images.setCurrentItem(position);
+
+            // do something when the button is clicked
+        }
+    };
+
 
 
     /*  @Override
@@ -211,13 +224,13 @@ public class OnBoardingPager extends BaseActivity implements ViewPager.OnPageCha
 
         dots[position].setImageDrawable(getResources().getDrawable(R.drawable.selecteditem_dot));
 
-      /*  if (position + 1 == dotsCount) {
+        if (position + 1 == dotsCount) {
             btnNext.setVisibility(View.GONE);
-            btnFinish.setVisibility(View.VISIBLE);
+           // btnFinish.setVisibility(View.VISIBLE);
         } else {
             btnNext.setVisibility(View.VISIBLE);
-            btnFinish.setVisibility(View.GONE);
-        }*/
+         //   btnFinish.setVisibility(View.GONE);
+        }
     }
 
     @Override
