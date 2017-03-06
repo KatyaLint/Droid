@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -92,9 +91,7 @@
         android:id="@+id/flight_details_changes_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/flight_details_title_rl"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+      >
 
         <ImageView
             android:id="@+id/flight_details_chage_imageview"
@@ -131,14 +128,12 @@
     </RelativeLayout>
 
     <View
-        android:layout_below="@+id/flight_details_changes_rl"
+
         android:id="@+id/flight_details_bottom_separator_1"
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
-        android:layout_weight="1"
         android:layout_margin="@dimen/DP10"
         android:background="@color/COLOR_22999999" />
-
 
 
     <RelativeLayout
@@ -147,9 +142,7 @@
         android:id="@+id/flight_details_cancelation_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/flight_details_bottom_separator_1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+    >
 
         <ImageView
             android:id="@+id/flight_details_cancelation_imageview"
@@ -186,11 +179,10 @@
 
 
     <View
-        android:layout_below="@+id/flight_details_cancelation_rl"
+
         android:id="@+id/flight_details_bottom_separator_2"
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
-        android:layout_weight="1"
         android:layout_margin="@dimen/DP10"
         android:background="@color/COLOR_22999999" />
 
@@ -198,10 +190,7 @@
         android:layout_margin="@dimen/DP20"
         android:id="@+id/flight_details_baggage_rl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/flight_details_bottom_separator_2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/flight_details_baggage_imageview"
@@ -238,4 +227,4 @@
 
 
 
-</RelativeLayout>
+</LinearLayout>

@@ -37,7 +37,7 @@ public class ConnectionManager {
         void onError(Object data);
     }
 
-
+    public static String BASE_URL_SIGNALR_URL = "http://apidev.hellogbye.com/dev/"; //"https://apiprod.hellogbye.com/prod/";
      public static String BASE_URL;// = "http://apidev.hellogbye.com/dev/rest/";
 
     //public static String BASE_URL = "http://demo.hellogbye.com/dev/rest/";

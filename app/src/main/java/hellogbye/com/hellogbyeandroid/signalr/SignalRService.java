@@ -18,6 +18,7 @@ import java.util.concurrent.ExecutionException;
 
 import hellogbye.com.hellogbyeandroid.fragments.cnc.CNCSignalRFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.network.Parser;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import microsoft.aspnet.signalr.client.Action;
@@ -45,7 +46,7 @@ public class SignalRService extends Service {
     private HubConnection _connection;
     private HubProxy _hub;
     /*private String serverUrl = "https://apiprod.hellogbye.com/prod/";*/
-    private String serverUrl = "http://apidev.hellogbye.com/dev/"; //"http://apidev.hellogbye.com/dev/"; //"https://apiprod.hellogbye.com/prod/";
+    private String serverUrl = ConnectionManager.BASE_URL_SIGNALR_URL; // "http://apidev.hellogbye.com/dev/"; //"http://apidev.hellogbye.com/dev/"; //"https://apiprod.hellogbye.com/prod/";
     private String SERVER_HUB_CHAT = "cncHub";
     private CNCSignalRFragment.IHiglightReceivedFromServer CNCHiglightResponceCB;
 

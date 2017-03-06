@@ -614,7 +614,7 @@ Code changing:
         HEL-2397 - strange screen appears when going back in create account
         HEL-2401 - on log in page the bottom 2 lines should are not pair design(2 equal lines)
         HEL-2407 - take out the save button from top right
-
+        HEL-2448 - can't add companions through the search
 
 
 
@@ -625,3 +625,4 @@ Code changing:
       --------------
        - Ability to show dropdown city in smaller phones (nexus-5 )
        - on boarding next button
+       - class view layout fix

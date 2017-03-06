@@ -119,6 +119,7 @@
             android:id="@+id/send_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:orientation="horizontal"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
@@ -140,7 +141,6 @@
             <ImageView
                 android:gravity="center"
                 android:id="@+id/cnc_mic"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/microphone"
