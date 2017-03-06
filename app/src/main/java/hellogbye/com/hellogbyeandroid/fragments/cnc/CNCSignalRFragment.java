@@ -430,7 +430,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
 
         String strCNCList = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, "");
-        System.out.println("Kate loadCNCList = " + strCNCList);
+
         if((strCNCList.equals("") || strCNCList.equals("null")) &&  getActivityInterface().getCNCItems()== null){
             Resources res = getResources();
             String userName = "";

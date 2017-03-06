@@ -943,6 +943,7 @@ kate
 
         createItinenaryView(rootView);
 
+
         getActivityInterface().setAlternativeFlights(null);
 
         setFavorityIcon();

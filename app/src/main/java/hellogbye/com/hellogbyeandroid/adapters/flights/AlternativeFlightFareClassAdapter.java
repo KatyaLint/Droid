@@ -92,7 +92,6 @@ public class AlternativeFlightFareClassAdapter extends PagerAdapter {
 
         flight_details_fareclass_type.setText(fareClassPreference.getFarepreference());
 
-
         if(fareClassPreference.isalternative()){
             flight_details_fareclass_selected.setVisibility(View.GONE);
         }else{

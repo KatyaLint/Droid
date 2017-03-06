@@ -28,6 +28,7 @@ import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.alternativeflights.AlternativeFlightsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
+import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilitySort;
@@ -176,11 +177,19 @@ public class AlternativeFlightsDetailsFragment extends HGBAbstractFragment {
 
         // 5. set item animator to DefaultAnimator
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
         alternativeFlights = getActivityInterface().getAlternativeFlights();
         mAdapter.setData(alternativeFlights);
-        mAdapter.notifyDataSetChanged();
+      //  mAdapter.notifyAll();
 
         hgbUtilitySort = new HGBUtilitySort();
+
+
+     /*   Bundle arg = new Bundle();
+        String mGuid = arg.getString(HGBConstants.BUNDLE_CURRENT_VIEW_NODE_ID);
+        getAlternativeFlights( mGuid);*/
+
 
         return rootView;
     }
@@ -234,4 +243,33 @@ public class AlternativeFlightsDetailsFragment extends HGBAbstractFragment {
      //   getActivityInterface().setAlternativeFlights(null);
         super.onDestroyView();
     }
+
+
+    private void getAlternativeFlights(String mGuid){
+
+        String solutionID = getActivityInterface().getTravelOrder().getmSolutionID();
+
+        String paxId = getSelectedUserGuid();
+        String flightID = mGuid;
+
+        ConnectionManager.getInstance(getActivity()).getAlternateFlightsForFlight(solutionID, paxId, flightID, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+
+                List<NodesVO> alternativeFlightsVOs = (List<NodesVO>)data;//gson.fromJson((String) data, listType);
+
+                getActivityInterface().setAlternativeFlights(alternativeFlightsVOs);
+
+            }
+
+            @Override
+            public void onError(Object data) {
+
+                //  ErrorMessage(data);
+            }
+        });
+    }
+
+
 }

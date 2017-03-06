@@ -46,6 +46,8 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         this.mContext = context;
         this.currentNode = currentNode;
 
+
+
         mFlightFareClassAdapter = new AlternativeFlightFareClassAdapter(currentNode.getDropdownoptions(), mContext);
 
 
@@ -161,7 +163,17 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
     //    viewHolder.select_flight.setTag(legFlightVO.getmParentguid());
         viewHolder.press_here.setTag(legFlightVO.getmParentguid());
 
+
+        viewHolder.show_alternative_flights.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alternativeButtonCB.showAlternative();
+                }
+            });
+
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -202,6 +214,8 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         this.onFareClassClickListener = onFareClassClickListener;
         mFlightFareClassAdapter.setOnClickFareClass(onFareClassClickListener);
     }
+
+
 
     // inner class to hold a reference to each item of RecyclerView
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -246,19 +260,25 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
 
         private LinearLayout flight_details_fare_class_ll;
 
+
+
+
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
             initializeAirplaneDetails(itemLayoutView);
             stopOverInitialization(itemLayoutView);
             flightMainCostInitialization(itemLayoutView);
+
             show_alternative_flights = (FontTextView) itemLayoutView.findViewById(R.id.show_alternative_flights);
+
+          /*  show_alternative_flights = (FontTextView) itemLayoutView.findViewById(R.id.show_alternative_flights);
 
             show_alternative_flights.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     alternativeButtonCB.showAlternative();
                 }
-            });
+            });*/
 
 
          /*   select_flight.setOnClickListener(new View.OnClickListener() {
