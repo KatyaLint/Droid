@@ -138,6 +138,8 @@ public class AlternativeFlightFareClassAdapter extends PagerAdapter {
                 }
             }
         });*/
+
+
         container.addView(itemLayoutView);
         return itemLayoutView;
     }

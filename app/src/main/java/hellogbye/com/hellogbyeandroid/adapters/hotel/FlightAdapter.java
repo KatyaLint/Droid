@@ -45,11 +45,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         this.itemsData = itemsData;
         this.mContext = context;
         this.currentNode = currentNode;
-
-
-
-        mFlightFareClassAdapter = new AlternativeFlightFareClassAdapter(currentNode.getDropdownoptions(), mContext);
-
+        this.mFlightFareClassAdapter = new AlternativeFlightFareClassAdapter(currentNode.getDropdownoptions(), mContext);
 
     }
 
