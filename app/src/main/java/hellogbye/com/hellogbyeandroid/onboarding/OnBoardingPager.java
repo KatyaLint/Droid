@@ -225,7 +225,7 @@ public class OnBoardingPager extends BaseActivity implements ViewPager.OnPageCha
         dots[position].setImageDrawable(getResources().getDrawable(R.drawable.selecteditem_dot));
 
         if (position + 1 == dotsCount) {
-            btnNext.setVisibility(View.GONE);
+            btnNext.setVisibility(View.INVISIBLE);
            // btnFinish.setVisibility(View.VISIBLE);
         } else {
             btnNext.setVisibility(View.VISIBLE);

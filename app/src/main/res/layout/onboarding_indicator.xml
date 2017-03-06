@@ -14,11 +14,12 @@
 
 
     <android.support.v4.view.ViewPager
+        
         android:layout_below="@+id/next_button_indecator"
         android:id="@+id/pager_introduction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/DP44"
+
         android:fitsSystemWindows="true"
         tools:listitem="@layout/pager_item" />
 
@@ -28,7 +29,7 @@
         android:id="@+id/viewPagerIndicator"
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP60"
-        android:layout_marginBottom="@dimen/DP220"
+        android:layout_marginBottom="@dimen/DP140"
         android:layout_alignParentBottom="true" >
 
         <LinearLayout

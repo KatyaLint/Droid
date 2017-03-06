@@ -616,6 +616,7 @@ Code changing:
         HEL-2407 - take out the save button from top right
         HEL-2448 - can't add companions through the search
         HEL-2449 - error after changing fare class
+        HEL-2418 - empty list of alternative flights
 
 
 
