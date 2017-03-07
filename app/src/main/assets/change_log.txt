@@ -617,6 +617,7 @@ Code changing:
         HEL-2448 - can't add companions through the search
         HEL-2449 - error after changing fare class
         HEL-2418 - empty list of alternative flights
+        HEL-2094 - keyboard ovverides the go button on cnc page
 
 
 
