@@ -1,6 +1,9 @@
 package hellogbye.com.hellogbyeandroid.network;
 
 
+import android.app.Activity;
+import android.content.Intent;
+
 import com.android.volley.NetworkResponse;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
@@ -15,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
+import hellogbye.com.hellogbyeandroid.application.HGBApplication;
 import hellogbye.com.hellogbyeandroid.models.CreditCardSessionItem;
 
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
@@ -82,6 +87,10 @@ public class Parser {
                     json = new String(response.data);
                     break;
                 case 401:
+                    //TODO log out
+                    Intent intent = new Intent();
+                    intent.setAction("logout");
+                    HGBApplication.getInstance().sendBroadcast(intent);
                     json = "Session AuthFailureError";
                     break;
                 default:
