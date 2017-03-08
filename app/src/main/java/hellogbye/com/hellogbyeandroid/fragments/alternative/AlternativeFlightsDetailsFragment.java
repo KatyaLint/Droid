@@ -77,6 +77,10 @@ public class AlternativeFlightsDetailsFragment extends HGBAbstractFragment {
             user_profile_popup_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+
+
                     String sortType = data.get(position);
                     alternativeFlights = hgbUtilitySort.sortData(sortType, alternativeFlights);
                     mAdapter.notifyDataSetChanged();

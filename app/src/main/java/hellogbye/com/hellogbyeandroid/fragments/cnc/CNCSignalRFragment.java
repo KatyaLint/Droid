@@ -4,7 +4,10 @@ package hellogbye.com.hellogbyeandroid.fragments.cnc;
  * Created by nyawka on 2/1/17.
  */
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -18,28 +21,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.AdapterView;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
-import hellogbye.com.hellogbyeandroid.adapters.CNCAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.cncadapters.CNCAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.cncadapters.CNCMenuAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.flights.AlternativeFlightsSortAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.ChangeTripName;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TitleNameChange;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.preferencespopup.UserProfilePreferences;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
-import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportResultsVO;
@@ -652,7 +660,12 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
             }else {
 
-                HGBUtility.showPikerDialog(airportSendValueVO.getCenteredItem(), null, getActivity(), airport,
+
+
+                popupCNCMenu(airport, airportSendValueVO);
+
+
+          /*      HGBUtility.showPikerDialog(airportSendValueVO.getCenteredItem(), null, getActivity(), airport,
                         airportSendValueVO.getTitleArray(), 0, airportSendValueVO.getResults().size() - 1, new PopUpAlertStringCB() {
 
                             @Override
@@ -666,9 +679,73 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
                             public void itemCanceled() {
 
                             }
-                        }, false);
+                        }, false);*/
             }
         }
+
+
+    }
+
+
+    private void popupCNCMenu(String airportTitle, final AirportSendValuesVO airportSendValueVO){
+
+
+        LayoutInflater li = LayoutInflater.from(getActivity());
+        View promptsView = li.inflate(R.layout.popup_cnc_screen_menu, null);
+
+        FontTextView popup_cnc_screen_title_text = (FontTextView)promptsView.findViewById(R.id.popup_cnc_screen_title_text) ;
+        popup_cnc_screen_title_text.setText(airportTitle);
+
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+        dialogBuilder.setCustomTitle(promptsView);
+
+
+        final List<String> data  = Arrays.asList(airportSendValueVO.getTitleArray());
+        Typeface textFont = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + "dinnextltpro_medium.otf");
+        final CNCMenuAdapter sortPopupAdapter = new CNCMenuAdapter(data,textFont);
+
+
+        View promptsViewTeest = li.inflate(R.layout.popup_alternative_layout_sort, null);
+       final ListView user_profile_popup_list_view = (ListView) promptsViewTeest.findViewById(R.id.alternative_popup_sort);
+
+        user_profile_popup_list_view.smoothScrollToPosition(airportSendValueVO.getCenteredItem());
+        sortPopupAdapter.setCheckedItemPosition(airportSendValueVO.getCenteredItem());
+
+        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            } });
+
+        //Create alert dialog object via builder
+       final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.setView(promptsViewTeest);
+        alertDialog.setCancelable(false);
+        alertDialog.show();
+
+
+        user_profile_popup_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String airportName = ((CheckedTextView) view.findViewById(R.id.cnc_menu_item)).getText().toString();
+                sortPopupAdapter.setCheckedItemPosition(position);
+                user_profile_popup_list_view.invalidate();
+
+                AirportResultsVO choosenAirport = findChoosenAirport(airportName, airportSendValueVO.getResults());
+                sendUserAnswearToServer(choosenAirport);
+
+                alertDialog.dismiss();
+
+            }
+        });
+
+        user_profile_popup_list_view.setAdapter(sortPopupAdapter);
+
+
+
+
+
+
 
 
     }
