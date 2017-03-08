@@ -619,6 +619,7 @@ Code changing:
         HEL-2418 - empty list of alternative flights
         HEL-2094 - keyboard ovverides the go button on cnc page
         HEL-1855 - change design for highlight pop up
+        HEL-1977 - photo appeared when not supposed to
 
 
 
