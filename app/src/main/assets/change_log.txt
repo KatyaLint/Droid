@@ -620,7 +620,7 @@ Code changing:
         HEL-2094 - keyboard ovverides the go button on cnc page
         HEL-1855 - change design for highlight pop up
         HEL-1977 - photo appeared when not supposed to
-
+        HEL-2404 - every time user log's in there is a loader(see video)
 
 
 
