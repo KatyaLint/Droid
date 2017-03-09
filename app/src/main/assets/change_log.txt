@@ -631,3 +631,4 @@ Code changing:
        - Ability to show dropdown city in smaller phones (nexus-5 )
        - on boarding next button
        - class view layout fix
+       - Added Udid to login (Session call)
