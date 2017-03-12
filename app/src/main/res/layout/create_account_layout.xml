@@ -6,17 +6,21 @@
     android:fitsSystemWindows="true"
     android:layout_height="match_parent">
 
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/root"
         android:layout_height="match_parent">
+
+
 
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/DP4"
-            android:layout_marginTop="@*android:dimen/status_bar_height"
+            android:layout_marginTop="@dimen/DP24"
             android:progressDrawable="@drawable/progressbar"
             android:translationZ="@dimen/DP1" />
 
@@ -25,9 +29,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
-            android:translationZ="100dp">
+            android:translationZ="@dimen/DP100"/>
 
-        </RelativeLayout>
+
 
         <ImageView
             android:id="@+id/arrow_back"
@@ -61,18 +65,15 @@
             android:layout_alignParentTop="true"
             android:layout_marginRight="@dimen/DP20"
             android:textSize="@dimen/SP14"
-            android:paddingTop="@dimen/SP10"
-            android:paddingBottom="@dimen/SP10"
+            android:paddingTop="@dimen/DP10"
+            android:paddingBottom="@dimen/DP10"
             android:paddingRight="@dimen/DP20"
             android:paddingLeft="@dimen/DP20"
             android:text="@string/next"
             android:textColor="@color/COLOR_WHITE"
-            android:translationZ="1dp"
-
-            android:alpha="0.4"
+            android:translationZ="@dimen/DP1"
             android:visibility="gone"
             app:fontName="dinnextltpro_medium.otf" />
-
 
         <ImageView
             android:id="@+id/cloud_02"
@@ -161,14 +162,12 @@
             android:id="@+id/sign_up_hyperlink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:autoLink="all"
-            android:gravity="center"
-
             android:linksClickable="true"
             android:paddingBottom="@dimen/DP10"
             android:paddingLeft="@dimen/DP10"
             android:paddingRight="@dimen/DP10"
+            android:gravity="center_horizontal"
             android:text="@string/sign_up_term_of_use"
             android:textColor="@color/COLOR_00516f"
             android:textSize="@dimen/SP12"

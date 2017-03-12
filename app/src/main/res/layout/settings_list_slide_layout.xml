@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/DP10" >
+
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/settingsRecyclerView"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_above="@+id/add_preferences"-->
+    <!--android:layout_below="@+id/flightRecyclerView" />-->
+    <!--<include layout="@layout/settings_drag_list" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_above="@+id/add_preferences"/>-->
+
+
+    <android.support.v7.widget.RecyclerView
+        android:choiceMode="singleChoice"
+        android:id="@+id/settings_preferences_drag_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/add_preferences"
+        />
+
+    <!--  android:layout_margin="@dimen/DP10"-->
+
+    <!--    <ListView
+            android:id="@+id/tempListView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/add_preferences"/>-->
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:id="@+id/add_preferences"
+        android:background="@drawable/red_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+
+        android:paddingLeft="@dimen/DP20"
+        android:paddingRight="@dimen/DP20"
+        android:textColor="@color/COLOR_WHITE"
+        android:textAllCaps="false"
+        android:text="@string/preferences_add_button" />
+
+</RelativeLayout>

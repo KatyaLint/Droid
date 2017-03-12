@@ -30,6 +30,7 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
+import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.application.HGBApplication;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -214,7 +215,8 @@ public class HGBJsonRequest extends Request<String> {
         headers.put("Accept", "application/json");
         headers.put("Content-Type", "application/json; charset=utf-8");
 
-        headers.put("User-Agent", " (HelloGbyeAndroid/" + android.os.Build.MODEL + " Android" + Build.VERSION.SDK_INT + ")");
+      //  headers.put("User-Agent", " (HelloGByeAndroid/" + build number +  android.os.Build.MODEL + " Android" + Build.VERSION.SDK_INT + ")");
+        headers.put("User-Agent", " (HelloGByeAndroid/" + "BuildNumber" + BuildConfig.VERSION_CODE  +"/OS" + Build.VERSION.RELEASE +  "/Android" + Build.VERSION.SDK_INT + ")");
         HGBPreferencesManager sharedPreferences = HGBPreferencesManager.getInstance(mContext);
         String token = sharedPreferences.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
         Log.d("Token", token);

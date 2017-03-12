@@ -19,6 +19,8 @@ public class CompanionVO {
     private String mCompanionid;
     @SerializedName("addeddatetime")
     private String mAddedatetime;
+    @SerializedName("addedvia")
+    private String mAddedvia;
 
     @SerializedName("companionuserprofile")
     private CompanionUserProfileVO companionUserProfile;
@@ -32,8 +34,7 @@ public class CompanionVO {
     @SerializedName("isfamilymember")
     private boolean mIsFamilyMember;
 
-    @SerializedName("addedvia")
-    private String mAddedvia;
+
 
     public String getmConfirmationstatus() {
         return mConfirmationstatus;
@@ -105,5 +106,13 @@ public class CompanionVO {
 
     public void setmAddedvia(String mAddedvia) {
         this.mAddedvia = mAddedvia;
+    }
+
+    public boolean ismIsFamilyMember() {
+        return mIsFamilyMember;
+    }
+
+    public void setmIsFamilyMember(boolean mIsFamilyMember) {
+        this.mIsFamilyMember = mIsFamilyMember;
     }
 }

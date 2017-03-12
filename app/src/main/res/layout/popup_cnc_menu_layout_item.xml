@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+ <hellogbye.com.hellogbyeandroid.views.FontCheckedTextView
+     android:layout_margin="@dimen/DP20"
+     android:textSize="@dimen/SP16"
+     android:id="@+id/cnc_menu_item"
+     android:layout_width="match_parent"
+     android:layout_height="@dimen/DP38"
+     android:checkMark="?android:attr/listChoiceIndicatorSingle"
+     android:gravity="center_vertical"
+     android:text="sfdsfsdf"
+     app:fontName="dinnextltpro_medium.otf"
+     android:textColor="@color/COLOR_00516f" />
+ 
+
+</RelativeLayout>

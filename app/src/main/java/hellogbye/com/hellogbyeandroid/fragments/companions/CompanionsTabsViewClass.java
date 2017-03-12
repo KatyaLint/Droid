@@ -29,6 +29,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
 
+import hellogbye.com.hellogbyeandroid.activities.ForgotPasswordActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.companion.CompanionsSwipeItemsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
@@ -322,7 +323,23 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
                     public void onSuccess(Object data) {
 
                         CompanionVO companionVO = (CompanionVO)data;
-                        getCompanions();
+                     //   getCompanions();
+                        LayoutInflater li = LayoutInflater.from(getContext());
+                        View popupView = li.inflate(R.layout.popup_layout_log_out, null);
+                        HGBUtility.showAlertPopUpOneButton(getActivity(), null, popupView,
+                                "Companion Request Sent", new PopUpAlertStringCB(){
+
+                                    @Override
+                                    public void itemSelected(String inputItem) {
+                                        getCompanions();
+                                    }
+
+                                    @Override
+                                    public void itemCanceled() {
+
+                                    }
+                                });
+
                       //  setNewRelationshipForCompanion(companionVO);
 
                     }
@@ -426,6 +443,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
         if(search_view != null) {
             search_view.setQuery("", false);
             searchIsOpen = false;
+            closeSearchBar();
         }
 
         ConnectionManager.getInstance(getActivity()).getCompanions(new ConnectionManager.ServerRequestListener() {

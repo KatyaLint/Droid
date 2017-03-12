@@ -7,8 +7,10 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.speech.RecognizerIntent;
@@ -37,6 +39,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.FareClassFragment;
@@ -67,6 +70,7 @@ import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsTabsView;
 import hellogbye.com.hellogbyeandroid.fragments.notification.NotificationFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsRadioCheckFragment;
+import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsSlideFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesCheckListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesDragListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesSearchListFragment;
@@ -112,6 +116,8 @@ import microsoft.aspnet.signalr.client.SignalRFuture;
 import microsoft.aspnet.signalr.client.http.android.AndroidPlatformComponent;
 import microsoft.aspnet.signalr.client.hubs.HubConnection;
 import microsoft.aspnet.signalr.client.hubs.HubProxy;
+
+import static hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum.PAYMENT_TRAVELERS;
 
 /**
  * Created by arisprung on 8/7/16.
@@ -246,7 +252,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         Intent intent = new Intent();
         intent.setClass(getBaseContext(), SignalRService.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-
 
         getUpComingTrips();
         getUserData();
@@ -474,6 +479,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        unregisterReceiver(receiver);
     }
 
 
@@ -693,7 +699,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
         for (AccountsVO account : accounts) {
             String userEmailLogIn = hgbSaveDataClass.getPersonalUserInformation().getUserEmailLogIn();
-            if (account.getEmail().equals(userEmailLogIn)) {
+            if (account.getEmail().equals(userEmailLogIn) && account.getTravelpreferenceprofile() != null) {
                 my_trip_profile.setText(account.getTravelpreferenceprofile().getmProfileName());
                 my_trip_profile.setTag(account.getTravelpreferenceprofile().getmId());
                 //   hgbSaveDataClass.getCurrentUser().setmTravelPreferencesProfileId(account.getTravelpreferenceprofile().getId());
@@ -897,7 +903,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 fragment = PreferenceSettingsEmailFragment.newInstance(navPosition);
                 break;
             case TRAVEL_PREFERENCE:
-                fragment = PreferenceSettingsFragment.newInstance(navPosition);
+               // fragment = PreferenceSettingsFragment.newInstance(navPosition);
+                fragment = PreferenceSettingsSlideFragment.newInstance(navPosition);
+
                 break;
             case ACCOUNT:
                 fragment = AccountSettingsFragment.newInstance(navPosition);
@@ -1003,12 +1011,14 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         if (isFreeUser && (navBar.equals(ToolBarNavEnum.COMPANIONS_PERSONAL_DETAILS) ||
                 navBar.equals(ToolBarNavEnum.PAYMENT_DETAILS) ||
                 navBar.equals(ToolBarNavEnum.COMPANIONS) ||
+                navBar.equals(ToolBarNavEnum.PAYMENT_TRAVELERS) ||
                 navBar.equals(ToolBarNavEnum.ALL_COMPANIONS_VIEW) ||
                 navBar.equals(ToolBarNavEnum.CREDIT_CARD_LIST) ||
                 navBar.equals(ToolBarNavEnum.NOTIFICATIONS))) {
 
             isAddAnimation = true;
             fragment = isFreeUser(fragment, navPosition);
+            mToolbar.setVisibility(View.GONE);
         }
 
 
@@ -1253,6 +1263,16 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
     @Override
+    protected void onResume() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("logout");
+        registerReceiver(receiver, filter);
+        super.onResume();
+    }
+
+
+
+    @Override
     public CostumeToolBar getToolBar() {
         return mToolbar;
     }
@@ -1408,6 +1428,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
 
     }
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            gotToStartMenuActivity();
+        }
+    };
 
 
 }

@@ -37,7 +37,7 @@ public class ConnectionManager {
         void onError(Object data);
     }
 
-
+    public static String BASE_URL_SIGNALR_URL = "http://apidev.hellogbye.com/dev/"; //"https://apiprod.hellogbye.com/prod/";
      public static String BASE_URL;// = "http://apidev.hellogbye.com/dev/rest/";
 
     //public static String BASE_URL = "http://demo.hellogbye.com/dev/rest/";
@@ -299,12 +299,19 @@ public class ConnectionManager {
 
         String url = getURL(Services.COMPANIONS);
         JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObjectStub = new JSONObject();
 
         try {
+
             jsonObject.put("addedvia", companionData.getmAddedvia());
-            jsonObject.put("emailaddress", companionData.getCompanionUserProfile().getmEmailAddress());
-            jsonObject.put("firstname", companionData.getCompanionUserProfile().getmFirstName());
-            jsonObject.put("lastname",  companionData.getCompanionUserProfile().getmLastName());
+            jsonObject.put("isAdult", true);
+            jsonObject.put("relationshiptypeid", companionData.getRelationshiptypeid());
+
+            jsonObjectStub.put("emailaddress", companionData.getCompanionUserProfile().getmEmailAddress());
+            jsonObjectStub.put("firstname", companionData.getCompanionUserProfile().getmFirstName());
+            jsonObjectStub.put("lastname",  companionData.getCompanionUserProfile().getmLastName());
+            jsonObjectStub.put("dob",  null);
+            jsonObject.put("stubcompanion",jsonObjectStub);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -490,13 +497,13 @@ public class ConnectionManager {
         });
     }
 
-    public void login(String email, String password,int id,final ServerRequestListener listener) {
+    public void login(String email, String password,String id,final ServerRequestListener listener) {
         String url = getURL(Services.USER_POST_LOGIN);
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("password", password);
             jsonObject.put("username", email);
-           // jsonObject.put("DeviceUUID", "123e4567-e89b-12d3-a456-426655440000");
+            jsonObject.put("DeviceUUID", id);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -23,7 +23,7 @@
         android:textSize="@dimen/SP32"
         android:textColor="@color/COLOR_00516f"
         app:fontName="dinnextltpro_condensed.ttf"
-        android:layout_marginBottom="@dimen/DP34"
+        android:layout_marginBottom="@dimen/DP10"
         android:gravity="center"
         android:layout_above="@+id/onboarding_text_explanation"
         android:layout_height="wrap_content" />
@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/DP44"
+        android:layout_marginBottom="@dimen/DP34"
         android:text="Next"
         android:textAllCaps="false"
         android:visibility="invisible"
@@ -50,6 +50,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/onboarding_next_button"
-        android:layout_marginBottom="@dimen/DP30" />
+        android:layout_marginBottom="@dimen/DP34" />
 
 </RelativeLayout>

@@ -139,18 +139,17 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         void onFareClassClicked(String position);
     }
 
-    public void initializeAdapter(final NodesVO currentNode){
-
-        currentNodeVO = currentNode;
+    private void initializeAdapter(){
 
         if(!currentNodeVO.ismIsAlternative()){
             getAlternativeFlights(currentNodeVO.getmPrimaryguid());
+            select_flight.setVisibility(View.GONE);
         }
 
-        ArrayList<LegsVO> legsFlights = currentNode.getLegs();
-        String allFlights =  setAllFlights(currentNode);
+        ArrayList<LegsVO> legsFlights = currentNodeVO.getLegs();
+        String allFlights =  setAllFlights(currentNodeVO);
 
-        mAdapter = new FlightAdapter(currentNode, legsFlights, getContext());
+        mAdapter = new FlightAdapter(currentNodeVO, legsFlights, getContext());
 
         mAdapter.setWebViewLinkClicked(new IWebViewClicked(){
             @Override
@@ -169,15 +168,14 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
 
                 int positionNumber = Integer.parseInt(position);
-                ArrayList<FairclassPreferencesVO> dropDown = currentNode.getDropdownoptions();
+                ArrayList<FairclassPreferencesVO> dropDown = currentNodeVO.getDropdownoptions();
 
                 FairclassPreferencesVO flightFareClass = dropDown.get(positionNumber);
-                flightFareClass.setPaxID(currentNode.getmPaxguid());
-                flightFareClass.setFlightID(currentNode.getmGuid());
-                flightFareClass.setSolutionID(currentNode.getAccountID());
+                flightFareClass.setPaxID(currentNodeVO.getmPaxguid());
+                flightFareClass.setFlightID(currentNodeVO.getmGuid());
+                flightFareClass.setSolutionID(currentNodeVO.getAccountID());
 
-                ;
-                flightFareClass.setCurrencyType(currentNode.getmCurrency());
+                flightFareClass.setCurrencyType(currentNodeVO.getmCurrency());
                 Bundle args = new Bundle();
                 Gson gson = new Gson();
                 String json = gson.toJson(flightFareClass);
@@ -187,21 +185,19 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         });
 
 
-        if(!currentNode.ismIsAlternative()){
-            select_flight.setVisibility(View.GONE);
-        }
+
 
         select_flight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendServerNewFlightOrder(currentNode.getLegs().get(0).getmParentguid());
+                sendServerNewFlightOrder(currentNodeVO.getLegs().get(0).getmParentguid());
             }
         });
 
-        mAdapter.setFlightCost(currentNode.getCost());
-        mAdapter.setPaid(currentNode.getmPaymentProcessingState());
+        mAdapter.setFlightCost(currentNodeVO.getCost());
+        mAdapter.setPaid(currentNodeVO.getmPaymentProcessingState());
         mAdapter.setDestinationFlights(allFlights);
-        mAdapter.updateMyFlight(!currentNode.ismIsAlternative());
+        mAdapter.updateMyFlight(!currentNodeVO.ismIsAlternative());
      //   mAdapter.updateMyFlight(isMyFlight);
         mAdapter.setAlternativeButtonDisable(false);
 
@@ -209,7 +205,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
             @Override
             public void showAlternative() {
                 Bundle arg = new Bundle();
-                arg.putString(HGBConstants.BUNDLE_CURRENT_VIEW_NODE_ID, currentNode.getmPrimaryguid());
+                arg.putString(HGBConstants.BUNDLE_CURRENT_VIEW_NODE_ID, currentNodeVO.getmPrimaryguid());
                 getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_DETAILS.getNavNumber(),arg);
 
             }
@@ -319,23 +315,23 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         //   slidingPanelInitialization();
         //   mSlidingPanels = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout_flight);
         mSlidingPanels = (SlidingUpPanelLayout)rootView.findViewById(R.id.sliding_layout_flight);
+      //  getActivityInterface().setAlternativeFlights(null);
         slidingPanelInitialization();
 
         Bundle args = getArguments();
 
         boolean isRoundTrip = args.getBoolean(HGBConstants.BUNDLE_ROUND_TRIP);
-        NodesVO currentNode;
         if(!isRoundTrip){
-            currentNode = getCurrentNode();
+            currentNodeVO = getCurrentNode();
         }
         else{
             if(isInbound){
-                currentNode =  getCurrentNodeInbound();
+                currentNodeVO =  getCurrentNodeInbound();
             }else{
-                currentNode =  getCurrentNodeOutbound();
+                currentNodeVO =  getCurrentNodeOutbound();
             }
         }
-        initializeAdapter(currentNode);
+        initializeAdapter();
         return rootView;
     }
 
@@ -344,8 +340,10 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         List<NodesVO> alternativeFlights = getActivityInterface().getAlternativeFlights();
 
         if (alternativeFlights != null) {
+
             currentNode = getNodeFromAlternative(alternativeFlights);
         }else {
+
             UserTravelMainVO userOrder = getActivityInterface().getTravelOrder();
             currentNode = getLegWithGuid(userOrder);
 
@@ -367,16 +365,13 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         ConnectionManager.getInstance(getActivity()).getAlternateFlightsForFlight(solutionID, paxId, flightID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-
                 List<NodesVO> alternativeFlightsVOs = (List<NodesVO>)data;//gson.fromJson((String) data, listType);
-
                 getActivityInterface().setAlternativeFlights(alternativeFlightsVOs);
             }
 
             @Override
             public void onError(Object data) {
-
-                ErrorMessage(data);
+              //  ErrorMessage(data);
             }
         });
     }
@@ -411,6 +406,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
                 new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
+
                         getActivityInterface().setAlternativeFlights(null);
                         //TODO why this here???
                         getFlowInterface().callRefreshItinerary(ToolBarNavEnum.ALTERNATIVE_FLIGHT_ROUND_TRIP.getNavNumber());

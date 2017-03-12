@@ -943,7 +943,8 @@ kate
 
         createItinenaryView(rootView);
 
-        getActivityInterface().setAlternativeFlights(null);
+
+        //getActivityInterface().setAlternativeFlights(null);
 
         setFavorityIcon();
         onFavorityClickListener();
@@ -952,6 +953,11 @@ kate
         return rootView;
     }
 
+    @Override
+    public void onDestroy() {
+        getActivityInterface().setAlternativeFlights(null);
+        super.onDestroy();
+    }
 
     private void priceInformationPopup(){
         LayoutInflater li = LayoutInflater.from(getContext());

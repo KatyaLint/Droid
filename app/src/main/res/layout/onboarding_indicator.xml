@@ -6,20 +6,27 @@
     android:fitsSystemWindows="true"
     android:background="@drawable/background_pin_code" >
 
+
     <android.support.v4.view.ViewPager
         android:id="@+id/pager_introduction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/DP44"
+        android:layout_marginTop="@dimen/DP20"
         android:fitsSystemWindows="true"
         tools:listitem="@layout/pager_item" />
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/next_button_indecator"
+        layout="@layout/next_button_layout"/>
 
     <RelativeLayout
 
         android:id="@+id/viewPagerIndicator"
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP60"
-        android:layout_marginBottom="@dimen/DP220"
+        android:layout_marginBottom="@dimen/DP60"
         android:layout_alignParentBottom="true" >
 
         <LinearLayout
@@ -29,13 +36,14 @@
             android:gravity="center"
             android:orientation="horizontal" />
 
-   <!--     <ImageButton
+<!--        <ImageButton
             android:id="@+id/btn_next"
             android:layout_width="42dip"
             android:layout_height="42dip"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dip"
-            android:background="@drawable/red_button" />-->
+            android:background="@drawable/red_button" /
+            >-->
 
     </RelativeLayout>
 

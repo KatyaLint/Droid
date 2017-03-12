@@ -1,4 +1,4 @@
-package hellogbye.com.hellogbyeandroid.adapters;
+package hellogbye.com.hellogbyeandroid.adapters.cncadapters;
 
 import android.content.Context;
 import android.graphics.Paint;

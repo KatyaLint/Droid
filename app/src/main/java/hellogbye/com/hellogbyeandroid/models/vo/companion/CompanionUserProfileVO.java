@@ -30,6 +30,8 @@ public class CompanionUserProfileVO {
     private boolean mIsPremiumUser;
     @SerializedName("istravelprofile")
     private boolean mIstravelProfile;
+    @SerializedName("currency")
+    private boolean mCurrency;
 
     public String getmFirstName() {
         return mFirstName;
@@ -101,5 +103,37 @@ public class CompanionUserProfileVO {
 
     public void setmUserProfileId(String mUserProfileId) {
         this.mUserProfileId = mUserProfileId;
+    }
+
+    public boolean ismIsPremiumUser() {
+        return mIsPremiumUser;
+    }
+
+    public void setmIsPremiumUser(boolean mIsPremiumUser) {
+        this.mIsPremiumUser = mIsPremiumUser;
+    }
+
+    public boolean ismIstravelProfile() {
+        return mIstravelProfile;
+    }
+
+    public void setmIstravelProfile(boolean mIstravelProfile) {
+        this.mIstravelProfile = mIstravelProfile;
+    }
+
+    public String getmAddress() {
+        return mAddress;
+    }
+
+    public void setmAddress(String mAddress) {
+        this.mAddress = mAddress;
+    }
+
+    public boolean ismCurrency() {
+        return mCurrency;
+    }
+
+    public void setmCurrency(boolean mCurrency) {
+        this.mCurrency = mCurrency;
     }
 }

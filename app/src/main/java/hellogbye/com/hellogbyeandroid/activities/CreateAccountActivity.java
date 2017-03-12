@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -50,6 +51,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.R;
@@ -270,6 +272,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         int i = HGBUtility.getNavBarHight(getApplicationContext());
         RelativeLayout.LayoutParams llp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         llp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        llp.addRule(RelativeLayout.CENTER_HORIZONTAL);
         llp.setMargins(0, 0, 0, i);
         mHyperlink.setLayoutParams(llp);
 
@@ -339,7 +342,13 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME, mRemmeberMeCheckbox.isChecked());
            // String strUdid = tm.getDeviceId();
           //  long udid = Long.valueOf(strUdid);
-            ConnectionManager.getInstance(CreateAccountActivity.this).login(mLoginEmail.getText().toString(), mLoginPassword.getText().toString(),android_id.hashCode(),
+
+            String uuid = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_UUID,"");
+            if("".equals(uuid)){
+                uuid = UUID.randomUUID().toString();
+            }
+
+            ConnectionManager.getInstance(CreateAccountActivity.this).login(mLoginEmail.getText().toString(), mLoginPassword.getText().toString(),uuid,
                     new ConnectionManager.ServerRequestListener() {
                         @Override
                         public void onSuccess(Object data) {
@@ -544,7 +553,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             CURRENT_STATE = NAME_STATE;
 
         } else {
-            mSignIn.setVisibility(View.VISIBLE);
+
             mNextTextView.setVisibility(View.GONE);
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), secondViewViews, firstViewViews);
             CURRENT_STATE = WELCOME_STATE;
@@ -1325,20 +1334,23 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         @Override
         public void updateDrawState(TextPaint ds) {
             ds.setColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_00516f));
-
+            ds.setTypeface(Typeface.DEFAULT_BOLD);
         }
     }
 
 
     private void setNextEnable(boolean isEnable) {
-        if (isEnable || BuildConfig.IS_DEV) {
-            mNextTextView.setAlpha(1.0f);
-            mNextTextView.setClickable(true);
-
-        } else {
-            mNextTextView.setAlpha(0.2f);
-            mNextTextView.setClickable(false);
-        }
+        //We might need this in the future. Its  to have the next button diabled if information was not added
+//        if (isEnable || BuildConfig.IS_DEV) {//
+//            mNextTextView.setAlpha(1.0f);
+//            mNextTextView.setClickable(true);
+//
+//        } else {
+//            mNextTextView.setAlpha(0.2f);
+//            mNextTextView.setClickable(false);
+//        }
+        mNextTextView.setAlpha(1.0f);
+        mNextTextView.setClickable(true);
 
     }
 

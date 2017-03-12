@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
@@ -10,4 +11,13 @@
                 />
         </shape>
     </item>
-</selector>
+</selector>-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle" android:padding="@dimen/DP2">
+    <solid android:color="@color/COLOR_003D4C"/> <!-- this one is ths color of the Rounded Button -->
+    <corners
+        android:bottomRightRadius="@dimen/DP20"
+        android:bottomLeftRadius="@dimen/DP20"
+        android:topLeftRadius="@dimen/DP20"
+        android:topRightRadius="@dimen/DP20"/>
+</shape>
