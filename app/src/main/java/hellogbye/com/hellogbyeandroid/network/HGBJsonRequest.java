@@ -216,7 +216,7 @@ public class HGBJsonRequest extends Request<String> {
         headers.put("Content-Type", "application/json; charset=utf-8");
 
       //  headers.put("User-Agent", " (HelloGByeAndroid/" + build number +  android.os.Build.MODEL + " Android" + Build.VERSION.SDK_INT + ")");
-        headers.put("User-Agent", " (HelloGByeAndroid/" + "BuildNumber" + BuildConfig.VERSION_CODE  +"/OS" + Build.VERSION.RELEASE +  "/Android" + Build.VERSION.SDK_INT + ")");
+        headers.put("User-Agent", " (HelloGByeAndroid/" + "Build-" + BuildConfig.VERSION_CODE  +"/OS-" + Build.VERSION.RELEASE +  "/Android" + Build.VERSION.SDK_INT + ")");
         HGBPreferencesManager sharedPreferences = HGBPreferencesManager.getInstance(mContext);
         String token = sharedPreferences.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
         Log.d("Token", token);
