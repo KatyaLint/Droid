@@ -20,12 +20,12 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 public class CNCMenuAdapter extends BaseAdapter {
 
-    private final Typeface textFont;
+
     private List<String> data;
     private int checkedPosition = -1;
-    public CNCMenuAdapter(List<String> data, Typeface typeface){
+    public CNCMenuAdapter(List<String> data){
         this.data = data;
-        textFont = typeface;
+
     }
 
 
@@ -55,7 +55,7 @@ public class CNCMenuAdapter extends BaseAdapter {
 
         String sortType = data.get(position);
         CheckedTextView itemText = (CheckedTextView)v.findViewById(R.id.cnc_menu_item);
-        itemText.setTypeface(textFont);
+
         itemText.setText(sortType);
 
         if(position == checkedPosition){

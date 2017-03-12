@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
- <CheckedTextView
+ <hellogbye.com.hellogbyeandroid.views.FontCheckedTextView
      android:layout_margin="@dimen/DP20"
      android:textSize="@dimen/SP16"
      android:id="@+id/cnc_menu_item"

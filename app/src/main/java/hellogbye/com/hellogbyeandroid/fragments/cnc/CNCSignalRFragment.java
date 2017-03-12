@@ -702,8 +702,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
 
         final List<String> data  = Arrays.asList(airportSendValueVO.getTitleArray());
-        Typeface textFont = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + "dinnextltpro_medium.otf");
-        final CNCMenuAdapter sortPopupAdapter = new CNCMenuAdapter(data,textFont);
+        final CNCMenuAdapter sortPopupAdapter = new CNCMenuAdapter(data);
 
 
         View promptsViewTeest = li.inflate(R.layout.popup_alternative_layout_sort, null);
