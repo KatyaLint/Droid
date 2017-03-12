@@ -632,3 +632,5 @@ Code changing:
        - on boarding next button
        - class view layout fix
        - new header string with os number and version code
+       - Added Udid to login (Session call)
+

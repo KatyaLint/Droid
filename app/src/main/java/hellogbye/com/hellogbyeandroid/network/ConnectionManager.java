@@ -497,13 +497,13 @@ public class ConnectionManager {
         });
     }
 
-    public void login(String email, String password,int id,final ServerRequestListener listener) {
+    public void login(String email, String password,String id,final ServerRequestListener listener) {
         String url = getURL(Services.USER_POST_LOGIN);
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("password", password);
             jsonObject.put("username", email);
-           // jsonObject.put("DeviceUUID", "123e4567-e89b-12d3-a456-426655440000");
+            jsonObject.put("DeviceUUID", id);
 
         } catch (Exception e) {
             e.printStackTrace();

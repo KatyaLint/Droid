@@ -51,6 +51,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.R;
@@ -341,7 +342,13 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME, mRemmeberMeCheckbox.isChecked());
            // String strUdid = tm.getDeviceId();
           //  long udid = Long.valueOf(strUdid);
-            ConnectionManager.getInstance(CreateAccountActivity.this).login(mLoginEmail.getText().toString(), mLoginPassword.getText().toString(),android_id.hashCode(),
+
+            String uuid = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_UUID,"");
+            if("".equals(uuid)){
+                uuid = UUID.randomUUID().toString();
+            }
+
+            ConnectionManager.getInstance(CreateAccountActivity.this).login(mLoginEmail.getText().toString(), mLoginPassword.getText().toString(),uuid,
                     new ConnectionManager.ServerRequestListener() {
                         @Override
                         public void onSuccess(Object data) {
