@@ -37,27 +37,13 @@ import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
  */
 public class PreferencesSwipeItemsAdapter extends RecyclerSwipeAdapter<PreferencesSwipeItemsAdapter.SimpleViewHolder> {
 
-
-    private Context mContext;
     private ArrayList<AccountDefaultSettingsVO> mDataset;
-    private ISwipeAdapterExecution swipeAdapterExecution;
-    private ICompanionsSearchCB companionSearchCB;
     private PreferenceSettingsSlideFragment.ListLineClicked listLineClicked;
-
-
-    public void addClickeListeners(ISwipeAdapterExecution swipeAdapterExecution) {
-        this.swipeAdapterExecution = swipeAdapterExecution;
-
-    }
 
     public void updateItems(ArrayList<AccountDefaultSettingsVO> accountSettings){
         this.mDataset = new ArrayList<>(accountSettings);
         notifyDataSetChanged();
 
-    }
-
-    public void setCompanionSearchCB(ICompanionsSearchCB companionSearchCB) {
-        this.companionSearchCB = companionSearchCB;
     }
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {
@@ -67,10 +53,7 @@ public class PreferencesSwipeItemsAdapter extends RecyclerSwipeAdapter<Preferenc
         private FontTextView settings_details_name_item;
         private RadioButton settings_radio_btn;
 
-        private View companion_arrow;
-
-
-        public SimpleViewHolder(View itemView) {
+        SimpleViewHolder(View itemView) {
             super(itemView);
 
             swipe_my_settings = (SwipeLayout) itemView.findViewById(R.id.swipe_my_settings);
@@ -82,11 +65,6 @@ public class PreferencesSwipeItemsAdapter extends RecyclerSwipeAdapter<Preferenc
 
             settings_details_name_item = (FontTextView) itemView.findViewById(R.id.settings_details_name_item);
             settings_radio_btn = (RadioButton)itemView.findViewById(R.id.settings_radio_btn);
-
-            companion_arrow = (View)itemView.findViewById(R.id.companion_arrow);
-
-//            my_trip_paid = (FontTextView) itemView.findViewById(R.id.my_trip_paid);
-
 
         }
     }
@@ -118,8 +96,6 @@ public class PreferencesSwipeItemsAdapter extends RecyclerSwipeAdapter<Preferenc
             viewHolder.settings_radio_btn.setChecked(false);
         }
 
-
-
         viewHolder.settings_rl.setTag(item.getmId());
         viewHolder.settings_radio_btn.setTag(item.getmId());
         viewHolder.settings_delete_item.setTag(item.getmId());
@@ -128,6 +104,7 @@ public class PreferencesSwipeItemsAdapter extends RecyclerSwipeAdapter<Preferenc
             @Override
             public void onClick(View view) {
 
+                System.out.println("Kate clicked");
                 listLineClicked.longClickedItem(view.getTag().toString());
 
             }
@@ -137,7 +114,6 @@ public class PreferencesSwipeItemsAdapter extends RecyclerSwipeAdapter<Preferenc
             public void onClick(View view) {
 
                 listLineClicked.clickedItem(view.getTag().toString());
-
             }
         });
 
@@ -145,9 +121,9 @@ public class PreferencesSwipeItemsAdapter extends RecyclerSwipeAdapter<Preferenc
 
 
         if(!item.isActiveProfile()) {
-            viewHolder.swipe_my_settings.setEnabled(true);
+            viewHolder.swipe_my_settings.setSwipeEnabled(true);
         }else {
-            viewHolder.swipe_my_settings.setEnabled(false);
+            viewHolder.swipe_my_settings.setSwipeEnabled(false);
         }
             viewHolder.swipe_my_settings.setShowMode(SwipeLayout.ShowMode.PullOut);
             viewHolder.swipe_my_settings.addSwipeListener(new SimpleSwipeListener() {
@@ -174,13 +150,8 @@ public class PreferencesSwipeItemsAdapter extends RecyclerSwipeAdapter<Preferenc
 
                     mItemManger.closeAllItems();
                     listLineClicked.deleteItem(guid);
-
-
             }
         });
-
-
-
     }
 
 
@@ -197,18 +168,18 @@ public class PreferencesSwipeItemsAdapter extends RecyclerSwipeAdapter<Preferenc
     }
 
 
-    public List<AccountDefaultSettingsVO> removeItem(int position) {
+    private List<AccountDefaultSettingsVO> removeItem(int position) {
         final AccountDefaultSettingsVO model = mDataset.remove(position);
         notifyItemRemoved(position);
         return mDataset;
     }
 
-    public void addItem(int position, AccountDefaultSettingsVO model) {
+    private void addItem(int position, AccountDefaultSettingsVO model) {
         mDataset.add(position, model);
         notifyItemInserted(position);
     }
 
-    public void moveItem(int fromPosition, int toPosition) {
+    private void moveItem(int fromPosition, int toPosition) {
         final AccountDefaultSettingsVO model = mDataset.remove(fromPosition);
         mDataset.add(toPosition, model);
         notifyItemMoved(fromPosition, toPosition);
