@@ -186,59 +186,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private boolean mBound = false;
 
 
-    private void configConnectFuture(SignalRFuture<Void> connect) {
-        final HubConnectionFactory hcf = HubConnectionFactory.getInstance();
 
-        connect.onError(new ErrorCallback() {
-            @Override
-            public void onError(final Throwable error) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(MainActivityBottomTabs.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-            }
-        });
-        connect.done(new Action<Void>() {
-            @Override
-            public void run(Void obj) throws Exception {
-                HubConnection conn = hcf.getHubConnection();
-                final HubProxy chat = hcf.getChatHub();
-
-                chat.invoke("Send", "android", "joined chat").done(new Action<Void>() {
-                    @Override
-                    public void run(Void obj) throws Exception {
-                        runOnUiThread(new Runnable() {
-                            @SuppressLint("InlinedApi")
-                            public void run() {
-                                Toast.makeText(MainActivityBottomTabs.this, "Joined the chat!", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                });
-            }
-        });
-    }
-    public void Send_Click(View view)
-    {
-        final HubConnectionFactory hcf = HubConnectionFactory.getInstance();
-        HubConnection conn = hcf.getHubConnection();
-        final HubProxy chat = hcf.getChatHub();
-        chat.invoke("send", "android says", "hello!").done(new Action<Void>() {
-
-            @Override
-            public void run(Void obj) throws Exception {
-                runOnUiThread(new Runnable() {
-                    @SuppressLint("InlinedApi")
-                    public void run() {
-                        Toast.makeText(MainActivityBottomTabs.this, "Sent", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-    }
 
 
     public SignalRService getSignalRService(){
@@ -266,19 +214,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         mToolbar = (CostumeToolBar) findViewById(R.id.toolbar_costume);
         initToolBar();
 
-
-        //INIT Bottom tabs
-
-
-//        List<Fragment> fragments = new ArrayList<>(5);
-//
-//        fragments.add(TripsTabsView.newInstance(0));
-//        fragments.add(TravelCompanionTabsWidgetFragment.newInstance(0));
-//        fragments.add(CNCFragment.newInstance(0));
-//        fragments.add(NotificationFragment.newInstance(0));
-//        fragments.add( AccountSettingsFragment.newInstance(0));
-//
-//        mNavController = new FragNavController(getSupportFragmentManager(), R.id.container, fragments);
         mTitle = getTitle();
 
         initBottomBar(savedInstanceState);

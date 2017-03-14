@@ -48,6 +48,7 @@ public class PreferencesTabCommonFragment extends HGBAbstractFragment {
         Bundle args = getArguments();
         if (args != null) {
             strJson = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
+
             String titleName =  args.getString(HGBConstants.BUNDLE_SETTINGS_TITLE_NAME);
             FontTextView titleBar = ((MainActivityBottomTabs) getActivity()).getTitleBar();
             titleBar.setText(titleName);
@@ -216,6 +217,7 @@ public class PreferencesTabCommonFragment extends HGBAbstractFragment {
         }
 
         if(goToNewFragment){
+            System.out.println("Kate goToNewFragment type " + type);
             gotToSelectedFragment(guid,type, titleName);
         }
 
@@ -283,7 +285,7 @@ public class PreferencesTabCommonFragment extends HGBAbstractFragment {
                             getActivityInterface().setAccountSettingsHotelChainAttributes(acountSettingsAttributes);
                             break;
                     }
-                    gotToSelectedFragment(settingsGuid,type, titleName);
+                    gotToSelectedFragment(settingsGuid, type, titleName);
                 }
             }
 

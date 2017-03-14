@@ -23,6 +23,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttribute
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.views.FontCheckedTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -137,7 +138,8 @@ public class PreferencesCheckListFragment extends PreferencesSettingsMainClass {
         mDynamicListView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                FontTextView settings_flight_title = (FontTextView) view.findViewById(R.id.settings_check_name);
+            //    FontTextView settings_flight_title = (FontTextView) view.findViewById(R.id.settings_check_name);
+                FontCheckedTextView settings_flight_title = (FontCheckedTextView) view.findViewById(R.id.setting_check_image);
                 String clickedItemID = settings_flight_title.getTag().toString();
                 multipleCheckView(clickedItemID);
                 preferenceSettingsListAdapter.notifyDataSetChanged();

@@ -81,14 +81,18 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
 
     private void searchListInitialization(View rootView){
         mSearchView = (SearchView)rootView.findViewById(R.id.settings_search);
-        mSearchView.setOnClickListener(new View.OnClickListener() {
+
+     /*   mSearchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 searchRecyclerView.setVisibility(View.VISIBLE);
                 mDynamicListView.setVisibility(View.GONE);
 
             }
-        });
+        });*/
+
+
+
        // mSearchView.setVisibility(View.GONE);
         setupSearchView();
         searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.settings_search_list);
@@ -150,6 +154,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         Bundle args = getArguments();
         if (args != null) {
             strId = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
+
             strType = args.getString(HGBConstants.BUNDLE_SETTINGS_TYPE);
             String strTitleName = args.getString(HGBConstants.BUNDLE_SETTINGS_TITLE_NAME);
             FontTextView titleBar = ((MainActivityBottomTabs) getActivity()).getTitleBar();
@@ -330,6 +335,9 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         mSearchView.setOnQueryTextListener(this);
         mSearchView.setSubmitButtonEnabled(false);*/
 
+
+        mSearchView.setIconifiedByDefault(false);
+
         mSearchView.setQueryHint(getString(R.string.settings_search_hunt));
         mSearchView.setOnQueryTextListener(this);
     }
@@ -394,15 +402,19 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         inflater.inflate(R.menu.menu_main, menu);
         final MenuItem item = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        searchView.setOnQueryTextListener(this);;
+        searchView.setOnQueryTextListener(this);
     }
 
     @Override
     public boolean onQueryTextChange(String query) {
+
         // Here is where we are going to implement our filter logic
         final List<SettingsAttributesVO> filteredModelList = filter(accountAttributesTemp, query);
         searchListAdapter.animateTo(filteredModelList);
+        searchListAdapter.notifyDataSetChanged();
         searchRecyclerView.scrollToPosition(0);
+        searchRecyclerView.setVisibility(View.VISIBLE);
+        mDynamicListView.setVisibility(View.GONE);
         return true;
 
     }
@@ -422,6 +434,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
                 filteredModelList.add(model);
             }
         }
+
         return filteredModelList;
     }
 

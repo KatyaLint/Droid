@@ -1,14 +1,10 @@
 package hellogbye.com.hellogbyeandroid.adapters.preferencesadapter;
 
-import android.content.Context;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
@@ -19,17 +15,10 @@ import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsSlideFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
-import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
-import hellogbye.com.hellogbyeandroid.models.vo.companion.ICompanionsSearchCB;
-import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
-import hellogbye.com.hellogbyeandroid.views.FontCheckedTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
-import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 
 
 /**
@@ -103,10 +92,7 @@ public class PreferencesSwipeItemsAdapter extends RecyclerSwipeAdapter<Preferenc
         viewHolder.settings_rl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                System.out.println("Kate clicked");
                 listLineClicked.longClickedItem(view.getTag().toString());
-
             }
         });
         viewHolder.settings_radio_btn.setOnClickListener(new View.OnClickListener() {

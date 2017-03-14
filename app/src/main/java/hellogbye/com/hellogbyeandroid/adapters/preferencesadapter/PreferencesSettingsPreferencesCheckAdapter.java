@@ -23,6 +23,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
+import hellogbye.com.hellogbyeandroid.views.FontCheckedTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
@@ -113,10 +114,12 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
 
         AccountDefaultSettingsVO attribute = getItem(position);//items.get(position);
         if(attribute != null){
-            FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_check_name);
 
-                settings_flight_title.setText(attribute.getmProfileName());
-                settings_flight_title.setTag(attribute.getmId());
+            FontCheckedTextView setting_check_image = (FontCheckedTextView) v.findViewById(R.id.setting_check_image);
+       //     FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_check_name);
+
+            setting_check_image.setText(attribute.getmProfileName());
+            setting_check_image.setTag(attribute.getmId());
 
  /*           FontTextView settings_check_active_profile = (FontTextView)v.findViewById(R.id.settings_check_active_profile);
             if(attribute.isActiveProfile()){

@@ -6,7 +6,22 @@
     android:id="@+id/settings_item_check_rl"
     android:orientation="horizontal">
 
-    <ImageView
+
+    <hellogbye.com.hellogbyeandroid.views.FontCheckedTextView
+        android:layout_centerInParent="true"
+        android:id="@+id/setting_check_image"
+        android:layout_margin="@dimen/DP20"
+        android:textSize="@dimen/SP16"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DP38"
+        android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
+        android:gravity="center_vertical"
+        android:text="sfdsfsdf"
+        app:fontName="dinnextltpro_medium.otf"
+        android:textColor="@color/COLOR_00516f" />
+
+
+  <!--  <ImageView
         android:layout_centerInParent="true"
         android:layout_alignParentLeft="true"
         android:id="@+id/setting_check_image"
@@ -25,11 +40,11 @@
         android:textColor="@color/COLOR_00516f"
         android:textSize="@dimen/SP16"
         android:text="prr"
-        app:fontName="dinnextltpro_medium.otf" />
+        app:fontName="dinnextltpro_medium.otf" />-->
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_centerInParent="true"
-        android:layout_toRightOf="@+id/settings_check_name"
+        android:layout_toRightOf="@+id/setting_check_image"
         android:id="@+id/settings_check_active_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

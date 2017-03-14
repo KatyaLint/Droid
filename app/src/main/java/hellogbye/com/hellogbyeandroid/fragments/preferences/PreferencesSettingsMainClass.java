@@ -200,8 +200,9 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
 
     @Override
     public void onDestroyView() {
+        super.onDestroyView();
         noBack = true;
-        super.onDetach();
+
     }
 }
 
