@@ -93,6 +93,9 @@
     <string name="preferences_bed_type">Preferred Bed Type</string>
     <string name="preferences_bed_rank">Rank the importance of bed types\nfrom most to least important</string>
 
+    <string name="preferences_fare_type">Preferred Fare Type</string>
+    <string name="preferences_fare_rank">Rank your preference for fare types\nfrom most to least important</string>
+
     <string name="preferences_prefered_hotel_chain">Preferred Hotel Chain</string>
     <string name="preferences_prefered_hotel_favorite">Tell us where you like to stay\nwhen you travel</string>
 

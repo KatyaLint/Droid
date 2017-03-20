@@ -137,7 +137,6 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
                 SettingsValuesVO item = preferenceSettingsListAdapter.remove(position);
 
                 boolean removed = selectedItem.remove(item);
-                System.out.println("Kate removed ="  +removed);
                 if(preferenceSettingsListAdapter.isEmpty()){
                     settings_empty_view_layout.setVisibility(View.VISIBLE);
                 }else{

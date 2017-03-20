@@ -65,9 +65,7 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
 
         ((MainActivityBottomTabs) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
             public void doBack() {
-                System.out.println("Kate first ="  +firstItems.size() + " selectedItem ="  +selectedItem.size());
                 if(firstItems.size() == selectedItem.size() || noBack){ //firstLength == firstItems.size()){// &&
-                    System.out.println("Kate back");
                     return;
                 }
                 /*if(noBack){
@@ -199,7 +197,6 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
                 strId, strType, guid, selectedItem, new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
-                        System.out.println("kate savePreferencesData");
                     }
 
                     @Override

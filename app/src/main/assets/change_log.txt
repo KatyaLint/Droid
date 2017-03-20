@@ -642,6 +642,7 @@ Code changing:
       HEL-1799 - can't edit profile prefernces getting error
       HEL-1318 - asks to save changes when there aren't any changes made on prefrences
       HEL-1630 - Saving changes on travel preferences - expected behavior
+      HEL-2854 - Can't enter fare preference in profile
 
       Code changing:
       --------------

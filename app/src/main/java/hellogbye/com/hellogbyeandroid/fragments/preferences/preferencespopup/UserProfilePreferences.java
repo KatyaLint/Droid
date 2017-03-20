@@ -173,7 +173,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
                 if(radioButtonSelected != -1) {
 
                     if(isDefaultProfile){
-                        System.out.println("Kate 12");
+
                         final DefaultsProfilesVO selected = accountDefaultSettings.get(radioButtonSelected);
                         postDefaultProfile(String.valueOf(selected.getId()), selected.getName(), activity, activityInterface, userProfileVOs);
                     }else{

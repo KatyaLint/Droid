@@ -187,6 +187,13 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
                 settings_text.setText(getActivity().getResources().getText(R.string.preferences_bed_rank));
                 break;
 
+            case "10":
+
+                accountAttributes  = correctCheckList(getActivityInterface().getAccountFarePreferences());
+                settings_title_text.setText(getActivity().getResources().getText(R.string.preferences_fare_type));
+                settings_text.setText(getActivity().getResources().getText(R.string.preferences_fare_rank));
+                break;
+
         }
 
     }
