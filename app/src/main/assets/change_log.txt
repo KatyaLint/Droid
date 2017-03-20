@@ -634,13 +634,14 @@ Code changing:
        - Added Udid to login (Session call)
 
   ------------------------------------------
-                         Version 0.0.7
+                         Version 0.0.8
    ------------------------------------------
       Fixed Bugs:
       -----------
       HEL-1798 - can't add airlines, aircrafts and hotels to profile see video
       HEL-1799 - can't edit profile prefernces getting error
       HEL-1318 - asks to save changes when there aren't any changes made on prefrences
+      HEL-1630 - Saving changes on travel preferences - expected behavior
 
       Code changing:
       --------------
