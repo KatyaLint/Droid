@@ -217,7 +217,6 @@ public class PreferencesTabCommonFragment extends HGBAbstractFragment {
         }
 
         if(goToNewFragment){
-            System.out.println("Kate goToNewFragment type " + type);
             gotToSelectedFragment(guid,type, titleName);
         }
 

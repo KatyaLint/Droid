@@ -640,6 +640,7 @@ Code changing:
       -----------
       HEL-1798 - can't add airlines, aircrafts and hotels to profile see video
       HEL-1799 - can't edit profile prefernces getting error
+      HEL-1318 - asks to save changes when there aren't any changes made on prefrences
 
       Code changing:
       --------------

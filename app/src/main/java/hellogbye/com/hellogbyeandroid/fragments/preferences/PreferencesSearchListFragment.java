@@ -30,6 +30,7 @@ import android.widget.TextView;
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
@@ -56,6 +57,9 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
     private RecyclerView searchRecyclerView;
     private PreferenceSettingsAirlineCarriersAdapter searchListAdapter;
     private PreferencesSettingsSearchCheckListAdapter preferenceSettingsListAdapter;
+
+    private int currentListSize;
+    private int changedListSize;
 
    // private String strJson;
 //    private String strType;
@@ -132,6 +136,8 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
                 String id = settings_flight_title.getTag().toString();
                 SettingsValuesVO item = preferenceSettingsListAdapter.remove(position);
 
+                boolean removed = selectedItem.remove(item);
+                System.out.println("Kate removed ="  +removed);
                 if(preferenceSettingsListAdapter.isEmpty()){
                     settings_empty_view_layout.setVisibility(View.VISIBLE);
                 }else{
@@ -180,9 +186,14 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
 
         accountAttributesTemp = new ArrayList<>(accountAttributes);
 
-        firstItems = myAccountAttribute.getAttributesVOs();
+        firstItems = new ArrayList<>();
+        firstItems.addAll(myAccountAttribute.getAttributesVOs());
+        System.out.println("Kate onCreateView search list");
 
-        selectedItem = new ArrayList<>( );
+      //  selectedItem = new ArrayList<>( );
+
+        selectedItem = new ArrayList<>(firstItems);
+
 
         for (SettingsValuesVO myAccount : firstItems) {
             for (SettingsAttributesVO accountAttribute : accountAttributes) {
@@ -217,8 +228,8 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
                             int intRank = myAccountAttributeVO.size()+1;
                             SettingsValuesVO valuesVO = new SettingsValuesVO(accountAttribute.getmId(),accountAttribute.getmName(),accountAttribute.getmDescription(),""+intRank);
                             myAccountAttribute.getAttributesVOs().add(valuesVO);
-                            selectedItem.add(valuesVO);
 
+                            selectedItem.add(valuesVO);
                             break;
                         }
                     }
@@ -313,11 +324,31 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         searchListAdapter.updateItems(accountAttributesTemp);
     }
 
+    private void findItemToDelete(String id){
+
+        Iterator<SettingsValuesVO> it = firstItems.iterator();
+
+        while(it.hasNext()) {
+            SettingsValuesVO value  = it.next();
+            if(value.getmID().equals(id)){
+                firstItems.remove(value);
+                break;
+            }
+
+        }
+
+    }
+
+
     private void removeFromSearchList(String itemId){
-        for(SettingsAttributesVO accountAttribute:accountAttributesTemp){
+        for(SettingsAttributesVO accountAttribute : accountAttributesTemp){
             if(accountAttribute.getmId().equals(itemId)){
                 if(accountAttribute.isChecked()) {
                     accountAttribute.setChecked(false);
+
+                   // firstItems.remove(accountAttribute);
+                    findItemToDelete(accountAttribute.getmId());
+
                 }else{
                     accountAttribute.setChecked(true);
                 }

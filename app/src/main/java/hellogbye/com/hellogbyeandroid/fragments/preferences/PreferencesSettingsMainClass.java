@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import java.util.ArrayList;
 import java.util.List;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
@@ -40,6 +42,8 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        selectedItem = new ArrayList<>();
+        settingsAttributesVO = new ArrayList<>();
         preference_save_changes =  ((MainActivityBottomTabs)getActivity()).getPreferencesSaveButton();
         setOnClickListenerForSavePreferences();
         guid = getSettingGuidSelected();
@@ -58,11 +62,17 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
 
     public void backOnListClicked() {
 
+
         ((MainActivityBottomTabs) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
             public void doBack() {
-                if(noBack){
+                System.out.println("Kate first ="  +firstItems.size() + " selectedItem ="  +selectedItem.size());
+                if(firstItems.size() == selectedItem.size() || noBack){ //firstLength == firstItems.size()){// &&
+                    System.out.println("Kate back");
                     return;
                 }
+                /*if(noBack){
+                    return;
+                }*/
 
                 savePreferenceAlert();
             }
@@ -79,7 +89,9 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
             return;
         }*/
 
-        if(settingsAttributesVO == null  && selectedItem.isEmpty()){// myAccountAttribute.getAttributesVOs().isEmpty()   && firstItems.isEmpty()){
+
+
+        if(settingsAttributesVO.isEmpty() && selectedItem.isEmpty()){// myAccountAttribute.getAttributesVOs().isEmpty()   && firstItems.isEmpty()){
             return;
         }
 
@@ -187,7 +199,7 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
                 strId, strType, guid, selectedItem, new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
-
+                        System.out.println("kate savePreferencesData");
                     }
 
                     @Override

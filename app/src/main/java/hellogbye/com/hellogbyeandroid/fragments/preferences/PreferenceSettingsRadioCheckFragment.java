@@ -44,6 +44,7 @@ public class PreferenceSettingsRadioCheckFragment extends PreferencesSettingsMai
     private FontTextView settings_text;
     private DynamicListView mDynamicListView;
     protected String guid;
+    private List<SettingsValuesVO> itemsInList;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new PreferenceSettingsRadioCheckFragment();
@@ -75,7 +76,9 @@ public class PreferenceSettingsRadioCheckFragment extends PreferencesSettingsMai
         settingsAttributesVO = new ArrayList<SettingsAttributesVO>();
         accountAttributesTemp = new ArrayList<>();
 
-        selectedItem = getMyAccountAttributes();
+        itemsInList = getMyAccountAttributes();
+
+     //   selectedItem = getMyAccountAttributes();
 
         dragDropListInitialization(rootView);
 
@@ -119,7 +122,6 @@ public class PreferenceSettingsRadioCheckFragment extends PreferencesSettingsMai
 
                 SettingsAttributesVO selected = accountAttributesTemp.get(selectedPosition);
                 selected.setChecked(true);
-
                 for(SettingsAttributesVO settingsAttributeVO: accountAttributesTemp ){
                     if(settingsAttributeVO.getmId().equals(selected.getmId())){
                         settingsAttributeVO.setChecked(true);
@@ -141,7 +143,7 @@ public class PreferenceSettingsRadioCheckFragment extends PreferencesSettingsMai
     }
 
     private List<SettingsAttributesVO> correctCheckList(List<SettingsAttributesVO> accountAttributes){
-        for (SettingsValuesVO settingsValuesVO : selectedItem){
+        for (SettingsValuesVO settingsValuesVO : itemsInList){
             for(SettingsAttributesVO accountAttributeVO :accountAttributes) {
                 if (settingsValuesVO.getmID().equals(accountAttributeVO.getmId())) {
                     accountAttributeVO.setmRank(settingsValuesVO.getmRank());
@@ -200,7 +202,7 @@ public class PreferenceSettingsRadioCheckFragment extends PreferencesSettingsMai
 
     @Override
     public void onDestroyView() {
+        super.onDestroyView();
         noBack = true;
-        super.onDetach();
     }
 }
