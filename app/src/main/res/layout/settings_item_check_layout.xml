@@ -15,11 +15,13 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP38"
         android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
+
         android:gravity="center_vertical"
         android:text="sfdsfsdf"
         app:fontName="dinnextltpro_medium.otf"
         android:textColor="@color/COLOR_00516f" />
 
+    <!--android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"-->
 
   <!--  <ImageView
         android:layout_centerInParent="true"
@@ -42,7 +44,7 @@
         android:text="prr"
         app:fontName="dinnextltpro_medium.otf" />-->
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
+ <!--   <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_centerInParent="true"
         android:layout_toRightOf="@+id/setting_check_image"
         android:id="@+id/settings_check_active_profile"
@@ -63,7 +65,7 @@
         android:layout_marginRight="@dimen/DP10"
         android:layout_centerInParent="true"
         android:layout_alignParentRight="true"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" />-->
 
 
 

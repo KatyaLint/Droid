@@ -18,8 +18,10 @@ import hellogbye.com.hellogbyeandroid.activities.HGBFlowInterface;
 import hellogbye.com.hellogbyeandroid.activities.HGBMainInterface;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsPreferencesCheckAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsRadioButtonAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
+import hellogbye.com.hellogbyeandroid.models.PersonalUserInformationVO;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
@@ -36,7 +38,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
 
     private AlertDialog selectDefaultProfileDialog;
     private int radioButtonSelected = -1;
-    private PreferencesSettingsPreferencesCheckAdapter mRadioPreferencesAdapter;
+    private PreferencesSettingsRadioButtonAdapter mRadioPreferencesAdapter;
     private ArrayList<DefaultsProfilesVO> accountDefaultSettings;
     private boolean isDefaultProfile = false;
     private DefaultsProfilesVO notChoosenProfileVO;
@@ -127,10 +129,11 @@ public class UserProfilePreferences extends HGBAbstractFragment {
             accountAttributes.add(accountDefaultSettingsVO);
         }
 
-        mRadioPreferencesAdapter = new PreferencesSettingsPreferencesCheckAdapter(activity, accountAttributes);
+        mRadioPreferencesAdapter = new PreferencesSettingsRadioButtonAdapter(activity, accountAttributes);
 
        // mRadioPreferencesAdapter.selectedItemID(accountAttributes.get(0).getmId());
-        mRadioPreferencesAdapter.setSelectedPosition(1);
+
+        mRadioPreferencesAdapter.selectedItemID(accountAttributes.get(0).getmId());
 
         radioButtonSelected = 1;
         mRadioPreferencesAdapter.notifyDataSetChanged();
@@ -144,8 +147,9 @@ public class UserProfilePreferences extends HGBAbstractFragment {
         manage_profile_ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                flowInterface.goToFragment(ToolBarNavEnum.TRAVEL_PREFERENCE.getNavNumber(), null);
+
                 selectDefaultProfileDialog.dismiss();
+                flowInterface.goToFragment(ToolBarNavEnum.TRAVEL_PREFERENCE.getNavNumber(), null);
             }
         });
 
@@ -202,8 +206,6 @@ public class UserProfilePreferences extends HGBAbstractFragment {
 
     private void postDefaultProfile(final String profileId, String profileName, final Activity activity, final HGBMainInterface activityInterface,final ArrayList<DefaultsProfilesVO> userProfileVOs) {
 
-
-
         ConnectionManager.getInstance(activity).postDefaultProfile(profileId, profileName, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
@@ -213,6 +215,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
                     HGBPreferencesManager hgbPrefrenceManager = HGBPreferencesManager.getInstance(getContext());
                     String logInEmail = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, "");
                     putNewPreferencesForUser(logInEmail, accountDefault.getmId(), activity, userProfileVOs);
+
                     for(DefaultsProfilesVO userProfile : userProfileVOs){
                         if(!userProfile.getId().equals(profileId)){
                             notChoosenProfileVO = userProfile;
@@ -263,7 +266,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
         });
     }
 
-    private void putAccoutToServer(final Activity activity,final HGBMainInterface activityInterface){
+    private void putAccoutToServer(final Activity activity, final HGBMainInterface activityInterface){
         final DefaultsProfilesVO selected = accountDefaultSettings.get(radioButtonSelected);
 
         String userEmail = activityInterface.getPersonalUserInformation().getUserEmailLogIn();
@@ -273,6 +276,10 @@ public class UserProfilePreferences extends HGBAbstractFragment {
             public void onSuccess(Object data) {
                 FontTextView my_trip_profile = ((MainActivityBottomTabs) activity).getMyTripProfile();
                 my_trip_profile.setTag(selected.getId());
+
+                ((MainActivityBottomTabs) activity).getHGBSaveDataClass().getPersonalUserInformation().setmTravelPreferencesProfileId(selected.getId());
+
+
                 //   FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
                 //   my_trip_profile.setText(selected.getProfilename());
             }

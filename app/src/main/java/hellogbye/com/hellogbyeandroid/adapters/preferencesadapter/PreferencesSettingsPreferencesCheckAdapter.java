@@ -141,9 +141,9 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
             int correntPosition = position+1;
 //            settings_text_drag.setText(""+correntPosition);
             this.getItem(position).setRank("" + correntPosition);
-            ImageView image = (ImageView)v.findViewById(R.id.setting_check_image);
+        //    FontCheckedTextView setting_check_image = (FontCheckedTextView)v.findViewById(R.id.setting_check_image);
 
-            RadioButton radioButton = (RadioButton)v.findViewById(R.id.setting_radio_image);
+         //   RadioButton radioButton = (RadioButton)v.findViewById(R.id.setting_radio_image);
 
             if(selectedPreferebcesID.equals(attribute.getmId())){
                 selectedPosition = position;
@@ -152,10 +152,10 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
 
 
 
-            radioButton.setChecked(position == selectedPosition);
-            radioButton.setTag(position);
+            setting_check_image.setChecked(position == selectedPosition);
+            setting_check_image.setTag(position);
 
-            radioButton.setOnClickListener(new View.OnClickListener() {
+            setting_check_image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     selectedPosition = (Integer)view.getTag();
@@ -167,7 +167,7 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
 
 
 
-            if(!isEditMode){
+         /*   if(!isEditMode){
                 image.setVisibility(View.INVISIBLE);
                 radioButton.setVisibility(View.VISIBLE);
                 settings_item_check_ll.setVisibility(View.VISIBLE);
@@ -182,7 +182,7 @@ public class PreferencesSettingsPreferencesCheckAdapter extends ArrayAdapter<Acc
                 }else{
                     image.setBackgroundResource(R.drawable.check_off);
                 }
-            }
+            }*/
         }
 
         return v;

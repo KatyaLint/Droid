@@ -187,7 +187,6 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
 
         firstItems = new ArrayList<>();
         firstItems.addAll(myAccountAttribute.getAttributesVOs());
-        System.out.println("Kate onCreateView search list");
 
       //  selectedItem = new ArrayList<>( );
 

@@ -8,7 +8,24 @@
     android:orientation="horizontal">
 
 
-    <RadioButton
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontCheckedTextView
+        android:layout_margin="@dimen/DP20"
+        android:textSize="@dimen/SP16"
+        android:id="@+id/settings_radio_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DP38"
+        android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
+        android:gravity="center_vertical"
+        android:text="sfdsfsdf"
+        android:layout_centerInParent="true"
+        app:fontName="dinnextltpro_medium.otf"
+        android:textColor="@color/COLOR_00516f" />
+
+
+
+ <!--   <RadioButton
         android:id="@+id/setting_radio_image"
         android:layout_width="wrap_content"
         android:layout_alignParentLeft="true"
@@ -26,7 +43,7 @@
         android:layout_toRightOf="@+id/setting_radio_image"
         android:textColor="@color/COLOR_999999"
         android:textSize="@dimen/SP16"
-        app:fontName="dinnextltpro_medium.otf" />
+        app:fontName="dinnextltpro_medium.otf" />-->
 
 
 

@@ -30,7 +30,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 /**
  * Created by nyawka on 11/25/15.
  */
-public class PreferencesSettingsRadioButtonAsCheckBoxAdapter extends ArrayAdapter<SettingsAttributesVO>  implements Swappable, SettingsAdapter
+public class PreferencesSettingsRadioListAdapter extends ArrayAdapter<SettingsAttributesVO>  implements Swappable, SettingsAdapter
 {
 
 
@@ -40,7 +40,7 @@ public class PreferencesSettingsRadioButtonAsCheckBoxAdapter extends ArrayAdapte
     public int selectedPosition = -1;
     public String selectedPreferebcesID="";
 
-    public PreferencesSettingsRadioButtonAsCheckBoxAdapter(Context context, List<SettingsAttributesVO> accountAttributes) {
+    public PreferencesSettingsRadioListAdapter(Context context, List<SettingsAttributesVO> accountAttributes) {
         super(accountAttributes);
         //settings_item_radio_button_layout
         //PreferencesSettingsRadioListAdapter
@@ -93,13 +93,13 @@ public class PreferencesSettingsRadioButtonAsCheckBoxAdapter extends ArrayAdapte
         View v = convertView;
         if (v == null) {
             v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.settings_item_radio_check_button_layout, null);
+                    .inflate(R.layout.settings_item_radio_button_layout, null);
         }
         SettingsAttributesVO attribute = this.getItem(position);//items.get(position);
         if(attribute != null){
             FontCheckedTextView settings_flight_title = (FontCheckedTextView) v.findViewById(R.id.settings_radio_name);
             settings_flight_title.setText(attribute.getmDescription());
-          //  settings_flight_title.setTag(attribute.getmId());
+            //  settings_flight_title.setTag(attribute.getmId());
 
             RelativeLayout settings_radio_button_ll = (RelativeLayout)v.findViewById(R.id.settings_radio_button_ll);
             settings_radio_button_ll.setTag(attribute.getmId());
@@ -117,10 +117,10 @@ public class PreferencesSettingsRadioButtonAsCheckBoxAdapter extends ArrayAdapte
             //  settings_text_drag.setText();
             int currentPosition = position+1;
 //            settings_text_drag.setText(""+correntPosition);
-         //   this.getItem(position).setRank("" + currentPosition);
+            //   this.getItem(position).setRank("" + currentPosition);
 
 
-          //  RadioButton r = (RadioButton)v.findViewById(R.id.setting_radio_image);
+            //  RadioButton r = (RadioButton)v.findViewById(R.id.setting_radio_image);
 
 
 

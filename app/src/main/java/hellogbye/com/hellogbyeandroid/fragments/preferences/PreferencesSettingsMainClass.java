@@ -42,6 +42,7 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        firstItems = new ArrayList<>();
         selectedItem = new ArrayList<>();
         settingsAttributesVO = new ArrayList<>();
         preference_save_changes =  ((MainActivityBottomTabs)getActivity()).getPreferencesSaveButton();

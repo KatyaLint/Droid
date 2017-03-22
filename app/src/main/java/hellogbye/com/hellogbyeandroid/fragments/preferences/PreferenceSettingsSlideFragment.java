@@ -161,7 +161,9 @@ public class PreferenceSettingsSlideFragment extends HGBAbstractFragment {
 
 
     private void setActiveAccount(){
+        //Kate
         String userPreferenceID =  getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId();
+
         for (AccountDefaultSettingsVO accountDefaultSettingVO: accountDefaultSettings){
             if(accountDefaultSettingVO.getmId().equals(userPreferenceID)){
                 accountDefaultSettingVO.setActiveProfile(true);

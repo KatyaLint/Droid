@@ -3,6 +3,7 @@ package hellogbye.com.hellogbyeandroid.fragments;
 import android.app.Activity;
 import android.app.AlertDialog;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -51,7 +52,7 @@ public class HGBAbstractFragment extends Fragment {
     private Tracker tracker;
 
     public interface FragmentNavigation {
-        public void pushFragment(Fragment fragment);
+        void pushFragment(Fragment fragment);
     }
 
     @Nullable
@@ -60,22 +61,19 @@ public class HGBAbstractFragment extends Fragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
         try {
             mHGBFlowInterface  = (HGBFlowInterface) getActivity();
             mHGBVoiceInterface  = (HGBVoiceInterface) getActivity();
 
-            mActivityInterface = ((MainActivityBottomTabs) activity).getHGBSaveDataClass();
-
+            mActivityInterface = ((MainActivityBottomTabs) context).getHGBSaveDataClass();
         } catch (ClassCastException e) {
             throw new ClassCastException(getActivity().toString() + "must implement HostingActivityInterface");
         }
-
     }
-
 
 
     @Override
@@ -92,24 +90,25 @@ public class HGBAbstractFragment extends Fragment {
 
 
     protected HGBVoiceInterface getVoiceInterface() {
-        if (mHGBVoiceInterface != null) {
+     //   if (mHGBVoiceInterface != null) {
             return mHGBVoiceInterface;
-        }
-        return  null;
+     //   }
+      //  return  null;
     }
 
     protected HGBFlowInterface getFlowInterface() {
-        if (mHGBFlowInterface != null) {
+      //  if (mHGBFlowInterface != null) {
             return mHGBFlowInterface;
-        }
-        return  null;
+     //   }
+      //  return  null;
     }
 
     protected HGBMainInterface getActivityInterface() {
-        if (mActivityInterface != null) {
+
+      //  if (mActivityInterface != null) {
             return mActivityInterface;
-        }
-        return  null;
+     /*   }
+        return  null;*/
     }
 
 

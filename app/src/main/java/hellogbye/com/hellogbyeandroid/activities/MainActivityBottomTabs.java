@@ -124,11 +124,14 @@ import static hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum.PAYMENT_TRAVE
  */
 public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInterface, HGBFlowInterface {
 
+
+    private HGBSaveDataClass hgbSaveDataClass = new HGBSaveDataClass();
+
     private CostumeToolBar mToolbar;
     private HGBPreferencesManager hgbPrefrenceManager;
     private UserProfileVO mCurrentUser;
     private OnBackPressedListener onBackPressedListener;
-    private HGBSaveDataClass hgbSaveDataClass = new HGBSaveDataClass();
+
     private PreferenceSettingsFragment.OnItemClickListener editClickCB;
     private ArrayList<String> mCvvList;
     private ArrayList<UserProfileVO> mTravelList = new ArrayList<>();

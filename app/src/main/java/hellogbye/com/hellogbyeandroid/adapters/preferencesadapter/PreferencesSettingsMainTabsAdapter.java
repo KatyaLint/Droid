@@ -121,7 +121,7 @@ public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<Pre
         //private FontTextView settings_flight_title;
         private RelativeLayout settings_item_check_rl;
         //private ImageView setting_check_image;
-        private  RadioButton radioButton;
+   //     private  RadioButton radioButton;
         public ViewHolder(View itemView) {
             super(itemView);
             settings_flight_title_check = (FontCheckedTextView) itemView.findViewById(R.id.setting_check_image);
@@ -131,7 +131,7 @@ public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<Pre
           //  setting_check_image = (ImageView) itemView.findViewById(R.id.setting_check_image);
 
 
-            radioButton = (RadioButton)itemView.findViewById(R.id.setting_radio_image);
+        //    radioButton = (RadioButton)itemView.findViewById(R.id.setting_radio_image);
 
             itemView.setOnClickListener(this);
 

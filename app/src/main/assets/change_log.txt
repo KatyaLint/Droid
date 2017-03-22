@@ -644,6 +644,7 @@ Code changing:
       HEL-1630 - Saving changes on travel preferences - expected behavior
       HEL-2854 - Can't enter fare preference in profile
 
+
       Code changing:
       --------------
 

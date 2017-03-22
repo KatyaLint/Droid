@@ -21,6 +21,7 @@ import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsCheckListAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsRadioButtonAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsRadioButtonAsCheckBoxAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsRadioListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
@@ -39,7 +40,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  */
 public class PreferenceSettingsRadioCheckFragment extends PreferencesSettingsMainClass{
 
-    private PreferencesSettingsRadioButtonAsCheckBoxAdapter preferenceSettingsListAdapter;
+    private PreferencesSettingsRadioListAdapter preferenceSettingsListAdapter;
     private FontTextView settings_title_text;
     private FontTextView settings_text;
     private DynamicListView mDynamicListView;
@@ -107,7 +108,7 @@ public class PreferenceSettingsRadioCheckFragment extends PreferencesSettingsMai
         mDynamicListView = (DynamicListView) rootView.findViewById(R.id.settings_drag_list);
         getCorrectAccountAtribute();
 
-        preferenceSettingsListAdapter = new PreferencesSettingsRadioButtonAsCheckBoxAdapter(getActivity(), accountAttributesTemp);
+        preferenceSettingsListAdapter = new PreferencesSettingsRadioListAdapter(getActivity(), accountAttributesTemp);
 
         for(SettingsAttributesVO account : accountAttributesTemp){
             if(account.isChecked()){

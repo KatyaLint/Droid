@@ -60,11 +60,9 @@ public class AlternativeFlightTabsWidgetFragment extends HGBAbstractFragment {
                              Bundle savedInstanceState) {
 
 
-        View rootView;
-            rootView = inflater.inflate(R.layout.tabs_widget, container, false);
+            View rootView = inflater.inflate(R.layout.tabs_widget, container, false);
             mTabHost = (FragmentTabHost)rootView.findViewById(android.R.id.tabhost);
             createTabsView();
-
 
         return rootView;
     }
