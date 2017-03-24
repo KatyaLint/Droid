@@ -1,7 +1,5 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -11,12 +9,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Environment;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -24,7 +19,6 @@ import android.text.TextPaint;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -69,11 +63,7 @@ import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
-import static android.R.attr.id;
-import static android.R.attr.type;
-import static com.appsee.pc.e;
 import static java.lang.Long.parseLong;
-import static org.jcodec.SliceType.P;
 
 /**
  * Created by arisprung on 11/8/16.
@@ -151,8 +141,10 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private int CURRENT_STATE = 0;
     private HGBPreferencesManager hgbPrefrenceManager;
     private CountDownTimer countDownTimer;
-    private String[] countryarray;
-    private List<ProvincesItem> mProvinceItems;
+    private String[] mUSCountryarray;
+    private String[] mCACountryarray;
+    private List<ProvincesItem> mUSProvinceItems;
+    private List<ProvincesItem> mCAProvinceItems;
     private ArrayAdapter adapter;
     private UserSignUpDataVO userData;
     private String android_id;
@@ -183,6 +175,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     protected void onResume() {
         super.onResume();
         checkFlow();
+        getStaticProvince();
     }
 
     private void initView() {
@@ -326,6 +319,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
             }
         });
+
+
     }
 
     private void sendLoginToServer() {
@@ -697,14 +692,14 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
             case R.id.us_layout:
                 setUSSelected(true);
-                getStaticProvince("US");
+
                 userData.setCountry("US");
                 isStateSelected = true;
                 break;
 
             case R.id.canada_layout:
                 setUSSelected(false);
-                getStaticProvince("CA");
+
                 userData.setCountry("CA");
                 isStateSelected = true;
                 break;
@@ -790,7 +785,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     private void userSelectedState() {
 
-        if (userData.getCountry() != null && mProvinceItems != null) {
+        if (userData.getCountry() != null && mCAProvinceItems != null && mUSProvinceItems != null) {
 
             if (levelDialog == null || isStateSelected) {
                 buildProvinceDialog();
@@ -804,25 +799,46 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     }
 
     private void buildProvinceDialog() {
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
-                CreateAccountActivity.this, R.layout.dialog_radio, countryarray);
+        ArrayAdapter<CharSequence> adapter = null;
+
+        if(userData.getCountry().equals("US")){
+            adapter = new ArrayAdapter<CharSequence>(
+                    CreateAccountActivity.this, R.layout.dialog_radio, mUSCountryarray);
+        }else if(userData.getCountry().equals("CA")){
+            adapter = new ArrayAdapter<CharSequence>(
+                    CreateAccountActivity.this, R.layout.dialog_radio, mCACountryarray);
+        }
+
         // Creating and Building the Dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Which State/Province?");
-        builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-                for (ProvincesItem province : mProvinceItems) {
-                    if (countryarray[item].contains(province.getProvincename())) {
-                        mStateProvince.setText(province.getProvincename());
-                        userData.setCountryProvince(province.getProvincecode());
-                        initAutoCityComplete();
-                        break;
+        if(adapter != null){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Which State/Province?");
+            builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                    if(userData.getCountry().equals("US")){
+                        setProvince(mUSProvinceItems,mUSCountryarray,item);
+
+                    }else if(userData.getCountry().equals("CA")){
+                        setProvince(mCAProvinceItems,mCACountryarray,item);
                     }
+
+                    levelDialog.hide();
                 }
-                levelDialog.hide();
+            });
+            levelDialog = builder.create();
+        }
+
+    }
+
+    private void setProvince(List<ProvincesItem> provinceItems, String[] countryarray, int item) {
+        for (ProvincesItem province : provinceItems) {
+            if (countryarray[item].contains(province.getProvincename())) {
+                mStateProvince.setText(province.getProvincename());
+                userData.setCountryProvince(province.getProvincecode());
+                initAutoCityComplete();
+                break;
             }
-        });
-        levelDialog = builder.create();
+        }
     }
 
     private void processBackPressed() {
@@ -1039,14 +1055,36 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     }
 
-    private void getStaticProvince(String id) {
+    private void getStaticProvince() {
         // String countryID = userData.getCountry();
-        ConnectionManager.getInstance(CreateAccountActivity.this).getStaticBookingProvince(id, new ConnectionManager.ServerRequestListener() {
+        ConnectionManager.getInstance(CreateAccountActivity.this).getStaticBookingProvince("US", new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                mProvinceItems = (List<ProvincesItem>) data;
-                if (mProvinceItems.size() > 0) {
-                    setDropDownItems();
+                mUSProvinceItems = (List<ProvincesItem>) data;
+                if (mUSProvinceItems.size() > 0) {
+                    mUSCountryarray = new String[mUSProvinceItems.size()];
+                    for (int i = 0; i < mUSProvinceItems.size(); i++) {
+                        mUSCountryarray[i] = mUSProvinceItems.get(i).getProvincecode() + " - " + mUSProvinceItems.get(i).getProvincename();
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
+        ConnectionManager.getInstance(CreateAccountActivity.this).getStaticBookingProvince("CA", new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                mCAProvinceItems = (List<ProvincesItem>) data;
+                if (mCAProvinceItems.size() > 0) {
+                    mCACountryarray = new String[mCAProvinceItems.size()];
+                    for (int i = 0; i < mCAProvinceItems.size(); i++) {
+                        mCACountryarray[i] = mCAProvinceItems.get(i).getProvincecode() + " - " + mCAProvinceItems.get(i).getProvincename();
+                    }
                 }
             }
 
@@ -1059,12 +1097,12 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         });
     }
 
-    private void setDropDownItems() {
-        countryarray = new String[mProvinceItems.size()];
-        for (int i = 0; i < mProvinceItems.size(); i++) {
-            countryarray[i] = mProvinceItems.get(i).getProvincecode() + " - " + mProvinceItems.get(i).getProvincename();
-        }
-    }
+//    private void setDropDownItems(List<ProvincesItem> mProvinceItems) {
+//        countryarray = new String[mProvinceItems.size()];
+//        for (int i = 0; i < mProvinceItems.size(); i++) {
+//            countryarray[i] = mProvinceItems.get(i).getProvincecode() + " - " + mProvinceItems.get(i).getProvincename();
+//        }
+//    }
 
     private void initAutoCityComplete() {
         mCity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
