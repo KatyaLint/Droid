@@ -425,7 +425,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     private void goToAddressView(View textView) {
         HGBUtility.hideKeyboard(getApplicationContext(), textView);
-        if (true) {//TODO checkPasswordValid()
+        if (checkPasswordValid()) {
             animateAddressView(true);
         } else {
             Toast.makeText(getApplicationContext(), "Address not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI

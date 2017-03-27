@@ -644,6 +644,7 @@ Code changing:
       HEL-1630 - Saving changes on travel preferences - expected behavior
       HEL-2854 - Can't enter fare preference in profile
       HEL-2883 - need to press twice on province
+      HEL-2884 - create of password (i can create any kind of password)
 
 
       Code changing:
