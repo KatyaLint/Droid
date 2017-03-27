@@ -482,7 +482,6 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         bc.include(new LatLng(currentNodeVO.getOriginairportcoordinates().getLatitude(), currentNodeVO.getOriginairportcoordinates().getLongitude()));
         bc.include(new LatLng(currentNodeVO.getDestinationairportcoordinates().getLatitude(), currentNodeVO.getDestinationairportcoordinates().getLongitude()));
 
-        //Kate
         mMap.addMarker(new MarkerOptions().
                 position(new LatLng(currentNodeVO.getOriginairportcoordinates().getLatitude(), currentNodeVO.getOriginairportcoordinates().getLongitude())));
         mMap.addMarker(new MarkerOptions().

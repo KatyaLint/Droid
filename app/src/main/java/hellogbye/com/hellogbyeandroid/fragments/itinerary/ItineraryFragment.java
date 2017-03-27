@@ -195,7 +195,7 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
 
 
         FontTextView textView = new FontTextView(activity);
-kate
+
         textView.setTextAppearance(activity, R.style.GridViewPassangersTextStyle);
         textView.setText(passenger.getmName() + " - " + "$" + HGBUtility.roundNumber(passenger.getmTotalPrice()));
         textView.setGravity(Gravity.CENTER);

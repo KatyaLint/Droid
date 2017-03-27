@@ -161,7 +161,6 @@ public class PreferenceSettingsSlideFragment extends HGBAbstractFragment {
 
 
     private void setActiveAccount(){
-        //Kate
         String userPreferenceID =  getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId();
 
         for (AccountDefaultSettingsVO accountDefaultSettingVO: accountDefaultSettings){
@@ -331,7 +330,6 @@ public class PreferenceSettingsSlideFragment extends HGBAbstractFragment {
 
                 if (data != null) {
                     accountDefaultSettings = (ArrayList<AccountDefaultSettingsVO>) data;
-                    //  System.out.println("Kate accountDefaultSettings =" + accountDefaultSettings.size());
                     createListAdapter();
                 }
             }

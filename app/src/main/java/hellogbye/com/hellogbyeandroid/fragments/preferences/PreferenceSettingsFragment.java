@@ -365,7 +365,6 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
             public void onSuccess(Object data) {
                 if (data != null) {
                     accountDefaultSettings = (List<AccountDefaultSettingsVO>) data;
-                  //  System.out.println("Kate accountDefaultSettings =" + accountDefaultSettings.size());
                     createListAdapter();
                 }
             }

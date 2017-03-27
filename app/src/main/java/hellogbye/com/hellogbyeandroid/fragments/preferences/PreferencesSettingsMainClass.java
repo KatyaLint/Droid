@@ -66,7 +66,13 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
 
         ((MainActivityBottomTabs) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
             public void doBack() {
-                if(firstItems.size() == selectedItem.size() || noBack){ //firstLength == firstItems.size()){// &&
+
+
+                if(firstItems.size() == selectedItem.size() || noBack
+
+                        || (settingsAttributesVO.isEmpty() && selectedItem.isEmpty())
+
+                        ){ //firstLength == firstItems.size()){// &&
                     return;
                 }
                 /*if(noBack){
@@ -90,9 +96,9 @@ public class PreferencesSettingsMainClass extends HGBAbstractFragment {
 
 
 
-        if(settingsAttributesVO.isEmpty() && selectedItem.isEmpty()){// myAccountAttribute.getAttributesVOs().isEmpty()   && firstItems.isEmpty()){
+      /*  if(settingsAttributesVO.isEmpty() && selectedItem.isEmpty()){// myAccountAttribute.getAttributesVOs().isEmpty()   && firstItems.isEmpty()){
             return;
-        }
+        }*/
 
 
         HGBUtility.showAlertPopUp(getActivity(), null, promptsView,

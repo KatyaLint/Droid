@@ -255,7 +255,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
         getActivityInterface().setCNCItems(null);
 
-        //Kate check
         args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
         getActivityInterface().setTravelOrder(new UserTravelMainVO());
         setTextForTrip("New Trip");
@@ -911,9 +910,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
             airportSendValuesVOsTemp.add(airportSendValuesVO);
 
 
-
-
-            //   Kate
          //   SignalRService service = ((MainActivityBottomTabs) getActivity()).getSignalRService();
 
             String preferencesID = null;

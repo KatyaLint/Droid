@@ -132,9 +132,11 @@ public class PreferenceSettingsRadioCheckFragment extends PreferencesSettingsMai
                 }
 
                 settingsAttributesVO.clear();
+                selectedItem.clear();
                 settingsAttributesVO.add(selected);
-
+                selectedItem.add(new SettingsValuesVO());
                 preferenceSettingsListAdapter.notifyDataSetChanged();
+
             }
         });
 
