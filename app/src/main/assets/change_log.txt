@@ -633,7 +633,7 @@ Code changing:
        - new header string with os number and version code
        - Added Udid to login (Session call)
 
-  ------------------------------------------
+   ------------------------------------------
                          Version 0.0.8
    ------------------------------------------
       Fixed Bugs:
@@ -644,8 +644,14 @@ Code changing:
       HEL-1630 - Saving changes on travel preferences - expected behavior
       HEL-2854 - Can't enter fare preference in profile
       HEL-2883 - need to press twice on province
+      HEL-2865 - crash at preference smoking/non smoking
+      HEL-2867 - change text in airline
       HEL-2884 - create of password (i can create any kind of password)
-        (HEL-2877) add headlines to checkout process per design
+      HEL-2877 - add headlines to checkout process per design
+      HEL-2866 - change tje place you take the text for prefereed hotel chain
+      HEL-2858 - app crash on anonymous
+      HEL-2874 - crash on cnc page
+      HEL-2864 - crash at preference stops/non stop
 
 
       Code changing:
