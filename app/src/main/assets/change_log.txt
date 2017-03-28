@@ -645,6 +645,7 @@ Code changing:
       HEL-2854 - Can't enter fare preference in profile
       HEL-2883 - need to press twice on province
       HEL-2884 - create of password (i can create any kind of password)
+        (HEL-2877) add headlines to checkout process per design
 
 
       Code changing:

@@ -356,8 +356,11 @@ public class CostumeToolBar extends Toolbar {
              * show chat message only
              */
             case PAYMENT_TRAVELERS:
+                titleBar.setVisibility(View.VISIBLE);
             case PAYMENT_DETAILS:
+                titleBar.setVisibility(View.VISIBLE);
             case SELECT_CREDIT_CARD:
+                titleBar.setVisibility(View.VISIBLE);
             case ALTERNATIVE_FLIGHT_FACTORY:
                 chat_message.setVisibility(View.VISIBLE);
                 break;
