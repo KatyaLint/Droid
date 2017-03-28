@@ -1,31 +1,5 @@
 [
     {
-        "outputFile": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-hdpi-v4/values-hdpi-v4.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endLine": 6,
-                    "endColumn": 13,
-                    "endOffset": 327
-                },
-                "from": {
-                    "file": "/Users/arisprung/.android/build-cache/9685886dd65cfc256dc30c97954a18cedda4331f/output/res/values-hdpi-v4/values-hdpi-v4.xml",
-                    "position": {
-                        "startLine": 2,
-                        "startColumn": 4,
-                        "startOffset": 55,
-                        "endLine": 6,
-                        "endColumn": 13,
-                        "endOffset": 327
-                    }
-                }
-            }
-        ]
-    },
-    {
         "outputFile": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-hdpi-v4/values-hdpi-v4.xml",
         "map": [
             {
@@ -38,7 +12,7 @@
                     "endOffset": 327
                 },
                 "from": {
-                    "file": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/values-hdpi-v4/values-hdpi-v4.xml",
+                    "file": "/Users/nyawka/.android/build-cache/f8a84fcb3af9005c074f1626a79ec8859a9b50ef/output/res/values-hdpi-v4/values-hdpi-v4.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,

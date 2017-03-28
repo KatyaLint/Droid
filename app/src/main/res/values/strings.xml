@@ -138,6 +138,7 @@
     <string name="cnc_start_planning_msg">Start planning a new itinerary by selecting</string>
 
     <string name="settings_search_hunt">Looking for aircraft?</string>
+    <string name="settings_search_hotel_hint">Add Your Preferred Hotel Chain</string>
     <string name="settings_empty_view_hotel">No favorite hotel chains selected\nUse the search bar to add them.</string>
     <string name="settings_empty_view_aircraft">No favorite airline type chains selected\nUse the search bar to add them.</string>
     <string name="settings_more_then_allowed_selected_title">Error</string>

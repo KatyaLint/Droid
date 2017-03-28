@@ -367,7 +367,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
 
         mSearchView.setIconifiedByDefault(false);
 
-        mSearchView.setQueryHint(getString(R.string.settings_search_hunt));
+        //mSearchView.setQueryHint(getString(R.string.settings_search_hunt));
         mSearchView.setOnQueryTextListener(this);
     }
 
@@ -386,6 +386,8 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
           //      my_settings.setText(R.string.my_settings_hotel);
         //        popular_settings.setText(R.string.popular_settings_hotel);
                 settings_item_title.setText(R.string.preferences_prefered_hotel_chain);
+
+                mSearchView.setQueryHint(getString(R.string.settings_search_hotel_hint));
                 settings_item_text.setText(R.string.preferences_prefered_hotel_favorite);
                 break;
             case "2":
@@ -394,6 +396,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
          //       popular_settings.setText(R.string.popular_settings_flight);
                 settings_item_title.setText(R.string.preferences_prefered_aircraft);
                 settings_item_text.setText(R.string.preferences_prefered_aircraft_favorite);
+                mSearchView.setQueryHint(getString(R.string.settings_search_hunt));
                 break;
             case "1":
                 accountAttributes = getActivityInterface().getAccountSettingsFlightCarrierAttributes();
@@ -402,6 +405,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
 
                 settings_item_title.setText(R.string.preferences_prefered_flight_carrier);
                 settings_item_text.setText(R.string.preferences_prefered_flight_carrier_favorite);
+                mSearchView.setQueryHint(getString(R.string.settings_search_hunt));
                 break;
 
         }

@@ -633,7 +633,7 @@ Code changing:
        - new header string with os number and version code
        - Added Udid to login (Session call)
 
-  ------------------------------------------
+   ------------------------------------------
                          Version 0.0.8
    ------------------------------------------
       Fixed Bugs:
@@ -644,7 +644,8 @@ Code changing:
       HEL-1630 - Saving changes on travel preferences - expected behavior
       HEL-2854 - Can't enter fare preference in profile
       HEL-2883 - need to press twice on province
-
+      HEL-2865 - crash at preference smoking/non smoking
+      HEL-2867 - change text in airline
 
       Code changing:
       --------------
