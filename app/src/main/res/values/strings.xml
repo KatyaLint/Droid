@@ -137,7 +137,7 @@
     <string name="itinerary_inner_flight_item">(Incl.Taxes, fees &amp; charges)</string>
     <string name="cnc_start_planning_msg">Start planning a new itinerary by selecting</string>
 
-    <string name="settings_search_hunt">Looking for aircraft?</string>
+    <string name="settings_search_hunt">Add Your Preferred Airline</string>
     <string name="settings_search_hotel_hint">Add Your Preferred Hotel Chain</string>
     <string name="settings_empty_view_hotel">No favorite hotel chains selected\nUse the search bar to add them.</string>
     <string name="settings_empty_view_aircraft">No favorite airline type chains selected\nUse the search bar to add them.</string>

@@ -646,6 +646,9 @@ Code changing:
       HEL-2883 - need to press twice on province
       HEL-2865 - crash at preference smoking/non smoking
       HEL-2867 - change text in airline
+      HEL-2884 - create of password (i can create any kind of password)
+      HEL-2866 - change tje place you take the text for prefereed hotel chain
+
 
       Code changing:
       --------------
