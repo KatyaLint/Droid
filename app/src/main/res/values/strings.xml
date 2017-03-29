@@ -359,6 +359,7 @@
     <string name="onboarding_title_4">Make changes in a flash</string>
     <string name="onboarding_explanation_4">Use the back button to ask for more\noptions in your own words.</string>
     <string name="already_have_an_account_sign_in">Already have an account? SIGN IN</string>
+    <string name="or">Or</string>
 
 
 </resources>

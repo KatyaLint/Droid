@@ -96,7 +96,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private ImageView mCloud07;
     private ImageView mArrowBack;
     private View mUnderlineTitle;
+    private FontTextView mAmex;
     private LinearLayout mBirds;
+    private LinearLayout mOr;
     private FontButtonView login;
     private ImageView mCanadaCheck;
     private ImageView mUSCheck;
@@ -198,6 +200,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mCloud07 = (ImageView) findViewById(R.id.cloud_7);
         mArrowBack = (ImageView) findViewById(R.id.arrow_back);
         mBirds = (LinearLayout) findViewById(R.id.birds);
+        mOr = (LinearLayout) findViewById(R.id.or_ll);
         mUSCheck = (ImageView) findViewById(R.id.us_check);
         mCanadaCheck = (ImageView) findViewById(R.id.canada_check);
         mForgotPasswordTextView = (FontTextView) findViewById(R.id.forgotpassword);
@@ -213,7 +216,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mCanadaText = (FontTextView) findViewById(R.id.canada);
         mUSText = (FontTextView) findViewById(R.id.usa);
         mEmail = (FontEditTextView) findViewById(R.id.email);
-        mHyperlink = (FontTextView) findViewById(R.id.sign_up_hyperlink);
+      //  mHyperlink = (FontTextView) findViewById(R.id.sign_up_hyperlink);
+        mAmex = (FontTextView) findViewById(R.id.amex_logo);
+
         mCreateAccount = (FontButtonView) findViewById(R.id.create_account);
         mCreate = (FontButtonView) findViewById(R.id.create_user);
         mTryNow = (FontButtonView) findViewById(R.id.try_now_new_create);
@@ -267,7 +272,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         llp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         llp.addRule(RelativeLayout.CENTER_HORIZONTAL);
         llp.setMargins(0, 0, 0, i);
-        mHyperlink.setLayoutParams(llp);
+        mAmex.setLayoutParams(llp);
 
 
 
@@ -499,12 +504,12 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     }
 
     private void initSpannableText() {
-        SpannableString ss = new SpannableString(getResources().getString(R.string.sign_up_term_of_use));
-        ss.setSpan(new myClickableSpan(1), 52, 61, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ss.setSpan(new myClickableSpan(2), 66, 80, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        mHyperlink.setText(ss);
-        mHyperlink.setAlpha(0.4f);
-        mHyperlink.setMovementMethod(LinkMovementMethod.getInstance());
+//        SpannableString ss = new SpannableString(getResources().getString(R.string.sign_up_term_of_use));
+//        ss.setSpan(new myClickableSpan(1), 52, 61, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        ss.setSpan(new myClickableSpan(2), 66, 80, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        mHyperlink.setText(ss);
+//        mHyperlink.setAlpha(0.4f);
+//        mHyperlink.setMovementMethod(LinkMovementMethod.getInstance());
 
 
         SpannableString signin = new SpannableString(getResources().getString(R.string.already_have_an_account_sign_in));
@@ -536,6 +541,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         firstViewViews.add(mLogoOnBoarding);
         firstViewViews.add(mCreateAccount);
         firstViewViews.add(mTryNow);
+        firstViewViews.add(mOr);
+        firstViewViews.add(mAmex);
         firstViewViews.add(mSignIn);
         mLabel1.setText(R.string.tell_name);
         mLabel2.setText(R.string.allow_book);
@@ -750,6 +757,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         firstViewViews.add(mLogoOnBoarding);
         firstViewViews.add(mCreateAccount);
         firstViewViews.add(mTryNow);
+        firstViewViews.add(mOr);
+        firstViewViews.add(mAmex);
         firstViewViews.add(mSignIn);
 
 
@@ -1371,7 +1380,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         }
         @Override
         public void updateDrawState(TextPaint ds) {
-            ds.setColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_00516f));
+            ds.setColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_EE3A3C));
             ds.setTypeface(Typeface.DEFAULT_BOLD);
         }
     }
