@@ -652,6 +652,7 @@ Code changing:
       HEL-2858 - app crash on anonymous
       HEL-2874 - crash on cnc page
       HEL-2864 - crash at preference stops/non stop
+      HEL-2863 - after reseting password getting a blank pop up
 
 
       Code changing:
