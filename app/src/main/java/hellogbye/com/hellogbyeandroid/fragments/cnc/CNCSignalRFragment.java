@@ -125,7 +125,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         args = getArguments();
 
         clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT);
-
         init(rootView);
         // startTutorial();
         startTutorialText();
@@ -225,7 +224,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
     private void addUserConversation(){
         ArrayList<ConversationVO> conversations = getActivityInterface().getTravelOrder().getConversation();
         for(ConversationVO conversation : conversations){
-        //    handleHGBMessageMe(conversation.getmMessage());
+            handleHGBMessageMe(conversation.getmMessage());
             handleHGBMessage(getString(R.string.itinerary_created));
         }
     }
@@ -235,12 +234,18 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         ConnectionManager.getInstance(getActivity()).getItinerary(solutionId, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
+
+                getActivityInterface().setCNCItems(null);
+                initList();
+               // getActivityInterface().setCNCItems(null);
                 args.putString(HGBConstants.SOLUTION_ITINERARY_ID,null);
                 args.putBoolean(HGBConstants.CNC_CLEAR_CHAT,false);
                 UserTravelMainVO userTravelMainVO = (UserTravelMainVO) data;
                 getActivityInterface().setTravelOrder(userTravelMainVO);
+
                 addUserConversation();
                 getFlowInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(), null);
+             //   handleHGBMessage(getString(R.string.itinerary_created));
             }
 
             @Override
@@ -487,9 +492,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
             @Override
             public void onClick(View v) {
                 String strMessage = mEditText.getText().toString();
-
-
-
                 handleMyMessage(strMessage);
             }
         });
@@ -710,9 +712,11 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         user_profile_popup_list_view.smoothScrollToPosition(airportSendValueVO.getCenteredItem());
         sortPopupAdapter.setCheckedItemPosition(airportSendValueVO.getCenteredItem());
 
-        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        /*dialogBuilder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-            } });
+
+
+            } });*/
 
         //Create alert dialog object via builder
        final AlertDialog alertDialog = dialogBuilder.create();
@@ -801,7 +805,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
     }
 
     public void handleHGBMessageMe(String strMessage) {
-
         getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.ME_ITEM));
         addWaitingItem();
 

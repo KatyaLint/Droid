@@ -169,7 +169,6 @@ public class TabViewMainFragment extends HGBAbstractFragment implements SearchVi
         my_trips_go_to_cnc.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-
                 final Bundle bundle = new Bundle();
                 bundle.putBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
                 getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), bundle);
@@ -187,6 +186,7 @@ public class TabViewMainFragment extends HGBAbstractFragment implements SearchVi
 
                 args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
                 args.putString(HGBConstants.SOLUTION_ITINERARY_ID, solutionId);
+
                 getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), args);
 
 

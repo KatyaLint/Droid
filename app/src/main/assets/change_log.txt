@@ -653,6 +653,7 @@ Code changing:
       HEL-2874 - crash on cnc page
       HEL-2864 - crash at preference stops/non stop
       HEL-2863 - after reseting password getting a blank pop up
+      HEL-2881 - can't see the conversation in trip from history/favourites
 
 
       Code changing:
