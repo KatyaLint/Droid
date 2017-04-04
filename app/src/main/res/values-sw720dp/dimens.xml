@@ -44,6 +44,7 @@
     <dimen name="DP280">560dp</dimen>
     <dimen name="DP300">600dp</dimen>
     <dimen name="DP340">680dp</dimen>
+    <dimen name="DP335">670dp</dimen>
     <dimen name="DP400">800dp</dimen>
     <dimen name="DP450">900dp</dimen>
 

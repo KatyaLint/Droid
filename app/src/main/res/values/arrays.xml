@@ -31,6 +31,14 @@
         <item>Mrs</item>
     </string-array>
 
+    <string-array name="traveler_type_array">
+        <item>Id rather not say</item>
+        <item>Business</item>
+        <item>Leisure</item>
+        <item>Both</item>
+
+    </string-array>
+
     <string-array name="seat_type_array">
         <item>Mr</item>
         <item>Miss</item>

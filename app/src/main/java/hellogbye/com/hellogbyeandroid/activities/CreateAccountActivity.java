@@ -96,6 +96,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private ImageView mCloud07;
     private ImageView mArrowBack;
     private View mUnderlineTitle;
+    private View mUnderlineTitle2;
     private FontTextView mAmex;
     private LinearLayout mBirds;
     private LinearLayout mOr;
@@ -130,6 +131,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private FontEditTextView mPassword1;
     private FontEditTextView mPassword2;
     private FontTextView mTitle;
+    private FontTextView mTravlerType;
     private LinearLayout mAddressLayout;
     private LinearLayout mUSLayout;
     private LinearLayout mCanadaLayout;
@@ -190,6 +192,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mBiulding1 = (ImageView) findViewById(R.id.building_01);
         mCloud01 = (ImageView) findViewById(R.id.cloud_01);
         mUnderlineTitle= (View) findViewById(R.id.title_underline_1);
+        mUnderlineTitle2= (View) findViewById(R.id.title_underline_2);
         mCloud01B = (ImageView) findViewById(R.id.cloud_1_b);
         mCloud02 = (ImageView) findViewById(R.id.cloud_02);
         mCloud03 = (ImageView) findViewById(R.id.cloud_03);
@@ -228,6 +231,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mPassword2 = (FontEditTextView) findViewById(R.id.password2);
         mSignIn = (FontTextView) findViewById(R.id.create_login);
         mTitle = (FontTextView) findViewById(R.id.user_title);
+        mTravlerType = (FontTextView) findViewById(R.id.user_travel_type);
         mCity = (AutoCompleteTextView) findViewById(R.id.city);
         mCity.setThreshold(1);
         mZip = (FontEditTextView) findViewById(R.id.zip);
@@ -255,6 +259,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         editTextViewListners();
         mUSLayout.setOnClickListener(this);
         mTitle.setOnClickListener(this);
+        mTravlerType.setOnClickListener(this);
         mCanadaLayout.setOnClickListener(this);
         mCreateAccount.setOnClickListener(this);
         mStateProvince.setOnClickListener(this);
@@ -401,8 +406,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                         && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
                     userData.setFirstName(mFirstName.getText().toString());
                     userData.setLastName(mLastName.getText().toString());
-
-                    goToEmailView();
+                    openTitleUp();
+                    //goToEmailView();
                     return true;
                 }
                 // Return true if you have consumed the action, else false.
@@ -533,7 +538,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         secondViewViews.add(mFirstName);
         secondViewViews.add(mLastName);
         secondViewViews.add(mUnderlineTitle);
+        secondViewViews.add(mUnderlineTitle2);
         secondViewViews.add(mTitle);
+        secondViewViews.add(mTravlerType);
         secondViewViews.add(mArrowBack);
 
         ArrayList<View> firstViewViews = new ArrayList<>();
@@ -572,7 +579,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         firstViewViews.add(mFirstName);
         firstViewViews.add(mLastName);
         firstViewViews.add(mTitle);
+        firstViewViews.add(mTravlerType);
         firstViewViews.add(mUnderlineTitle);
+        firstViewViews.add(mUnderlineTitle2);
 
 
         ArrayList<View> secondViewViews = new ArrayList<>();
@@ -664,7 +673,11 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
         switch (view.getId()) {
             case R.id.user_title:
-                HGBUtility.showPikerDialog(0,mTitle, CreateAccountActivity.this, "SELECT TITLE", getResources().getStringArray(R.array.title_array), 0, 2, null, true);
+                openTitleUp();
+
+                break;
+            case R.id.user_travel_type:
+                HGBUtility.showPikerDialog(0,mTravlerType, CreateAccountActivity.this, "SELECT TYPE", getResources().getStringArray(R.array.traveler_type_array), 0, 3, null, true);
                 break;
 
             case R.id.create_account:
@@ -675,6 +688,19 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                     if (CURRENT_STATE == NAME_STATE) {
                         userData.setFirstName(mFirstName.getText().toString());
                         userData.setLastName(mLastName.getText().toString());
+                        if(mTravlerType.getText().toString().equals( getResources().getStringArray(R.array.traveler_type_array)[1]))
+                        {
+                            userData.setUserTravelerType(0);
+                        }else if(mTravlerType.getText().toString().equals( getResources().getStringArray(R.array.traveler_type_array)[2])){
+                            userData.setUserTravelerType(1);
+
+                        }else if(mTravlerType.getText().toString().equals( getResources().getStringArray(R.array.traveler_type_array)[3])){
+                            userData.setUserTravelerType(2);
+
+                        }else {
+                            userData.setUserTravelerType(-1);
+                        }
+
 
                         goToEmailView();
                     } else if (CURRENT_STATE == EMAIL_STATE) {
@@ -742,6 +768,10 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                 break;
 
         }
+    }
+
+    private void openTitleUp() {
+        HGBUtility.showPikerDialog(0,mTitle, CreateAccountActivity.this, "SELECT TITLE", getResources().getStringArray(R.array.title_array), 0, 2, null, true);
     }
 
     private void goToLoginState(boolean animateFoward) {

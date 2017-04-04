@@ -660,3 +660,4 @@ Code changing:
       --------------
 
        Create Account - New Design
+       Create Account Your Name - New Design
