@@ -41,6 +41,7 @@ public class HGBSaveDataClass implements HGBMainInterface {
     private List<SettingsAttributesVO> hotelSmokingAttributes;
     private List<SettingsAttributesVO> hotelChainAttributes;
     private List<SettingsAttributesVO> hotelBedTypeAttributes;
+    private List<SettingsAttributesVO> flightFarePrefencessAttributes;
     private ArrayList<CompanionVO> companions;
     private ArrayList<CompanionVO> companionsInvintation;
     private ArrayList<CompanionStaticRelationshipTypesVO> componionStaticDescriptionVOs;
@@ -243,6 +244,16 @@ public class HGBSaveDataClass implements HGBMainInterface {
     @Override
     public List<SettingsAttributesVO> getAccountSettingsHotelChainAttributes() {
         return hotelChainAttributes;
+    }
+
+    @Override
+    public void setAccountFarePreferences(List<SettingsAttributesVO> fareClassAttributes) {
+        this.flightFarePrefencessAttributes = fareClassAttributes;
+    }
+
+    @Override
+    public List<SettingsAttributesVO> getAccountFarePreferences() {
+        return flightFarePrefencessAttributes;
     }
 
     @Override

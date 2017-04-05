@@ -19,12 +19,14 @@ import hellogbye.com.hellogbyeandroid.R;
 //import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsDragListAdapter;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -55,7 +57,7 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.settings_drag_list, container, false);
-
+        noBack = true;
 
         Bundle args = getArguments();
         if (args != null) {
@@ -70,8 +72,6 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
         settings_title_text = (FontTextView)rootView.findViewById(R.id.settings_item_title);
         settings_text = (FontTextView)rootView.findViewById(R.id.settings_item_text);
 
-        noBack = false;
-
         selectedItem = new ArrayList<>();
         choosedItems = getMyAccountAttributes();
 
@@ -83,6 +83,57 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
     }
 
 
+    private void savePreferenceAlert(final List<SettingsValuesVO> accountAttributesVO){
+        LayoutInflater li = LayoutInflater.from(getActivity());
+        View promptsView = li.inflate(R.layout.settings_save_popup, null);
+
+    /*    if( settingsAttributesVO == null || guid.equals("7")
+            && firstItems.isEmpty()
+            && myAccountAttribute.getAttributesVOs().isEmpty() || settingsAttributesVO.isEmpty()){
+            return;
+        }*/
+
+
+
+      /*  if(settingsAttributesVO.isEmpty() && selectedItem.isEmpty()){// myAccountAttribute.getAttributesVOs().isEmpty()   && firstItems.isEmpty()){
+            return;
+        }*/
+
+
+        HGBUtility.showAlertPopUp(getActivity(), null, promptsView,
+                getResources().getString(R.string.preferences_save_pop_up),
+                getResources().getString(R.string.save_button),
+                new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+                        convertSettingsAttributesVO();
+                        if(noBack){
+                            return;
+                        }
+                        String guid = getSettingGuidSelected();
+                        ConnectionManager.getInstance(getActivity()).putAttributesValues(
+                                strId, strType, guid, accountAttributesVO, new ConnectionManager.ServerRequestListener() {
+                                    @Override
+                                    public void onSuccess(Object data) {
+
+                                    }
+
+                                    @Override
+                                    public void onError(Object data) {
+                                        ErrorMessage(data);
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void itemCanceled() {
+
+
+                    }
+                });
+
+    }
+
 
     public void backOnListClicked(final String strType,final String strId,final List<SettingsValuesVO> accountAttributesVO) {
 
@@ -92,11 +143,15 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
                 if(noBack){
                     return;
                 }
-                String guid = getSettingGuidSelected();
+
+                savePreferenceAlert(accountAttributesVO);
+
+             /*   String guid = getSettingGuidSelected();
                 ConnectionManager.getInstance(getActivity()).putAttributesValues(
                         strId, strType, guid, accountAttributesVO, new ConnectionManager.ServerRequestListener() {
                             @Override
                             public void onSuccess(Object data) {
+                                System.out.println("Kate putAttributesValues");
 
                             }
 
@@ -104,7 +159,7 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
                             public void onError(Object data) {
                                 ErrorMessage(data);
                             }
-                        });
+                        });*/
             }
         });
     }
@@ -160,6 +215,7 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
                     public boolean onItemLongClick(final AdapterView<?> parent, final View view,
                                                    final int position, final long id) {
                         mDynamicListView.startDragging(position);
+                        noBack = false;
                         return true;
                     }
                 }
@@ -185,6 +241,13 @@ public class PreferencesDragListFragment extends PreferencesSettingsMainClass {
                 accountAttributes  = correctCheckList(getActivityInterface().getAccountSettingsHotelBedTypeAttributes());
                 settings_title_text.setText(getActivity().getResources().getText(R.string.preferences_bed_type));
                 settings_text.setText(getActivity().getResources().getText(R.string.preferences_bed_rank));
+                break;
+
+            case "10":
+
+                accountAttributes  = correctCheckList(getActivityInterface().getAccountFarePreferences());
+                settings_title_text.setText(getActivity().getResources().getText(R.string.preferences_fare_type));
+                settings_text.setText(getActivity().getResources().getText(R.string.preferences_fare_rank));
                 break;
 
         }

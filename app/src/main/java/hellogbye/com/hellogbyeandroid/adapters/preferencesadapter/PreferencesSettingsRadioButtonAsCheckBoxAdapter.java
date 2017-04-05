@@ -23,6 +23,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
+import hellogbye.com.hellogbyeandroid.views.FontCheckedTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
@@ -41,7 +42,8 @@ public class PreferencesSettingsRadioButtonAsCheckBoxAdapter extends ArrayAdapte
 
     public PreferencesSettingsRadioButtonAsCheckBoxAdapter(Context context, List<SettingsAttributesVO> accountAttributes) {
         super(accountAttributes);
-
+        //settings_item_radio_button_layout
+        //PreferencesSettingsRadioListAdapter
     }
 
 
@@ -89,14 +91,13 @@ public class PreferencesSettingsRadioButtonAsCheckBoxAdapter extends ArrayAdapte
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View v = convertView;
-
         if (v == null) {
             v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.settings_item_radio_check_button_layout, null);
         }
         SettingsAttributesVO attribute = this.getItem(position);//items.get(position);
         if(attribute != null){
-            FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_radio_name);
+            FontCheckedTextView settings_flight_title = (FontCheckedTextView) v.findViewById(R.id.settings_radio_name);
             settings_flight_title.setText(attribute.getmDescription());
           //  settings_flight_title.setTag(attribute.getmId());
 
@@ -119,7 +120,7 @@ public class PreferencesSettingsRadioButtonAsCheckBoxAdapter extends ArrayAdapte
          //   this.getItem(position).setRank("" + currentPosition);
 
 
-            RadioButton r = (RadioButton)v.findViewById(R.id.setting_radio_image);
+          //  RadioButton r = (RadioButton)v.findViewById(R.id.setting_radio_image);
 
 
 
@@ -129,13 +130,12 @@ public class PreferencesSettingsRadioButtonAsCheckBoxAdapter extends ArrayAdapte
             }
 
 
-            r.setChecked(position == selectedPosition);
-            r.setTag(position);
+            settings_flight_title.setChecked(position == selectedPosition);
+            settings_flight_title.setTag(position);
 
-            r.setOnClickListener(new View.OnClickListener() {
+            settings_flight_title.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     selectedPosition = (Integer)view.getTag();
                     listRadioButtonClickedClicked.clickedItem(selectedPosition);
                     notifyDataSetChanged();

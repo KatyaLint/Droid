@@ -17,6 +17,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
+import hellogbye.com.hellogbyeandroid.views.FontCheckedTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -53,7 +54,27 @@ public class PreferencesSettingsCheckListAdapter extends ArrayAdapter<SettingsAt
         }
         SettingsAttributesVO attribute = this.getItem(position);//items.get(position);
         /*if(attribute != null){*/
-            FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_check_name);
+
+        FontCheckedTextView setting_check_image = (FontCheckedTextView) v.findViewById(R.id.setting_check_image);
+
+
+        setting_check_image.setText(attribute.getmDescription());
+        setting_check_image.setTag(attribute.getmId());
+
+          //  ImageView setting_check_image = (ImageView)v.findViewById(R.id.setting_check_image);
+
+            if(attribute.isChecked()){
+                setting_check_image.setChecked(true);
+
+            }else{
+                setting_check_image.setChecked(false);
+
+            }
+
+
+
+
+    /*        FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_check_name);
             if(settings_flight_title != null){
                 settings_flight_title.setText(attribute.getmDescription());
                 settings_flight_title.setTag(attribute.getmId());
@@ -64,7 +85,7 @@ public class PreferencesSettingsCheckListAdapter extends ArrayAdapter<SettingsAt
                 setting_check_image.setBackgroundResource(R.drawable.check_on);
             }else{
                 setting_check_image.setBackgroundResource(R.drawable.check_off);
-            }
+            }*/
 
      /*   }*/
 

@@ -48,6 +48,7 @@ public class PreferencesTabCommonFragment extends HGBAbstractFragment {
         Bundle args = getArguments();
         if (args != null) {
             strJson = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
+
             String titleName =  args.getString(HGBConstants.BUNDLE_SETTINGS_TITLE_NAME);
             FontTextView titleBar = ((MainActivityBottomTabs) getActivity()).getTitleBar();
             titleBar.setText(titleName);
@@ -205,8 +206,11 @@ public class PreferencesTabCommonFragment extends HGBAbstractFragment {
                 type = "HTL";
                 accountAttributes = getActivityInterface().getAccountSettingsHotelSmokingClassAttributes();
                 break;
+            case "10":
+                type = "FLT";
+                accountAttributes = getActivityInterface().getAccountFarePreferences();
+                break;
         }
-
 
         setSettingGuidSelected(guid);
         if (accountAttributes != null) {
@@ -241,6 +245,7 @@ public class PreferencesTabCommonFragment extends HGBAbstractFragment {
                 break;
             case "3":
             case "6":
+            case "10":
                 getFlowInterface().goToFragment(ToolBarNavEnum.PREFERENCES_DRAG_LIST_SETTINGS.getNavNumber(), args);
                 break;
 
@@ -256,7 +261,6 @@ public class PreferencesTabCommonFragment extends HGBAbstractFragment {
                 if (data != null) {
                     List<SettingsAttributesVO> acountSettingsAttributes = (List<SettingsAttributesVO>) data; //gson.fromJson((String) data, listType);
                     String settingsGuid = getSettingGuidSelected();
-
                     switch (settingsGuid) {
                         case "1":
                             getActivityInterface().setAccountSettingsFlightCarrierAttributes(acountSettingsAttributes);
@@ -282,8 +286,11 @@ public class PreferencesTabCommonFragment extends HGBAbstractFragment {
                         case "9":
                             getActivityInterface().setAccountSettingsHotelChainAttributes(acountSettingsAttributes);
                             break;
+                        case "10":
+                            getActivityInterface().setAccountFarePreferences(acountSettingsAttributes);
+                            break;
                     }
-                    gotToSelectedFragment(settingsGuid,type, titleName);
+                    gotToSelectedFragment(settingsGuid, type, titleName);
                 }
             }
 

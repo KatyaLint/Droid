@@ -15,6 +15,7 @@ public class UserSignUpDataVO {
     private String state="";
     private String username;
     private String userEmail;
+    private int userTravelerType;
 
     public String getState() {
         return state;
@@ -102,5 +103,13 @@ public class UserSignUpDataVO {
 
     public void setCountryProvince(String countryProvince) {
         this.countryProvince = countryProvince;
+    }
+
+    public int getUserTravelerType() {
+        return userTravelerType;
+    }
+
+    public void setUserTravelerType(int userTravelerType) {
+        this.userTravelerType = userTravelerType;
     }
 }

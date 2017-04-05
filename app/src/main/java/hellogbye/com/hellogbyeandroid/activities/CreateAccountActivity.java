@@ -1,7 +1,5 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -11,12 +9,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Environment;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -24,7 +19,6 @@ import android.text.TextPaint;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -69,11 +63,7 @@ import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
-import static android.R.attr.id;
-import static android.R.attr.type;
-import static com.appsee.pc.e;
 import static java.lang.Long.parseLong;
-import static org.jcodec.SliceType.P;
 
 /**
  * Created by arisprung on 11/8/16.
@@ -106,7 +96,10 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private ImageView mCloud07;
     private ImageView mArrowBack;
     private View mUnderlineTitle;
+    private View mUnderlineTitle2;
+    private FontTextView mAmex;
     private LinearLayout mBirds;
+    private LinearLayout mOr;
     private FontButtonView login;
     private ImageView mCanadaCheck;
     private ImageView mUSCheck;
@@ -138,6 +131,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private FontEditTextView mPassword1;
     private FontEditTextView mPassword2;
     private FontTextView mTitle;
+    private FontTextView mTravlerType;
     private LinearLayout mAddressLayout;
     private LinearLayout mUSLayout;
     private LinearLayout mCanadaLayout;
@@ -151,8 +145,10 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private int CURRENT_STATE = 0;
     private HGBPreferencesManager hgbPrefrenceManager;
     private CountDownTimer countDownTimer;
-    private String[] countryarray;
-    private List<ProvincesItem> mProvinceItems;
+    private String[] mUSCountryarray;
+    private String[] mCACountryarray;
+    private List<ProvincesItem> mUSProvinceItems;
+    private List<ProvincesItem> mCAProvinceItems;
     private ArrayAdapter adapter;
     private UserSignUpDataVO userData;
     private String android_id;
@@ -183,6 +179,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     protected void onResume() {
         super.onResume();
         checkFlow();
+        getStaticProvince();
     }
 
     private void initView() {
@@ -195,6 +192,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mBiulding1 = (ImageView) findViewById(R.id.building_01);
         mCloud01 = (ImageView) findViewById(R.id.cloud_01);
         mUnderlineTitle= (View) findViewById(R.id.title_underline_1);
+        mUnderlineTitle2= (View) findViewById(R.id.title_underline_2);
         mCloud01B = (ImageView) findViewById(R.id.cloud_1_b);
         mCloud02 = (ImageView) findViewById(R.id.cloud_02);
         mCloud03 = (ImageView) findViewById(R.id.cloud_03);
@@ -205,6 +203,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mCloud07 = (ImageView) findViewById(R.id.cloud_7);
         mArrowBack = (ImageView) findViewById(R.id.arrow_back);
         mBirds = (LinearLayout) findViewById(R.id.birds);
+        mOr = (LinearLayout) findViewById(R.id.or_ll);
         mUSCheck = (ImageView) findViewById(R.id.us_check);
         mCanadaCheck = (ImageView) findViewById(R.id.canada_check);
         mForgotPasswordTextView = (FontTextView) findViewById(R.id.forgotpassword);
@@ -220,7 +219,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mCanadaText = (FontTextView) findViewById(R.id.canada);
         mUSText = (FontTextView) findViewById(R.id.usa);
         mEmail = (FontEditTextView) findViewById(R.id.email);
-        mHyperlink = (FontTextView) findViewById(R.id.sign_up_hyperlink);
+      //  mHyperlink = (FontTextView) findViewById(R.id.sign_up_hyperlink);
+        mAmex = (FontTextView) findViewById(R.id.amex_logo);
+
         mCreateAccount = (FontButtonView) findViewById(R.id.create_account);
         mCreate = (FontButtonView) findViewById(R.id.create_user);
         mTryNow = (FontButtonView) findViewById(R.id.try_now_new_create);
@@ -230,6 +231,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mPassword2 = (FontEditTextView) findViewById(R.id.password2);
         mSignIn = (FontTextView) findViewById(R.id.create_login);
         mTitle = (FontTextView) findViewById(R.id.user_title);
+        mTravlerType = (FontTextView) findViewById(R.id.user_travel_type);
         mCity = (AutoCompleteTextView) findViewById(R.id.city);
         mCity.setThreshold(1);
         mZip = (FontEditTextView) findViewById(R.id.zip);
@@ -257,6 +259,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         editTextViewListners();
         mUSLayout.setOnClickListener(this);
         mTitle.setOnClickListener(this);
+        mTravlerType.setOnClickListener(this);
         mCanadaLayout.setOnClickListener(this);
         mCreateAccount.setOnClickListener(this);
         mStateProvince.setOnClickListener(this);
@@ -274,7 +277,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         llp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         llp.addRule(RelativeLayout.CENTER_HORIZONTAL);
         llp.setMargins(0, 0, 0, i);
-        mHyperlink.setLayoutParams(llp);
+        mAmex.setLayoutParams(llp);
 
 
 
@@ -326,6 +329,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
             }
         });
+
+
     }
 
     private void sendLoginToServer() {
@@ -401,8 +406,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                         && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
                     userData.setFirstName(mFirstName.getText().toString());
                     userData.setLastName(mLastName.getText().toString());
-
-                    goToEmailView();
+                    openTitleUp();
+                    //goToEmailView();
                     return true;
                 }
                 // Return true if you have consumed the action, else false.
@@ -430,7 +435,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     private void goToAddressView(View textView) {
         HGBUtility.hideKeyboard(getApplicationContext(), textView);
-        if (true) {//TODO checkPasswordValid()
+        if (checkPasswordValid()) {
             animateAddressView(true);
         } else {
             Toast.makeText(getApplicationContext(), "Address not valid", Toast.LENGTH_SHORT).show();//TODO need to take care of this in UI
@@ -504,12 +509,12 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     }
 
     private void initSpannableText() {
-        SpannableString ss = new SpannableString(getResources().getString(R.string.sign_up_term_of_use));
-        ss.setSpan(new myClickableSpan(1), 52, 61, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ss.setSpan(new myClickableSpan(2), 66, 80, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        mHyperlink.setText(ss);
-        mHyperlink.setAlpha(0.4f);
-        mHyperlink.setMovementMethod(LinkMovementMethod.getInstance());
+//        SpannableString ss = new SpannableString(getResources().getString(R.string.sign_up_term_of_use));
+//        ss.setSpan(new myClickableSpan(1), 52, 61, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        ss.setSpan(new myClickableSpan(2), 66, 80, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        mHyperlink.setText(ss);
+//        mHyperlink.setAlpha(0.4f);
+//        mHyperlink.setMovementMethod(LinkMovementMethod.getInstance());
 
 
         SpannableString signin = new SpannableString(getResources().getString(R.string.already_have_an_account_sign_in));
@@ -533,7 +538,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         secondViewViews.add(mFirstName);
         secondViewViews.add(mLastName);
         secondViewViews.add(mUnderlineTitle);
+        secondViewViews.add(mUnderlineTitle2);
         secondViewViews.add(mTitle);
+        secondViewViews.add(mTravlerType);
         secondViewViews.add(mArrowBack);
 
         ArrayList<View> firstViewViews = new ArrayList<>();
@@ -541,6 +548,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         firstViewViews.add(mLogoOnBoarding);
         firstViewViews.add(mCreateAccount);
         firstViewViews.add(mTryNow);
+        firstViewViews.add(mOr);
+        firstViewViews.add(mAmex);
         firstViewViews.add(mSignIn);
         mLabel1.setText(R.string.tell_name);
         mLabel2.setText(R.string.allow_book);
@@ -570,7 +579,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         firstViewViews.add(mFirstName);
         firstViewViews.add(mLastName);
         firstViewViews.add(mTitle);
+        firstViewViews.add(mTravlerType);
         firstViewViews.add(mUnderlineTitle);
+        firstViewViews.add(mUnderlineTitle2);
 
 
         ArrayList<View> secondViewViews = new ArrayList<>();
@@ -662,7 +673,11 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
         switch (view.getId()) {
             case R.id.user_title:
-                HGBUtility.showPikerDialog(0,mTitle, CreateAccountActivity.this, "SELECT TITLE", getResources().getStringArray(R.array.title_array), 0, 2, null, true);
+                openTitleUp();
+
+                break;
+            case R.id.user_travel_type:
+                HGBUtility.showPikerDialog(0,mTravlerType, CreateAccountActivity.this, "SELECT TYPE", getResources().getStringArray(R.array.traveler_type_array), 0, 3, null, true);
                 break;
 
             case R.id.create_account:
@@ -673,6 +688,19 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                     if (CURRENT_STATE == NAME_STATE) {
                         userData.setFirstName(mFirstName.getText().toString());
                         userData.setLastName(mLastName.getText().toString());
+                        if(mTravlerType.getText().toString().equals( getResources().getStringArray(R.array.traveler_type_array)[1]))
+                        {
+                            userData.setUserTravelerType(0);
+                        }else if(mTravlerType.getText().toString().equals( getResources().getStringArray(R.array.traveler_type_array)[2])){
+                            userData.setUserTravelerType(1);
+
+                        }else if(mTravlerType.getText().toString().equals( getResources().getStringArray(R.array.traveler_type_array)[3])){
+                            userData.setUserTravelerType(2);
+
+                        }else {
+                            userData.setUserTravelerType(-1);
+                        }
+
 
                         goToEmailView();
                     } else if (CURRENT_STATE == EMAIL_STATE) {
@@ -697,14 +725,14 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
             case R.id.us_layout:
                 setUSSelected(true);
-                getStaticProvince("US");
+
                 userData.setCountry("US");
                 isStateSelected = true;
                 break;
 
             case R.id.canada_layout:
                 setUSSelected(false);
-                getStaticProvince("CA");
+
                 userData.setCountry("CA");
                 isStateSelected = true;
                 break;
@@ -742,6 +770,10 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         }
     }
 
+    private void openTitleUp() {
+        HGBUtility.showPikerDialog(0,mTitle, CreateAccountActivity.this, "SELECT TITLE", getResources().getStringArray(R.array.title_array), 0, 2, null, true);
+    }
+
     private void goToLoginState(boolean animateFoward) {
 
         disableScreen();
@@ -755,6 +787,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         firstViewViews.add(mLogoOnBoarding);
         firstViewViews.add(mCreateAccount);
         firstViewViews.add(mTryNow);
+        firstViewViews.add(mOr);
+        firstViewViews.add(mAmex);
         firstViewViews.add(mSignIn);
 
 
@@ -790,7 +824,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     private void userSelectedState() {
 
-        if (userData.getCountry() != null && mProvinceItems != null) {
+        if (userData.getCountry() != null && mCAProvinceItems != null && mUSProvinceItems != null) {
 
             if (levelDialog == null || isStateSelected) {
                 buildProvinceDialog();
@@ -804,25 +838,46 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     }
 
     private void buildProvinceDialog() {
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
-                CreateAccountActivity.this, R.layout.dialog_radio, countryarray);
+        ArrayAdapter<CharSequence> adapter = null;
+
+        if(userData.getCountry().equals("US")){
+            adapter = new ArrayAdapter<CharSequence>(
+                    CreateAccountActivity.this, R.layout.dialog_radio, mUSCountryarray);
+        }else if(userData.getCountry().equals("CA")){
+            adapter = new ArrayAdapter<CharSequence>(
+                    CreateAccountActivity.this, R.layout.dialog_radio, mCACountryarray);
+        }
+
         // Creating and Building the Dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Which State/Province?");
-        builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-                for (ProvincesItem province : mProvinceItems) {
-                    if (countryarray[item].contains(province.getProvincename())) {
-                        mStateProvince.setText(province.getProvincename());
-                        userData.setCountryProvince(province.getProvincecode());
-                        initAutoCityComplete();
-                        break;
+        if(adapter != null){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Which State/Province?");
+            builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                    if(userData.getCountry().equals("US")){
+                        setProvince(mUSProvinceItems,mUSCountryarray,item);
+
+                    }else if(userData.getCountry().equals("CA")){
+                        setProvince(mCAProvinceItems,mCACountryarray,item);
                     }
+
+                    levelDialog.hide();
                 }
-                levelDialog.hide();
+            });
+            levelDialog = builder.create();
+        }
+
+    }
+
+    private void setProvince(List<ProvincesItem> provinceItems, String[] countryarray, int item) {
+        for (ProvincesItem province : provinceItems) {
+            if (countryarray[item].contains(province.getProvincename())) {
+                mStateProvince.setText(province.getProvincename());
+                userData.setCountryProvince(province.getProvincecode());
+                initAutoCityComplete();
+                break;
             }
-        });
-        levelDialog = builder.create();
+        }
     }
 
     private void processBackPressed() {
@@ -1039,14 +1094,36 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     }
 
-    private void getStaticProvince(String id) {
+    private void getStaticProvince() {
         // String countryID = userData.getCountry();
-        ConnectionManager.getInstance(CreateAccountActivity.this).getStaticBookingProvince(id, new ConnectionManager.ServerRequestListener() {
+        ConnectionManager.getInstance(CreateAccountActivity.this).getStaticBookingProvince("US", new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                mProvinceItems = (List<ProvincesItem>) data;
-                if (mProvinceItems.size() > 0) {
-                    setDropDownItems();
+                mUSProvinceItems = (List<ProvincesItem>) data;
+                if (mUSProvinceItems.size() > 0) {
+                    mUSCountryarray = new String[mUSProvinceItems.size()];
+                    for (int i = 0; i < mUSProvinceItems.size(); i++) {
+                        mUSCountryarray[i] = mUSProvinceItems.get(i).getProvincecode() + " - " + mUSProvinceItems.get(i).getProvincename();
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Object data) {
+                HGBErrorHelper errorHelper = new HGBErrorHelper();
+                errorHelper.setMessageForError((String) data);
+                errorHelper.show(getFragmentManager(), (String) data);
+            }
+        });
+        ConnectionManager.getInstance(CreateAccountActivity.this).getStaticBookingProvince("CA", new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                mCAProvinceItems = (List<ProvincesItem>) data;
+                if (mCAProvinceItems.size() > 0) {
+                    mCACountryarray = new String[mCAProvinceItems.size()];
+                    for (int i = 0; i < mCAProvinceItems.size(); i++) {
+                        mCACountryarray[i] = mCAProvinceItems.get(i).getProvincecode() + " - " + mCAProvinceItems.get(i).getProvincename();
+                    }
                 }
             }
 
@@ -1059,12 +1136,12 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         });
     }
 
-    private void setDropDownItems() {
-        countryarray = new String[mProvinceItems.size()];
-        for (int i = 0; i < mProvinceItems.size(); i++) {
-            countryarray[i] = mProvinceItems.get(i).getProvincecode() + " - " + mProvinceItems.get(i).getProvincename();
-        }
-    }
+//    private void setDropDownItems(List<ProvincesItem> mProvinceItems) {
+//        countryarray = new String[mProvinceItems.size()];
+//        for (int i = 0; i < mProvinceItems.size(); i++) {
+//            countryarray[i] = mProvinceItems.get(i).getProvincecode() + " - " + mProvinceItems.get(i).getProvincename();
+//        }
+//    }
 
     private void initAutoCityComplete() {
         mCity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -1333,7 +1410,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         }
         @Override
         public void updateDrawState(TextPaint ds) {
-            ds.setColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_00516f));
+            ds.setColor(ContextCompat.getColor(getApplicationContext(), R.color.COLOR_EE3A3C));
             ds.setTypeface(Typeface.DEFAULT_BOLD);
         }
     }

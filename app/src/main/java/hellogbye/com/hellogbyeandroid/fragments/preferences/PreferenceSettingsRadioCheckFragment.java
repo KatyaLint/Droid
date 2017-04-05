@@ -21,6 +21,7 @@ import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsCheckListAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsRadioButtonAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsRadioButtonAsCheckBoxAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsRadioListAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
@@ -39,11 +40,12 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  */
 public class PreferenceSettingsRadioCheckFragment extends PreferencesSettingsMainClass{
 
-    private PreferencesSettingsRadioButtonAsCheckBoxAdapter preferenceSettingsListAdapter;
+    private PreferencesSettingsRadioListAdapter preferenceSettingsListAdapter;
     private FontTextView settings_title_text;
     private FontTextView settings_text;
     private DynamicListView mDynamicListView;
     protected String guid;
+    private List<SettingsValuesVO> itemsInList;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new PreferenceSettingsRadioCheckFragment();
@@ -75,7 +77,9 @@ public class PreferenceSettingsRadioCheckFragment extends PreferencesSettingsMai
         settingsAttributesVO = new ArrayList<SettingsAttributesVO>();
         accountAttributesTemp = new ArrayList<>();
 
-        selectedItem = getMyAccountAttributes();
+        itemsInList = getMyAccountAttributes();
+
+     //   selectedItem = getMyAccountAttributes();
 
         dragDropListInitialization(rootView);
 
@@ -104,7 +108,7 @@ public class PreferenceSettingsRadioCheckFragment extends PreferencesSettingsMai
         mDynamicListView = (DynamicListView) rootView.findViewById(R.id.settings_drag_list);
         getCorrectAccountAtribute();
 
-        preferenceSettingsListAdapter = new PreferencesSettingsRadioButtonAsCheckBoxAdapter(getActivity(), accountAttributesTemp);
+        preferenceSettingsListAdapter = new PreferencesSettingsRadioListAdapter(getActivity(), accountAttributesTemp);
 
         for(SettingsAttributesVO account : accountAttributesTemp){
             if(account.isChecked()){
@@ -119,7 +123,6 @@ public class PreferenceSettingsRadioCheckFragment extends PreferencesSettingsMai
 
                 SettingsAttributesVO selected = accountAttributesTemp.get(selectedPosition);
                 selected.setChecked(true);
-
                 for(SettingsAttributesVO settingsAttributeVO: accountAttributesTemp ){
                     if(settingsAttributeVO.getmId().equals(selected.getmId())){
                         settingsAttributeVO.setChecked(true);
@@ -129,9 +132,11 @@ public class PreferenceSettingsRadioCheckFragment extends PreferencesSettingsMai
                 }
 
                 settingsAttributesVO.clear();
+                selectedItem.clear();
                 settingsAttributesVO.add(selected);
-
+                selectedItem.add(new SettingsValuesVO());
                 preferenceSettingsListAdapter.notifyDataSetChanged();
+
             }
         });
 
@@ -141,7 +146,7 @@ public class PreferenceSettingsRadioCheckFragment extends PreferencesSettingsMai
     }
 
     private List<SettingsAttributesVO> correctCheckList(List<SettingsAttributesVO> accountAttributes){
-        for (SettingsValuesVO settingsValuesVO : selectedItem){
+        for (SettingsValuesVO settingsValuesVO : itemsInList){
             for(SettingsAttributesVO accountAttributeVO :accountAttributes) {
                 if (settingsValuesVO.getmID().equals(accountAttributeVO.getmId())) {
                     accountAttributeVO.setmRank(settingsValuesVO.getmRank());
@@ -200,7 +205,7 @@ public class PreferenceSettingsRadioCheckFragment extends PreferencesSettingsMai
 
     @Override
     public void onDestroyView() {
+        super.onDestroyView();
         noBack = true;
-        super.onDetach();
     }
 }

@@ -30,6 +30,7 @@ import android.widget.TextView;
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
@@ -57,6 +58,9 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
     private PreferenceSettingsAirlineCarriersAdapter searchListAdapter;
     private PreferencesSettingsSearchCheckListAdapter preferenceSettingsListAdapter;
 
+    private int currentListSize;
+    private int changedListSize;
+
    // private String strJson;
 //    private String strType;
   //  private List<SettingsValuesVO> myAccountAttributeList;
@@ -81,14 +85,18 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
 
     private void searchListInitialization(View rootView){
         mSearchView = (SearchView)rootView.findViewById(R.id.settings_search);
-        mSearchView.setOnClickListener(new View.OnClickListener() {
+
+     /*   mSearchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 searchRecyclerView.setVisibility(View.VISIBLE);
                 mDynamicListView.setVisibility(View.GONE);
 
             }
-        });
+        });*/
+
+
+
        // mSearchView.setVisibility(View.GONE);
         setupSearchView();
         searchRecyclerView = (RecyclerView) rootView.findViewById(R.id.settings_search_list);
@@ -128,6 +136,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
                 String id = settings_flight_title.getTag().toString();
                 SettingsValuesVO item = preferenceSettingsListAdapter.remove(position);
 
+                boolean removed = selectedItem.remove(item);
                 if(preferenceSettingsListAdapter.isEmpty()){
                     settings_empty_view_layout.setVisibility(View.VISIBLE);
                 }else{
@@ -150,6 +159,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         Bundle args = getArguments();
         if (args != null) {
             strId = args.getString(HGBConstants.BUNDLE_SETTINGS_ATT_ID);
+
             strType = args.getString(HGBConstants.BUNDLE_SETTINGS_TYPE);
             String strTitleName = args.getString(HGBConstants.BUNDLE_SETTINGS_TITLE_NAME);
             FontTextView titleBar = ((MainActivityBottomTabs) getActivity()).getTitleBar();
@@ -175,9 +185,13 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
 
         accountAttributesTemp = new ArrayList<>(accountAttributes);
 
-        firstItems = myAccountAttribute.getAttributesVOs();
+        firstItems = new ArrayList<>();
+        firstItems.addAll(myAccountAttribute.getAttributesVOs());
 
-        selectedItem = new ArrayList<>( );
+      //  selectedItem = new ArrayList<>( );
+
+        selectedItem = new ArrayList<>(firstItems);
+
 
         for (SettingsValuesVO myAccount : firstItems) {
             for (SettingsAttributesVO accountAttribute : accountAttributes) {
@@ -212,8 +226,8 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
                             int intRank = myAccountAttributeVO.size()+1;
                             SettingsValuesVO valuesVO = new SettingsValuesVO(accountAttribute.getmId(),accountAttribute.getmName(),accountAttribute.getmDescription(),""+intRank);
                             myAccountAttribute.getAttributesVOs().add(valuesVO);
-                            selectedItem.add(valuesVO);
 
+                            selectedItem.add(valuesVO);
                             break;
                         }
                     }
@@ -308,11 +322,31 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         searchListAdapter.updateItems(accountAttributesTemp);
     }
 
+    private void findItemToDelete(String id){
+
+        Iterator<SettingsValuesVO> it = firstItems.iterator();
+
+        while(it.hasNext()) {
+            SettingsValuesVO value  = it.next();
+            if(value.getmID().equals(id)){
+                firstItems.remove(value);
+                break;
+            }
+
+        }
+
+    }
+
+
     private void removeFromSearchList(String itemId){
-        for(SettingsAttributesVO accountAttribute:accountAttributesTemp){
+        for(SettingsAttributesVO accountAttribute : accountAttributesTemp){
             if(accountAttribute.getmId().equals(itemId)){
                 if(accountAttribute.isChecked()) {
                     accountAttribute.setChecked(false);
+
+                   // firstItems.remove(accountAttribute);
+                    findItemToDelete(accountAttribute.getmId());
+
                 }else{
                     accountAttribute.setChecked(true);
                 }
@@ -330,7 +364,10 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         mSearchView.setOnQueryTextListener(this);
         mSearchView.setSubmitButtonEnabled(false);*/
 
-        mSearchView.setQueryHint(getString(R.string.settings_search_hunt));
+
+        mSearchView.setIconifiedByDefault(false);
+
+        //mSearchView.setQueryHint(getString(R.string.settings_search_hunt));
         mSearchView.setOnQueryTextListener(this);
     }
 
@@ -349,6 +386,8 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
           //      my_settings.setText(R.string.my_settings_hotel);
         //        popular_settings.setText(R.string.popular_settings_hotel);
                 settings_item_title.setText(R.string.preferences_prefered_hotel_chain);
+
+                mSearchView.setQueryHint(getString(R.string.settings_search_hotel_hint));
                 settings_item_text.setText(R.string.preferences_prefered_hotel_favorite);
                 break;
             case "2":
@@ -357,6 +396,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
          //       popular_settings.setText(R.string.popular_settings_flight);
                 settings_item_title.setText(R.string.preferences_prefered_aircraft);
                 settings_item_text.setText(R.string.preferences_prefered_aircraft_favorite);
+                mSearchView.setQueryHint(getString(R.string.settings_search_hunt));
                 break;
             case "1":
                 accountAttributes = getActivityInterface().getAccountSettingsFlightCarrierAttributes();
@@ -365,6 +405,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
 
                 settings_item_title.setText(R.string.preferences_prefered_flight_carrier);
                 settings_item_text.setText(R.string.preferences_prefered_flight_carrier_favorite);
+                mSearchView.setQueryHint(getString(R.string.settings_search_hunt));
                 break;
 
         }
@@ -394,15 +435,19 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         inflater.inflate(R.menu.menu_main, menu);
         final MenuItem item = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        searchView.setOnQueryTextListener(this);;
+        searchView.setOnQueryTextListener(this);
     }
 
     @Override
     public boolean onQueryTextChange(String query) {
+
         // Here is where we are going to implement our filter logic
         final List<SettingsAttributesVO> filteredModelList = filter(accountAttributesTemp, query);
         searchListAdapter.animateTo(filteredModelList);
+        searchListAdapter.notifyDataSetChanged();
         searchRecyclerView.scrollToPosition(0);
+        searchRecyclerView.setVisibility(View.VISIBLE);
+        mDynamicListView.setVisibility(View.GONE);
         return true;
 
     }
@@ -422,6 +467,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
                 filteredModelList.add(model);
             }
         }
+
         return filteredModelList;
     }
 

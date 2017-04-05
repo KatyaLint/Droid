@@ -271,8 +271,17 @@ public class ConnectionManager {
             jsonObject.put("password", userData.getPassword());
             jsonObject.put("state", userData.getCountryProvince());
             jsonObject.put("username", userData.getUserEmail());
+            if(userData.getUserTravelerType()!= -1){
+                jsonObject.put("marketingtravelertype", userData.getUserTravelerType());
+            }
+
             jsonObject.put("acceptHgbMarketing", hellopromtion);
             jsonObject.put("acceptThirdPartyMarketing",thirdpatyboolean);
+            jsonObject.put("usertypeid","NPAY");
+            jsonObject.put("isprofilepublic",true);
+            jsonObject.put("cardtoken","");
+
+
 
 
 
@@ -700,7 +709,7 @@ public class ConnectionManager {
             public void onErrorResponse(VolleyError error) {
                 listener.onError(Parser.parseErrorMessage(error));
             }
-        });
+        }, false);
     }
 
 
@@ -1714,7 +1723,7 @@ public class ConnectionManager {
             public void onErrorResponse(VolleyError error) {
                 listener.onError(Parser.parseErrorMessage(error));
             }
-        });
+        },false);
     }
 
 

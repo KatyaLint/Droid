@@ -22,6 +22,7 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
+import hellogbye.com.hellogbyeandroid.views.FontCheckedTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
@@ -104,13 +105,13 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountD
         }
         AccountDefaultSettingsVO attribute = this.getItem(position);//items.get(position);
         if(attribute != null){
-            FontTextView settings_flight_title = (FontTextView) v.findViewById(R.id.settings_radio_name);
+            FontCheckedTextView settings_flight_title = (FontCheckedTextView) v.findViewById(R.id.settings_radio_name);
             settings_flight_title.setText(attribute.getmProfileName());
 
 
           //  settings_flight_title.setTag(attribute.getmId());
 
-            RelativeLayout settings_radio_button_ll = (RelativeLayout)v.findViewById(R.id.settings_radio_button_ll_right_side);
+            RelativeLayout settings_radio_button_ll = (RelativeLayout)v.findViewById(R.id.settings_radio_button_ll);
             settings_radio_button_ll.setTag(attribute.getmId());
             settings_radio_button_ll.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -131,7 +132,7 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountD
             this.getItem(position).setRank("" + currentPosition);
 
 
-            RadioButton r = (RadioButton)v.findViewById(R.id.setting_radio_image);
+         //   RadioButton r = (RadioButton)v.findViewById(R.id.setting_radio_image);
 
             if(selectedPreferebcesID.equals(attribute.getmId())){
                 selectedPosition = position;
@@ -141,10 +142,10 @@ public class PreferencesSettingsRadioButtonAdapter extends ArrayAdapter<AccountD
 
 
 
-            r.setChecked(position == selectedPosition);
-            r.setTag(position);
+            settings_flight_title.setChecked(position == selectedPosition);
+            settings_flight_title.setTag(position);
 
-            r.setOnClickListener(new View.OnClickListener() {
+            settings_flight_title.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 

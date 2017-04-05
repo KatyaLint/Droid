@@ -70,6 +70,9 @@ public interface HGBMainInterface {
     void setAccountSettingsHotelChainAttributes(List<SettingsAttributesVO> hotelChainAttributes);
     List<SettingsAttributesVO> getAccountSettingsHotelChainAttributes();
 
+    void setAccountFarePreferences(List<SettingsAttributesVO> hotelChainAttributes);
+    List<SettingsAttributesVO> getAccountFarePreferences();
+
     void setAccountSettingsHotelSmokingAttributes(List<SettingsAttributesVO> hotelSmokingAttributes);
     List<SettingsAttributesVO> getAccountSettingsHotelSmokingClassAttributes();
 

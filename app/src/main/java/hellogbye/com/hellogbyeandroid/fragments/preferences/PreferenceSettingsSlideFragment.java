@@ -29,6 +29,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttribute
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.DividerItemDecoration;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
@@ -41,11 +42,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 public class PreferenceSettingsSlideFragment extends HGBAbstractFragment {
 
-
     private String activeProfileId;
-
-
-
     private FontButtonView addNewPreferencesButton;
     private RecyclerView settings_preferences_drag_list;
     private View popup_preferences_layout;
@@ -63,6 +60,7 @@ public class PreferenceSettingsSlideFragment extends HGBAbstractFragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     private void onBackPressed(){
         ((MainActivityBottomTabs) getActivity()).setOnBackPressedListener(new OnBackPressedListener() {
             public void doBack() {
@@ -72,28 +70,13 @@ public class PreferenceSettingsSlideFragment extends HGBAbstractFragment {
     }
 
     private void sendPreferenceChooseToServer(){
-     /*   if(radioButtonSelected != -1) {
-            AccountDefaultSettingsVO selected = accountDefaultSettings.get(radioButtonSelected);
-            final String selectedID = selected.getmId();
-            */
-
-          /*  for(AccountDefaultSettingsVO acountSettings : accountDefaultSettings){
-                if(acountSettings.isActiveProfile()){
-                    activeProfileId = acountSettings.getmId();
-                    break;
-                }
-            }*/
-
-
 
             String userEmail = getActivityInterface().getPersonalUserInformation().getUserEmailLogIn();
             ConnectionManager.getInstance(getActivity()).putAccountsPreferences(userEmail, activeProfileId, new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
-
                     FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
                     my_trip_profile.setTag(activeProfileId);
-                    System.out.println("Kate activeProfileId =" + activeProfileId);
                 }
 
                 @Override
@@ -101,7 +84,6 @@ public class PreferenceSettingsSlideFragment extends HGBAbstractFragment {
                     ErrorMessage(data);
                 }
             });
-        /*}*/
     }
 
     private void addNewPreferenceClick(){
@@ -117,6 +99,7 @@ public class PreferenceSettingsSlideFragment extends HGBAbstractFragment {
             }
         });
     }
+
     private void editSettingsPreferencesPopUp() {
 
         HGBUtility.showAlertPopUp(getActivity(), input, popup_preferences_layout, null,
@@ -135,6 +118,7 @@ public class PreferenceSettingsSlideFragment extends HGBAbstractFragment {
                 });
 
     }
+
     private void popUpConnection(String profileName) {
         ConnectionManager.getInstance(getActivity()).postNewPreferenceProfile(profileName, new ConnectionManager.ServerRequestListener() {
             @Override
@@ -151,7 +135,6 @@ public class PreferenceSettingsSlideFragment extends HGBAbstractFragment {
                 ErrorMessage(data);
             }
         });
-
     }
 
     private void initialize(View rootView, LayoutInflater inflater){
@@ -304,18 +287,17 @@ public class PreferenceSettingsSlideFragment extends HGBAbstractFragment {
 
         for( AccountDefaultSettingsVO accountAttribute : accountDefaultSettings){
             if(accountAttribute.getmId().equals(clickedItemID)){
-                if(accountAttribute.isActiveProfile()){
-                   // accountAttribute.setActiveProfile(false);
-                }else{
+                if(!accountAttribute.isActiveProfile()){
                     accountAttribute.setActiveProfile(true);
                 }
-
             }else{
                 accountAttribute.setActiveProfile(false);
             }
         }
 
         getActivityInterface().getPersonalUserInformation().setmTravelPreferencesProfileId(clickedItemID);
+        HGBPreferencesManager hgbPrefrenceManager = HGBPreferencesManager.getInstance(getActivity());
+        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, clickedItemID);
 
         activeProfileId = clickedItemID;
         mAdapter.notifyDataSetChanged();
@@ -330,9 +312,6 @@ public class PreferenceSettingsSlideFragment extends HGBAbstractFragment {
         settings_preferences_drag_list.setAdapter(mAdapter);
 
         mAdapter.setClickedLineCB(listLineClicked);
-
-
-
 
     }
 
@@ -351,7 +330,6 @@ public class PreferenceSettingsSlideFragment extends HGBAbstractFragment {
 
                 if (data != null) {
                     accountDefaultSettings = (ArrayList<AccountDefaultSettingsVO>) data;
-                    //  System.out.println("Kate accountDefaultSettings =" + accountDefaultSettings.size());
                     createListAdapter();
                 }
             }

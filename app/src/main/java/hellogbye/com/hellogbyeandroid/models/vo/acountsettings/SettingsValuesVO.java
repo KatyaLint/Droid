@@ -18,7 +18,9 @@ public class SettingsValuesVO {
 
     private boolean isChecked;
 
+    public SettingsValuesVO(){
 
+    }
 
     public SettingsValuesVO(String id, String name, String description, String rank) {
         this.mID = id;

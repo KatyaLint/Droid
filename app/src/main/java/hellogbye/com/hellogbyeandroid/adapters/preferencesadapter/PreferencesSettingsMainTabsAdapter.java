@@ -16,6 +16,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
+import hellogbye.com.hellogbyeandroid.views.FontCheckedTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
@@ -65,12 +66,14 @@ public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<Pre
         }
       //  holder.setting_flight_text.setText(strAttributes);
         holder.settings_item_check_rl.setTag(position);
-        holder.settings_flight_title.setText(item.getmName());
-        holder.settings_flight_title.setTag(item.getmId());
+        holder.settings_flight_title_check.setText(item.getmName());
+        holder.settings_flight_title_check.setTag(item.getmId());
         if(item.isChecked()){
-            holder.setting_check_image.setBackgroundResource(R.drawable.check_on);
+            holder.settings_flight_title_check.setChecked(true);
         }else {
-            holder.setting_check_image.setBackgroundResource(R.drawable.check_off);
+            //holder.setting_check_image.setBackgroundResource(R.drawable.check_off);
+
+            holder.settings_flight_title_check.setChecked(false);
         }
 
 
@@ -114,18 +117,21 @@ public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<Pre
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private FontTextView settings_flight_title;
+        private FontCheckedTextView settings_flight_title_check ;
+        //private FontTextView settings_flight_title;
         private RelativeLayout settings_item_check_rl;
-        private ImageView setting_check_image;
-        private  RadioButton radioButton;
+        //private ImageView setting_check_image;
+   //     private  RadioButton radioButton;
         public ViewHolder(View itemView) {
             super(itemView);
-            settings_flight_title = (FontTextView) itemView.findViewById(R.id.settings_check_name);
+            settings_flight_title_check = (FontCheckedTextView) itemView.findViewById(R.id.setting_check_image);
+
+         //   settings_flight_title = (FontTextView) itemView.findViewById(R.id.settings_check_name);
             settings_item_check_rl = (RelativeLayout) itemView.findViewById(R.id.settings_item_check_rl);
-            setting_check_image = (ImageView) itemView.findViewById(R.id.setting_check_image);
+          //  setting_check_image = (ImageView) itemView.findViewById(R.id.setting_check_image);
 
 
-            radioButton = (RadioButton)itemView.findViewById(R.id.setting_radio_image);
+        //    radioButton = (RadioButton)itemView.findViewById(R.id.setting_radio_image);
 
             itemView.setOnClickListener(this);
 
@@ -134,9 +140,11 @@ public class PreferencesSettingsMainTabsAdapter extends RecyclerView.Adapter<Pre
         @Override
         public void onClick(View view) {
 
-            FontTextView textView = (FontTextView) view.findViewById(R.id.settings_check_name);
+            FontCheckedTextView settings_flight_title_check = (FontCheckedTextView) view.findViewById(R.id.setting_check_image);
+
+        //   FontTextView textView = (FontTextView) view.findViewById(R.id.settings_check_name);
             RelativeLayout settings_item_check_rl = (RelativeLayout) view.findViewById(R.id.settings_item_check_rl);
-            mItemClickListener.onItemClick(textView.getTag().toString(), settings_item_check_rl.getTag().toString());
+            mItemClickListener.onItemClick(settings_flight_title_check.getTag().toString(), settings_item_check_rl.getTag().toString());
         }
     }
 

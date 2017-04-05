@@ -70,7 +70,9 @@ public class PreferencesTabWidgetFragment extends HGBAbstractFragment {
         Bundle args = getArguments();
         if (args != null) {
             String titleName =  args.getString(HGBConstants.BUNDLE_SETTINGS_TITLE_NAME);
+
             FontTextView titleBar = ((MainActivityBottomTabs) getActivity()).getTitleBar();
+            titleBar.setVisibility(View.VISIBLE);
             titleBar.setText(titleName);
         }
 
@@ -79,9 +81,9 @@ public class PreferencesTabWidgetFragment extends HGBAbstractFragment {
         mTabHost.setup(getActivity(), getChildFragmentManager(), android.R.id.tabcontent);
 
         mTabHost.addTab(mTabHost.newTabSpec(TAB_1_TAG).setIndicator(TAB_1_TAG),
-                PreferencesFlightFragment.class, null);
+                PreferencesFlightFragment.class, args);
         mTabHost.addTab(mTabHost.newTabSpec(TAB_2_TAG).setIndicator(TAB_2_TAG),
-                PreferencesHotelFragment.class, null);
+                PreferencesHotelFragment.class, args);
 
         mTabHost.setCurrentTab(0);
 

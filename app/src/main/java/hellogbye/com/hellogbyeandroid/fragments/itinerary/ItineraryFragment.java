@@ -195,7 +195,7 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
 
 
         FontTextView textView = new FontTextView(activity);
-kate
+
         textView.setTextAppearance(activity, R.style.GridViewPassangersTextStyle);
         textView.setText(passenger.getmName() + " - " + "$" + HGBUtility.roundNumber(passenger.getmTotalPrice()));
         textView.setGravity(Gravity.CENTER);
@@ -593,7 +593,8 @@ kate
         ImageView grid_flight_direction_view = (ImageView)child.findViewById(R.id.grid_flight_direction_view);
         String isRoundTrip = isRoundTrip();
 
-        if(node.getmPrimaryguid().equals(isRoundTrip) || node.getParentflightid() != null){
+        if(node.getmPrimaryguid().equals(isRoundTrip) || node.getParentflightid() != null) {
+
             grid_flight_direction_view.setImageDrawable(getResources().getDrawable(R.drawable.arrow_bi_directional_copy));
         }else{
             grid_flight_direction_view.setImageDrawable(getResources().getDrawable(R.drawable.arrow_one_direction));
