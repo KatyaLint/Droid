@@ -19,6 +19,7 @@ import android.text.TextPaint;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -173,6 +174,15 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             Window w = getWindow(); // in Activity's onCreate() for instance
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
+
+        Uri data = getIntent().getData();
+        if(data != null){
+            String inurl = data.toString();
+            String email = inurl.replace("hgb://", "");
+
+            sendLoginToServer(email);
+        }
+
     }
 
     @Override
@@ -323,7 +333,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             @Override
             public void onClick(View view) {
 
-                sendLoginToServer();
+                sendLoginToServer(mLoginEmail.getText().toString());
 
 
 
@@ -333,7 +343,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     }
 
-    private void sendLoginToServer() {
+    private void sendLoginToServer(String email) {
         try{
 //            int permissionCheck = ContextCompat.checkSelfPermission(CreateAccountActivity.this, Manifest.permission.READ_PHONE_STATE);
 //
@@ -352,8 +362,12 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             if("".equals(uuid)){
                 uuid = UUID.randomUUID().toString();
             }
+            String passwordLocal = userData.getConfirmPassword() ;
+            if(passwordLocal == null){
+                passwordLocal = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, "");
+            }
 
-            ConnectionManager.getInstance(CreateAccountActivity.this).login(mLoginEmail.getText().toString(), mLoginPassword.getText().toString(),uuid,
+            ConnectionManager.getInstance(CreateAccountActivity.this).login(email,passwordLocal,uuid,
                     new ConnectionManager.ServerRequestListener() {
                         @Override
                         public void onSuccess(Object data) {
@@ -363,7 +377,6 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                             hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
 
                             hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, mLoginEmail.getText().toString());
-                            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, mLoginPassword.getText().toString());
                             hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
                             goToMainActivity();
                         }
@@ -400,10 +413,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mLastName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH
-                        || actionId == EditorInfo.IME_ACTION_DONE
-                        || keyEvent.getAction() == KeyEvent.ACTION_DOWN
-                        && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
                     userData.setFirstName(mFirstName.getText().toString());
                     userData.setLastName(mLastName.getText().toString());
                     openTitleUp();
@@ -1256,6 +1266,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             public void onSuccess(Object data) {
                 hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
                 hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, userData.getUserEmail());
+                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD,userData.getConfirmPassword());
+                String  passwordLocal = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, "");
                 Intent intent = new Intent(getBaseContext(), EnterPinActivity.class);
                 startActivity(intent);
                 finish();
@@ -1305,7 +1317,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             Intent intent = new Intent(getApplicationContext(), OnBoardingPager.class);
             startActivity(intent);
         }
-        //finish();
+        finish();
     }
 
     @Override
@@ -1449,7 +1461,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         switch (requestCode) {
             case 002:
                 if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    sendLoginToServer();
+                    sendLoginToServer(mLoginEmail.getText().toString());
                 }
                 break;
 

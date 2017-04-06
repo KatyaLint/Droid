@@ -24,8 +24,7 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
  */
 
 public class EnterPinActivity extends Activity {
-    private FontButtonView pin_code_verification_next;
-    private FontEditTextView pin_code_verification_pin;
+
     private FontTextView resend_text;
     private HGBPreferencesManager hgbPrefrenceManager;
 
@@ -40,16 +39,9 @@ public class EnterPinActivity extends Activity {
 
         setContentView(R.layout.pin_code_verification);
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
-        pin_code_verification_next = (FontButtonView) findViewById(R.id.pin_code_verification_next);
         resend_text = (FontTextView)findViewById(R.id.resend_text);
-        pin_code_verification_pin = (FontEditTextView) findViewById(R.id.pin_code_verification_pin);
 
-        pin_code_verification_next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activateUserWithKey();
-            }
-        });
+
 
         resend_text.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,35 +65,7 @@ public class EnterPinActivity extends Activity {
         });
     }
 
-    private void activateUserWithKey() {
 
-        String userPinCode = pin_code_verification_pin.getText().toString();
-
-        ConnectionManager.getInstance(EnterPinActivity.this).postUserActivation(userPinCode, new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
-                UserLoginCredentials user = (UserLoginCredentials) data;
-                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
-                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
-
-                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
-                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, null);
-              //  hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, null);
-
-                goToMainActivity();
-
-            }
-
-            @Override
-            public void onError(Object data) {
-                HGBErrorHelper errorHelper = new HGBErrorHelper();
-                errorHelper.setMessageForError((String) data);
-                errorHelper.show(getFragmentManager(), (String) data);
-
-            }
-        });
-
-    }
 
     private void goToMainActivity() {
 

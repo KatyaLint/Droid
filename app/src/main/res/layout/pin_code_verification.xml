@@ -1,69 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background_pin_code">
-
-<hellogbye.com.hellogbyeandroid.views.FontTextView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textColor="@color/COLOR_00516f"
-    android:gravity="center"
-    android:textSize="@dimen/SP32"
-    android:layout_margin="@dimen/DP10"
-    app:fontName="dinnextltpro_mediumcond.ttf"
-    android:text="Enter Pin"/>
-
-
-<hellogbye.com.hellogbyeandroid.views.FontEditTextView
-    android:id="@+id/pin_code_verification_pin"
-    android:layout_width="match_parent"
-    android:textColor="@color/COLOR_00516f"
-    android:textSize="@dimen/SP18"
-    android:layout_margin="@dimen/DP10"
-    android:layout_height="wrap_content" />
-
-
-    <hellogbye.com.hellogbyeandroid.views.FontButtonView
-        style="@style/RedButton"
-        android:id="@+id/pin_code_verification_next"
-        android:text="Next"/>
-
-    <View
-        android:id="@+id/bottom_separator"
-        android:layout_width="match_parent"
-        android:layout_margin="@dimen/DP20"
-        android:layout_height="@dimen/DP1"
-        android:background="@color/COLOR_00516f" />
+    android:layout_height="match_parent"
+    android:background="@drawable/background_pin_code"
+    android:orientation="vertical">
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/confirm_text_above"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/DP120"
         android:gravity="center"
-        app:fontName="dinnextltpro_condensed.ttf"
-        android:textSize="@dimen/SP24"
+        android:text="Confirm your account\nto continue"
         android:textColor="@color/COLOR_00516f"
-        android:text="@string/pin_code_title"/>
+        android:textSize="@dimen/SP32"
+        app:fontName="dinnextltpro_mediumcond.ttf" />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/resend_text"
-        android:layout_margin="@dimen/DP20"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/confirm_text_above"
+        android:layout_marginTop="@dimen/DP20"
         android:gravity="center"
+        android:text="We've sent you an email. Please verify your\naccount to register"
+        android:textColor="@color/COLOR_00516f"
         android:textSize="@dimen/SP16"
-        android:textColor="@color/COLOR_00516f"
-        android:text="@string/pin_code_resend"/>
+        app:fontName="dinnextltpro_regular.otf" />
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="@dimen/SP16"
-        android:visibility="gone"
-        android:textColor="@color/COLOR_00516f"
-        android:text="@string/pin_code_send_email"/>
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <View
+            android:id="@+id/bottom_separator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/DP1"
+            android:layout_margin="@dimen/DP20"
+            android:background="@color/COLOR_00516f" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/didnt_recieve"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/DP20"
+                android:layout_alignParentLeft="true"
+                app:fontName="dinnextltpro_condensed.ttf"
+                android:text="Didn't receive an email"
+                android:textColor="@color/COLOR_00516f"
+                android:textSize="@dimen/SP18" />
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/resend_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fontName="dinnextltpro_condensed.ttf"
+                android:layout_margin="@dimen/DP20"
+                android:layout_alignParentRight="true"
+                android:text="Re-send"
+                android:textColor="@color/COLOR_EE3A3C"
+                android:textSize="@dimen/SP16" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
