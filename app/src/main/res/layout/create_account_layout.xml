@@ -186,7 +186,7 @@
             android:id="@+id/or_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/create_login"
+            android:layout_below="@+id/cloud_03"
             android:layout_marginTop="@dimen/DP30"
             android:layout_centerHorizontal="true"
             android:elevation="1dp"
