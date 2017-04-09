@@ -655,6 +655,7 @@ Code changing:
       HEL-2863 - after reseting password getting a blank pop up
       HEL-2881 - can't see the conversation in trip from history/favourites
       HEL-2882 -  can't create account
+      HEL-3042 - can't log in to app
 
 
       Code changing:

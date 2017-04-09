@@ -179,8 +179,11 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         if(data != null){
             String inurl = data.toString();
             String email = inurl.replace("hgb://", "");
-
-            sendLoginToServer(email);
+            String passwordLocal = userData.getConfirmPassword() ;
+            if(passwordLocal == null){
+                passwordLocal = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, "");
+            }
+            sendLoginToServer(email,passwordLocal);
         }
 
     }
@@ -333,7 +336,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             @Override
             public void onClick(View view) {
 
-                sendLoginToServer(mLoginEmail.getText().toString());
+                sendLoginToServer(mLoginEmail.getText().toString(),mLoginPassword.getText().toString());
 
 
 
@@ -343,7 +346,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     }
 
-    private void sendLoginToServer(String email) {
+    private void sendLoginToServer(String email,String pass) {
         try{
 //            int permissionCheck = ContextCompat.checkSelfPermission(CreateAccountActivity.this, Manifest.permission.READ_PHONE_STATE);
 //
@@ -362,12 +365,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             if("".equals(uuid)){
                 uuid = UUID.randomUUID().toString();
             }
-            String passwordLocal = userData.getConfirmPassword() ;
-            if(passwordLocal == null){
-                passwordLocal = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, "");
-            }
 
-            ConnectionManager.getInstance(CreateAccountActivity.this).login(email,passwordLocal,uuid,
+
+            ConnectionManager.getInstance(CreateAccountActivity.this).login(email,pass,uuid,
                     new ConnectionManager.ServerRequestListener() {
                         @Override
                         public void onSuccess(Object data) {
@@ -1461,7 +1461,11 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         switch (requestCode) {
             case 002:
                 if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    sendLoginToServer(mLoginEmail.getText().toString());
+                    String passwordLocal = userData.getConfirmPassword() ;
+                    if(passwordLocal == null){
+                        passwordLocal = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, "");
+                    }
+                    sendLoginToServer(mLoginEmail.getText().toString(),passwordLocal);
                 }
                 break;
 
