@@ -138,6 +138,7 @@
             android:layout_below="@+id/cloud_03"
             android:layout_marginRight="@dimen/MINUS_DP320"
             android:layout_marginTop="@dimen/MINUS_DP30"
+
             android:src="@drawable/building" />
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -190,6 +191,7 @@
             android:layout_marginTop="@dimen/DP30"
             android:layout_centerHorizontal="true"
             android:elevation="1dp"
+            android:translationZ="2dp"
             android:orientation="horizontal">
 
             <View
@@ -360,6 +362,7 @@
             android:focusableInTouchMode="false"
             android:hint="What type of traveller describes you?"
             android:maxLines="1"
+            android:translationZ="3dp"
             android:singleLine="true"
             android:visibility="gone" />
 
@@ -449,11 +452,24 @@
             />
 
         <ImageView
+            android:id="@+id/cloud_8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignBottom="@id/building_02"
+            android:layout_alignTop="@id/building_02"
+            android:translationZ="1dp"
+            android:alpha="0.60"
+            android:layout_marginLeft="@dimen/MINUS_DP320"
+            android:src="@drawable/cloud_08" />
+
+        <ImageView
             android:id="@+id/cloud_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/building_01"
+            android:layout_marginTop="@dimen/MINUS_DP320"
             android:layout_marginLeft="@dimen/MINUS_DP250"
             android:src="@drawable/cloud_05" />
 
@@ -494,6 +510,7 @@
             android:layout_below="@+id/cloud_01"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/DP10"
+            android:translationZ="2dp"
             android:visibility="gone" />
 
         <ImageView
@@ -503,6 +520,7 @@
             android:layout_alignTop="@+id/cloud_03"
             android:layout_marginLeft="@dimen/MINUS_DP300"
             android:alpha="0.58"
+
             android:src="@drawable/building" />
 
 

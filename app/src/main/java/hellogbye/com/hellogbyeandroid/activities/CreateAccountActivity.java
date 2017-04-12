@@ -95,6 +95,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private ImageView mCloud05;
     private ImageView mCloud06;
     private ImageView mCloud07;
+    private ImageView mCloud08;
     private ImageView mArrowBack;
     private View mUnderlineTitle;
     private View mUnderlineTitle2;
@@ -214,6 +215,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mCloud05 = (ImageView) findViewById(R.id.cloud_5);
         mCloud06 = (ImageView) findViewById(R.id.cloud_6);
         mCloud07 = (ImageView) findViewById(R.id.cloud_7);
+        mCloud08 = (ImageView) findViewById(R.id.cloud_8);
         mArrowBack = (ImageView) findViewById(R.id.arrow_back);
         mBirds = (LinearLayout) findViewById(R.id.birds);
         mOr = (LinearLayout) findViewById(R.id.or_ll);
@@ -975,6 +977,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             mCloud04B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud4b_1_2));
             mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_1_2));
             mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_1_2));
+            mCloud08.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud08_1_2));
             mBiulding1.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding01_1_2));
             mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_1_2));
         } else {
@@ -989,6 +992,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             mCloud04B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud4b_2_1));
             mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_2_1));
             mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_2_1));
+            mCloud08.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud08_2_1));
             mBiulding1.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding01_2_1));
             mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_2_1));
         }
@@ -1006,6 +1010,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_2_3));
             mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_2_3));
             mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_2_3));
+            mCloud08.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud08_2_3));
             mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_2_3));
             mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_2_3));
         } else {
@@ -1020,6 +1025,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_3_2));
             mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_3_2));
             mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_3_2));
+            mCloud08.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud08_3_2));
         }
     }
 
