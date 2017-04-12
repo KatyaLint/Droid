@@ -51,6 +51,7 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -800,9 +801,9 @@ public class HGBUtility {
       if(popupTitle != null) {
           alert.setTitle(popupTitle);
       }
-      alert .setView(popupView).
+      alert .setView(popupView);
 
-       setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+      alert.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
 
           @Override
           public void onClick(DialogInterface dialog, int which) {
@@ -842,7 +843,25 @@ public class HGBUtility {
 
 
         /*      }*/
-      alert.create().show();
+      AlertDialog dialog = alert.create();
+      dialog.show();
+
+
+      Button negative_button = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+
+      Button positive_button = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+
+
+      if (negative_button != null) {
+
+          negative_button.setTextColor(activity.getResources()
+                  .getColor(R.color.COLOR_EE3A3C));
+      }
+      if (positive_button != null) {
+          positive_button.setTextColor(activity.getResources()
+                  .getColor(R.color.COLOR_EE3A3C));
+      }
+
 
   }
 
@@ -954,6 +973,7 @@ public class HGBUtility {
         }
         return path;
     }
+
 
 
 

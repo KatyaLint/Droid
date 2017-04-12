@@ -39,7 +39,7 @@ public class ChangeTripName  extends HGBAbstractFragment {
             public void onClick(View view) {
 
                 input.setText(itirnarary_title_Bar.getText());
-                HGBUtility.showAlertPopUp(activity, input, promptsView, activity.getResources().getString(R.string.edit_trip_name)
+                HGBUtility.showAlertPopUp(activity, input, promptsView, null
                         , activity.getResources().getString(R.string.save_button),
                         new PopUpAlertStringCB() {
                             @Override
