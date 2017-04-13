@@ -664,3 +664,21 @@ Code changing:
        Create Account - New Design
        Create Account Your Name - New Design
        Create Account COnfirmation
+
+
+
+    ------------------------------------------
+                Version 0.0.9
+    ------------------------------------------
+        Fixed Bugs:
+        -----------
+
+
+
+
+
+
+      Code changing:
+      --------------
+       - new register user popup
+       - Edit Trip view

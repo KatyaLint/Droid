@@ -62,7 +62,6 @@ import hellogbye.com.hellogbyeandroid.fragments.checkout.TravelersFragment;
 import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionsTravelers;
 import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionTabsWidgetFragment;
-import hellogbye.com.hellogbyeandroid.fragments.freeuser.FreeUserFragment;
 import hellogbye.com.hellogbyeandroid.fragments.hotel.SelectNewRoomFragment;
 import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragment;
 import hellogbye.com.hellogbyeandroid.fragments.membership.MembershipFragment;
@@ -916,9 +915,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 fragment = HazardousNoticeFragment.newInstance(navPosition);
                 break;
             case FREE_USER_FRAGMENT:
-                fragment = FreeUserFragment.newInstance(navPosition);
+               // fragment = FreeUserFragment.newInstance(navPosition);
                 stashToBack = false;
-                isAddAnimation = true;
+                freeUserPopUp();
+                //isAddAnimation = true;
                 break;
             case CHECKOUT_CONFIRMATION:
                 fragment = CheckoutConfirmationFragment.newInstance(navPosition);
@@ -956,15 +956,68 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             isAddAnimation = true;
             fragment = isFreeUser(fragment, navPosition);
-            mToolbar.setVisibility(View.GONE);
+           // mToolbar.setVisibility(View.GONE);
+        }else {
+
+
+            HGBUtility.hideKeyboard(MainActivityBottomTabs.this);
+            HGBUtility.goToNextFragmentIsAddToBackStack(getSupportFragmentManager(), fragment, stashToBack, isAddAnimation);
+            mToolbar.initToolBarItems();
+            mToolbar.updateToolBarView(position);
         }
-
-
-        HGBUtility.hideKeyboard(MainActivityBottomTabs.this);
-        HGBUtility.goToNextFragmentIsAddToBackStack(getSupportFragmentManager(), fragment, stashToBack, isAddAnimation);
-        mToolbar.initToolBarItems();
-        mToolbar.updateToolBarView(position);
     }
+
+    private void freeUserPopUp(){
+        LayoutInflater li = LayoutInflater.from(MainActivityBottomTabs.this);
+        final  View popupView = li.inflate(R.layout.popup_free_user_regestration, null);
+      /*  FontTextView popup_flight_baggage_text = (FontTextView) popupView.findViewById(R.id.popup_flight_baggage_text);
+        String currency = getActivityInterface().getCurrentUser().getCurrency();
+        String text = String.format(getActivity().getResources().getString(R.string.popup_flight_baggage_info_text),currency );
+        popup_flight_baggage_text.setText(text);*/
+
+
+
+      LinearLayout free_user_sign_in = (LinearLayout)popupView.findViewById(R.id.free_user_sign_in);
+        free_user_sign_in.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivityBottomTabs.this, CreateAccountActivity.class);
+                intent.putExtra("free_user_sign_in",true);
+                startActivity(intent);
+            }
+        });
+
+        LinearLayout free_user_create_new = (LinearLayout)popupView.findViewById(R.id.free_user_create_new);
+        free_user_create_new.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivityBottomTabs.this, CreateAccountActivity.class);
+                intent.putExtra("free_user_create_user",true);
+                startActivity(intent);
+
+            }
+        });
+
+
+
+        HGBUtility.showAlertPopUp(MainActivityBottomTabs.this, null, popupView,
+               null, null, new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+
+                    }
+
+                    @Override
+                    public void itemCanceled() {
+
+                    }
+                });
+
+
+    }
+
+
 
     @Override
     public void enableFullScreen(boolean fullscreen) {
@@ -1006,14 +1059,14 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
           //  Intent intent = new Intent(getBaseContext(), SignUpActivity.class);
           //  startActivity(intent);
-
-            fragment = FreeUserFragment.newInstance(navPosition);
-            mToolbar.setVisibility(View.GONE);
+            freeUserPopUp();
+          //  fragment = FreeUserFragment.newInstance(navPosition);
+          //  mToolbar.setVisibility(View.GONE);
         }
        /* else {
             mToolbar.setVisibility(View.VISIBLE);
         }*/
-        mToolbar.setVisibility(View.VISIBLE);
+      //  mToolbar.setVisibility(View.VISIBLE);
         return fragment;
     }
 

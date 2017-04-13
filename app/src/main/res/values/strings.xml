@@ -261,6 +261,7 @@
     <string name="ok_button">Ok</string>
     <string name="logout_button">LOG OUT</string>
 
+
     <string name="you_can_say_things_like">You can say things like:</string>
     <string name="cnc_error">Your query was not recognized.\nPlease try again.</string>
     <string name="i_have_read_and_understood_the_hazardous_nmaterial_notice">I have read and understood the <u>Hazardous\nMaterial notice</u></string>
@@ -360,6 +361,10 @@
     <string name="onboarding_explanation_4">Use the back button to ask for more\noptions in your own words.</string>
     <string name="already_have_an_account_sign_in">Already have an account? SIGN IN</string>
     <string name="or">Or</string>
+
+
+    <string name = "free_user_title">Become A Registered User</string>
+    <string name = "free_user_explanation">This option is available only for registered users</string>
 
 
 </resources>

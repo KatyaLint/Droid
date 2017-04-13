@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/free_user_title_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/COLOR_00516f"
+        android:textSize="@dimen/SP24"
+
+        app:fontName="dinnextltpro_condensed.ttf"
+        android:padding="@dimen/DP20"
+        android:text="@string/free_user_title"/>
+   <!-- profile_choose_between-->
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/free_user_explanation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/free_user_title_text"
+        android:textColor="@color/COLOR_565656"
+        android:textSize="@dimen/SP16"
+        android:layout_centerVertical="true"
+        app:fontName="dinnextltpro_condensed.ttf"
+        android:padding="@dimen/DP20"
+        android:text="@string/free_user_explanation"/>
+
+
+    <LinearLayout
+        android:padding="@dimen/DP20"
+        android:id="@+id/free_user_sign_in"
+        android:layout_below="@+id/free_user_explanation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add" />
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:textSize="@dimen/SP14"
+            android:textColor="@color/COLOR_565656"
+            app:fontName="dinnextltpro_medium.otf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/DP10"
+            android:text="SIGN IN"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:padding="@dimen/DP20"
+        android:id="@+id/free_user_create_new"
+        android:layout_below="@+id/free_user_sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add" />
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:textSize="@dimen/SP14"
+            android:textColor="@color/COLOR_565656"
+            app:fontName="dinnextltpro_medium.otf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/DP10"
+            android:text="CREATE A NEW ACCOUNT"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
