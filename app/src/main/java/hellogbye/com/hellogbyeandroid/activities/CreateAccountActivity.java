@@ -794,8 +794,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             public void onClick(DialogInterface dialog, int item) {
 
                 if(mTitle != null) { //can be null if i don't want to show anything like in cnc fragment
-                    mTitle.setText(getResources().getStringArray(R.array.title_array)[item]);
-                    userData.setGender(getResources().getStringArray(R.array.title_array)[item]);
+                    mTitle.setText(getResources().getStringArray(R.array.gender_array)[item]);
+                    userData.setGender(getResources().getStringArray(R.array.gender_array)[item]);
                 }
 
                 titleDialog.hide();
