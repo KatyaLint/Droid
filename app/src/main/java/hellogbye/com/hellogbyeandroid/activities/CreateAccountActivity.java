@@ -64,6 +64,7 @@ import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
+import static hellogbye.com.hellogbyeandroid.R.id.textView;
 import static java.lang.Long.parseLong;
 
 /**
@@ -156,6 +157,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private String android_id;
     private ArrayList<String> mCityList;
     private AlertDialog levelDialog;
+    private AlertDialog titleDialog;
     private Tooltip mTooltip;
 
     @Override
@@ -783,7 +785,27 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     }
 
     private void openTitleUp() {
-        HGBUtility.showPikerDialog(0,mTitle, CreateAccountActivity.this, "SELECT TITLE", getResources().getStringArray(R.array.title_array), 0, 2, null, true);
+           titleDialog = null;
+
+       ArrayAdapter adapterTitle = new ArrayAdapter(CreateAccountActivity.this,  R.layout.dialog_radio,  getResources().getStringArray(R.array.gender_array));
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Which Gender?");
+        builder.setSingleChoiceItems(adapterTitle, -1, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+
+                if(mTitle != null) { //can be null if i don't want to show anything like in cnc fragment
+                    mTitle.setText(getResources().getStringArray(R.array.title_array)[item]);
+                    userData.setGender(getResources().getStringArray(R.array.title_array)[item]);
+                }
+
+                titleDialog.hide();
+            }
+        });
+         titleDialog = builder.create();
+        titleDialog.show();
+
+
+       // HGBUtility.showPikerDialog(0,mTitle, CreateAccountActivity.this, "SELECT TITLE", getResources().getStringArray(R.array.title_array), 0, 2, null, true);
     }
 
     private void goToLoginState(boolean animateFoward) {
@@ -866,7 +888,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             builder.setTitle("Which State/Province?");
             builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int item) {
-                    if(userData.getCountry().equals("US")){
+                    if(userData.getCountry().equals("US") ){
                         setProvince(mUSProvinceItems,mUSCountryarray,item);
 
                     }else if(userData.getCountry().equals("CA")){

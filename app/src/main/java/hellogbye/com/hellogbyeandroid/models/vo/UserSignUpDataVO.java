@@ -15,6 +15,7 @@ public class UserSignUpDataVO {
     private String state="";
     private String username;
     private String userEmail;
+    private String gender;
     private int userTravelerType;
 
     public String getState() {
@@ -111,5 +112,13 @@ public class UserSignUpDataVO {
 
     public void setUserTravelerType(int userTravelerType) {
         this.userTravelerType = userTravelerType;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

@@ -336,7 +336,7 @@
             android:layout_marginTop="@dimen/DP24"
             android:drawableRight="@drawable/dropdown_lightblue"
             android:focusableInTouchMode="false"
-            android:hint="@string/title"
+            android:hint="Gender"
             android:maxLines="1"
             android:singleLine="true"
             android:visibility="gone" />

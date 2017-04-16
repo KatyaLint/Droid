@@ -274,7 +274,7 @@ public class ConnectionManager {
             if(userData.getUserTravelerType()!= -1){
                 jsonObject.put("marketingtravelertype", userData.getUserTravelerType());
             }
-
+            jsonObject.put("gender", userData.getGender());
             jsonObject.put("acceptHgbMarketing", hellopromtion);
             jsonObject.put("acceptThirdPartyMarketing",thirdpatyboolean);
             jsonObject.put("usertypeid","NPAY");
