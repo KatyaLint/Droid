@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/text1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:checkMark="?android:attr/listChoiceIndicatorSingle"
-    android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingEnd="@dimen/DP6"
-    android:paddingStart="@dimen/DP16"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall"
-    android:textColor="?android:attr/textColorAlertDialogListItem" />
-
+    android:layout_width="fill_parent"
+    android:layout_height="40dip"
+    android:gravity="center_vertical"
+    android:paddingLeft="@dimen/DP6"
+    android:drawableLeft="?android:attr/listChoiceIndicatorSingle"
+    />
