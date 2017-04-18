@@ -146,8 +146,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
         userProfilePreferences = new UserProfilePreferences();
         userProfilePreferences.getAccountsProfiles(getActivity(), getActivityInterface());
-
-
+        
         initList();
 
 
@@ -266,11 +265,13 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
 
         FontTextView cnc_add_dialog_favorites_text  =  (FontTextView)cnc_add_dialog_favorites.findViewById(R.id.cnc_add_dialog_favorites_text);
-
+        ImageView add_to_favorites_img = (ImageView)cnc_add_dialog_favorites.findViewById(R.id.add_to_favorites_img);
         if (getActivityInterface().getTravelOrder() != null && !getActivityInterface().getTravelOrder().ismIsFavorite()) {
             cnc_add_dialog_favorites_text.setText(R.string.cnc_add_dialog_add_favorites);
+            add_to_favorites_img.setBackgroundResource(R.drawable.add_to_favorites);
         } else {
             cnc_add_dialog_favorites_text.setText(R.string.cnc_add_dialog_remove_favorites);
+            add_to_favorites_img.setBackgroundResource(R.drawable.remove_from_favorites);
         }
 
 
@@ -352,7 +353,10 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
 
     private void addUserConversation(){
-        ArrayList<ConversationVO> conversations = getActivityInterface().getTravelOrder().getConversation();
+
+        ArrayList<ConversationVO> conversations = getActivityInterface().getTravelOrder().getConversation(); //getActivityInterface().getCNCItems();
+        ArrayList<CNCItem> cncItems = getActivityInterface().getCNCItems();
+
         for(ConversationVO conversation : conversations){
             handleHGBMessageMe(conversation.getmMessage());
             handleHGBMessage(getString(R.string.itinerary_created));
@@ -366,6 +370,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
             public void onSuccess(Object data) {
 
                 getActivityInterface().setCNCItems(null);
+
                 initList();
                // getActivityInterface().setCNCItems(null);
                 args.putString(HGBConstants.SOLUTION_ITINERARY_ID,null);
@@ -547,6 +552,10 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 */
 
         mRecyclerView.setLayoutManager(mLayoutManager);
+
+
+
+        //all cnc items
         ArrayList<CNCItem> cncItems = getActivityInterface().getCNCItems();
 
         mCNCAdapter = new CNCAdapter(getActivity().getApplicationContext(), cncItems);
@@ -554,6 +563,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         mCNCAdapter.SetOnItemClickListener(new CNCAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+
                 String strText = getActivityInterface().getCNCItems().get(position).getText();
                 //TODO this logic needs to change once we get final api
                 if (getString(R.string.itinerary_created).equals(strText)
@@ -574,6 +584,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         String strCNCList = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, "");
 
         if((strCNCList.equals("") || strCNCList.equals("null")) &&  getActivityInterface().getCNCItems()== null){
+
             Resources res = getResources();
             String userName = "";
             UserProfileVO usersList = getActivityInterface().getCurrentUser();
@@ -589,11 +600,13 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
         }
         else if (getActivityInterface().getCNCItems() == null) {
+
             try {
                 Gson gson = new Gson();
                 Type listType = new TypeToken<List<CNCItem>>() {
                 }.getType();
                 ArrayList<CNCItem> posts = (ArrayList<CNCItem>) gson.fromJson(strCNCList, listType);
+
                 getActivityInterface().setCNCItems(posts);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -1031,6 +1044,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
         if(!cncItems.isEmpty() && cncItems.size()>1){
 
+
             UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
 
             String solutionId = travelOrder.getmSolutionID();
@@ -1095,6 +1109,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
 
         ArrayList<CNCItem> cncItems = getActivityInterface().getCNCItems();
+
         UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
         String solutionId = null;
         if(travelOrder != null) {
@@ -1158,6 +1173,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
     private void resetMessageEditText() {
         mEditText.setText("");
+
         mRecyclerView.scrollToPosition(getActivityInterface().getCNCItems().size() - 1);
         HGBUtility.hideKeyboard(getActivity().getApplicationContext(), mEditText);
     }
