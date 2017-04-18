@@ -869,6 +869,7 @@ public class HGBUtility {
     public static void showAlertPopUpOneButton(final Activity activity, final EditText input, final View popupView ,
                                       final String popupTitle, final PopUpAlertStringCB
                                               alertCB){
+
         final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
         alert.setCancelable(false);
         if(popupTitle != null) {
@@ -895,9 +896,22 @@ public class HGBUtility {
 
                         dialog.cancel();
                     }
-                })
+                });
 
-                .create().show();
+
+
+        AlertDialog dialog = alert.create();
+        dialog.show();
+
+        Button positive_button = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+
+        if (positive_button != null) {
+            positive_button.setTextColor(activity.getResources()
+                    .getColor(R.color.COLOR_EE3A3C));
+        }
+
+
+
     }
 
 

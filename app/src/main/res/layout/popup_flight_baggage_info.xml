@@ -16,11 +16,11 @@
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/COLOR_003D4C"
+        android:textColor="@color/COLOR_00516f"
         android:text="@string/popup_flight_baggage_info_title"
         android:textSize="@dimen/SP24"
-        android:gravity="center"
-        app:fontName="dinnextltpro_medium.otf"
+        android:gravity="left"
+        app:fontName="dinnextltpro_condensed.ttf"
         android:paddingBottom="@dimen/DP20"/>
 
 
@@ -29,9 +29,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/SP16"
-        android:gravity="center"
+        android:gravity="left"
         app:fontName="dinnextltpro_regular.otf"
         android:text="@string/popup_flight_baggage_info_text"
-        android:textColor="@color/COLOR_BLACK"/>
+        android:textColor="@color/COLOR_565656"/>
 
 </LinearLayout>

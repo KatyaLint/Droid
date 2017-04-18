@@ -314,9 +314,11 @@
     <string name="itinerary_and_payment">ITINERARY AND PAYMENT</string>
 
     <string name="popup_flight_baggage_info_title">Flight Baggage &amp; Hotel Info</string>
-    <string name="popup_flight_baggage_info_text">All flights shown are in %1$s, per\npassenger, and include all taxes, fees and\ncharges.\n\n
-                                                    Additional baggage fees may apply.\n\n
-                                        Hotel prices do not include taxes, fees\nand charges.</string>
+    <string name="popup_flight_baggage_info_text">All flights shown are in %1$s, per\n\npassenger, and include all taxes, fees and\ncharges.\n\n\n
+        Additional baggage fees may apply.\n\n\n
+        Hotel prices on individual hotel tiles do\n\nnot include taxes &amp; fees.\n\n\n
+        The total price shown for your\n\nitinerary dose include applicable hotel\n\ntaxes &amp; fees.
+                                      </string>
 
 
     <string name="my_trip_plan_trip">PLAN A TRIP</string>

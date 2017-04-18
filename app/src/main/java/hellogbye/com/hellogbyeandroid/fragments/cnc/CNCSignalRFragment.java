@@ -146,7 +146,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
         userProfilePreferences = new UserProfilePreferences();
         userProfilePreferences.getAccountsProfiles(getActivity(), getActivityInterface());
-        
+
         initList();
 
 
