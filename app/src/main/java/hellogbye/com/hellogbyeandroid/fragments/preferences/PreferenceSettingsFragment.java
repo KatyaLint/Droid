@@ -36,6 +36,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttribute
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -56,7 +57,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
     private String edit_mode;
     private int radioButtonSelected = -1;
     private AccountDefaultSettingsVO accountDefaultSettingsVO;
-    private Button addNewPreferencesButton;
+    private FontButtonView addNewPreferencesButton;
     private FontTextView edit_preferences_imagebtn;
     private ImageButton check_preferences;
     private ImageButton tool_bar_delete_preferences;
@@ -333,7 +334,7 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
         check_preferences = ((MainActivityBottomTabs)getActivity()).getCheckPreferenceButton();
         tool_bar_delete_preferences = ((MainActivityBottomTabs)getActivity()).getToolBarDeletePreferences();
 
-        addNewPreferencesButton = (Button) rootView.findViewById(R.id.add_preferences);
+        addNewPreferencesButton = (FontButtonView) rootView.findViewById(R.id.add_preferences);
 
         check_preferences.setVisibility(View.GONE);
         edit_preferences_imagebtn.setVisibility(View.VISIBLE);

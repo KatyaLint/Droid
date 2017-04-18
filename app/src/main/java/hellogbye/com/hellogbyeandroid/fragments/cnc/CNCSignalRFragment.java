@@ -6,6 +6,7 @@ package hellogbye.com.hellogbyeandroid.fragments.cnc;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.CreateAccountActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.cncadapters.CNCAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.cncadapters.CNCMenuAdapter;
@@ -48,6 +50,7 @@ import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TitleNameChange;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.preferencespopup.UserProfilePreferences;
 import hellogbye.com.hellogbyeandroid.models.CNCItem;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportResultsVO;
@@ -105,7 +108,8 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
     private FontTextView itirnarary_title_Bar;
     private UserProfilePreferences userProfilePreferences;
-   // private SignalRService service;
+    private LinearLayout cnc_add_dialog_favorites;
+    // private SignalRService service;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new CNCSignalRFragment();
@@ -169,7 +173,9 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearCNCItems();
+                freeUserPopUp();
+
+
             }
         });
 
@@ -210,6 +216,130 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
         //  showMessagesToUser();
         return rootView;
+    }
+
+
+    private void freeUserPopUp(){
+
+        LayoutInflater li = LayoutInflater.from(getActivity());
+        final  View popup_cnc_add_dialog = li.inflate(R.layout.popup_cnc_add_dialog, null);
+      /*  FontTextView popup_flight_baggage_text = (FontTextView) popupView.findViewById(R.id.popup_flight_baggage_text);
+        String currency = getActivityInterface().getCurrentUser().getCurrency();
+        String text = String.format(getActivity().getResources().getString(R.string.popup_flight_baggage_info_text),currency );
+        popup_flight_baggage_text.setText(text);*/
+
+
+
+        LinearLayout cnc_add_dialog_add_trip = (LinearLayout)popup_cnc_add_dialog.findViewById(R.id.cnc_add_dialog_add_trip);
+        cnc_add_dialog_add_trip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearCNCItems();
+                HGBUtility.dialog.cancel();
+
+            }
+        });
+
+
+
+
+        LinearLayout cnc_add_dialog_add_companion = (LinearLayout)popup_cnc_add_dialog.findViewById(R.id.cnc_add_dialog_add_companion);
+        cnc_add_dialog_add_companion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFlowInterface().goToFragment(ToolBarNavEnum.COMPANIONS.getNavNumber(), null);
+                HGBUtility.dialog.cancel();
+
+
+            }
+        });
+
+        cnc_add_dialog_favorites = (LinearLayout)popup_cnc_add_dialog.findViewById(R.id.cnc_add_dialog_favorites);
+        cnc_add_dialog_favorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFavorityItinerary();
+                HGBUtility.dialog.cancel();
+
+            }
+        });
+
+
+        FontTextView cnc_add_dialog_favorites_text  =  (FontTextView)cnc_add_dialog_favorites.findViewById(R.id.cnc_add_dialog_favorites_text);
+
+        if (getActivityInterface().getTravelOrder() != null && !getActivityInterface().getTravelOrder().ismIsFavorite()) {
+            cnc_add_dialog_favorites_text.setText(R.string.cnc_add_dialog_add_favorites);
+        } else {
+            cnc_add_dialog_favorites_text.setText(R.string.cnc_add_dialog_remove_favorites);
+        }
+
+
+        if( getActivityInterface().getCNCItems().size() > 2){
+            cnc_add_dialog_add_companion.setVisibility(View.VISIBLE);
+            cnc_add_dialog_favorites.setVisibility(View.VISIBLE);
+        }else{
+            cnc_add_dialog_add_companion.setVisibility(View.GONE);
+            cnc_add_dialog_favorites.setVisibility(View.GONE);
+        }
+
+
+        HGBUtility.showAlertPopUp(getActivity(), null, popup_cnc_add_dialog,
+                null, null, new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+
+                    }
+
+                    @Override
+                    public void itemCanceled() {
+
+                    }
+                });
+
+
+    }
+
+    private void getFavorityCurrentItinerary(String solutionId) {
+
+        ConnectionManager.getInstance(getActivity()).getItinerary(solutionId, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+                UserTravelMainVO userTravelMainVO = (UserTravelMainVO) data;
+                getActivityInterface().setTravelOrder(userTravelMainVO);
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
+
+    private void setFavorityItinerary() {
+        UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
+        final String solutionID = travelOrder.getmSolutionID();
+        boolean isFavorite = travelOrder.ismIsFavorite();
+
+        ConnectionManager.getInstance(getActivity()).putFavorityItenarary(!isFavorite, solutionID, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                FontTextView cnc_add_dialog_favorites_text  =  (FontTextView)cnc_add_dialog_favorites.findViewById(R.id.cnc_add_dialog_favorites_text);
+                if (getActivityInterface().getTravelOrder().ismIsFavorite()) {
+                    cnc_add_dialog_favorites_text.setText(R.string.cnc_add_dialog_add_favorites);
+                } else {
+                    cnc_add_dialog_favorites_text.setText(R.string.cnc_add_dialog_remove_favorites);
+                }
+
+                getFavorityCurrentItinerary(solutionID);
+            }
+
+            @Override
+            public void onError(Object data) {
+
+                ErrorMessage(data);
+            }
+        });
     }
 
 

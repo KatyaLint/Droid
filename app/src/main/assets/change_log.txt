@@ -682,3 +682,5 @@ Code changing:
       --------------
        - new register user popup
        - Edit Trip view
+        - new add_to_favorites icon
+        - new cnc add dialog

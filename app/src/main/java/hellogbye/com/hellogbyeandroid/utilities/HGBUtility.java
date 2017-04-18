@@ -91,7 +91,7 @@ public class HGBUtility {
 
     private static ProgressDialog progressDialog;
     private static Stack<Fragment> fragmentStack = new Stack<Fragment>();
-
+    public static AlertDialog dialog;
 
 
     public static void downloadImage(Bitmap showedImgae){
@@ -843,7 +843,7 @@ public class HGBUtility {
 
 
         /*      }*/
-      AlertDialog dialog = alert.create();
+      dialog = alert.create();
       dialog.show();
 
 

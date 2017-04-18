@@ -278,7 +278,8 @@ public class CostumeToolBar extends Toolbar {
             case PREFERENCES_DRAG_LIST_SETTINGS:
             case PREFERENCE_SETTINGS_EMAILS:
             case PREFERENCES_CHECK_AS_RADIO_SETTINGS:
-            case TRAVEL_PREFERENCE:
+
+
                 preference_save_changes.setVisibility(View.VISIBLE);
                 titleBar.setVisibility(View.VISIBLE);
                 edit_preferences.setVisibility(View.GONE);
@@ -335,6 +336,8 @@ public class CostumeToolBar extends Toolbar {
             case COMPANIONS_DETAILS:
             case FARE_CLASS_FRAGMENT:
             case SELECT_ROOM_FRAGMENT:
+            case TRAVEL_PREFERENCE:
+            case FREE_USER_FRAGMENT:
                 titleBar.setVisibility(View.VISIBLE);
                 break;
             /**

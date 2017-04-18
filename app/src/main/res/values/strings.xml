@@ -367,4 +367,10 @@
     <string name = "free_user_explanation">This option is available only for registered users</string>
 
 
+    <string name = "cnc_add_dialog">What do you want to add?</string>
+    <string name = "cnc_add_dialog_add_favorites">Add to favorites</string>
+    <string name = "cnc_add_dialog_remove_favorites">Remove from favorites</string>
+
+
+
 </resources>

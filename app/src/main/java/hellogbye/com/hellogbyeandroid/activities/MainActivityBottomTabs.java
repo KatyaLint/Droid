@@ -89,14 +89,11 @@ import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.network.Parser;
-import hellogbye.com.hellogbyeandroid.signalr.HubConnectionFactory;
-/*import hellogbye.com.hellogbyeandroid.signalr.SignalRHubConnection;*/
 import hellogbye.com.hellogbyeandroid.signalr.SignalRService;
 import hellogbye.com.hellogbyeandroid.utilities.GPSTracker;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
@@ -107,16 +104,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityNetwork;
 import hellogbye.com.hellogbyeandroid.utilities.SpeechRecognitionUtil;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
-import microsoft.aspnet.signalr.client.Action;
-import microsoft.aspnet.signalr.client.ErrorCallback;
-import microsoft.aspnet.signalr.client.LogLevel;
-import microsoft.aspnet.signalr.client.Platform;
-import microsoft.aspnet.signalr.client.SignalRFuture;
-import microsoft.aspnet.signalr.client.http.android.AndroidPlatformComponent;
-import microsoft.aspnet.signalr.client.hubs.HubConnection;
-import microsoft.aspnet.signalr.client.hubs.HubProxy;
 
-import static hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum.PAYMENT_TRAVELERS;
 
 /**
  * Created by arisprung on 8/7/16.
@@ -169,8 +157,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
 
     private AutoCompleteTextView mAutoComplete;
-
-    private NodesVO mSelectedHotelNode;
     private ImageButton toolbar_profile_popup;
 
    // private SignalRHubConnection mSignalRHubConnection;
@@ -186,8 +172,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     private SignalRService mService;
     private boolean mBound = false;
-
-
 
 
 
@@ -298,17 +282,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
 
-/*    private void clearCNCItems() {
->>>>>>> master
-
-        hgbSaveDataClass.setCNCItems(null);
-        hgbSaveDataClass.setTravelOrder(null);
-        hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
-        hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
-        Bundle args = new Bundle();
-        args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
-        selectItem(ToolBarNavEnum.CNC.getNavNumber(), null, true);
-    }*/
 
     private void selectBottemTab(int menuItemId) {
 
@@ -801,6 +774,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         // update the main content by replacing fragments
 
         Fragment fragment = null;
+
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
         boolean stashToBack = stashFragment;
         int navPosition = position;//navBar.getNavNumber();
@@ -916,7 +890,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 break;
             case FREE_USER_FRAGMENT:
                // fragment = FreeUserFragment.newInstance(navPosition);
-                stashToBack = false;
+             //   stashToBack = false;
                 freeUserPopUp();
                 //isAddAnimation = true;
                 break;
@@ -946,6 +920,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             fragment.setArguments(arguments);
         }
 
+        mToolbar.initToolBarItems();
+
         if (isFreeUser && (navBar.equals(ToolBarNavEnum.COMPANIONS_PERSONAL_DETAILS) ||
                 navBar.equals(ToolBarNavEnum.PAYMENT_DETAILS) ||
                 navBar.equals(ToolBarNavEnum.COMPANIONS) ||
@@ -960,11 +936,16 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         }else {
 
 
-            HGBUtility.hideKeyboard(MainActivityBottomTabs.this);
-            HGBUtility.goToNextFragmentIsAddToBackStack(getSupportFragmentManager(), fragment, stashToBack, isAddAnimation);
-            mToolbar.initToolBarItems();
             mToolbar.updateToolBarView(position);
+            HGBUtility.goToNextFragmentIsAddToBackStack(getSupportFragmentManager(), fragment, stashToBack, isAddAnimation);
+
+ /*           mToolbar.initToolBarItems();
+            mToolbar.updateToolBarView(position);*/
         }
+
+        HGBUtility.hideKeyboard(MainActivityBottomTabs.this);
+
+
     }
 
     private void freeUserPopUp(){
