@@ -673,11 +673,6 @@ Code changing:
         Fixed Bugs:
         -----------
 
-
-
-
-
-
       Code changing:
       --------------
        - new register user popup
