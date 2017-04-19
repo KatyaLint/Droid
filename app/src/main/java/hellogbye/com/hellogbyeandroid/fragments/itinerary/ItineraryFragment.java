@@ -74,6 +74,7 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
     private ImageButton up_bar_favorite;
     private FontTextView itirnarary_title_Bar;
     private FontTextView grid_total_price_currency;
+    private LinearLayout grid_price_ll;
 
     public ItineraryFragment() {
 
@@ -862,6 +863,8 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
 
         LinearLayout itineraryLayout = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.scroll_view_ll);
         LinearLayout cnc_empty_view = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.cnc_empty_view);
+
+
       //  UserTravelMainVO user = parseFlight();
      //  getActivityInterface().setTravelOrder(user);
         UserTravelMainVO  user = getActivityInterface().getTravelOrder();
@@ -869,6 +872,8 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
 
 
         if(userOrder != null && !userOrder.getItems().isEmpty()) {
+
+            setSolutionNameForItirnarary(false);
             itineraryLayout.setVisibility(View.VISIBLE);
             createPassengersName(scrollViewLinearLayout, userOrder);
             createMainNodes(userOrder);
@@ -876,14 +881,19 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
             View mainView = createGridView(userOrder);
             itineraryLayout.addView(mainView);
             cnc_empty_view.setVisibility(View.GONE);
+            grid_price_ll.setVisibility(View.VISIBLE);
             grid_make_payment.setEnabled(true);
             grid_total_price.setText("$" + HGBUtility.roundNumber(Double.parseDouble(userOrder.getmTotalPrice())));
             UserProfileVO currentUser = getActivityInterface().getCurrentUser();
             grid_total_price_currency.setText(currentUser.getCurrency());
-        }else{  // server returning wrong data
+
+        }else{
+            setSolutionNameForItirnarary(true);// server returning wrong data
             itineraryLayout.setVisibility(View.GONE);
             cnc_empty_view.setVisibility(View.VISIBLE);
             grid_make_payment.setEnabled(false);
+            grid_price_ll.setVisibility(View.INVISIBLE);
+
         }
     }
 
@@ -920,6 +930,7 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
             }
         });
 
+        grid_price_ll = (LinearLayout)rootView.findViewById(R.id.grid_price_ll);
         grid_make_payment = (FontButtonView)rootView.findViewById(R.id.grid_make_payment);
         grid_make_payment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -947,9 +958,9 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
 
         //getActivityInterface().setAlternativeFlights(null);
 
-        setFavorityIcon();
-        onFavorityClickListener();
-        setSolutionNameForItirnarary();
+        //setFavorityIcon();
+        //onFavorityClickListener();
+      /*  setSolutionNameForItirnarary();*/
         titleChangeName();
         return rootView;
     }
@@ -971,18 +982,22 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
                 null, null);
     }
 
-    private void setSolutionNameForItirnarary() {
+    private void setSolutionNameForItirnarary(boolean isEmpty) {
         String solutionName = userOrder.getmSolutionName();
         itirnarary_title_Bar = ((MainActivityBottomTabs)getActivity()).getItirnaryTitleBar();
         itirnarary_title_Bar.setText(solutionName);
         itirnarary_title_Bar.setTag(userOrder.getmSolutionID());
+        if(isEmpty){
+            itirnarary_title_Bar.setVisibility(View.INVISIBLE);
+        }
+
 
     }
 
 
     private void setFavorityIcon(){
         boolean isFavority = userOrder.ismIsFavorite();
-        up_bar_favorite = ((MainActivityBottomTabs)getActivity()).getFavorityImageButton();
+      //  up_bar_favorite = ((MainActivityBottomTabs)getActivity()).getFavorityImageButton();
         if (isFavority) {
             up_bar_favorite.setBackgroundResource(R.drawable.star_in_favorite);
             //   hgbSaveDataClass.getTravelOrder().setmIsFavorite(false);

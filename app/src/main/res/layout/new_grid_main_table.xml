@@ -3,6 +3,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/COLOR_f4f4f4"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <HorizontalScrollView
@@ -34,6 +35,8 @@
 
         <LinearLayout
 
+            android:id="@+id/grid_price_ll"
+            android:visibility="invisible"
             android:layout_weight="2"
             android:layout_width="@dimen/DP0"
             android:layout_height="wrap_content"
@@ -70,8 +73,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/SP24"
                 android:textColor="@color/COLOR_00516f"
-                app:fontName="dinnextltpro_light.otf"
-                android:text="USD"/>
+                app:fontName="dinnextltpro_light.otf" />
 
             </LinearLayout>
 
@@ -107,7 +109,7 @@
             android:layout_width="@dimen/DP0"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_red_button"
-            android:textColor="@color/COLOR_WHITE"
+
             android:gravity="center"
             app:fontName="dinnextltpro_medium.otf"
             android:textAllCaps="false"

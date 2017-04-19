@@ -21,7 +21,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 public class CostumeToolBar extends Toolbar {
 
-    private ImageButton up_bar_favorite;
+ //   private ImageButton up_bar_favorite;
     private ImageButton chat_message;
     private ImageButton toolbar_new_iternerary;
     private ImageButton favoriteButton;
@@ -82,10 +82,11 @@ public class CostumeToolBar extends Toolbar {
         /*if (keyBoardImage == null) {
             keyBoardImage = (ImageButton) findViewById(R.id.keyboard);
         }*/
-        if (up_bar_favorite == null) {
+    /*    if (up_bar_favorite == null) {
             up_bar_favorite = (ImageButton) findViewById(R.id.up_bar_favorite);
 
-        }
+        }*/
+
         if (favoriteButton == null) {
             favoriteButton = (ImageButton) findViewById(R.id.favority);
         }
@@ -236,7 +237,7 @@ public class CostumeToolBar extends Toolbar {
         String selectedItem = navBar.getNavTitle();
    //     tool_bar_profile_name.setVisibility(View.GONE);
         titleBar.setVisibility(View.GONE);
-        up_bar_favorite.setVisibility(View.GONE);
+     //   up_bar_favorite.setVisibility(View.GONE);
         favoriteButton.setVisibility(View.GONE);
         editPreferense.setVisibility(View.GONE);
         edit_preferences.setVisibility(View.GONE);
@@ -266,7 +267,7 @@ public class CostumeToolBar extends Toolbar {
                 toolbar_profile_popup.setVisibility(View.VISIBLE);
                 break;
             case ITINARERY:
-                up_bar_favorite.setVisibility(View.VISIBLE);
+       //         up_bar_favorite.setVisibility(View.VISIBLE);
                 itirnarary_title_Bar.setVisibility(View.VISIBLE);
                 break;
             /**

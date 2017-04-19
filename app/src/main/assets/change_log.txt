@@ -679,4 +679,5 @@ Code changing:
        - Edit Trip view
         - new add_to_favorites icon
         - new cnc add dialog
-      - grid dialog information
+       - grid dialog information
+       - empty itinerary

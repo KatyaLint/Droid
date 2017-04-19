@@ -143,7 +143,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private LinearLayout edit_preferences_ll;
     private FontTextView edit_preferences_imagebtn;
     private ImageButton check_preferences;
-    private ImageButton up_bar_favorite;
+   // private ImageButton up_bar_favorite;
     private ImageButton toolbar_new_iternerary;
     private ImageButton toolbar_add_companion;
     private FontTextView my_trip_profile;
@@ -448,7 +448,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         edit_preferences_imagebtn = (FontTextView) mToolbar.findViewById(R.id.edit_preferences);
         check_preferences = (ImageButton) mToolbar.findViewById(R.id.check_preferences);
         itirnarary_title_Bar = (FontTextView)mToolbar.findViewById(R.id.itirnarary_title_Bar);
-        up_bar_favorite = (ImageButton)mToolbar.findViewById(R.id.up_bar_favorite);
+     //   up_bar_favorite = (ImageButton)mToolbar.findViewById(R.id.up_bar_favorite);
         preference_save_changes = (FontTextView) mToolbar.findViewById(R.id.preference_save_changes);
         preference_add_card = (ImageView) mToolbar.findViewById(R.id.add_cc);
         toolbar_new_iternerary = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary);
@@ -525,9 +525,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         return my_trip_profile;
     }
 
-    public ImageButton getFavorityImageButton(){
-        return up_bar_favorite;
-    }
+    /*public ImageButton getFavorityImageButton(){
+        return up_bar_favorite;}*/
+
     public FontTextView getItirnaryTitleBar(){
         return itirnarary_title_Bar;
     }
