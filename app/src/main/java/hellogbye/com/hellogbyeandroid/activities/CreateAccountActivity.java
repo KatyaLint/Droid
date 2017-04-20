@@ -21,6 +21,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -65,6 +66,7 @@ import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 import static hellogbye.com.hellogbyeandroid.R.id.textView;
+import static hellogbye.com.hellogbyeandroid.R.id.title;
 import static java.lang.Long.parseLong;
 
 /**
@@ -158,6 +160,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private ArrayList<String> mCityList;
     private AlertDialog levelDialog;
     private AlertDialog titleDialog;
+    private AlertDialog travelTypeDialog;
+
     private Tooltip mTooltip;
 
     @Override
@@ -691,7 +695,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
                 break;
             case R.id.user_travel_type:
-                HGBUtility.showPikerDialog(0,mTravlerType, CreateAccountActivity.this, "SELECT TYPE", getResources().getStringArray(R.array.traveler_type_array), 0, 3, null, true);
+                openTravelerTypeDialog();
                 break;
 
             case R.id.create_account:
@@ -784,12 +788,48 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         }
     }
 
+    private void openTravelerTypeDialog() {
+        travelTypeDialog = null;
+
+        ArrayAdapter adapterTitle = new ArrayAdapter(CreateAccountActivity.this,  R.layout.dialog_radio,  getResources().getStringArray(R.array.traveler_type_array));
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View title=inflater.inflate(R.layout.titlebar, null);
+        FontTextView titleText =(FontTextView)title.findViewById(R.id.titlebar);
+        titleText.setText("Which type of traveler describes you?");
+        builder.setCustomTitle(title);
+        builder.setSingleChoiceItems(adapterTitle, -1, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+
+                if(mTravlerType != null) { //can be null if i don't want to show anything like in cnc fragment
+                    mTravlerType.setText(getResources().getStringArray(R.array.traveler_type_array)[item]);
+                   // userData.setUserTravelerType(getResources().getStringArray(R.array.gender_array)[item]);
+                }
+
+                travelTypeDialog.hide();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                travelTypeDialog.dismiss();
+            } });
+        travelTypeDialog = builder.create();
+        travelTypeDialog.show();
+    }
+
     private void openTitleUp() {
            titleDialog = null;
 
        ArrayAdapter adapterTitle = new ArrayAdapter(CreateAccountActivity.this,  R.layout.dialog_radio,  getResources().getStringArray(R.array.gender_array));
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Which Gender?");
+
+        LayoutInflater inflater = getLayoutInflater();
+        View title=inflater.inflate(R.layout.titlebar, null);
+        FontTextView titleText =(FontTextView)title.findViewById(R.id.titlebar);
+        titleText.setText("Which Gender?");
+        builder.setCustomTitle(title);
         builder.setSingleChoiceItems(adapterTitle, -1, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
 
@@ -801,6 +841,11 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                 titleDialog.hide();
             }
         });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                titleDialog.dismiss();
+            } });
          titleDialog = builder.create();
         titleDialog.show();
 
