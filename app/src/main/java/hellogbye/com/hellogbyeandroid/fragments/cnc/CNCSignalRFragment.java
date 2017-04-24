@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -855,17 +856,17 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         user_profile_popup_list_view.smoothScrollToPosition(airportSendValueVO.getCenteredItem());
         sortPopupAdapter.setCheckedItemPosition(airportSendValueVO.getCenteredItem());
 
-        /*dialogBuilder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+                removeWaitingItem();
 
-
-            } });*/
+            } });
 
         //Create alert dialog object via builder
        final AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.setView(promptsViewTeest);
         alertDialog.setCancelable(false);
-        alertDialog.show();
+
 
 
         user_profile_popup_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -884,10 +885,16 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
             }
         });
 
+        Button positive_button = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+
+        if (positive_button != null) {
+            positive_button.setTextColor(getContext().getResources().getColor(R.color.COLOR_EE3A3C));
+        }
+
         user_profile_popup_list_view.setAdapter(sortPopupAdapter);
 
 
-
+        alertDialog.show();
 
 
 
