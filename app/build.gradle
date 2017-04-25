@@ -120,5 +120,6 @@ dependencies {
     compile files('libs/signalr-client-sdk.jar')
     compile files('libs/signalr-client-sdk-android.jar')
 
+
 }
 apply plugin: 'com.google.gms.google-services'

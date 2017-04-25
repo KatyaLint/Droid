@@ -373,8 +373,8 @@
     <string name = "itinerary_empty_title">This Itinerary is Empty</string>
     <string name = "itinerary_empty_small_title">It contains:</string>
     <string name = "itinerary_empty_text">No Flights/Hotels</string>
-
-
+    <string name="map">MAP</string>
+    <string name="street">STREET</string>
 
 
 </resources>

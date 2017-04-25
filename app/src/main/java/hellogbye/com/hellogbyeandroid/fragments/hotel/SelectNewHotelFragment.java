@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -23,6 +26,10 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
+import com.google.android.gms.maps.StreetViewPanorama;
+import com.google.android.gms.maps.StreetViewPanoramaOptions;
+import com.google.android.gms.maps.StreetViewPanoramaView;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -32,15 +39,16 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
-import hellogbye.com.hellogbyeandroid.adapters.hotel.CustomAlternativeHotelAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.PlaceAutocompleteAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.hotel.CustomAlternativeHotelAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.CellsVO;
@@ -57,7 +65,7 @@ import static hellogbye.com.hellogbyeandroid.R.id.map;
  */
 
 
-public class SelectNewHotelFragment extends HGBAbstractFragment implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
+public class SelectNewHotelFragment extends HGBAbstractFragment implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, OnStreetViewPanoramaReadyCallback {
 
 
     private SupportMapFragment mMapfragment;
@@ -68,12 +76,17 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
     private NodesVO mCurrentSelectedNode;
     private NodesVO mPastSelectedNode;
     private AutoCompleteTextView mAutocomplete;
+    private Switch mSwitch;
+    private StreetViewPanoramaView mStreetViewPanoramaView;
+    private View mView;
 
-
+    private StreetViewPanoramaOptions options;
+    private StreetViewPanorama mPanorama;
     protected GoogleApiClient mGoogleApiClient;
 
     private PlaceAutocompleteAdapter mPlaceAutocompleteAdapter;
-    private HashMap<Integer,Marker> mMarkersList;
+    private HashMap<Integer, Marker> mMarkersList;
+    private static final String STREETVIEW_BUNDLE_KEY = "StreetViewBundleKey";
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new SelectNewHotelFragment();
@@ -87,10 +100,14 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.select_new_hotel_main_layout, container, false);
-        mViewPager = (ViewPager) rootView.findViewById(R.id.alt_hotel_viewpager);
+        mView = inflater.inflate(R.layout.select_new_hotel_main_layout, container, false);
+        mViewPager = (ViewPager) mView.findViewById(R.id.alt_hotel_viewpager);
         mMarkersList = new HashMap<>();
-        return rootView;
+        mAutocomplete = (AutoCompleteTextView) mView.findViewById(R.id.hotel_autocomplete);
+        mStreetViewPanoramaView = (StreetViewPanoramaView) mView.findViewById(R.id.steet_view_panorama);
+        mSwitch = (Switch) mView.findViewById(R.id.hotel_switch);
+
+        return mView;
     }
 
 
@@ -155,13 +172,60 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
 
         initAutoComplete();
 
+        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    showStreetView();
+                } else {
+                    showMap();
+                }
+            }
+        });
 
+
+
+        initStreetView(savedInstanceState);
     }
+
+    private void initStreetView(Bundle savedInstanceState) {
+
+        mStreetViewPanoramaView.onCreate(savedInstanceState);
+        mStreetViewPanoramaView.getStreetViewPanoramaAsync(new OnStreetViewPanoramaReadyCallback() {
+            @Override
+            public void onStreetViewPanoramaReady(StreetViewPanorama panorama) {
+                panorama.setPosition(new LatLng(mCurrentSelectedNode.getmLatitude(), mCurrentSelectedNode.getmLongitude()));
+                mPanorama = panorama;
+            }
+        });
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Bundle mStreetViewBundle = outState.getBundle(STREETVIEW_BUNDLE_KEY);
+        if (mStreetViewBundle == null) {
+            mStreetViewBundle = new Bundle();
+            outState.putBundle(STREETVIEW_BUNDLE_KEY, mStreetViewBundle);
+        }
+
+        mStreetViewPanoramaView.onSaveInstanceState(mStreetViewBundle);
+    }
+
+    private void showStreetView() {
+        mStreetViewPanoramaView.setVisibility(View.VISIBLE);
+    }
+
+    private void showMap() {
+        mStreetViewPanoramaView.setVisibility(View.GONE);
+    }
+
 
     @Override
     public void onStart() {
         super.onStart();
-        mGoogleApiClient.connect();
+
     }
 
     @Override
@@ -176,15 +240,14 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .enableAutoManage(getActivity(), 0, this)
                 .addApi(Places.GEO_DATA_API)
+                .addOnConnectionFailedListener(this).addApi(Places.GEO_DATA_API)
+                .addConnectionCallbacks(this)
                 .build();
-        mAutocomplete = ((MainActivityBottomTabs) getActivity()).getmAutoComplete();
+        mGoogleApiClient.connect();
+
 
 // // Register a listener that receives callbacks when a suggestion has been selected
-        mAutocomplete.setOnItemClickListener(mAutocompleteClickListener);
 
-        mPlaceAutocompleteAdapter = new PlaceAutocompleteAdapter(getActivity(), mGoogleApiClient, new LatLngBounds(new LatLng(mCurrentSelectedNode.getmLatitude(), mCurrentSelectedNode.getmLongitude()), new LatLng(mCurrentSelectedNode.getmLatitude(), mCurrentSelectedNode.getmLongitude())),
-                null);
-        mAutocomplete.setAdapter(mPlaceAutocompleteAdapter);
     }
 
     private void sendToGoogleAutoComplete(CharSequence charSequence) {
@@ -218,10 +281,10 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
                 break;
             }
         }
-
-        for (NodesVO node : mNodesList) {
-
-        }
+//
+//        for (NodesVO node : mNodesList) {
+//
+//        }
 
         return false;
     }
@@ -271,6 +334,8 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
                 .tilt(30)                   // Sets the tilt of the camera to 30 degrees
                 .build();                   // Creates a CameraPosition from the builder
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        mPanorama.setPosition(new LatLng(mCurrentSelectedNode.getmLatitude(), mCurrentSelectedNode.getmLongitude()));
+
     }
 
     private void setMarkers() {
@@ -293,10 +358,6 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
         mCurrentSelectedNode = getLegWithGuid(getActivityInterface().getTravelOrder());
     }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
 
     /**
      * Listener that handles selections from suggestions from the AutoCompleteTextView that
@@ -365,7 +426,7 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
                         CellsVO cellsVO = (CellsVO) data;
                         mNodesList.clear();
                         mNodesList.addAll(cellsVO.getmNodes());
-                        mNodesList.add(0,mCurrentSelectedNode);
+                        mNodesList.add(0, mCurrentSelectedNode);
                         loadMap();
                         mAdapter.notifyDataSetChanged();
                         resetSelectedNode(mNodesList.get(0));
@@ -415,14 +476,41 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
                 });
     }
 
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        Log.e("", "onConnected. Error: ");
+        mAutocomplete.setOnItemClickListener(mAutocompleteClickListener);
+
+        mPlaceAutocompleteAdapter = new PlaceAutocompleteAdapter(getActivity(), mGoogleApiClient, new LatLngBounds(new LatLng(mCurrentSelectedNode.getmLatitude(), mCurrentSelectedNode.getmLongitude()), new LatLng(mCurrentSelectedNode.getmLatitude(), mCurrentSelectedNode.getmLongitude())),
+                null);
+        mAutocomplete.setAdapter(mPlaceAutocompleteAdapter);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        Log.e("", "onConnectionSuspended. Error: ");
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.e("", "ConnectionResult. Error: " + connectionResult.getErrorMessage());
+
+    }
+
+    @Override
+    public void onStreetViewPanoramaReady(StreetViewPanorama streetViewPanorama) {
+
+    }
+
     private class LoadMarkersAsyncTask extends AsyncTask<Void, MarkerOptions, Void> {
 
-    int iIndex= 0;
+        int iIndex = 0;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             mMap.clear();
-            iIndex =0;
+            iIndex = 0;
         }
 
         @Override
@@ -475,10 +563,10 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
         protected Void doInBackground(Void... redo) {
             for (int i = 0; i < mNodesList.size(); i++) {
                 if (mCurrentSelectedNode.getmLatitude() == mNodesList.get(i).getmLatitude() && mCurrentSelectedNode.getmLongitude() == mNodesList.get(i).getmLongitude()) {
-                    publishProgress(new MarkerSet(i,true));
+                    publishProgress(new MarkerSet(i, true));
 
                 } else if (mPastSelectedNode.getmLatitude() == mNodesList.get(i).getmLatitude() && mPastSelectedNode.getmLongitude() == mNodesList.get(i).getmLongitude()) {
-                    publishProgress(new MarkerSet(i,false));
+                    publishProgress(new MarkerSet(i, false));
 
                 }
             }
@@ -490,7 +578,7 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
         @Override
         protected void onProgressUpdate(MarkerSet... values) {
             Marker marker = mMarkersList.get(values[0].getIndex());
-            if(values[0].isSelected()){
+            if (values[0].isSelected()) {
                 marker.setZIndex(1.0f);
             }
             marker.setIcon(BitmapDescriptorFactory.fromBitmap(HGBUtilityHotel.getMarkerBitmap(values[0].isSelected(),
@@ -506,7 +594,7 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
 
     }
 
-    public class MarkerSet{
+    public class MarkerSet {
         private int index;
         private boolean isSelected;
 
@@ -531,8 +619,6 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
             isSelected = selected;
         }
     }
-
-
 
 
 }

@@ -345,7 +345,7 @@ public class CostumeToolBar extends Toolbar {
              * show title and search bar
              */
             case SELECT_HOTEL_FRAGMENT:
-                search_maginfy.setVisibility(View.VISIBLE);
+               // search_maginfy.setVisibility(View.VISIBLE);
                 titleBar.setVisibility(View.VISIBLE);
                 break;
 

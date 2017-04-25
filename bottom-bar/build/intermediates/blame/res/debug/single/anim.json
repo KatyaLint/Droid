@@ -1,0 +1,66 @@
+[
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/anim/design_snackbar_out.xml",
+        "source": "/Users/arisprung/.android/build-cache/6c5a10ba49b394c61d1691b295523cf5617247ff/output/res/anim/design_snackbar_out.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/anim/design_bottom_sheet_slide_in.xml",
+        "source": "/Users/arisprung/.android/build-cache/6c5a10ba49b394c61d1691b295523cf5617247ff/output/res/anim/design_bottom_sheet_slide_in.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/anim/abc_popup_exit.xml",
+        "source": "/Users/arisprung/.android/build-cache/9685886dd65cfc256dc30c97954a18cedda4331f/output/res/anim/abc_popup_exit.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/anim/abc_popup_enter.xml",
+        "source": "/Users/arisprung/.android/build-cache/9685886dd65cfc256dc30c97954a18cedda4331f/output/res/anim/abc_popup_enter.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/anim/abc_slide_out_top.xml",
+        "source": "/Users/arisprung/.android/build-cache/9685886dd65cfc256dc30c97954a18cedda4331f/output/res/anim/abc_slide_out_top.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/anim/abc_slide_in_bottom.xml",
+        "source": "/Users/arisprung/.android/build-cache/9685886dd65cfc256dc30c97954a18cedda4331f/output/res/anim/abc_slide_in_bottom.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/anim/abc_grow_fade_in_from_bottom.xml",
+        "source": "/Users/arisprung/.android/build-cache/9685886dd65cfc256dc30c97954a18cedda4331f/output/res/anim/abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/anim/abc_slide_in_top.xml",
+        "source": "/Users/arisprung/.android/build-cache/9685886dd65cfc256dc30c97954a18cedda4331f/output/res/anim/abc_slide_in_top.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/anim/abc_slide_out_bottom.xml",
+        "source": "/Users/arisprung/.android/build-cache/9685886dd65cfc256dc30c97954a18cedda4331f/output/res/anim/abc_slide_out_bottom.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/anim/design_snackbar_in.xml",
+        "source": "/Users/arisprung/.android/build-cache/6c5a10ba49b394c61d1691b295523cf5617247ff/output/res/anim/design_snackbar_in.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/anim/design_fab_out.xml",
+        "source": "/Users/arisprung/.android/build-cache/6c5a10ba49b394c61d1691b295523cf5617247ff/output/res/anim/design_fab_out.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/anim/abc_fade_in.xml",
+        "source": "/Users/arisprung/.android/build-cache/9685886dd65cfc256dc30c97954a18cedda4331f/output/res/anim/abc_fade_in.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/anim/abc_shrink_fade_out_from_bottom.xml",
+        "source": "/Users/arisprung/.android/build-cache/9685886dd65cfc256dc30c97954a18cedda4331f/output/res/anim/abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/anim/design_fab_in.xml",
+        "source": "/Users/arisprung/.android/build-cache/6c5a10ba49b394c61d1691b295523cf5617247ff/output/res/anim/design_fab_in.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/anim/abc_fade_out.xml",
+        "source": "/Users/arisprung/.android/build-cache/9685886dd65cfc256dc30c97954a18cedda4331f/output/res/anim/abc_fade_out.xml"
+    },
+    {
+        "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/anim/design_bottom_sheet_slide_out.xml",
+        "source": "/Users/arisprung/.android/build-cache/6c5a10ba49b394c61d1691b295523cf5617247ff/output/res/anim/design_bottom_sheet_slide_out.xml"
+    }
+]

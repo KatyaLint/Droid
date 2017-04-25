@@ -930,7 +930,11 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         // Creating and Building the Dialog
         if(adapter != null){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Which State/Province?");
+            LayoutInflater inflater = getLayoutInflater();
+            View title=inflater.inflate(R.layout.titlebar, null);
+            FontTextView titleText =(FontTextView)title.findViewById(R.id.titlebar);
+            titleText.setText("Which State/Province?");
+            builder.setCustomTitle(title);
             builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int item) {
                     if(userData.getCountry().equals("US") ){
