@@ -2,6 +2,7 @@ package hellogbye.com.hellogbyeandroid.fragments.hotel;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -56,6 +58,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityHotel;
+import info.hoang8f.android.segmented.SegmentedGroup;
 
 import static hellogbye.com.hellogbyeandroid.R.id.map;
 
@@ -76,7 +79,7 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
     private NodesVO mCurrentSelectedNode;
     private NodesVO mPastSelectedNode;
     private AutoCompleteTextView mAutocomplete;
-    private Switch mSwitch;
+    private SegmentedGroup mSwitch;
     private StreetViewPanoramaView mStreetViewPanoramaView;
     private View mView;
 
@@ -105,7 +108,7 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
         mMarkersList = new HashMap<>();
         mAutocomplete = (AutoCompleteTextView) mView.findViewById(R.id.hotel_autocomplete);
         mStreetViewPanoramaView = (StreetViewPanoramaView) mView.findViewById(R.id.steet_view_panorama);
-        mSwitch = (Switch) mView.findViewById(R.id.hotel_switch);
+        mSwitch = (SegmentedGroup) mView.findViewById(R.id.segmented2);
 
         return mView;
     }
@@ -172,16 +175,27 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
 
         initAutoComplete();
 
-        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mSwitch.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                if (i == R.id.button21) {
                     showStreetView();
                 } else {
                     showMap();
                 }
+
             }
         });
+//        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                if (b) {
+//                    showStreetView();
+//                } else {
+//                    showMap();
+//                }
+//            }
+//        });
 
 
 

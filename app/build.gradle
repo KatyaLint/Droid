@@ -119,7 +119,7 @@ dependencies {
     compile files('libs/gson-2.2.3.jar')
     compile files('libs/signalr-client-sdk.jar')
     compile files('libs/signalr-client-sdk-android.jar')
-
+    compile 'info.hoang8f:android-segmented:1.0.6'
 
 }
 apply plugin: 'com.google.gms.google-services'

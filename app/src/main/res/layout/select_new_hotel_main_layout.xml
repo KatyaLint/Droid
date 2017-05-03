@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/select_hotel_rl"
@@ -18,6 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:maxLines="1"
+            android:layout_gravity="center"
             android:drawableLeft="@drawable/search_icon"
             android:drawablePadding="@dimen/DP2"
             android:completionThreshold="1"
@@ -28,16 +30,39 @@
             android:textColor="@color/COLOR_BLACK" />
 
 
-        <Switch
-            android:id="@+id/hotel_switch"
+
+
+        <info.hoang8f.android.segmented.SegmentedGroup
+            android:id="@+id/segmented2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:activeTextColor="@android:color/white"
-            app:currentActive="First"
-            app:firstText="First Page"
-            app:inActiveTextColor="#282950"
-            app:secondText="Second page"/>
+            android:layout_margin="@dimen/DP20"
+            android:orientation="horizontal"
+            segmentedgroup:sc_border_width="2dp"
+            segmentedgroup:sc_checked_text_color="@color/COLOR_WHITE"
+            segmentedgroup:sc_tint_color="@color/COLOR_00516f"
+
+
+
+
+            segmentedgroup:sc_corner_radius="10dp">
+
+            <RadioButton
+                android:id="@+id/button21"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MAP"
+                style="@style/RadioButton" />
+
+            <RadioButton
+                android:id="@+id/button22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STREET VIEW"
+                style="@style/RadioButton" />
+        </info.hoang8f.android.segmented.SegmentedGroup>
 
     </LinearLayout>
 
