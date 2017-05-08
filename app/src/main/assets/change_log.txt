@@ -683,3 +683,4 @@ Code changing:
        - empty itinerary
        - active profile blue line
        - avatar removed from cnc
+       - cnc round textbox
