@@ -104,6 +104,7 @@ public class AccountPersonalInfoHelpAndFeedbackFragment extends HGBAbstractFragm
 
         FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
         if(my_trip_profile.getTag()!=null){
+
             userPreferenceID =  my_trip_profile.getTag().toString();
         }
 

@@ -77,6 +77,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         // Empty constructor required for fragment subclasses
     }
 
+
     public static Fragment newInstance(int position) {
         Fragment fragment = new AlternativeFlightFragment();
         Bundle args = new Bundle();

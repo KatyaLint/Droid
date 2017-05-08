@@ -7,6 +7,7 @@ public class PersonalUserInformationVO {
 
     private String mTravelPreferencesProfileId;
     private String userEmailLogIn;
+    private String mTravelPreferencesProfileName;
 
     public String getUserEmailLogIn() {
         return userEmailLogIn;
@@ -23,5 +24,14 @@ public class PersonalUserInformationVO {
 
     public void setmTravelPreferencesProfileId(String mTravelPreferencesProfileId) {
         this.mTravelPreferencesProfileId = mTravelPreferencesProfileId;
+    }
+
+
+    public String getmTravelPreferencesProfileName() {
+        return mTravelPreferencesProfileName;
+    }
+
+    public void setmTravelPreferencesProfileName(String mTravelPreferencesProfileName) {
+        this.mTravelPreferencesProfileName = mTravelPreferencesProfileName;
     }
 }

@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="@dimen/DP10"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
 
 
- <ListView
-     android:id="@+id/user_profile_popup_list_view"
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:layout_alignParentTop="true" />
 
 
 <!--    <View
@@ -22,27 +17,14 @@
        android:layout_height="@dimen/DP1"
        android:background="@color/COLOR_999999" />-->
 
-    <include
-        android:layout_below="@+id/user_profile_popup_list_view"
-        android:id="@+id/profile_manage"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        layout="@layout/user_profile_popup_list_bottom"
-
-
-         />
-
-
-  <!--  <LinearLayout
+    <LinearLayout
         android:layout_marginTop="@dimen/DP10"
         android:id="@+id/manage_profile_ll"
-        android:layout_below="@+id/user_profile_popup_list_view"
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="wrap_content">
             <View
                android:id="@+id/user_profile_popup_list_separator"
-               android:layout_above="@+id/manage_profile_ll"
                android:layout_width="match_parent"
                android:layout_height="@dimen/DP1"
                android:background="@color/COLOR_999999" />
@@ -74,11 +56,10 @@
         </LinearLayout>
         <View
             android:id="@+id/user_profile_popup_list_separator_"
-            android:layout_above="@+id/manage_profile_ll"
             android:layout_width="match_parent"
             android:layout_height="@dimen/DP1"
             android:background="@color/COLOR_80999999" />
-    </LinearLayout>-->
+    </LinearLayout>
 
 
-</RelativeLayout>
+</LinearLayout>

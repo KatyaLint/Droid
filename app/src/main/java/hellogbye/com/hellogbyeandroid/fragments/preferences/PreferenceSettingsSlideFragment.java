@@ -119,14 +119,18 @@ public class PreferenceSettingsSlideFragment extends HGBAbstractFragment {
 
     }
 
-    private void popUpConnection(String profileName) {
+    private void popUpConnection(final String profileName) {
         ConnectionManager.getInstance(getActivity()).postNewPreferenceProfile(profileName, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
                     AccountDefaultSettingsVO accountDefault = (AccountDefaultSettingsVO) data;
+
                     accountDefaultSettings.add(accountDefault);
+
                     mAdapter.notifyDataSetChanged();
+                   // ((MainActivityBottomTabs) getActivity()).getHGBSaveDataClass().setPersonalUserInformation().getmTravelPreferencesProfileName();
+
                 }
             }
 
@@ -330,6 +334,8 @@ public class PreferenceSettingsSlideFragment extends HGBAbstractFragment {
 
                 if (data != null) {
                     accountDefaultSettings = (ArrayList<AccountDefaultSettingsVO>) data;
+
+                    getActivityInterface().setAccountDefaultSettingsVOs(accountDefaultSettings);
                     createListAdapter();
                 }
             }

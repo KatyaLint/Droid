@@ -677,7 +677,8 @@ Code changing:
       --------------
        - new register user popup
        - Edit Trip view
-        - new add_to_favorites icon
-        - new cnc add dialog
+       - new add_to_favorites icon
+       - new cnc add dialog
        - grid dialog information
        - empty itinerary
+       - active profile blue line

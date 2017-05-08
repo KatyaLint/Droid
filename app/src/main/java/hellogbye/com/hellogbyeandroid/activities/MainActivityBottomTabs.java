@@ -188,13 +188,25 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
 
         getUpComingTrips();
-        getUserData();
-        getCompanionsFromServer();
-        getCountries();
+
 
 
         hgbSaveDataClass.setPersonalUserInformation(new PersonalUserInformationVO());
         setContentView(R.layout.main_activity_bottom_tab_layout);
+
+        userProfilePreferences = new UserProfilePreferences();
+
+        userProfilePreferences.getUserSettings(MainActivityBottomTabs.this, MainActivityBottomTabs.this,hgbSaveDataClass, new CNCSignalRFragment.IProfileUpdated() {
+
+            @Override
+            public void profileUpdated(String profilename) {
+
+                getUserData();
+            }
+        }, false);
+
+        getCompanionsFromServer();
+        getCountries();
 
         //INIT ToolBar
         mToolbar = (CostumeToolBar) findViewById(R.id.toolbar_costume);
@@ -242,6 +254,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     }
 
+
+    public UserProfilePreferences getUserProfilePreferences(){
+        return userProfilePreferences;
+    }
 
     private void initBottomBar(Bundle savedInstanceState) {
 
@@ -563,15 +579,23 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
                 //showUserProfiles();
                 if (!mCurrentUser.getIsTravelprofile()) {
-                    userProfilePreferences = new UserProfilePreferences();
+
                     showUserProfiles();
                 }
 
                 String profileID = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, "");
+             /*   List<DefaultsProfilesVO> accountDefaultSettings = hgbSaveDataClass.getDefaultsProfilesVOs();
+                for(DefaultsProfilesVO defaultsProfilesVO : accountDefaultSettings){
+                    if(defaultsProfilesVO.getId().equals(profileID)){
+                        hgbSaveDataClass.getPersonalUserInformation().setmTravelPreferencesProfileName(defaultsProfilesVO.getProfilename());
+                    }
+                }*/
+
                 hgbSaveDataClass.getPersonalUserInformation().setmTravelPreferencesProfileId(profileID);
+
                 //my_trips_image_profile.setImageBitmap(HGBUtility.getBitmapFromCache(getBaseContext()));
                 getAccountsProfiles();
-                selectBottemTab(R.id.bb_menu_cnc);
+
                 //  selectItem(ToolBarNavEnum.TRIPS.getNavNumber(), null,true);
 
                 //selectBottemTab(R.id.bb_menu_cnc);
@@ -602,21 +626,24 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
     }
 
-    public void editProfileTypeMainToolBar() {
+    private void editProfileTypeMainToolBar() {
         //TODO remove to profile fragment
         ArrayList<AccountsVO> accounts = hgbSaveDataClass.getAccounts();
-
 
         for (AccountsVO account : accounts) {
             String userEmailLogIn = hgbSaveDataClass.getPersonalUserInformation().getUserEmailLogIn();
             if (account.getEmail().equals(userEmailLogIn) && account.getTravelpreferenceprofile() != null) {
                 my_trip_profile.setText(account.getTravelpreferenceprofile().getmProfileName());
                 my_trip_profile.setTag(account.getTravelpreferenceprofile().getmId());
-                //   hgbSaveDataClass.getCurrentUser().setmTravelPreferencesProfileId(account.getTravelpreferenceprofile().getId());
+
+                hgbSaveDataClass.getPersonalUserInformation().setmTravelPreferencesProfileName(account.getTravelpreferenceprofile().getmProfileName());
+
                 hgbSaveDataClass.getPersonalUserInformation().setmTravelPreferencesProfileId(account.getTravelpreferenceprofile().getmId());
+
                 break;
             }
         }
+        selectBottemTab(R.id.bb_menu_cnc);
     }
 
     private UserProfilePreferences userProfilePreferences;
@@ -650,75 +677,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     }
 
-
-/*    private void showAlertProfilesDialog(ArrayList<DefaultsProfilesVO> userProfileVOs) {
-     //   kate
-        LayoutInflater li = LayoutInflater.from(MainActivityBottomTabs.this);
-        View promptsView = li.inflate(R.layout.popup_custom_title, null);
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivityBottomTabs.this);
-        dialogBuilder.setCustomTitle(promptsView);
-        // dialogBuilder.setTitle(getResources().getString(R.string.profile_choose_between));
-
-        final ArrayList<String> itemsList = new ArrayList<String>();
-        for (DefaultsProfilesVO userProfileVO : userProfileVOs) {
-            itemsList.add(userProfileVO.getName());
-        }
-        // final CharSequence[] list = itemsList.toArray(new String[itemsList.size()]);
-        UserProfilesAdapter adapter = new UserProfilesAdapter(itemsList, this.getBaseContext());
-
-
-      //  UserProfilesListAdapter adapter = new UserProfilesListAdapter(itemsList, this.getBaseContext());
-
-        dialogBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-                DefaultsProfilesVO defaultProfile = userDefaultProfiles.get(item);
-                postDefaultProfile(String.valueOf(defaultProfile.getId()), defaultProfile.getName());
-                selectDefaultProfileDialog.dismiss();
-            }
-        });
-        //Create alert dialog object via builder
-        selectDefaultProfileDialog = dialogBuilder.create();
-        selectDefaultProfileDialog.setCancelable(false);
-        selectDefaultProfileDialog.show();
-    }*/
-
-
-    private void postDefaultProfile(String profileId, String profileName) {
-        ConnectionManager.getInstance(MainActivityBottomTabs.this).postDefaultProfile(profileId, profileName, new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
-                if (data != null) {
-                    AccountDefaultSettingsVO accountDefault = (AccountDefaultSettingsVO) data;
-                    putNewPreferencesForUser(hgbSaveDataClass.getPersonalUserInformation().getUserEmailLogIn(), accountDefault.getmId());
-                }
-            }
-
-            @Override
-            public void onError(Object data) {
-                ErrorMessage(data);
-            }
-        });
-
-    }
-
-
-    private void putNewPreferencesForUser(final String userEmail, final String accountID) {
-        ConnectionManager.getInstance(MainActivityBottomTabs.this).putAccountsPreferences(userEmail, accountID, new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
-                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, accountID);
-            }
-
-            @Override
-            public void onError(Object data) {
-                ErrorMessage(data);
-            }
-        });
-    }
-
-    public void setUserDefaultProfiles(ArrayList<DefaultsProfilesVO> userDefaultProfiles) {
-        this.userDefaultProfiles = userDefaultProfiles;
-    }
 
     private void getCompanionsFromServer() {
         ConnectionManager.getInstance(MainActivityBottomTabs.this).getCompanions(new ConnectionManager.ServerRequestListener() {

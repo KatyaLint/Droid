@@ -154,14 +154,52 @@
         ​
     </RelativeLayout>
 
-    <ScrollView
-        android:layout_above="@+id/cnc_view_border_line"
+
+    <LinearLayout
+        android:id="@+id/cnc_fragment_profile_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:background="@color/COLOR_079DE0"
+        android:orientation="horizontal"
+        android:padding="@dimen/DP8"
+        android:gravity="center">
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/COLOR_WHITE"
+            android:textSize="@dimen/SP12"
+            app:fontName="dinnextltpro_bold.otf"
+            android:text="Active Profile"/>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/cnc_fragment_profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/COLOR_WHITE"
+            android:layout_marginLeft="@dimen/DP10"
+            android:textSize="@dimen/SP12"
+            android:text="Time Saver"/>
+
+        <ImageView
+            android:layout_marginLeft="@dimen/DP10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chevron_dropdown"/>
+
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_above="@+id/cnc_view_border_line"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cnc_fragment_profile_line"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -182,12 +220,11 @@
                 android:visibility="visible"
                 app:fontName="dinnextltpro_medium.otf" />-->
 
-     <android.support.v7.widget.RecyclerView
-         android:id="@+id/cnc_recycler_view"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-
-         android:layout_alignParentTop="true" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/cnc_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true" />
 
             <RelativeLayout
                 android:id="@+id/cnc_tutorial_text_rl"
