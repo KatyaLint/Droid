@@ -682,3 +682,4 @@ Code changing:
        - grid dialog information
        - empty itinerary
        - active profile blue line
+       - avatar removed from cnc
