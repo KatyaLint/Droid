@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="@color/COLOR_F5F5F5"
     android:layout_marginBottom="@dimen/DP16"
     android:orientation="vertical">
@@ -189,7 +190,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-
+        android:isScrollContainer="true"
+        android:windowSoftInputMode="adjustResize"
         android:layout_margin="@dimen/DP14"
         android:background="@drawable/cnc_gray_round_border"
         android:orientation="horizontal">
@@ -262,24 +264,11 @@
             android:layout_height="wrap_content"
 
             android:orientation="horizontal"
-            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true">
             ​
-            <hellogbye.com.hellogbyeandroid.views.FontTextView
-                android:id="@+id/cnc_send"
-                android:layout_width="@dimen/DP50"
-                android:layout_height="@dimen/DP34"
-                android:background="@drawable/blue_button_border_cnc"
-                android:gravity="center"
-                android:layout_marginBottom="@dimen/DP20"
-                android:layout_marginRight="@dimen/DP10"
 
-                android:text="@string/send"
-                android:textColor="@color/COLOR_003D4C"
-                app:fontName="dinnextltpro_medium.otf"
-                android:textSize="@dimen/SP16"
-                android:visibility="gone" />
             ​
             <ImageView
                 android:gravity="center"
@@ -289,6 +278,20 @@
                 android:background="@drawable/microphone"
                 android:layout_margin="@dimen/DP10"
                 android:visibility="visible" />
+
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/cnc_send"
+                android:layout_width="@dimen/DP50"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_button_border_cnc"
+                android:gravity="center"
+                android:padding="@dimen/DP10"
+                android:text="@string/send"
+                android:textColor="@color/COLOR_003D4C"
+                app:fontName="dinnextltpro_medium.otf"
+                android:textSize="@dimen/SP14"
+                android:visibility="gone" />
             ​
         </LinearLayout>
         ​

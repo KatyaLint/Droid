@@ -5,7 +5,6 @@ package hellogbye.com.hellogbyeandroid.fragments.cnc;
  */
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -40,7 +39,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.HGBMainInterface;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.cncadapters.CNCAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.cncadapters.CNCMenuAdapter;
@@ -52,7 +50,6 @@ import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportResultsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.ResponsesVO;
@@ -641,10 +638,12 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
                 userName = usersList.getFirstname();
             }
 
-            String text = String.format(res.getString(R.string.default_cnc_message),userName );
+          //  String text = String.format(res.getString(R.string.default_cnc_message),userName );
 
-            getActivityInterface().addCNCItem(new CNCItem(text, CNCAdapter.HGB_ITEM));
-            getActivityInterface().addCNCItem(new CNCItem(res.getString(R.string.default_cnc_message_two), CNCAdapter.HGB_ITEM_NO_ICON));
+           String default_cnc_message_examples_text = res.getString(R.string.default_cnc_message_examples);
+
+            getActivityInterface().addCNCItem(new CNCItem(default_cnc_message_examples_text, CNCAdapter.HGB_ITEM));
+         //   getActivityInterface().addCNCItem(new CNCItem(res.getString(R.string.default_cnc_message_two), CNCAdapter.HGB_ITEM_NO_ICON));
             setTutorialTextVisibility(true);
 
         }

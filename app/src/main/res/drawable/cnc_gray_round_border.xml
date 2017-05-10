@@ -22,10 +22,10 @@
             <solid android:color="@color/COLOR_WHITE"/>
             <corners android:radius="@dimen/DP80" />
             <padding
-                android:left="@dimen/DP4"
-                android:right="@dimen/DP4"
-                android:top="@dimen/DP4"
-                android:bottom="@dimen/DP4"/>
+                android:left="@dimen/DP2"
+                android:right="@dimen/DP2"
+                android:top="@dimen/DP2"
+                android:bottom="@dimen/DP2"/>
         </shape>
 
     </item>
