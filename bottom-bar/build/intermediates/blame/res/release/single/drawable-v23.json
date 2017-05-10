@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/Users/nyawka/Documents/workHG/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/release/drawable-v23/abc_control_background_material.xml",
+        "source": "/Users/nyawka/.android/build-cache/f8a84fcb3af9005c074f1626a79ec8859a9b50ef/output/res/drawable-v23/abc_control_background_material.xml"
+    },
+    {
         "merged": "/Volumes/code/HelloGbye/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/release/drawable-v23/abc_control_background_material.xml",
         "source": "/Users/arisprung/.android/build-cache/9685886dd65cfc256dc30c97954a18cedda4331f/output/res/drawable-v23/abc_control_background_material.xml"
     }

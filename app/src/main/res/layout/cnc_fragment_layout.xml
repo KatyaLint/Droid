@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/COLOR_F5F5F5"
+    android:layout_marginBottom="@dimen/DP16"
     android:orientation="vertical">
     ​
  <!--   <include
@@ -38,130 +39,50 @@
         app:fontName="dinnextltpro_medium.otf" />
 
 
-    <View
-        android:id="@+id/cnc_view_border_line"
-        android:layout_above="@+id/cnc_message_rl"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/DP1"
-        android:background="@color/COLOR_80999999"
-        android:layout_marginBottom="@dimen/DP10"/>
-    ​
-    <RelativeLayout
-        android:id="@+id/cnc_message_rl"
+    <LinearLayout
+        android:id="@+id/cnc_fragment_profile_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:orientation="horizontal">
-        ​
-        <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:background="@color/warm_grey_line" />-->
-        ​
- <!--       <Button
-            android:id="@+id/cnc_fragment_trip_settings"
-            android:layout_width="@dimen/DP22"
-            android:layout_height="@dimen/DP22"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/DP10"
-            android:background="@drawable/edit_icon" />-->
-        ​
+        android:background="@color/COLOR_079DE0"
+        android:orientation="horizontal"
+        android:padding="@dimen/DP8"
+        android:gravity="center">
 
-        <hellogbye.com.hellogbyeandroid.views.FontEditTextView
-            android:background="@android:color/transparent"
-            android:id="@+id/cnc_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/DP10"
-
-            android:layout_toLeftOf="@+id/send_ll"
-            android:layout_toStartOf="@+id/send_ll"
-            android:gravity="center_vertical"
-            android:hint="@string/type_message"
-            android:minHeight="@dimen/DP44"
-            android:textColor="@color/COLOR_565656"
-            android:textColorHint="@color/COLOR_565656"
-            android:textSize="@dimen/SP16"
-            app:fontName="dinnextltpro_regular.otf" />
-
-        ​
-
-        ​
-  <!--      android:id="@+id/cnc_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/DP4"
-        android:layout_toEndOf="@+id/cnc_fragment_trip_settings"
-        android:layout_toLeftOf="@+id/send_ll"
-        android:layout_toStartOf="@+id/send_ll"
-        android:focusableInTouchMode="true"
-        android:gravity="center_vertical"
-        android:hint="@string/type_message"
-        ​
-        android:minHeight="@dimen/DP44"
-        android:textColor="@color/cnc_user_message_color"
-        android:textColorHint="@color/cnc_user_message_color"
-        android:textSize="@dimen/SP16"
-        app:fontName="dinnextltpro_medium.otf" />-->
-        ​
-        <!--android:text="Fly from Miami to New York"-->
-        <!--android:minHeight="@dimen/DP44" />-->
-        ​
-        ​
-        <!--android:text="Fly with Roy and Steve to New York for one week"-->
-        <!--android:text="Fly Sam from NYC to Vegas on Nov 15th for 3 nights in the morning then back to NYC. Fly Warren from Miami to Vegas on Nov 15th before 5PM for 3 nights then on to Toronto for a 1 night then back to Miami. Fly me from Toronto to Vegas, on the earliest flight available for 3 nights on Nov 15th then back to Toronto."-->
-        ​
-        <!--​   android:layout_marginBottom="@dimen/DP10"-->
-
-        <LinearLayout
-            android:id="@+id/send_ll"
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/COLOR_WHITE"
+            android:textSize="@dimen/SP12"
+            app:fontName="dinnextltpro_bold.otf"
+            android:text="Active Profile"/>
 
-            android:orientation="horizontal"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
-            ​
-            <hellogbye.com.hellogbyeandroid.views.FontTextView
-                android:id="@+id/cnc_send"
-                android:layout_width="@dimen/DP50"
-                android:layout_height="@dimen/DP34"
-                android:background="@drawable/blue_button_border_cnc"
-                android:gravity="center"
-                android:layout_marginBottom="@dimen/DP20"
-                android:layout_marginRight="@dimen/DP10"
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/cnc_fragment_profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/COLOR_WHITE"
+            android:layout_marginLeft="@dimen/DP10"
+            android:textSize="@dimen/SP12"
+            android:text="Time Saver"/>
 
-                android:text="@string/send"
-                android:textColor="@color/COLOR_003D4C"
-                app:fontName="dinnextltpro_medium.otf"
-                android:textSize="@dimen/SP16"
-                android:visibility="gone" />
-            ​
-            <ImageView
-                android:gravity="center"
-                android:id="@+id/cnc_mic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/microphone"
-                android:layout_margin="@dimen/DP10"
-                android:visibility="visible" />
-            ​
-        </LinearLayout>
-        ​
-        ​
-    </RelativeLayout>
+        <ImageView
+            android:layout_marginLeft="@dimen/DP10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chevron_dropdown"/>
+
+    </LinearLayout>
+
 
     <ScrollView
-        android:layout_above="@+id/cnc_view_border_line"
+        android:layout_above="@+id/cnc_message_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/cnc_fragment_profile_line"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -182,12 +103,11 @@
                 android:visibility="visible"
                 app:fontName="dinnextltpro_medium.otf" />-->
 
-     <android.support.v7.widget.RecyclerView
-         android:id="@+id/cnc_recycler_view"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-
-         android:layout_alignParentTop="true" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/cnc_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true" />
 
             <RelativeLayout
                 android:id="@+id/cnc_tutorial_text_rl"
@@ -251,6 +171,130 @@
         </LinearLayout>
 
     </ScrollView>
+
+
+
+    <View
+        android:visibility="gone"
+        android:id="@+id/cnc_view_border_line"
+        android:layout_above="@+id/cnc_message_rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DP1"
+        android:background="@color/COLOR_80999999"
+        android:layout_marginBottom="@dimen/DP10"/>
+    ​
+    <RelativeLayout
+
+        android:id="@+id/cnc_message_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+
+        android:layout_margin="@dimen/DP14"
+        android:background="@drawable/cnc_gray_round_border"
+        android:orientation="horizontal">
+        ​
+        <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:background="@color/warm_grey_line" />-->
+        ​
+        <!--       <Button
+                   android:id="@+id/cnc_fragment_trip_settings"
+                   android:layout_width="@dimen/DP22"
+                   android:layout_height="@dimen/DP22"
+                   android:layout_centerVertical="true"
+                   android:layout_marginLeft="@dimen/DP10"
+                   android:background="@drawable/edit_icon" />-->
+        ​
+
+        <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+
+            android:background="@android:color/transparent"
+            android:id="@+id/cnc_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/DP10"
+
+            android:layout_toLeftOf="@+id/send_ll"
+            android:layout_toStartOf="@+id/send_ll"
+            android:gravity="center_vertical"
+            android:hint="@string/type_message"
+            android:minHeight="@dimen/DP44"
+            android:textColor="@color/COLOR_565656"
+            android:textColorHint="@color/COLOR_565656"
+            android:textSize="@dimen/SP16"
+            app:fontName="dinnextltpro_regular.otf" />
+
+        ​
+
+        ​
+        <!--      android:id="@+id/cnc_edit_text"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="@dimen/DP4"
+              android:layout_toEndOf="@+id/cnc_fragment_trip_settings"
+              android:layout_toLeftOf="@+id/send_ll"
+              android:layout_toStartOf="@+id/send_ll"
+              android:focusableInTouchMode="true"
+              android:gravity="center_vertical"
+              android:hint="@string/type_message"
+              ​
+              android:minHeight="@dimen/DP44"
+              android:textColor="@color/cnc_user_message_color"
+              android:textColorHint="@color/cnc_user_message_color"
+              android:textSize="@dimen/SP16"
+              app:fontName="dinnextltpro_medium.otf" />-->
+        ​
+        <!--android:text="Fly from Miami to New York"-->
+        <!--android:minHeight="@dimen/DP44" />-->
+        ​
+        ​
+        <!--android:text="Fly with Roy and Steve to New York for one week"-->
+        <!--android:text="Fly Sam from NYC to Vegas on Nov 15th for 3 nights in the morning then back to NYC. Fly Warren from Miami to Vegas on Nov 15th before 5PM for 3 nights then on to Toronto for a 1 night then back to Miami. Fly me from Toronto to Vegas, on the earliest flight available for 3 nights on Nov 15th then back to Toronto."-->
+        ​
+        <!--​   android:layout_marginBottom="@dimen/DP10"-->
+
+        <LinearLayout
+            android:id="@+id/send_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+            ​
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/cnc_send"
+                android:layout_width="@dimen/DP50"
+                android:layout_height="@dimen/DP34"
+                android:background="@drawable/blue_button_border_cnc"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/DP20"
+                android:layout_marginRight="@dimen/DP10"
+
+                android:text="@string/send"
+                android:textColor="@color/COLOR_003D4C"
+                app:fontName="dinnextltpro_medium.otf"
+                android:textSize="@dimen/SP16"
+                android:visibility="gone" />
+            ​
+            <ImageView
+                android:gravity="center"
+                android:id="@+id/cnc_mic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/microphone"
+                android:layout_margin="@dimen/DP10"
+                android:visibility="visible" />
+            ​
+        </LinearLayout>
+        ​
+        ​
+    </RelativeLayout>
+
     ​
     ​
 </RelativeLayout>

@@ -95,6 +95,7 @@ public class PreferencesSwipeItemsAdapter extends RecyclerSwipeAdapter<Preferenc
                 listLineClicked.longClickedItem(view.getTag().toString());
             }
         });
+
         viewHolder.settings_radio_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

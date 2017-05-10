@@ -154,6 +154,10 @@ public class PreferenceSettingsFragment extends HGBAbstractFragment {
             return;
         }
         String selectedTag = my_trip_profile.getTag().toString();
+
+       // String id = getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId();
+
+     //   mAdapter.selectedItemID(selectedTag);
         mAdapter.selectedItemID(selectedTag);
     }
 

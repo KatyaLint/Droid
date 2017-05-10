@@ -677,10 +677,11 @@ Code changing:
       --------------
        - new register user popup
        - Edit Trip view
-        - new add_to_favorites icon
-        - new cnc add dialog
+       - new add_to_favorites icon
+       - new cnc add dialog
        - grid dialog information
        - empty itinerary
+
        - Create Account Your Address _tooltip search city
        - Create Account Your Name
        - Create Account Your Name Filled
@@ -694,3 +695,7 @@ Code changing:
        - Create Account Animation update
        - Create Account COnfirmation
        - Update alert dialog to radio button
+       - active profile blue line
+       - avatar removed from cnc
+       - cnc round textbox
+

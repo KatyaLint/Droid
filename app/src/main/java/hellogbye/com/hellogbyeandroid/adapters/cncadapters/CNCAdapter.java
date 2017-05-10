@@ -80,7 +80,7 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         }
 
-        public void setVisabilityIcon(boolean isVisible){
+        private void setVisabilityIcon(boolean isVisible){
             if(isVisible){
                 cnc_image_view.setVisibility(View.VISIBLE);
             }else{
@@ -131,12 +131,12 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case HGB_ITEM:
                 View hgbview = LayoutInflater.from(parent.getContext()).inflate(R.layout.cnc_hgb_item, parent, false);
                 ViewHolderHGB vh2 = new ViewHolderHGB(hgbview);
-                vh2.setVisabilityIcon(true);
+             //   vh2.setVisabilityIcon(true);
                 return vh2;
             case HGB_ITEM_NO_ICON:
                 View hgbview2 = LayoutInflater.from(parent.getContext()).inflate(R.layout.cnc_hgb_item, parent, false);
                 ViewHolderHGB vh3 = new ViewHolderHGB(hgbview2);
-                vh3.setVisabilityIcon(false);
+            //    vh3.setVisabilityIcon(false);
                 return vh3;
 
             case WAITING_ITEM:
@@ -159,7 +159,7 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case ME_ITEM:
                 ViewHolderMe meholder = (ViewHolderMe) holder;
                 meholder.itemME.setText(strMessage);
-                HGBUtility.getAndSaveUserImage(avatarUrl,  meholder.cnc_image_view_user, null);
+          //      HGBUtility.getAndSaveUserImage(avatarUrl,  meholder.cnc_image_view_user, null);
                 meholder.itemME.setTextIsSelectable(true);
               //  meholder.cnc_image_view_user.setImageBitmap(HGBUtility.getBitmapFromCache(mContext));
                 break;

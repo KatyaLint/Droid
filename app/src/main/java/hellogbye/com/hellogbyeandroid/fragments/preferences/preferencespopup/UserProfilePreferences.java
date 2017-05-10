@@ -6,12 +6,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.HGBFlowInterface;
@@ -20,6 +22,8 @@ import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsPreferencesCheckAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.preferencesadapter.PreferencesSettingsRadioButtonAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
+import hellogbye.com.hellogbyeandroid.fragments.cnc.CNCSignalRFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.models.PersonalUserInformationVO;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -27,6 +31,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -42,8 +47,45 @@ public class UserProfilePreferences extends HGBAbstractFragment {
     private ArrayList<DefaultsProfilesVO> accountDefaultSettings;
     private boolean isDefaultProfile = false;
     private DefaultsProfilesVO notChoosenProfileVO;
-    //private HGBPreferencesManager hgbPrefrenceManager;
+    private CNCSignalRFragment.IProfileUpdated miProfileUpdated;
+/*    private static UserProfilePreferences singleton = new UserProfilePreferences( );
 
+    public UserProfilePreferences(){
+
+    }
+
+
+    public static UserProfilePreferences getInstance( ) {
+        return singleton;
+    }*/
+
+    public String getActiveAccount(HGBMainInterface hgbMainInterface){
+        String userPreferenceID = hgbMainInterface.getPersonalUserInformation().getmTravelPreferencesProfileId();
+      //  ArrayList<AccountsVO> acountsProfiles = hgbMainInterface.getAccounts();
+
+        List<DefaultsProfilesVO> accountDefaultSettings = hgbMainInterface.getDefaultsProfilesVOs();
+        for(DefaultsProfilesVO defaultsProfilesVO : accountDefaultSettings){
+            if(defaultsProfilesVO.getId().equals(userPreferenceID)){
+                return defaultsProfilesVO.getProfilename();
+               // hgbSaveDataClass.getPersonalUserInformation().setmTravelPreferencesProfileName(defaultsProfilesVO.getProfilename());
+            }
+        }
+
+    /*    List<AccountDefaultSettingsVO> accountDefaultSettingsProfile = hgbMainInterface.getAccountDefaultSettingsVOs();
+        if(accountDefaultSettingsProfile != null ) {
+
+            for (AccountDefaultSettingsVO account : accountDefaultSettingsProfile) {
+                String accountProfile = account.getmProfileName();
+
+                if (accountProfile != null && account.getmId().equals(userPreferenceID)) {
+                    String name = accountProfile;
+                    System.out.println("Kate name getActiveAccount =" + name);
+                    return name;
+                }
+            }
+        }*/
+        return null;
+    }
 
 
 
@@ -86,16 +128,23 @@ public class UserProfilePreferences extends HGBAbstractFragment {
 
 
 
-    public void getUserSettings(final Activity context, final HGBFlowInterface flowInterface,final HGBMainInterface activityInterface){
+    public void getUserSettings(final Activity context, final HGBFlowInterface flowInterface, final HGBMainInterface activityInterface, CNCSignalRFragment.IProfileUpdated iProfileUpdated,
+                                final boolean isDialog){
         // getPreferenceProfiles(final ServerRequestListener listener)
         isDefaultProfile = false;
+        miProfileUpdated = iProfileUpdated;
         ConnectionManager.getInstance(context).getPreferenceProfiles(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 if (data != null) {
                     accountDefaultSettings = (ArrayList<DefaultsProfilesVO>) data;
-                    //     List<AccountDefaultSettingsVO> accountDefaultSettings = (List<AccountDefaultSettingsVO>) data;
-                    profilesDialog(accountDefaultSettings, context, flowInterface, activityInterface);
+                    activityInterface.setDefaultsProfilesVOs(accountDefaultSettings);
+                    if(isDialog) {
+                        //     List<AccountDefaultSettingsVO> accountDefaultSettings = (List<AccountDefaultSettingsVO>) data;
+                        profilesDialog(accountDefaultSettings, context, flowInterface, activityInterface);
+                    }else{
+                        miProfileUpdated.profileUpdated("");
+                    }
                 }
             }
             @Override
@@ -122,6 +171,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
             AccountDefaultSettingsVO accountDefaultSettingsVO = new AccountDefaultSettingsVO();
             accountDefaultSettingsVO.setmId(defaultsProfilesVO.getId());
             String profileName = defaultsProfilesVO.getProfilename();
+
             if(profileName == null){
                 profileName = defaultsProfilesVO.getName();
             }
@@ -168,6 +218,11 @@ public class UserProfilePreferences extends HGBAbstractFragment {
             }
         });
 
+    /*    String profileName = ((MainActivityBottomTabs) getActivity()).getHGBSaveDataClass().getPersonalUserInformation().getmTravelPreferencesProfileName();
+        System.out.println("Kate profileIDrrr profileName=" + profileName);
+
+*/
+
         selectedRadioPreference(activity);
 
 
@@ -204,7 +259,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
 
 
 
-    private void postDefaultProfile(final String profileId, String profileName, final Activity activity, final HGBMainInterface activityInterface,final ArrayList<DefaultsProfilesVO> userProfileVOs) {
+    private void postDefaultProfile(final String profileId,final String profileName, final Activity activity, final HGBMainInterface activityInterface,final ArrayList<DefaultsProfilesVO> userProfileVOs) {
 
         ConnectionManager.getInstance(activity).postDefaultProfile(profileId, profileName, new ConnectionManager.ServerRequestListener() {
             @Override
@@ -230,8 +285,6 @@ public class UserProfilePreferences extends HGBAbstractFragment {
                 ErrorMessage(data);
             }
         });
-
-
     }
 
 
@@ -275,10 +328,13 @@ public class UserProfilePreferences extends HGBAbstractFragment {
             @Override
             public void onSuccess(Object data) {
                 FontTextView my_trip_profile = ((MainActivityBottomTabs) activity).getMyTripProfile();
+
                 my_trip_profile.setTag(selected.getId());
 
                 ((MainActivityBottomTabs) activity).getHGBSaveDataClass().getPersonalUserInformation().setmTravelPreferencesProfileId(selected.getId());
+                ((MainActivityBottomTabs) activity).getHGBSaveDataClass().getPersonalUserInformation().setmTravelPreferencesProfileName(selected.getProfilename());
 
+                miProfileUpdated.profileUpdated(selected.getProfilename());
 
                 //   FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
                 //   my_trip_profile.setText(selected.getProfilename());
@@ -299,6 +355,9 @@ public class UserProfilePreferences extends HGBAbstractFragment {
             return;
         }
         String selectedTag = my_trip_profile.getTag().toString();
+
+        System.out.println("Kate selectedRadioPreference UserProfile selectedTag =" + selectedTag);
+
         mRadioPreferencesAdapter.selectedItemID(selectedTag);
     }
 

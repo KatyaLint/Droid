@@ -5,10 +5,9 @@ package hellogbye.com.hellogbyeandroid.fragments.cnc;
  */
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -41,11 +40,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.CreateAccountActivity;
+import hellogbye.com.hellogbyeandroid.activities.HGBMainInterface;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.adapters.cncadapters.CNCAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.cncadapters.CNCMenuAdapter;
-import hellogbye.com.hellogbyeandroid.adapters.flights.AlternativeFlightsSortAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.ChangeTripName;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TitleNameChange;
@@ -54,6 +52,7 @@ import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportResultsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.ResponsesVO;
@@ -108,8 +107,12 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
     private int selectedCount = 0;
 
     private FontTextView itirnarary_title_Bar;
-    private UserProfilePreferences userProfilePreferences;
+
     private LinearLayout cnc_add_dialog_favorites;
+
+    private LinearLayout cnc_fragment_profile_line;
+    private FontTextView cnc_fragment_profile_name;
+    private UserProfilePreferences userProfilePreferences;
     // private SignalRService service;
 
     public static Fragment newInstance(int position) {
@@ -119,6 +122,11 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         fragment.setArguments(args);
         return fragment;
     }
+
+    public interface IProfileUpdated{
+        void profileUpdated(String profilename);
+    }
+
 
     @Nullable
     @Override
@@ -145,7 +153,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
             setTutorialTextVisibility(false);
         }
 
-        userProfilePreferences = new UserProfilePreferences();
+        userProfilePreferences = ((MainActivityBottomTabs)getActivity()).getUserProfilePreferences();
         userProfilePreferences.getAccountsProfiles(getActivity(), getActivityInterface());
 
         initList();
@@ -158,13 +166,16 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         }
 
         joinCompanionToTravel();
-        final ImageButton toolbar_profile_popup = ((MainActivityBottomTabs)getActivity()).getToolbarProfilePopup();
+
+     /*   final ImageButton toolbar_profile_popup = ((MainActivityBottomTabs)getActivity()).getToolbarProfilePopup();
         toolbar_profile_popup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 userProfilePreferences.getUserSettings(getActivity(), getFlowInterface(), getActivityInterface());
             }
-        });
+        });*/
+
+
         // tool_bar_profile_name = ((MainActivityBottomTabs)getActivity()).getToolBarProfileChange();
 
 
@@ -194,6 +205,43 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
         SignalRService service = ((MainActivityBottomTabs) getActivity()).getSignalRService();
         service.setCNCHiglightResponceCB(higlightReceivedFromServer);
+
+
+        cnc_fragment_profile_line = (LinearLayout)rootView.findViewById(R.id.cnc_fragment_profile_line);
+        cnc_fragment_profile_name = (FontTextView)rootView.findViewById(R.id.cnc_fragment_profile_name);
+
+        String profilePreferencesActiveName = userProfilePreferences.getActiveAccount(getActivityInterface());
+        cnc_fragment_profile_name.setText(profilePreferencesActiveName);
+
+        String profilePreferencesActiveId =   getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId();
+
+        FontTextView my_trip_profile = ((MainActivityBottomTabs) getActivity()).getMyTripProfile();
+        my_trip_profile.setTag(profilePreferencesActiveId);
+
+        cnc_fragment_profile_line.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userProfilePreferences.getUserSettings(getActivity(), getFlowInterface(), getActivityInterface(), new IProfileUpdated() {
+
+                    @Override
+                    public void profileUpdated(String profilename) {
+                        cnc_fragment_profile_name.setText(profilename);
+                    }
+                }, true);
+            }
+
+
+        });
+
+
+
+
+
+
+      //  getActivity().getAc.getTravelpreferenceprofile().getmProfileName()
+
+
+
                 /*new IHiglightReceivedFromServer(){
 
             @Override
