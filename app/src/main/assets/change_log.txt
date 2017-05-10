@@ -681,3 +681,16 @@ Code changing:
         - new cnc add dialog
        - grid dialog information
        - empty itinerary
+       - Create Account Your Address _tooltip search city
+       - Create Account Your Name
+       - Create Account Your Name Filled
+       - Create Account Your Email Filled
+       - Create Account Your Password
+       - Create Account Your Password_tooltip
+       - Create Account Your Password Filled
+       - Create Account Your Email
+       - Create Account
+       - Create Account Your Address_filled
+       - Create Account Animation update
+       - Create Account COnfirmation
+       - Update alert dialog to radio button
