@@ -192,7 +192,9 @@
         android:layout_alignParentBottom="true"
         android:isScrollContainer="true"
         android:windowSoftInputMode="adjustResize"
-        android:layout_margin="@dimen/DP14"
+        android:layout_marginBottom="@dimen/DP14"
+        android:layout_marginRight="@dimen/DP14"
+        android:layout_marginLeft="@dimen/DP14"
         android:background="@drawable/cnc_gray_round_border"
         android:orientation="horizontal">
         ​

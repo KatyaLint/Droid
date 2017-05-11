@@ -53,6 +53,8 @@ import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportResultsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.ResponsesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.cnc.CNCExamplesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.cnc.CNCTutorialsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionUserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.ConversationVO;
@@ -93,7 +95,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
     private LinearLayout cnc_text_tutorial_ll;
 
     private Handler tutorailTexthandler = new Handler();
-    private   Runnable mRunnable;
+    private Runnable mRunnable;
     private String[] account_settings;
     private int mTutorialTextNumber = 0;
 
@@ -110,6 +112,8 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
     private LinearLayout cnc_fragment_profile_line;
     private FontTextView cnc_fragment_profile_name;
     private UserProfilePreferences userProfilePreferences;
+    private CNCTutorialsVO cncTutorials;
+    private String tutorialMessage = "/examples";
     // private SignalRService service;
 
     public static Fragment newInstance(int position) {
@@ -128,6 +132,9 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
+        cncTutorials = getActivityInterface().getCNCTutorialsVOs();
 
         account_settings = getResources().getStringArray(R.array.tutorial_arr);
 
@@ -232,31 +239,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
 
 
-
-
-
-      //  getActivity().getAc.getTravelpreferenceprofile().getmProfileName()
-
-
-
-                /*new IHiglightReceivedFromServer(){
-
-            @Override
-            public void HiglightReceived( AirportServerResultCNCVO airportServerResultVO) {
-
-
-                serverFinished(airportServerResultVO);
-
-
-            }
-        });//(higlightReceivedFromServer);*/
-
-/*        itirnarary_title_Bar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // clearCNCItems();
-            }
-        });*/
 
 
         //  showMessagesToUser();
@@ -405,7 +387,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
         for(ConversationVO conversation : conversations){
             handleHGBMessageMe(conversation.getmMessage());
-            handleHGBMessage(getString(R.string.itinerary_created));
+            handleHGBMessage(getString(R.string.itinerary_created), CNCAdapter.HGB_ITEM_SELECTED);
         }
     }
 
@@ -532,7 +514,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
             public void onError(Object data) {
 
                 //   ErrorMessage(data);
-                handleHGBMessage(getResources().getString(R.string.cnc_error));
+                handleHGBMessage(getResources().getString(R.string.cnc_error), CNCAdapter.HGB_ITEM);
                 CNCSignalRFragment.this.airportSendValuesVOs.clear();
             }
         });
@@ -740,7 +722,12 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         //stopTextTutorial();
         //setTutorialTextVisibility(false);
 
-        getActivityInterface().addCNCItem(new CNCItem(strMessageReceived.trim(), CNCAdapter.ME_ITEM));
+        String userMessage = strMessageReceived.trim();
+        if(userMessage.equals(tutorialMessage)){
+            examplesLogics();
+            return;
+        }
+        getActivityInterface().addCNCItem(new CNCItem(userMessage, CNCAdapter.ME_ITEM));
         addWaitingItem();
         mCNCAdapter.notifyDataSetChanged();
         resetMessageEditText();
@@ -763,6 +750,20 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
     }
 
+    private void examplesLogics() {
+        getActivityInterface().getCNCItems().clear();
+
+        ArrayList<CNCExamplesVO> examples = cncTutorials.getExamples();
+
+        for(CNCExamplesVO example : examples){
+            handleHGBMessage(example.getName(),CNCAdapter.HGB_ITEM_SELECTED);
+        }
+        mCNCAdapter.notifyDataSetChanged();
+        resetMessageEditText();
+        setTutorialTextVisibility(false);
+    }
+
+
     private void enterCNCMessage(final String strMessage) {
         setTutorialTextVisibility(false);
         clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
@@ -773,7 +774,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
             selectedCount = 0;
             sendMessageToServer(strMessage);
-
         }
     }
 
@@ -995,8 +995,11 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
 
 
-    public void handleHGBMessage(String strMessage) {
-
+    public void handleHGBMessage(String strMessage,int type ) {
+        getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(),  type ));//CNCAdapter.HGB_ITEM));
+        removeWaitingItem();
+    }
+    public void handleHGBMessageSelected(String strMessage,int type ) {
         getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.HGB_ITEM));
         removeWaitingItem();
     }
@@ -1048,7 +1051,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
         @Override
         public void SignalRRrror(String error) {
-            handleHGBMessage(getResources().getString(R.string.cnc_error));
+            handleHGBMessage(getResources().getString(R.string.cnc_error), CNCAdapter.HGB_ITEM);
             airportSendValuesVOs.clear();
           //  ErrorMessage(error);
         }
@@ -1145,12 +1148,12 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
     private void handleHGBMessagesViews(UserTravelMainVO userTraveler){
         if(userTraveler.getItems().size() <=0){
-            handleHGBMessage(getString(R.string.itinerary_no_items));
+            handleHGBMessage(getString(R.string.itinerary_no_items),CNCAdapter.HGB_ITEM);
         }
         else if (getActivityInterface().getSolutionID() == null) {
-            handleHGBMessage(getString(R.string.itinerary_created));
+            handleHGBMessage(getString(R.string.itinerary_created), CNCAdapter.HGB_ITEM_SELECTED);
         }else{
-            handleHGBMessage(getString(R.string.grid_has_been_updated));
+            handleHGBMessage(getString(R.string.grid_has_been_updated), CNCAdapter.HGB_ITEM_SELECTED);
         }
 
         airportSendValuesVOs.clear();

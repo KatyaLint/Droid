@@ -45,6 +45,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.FareClassFragment;
 
 import hellogbye.com.hellogbyeandroid.fragments.cnc.CNCSignalRFragment;
+import hellogbye.com.hellogbyeandroid.fragments.cnc.CNCTutorials;
 import hellogbye.com.hellogbyeandroid.fragments.hotel.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.hotel.SelectNewHotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
@@ -87,6 +88,7 @@ import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.cnc.CNCTutorialsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
@@ -182,6 +184,11 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        CNCTutorials cncTutorials = new CNCTutorials();
+        CNCTutorialsVO cncTutorialsVO = cncTutorials.parseFlight(MainActivityBottomTabs.this);
+        hgbSaveDataClass.setCNCTutorialsVOs(cncTutorialsVO);
 
         Intent intent = new Intent();
         intent.setClass(getBaseContext(), SignalRService.class);

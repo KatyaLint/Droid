@@ -681,7 +681,6 @@ Code changing:
        - new cnc add dialog
        - grid dialog information
        - empty itinerary
-
        - Create Account Your Address _tooltip search city
        - Create Account Your Name
        - Create Account Your Name Filled
@@ -698,4 +697,6 @@ Code changing:
        - active profile blue line
        - avatar removed from cnc
        - cnc round textbox
+
+       -examples in working progress
 

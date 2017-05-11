@@ -18,6 +18,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.cnc.CNCTutorialsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelationshipTypesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
@@ -62,6 +63,7 @@ public class HGBSaveDataClass implements HGBMainInterface {
     private List<AccountDefaultSettingsVO> accountDefaultSettingsVOs;
 
     private List<DefaultsProfilesVO> defaultsProfilesVOs;
+    private CNCTutorialsVO cncTutorialsVOs;
 
 //    public HGBSaveDataClass(MainActivity mainActivity ,HGBPreferencesManager hgbPrefrenceManager) {
 //        this.hgbPrefrenceManager = hgbPrefrenceManager;
@@ -362,6 +364,16 @@ public class HGBSaveDataClass implements HGBMainInterface {
     @Override
     public void setDefaultsProfilesVOs(List<DefaultsProfilesVO> defaultsProfilesVOs) {
         this.defaultsProfilesVOs = defaultsProfilesVOs;
+    }
+
+    @Override
+    public CNCTutorialsVO getCNCTutorialsVOs() {
+        return cncTutorialsVOs;
+    }
+
+    @Override
+    public void setCNCTutorialsVOs(CNCTutorialsVO cncTutorialsVO) {
+        this.cncTutorialsVOs = cncTutorialsVO;
     }
 
 

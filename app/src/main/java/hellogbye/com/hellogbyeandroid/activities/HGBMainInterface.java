@@ -10,6 +10,7 @@ import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.PersonalUserInformationVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.cnc.CNCTutorialsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
@@ -109,9 +110,12 @@ public interface HGBMainInterface {
     void setAccountDefaultSettingsVOs(List<AccountDefaultSettingsVO> accountDefaultSettingsVOs);
 
 
-     List<DefaultsProfilesVO> getDefaultsProfilesVOs();
-
+    List<DefaultsProfilesVO> getDefaultsProfilesVOs();
     void setDefaultsProfilesVOs(List<DefaultsProfilesVO> defaultsProfilesVOs);
+
+    CNCTutorialsVO getCNCTutorialsVOs();
+    void setCNCTutorialsVOs(CNCTutorialsVO cncTutorialsVO);
+
 
 
 }
