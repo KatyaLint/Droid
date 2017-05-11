@@ -1,12 +1,70 @@
-
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/select_hotel_rl"
+    android:orientation="vertical">
 
-    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/hotel_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/COLOR_F2F2F2"
+        android:orientation="horizontal">
 
+        <AutoCompleteTextView
+            android:id="@+id/hotel_autocomplete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/search_icon"
+            android:drawablePadding="@dimen/DP2"
+            android:completionThreshold="1"
+            android:dropDownSelector="@color/COLOR_WHITE"
+            android:hint="Looking for hotel..."
+            android:padding="@dimen/DP6"
+            android:popupBackground="@color/COLOR_WHITE"
+            android:textColor="@color/COLOR_BLACK" />
+
+
+
+
+        <info.hoang8f.android.segmented.SegmentedGroup
+            android:id="@+id/segmented2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/DP20"
+            android:orientation="horizontal"
+            segmentedgroup:sc_border_width="2dp"
+            segmentedgroup:sc_checked_text_color="@color/COLOR_WHITE"
+            segmentedgroup:sc_tint_color="@color/COLOR_00516f"
+
+
+
+
+            segmentedgroup:sc_corner_radius="10dp">
+
+            <RadioButton
+                android:id="@+id/button21"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MAP"
+                style="@style/RadioButton" />
+
+            <RadioButton
+                android:id="@+id/button22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STREET VIEW"
+                style="@style/RadioButton" />
+        </info.hoang8f.android.segmented.SegmentedGroup>
+
+    </LinearLayout>
 
 
     <FrameLayout
@@ -14,18 +72,23 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/hotel_header"
         android:layout_above="@+id/alt_hotel_recycler_view"
-
-
         />
+
+    <com.google.android.gms.maps.StreetViewPanoramaView
+        android:id="@+id/steet_view_panorama"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/hotel_header"
+        android:layout_above="@+id/alt_hotel_recycler_view"
+        android:visibility="gone"
+        android:layout_height="match_parent"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/alt_hotel_viewpager"
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP150"
-
         android:layout_alignParentBottom="true"
-        android:clickable="true"
-         />
+        android:clickable="true" />
 
 </RelativeLayout>

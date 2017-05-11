@@ -35,6 +35,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     public void setClickListener(OnBoardingPager.IOnBoardingNextClickListener onBoardingNextClickListener){
         this.onBoardingNextClickListener = onBoardingNextClickListener;
     }
+
     @Override
     public int getCount() {
         return onboardingPagerTextVOArrayList.size();

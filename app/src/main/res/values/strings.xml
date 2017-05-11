@@ -128,6 +128,7 @@
     <string name="type_message">Type to search or press the mic</string>
     <string name="send">Go</string>
     <!--<string name="default_cnc_message"> welcome to\nHelloGbye. Tell us in your own words where and when you'd\nlike to go.</string>-->
+    <string name="default_cnc_message_examples">Type /examples to to see different ways to search. Type /tutorials to see short instructional videos.</string>
     <string name="default_cnc_message">Hello %1$s, welcome to\nHelloGbye. Tell us in your own words where and when you\'d like to go.</string>
     <string name="default_cnc_message_two">You can come back here\nanytime and make changes to\nyour itinerary</string>
     <string name="itinerary_created">Ok, i\'ve found these options for you</string>
@@ -232,7 +233,7 @@
     <!--<string name="terms">By clicking pre-register. You agree to HelloGbye\nUser Agreement and Privacy Policy.</string>-->
     <string name="sign_up_done">Done!</string>
 
-    <string name="continue_to_checkout">Checkout</string>
+    <string name="continue_to_checkout">CHECKOUT</string>
     <string name="continue_to_checkout_flight_baggage">Flight Baggage &amp; Hotel info</string>
     <string name="continue_to_checkout_price">PRICE :</string>
     <string name="continue_to_checkout_last_screen">An email confirmation has been\nsent to the email address above.</string>
@@ -260,6 +261,7 @@
     <string name="save_button">Save</string>
     <string name="ok_button">Ok</string>
     <string name="logout_button">LOG OUT</string>
+
 
     <string name="you_can_say_things_like">You can say things like:</string>
     <string name="cnc_error">Your query was not recognized.\nPlease try again.</string>
@@ -313,9 +315,8 @@
     <string name="itinerary_and_payment">ITINERARY AND PAYMENT</string>
 
     <string name="popup_flight_baggage_info_title">Flight Baggage &amp; Hotel Info</string>
-    <string name="popup_flight_baggage_info_text">All flights shown are in %1$s, per\npassenger, and include all taxes, fees and\ncharges.\n\n
-                                                    Additional baggage fees may apply.\n\n
-                                        Hotel prices do not include taxes, fees\nand charges.</string>
+    <string name="popup_flight_baggage_info_text">All flights shown are in %1$s, per\n\npassenger, and include all taxes, fees\n\nand charges.\n\n\nAdditional baggage fees may apply.\n\n\nHotel prices on individual hotel tiles do\n\nnot include taxes &amp; fees.\n\n\nThe total price shown for your\n\nitinerary dose include applicable hotel\n\ntaxes &amp; fees.
+                                      </string>
 
 
     <string name="my_trip_plan_trip">PLAN A TRIP</string>
@@ -360,6 +361,21 @@
     <string name="onboarding_explanation_4">Use the back button to ask for more\noptions in your own words.</string>
     <string name="already_have_an_account_sign_in">Already have an account? SIGN IN</string>
     <string name="or">Or</string>
+
+
+    <string name = "free_user_title">Become A Registered User</string>
+    <string name = "free_user_explanation">This option is available only for registered users</string>
+
+
+    <string name = "cnc_add_dialog">What do you want to add?</string>
+    <string name = "cnc_add_dialog_add_favorites">Add to favorites</string>
+    <string name = "cnc_add_dialog_remove_favorites">Remove from favorites</string>
+
+    <string name = "itinerary_empty_title">This Itinerary is Empty</string>
+    <string name = "itinerary_empty_small_title">It contains:</string>
+    <string name = "itinerary_empty_text">No Flights/Hotels</string>
+    <string name="map">MAP</string>
+    <string name="street">STREET</string>
 
 
 </resources>

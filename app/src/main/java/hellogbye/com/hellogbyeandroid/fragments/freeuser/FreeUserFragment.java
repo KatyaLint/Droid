@@ -1,3 +1,4 @@
+/*
 package hellogbye.com.hellogbyeandroid.fragments.freeuser;
 
 
@@ -18,9 +19,11 @@ import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 
+*/
 /**
  * Created by nyawka on 4/14/16.
- */
+ *//*
+
 public class FreeUserFragment extends HGBAbstractFragment {
     private FontButtonView free_user_sign_in_btn;
     private FontButtonView free_user_create_new_account_btn;
@@ -45,6 +48,9 @@ public class FreeUserFragment extends HGBAbstractFragment {
         free_user_sign_in_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
+
+
                 Intent intent = new Intent(getActivity(), CreateAccountActivity.class);
                 intent.putExtra("free_user_sign_in",true);
                 startActivity(intent);
@@ -74,3 +80,4 @@ public class FreeUserFragment extends HGBAbstractFragment {
 
 
 
+*/

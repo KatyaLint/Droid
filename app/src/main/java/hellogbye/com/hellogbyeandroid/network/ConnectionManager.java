@@ -274,7 +274,7 @@ public class ConnectionManager {
             if(userData.getUserTravelerType()!= -1){
                 jsonObject.put("marketingtravelertype", userData.getUserTravelerType());
             }
-
+            jsonObject.put("gender", userData.getGender());
             jsonObject.put("acceptHgbMarketing", hellopromtion);
             jsonObject.put("acceptThirdPartyMarketing",thirdpatyboolean);
             jsonObject.put("usertypeid","NPAY");
@@ -1054,7 +1054,7 @@ public class ConnectionManager {
     }
 
     public void getDefaultProfiles(final ServerRequestListener listener) {
-        String url = getURL(Services.DEFAULT_PROFILES);
+        String url = getURL(Services.USER_GET_TRAVEL_PROFILES_DEFAULT);
 
         JSONObject jsonObject = new JSONObject();
         HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
@@ -1111,7 +1111,7 @@ public class ConnectionManager {
         });
     }
 
-    public void getPreferencesForProfileId(String profileid, final ServerRequestListener listener) {
+   /* public void getPreferencesForProfileId(String profileid, final ServerRequestListener listener) {
         String url = getURL(Services.USER_TRAVEL_PROFILES) + profileid + "/Preferences";
         JSONObject jsonObject = new JSONObject();
 
@@ -1128,7 +1128,7 @@ public class ConnectionManager {
             }
         });
 
-    }
+    }*/
 
 
     public void getUserProfile(final ServerRequestListener listener) {
@@ -1151,6 +1151,7 @@ public class ConnectionManager {
     }
 
 
+/*
     public void getTravelProfiles(final ServerRequestListener listener) {
         String url = getURL(Services.USER_GET_TRAVEL_PROFILES_DEFAULT);
         JSONObject jsonObject = new JSONObject();
@@ -1167,6 +1168,7 @@ public class ConnectionManager {
             }
         });
     }
+*/
 
 
     public void getSearchWithQuery(String query, String profileid, final ServerRequestListener listener) {
@@ -1245,11 +1247,11 @@ public class ConnectionManager {
     //{"parameters":{"solution":"c86d9879-eb15-4164-8b75-6bbac0787b75","paxid":"9d2c85f5-d295-4064-a8c6-a4d0015b52e4","checkin":"2015-09-03","checkout":"2015-09-04"},"hotel":"c329c20a-4836-4bec-9580-48f7814e9fbd"}
 
     public void getUserSettingsAttributes(String attributesId, final ServerRequestListener listener) {
-        String url = getURL(Services.USER_GET_TRAVEL_PROFILES);
+        String url = getURL(Services.USER_TRAVEL_PROFILES);
         JSONObject jsonObject = new JSONObject();
 
 
-        url = url + "/" + attributesId + "/" + PREFERENCES;
+        url = url +  attributesId + "/" + PREFERENCES;
 
         HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
                 jsonObject, new Response.Listener<String>() {
@@ -2056,7 +2058,7 @@ public class ConnectionManager {
                 USER_GET_PROFILE("UserProfile"),
                 USER_POST_CHANGE_PASSWORD("UserProfile/Password"),
                 USER_GET_TRAVEL_PROFILES("TravelPreference/Profiles"),
-                USER_GET_TRAVEL_PROFILES_DEFAULT("TravelPreference/Profiles/Defaults"),
+           //     USER_GET_TRAVEL_PROFILES_DEFAULT("TravelPreference/Profiles/Defaults"),
                 USER_POST_CHECKOUT("CheckOut"),
                 USER_GET_SEARCH_QUERY("Solution/Primarysearch?query="),
                 USER_GET_HOTEL_ALTERNATIVE("Hotel"),
@@ -2093,7 +2095,7 @@ public class ConnectionManager {
                 ACTIVATE_NOTIFICATION("PushNotifications/Enable/"),
 
                 HOTEL_SEARCH("hotel/Search"),
-                DEFAULT_PROFILES("TravelPreference/Profiles/Defaults"),
+                USER_GET_TRAVEL_PROFILES_DEFAULT("TravelPreference/Profiles/Defaults"),
                 STATIC_CITY_AUTOCOMPLETE("statics/cityautocomplete"),
                 COMPANION_SEARCH("UserProfile/Search?count=5&excludeCompanions=false&"),
                 RESEND_ACTIVATION("UserProfile/ResendWelcomeEmail?email=");

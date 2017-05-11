@@ -3,7 +3,17 @@
     android:id="@+id/layout_root" android:orientation="vertical"
     android:layout_width="fill_parent" android:layout_height="fill_parent"
     android:paddingLeft="@dimen/DP20" android:paddingRight="@dimen/DP20"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/DP20" android:paddingTop="@dimen/DP14" android:layout_gravity="top">
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_trip_name"
+        android:textColor="@color/COLOR_00516f"
+        app:fontName="dinnextltpro_condensed.ttf"
+        android:textSize="@dimen/SP24"/>
 
 
 
@@ -12,6 +22,7 @@
         android:layout_width="match_parent"
         android:text="prrrr"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/COLOR_999999"/>
+        android:hint=""
+        android:textColorHint="@color/COLOR_80FFFFFF"/>
 
 </LinearLayout>

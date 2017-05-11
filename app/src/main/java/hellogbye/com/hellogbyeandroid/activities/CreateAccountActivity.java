@@ -19,7 +19,9 @@ import android.text.TextPaint;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -63,6 +65,8 @@ import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
+import static hellogbye.com.hellogbyeandroid.R.id.textView;
+import static hellogbye.com.hellogbyeandroid.R.id.title;
 import static java.lang.Long.parseLong;
 
 /**
@@ -94,6 +98,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private ImageView mCloud05;
     private ImageView mCloud06;
     private ImageView mCloud07;
+    private ImageView mCloud08;
     private ImageView mArrowBack;
     private View mUnderlineTitle;
     private View mUnderlineTitle2;
@@ -154,6 +159,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private String android_id;
     private ArrayList<String> mCityList;
     private AlertDialog levelDialog;
+    private AlertDialog titleDialog;
+    private AlertDialog travelTypeDialog;
+
     private Tooltip mTooltip;
 
     @Override
@@ -173,6 +181,18 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             Window w = getWindow(); // in Activity's onCreate() for instance
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
+
+        Uri data = getIntent().getData();
+        if(data != null){
+            String inurl = data.toString();
+            String email = inurl.replace("hgb://", "");
+            String passwordLocal = userData.getConfirmPassword() ;
+            if(passwordLocal == null){
+                passwordLocal = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, "");
+            }
+            sendLoginToServer(email,passwordLocal);
+        }
+
     }
 
     @Override
@@ -201,6 +221,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mCloud05 = (ImageView) findViewById(R.id.cloud_5);
         mCloud06 = (ImageView) findViewById(R.id.cloud_6);
         mCloud07 = (ImageView) findViewById(R.id.cloud_7);
+        mCloud08 = (ImageView) findViewById(R.id.cloud_8);
         mArrowBack = (ImageView) findViewById(R.id.arrow_back);
         mBirds = (LinearLayout) findViewById(R.id.birds);
         mOr = (LinearLayout) findViewById(R.id.or_ll);
@@ -323,7 +344,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             @Override
             public void onClick(View view) {
 
-                sendLoginToServer();
+                sendLoginToServer(mLoginEmail.getText().toString(),mLoginPassword.getText().toString());
 
 
 
@@ -333,7 +354,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     }
 
-    private void sendLoginToServer() {
+    private void sendLoginToServer(String email,String pass) {
         try{
 //            int permissionCheck = ContextCompat.checkSelfPermission(CreateAccountActivity.this, Manifest.permission.READ_PHONE_STATE);
 //
@@ -353,7 +374,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                 uuid = UUID.randomUUID().toString();
             }
 
-            ConnectionManager.getInstance(CreateAccountActivity.this).login(mLoginEmail.getText().toString(), mLoginPassword.getText().toString(),uuid,
+
+            ConnectionManager.getInstance(CreateAccountActivity.this).login(email,pass,uuid,
                     new ConnectionManager.ServerRequestListener() {
                         @Override
                         public void onSuccess(Object data) {
@@ -363,7 +385,6 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                             hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
 
                             hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, mLoginEmail.getText().toString());
-                            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, mLoginPassword.getText().toString());
                             hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
                             goToMainActivity();
                         }
@@ -400,10 +421,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mLastName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH
-                        || actionId == EditorInfo.IME_ACTION_DONE
-                        || keyEvent.getAction() == KeyEvent.ACTION_DOWN
-                        && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
                     userData.setFirstName(mFirstName.getText().toString());
                     userData.setLastName(mLastName.getText().toString());
                     openTitleUp();
@@ -677,7 +695,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
                 break;
             case R.id.user_travel_type:
-                HGBUtility.showPikerDialog(0,mTravlerType, CreateAccountActivity.this, "SELECT TYPE", getResources().getStringArray(R.array.traveler_type_array), 0, 3, null, true);
+                openTravelerTypeDialog();
                 break;
 
             case R.id.create_account:
@@ -770,8 +788,69 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         }
     }
 
+    private void openTravelerTypeDialog() {
+        travelTypeDialog = null;
+
+        ArrayAdapter adapterTitle = new ArrayAdapter(CreateAccountActivity.this,  R.layout.dialog_radio,  getResources().getStringArray(R.array.traveler_type_array));
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View title=inflater.inflate(R.layout.titlebar, null);
+        FontTextView titleText =(FontTextView)title.findViewById(R.id.titlebar);
+        titleText.setText("Which type of traveler describes you?");
+        builder.setCustomTitle(title);
+        builder.setSingleChoiceItems(adapterTitle, -1, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+
+                if(mTravlerType != null) { //can be null if i don't want to show anything like in cnc fragment
+                    mTravlerType.setText(getResources().getStringArray(R.array.traveler_type_array)[item]);
+                   // userData.setUserTravelerType(getResources().getStringArray(R.array.gender_array)[item]);
+                }
+
+                travelTypeDialog.hide();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                travelTypeDialog.dismiss();
+            } });
+        travelTypeDialog = builder.create();
+        travelTypeDialog.show();
+    }
+
     private void openTitleUp() {
-        HGBUtility.showPikerDialog(0,mTitle, CreateAccountActivity.this, "SELECT TITLE", getResources().getStringArray(R.array.title_array), 0, 2, null, true);
+           titleDialog = null;
+
+       ArrayAdapter adapterTitle = new ArrayAdapter(CreateAccountActivity.this,  R.layout.dialog_radio,  getResources().getStringArray(R.array.gender_array));
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View title=inflater.inflate(R.layout.titlebar, null);
+        FontTextView titleText =(FontTextView)title.findViewById(R.id.titlebar);
+        titleText.setText("Which Gender?");
+        builder.setCustomTitle(title);
+        builder.setSingleChoiceItems(adapterTitle, -1, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+
+                if(mTitle != null) { //can be null if i don't want to show anything like in cnc fragment
+                    mTitle.setText(getResources().getStringArray(R.array.gender_array)[item]);
+                    userData.setGender(getResources().getStringArray(R.array.gender_array)[item]);
+                }
+
+                titleDialog.hide();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                titleDialog.dismiss();
+            } });
+         titleDialog = builder.create();
+        titleDialog.show();
+
+
+       // HGBUtility.showPikerDialog(0,mTitle, CreateAccountActivity.this, "SELECT TITLE", getResources().getStringArray(R.array.title_array), 0, 2, null, true);
     }
 
     private void goToLoginState(boolean animateFoward) {
@@ -851,10 +930,14 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         // Creating and Building the Dialog
         if(adapter != null){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Which State/Province?");
+            LayoutInflater inflater = getLayoutInflater();
+            View title=inflater.inflate(R.layout.titlebar, null);
+            FontTextView titleText =(FontTextView)title.findViewById(R.id.titlebar);
+            titleText.setText("Which State/Province?");
+            builder.setCustomTitle(title);
             builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int item) {
-                    if(userData.getCountry().equals("US")){
+                    if(userData.getCountry().equals("US") ){
                         setProvince(mUSProvinceItems,mUSCountryarray,item);
 
                     }else if(userData.getCountry().equals("CA")){
@@ -965,6 +1048,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             mCloud04B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud4b_1_2));
             mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_1_2));
             mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_1_2));
+            mCloud08.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud08_1_2));
             mBiulding1.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding01_1_2));
             mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_1_2));
         } else {
@@ -979,6 +1063,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             mCloud04B.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud4b_2_1));
             mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_2_1));
             mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_2_1));
+            mCloud08.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud08_2_1));
             mBiulding1.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding01_2_1));
             mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_2_1));
         }
@@ -996,6 +1081,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             mCloud04.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud04_2_3));
             mBiulding2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buiding02_2_3));
             mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_2_3));
+            mCloud08.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud08_2_3));
             mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_2_3));
             mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_2_3));
         } else {
@@ -1010,6 +1096,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             mCloud07.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud07_3_2));
             mCloud05.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud05_3_2));
             mCloud06.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud06_3_2));
+            mCloud08.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cloud08_3_2));
         }
     }
 
@@ -1256,6 +1343,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             public void onSuccess(Object data) {
                 hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
                 hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, userData.getUserEmail());
+                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD,userData.getConfirmPassword());
+                String  passwordLocal = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, "");
                 Intent intent = new Intent(getBaseContext(), EnterPinActivity.class);
                 startActivity(intent);
                 finish();
@@ -1305,7 +1394,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             Intent intent = new Intent(getApplicationContext(), OnBoardingPager.class);
             startActivity(intent);
         }
-        //finish();
+        finish();
     }
 
     @Override
@@ -1449,7 +1538,11 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         switch (requestCode) {
             case 002:
                 if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    sendLoginToServer();
+                    String passwordLocal = userData.getConfirmPassword() ;
+                    if(passwordLocal == null){
+                        passwordLocal = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, "");
+                    }
+                    sendLoginToServer(mLoginEmail.getText().toString(),passwordLocal);
                 }
                 break;
 

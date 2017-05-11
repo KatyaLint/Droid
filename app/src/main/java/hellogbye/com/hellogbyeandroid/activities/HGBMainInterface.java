@@ -9,6 +9,8 @@ import hellogbye.com.hellogbyeandroid.models.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.PersonalUserInformationVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.cnc.CNCTutorialsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsAttributeParamVO;
@@ -17,6 +19,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelatio
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
+import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 
 /**
@@ -101,6 +104,17 @@ public interface HGBMainInterface {
 
     ArrayList<MyTripItem> getUpComingTrips();
     void setUpComingTrips( ArrayList<MyTripItem> upComingTrips);
+
+    List<AccountDefaultSettingsVO> getAccountDefaultSettingsVOs();
+
+    void setAccountDefaultSettingsVOs(List<AccountDefaultSettingsVO> accountDefaultSettingsVOs);
+
+
+    List<DefaultsProfilesVO> getDefaultsProfilesVOs();
+    void setDefaultsProfilesVOs(List<DefaultsProfilesVO> defaultsProfilesVOs);
+
+    CNCTutorialsVO getCNCTutorialsVOs();
+    void setCNCTutorialsVOs(CNCTutorialsVO cncTutorialsVO);
 
 
 

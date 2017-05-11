@@ -59,6 +59,7 @@ public class SignUpActivity extends BaseActivity {
     private ArrayAdapter adapter;
     private FontButtonView pin_code_verification_next;
     private FontEditTextView pin_code_verification_pin;
+    private String mPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,9 +109,6 @@ public class SignUpActivity extends BaseActivity {
         sign_up_layout_ll = (LinearLayout) findViewById(R.id.sign_up_layout_ll);
         sign_up_layout_ll.setVisibility(View.VISIBLE);
         pin_code_verification_layout.setVisibility(View.GONE);
-
-        pin_code_verification_next = (FontButtonView) pin_code_verification_layout.findViewById(R.id.pin_code_verification_next);
-        pin_code_verification_pin = (FontEditTextView) pin_code_verification_layout.findViewById(R.id.pin_code_verification_pin);
 
         pin_code_verification_next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -278,7 +276,7 @@ public class SignUpActivity extends BaseActivity {
                 hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
 
                 hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
-                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, null);
+
                // hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, null);
 
                 Intent intent = new Intent(getBaseContext(), CreateAccountActivity.class);

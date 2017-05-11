@@ -96,6 +96,7 @@ public class DetailsHotelFragment extends HGBAbstractFragment  implements  OnMap
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
         loadMap();
     }
 

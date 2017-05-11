@@ -21,7 +21,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 public class CostumeToolBar extends Toolbar {
 
-    private ImageButton up_bar_favorite;
+ //   private ImageButton up_bar_favorite;
     private ImageButton chat_message;
     private ImageButton toolbar_new_iternerary;
     private ImageButton favoriteButton;
@@ -82,10 +82,11 @@ public class CostumeToolBar extends Toolbar {
         /*if (keyBoardImage == null) {
             keyBoardImage = (ImageButton) findViewById(R.id.keyboard);
         }*/
-        if (up_bar_favorite == null) {
+    /*    if (up_bar_favorite == null) {
             up_bar_favorite = (ImageButton) findViewById(R.id.up_bar_favorite);
 
-        }
+        }*/
+
         if (favoriteButton == null) {
             favoriteButton = (ImageButton) findViewById(R.id.favority);
         }
@@ -236,7 +237,7 @@ public class CostumeToolBar extends Toolbar {
         String selectedItem = navBar.getNavTitle();
    //     tool_bar_profile_name.setVisibility(View.GONE);
         titleBar.setVisibility(View.GONE);
-        up_bar_favorite.setVisibility(View.GONE);
+     //   up_bar_favorite.setVisibility(View.GONE);
         favoriteButton.setVisibility(View.GONE);
         editPreferense.setVisibility(View.GONE);
         edit_preferences.setVisibility(View.GONE);
@@ -266,7 +267,7 @@ public class CostumeToolBar extends Toolbar {
                 toolbar_profile_popup.setVisibility(View.VISIBLE);
                 break;
             case ITINARERY:
-                up_bar_favorite.setVisibility(View.VISIBLE);
+       //         up_bar_favorite.setVisibility(View.VISIBLE);
                 itirnarary_title_Bar.setVisibility(View.VISIBLE);
                 break;
             /**
@@ -278,7 +279,8 @@ public class CostumeToolBar extends Toolbar {
             case PREFERENCES_DRAG_LIST_SETTINGS:
             case PREFERENCE_SETTINGS_EMAILS:
             case PREFERENCES_CHECK_AS_RADIO_SETTINGS:
-            case TRAVEL_PREFERENCE:
+
+
                 preference_save_changes.setVisibility(View.VISIBLE);
                 titleBar.setVisibility(View.VISIBLE);
                 edit_preferences.setVisibility(View.GONE);
@@ -335,13 +337,15 @@ public class CostumeToolBar extends Toolbar {
             case COMPANIONS_DETAILS:
             case FARE_CLASS_FRAGMENT:
             case SELECT_ROOM_FRAGMENT:
+            case TRAVEL_PREFERENCE:
+            case FREE_USER_FRAGMENT:
                 titleBar.setVisibility(View.VISIBLE);
                 break;
             /**
              * show title and search bar
              */
             case SELECT_HOTEL_FRAGMENT:
-                search_maginfy.setVisibility(View.VISIBLE);
+               // search_maginfy.setVisibility(View.VISIBLE);
                 titleBar.setVisibility(View.VISIBLE);
                 break;
 

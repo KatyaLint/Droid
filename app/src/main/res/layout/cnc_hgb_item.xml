@@ -9,6 +9,7 @@
 
 
     <ImageView
+        android:visibility="gone"
         android:id="@+id/cnc_image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,6 +18,7 @@
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/cnc_hgb_input"
+        android:lineSpacingExtra="@dimen/DP4"
         style="@style/CNCStyle"
         android:text="HGB"
         android:gravity="left"

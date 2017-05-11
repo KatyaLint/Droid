@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:id="@+id/new_grid_main_ll"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">s
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_weight="0.2"
@@ -27,26 +27,36 @@
     <LinearLayout
         android:paddingTop="@dimen/DP20"
         android:id="@+id/cnc_empty_view"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@drawable/light_house"
         android:gravity="center">
 
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/earth_icon"/>
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/SP32"
+            android:textSize="@dimen/SP36"
             android:textColor="@color/COLOR_00516f"
             android:gravity="center"
+            android:layout_marginTop="@dimen/DP220"
             app:fontName="dinnextltpro_mediumcond.ttf"
-            android:text="@string/trip_no_trips_title"
-            android:padding="@dimen/DP20"/>
+            android:text="@string/itinerary_empty_title"
+            android:padding="@dimen/DP10"/>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/SP20"
+            android:gravity="center"
+            android:padding="@dimen/DP10"
+            app:fontName="dinnextltpro_medium.otf"
+            android:textColor="@color/COLOR_00516f"
+            android:text="@string/itinerary_empty_small_title" />
+
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
 
@@ -54,9 +64,9 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/SP18"
             android:gravity="center"
-            app:fontName="dinnextltpro_light.otf"
-            android:textColor="@color/COLOR_999999"
-            android:text="@string/trip_no_trips_explanation" />
+            app:fontName="dinnextltpro_regular.otf"
+            android:textColor="@color/COLOR_00516f"
+            android:text="@string/itinerary_empty_text" />
 
     </LinearLayout>
 

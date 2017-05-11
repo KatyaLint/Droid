@@ -1,0 +1,52 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/COLOR_999999"/>
+            <corners android:radius="@dimen/DP80" />
+
+        </shape>
+    </item>
+
+
+
+
+
+    <item
+        android:left="0dp"
+        android:right="0dp"
+        android:top="0dp"
+        android:bottom="@dimen/DP1">
+
+
+        <shape android:shape="rectangle">
+            <solid android:color="@color/COLOR_WHITE"/>
+            <corners android:radius="@dimen/DP80" />
+            <padding
+                android:left="@dimen/DP2"
+                android:right="@dimen/DP2"
+                android:top="@dimen/DP2"
+                android:bottom="@dimen/DP2"/>
+        </shape>
+
+    </item>
+</layer-list>
+
+
+
+    <!--<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+        <stroke
+            android:width="@dimen/DP1"
+            android:color="@color/COLOR_999999" />
+
+        <padding
+            android:left="@dimen/DP4"
+            android:right="@dimen/DP4"
+            android:top="@dimen/DP4"
+            android:bottom="@dimen/DP4"/>
+        <solid android:color="@color/COLOR_WHITE" />
+
+        <corners android:radius="@dimen/DP80" />
+
+    </shape>-->

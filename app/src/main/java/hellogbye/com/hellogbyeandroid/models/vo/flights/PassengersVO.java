@@ -32,6 +32,7 @@ public class PassengersVO {
 
     @SerializedName("itineraryitems")
     private ArrayList<String> mItineraryItems = new ArrayList<String>();
+
     private HashSet<String> mBookingItems = new HashSet<>();
 
 

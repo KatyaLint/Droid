@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/DP10"
-    android:id="@+id/settings_radio_button_ll"
-    android:orientation="horizontal">
+    android:id="@+id/settings_radio_button_ll" >
 
 
 
     <hellogbye.com.hellogbyeandroid.views.FontCheckedTextView
-        android:layout_margin="@dimen/DP20"
+
         android:textSize="@dimen/SP16"
-        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/DP10"
         android:id="@+id/settings_radio_name"
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP38"
         android:checkMark="?android:attr/listChoiceIndicatorSingle"
         android:gravity="center_vertical"
         android:text="sfdsfsdf"
+
         app:fontName="dinnextltpro_medium.otf"
-        android:textColor="@color/COLOR_00516f" />
+        android:textColor="@color/COLOR_00516f"
+        />
 
 
+    <!--android:textColor="@color/COLOR_00516f"-->
+    <!--   <hellogbye.com.hellogbyeandroid.views.FontTextView
 
- <!--   <hellogbye.com.hellogbyeandroid.views.FontTextView
-
-        android:id="@+id/settings_radio_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/DP10"
-        android:text="lalala"
-        android:layout_centerInParent="true"
-        android:layout_alignParentLeft="true"
-        android:textColor="@color/COLOR_999999"
-        android:textSize="@dimen/SP16"
-        android:layout_marginRight="@dimen/DP6"
-        app:fontName="dinnextltpro_medium.otf" />-->
+           android:id="@+id/settings_radio_name"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="@dimen/DP10"
+           android:text="lalala"
+           android:layout_centerInParent="true"
+           android:layout_alignParentLeft="true"
+           android:textColor="@color/COLOR_999999"
+           android:textSize="@dimen/SP16"
+           android:layout_marginRight="@dimen/DP6"
+           app:fontName="dinnextltpro_medium.otf" />-->
 
  <!--   <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/settings_radio_active_info"
