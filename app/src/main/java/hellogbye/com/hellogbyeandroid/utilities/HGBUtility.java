@@ -803,7 +803,8 @@ public class HGBUtility {
       }
       alert .setView(popupView);
 
-      alert.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+
+      alert.setPositiveButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
 
           @Override
           public void onClick(DialogInterface dialog, int which) {
@@ -820,7 +821,25 @@ public class HGBUtility {
           }
       });
 
-      alert.setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
+      alert.setNegativeButton(positiveButton, new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int which) {
+              String newName ="";
+              if(input != null){
+                  newName = input.getText().toString();
+                  input.setText("");
+                  IBinder token = input.getWindowToken();
+                  ( (InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
+              }
+              if(alertCB != null){
+                  alertCB.itemSelected(newName);
+              }
+              ((ViewGroup) popupView.getParent()).removeView(popupView);
+
+              dialog.cancel();
+          }
+      });
+
+   /*   alert.setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
                   public void onClick(DialogInterface dialog, int which) {
                       String newName ="";
                     if(input != null){
@@ -837,7 +856,7 @@ public class HGBUtility {
                       dialog.cancel();
                   }
               });
-
+*/
          /*     if(isOneButton) {*/
 
 
@@ -855,7 +874,7 @@ public class HGBUtility {
       if (negative_button != null) {
 
           negative_button.setTextColor(activity.getResources()
-                  .getColor(R.color.COLOR_EE3A3C));
+                  .getColor(R.color.COLOR_999999));
       }
       if (positive_button != null) {
           positive_button.setTextColor(activity.getResources()

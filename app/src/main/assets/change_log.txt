@@ -700,3 +700,14 @@ Code changing:
 
        -examples in working progress
 
+
+           ------------------------------------------
+                       Version 0.0.10
+           ------------------------------------------
+               Fixed Bugs:
+               -----------
+
+             Code changing:
+             --------------
+
+        - LogOut dialog from account and on back pressing

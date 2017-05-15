@@ -105,6 +105,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityNetwork;
 import hellogbye.com.hellogbyeandroid.utilities.SpeechRecognitionUtil;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
+import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
@@ -423,7 +424,37 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 //    }
 
 
-    private void LogOutPopup() {
+
+    public void LogOutPopup(){
+        LayoutInflater li = LayoutInflater.from(MainActivityBottomTabs.this);
+        final View promptsView = li.inflate(R.layout.popup_logout_layout, null);
+
+
+
+/*        FontButtonView btn_account_logout_button = (FontButtonView)this.findViewById(R.id.account_logout_button);
+        btn_account_logout_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {*/
+
+                HGBUtility.showAlertPopUp(MainActivityBottomTabs.this, null, promptsView,
+                        null,getResources().getString(R.string.logout_button),
+                        new PopUpAlertStringCB() {
+                            @Override
+                            public void itemSelected(String inputItem) {
+                                gotToStartMenuActivity();
+                            }
+
+                            @Override
+                            public void itemCanceled() {
+
+                            }
+                        });
+           // }
+
+      //  });
+    }
+
+ /*   private void LogOutPopup() {
         LayoutInflater li = LayoutInflater.from(getApplicationContext());
         final View popupView = li.inflate(R.layout.popup_alert_layout, null);
         HGBUtility.showAlertPopUp(MainActivityBottomTabs.this, null, popupView,
@@ -440,7 +471,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                     }
                 });
     }
-
+*/
 
     private void initToolBar() {
 
