@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/flight_tickets_destination_preferred_seat_rl"
+    android:orientation="horizontal"
+    android:layout_height="match_parent">
+
+
+
+<RelativeLayout
+    android:id="@+id/flight_ticket_main_rl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/DP10">
+
+
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Preferred Seat Type"
+        app:fontName="dinnextltpro_medium.otf"
+        android:textColor="@color/COLOR_565656"
+        android:textSize="@dimen/SP18"/>
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/flight_ticket_details_seat_type_preferred"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SELECT TYPE"
+        app:fontName="dinnextltpro_medium.otf"
+        android:textColor="@color/COLOR_003D4C"
+        android:textSize="@dimen/SP12"
+
+        android:layout_marginRight="7dp"
+        android:layout_marginEnd="7dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/flight_ticket_details_preferred_seat_arrow"
+        android:layout_toStartOf="@+id/flight_ticket_details_preferred_seat_arrow" />
+
+    <ImageView
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/arrow_drop_down"
+        android:id="@+id/flight_ticket_details_preferred_seat_arrow"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>
+
+
+
+
+
+</RelativeLayout>

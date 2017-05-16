@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/flight_tickets_destination"
+    android:orientation="horizontal"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="From"
+        app:fontName="dinnextltpro_bold.otf"
+        android:textSize="@dimen/SP10"/>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stops"
+            app:fontName="dinnextltpro_bold.otf"
+            android:textSize="@dimen/SP10"/>
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To"
+            app:fontName="dinnextltpro_bold.otf"
+            android:textSize="@dimen/SP10"/>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time"
+            app:fontName="dinnextltpro_bold.otf"
+            android:textSize="@dimen/SP10"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/flight_tickets_destination_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Toronto, sdfsdf"
+            android:layout_marginLeft="@dimen/DP8"
+            app:fontName="dinnextltpro_regular.otf"
+            android:textSize="@dimen/SP10"/>
+
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/flight_tickets_destination_stops"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Toronto, sdfsdf"
+            android:layout_marginLeft="@dimen/DP8"
+            app:fontName="dinnextltpro_regular.otf"
+            android:textSize="@dimen/SP10"/>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/flight_tickets_destination_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Toronto, sdfsdf"
+            android:layout_marginLeft="@dimen/DP8"
+            app:fontName="dinnextltpro_regular.otf"
+            android:textSize="@dimen/SP10"/>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/flight_tickets_destination_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Toronto, sdfsdf"
+            android:layout_marginLeft="@dimen/DP8"
+            app:fontName="dinnextltpro_regular.otf"
+            android:textSize="@dimen/SP10"/>
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

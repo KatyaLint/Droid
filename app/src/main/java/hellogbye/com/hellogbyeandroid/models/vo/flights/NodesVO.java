@@ -18,7 +18,7 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     private String userName;
     private String accountID;
     private boolean isEmpty = false;
-
+    private int selectedSeatType = 0;
 
 
 
@@ -83,6 +83,7 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
 
     @SerializedName("travelsector")
     private String mTravelsector;
+
     @SerializedName("primaryguid")
     private String mPrimaryguid;
     @SerializedName("normalizedduration")
@@ -685,5 +686,14 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
 
     public void setmOccupants(ArrayList<Occupant> mOccupants) {
         this.mOccupants = mOccupants;
+    }
+
+
+    public int getSelectedSeatType() {
+        return selectedSeatType;
+    }
+
+    public void setSelectedSeatType(int selectedSeatType) {
+        this.selectedSeatType = selectedSeatType;
     }
 }

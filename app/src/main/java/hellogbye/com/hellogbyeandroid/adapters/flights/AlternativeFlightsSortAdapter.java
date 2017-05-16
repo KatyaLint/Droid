@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.views.FontCheckedTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -21,6 +23,12 @@ import hellogbye.com.hellogbyeandroid.views.FontTextView;
 public class AlternativeFlightsSortAdapter extends BaseAdapter {
 
     private List<String> data;
+    private int selectedID = 0;
+
+    public void setSelectedID(int selected){
+        this.selectedID = selected;
+    }
+
     public AlternativeFlightsSortAdapter(List<String> data){
         this.data = data;
     }
@@ -52,8 +60,15 @@ public class AlternativeFlightsSortAdapter extends BaseAdapter {
 
         String sortType = data.get(position);
 
-        FontTextView itemText = (FontTextView)v.findViewById(R.id.alternative_sort_item);
+        FontCheckedTextView itemText = (FontCheckedTextView)v.findViewById(R.id.alternative_sort_item);
+
+
         itemText.setText(sortType);
+        if(position == selectedID){
+            itemText.setChecked(true);
+        }else{
+            itemText.setChecked(false);
+        }
 
 
         return v;

@@ -138,6 +138,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
     public interface IFareClassClickListener{
         void onFareClassClicked(String position);
+        void onSeatTypeClicked(String position);
     }
 
     private void initializeAdapter(){
@@ -182,6 +183,15 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
                 String json = gson.toJson(flightFareClass);
                 args.putString("flight_class_fare", json);
                 getFlowInterface().goToFragment(ToolBarNavEnum.FARE_CLASS_FRAGMENT.getNavNumber(), args);
+            }
+
+            @Override
+            public void onSeatTypeClicked(String position) {
+               /* currentNodeVO.setSelectedSeatType(position);
+
+                mAdapter.updateData(currentNodeVO);
+
+                recyclerView.invalidate();*/
             }
         });
 

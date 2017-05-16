@@ -521,7 +521,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                 .into((RelativeLayout)findViewById(R.id.root))
                 .animate(new TooltipAnimation(TooltipAnimation.REVEAL, 500))
                 .autoCancel(5000)
-                .withTip(new Tooltip.Tip(75, 35, ContextCompat.getColor(getApplicationContext(), R.color.COLOR_003D4C_40_percent_opacity)))
+                .withTip(new Tooltip.Tip(75, 35, ContextCompat.getColor(getApplicationContext(), R.color.COLOR_003D4C)))
                 .show();
         mTooltip.setAlpha(0.7f);
     }

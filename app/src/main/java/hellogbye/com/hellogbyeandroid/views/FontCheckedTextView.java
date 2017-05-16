@@ -3,6 +3,7 @@ package hellogbye.com.hellogbyeandroid.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.support.v7.widget.AppCompatCheckedTextView;
 import android.util.AttributeSet;
 import android.widget.CheckedTextView;
 
@@ -12,7 +13,7 @@ import hellogbye.com.hellogbyeandroid.R;
  * Created by nyawka on 3/9/17.
  */
 
-public class FontCheckedTextView extends CheckedTextView {
+public class FontCheckedTextView extends AppCompatCheckedTextView {
     public FontCheckedTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(attrs);

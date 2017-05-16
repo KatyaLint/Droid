@@ -1,18 +1,25 @@
 package hellogbye.com.hellogbyeandroid.adapters.hotel;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.flights.AlternativeFlightFareClassAdapter;
+import hellogbye.com.hellogbyeandroid.adapters.flights.AlternativeFlightsSortAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.IWebViewClicked;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.FairclassPreferencesVO;
@@ -22,6 +29,8 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.WrapContentViewPager;
+
+
 
 /**
  * Created by nyawka on 10/7/15.
@@ -37,17 +46,81 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
     private IWebViewClicked webViewLinkClicked;
     private Context mContext;
     private NodesVO currentNode;
+    private AlternativeFlightsSortAdapter alternativeFlightsSortAdapter;
 
     private AlternativeFlightFareClassAdapter mFlightFareClassAdapter;
     private AlternativeFlightFragment.IFareClassClickListener onFareClassClickListener;
+    private AlertDialog alertDialog;
+    private ListView user_profile_popup_list_view;
+    private ArrayList<String> preferred_seat_type_list;
+
 
     public FlightAdapter(NodesVO currentNode, ArrayList<LegsVO> itemsData, Context context) {
+
         this.itemsData = itemsData;
         this.mContext = context;
         this.currentNode = currentNode;
         this.mFlightFareClassAdapter = new AlternativeFlightFareClassAdapter(currentNode.getDropdownoptions(), mContext);
 
+        sortDialog(context);
     }
+
+    private void sortDialog(Context context){
+
+        LayoutInflater li = LayoutInflater.from(context);
+        View promptsView = li.inflate(R.layout.popup_custom_title_alternative_sort, null);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+        FontTextView profile_title_layout_text = (FontTextView)promptsView.findViewById(R.id.profile_title_layout_text);
+        profile_title_layout_text.setText(context.getResources().getString(R.string.flight_alternative_preferred_seat_type));
+        dialogBuilder.setCustomTitle(promptsView);
+
+
+
+        String[] preferred_seat_type = context.getResources().getStringArray(R.array.preferred_seat_type);
+        preferred_seat_type_list = new ArrayList<String>(Arrays.asList(preferred_seat_type));
+        this.alternativeFlightsSortAdapter = new AlternativeFlightsSortAdapter(preferred_seat_type_list);
+
+
+        alternativeFlightsSortAdapter.setSelectedID(currentNode.getSelectedSeatType());
+
+
+        View promptsViewTeest = li.inflate(R.layout.popup_alternative_layout_sort, null);
+        user_profile_popup_list_view = (ListView) promptsViewTeest.findViewById(R.id.alternative_popup_sort);
+
+
+     /*   user_profile_popup_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                String selectedType = preferred_seat_type_list.get(position);
+                flight_ticket_details_seat_type_preferred.
+                mAdapter.notifyDataSetChanged();
+                alertDialog.dismiss();
+
+            }
+        });*/
+
+
+
+
+        user_profile_popup_list_view.setAdapter(alternativeFlightsSortAdapter);
+
+        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+            } });
+
+
+        //Create alert dialog object via builder
+        alertDialog = dialogBuilder.create();
+        alertDialog.setView(promptsViewTeest);
+        alertDialog.setCancelable(false);
+
+
+    }
+
+
 
     public void updateMyFlight(boolean mIsMyFlight) {
         this.mIsMyFlight = mIsMyFlight;
@@ -62,19 +135,31 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
 
 
         ViewHolder viewHolder = new ViewHolder(itemLayoutView);
+
+
+
+
         return viewHolder;
     }
 
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(final ViewHolder viewHolder, int position) {
+
+
         LegsVO legFlightVO = itemsData.get(position);
+        viewHolder.flight_tickets_destination_preferred_seat_rl.setTag(position);
+
         if (position != 0) {
             viewHolder.flight_tickets_rl.setVisibility(View.GONE);
             viewHolder.flight_details_fare_class_ll.setVisibility(View.GONE);
+            viewHolder.flight_tickets_destination_preferred_seat_rl.setVisibility(View.GONE);
+          //  viewHolder.flight_tickets_destination_preferred_seat_rl.setTag(position);
         }
         else
         {
+
+            viewHolder.flight_ticket_details_seat_type_preferred.setText( preferred_seat_type_list.get(currentNode.getSelectedSeatType())  );
             viewHolder.flight_cost.setText("$" + HGBUtility.roundNumber(getFlightCost()) + currentNode.getmCurrency());
             viewHolder.flight_direction.setText(destinationFlights);
             viewHolder.flight_tickets_rl.setVisibility(View.VISIBLE);
@@ -91,6 +176,9 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
            // viewHolder.mFlightFareClassAdapter.setDataset(dropDownOptions);
 
         }
+
+
+
      /*   if (position != itemsData.size() - 1) {
             viewHolder.show_alternative_flights.setVisibility(View.GONE);
         } else {
@@ -108,9 +196,22 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
 
             String departureDate = HGBUtilityDate.parseDateToddMMyyyyMyTrip(legFlightVO.getmDeparture());
 
-            viewHolder.flight_details.setText(legFlightVO.getmOriginCityName()+", "+legFlightVO.getmOriginAirPortName()+"\n"
+
+
+            viewHolder.flight_tickets_destination_from.setText(legFlightVO.getmOriginCityName() + "," + legFlightVO.getmOriginAirPortName());
+         //   viewHolder.flight_tickets_destination_stops.setText(legFlightVO.get + "," + legFlightVO.getmOriginAirPortName());
+            viewHolder.flight_tickets_destination_to.setText(legFlightVO.getmDestinationCityName()+", "+legFlightVO.getmDestinationAirportName());
+            viewHolder.flight_tickets_destination_time.setText("Depart: " + legFlightVO.getmDepartureTime()+"     Arrival: " +legFlightVO.getmArrivalTime());
+           // flight_tickets_destination_time
+
+            if (legFlightVO.getmType().equals("StopOver")) {
+                viewHolder.flight_tickets_destination_stops.setText("To: " + legFlightVO.getmCityName() + ", " + legFlightVO.getmAirportName() + " Airport");
+            }
+
+           /* viewHolder.flight_details.setText(legFlightVO.getmOriginCityName()+", "+legFlightVO.getmOriginAirPortName()+"\n"
             +legFlightVO.getmDestinationCityName()+", "+legFlightVO.getmDestinationAirportName()+"\n"
-                    + departureDate);
+                    + departureDate);*/
+
             viewHolder.stop_over_include_layout.setVisibility(View.GONE);
             viewHolder.flight_date.setText(departureDate);
             HGBUtility.loadAirplainImage( legFlightVO.getmCarrierBadgeUrl(),  viewHolder.airplane_details_operated_image);
@@ -121,6 +222,55 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             viewHolder.stop_over_time.setText((int) legFlightVO.getmDurationHours() + "h " + (int) legFlightVO.getmDurationMinutes() + "m");
             viewHolder.airplane_details_ll.setVisibility(View.GONE);
         }
+
+        viewHolder.flight_tickets_destination_preferred_seat_rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+
+
+
+
+                user_profile_popup_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View viewPopup, int position, long id) {
+
+                        FontTextView flight_ticket_details_seat_type_preferred = (FontTextView) view.findViewById(R.id.flight_ticket_details_seat_type_preferred);
+
+                        currentNode.setSelectedSeatType(position);
+                        flight_ticket_details_seat_type_preferred.setText( preferred_seat_type_list.get(currentNode.getSelectedSeatType()));
+                        //    onFareClassClickListener.onSeatTypeClicked(""+position);
+
+
+                        alternativeFlightsSortAdapter.setSelectedID(position);
+
+               /* String selectedType = preferred_seat_type_list.get(position);
+                alternativeFlightsSortAdapter.setSelectedID(position);
+                currentNode.setSelectedSeatType(selectedType);
+                alternativeFlightsSortAdapter.notifyDataSetChanged();*/
+
+
+
+               /* if(tagPosition != null && tagPosition.equals(0)) {
+                     flight_ticket_details_seat_type_preferred.setText(selectedType);
+                    alternativeFlightsSortAdapter.notifyDataSetChanged();
+                }*/
+                        alertDialog.dismiss();
+
+                    }
+                });
+
+
+
+
+                alertDialog.show();
+
+            //    mFlightFareClassAdapter.set
+
+                   /* String guid = view.getTag().toString();
+                    alternativeButtonCB.selectedPressEticket(guid);*/
+            }
+        });
+
 
         if (mIsMyFlight) {
          /*   viewHolder.image_my_flight.setVisibility(View.VISIBLE);
@@ -216,6 +366,8 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
     // inner class to hold a reference to each item of RecyclerView
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        private final FontTextView flight_ticket_details_seat_type_preferred;
+        private  RelativeLayout flight_tickets_destination_preferred_seat_rl;
         private FontTextView show_alternative_flights;
       //  private View flight_ticket_details_layout;
         private FontTextView operatorName;
@@ -240,6 +392,8 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
       //  private FontTextView select_flight;
 
         private FontTextView flight_details;
+
+
         private FontTextView press_here;
         private LinearLayout press_here_ll;
 
@@ -257,6 +411,10 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         private LinearLayout flight_details_fare_class_ll;
 
 
+        private FontTextView flight_tickets_destination_from;
+        private FontTextView flight_tickets_destination_stops;
+        private FontTextView flight_tickets_destination_to;
+        private FontTextView flight_tickets_destination_time;
 
 
         public ViewHolder(View itemLayoutView) {
@@ -266,6 +424,10 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             flightMainCostInitialization(itemLayoutView);
 
             show_alternative_flights = (FontTextView) itemLayoutView.findViewById(R.id.show_alternative_flights);
+
+            flight_tickets_destination_preferred_seat_rl = (RelativeLayout)itemLayoutView.findViewById(R.id.flight_tickets_destination_preferred_seat_rl);
+            flight_ticket_details_seat_type_preferred = (FontTextView)itemLayoutView.findViewById(R.id.flight_ticket_details_seat_type_preferred);
+
 
           /*  show_alternative_flights = (FontTextView) itemLayoutView.findViewById(R.id.show_alternative_flights);
 
@@ -332,7 +494,12 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
 
       //      select_flight = (FontTextView) mainView.findViewById(R.id.select_flight);
 
-            flight_details = (FontTextView) mainView.findViewById(R.id.flight_details);
+            flight_tickets_destination_from = (FontTextView)mainView.findViewById(R.id.flight_tickets_destination_from);
+            flight_tickets_destination_stops = (FontTextView)mainView.findViewById(R.id.flight_tickets_destination_stops);
+            flight_tickets_destination_to  = (FontTextView)mainView.findViewById(R.id.flight_tickets_destination_to);
+            flight_tickets_destination_time = (FontTextView)mainView.findViewById(R.id.flight_tickets_destination_time);
+
+          //  flight_details = (FontTextView) mainView.findViewById(R.id.flight_details);
 
             press_here_ll = (LinearLayout) mainView.findViewById(R.id.select_tix_ll);
             press_here = (FontTextView) mainView.findViewById(R.id.select_tix_press_here);

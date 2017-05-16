@@ -306,4 +306,8 @@ public class LegsVO {
     public void setmEquipment(String mEquipment) {
         this.mEquipment = mEquipment;
     }
+
+    public void setmType(String mType) {
+        this.mType = mType;
+    }
 }

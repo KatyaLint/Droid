@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/COLOR_WHITE"
     android:layout_width="match_parent"
@@ -9,19 +8,28 @@
 
 
 
-    <include
+    <include layout="@layout/flight_ticket_details"/>
 
-        layout="@layout/flight_ticket_details"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DP1"
+        android:background="@color/COLOR_999999"/>
+
+    <include layout="@layout/flight_ticket_details_preferred_seat"/>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DP1"
+        android:background="@color/COLOR_999999"/>
 
   <include layout="@layout/flight_details_fare_class"/>
 
   <!--  android:id="@+id/flight_ticket_details_layout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"-->
-    <include
-
-        layout="@layout/airplane_details"/>
+    <include layout="@layout/airplane_details"/>
 
 <!--    android:id="@+id/airplane_details_layout"
     android:layout_width="fill_parent"
