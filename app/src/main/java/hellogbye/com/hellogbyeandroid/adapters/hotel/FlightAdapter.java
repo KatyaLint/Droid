@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -87,23 +88,6 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         View promptsViewTeest = li.inflate(R.layout.popup_alternative_layout_sort, null);
         user_profile_popup_list_view = (ListView) promptsViewTeest.findViewById(R.id.alternative_popup_sort);
 
-
-     /*   user_profile_popup_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
-                String selectedType = preferred_seat_type_list.get(position);
-                flight_ticket_details_seat_type_preferred.
-                mAdapter.notifyDataSetChanged();
-                alertDialog.dismiss();
-
-            }
-        });*/
-
-
-
-
         user_profile_popup_list_view.setAdapter(alternativeFlightsSortAdapter);
 
         dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -112,12 +96,17 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             } });
 
 
+
         //Create alert dialog object via builder
         alertDialog = dialogBuilder.create();
         alertDialog.setView(promptsViewTeest);
         alertDialog.setCancelable(false);
 
-
+        Button positive_button = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        if (positive_button != null) {
+            positive_button.setTextColor(context.getResources()
+                    .getColor(R.color.COLOR_EE3A3C));
+        }
     }
 
 
@@ -226,8 +215,6 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         viewHolder.flight_tickets_destination_preferred_seat_rl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-
-
 
 
                 user_profile_popup_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
