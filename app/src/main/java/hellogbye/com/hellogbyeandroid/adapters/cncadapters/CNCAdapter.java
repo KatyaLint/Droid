@@ -71,14 +71,25 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     class ViewHolderHGB extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
-        public FontTextView itemHGB;
+        private FontTextView itemHGB;
         private ImageView cnc_image_view;
+        private ImageView cnc_white_bubble_image;
 
-        public ViewHolderHGB(View itemLayoutView) {
+        ViewHolderHGB(View itemLayoutView) {
             super(itemLayoutView);
             itemHGB = (FontTextView) itemLayoutView.findViewById(R.id.cnc_hgb_input);
             cnc_image_view = (ImageView) itemLayoutView.findViewById(R.id.cnc_image_view);
+            cnc_white_bubble_image = (ImageView) itemLayoutView.findViewById(R.id.cnc_white_bubble_image);
             itemLayoutView.setOnClickListener(this);
+
+        }
+
+        private void setVisabilityBubbleIcon(boolean isVisible){
+            if(isVisible){
+                cnc_white_bubble_image.setVisibility(View.VISIBLE);
+            }else{
+                cnc_white_bubble_image.setVisibility(View.GONE);
+            }
 
         }
 
@@ -102,10 +113,10 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     class ViewHolderWaiting extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
-        public DotsTextView itemWaiting;
+        private DotsTextView itemWaiting;
 
 
-        public ViewHolderWaiting(View itemLayoutView) {
+         ViewHolderWaiting(View itemLayoutView) {
             super(itemLayoutView);
             itemWaiting = (DotsTextView) itemLayoutView.findViewById(R.id.dots);
             //itemLayoutView.setOnClickListener(this);
@@ -131,14 +142,24 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 return vh;
 
             case HGB_ITEM:
-            case HGB_ITEM_SELECTED:
+
                 View hgbview = LayoutInflater.from(parent.getContext()).inflate(R.layout.cnc_hgb_item, parent, false);
                 ViewHolderHGB vh2 = new ViewHolderHGB(hgbview);
-             //   vh2.setVisabilityIcon(true);
+                vh2.setVisabilityBubbleIcon(false);
                 return vh2;
+
+            case HGB_ITEM_SELECTED:
+                View hgbviewselected = LayoutInflater.from(parent.getContext()).inflate(R.layout.cnc_hgb_item, parent, false);
+                ViewHolderHGB vhselected = new ViewHolderHGB(hgbviewselected);
+                vhselected.setVisabilityBubbleIcon(true);
+
+
+             //   vh2.setVisabilityIcon(true);
+                return vhselected;
             case HGB_ITEM_NO_ICON:
                 View hgbview2 = LayoutInflater.from(parent.getContext()).inflate(R.layout.cnc_hgb_item, parent, false);
                 ViewHolderHGB vh3 = new ViewHolderHGB(hgbview2);
+
             //    vh3.setVisabilityIcon(false);
                 return vh3;
 
@@ -197,26 +218,27 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             case HGB_ITEM:
             case HGB_ITEM_NO_ICON:
-                System.out.println("Kate HGB_ITEM");
+
                 ViewHolderHGB hgbholder = (ViewHolderHGB) holder;
 
                     hgbholder.itemHGB.setBackgroundResource(R.drawable.hgb_cnc_backround);
                     hgbholder.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_00516f));
                     hgbholder.itemHGB.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
+
                    // hgbholder.itemHGB.setPaintFlags(hgbholder.itemHGB.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                     //hgbholder.itemHGB.setSelected(false);
                   //  hgbholder.itemHGB.setTextIsSelectable(false);
-                hgbholder.itemHGB.setSelected(true);
-                hgbholder.itemHGB.setTextIsSelectable(true);
+                    hgbholder.itemHGB.setSelected(true);
+                    hgbholder.itemHGB.setTextIsSelectable(true);
                     hgbholder.itemHGB.setText(strMessage);
                  break;
             case HGB_ITEM_SELECTED:
-                System.out.println("Kate HGB_ITEM_SELECTED");
-                        ViewHolderHGB hgbholderselected = (ViewHolderHGB) holder;
 
+                        ViewHolderHGB hgbholderselected = (ViewHolderHGB) holder;
+                //hgbholderselected.itemHGB.findViewById(R.id.cnc_white_bubble_image).setVisibility(View.VISIBLE);
                         hgbholderselected.itemHGB.setBackgroundResource(R.drawable.hgb_cnc_backround);
                         hgbholderselected.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_00516f));
-                        hgbholderselected.itemHGB.setPaintFlags(hgbholderselected.itemHGB.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                    //    hgbholderselected.itemHGB.setPaintFlags(hgbholderselected.itemHGB.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                         hgbholderselected.itemHGB.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
                 hgbholderselected.itemHGB.setSelected(false);
                 hgbholderselected.itemHGB.setTextIsSelectable(false);

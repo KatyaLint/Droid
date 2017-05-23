@@ -90,7 +90,8 @@
                     style="@style/RedCustomButtonStyle"
                     android:layout_alignParentBottom="true"
                     android:text="@string/flight_select_flight"
-                    android:visibility="visible" />
+
+                    android:visibility="gone" />
 
 <!--    <android.support.v7.widget.RecyclerView
         android:id="@+id/flightRecyclerView"

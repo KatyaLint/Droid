@@ -72,5 +72,9 @@ public class CNCMenuAdapter extends BaseAdapter {
     public void setCheckedItemPosition(int position){
         checkedPosition = position;
     }
+    public int getCheckedItemPosition(){
+        return checkedPosition;
+    }
+
 
 }

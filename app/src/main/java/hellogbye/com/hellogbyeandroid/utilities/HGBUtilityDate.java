@@ -355,6 +355,9 @@ public class HGBUtilityDate {
         return str;
     }
 
+
+
+
     public static String parseDateToDateHHmm(String time) {
 
         String outputPattern = "MM/dd/yyyy HH:mm:ss";

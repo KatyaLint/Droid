@@ -19,6 +19,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
@@ -65,9 +66,9 @@ public class AlternativeFlightsDetailsFragment extends HGBAbstractFragment {
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
             dialogBuilder.setCustomTitle(promptsView);
 
-        final ArrayList<String> data = new ArrayList<>();
-        data.add("Price");
-        data.add("Airline");
+        String[] preferred_seat_type = getActivity().getResources().getStringArray(R.array.sort_airlines);
+        final ArrayList<String> data = new ArrayList<String>(Arrays.asList(preferred_seat_type));
+
             sortPopupAdapter = new AlternativeFlightsSortAdapter(data);
 
             View promptsViewTeest = li.inflate(R.layout.popup_alternative_layout_sort, null);
@@ -79,10 +80,8 @@ public class AlternativeFlightsDetailsFragment extends HGBAbstractFragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-
-
                     String sortType = data.get(position);
-                    alternativeFlights = hgbUtilitySort.sortData(sortType, alternativeFlights);
+                    alternativeFlights = hgbUtilitySort.sortData(sortType, alternativeFlights, getSelectedGuid());
                     mAdapter.notifyDataSetChanged();
                     alertDialog.dismiss();
 
@@ -119,7 +118,7 @@ public class AlternativeFlightsDetailsFragment extends HGBAbstractFragment {
             selectedRadioPreference(activity);*/
 
 
-            dialogBuilder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+            dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                   /*  if(radioButtonSelected != -1) {
 
@@ -149,6 +148,7 @@ public class AlternativeFlightsDetailsFragment extends HGBAbstractFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
         View rootView = inflater.inflate(R.layout.alternative_flights_list_layout, container, false);
 
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
@@ -157,6 +157,9 @@ public class AlternativeFlightsDetailsFragment extends HGBAbstractFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         // 3. create an adapter
         mAdapter = new AlternativeFlightsAdapter();
+
+        mAdapter.setPrimaryGuid(getSelectedGuid());
+
         recyclerView.setAdapter(mAdapter);
         mAdapter.setOnSortClick(new ISortClickCB(){
 
@@ -170,8 +173,22 @@ public class AlternativeFlightsDetailsFragment extends HGBAbstractFragment {
 
             @Override
             public void onItemClick(String guid) {
-                selectedItemGuidNumber(guid);
-                getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_FACTORY.getNavNumber(),null);
+             //   selectedItemGuidNumber(guid);
+                for(NodesVO nodeVO : alternativeFlights){
+                    if(nodeVO.getmGuid().equals(guid)){
+                        alternativeFlights.remove(nodeVO);
+                        alternativeFlights.add(0,nodeVO);
+                        selectedItemGuidNumber(guid);
+                        mAdapter.setPrimaryGuid(guid);
+                        mAdapter.notifyDataSetChanged();
+                        return;
+                    }
+                }
+
+              //  getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_FACTORY.getNavNumber(),null);
+
+
+
                 //getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_ROUND_TRIP.getNavNumber(),null);
             }
         });
@@ -188,6 +205,12 @@ public class AlternativeFlightsDetailsFragment extends HGBAbstractFragment {
       //  mAdapter.notifyAll();
 
         hgbUtilitySort = new HGBUtilitySort();
+
+
+
+
+
+
 
 
      /*   Bundle arg = new Bundle();

@@ -151,7 +151,9 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
             @Override
             public void onClick(View view) {
 
-                HGBUtility.showAlertPopUp(getActivity(), null, promptsView,
+                ((MainActivityBottomTabs)getActivity()).LogOutPopup();
+
+               /* HGBUtility.showAlertPopUp(getActivity(), null, promptsView,
                        null,getResources().getString(R.string.logout_button),
                         new PopUpAlertStringCB() {
                             @Override
@@ -163,7 +165,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
                             public void itemCanceled() {
 
                             }
-                        });
+                        });*/
             }
 
         });

@@ -109,7 +109,7 @@
                 android:textColor="@color/COLOR_565656"
 
                 android:textSize="@dimen/SP10"
-                android:text="Refundable"
+
                 android:layout_alignParentRight="true"
                 app:fontName="dinnextltpro_light.otf"  />
 
@@ -117,11 +117,42 @@
         </RelativeLayout>
 
         <include
+
             android:id="@+id/alternative_departure"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/alternative_cost"
             layout="@layout/alternative_flight_item_departure"/>
+
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:padding="@dimen/DP8"
+            android:layout_marginTop="@dimen/DP10"
+            android:background="@drawable/blue_button_border"
+            android:id="@+id/choose_alternative_flight"
+            android:layout_below="@+id/alternative_cost"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:text="Choose"
+            android:textColor="@color/COLOR_00516f"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:fontName="dinnextltpro_medium.otf" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:drawableLeft="@drawable/check_mark_small"
+            android:padding="@dimen/DP8"
+            android:layout_marginTop="@dimen/DP10"
+            android:background="@color/COLOR_19ef393b"
+            android:textColor="@color/COLOR_EE3A3C"
+            android:id="@+id/selected_alternative_flight"
+            android:layout_below="@+id/alternative_cost"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:text="Selected"
+            app:fontName="dinnextltpro_medium.otf"
+            android:layout_height="wrap_content" />
+
 
 <!--        <View
             android:id="@+id/alternative_divider"

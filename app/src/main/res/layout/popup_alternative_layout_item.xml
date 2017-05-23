@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/popup_alternative_layout_ll">
 
- <hellogbye.com.hellogbyeandroid.views.FontTextView
+<!-- <hellogbye.com.hellogbyeandroid.views.FontTextView
      android:id="@+id/alternative_sort_item"
      android:layout_margin="@dimen/DP14"
      android:textSize="@dimen/SP16"
@@ -16,6 +16,22 @@
      android:text="sdfsdfsdf"
      app:fontName="dinnextltpro_medium.otf"
      android:gravity="center_vertical"
-     android:layout_height="@dimen/DP38" />
+     android:layout_height="@dimen/DP38" />-->
+
+ <hellogbye.com.hellogbyeandroid.views.FontCheckedTextView
+     android:id="@+id/alternative_sort_item"
+     android:layout_centerInParent="true"
+
+     android:layout_margin="@dimen/DP14"
+     android:textSize="@dimen/SP16"
+     android:layout_width="match_parent"
+     android:layout_height="@dimen/DP38"
+     android:drawableLeft="?android:attr/listChoiceIndicatorSingle"
+
+     android:gravity="center_vertical"
+     android:text="sfdsfsdf"
+     app:fontName="dinnextltpro_regular.otf"
+     android:textColor="@color/COLOR_565656" />
+
 
 </LinearLayout>

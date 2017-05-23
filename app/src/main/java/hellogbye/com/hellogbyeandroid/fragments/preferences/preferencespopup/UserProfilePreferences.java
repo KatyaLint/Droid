@@ -355,9 +355,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
             return;
         }
         String selectedTag = my_trip_profile.getTag().toString();
-
-        System.out.println("Kate selectedRadioPreference UserProfile selectedTag =" + selectedTag);
-
+        
         mRadioPreferencesAdapter.selectedItemID(selectedTag);
     }
 
