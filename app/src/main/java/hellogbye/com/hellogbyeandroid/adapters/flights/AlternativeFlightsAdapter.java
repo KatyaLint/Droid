@@ -19,6 +19,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
+import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
@@ -31,6 +32,7 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
 
     private OnItemClickListener mItemClickListener;
     private AlternativeFlightsDetailsFragment.ISortClickCB onSortClickCB;
+    private String primaryGuid;
 
     public void setData(List<NodesVO> itemsData){
         this.itemsData = itemsData;
@@ -125,6 +127,30 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
         }
 
 
+        if(primaryGuid.equals(itemData.getmGuid())){
+            viewHolder.choose_alternative_flight.setVisibility(View.GONE);
+            viewHolder.selected_alternative_flight.setVisibility(View.VISIBLE);
+
+        }else{
+
+            viewHolder.choose_alternative_flight.setVisibility(View.VISIBLE);
+            viewHolder.selected_alternative_flight.setVisibility(View.GONE);
+        }
+
+        viewHolder.choose_alternative_flight.setTag(itemData.getmGuid());
+        viewHolder.choose_alternative_flight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String chooseId = (String)v.getTag().toString();
+                mItemClickListener.onItemClick(chooseId);
+
+
+                System.out.println("Kate choose_alternative_flight chooseId =" + chooseId);
+            }
+        });
+
+
   /*      if(itemData.getLegs().size() > 1)
         {
             viewHolder.alternative_flight_multiple.setText("Multiple");
@@ -141,6 +167,10 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
 
     public void setOnSortClick(AlternativeFlightsDetailsFragment.ISortClickCB onSortClickCB) {
         this.onSortClickCB = onSortClickCB;
+    }
+
+    public void setPrimaryGuid(String primaryGuid) {
+        this.primaryGuid = primaryGuid;
     }
 
 
@@ -176,9 +206,16 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
         private FontTextView alternative_flight_time;
         private FontTextView alternative_class_type;
         private FontTextView alternative_flight_refundable;
+        private FontTextView choose_alternative_flight;
+        private FontTextView selected_alternative_flight;
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
+
+            choose_alternative_flight = (FontTextView)itemLayoutView.findViewById(R.id.choose_alternative_flight);
+            selected_alternative_flight = (FontTextView)itemLayoutView.findViewById(R.id.selected_alternative_flight);
+
+
        //     alternative_flight_guid = (FontTextView)itemLayoutView.findViewById(R.id.alternative_flight_guid);
             mainRelativeItem = (RelativeLayout)itemLayoutView.findViewById(R.id.alternate_flight_item_rl);
        /*     txtStartTime = (FontTextView) itemLayoutView.findViewById(R.id.startTime);

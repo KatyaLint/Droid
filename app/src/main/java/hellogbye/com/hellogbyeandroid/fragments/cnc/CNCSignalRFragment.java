@@ -903,6 +903,15 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         user_profile_popup_list_view.smoothScrollToPosition(airportSendValueVO.getCenteredItem());
         sortPopupAdapter.setCheckedItemPosition(airportSendValueVO.getCenteredItem());
 
+        dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                int checked = sortPopupAdapter.getCheckedItemPosition();
+
+                String airportName = airportSendValueVO.getResults().get(checked).getAirportname();
+                sendUserAnswearToServer(airportSendValueVO.getResults().get(checked));
+              //  removeWaitingItem();
+
+            } });
         dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 removeWaitingItem();

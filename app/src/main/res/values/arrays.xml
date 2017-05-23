@@ -58,4 +58,12 @@
         <item>Aisle</item>
     </string-array>
 
+
+    <string-array name="sort_airlines">
+        <item>Airline</item>
+        <item>Price</item>
+        <item>Number of stops</item>
+        <item>Duration</item>
+    </string-array>
+
 </resources>

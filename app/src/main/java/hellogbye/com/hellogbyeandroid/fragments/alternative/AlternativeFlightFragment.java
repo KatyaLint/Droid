@@ -74,6 +74,8 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
     private AlternativeFlightFareClassAdapter mFlightDetailsAdapter;
 
     public AlternativeFlightFragment() {
+
+
         // Empty constructor required for fragment subclasses
     }
 
@@ -143,10 +145,10 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
     private void initializeAdapter(){
 
-        if(!currentNodeVO.ismIsAlternative()){
+        /*if(!currentNodeVO.ismIsAlternative()){
             getAlternativeFlights(currentNodeVO.getmPrimaryguid());
             select_flight.setVisibility(View.GONE);
-        }
+        }*/
 
         ArrayList<LegsVO> legsFlights = currentNodeVO.getLegs();
         String allFlights =  setAllFlights(currentNodeVO);
@@ -215,9 +217,10 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         mAdapter.setButtonListener(new AlternativeButtonCB() {
             @Override
             public void showAlternative() {
-                Bundle arg = new Bundle();
-                arg.putString(HGBConstants.BUNDLE_CURRENT_VIEW_NODE_ID, currentNodeVO.getmPrimaryguid());
-                getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_DETAILS.getNavNumber(),arg);
+
+
+                getAlternativeFlights(currentNodeVO.getmPrimaryguid());
+
 
             }
 
@@ -308,8 +311,6 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         LayoutInflater inflater = LayoutInflater.from(getContext());
         rootView = inflater.inflate(R.layout.flight_layout_details, null, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.flightRecyclerView);
@@ -371,17 +372,26 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         String solutionID = getActivityInterface().getTravelOrder().getmSolutionID();
 
         String paxId = getSelectedUserGuid();
-        String flightID = mGuid;
+        String flightID = currentNodeVO.getmPrimaryguid();
 
         ConnectionManager.getInstance(getActivity()).getAlternateFlightsForFlight(solutionID, paxId, flightID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 List<NodesVO> alternativeFlightsVOs = (List<NodesVO>)data;//gson.fromJson((String) data, listType);
                 getActivityInterface().setAlternativeFlights(alternativeFlightsVOs);
+
+                Bundle arg = new Bundle();
+
+                arg.putString(HGBConstants.BUNDLE_CURRENT_VIEW_NODE_ID, currentNodeVO.getmPrimaryguid());
+                getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_DETAILS.getNavNumber(),arg);
+
+
+             //   kate
             }
 
             @Override
             public void onError(Object data) {
+                System.out.println("Kate Error data " + data);
               //  ErrorMessage(data);
             }
         });
