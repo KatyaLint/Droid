@@ -109,7 +109,7 @@
                 android:textColor="@color/COLOR_565656"
 
                 android:textSize="@dimen/SP10"
-                android:text="Refundable"
+
                 android:layout_alignParentRight="true"
                 app:fontName="dinnextltpro_light.otf"  />
 

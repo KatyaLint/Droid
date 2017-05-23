@@ -145,8 +145,6 @@ public class AlternativeFlightsAdapter extends  RecyclerView.Adapter<Alternative
                 String chooseId = (String)v.getTag().toString();
                 mItemClickListener.onItemClick(chooseId);
 
-
-                System.out.println("Kate choose_alternative_flight chooseId =" + chooseId);
             }
         });
 
