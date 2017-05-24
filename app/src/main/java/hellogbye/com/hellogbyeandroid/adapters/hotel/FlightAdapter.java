@@ -82,6 +82,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
         this.alternativeFlightsSortAdapter = new AlternativeFlightsSortAdapter(preferred_seat_type_list);
 
 
+
         alternativeFlightsSortAdapter.setSelectedID(currentNode.getSelectedSeatType());
 
 
@@ -193,9 +194,13 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
             viewHolder.flight_tickets_destination_time.setText("Depart: " + legFlightVO.getmDepartureTime()+"     Arrival: " +legFlightVO.getmArrivalTime());
            // flight_tickets_destination_time
 
-            if (legFlightVO.getmType().equals("StopOver")) {
+
+
+          /*  if (legFlightVO.getmType().equals("StopOver")) {
                 viewHolder.flight_tickets_destination_stops.setText("To: " + legFlightVO.getmCityName() + ", " + legFlightVO.getmAirportName() + " Airport");
-            }
+            }*/
+
+
 
            /* viewHolder.flight_details.setText(legFlightVO.getmOriginCityName()+", "+legFlightVO.getmOriginAirPortName()+"\n"
             +legFlightVO.getmDestinationCityName()+", "+legFlightVO.getmDestinationAirportName()+"\n"
@@ -207,6 +212,9 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
 
 
         } else if (legFlightVO.getmType().equals("StopOver")) {
+
+            viewHolder.flight_tickets_destination_stops.setText("To: " + legFlightVO.getmCityName() + ", " + legFlightVO.getmAirportName() + " Airport");
+
             viewHolder.stop_over_txt.setText(" " +legFlightVO.getmCityName()+", " +legFlightVO.getmAirportName() + " Airport");
             viewHolder.stop_over_time.setText((int) legFlightVO.getmDurationHours() + "h " + (int) legFlightVO.getmDurationMinutes() + "m");
             viewHolder.airplane_details_ll.setVisibility(View.GONE);
@@ -223,12 +231,13 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
 
                         FontTextView flight_ticket_details_seat_type_preferred = (FontTextView) view.findViewById(R.id.flight_ticket_details_seat_type_preferred);
 
+
                         currentNode.setSelectedSeatType(position);
-                        flight_ticket_details_seat_type_preferred.setText( preferred_seat_type_list.get(currentNode.getSelectedSeatType()));
+                        flight_ticket_details_seat_type_preferred.setText( preferred_seat_type_list.get(position));
                         //    onFareClassClickListener.onSeatTypeClicked(""+position);
 
 
-                        alternativeFlightsSortAdapter.setSelectedID(position);
+                        alternativeFlightsSortAdapter.setSelectedID(currentNode.getSelectedSeatType());
 
                /* String selectedType = preferred_seat_type_list.get(position);
                 alternativeFlightsSortAdapter.setSelectedID(position);
