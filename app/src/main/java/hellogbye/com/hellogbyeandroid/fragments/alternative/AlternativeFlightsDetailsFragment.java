@@ -58,7 +58,7 @@ public class AlternativeFlightsDetailsFragment extends HGBAbstractFragment {
         void onSortClick();
     }
 
-
+private int selectedPosition = 0;
     private void sortDialog(){
 
             LayoutInflater li = LayoutInflater.from(getActivity());
@@ -70,7 +70,7 @@ public class AlternativeFlightsDetailsFragment extends HGBAbstractFragment {
         final ArrayList<String> data = new ArrayList<String>(Arrays.asList(preferred_seat_type));
 
             sortPopupAdapter = new AlternativeFlightsSortAdapter(data);
-
+            sortPopupAdapter.setSelectedID(selectedPosition);
             View promptsViewTeest = li.inflate(R.layout.popup_alternative_layout_sort, null);
             ListView user_profile_popup_list_view = (ListView) promptsViewTeest.findViewById(R.id.alternative_popup_sort);
 
@@ -78,9 +78,9 @@ public class AlternativeFlightsDetailsFragment extends HGBAbstractFragment {
             user_profile_popup_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
+                    
                     String sortType = data.get(position);
+                    selectedPosition = position;
                     alternativeFlights = hgbUtilitySort.sortData(sortType, alternativeFlights, getSelectedGuid());
                     mAdapter.notifyDataSetChanged();
                     alertDialog.dismiss();
