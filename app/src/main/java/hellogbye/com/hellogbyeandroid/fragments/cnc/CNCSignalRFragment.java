@@ -211,11 +211,18 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         service.setCNCHiglightResponceCB(higlightReceivedFromServer);
 
 
+        cnc_fragment_profile_line =  (LinearLayout)rootView.findViewById(R.id.cnc_fragment_profile_line); //((MainActivityBottomTabs)getActivity()).getCnc_fragment_profile_line();
+
+        cnc_fragment_profile_name = (FontTextView)rootView.findViewById(R.id.cnc_fragment_profile_name);//((MainActivityBottomTabs)getActivity()).getCnc_fragment_profile_name();
+
+/*
         cnc_fragment_profile_line = (LinearLayout)rootView.findViewById(R.id.cnc_fragment_profile_line);
         cnc_fragment_profile_name = (FontTextView)rootView.findViewById(R.id.cnc_fragment_profile_name);
+*/
 
         String profilePreferencesActiveName = userProfilePreferences.getActiveAccount(getActivityInterface());
-        cnc_fragment_profile_name.setText(profilePreferencesActiveName);
+
+       cnc_fragment_profile_name.setText(profilePreferencesActiveName);
 
         String profilePreferencesActiveId =   getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId();
 

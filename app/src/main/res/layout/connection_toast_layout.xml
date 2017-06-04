@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/connection_toast_rl"
+    android:background="@color/COLOR_38b77f"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+
+<!--    <LinearLayout
+        android:id="@+id/cnc_fragment_profile_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/COLOR_079DE0"
+        android:orientation="horizontal"
+        android:padding="@dimen/DP8"
+        android:visibility="visible"
+        android:gravity="center">
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/COLOR_WHITE"
+            android:textSize="@dimen/SP12"
+            app:fontName="dinnextltpro_bold.otf"
+            android:text="Active Profile"/>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/cnc_fragment_profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/COLOR_WHITE"
+            android:layout_marginLeft="@dimen/DP10"
+            android:textSize="@dimen/SP12"
+            android:text="Time Saver"/>
+
+        <ImageView
+            android:layout_marginLeft="@dimen/DP10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chevron_dropdown"/>
+
+    </LinearLayout>-->
+
+
+    <LinearLayout
+        android:id="@+id/connection_toast_layout_connected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/COLOR_38b77f"
+        android:orientation="horizontal"
+        android:padding="@dimen/DP8"
+        android:gravity="center"
+        android:visibility="gone"
+        android:minHeight="@dimen/DP26">
+
+
+        <ImageView
+            android:layout_marginLeft="@dimen/DP10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/check_mark"/>
+
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_marginLeft="@dimen/DP6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/COLOR_WHITE"
+            android:textSize="@dimen/SP12"
+            app:fontName="dinnextltpro_bold.otf"
+            android:text="Connected"/>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:minHeight="@dimen/DP26"
+        android:id="@+id/connection_toast_layout_disconnected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/COLOR_EE3A3C"
+        android:orientation="horizontal"
+        android:padding="@dimen/DP8"
+        android:visibility="gone"
+        android:gravity="center">
+
+
+        <ImageView
+            android:layout_marginLeft="@dimen/DP10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/refresh_icon"/>
+
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_marginLeft="@dimen/DP6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/COLOR_WHITE"
+            android:textSize="@dimen/SP12"
+            app:fontName="dinnextltpro_bold.otf"
+            android:text="No Internet Connection"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

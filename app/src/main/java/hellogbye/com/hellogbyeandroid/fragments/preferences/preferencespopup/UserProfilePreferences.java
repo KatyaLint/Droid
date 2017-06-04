@@ -61,10 +61,12 @@ public class UserProfilePreferences extends HGBAbstractFragment {
 
     public String getActiveAccount(HGBMainInterface hgbMainInterface){
         String userPreferenceID = hgbMainInterface.getPersonalUserInformation().getmTravelPreferencesProfileId();
+
       //  ArrayList<AccountsVO> acountsProfiles = hgbMainInterface.getAccounts();
 
         List<DefaultsProfilesVO> accountDefaultSettings = hgbMainInterface.getDefaultsProfilesVOs();
         for(DefaultsProfilesVO defaultsProfilesVO : accountDefaultSettings){
+
             if(defaultsProfilesVO.getId().equals(userPreferenceID)){
                 return defaultsProfilesVO.getProfilename();
                // hgbSaveDataClass.getPersonalUserInformation().setmTravelPreferencesProfileName(defaultsProfilesVO.getProfilename());

@@ -98,16 +98,19 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.ViewHolder
 
 
 
+
         //Create alert dialog object via builder
         alertDialog = dialogBuilder.create();
         alertDialog.setView(promptsViewTeest);
         alertDialog.setCancelable(false);
 
-        Button positive_button = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+
+        Button positive_button = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
         if (positive_button != null) {
             positive_button.setTextColor(context.getResources()
                     .getColor(R.color.COLOR_EE3A3C));
         }
+
     }
 
 

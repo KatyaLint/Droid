@@ -7,9 +7,9 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     android:fitsSystemWindows="true">
 
-        <include
+        <include layout="@layout/toolbar_layout" />
 
-            layout="@layout/toolbar_layout" />
+        <include   layout="@layout/connection_toast_layout" />
 
 
         <FrameLayout

@@ -47,6 +47,7 @@
         android:background="@color/COLOR_079DE0"
         android:orientation="horizontal"
         android:padding="@dimen/DP8"
+        android:layout_alignParentTop="true"
         android:gravity="center">
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -74,11 +75,11 @@
 
     </LinearLayout>
 
-
     <ScrollView
         android:layout_above="@+id/cnc_message_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_below="@+id/cnc_fragment_profile_line"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">

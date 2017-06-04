@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -135,11 +136,18 @@ private int selectedPosition = 0;
                 } });
 
 
+
             //Create alert dialog object via builder
         alertDialog = dialogBuilder.create();
         alertDialog.setView(promptsViewTeest);
         alertDialog.setCancelable(false);
         alertDialog.show();
+
+        Button positive_button = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+
+        if (positive_button != null) {
+            positive_button.setTextColor(getContext().getResources().getColor(R.color.COLOR_EE3A3C));
+        }
 
     }
 

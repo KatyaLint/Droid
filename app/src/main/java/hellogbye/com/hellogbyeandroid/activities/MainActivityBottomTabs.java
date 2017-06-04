@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -22,11 +24,17 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
@@ -161,8 +169,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     private AutoCompleteTextView mAutoComplete;
     private ImageButton toolbar_profile_popup;
+    private LinearLayout connection_toast_layout_connected;
+    private LinearLayout connection_toast_layout_disconnected;
 
-   // private SignalRHubConnection mSignalRHubConnection;
+    // private SignalRHubConnection mSignalRHubConnection;
 
 
 
@@ -253,6 +263,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
           //  hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_LOCATION_TOKEN, false);
 
         }
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(android.net.ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(broadcastReceiver, intentFilter);
+
+
 
      /*   if (location != null && hgbSaveDataClass.getTravelOrder() != null) {
             String[] locationArr = location.split("&");
@@ -414,6 +430,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 e.printStackTrace();
             }
         unregisterReceiver(receiver);
+        unregisterReceiver(broadcastReceiver);
     }
 
 
@@ -475,6 +492,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     private void initToolBar() {
 
+
         setSupportActionBar(mToolbar);
 
       //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -514,6 +532,11 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         my_trip_profile = (FontTextView) findViewById(R.id.my_trip_profile);
         tool_bar_delete_preferences = (ImageButton)findViewById(R.id.tool_bar_delete_preferences);
         toolbar_profile_popup = (ImageButton)findViewById(R.id.toolbar_profile_popup);
+
+        connection_toast_layout_connected = (LinearLayout)findViewById(R.id.connection_toast_layout_connected);
+        connection_toast_layout_disconnected = (LinearLayout)findViewById(R.id.connection_toast_layout_disconnected);
+
+
       //  toolbar_trip_name = (FontTextView)findViewById(R.id.toolbar_trip_name);
 
     }
@@ -521,6 +544,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 /*    public FontTextView getToolBarTripName(){
         return toolbar_trip_name;
     }*/
+
 
     public ImageButton getToolbarProfilePopup(){
         return toolbar_profile_popup;
@@ -552,6 +576,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             }
         });
     }
+
+
+
+
 
     public SearchView getSearchView(){
         return search_view_tool_bar;
@@ -1235,6 +1263,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         IntentFilter filter = new IntentFilter();
         filter.addAction("logout");
         registerReceiver(receiver, filter);
+
+
+
         super.onResume();
     }
 
@@ -1396,6 +1427,57 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
 
     }
+
+
+    private boolean isNetworkAvailable(Context context) {
+        final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+    }
+
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+
+            boolean isConnected = isNetworkAvailable(context);
+            if(isConnected){
+                connection_toast_layout_connected.setVisibility(View.VISIBLE);
+                connection_toast_layout_disconnected.setVisibility(View.GONE);
+              //  cnc_fragment_profile_line.setVisibility(View.VISIBLE);
+
+              //  connection_toast_rl.setVisibility(View.VISIBLE);
+
+                Animation anim = AnimationUtils.loadAnimation(MainActivityBottomTabs.this, R.anim.fade_out);
+                anim.setAnimationListener(new Animation.AnimationListener(){
+                    @Override
+                    public void onAnimationStart(Animation arg0) {
+                    }
+                    @Override
+                    public void onAnimationRepeat(Animation arg0) {
+                    }
+                    @Override
+                    public void onAnimationEnd(Animation arg0) {
+                        connection_toast_layout_connected.setVisibility(View.GONE);
+                    }
+                });
+
+                connection_toast_layout_connected.startAnimation(anim);
+
+
+            }else{
+              //  connection_toast_rl.setVisibility(View.VISIBLE);
+                connection_toast_layout_disconnected.setVisibility(View.VISIBLE);
+                connection_toast_layout_connected.setVisibility(View.GONE);
+           //     cnc_fragment_profile_line.setVisibility(View.GONE);
+
+            }
+
+
+        }
+    };
+
+
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

@@ -391,8 +391,7 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
             @Override
             public void onError(Object data) {
-                System.out.println("Kate Error data " + data);
-              //  ErrorMessage(data);
+                ErrorMessage(data);
             }
         });
     }
