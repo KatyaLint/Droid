@@ -20,6 +20,7 @@ import hellogbye.com.hellogbyeandroid.fragments.cnc.CNCSignalRFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.network.Parser;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import microsoft.aspnet.signalr.client.Action;
 import microsoft.aspnet.signalr.client.ErrorCallback;
@@ -47,7 +48,7 @@ public class SignalRService extends Service {
     private HubProxy _hub;
     /*private String serverUrl = "https://apiprod.hellogbye.com/prod/";*/
     private String serverUrl = ConnectionManager.BASE_URL_SIGNALR_URL; // "http://apidev.hellogbye.com/dev/"; //"http://apidev.hellogbye.com/dev/"; //"https://apiprod.hellogbye.com/prod/";
-    private String SERVER_HUB_CHAT = "cncHub";
+    private String SERVER_HUB_CHAT = "hgbhub";//"cncHub";
     private CNCSignalRFragment.IHiglightReceivedFromServer CNCHiglightResponceCB;
 
     @Override
@@ -79,7 +80,7 @@ public class SignalRService extends Service {
 
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
 
-        String strToken = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
+        String strToken = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.TOKEN, "");
        // request.addHeader("session_token", strToken);
         String host = serverUrl; //The url from your web site
         String sessionToken = "session_token="+strToken;
@@ -117,23 +118,31 @@ public class SignalRService extends Service {
                 JsonObject jsonObject = new JsonObject();
                 String invokationFunctionName = null;
                 String connectionId = _connection.getConnectionId();
-                String signalrConnectionID = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_SIGNALR_CONNECTION_ID, "");
+                String signalrConnectionID = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_SIGNALR_CONNECTION_ID, "");
 
-                if(signalrConnectionID != null && !signalrConnectionID.isEmpty()){
+              /*  if(signalrConnectionID != null && !signalrConnectionID.isEmpty()) {
+                    invokationFunctionName = "cncClientRegisterR";
+                    jsonObject.addProperty("signalRclientId",connectionId);
+
+                }*/
+
+
+          /*      if(signalrConnectionID != null && !signalrConnectionID.isEmpty()) {
                     invokationFunctionName = "cncClientReRegisterR";
                     jsonObject.addProperty("oldSignalRclientid",signalrConnectionID);
                     jsonObject.addProperty("newSignalRclientid",connectionId);
                 }else{
                     invokationFunctionName = "cncClientRegisterR";
                     jsonObject.addProperty("signalRclientId",connectionId);
-                }
+                }*/
 
-                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_SIGNALR_CONNECTION_ID, connectionId);
+
+                hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.HGB_USER_SIGNALR_CONNECTION_ID, connectionId);
 
 
             //    jsonObject.addProperty(invokationFunctionName,_connection.getConnectionId());
 
-                String userProfileID = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, "");
+                String userProfileID = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_PROFILE_ID, "");
 
                 jsonObject.addProperty("userId",userProfileID);
 
@@ -146,11 +155,18 @@ public class SignalRService extends Service {
 
                     @Override
                     public void onError(Throwable error) {
+
                     }
                 });
 
             }
         });
+
+
+
+
+
+
 
         try {
             signalRFuture.get();
@@ -254,14 +270,14 @@ public class SignalRService extends Service {
 
     public void cncSubmitQueryR(String query, String preferencesID, String preferencesProfileId) {
 
-        JsonObject jsonObject =  createParams(query, preferencesID, preferencesProfileId, null);
+       /* JsonObject jsonObject =  createParams(query, preferencesID, preferencesProfileId, null);
 
         _hub.invoke("cncSubmitQueryR", jsonObject).onError(new ErrorCallback() {
             @Override
             public void onError(Throwable throwable) {
                 CNCHiglightResponceCB.SignalRRrror("Error int cncSubmitQueryR " +throwable.getMessage() );
             }
-        });
+        });*/
     }
 
 

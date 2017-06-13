@@ -1,7 +1,8 @@
 package hellogbye.com.hellogbyeandroid.adapters.cncadapters;
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
-import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +12,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.models.CNCItem;
-import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.models.vo.cnc.CNCItem;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 import hellogbye.com.hellogbyeandroid.views.RoundedImageView;
 import pl.tajchert.sample.DotsTextView;
@@ -21,12 +21,15 @@ import pl.tajchert.sample.DotsTextView;
  * Created by arisprung on 10/27/15.
  */
 public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private final FragmentManager fragmentManager;
     private ArrayList<CNCItem> mArrayList;
     private OnItemClickListener mItemClickListner;
     private Context mContext;
 
+
     public static final int HGB_ITEM = 2;
     public static final int HGB_ITEM_SELECTED = 5;
+    public static final int HGB_ITEM_VIDEO_TUTORIAL = 6;
     public static final int HGB_ITEM_NO_ICON = 4;
     public static final int HGB_ERROR_ITEM = 1;
     public static final int ME_ITEM = 0;
@@ -35,16 +38,19 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private int padding_integer;
     private String avatarUrl;
     // Provide a suitable constructor (depends on the kind of dataset)
-    public CNCAdapter(Context context, ArrayList<CNCItem> myDataset) {
+    public CNCAdapter(Activity activity, Context applicationContext, ArrayList<CNCItem> myDataset) {
         mArrayList = myDataset;
-        mContext = context;
-        padding_integer = (int) context.getResources().getDimension(R.dimen.DP10);
+        mContext = applicationContext;
+        padding_integer = (int) applicationContext.getResources().getDimension(R.dimen.DP10);
+        fragmentManager = activity.getFragmentManager();
+
 
     }
 
     public void setAvatarUserUrl(String avatarUrl){
         this.avatarUrl = avatarUrl;
     }
+
     class ViewHolderMe extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
         private FontTextView itemME;
@@ -68,6 +74,33 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
     }
+
+
+   /* String[] VideoID = {"P3mAtvs5Elc", "nCgQDjiotG0", "P3mAtvs5Elc"};
+
+    class VideoInfoHolder extends  RecyclerView.ViewHolder implements View.OnClickListener {
+
+        protected RelativeLayout relativeLayoutOverYouTubeThumbnailView;
+        YouTubeThumbnailView youTubeThumbnailView;
+        protected ImageView playButton;
+
+        public VideoInfoHolder(View itemView) {
+            super(itemView);
+            playButton=(ImageView)itemView.findViewById(R.id.btnYoutube_player);
+            playButton.setOnClickListener(this);
+            relativeLayoutOverYouTubeThumbnailView = (RelativeLayout) itemView.findViewById(R.id.relativeLayout_over_youtube_thumbnail);
+            youTubeThumbnailView = (YouTubeThumbnailView) itemView.findViewById(R.id.youtube_thumbnail);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = YouTubeStandalonePlayer.createVideoIntent((Activity) mContext, "AIzaSyANMrd66GHfMu43HBJMAxvxSyB4W5rTk-E", VideoID[getLayoutPosition()]);
+            mContext.startActivity(intent);
+        }
+    }
+*/
+
+
 
     class ViewHolderHGB extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
@@ -168,13 +201,19 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 ViewHolderWaiting vhwait = new ViewHolderWaiting(waitview);
                 return vhwait;
 
+    /*        case HGB_ITEM_VIDEO_TUTORIAL:
+                View videoTutorial = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+                VideoInfoHolder videoTutorialHolder = new VideoInfoHolder(videoTutorial);
+                return videoTutorialHolder;*/
+
+
         }
         return null;
     }
 
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
         String strMessage = mArrayList.get(position).getText();
 
@@ -249,6 +288,36 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 ViewHolderWaiting hgbwaiting = (ViewHolderWaiting) holder;
                 //TODO magic
                 break;
+         /*   case HGB_ITEM_VIDEO_TUTORIAL:
+
+                final VideoInfoHolder videoInfoHolder = (VideoInfoHolder) holder;
+                final YouTubeThumbnailLoader.OnThumbnailLoadedListener  onThumbnailLoadedListener = new YouTubeThumbnailLoader.OnThumbnailLoadedListener(){
+                    @Override
+                    public void onThumbnailError(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader.ErrorReason errorReason) {
+
+                    }
+
+                    @Override
+                    public void onThumbnailLoaded(YouTubeThumbnailView youTubeThumbnailView, String s) {
+                        youTubeThumbnailView.setVisibility(View.VISIBLE);
+                        videoInfoHolder.relativeLayoutOverYouTubeThumbnailView.setVisibility(View.VISIBLE);
+                    }
+                };
+
+                videoInfoHolder.youTubeThumbnailView.initialize("AIzaSyANMrd66GHfMu43HBJMAxvxSyB4W5rTk-E", new YouTubeThumbnailView.OnInitializedListener() {
+                    @Override
+                    public void onInitializationSuccess(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader youTubeThumbnailLoader) {
+
+                        youTubeThumbnailLoader.setVideo(VideoID[position]);
+                        youTubeThumbnailLoader.setOnThumbnailLoadedListener(onThumbnailLoadedListener);
+                    }
+
+                    @Override
+                    public void onInitializationFailure(YouTubeThumbnailView youTubeThumbnailView, YouTubeInitializationResult youTubeInitializationResult) {
+                        //write something for failure
+                    }
+                });
+                break;*/
         }
     }
 

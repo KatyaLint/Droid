@@ -7,31 +7,14 @@ import android.content.SharedPreferences.Editor;
 public class HGBPreferencesManager
 {
 
-	private static final String SHARED_PREFS = "hgb_prefs";
-	public static final String TOKEN = "token";
-	public static final String REMMEMBER_ME = "remmember_me";
-	public static final String TRAVEL_PREF_ENTRY = "travel_entry";
-	public static final String HGB_NAME = "name";
-	public static final String HGB_PREFRENCE_ID = "prefrence_id";
-	public static final String HGB_LAST_TRAVEL_VO = "last_travel_vo";
-	public static final String HGB_CNC_LIST = "cnc_list";
-	public static final String HGB_CNC_FIRST_TIME= "cnc_first_time";
-	public static final String HGB_FREE_USER = "free_user";
-	public static final String HGB_USER_LAST_PSWD = "user_last_pswd";
-	public static final String HGB_USER_LAST_EMAIL = "user_last_email";
-	public static final String HGB_USER_PROFILE_ID = "user_profile_id";
-	public static final String HGB_USER_SIGNALR_CONNECTION_ID = "user_signalr_connection_id";
-	public static final String HGB_LOCATION_TOKEN = "location_token";
-	public static final String CHOOSEN_SERVER = "choosen_server";
-	public static final String HGB_USER_IS_LOGIN_IN_PAST = "user_login_in_past";
-	public static final String HGB_USER_UUID = "user_uuid";
+
 
 	private SharedPreferences mSharedPreferencesFile;
 	private static HGBPreferencesManager mHomeSharedPreferences = null;
 
 	private HGBPreferencesManager(Context context)
 	{
-		mSharedPreferencesFile = context.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+		mSharedPreferencesFile = context.getSharedPreferences(HGBConstants.SHARED_PREFS, Context.MODE_PRIVATE);
 	}
 
 	public static synchronized HGBPreferencesManager getInstance(Context context)

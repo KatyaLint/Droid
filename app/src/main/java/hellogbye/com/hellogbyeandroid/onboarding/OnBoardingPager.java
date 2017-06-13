@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.BaseActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -129,7 +130,7 @@ public class OnBoardingPager extends BaseActivity implements ViewPager.OnPageCha
 
             @Override
             public void onClickNext() {
-                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY, true);
+                hgbPrefrenceManager.putBooleanSharedPreferences(HGBConstants.TRAVEL_PREF_ENTRY, true);
                 Intent intent = new Intent(getApplicationContext(),MainActivityBottomTabs.class);
                 startActivity(intent);
                 finish();

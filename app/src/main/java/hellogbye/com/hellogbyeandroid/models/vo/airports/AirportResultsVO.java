@@ -12,6 +12,7 @@ public class AirportResultsVO {
     @SerializedName("name")
     private String name;
 
+
     @SerializedName("airportname")
     private String airportname;
 

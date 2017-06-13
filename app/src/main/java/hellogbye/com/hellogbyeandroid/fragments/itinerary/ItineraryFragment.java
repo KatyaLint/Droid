@@ -865,7 +865,7 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
         LinearLayout cnc_empty_view = (LinearLayout)scrollViewLinearLayout.findViewById(R.id.cnc_empty_view);
 
 
-      //  UserTravelMainVO user = parseFlight();
+        //  UserTravelMainVO user = parseFlight();
      //  getActivityInterface().setTravelOrder(user);
         UserTravelMainVO  user = getActivityInterface().getTravelOrder();
         userOrder = user;

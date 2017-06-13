@@ -21,6 +21,7 @@ import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 
@@ -37,7 +38,7 @@ public class ConnectionManager {
         void onError(Object data);
     }
 
-    public static String BASE_URL_SIGNALR_URL = "http://apidev.hellogbye.com/dev/"; //"https://apiprod.hellogbye.com/prod/";
+    public static String BASE_URL_SIGNALR_URL = "https://apiprod.hellogbye.com/prod/"; //"https://apiprod.hellogbye.com/prod/";
      public static String BASE_URL;// = "http://apidev.hellogbye.com/dev/rest/";
 
     //public static String BASE_URL = "http://demo.hellogbye.com/dev/rest/";
@@ -74,10 +75,10 @@ public class ConnectionManager {
 
     private static String changeServerURL(){
 
-        String choosenServer = mHGBPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER,"");
+        String choosenServer = mHGBPrefrenceManager.getStringSharedPreferences(HGBConstants.CHOOSEN_SERVER,"");
 
         if(choosenServer == null || choosenServer.isEmpty()){
-            BASE_URL = "http://apidev.hellogbye.com/dev/rest/"; // "http://apidev.hellogbye.com/dev/rest/ "https://apiprod.hellogbye.com/prod/rest/"; //"http://apidev.hellogbye.com/dev/rest/";// //"https://apiuat.hellogbye.com/uat/rest/";//This is default server
+            BASE_URL = "https://apiprod.hellogbye.com/prod/rest/"; // "http://apidev.hellogbye.com/dev/rest/ "https://apiprod.hellogbye.com/prod/rest/"; //"http://apidev.hellogbye.com/dev/rest/";// //"https://apiuat.hellogbye.com/uat/rest/";//This is default server
         }else{
             BASE_URL = choosenServer;
         }
@@ -506,13 +507,14 @@ public class ConnectionManager {
         });
     }
 
-    public void login(String email, String password,String id,final ServerRequestListener listener) {
+    public void login(String email, String password,String id,String connectionID, final ServerRequestListener listener) {
         String url = getURL(Services.USER_POST_LOGIN);
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("password", password);
             jsonObject.put("username", email);
             jsonObject.put("DeviceUUID", id);
+            jsonObject.put("ConnectionId", connectionID);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -715,8 +717,8 @@ public class ConnectionManager {
 
 
 
-    public void postItineraryCNCSearch(ArrayList<AirportSendValuesVO> airportSendValuesVOs, final ServerRequestListener listener) {
-        String url = getURL(Services.ITINERARY);
+    public void postItineraryCNCSearch(ArrayList<AirportSendValuesVO> airportSendValuesVOs, String connectionID,final ServerRequestListener listener) {
+        String url = getURL(Services.ITINERARYV2);//getURL(Services.ITINERARY);
         JSONObject jsonObjectMain = new JSONObject();
 
 
@@ -726,22 +728,25 @@ public class ConnectionManager {
 
             try {
 
+                jsonObjectMain.put("connectionid", connectionID);
+                jsonObjectMain.put("itineraryid",airportSendValuesVO.getItineraryid());
                 //Main for all query request
+
                 jsonObjectMain.put("query", airportSendValuesVO.getQuery());
                 jsonObjectMain.put("travelpreferenceprofileid", airportSendValuesVO.getTravelpreferenceprofileid());
 
 //                //TODO need to remove
-                jsonObjectMain.put("latitude", "0");
-                jsonObjectMain.put("longitude", "0");
+             /*   jsonObjectMain.put("latitude", "0");
+                jsonObjectMain.put("longitude", "0");*/
 
-         /*       jsonObjectMain.put("latitude", airportSendValuesVO.getLatitude());
-                jsonObjectMain.put("longitude", airportSendValuesVO.getLongitude());*/
+                jsonObjectMain.put("latitude", airportSendValuesVO.getLatitude());
+                jsonObjectMain.put("longitude", airportSendValuesVO.getLongitude());
 
                 jsonObjectMain.put("token", jsonArray);
 
                 JSONObject jsonObjectSecond = new JSONObject();
                 //it's array of cities
-                jsonObjectSecond.put("type", airportSendValuesVO.getType());
+                jsonObjectSecond.put("type", "City");
 
                 JSONObject jsonObjectThird = new JSONObject();
                 JSONArray jsonArrayPosition = new JSONArray();
@@ -753,7 +758,8 @@ public class ConnectionManager {
                 jsonObjectThird.put("id", airportSendValuesVO.getId());
                 jsonObjectThird.put("start", airportSendValuesVO.getStart());
                 jsonObjectThird.put("end", airportSendValuesVO.getEnd());
-               // jsonObjectThird.put("value", airportSendValuesVO.getValue());
+                jsonObjectThird.put("value", airportSendValuesVO.getValue());
+                jsonObjectThird.put("type", "City");
 
 
             } catch (Exception e) {
@@ -816,26 +822,6 @@ public class ConnectionManager {
     }
 
 
-    public void AddCreditCardHelloGbye(JSONObject json,final ServerRequestListener listener) {
-        String url = getURL(Services.CARD_TOKEN);
-
-
-        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
-                json, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                listener.onSuccess(Parser.parseCreditCardList(response));
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(Parser.parseErrorMessage(error));
-            }
-        });
-
-    }
-
-
     public void addCreditCard(CreditCardItem creditCardItem, final ServerRequestListener listener) {
 
         //AddCreditCard addCreditCard = new AddCreditCard();
@@ -853,6 +839,61 @@ public class ConnectionManager {
             }
         },false);
     }
+
+
+    public void AddCreditCardHelloGbye(JSONObject json,final ServerRequestListener listener) {
+        String url = getURL(Services.CARD_TOKEN);
+
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                json, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseCreditCardList(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
+
+    public void sendPostSignalRRegistration(String connectionid, String userid, String solutionid, final ServerRequestListener listener) {
+
+        //AddCreditCard addCreditCard = new AddCreditCard();
+
+        String url = getURL(Services.POST_SIGNALR_REGISTRATION);
+        JSONObject jsonObject = new JSONObject();
+
+
+        try {
+
+            jsonObject.put("connectionId", connectionid);
+            jsonObject.put("userid", userid);
+            jsonObject.put("solutionid",solutionid);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Kate jsonObject =" + jsonObject.toString());
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseAirplaneData(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+
+        }, false);
+    }
+
 
     ////////////////////////////////
     // GETS
@@ -885,7 +926,8 @@ public class ConnectionManager {
 
         String url = getURL(Services.ITINERARY_HIGHLIGHT);
         JSONObject jsonObject = new JSONObject();
-        query = query.replaceAll(" ", "%20");
+        query = query.replaceAll(" " +
+                "", "%20");
 
         url = url + query;
 
@@ -2073,6 +2115,7 @@ public class ConnectionManager {
                 USER_PROFILE_RESET_PASSWORD("UserProfile/ResetPassword?email="),
                 USER_SOLUTION("Solution/"),
                 ITINERARY("Itinerary/"),
+                ITINERARYV2("Itinerary/V2"),
                 USER_GET_TRAVEL_PREFERENCES("TravelPreference"),
 
                 COMPANIONS("Companions"),
@@ -2098,8 +2141,8 @@ public class ConnectionManager {
                 USER_GET_TRAVEL_PROFILES_DEFAULT("TravelPreference/Profiles/Defaults"),
                 STATIC_CITY_AUTOCOMPLETE("statics/cityautocomplete"),
                 COMPANION_SEARCH("UserProfile/Search?count=5&excludeCompanions=false&"),
-                RESEND_ACTIVATION("UserProfile/ResendWelcomeEmail?email=");
-
+                RESEND_ACTIVATION("UserProfile/ResendWelcomeEmail?email="),
+                POST_SIGNALR_REGISTRATION("Signalr/Register");
 
                 String url;
                 Services(String url){

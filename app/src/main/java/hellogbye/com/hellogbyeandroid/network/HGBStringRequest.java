@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import hellogbye.com.hellogbyeandroid.application.HGBApplication;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 
 
@@ -144,7 +145,7 @@ public class HGBStringRequest extends Request<String> {
         headers.put("Accept", "application/json");
        // headers.put("Content-Type", "application/json");
         HGBPreferencesManager sharedPreferences = HGBPreferencesManager.getInstance(mContext);
-        String token = sharedPreferences.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
+        String token = sharedPreferences.getStringSharedPreferences(HGBConstants.TOKEN, "");
         if(!token.equals("")){
             headers.put("Authorization", "Session " + token);
         }

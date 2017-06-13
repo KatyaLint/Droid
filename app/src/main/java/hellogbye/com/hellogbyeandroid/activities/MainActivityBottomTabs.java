@@ -1,6 +1,5 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -11,8 +10,6 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.location.Location;
 import android.net.ConnectivityManager;
-import android.net.wifi.WifiManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.speech.RecognizerIntent;
@@ -24,18 +21,12 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
@@ -47,7 +38,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.FareClassFragment;
@@ -95,7 +85,6 @@ import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
-import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.AccountDefaultSettingsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.cnc.CNCTutorialsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
@@ -113,7 +102,6 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityNetwork;
 import hellogbye.com.hellogbyeandroid.utilities.SpeechRecognitionUtil;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
-import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
@@ -198,7 +186,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
 
         CNCTutorials cncTutorials = new CNCTutorials();
-        CNCTutorialsVO cncTutorialsVO = cncTutorials.parseFlight(MainActivityBottomTabs.this);
+        CNCTutorialsVO cncTutorialsVO = cncTutorials.parseTutorials(MainActivityBottomTabs.this);
         hgbSaveDataClass.setCNCTutorialsVOs(cncTutorialsVO);
 
         Intent intent = new Intent();
@@ -237,21 +225,21 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         hgbSaveDataClass.setPreferenceManager(hgbPrefrenceManager); //= new HGBSaveDataClass(this, hgbPrefrenceManager);
-        isFreeUser = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
+        isFreeUser = hgbPrefrenceManager.getBooleanSharedPreferences(HGBConstants.HGB_FREE_USER, false);
 
         //check if we have travelitinery in db
-        String strTravel = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_LAST_TRAVEL_VO, "");
+        String strTravel = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_LAST_TRAVEL_VO, "");
         if (!"".equals(strTravel)) {
             UserTravelMainVO userTravelVO = (UserTravelMainVO) Parser.parseAirplaneData(strTravel);
             hgbSaveDataClass.setTravelOrder(userTravelVO);
         }
 
 
-        String pref = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, "");
+        String pref = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_LAST_EMAIL, "");
 
         //INIT Location
 
-        boolean locationToken = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.HGB_LOCATION_TOKEN, true);
+        boolean locationToken = hgbPrefrenceManager.getBooleanSharedPreferences(HGBConstants.HGB_LOCATION_TOKEN, true);
 
 
         boolean location = HGBUtilityNetwork.isGPSEnable(MainActivityBottomTabs.this);//getLocation(MainActivityBottomTabs.this, locationToken);
@@ -414,8 +402,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
 
         if(isLogoutExit){
-            hgbPrefrenceManager.deleteSharedPrefrence(HGBPreferencesManager.HGB_CNC_LIST);
-            hgbPrefrenceManager.deleteSharedPrefrence(HGBPreferencesManager.HGB_LAST_TRAVEL_VO);
+            hgbPrefrenceManager.deleteSharedPrefrence(HGBConstants.HGB_CNC_LIST);
+            hgbPrefrenceManager.deleteSharedPrefrence(HGBConstants.HGB_LAST_TRAVEL_VO);
             return;
         }
 
@@ -424,7 +412,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 String json = gsonback.toJson(hgbSaveDataClass.getCNCItems());
                 // When user exit the app, next time hi will see his itirnarary
 
-                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_CNC_LIST, json);
+                hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.HGB_CNC_LIST, json);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -637,7 +625,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
                 UserProfileVO mCurrentUser = (UserProfileVO) data;
 
-                String logInEmail = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, "");
+                String logInEmail = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_LAST_EMAIL, "");
                 hgbSaveDataClass.getPersonalUserInformation().setUserEmailLogIn(logInEmail);
 
                 hgbSaveDataClass.setCurrentUser(mCurrentUser);
@@ -649,7 +637,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                     showUserProfiles();
                 }
 
-                String profileID = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, "");
+                String profileID = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_PROFILE_ID, "");
              /*   List<DefaultsProfilesVO> accountDefaultSettings = hgbSaveDataClass.getDefaultsProfilesVOs();
                 for(DefaultsProfilesVO defaultsProfilesVO : accountDefaultSettings){
                     if(defaultsProfilesVO.getId().equals(profileID)){
@@ -1096,8 +1084,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     @Override
     public void gotToStartMenuActivity() {
         //  hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
-        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
-        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.CHOOSEN_SERVER, "");
+        hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.TOKEN, "");
+        hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.CHOOSEN_SERVER, "");
         isLogoutExit = true;
         HGBUtility.removeAllFragments(getSupportFragmentManager());
         finish();
@@ -1392,6 +1380,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     public AutoCompleteTextView getmAutoComplete() {
         return mAutoComplete;
     }
+
 
     private final ServiceConnection mConnection = new ServiceConnection() {
 

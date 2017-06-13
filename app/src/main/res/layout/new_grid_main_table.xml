@@ -109,7 +109,7 @@
             android:layout_width="@dimen/DP0"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_red_button"
-
+            android:textColor="@color/COLOR_WHITE"
             android:gravity="center"
             app:fontName="dinnextltpro_medium.otf"
             android:textAllCaps="false"

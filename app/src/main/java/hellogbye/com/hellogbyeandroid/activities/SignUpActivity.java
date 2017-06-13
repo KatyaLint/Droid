@@ -29,6 +29,7 @@ import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -159,7 +160,7 @@ public class SignUpActivity extends BaseActivity {
                 ConnectionManager.getInstance(SignUpActivity.this).postUserCreateAccount(userData, false,false,new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
-                        hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
+                        hgbPrefrenceManager.putBooleanSharedPreferences(HGBConstants.HGB_FREE_USER, false);
 
                         resetPassword();
                         sign_up_layout_ll.setVisibility(View.GONE);
@@ -272,10 +273,10 @@ public class SignUpActivity extends BaseActivity {
                 sign_up_layout_ll.setVisibility(View.VISIBLE);
                 pin_code_verification_layout.setVisibility(View.GONE);
                 UserLoginCredentials user = (UserLoginCredentials) data;
-                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
-                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
+                hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.TOKEN, user.getToken());
+                hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.HGB_USER_PROFILE_ID, user.getUserprofileid());
 
-                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
+                hgbPrefrenceManager.putBooleanSharedPreferences(HGBConstants.HGB_FREE_USER, false);
 
                // hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, null);
 

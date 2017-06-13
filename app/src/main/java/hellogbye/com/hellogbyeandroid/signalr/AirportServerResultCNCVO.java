@@ -17,7 +17,17 @@ public class AirportServerResultCNCVO {
     @SerializedName("highlightdata")
     private HighlightdataVO highlightdataVO;
 
+    @SerializedName("responses")
+    private ArrayList<ResponsesVO> responses = new ArrayList<ResponsesVO>();
 
+    @SerializedName("dontinitiatesearch")
+    private boolean dontinitiatesearch;
+
+    @SerializedName("query")
+    private String query;
+
+    @SerializedName("itineraryid")
+    private String itineraryid;
 
     @SerializedName("originalquery")
     private
@@ -50,5 +60,29 @@ public class AirportServerResultCNCVO {
 
     public void setHighlightdataVO(HighlightdataVO highlightdataVO) {
         this.highlightdataVO = highlightdataVO;
+    }
+
+    public ArrayList<ResponsesVO> getResponses() {
+        return responses;
+    }
+
+    public void setResponses(ArrayList<ResponsesVO> responses) {
+        this.responses = responses;
+    }
+
+    public String getItineraryid() {
+        return itineraryid;
+    }
+
+    public void setItineraryid(String itineraryid) {
+        this.itineraryid = itineraryid;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
     }
 }

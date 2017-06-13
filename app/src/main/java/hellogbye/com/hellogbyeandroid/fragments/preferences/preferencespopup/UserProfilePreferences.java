@@ -270,7 +270,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
 
                     AccountDefaultSettingsVO accountDefault = (AccountDefaultSettingsVO) data;
                     HGBPreferencesManager hgbPrefrenceManager = HGBPreferencesManager.getInstance(getContext());
-                    String logInEmail = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, "");
+                    String logInEmail = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_LAST_EMAIL, "");
                     putNewPreferencesForUser(logInEmail, accountDefault.getmId(), activity, userProfileVOs);
 
                     for(DefaultsProfilesVO userProfile : userProfileVOs){
@@ -310,7 +310,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
             @Override
             public void onSuccess(Object data) {
                 HGBPreferencesManager hgbPrefrenceManager = HGBPreferencesManager.getInstance(getContext());
-                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, accountID);
+                hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.HGB_USER_PROFILE_ID, accountID);
                 postNotChoosenDefaultProfile(activity, userProfileVOs);
             }
 

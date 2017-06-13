@@ -13,6 +13,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.onboarding.OnBoardingPager;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
@@ -47,7 +48,7 @@ public class EnterPinActivity extends Activity {
             @Override
             public void onClick(View view) {
                 ConnectionManager.getInstance(EnterPinActivity.this).postResendActivateEmail(
-                        hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL,""), new ConnectionManager.ServerRequestListener() {
+                        hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_LAST_EMAIL,""), new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
                         Toast.makeText(getApplicationContext(),"Activation code sent",Toast.LENGTH_SHORT).show();
@@ -70,7 +71,7 @@ public class EnterPinActivity extends Activity {
     private void goToMainActivity() {
 
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
-        boolean doesExist = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY, false);
+        boolean doesExist = hgbPrefrenceManager.getBooleanSharedPreferences(HGBConstants.TRAVEL_PREF_ENTRY, false);
 
         if (doesExist) {
             Intent intent = new Intent(getApplicationContext(), MainActivityBottomTabs.class);

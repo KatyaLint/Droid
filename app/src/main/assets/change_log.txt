@@ -711,3 +711,4 @@ Code changing:
              --------------
 
         - LogOut dialog from account and on back pressing
+        - SignalR changes

@@ -25,7 +25,7 @@ public class CNCTutorials {
 
     }
 
-    public static CNCTutorialsVO parseFlight(Activity activity){
+    public static CNCTutorialsVO parseTutorials(Activity activity){
         CNCTutorialsVO cncTutorialsVO = null;
         try {
             Gson gson = new Gson();

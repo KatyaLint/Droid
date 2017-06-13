@@ -32,7 +32,7 @@ public class ViewPDFManager {
     public String  starDownloadPDF(String pdfUrl ){
         OkHttpClient okHttpClient = new OkHttpClient();
         HGBPreferencesManager sharedPreferences = HGBPreferencesManager.getInstance(mContext);
-        String token = sharedPreferences.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
+        String token = sharedPreferences.getStringSharedPreferences(HGBConstants.TOKEN, "");
 
         Request request = new Request.Builder()
                 .url(pdfUrl)

@@ -89,6 +89,7 @@ public class HotelFragment extends HGBAbstractFragment {
     private static final String TAB_2_TAG = "GALLERY";
     private static final String TAB_3_TAG = "HOTEL POLICIES";
     private FontTextView mNumberImages;
+    private Intent intent;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new HotelFragment();
@@ -113,6 +114,10 @@ public class HotelFragment extends HGBAbstractFragment {
         loadAlternativeHotels();
         loadRoomsList();
 
+             Gson gson = new Gson();
+                String json = gson.toJson(getLegWithGuid(getActivityInterface().getTravelOrder()).getAllImagesVOs());
+                intent = new Intent(getActivity().getApplicationContext(), ImageGalleryActivity.class);
+                intent.putExtra("images", json);
 
         mAlertnativeHotelFontTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -337,10 +342,10 @@ public class HotelFragment extends HGBAbstractFragment {
             @Override
             public void onItemClick(View view, int position) {
 
-                Gson gson = new Gson();
+               /* Gson gson = new Gson();
                 String json = gson.toJson(getLegWithGuid(getActivityInterface().getTravelOrder()).getAllImagesVOs());
                 Intent intent = new Intent(getActivity().getApplicationContext(), ImageGalleryActivity.class);
-                intent.putExtra("images", json);
+                intent.putExtra("images", json);*/
                 startActivity(intent);
 
             }

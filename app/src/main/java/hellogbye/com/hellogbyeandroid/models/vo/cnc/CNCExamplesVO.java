@@ -10,8 +10,10 @@ import java.util.ArrayList;
 
 public class CNCExamplesVO {
     @SerializedName("name")
-    private
-    String name;
+    private String name;
+
+    @SerializedName("url")
+    private String url;
 
     @SerializedName("queries")
     private ArrayList<String> examples;
@@ -31,5 +33,13 @@ public class CNCExamplesVO {
 
     public void setExamples(ArrayList<String> examples) {
         this.examples = examples;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

@@ -301,7 +301,7 @@ public class PreferenceSettingsSlideFragment extends HGBAbstractFragment {
 
         getActivityInterface().getPersonalUserInformation().setmTravelPreferencesProfileId(clickedItemID);
         HGBPreferencesManager hgbPrefrenceManager = HGBPreferencesManager.getInstance(getActivity());
-        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, clickedItemID);
+        hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.HGB_USER_PROFILE_ID, clickedItemID);
 
         activeProfileId = clickedItemID;
         mAdapter.notifyDataSetChanged();

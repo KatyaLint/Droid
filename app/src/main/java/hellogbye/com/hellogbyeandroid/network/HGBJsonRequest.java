@@ -2,6 +2,7 @@ package hellogbye.com.hellogbyeandroid.network;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.util.Log;
 
@@ -32,6 +33,7 @@ import java.util.Map;
 
 import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.application.HGBApplication;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
@@ -87,6 +89,12 @@ public class HGBJsonRequest extends Request<String> {
         send();
     }
 
+
+    private boolean isNetworkAvailable(Context context) {
+        final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+    }
+
     public HGBJsonRequest(int method, String url, JSONObject params, Listener<String> listener, ErrorListener errorListener, boolean showLoader) {
 
 
@@ -94,6 +102,12 @@ public class HGBJsonRequest extends Request<String> {
 
 //        super(method, url, (stringBodyRequest == null || stringBodyRequest.length() == 0) ? null : stringBodyRequest, listener,	errorListener);
         super(method, url, errorListener);
+
+     /*   if( !isNetworkAvailable(mContext)){
+            return;
+        }*/
+
+
 
         this.listener = listener;
         this.jsonParams = params;
@@ -221,7 +235,7 @@ public class HGBJsonRequest extends Request<String> {
       //  headers.put("User-Agent", " (HelloGByeAndroid/" + build number +  android.os.Build.MODEL + " Android" + Build.VERSION.SDK_INT + ")");
         headers.put("User-Agent", " (HelloGByeAndroid/" + "Build-" + BuildConfig.VERSION_CODE  +"/OS-" + Build.VERSION.RELEASE +  "/Android" + Build.VERSION.SDK_INT + ")");
         HGBPreferencesManager sharedPreferences = HGBPreferencesManager.getInstance(mContext);
-        String token = sharedPreferences.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
+        String token = sharedPreferences.getStringSharedPreferences(HGBConstants.TOKEN, "");
         Log.d("Token", token);
         if (!token.equals("")) {
             headers.put("Authorization", "Session " + token);

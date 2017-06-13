@@ -36,6 +36,8 @@
 
         <service android:name=".signalr.SignalRService" />
 
+      <!--  <service android:name=".signalr.SignalRServiceLogin" />-->
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />

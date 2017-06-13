@@ -19,7 +19,6 @@ import android.text.TextPaint;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -57,6 +56,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.onboarding.OnBoardingPager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBAnimationUtility;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -65,8 +65,6 @@ import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
-import static hellogbye.com.hellogbyeandroid.R.id.textView;
-import static hellogbye.com.hellogbyeandroid.R.id.title;
 import static java.lang.Long.parseLong;
 
 /**
@@ -105,7 +103,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private FontTextView mAmex;
     private LinearLayout mBirds;
     private LinearLayout mOr;
-    private FontButtonView login;
+    private FontButtonView login_button;
     private ImageView mCanadaCheck;
     private ImageView mUSCheck;
     private ProgressBar mProgressBar;
@@ -168,6 +166,14 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account_layout);
+
+
+     /*   Intent intent = new Intent();
+        intent.setClass(getBaseContext(), SignalRServiceLogin.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+*/
+
+
         mCityList = new ArrayList<>();
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         android_id = Settings.Secure.getString(CreateAccountActivity.this.getContentResolver(),
@@ -188,7 +194,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             String email = inurl.replace("hgb://", "");
             String passwordLocal = userData.getConfirmPassword() ;
             if(passwordLocal == null){
-                passwordLocal = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, "");
+                passwordLocal = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_LAST_PSWD, "");
             }
             sendLoginToServer(email,passwordLocal);
         }
@@ -264,9 +270,17 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mUSLayout = (LinearLayout) findViewById(R.id.us_layout);
         mLoginEmail = (FontEditTextView) findViewById(R.id.username);
         mLoginPassword = (FontEditTextView) findViewById(R.id.login_password);
-        login = (FontButtonView) findViewById(R.id.login_button);
+        login_button = (FontButtonView) findViewById(R.id.login_button);
         mHelloGbyePromotionCheckBox = (CheckBox)findViewById(R.id.promotion_checkbox);
         mThirdPartyPromotionCheckBox = (CheckBox)findViewById(R.id.special_offer_checkbox);
+
+
+        login_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendLoginToServer(mLoginEmail.getText().toString(),mLoginPassword.getText().toString());
+            }
+        });
 
 
 
@@ -339,22 +353,56 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             }
         });
 
-
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                sendLoginToServer(mLoginEmail.getText().toString(),mLoginPassword.getText().toString());
-
-
-
-            }
-        });
-
-
     }
 
+  /*  private SignalRServiceLogin mService;
+    private boolean mBound = false;*/
+
+
+
+
+  /*  private final ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className,
+                                       IBinder service) {
+
+            // We've bound to SignalRService, cast the IBinder and get SignalRService instance
+            SignalRServiceLogin.LocalBinder binder = (SignalRServiceLogin.LocalBinder) service;
+            mService = binder.getService();
+
+
+            String conecctionID = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_SIGNALR_CONNECTION_LOGIN_ID, "");
+ *//*
+            After getting the connectionID from signalR user can login
+             *//*
+
+            login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    sendLoginToServer(mLoginEmail.getText().toString(),mLoginPassword.getText().toString());
+                }
+            });
+
+
+
+
+            mBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBound = false;
+        }
+    };*/
+
+
+
+
     private void sendLoginToServer(String email,String pass) {
+
+
+
         try{
 //            int permissionCheck = ContextCompat.checkSelfPermission(CreateAccountActivity.this, Manifest.permission.READ_PHONE_STATE);
 //
@@ -365,27 +413,28 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 //                //TODO
 //            }
            // TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-            hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME, mRemmeberMeCheckbox.isChecked());
+            hgbPrefrenceManager.putBooleanSharedPreferences(HGBConstants.REMMEMBER_ME, mRemmeberMeCheckbox.isChecked());
            // String strUdid = tm.getDeviceId();
           //  long udid = Long.valueOf(strUdid);
 
-            String uuid = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_UUID,"");
+            String uuid = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_UUID,"");
             if("".equals(uuid)){
                 uuid = UUID.randomUUID().toString();
             }
 
+            String connectionID = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_SIGNALR_CONNECTION_LOGIN_ID, "");
 
-            ConnectionManager.getInstance(CreateAccountActivity.this).login(email,pass,uuid,
+            ConnectionManager.getInstance(CreateAccountActivity.this).login(email,pass,uuid,connectionID,
                     new ConnectionManager.ServerRequestListener() {
                         @Override
                         public void onSuccess(Object data) {
                             UserLoginCredentials user = (UserLoginCredentials) data;
-                            hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_USER_IS_LOGIN_IN_PAST, true);
-                            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
-                            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
+                            hgbPrefrenceManager.putBooleanSharedPreferences(HGBConstants.HGB_USER_IS_LOGIN_IN_PAST, true);
+                            hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.TOKEN, user.getToken());
+                            hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.HGB_USER_PROFILE_ID, user.getUserprofileid());
 
-                            hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, mLoginEmail.getText().toString());
-                            hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
+                            hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.HGB_USER_LAST_EMAIL, mLoginEmail.getText().toString());
+                            hgbPrefrenceManager.putBooleanSharedPreferences(HGBConstants.HGB_FREE_USER, false);
                             goToMainActivity();
                         }
 
@@ -627,7 +676,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         ArrayList<View> firstViewViews = new ArrayList<>();
         firstViewViews.add(mEmail);
         String email = mEmail.getText().toString();
-        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, email);
+        hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.HGB_USER_LAST_EMAIL, email);
 
         ArrayList<View> secondViewViews = new ArrayList<>();
         secondViewViews.add(mPassword1);
@@ -766,11 +815,11 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                             @Override
                             public void onSuccess(Object data) {
                                 UserLoginCredentials user = (UserLoginCredentials) data;
-                                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
-                                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, true);
-                                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_PROFILE_ID, user.getUserprofileid());
+                                hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.TOKEN, user.getToken());
+                                hgbPrefrenceManager.putBooleanSharedPreferences(HGBConstants.HGB_FREE_USER, true);
+                                hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.HGB_USER_PROFILE_ID, user.getUserprofileid());
                                 String freeUserEmail = "demo" + user.getUserprofileid() + "@hellogbye.com";
-                                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, freeUserEmail);
+                                hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.HGB_USER_LAST_EMAIL, freeUserEmail);
 //                        hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.TOKEN, user.getToken());
                                 goToMainActivity();
 
@@ -876,11 +925,11 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), firstViewViews, secondViewViews);
             mNextTextView.setText(R.string.next);
 
-            remember_me = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.REMMEMBER_ME, false);
-            String email = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, null);
+            remember_me = hgbPrefrenceManager.getBooleanSharedPreferences(HGBConstants.REMMEMBER_ME, false);
+            String email = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_LAST_EMAIL, null);
             if (remember_me && email != null) {
                 mLoginEmail.setText(email);
-                String pswd = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, null);
+                String pswd = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_LAST_PSWD, null);
                 if (pswd != null) {
                     mLoginPassword.setText(pswd);
                 }
@@ -1202,9 +1251,12 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                 errorHelper.show(getFragmentManager(), (String) data);
             }
         });
+
+
         ConnectionManager.getInstance(CreateAccountActivity.this).getStaticBookingProvince("CA", new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
+
                 mCAProvinceItems = (List<ProvincesItem>) data;
                 if (mCAProvinceItems.size() > 0) {
                     mCACountryarray = new String[mCAProvinceItems.size()];
@@ -1341,10 +1393,10 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         ConnectionManager.getInstance(CreateAccountActivity.this).postUserCreateAccount(userData,mHelloGbyePromotionCheckBox.isChecked(),mThirdPartyPromotionCheckBox.isChecked(), new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_FREE_USER, false);
-                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_EMAIL, userData.getUserEmail());
-                hgbPrefrenceManager.putStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD,userData.getConfirmPassword());
-                String  passwordLocal = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, "");
+                hgbPrefrenceManager.putBooleanSharedPreferences(HGBConstants.HGB_FREE_USER, false);
+                hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.HGB_USER_LAST_EMAIL, userData.getUserEmail());
+                hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.HGB_USER_LAST_PSWD,userData.getConfirmPassword());
+                String  passwordLocal = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_LAST_PSWD, "");
                 Intent intent = new Intent(getBaseContext(), EnterPinActivity.class);
                 startActivity(intent);
                 finish();
@@ -1368,7 +1420,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             return;
         }
 
-        String strToken = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.TOKEN, "");
+        String strToken = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.TOKEN, "");
 
         if (!strToken.equals("")) {
             if(getIntent().hasExtra("free_user_sign_in") || getIntent().hasExtra("free_user_create_user")){
@@ -1385,7 +1437,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private void goToMainActivity() {
 
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
-        boolean doesExist = hgbPrefrenceManager.getBooleanSharedPreferences(HGBPreferencesManager.TRAVEL_PREF_ENTRY, false);
+        boolean doesExist = hgbPrefrenceManager.getBooleanSharedPreferences(HGBConstants.TRAVEL_PREF_ENTRY, false);
 
         if (doesExist) {
             Intent intent = new Intent(getApplicationContext(), MainActivityBottomTabs.class);
@@ -1540,7 +1592,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                 if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     String passwordLocal = userData.getConfirmPassword() ;
                     if(passwordLocal == null){
-                        passwordLocal = hgbPrefrenceManager.getStringSharedPreferences(HGBPreferencesManager.HGB_USER_LAST_PSWD, "");
+                        passwordLocal = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_LAST_PSWD, "");
                     }
                     sendLoginToServer(mLoginEmail.getText().toString(),passwordLocal);
                 }
@@ -1549,5 +1601,14 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             default:
                 break;
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        /*if (mBound) {
+            unbindService(mConnection);
+            mBound = false;
+        }*/
     }
 }

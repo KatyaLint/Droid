@@ -18,6 +18,7 @@ public class AirportSendValuesVO {
     private String travelpreferenceprofileid;
     private int centeredItem;
     private String[] titleArray;
+    private String itineraryid;
     private ArrayList<AirportResultsVO> results;
 
     public AirportSendValuesVO() {
@@ -125,5 +126,14 @@ public class AirportSendValuesVO {
 
     public void setResults(ArrayList<AirportResultsVO> results) {
         this.results = results;
+    }
+
+
+    public String getItineraryid() {
+        return itineraryid;
+    }
+
+    public void setItineraryid(String itineraryid) {
+        this.itineraryid = itineraryid;
     }
 }

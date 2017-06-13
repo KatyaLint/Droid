@@ -407,6 +407,7 @@ public class Parser {
 
 
     public static Object parseAirplaneData(String response) {
+
         UserTravelMainVO airplaneDataVO = null;
         try {
             Gson gson = new Gson();
@@ -533,10 +534,10 @@ public class Parser {
     }
 
     public static Object parseAirportResult(String response) {
-        AirportServerResultVO  airportServerResultVO = null;
+        AirportServerResultCNCVO  airportServerResultVO = null;
         try {
             Gson gson = new Gson();
-            Type listType = new TypeToken<AirportServerResultVO>() {
+            Type listType = new TypeToken<AirportServerResultCNCVO>() {
             }.getType();
             airportServerResultVO = gson.fromJson((String) response, listType);
         } catch (Exception e) {
