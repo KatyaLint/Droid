@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <HorizontalScrollView
+        android:id="@+id/hsv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/myviewpager1"
+        android:layout_width="300dp"
+        android:layout_height="400dp"/>
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/myviewpager2"
+            android:layout_width="300dp"
+            android:layout_height="400dp"/>
+
+    </LinearLayout>
+
+    </HorizontalScrollView>
+
+
+    <HorizontalScrollView
+        android:id="@+id/hsv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/myviewpager3"
+            android:layout_width="300dp"
+            android:layout_height="400dp"/>
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/myviewpager4"
+            android:layout_width="300dp"
+            android:layout_height="400dp"/>
+
+    </LinearLayout>
+
+    </HorizontalScrollView>
+
+</LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

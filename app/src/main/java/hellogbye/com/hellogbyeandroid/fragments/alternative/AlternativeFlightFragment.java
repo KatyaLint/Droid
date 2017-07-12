@@ -41,6 +41,8 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.flights.AlternativeFlightFareClassAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.hotel.FlightAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.fragments.itinerary.IntItineraryHelper;
+import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryHelper;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.AirportCoordinatesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.FairclassPreferencesVO;
@@ -371,10 +373,27 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
 
         String solutionID = getActivityInterface().getTravelOrder().getmSolutionID();
 
-        String paxId = getSelectedUserGuid();
+        String paxId = getSelectedUserGuid();//currentNodeVO.getmPaxguid(); //getSelectedUserGuid();
         String flightID = currentNodeVO.getmPrimaryguid();
 
-        ConnectionManager.getInstance(getActivity()).getAlternateFlightsForFlight(solutionID, paxId, flightID, new ConnectionManager.ServerRequestListener() {
+        System.out.println("Kate paxId ="  +paxId);
+        ItineraryHelper.getAlternativeFlights(paxId, flightID, getActivityInterface(), getActivity(), new IntItineraryHelper() {
+            @Override
+            public void finished() {
+                Bundle arg = new Bundle();
+
+                arg.putString(HGBConstants.BUNDLE_CURRENT_VIEW_NODE_ID, currentNodeVO.getmPrimaryguid());
+                getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_DETAILS.getNavNumber(),arg);
+            }
+
+            @Override
+            public void errorReceived(Object data) {
+                ErrorMessage(data);
+            }
+        });
+
+
+   /*     ConnectionManager.getInstance(getActivity()).getAlternateFlightsForFlight(solutionID, paxId, flightID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 List<NodesVO> alternativeFlightsVOs = (List<NodesVO>)data;//gson.fromJson((String) data, listType);
@@ -393,7 +412,8 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
             public void onError(Object data) {
                 ErrorMessage(data);
             }
-        });
+        });*/
+
     }
 
 

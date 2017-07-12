@@ -2,7 +2,10 @@ package hellogbye.com.hellogbyeandroid.fragments.itinerary;
 
 import android.app.Activity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,8 +23,19 @@ import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import com.nostra13.universalimageloader.core.process.BitmapProcessor;
 
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -39,6 +53,8 @@ import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.AllImagesVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.LegsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
@@ -138,7 +154,17 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
         for (PassengersVO passenger:passengers){
             View child = activity.getLayoutInflater().inflate(R.layout.new_grid_passanger_name, null);
             FontTextView text = (FontTextView)child.findViewById(R.id.grid_passanger_name);
-            text.setText(passenger.getmName() + " - " +  HGBUtility.roundNumber(passenger.getmTotalPrice()));
+
+            FontTextView grid_passanger_cost_flight = (FontTextView)child.findViewById(R.id.grid_passanger_cost_flight);
+
+            text.setText(passenger.getmName() );
+
+            String priceLine= "" + HGBUtility.roundNumber(passenger.getmTotalPrice()) + " ";
+            if(user.getmCurrency() != null) {
+                priceLine += user.getmCurrency();
+            }
+
+            grid_passanger_cost_flight.setText("$" + priceLine + " + Taxes & Feess");
 
             RoundedImageView grid_round_image = (RoundedImageView)child.findViewById(R.id.grid_round_image);
 
@@ -147,7 +173,6 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
             LinearLayout outer = new LinearLayout(activity);
 
             outer.setLayoutParams(params);
-
             outer.setOrientation(LinearLayout.VERTICAL);
 
             outer.addView(child);
@@ -156,21 +181,6 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
         }
         passengersNames.addView(inner);
 
-        LayoutInflater li = LayoutInflater.from(activity);
-        View promptsView = li.inflate(R.layout.new_grid_add_companion, null);
-
-        LinearLayout new_grid_add_companion_ll = (LinearLayout) promptsView.findViewById(R.id.new_grid_add_companion_ll);
-        new_grid_add_companion_ll.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-
-                Bundle args = new Bundle();
-
-                args.putString("class_name", ItineraryFragment.class.toString());
-                getFlowInterface().goToFragment(ToolBarNavEnum.ALL_COMPANIONS_VIEW.getNavNumber(), args);
-            }
-        });
-        passengersNames.addView(promptsView);
     }
 
 
@@ -425,8 +435,8 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
 
                   //  Fragment fragment = new AlternativeFlightFragment();
                     //accountID
-                    TextView grid_flight_destination_from = (TextView)view.findViewById(R.id.grid_flight_destination_from);
-                    String guidSelectedUser = grid_flight_destination_from.getTag().toString();
+                    LinearLayout grid_flight_square_ll = (LinearLayout)view.findViewById(R.id.grid_flight_square_ll);
+                    String guidSelectedUser = grid_flight_square_ll.getTag().toString();
 
 
                     TextView grid_traveler_flight_price = (TextView)view.findViewById(R.id.grid_traveler_flight_price);
@@ -538,20 +548,31 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
 
         View child = activity.getLayoutInflater().inflate(R.layout.new_grid_view_inner_flight_item, null);
 
-        TextView grid_flight_destination_from = (TextView)child.findViewById(R.id.grid_flight_destination_from);
-        grid_flight_destination_from.setText(node.getmOriginCityName() + " - " + node.getmDestinationCityName());
+
+
+       /* TextView grid_flight_destination_from = (TextView)child.findViewById(R.id.grid_flight_destination_from);
+        grid_flight_destination_from.setText(node.getmOriginCityName() + " - " + node.getmDestinationCityName());*/
 
 /*        ImageView flight_image = (ImageView)child.findViewById(R.id.flight_image);
         flight_image.setImageResource(R.drawable.dlight_b_icon);*/
 
         //accountID
-        grid_flight_destination_from.setTag(node.getAccountID());
 
-        TextView grid_traveler_flight_price = (TextView)child.findViewById(R.id.grid_traveler_flight_price);
+        LinearLayout grid_flight_square_ll =(LinearLayout)child.findViewById(R.id.grid_flight_square_ll);
+        grid_flight_square_ll.setTag(node.getAccountID());
+
+
+        FontTextView grid_traveler_flight_price = (FontTextView)child.findViewById(R.id.grid_traveler_flight_price);
         TextView grid_traveler_continued_flight = (TextView)child.findViewById(R.id.grid_traveler_continued_flight);
 
-        grid_traveler_flight_price.setText("$" + HGBUtility.roundNumber(node.getCost()) + node.getmCurrency());
-        grid_traveler_flight_price.setVisibility(View.VISIBLE);
+        grid_traveler_flight_price.setText("$" + HGBUtility.roundNumber(node.getCost()));
+
+        FontTextView grid_traveler_flight_currency = (FontTextView)child.findViewById(R.id.grid_traveler_flight_currency);
+        grid_traveler_flight_currency.setText(node.getmCurrency());
+
+        LinearLayout grid_money_ll = (LinearLayout)child.findViewById(R.id.grid_money_ll);
+
+        grid_money_ll.setVisibility(View.VISIBLE);
         grid_traveler_continued_flight.setVisibility(View.INVISIBLE);
 
       /*  if(counter == 0){
@@ -563,13 +584,13 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
            */
             if(node.getParentflightid() != null){
                 grid_traveler_continued_flight.setVisibility(View.VISIBLE);
-                grid_traveler_flight_price.setVisibility(View.INVISIBLE);
+                grid_money_ll.setVisibility(View.INVISIBLE);
                 grid_traveler_continued_flight.setText("Return Flight");
             }
 
             if(nodeBeforeID.equals(node.getmPrimaryguid())){
                 grid_traveler_continued_flight.setVisibility(View.VISIBLE);
-                grid_traveler_flight_price.setVisibility(View.INVISIBLE);
+                grid_money_ll.setVisibility(View.INVISIBLE);
                 grid_traveler_continued_flight.setText("Continued Flight");
             }else{
                 nodeBeforeID = node.getmPrimaryguid();
@@ -598,7 +619,7 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
 
             grid_flight_direction_view.setImageDrawable(getResources().getDrawable(R.drawable.arrow_bi_directional_copy));
         }else{
-            grid_flight_direction_view.setImageDrawable(getResources().getDrawable(R.drawable.arrow_one_direction));
+            grid_flight_direction_view.setImageResource(R.drawable.arrow_forth_on);
         }
 
       /*  if(isRoundTrip != null) {
@@ -616,12 +637,33 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
 
 
         TextView grid_flight_operator_departure = (TextView)child.findViewById(R.id.grid_flight_operator_departure);
-        grid_flight_operator_departure.setText("Depart: " + HGBUtilityDate.parseDateToHHmm(node.getmDeparture()) + "     Arrival: "+HGBUtilityDate.parseDateToHHmm(node.getmArrival()));
+        grid_flight_operator_departure.setText("Depart: " + HGBUtilityDate.parseDateToHHmm(node.getmDeparture()) + " Arrival: "+HGBUtilityDate.parseDateToHHmm(node.getmArrival()));
 
 
         TextView grid_flight_airlines_class = (TextView)child.findViewById(R.id.grid_flight_airlines_class);
-        grid_flight_airlines_class.setText(node.getmOperatorName() + ", " + node.getmFareClass() + " Class");
+        grid_flight_airlines_class.setText(node.getmOperatorName() );
 
+
+        FontTextView grid_flight_airlines_flightnumber = (FontTextView)child.findViewById(R.id.grid_flight_airlines_flightnumber);
+        grid_flight_airlines_flightnumber.setText(node.getmOperator() + " " + node.getmEquipment());
+
+        ArrayList<LegsVO> legs = node.getLegs();
+        int stopCounter = 0;
+        String stopsStr = legs.get(0).getmOriginCityName();
+            for(int i=1;i<legs.size();i++){// LegsVO leg : legs){
+               if( legs.get(i).getmType().equals("Leg")){
+                   stopCounter++;
+                   stopsStr += "-"+legs.get(i).getmOriginCityName();
+               }
+            }
+
+        stopsStr += "-" +legs.get(0).getmDestinationCityName();
+        FontTextView grid_flight_airlines_stops = (FontTextView)child.findViewById(R.id.grid_flight_airlines_stops);
+
+        grid_flight_airlines_stops.setText(stopsStr);
+
+        FontTextView grid_flight_airlines_fareclass = (FontTextView)child.findViewById(R.id.grid_flight_airlines_fareclass);
+        grid_flight_airlines_fareclass.setText(node.getmFareClass() + " Class");
 
 
 /*        TextView grid_flight_operator_arrival = (TextView)child.findViewById(R.id.grid_flight_operator_arrival);
@@ -632,8 +674,8 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
         //grid_flight_operator.setTag(node.getmType());
 
 
-        TextView grid_flight_time = (TextView)child.findViewById(R.id.grid_flight_time);
-        grid_flight_time.setText(node.getmFlightTime());
+/*        TextView grid_flight_time = (TextView)child.findViewById(R.id.grid_flight_time);
+        grid_flight_time.setText(node.getmFlightTime());*/
 
 
         LayoutParams outerLayoutParams = new LayoutParams((int)iScreenSize, cellHieght);
@@ -682,40 +724,47 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
         return outer;
     }
 
+
+    public Bitmap getBitmapFromURL(String imageUrl) {
+        try {
+            URL url = new URL(imageUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+
     /**
      * Create hotel layout, with node details
      * @param node
      * @return hotel layout
      */
     private View hotelLayout(NodesVO node,int counter){
-        View child = activity.getLayoutInflater().inflate(R.layout.new_grid_view_inner_hotel_item, null);
-        ImageView hotel_bad_image = (ImageView)child.findViewById(R.id.hotel_bad_image);
-        hotel_bad_image.setImageResource(R.drawable.group_2);
+        final View child = activity.getLayoutInflater().inflate(R.layout.new_grid_view_inner_hotel_item, null);
 
-       /* if(counter == 0){
-            hotel_bad_image.setImageResource(R.drawable.group_2);
-        }
-        else{
-            hotel_bad_image.setImageResource(R.drawable.group_2_copy);
-        }*/
-        TextView grid_hotel_name = (TextView)child.findViewById(R.id.grid_hotel_name);
+
+
+        ImageView image_view = (ImageView)child.findViewById(R.id.image_view);
+        ImageLoader.getInstance().displayImage(node.getmImage(), image_view);
+
+        FontTextView grid_hotel_name = (FontTextView)child.findViewById(R.id.grid_hotel_name);
         grid_hotel_name.setText(node.getmHotelName());
-
         grid_hotel_name.setTag(node.getAccountID());
 
-        TextView grid_hotel_place = (TextView)child.findViewById(R.id.grid_hotel_place);
+        FontTextView grid_hotel_place = (FontTextView)child.findViewById(R.id.grid_hotel_place);
         grid_hotel_place.setText(node.getmAddress1());
-
         grid_hotel_place.setTag(node.getmGuid());
 
-        TextView grid_hotel_price = (TextView)child.findViewById(R.id.grid_hotel_price);
-        long diff = HGBUtilityDate.dayDifference(node.getmCheckIn(), node.getmCheckOut());//HGBUtility.getDateDiff(node.getmCheckIn(), node.getmCheckOut());
-        double iCharge = node.getmMinimumAmount()/(diff+1);
-        String result = String.format("%.2f", iCharge);
-        grid_hotel_price.setText("$" + HGBUtility.roundNumber(iCharge) + node.getmCurrency());
 
-        //type
-        grid_hotel_price.setTag(node.getmType());
+
 
         View starView = (View)child.findViewById(R.id.grid_star_layout);
 
@@ -728,21 +777,72 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
         setStarRating(starView, node.getmStarRating());
 
 
-        TextView grid_hotel_room_explanation = (TextView) child.findViewById(R.id.grid_hotel_room_explanation);
+        FontTextView grid_hotel_room_explanation = (FontTextView) child.findViewById(R.id.grid_hotel_room_explanation);
         grid_hotel_room_explanation.setText(node.getRoomsVOs().get(0).getmRoomType());
 
         LayoutParams outerLayoutParams = new LayoutParams((int)iScreenSize, cellHieght);
         RelativeLayout innerWhiteLayout = (RelativeLayout)child.findViewById(R.id.innerWhiteHotelLayout);
         innerWhiteLayout.setLayoutParams(outerLayoutParams);
 
+        ImageView new_grid_promo_available = (ImageView) child.findViewById(R.id.new_grid_promo_available);
+        System.out.println("Kate node =" + node.getAlternativePromoHotel());
 
-        LinearLayout outer = new LinearLayout(activity);
+
+        LinearLayout hotel_grid_regular_price = (LinearLayout) child.findViewById(R.id.hotel_grid_regular_price);
+
+        if(node.getAlternativePromoHotel() != null && !node.getAlternativePromoHotel().isEmpty()){
+
+            System.out.println("Kate promo");
+            hotel_grid_regular_price.setVisibility(View.GONE);
+            new_grid_promo_available.setVisibility(View.VISIBLE);
+            
+            RelativeLayout hotel_grid_price_line = (RelativeLayout) child.findViewById(R.id.hotel_grid_price_line);
+            hotel_grid_price_line.setVisibility(View.VISIBLE);
+            //regular price
+            FontTextView promo_price_line_regular_price = (FontTextView) child.findViewById(R.id.promo_price_line_regular_price);
+            long diff = HGBUtilityDate.dayDifference(node.getmCheckIn(), node.getmCheckOut());//HGBUtility.getDateDiff(node.getmCheckIn(), node.getmCheckOut());
+            double iCharge = node.getmMinimumAmount()/(diff+1);
+            String result = String.format("%.2f", iCharge);
+            promo_price_line_regular_price.setText("$" + HGBUtility.roundNumber(iCharge));
+
+            FontTextView price_line_regular_currency = (FontTextView) child.findViewById(R.id.price_line_regular_currency);
+            price_line_regular_currency.setText(node.getmCurrency() +"\n"+"NIGHT");
+
+
+            FontTextView promo_price_line_promo_price = (FontTextView) child.findViewById(R.id.promo_price_line_promo_price);
+            promo_price_line_promo_price.setText(""+HGBUtility.roundNumber(node.getAlternativePromoHotel().getRoomsVOs().get(0).getmCost()));
+
+            FontTextView promo_price_line_promo_currency = (FontTextView) child.findViewById(R.id.promo_price_line_promo_currency);
+            promo_price_line_promo_currency.setText(node.getmCurrency() + "\n" + "NIGHT");
+
+
+        }else{
+            System.out.println("Kate regular");
+            hotel_grid_regular_price.setVisibility(View.VISIBLE);
+            new_grid_promo_available.setVisibility(View.GONE);
+
+            FontTextView grid_hotel_night = (FontTextView) child.findViewById(R.id.grid_hotel_night);
+            grid_hotel_night.setText(node.getmCurrency() + "/NIGHT");
+
+            FontTextView grid_hotel_price = (FontTextView)child.findViewById(R.id.grid_hotel_price);
+            long diff = HGBUtilityDate.dayDifference(node.getmCheckIn(), node.getmCheckOut());//HGBUtility.getDateDiff(node.getmCheckIn(), node.getmCheckOut());
+            double iCharge = node.getmMinimumAmount()/(diff+1);
+            String result = String.format("%.2f", iCharge);
+            grid_hotel_price.setText("$" + HGBUtility.roundNumber(iCharge));
+            //type
+            grid_hotel_price.setTag(node.getmType());
+        }
+
+
+
+      //  RelativeLayout outer = new RelativeLayout(activity);
 
        // outer.setLayoutParams(outerLayoutParams);
-        outer.setOrientation(LinearLayout.VERTICAL);
-        outer.addView(child);
+      //  outer.setOrientation(LinearLayout.VERTICAL);
 
-        return outer;
+      //  outer.addView(child);
+
+        return innerWhiteLayout;
 
     }
 
@@ -751,41 +851,41 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
     private void setStarRating(View holder, float star) {
 
         if ("0.5".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.big_star_dark_blue_half, R.drawable.big_star_dark_blue_out,
-                    R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out);
+            starHolder(holder, R.drawable.big_star_dark_blue_half, R.drawable.empty_star,
+                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
 
         } else if ("1.0".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.big_star_blue_dark_full, R.drawable.big_star_dark_blue_out,
-                    R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out);
+            starHolder(holder, R.drawable.star_1, R.drawable.empty_star,
+                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
 
         } else if ("1.5".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.big_star_blue_dark_full, R.drawable.big_star_dark_blue_half,
-                    R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out);
+            starHolder(holder, R.drawable.star_1, R.drawable.big_star_dark_blue_half,
+                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
 
         } else if ("2.0".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full,
-                    R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out);
+            starHolder(holder, R.drawable.star_1, R.drawable.star_1,
+                    R.drawable.empty_star, R.drawable.empty_star, R.drawable.empty_star);
         } else if ("2.5".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full,
-                    R.drawable.big_star_dark_blue_half, R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out);
+            starHolder(holder, R.drawable.star_1, R.drawable.star_1,
+                    R.drawable.big_star_dark_blue_half, R.drawable.empty_star, R.drawable.empty_star);
         } else if ("3.0".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.star_blue_full, R.drawable.star_blue_full,
-                    R.drawable.star_blue_full, R.drawable.big_star_dark_blue_out, R.drawable.big_star_dark_blue_out);
+            starHolder(holder, R.drawable.star_1, R.drawable.star_1,
+                    R.drawable.star_1, R.drawable.empty_star, R.drawable.empty_star);
         } else if ("3.5".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full,
-                    R.drawable.big_star_blue_dark_full, R.drawable.big_star_dark_blue_half, R.drawable.big_star_dark_blue_out);
+            starHolder(holder, R.drawable.star_1, R.drawable.star_1,
+                    R.drawable.star_1, R.drawable.big_star_dark_blue_half, R.drawable.empty_star);
 
         } else if ("4.0".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full,
-                    R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full, R.drawable.big_star_dark_blue_out);
+            starHolder(holder, R.drawable.star_1, R.drawable.star_1,
+                    R.drawable.star_1, R.drawable.star_1, R.drawable.empty_star);
 
         } else if ("4.5".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full,
-                    R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full, R.drawable.big_star_dark_blue_half);
+            starHolder(holder, R.drawable.star_1, R.drawable.star_1,
+                    R.drawable.star_1, R.drawable.star_1, R.drawable.big_star_dark_blue_half);
 
         } else if ("5.0".equals(String.valueOf(star))) {
-            starHolder(holder, R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full,
-                    R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full, R.drawable.big_star_blue_dark_full);
+            starHolder(holder, R.drawable.star_1, R.drawable.star_1,
+                    R.drawable.star_1, R.drawable.star_1, R.drawable.star_1);
 
         }
     }
@@ -916,7 +1016,7 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         getFlowInterface().enableFullScreen(true);
-        cellHieght = (int) getResources().getDimension(R.dimen.DP150);
+        cellHieght = (int) getResources().getDimension(R.dimen.DP220);
         activity = getActivity();
 
         View rootView = inflater.inflate(R.layout.new_grid_main_table, container, false);
@@ -951,7 +1051,7 @@ public class ItineraryFragment extends HGBAbstractFragment implements TitleNameC
             }
         });
 
-        iScreenSize = getActivity().getResources().getDimension(R.dimen.DP250); //dp + activity.getResources().getDimension(R.dimen.DP50);
+        iScreenSize = getActivity().getResources().getDimension(R.dimen.DP335); //dp + activity.getResources().getDimension(R.dimen.DP50);
 
         createItinenaryView(rootView);
 

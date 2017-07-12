@@ -1,152 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/grid_main_hotel_square_ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:id="@+id/innerWhiteHotelLayout">
 
 
-    <RelativeLayout
+
+<!--    <RelativeLayout
         android:id="@+id/innerWhiteHotelLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent">-->
+
+        <ImageView
+            android:scaleType="centerCrop"
+            android:id="@+id/image_view"
+            android:background="@drawable/no_photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 
-    <RelativeLayout
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/new_grid_promo_available"
+        android:layout_marginRight="@dimen/DP14"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/member_price_promos_available"/>
+
+
+
+<!--    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/COLOR_WHITE"
+        android:id="@+id/grid_main_hotel_square_rl"
         android:layout_gravity="center"
         android:padding="@dimen/DP10" >
 
-        <!--android:background="@drawable/rounded_corner_white"-->
-
-        <!--android:layout_width="@dimen/DP150"-->
-        <!--android:layout_height="@dimen/DP150"-->
 
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/grid_hotel_name"
-        style="@style/GridTextStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hotel name"
-        android:textColor="@color/COLOR_00516f"
-        app:fontName="dinnextltpro_regular.otf"
-        android:maxLines="2"
-        android:layout_toLeftOf="@+id/hotel_bad_image"
-        android:layout_toStartOf="@+id/hotel_bad_image" />
+        </RelativeLayout>-->
 
 
-        <ImageView
-            android:id="@+id/hotel_bad_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/group_2"
-            android:layout_alignParentRight="true"/>
+    <!--android:background="@color/COLOR_66000000"-->
+        <RelativeLayout
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:layout_below="@+id/grid_hotel_name"
-        android:id="@+id/grid_hotel_place"
-        style="@style/GridTextStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:text="Cape Town"
-        android:textColor="@color/COLOR_003D4C"
-        app:fontName="dinnextltpro_regular.otf" />
-
-        <include
-            android:layout_marginBottom="@dimen/DP6"
-            android:layout_marginTop="@dimen/DP6"
+            android:id="@+id/grid_main_hotel_square_rl"
+            android:background="@color/COLOR_A6000000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/grid_star_layout"
-            android:layout_below="@+id/grid_hotel_place"
-            layout="@layout/star_layout" />
-
-
-    <LinearLayout
-        android:layout_below="@+id/grid_star_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/grid_hotel_price_ll">
-
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:id="@+id/grid_hotel_price"
-            style="@style/GridTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$100000"
-            android:textColor="@color/COLOR_EE3A3C"
-            app:fontName="dinnextltpro_regular.otf" />
-
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:id="@+id/grid_hotel_night"
-            style="@style/GridTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="/Night"
-            android:textColor="@color/COLOR_565656"
-            app:fontName="dinnextltpro_regular.otf" />
-
-    </LinearLayout>
+            android:layout_above="@+id/new_grid_white_separator">
 
 
 
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/grid_hotel_name"
+                android:textSize="@dimen/SP14"
+                android:layout_margin="@dimen/DP6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hotel name"
+                android:textColor="@color/COLOR_WHITE"
+                app:fontName="dinnextltpro_medium.otf"
+                android:maxLines="2"
+                />
 
 
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:layout_below="@+id/grid_hotel_price_ll"
-            android:id="@+id/grid_hotel_taxes"
-            style="@style/GridTextStyle"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/grid_taxes"
-            android:textColor="@color/COLOR_565656"
-            app:fontName="dinnextltpro_light.otf" />
+            <!--  <ImageView
+                  android:id="@+id/hotel_bad_image"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:background="@drawable/group_2"
+                  android:layout_alignParentRight="true"/>-->
 
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:layout_below="@+id/grid_hotel_taxes"
-            android:id="@+id/grid_hotel_room_explanation"
-            style="@style/GridTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1 King bad"
-            android:maxLines="3"
-            android:textColor="@color/COLOR_565656"
-            app:fontName="dinnextltpro_light.otf" />
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:layout_margin="@dimen/DP6"
+                android:layout_below="@+id/grid_hotel_name"
+                android:id="@+id/grid_hotel_place"
+                style="@style/GridTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="Cape Town"
+                android:textColor="@color/COLOR_003D4C"
+                app:fontName="dinnextltpro_regular.otf" />
+
+            <include
+                android:layout_margin="@dimen/DP6"
+                android:layout_marginBottom="@dimen/DP6"
+                android:layout_marginTop="@dimen/DP6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/grid_star_layout"
+                android:layout_below="@+id/grid_hotel_place"
+                layout="@layout/star_layout" />
+
+
+            <LinearLayout
+                android:layout_margin="@dimen/DP6"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/grid_hotel_price_ll">
+                <LinearLayout
+                    android:id="@+id/hotel_grid_regular_price"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+                    android:id="@+id/grid_hotel_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$100000"
+                    android:textSize="@dimen/SP20"
+                    android:textColor="@color/COLOR_WHITE"
+                    app:fontName="dinnextltpro_medium.otf" />
+
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+                    android:gravity="right"
+                    android:id="@+id/grid_hotel_night"
+                    android:textSize="@dimen/SP10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CAD/NIGHT"
+                    android:textColor="@color/COLOR_WHITE"
+                    app:fontName="dinnextltpro_regular.otf" />
+                </LinearLayout>
+
+                <include
+                    android:visibility="gone"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/new_grid_view_promo_price_line"/>
+
+            </LinearLayout>
+
+
+
+
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+                android:layout_below="@+id/grid_hotel_price_ll"
+                android:id="@+id/grid_hotel_taxes"
+                style="@style/GridTextStyle"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/grid_taxes"
+                android:textColor="@color/COLOR_565656"
+                app:fontName="dinnextltpro_light.otf" />
+
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:layout_below="@+id/grid_hotel_taxes"
+                android:id="@+id/grid_hotel_room_explanation"
+                style="@style/GridTextStyle"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 King bad"
+                android:maxLines="3"
+                android:textColor="@color/COLOR_565656"
+                app:fontName="dinnextltpro_light.otf" />
 
         </RelativeLayout>
 
+    <View
+        android:id="@+id/new_grid_white_separator"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DP1"
+        android:layout_above="@+id/new_grid_bottom_line"
+        android:background="@color/COLOR_0DFFFFFF" />
+
+
         <RelativeLayout
-            android:padding="@dimen/DP6"
-            android:background="@color/COLOR_f9fbfd"
+
+            android:id="@+id/new_grid_bottom_line"
+            android:background="@color/COLOR_A6000000"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="@dimen/DP38">
             <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:layout_margin="@dimen/DP6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/SP10"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
                 app:fontName="dinnextltpro_regular.otf"
                 android:textColor="@color/COLOR_00516f"
                 android:text="@string/hotel_grid_more_options"/>
-            <ImageView
+
+
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:layout_margin="@dimen/DP6"
+                android:layout_centerInParent="true"
+                android:id="@+id/grid_select_hotel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/DP6"
+                android:background="@drawable/rounded_corner_itinerary_select"
+                android:textColor="@color/COLOR_00516f"
+                android:textSize="@dimen/SP10"
+                app:fontName="dinnextltpro_medium.otf"
                 android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:background="@drawable/grid_more_option"/>
+                android:text="SELECT" />
+
         </RelativeLayout>
 
-    </RelativeLayout>
 
-</LinearLayout>
+
+
+<!--
+    </RelativeLayout>-->
+
+</RelativeLayout>
 
 
 

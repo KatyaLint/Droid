@@ -42,6 +42,8 @@ public class UserTravelMainVO {
     @SerializedName("conversation")
     private ArrayList<ConversationVO> conversation = new ArrayList<ConversationVO>();
 
+    @SerializedName("currency")
+    private String mCurrency;
 
 
 
@@ -103,4 +105,11 @@ public class UserTravelMainVO {
         this.mTotalPrice = mTotalPrice;
     }
 
+    public String getmCurrency() {
+        return mCurrency;
+    }
+
+    public void setmCurrency(String mCurrency) {
+        this.mCurrency = mCurrency;
+    }
 }

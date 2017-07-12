@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/grid_flight_airlines_class"
+        android:textSize="@dimen/SP12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/GridTextStyle"
+        android:text="American Airline"
+        android:textColor="@color/COLOR_565656"
+        app:fontName="dinnextltpro_regular.otf" />
+
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/grid_flight_airlines_flightnumber"
+        android:textSize="@dimen/SP12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="AA 242"
+        style="@style/GridTextStyle"
+        android:textColor="@color/COLOR_565656"
+        app:fontName="dinnextltpro_regular.otf" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/grid_flight_airlines_stops"
+        android:textSize="@dimen/SP12"
+        style="@style/GridTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Torronto-Vancuver- "
+        android:textColor="@color/COLOR_565656"
+        app:fontName="dinnextltpro_regular.otf" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/grid_flight_airlines_fareclass"
+        android:textSize="@dimen/SP12"
+        style="@style/GridTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Business"
+        android:textColor="@color/COLOR_565656"
+        app:fontName="dinnextltpro_regular.otf" />
+
+
+   <!-- <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+        android:id="@+id/grid_flight_destination_from"
+        style="@style/GridTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Toronto to"
+        android:textColor="@color/COLOR_00516f"
+        app:fontName="dinnextltpro_regular.otf"
+        android:layout_below="@+id/grid_flight_time"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />-->
+
+
+    <LinearLayout
+        style="@style/GridTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/grid_flight_operator_departure"
+            android:textSize="@dimen/SP12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Departure : 17:35"
+            android:textColor="@color/COLOR_565656"
+            app:fontName="dinnextltpro_regular.otf" />
+
+    <!--    <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/grid_flight_operator_arrival"
+            android:textSize="@dimen/SP12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Arrival: 20:41"
+            android:textColor="@color/COLOR_565656"
+            app:fontName="dinnextltpro_regular.otf" />-->
+
+    </LinearLayout>
+
+
+</LinearLayout>

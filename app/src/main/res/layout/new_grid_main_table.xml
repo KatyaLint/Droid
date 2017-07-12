@@ -14,10 +14,11 @@
     android:fillViewport="true"
     android:scrollbars="horizontal">
 
+ <!--   <include
+        layout="@layout/new_grid_main_layout"/>-->
+
     <include
-        layout="@layout/new_grid_main_layout"/>
-
-
+        layout="@layout/new_grid_main_adapter_layout"/>
 
 </HorizontalScrollView>
 

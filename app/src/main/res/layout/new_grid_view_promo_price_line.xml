@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/hotel_grid_price_line"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/promo_price_line_regular_price_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/promo_price_line_regular_price"
+        android:text="130"
+        android:textSize="@dimen/SP18"
+        app:fontName="dinnextltpro_medium.otf"
+        android:textColor="@color/COLOR_WHITE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/price_line_regular_currency"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/promo_price_line_regular_price"
+            android:textSize="@dimen/SP6"
+            android:textColor="@color/COLOR_WHITE"
+            app:fontName="dinnextltpro_medium.otf"
+            android:text="USD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+<!--        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+         &lt;!&ndash;   <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:textSize="@dimen/SP6"
+                app:fontName="dinnextltpro_medium.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/price_line_currency"/>&ndash;&gt;
+
+
+
+        </LinearLayout>-->
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_below="@+id/promo_price_line_regular_price_rl"
+        android:background="@drawable/round_corner_price_line"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/promo_price_text"
+        android:textSize="@dimen/SP8"
+        android:textColor="@color/COLOR_2eb5e2"
+        android:text="Rates starting at:"
+        app:fontName="dinnextltpro_regular.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+        <RelativeLayout
+            android:layout_below="@+id/promo_price_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+            android:id="@+id/promo_price_line_promo_price"
+            android:text="100$"
+            app:fontName="dinnextltpro_medium.otf"
+            android:textSize="@dimen/SP18"
+            android:textColor="@color/COLOR_2eb5e2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/promo_price_line_promo_currency"
+                android:text="USD"
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@+id/promo_price_line_promo_price"
+                app:fontName="dinnextltpro_medium.otf"
+                android:textSize="@dimen/SP8"
+                android:layout_gravity="center"
+                android:textColor="@color/COLOR_2eb5e2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -5,8 +5,8 @@
     android:id="@+id/new_grid_main_ll"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
-    android:gravity="center"
-
+    android:gravity="left"
+      android:background="@color/COLOR_00516f"
     android:orientation="horizontal">
 
    
@@ -15,17 +15,36 @@
        android:id="@+id/grid_round_image"
        android:layout_width="@dimen/DP26"
        android:layout_height="@dimen/DP26"
-       android:layout_marginRight="@dimen/DP10"
-     />
-   
-   <hellogbye.com.hellogbyeandroid.views.FontTextView
+       android:layout_marginRight="@dimen/DP10" />
 
+
+   <LinearLayout
+
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
+
+   <hellogbye.com.hellogbyeandroid.views.FontTextView
+       android:layout_gravity="center"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:text="sdfsdfds"
+       android:text="Chris"
        android:textAllCaps="true"
        android:textSize="@dimen/SP14"
        android:textColor="@color/COLOR_WHITE"
        app:fontName="dinnextltpro_regular.otf"
        android:id="@+id/grid_passanger_name"/>
+
+
+      <hellogbye.com.hellogbyeandroid.views.FontTextView
+          android:layout_gravity="center"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="675$"
+          android:textSize="@dimen/SP10"
+          android:textColor="@color/COLOR_WHITE"
+          app:fontName="dinnextltpro_regular.otf"
+          android:id="@+id/grid_passanger_cost_flight"/>
+
+   </LinearLayout>
 </LinearLayout>

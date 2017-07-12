@@ -279,6 +279,7 @@ public class Parser {
 
     public static Object parseAlternativeFlight(String response) {
         List<NodesVO> alternativeFlightsVOs = null;
+        System.out.println("Kate parseAlternativeFlight response =" + response);
         try {
             Type listType = new TypeToken<List<NodesVO>>() {
             }.getType();

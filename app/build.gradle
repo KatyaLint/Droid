@@ -35,7 +35,7 @@ android {
         applicationId "hellogbye.com.hellogbyeandroid"
 
 
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 7
         versionName "0.0.7"
@@ -120,6 +120,8 @@ dependencies {
     compile files('libs/signalr-client-sdk.jar')
     compile files('libs/signalr-client-sdk-android.jar')
     compile files('libs/YouTubeAndroidPlayerApi.jar')
+    compile files('libs/shimmer.jar')
+
     compile 'info.hoang8f:android-segmented:1.0.6'
 
 }

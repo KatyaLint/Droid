@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -63,6 +64,9 @@ public class HGBSaveDataClass implements HGBMainInterface {
 
     private List<DefaultsProfilesVO> defaultsProfilesVOs;
     private CNCTutorialsVO cncTutorialsVOs;
+    private HashMap<String, List<NodesVO>> alternativeFlightsHash = new HashMap<>();
+    private HashMap<String, List<NodesVO>> alternativeHotelsHash = new HashMap<>();
+    private List<NodesVO> alternativeHotelsVO;
 
 //    public HGBSaveDataClass(MainActivity mainActivity ,HGBPreferencesManager hgbPrefrenceManager) {
 //        this.hgbPrefrenceManager = hgbPrefrenceManager;
@@ -130,6 +134,39 @@ public class HGBSaveDataClass implements HGBMainInterface {
     @Override
     public List<NodesVO> getAlternativeFlights() {
         return alternativeFlights;
+    }
+
+    @Override
+    public void setAlternativeHotels(List<NodesVO> alternativeHotelsVO) {
+        this.alternativeHotelsVO = alternativeHotelsVO;
+    }
+
+    @Override
+    public List<NodesVO> getAlternativeHotels() {
+        return this.alternativeHotelsVO;
+    }
+
+    @Override
+    public void setAlternativeFlightsHash(String paxGuid, List<NodesVO> alternativeFlightsHash) {
+
+    }
+
+
+    @Override
+    public HashMap<String, List<NodesVO>> getAlternativeFlightsHash() {
+        return alternativeFlightsHash;
+    }
+
+    @Override
+    public void setAlternativeHotelsHash(String paxGuid, List<NodesVO> alternativeHotelsHash) {
+
+    }
+
+
+
+    @Override
+    public HashMap<String, List<NodesVO>> getAlternativeHotelsHash() {
+        return alternativeHotelsHash;
     }
 
  /*   @Override

@@ -101,7 +101,6 @@ public class SignalRService extends Service {
 
             @Override
             public void run() {
-
             }
         });
 
@@ -114,7 +113,6 @@ public class SignalRService extends Service {
 
             @Override
             public void run(Void obj) throws Exception {
-
                 JsonObject jsonObject = new JsonObject();
                 String invokationFunctionName = null;
                 String connectionId = _connection.getConnectionId();
@@ -155,16 +153,11 @@ public class SignalRService extends Service {
 
                     @Override
                     public void onError(Throwable error) {
-
                     }
                 });
 
             }
         });
-
-
-
-
 
 
 
@@ -176,7 +169,7 @@ public class SignalRService extends Service {
         }
 
 
-        _hub.on("cncOnShowSolutionR",
+    /*    _hub.on("cncOnShowSolutionR",
                 new SubscriptionHandler1<JsonObject>() {
                     @Override
                     public void run(final JsonObject msg) {
@@ -217,7 +210,7 @@ public class SignalRService extends Service {
 
                     }
                 }
-                , Object.class);
+                , Object.class);*/
 
     }
 

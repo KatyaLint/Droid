@@ -12,22 +12,15 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/COLOR_00516f"
-        android:orientation="horizontal" >
-
-        <!--<hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/grid_user_name"
-            android:text="testt"/>-->
-        </LinearLayout>
+        android:orientation="horizontal" />
 
 
-    <!--android:layout_height="@dimen/DP34"-->
 
+    <!--empty view-->
     <LinearLayout
         android:paddingTop="@dimen/DP20"
         android:id="@+id/cnc_empty_view"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"

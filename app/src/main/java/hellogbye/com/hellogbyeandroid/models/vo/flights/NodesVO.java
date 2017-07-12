@@ -179,6 +179,11 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
     private AirportCoordinatesVO destinationairportcoordinates = new AirportCoordinatesVO();
 
 
+    @SerializedName("alternativehotel")
+    private NodesVO alternativePromoHotel;
+
+
+
     public NodesVO getClone(){
         try { // call clone in Object.
             return (NodesVO) super.clone();
@@ -695,5 +700,13 @@ public class NodesVO implements Comparable<NodesVO>, Cloneable
 
     public void setSelectedSeatType(int selectedSeatType) {
         this.selectedSeatType = selectedSeatType;
+    }
+
+    public NodesVO getAlternativePromoHotel() {
+        return alternativePromoHotel;
+    }
+
+    public void setAlternativePromoHotel(NodesVO alternativePromoHotel) {
+        this.alternativePromoHotel = alternativePromoHotel;
     }
 }

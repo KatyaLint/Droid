@@ -1337,6 +1337,38 @@ public class ConnectionManager {
 
 
 
+    public void getAlternativeHotelForFlightV2(String solutionid, String paxid, String checkin, String checkout, boolean isPromoAlternative, final ServerRequestListener listener) {
+
+
+        String url = getURL(Services.USER_HOTEL_SOLUTIONS);
+        String[] checkinSplit = checkin.split("T");
+        String[] checkoutSplit = checkout.split("T");
+
+        url = url + SOLUTION + solutionid + "&paxid=" + paxid + "&checkin=" + checkinSplit[0] + "&checkout=" + checkoutSplit[0] + "&isPromoAlternative="+isPromoAlternative;
+        JSONObject jsonObject = new JSONObject();
+        System.out.println("Kate getAlternateHotelForFlight =" + url);
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseAlternativeFlight(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        },true);
+
+//https://apiprod.hellogbye.com/prod/rest/Hotel?solution=957a8e48-3d4c-4c38-bd03-598e434b0478&paxid=66ceb3dc-faf7-40c8-8292-32a641f782fd
+// &checkin=2017-06-21&checkout=2017-06-24&isPromoAlternative=false
+
+        //USER_HOTEL_SOLUTIONS
+    //https://apiprod.hellogbye.com/prod/rest/Flight?solution=9f5dc7d9-24f2-46fd-b6ec-54ad0fb40b21&paxid=c47ae6eb-d3da-42b2-a2dc-af9e0eb322ee&flight=bfe3f7ec-fe19-430b-b9b3-a9176629d5c9
+    //https://apiprod.hellogbye.com/prod/rest/Flight?solution=957a8e48-3d4c-4c38-bd03-598e434b0478&paxid=66ceb3dc-faf7-40c8-8292-32a641f782fd&flight=69cc12f0-5b98-4c30-a938-6caf696ede0b
+    }
+
 
     public void getAlternateFlightsForFlight(String solutionid, String paxid, String flightid, final ServerRequestListener listener) {
 
@@ -1344,6 +1376,11 @@ public class ConnectionManager {
         String url = getURL(Services.USER_FLIGHT_SOLUTIONS);
         url = url + SOLUTION + solutionid + "&paxid=" + paxid + "&flight=" + flightid;
         JSONObject jsonObject = new JSONObject();
+        System.out.println("Kate ");
+
+        //https://apiprod.hellogbye.com/prod/rest/Flight?solution=9f5dc7d9-24f2-46fd-b6ec-54ad0fb40b21&paxid=093717ff-c063-4e99-a6b5-a78900a2d443&flight=4006f7aa-2a5d-4758-9118-51c1573dfd6e
+
+        //https://apiprod.hellogbye.com/prod/rest/Flight?solution=957a8e48-3d4c-4c38-bd03-598e434b0478&paxid=66ceb3dc-faf7-40c8-8292-32a641f782fd&flight=69cc12f0-5b98-4c30-a938-6caf696ede0b
 
 
         HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
@@ -1365,7 +1402,6 @@ public class ConnectionManager {
 
     public void getStaticBookingProvince(String countryCode, final ServerRequestListener listener) {
 
-        //ka
         String url = getURL(Services.STATIC_PROVINCE_BY_COUNTRY_CODE);
         url = url + countryCode;
         JSONObject jsonObject = new JSONObject();
@@ -2108,6 +2144,7 @@ public class ConnectionManager {
                 USER_PUT_HOTEL("Hotel"),
                 USER_GET_BOOKING_OPTIONS("Statics/BookingOptions"),
                 USER_FLIGHT_SOLUTIONS("Flight"),
+                USER_HOTEL_SOLUTIONS("Hotel"),
                 USER_GET_TRAVELER_INFO("Traveler/GetAll/"),
                 USER_GET_USER_PROFILE_ACCOUNTS("UserProfile/Accounts"),
                 USER_POST_USER_PROFILE_EMAIL("UserProfile/ResetPassword?email="),

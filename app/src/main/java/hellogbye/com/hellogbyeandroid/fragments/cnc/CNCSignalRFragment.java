@@ -396,11 +396,11 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
     }
 
     private void postToSignalR(String connectionId, String userId, String solutionId){
-        String connectionid = "";
+      /*  String connectionid = "";
         String userid = "";
-        String solutionid = "";
+        String solutionid = "";*/
 
-        ConnectionManager.getInstance(getActivity()).sendPostSignalRRegistration(connectionid, userid, solutionid,
+        ConnectionManager.getInstance(getActivity()).sendPostSignalRRegistration(connectionId, userId, solutionId,
                 new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {

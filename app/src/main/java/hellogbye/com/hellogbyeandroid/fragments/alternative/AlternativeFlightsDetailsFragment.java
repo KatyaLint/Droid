@@ -280,7 +280,7 @@ private int selectedPosition = 0;
     }
 
 
-    private void getAlternativeFlights(String mGuid){
+    private void getAlternativeFlights(String mGuid) {
 
         String solutionID = getActivityInterface().getTravelOrder().getmSolutionID();
 

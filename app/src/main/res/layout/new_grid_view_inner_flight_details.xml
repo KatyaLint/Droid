@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fontName="dinnextltpro_medium.otf"
+            style="@style/GridTextStyle"
+            android:textSize="@dimen/SP12"
+            android:text="Operated by"/>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fontName="dinnextltpro_medium.otf"
+            style="@style/GridTextStyle"
+            android:textSize="@dimen/SP12"
+            android:text="Flight"/>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fontName="dinnextltpro_medium.otf"
+            style="@style/GridTextStyle"
+            android:textSize="@dimen/SP12"
+            android:text="1 Stops"/>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fontName="dinnextltpro_medium.otf"
+            android:textSize="@dimen/SP12"
+            style="@style/GridTextStyle"
+            android:text="Fare Class"/>
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fontName="dinnextltpro_medium.otf"
+            style="@style/GridTextStyle"
+            android:textSize="@dimen/SP12"
+            android:text="Time"/>
+
+
+</LinearLayout>

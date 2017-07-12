@@ -26,6 +26,7 @@ public class PassengersVO {
 
     @SerializedName("avatarurl")
     private String avatarurl;
+
     private boolean mChildDataMissing;
 
 
@@ -154,4 +155,6 @@ public class PassengersVO {
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
+
+
 }

@@ -63,6 +63,9 @@ import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionsTravelers;
 import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionTabsWidgetFragment;
 import hellogbye.com.hellogbyeandroid.fragments.hotel.SelectNewRoomFragment;
 import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragment;
+import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragmentAdapter;
+import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragmentHelperAdapter;
+import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragmentNoScrollingAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.membership.MembershipFragment;
 import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsTabsView;
 import hellogbye.com.hellogbyeandroid.fragments.notification.NotificationFragment;
@@ -843,6 +846,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 break;
             case ITINARERY:
                 fragment = ItineraryFragment.newInstance(navPosition);
+               //fragment = ItineraryFragmentAdapter.newInstance(navPosition);
+             //   fragment = ItineraryFragmentHelperAdapter.newInstance(navPosition);
+               // fragment = ItineraryFragmentNoScrollingAdapter.newInstance(navPosition);
+
 
                 // setItineraryTitleName();
                 break;

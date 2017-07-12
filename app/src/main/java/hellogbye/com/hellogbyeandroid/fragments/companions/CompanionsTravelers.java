@@ -26,6 +26,7 @@ import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.adapters.companion.CompanionsSwipeItemsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragment;
+import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragmentAdapter;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 
@@ -66,7 +67,7 @@ public class CompanionsTravelers extends CompanionsTabsViewClass {
         Bundle args = getArguments();
         if (args != null) {
             String className = args.getString("class_name");
-            if (ItineraryFragment.class.toString().equals(className)) {
+            if (ItineraryFragmentAdapter.class.toString().equals(className)) {
 
                 return true;
             }

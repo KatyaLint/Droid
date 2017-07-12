@@ -1,6 +1,7 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.models.vo.cnc.CNCItem;
@@ -36,6 +37,15 @@ public interface HGBMainInterface {
 
     void setAlternativeFlights(List<NodesVO> alternativeFlightsVO);
     List<NodesVO> getAlternativeFlights();
+
+    void setAlternativeHotels(List<NodesVO> alternativeHotelsVO);
+    List<NodesVO> getAlternativeHotels();
+
+    void setAlternativeFlightsHash(String paxGuid,List<NodesVO>  alternativeFlightsHash);
+    HashMap<String,List<NodesVO>>  getAlternativeFlightsHash();
+
+    void setAlternativeHotelsHash(String paxGuid,List<NodesVO>  alternativeHotelsHash);
+    HashMap<String,List<NodesVO>>  getAlternativeHotelsHash();
 
     void setAccountSettingsAttribute(List<SettingsAttributeParamVO> settingsAttribute);
     List<SettingsAttributeParamVO> getAccountSettingsAttribute();
