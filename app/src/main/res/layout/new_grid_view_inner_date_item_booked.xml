@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/grid_squer_empty_booked"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/DP26"
+    android:background="@color/COLOR_F5F5F5"
+    android:orientation="horizontal">
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        app:fontName="dinnextltpro_medium.otf"
+        android:id="@+id/date_text_layout_booked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:layout_gravity="center"
+        android:paddingLeft="@dimen/DP26"
+        android:text="12/3/1986"
+        android:textColor="@color/COLOR_565656"
+        android:textSize="@dimen/SP14" />
+
+
+</LinearLayout>

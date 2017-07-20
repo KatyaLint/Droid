@@ -181,7 +181,7 @@
 //
 ////                    ItineraryFragment fragemnt = new ItineraryFragment();
 ////                    HGBUtility.goToNextFragmentIsAddToBackStack(getActivity(), fragemnt, true); //now we always want to add to the backstack
-//                  getFlowInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(),null);
+//                  getFlowInterface().goToFragment(ToolBarNavEnum.ITINERARY.getNavNumber(),null);
 //
 //                    checkState();
 ////                    HotelFragment fragemnt = new HotelFragment();

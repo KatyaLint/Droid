@@ -899,10 +899,33 @@ public class ConnectionManager {
     // GETS
     ///////////////////////////////
 
+    public void getBookedItinerary(String itineraryid,String connectionId,  final ServerRequestListener listener) {
+
+        String url = getURL(Services.ITINERARY);
+        url = url + "/booked/" + itineraryid +"/"+ connectionId;
+        JSONObject jsonObject = new JSONObject();
+
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseAirplaneData(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, false);
+    }
+
+
     public void getItinerary(String solutionid, final ServerRequestListener listener) {
 
         String url = getURL(Services.ITINERARY);
         url = url + solutionid;
+        System.out.println("Kate url = " + url);
         JSONObject jsonObject = new JSONObject();
 
 

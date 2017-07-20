@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AutoCompleteTextView;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -62,10 +63,9 @@ import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionDetailsFragm
 import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionsTravelers;
 import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionTabsWidgetFragment;
 import hellogbye.com.hellogbyeandroid.fragments.hotel.SelectNewRoomFragment;
-import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragment;
-import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragmentAdapter;
-import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragmentHelperAdapter;
-import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragmentNoScrollingAdapter;
+
+import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragmentComposeView;
+
 import hellogbye.com.hellogbyeandroid.fragments.membership.MembershipFragment;
 import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsTabsView;
 import hellogbye.com.hellogbyeandroid.fragments.notification.NotificationFragment;
@@ -162,6 +162,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private ImageButton toolbar_profile_popup;
     private LinearLayout connection_toast_layout_connected;
     private LinearLayout connection_toast_layout_disconnected;
+    private HorizontalScrollView table_scroll;
+    private ImageButton toolbar_new_grid_add_companions;
 
     // private SignalRHubConnection mSignalRHubConnection;
 
@@ -234,6 +236,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         String strTravel = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_LAST_TRAVEL_VO, "");
         if (!"".equals(strTravel)) {
             UserTravelMainVO userTravelVO = (UserTravelMainVO) Parser.parseAirplaneData(strTravel);
+
             hgbSaveDataClass.setTravelOrder(userTravelVO);
         }
 
@@ -516,6 +519,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         preference_add_card = (ImageView) mToolbar.findViewById(R.id.add_cc);
         toolbar_new_iternerary = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary);
         toolbar_new_iternerary_cnc = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary_cnc);
+        toolbar_new_grid_add_companions = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_grid_add_companions);
+
         toolbar_new_iternerary_cnc_chat_message = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary_cnc_chat_message);
         search_view_tool_bar = (SearchView)mToolbar.findViewById(R.id.search_view_tool_bar);
         search_maginfy = (ImageButton)mToolbar.findViewById(R.id.search_maginfy);
@@ -530,6 +535,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
       //  toolbar_trip_name = (FontTextView)findViewById(R.id.toolbar_trip_name);
 
+        table_scroll = (HorizontalScrollView)findViewById(R.id.table_scroll);
+       // table_scroll = ((MainActivityBottomTabs)getBaseContext()).getItitneraryHS();
+
     }
 
 /*    public FontTextView getToolBarTripName(){
@@ -537,6 +545,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }*/
 
 
+    public HorizontalScrollView getItitneraryHS(){
+        return table_scroll;
+    }
     public ImageButton getToolbarProfilePopup(){
         return toolbar_profile_popup;
     }
@@ -552,6 +563,11 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     public ImageButton getToolbar_new_iterneraryCnc(){
         return toolbar_new_iternerary_cnc;
+    }
+
+
+    public ImageButton getToolbar_toolbar_new_grid_add_companions(){
+        return toolbar_new_grid_add_companions;
     }
 
     public ImageButton getToolbar_new_iterneraryCnc_Chat_Message(){
@@ -844,8 +860,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             case PREFERENCES_MEMBERSHIP:
                 fragment = MembershipFragment.newInstance(navPosition);
                 break;
-            case ITINARERY:
-                fragment = ItineraryFragment.newInstance(navPosition);
+            case ITINERARY:
+                //fragment = ItineraryFragment.newInstance(navPosition);
+                fragment = ItineraryFragmentComposeView.newInstance(navPosition);
+                stashToBack = false;
                //fragment = ItineraryFragmentAdapter.newInstance(navPosition);
              //   fragment = ItineraryFragmentHelperAdapter.newInstance(navPosition);
                // fragment = ItineraryFragmentNoScrollingAdapter.newInstance(navPosition);
@@ -853,6 +871,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
                 // setItineraryTitleName();
                 break;
+
+
             case ALTERNATIVE_FLIGHT_ROUND_TRIP:
                 fragment = AlternativeFlightTabsWidgetFragment.newInstance(navPosition);
                // stashToBack = false;
@@ -1079,7 +1099,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     public void continueFlow(int fragment) {
 
         if (fragment == ToolBarNavEnum.ALTERNATIVE_FLIGHT_ROUND_TRIP.getNavNumber()) {
-            selectItem(ToolBarNavEnum.ITINARERY.getNavNumber(), null, true);
+            selectItem(ToolBarNavEnum.ITINERARY.getNavNumber(), null, true);
         }
     }
 
@@ -1208,9 +1228,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     }
 
-
-
-
+    
 
     @Override
     public void callRefreshItinerary(final int fragment) {
@@ -1220,6 +1238,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             public void onSuccess(Object data) {
                 hgbSaveDataClass.setTravelOrder((UserTravelMainVO) data);
                 continueFlow(fragment);
+
             }
 
             @Override
@@ -1231,22 +1250,55 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     }
 
+    private void getPostBookingItinerary(){
+
+        UserTravelMainVO userOrder = hgbSaveDataClass.getTravelOrder();
+        boolean isBookedVersion = userOrder.getmHasbookedversion();
+        if(!isBookedVersion){
+            return;
+        }
+
+        String solutionID = userOrder.getmSolutionID();
+        HGBPreferencesManager mHGBPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
+        String signalrConnectionID = mHGBPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_SIGNALR_CONNECTION_ID, "");
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).getBookedItinerary(solutionID,signalrConnectionID, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+                UserTravelMainVO userTravelMainVO = (UserTravelMainVO) data;
+
+                hgbSaveDataClass.setBookedTravelOrder(userTravelMainVO);
+                goToFragment(ToolBarNavEnum.ITINERARY.getNavNumber(), null);
+                //   handleHGBMessage(getString(R.string.itinerary_created));
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+
+            }
+        });
+
+    }
+
+
+
 
     @Override
-    public void callRefreshItineraryWithCallback(final int fragment,final RefreshComplete refreslistner) {
-
-        ConnectionManager.getInstance(MainActivityBottomTabs.this).getItinerary(hgbSaveDataClass.getSolutionID(), new ConnectionManager.ServerRequestListener() {
+    public void callRefreshItineraryWithCallback(final int fragment,final RefreshComplete refreslistner, String solutionID) {
+        //hgbSaveDataClass.getTravelOrder().getmSolutionID()
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).getItinerary(solutionID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 hgbSaveDataClass.setTravelOrder((UserTravelMainVO) data);
                 continueFlow(fragment);
-                refreslistner.onRefreshSuccess();
+                refreslistner.onRefreshSuccess(data);
             }
 
             @Override
             public void onError(Object data) {
                 ErrorMessage("Problem updating grid ");
-                refreslistner.onRefreshError();
+                refreslistner.onRefreshError(data);
 
             }
         });

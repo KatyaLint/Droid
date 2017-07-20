@@ -54,6 +54,7 @@ public class HGBSaveDataClass implements HGBMainInterface {
     private ArrayList<CreditCardItem> mCreditCardList;
     private ArrayList<UserProfileVO> mTravelList;
     private UserTravelMainVO mUserTravelOrder;
+    private UserTravelMainVO mUserBookedTravelOrder;
     private ArrayList<CNCItem> mCNCItems;
     private String solutionID;
     private List<NodesVO> alternativeFlights;
@@ -111,6 +112,7 @@ public class HGBSaveDataClass implements HGBMainInterface {
         if (travelorder == null) {
             setSolutionID(null);
         } else {
+
             setSolutionID(mUserTravelOrder.getmSolutionID());
 
             GsonBuilder gsonBuilder = new GsonBuilder().serializeSpecialFloatingPointValues();
@@ -124,6 +126,16 @@ public class HGBSaveDataClass implements HGBMainInterface {
     @Override
     public UserTravelMainVO getTravelOrder() {
         return mUserTravelOrder;
+    }
+
+    @Override
+    public void setBookedTravelOrder(UserTravelMainVO travelorder) {
+        this.mUserBookedTravelOrder = travelorder;
+    }
+
+    @Override
+    public UserTravelMainVO getBookedTravelOrder() {
+        return mUserBookedTravelOrder;
     }
 
     @Override

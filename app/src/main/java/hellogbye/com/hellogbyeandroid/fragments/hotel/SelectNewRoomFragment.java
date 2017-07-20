@@ -135,16 +135,16 @@ public class SelectNewRoomFragment extends HGBAbstractFragment {
                     public void onSuccess(Object data) {
                         getFlowInterface().callRefreshItineraryWithCallback(ToolBarNavEnum.HOTEL.getNavNumber(), new RefreshComplete() {
                             @Override
-                            public void onRefreshSuccess() {
+                            public void onRefreshSuccess(Object data) {
                                 //selectedItemGuidNumber(nodesVO.getmGuid());
                                 getActivity().onBackPressed();
                             }
 
                             @Override
-                            public void onRefreshError() {
+                            public void onRefreshError(Object data) {
 
                             }
-                        });
+                        }, getActivityInterface().getTravelOrder().getmSolutionID());
 
                     }
 

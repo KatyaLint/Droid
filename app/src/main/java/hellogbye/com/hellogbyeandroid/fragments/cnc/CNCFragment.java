@@ -415,7 +415,7 @@ private void setTextForTrip(String name){
                 //TODO this logic needs to change once we get final api
                 if (getString(R.string.itinerary_created).equals(strText)
                         || getString(R.string.grid_has_been_updated).equals(strText)) {
-                    getFlowInterface().goToFragment(ToolBarNavEnum.ITINARERY.getNavNumber(),null);
+                    getFlowInterface().goToFragment(ToolBarNavEnum.ITINERARY.getNavNumber(),null);
                 }
             }
         });

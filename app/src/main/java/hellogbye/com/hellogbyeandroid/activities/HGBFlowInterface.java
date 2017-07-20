@@ -18,7 +18,7 @@ import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 public interface HGBFlowInterface {
 
     void callRefreshItinerary(final int fragment);
-    void callRefreshItineraryWithCallback(final int fragment, RefreshComplete refreshlistner);
+    void callRefreshItineraryWithCallback(final int fragment, RefreshComplete refreshlistner, String solutionId);
     CostumeToolBar getToolBar();
 
     void goToFragment(int fragment, Bundle bundle, boolean stashFragment);

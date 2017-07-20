@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/new_grid_main_passangers_ll"
+    android:id="@+id/new_grid_main_passangers_ll_booked"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     android:gravity="left"
@@ -12,7 +12,7 @@
    
    <hellogbye.com.hellogbyeandroid.views.RoundedImageView
        android:layout_marginLeft="@dimen/DP30"
-       android:id="@+id/grid_round_image"
+       android:id="@+id/grid_round_image_booked"
        android:layout_width="@dimen/DP26"
        android:layout_height="@dimen/DP26"
        android:layout_marginRight="@dimen/DP10" />
@@ -33,7 +33,7 @@
        android:textSize="@dimen/SP14"
        android:textColor="@color/COLOR_WHITE"
        app:fontName="dinnextltpro_regular.otf"
-       android:id="@+id/grid_passanger_name"/>
+       android:id="@+id/grid_passanger_name_booked"/>
 
 
       <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -44,7 +44,7 @@
           android:textSize="@dimen/SP10"
           android:textColor="@color/COLOR_WHITE"
           app:fontName="dinnextltpro_regular.otf"
-          android:id="@+id/grid_passanger_cost_flight"/>
+          android:id="@+id/grid_passanger_cost_flight_booked"/>
 
    </LinearLayout>
 </LinearLayout>

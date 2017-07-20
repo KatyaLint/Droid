@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+   <!--    <LinearLayout
+           android:layout_weight="0.2"
+           android:id="@+id/passangers_names_ll"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:background="@color/COLOR_00516f"
+           android:orientation="horizontal" />-->
+
+
+   <!--empty view-->
+   <LinearLayout
+       android:paddingTop="@dimen/DP20"
+       android:id="@+id/cnc_empty_view_booked"
+       android:visibility="gone"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       android:background="@drawable/light_house"
+       android:gravity="center">
+
+
+      <hellogbye.com.hellogbyeandroid.views.FontTextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="@dimen/SP36"
+          android:textColor="@color/COLOR_00516f"
+          android:gravity="center"
+          android:layout_marginTop="@dimen/DP220"
+          app:fontName="dinnextltpro_mediumcond.ttf"
+          android:text="@string/itinerary_empty_title"
+          android:padding="@dimen/DP10"/>
+
+      <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="@dimen/SP20"
+          android:gravity="center"
+          android:padding="@dimen/DP10"
+          app:fontName="dinnextltpro_medium.otf"
+          android:textColor="@color/COLOR_00516f"
+          android:text="@string/itinerary_empty_small_title" />
+
+
+      <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="@dimen/SP18"
+          android:gravity="center"
+          app:fontName="dinnextltpro_regular.otf"
+          android:textColor="@color/COLOR_00516f"
+          android:text="@string/itinerary_empty_text" />
+
+   </LinearLayout>
+
+
+
+   <ScrollView
+       android:layout_weight="6"
+       android:id="@+id/scroll_view_scroll_booked"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:scrollbarStyle="insideOverlay"
+       android:scrollbars="vertical"
+       android:fillViewport="false">
+
+
+      <LinearLayout
+          android:id="@+id/scroll_view_ll_booked"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="horizontal" >
+
+         <!--   <include layout="@layout/new_grid_main_layout_pager_adapter"/>-->
+
+
+
+      </LinearLayout>
+
+   </ScrollView>
+
+   <!--   <Button
+          android:id="@+id/grid_make_payment"
+          android:layout_weight="0.1"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@color/red_button_color"
+          android:textColor="@color/white"
+          android:gravity="center"
+          android:text="@string/itinerary_make_payment"/>-->
+
+</LinearLayout>

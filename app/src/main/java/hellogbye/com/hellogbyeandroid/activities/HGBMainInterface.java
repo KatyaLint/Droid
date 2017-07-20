@@ -35,6 +35,10 @@ public interface HGBMainInterface {
     void setTravelOrder(UserTravelMainVO travelorder);
     UserTravelMainVO getTravelOrder();
 
+    void setBookedTravelOrder(UserTravelMainVO travelorder);
+    UserTravelMainVO getBookedTravelOrder();
+
+
     void setAlternativeFlights(List<NodesVO> alternativeFlightsVO);
     List<NodesVO> getAlternativeFlights();
 

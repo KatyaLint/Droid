@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/innerWhiteHotelLayout">
+    android:id="@+id/innerWhiteHotelLayout_booked">
 
 
 
@@ -16,7 +16,7 @@
 
         <ImageView
             android:scaleType="centerCrop"
-            android:id="@+id/image_view"
+            android:id="@+id/image_view_booked"
             android:background="@drawable/no_photo"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -24,7 +24,7 @@
 
     <ImageView
         android:visibility="gone"
-        android:id="@+id/new_grid_promo_available"
+        android:id="@+id/new_grid_promo_available_booked"
         android:layout_marginRight="@dimen/DP14"
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
@@ -48,16 +48,16 @@
     <!--android:background="@color/COLOR_66000000"-->
         <RelativeLayout
 
-            android:id="@+id/grid_main_hotel_square_rl"
+            android:id="@+id/grid_main_hotel_square_rl_booked"
             android:background="@color/COLOR_A6000000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/new_grid_white_separator">
+            android:layout_above="@+id/new_grid_white_separator_booked">
 
 
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
-                android:id="@+id/grid_hotel_name"
+                android:id="@+id/grid_hotel_name_booked"
                 android:textSize="@dimen/SP14"
                 android:layout_margin="@dimen/DP6"
                 android:layout_width="match_parent"
@@ -77,8 +77,8 @@
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:layout_margin="@dimen/DP6"
-                android:layout_below="@+id/grid_hotel_name"
-                android:id="@+id/grid_hotel_place"
+                android:layout_below="@+id/grid_hotel_name_booked"
+                android:id="@+id/grid_hotel_place_booked"
                 style="@style/GridTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -93,8 +93,8 @@
                 android:layout_marginTop="@dimen/DP6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/grid_star_layout"
-                android:layout_below="@+id/grid_hotel_place"
+                android:id="@+id/grid_star_layout_booked"
+                android:layout_below="@+id/grid_hotel_place_booked"
                 layout="@layout/star_layout" />
 
 
@@ -104,15 +104,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:id="@+id/grid_hotel_price_ll">
+                android:id="@+id/grid_hotel_price_ll_booked">
                 <LinearLayout
-                    android:id="@+id/hotel_grid_regular_price"
+                    android:id="@+id/hotel_grid_regular_price_booked"
                     android:orientation="vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                 <hellogbye.com.hellogbyeandroid.views.FontTextView
-                    android:id="@+id/grid_hotel_price"
+                    android:id="@+id/grid_hotel_price_booked"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$100000"
@@ -122,7 +122,7 @@
 
                 <hellogbye.com.hellogbyeandroid.views.FontTextView
                     android:gravity="right"
-                    android:id="@+id/grid_hotel_night"
+                    android:id="@+id/grid_hotel_night_booked"
                     android:textSize="@dimen/SP10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -146,8 +146,8 @@
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
 
-                android:layout_below="@+id/grid_hotel_price_ll"
-                android:id="@+id/grid_hotel_taxes"
+                android:layout_below="@+id/grid_hotel_price_ll_booked"
+                android:id="@+id/grid_hotel_taxes_booked"
                 style="@style/GridTextStyle"
                 android:visibility="gone"
                 android:layout_width="wrap_content"
@@ -158,8 +158,8 @@
 
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
-                android:layout_below="@+id/grid_hotel_taxes"
-                android:id="@+id/grid_hotel_room_explanation"
+                android:layout_below="@+id/grid_hotel_taxes_booked"
+                android:id="@+id/grid_hotel_room_explanation_booked"
                 style="@style/GridTextStyle"
                 android:visibility="gone"
                 android:layout_width="wrap_content"
@@ -172,16 +172,16 @@
         </RelativeLayout>
 
     <View
-        android:id="@+id/new_grid_white_separator"
+        android:id="@+id/new_grid_white_separator_booked"
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
-        android:layout_above="@+id/new_grid_bottom_line"
+        android:layout_above="@+id/new_grid_bottom_line_booked"
         android:background="@color/COLOR_0DFFFFFF" />
 
 
         <RelativeLayout
 
-            android:id="@+id/new_grid_bottom_line"
+            android:id="@+id/new_grid_bottom_line_booked"
             android:background="@color/COLOR_A6000000"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
@@ -202,7 +202,7 @@
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:layout_margin="@dimen/DP6"
                 android:layout_centerInParent="true"
-                android:id="@+id/grid_select_hotel"
+                android:id="@+id/grid_select_hotel_booked"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/DP6"

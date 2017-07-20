@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/COLOR_f4f4f4"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <!--passangers names-->
+    <HorizontalScrollView
+        android:scrollbars="none"
+        android:fillViewport="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/passenger_name_sc_booked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+
+            android:id="@+id/passangers_names_ll_booked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/COLOR_00516f"
+            android:orientation="horizontal" />
+
+    </HorizontalScrollView>
+
+
+
+    <!--postbooking tabs view-->
+    <include
+        android:layout_below="@+id/passenger_name_sc_booked"
+        android:id="@+id/new_grid_post_booking_booked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        layout="@layout/new_grid_post_booking_tabs"/>
+
+    <!--mainView-->
+    <include
+        android:layout_above="@+id/grid_checkout_ll_booked"
+        android:layout_below="@+id/new_grid_post_booking_booked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/new_grid_main_table_booking_hsc"/>
+
+
+    <!--price line-->
+    <LinearLayout
+        android:id="@+id/grid_checkout_ll_booked"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="3"
+        android:padding="@dimen/DP6"
+        android:orientation="horizontal">
+
+        <LinearLayout
+
+            android:id="@+id/grid_price_ll_booked"
+            android:visibility="invisible"
+            android:layout_weight="2"
+            android:layout_width="@dimen/DP0"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/SP12"
+                android:visibility="gone"
+                android:textColor="@color/COLOR_00516f"
+                app:fontName="dinnextltpro_medium.otf"
+                android:text="@string/continue_to_checkout_price"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+                    android:id="@+id/grid_total_price_booked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/SP24"
+                    android:textColor="@color/COLOR_00516f"
+                    app:fontName="dinnextltpro_boldcondensed.otf"
+                    android:text="@string/continue_to_checkout_price"
+                    android:layout_marginRight="@dimen/DP6"/>
+
+
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+                    android:id="@+id/grid_total_price_currency_booked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/SP24"
+                    android:textColor="@color/COLOR_00516f"
+                    app:fontName="dinnextltpro_light.otf" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+                    android:id="@+id/continue_to_checkout_flight_baggage_booked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/SP12"
+                    android:textColor="@color/COLOR_00516f"
+                    app:fontName="dinnextltpro_regular.otf"
+                    android:text="@string/continue_to_checkout_flight_baggage"/>
+                <ImageView
+                    android:layout_marginLeft="@dimen/DP10"
+                    android:layout_toRightOf="@+id/continue_to_checkout_flight_baggage_booked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/info"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <hellogbye.com.hellogbyeandroid.views.FontButtonView
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/grid_make_payment_booked"
+            android:layout_width="@dimen/DP0"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_red_button"
+            android:textColor="@color/COLOR_WHITE"
+            android:gravity="center"
+            app:fontName="dinnextltpro_medium.otf"
+            android:textAllCaps="false"
+            android:textSize="@dimen/SP18"
+            android:text="@string/continue_to_checkout" />
+
+
+    </LinearLayout>
+
+    <!--price devider line-->
+    <View
+        android:layout_above="@+id/grid_checkout_ll_booked"
+        style="@style/Divider"/>
+
+
+</RelativeLayout>

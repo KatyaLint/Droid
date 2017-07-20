@@ -1,6 +1,5 @@
 package hellogbye.com.hellogbyeandroid.fragments.alternative;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,25 +7,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
+import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.FairclassPreferencesVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.RoomsVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
-import hellogbye.com.hellogbyeandroid.network.HGBJsonRequest;
-import hellogbye.com.hellogbyeandroid.network.Parser;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
@@ -122,7 +114,21 @@ public class FareClassFragment extends HGBAbstractFragment {
 
     private void getFlight(){
 
-        ConnectionManager.getInstance(getActivity()).getItinerary(getActivityInterface().getTravelOrder().getmSolutionID(),  new ConnectionManager.ServerRequestListener() {
+
+        ((MainActivityBottomTabs)getActivity()).callRefreshItineraryWithCallback(ToolBarNavEnum.FARE_CLASS_FRAGMENT.getNavNumber(), new RefreshComplete() {
+            @Override
+            public void onRefreshSuccess(Object data) {
+                ((MainActivityBottomTabs)getActivity()).onBackPressed();
+            }
+
+            @Override
+            public void onRefreshError(Object data) {
+                ErrorMessage(data);
+            }
+        }, getActivityInterface().getTravelOrder().getmSolutionID());
+
+
+/*        ConnectionManager.getInstance(getActivity()).getItinerary(getActivityInterface().getTravelOrder().getmSolutionID(),  new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 UserTravelMainVO userTravelMainVO = (UserTravelMainVO) data;
@@ -134,7 +140,7 @@ public class FareClassFragment extends HGBAbstractFragment {
             public void onError(Object data) {
                 ErrorMessage(data);
             }
-        });
+        });*/
     }
 
 }

@@ -19,6 +19,11 @@ public class UserTravelMainVO {
     @SerializedName("solutionname")
     private String mSolutionName;
 
+    @SerializedName("hasbookedversion")
+    private boolean mHasbookedversion;
+
+
+
     //Common
     @SerializedName("isfavorite")
     private boolean mIsFavorite;
@@ -111,5 +116,13 @@ public class UserTravelMainVO {
 
     public void setmCurrency(String mCurrency) {
         this.mCurrency = mCurrency;
+    }
+
+    public boolean getmHasbookedversion() {
+        return mHasbookedversion;
+    }
+
+    public void setmHasbookedversion(boolean mHasbookedversion) {
+        this.mHasbookedversion = mHasbookedversion;
     }
 }

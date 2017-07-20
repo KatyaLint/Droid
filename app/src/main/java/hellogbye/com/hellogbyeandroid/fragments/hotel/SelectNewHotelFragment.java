@@ -14,9 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
-import android.widget.CompoundButton;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -469,16 +467,16 @@ public class SelectNewHotelFragment extends HGBAbstractFragment implements Googl
 
                         getFlowInterface().callRefreshItineraryWithCallback(ToolBarNavEnum.HOTEL.getNavNumber(), new RefreshComplete() {
                             @Override
-                            public void onRefreshSuccess() {
+                            public void onRefreshSuccess(Object data) {
                                 selectedItemGuidNumber(nodesVO.getmGuid());
                                 getActivity().onBackPressed();
                             }
 
                             @Override
-                            public void onRefreshError() {
+                            public void onRefreshError(Object data) {
 
                             }
-                        });
+                        }, getActivityInterface().getTravelOrder().getmSolutionID());
 
 
                     }

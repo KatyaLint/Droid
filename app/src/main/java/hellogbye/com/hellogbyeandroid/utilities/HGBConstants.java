@@ -38,6 +38,10 @@ public class HGBConstants {
     public static final String BUNDLE_ROUND_TRIP = "round_trip";
     public static final String BUNDLE_CURRENT_VIEW_NODE_ID = "current_view_node_id";
 
+ //   public static final String BUNDLE_IS_POST_BOOKING_EXIST = "bundle_is_post_booking_exist";
+    public static final String BUNDLE_IS_PROPOSED_ITINERARY = "bundle_is_proposed_itinerary";
+    public static final String BUNDLE_IS_CURRENT_ITINERARY = "bundle_is_current_itinerary";
+
     /* GPS Constant Permission */
     public static final int MY_PERMISSION_ACCESS_COARSE_LOCATION = 11;
     public static final int MY_PERMISSION_ACCESS_FINE_LOCATION = 12;

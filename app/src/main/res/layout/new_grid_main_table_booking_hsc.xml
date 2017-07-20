@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <HorizontalScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+      android:layout_below="@+id/new_grid_post_booking"
+      android:layout_above="@+id/grid_checkout_ll_booking"
+      android:id="@+id/table_scroll_booked"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:fillViewport="true"
+    android:visibility="visible"
+      android:scrollbars="horizontal">
+
+   <!--   <include
+          layout="@layout/new_grid_main_layout"/>-->
+
+      <include
+          layout="@layout/new_grid_main_booking_adapter_layout"/>
+
+  </HorizontalScrollView>

@@ -9,7 +9,7 @@ public enum ToolBarNavEnum {
     TRAVEL_PREFERENCE(5,"Travel Profiles"),
     HELP(6,"Help & Feedback"),
     HOME(7,"Home"),
-    ITINARERY(8,"Current Itinerary"),
+
     ALTERNATIVE_FLIGHT_ROUND_TRIP(9,"Flight Details"),
     HOTEL(10,"Hotel Details"),
     ALTERNATIVE_FLIGHT_DETAILS(11,"Alternate Flights"),
@@ -42,7 +42,11 @@ public enum ToolBarNavEnum {
     FREE_USER_FRAGMENT(36,"Member Only"),
     SELECT_HOTEL_FRAGMENT(37,"Select Hotel"),
     SELECT_ROOM_FRAGMENT(38,"Room Type"),
-    FARE_CLASS_FRAGMENT(39,"Fare Class");
+    FARE_CLASS_FRAGMENT(39,"Fare Class"),
+    ITINERARY(8,"Current Itinerary"),
+
+
+    ;
 
 
 

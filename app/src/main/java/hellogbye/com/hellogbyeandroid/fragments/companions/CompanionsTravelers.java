@@ -1,33 +1,13 @@
 package hellogbye.com.hellogbyeandroid.fragments.companions;
 
 
-
-
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.SearchView;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.adapters.companion.CompanionsSwipeItemsAdapter;
-import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragment;
-import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragmentAdapter;
-import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragmentComposeView;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 
 
@@ -67,7 +47,7 @@ public class CompanionsTravelers extends CompanionsTabsViewClass {
         Bundle args = getArguments();
         if (args != null) {
             String className = args.getString("class_name");
-            if (ItineraryFragmentAdapter.class.toString().equals(className)) {
+            if (ItineraryFragmentComposeView.class.toString().equals(className)) {
 
                 return true;
             }

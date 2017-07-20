@@ -2,14 +2,14 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/grid_flight_square_ll"
+    android:id="@+id/grid_flight_square_ll_booked"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
 
     <RelativeLayout
-        android:id="@+id/innerWhiteFlightLayout"
+        android:id="@+id/innerWhiteFlightLayout_booked"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -30,11 +30,11 @@
             android:background="@drawable/border_image_grey"
             android:layout_marginRight="@dimen/DP10"
             android:padding="@dimen/DP2"
-            android:id="@+id/grid_airplane_logo"/>
+            android:id="@+id/grid_airplane_logo_booked"/>
 
 
         <LinearLayout
-            android:id="@+id/flight_direction_ll"
+            android:id="@+id/flight_direction_ll_booked"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -44,7 +44,7 @@
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
 
-                android:id="@+id/grid_traveler_flight_stops_departure"
+                android:id="@+id/grid_traveler_flight_stops_departure_booked"
                 style="@style/GridTextStyle"
                 android:textSize="@dimen/SP24"
                 android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
 
 
             <ImageView
-                android:id="@+id/grid_flight_direction_view"
+                android:id="@+id/grid_flight_direction_view_booked"
                 android:layout_marginRight="@dimen/DP6"
                 android:layout_marginLeft="@dimen/DP6"
                 android:layout_gravity="center"
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content" />
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
-                android:id="@+id/grid_traveler_flight_stops_arrival"
+                android:id="@+id/grid_traveler_flight_stops_arrival_booked"
                 style="@style/GridTextStyle"
                 android:textSize="@dimen/SP24"
                 android:layout_width="wrap_content"
@@ -78,7 +78,7 @@
         </LinearLayout>
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:id="@+id/grid_traveler_continued_flight"
+            android:id="@+id/grid_traveler_continued_flight_booked"
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
 
         <LinearLayout
             android:layout_margin="@dimen/DP6"
-            android:id="@+id/grid_money_ll"
+            android:id="@+id/grid_money_ll_booked"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -104,7 +104,7 @@
 
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:id="@+id/grid_traveler_flight_price"
+            android:id="@+id/grid_traveler_flight_price_booked"
             style="@style/GridTextStyle"
             android:textSize="@dimen/SP20"
             android:layout_width="wrap_content"
@@ -116,7 +116,7 @@
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:gravity="right"
-                android:id="@+id/grid_traveler_flight_currency"
+                android:id="@+id/grid_traveler_flight_currency_booked"
                 style="@style/GridTextStyle"
                 android:textSize="@dimen/SP10"
                 android:layout_width="match_parent"
@@ -130,7 +130,7 @@
 
 
         <LinearLayout
-            android:layout_below="@+id/grid_money_ll"
+            android:layout_below="@+id/grid_money_ll_booked"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">

@@ -1,0 +1,62 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+        <item android:state_checked="false" android:drawable="@color/COLOR_WHITE">
+
+
+            <shape >
+
+                <solid android:color="@color/COLOR_WHITE"/>
+
+                <stroke android:width="@dimen/DP6"
+                    android:color="@color/COLOR_WHITE"/>
+
+                <padding android:left="@dimen/DP8"
+                    android:top="@dimen/DP8"
+                    android:right="@dimen/DP8"
+                    android:bottom="@dimen/DP8"
+                    />
+
+                <corners android:radius="@dimen/DP10" />
+            </shape>
+
+
+
+            </item>
+        <item android:state_checked="true" android:drawable="@color/COLOR_00516f" >
+            <shape >
+
+                <solid android:color="@color/COLOR_00516f"/>
+
+                <stroke android:width="@dimen/DP6"
+                    android:color="@color/COLOR_00516f"/>
+
+                <padding android:left="@dimen/DP8"
+                    android:top="@dimen/DP8"
+                    android:right="@dimen/DP8"
+                    android:bottom="@dimen/DP8"
+                    />
+
+                <corners android:radius="@dimen/DP10" />
+            </shape>
+            </item>
+
+
+        <item android:drawable="@color/COLOR_00516f" > <!-- default -->
+            <shape >
+
+                <solid android:color="@color/COLOR_00516f"/>
+
+                <stroke android:width="@dimen/DP6"
+                    android:color="@color/COLOR_00516f"/>
+
+                <padding android:left="@dimen/DP8"
+                    android:top="@dimen/DP8"
+                    android:right="@dimen/DP8"
+                    android:bottom="@dimen/DP8"
+                    />
+
+                <corners android:radius="@dimen/DP10" />
+            </shape>
+    </item>
+    </selector>

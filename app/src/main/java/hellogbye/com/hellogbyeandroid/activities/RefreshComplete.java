@@ -5,6 +5,6 @@ package hellogbye.com.hellogbyeandroid.activities;
  */
 
 public interface RefreshComplete {
-    void onRefreshSuccess();
-    void onRefreshError();
+    void onRefreshSuccess(Object data);
+    void onRefreshError(Object data);
 }

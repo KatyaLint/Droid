@@ -6,26 +6,60 @@
     android:background="@color/COLOR_f4f4f4"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<HorizontalScrollView
-    android:layout_above="@+id/grid_checkout_ll"
-    android:id="@+id/table_scroll"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:scrollbars="horizontal">
 
- <!--   <include
-        layout="@layout/new_grid_main_layout"/>-->
+
+    <!--passangers names-->
+    <HorizontalScrollView
+        android:scrollbars="none"
+        android:fillViewport="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/passenger_name_sc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+
+        android:id="@+id/passangers_names_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/COLOR_00516f"
+        android:orientation="horizontal" />
+
+    </HorizontalScrollView>
+
+    <!--postbooking tabs view-->
+    <include
+        android:layout_below="@+id/passenger_name_sc"
+        android:id="@+id/new_grid_post_booking_booked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        layout="@layout/new_grid_post_booking_tabs"/>
+
 
     <include
-        layout="@layout/new_grid_main_adapter_layout"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/grid_checkout_ll"
+        android:layout_below="@+id/new_grid_post_booking_booked"
+        layout="@layout/new_grid_main_table_regular_hsc"/>
 
-</HorizontalScrollView>
 
 
 
+<!--postbooking tabs view
+<include
+    android:layout_below="@+id/passenger_name_sc"
+    android:id="@+id/new_grid_post_booking"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="visible"
+    layout="@layout/new_grid_post_booking_tabs"/>-->
 
+
+    <!--price line-->
     <LinearLayout
+
         android:id="@+id/grid_checkout_ll"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
@@ -120,6 +154,7 @@
 
     </LinearLayout>
 
+    <!--price devider line-->
     <View
         android:layout_above="@+id/grid_checkout_ll"
         style="@style/Divider"/>

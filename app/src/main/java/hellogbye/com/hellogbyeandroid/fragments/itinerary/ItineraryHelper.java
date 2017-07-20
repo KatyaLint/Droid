@@ -33,8 +33,6 @@ public class ItineraryHelper {
         ConnectionManager.getInstance(activity).getAlternateFlightsForFlight(solutionID, paxId, flightID, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                System.out.println("Kate getAlternateFlightsForFlight onSuccess");
-
                 List<NodesVO> alternativeFlightsVOs = (List<NodesVO>)data;//gson.fromJson((String) data, listType);
 
                 hgbMainInterface.setAlternativeFlights(alternativeFlightsVOs);
@@ -58,12 +56,6 @@ public class ItineraryHelper {
 
         String paxId = paxID; //getSelectedUserGuid();
         String flightID = flightid;
-
-        System.out.println("Kate getAlternativeHotel onSuccess");
-        /*  String solutionID = getActivityInterface().getTravelOrder().getmSolutionID();
-
-        String paxId = getSelectedUserGuid();
-        String flightID = currentNodeVO.getmPrimaryguid();*/
 
 
         ConnectionManager.getInstance(activity).getAlternativeHotelForFlightV2( solutionID, paxId, checkin,  checkout,  isPromoAlternative, new ConnectionManager.ServerRequestListener() {

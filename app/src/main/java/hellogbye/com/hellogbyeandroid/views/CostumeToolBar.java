@@ -49,6 +49,7 @@ public class CostumeToolBar extends Toolbar {
 
     private ImageButton tool_bar_delete_preferences;
     private ImageButton toolbar_profile_popup;
+    private ImageButton toolbar_new_grid_add_companions;
 
     public CostumeToolBar(Context context) {
         super(context);
@@ -119,6 +120,9 @@ public class CostumeToolBar extends Toolbar {
         }*/
         if(toolbar_new_iternerary_cnc == null){
             toolbar_new_iternerary_cnc = (ImageButton) findViewById(R.id.toolbar_new_iternerary_cnc);
+        }
+        if(toolbar_new_grid_add_companions == null){
+            toolbar_new_grid_add_companions = (ImageButton)findViewById(R.id.toolbar_new_grid_add_companions);
         }
 
         if(toolbar_new_iternerary == null){
@@ -246,6 +250,7 @@ public class CostumeToolBar extends Toolbar {
         check_preferences.setVisibility(View.GONE);
         itirnarary_title_Bar.setVisibility(View.GONE);
         toolbar_new_iternerary_cnc.setVisibility(View.GONE);
+        toolbar_new_grid_add_companions.setVisibility(GONE);
         preference_save_changes.setVisibility(View.GONE);
         toolbar_new_iternerary.setVisibility(View.GONE);
         search_maginfy.setVisibility(View.GONE);
@@ -266,8 +271,9 @@ public class CostumeToolBar extends Toolbar {
                 toolbar_new_iternerary_cnc.setVisibility(View.VISIBLE);
                 toolbar_profile_popup.setVisibility(View.VISIBLE);
                 break;
-            case ITINARERY:
+            case ITINERARY:
        //         up_bar_favorite.setVisibility(View.VISIBLE);
+                toolbar_new_grid_add_companions.setVisibility(View.VISIBLE);
                 itirnarary_title_Bar.setVisibility(View.VISIBLE);
                 break;
             /**
