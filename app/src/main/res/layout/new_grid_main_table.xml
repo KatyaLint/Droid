@@ -113,7 +113,7 @@
             </LinearLayout>
 
             <RelativeLayout
-
+                android:id="@+id/continue_to_checkout_flight_baggage_rl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 

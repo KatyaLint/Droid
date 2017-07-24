@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
     private int cellHieght;
     private FontTextView grid_total_price;
 
-    private FontTextView continue_to_checkout_flight_baggage;
+    private RelativeLayout continue_to_checkout_flight_baggage_rl;
     private ImageButton up_bar_favorite;
     private FontTextView itirnarary_title_Bar;
     private FontTextView grid_total_price_currency;
@@ -70,6 +71,7 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
     private RadioGroup postbooking_tabs;
     private RadioButton proposed_itinerary;
     private RadioButton current_itenerary;
+    private RelativeLayout continue_to_checkout_flight_baggage_booked_rl;
 
 
     public static Fragment newInstance(int position) {
@@ -244,8 +246,8 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
     private void initializeBookedView(View bookedView){
         grid_total_price = (FontTextView)bookedView.findViewById(R.id.grid_total_price_booked);
         grid_total_price_currency = (FontTextView)bookedView.findViewById(R.id.grid_total_price_currency_booked);
-        continue_to_checkout_flight_baggage = (FontTextView)bookedView.findViewById(R.id.continue_to_checkout_flight_baggage_booked);
-        continue_to_checkout_flight_baggage.setOnClickListener(new View.OnClickListener() {
+        continue_to_checkout_flight_baggage_booked_rl = (RelativeLayout)bookedView.findViewById(R.id.continue_to_checkout_flight_baggage_booked_rl);
+        continue_to_checkout_flight_baggage_booked_rl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 priceInformationPopup();
@@ -278,8 +280,8 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
     private void initializeRegularView(View rootView){
         grid_total_price = (FontTextView)rootView.findViewById(R.id.grid_total_price);
         grid_total_price_currency = (FontTextView)rootView.findViewById(R.id.grid_total_price_currency);
-        continue_to_checkout_flight_baggage = (FontTextView)rootView.findViewById(R.id.continue_to_checkout_flight_baggage);
-        continue_to_checkout_flight_baggage.setOnClickListener(new View.OnClickListener() {
+        continue_to_checkout_flight_baggage_rl = (RelativeLayout) rootView.findViewById(R.id.continue_to_checkout_flight_baggage_rl);
+        continue_to_checkout_flight_baggage_rl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 priceInformationPopup();
