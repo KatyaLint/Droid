@@ -13,11 +13,18 @@
      android:id="@+id/cnc_menu_item"
      android:layout_width="match_parent"
      android:layout_height="@dimen/DP38"
-     android:checkMark="?android:attr/listChoiceIndicatorSingle"
+     android:drawableLeft="?android:attr/listChoiceIndicatorSingle"
      android:gravity="center_vertical"
      android:text="sfdsfsdf"
-     app:fontName="dinnextltpro_medium.otf"
-     android:textColor="@color/COLOR_00516f" />
- 
+
+     app:fontName="dinnextltpro_regular.otf"
+     android:textColor="@color/COLOR_565656" />
+
+ <View
+   android:id="@+id/bottom_view_popup_cnc"
+     android:layout_below="@+id/cnc_menu_item"
+     android:layout_width="match_parent"
+     android:layout_height="@dimen/DP1"
+     android:background="@color/COLOR_80999999" />
 
 </RelativeLayout>

@@ -794,6 +794,7 @@ public class HGBUtility {
 
 
   public static void showAlertPopUp(final Activity activity, final EditText input, final View popupView ,
+                                  /*  View customTitleView, */
                                     final String popupTitle, String positiveButton, final PopUpAlertStringCB
                                     alertCB){
       final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
@@ -803,6 +804,9 @@ public class HGBUtility {
       }
       alert .setView(popupView);
 
+     /* if(customTitleView != null) {
+          alert.setCustomTitle(customTitleView);
+      }*/
 
       alert.setPositiveButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
 
@@ -839,29 +843,6 @@ public class HGBUtility {
           }
       });
 
-   /*   alert.setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
-                  public void onClick(DialogInterface dialog, int which) {
-                      String newName ="";
-                    if(input != null){
-                        newName = input.getText().toString();
-                        input.setText("");
-                        IBinder token = input.getWindowToken();
-                        ( (InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
-                    }
-                      if(alertCB != null){
-                          alertCB.itemSelected(newName);
-                      }
-                      ((ViewGroup) popupView.getParent()).removeView(popupView);
-
-                      dialog.cancel();
-                  }
-              });
-*/
-         /*     if(isOneButton) {*/
-
-
-
-        /*      }*/
       dialog = alert.create();
       dialog.show();
 
@@ -873,12 +854,10 @@ public class HGBUtility {
 
       if (negative_button != null) {
 
-          negative_button.setTextColor(activity.getResources()
-                  .getColor(R.color.COLOR_999999));
+          negative_button.setTextColor(ContextCompat.getColor(activity, R.color.COLOR_999999));
       }
       if (positive_button != null) {
-          positive_button.setTextColor(activity.getResources()
-                  .getColor(R.color.COLOR_EE3A3C));
+          positive_button.setTextColor(ContextCompat.getColor(activity, R.color.COLOR_EE3A3C));
       }
 
 
@@ -925,8 +904,7 @@ public class HGBUtility {
         Button positive_button = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
 
         if (positive_button != null) {
-            positive_button.setTextColor(activity.getResources()
-                    .getColor(R.color.COLOR_EE3A3C));
+            positive_button.setTextColor(ContextCompat.getColor(activity, R.color.COLOR_EE3A3C));
         }
 
 

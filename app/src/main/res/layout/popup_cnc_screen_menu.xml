@@ -3,11 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-
-    >
-
-
+    android:layout_height="wrap_content">
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/popup_cnc_screen_title_text"
@@ -15,13 +11,12 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/image_profile_switch_a_1"
         android:textColor="@color/COLOR_00516f"
-        android:textSize="@dimen/SP18"
+        android:textSize="@dimen/SP24"
         android:layout_centerVertical="true"
-        app:fontName="dinnextltpro_medium.otf"
+        app:fontName="dinnextltpro_condensed.ttf"
         android:padding="@dimen/DP20"
         android:text="@string/profile_choose_between"/>
    <!-- profile_choose_between-->
-
 
     <View
 

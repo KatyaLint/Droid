@@ -52,7 +52,11 @@ public class CNCMenuAdapter extends BaseAdapter {
             v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.popup_cnc_menu_layout_item, null);
         }
-
+        if(position == getCount() -1){
+            v.findViewById(R.id.bottom_view_popup_cnc).setVisibility(View.VISIBLE);
+        }else{
+            v.findViewById(R.id.bottom_view_popup_cnc).setVisibility(View.GONE);
+        }
         String sortType = data.get(position);
         CheckedTextView itemText = (CheckedTextView)v.findViewById(R.id.cnc_menu_item);
 

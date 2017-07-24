@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -47,6 +48,7 @@ import hellogbye.com.hellogbyeandroid.fragments.ChangeTripName;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TitleNameChange;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.preferencespopup.UserProfilePreferences;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.vo.cnc.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
@@ -1004,6 +1006,9 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
     private void popupCNCMenu(String airportTitle, final AirportSendValuesVO airportSendValueVO){
 
 
+
+
+
         LayoutInflater li = LayoutInflater.from(getActivity());
         View promptsView = li.inflate(R.layout.popup_cnc_screen_menu, null);
 
@@ -1044,7 +1049,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
        final AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.setView(promptsViewTeest);
         alertDialog.setCancelable(false);
-
+        alertDialog.show();
 
 
         user_profile_popup_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -1066,13 +1071,18 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         Button positive_button = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
 
         if (positive_button != null) {
-            positive_button.setTextColor(getContext().getResources().getColor(R.color.COLOR_EE3A3C));
+            positive_button.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_EE3A3C));
+        }
+        Button negative_button = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+
+        if (negative_button != null) {
+            negative_button.setTextColor(ContextCompat.getColor(getContext(), R.color.COLOR_999999));
         }
 
         user_profile_popup_list_view.setAdapter(sortPopupAdapter);
 
 
-        alertDialog.show();
+
 
 
 

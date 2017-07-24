@@ -27,7 +27,7 @@
      android:layout_width="match_parent"
      android:layout_height="@dimen/DP38"
      android:drawableLeft="?android:attr/listChoiceIndicatorSingle"
-
+    android:drawablePadding="@dimen/DP4"
      android:gravity="center_vertical"
      android:text="sfdsfsdf"
      app:fontName="dinnextltpro_regular.otf"
