@@ -1115,7 +1115,16 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.CHOOSEN_SERVER, "");
         isLogoutExit = true;
         HGBUtility.removeAllFragments(getSupportFragmentManager());
-        finish();
+        Intent intent = new Intent(getBaseContext(), CreateAccountActivity.class);
+        startActivity(intent);
+
+       // getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.content_frame)).commit();
+
+
+
+
+
+       // finish();
 
     }
 

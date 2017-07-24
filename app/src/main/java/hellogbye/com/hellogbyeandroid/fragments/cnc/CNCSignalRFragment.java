@@ -594,7 +594,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
 
         mCNCAdapter = new CNCAdapter(getActivity(),getActivity().getApplicationContext(), cncItems);
-        mCNCAdapter.notifyDataSetChanged();
+
        /* cncItemsAdapterList.addAll(cncItems);
         mCNCAdapter.setItems(cncItemsAdapterList);*/
 
@@ -616,6 +616,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         UserProfileVO usersList = getActivityInterface().getCurrentUser();
 
         mCNCAdapter.setAvatarUserUrl(usersList.getAvatar());
+        mCNCAdapter.notifyDataSetChanged();
     }
 
 
