@@ -27,7 +27,6 @@
         android:textSize="@dimen/SP16"
         app:fontName="dinnextltpro_regular.otf"
         android:textColor="@color/COLOR_00516f"
-
         android:layout_alignParentLeft="true"/>
 
     <ImageView

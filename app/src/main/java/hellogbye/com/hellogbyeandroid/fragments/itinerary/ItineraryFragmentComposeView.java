@@ -123,10 +123,6 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
 
         boolean isBookedVersionExist = getActivityInterface().getTravelOrder().getmHasbookedversion();
 
-
-        System.out.println("Kate onCreateView");
-
-
         if(!isBookedVersionExist){
             rootView = inflater.inflate(R.layout.new_grid_main_table, container, false);
             initializeRegularView(rootView);
@@ -652,14 +648,12 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
 
     @Override
     public void onDestroy() {
-        System.out.println("Kate onDestroy");
         getActivityInterface().setAlternativeFlights(null);
         super.onDestroy();
     }
 
     @Override
     public void onDestroyView() {
-        System.out.println("Kate onDestroyView");
         UserTravelMainVO userOrder = getActivityInterface().getTravelOrder();
         if (userOrder != null) {
             ArrayList<PassengersVO> passangers = userOrder.getPassengerses();

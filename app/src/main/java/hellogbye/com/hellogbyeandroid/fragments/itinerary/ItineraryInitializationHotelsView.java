@@ -74,14 +74,11 @@ public class ItineraryInitializationHotelsView {
         innerWhiteLayout.setLayoutParams(outerLayoutParams);
 
         ImageView new_grid_promo_available = (ImageView) child.findViewById(R.id.new_grid_promo_available);
-        System.out.println("Kate node =" + node.getAlternativePromoHotel());
-
 
         LinearLayout hotel_grid_regular_price = (LinearLayout) child.findViewById(R.id.hotel_grid_regular_price);
 
         if(node.getAlternativePromoHotel() != null && !node.getAlternativePromoHotel().isEmpty()){
 
-            System.out.println("Kate promo");
             hotel_grid_regular_price.setVisibility(View.GONE);
             new_grid_promo_available.setVisibility(View.VISIBLE);
 
@@ -106,7 +103,6 @@ public class ItineraryInitializationHotelsView {
 
 
         }else{
-            System.out.println("Kate regular");
             hotel_grid_regular_price.setVisibility(View.VISIBLE);
             new_grid_promo_available.setVisibility(View.GONE);
 

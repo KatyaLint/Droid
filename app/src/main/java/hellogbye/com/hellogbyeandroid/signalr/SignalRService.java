@@ -10,6 +10,9 @@ import android.util.Log;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import org.json.JSONObject;
+import org.json.JSONString;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -114,7 +117,7 @@ public class SignalRService extends Service {
             @Override
             public void run(Void obj) throws Exception {
                 JsonObject jsonObject = new JsonObject();
-                String invokationFunctionName = null;
+
                 String connectionId = _connection.getConnectionId();
                 String signalrConnectionID = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_SIGNALR_CONNECTION_ID, "");
 
@@ -145,7 +148,9 @@ public class SignalRService extends Service {
                 jsonObject.addProperty("userId",userProfileID);
 
 
-                _hub.invoke(invokationFunctionName, jsonObject).done(new Action<Void>() {
+
+                // must be invokation function
+         /*       _hub.invoke(null, jsonObject).done(new Action<Void>() {
                     @Override
                     public void run(Void aVoid) throws Exception {
                     }
@@ -154,7 +159,23 @@ public class SignalRService extends Service {
                     @Override
                     public void onError(Throwable error) {
                     }
+                });*/
+
+
+                JsonObject jsonObject2 = new JsonObject();
+
+                _hub.invoke("cnconmessagetoclientr", jsonObject2).onError(new ErrorCallback() {
+                    @Override
+                    public void onError(Throwable throwable) {
+                        CNCHiglightResponceCB.SignalRRrror("Error int cncSubmitHighlightQueryCmR " + throwable.getMessage() );
+                    }
+                }).done(new Action<Void>() {
+                    @Override
+                    public void run(Void aVoid) throws Exception {
+
+                    }
                 });
+
 
             }
         });
@@ -169,15 +190,39 @@ public class SignalRService extends Service {
         }
 
 
-    /*    _hub.on("cncOnShowSolutionR",
+
+
+
+          _hub.on("cncOnMessageToClientR",
+                new SubscriptionHandler1<String>() {
+                    @Override
+                    public void run(final String msg) {
+                        String str = msg.toString();
+                        System.out.println("Kate signalR received str = " + str);
+                    //    System.out.println("Kate response =" + msg.toString());
+              //          String response = msg.toString();
+                        CNCHiglightResponceCB.SignalRCNCConversation(str);
+
+                     //   SignalRServerResponseForHighlightVO signalRServerResponseForHighlightVO = (SignalRServerResponseForHighlightVO) Parser.parseSignalRHighlightResponse(response);
+
+                       // CNCHiglightResponceCB.AnswearFromServerToUserChooses(signalRServerResponseForHighlightVO);
+
+
+                    }
+                }
+                , String.class);
+
+
+
+        _hub.on("cncOnShowSolutionR",
                 new SubscriptionHandler1<JsonObject>() {
                     @Override
                     public void run(final JsonObject msg) {
 
-                        String response = msg.toString();
+      /*                  String response = msg.toString();
                         SignalRServerResponseForHighlightVO signalRServerResponseForHighlightVO = (SignalRServerResponseForHighlightVO) Parser.parseSignalRHighlightResponse(response);
 
-                        CNCHiglightResponceCB.AnswearFromServerToUserChooses(signalRServerResponseForHighlightVO);
+                        CNCHiglightResponceCB.AnswearFromServerToUserChooses(signalRServerResponseForHighlightVO);*/
 
 
                     }
@@ -189,11 +234,11 @@ public class SignalRService extends Service {
                     @Override
                     public void run(final JsonObject msg) {
 
-                        String response = msg.toString();
+                 /*       String response = msg.toString();
 
                         AirportServerResultCNCVO airportServerResultVO = (AirportServerResultCNCVO) Parser.parseAirportCNCResult(response);
 
-                        CNCHiglightResponceCB.HiglightReceived(airportServerResultVO);
+                        CNCHiglightResponceCB.HiglightReceived(airportServerResultVO);*/
 
 
                     }
@@ -210,10 +255,32 @@ public class SignalRService extends Service {
 
                     }
                 }
-                , Object.class);*/
+                , Object.class);
+
+        _hub.on("cncOnShowSolutionR",
+                new SubscriptionHandler1<Object>() {
+                    @Override
+                    public void run(final Object msg) {
+                        //  final String finalMsg = msg.UserName + " says " + msg.Message;
+
+                    }
+                }
+                , Object.class);
 
     }
 
+
+    public void cncSignalRMessagesInvokation() {
+
+
+        _hub.invoke("cnconmessagetoclientr").onError(new ErrorCallback() {
+            @Override
+            public void onError(Throwable throwable) {
+                CNCHiglightResponceCB.SignalRRrror("Error int cncSubmitHighlightQueryCmR " +throwable.getMessage() );
+            }
+        });
+
+    }
 
     public void cncSubmitHighlightNew(ArrayList<AirportSendValuesVO> airportSendValuesVO, String preferencesProfileId){
 

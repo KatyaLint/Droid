@@ -376,7 +376,6 @@ public class AlternativeFlightFragment extends HGBAbstractFragment implements Go
         String paxId = getSelectedUserGuid();//currentNodeVO.getmPaxguid(); //getSelectedUserGuid();
         String flightID = currentNodeVO.getmPrimaryguid();
 
-        System.out.println("Kate paxId ="  +paxId);
         ItineraryHelper.getAlternativeFlights(paxId, flightID, getActivityInterface(), getActivity(), new IntItineraryHelper() {
             @Override
             public void finished() {

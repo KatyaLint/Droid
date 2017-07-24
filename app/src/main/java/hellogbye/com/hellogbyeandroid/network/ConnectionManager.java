@@ -721,7 +721,6 @@ public class ConnectionManager {
         String url = getURL(Services.ITINERARYV2);//getURL(Services.ITINERARY);
         JSONObject jsonObjectMain = new JSONObject();
 
-
         JSONArray jsonArray = new JSONArray();
 
         for (AirportSendValuesVO airportSendValuesVO : airportSendValuesVOs) {
@@ -878,7 +877,6 @@ public class ConnectionManager {
             e.printStackTrace();
         }
 
-        System.out.println("Kate jsonObject =" + jsonObject.toString());
         HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
                 jsonObject, new Response.Listener<String>() {
             @Override
@@ -925,7 +923,6 @@ public class ConnectionManager {
 
         String url = getURL(Services.ITINERARY);
         url = url + solutionid;
-        System.out.println("Kate url = " + url);
         JSONObject jsonObject = new JSONObject();
 
 
@@ -945,14 +942,14 @@ public class ConnectionManager {
 
 
 
-    public void getItineraryCNCSearch(String query, final ServerRequestListener listener) {
+    public void getItineraryCNCSearch(String query,String connectionId, final ServerRequestListener listener) {
 
         String url = getURL(Services.ITINERARY_HIGHLIGHT);
         JSONObject jsonObject = new JSONObject();
         query = query.replaceAll(" " +
                 "", "%20");
 
-        url = url + query;
+        url = url + query+"&clientConnectionId=" + connectionId;
 
         HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
                 jsonObject, new Response.Listener<String>() {
@@ -1369,7 +1366,6 @@ public class ConnectionManager {
 
         url = url + SOLUTION + solutionid + "&paxid=" + paxid + "&checkin=" + checkinSplit[0] + "&checkout=" + checkoutSplit[0] + "&isPromoAlternative="+isPromoAlternative;
         JSONObject jsonObject = new JSONObject();
-        System.out.println("Kate getAlternateHotelForFlight =" + url);
 
         HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
                 jsonObject, new Response.Listener<String>() {
@@ -1399,7 +1395,6 @@ public class ConnectionManager {
         String url = getURL(Services.USER_FLIGHT_SOLUTIONS);
         url = url + SOLUTION + solutionid + "&paxid=" + paxid + "&flight=" + flightid;
         JSONObject jsonObject = new JSONObject();
-        System.out.println("Kate ");
 
         //https://apiprod.hellogbye.com/prod/rest/Flight?solution=9f5dc7d9-24f2-46fd-b6ec-54ad0fb40b21&paxid=093717ff-c063-4e99-a6b5-a78900a2d443&flight=4006f7aa-2a5d-4758-9118-51c1573dfd6e
 

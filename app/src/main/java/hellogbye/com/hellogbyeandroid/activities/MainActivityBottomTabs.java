@@ -1228,7 +1228,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     }
 
-    
+
 
     @Override
     public void callRefreshItinerary(final int fragment) {

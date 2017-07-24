@@ -115,6 +115,10 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
     private CNCTutorialsVO cncTutorials;
     private String tutorialMessage = "/examples";
     private String tutorialVideoMessage = "/tutorials";
+
+    private ArrayList<CNCItem> cncItemsAdapterList=new ArrayList<CNCItem>();
+
+
     // private SignalRService service;
 
     public static Fragment newInstance(int position) {
@@ -221,7 +225,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
         SignalRService service = ((MainActivityBottomTabs) getActivity()).getSignalRService();
         service.setCNCHiglightResponceCB(higlightReceivedFromServer);
-
+     //   service.cncSignalRMessagesInvokation();
 
         cnc_fragment_profile_line =  (LinearLayout)rootView.findViewById(R.id.cnc_fragment_profile_line); //((MainActivityBottomTabs)getActivity()).getCnc_fragment_profile_line();
 
@@ -594,7 +598,13 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         //all cnc items
         ArrayList<CNCItem> cncItems = getActivityInterface().getCNCItems();
 
+
         mCNCAdapter = new CNCAdapter(getActivity(),getActivity().getApplicationContext(), cncItems);
+        mCNCAdapter.notifyDataSetChanged();
+       /* cncItemsAdapterList.addAll(cncItems);
+        mCNCAdapter.setItems(cncItemsAdapterList);*/
+
+
         mRecyclerView.setAdapter(mCNCAdapter);
         mCNCAdapter.SetOnItemClickListener(new CNCAdapter.OnItemClickListener() {
             @Override
@@ -741,6 +751,15 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         }
         getActivityInterface().addCNCItem(new CNCItem(userMessage, CNCAdapter.ME_ITEM));
         addWaitingItem();
+
+
+/*
+        cncItemsAdapterList.clear();
+        cncItemsAdapterList.addAll(getActivityInterface().getCNCItems());
+        mCNCAdapter.setItems(cncItemsAdapterList);
+*/
+
+
         mCNCAdapter.notifyDataSetChanged();
         resetMessageEditText();
 
@@ -770,6 +789,10 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         for(CNCExamplesVO example : examples){
             handleHGBMessage(example.getName(),CNCAdapter.HGB_ITEM_SELECTED);
         }
+
+     /*   cncItemsAdapterList.clear();
+        cncItemsAdapterList.addAll( getActivityInterface().getCNCItems());
+        mCNCAdapter.setItems( cncItemsAdapterList);*/
         mCNCAdapter.notifyDataSetChanged();
         resetMessageEditText();
         setTutorialTextVisibility(false);
@@ -785,8 +808,13 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
             handleHGBMessage(example.getName(),CNCAdapter.HGB_ITEM_VIDEO_TUTORIAL);
         }
 
-
         mCNCAdapter.notifyDataSetChanged();
+    /*    cncItemsAdapterList.clear();
+        cncItemsAdapterList.addAll( getActivityInterface().getCNCItems());
+        System.out.println("Kate cncItemsAdapterList 3 = " + cncItemsAdapterList);
+        mCNCAdapter.setItems( cncItemsAdapterList);*/
+
+      //  mCNCAdapter.notifyDataSetChanged();
         resetMessageEditText();
         setTutorialTextVisibility(false);
     }
@@ -883,7 +911,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
                     }*/
 
 
-        System.out.println("Kate serverFinishedResult");
         maxAirportSize = responses.size();
 
 
@@ -949,7 +976,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
 
 
-                popupCNCMenu(airport, airportSendValueVO);
+            popupCNCMenu(airport, airportSendValueVO);
 
 
           /*      HGBUtility.showPikerDialog(airportSendValueVO.getCenteredItem(), null, getActivity(), airport,
@@ -1099,7 +1126,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
 
 
-    public void handleHGBMessage(String strMessage,int type ) {
+    private synchronized void handleHGBMessage(String strMessage,int type ) {
         getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(),  type ));//CNCAdapter.HGB_ITEM));
         removeWaitingItem();
     }
@@ -1108,7 +1135,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         removeWaitingItem();
     }
 
-    public void handleHGBMessageMe(String strMessage) {
+    private void handleHGBMessageMe(String strMessage) {
         getActivityInterface().addCNCItem(new CNCItem(strMessage.trim(), CNCAdapter.ME_ITEM));
         addWaitingItem();
 
@@ -1119,6 +1146,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         void HiglightReceived(AirportServerResultCNCVO airportServerResultVO);
         void AnswearFromServerToUserChooses(SignalRServerResponseForHighlightVO signalRServerResponseForHighlightVO);
         void SignalRRrror(String error);
+        void SignalRCNCConversation(String cncConversation);
     }
 
     private IHiglightReceivedFromServer higlightReceivedFromServer = new IHiglightReceivedFromServer(){
@@ -1159,6 +1187,28 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
             airportSendValuesVOs.clear();
           //  ErrorMessage(error);
         }
+
+        @Override
+        public void SignalRCNCConversation(final String cncConversation) {
+            //all cnc items
+
+            getActivityInterface().addCNCItem(new CNCItem(cncConversation, CNCAdapter.HGB_ITEM_SIGNALR));
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+//stuff that updates ui
+                    removeWaitingItem();
+
+                    mCNCAdapter.notifyDataSetChanged();
+
+                 /*   cncItemsAdapterList.clear();
+                    cncItemsAdapterList.addAll(getActivityInterface().getCNCItems());
+                    mCNCAdapter.setItems(cncItemsAdapterList);*/
+                }
+            });
+        }
     };
 
 
@@ -1169,7 +1219,9 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
         SignalRService service = ((MainActivityBottomTabs) getActivity()).getSignalRService();
         service.cncSubmitQueryR(strMessage, null, preferencesProfileId);
-        ConnectionManager.getInstance(getActivity()).getItineraryCNCSearch(strMessage, new ConnectionManager.ServerRequestListener() {
+
+       String connectionId =  mHGBPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_SIGNALR_CONNECTION_ID, "");
+        ConnectionManager.getInstance(getActivity()).getItineraryCNCSearch(strMessage, connectionId,new ConnectionManager.ServerRequestListener() {
 
                     @Override
                     public void onSuccess(Object data) {
@@ -1401,7 +1453,12 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
                 iter.remove();
             }
         }
+
         mCNCAdapter.notifyDataSetChanged();
+
+/*        cncItemsAdapterList.clear();
+        cncItemsAdapterList.addAll(getActivityInterface().getCNCItems());
+        mCNCAdapter.setItems(cncItemsAdapterList);*/
     }
 
     public void requestFocusOnMessage(){
@@ -1429,17 +1486,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         };
     }
 
-    @Override
-    public void onResume() {
-        tutorailTexthandler.post(mRunnable);
-        super.onResume();
-    }
-
-    @Override
-    public void onStop() {
-        tutorailTexthandler.removeCallbacks(mRunnable);
-        super.onStop();
-    }
 
     private void changeTutorialText() {
 
@@ -1484,4 +1530,17 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
         super.onDestroyView();
     }
+
+    @Override
+    public void onResume() {
+        tutorailTexthandler.post(mRunnable);
+        super.onResume();
+    }
+
+    @Override
+    public void onStop() {
+        tutorailTexthandler.removeCallbacks(mRunnable);
+        super.onStop();
+    }
+
 }

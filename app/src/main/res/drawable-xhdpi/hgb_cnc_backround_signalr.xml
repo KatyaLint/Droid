@@ -1,0 +1,19 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <stroke
+        android:width="@dimen/DP1"
+        android:color="@color/COLOR_50e3c2" />
+
+    <padding
+
+        android:left="@dimen/DP1"
+        android:right="@dimen/DP1"
+        android:top="@dimen/DP1" />
+    <solid android:color="@color/COLOR_50e3c2" />
+    <corners
+        android:topLeftRadius="@dimen/DP10"
+        android:bottomLeftRadius="@dimen/DP10"
+        android:bottomRightRadius="@dimen/DP10"
+        android:topRightRadius="@dimen/DP10" />
+
+</shape>

@@ -3,6 +3,7 @@ package hellogbye.com.hellogbyeandroid.adapters.cncadapters;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,24 +22,30 @@ import pl.tajchert.sample.DotsTextView;
  * Created by arisprung on 10/27/15.
  */
 public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
     private final FragmentManager fragmentManager;
-    private ArrayList<CNCItem> mArrayList;
+    private ArrayList<CNCItem> mArrayList = new ArrayList<>();
     private OnItemClickListener mItemClickListner;
     private Context mContext;
 
-
+    public static final int ME_ITEM = 0;
+    public static final int HGB_ERROR_ITEM = 1;
     public static final int HGB_ITEM = 2;
+    public static final int WAITING_ITEM = 3;
+    public static final int HGB_ITEM_NO_ICON = 4;
     public static final int HGB_ITEM_SELECTED = 5;
     public static final int HGB_ITEM_VIDEO_TUTORIAL = 6;
-    public static final int HGB_ITEM_NO_ICON = 4;
-    public static final int HGB_ERROR_ITEM = 1;
-    public static final int ME_ITEM = 0;
-    public static final int WAITING_ITEM = 3;
+    public static final int HGB_ITEM_SIGNALR = 7;
+
+
+
+
 
     private int padding_integer;
     private String avatarUrl;
     // Provide a suitable constructor (depends on the kind of dataset)
     public CNCAdapter(Activity activity, Context applicationContext, ArrayList<CNCItem> myDataset) {
+
         mArrayList = myDataset;
         mContext = applicationContext;
         padding_integer = (int) applicationContext.getResources().getDimension(R.dimen.DP10);
@@ -46,6 +53,12 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     }
+
+ /*   public void setItems(ArrayList<CNCItem> myDataset){
+        mArrayList.clear();
+        mArrayList.addAll(myDataset);
+        notifyDataSetChanged();
+    }*/
 
     public void setAvatarUserUrl(String avatarUrl){
         this.avatarUrl = avatarUrl;
@@ -175,7 +188,7 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 return vh;
 
             case HGB_ITEM:
-
+            case HGB_ITEM_SIGNALR:
                 View hgbview = LayoutInflater.from(parent.getContext()).inflate(R.layout.cnc_hgb_item, parent, false);
                 ViewHolderHGB vh2 = new ViewHolderHGB(hgbview);
                 vh2.setVisabilityBubbleIcon(false);
@@ -216,7 +229,6 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
         String strMessage = mArrayList.get(position).getText();
-
         switch (holder.getItemViewType()) {
 
             case ME_ITEM:
@@ -271,6 +283,19 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     hgbholder.itemHGB.setTextIsSelectable(true);
                     hgbholder.itemHGB.setText(strMessage);
                  break;
+            case HGB_ITEM_SIGNALR:
+                ViewHolderHGB hgbholderSignalR = (ViewHolderHGB) holder;
+                hgbholderSignalR.itemHGB.setBackgroundResource(R.drawable.hgb_cnc_backround_signalr);
+                hgbholderSignalR.itemHGB.setTextColor(ContextCompat.getColor(mContext, R.color.COLOR_00503e));//getApmContext.getResources().getColor(R.color.COLOR_00503e));
+                hgbholderSignalR.itemHGB.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
+
+                // hgbholder.itemHGB.setPaintFlags(hgbholder.itemHGB.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                //hgbholder.itemHGB.setSelected(false);
+                //  hgbholder.itemHGB.setTextIsSelectable(false);
+                hgbholderSignalR.itemHGB.setSelected(true);
+                hgbholderSignalR.itemHGB.setTextIsSelectable(true);
+                hgbholderSignalR.itemHGB.setText(strMessage);
+                break;
             case HGB_ITEM_SELECTED:
 
                         ViewHolderHGB hgbholderselected = (ViewHolderHGB) holder;
@@ -279,8 +304,8 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         hgbholderselected.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_00516f));
                     //    hgbholderselected.itemHGB.setPaintFlags(hgbholderselected.itemHGB.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                         hgbholderselected.itemHGB.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
-                hgbholderselected.itemHGB.setSelected(false);
-                hgbholderselected.itemHGB.setTextIsSelectable(false);
+                        hgbholderselected.itemHGB.setSelected(false);
+                        hgbholderselected.itemHGB.setTextIsSelectable(false);
                         hgbholderselected.itemHGB.setText(strMessage);
                 break;
 
