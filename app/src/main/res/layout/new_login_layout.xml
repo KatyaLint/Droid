@@ -11,42 +11,63 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Login"
-
+        android:text="Log In"
+        android:textColor="@color/COLOR_00516f"
         android:textSize="@dimen/SP32"
-        app:fontName="dinnextltpro_mediumcond.ttf" />
+        app:fontName="dinnextltpro_condensed.ttf" />
 
 
 
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+
         android:id="@+id/username"
         style="@style/new_sign_up_text_color"
         android:layout_height="wrap_content"
+
         android:layout_gravity="center_horizontal"
         android:hint="Email"
+        android:layout_marginTop="@dimen/DP26"
+        android:layout_marginRight="@dimen/DP26"
+        android:layout_marginLeft="@dimen/DP26"
         android:textColor="@color/COLOR_00516f"
         android:imeOptions="actionNext"
         android:maxLines="1"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:layout_width="match_parent" />
 
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
         android:id="@+id/login_password"
+        android:layout_marginTop="@dimen/DP20"
+        android:layout_marginRight="@dimen/DP26"
+        android:layout_marginLeft="@dimen/DP26"
         style="@style/new_sign_up_text_color"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:hint="Password"
-        android:inputType="textPassword"
         android:imeOptions="actionDone"
+        android:inputType="textPassword"
         android:maxLines="1"
         android:singleLine="true" />
 
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_marginRight="@dimen/DP26"
+        android:id="@+id/forgotpassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_button"
+        android:layout_gravity="right"
+        android:layout_marginTop="@dimen/DP10"
+        android:text="@string/forgot_password"
+        android:textColor="@color/COLOR_00516f"
+        app:fontName="dinnextltpro_light.otf" />
 
 
     <RelativeLayout
+        android:layout_marginLeft="@dimen/DP26"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/DP10"
-        android:layout_marginLeft="@dimen/DP8" >
+        android:padding="@dimen/DP10">
         <CheckBox
             android:id="@+id/remmember_me_checkbox"
             android:layout_width="wrap_content"
@@ -56,13 +77,14 @@
             />
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:textSize="@dimen/SP16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fontName="dinnextltpro_light.otf"
             android:textColor="@color/COLOR_00516f"
             android:text="@string/remmeber_me"
             android:layout_marginLeft="@dimen/DP8"
-
+            android:gravity="center"
             android:layout_alignTop="@+id/remmember_me_checkbox"
             android:layout_alignBottom="@+id/remmember_me_checkbox"
             android:layout_toRightOf="@+id/remmember_me_checkbox"
@@ -75,20 +97,10 @@
         android:id="@+id/login_button"
         android:layout_marginTop="@dimen/DP10"
         style="@style/RedButton"
-        android:text="Log in" />
+        android:textAllCaps="false"
+        android:text="Log In" />
 
 
-    <hellogbye.com.hellogbyeandroid.views.FontTextView
-        android:id="@+id/forgotpassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/login_button"
-        app:fontName="dinnextltpro_light.otf"
-        android:layout_marginTop="@dimen/DP10"
-        android:text="@string/forgot_password"
-        android:textColor="@color/COLOR_00516f"
-        android:layout_gravity="center_horizontal"
-        />
 
 
 </LinearLayout>

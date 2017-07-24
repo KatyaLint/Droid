@@ -301,6 +301,7 @@
             android:id="@+id/password1"
             style="@style/new_sign_up_text_color"
             android:layout_height="wrap_content"
+
             android:layout_below="@+id/label_2"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/DP50"

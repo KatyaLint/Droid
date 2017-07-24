@@ -7,19 +7,19 @@
     android:background="@drawable/b_g_android"
     android:orientation="vertical">
 
-    <EditText
+    <!--<EditText
         android:id="@+id/email"
         style="@style/register_edit_text"
         android:layout_marginTop="@dimen/DP100"
         android:inputType="textEmailAddress"
         android:hint="@string/email_address"/>
 
-    <!--android:text="bruce@hellogbye.com"-->
-    <!--android:text="vlad.kirillov@hellogbye.com"-->
-    <!--android:text="daniel.korn@hellogbye.com"-->
-    <!--android:text="hussam@hellogbye.com"-->
-    <!--android:text="ari.sprung@amginetech.com"-->
-    <!--android:text="michael.gorlik@amginetech.com"-->
+    &lt;!&ndash;android:text="bruce@hellogbye.com"&ndash;&gt;
+    &lt;!&ndash;android:text="vlad.kirillov@hellogbye.com"&ndash;&gt;
+    &lt;!&ndash;android:text="daniel.korn@hellogbye.com"&ndash;&gt;
+    &lt;!&ndash;android:text="hussam@hellogbye.com"&ndash;&gt;
+    &lt;!&ndash;android:text="ari.sprung@amginetech.com"&ndash;&gt;
+    &lt;!&ndash;android:text="michael.gorlik@amginetech.com"&ndash;&gt;
 
     <EditText
         android:id="@+id/password"
@@ -30,9 +30,9 @@
         android:layout_marginTop="@dimen/DP16"
         android:hint="@string/password"
        />
-    <!--android:text="password"-->
-    <!--android:text="123456"-->
-    <!--android:text="pivotal"-->
+    &lt;!&ndash;android:text="password"&ndash;&gt;
+    &lt;!&ndash;android:text="123456"&ndash;&gt;
+    &lt;!&ndash;android:text="pivotal"&ndash;&gt;
     <CheckBox
         android:id="@+id/remmember_me_checkbox"
         android:layout_width="wrap_content"
@@ -74,7 +74,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         />
-
+-->
 
 
 
