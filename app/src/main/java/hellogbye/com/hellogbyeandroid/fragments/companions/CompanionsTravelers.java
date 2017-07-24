@@ -40,17 +40,21 @@ public class CompanionsTravelers extends CompanionsTabsViewClass {
         setSearchView(rootView, addCompanionsToCNCScreen);
 
 
+
         return rootView;
     }
 
     private boolean addingCompanionsToCNCView() {
         Bundle args = getArguments();
         if (args != null) {
-            String className = args.getString("class_name");
-            if (ItineraryFragmentComposeView.class.toString().equals(className)) {
-
+            Boolean className = args.getBoolean(HGBConstants.BUNDLE_ADD_COMPANION_CNC);
+            if(className){
                 return true;
             }
+           /* if (ItineraryFragmentComposeView.class.toString().equals(className)) {
+
+                return true;
+            }*/
 
         }
         return false;

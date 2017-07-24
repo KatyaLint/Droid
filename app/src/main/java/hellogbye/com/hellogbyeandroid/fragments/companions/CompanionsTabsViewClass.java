@@ -295,6 +295,7 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
         search_view =  ((MainActivityBottomTabs)getActivity()).getSearchView();
         search_view.setQueryHint("Search Companions");
         search_maginfy =  ((MainActivityBottomTabs)getActivity()).getSearchMagifyImage();
+        search_maginfy.setVisibility(View.VISIBLE);
         titleBar =  ((MainActivityBottomTabs)getActivity()).getTitleBar();
         toolbar_add_companion = ((MainActivityBottomTabs)getActivity()).getAddCompanionButton();
         searchListInitialization();

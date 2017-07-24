@@ -1,6 +1,7 @@
 package hellogbye.com.hellogbyeandroid.fragments.cnc;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
+import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -65,7 +67,13 @@ public class Information_Popup_View {
         cnc_add_dialog_add_companion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                flowInterface.goToFragment(ToolBarNavEnum.COMPANIONS.getNavNumber(), null);
+                Bundle arg = new Bundle();
+
+                //Kate check
+                arg.putBoolean(HGBConstants.BUNDLE_ADD_COMPANION_CNC, true);
+                //flowInterface.goToFragment(ToolBarNavEnum.COMPANIONS.getNavNumber(), null);
+                flowInterface.goToFragment(ToolBarNavEnum.ALL_COMPANIONS_VIEW.getNavNumber(), arg);
+
                 HGBUtility.dialog.cancel();
             }
         });

@@ -134,13 +134,26 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
            rootView = manageBookingView( rootView,  inflater,  container,  isProposed,  isBookedVersionExist);
         }
 
-        ImageButton toolbar_new_iternerary_cnc = ((MainActivityBottomTabs) getActivity()).getToolbar_new_iterneraryCnc();
-        toolbar_new_iternerary_cnc.setOnClickListener(new View.OnClickListener() {
+
+        ImageButton newIteneraryImageButton = ((MainActivityBottomTabs) getActivity()).getToolbar_new_iterneraryCnc();
+        newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 information_popup_view.freeUserPopUp();
+
+
             }
         });
+
+   /*     ImageButton toolbar_new_iternerary_cnc = ((MainActivityBottomTabs) getActivity()).getToolbar_new_iterneraryCnc();
+        System.out.println("Kate toolbar_new_iternerary_cnc = " + toolbar_new_iternerary_cnc);
+        toolbar_new_iternerary_cnc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Kate toolbar_new_iternerary_cnc");
+                information_popup_view.freeUserPopUp();
+            }
+        });*/
 
 
         titleChangeName();

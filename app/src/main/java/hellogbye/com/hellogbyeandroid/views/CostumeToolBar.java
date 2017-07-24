@@ -273,7 +273,7 @@ public class CostumeToolBar extends Toolbar {
                 break;
             case ITINERARY:
        //         up_bar_favorite.setVisibility(View.VISIBLE);
-                toolbar_new_grid_add_companions.setVisibility(View.VISIBLE);
+                toolbar_new_iternerary_cnc.setVisibility(View.VISIBLE);
                 itirnarary_title_Bar.setVisibility(View.VISIBLE);
                 break;
             /**

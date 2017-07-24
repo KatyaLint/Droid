@@ -109,19 +109,12 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
     private FontTextView itirnarary_title_Bar;
 
-    private LinearLayout cnc_add_dialog_favorites;
-
     private LinearLayout cnc_fragment_profile_line;
     private FontTextView cnc_fragment_profile_name;
     private UserProfilePreferences userProfilePreferences;
     private CNCTutorialsVO cncTutorials;
     private String tutorialMessage = "/examples";
     private String tutorialVideoMessage = "/tutorials";
-
-    private ArrayList<CNCItem> cncItemsAdapterList=new ArrayList<CNCItem>();
-
-
-    // private SignalRService service;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new CNCSignalRFragment();
@@ -276,7 +269,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getFlowInterface().enableFullScreen(false);
-
     }
 
 
@@ -754,14 +746,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         getActivityInterface().addCNCItem(new CNCItem(userMessage, CNCAdapter.ME_ITEM));
         addWaitingItem();
 
-
-/*
-        cncItemsAdapterList.clear();
-        cncItemsAdapterList.addAll(getActivityInterface().getCNCItems());
-        mCNCAdapter.setItems(cncItemsAdapterList);
-*/
-
-
         mCNCAdapter.notifyDataSetChanged();
         resetMessageEditText();
 
@@ -792,9 +776,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
             handleHGBMessage(example.getName(),CNCAdapter.HGB_ITEM_SELECTED);
         }
 
-     /*   cncItemsAdapterList.clear();
-        cncItemsAdapterList.addAll( getActivityInterface().getCNCItems());
-        mCNCAdapter.setItems( cncItemsAdapterList);*/
         mCNCAdapter.notifyDataSetChanged();
         resetMessageEditText();
         setTutorialTextVisibility(false);
@@ -811,12 +792,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         }
 
         mCNCAdapter.notifyDataSetChanged();
-    /*    cncItemsAdapterList.clear();
-        cncItemsAdapterList.addAll( getActivityInterface().getCNCItems());
-        System.out.println("Kate cncItemsAdapterList 3 = " + cncItemsAdapterList);
-        mCNCAdapter.setItems( cncItemsAdapterList);*/
 
-      //  mCNCAdapter.notifyDataSetChanged();
         resetMessageEditText();
         setTutorialTextVisibility(false);
     }
@@ -1004,10 +980,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
 
     private void popupCNCMenu(String airportTitle, final AirportSendValuesVO airportSendValueVO){
-
-
-
-
 
         LayoutInflater li = LayoutInflater.from(getActivity());
         View promptsView = li.inflate(R.layout.popup_cnc_screen_menu, null);
