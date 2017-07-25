@@ -167,7 +167,7 @@ public class OnBoardingPager extends BaseActivity implements ViewPager.OnPageCha
         public void onClick(View v) {
 
             int position = intro_images.getCurrentItem();
-            
+
             if(position == 3){
                 goToMainActivity();
             }else{

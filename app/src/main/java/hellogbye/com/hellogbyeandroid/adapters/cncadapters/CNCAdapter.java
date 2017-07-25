@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
@@ -116,6 +117,7 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     class ViewHolderHGB extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private final LinearLayout cnc_hgb_item_ll;
         // each data item is just a string in this case
         private FontTextView itemHGB;
         private ImageView cnc_image_view;
@@ -126,9 +128,17 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             itemHGB = (FontTextView) itemLayoutView.findViewById(R.id.cnc_hgb_input);
             cnc_image_view = (ImageView) itemLayoutView.findViewById(R.id.cnc_image_view);
             cnc_white_bubble_image = (ImageView) itemLayoutView.findViewById(R.id.cnc_white_bubble_image);
+            cnc_hgb_item_ll = (LinearLayout)itemLayoutView.findViewById(R.id.cnc_hgb_item_ll);
             itemLayoutView.setOnClickListener(this);
 
         }
+
+        public void setBackgroudForBubble(boolean isBlueBG){
+            if(isBlueBG){
+                cnc_hgb_item_ll.setBackgroundResource(R.drawable.hgb_cnc_backround);
+            }
+        }
+
 
         private void setVisabilityBubbleIcon(boolean isVisible){
             if(isVisible){
@@ -244,6 +254,8 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 hgbholderError.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_BLACK));
                 hgbholderError.itemHGB.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
                 hgbholderError.itemHGB.setTextIsSelectable(true);
+
+
                 break;
           /*  case HGB_ITEM:
             case HGB_ITEM_NO_ICON:
@@ -285,7 +297,7 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                  break;
             case HGB_ITEM_SIGNALR:
                 ViewHolderHGB hgbholderSignalR = (ViewHolderHGB) holder;
-                hgbholderSignalR.itemHGB.setBackgroundResource(R.drawable.hgb_cnc_backround_signalr);
+                hgbholderSignalR.itemHGB.setBackgroundResource(R.drawable.hgb_cnc_backround_signalr_green);
                 hgbholderSignalR.itemHGB.setTextColor(ContextCompat.getColor(mContext, R.color.COLOR_00503e));//getApmContext.getResources().getColor(R.color.COLOR_00503e));
                 hgbholderSignalR.itemHGB.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
 

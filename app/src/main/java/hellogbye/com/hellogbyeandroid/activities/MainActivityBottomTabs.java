@@ -1348,10 +1348,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     /////   HGBVoiceInterface  //////
     /////////////////////////////////
 
-
     @Override
     public void openVoiceToTextControl() {
-        try {
+        /*try {
 
             Intent detailsIntent = new Intent(RecognizerIntent.ACTION_GET_LANGUAGE_DETAILS);
             sendOrderedBroadcast(
@@ -1359,16 +1358,17 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
         } catch (Exception e) {
             Log.v("Speech", "Could not find any Speech Recognition Actions");
-        }
+        }*/
     }
 
-    public class LanguageDetailsChecker extends BroadcastReceiver {
+  /*  public class LanguageDetailsChecker extends BroadcastReceiver {
         private List<String> supportedLanguages;
 
         private String languagePreference;
 
         @Override
         public void onReceive(Context context, Intent i) {
+            System.out.println("Kate LanguageDetailsChecker");
             Bundle results = getResultExtras(true);
             if (results.containsKey(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE)) {
                 languagePreference =
@@ -1390,6 +1390,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                     //intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
                     intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, languagePreference);
                     intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak Now...");
+
                     startActivityForResult(intent, 0);
                 } else {
                     Crashlytics.logException(new Exception("Speech not avaibale"));
@@ -1400,12 +1401,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 Log.v("Speech", "Could not find any Speech Recognition Actions");
             }
         }
-    }
+    }*/
 
-    @Override
+  /*  @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
-
+        System.out.println("Kate onActivityResult");
         if (requestCode == 0 && resultCode == RESULT_OK) {
             ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
@@ -1419,7 +1420,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(CNCSignalRFragment.class.toString());
 
 
-            //Kate why is this here
+
           //  ((CNCSignalRFragment) currentFragment).handleMyMessage(matches.get(0));
 
 
@@ -1435,7 +1436,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 //            }
         }
     }
-
+*/
 
 
 

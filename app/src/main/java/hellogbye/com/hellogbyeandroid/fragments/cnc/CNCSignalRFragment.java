@@ -5,10 +5,13 @@ package hellogbye.com.hellogbyeandroid.fragments.cnc;
  */
 
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.RecognizerIntent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -29,6 +32,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -38,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
@@ -73,6 +78,8 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityNetwork;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by arisprung on 11/3/15.
@@ -680,6 +687,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
             public void onClick(View v) {
                 String strMessage = mEditText.getText().toString();
                 handleMyMessage(strMessage);
+                enterCNCMessage(strMessage);
             }
         });
 
@@ -714,12 +722,53 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         mMicImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getVoiceInterface().openVoiceToTextControl();
+                promptSpeechInput();
+               // getVoiceInterface().openVoiceToTextControl();
             }
         });
-
     }
 
+    private final int REQ_CODE_SPEECH_INPUT = 100;
+    /**
+     * Showing google speech input dialog
+     * */
+    private void promptSpeechInput() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+                "speach promt");
+        try {
+            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+        } catch (ActivityNotFoundException a) {
+            Toast.makeText(getActivity().getApplicationContext(),
+                   "speach not supported",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Receiving speech input
+     * */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case REQ_CODE_SPEECH_INPUT: {
+                if (resultCode == RESULT_OK && null != data) {
+
+                    ArrayList<String> result = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    handleMyMessage(result.get(0));
+
+                }
+                break;
+            }
+
+        }
+    }
 
 
     private void setTutorialTextVisibility(boolean isVisible){
@@ -731,6 +780,8 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
             cnc_text_tutorial_ll.setVisibility(View.GONE);
         }
     }
+
+
 
     private void handleMyMessage(final String strMessageReceived) {
         //stopTextTutorial();
@@ -763,8 +814,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
                 enterCNCMessage(strMessageReceived);
             }
         });
-
-
 
     }
 

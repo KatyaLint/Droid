@@ -556,10 +556,9 @@ private void setTextForTrip(String name){
                 enterCNCMessage(strMessageReceived);
             }
         });
-
-
-
     }
+
+
 
     private void enterCNCMessage(final String strMessage) {
         setTutorialTextVisibility(false);
