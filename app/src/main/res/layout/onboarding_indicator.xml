@@ -26,7 +26,7 @@
         android:id="@+id/viewPagerIndicator"
         android:layout_width="match_parent"
         android:layout_height="@dimen/DP60"
-        android:layout_marginBottom="@dimen/DP60"
+        android:layout_marginBottom="@dimen/DP180"
         android:layout_alignParentBottom="true" >
 
         <LinearLayout

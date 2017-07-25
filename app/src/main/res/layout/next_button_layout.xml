@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
 
         android:layout_marginTop="@dimen/DP44"
-        android:layout_marginRight="@dimen/DP20"
+        android:layout_marginRight="@dimen/DP6"
 
         android:textSize="@dimen/SP14"
         android:paddingTop="@dimen/DP10"
@@ -27,5 +27,11 @@
 
         android:visibility="visible"
         app:fontName="dinnextltpro_medium.otf" />
+
+
+
+
+
+
 
 </RelativeLayout>

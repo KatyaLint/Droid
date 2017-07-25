@@ -51,6 +51,7 @@ public class OnBoardingPager extends BaseActivity implements ViewPager.OnPageCha
     private HGBPreferencesManager hgbPrefrenceManager;
     private FontTextView btnNext;
 
+
 /*    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -118,11 +119,13 @@ public class OnBoardingPager extends BaseActivity implements ViewPager.OnPageCha
 
         intro_images = (ViewPager) findViewById(R.id.pager_introduction);
         btnNext = (FontTextView) findViewById(R.id.onboarding_next);
+
      /*   btnFinish = (ImageButton) findViewById(R.id.btn_finish);*/
 
         pager_indicator = (LinearLayout) findViewById(R.id.viewPagerCountDots);
 
         btnNext.setOnClickListener(nextClickListener);
+
   /*      btnFinish.setOnClickListener(this);*/
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
         mAdapter = new ViewPagerAdapter(OnBoardingPager.this, onboardingPagerTextVOArrayList);
@@ -130,10 +133,7 @@ public class OnBoardingPager extends BaseActivity implements ViewPager.OnPageCha
 
             @Override
             public void onClickNext() {
-                hgbPrefrenceManager.putBooleanSharedPreferences(HGBConstants.TRAVEL_PREF_ENTRY, true);
-                Intent intent = new Intent(getApplicationContext(),MainActivityBottomTabs.class);
-                startActivity(intent);
-                finish();
+                goToMainActivity();
 
             }
         });
@@ -156,12 +156,24 @@ public class OnBoardingPager extends BaseActivity implements ViewPager.OnPageCha
         });
     }
 
+    private void goToMainActivity(){
+        hgbPrefrenceManager.putBooleanSharedPreferences(HGBConstants.TRAVEL_PREF_ENTRY, true);
+        Intent intent = new Intent(getApplicationContext(),MainActivityBottomTabs.class);
+        startActivity(intent);
+        finish();
+    }
+
     private View.OnClickListener nextClickListener = new View.OnClickListener() {
         public void onClick(View v) {
 
             int position = intro_images.getCurrentItem();
-            position = position + 1;
-            intro_images.setCurrentItem(position);
+            
+            if(position == 3){
+                goToMainActivity();
+            }else{
+                position = position + 1;
+                intro_images.setCurrentItem(position);
+            }
 
             // do something when the button is clicked
         }
@@ -224,14 +236,14 @@ public class OnBoardingPager extends BaseActivity implements ViewPager.OnPageCha
         }
 
         dots[position].setImageDrawable(getResources().getDrawable(R.drawable.selecteditem_dot));
-
+       /* btnNext.setVisibility(View.VISIBLE);
         if (position + 1 == dotsCount) {
             btnNext.setVisibility(View.INVISIBLE);
            // btnFinish.setVisibility(View.VISIBLE);
         } else {
             btnNext.setVisibility(View.VISIBLE);
          //   btnFinish.setVisibility(View.GONE);
-        }
+        }*/
     }
 
     @Override

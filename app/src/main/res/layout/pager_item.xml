@@ -29,17 +29,6 @@
         android:layout_height="wrap_content" />
 
 
-    <hellogbye.com.hellogbyeandroid.views.FontButtonView
-        android:id="@+id/onboarding_next_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/DP34"
-        android:text="Next"
-        android:textAllCaps="false"
-        android:visibility="invisible"
-        style="@style/RedButton"/>
-
     <hellogbye.com.hellogbyeandroid.views.FontTextView
         android:id="@+id/onboarding_text_explanation"
         android:text="dfxcv"
@@ -52,4 +41,14 @@
         android:layout_above="@+id/onboarding_next_button"
         android:layout_marginBottom="@dimen/DP34" />
 
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:id="@+id/onboarding_next_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/DP34"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:visibility="invisible"
+        style="@style/RedButton"/>
 </RelativeLayout>
