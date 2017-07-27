@@ -31,6 +31,9 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
 
     private CompanionVO companionVO;
 
+
+
+    
     public static Fragment newInstance(int position) {
         Fragment fragment = new CompanionDetailsFragment();
         Bundle args = new Bundle();
