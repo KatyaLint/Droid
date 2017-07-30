@@ -426,7 +426,9 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
     private void setTextForTrip(String name){
         itirnarary_title_Bar = ((MainActivityBottomTabs) getActivity()).getItirnaryTitleBar();
-        itirnarary_title_Bar.setText(name);
+        if(name != null) {
+            itirnarary_title_Bar.setText(name);
+        }
         if(getActivityInterface().getTravelOrder() != null) {
             itirnarary_title_Bar.setTag(getActivityInterface().getTravelOrder().getmSolutionID());
         }

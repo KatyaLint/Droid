@@ -426,8 +426,9 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
             return;
         }
         // String solutionName = userOrder.getmSolutionName();
-
-        itirnarary_title_Bar.setText(solutionName);
+        if(solutionName != null) {
+            itirnarary_title_Bar.setText(solutionName);
+        }
         itirnarary_title_Bar.setTag(solutionID);
     }
 
@@ -585,7 +586,7 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
                 getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_FACTORY.getNavNumber(),null);
 
             }else if (NodeTypeEnum.HOTEL.getType().equals(nodeType)){
-                
+
                 selectedItemGuidNumber(guidSelectedItem);
                 selectedUserGuidNumber(guidSelectedUser);
                 getFlowInterface().goToFragment(ToolBarNavEnum.HOTEL.getNavNumber(),null);
