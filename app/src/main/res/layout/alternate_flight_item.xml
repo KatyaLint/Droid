@@ -37,7 +37,7 @@
             android:textSize="@dimen/SP12"
             app:fontName="dinnextltpro_medium.otf"
             android:textColor="@color/COLOR_00516f"
-            android:text="Sort"/>
+            android:text="SORT"/>
     </LinearLayout>
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
