@@ -164,7 +164,7 @@ public class SignalRService extends Service {
 
                 JsonObject jsonObject2 = new JsonObject();
 
-                _hub.invoke("cnconmessagetoclientr", jsonObject2).onError(new ErrorCallback() {
+                _hub.invoke("cncOnMessageToClientR", jsonObject2).onError(new ErrorCallback() {
                     @Override
                     public void onError(Throwable throwable) {
                         CNCHiglightResponceCB.SignalRRrror("Error int cncSubmitHighlightQueryCmR " + throwable.getMessage() );
