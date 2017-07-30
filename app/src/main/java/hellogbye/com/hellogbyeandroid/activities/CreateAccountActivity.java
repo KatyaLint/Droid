@@ -1308,6 +1308,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             @Override
             public void afterTextChanged(final Editable editable) {
 
+                //kate
                 ConnectionManager.getInstance(CreateAccountActivity.this).postAutocompleteCity(editable.toString(), userData.getCountry(),
                         userData.getCountryProvince()
                         , new ConnectionManager.ServerRequestListener() {

@@ -123,10 +123,13 @@
                 android:orientation="horizontal">
 
                 <AutoCompleteTextView
+                    android:completionThreshold="1"
                     android:id="@+id/companion_personal_settings_location_city"
                     style="@style/PersonalInformationEditText"
                     android:layout_width="@dimen/DP0"
                     android:layout_weight="1"
+                    android:inputType="textAutoComplete"
+                    android:privateImeOptions="nm"
                     android:hint="City"
                      />
 

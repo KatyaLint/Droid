@@ -337,13 +337,24 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                ConnectionManager.getInstance(getActivity()).postAutocompleteCity(charSequence.toString(), companion_personal_settings_location_country.getText().toString(),
+
+
+            }
+
+            @Override
+            public void afterTextChanged(final Editable editable) {
+
+                ConnectionManager.getInstance(getActivity()).postAutocompleteCity(editable.toString(), companion_personal_settings_location_country.getText().toString(),
                         companion_personal_settings_location_province.getText().toString()
                         , new ConnectionManager.ServerRequestListener() {
                             @Override
                             public void onSuccess(Object data) {
-                                adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, (ArrayList<String>)data);
+                                mCityList = (ArrayList<String>) data;
+                                adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, mCityList);
                                 companion_personal_settings_location_city.setAdapter(adapter);
+                                if(editable.length()==1){
+                                    companion_personal_settings_location_city.showDropDown();
+                                }
                             }
 
                             @Override
@@ -352,13 +363,6 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
                             }
                         });
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-
 
             }
         });
