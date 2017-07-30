@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
@@ -30,10 +31,9 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
 
 
     private CompanionVO companionVO;
+    private LinearLayout companion_add_relationship_ll;
 
 
-
-    
     public static Fragment newInstance(int position) {
         Fragment fragment = new CompanionDetailsFragment();
         Bundle args = new Bundle();
@@ -94,7 +94,7 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
 //       final Button companion_add_relationship = (Button) view.findViewById(R.id.companion_add_relationship);
 //        companion_add_relationship.setText(companionVO.getRelationshiptype());
 
-
+        companion_add_relationship_ll = (LinearLayout)view.findViewById(R.id.companion_add_relationship_ll);
         final FontTextView companion_add_relationship = (FontTextView) view.findViewById(R.id.companion_add_relationship);
         String companionRelationShip = companionVO.getRelationshiptype();
         if(companionRelationShip == null || companionRelationShip.isEmpty()){
@@ -113,7 +113,7 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
 
 
 
-        companion_add_relationship.setOnClickListener(new View.OnClickListener() {
+        companion_add_relationship_ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final ArrayList<CompanionStaticRelationshipTypesVO> componentsDescription = getActivityInterface().getCompanionsStaticRelationshipTypes();

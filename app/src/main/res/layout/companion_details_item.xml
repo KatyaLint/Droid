@@ -135,6 +135,7 @@
 
 
     <LinearLayout
+        android:id="@+id/companion_add_relationship_ll"
         android:visibility="visible"
         android:background="@color/COLOR_WHITE"
         android:layout_width="match_parent"
