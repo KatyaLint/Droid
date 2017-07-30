@@ -1548,13 +1548,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
       /*  String connectionid = "";
         String userid = "";
         String solutionid = "";*/
-
-        System.out.println("Kate connectionId =" + connectionId + "userId =" + userId + "solutionId =" + solutionId);
         ConnectionManager.getInstance(MainActivityBottomTabs.this).sendPostSignalRRegistration(connectionId, userId, solutionId,
                 new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
-                        System.out.println("Kate post to SignalR");
 
                     }
 
