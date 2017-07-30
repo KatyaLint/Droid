@@ -499,7 +499,7 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
 
 
                         view =  itineraryInitializationFlightView.flightLayout(node, getActivity(), nodeBeforeID, getActivityInterface());
-                        view.setTag(NodeTypeEnum.FLIGHT.getType());
+                        view.setTag(NodeTypeEnum.FLIGHT.getType() +"," + node.getAccountID()+","+node.getmGuid());
                         counter  = counter + 1;
 
                     } else {
@@ -507,7 +507,7 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
                         //create hotel
 
                         view = itineraryInitializationHotelView.hotelLayout(node,getActivity());//hotelLayout(node,counter);
-                        view.setTag(NodeTypeEnum.HOTEL.getType());
+                        view.setTag(NodeTypeEnum.HOTEL.getType()+"," + node.getAccountID()+"," + node.getmGuid());
                     }
                     view.setOnClickListener(nodeClickListener);
                     //   view.setLayoutParams(nodeParams);
@@ -571,27 +571,13 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
     private View.OnClickListener nodeClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            String nodeType =  view.getTag().toString();
+            String[] nodeTypeStr =  view.getTag().toString().split(",");
+            String nodeType = nodeTypeStr[0];
+            String guidSelectedUser  = nodeTypeStr[1];
+            String guidSelectedItem = nodeTypeStr[2];
 
             //                NodeTypeEnum.FLIGHT.getType();
             if (NodeTypeEnum.FLIGHT.getType().equals(nodeType)){
-
-                //  Fragment fragment = new AlternativeFlightFragment();
-                //accountID
-                LinearLayout grid_flight_square_ll;// = (LinearLayout)view.findViewById(R.id.grid_flight_square_ll);
-                TextView grid_traveler_flight_price ;//= (TextView)view.findViewById(R.id.grid_traveler_flight_price);
-                if(isBooked){
-                    grid_flight_square_ll = (LinearLayout)view.findViewById(R.id.grid_flight_square_ll);
-                    grid_traveler_flight_price = (TextView)view.findViewById(R.id.grid_traveler_flight_price_booked);
-                }else{
-                    grid_flight_square_ll = (LinearLayout)view.findViewById(R.id.grid_flight_square_ll_booked);
-                    grid_traveler_flight_price = (TextView)view.findViewById(R.id.grid_traveler_flight_price);
-                }
-              //  LinearLayout grid_flight_square_ll = (LinearLayout)view.findViewById(R.id.grid_flight_square_ll);
-                String guidSelectedUser = grid_flight_square_ll.getTag().toString();
-
-
-                String guidSelectedItem = grid_traveler_flight_price.getTag().toString();
 
                 selectedItemGuidNumber(guidSelectedItem);
                 selectedUserGuidNumber(guidSelectedUser);
@@ -599,25 +585,7 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
                 getFlowInterface().goToFragment(ToolBarNavEnum.ALTERNATIVE_FLIGHT_FACTORY.getNavNumber(),null);
 
             }else if (NodeTypeEnum.HOTEL.getType().equals(nodeType)){
-
-
-                TextView grid_hotel_name ;//= (TextView)view.findViewById(R.id.grid_hotel_name);
-                TextView grid_hotel_place;// = (TextView)view.findViewById(R.id.grid_hotel_place);
-                if(isBooked){
-
-                     grid_hotel_name = (TextView)view.findViewById(R.id.grid_hotel_name_booked);
-                     grid_hotel_place = (TextView)view.findViewById(R.id.grid_hotel_place_booked);
-                }else{
-
-                     grid_hotel_name = (TextView)view.findViewById(R.id.grid_hotel_name);
-                     grid_hotel_place = (TextView)view.findViewById(R.id.grid_hotel_place);
-                }
-
-                String guidSelectedUser = grid_hotel_name.getTag().toString();
-
-
-                String guidSelectedItem = grid_hotel_place.getTag().toString();
-
+                
                 selectedItemGuidNumber(guidSelectedItem);
                 selectedUserGuidNumber(guidSelectedUser);
                 getFlowInterface().goToFragment(ToolBarNavEnum.HOTEL.getNavNumber(),null);
