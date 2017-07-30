@@ -29,7 +29,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/sort_by_icon" />
 
-
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
