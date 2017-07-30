@@ -689,7 +689,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
             public void onClick(View v) {
                 String strMessage = mEditText.getText().toString();
                 handleMyMessage(strMessage);
-                System.out.println("Kate mSendTextView");
+
                // enterCNCMessage(strMessage);
             }
         });
@@ -791,7 +791,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         //setTutorialTextVisibility(false);
 
         String userMessage = strMessageReceived.trim();
-        System.out.println("Kate userMessage = "  +userMessage);
         if(userMessage.equals(tutorialMessage)){
             examplesLogics();
             return;
@@ -1039,7 +1038,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
     private void popupCNCMenu(String airportTitle, final AirportSendValuesVO airportSendValueVO){
 
-        System.out.println("Kate popup dialog");
+
         LayoutInflater li = LayoutInflater.from(getActivity());
         View promptsView = li.inflate(R.layout.popup_cnc_screen_menu, null);
 
@@ -1248,7 +1247,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
 
     private void sendMessageToServer(final String strMessage, final iAfterServer iserverFinished) {
-        System.out.println("Kate sendMessageToServer");
 
         String preferencesProfileId = getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId();
 

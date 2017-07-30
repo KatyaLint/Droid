@@ -198,7 +198,7 @@ public class SignalRService extends Service {
                     @Override
                     public void run(final String msg) {
                         String str = msg.toString();
-                        System.out.println("Kate signalR received str = " + str);
+
                     //    System.out.println("Kate response =" + msg.toString());
               //          String response = msg.toString();
                         CNCHiglightResponceCB.SignalRCNCConversation(str);
