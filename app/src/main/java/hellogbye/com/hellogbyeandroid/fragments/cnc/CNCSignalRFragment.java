@@ -290,30 +290,11 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         }
     }
 
-    private void postToSignalR(String connectionId, String userId, String solutionId){
-      /*  String connectionid = "";
-        String userid = "";
-        String solutionid = "";*/
-
-        ConnectionManager.getInstance(getActivity()).sendPostSignalRRegistration(connectionId, userId, solutionId,
-                new ConnectionManager.ServerRequestListener() {
-                    @Override
-                    public void onSuccess(Object data) {
 
 
-                    }
+    private void getCurrentItinerary(final String solutionItineraryId){
 
-                    @Override
-                    public void onError(Object data) {
-
-                    }
-                });
-    }
-
-    private void getCurrentItinerary(final String solutionId){
-
-
-
+        System.out.println("Kate getCurrent");
         ((MainActivityBottomTabs)getActivity()).callRefreshItineraryWithCallback(ToolBarNavEnum.CNC.getNavNumber(), new RefreshComplete() {
             @Override
             public void onRefreshSuccess(Object data) {
@@ -326,7 +307,9 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
                 String signalrConnectionID = mHGBPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_SIGNALR_CONNECTION_ID, "");
                 String userId = mHGBPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_PROFILE_ID, "");
 
-                postToSignalR(signalrConnectionID, userId, solutionId);
+
+
+                ((MainActivityBottomTabs)getActivity()).postToSignalR(signalrConnectionID, userId, solutionItineraryId);
 
                 addUserConversation();
                 //Kate
@@ -338,7 +321,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
                 ErrorMessage(data);
                 removeWaitingItem();
             }
-        }, solutionId);
+        }, solutionItineraryId);
 
 
 
@@ -865,9 +848,11 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         clearCNCscreen = args.getBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
 
         if(!clearCNCscreen) { // not a new message
+            System.out.println("Kate not a new one");
             sendCNCMessageToServer(strMessage);
         } else { //  a new message
 
+            System.out.println("Kate a new one");
             selectedCount = 0;
           //  sendMessageToServer(strMessage);
 
@@ -935,12 +920,23 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
     private void serverFinishedResult(AirportServerResultCNCVO airportServerResultVO) {
 
+
+
+
+
        // ArrayList<ResponsesVO> responses = airportServerResultVO.getHighlightdataVO().getResponses();
 
         ArrayList<ResponsesVO> responses = airportServerResultVO.getResponses();
-        if(responses.isEmpty()){
-            handleHGBMessage("Please specify your request",CNCAdapter.HGB_ITEM);
-        }
+
+        String signalrConnectionID = mHGBPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_SIGNALR_CONNECTION_ID, "");
+        String userId = mHGBPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_PROFILE_ID, "");
+        String solutionItineraryId = airportServerResultVO.getItineraryid();
+        System.out.println("Kate serverFinished");
+        ((MainActivityBottomTabs)getActivity()).postToSignalR(signalrConnectionID, userId, solutionItineraryId);
+//        if(responses.isEmpty()){
+//
+//          //  handleHGBMessage("Please specify your request",CNCAdapter.HGB_ITEM);
+//        }
        // ArrayList<ResponsesVO> responses = airportResult.getResponses();
         maxAirportSize = 0;//responses.size();
                    /* for (ResponsesVO response : responses) {
