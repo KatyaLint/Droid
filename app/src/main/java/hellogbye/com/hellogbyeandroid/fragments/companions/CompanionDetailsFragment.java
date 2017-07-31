@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionUserProfileVO;
@@ -42,6 +43,9 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
 
         return fragment;
     }
+
+
+
 
     @Nullable
     @Override
@@ -118,7 +122,7 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
             public void onClick(View view) {
                 final ArrayList<CompanionStaticRelationshipTypesVO> componentsDescription = getActivityInterface().getCompanionsStaticRelationshipTypes();
                 if (componentsDescription == null) {
-                    getRelationshipTypes();
+                    ((MainActivityBottomTabs)getActivity()).getRelationshipTypes();
                 } else {
 
 
@@ -140,7 +144,8 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
                                         }
 
                                     }
-                                    setNewRelationshipForCompanion(companionIdRelationship);
+                                    String paxID  = companionVO.getmCompanionid();
+                                    ((MainActivityBottomTabs)getActivity()).setNewRelationshipForCompanion(companionIdRelationship, paxID);
                                 }
 
                                 @Override
@@ -176,33 +181,5 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
     }
 
 
-    private void setNewRelationshipForCompanion(int relationshiptypeId){
-        String paxID  = companionVO.getmCompanionid();
-        ConnectionManager.getInstance(getActivity()).putCompanionRelationship(paxID, relationshiptypeId,new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
-            }
-
-            @Override
-            public void onError(Object data) {
-                ErrorMessage(data);
-            }
-        });
-    }
-
-    private void getRelationshipTypes(){
-        ConnectionManager.getInstance(getActivity()).getStaticCompanionsRelationTypesVO( new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
-                ArrayList<CompanionStaticRelationshipTypesVO> companionStaticRelationshipTypesVOs = (ArrayList<CompanionStaticRelationshipTypesVO> )data;
-                getActivityInterface().setCompanionsStaticRelationshipTypes(companionStaticRelationshipTypesVOs);
-            }
-
-            @Override
-            public void onError(Object data) {
-                ErrorMessage(data);
-            }
-        });
-    }
 
 }

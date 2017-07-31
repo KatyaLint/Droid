@@ -313,14 +313,15 @@ public class ConnectionManager {
 
         try {
 
-            jsonObject.put("addedvia", companionData.getmAddedvia());
-            jsonObject.put("isAdult", true);
+            jsonObject.put("addedviastatus", companionData.getmAddedvia());
+            jsonObject.put("isAdult", companionData.ismIsAdult());
             jsonObject.put("relationshiptypeid", companionData.getRelationshiptypeid());
 
             jsonObjectStub.put("emailaddress", companionData.getCompanionUserProfile().getmEmailAddress());
             jsonObjectStub.put("firstname", companionData.getCompanionUserProfile().getmFirstName());
             jsonObjectStub.put("lastname",  companionData.getCompanionUserProfile().getmLastName());
-            jsonObjectStub.put("dob",  null);
+            jsonObjectStub.put("dob",  companionData.getCompanionUserProfile().getmDoB());
+            jsonObjectStub.put("gender",  companionData.getCompanionUserProfile().getmGender());
             jsonObject.put("stubcompanion",jsonObjectStub);
 
         } catch (Exception e) {

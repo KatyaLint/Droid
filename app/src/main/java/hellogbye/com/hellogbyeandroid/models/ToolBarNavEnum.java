@@ -44,6 +44,7 @@ public enum ToolBarNavEnum {
     SELECT_ROOM_FRAGMENT(38,"Room Type"),
     FARE_CLASS_FRAGMENT(39,"Fare Class"),
     ITINERARY(8,"Current Itinerary"),
+    COMPANION_ADD_NEW_COMPANION(40,"Add New Companion")
 
 
     ;

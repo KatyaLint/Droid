@@ -34,6 +34,8 @@ public class CompanionVO {
     @SerializedName("isfamilymember")
     private boolean mIsFamilyMember;
 
+    @SerializedName("isAdult")
+    private boolean mIsAdult;
 
 
     public String getmConfirmationstatus() {
@@ -114,5 +116,13 @@ public class CompanionVO {
 
     public void setmIsFamilyMember(boolean mIsFamilyMember) {
         this.mIsFamilyMember = mIsFamilyMember;
+    }
+
+    public boolean ismIsAdult() {
+        return mIsAdult;
+    }
+
+    public void setmIsAdult(boolean mIsAdult) {
+        this.mIsAdult = mIsAdult;
     }
 }

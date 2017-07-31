@@ -33,6 +33,11 @@ public class CompanionUserProfileVO {
     @SerializedName("currency")
     private boolean mCurrency;
 
+    @SerializedName("gender")
+    private String mGender;
+    @SerializedName("dob")
+    private String mDoB;
+
     public String getmFirstName() {
         return mFirstName;
     }
@@ -135,5 +140,21 @@ public class CompanionUserProfileVO {
 
     public void setmCurrency(boolean mCurrency) {
         this.mCurrency = mCurrency;
+    }
+
+    public String getmGender() {
+        return mGender;
+    }
+
+    public void setmGender(String mGender) {
+        this.mGender = mGender;
+    }
+
+    public String getmDoB() {
+        return mDoB;
+    }
+
+    public void setmDoB(String mDoB) {
+        this.mDoB = mDoB;
     }
 }

@@ -31,6 +31,7 @@ import hellogbye.com.hellogbyeandroid.R;
 
 import hellogbye.com.hellogbyeandroid.activities.ForgotPasswordActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
+import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
 import hellogbye.com.hellogbyeandroid.adapters.companion.CompanionsSwipeItemsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
@@ -207,7 +208,10 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
         toolbar_add_companion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addTravelCompanion();
+                getFlowInterface().goToFragment(ToolBarNavEnum.COMPANION_ADD_NEW_COMPANION.getNavNumber(), null);
+
+
+               // addTravelCompanion();
             }
         });
 
@@ -317,39 +321,39 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
                 }
                 companionSearchVO.setmAddedvia("Search");
 
+                ((MainActivityBottomTabs)getActivity()).postCompanion(companionSearchVO);
 
-
-                ConnectionManager.getInstance(getActivity()).postSearchCompanionAdd(companionSearchVO, new ConnectionManager.ServerRequestListener() {
-                    @Override
-                    public void onSuccess(Object data) {
-
-                        CompanionVO companionVO = (CompanionVO)data;
-                     //   getCompanions();
-                        LayoutInflater li = LayoutInflater.from(getContext());
-                        View popupView = li.inflate(R.layout.popup_layout_log_out, null);
-                        HGBUtility.showAlertPopUpOneButton(getActivity(), null, popupView,
-                                "Companion Request Sent", new PopUpAlertStringCB(){
-
-                                    @Override
-                                    public void itemSelected(String inputItem) {
-                                        getCompanions();
-                                    }
-
-                                    @Override
-                                    public void itemCanceled() {
-
-                                    }
-                                });
-
-                      //  setNewRelationshipForCompanion(companionVO);
-
-                    }
-
-                    @Override
-                    public void onError(Object data) {
-                        ErrorMessage(data);
-                    }
-                });
+//                ConnectionManager.getInstance(getActivity()).postSearchCompanionAdd(companionSearchVO, new ConnectionManager.ServerRequestListener() {
+//                    @Override
+//                    public void onSuccess(Object data) {
+//
+//                        CompanionVO companionVO = (CompanionVO)data;
+//                     //   getCompanions();
+//                        LayoutInflater li = LayoutInflater.from(getContext());
+//                        View popupView = li.inflate(R.layout.popup_layout_log_out, null);
+//                        HGBUtility.showAlertPopUpOneButton(getActivity(), null, popupView,
+//                                "Companion Request Sent", new PopUpAlertStringCB(){
+//
+//                                    @Override
+//                                    public void itemSelected(String inputItem) {
+//                                        getCompanions();
+//                                    }
+//
+//                                    @Override
+//                                    public void itemCanceled() {
+//
+//                                    }
+//                                });
+//
+//                      //  setNewRelationshipForCompanion(companionVO);
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Object data) {
+//                        ErrorMessage(data);
+//                    }
+//                });
 
             }
         });
@@ -447,12 +451,11 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
             closeSearchBar();
         }
 
-        ConnectionManager.getInstance(getActivity()).getCompanions(new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
 
-                ArrayList<CompanionVO> companions =(ArrayList<CompanionVO>)data;
-                getActivityInterface().setCompanions(companions);
+        ((MainActivityBottomTabs)getActivity()).getCompanions(new RefreshComplete() {
+            @Override
+            public void onRefreshSuccess(Object data) {
+                ArrayList<CompanionVO> companions = getActivityInterface().getCompanions();
                 if(isPending){
                     pendingCompanions(companions);
                     getCompanionsInvitation();
@@ -461,14 +464,36 @@ public class CompanionsTabsViewClass  extends HGBAbstractFragment implements and
                     emptyCompanionsView();
                 }
                 searchListAdapter.updateItems(companionsVOPending);
-
             }
 
             @Override
-            public void onError(Object data) {
+            public void onRefreshError(Object data) {
                 ErrorMessage(data);
             }
         });
+
+//        ConnectionManager.getInstance(getActivity()).getCompanions(new ConnectionManager.ServerRequestListener() {
+//            @Override
+//            public void onSuccess(Object data) {
+//
+//                ArrayList<CompanionVO> companions =(ArrayList<CompanionVO>)data;
+//                getActivityInterface().setCompanions(companions);
+//                if(isPending){
+//                    pendingCompanions(companions);
+//                    getCompanionsInvitation();
+//                }else{
+//                    acceptedCompanions(companions);
+//                    emptyCompanionsView();
+//                }
+//                searchListAdapter.updateItems(companionsVOPending);
+//
+//            }
+//
+//            @Override
+//            public void onError(Object data) {
+//                ErrorMessage(data);
+//            }
+//        });
     }
 
     public void confirmCompanion(String companion_id){

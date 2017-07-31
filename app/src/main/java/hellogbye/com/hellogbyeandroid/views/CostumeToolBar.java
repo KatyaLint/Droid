@@ -345,6 +345,7 @@ public class CostumeToolBar extends Toolbar {
             case SELECT_ROOM_FRAGMENT:
             case TRAVEL_PREFERENCE:
             case FREE_USER_FRAGMENT:
+            case COMPANION_ADD_NEW_COMPANION:
                 titleBar.setVisibility(View.VISIBLE);
                 break;
             /**

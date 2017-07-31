@@ -45,6 +45,7 @@ import hellogbye.com.hellogbyeandroid.fragments.alternative.FareClassFragment;
 
 import hellogbye.com.hellogbyeandroid.fragments.cnc.CNCSignalRFragment;
 import hellogbye.com.hellogbyeandroid.fragments.cnc.CNCTutorials;
+import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionAddNewCompanion;
 import hellogbye.com.hellogbyeandroid.fragments.hotel.HotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.hotel.SelectNewHotelFragment;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.AlternativeFlightFragment;
@@ -89,6 +90,7 @@ import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.cnc.CNCTutorialsVO;
+import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelationshipTypesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
@@ -200,7 +202,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
         getUpComingTrips();
 
-
+       // getRelationshipTypes();
 
         hgbSaveDataClass.setPersonalUserInformation(new PersonalUserInformationVO());
         setContentView(R.layout.main_activity_bottom_tab_layout);
@@ -812,6 +814,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         boolean isAddAnimation = false;
 
         switch (navBar) {
+            case COMPANION_ADD_NEW_COMPANION:
+                fragment = CompanionAddNewCompanion.newInstance(navPosition);
+
+                break;
             case CNC:
                // fragment = CNCFragment.newInstance(navPosition);
                 fragment = CNCSignalRFragment.newInstance(navPosition);
@@ -1311,7 +1317,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             }
         });
-
     }
 
     @Override
@@ -1561,5 +1566,97 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                     }
                 });
     }
+
+
+    //-------------------------------------
+
+
+    public void setNewRelationshipForCompanion(int relationshiptypeId, String paxID){
+     //   String paxID  = companionVO.getmCompanionid();
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).putCompanionRelationship(paxID, relationshiptypeId,new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
+
+    public void getRelationshipTypes(){
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).getStaticCompanionsRelationTypesVO( new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                ArrayList<CompanionStaticRelationshipTypesVO> companionStaticRelationshipTypesVOs = (ArrayList<CompanionStaticRelationshipTypesVO> )data;
+                hgbSaveDataClass.setCompanionsStaticRelationshipTypes(companionStaticRelationshipTypesVOs);
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
+    
+
+    public void postCompanion(CompanionVO companionVO) {
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).postSearchCompanionAdd(companionVO, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+                CompanionVO companionVO = (CompanionVO) data;
+                //   getCompanions();
+                LayoutInflater li = LayoutInflater.from(MainActivityBottomTabs.this);
+                View popupView = li.inflate(R.layout.popup_layout_log_out, null);
+                HGBUtility.showAlertPopUpOneButton(MainActivityBottomTabs.this, null, popupView,
+                        "Companion Request Sent", new PopUpAlertStringCB() {
+
+                            @Override
+                            public void itemSelected(String inputItem) {
+                                getCompanions(null);
+                            }
+
+                            @Override
+                            public void itemCanceled() {
+
+                            }
+                        });
+
+                //  setNewRelationshipForCompanion(companionVO);
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
+
+
+    public void getCompanions(final RefreshComplete refreslistner){
+
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).getCompanions(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+
+                ArrayList<CompanionVO> companions =(ArrayList<CompanionVO>)data;
+                hgbSaveDataClass.setCompanions(companions);
+                if(refreslistner != null) {
+                    refreslistner.onRefreshSuccess(data);
+                }
+
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
+
 
 }
