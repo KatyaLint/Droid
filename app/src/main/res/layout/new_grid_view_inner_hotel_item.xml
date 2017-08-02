@@ -195,7 +195,7 @@
                 android:layout_centerInParent="true"
                 app:fontName="dinnextltpro_regular.otf"
                 android:textColor="@color/COLOR_00516f"
-                android:text="@string/hotel_grid_more_options"/>
+          />
 
 
 
