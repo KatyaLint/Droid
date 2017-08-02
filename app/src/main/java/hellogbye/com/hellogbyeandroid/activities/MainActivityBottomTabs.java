@@ -1599,7 +1599,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             }
         });
     }
-    
+
 
     public void postCompanion(CompanionVO companionVO) {
         ConnectionManager.getInstance(MainActivityBottomTabs.this).postSearchCompanionAdd(companionVO, new ConnectionManager.ServerRequestListener() {

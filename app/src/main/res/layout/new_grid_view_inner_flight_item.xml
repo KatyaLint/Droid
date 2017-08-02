@@ -275,7 +275,7 @@
                 android:textSize="@dimen/SP10"
                 app:fontName="dinnextltpro_medium.otf"
                 android:layout_alignParentRight="true"
-                android:text="SELECT" />
+                android:text="SELECTED" />
 
         </RelativeLayout>
 
