@@ -37,6 +37,7 @@ import java.io.IOException;
 
 import hellogbye.com.hellogbyeandroid.R;
 //import hellogbye.com.hellogbyeandroid.activities.MainActivity;
+import hellogbye.com.hellogbyeandroid.activities.CreateAccountActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.activities.dialogs.SignInDialog;
 import hellogbye.com.hellogbyeandroid.adapters.settingaccount.AccountSettingsAdapter;
@@ -246,23 +247,6 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
 
                 SignInDialog signInDialog = new SignInDialog(getActivity(), android.R.style.Theme_NoTitleBar_Fullscreen);
                 signInDialog.show();
-
-
-                // TODO Auto-generated method stub
-//                AlertDialog.Builder sort = new AlertDialog.Builder(getActivity());
-              //  Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_NoTitleBar_Fullscreen);
-//                //dialog.requestWindowFeature(Window.FEATURE__TITLE);
-//                dialog.setCancelable(false);
-//                dialog.setContentView(R.layout.new_sigin_layout);
-//                dialog.show();
-
-                // Get the layout inflater
-//                LayoutInflater inflater = getActivity().getLayoutInflater();
-//                View sortView = inflater.inflate(R.layout.new_login_layout, null);
-//                sort.setView(sortView);
-//                sort.create().show();
-
-
             }
         });
 
@@ -270,7 +254,9 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
         account_create_acount_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), CreateAccountActivity.class);
+                intent.putExtra("free_user_create_user",true);
+                startActivity(intent);
             }
         });
 

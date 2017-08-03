@@ -12,16 +12,17 @@ import android.widget.ImageButton;
 
 import java.util.UUID;
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.ForgotPasswordActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.onboarding.OnBoardingPager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
-import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontCheckedTextView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
+import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 /**
  * Created by amirlubashevsky on 02/08/2017.
@@ -76,6 +77,17 @@ public class SignInDialog extends Dialog {
             @Override
             public void onClick(View view) {
                 sendLoginToServer(username_email.getText().toString(),login_password.getText().toString());
+            }
+        });
+
+
+        FontTextView forgotpassword = (FontTextView) findViewById(R.id.forgotpassword);
+        forgotpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ForgotPasswordActivity.class);
+                getContext().startActivity(intent);
+
             }
         });
 
