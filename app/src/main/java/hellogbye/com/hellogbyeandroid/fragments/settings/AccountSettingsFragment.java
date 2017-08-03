@@ -3,6 +3,7 @@ package hellogbye.com.hellogbyeandroid.fragments.settings;
 import android.Manifest;
 import android.app.Activity;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -23,6 +24,7 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -36,6 +38,7 @@ import java.io.IOException;
 import hellogbye.com.hellogbyeandroid.R;
 //import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
+import hellogbye.com.hellogbyeandroid.activities.dialogs.SignInDialog;
 import hellogbye.com.hellogbyeandroid.adapters.settingaccount.AccountSettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
@@ -134,6 +137,8 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.account_settings_main_layout, container, false);
+        isFreeUser = ((MainActivityBottomTabs)getActivity()).getIsFreeUser();
+
 
         activity = getActivity();
 
@@ -232,12 +237,58 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
      //   getFlowInterface().loadJSONFromAsset();
         //getCountries();
 
+        FontButtonView account_signin_button = (FontButtonView) rootView.findViewById(R.id.account_signin_button);
+        FontButtonView account_create_acount_button = (FontButtonView) rootView.findViewById(R.id.account_create_acount_button);
 
+        account_signin_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                SignInDialog signInDialog = new SignInDialog(getActivity(), android.R.style.Theme_NoTitleBar_Fullscreen);
+                signInDialog.show();
+
+
+                // TODO Auto-generated method stub
+//                AlertDialog.Builder sort = new AlertDialog.Builder(getActivity());
+              //  Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_NoTitleBar_Fullscreen);
+//                //dialog.requestWindowFeature(Window.FEATURE__TITLE);
+//                dialog.setCancelable(false);
+//                dialog.setContentView(R.layout.new_sigin_layout);
+//                dialog.show();
+
+                // Get the layout inflater
+//                LayoutInflater inflater = getActivity().getLayoutInflater();
+//                View sortView = inflater.inflate(R.layout.new_login_layout, null);
+//                sort.setView(sortView);
+//                sort.create().show();
+
+
+            }
+        });
+
+
+        account_create_acount_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+
+        if(isFreeUser){
+            account_signin_button.setVisibility(View.VISIBLE);
+            account_create_acount_button.setVisibility(View.VISIBLE);
+            btn_account_logout_button.setVisibility(View.GONE);
+        }else{
+            btn_account_logout_button.setVisibility(View.VISIBLE);
+            account_signin_button.setVisibility(View.GONE);
+            account_create_acount_button.setVisibility(View.GONE);
+        }
 
 
         account_details_image.setOnClickListener(imageClickListener);
         //getIsFreeUser
-        isFreeUser = ((MainActivityBottomTabs)getActivity()).getIsFreeUser();
+
 
 
 

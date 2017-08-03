@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.UUID;
 
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
@@ -87,6 +88,7 @@ import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.PersonalUserInformationVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.cnc.CNCTutorialsVO;
@@ -190,6 +192,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //after free user, remove all fragments and start all over again
+        removeAllFragments();
 
 
         CNCTutorials cncTutorials = new CNCTutorials();
@@ -356,6 +361,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         }*/
 
         //TODO this is when I want the fragment to contorl the back -Kate I suggest we do this for all Fragments
+
+
+
 
         int count = HGBUtility.getFragmentStack().size(); //  getFragmentManager().getBackStackEntryCount();
 
@@ -1083,9 +1091,13 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
         if (isFreeUser) {
 
+            //  freeUserPopUp();
+
+
+
           //  Intent intent = new Intent(getBaseContext(), SignUpActivity.class);
           //  startActivity(intent);
-            freeUserPopUp();
+
           //  fragment = FreeUserFragment.newInstance(navPosition);
           //  mToolbar.setVisibility(View.GONE);
         }
@@ -1126,13 +1138,14 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
        // getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.content_frame)).commit();
 
-
-
-
-
        // finish();
 
     }
+
+    public void removeAllFragments(){
+        HGBUtility.removeAllFragments(getSupportFragmentManager());
+    }
+
 
     @Override
     public void setCreditCardsSelected(HashSet<CreditCardItem> cardsList) {
@@ -1657,6 +1670,5 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             }
         });
     }
-
 
 }

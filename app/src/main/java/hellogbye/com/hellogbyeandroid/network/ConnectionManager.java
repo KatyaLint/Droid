@@ -487,7 +487,7 @@ public class ConnectionManager {
 
     public void deviceAuthentication(String deviceID,final ServerRequestListener listener){
         String url = getURL(Services.USER_PROFILE_DEVICE_AUTHENTICATION);
-        url = url + deviceID;
+        url = url;// + deviceID;
         JSONObject jsonObject = new JSONObject();
        /* try {
             jsonObject.put("id", deviceID);

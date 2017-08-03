@@ -300,7 +300,10 @@ public class CostumeToolBar extends Toolbar {
                 search_maginfy.setVisibility(View.VISIBLE);
                 break;
 
-
+            case ACCOUNT:
+                titleBar.setVisibility(View.VISIBLE);
+                preference_save_changes.setVisibility(View.GONE);
+                break;
 
                 /**
                  * show save button
@@ -308,7 +311,7 @@ public class CostumeToolBar extends Toolbar {
             case ALL_COMPANIONS_VIEW:
             case COMPANIONS_PERSONAL_DETAILS:
             case HELP:
-            case ACCOUNT:
+
                 preference_save_changes.setVisibility(View.GONE);
                 break;
             case PREFERENCES_TAB_SETTINGS:

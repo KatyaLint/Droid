@@ -196,7 +196,7 @@
         android:layout_marginBottom="@dimen/DP14"
         android:layout_marginRight="@dimen/DP14"
         android:layout_marginLeft="@dimen/DP14"
-        android:background="@drawable/cnc_gray_round_border"
+
         android:orientation="horizontal">
         ​
         <!--<View-->
@@ -216,12 +216,13 @@
 
         <hellogbye.com.hellogbyeandroid.views.FontEditTextView
 
-            android:background="@android:color/transparent"
+
             android:id="@+id/cnc_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/DP10"
-
+            android:paddingLeft="@dimen/DP10"
+            android:background="@drawable/cnc_gray_round_border"
             android:layout_toLeftOf="@+id/send_ll"
             android:layout_toStartOf="@+id/send_ll"
             android:gravity="center_vertical"

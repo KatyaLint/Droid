@@ -224,7 +224,6 @@
                 android:layout_marginBottom="@dimen/DP20"
                 android:layout_marginTop="@dimen/DP20"
                 android:layout_marginRight="@dimen/DP54"
-                android:layout_below="@+id/remmember_me_checkbox"
                 android:text="@string/save_button" />
 
         </LinearLayout>

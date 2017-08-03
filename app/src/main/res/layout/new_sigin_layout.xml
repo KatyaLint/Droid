@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_pin_code"
+    android:orientation="vertical">
+
+
+    <ImageButton
+        android:id="@+id/new_sign_in_close_btn"
+        android:layout_margin="@dimen/DP6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/close_icon_a_1"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/login"
+        android:layout_marginTop="@dimen/DP80"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Sign In"
+        android:textColor="@color/COLOR_00516f"
+        android:textSize="@dimen/SP32"
+        app:fontName="dinnextltpro_condensed.ttf" />
+
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+
+        android:id="@+id/username_email"
+        style="@style/new_sign_up_text_color"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center_horizontal"
+        android:hint="Email"
+        android:layout_marginTop="@dimen/DP26"
+        android:layout_marginRight="@dimen/DP26"
+        android:layout_marginLeft="@dimen/DP26"
+        android:textColor="@color/COLOR_00516f"
+        android:imeOptions="actionNext"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:layout_width="match_parent" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+        android:id="@+id/login_password"
+        android:layout_marginTop="@dimen/DP20"
+        android:layout_marginRight="@dimen/DP26"
+        android:layout_marginLeft="@dimen/DP26"
+        style="@style/new_sign_up_text_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:hint="Password"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:singleLine="true" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_marginRight="@dimen/DP26"
+        android:id="@+id/forgotpassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_button"
+        android:layout_gravity="right"
+        android:layout_marginTop="@dimen/DP10"
+        android:text="@string/forgot_password"
+        android:textColor="@color/COLOR_00516f"
+        app:fontName="dinnextltpro_light.otf" />
+
+
+
+        <hellogbye.com.hellogbyeandroid.views.FontCheckedTextView
+            android:layout_centerInParent="true"
+            android:id="@+id/remmember_me_checkbox"
+            android:layout_margin="@dimen/DP20"
+            android:textSize="@dimen/SP16"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/DP38"
+            android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
+            android:checked="true"
+            android:gravity="center_vertical"
+            android:text="@string/remmeber_me"
+            app:fontName="dinnextltpro_medium.otf"
+            android:textColor="@color/COLOR_00516f" />
+
+
+    <!--<RelativeLayout-->
+        <!--android:layout_marginLeft="@dimen/DP26"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="@dimen/DP10">-->
+
+
+        <!---->
+        <!---->
+        <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/remmember_me_checkbox"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:button="@drawable/selector_hgb_checkbox"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:checked="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;/>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;<hellogbye.com.hellogbyeandroid.views.FontTextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textSize="@dimen/SP16"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;app:fontName="dinnextltpro_light.otf"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textColor="@color/COLOR_00516f"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="@string/remmeber_me"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginLeft="@dimen/DP8"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_alignTop="@+id/remmember_me_checkbox"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_alignBottom="@+id/remmember_me_checkbox"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_toRightOf="@+id/remmember_me_checkbox"&ndash;&gt;-->
+            <!--&lt;!&ndash;/>&ndash;&gt;-->
+
+    <!--</RelativeLayout>-->
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:id="@+id/login_button"
+        android:layout_marginTop="@dimen/DP10"
+        style="@style/RedButton"
+        android:textAllCaps="false"
+        android:text="Sign In" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

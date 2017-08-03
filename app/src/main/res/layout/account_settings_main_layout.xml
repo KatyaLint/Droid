@@ -93,7 +93,7 @@
 
 
     <hellogbye.com.hellogbyeandroid.views.FontButtonView
-
+        android:visibility="gone"
         android:id="@+id/account_logout_button"
         android:layout_marginBottom="@dimen/DP20"
         android:layout_alignParentBottom="true"
@@ -102,6 +102,27 @@
         android:textAllCaps="false"
         android:text="@string/component_log_out"
         style="@style/RedButton"/>
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+
+        android:id="@+id/account_signin_button"
+        android:layout_above="@+id/account_create_acount_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="@string/account_sign_in"
+        style="@style/RedButton"/>
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:id="@+id/account_create_acount_button"
+        android:layout_marginBottom="@dimen/DP20"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="@string/account_create_account"
+        style="@style/BlueButton"/>
 
 
 
