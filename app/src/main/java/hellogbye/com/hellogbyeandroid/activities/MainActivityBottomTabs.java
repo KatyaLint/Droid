@@ -168,7 +168,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private LinearLayout connection_toast_layout_disconnected;
     private HorizontalScrollView table_scroll;
     private ImageButton toolbar_new_grid_add_companions;
-
+    private UserProfilePreferences userProfilePreferences;
     // private SignalRHubConnection mSignalRHubConnection;
 
 
@@ -663,7 +663,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 //showUserProfiles();
                 if (!mCurrentUser.getIsTravelprofile()) {
 
-                    showUserProfiles();
+                    userProfilePreferences.getUserDefaultSettings(MainActivityBottomTabs.this, MainActivityBottomTabs.this, hgbSaveDataClass);
+                   // showUserProfiles();
                 }
 
                 String profileID = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_PROFILE_ID, "");
@@ -729,7 +730,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         selectBottemTab(R.id.bb_menu_cnc);
     }
 
-    private UserProfilePreferences userProfilePreferences;
+
     private void showUserProfiles() {
 
         //     https://apiuat.hellogbye.com/uat/rest/TravelPreference/Profiles/Defaults

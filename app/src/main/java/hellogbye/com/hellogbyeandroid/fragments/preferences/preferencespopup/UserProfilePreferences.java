@@ -151,6 +151,8 @@ public class UserProfilePreferences extends HGBAbstractFragment {
             }
             @Override
             public void onError(Object data) {
+                //Kate TODO
+
                 ErrorMessage(data);
             }
         });
