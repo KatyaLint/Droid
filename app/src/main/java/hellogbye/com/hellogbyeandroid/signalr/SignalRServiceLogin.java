@@ -73,6 +73,7 @@ public class SignalRServiceLogin extends Service {
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
 
         String strToken = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.TOKEN, "");
+
        // request.addHeader("session_token", strToken);
         String host = serverUrl; //The url from your web site
         String sessionToken = "session_token="+strToken;

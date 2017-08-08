@@ -113,10 +113,12 @@ public class HGBAbstractFragment extends Fragment {
 
 
     public void ErrorMessage(Object message){
+        Activity activity = getActivity();
+        if(message == null || activity == null){
+            return;
+        }
         HGBErrorHelper errorHelper = new HGBErrorHelper();
         errorHelper.setMessageForError((String) message);
-        Activity activity = getActivity();
-
         errorHelper.show(activity.getFragmentManager(), (String) message);
     }
 

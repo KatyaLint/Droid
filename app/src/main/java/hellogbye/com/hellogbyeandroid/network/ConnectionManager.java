@@ -498,7 +498,7 @@ public class ConnectionManager {
                 jsonObject, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(Parser.authenticationData(response));
+                listener.onSuccess(Parser.loginData(response));
             }
         }, new Response.ErrorListener() {
             @Override

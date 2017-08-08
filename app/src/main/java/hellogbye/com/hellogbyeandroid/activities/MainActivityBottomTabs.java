@@ -1130,11 +1130,20 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     @Override
     public void gotToStartMenuActivity() {
         //  hgbPrefrenceManager.removeKey(HGBPreferencesManager.HGB_CNC_LIST);
-        hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.TOKEN, "");
-        hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.CHOOSEN_SERVER, "");
+        hgbPrefrenceManager.removeKey(HGBConstants.TOKEN);
+        hgbPrefrenceManager.removeKey(HGBConstants.CHOOSEN_SERVER);
         isLogoutExit = true;
         HGBUtility.removeAllFragments(getSupportFragmentManager());
         Intent intent = new Intent(getBaseContext(), CreateAccountActivity.class);
+
+
+
+        hgbPrefrenceManager.removeKey(HGBConstants.HGB_FREE_USER);
+        hgbPrefrenceManager.removeKey(HGBConstants.HGB_USER_PROFILE_ID);
+        hgbPrefrenceManager.removeKey(HGBConstants.HGB_USER_LAST_EMAIL);
+
+
+
         startActivity(intent);
 
        // getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.content_frame)).commit();

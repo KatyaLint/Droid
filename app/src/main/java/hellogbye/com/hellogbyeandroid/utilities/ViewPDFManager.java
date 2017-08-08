@@ -33,7 +33,6 @@ public class ViewPDFManager {
         OkHttpClient okHttpClient = new OkHttpClient();
         HGBPreferencesManager sharedPreferences = HGBPreferencesManager.getInstance(mContext);
         String token = sharedPreferences.getStringSharedPreferences(HGBConstants.TOKEN, "");
-
         Request request = new Request.Builder()
                 .url(pdfUrl)
                 .addHeader("Content-Type", "application/pdf")

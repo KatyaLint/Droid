@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
@@ -423,7 +424,6 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             }
 
             String connectionID = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_SIGNALR_CONNECTION_LOGIN_ID, "");
-
             ConnectionManager.getInstance(CreateAccountActivity.this).login(email,pass,uuid,connectionID,
                     new ConnectionManager.ServerRequestListener() {
                         @Override
@@ -814,6 +814,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                         deviceAuthentication(android_id, new ConnectionManager.ServerRequestListener() {
                             @Override
                             public void onSuccess(Object data) {
+
                                 UserLoginCredentials user = (UserLoginCredentials) data;
                                 hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.TOKEN, user.getToken());
                                 hgbPrefrenceManager.putBooleanSharedPreferences(HGBConstants.HGB_FREE_USER, true);
@@ -1308,7 +1309,6 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
             @Override
             public void afterTextChanged(final Editable editable) {
 
-                //kate
                 ConnectionManager.getInstance(CreateAccountActivity.this).postAutocompleteCity(editable.toString(), userData.getCountry(),
                         userData.getCountryProvince()
                         , new ConnectionManager.ServerRequestListener() {
@@ -1422,16 +1422,12 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         }
 
         String strToken = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.TOKEN, "");
-
         if (!strToken.equals("")) {
             if(getIntent().hasExtra("free_user_sign_in") || getIntent().hasExtra("free_user_create_user")){
                 checkIfCameFromFreeUser();
             }else{
                 goToMainActivity();
             }
-
-
-
         }
     }
 
@@ -1586,8 +1582,10 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     }
 
-    @Override
+
+        @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+       super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case 002:
                 if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {

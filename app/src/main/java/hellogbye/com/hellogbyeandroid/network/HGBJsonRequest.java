@@ -55,14 +55,14 @@ public class HGBJsonRequest extends Request<String> {
     private JSONArray jsonArrayParams;
     private JSONObject jsonParams;
     private Listener<String> listener;
-    private static String token;
+    //private static String token;
     private boolean showLoader;
     private ProgressDialog progressDialog;
     private String loading;
 
 
 
-    public HGBJsonRequest(int method, String url, JSONArray params, Listener<String> listener, ErrorListener errorListener) {
+    HGBJsonRequest(int method, String url, JSONArray params, Listener<String> listener, ErrorListener errorListener) {
 
 //        super(method, url, (stringBodyRequest == null || stringBodyRequest.length() == 0) ? null : stringBodyRequest, listener,	errorListener);
         super(method, url, errorListener);
@@ -95,7 +95,7 @@ public class HGBJsonRequest extends Request<String> {
         return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 
-    public HGBJsonRequest(int method, String url, JSONObject params, Listener<String> listener, ErrorListener errorListener, boolean showLoader) {
+     public HGBJsonRequest(int method, String url, JSONObject params, Listener<String> listener, ErrorListener errorListener, boolean showLoader) {
 
 
 
@@ -130,7 +130,7 @@ public class HGBJsonRequest extends Request<String> {
         send();
     }
 
-    public HGBJsonRequest(int method, String url, JSONObject params, Listener<String> listener, ErrorListener errorListener) {
+     HGBJsonRequest(int method, String url, JSONObject params, Listener<String> listener, ErrorListener errorListener) {
 
 //        super(method, url, (stringBodyRequest == null || stringBodyRequest.length() == 0) ? null : stringBodyRequest, listener,	errorListener);
         super(method, url, errorListener);
@@ -155,7 +155,7 @@ public class HGBJsonRequest extends Request<String> {
         setService(url);
         send();
     }
-    public HGBJsonRequest(boolean customhurl,int method, String url, JSONObject params, Listener<String> listener, ErrorListener errorListener) {
+     HGBJsonRequest(boolean customhurl,int method, String url, JSONObject params, Listener<String> listener, ErrorListener errorListener) {
 
         super(method, url, errorListener);
 
@@ -297,21 +297,21 @@ public class HGBJsonRequest extends Request<String> {
     }
 
 
-    public void send() {
+    private void send() {
         Log.d(TAG, service + "\nURL: " + url + "\nPARAMS: " + returnParams().toString());
         showLoader();
         queue.add(this);
     }
 
-    public static void setToken(String userToken) {
-        token = userToken;
-    }
+//    public static void setToken(String userToken) {
+//        token = userToken;
+//    }
 
     public static void setContext(Context context) {
         mContext = context;
     }
 
-    public void showLoader() {
+    private void showLoader() {
         if (showLoader) {
             try {
 
@@ -327,7 +327,7 @@ public class HGBJsonRequest extends Request<String> {
         }
     }
 
-    public void removeLoader() {
+    private void removeLoader() {
         if (progressDialog != null && progressDialog.isShowing())
             progressDialog.dismiss();
     }

@@ -49,8 +49,8 @@ public class HGBStringRequest extends Request<String> {
     private Map<String, String> params;
 
     private boolean showLoader;
-    ProgressDialog progressDialog;
-    String loading;
+    private ProgressDialog progressDialog;
+    private String loading;
 
 
     public HGBStringRequest(int method, String url, Map<String, String> params, Listener<String> listener, ErrorListener errorListener) {
@@ -101,8 +101,9 @@ public class HGBStringRequest extends Request<String> {
 
     protected Map<String, String> getParams()
             throws com.android.volley.AuthFailureError {
+
         return params;
-    };
+    }
 
     private void setService(String url) {
         URI uri;
