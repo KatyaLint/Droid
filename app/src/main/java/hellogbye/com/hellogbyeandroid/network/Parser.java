@@ -20,6 +20,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.application.HGBApplication;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.AirlinePointsProgramVO;
 import hellogbye.com.hellogbyeandroid.models.CreditCardSessionItem;
 
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
@@ -521,6 +522,19 @@ public class Parser {
             e.printStackTrace();
         }
         return mCompanionRelationshipTypes;
+    }
+
+    public static Object parseAirlinePointsProgram(String response) {
+        ArrayList<AirlinePointsProgramVO>  airlinePointsProgramVO= null;
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<AirlinePointsProgramVO>>() {
+            }.getType();
+            airlinePointsProgramVO = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return airlinePointsProgramVO;
     }
 
     public static Object parseSignalRHighlightResponse(String response) {

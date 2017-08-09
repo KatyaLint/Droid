@@ -126,13 +126,13 @@
 
     <string name="closeDrawer">Navigation View</string>
     <string name="openDrawer">Navigation View Closed</string>
-    <string name="type_message">Type to search or press the mic</string>
+    <string name="type_message">Tap to type or press the mic</string>
     <string name="send">Go</string>
     <!--<string name="default_cnc_message"> welcome to\nHelloGbye. Tell us in your own words where and when you'd\nlike to go.</string>-->
     <string name="default_cnc_message_examples">Type /examples to to see different ways to search. Type /tutorials to see short instructional videos.</string>
     <string name="default_cnc_message">Hello %1$s, welcome to\nHelloGbye. Tell us in your own words where and when you\'d like to go.</string>
     <string name="default_cnc_message_two">You can come back here\nanytime and make changes to\nyour itinerary</string>
-    <string name="itinerary_created">Ok, i\'ve found these options for you</string>
+    <string name="itinerary_created">OK, I\'ve found these options for you</string>
     <string name="itinerary_no_items">No content available</string>
     <string name="grid_has_been_updated">OK, the grid has been updated</string>
     <string name="itinerary_try_again">Itinerary Try Again</string>
@@ -382,4 +382,8 @@
     <string name="street">STREET</string>
 
 
+    <string name="check_out_message_first_str">
+        Boarding may be denied if your name does not match your passport. Please review carefully. Additional passport information will be required upon check-in.
+        \n\nYou can add your loyalty points once you check-in with the airline.
+    </string>
 </resources>

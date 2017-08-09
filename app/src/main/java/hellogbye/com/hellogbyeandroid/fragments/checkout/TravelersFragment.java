@@ -22,6 +22,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
+import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
 import hellogbye.com.hellogbyeandroid.adapters.checkout.IExpandableViewSelected;
 import hellogbye.com.hellogbyeandroid.adapters.checkout.TravlerExpandableAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
@@ -164,7 +165,6 @@ public class TravelersFragment extends HGBAbstractFragment {
                         boolean isMissing = checkIfMissing(userInfo);
                         passangers.get(z).setmChildDataMissing(isMissing);
                         if(isMissing){
-
                             mNext.setEnabled(false);
 
                         }else{
@@ -172,14 +172,28 @@ public class TravelersFragment extends HGBAbstractFragment {
                             mNext.setEnabled(true);
 
                         }
+
+                        ((MainActivityBottomTabs)getActivity()).getAirlinePointsProgram( passangers.get(z).getmPaxguid(),userInfo.getUserprofileid(), new RefreshComplete(){
+
+                            @Override
+                            public void onRefreshSuccess(Object data) {
+                                System.out.println("Kate Talk to Arik");
+                            }
+
+                            @Override
+                            public void onRefreshError(Object data) {
+
+                            }
+                        });
+
+
                     }
 
                 }
-
             }
 
-            mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), passangers, children);
-            mRecyclerView.setAdapter(mAdapter);
+//            mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), passangers, children);
+//            mRecyclerView.setAdapter(mAdapter);
         }else{
 
             for (int i = 0; i < passangers.size(); i++) {
@@ -189,9 +203,15 @@ public class TravelersFragment extends HGBAbstractFragment {
                 passangers.get(i).setmChildDataMissing(true);
             }
 
-            mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), passangers, children);
-            mRecyclerView.setAdapter(mAdapter);
+//            mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), passangers, children);
+//            mRecyclerView.setAdapter(mAdapter);
         }
+
+
+
+        mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), passangers, children);
+        mRecyclerView.setAdapter(mAdapter);
+
         mAdapter.setGroupViewClickedInterface(new IExpandableViewSelected(){
 
             @Override

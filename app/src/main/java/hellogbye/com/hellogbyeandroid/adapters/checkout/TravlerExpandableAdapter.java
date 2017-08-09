@@ -98,6 +98,15 @@ public class TravlerExpandableAdapter extends BaseExpandableListAdapter {
         holder.childPhone.setText(child.getPhone());
         holder.childAddress.setText(child.getAddress() + "\n" + child.getCity() + "," + child.getState() + "\n" + child.getPostalcode());
         holder.childEmail.setText(child.getEmailaddress());
+
+        if(!child.ispremiumuser()){
+            holder.travler_loyalty_program_entry.setText("None");
+        }else{
+            holder.travler_loyalty_program_entry.setText("Premium");
+        }
+
+
+
         if(child.getFirstname() == null){
             holder.childNametext.setText("");
         }
@@ -113,7 +122,6 @@ public class TravlerExpandableAdapter extends BaseExpandableListAdapter {
 
         if (child.getFirstname() == null || child.getFirstname().equals("")) {
             holder.childNametextLabel.setTextColor(ContextCompat.getColor(context, R.color.COLOR_EE3A3C));
-
         }
         if (child.getPostalcode() == null || child.getPostalcode().equals("")) {
             holder.childAddressLabel.setTextColor(ContextCompat.getColor(context, R.color.COLOR_EE3A3C));
@@ -127,6 +135,10 @@ public class TravlerExpandableAdapter extends BaseExpandableListAdapter {
         if (child.getDob() == null || child.getDob().equals("")) {
             holder.childDOBLabel.setTextColor(ContextCompat.getColor(context, R.color.COLOR_EE3A3C));
         }
+        if (!child.ispremiumuser()){// || child.getDob().equals("")) {
+            holder.travler_loyalty_program.setTextColor(ContextCompat.getColor(context, R.color.COLOR_EE3A3C));
+        }
+
 
     }
 
@@ -233,12 +245,14 @@ public class TravlerExpandableAdapter extends BaseExpandableListAdapter {
         private FontTextView childEmailLabel;
         private FontTextView childPhoneLabel;
         private FontTextView childAddressLabel;
+        private FontTextView travler_loyalty_program;
 
         private FontTextView childNametext;
         private FontTextView childDOB;
         private FontTextView childEmail;
         private FontTextView childPhone;
         private FontTextView childAddress;
+        private FontTextView travler_loyalty_program_entry;
 
         public ChildViewHolder(View itemView) {
             super(itemView);
@@ -252,12 +266,14 @@ public class TravlerExpandableAdapter extends BaseExpandableListAdapter {
             childPhone = (FontTextView) convertView.findViewById(R.id.travler_phone_entry);
             childAddress = (FontTextView) convertView.findViewById(R.id.travler_address_entry);
             childEmail = (FontTextView) convertView.findViewById(R.id.travler_email_entry);
+            travler_loyalty_program = (FontTextView)convertView.findViewById(R.id.travler_loyalty_program_txt);
 
             childNametextLabel = (FontTextView) convertView.findViewById(R.id.travler_name);
             childDOBLabel = (FontTextView) convertView.findViewById(R.id.travler_dob);
             childPhoneLabel = (FontTextView) convertView.findViewById(R.id.travler_phone);
             childAddressLabel = (FontTextView) convertView.findViewById(R.id.travler_address);
             childEmailLabel = (FontTextView) convertView.findViewById(R.id.travler_email);
+            travler_loyalty_program_entry = (FontTextView)convertView.findViewById(R.id.travler_loyalty_program_entry);
         }
 
 

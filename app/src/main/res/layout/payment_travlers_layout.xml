@@ -38,9 +38,9 @@
         android:gravity="center"
         app:fontName="dinnextltpro_medium.otf"
         android:textAllCaps="false"
-        android:text="@string/payment_next_button"
+        android:text="2 steps left"
         android:layout_alignParentBottom="true"/>
-
+    <!--android:text="@string/payment_next_button"-->
 
 <!--    <LinearLayout
         android:id="@+id/traveler_next_rl"

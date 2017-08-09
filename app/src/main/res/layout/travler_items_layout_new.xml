@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/COLOR_WHITE"
+    android:orientation="horizontal"
+    android:padding="@dimen/DP10">
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_loyalty_program_txt"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Loyalty Program :"
+        app:fontName="dinnextltpro_regular.otf" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+        android:id="@+id/travler_loyalty_program_entry"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_marginLeft="@dimen/DP6"
+        android:layout_toRightOf="@+id/travler_loyalty_program_txt"
+        android:text="sfdfsfsdf"
+        app:fontName="dinnextltpro_regular.otf" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_name"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name :"
+        app:fontName="dinnextltpro_regular.otf"
+        android:layout_alignBottom="@+id/travler_name_entry"
+        android:layout_alignTop="@+id/travler_name_entry" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_name_entry"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:text="Kate Kate Kate
+sdfsdf
+sdfsdf
+sdf"
+        app:fontName="dinnextltpro_regular.otf"
+        android:layout_below="@+id/travler_loyalty_program_entry"
+        android:layout_alignLeft="@+id/travler_loyalty_program_entry"
+        android:layout_alignStart="@+id/travler_loyalty_program_entry"
+        android:layout_marginTop="1dp" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_dob"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_alignLeft="@+id/travler_name"
+        android:layout_below="@+id/travler_name"
+        android:text="Date of Birth :"
+        app:fontName="dinnextltpro_regular.otf" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_dob_entry"
+        android:text="DOB"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_below="@+id/travler_name_entry"
+        android:layout_alignLeft="@+id/travler_name_entry"
+        android:layout_alignStart="@+id/travler_name_entry"
+        />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_email"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_alignLeft="@+id/travler_dob"
+        android:layout_below="@+id/travler_dob_entry"
+        android:text="Email :"
+        app:fontName="dinnextltpro_regular.otf" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_email_entry"
+        android:text="m.dushansky+171333333@gmail.commmmmmmmmmmmmmmm"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_alignLeft="@+id/travler_dob_entry"
+        android:layout_below="@+id/travler_dob_entry"
+        app:fontName="dinnextltpro_regular.otf" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_phone"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_alignLeft="@+id/travler_email"
+        android:layout_below="@+id/travler_email_entry"
+        android:text="Phone :"
+
+        app:fontName="dinnextltpro_regular.otf" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_phone_entry"
+        android:text="054972487"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_alignLeft="@+id/travler_email_entry"
+        android:layout_below="@+id/travler_email_entry"
+        app:fontName="dinnextltpro_regular.otf" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_address"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_alignLeft="@+id/travler_phone"
+        android:layout_below="@+id/travler_phone_entry"
+        android:visibility="gone"
+        android:text="Address :" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/travler_address_entry"
+        style="@style/TextViewTravlerCheckoutDetails"
+        android:layout_alignLeft="@+id/travler_phone_entry"
+        android:layout_below="@+id/travler_phone_entry"
+        android:visibility="gone"
+        app:fontName="dinnextltpro_regular.otf" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout">
+
+      <!--  <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:id="@+id/travler_loyalty_program_txt"
+            style="@style/TextViewTravlerCheckoutDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Loyalty Program :"
+            app:fontName="dinnextltpro_regular.otf" />-->
+
+
+        <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
+            <!--android:id="@+id/travler_name"-->
+            <!--style="@style/TextViewTravlerCheckoutDetails"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Name :"-->
+            <!--app:fontName="dinnextltpro_regular.otf" />-->
+
+
+
+
+        <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
+            <!--android:id="@+id/travler_dob"-->
+            <!--style="@style/TextViewTravlerCheckoutDetails"-->
+            <!--android:layout_alignLeft="@+id/trevelerName_ll"-->
+            <!--android:layout_below="@+id/trevelerName_ll"-->
+            <!--android:text="Date of Birth :"-->
+            <!--app:fontName="dinnextltpro_regular.otf" />-->
+
+        <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
+            <!--android:id="@+id/travler_email"-->
+            <!--style="@style/TextViewTravlerCheckoutDetails"-->
+            <!--android:layout_alignLeft="@+id/travler_dob"-->
+            <!--android:layout_below="@+id/travler_dob"-->
+            <!--android:text="Email :"-->
+            <!--app:fontName="dinnextltpro_regular.otf" />-->
+
+        <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
+            <!--android:id="@+id/travler_phone"-->
+            <!--style="@style/TextViewTravlerCheckoutDetails"-->
+            <!--android:layout_alignLeft="@+id/travler_email"-->
+            <!--android:layout_below="@+id/travler_email"-->
+            <!--android:text="Phone :"-->
+
+            <!--app:fontName="dinnextltpro_regular.otf" />-->
+
+        <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
+            <!--android:id="@+id/travler_address"-->
+            <!--style="@style/TextViewTravlerCheckoutDetails"-->
+            <!--android:layout_alignLeft="@+id/travler_phone"-->
+            <!--android:layout_below="@+id/travler_phone"-->
+            <!--android:visibility="gone"-->
+            <!--android:text="Address :" />-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/DP10"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout2">
+
+        <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
+
+            <!--android:id="@+id/travler_loyalty_program_entry"-->
+            <!--style="@style/TextViewTravlerCheckoutDetails"-->
+            <!--android:layout_toRightOf="@+id/travler_name"-->
+            <!--android:text="sfdfsfsdf"-->
+            <!--app:fontName="dinnextltpro_regular.otf" />-->
+
+
+        <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
+
+            <!--android:id="@+id/travler_name_entry"-->
+            <!--style="@style/TextViewTravlerCheckoutDetails"-->
+            <!--android:layout_toRightOf="@+id/travler_name"-->
+            <!--android:text="sfdfsfsdf"-->
+            <!--app:fontName="dinnextltpro_regular.otf" />-->
+
+        <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
+            <!--android:id="@+id/travler_dob_entry"-->
+            <!--android:text="ro"-->
+            <!--style="@style/TextViewTravlerCheckoutDetails"-->
+            <!--android:layout_alignLeft="@+id/travler_name_entry"-->
+            <!--android:layout_below="@+id/travler_name_entry"-->
+             <!--/>-->
+
+        <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
+            <!--android:id="@+id/travler_email_entry"-->
+            <!--android:text="email"-->
+            <!--style="@style/TextViewTravlerCheckoutDetails"-->
+            <!--android:layout_alignLeft="@+id/travler_dob_entry"-->
+            <!--android:layout_below="@+id/travler_dob_entry"-->
+
+            <!--app:fontName="dinnextltpro_regular.otf" />-->
+
+        <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
+            <!--android:id="@+id/travler_phone_entry"-->
+            <!--android:text="054972487"-->
+            <!--style="@style/TextViewTravlerCheckoutDetails"-->
+            <!--android:layout_alignLeft="@+id/travler_email_entry"-->
+            <!--android:layout_below="@+id/travler_email_entry"-->
+            <!--app:fontName="dinnextltpro_regular.otf" />-->
+
+        <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
+            <!--android:id="@+id/travler_address_entry"-->
+            <!--style="@style/TextViewTravlerCheckoutDetails"-->
+            <!--android:layout_alignLeft="@+id/travler_phone_entry"-->
+            <!--android:layout_below="@+id/travler_phone_entry"-->
+            <!--android:visibility="gone"-->
+            <!--app:fontName="dinnextltpro_regular.otf" />-->
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

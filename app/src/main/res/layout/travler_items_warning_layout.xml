@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/DP10"
+    android:background="@color/COLOR_079DE0"
+    android:orientation="vertical"
+   >
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Message"
+        android:gravity="center"
+        android:drawablePadding="@dimen/DP4"
+        android:drawableLeft="@drawable/pas_info_icon_on"/>
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/check_out_message_first_str"/>
+
+
+</LinearLayout>

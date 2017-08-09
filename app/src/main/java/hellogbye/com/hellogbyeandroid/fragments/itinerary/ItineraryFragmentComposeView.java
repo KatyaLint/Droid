@@ -311,6 +311,11 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
 
     }
 
+
+
+
+
+
     @Override
     public void titleChangeName() {
         ChangeTripName.onClickListener(getActivity(), getActivityInterface().getSolutionID(), getActivityInterface().getTravelOrder());
