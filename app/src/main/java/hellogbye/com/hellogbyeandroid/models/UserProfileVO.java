@@ -70,6 +70,9 @@ public class UserProfileVO {
     @SerializedName("currency")
     private String currency;
 
+    @SerializedName("paxmileage")
+    private int paxmileage;
+
     private HashSet<String> bookingItems;
 
 
@@ -283,5 +286,13 @@ public class UserProfileVO {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public int getPaxmileage() {
+        return paxmileage;
+    }
+
+    public void setPaxmileage(int paxmileage) {
+        this.paxmileage = paxmileage;
     }
 }

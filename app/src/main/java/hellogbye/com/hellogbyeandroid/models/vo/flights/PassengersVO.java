@@ -27,6 +27,9 @@ public class PassengersVO {
     @SerializedName("avatarurl")
     private String avatarurl;
 
+    @SerializedName("currency")
+    private String currency;
+
     private boolean mChildDataMissing;
 
 
@@ -157,4 +160,11 @@ public class PassengersVO {
     }
 
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 }

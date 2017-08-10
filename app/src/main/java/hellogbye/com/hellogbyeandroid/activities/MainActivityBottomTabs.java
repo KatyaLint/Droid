@@ -101,6 +101,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.cnc.CNCTutorialsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelationshipTypesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
@@ -1695,6 +1696,60 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
                 AirlinePointsProgramVO airlinePointsProgramVO = (AirlinePointsProgramVO)data;
                 refreslistner.onRefreshSuccess(airlinePointsProgramVO);
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
+
+    public void getTravellersInfoWithSolutionId(final RefreshComplete refreslistner) {
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).getTravellersInforWithSolutionId(hgbSaveDataClass.getTravelOrder().getmSolutionID(),
+                new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        setListUsers((ArrayList<UserProfileVO>) data);
+                        goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS.getNavNumber(), null);
+                    }
+
+                    @Override
+                    public void onError(Object data) {
+                        ErrorMessage(data);
+                    }
+                });
+    }
+
+    public void updateAvailability(final RefreshComplete refreslistner){
+
+        ArrayList<UserProfileVO> users = getListUsers();
+        UserTravelMainVO order = hgbSaveDataClass.getTravelOrder();
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).updateAvailability(order.getmSolutionID(), users,
+                new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        refreslistner.onRefreshSuccess(data);
+                    }
+
+                    @Override
+                    public void onError(Object data) {
+                        ErrorMessage(data);
+                    }
+                });
+
+    }
+
+
+    public void getCreditCardsList(final RefreshComplete refreslistner){
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).getCreditCards(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                ArrayList<CreditCardItem> creditCards = (ArrayList<CreditCardItem>) data;
+                setCreditCards(creditCards);
+                refreslistner.onRefreshSuccess(data);
+               // goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
 
             }
 

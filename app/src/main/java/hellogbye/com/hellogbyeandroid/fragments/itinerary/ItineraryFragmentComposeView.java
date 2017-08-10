@@ -26,6 +26,7 @@ import java.util.Set;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
+import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
 import hellogbye.com.hellogbyeandroid.fragments.ChangeTripName;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.fragments.TitleNameChange;
@@ -260,18 +261,21 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
             @Override
             public void onClick(View view) {
 
-                ConnectionManager.getInstance(getActivity()).getTravellersInforWithSolutionId(getActivityInterface().getTravelOrder().getmSolutionID(),
-                        new ConnectionManager.ServerRequestListener() {
-                            @Override
-                            public void onSuccess(Object data) {
-                                getFlowInterface().setListUsers((ArrayList<UserProfileVO>) data);
-                                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS.getNavNumber(), null);
-                            }
-                            @Override
-                            public void onError(Object data) {
-                                ErrorMessage(data);
-                            }
-                        });
+                ((MainActivityBottomTabs)getActivity()). getTravellersInfoWithSolutionId(null);
+
+
+//                ConnectionManager.getInstance(getActivity()).getTravellersInforWithSolutionId(getActivityInterface().getTravelOrder().getmSolutionID(),
+//                        new ConnectionManager.ServerRequestListener() {
+//                            @Override
+//                            public void onSuccess(Object data) {
+//                                getFlowInterface().setListUsers((ArrayList<UserProfileVO>) data);
+//                                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS.getNavNumber(), null);
+//                            }
+//                            @Override
+//                            public void onError(Object data) {
+//                                ErrorMessage(data);
+//                            }
+//                        });
             }
         });
 
@@ -294,18 +298,19 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
             @Override
             public void onClick(View view) {
 
-                ConnectionManager.getInstance(getActivity()).getTravellersInforWithSolutionId(getActivityInterface().getTravelOrder().getmSolutionID(),
-                        new ConnectionManager.ServerRequestListener() {
-                            @Override
-                            public void onSuccess(Object data) {
-                                getFlowInterface().setListUsers((ArrayList<UserProfileVO>) data);
-                                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS.getNavNumber(), null);
-                            }
-                            @Override
-                            public void onError(Object data) {
-                                ErrorMessage(data);
-                            }
-                        });
+                ((MainActivityBottomTabs)getActivity()). getTravellersInfoWithSolutionId(null);
+//                ConnectionManager.getInstance(getActivity()).getTravellersInforWithSolutionId(getActivityInterface().getTravelOrder().getmSolutionID(),
+//                        new ConnectionManager.ServerRequestListener() {
+//                            @Override
+//                            public void onSuccess(Object data) {
+//                                getFlowInterface().setListUsers((ArrayList<UserProfileVO>) data);
+//                                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS.getNavNumber(), null);
+//                            }
+//                            @Override
+//                            public void onError(Object data) {
+//                                ErrorMessage(data);
+//                            }
+//                        });
             }
         });
 

@@ -125,7 +125,18 @@ public class TravelersFragment extends HGBAbstractFragment {
             public void onClick(View v) {
 
 
-                getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
+                ((MainActivityBottomTabs)getActivity()).updateAvailability(new RefreshComplete() {
+                    @Override
+                    public void onRefreshSuccess(Object data) {
+                        getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
+                    }
+
+                    @Override
+                    public void onRefreshError(Object data) {
+
+                    }
+                });
+
 
 
 
@@ -143,6 +154,10 @@ public class TravelersFragment extends HGBAbstractFragment {
 
 
     }
+
+
+
+
 
     private void setChildrenToView(){
         List<ArrayList<UserProfileVO>> children = new ArrayList<ArrayList<UserProfileVO>>();
@@ -173,6 +188,7 @@ public class TravelersFragment extends HGBAbstractFragment {
 
                         }
 
+                        //TODO talk with ARIK getAirlinePointsProgram
                         ((MainActivityBottomTabs)getActivity()).getAirlinePointsProgram( passangers.get(z).getmPaxguid(),userInfo.getUserprofileid(), new RefreshComplete(){
 
                             @Override
@@ -228,6 +244,8 @@ public class TravelersFragment extends HGBAbstractFragment {
 
             @Override
             public void groupEditClicked(int groupPosition) {
+
+              //TODO when changing passanger data should change it in passengers kate
                 Bundle args = new Bundle();
                 args.putString(HGBConstants.BUNDLE_USER_JSON_POSITION, passangers.get(groupPosition).getmName());
                 getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS_DETAILS.getNavNumber(), args);

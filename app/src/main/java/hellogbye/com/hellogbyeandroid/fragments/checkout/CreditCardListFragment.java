@@ -19,6 +19,7 @@ import hellogbye.com.hellogbyeandroid.IClickedItem;
 import hellogbye.com.hellogbyeandroid.ISwipeAdapterExecution;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
+import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
 import hellogbye.com.hellogbyeandroid.adapters.creditcardadapters.CreditCardSwipeItemsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
@@ -114,11 +115,11 @@ public class CreditCardListFragment extends HGBAbstractFragment {
         mRecyclerView.setAdapter(mAdapter);
         removeCreditCardSwipe();
 
-        ConnectionManager.getInstance(getActivity()).getCreditCards(new ConnectionManager.ServerRequestListener() {
+        ((MainActivityBottomTabs)getActivity()).getCreditCardsList(new RefreshComplete() {
             @Override
-            public void onSuccess(Object data) {
-                getFlowInterface().setCreditCards((ArrayList<CreditCardItem>) data);
-                if (((ArrayList<CreditCardItem>) data).size() != 0) {
+            public void onRefreshSuccess(Object data) {
+                ArrayList<CreditCardItem> creditCards = getFlowInterface().getCreditCards();
+                if (!creditCards.isEmpty()) {
                     mMissingLinearLayout.setVisibility(View.GONE);
                     mAdapter.setDataSet((ArrayList<CreditCardItem>) data);
                     mAdapter.notifyDataSetChanged();
@@ -129,10 +130,31 @@ public class CreditCardListFragment extends HGBAbstractFragment {
             }
 
             @Override
-            public void onError(Object data) {
-                ErrorMessage(data);
+            public void onRefreshError(Object data) {
+
             }
         });
+
+
+//        ConnectionManager.getInstance(getActivity()).getCreditCards(new ConnectionManager.ServerRequestListener() {
+//            @Override
+//            public void onSuccess(Object data) {
+//                getFlowInterface().setCreditCards((ArrayList<CreditCardItem>) data);
+//                if (((ArrayList<CreditCardItem>) data).size() != 0) {
+//                    mMissingLinearLayout.setVisibility(View.GONE);
+//                    mAdapter.setDataSet((ArrayList<CreditCardItem>) data);
+//                    mAdapter.notifyDataSetChanged();
+//
+//                } else {
+//                    mMissingLinearLayout.setVisibility(View.VISIBLE);
+//                }
+//            }
+
+//            @Override
+//            public void onError(Object data) {
+//                ErrorMessage(data);
+//            }
+//        });
     }
 
 

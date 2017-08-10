@@ -24,6 +24,7 @@ import java.util.Map;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
+import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
 import hellogbye.com.hellogbyeandroid.adapters.creditcardadapters.AlertCheckoutAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
@@ -125,7 +126,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         lv = (ExpandableListView) view.findViewById(R.id.ex_list);
         UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
         passangers = travelOrder.getPassengerses();
-        mTotalPrice.setText("Total: $" + travelOrder.getmTotalPrice());
+        mTotalPrice.setText("Total: " + "$"+HGBUtility.roundNumber(Double.parseDouble(travelOrder.getmTotalPrice()))+ " " + travelOrder.getmCurrency());
         mTotalCCLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,7 +170,9 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
 
             Map<String, NodesVO> hashMap = travelOrder.getItems();
-            groups.add(new PaymnentGroup(passengersVO.getmName(), "$" + String.valueOf(passengersVO.getmTotalPrice()), true, passengersVO.getmItineraryItems(), getString(R.string.select_card)));
+            groups.add(new PaymnentGroup(passengersVO.getmName(),
+                    passengersVO.getmTotalPrice(), true, passengersVO.getmItineraryItems(), getString(R.string.select_card),
+                    passengersVO.getCurrency()));
 
             ArrayList<String> passengerItems = passengersVO.getmItineraryItems();
             for (String passengerItem : passengerItems) {
@@ -217,22 +220,22 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
     }
 
 
-    private void getUsersList(){
-        ConnectionManager.getInstance(getActivity()).getCreditCards(new ConnectionManager.ServerRequestListener() {
-            @Override
-            public void onSuccess(Object data) {
-                ArrayList<CreditCardItem> creditCards = (ArrayList<CreditCardItem>) data;
-                getActivityInterface().setCreditCards(creditCards);
-                getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
-
-            }
-
-            @Override
-            public void onError(Object data) {
-                ErrorMessage(data);
-            }
-        });
-    }
+//    private void getUsersList(){
+//        ConnectionManager.getInstance(getActivity()).getCreditCards(new ConnectionManager.ServerRequestListener() {
+//            @Override
+//            public void onSuccess(Object data) {
+//                ArrayList<CreditCardItem> creditCards = (ArrayList<CreditCardItem>) data;
+//                getActivityInterface().setCreditCards(creditCards);
+//                getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
+//
+//            }
+//
+//            @Override
+//            public void onError(Object data) {
+//                ErrorMessage(data);
+//            }
+//        });
+//    }
 
     private void sendPaymentSolution() {
 
@@ -244,7 +247,17 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         ConnectionManager.getInstance(getActivity()).checkoutSolutionId(getActivityInterface().getSolutionID(), set, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                getUsersList();
+                ((MainActivityBottomTabs)getActivity()).getCreditCardsList(new RefreshComplete() {
+                    @Override
+                    public void onRefreshSuccess(Object data) {
+                        getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
+                    }
+
+                    @Override
+                    public void onRefreshError(Object data) {
+
+                    }
+                });
             }
 
             @Override
@@ -256,13 +269,12 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
     public void initSelectCCDialog() {
 
-        ConnectionManager.getInstance(getActivity()).getCreditCards(new ConnectionManager.ServerRequestListener() {
+        ((MainActivityBottomTabs)getActivity()).getCreditCardsList(new RefreshComplete() {
             @Override
-            public void onSuccess(Object data) {
-
+            public void onRefreshSuccess(Object data) {
                 itemsList = new ArrayList<>();
-                getFlowInterface().setCreditCards((ArrayList<CreditCardItem>) data);
-                for (CreditCardItem item : (ArrayList<CreditCardItem>) data) {
+                ArrayList<CreditCardItem> creditCards = getFlowInterface().getCreditCards();
+                for (CreditCardItem item : creditCards) {
                     itemsList.add(item);
                 }
 
@@ -324,13 +336,92 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 //Create alert dialog object via builder
                 selectCCDialog = dialogBuilder.create();
 
+
             }
 
             @Override
-            public void onError(Object data) {
-                ErrorMessage(data);
+            public void onRefreshError(Object data) {
+
             }
         });
+
+
+
+//        ConnectionManager.getInstance(getActivity()).getCreditCards(new ConnectionManager.ServerRequestListener() {
+//            @Override
+//            public void onSuccess(Object data) {
+//
+//                itemsList = new ArrayList<>();
+//                getFlowInterface().setCreditCards((ArrayList<CreditCardItem>) data);
+//                for (CreditCardItem item : (ArrayList<CreditCardItem>) data) {
+//                    itemsList.add(item);
+//                }
+//
+//                CreditCardItem cAdd = new CreditCardItem();
+//                cAdd.setLast4(getActivity().getResources().getString(R.string.add_card));
+//                CreditCardItem cLast = new CreditCardItem();
+//                cLast.setLast4(getActivity().getResources().getString(R.string.remove_card));
+//                itemsList.add(cAdd);
+//                itemsList.add(cLast);
+//
+//
+//                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+//                dialogBuilder.setTitle(getResources().getString(R.string.payment_select_payment_method));
+//
+//                dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//
+//                    } });
+//
+//                AlertCheckoutAdapter adapter = new AlertCheckoutAdapter(itemsList,getActivity().getApplicationContext());
+//                dialogBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int item) {
+//
+//                        CreditCardItem selectedText = itemsList.get(item);
+//                        if(selectedText == null){
+//                            ErrorMessage("Wrong credit Card");
+//                            return;
+//                        }
+//                        //This is to set creditcard  array  final json for payment
+//
+//                        if ( selectedText.getLast4().equals(getString(R.string.cancel))) {
+//
+//                        } else if (selectedText.getLast4().equals(getString(R.string.add_card))) {
+//                            getFlowInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(), null);
+//                        } else if (selectedText.getLast4().equals(getString(R.string.remove_card))) {
+//                            if (!mSelectedView.getText().toString().equals(getString(R.string.select_card))) {
+//                                CreditCardItem selectedCreditCard = getCardByNumber(mSelectedView.getText().toString());
+//                                getFlowInterface().getCreditCardsSelected().remove(selectedCreditCard);
+//                                calculateCard(selectedCreditCard, mSelectedView, false);
+//                            }
+//
+//                        } else {
+//                            CreditCardItem selectedCreditCard = getCardByNumber(selectedText.getLast4());
+//                            getFlowInterface().getCreditCardsSelected().add(selectedCreditCard);
+//                            calculateCard(selectedCreditCard, mSelectedView, true);
+//                        }
+//                        mSelectedView = null;
+//
+//                        if (getFlowInterface().getCreditCardsSelected().size() == 0) {
+//                            disablePaymentSolution();
+//                        } else {
+//                            enablePaymentSelection();
+//                        }
+//
+//                        selectCCDialog.dismiss();
+//                    }
+//                });
+//                //Create alert dialog object via builder
+//                selectCCDialog = dialogBuilder.create();
+//
+//            }
+//
+//            @Override
+//            public void onError(Object data) {
+//                ErrorMessage(data);
+//            }
+//        });
 
 
     }
@@ -680,7 +771,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
             final PaymnentGroup group = (PaymnentGroup) getGroup(groupPosition);
             holder.groupNametext.setText(group.getNameText());
-            holder.groupPricetext.setText(group.getTotalText());
+            holder.groupPricetext.setText("Total: $"+HGBUtility.roundNumber(group.getTotalText())+" "+group.getCurrency() );
             holder.groupSelectCC.setText(group.getCreditcard());
             holder.groupSelectCCLinearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -776,11 +867,12 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             String string = childPricetext.getText().toString().substring(1);
 
             if (add) {
-                double d = Double.valueOf(paymnentGroup.getTotalText().substring(1)) + Double.valueOf(string);
-                groupsList.get(groupPosition).setTotalText("$" + String.valueOf(d));
+                double d = Double.valueOf(paymnentGroup.getTotalText()) + Double.valueOf(string);
+                groupsList.get(groupPosition).setTotalText(d);
             } else {
-                double d = Double.valueOf(paymnentGroup.getTotalText().substring(1)) - Double.valueOf(string);
-                groupsList.get(groupPosition).setTotalText("$" + String.valueOf(d));
+
+                double d = Double.valueOf(paymnentGroup.getTotalText()) - Double.valueOf(string);
+                groupsList.get(groupPosition).setTotalText(d);
             }
 
         }

@@ -8,19 +8,21 @@ import java.util.ArrayList;
 public class PaymnentGroup {
 
     private String nameText;
-    private String totalText;
+    private double totalText;
     private boolean selected;
     private ArrayList<String> items;
     private String creditcard;
     private String creditcardid;
     private boolean mChildDataMissing;
+    private String currency;
 
-    public PaymnentGroup(String nameText, String totalText, boolean selected, ArrayList<String> items,String creditcard) {
+    public PaymnentGroup(String nameText, double totalText, boolean selected, ArrayList<String> items,String creditcard,String currency) {
         this.nameText = nameText;
         this.totalText = totalText;
         this.selected = selected;
         this.items = items;
         this.creditcard = creditcard;
+        this.currency = currency;
     }
 
     public String getNameText() {
@@ -31,7 +33,7 @@ public class PaymnentGroup {
         this.nameText = nameText;
     }
 
-    public String getTotalText() {
+    public double getTotalText() {
         return totalText;
     }
 
@@ -43,7 +45,7 @@ public class PaymnentGroup {
         this.selected = selected;
     }
 
-    public void setTotalText(String totalText) {
+    public void setTotalText(double totalText) {
         this.totalText = totalText;
     }
 
@@ -77,5 +79,13 @@ public class PaymnentGroup {
 
     public void setCreditcardid(String creditcardid) {
         this.creditcardid = creditcardid;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }

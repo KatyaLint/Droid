@@ -160,7 +160,6 @@ public class TravlerExpandableAdapter extends BaseExpandableListAdapter {
         final PassengersVO group = (PassengersVO) getGroup(groupPosition);
         holder.groupNametext.setText(group.getmName());
 
-
         holder.groupImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -15,12 +15,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+
+import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
@@ -1744,6 +1747,58 @@ public class ConnectionManager {
     ///////////////////////////////
 
 
+
+    public void updateAvailability(String itirneraryId, ArrayList<UserProfileVO> users, final ServerRequestListener listener){
+        String url = getURL(Services.UPDATE_AVAILABILITY);
+
+        JSONObject json1 = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        try {
+            json1.put("ItineraryId", itirneraryId);
+
+            for (UserProfileVO userData : users) {
+
+                JSONObject jsonUser = new JSONObject();
+                jsonUser.put("address", userData.getAddress());
+                jsonUser.put("city", userData.getCity());
+                jsonUser.put("dateofbirth", userData.getDob());
+                jsonUser.put("email", userData.getEmailaddress());
+                jsonUser.put("firstname", userData.getFirstname());
+                jsonUser.put("gender", userData.getGender());
+                jsonUser.put("lastname", userData.getLastname());
+                jsonUser.put("middlename", userData.getMiddlename());
+                jsonUser.put("paxguid", userData.getPaxid());
+                jsonUser.put("paxmileage", userData.getPaxmileage());//TODO need to add
+                jsonUser.put("postalcode", userData.getPostalcode());
+                jsonUser.put("primaryphone", userData.getPhone());
+                jsonUser.put("province", userData.getState());
+
+                jsonArray.put(jsonUser);
+
+
+            }
+            json1.put("Paxdetails",jsonArray);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
+                json1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
+
     public void confirmCompanion(String companion_id, final ServerRequestListener listener){
         String url = getURL(Services.COMPANIONS_CONFIRM);
         url = url + companion_id;
@@ -2221,7 +2276,8 @@ public class ConnectionManager {
                 COMPANION_SEARCH("UserProfile/Search?count=5&excludeCompanions=false&"),
                 RESEND_ACTIVATION("UserProfile/ResendWelcomeEmail?email="),
                 POST_SIGNALR_REGISTRATION("Signalr/Register"),
-                AIRLINE_POINTS_PROGRAM("AirlinePointsProgram/itinerary/");
+                AIRLINE_POINTS_PROGRAM("AirlinePointsProgram/itinerary/"),
+                UPDATE_AVAILABILITY("Itinerary/UpdateAvailability");
 
                 //https://apiprod.hellogbye.com/prod/rest/AirlinePointsProgram/itinerary/cb37f18e-d8cb-45ed-8ccf-ef0df6d01701/passenger/c47ae6eb-d3da-42b2-a2dc-af9e0eb322ee
 

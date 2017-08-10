@@ -44,8 +44,7 @@
                 android:textColor="@color/COLOR_003D4C"
                 android:textSize="@dimen/SP20"
                 android:text="Bruce"
-                app:fontName="dinnextltpro_medium.otf"
-               />
+                app:fontName="dinnextltpro_medium.otf" />
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/payment_group_price"
                 android:layout_height="wrap_content"
