@@ -377,7 +377,7 @@ public class AddCreditCardFragment extends HGBAbstractFragment implements TextWa
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        System.out.println("Add credit card");
+
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == MY_SCAN_REQUEST_CODE) {

@@ -50,6 +50,10 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.FareClassFragment;
 
 import hellogbye.com.hellogbyeandroid.fragments.checkout.AirlinePointsProgramVO;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.CheckoutLoyltyAdapter;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.LoyaltyProgramsAdd;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.LoyaltyProgramsPopup;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.ManagePaymentFragment;
 import hellogbye.com.hellogbyeandroid.fragments.cnc.CNCSignalRFragment;
 import hellogbye.com.hellogbyeandroid.fragments.cnc.CNCTutorials;
 import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionAddNewCompanion;
@@ -831,6 +835,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         boolean isAddAnimation = false;
 
         switch (navBar) {
+            case LOYLTY_NEW_PROGRAMME:
+                fragment = LoyaltyProgramsPopup.newInstance(navPosition);
+                break;
+            case LOYALTY_ADD_PROGRAMME:
+                fragment = LoyaltyProgramsAdd.newInstance(navPosition);
+                break;
             case COMPANION_ADD_NEW_COMPANION:
                 fragment = CompanionAddNewCompanion.newInstance(navPosition);
 
@@ -944,6 +954,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             case ADD_CREDIT_CARD:
                 fragment = AddCreditCardFragment.newInstance(navPosition);
                 break;
+            //TODO remove all not needed files
+//            case CREDIT_CARDS_LIST:
+//                fragment = ManagePaymentFragment.newInstance(navPosition);
+//                  break;
             case CREDIT_CARD_LIST:
                 fragment = CreditCardListFragment.newInstance(navPosition);
                 break;
@@ -1694,7 +1708,24 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             @Override
             public void onSuccess(Object data) {
 
-                AirlinePointsProgramVO airlinePointsProgramVO = (AirlinePointsProgramVO)data;
+                List<AirlinePointsProgramVO> airlinePointsProgramVO = (List<AirlinePointsProgramVO>)data;
+                refreslistner.onRefreshSuccess(airlinePointsProgramVO);
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
+
+    public void getStaticAllAirlinePointsProgram(final RefreshComplete refreslistner){
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).getStaticAllAirlinePointsProgram(new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                List<AirlinePointsProgramVO> airlinePointsProgramVO = (List<AirlinePointsProgramVO>)data;
+                hgbSaveDataClass.setStaticAirlinePointsProgram(airlinePointsProgramVO);
                 refreslistner.onRefreshSuccess(airlinePointsProgramVO);
 
             }

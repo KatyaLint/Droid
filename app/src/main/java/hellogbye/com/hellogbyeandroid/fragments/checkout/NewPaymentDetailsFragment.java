@@ -96,13 +96,13 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         View rootView = inflater.inflate(R.layout.payment_details_layout, container, false);
 
         initSelectCCDialog();
+
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
         mTotalPrice = (FontTextView) view.findViewById(R.id.payment_total_price);
         mPaymentSubmit = (FontButtonView) view.findViewById(R.id.payment_submit);
@@ -131,6 +131,11 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             @Override
             public void onClick(View v) {
 
+//                getFlowInterface().goToFragment(ToolBarNavEnum.CREDIT_CARDS_LIST.getNavNumber(), null);
+//                LinearLayout ll = (LinearLayout)v;
+//                mSelectedView = (FontTextView) ll.getChildAt(1);
+//                mSelectedView.setTag("total");
+
                 if (selectCCDialog != null) {
                     selectCCDialog.show();
                     LinearLayout ll = (LinearLayout)v;
@@ -141,14 +146,14 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             }
         });
 
-
-        ImageButton newIteneraryImageButton = ((MainActivityBottomTabs) getActivity()).getToolbar_new_iterneraryCnc_Chat_Message();
-        newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), null);
-            }
-        });
+//
+//        ImageButton newIteneraryImageButton = ((MainActivityBottomTabs) getActivity()).getToolbar_new_iterneraryCnc_Chat_Message();
+//        newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), null);
+//            }
+//        });
 
 
         mPaymentSubmit.setOnClickListener(new View.OnClickListener() {
@@ -217,25 +222,22 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         initCheckoutSteps();
         getFlowInterface().getCreditCardsSelected().clear();
 
+
+
+        if (getFlowInterface().getCreditCardsSelected().size() == 0) {
+            disablePaymentSolution();
+        } else {
+            enablePaymentSelection();
+        }
+
+
+        //mSelectedView.setTag("total");
+//        if(getActivityInterface().getCreditCard() != null) {
+//            calculateCard(getActivityInterface().getCreditCard(), mSelectedView);
+//        }
+
     }
 
-
-//    private void getUsersList(){
-//        ConnectionManager.getInstance(getActivity()).getCreditCards(new ConnectionManager.ServerRequestListener() {
-//            @Override
-//            public void onSuccess(Object data) {
-//                ArrayList<CreditCardItem> creditCards = (ArrayList<CreditCardItem>) data;
-//                getActivityInterface().setCreditCards(creditCards);
-//                getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
-//
-//            }
-//
-//            @Override
-//            public void onError(Object data) {
-//                ErrorMessage(data);
-//            }
-//        });
-//    }
 
     private void sendPaymentSolution() {
 
@@ -250,6 +252,9 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 ((MainActivityBottomTabs)getActivity()).getCreditCardsList(new RefreshComplete() {
                     @Override
                     public void onRefreshSuccess(Object data) {
+
+
+
                         getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
                     }
 
@@ -272,6 +277,16 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         ((MainActivityBottomTabs)getActivity()).getCreditCardsList(new RefreshComplete() {
             @Override
             public void onRefreshSuccess(Object data) {
+
+                //getFlowInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(), null);
+
+//                if(getActivityInterface().getCreditCard() != null) {
+//                    calculateCard(getActivityInterface().getCreditCard(), mSelectedView);
+//                }
+
+             //   getFlowInterface().goToFragment(ToolBarNavEnum.CREDIT_CARDS_LIST.getNavNumber(), null);
+
+
                 itemsList = new ArrayList<>();
                 ArrayList<CreditCardItem> creditCards = getFlowInterface().getCreditCards();
                 for (CreditCardItem item : creditCards) {
@@ -282,8 +297,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 cAdd.setLast4(getActivity().getResources().getString(R.string.add_card));
                 CreditCardItem cLast = new CreditCardItem();
                 cLast.setLast4(getActivity().getResources().getString(R.string.remove_card));
-                itemsList.add(cAdd);
-                itemsList.add(cLast);
+                itemsList.add(0,cAdd);
+               // itemsList.add(cLast);
 
 
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
@@ -294,6 +309,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
 
                     } });
+
 
                 AlertCheckoutAdapter adapter = new AlertCheckoutAdapter(itemsList,getActivity().getApplicationContext());
                 dialogBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {
@@ -310,6 +326,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
                         } else if (selectedText.getLast4().equals(getString(R.string.add_card))) {
                             getFlowInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(), null);
+
                         } else if (selectedText.getLast4().equals(getString(R.string.remove_card))) {
                             if (!mSelectedView.getText().toString().equals(getString(R.string.select_card))) {
                                 CreditCardItem selectedCreditCard = getCardByNumber(mSelectedView.getText().toString());
@@ -426,8 +443,18 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getActivityInterface().setSelectedCreditCard(null);
+    }
 
     private void calculateCard(CreditCardItem selectedCreditCard, FontTextView mSelectedView, boolean add) {
+
+//        boolean add = true;
+//        if(selectedCreditCard == null){
+//            add = false;
+//        }
 
 
         if (mSelectedView.getTag() instanceof PaymnentGroup) {
@@ -692,8 +719,19 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 @Override
                 public void onClick(View v) {
 
+//                    getFlowInterface().goToFragment(ToolBarNavEnum.CREDIT_CARDS_LIST.getNavNumber(), null);
+//
+//                    LinearLayout ll = (LinearLayout)v;
+//                    mSelectedView = (FontTextView) ll.getChildAt(1);
+//                    mSelectedView.setTag(child);
+
+
+
                     if (selectCCDialog != null) {
                         selectCCDialog.show();
+
+                    //    getFlowInterface().goToFragment(ToolBarNavEnum.CREDIT_CARDS_LIST.getNavNumber(), null);
+
                         LinearLayout ll = (LinearLayout)v;
                         mSelectedView = (FontTextView) ll.getChildAt(1);
                         mSelectedView.setTag(child);
@@ -776,6 +814,13 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             holder.groupSelectCCLinearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+
+//                    getFlowInterface().goToFragment(ToolBarNavEnum.CREDIT_CARDS_LIST.getNavNumber(), null);
+//                    LinearLayout ll =(LinearLayout) v;
+//                    mSelectedView = (FontTextView) ll.getChildAt(1);
+//                    mSelectedView.setTag(group);
+
                     if (selectCCDialog != null) {
                         selectCCDialog.show();
                         LinearLayout ll =(LinearLayout) v;

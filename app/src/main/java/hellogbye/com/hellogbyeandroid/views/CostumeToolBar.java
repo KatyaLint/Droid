@@ -325,6 +325,7 @@ public class CostumeToolBar extends Toolbar {
                 break;
             case PAYMENT_TRAVELERS_DETAILS:
                 preference_save_changes.setVisibility(View.VISIBLE);
+                titleBar.setVisibility(View.VISIBLE);
                 break;
 
             /**
@@ -349,15 +350,15 @@ public class CostumeToolBar extends Toolbar {
             case TRAVEL_PREFERENCE:
             case FREE_USER_FRAGMENT:
             case COMPANION_ADD_NEW_COMPANION:
+            case LOYLTY_NEW_PROGRAMME:
+            case LOYALTY_ADD_PROGRAMME:
+            case SELECT_HOTEL_FRAGMENT:
                 titleBar.setVisibility(View.VISIBLE);
                 break;
             /**
              * show title and search bar
              */
-            case SELECT_HOTEL_FRAGMENT:
-               // search_maginfy.setVisibility(View.VISIBLE);
-                titleBar.setVisibility(View.VISIBLE);
-                break;
+
 
             case ALTERNATIVE_FLIGHT_ONE_WAY_TRIP:
             case ALTERNATIVE_FLIGHT_ROUND_TRIP:

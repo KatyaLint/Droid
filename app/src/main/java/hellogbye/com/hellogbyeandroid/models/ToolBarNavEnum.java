@@ -13,7 +13,7 @@ public enum ToolBarNavEnum {
     ALTERNATIVE_FLIGHT_ROUND_TRIP(9,"Flight Details"),
     HOTEL(10,"Hotel Details"),
     ALTERNATIVE_FLIGHT_DETAILS(11,"Alternate Flights"),
-    PAYMENT_DETAILS(12,"Payment Info"),
+    PAYMENT_DETAILS(12,"Checkout Process"),
 
     PREFERENCES_TAB_SETTINGS(13,""),
     PREFERENCES_CHECK_LIST_SETTINGS(14,""),
@@ -44,7 +44,10 @@ public enum ToolBarNavEnum {
     SELECT_ROOM_FRAGMENT(38,"Room Type"),
     FARE_CLASS_FRAGMENT(39,"Fare Class"),
     ITINERARY(8,"Current Itinerary"),
-    COMPANION_ADD_NEW_COMPANION(40,"Add New Companion")
+    COMPANION_ADD_NEW_COMPANION(40,"Add New Companion"),
+    LOYLTY_NEW_PROGRAMME(41,"Add New Program"),
+    LOYALTY_ADD_PROGRAMME(42,"Loyalty Programs"),
+    CREDIT_CARDS_LIST(43,"Select Card")
 
 
     ;

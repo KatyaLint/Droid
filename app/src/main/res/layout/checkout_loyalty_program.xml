@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/COLOR_WHITE">
+
+
+    <ImageButton
+        android:id="@+id/checkout_loyalty_close_btn"
+        android:layout_margin="@dimen/DP6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/close_icon_a_1"/>
+
+    <android.support.v7.widget.SearchView
+        android:layout_below="@+id/checkout_loyalty_close_btn"
+
+        android:id="@+id/checkout_loyalty_search"
+        android:background="@color/COLOR_WHITE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/checkout_loyalty_search"
+        android:id="@+id/checkout_recycle_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

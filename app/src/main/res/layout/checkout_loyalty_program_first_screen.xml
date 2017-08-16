@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/DP10"
+    android:background="@color/COLOR_WHITE">
+
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/user_loyalty_programm_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/DP10"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/user_loyalty_programm_name"
+        android:layout_above="@+id/layout_program_add_btn"
+        android:id="@+id/checkout_recycle_view_preferences"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:id="@+id/layout_program_add_btn"
+        android:layout_marginBottom="@dimen/DP20"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="Add Programme"
+        style="@style/RedButton"/>
+
+</RelativeLayout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:paddingLeft="@dimen/DP20" android:paddingRight="@dimen/DP20"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="@dimen/DP20" android:paddingTop="@dimen/DP14" android:layout_gravity="top">
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/lyoalty_membership_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="member name"
+        android:textColor="@color/COLOR_00516f"
+        app:fontName="dinnextltpro_condensed.ttf"
+        android:textSize="@dimen/SP24"/>
+
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+        android:id="@+id/loyalty_membership_code_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter membership code"
+        android:textColorHint="@color/COLOR_80FFFFFF"/>
+
+</LinearLayout>

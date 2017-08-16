@@ -215,7 +215,7 @@
     <string name="my_trip_empty_text">Start planning your trip below.\nAnytime you create a trip you can\naccess it from here</string>
 
     <string name="account_relationship">Relationship:</string>
-    <string name="add_card">Add Card</string>
+    <string name="add_card">Add New Card</string>
     <string name="remove_card">Remove Card</string>
     <string name="cancel">Cancel</string>
     <string name="select_card">Select Card</string>
@@ -237,7 +237,7 @@
     <!--<string name="terms">By clicking pre-register. You agree to HelloGbye\nUser Agreement and Privacy Policy.</string>-->
     <string name="sign_up_done">Done!</string>
 
-    <string name="continue_to_checkout">CHECKOUT</string>
+    <string name="continue_to_checkout">Checkout</string>
     <string name="continue_to_checkout_flight_baggage">Flight Baggage &amp; Hotel info</string>
     <string name="continue_to_checkout_price">PRICE :</string>
     <string name="continue_to_checkout_last_screen">An email confirmation has been\nsent to the email address above.</string>
@@ -275,7 +275,7 @@
     <string name="card_storage_account_id">604570</string>
 
 
-    <string name = "payment_select_payment_method">Select Payment Method</string>
+    <string name = "payment_select_payment_method">Select Card</string>
     <string name = "payment_next_button">Next</string>
     <string name="payment_card_information">CARD INFORMATION</string>
     <string name="payment_scan_card">Scan</string>

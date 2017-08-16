@@ -3,6 +3,8 @@ package hellogbye.com.hellogbyeandroid.fragments.checkout;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,9 +19,12 @@ import java.util.List;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.CreateAccountActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
+import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
+import hellogbye.com.hellogbyeandroid.activities.dialogs.SignInDialog;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
+import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
@@ -39,7 +44,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
 
     private FontEditTextView mTitle;
-    private FontEditTextView mSeatType;
+    private FontEditTextView travel_seat_type;
     private FontEditTextView mFirstName;
     private FontEditTextView mLastName;
     private FontEditTextView mDOB;
@@ -84,7 +89,8 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
         mTitle = (FontEditTextView) view.findViewById(R.id.travel_detail_title);
         mFirstName = (FontEditTextView) view.findViewById(R.id.travel_detail_first_name);
-        mSeatType= (FontEditTextView) view.findViewById(R.id.travel_seat_type);
+
+        travel_seat_type= (FontEditTextView) view.findViewById(R.id.travel_seat_type);
         mLastName = (FontEditTextView) view.findViewById(R.id.travel_detail_last_name);
         travel_detail_middle_name = (FontEditTextView) view.findViewById(R.id.travel_detail_middle_name);
         mDOB = (FontEditTextView) view.findViewById(R.id.travel_detail_dob);
@@ -118,7 +124,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
       //  setSaveButton();
         setClickListner();
-        buildSeatTypeDialog();
+        //buildSeatTypeDialog();
 
     }
 
@@ -201,10 +207,28 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
 
 
-        mSeatType.setOnClickListener(new View.OnClickListener() {
+        travel_seat_type.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSeatTypeDialog.show();
+
+                ((MainActivityBottomTabs)getActivity()).getStaticAllAirlinePointsProgram(new RefreshComplete() {
+                    @Override
+                    public void onRefreshSuccess(Object data) {
+
+//                        LoyaltyProgramsPopup loyaltyProgramsPopup = new LoyaltyProgramsPopup(getActivity(), android.R.style.Theme_NoTitleBar_Fullscreen);
+//                        //LoyaltyProgramsPopup loyaltyProgramsPopup = new LoyaltyProgramsPopup(getActivity());
+//                        loyaltyProgramsPopup.initializeAdapter( getActivityInterface().getStaticAirlinePointsProgram());
+                        showDialog();
+                    }
+
+                    @Override
+                    public void onRefreshError(Object data) {
+
+                    }
+                });
+
+
+              //  mSeatTypeDialog.show();
             }
         });
 
@@ -268,6 +292,20 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
             }
         });
     }
+
+
+    public void showDialog() {
+
+        //getFlowInterface().goToFragment(ToolBarNavEnum.LOYLTY_NEW_PROGRAMME.getNavNumber(), null);
+        getFlowInterface().goToFragment(ToolBarNavEnum.LOYALTY_ADD_PROGRAMME.getNavNumber(), null);
+
+//        getFlowInterface().goToFragment(ToolBarNavEnum.LOYLTY_NEW_PROGRAMME.getNavNumber(), null);
+//        checkout_loyalty_program_first_screen.xml
+
+
+    }
+
+
 //
 //      private void setSaveButton() {
 //        if (HGBUtility.isUserDataValid(mUser)) {
@@ -546,23 +584,23 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
                 }, false);*/
 
     }
-
-    private void buildSeatTypeDialog() {
-
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
-                getActivity(), R.layout.dialog_radio, seatArray);
-        // Creating and Building the Dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Preferred Seat Type");
-        builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-                mSeatType.setText(seatArray[item]);
-
-                mSeatTypeDialog.hide();
-            }
-        });
-        mSeatTypeDialog = builder.create();
-    }
+//
+//    private void buildSeatTypeDialog() {
+//
+//        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
+//                getActivity(), R.layout.dialog_radio, seatArray);
+//        // Creating and Building the Dialog
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        builder.setTitle("Preferred Seat Type");
+//        builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int item) {
+//                travel_seat_type.setText(seatArray[item]);
+//
+//                mSeatTypeDialog.hide();
+//            }
+//        });
+//        mSeatTypeDialog = builder.create();
+//    }
 
 
 }

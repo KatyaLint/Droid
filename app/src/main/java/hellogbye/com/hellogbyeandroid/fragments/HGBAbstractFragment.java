@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,7 @@ import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 /**
  * Created by arisprung on 9/20/15.
  */
-public class HGBAbstractFragment extends Fragment {
+public class HGBAbstractFragment extends DialogFragment {
 
     private HGBMainInterface mActivityInterface;
     private HGBFlowInterface mHGBFlowInterface;

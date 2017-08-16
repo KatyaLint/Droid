@@ -1,50 +1,55 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/COLOR_WHITE"
     android:orientation="vertical">
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:background="@color/COLOR_F5F5F5">-->
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/COLOR_F5F5F5">
+        android:layout_height="match_parent">
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:background="@color/COLOR_F5F5F5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/DP10"
-            android:text="PERFERRED SEAT TYPE"
+            android:padding="@dimen/DP16"
+            android:text="LOYALTY PROGRAM"
             android:textSize="@dimen/SP12"
             app:fontName="dinnextltpro_regular.otf" />
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
+
         android:id="@+id/travel_seat_type"
         style="@style/TravelerDetailsTextStyle"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="false"
         android:maxLines="1"
-        android:text="No Preference"
+        android:text="Select"
         android:layout_width="match_parent"
-        android:singleLine="true"
         app:fontName="dinnextltpro_regular.otf"
-        android:drawableRight="@drawable/dropdown_lightblue"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/COLOR_F5F5F5">
+        android:drawableRight="@drawable/dropdown_lightblue" />
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:background="@color/COLOR_F5F5F5">-->
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:background="@color/COLOR_F5F5F5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/DP10"
+            android:padding="@dimen/DP10"
             android:text="PERSONAL INFORMATION"
             android:textSize="@dimen/SP12"
             app:fontName="dinnextltpro_regular.otf" />
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -61,9 +66,9 @@
             android:layout_weight="1"
             android:singleLine="true"
             android:hint="Title"
+            android:visibility="gone"
             app:fontName="dinnextltpro_regular.otf"
-            android:drawableRight="@drawable/dropdown_lightblue"
-             />
+            android:drawableRight="@drawable/dropdown_lightblue" />
 
         <hellogbye.com.hellogbyeandroid.views.FontEditTextView
             android:id="@+id/travel_detail_first_name"
@@ -87,7 +92,7 @@
             app:fontName="dinnextltpro_regular.otf"
             android:layout_weight="1"
             style="@style/TravelerDetailsTextStyle"
-            android:hint="Middle Name (optional)" />
+            android:hint="Middle Name (Optional)" />
 
         <hellogbye.com.hellogbyeandroid.views.FontEditTextView
             android:id="@+id/travel_detail_last_name"
@@ -133,9 +138,9 @@
             />
     </LinearLayout>
 
+    </LinearLayout>
 
 
-
-</LinearLayout>
+</RelativeLayout>
 
 

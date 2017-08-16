@@ -1586,6 +1586,27 @@ public class ConnectionManager {
         }, false);
 
     }
+
+    public void getStaticAllAirlinePointsProgram( final ServerRequestListener listener) {
+
+        String url = getURL(Services.STATIC_AIRLINE_POINTS_PROGRAM);
+        //  http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/itinerary?count=15&skip=0
+
+        JSONObject jsonObject = new JSONObject();
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseAirlinePointsProgram(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, false);
+
+    }
     //https://apiprod.hellogbye.com/prod/rest/AirlinePointsProgram/itinerary/cb37f18e-d8cb-45ed-8ccf-ef0df6d01701/passenger/c47ae6eb-d3da-42b2-a2dc-af9e0eb322ee
 
     ////////////////////////////////
@@ -2277,6 +2298,7 @@ public class ConnectionManager {
                 RESEND_ACTIVATION("UserProfile/ResendWelcomeEmail?email="),
                 POST_SIGNALR_REGISTRATION("Signalr/Register"),
                 AIRLINE_POINTS_PROGRAM("AirlinePointsProgram/itinerary/"),
+                STATIC_AIRLINE_POINTS_PROGRAM("Statics/AllAirlinePointsPrograms"),
                 UPDATE_AVAILABILITY("Itinerary/UpdateAvailability");
 
                 //https://apiprod.hellogbye.com/prod/rest/AirlinePointsProgram/itinerary/cb37f18e-d8cb-45ed-8ccf-ef0df6d01701/passenger/c47ae6eb-d3da-42b2-a2dc-af9e0eb322ee

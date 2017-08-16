@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.fragments.checkout.AirlinePointsProgramVO;
 import hellogbye.com.hellogbyeandroid.models.vo.cnc.CNCItem;
 import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.PersonalUserInformationVO;
@@ -63,6 +64,9 @@ public interface HGBMainInterface {
 
     ArrayList<CreditCardItem> getCreditCards();
     void setCreditCards( ArrayList<CreditCardItem> mCreditCardsList);
+
+    CreditCardItem getCreditCard();
+    void setSelectedCreditCard(CreditCardItem selectedCreditCard);
 
 
 
@@ -129,5 +133,12 @@ public interface HGBMainInterface {
     void setCNCTutorialsVOs(CNCTutorialsVO cncTutorialsVO);
 
 
+    List<AirlinePointsProgramVO> getStaticAirlinePointsProgram();
+    void setStaticAirlinePointsProgram(List<AirlinePointsProgramVO> staticAirlinePointsProgram) ;
 
+    AirlinePointsProgramVO getSelectedProgram();
+    void setSelectedProgram(AirlinePointsProgramVO airlinePointsProgramVO);
+
+    List<AirlinePointsProgramVO> getUserAirlinePointsProgram();
+    void setUserAirlinePointsProgram(List<AirlinePointsProgramVO> userAirlinePointsProgram) ;
 }
