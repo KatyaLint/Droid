@@ -704,7 +704,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 holder.childPlaneFlightDeparture = (FontTextView) convertView.findViewById(R.id.plane_flight_departure);
                 holder.childImage = (ImageView) convertView.findViewById(R.id.node_image);
                 holder.childPlaneFlightArrival = (FontTextView) convertView.findViewById(R.id.plane_flight_arrival);
-
+                holder.plane_flight_seat_location = (FontTextView)convertView.findViewById(R.id.plane_flight_seat_location);
+             //   holder.plane_flight_seat_location_ll = (LinearLayout)convertView.findViewById(R.id.plane_flight_seat_location_ll);
 
                 convertView.setTag(holder);
             } else {
@@ -777,10 +778,34 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 holder.childPlaneFlightDeparture.setText("Departure: "+child.getFlightDeparture());
                 holder.childPlaneFlightArrival.setText("Arrival: "+child.getFlightArrival());
                 holder.childImage.setBackgroundResource(R.drawable.dlight_b_icon);
+
+
+                holder.plane_flight_seat_location.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String selectedStr = holder.plane_flight_seat_location.getText().toString();
+                        System.out.println("Kate selectedStr =" + selectedStr);
+                        ((MainActivityBottomTabs)getActivity()).buildSeatTypeDialog(selectedStr,new RefreshComplete() {
+                            @Override
+                            public void onRefreshSuccess(Object data) {
+                                String choosenText = (String)data;
+                                holder.plane_flight_seat_location.setText(choosenText);
+                            }
+
+                            @Override
+                            public void onRefreshError(Object data) {
+
+                            }
+                        });
+                    }
+                });
             }
 
             return convertView;
         }
+
+
+
 
 
         @Override
@@ -903,6 +928,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             FontTextView childPlaneFlightClass;
             FontTextView childPlaneFlightDeparture;
             FontTextView childPlaneFlightArrival;
+            FontTextView plane_flight_seat_location;
 
         }
 

@@ -142,13 +142,14 @@ public class TravelersFragment extends HGBAbstractFragment {
 
             }
         });
-        ImageButton newIteneraryImageButton = ((MainActivityBottomTabs) getActivity()).getToolbar_new_iterneraryCnc_Chat_Message();
-        newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), null);
-            }
-        });
+
+//        ImageButton newIteneraryImageButton = ((MainActivityBottomTabs) getActivity()).getToolbar_new_iterneraryCnc_Chat_Message();
+//        newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), null);
+//            }
+//        });
 
         initCheckoutSteps();
 

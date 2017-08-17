@@ -122,13 +122,13 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
         mCheckBox = (CheckBox) view.findViewById(R.id.hazerdus_checkbox);
         mRecyclerViewCC = (RecyclerView) view.findViewById(R.id.summary_traveler_recyclerView_cc);
 
-        ImageButton newIteneraryImageButton = ((MainActivityBottomTabs) getActivity()).getToolbar_new_iterneraryCnc_Chat_Message();
-        newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), null);
-            }
-        });
+//        ImageButton newIteneraryImageButton = ((MainActivityBottomTabs) getActivity()).getToolbar_new_iterneraryCnc_Chat_Message();
+//        newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getFlowInterface().goToFragment(ToolBarNavEnum.CNC.getNavNumber(), null);
+//            }
+//        });
 
 
         SpannableString ss = new SpannableString(getString(R.string.i_have_read_and_understood_the_hazardous_nmaterial_notice));

@@ -124,7 +124,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
       //  setSaveButton();
         setClickListner();
-        //buildSeatTypeDialog();
+    //    buildSeatTypeDialog();
 
     }
 
@@ -584,7 +584,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
                 }, false);*/
 
     }
-//
+
 //    private void buildSeatTypeDialog() {
 //
 //        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(

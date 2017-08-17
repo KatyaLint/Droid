@@ -133,6 +133,27 @@
                 android:textSize="@dimen/SP14"
                 app:fontName="dinnextltpro_light.otf" />
 
+            <LinearLayout
+                android:id="@+id/plane_flight_seat_location_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <hellogbye.com.hellogbyeandroid.views.FontTextView
+                    style="@style/PaymentItemStyle"
+                    android:textSize="@dimen/SP14"
+
+                    android:drawablePadding="@dimen/DP4"
+                    android:text="Seat Location :"
+                    app:fontName="dinnextltpro_light.otf" />
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:id="@+id/plane_flight_seat_location"
+                style="@style/PaymentItemStyle"
+                android:textSize="@dimen/SP14"
+                android:drawableRight="@drawable/arrow_drop_down"
+                android:drawablePadding="@dimen/DP4"
+                android:text="Select"
+                app:fontName="dinnextltpro_light.otf" />
+            </LinearLayout>
+
         </LinearLayout>
 
 

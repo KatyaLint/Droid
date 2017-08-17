@@ -81,7 +81,7 @@
             android:layout_below="@+id/total_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/DP10"
+            android:layout_marginLeft="@dimen/DP10"
             android:padding="@dimen/DP8"
             android:background="@color/COLOR_F5F5F5"
             android:text="SELECT ITINERARY &amp; PAYMENT"

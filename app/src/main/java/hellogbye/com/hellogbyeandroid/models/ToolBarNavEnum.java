@@ -21,7 +21,7 @@ public enum ToolBarNavEnum {
     PREFERENCES_SEARCH_LIST_SETTINGS(16,""),
     PREFERENCES_DRAG_LIST_SETTINGS(17,""),
 
-    PAYMENT_TRAVELERS(18,"Travelers"),
+    PAYMENT_TRAVELERS(18,"Checkout Process"),
     PAYMENT_TRAVELERS_DETAILS(19,"Traveler"),
     SELECT_CREDIT_CARD(20,"Review"),
     ADD_CREDIT_CARD(21,"Card Details"),

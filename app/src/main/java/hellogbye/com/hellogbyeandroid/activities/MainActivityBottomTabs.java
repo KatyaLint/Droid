@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -23,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
@@ -1791,5 +1793,35 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
     }
 
+    private AlertDialog mSeatTypeDialog;
+    private String[] seatArray = {"No Preference","Window","Aisle"};
+        public void buildSeatTypeDialog(final String chooseItem, final RefreshComplete refreslistner) {
+
+            int choosenNum =0;
+            for(int i=0;i<seatArray.length;i++){
+                String seatName = seatArray[i];
+                if(chooseItem.equalsIgnoreCase(seatName)){
+                    choosenNum = i;
+                    break;
+                }
+            }
+
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
+                MainActivityBottomTabs.this, R.layout.dialog_radio, seatArray);
+        // Creating and Building the Dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivityBottomTabs.this);
+        builder.setTitle("Preferred Seat Type");
+        builder.setSingleChoiceItems(adapter, choosenNum, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+//                travel_seat_type.setText(seatArray[item]);
+
+                refreslistner.onRefreshSuccess(seatArray[item]);
+
+                mSeatTypeDialog.hide();
+            }
+        });
+        mSeatTypeDialog = builder.create();
+        mSeatTypeDialog.show();
+    }
 
 }
