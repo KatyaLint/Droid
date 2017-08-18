@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="@dimen/DP10"
+            android:layout_margin="@dimen/DP10"
             android:text="@string/itinerary_and_payment"
             android:textColor="@color/COLOR_565656"
             android:textSize="@dimen/SP10"
@@ -34,34 +34,25 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/summary_traveler_recyclerView_cc"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-        </android.support.v7.widget.RecyclerView>
-
-
+            android:layout_height="wrap_content" />
 
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="@dimen/DP10"
+            android:layout_margin="@dimen/DP10"
             android:text="@string/payment_traveler_information"
             android:textColor="@color/COLOR_565656"
             android:textSize="@dimen/SP10"
             app:fontName="dinnextltpro_regular.otf" />
 
 
-
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/summary_traveler_recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content"/>
 
-
-        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 

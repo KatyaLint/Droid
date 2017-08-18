@@ -384,7 +384,10 @@
 
     <string name="check_out_message_first_str">
         Boarding may be denied if your name does not match your passport. Please review carefully. Additional passport information will be required upon check-in.
-        \n\nYou can add your loyalty points once you check-in with the airline.
+
+    </string>
+    <string name="check_out_message_second_str">
+       You can add your loyalty points once you check-in with the airline.
     </string>
 
     <string name="checkout_uderline_edit"><u>Edit</u></string>

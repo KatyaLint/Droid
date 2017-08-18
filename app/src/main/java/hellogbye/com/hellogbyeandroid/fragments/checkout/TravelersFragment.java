@@ -84,6 +84,7 @@ public class TravelersFragment extends HGBAbstractFragment {
 
 
         UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
+
         passangers = travelOrder.getPassengerses();
         mNext = (FontButtonView) view.findViewById(R.id.traveler_next);
         mNext.setEnabled(false);
@@ -164,14 +165,14 @@ public class TravelersFragment extends HGBAbstractFragment {
         List<ArrayList<UserProfileVO>> children = new ArrayList<ArrayList<UserProfileVO>>();
 
         ArrayList<UserProfileVO> userList = getFlowInterface().getListUsers();
-      //  getFlowInterface().setListUsers((ArrayList<UserProfileVO>) data);
+        UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
+        String currency = travelOrder.getmCurrency();
+        //  getFlowInterface().setListUsers((ArrayList<UserProfileVO>) data);
 
         if(userList.size() !=0 ){
             for (int i = 0; i < userList.size(); i++) {
                 UserProfileVO user = userList.get(i);
                 for (int z = 0; z <passangers.size() ; z++) {
-
-
 
                     if(passangers.get(z).getmName().equalsIgnoreCase(user.getFirstname())){
                         ArrayList<UserProfileVO> passengerChildArray = new ArrayList<>();
@@ -180,6 +181,8 @@ public class TravelersFragment extends HGBAbstractFragment {
                         children.add(passengerChildArray);
                         boolean isMissing = checkIfMissing(userInfo);
                         passangers.get(z).setmChildDataMissing(isMissing);
+
+                        passangers.get(z).setCurrency(currency);
                         if(isMissing){
                             mNext.setEnabled(false);
 
@@ -223,9 +226,7 @@ public class TravelersFragment extends HGBAbstractFragment {
 //            mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), passangers, children);
 //            mRecyclerView.setAdapter(mAdapter);
         }
-
-
-
+        
         mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), passangers, children);
         mRecyclerView.setAdapter(mAdapter);
 

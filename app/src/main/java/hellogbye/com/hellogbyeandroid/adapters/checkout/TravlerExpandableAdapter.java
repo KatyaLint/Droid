@@ -16,6 +16,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymnentGroup;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -159,13 +160,14 @@ public class TravlerExpandableAdapter extends BaseExpandableListAdapter {
 
         final PassengersVO group = (PassengersVO) getGroup(groupPosition);
         holder.groupNametext.setText(group.getmName());
+        holder.groupPricetext.setText("Total: $"+ HGBUtility.roundNumber(group.getmTotalPrice())+" "+group.getCurrency());
 
         holder.groupImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(groupViewClickedInterface.groupClicked(groupPosition)){
                     group.setSelected(true);
-                    v.setBackgroundResource(R.drawable.expand_copy_3);
+                    v.setBackgroundResource(R.drawable.open_icon);
                 }
                 else{
                     group.setSelected(false);
@@ -229,6 +231,7 @@ public class TravlerExpandableAdapter extends BaseExpandableListAdapter {
             groupEdittext = (FontTextView) convertView.findViewById(R.id.payment_group_edit);
             groupMissing = (FontTextView) convertView.findViewById(R.id.payment_group_missing);
 
+            //Kate
             groupPricetext = (FontTextView) convertView.findViewById(R.id.payment_group_price);
             // holder.groupSelectCC = (FontTextView) convertView.findViewById(R.id.passenger_select_cc);
             // holder.groupCheckBox = (CheckBox) convertView.findViewById(R.id.payment_group_checkbox);

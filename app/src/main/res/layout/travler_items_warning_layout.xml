@@ -1,27 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/DP10"
-    android:background="@color/COLOR_079DE0"
-    android:orientation="vertical"
-   >
+    android:padding="@dimen/DP20"
+    android:background="@color/COLOR_e1ebf3"
+    android:orientation="vertical" >
 
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/message_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Message"
         android:gravity="center"
+        android:textSize="@dimen/SP18"
+        app:fontName="dinnextltpro_medium.otf"
+        android:textColor="@color/COLOR_00516f"
         android:drawablePadding="@dimen/DP4"
-        android:drawableLeft="@drawable/pas_info_icon_on"/>
+        android:drawableLeft="@drawable/message_icon"
+        android:layout_marginBottom="@dimen/DP20"/>
+
+
+    <RelativeLayout
+        android:layout_below="@+id/message_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <View
+        android:id="@+id/image_view_vertical"
+        android:layout_marginRight="@dimen/DP6"
+        android:layout_width="@dimen/DP1"
+        android:layout_height="wrap_content"
+        android:background="@color/COLOR_00516f"
+        android:layout_alignBottom="@+id/fontTextView2"
+        android:layout_alignTop="@+id/fontTextView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
-
+        android:layout_toRightOf="@+id/image_view_vertical"
+        android:textSize="@dimen/SP12"
+        app:fontName="dinnextltpro_regular.otf"
+        android:textColor="@color/COLOR_00516f"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/check_out_message_first_str"/>
+        android:text="@string/check_out_message_first_str"
+        android:id="@+id/fontTextView2" />
+
+        <View
+
+            android:id="@+id/image_view_vertical_2"
+            android:layout_marginRight="@dimen/DP6"
+            android:layout_width="@dimen/DP1"
+            android:layout_height="wrap_content"
+            android:background="@color/COLOR_00516f"
+            android:layout_alignBottom="@+id/fontTextView1"
+            android:layout_alignTop="@+id/fontTextView1"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
 
-</LinearLayout>
+
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_marginTop="@dimen/DP10"
+            android:layout_below="@+id/fontTextView2"
+            android:layout_toRightOf="@+id/image_view_vertical"
+            android:textSize="@dimen/SP12"
+            app:fontName="dinnextltpro_regular.otf"
+            android:textColor="@color/COLOR_00516f"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/check_out_message_second_str"
+            android:id="@+id/fontTextView1" />
+    </RelativeLayout>
+</RelativeLayout>

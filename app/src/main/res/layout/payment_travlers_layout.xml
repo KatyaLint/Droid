@@ -24,7 +24,6 @@
         android:dividerHeight="@dimen/DP20"
         android:layout_height="match_parent">
 
-
     </ExpandableListView>
 
 

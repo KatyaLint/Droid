@@ -175,13 +175,14 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
 
             Map<String, NodesVO> hashMap = travelOrder.getItems();
-            groups.add(new PaymnentGroup(passengersVO.getmName(),
-                    passengersVO.getmTotalPrice(), true, passengersVO.getmItineraryItems(), getString(R.string.select_card),
-                    passengersVO.getCurrency()));
 
+            PaymnentGroup paymnentGroup =  new PaymnentGroup(passengersVO.getmName(),
+                    passengersVO.getmTotalPrice(), true, passengersVO.getmItineraryItems(), getString(R.string.select_card),
+                    passengersVO.getCurrency());
             ArrayList<String> passengerItems = passengersVO.getmItineraryItems();
             for (String passengerItem : passengerItems) {
                 NodesVO nodesVO = hashMap.get(passengerItem);
+                paymnentGroup.setCurrency(nodesVO.getmCurrency());
 /*                if (nodesVO != null) {*/
                     if (nodesVO != null) {//&& list.size() > 0) {
                         PaymentChild paymentChild;
@@ -212,6 +213,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
    //             }
             }
+            groups.add(paymnentGroup);
             children.add(passengerChildArray);
         }
 
@@ -834,7 +836,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
             final PaymnentGroup group = (PaymnentGroup) getGroup(groupPosition);
             holder.groupNametext.setText(group.getNameText());
-            holder.groupPricetext.setText("Total: $"+HGBUtility.roundNumber(group.getTotalText())+" "+group.getCurrency() );
+            holder.groupPricetext.setText("Total: $"+HGBUtility.roundNumber(group.getTotalText())+" "+group.getCurrency());
             holder.groupSelectCC.setText(group.getCreditcard());
             holder.groupSelectCCLinearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -858,7 +860,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             });
 
             if (group.isSelected()) {
-                holder.groupImageView.setBackgroundResource(R.drawable.expand_copy_3);
+                holder.groupImageView.setBackgroundResource(R.drawable.open_icon);
             } else {
                 holder.groupImageView.setBackgroundResource(R.drawable.minimize);
             }
@@ -867,7 +869,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 public void onClick(View v) {
                     if (lv.isGroupExpanded(groupPosition)) {
                         lv.collapseGroup(groupPosition);
-                        v.setBackgroundResource(R.drawable.expand_copy_3);
+                        v.setBackgroundResource(R.drawable.open_icon);
                         group.setSelected(true);
                     } else {
                         lv.expandGroup(groupPosition);
