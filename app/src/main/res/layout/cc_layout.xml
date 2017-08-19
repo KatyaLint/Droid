@@ -20,16 +20,18 @@
         android:visibility="gone" />
 
     <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:drawablePadding="@dimen/DP4"
         android:id="@+id/passenger_select_cc"
         style="@style/NewPaymentSelectCCStyle"
-        app:fontName="dinnextltpro_regular.otf" />
+        app:fontName="dinnextltpro_regular.otf"
+        android:drawableRight="@drawable/expand_more_a_1"/>
 
-    <ImageView
-        android:id="@+id/passenger_select_cc_dropdown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/DP6"
-        android:background="@drawable/expand_more_a_1" />
+    <!--<ImageView-->
+        <!--android:id="@+id/passenger_select_cc_dropdown"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/DP6"-->
+        <!--android:background="@drawable/expand_more_a_1" />-->
 
 </LinearLayout>
 

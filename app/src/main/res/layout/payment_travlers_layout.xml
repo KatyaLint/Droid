@@ -21,10 +21,10 @@
         android:layout_below="@+id/steps_layout"
         android:groupIndicator="@null"
         android:divider="@color/COLOR_F5F5F5"
-        android:dividerHeight="@dimen/DP20"
-        android:layout_height="match_parent">
+        android:dividerHeight="@dimen/DP2"
+        android:layout_height="match_parent"/>
+    <!--android:dividerHeight="@dimen/DP20"-->
 
-    </ExpandableListView>
 
 
 

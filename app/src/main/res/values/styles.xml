@@ -238,8 +238,8 @@
     <style name="NewPaymentSelectCCStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/SP10</item>
-        <item name="android:text">Select Card</item>
+        <item name="android:textSize">@dimen/SP13</item>
+        <item name="android:text">PAYMENT METHOD</item>
         <item name="android:textColor">@color/COLOR_00516f</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_centerVertical">true</item>

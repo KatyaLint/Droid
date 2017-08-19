@@ -14,6 +14,7 @@
     <!--android:layout_alignParentLeft="true"-->
     <!--/>-->
     <ImageView
+        android:visibility="gone"
         android:id="@+id/node_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,7 +32,7 @@
             android:id="@+id/payment_child_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/COLOR_00516f"
+            android:textColor="@color/COLOR_565656"
             android:textSize="@dimen/SP18"
             app:fontName="dinnextltpro_bold.otf" />
 
@@ -45,8 +46,8 @@
             android:id="@+id/payment_child_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/COLOR_00516f"
-            android:textSize="@dimen/SP18"
+            android:textColor="@color/COLOR_565656"
+            android:textSize="@dimen/SP20"
             app:fontName="dinnextltpro_bold.otf" />
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -161,13 +162,13 @@
 
 
     <include
+
         layout="@layout/cc_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/SP10"
-
-        />
+        android:layout_marginRight="@dimen/SP10" />
 
 </RelativeLayout>

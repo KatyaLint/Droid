@@ -691,7 +691,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 holder.childPricetext = (FontTextView) convertView.findViewById(R.id.payment_child_price);
                 holder.childSelectCCText = (FontTextView) convertView.findViewById(R.id.passenger_select_cc);
                 holder.childSelectCCImage = (ImageView) convertView.findViewById(R.id.passenger_select_cc_image);
-                holder.childSelectCCDropDown = (ImageView) convertView.findViewById(R.id.passenger_select_cc_dropdown);
+              //  holder.childSelectCCDropDown = (ImageView) convertView.findViewById(R.id.passenger_select_cc_dropdown);
                 holder.childSelectCCLinearLayout = (LinearLayout) convertView.findViewById(R.id.passenger_select_cc_ll);
                 holder.childPlaneLinearLayout = (LinearLayout) convertView.findViewById(R.id.plane_ll);
                 holder.childHotelCCLinearLayout = (LinearLayout) convertView.findViewById(R.id.hotel_ll);
@@ -715,7 +715,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             }
             final PaymentChild child = (PaymentChild) getChild(groupPosition, childPosition);
             holder.childNametext.setText(child.getNameText());
-            holder.childPricetext.setText(child.getTotalText());
+            //Kate add currency
+            holder.childPricetext.setText("Total Price " + child.getTotalText() + " ");
             holder.childSelectCCText.setText(child.getCreditcard()
             );
             holder.childSelectCCLinearLayout.setOnClickListener(new View.OnClickListener() {
@@ -745,10 +746,10 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             });
 
             if(child.getCreditcard().equals(getString(R.string.select_card))){
-                holder.childSelectCCDropDown.setVisibility(View.VISIBLE);
+               // holder.childSelectCCText.setVisibility(View.VISIBLE);
                 holder.childSelectCCImage.setVisibility(View.GONE);
             }else{
-                holder.childSelectCCDropDown.setVisibility(View.GONE);
+              //  holder.childSelectCCText.setVisibility(View.GONE);
                 holder.childSelectCCImage.setVisibility(View.VISIBLE);
                 setCCIcon(holder.childSelectCCImage,child.getCreditcardid());
             }
@@ -915,7 +916,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             FontTextView childPricetext;
             FontTextView childSelectCCText;
             ImageView childSelectCCImage;
-            ImageView childSelectCCDropDown;
+          //  ImageView childSelectCCDropDown;
             ImageView childImage;
             LinearLayout childSelectCCLinearLayout;
             LinearLayout childPlaneLinearLayout;

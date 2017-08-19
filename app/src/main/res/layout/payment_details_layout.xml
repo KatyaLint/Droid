@@ -15,7 +15,7 @@
 
     <View
         android:id="@+id/steps_layout_seprator"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/DP1"
         android:layout_below="@+id/steps_layout"
         android:background="#979797" />
@@ -42,17 +42,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pay For Entire Trip"
-                android:textColor="@color/COLOR_00516f"
-                android:textSize="@dimen/SP16"
+                android:textColor="@color/COLOR_565656"
+                android:textSize="@dimen/SP18"
                 app:fontName="dinnextltpro_medium.otf" />
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/payment_total_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/COLOR_00516f"
-                android:textSize="@dimen/SP26"
-                app:fontName="dinnextltpro_light.otf" />
+                android:textColor="@color/COLOR_565656"
+                android:textSize="@dimen/SP14"
+                app:fontName="dinnextltpro_regular.otf" />
 
 
         </LinearLayout>

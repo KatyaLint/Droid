@@ -20,18 +20,23 @@
         android:id="@+id/travel_data_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/DP34"
+        android:layout_marginLeft="@dimen/DP30"
+        android:layout_marginRight="@dimen/DP30"
+
         android:layout_marginTop="@dimen/DP38"
         layout="@layout/travler_items_layout_new"/>
 
 
     <include
-
+        android:layout_marginBottom="@dimen/DP20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         layout="@layout/travler_items_warning_layout"
         android:layout_below="@+id/travel_data_ll"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignLeft="@+id/travel_data_ll"
+        android:layout_alignStart="@+id/travel_data_ll"
+        android:layout_alignRight="@+id/travel_data_ll"
+        android:layout_alignEnd="@+id/travel_data_ll" />
 
 
 
