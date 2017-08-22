@@ -6,7 +6,6 @@
     android:background="@color/COLOR_WHITE"
     android:clickable="true"
     android:paddingLeft="@dimen/DP26">
-
     <!--<CheckBox-->
     <!--android:id="@+id/payment_child_checkbox"-->
     <!--style="@style/PaymentCheckBoxStyle"-->

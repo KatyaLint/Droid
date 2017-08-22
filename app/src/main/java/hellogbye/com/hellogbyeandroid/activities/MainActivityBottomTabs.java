@@ -1744,7 +1744,12 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
-                        setListUsers((ArrayList<UserProfileVO>) data);
+                        ArrayList<UserProfileVO> usersProfiles = (ArrayList<UserProfileVO>) data;
+                        for(UserProfileVO userProfileVO : usersProfiles){
+                            System.out.println("Kate usersProfiles = " + userProfileVO.getFirstname());
+                        }
+
+                        setListUsers(usersProfiles);
                         goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS.getNavNumber(), null);
                     }
 

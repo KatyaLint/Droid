@@ -386,7 +386,7 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
             grid_total_price_currency.setText(currentUser.getCurrency());
 
         }else{
-            setSolutionNameForItirnarary(true, user.getmSolutionName(), user.getmSolutionID());// server returning wrong data
+            setSolutionNameForItirnarary(true, "", "");// server returning wrong data
             itineraryLayout.setVisibility(View.GONE);
             cnc_empty_view.setVisibility(View.VISIBLE);
             grid_make_payment.setEnabled(false);
