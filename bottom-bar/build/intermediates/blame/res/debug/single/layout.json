@@ -16,12 +16,12 @@
         "source": "/Users/amirlubashevsky/.android/build-cache/1bc003dfeb38174a26f435cf5994c90450adeeb1/output/res/layout/design_layout_snackbar_include.xml"
     },
     {
-        "merged": "/Users/amirlubashevsky/Documents/GitHub/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/layout/abc_screen_simple_overlay_action_mode.xml",
-        "source": "/Users/amirlubashevsky/.android/build-cache/65b1eb472115d856c10b8fd542305430888f93fc/output/res/layout/abc_screen_simple_overlay_action_mode.xml"
-    },
-    {
         "merged": "/Users/amirlubashevsky/Documents/GitHub/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/layout/abc_action_menu_item_layout.xml",
         "source": "/Users/amirlubashevsky/.android/build-cache/65b1eb472115d856c10b8fd542305430888f93fc/output/res/layout/abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/amirlubashevsky/Documents/GitHub/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/layout/abc_screen_simple_overlay_action_mode.xml",
+        "source": "/Users/amirlubashevsky/.android/build-cache/65b1eb472115d856c10b8fd542305430888f93fc/output/res/layout/abc_screen_simple_overlay_action_mode.xml"
     },
     {
         "merged": "/Users/amirlubashevsky/Documents/GitHub/HelloGByeDroid/bottom-bar/build/intermediates/res/merged/debug/layout/design_navigation_menu_item.xml",
