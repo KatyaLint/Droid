@@ -21,7 +21,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 
 public class CostumeToolBar extends Toolbar {
 
- //   private ImageButton up_bar_favorite;
+    //   private ImageButton up_bar_favorite;
     private ImageButton chat_message;
     private ImageButton toolbar_new_iternerary;
     private ImageButton favoriteButton;
@@ -239,9 +239,9 @@ public class CostumeToolBar extends Toolbar {
         mSelectedFragment = position;
         ToolBarNavEnum navBar = ToolBarNavEnum.getNav(position);
         String selectedItem = navBar.getNavTitle();
-   //     tool_bar_profile_name.setVisibility(View.GONE);
+        //     tool_bar_profile_name.setVisibility(View.GONE);
         titleBar.setVisibility(View.GONE);
-     //   up_bar_favorite.setVisibility(View.GONE);
+        //   up_bar_favorite.setVisibility(View.GONE);
         favoriteButton.setVisibility(View.GONE);
         editPreferense.setVisibility(View.GONE);
         edit_preferences.setVisibility(View.GONE);
@@ -266,13 +266,13 @@ public class CostumeToolBar extends Toolbar {
 
 
             case CNC:
-           //     tool_bar_profile_name.setVisibility(View.VISIBLE);
+                //     tool_bar_profile_name.setVisibility(View.VISIBLE);
                 itirnarary_title_Bar.setVisibility(VISIBLE);
                 toolbar_new_iternerary_cnc.setVisibility(View.VISIBLE);
                 //toolbar_profile_popup.setVisibility(View.VISIBLE);
                 break;
             case ITINERARY:
-       //         up_bar_favorite.setVisibility(View.VISIBLE);
+                //         up_bar_favorite.setVisibility(View.VISIBLE);
                 toolbar_new_iternerary_cnc.setVisibility(View.VISIBLE);
                 itirnarary_title_Bar.setVisibility(View.VISIBLE);
                 break;
@@ -290,7 +290,7 @@ public class CostumeToolBar extends Toolbar {
                 preference_save_changes.setVisibility(View.VISIBLE);
                 titleBar.setVisibility(View.VISIBLE);
                 edit_preferences.setVisibility(View.GONE);
-            break;
+                break;
 
 
 
@@ -305,9 +305,9 @@ public class CostumeToolBar extends Toolbar {
                 preference_save_changes.setVisibility(View.GONE);
                 break;
 
-                /**
-                 * show save button
-                 */
+            /**
+             * show save button
+             */
             case ALL_COMPANIONS_VIEW:
             case COMPANIONS_PERSONAL_DETAILS:
             case HELP:
@@ -339,9 +339,9 @@ public class CostumeToolBar extends Toolbar {
 
             case HOTEL:
                 chat_message.setVisibility(View.VISIBLE);
-            /**
-             * show title only
-             */
+                /**
+                 * show title only
+                 */
             case NOTIFICATIONS:
             case PREFERENCES_MEMBERSHIP:
             case COMPANIONS_DETAILS:

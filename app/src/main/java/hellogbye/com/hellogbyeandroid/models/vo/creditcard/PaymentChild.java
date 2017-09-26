@@ -24,6 +24,7 @@ public class PaymentChild {
     private String hotelRoomType;
     private String hotelCheckIn;
     private String hotelDuration;
+    private String operatorName;
 
     public PaymentChild(String nameText, String totalText, boolean selected,String guid,String paxguid,String creditcard,String parentflight) {
         this.nameText = nameText;
@@ -185,5 +186,13 @@ public class PaymentChild {
 
     public void setParentflight(String parentflight) {
         this.parentflight = parentflight;
+    }
+
+    public String getOperatorName() {
+        return operatorName;
+    }
+
+    public void setOperatorName(String operatorName) {
+        this.operatorName = operatorName;
     }
 }

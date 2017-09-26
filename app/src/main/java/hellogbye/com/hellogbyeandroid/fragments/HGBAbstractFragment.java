@@ -91,23 +91,23 @@ public class HGBAbstractFragment extends DialogFragment {
 
 
     protected HGBVoiceInterface getVoiceInterface() {
-     //   if (mHGBVoiceInterface != null) {
-            return mHGBVoiceInterface;
-     //   }
-      //  return  null;
+        //   if (mHGBVoiceInterface != null) {
+        return mHGBVoiceInterface;
+        //   }
+        //  return  null;
     }
 
     protected HGBFlowInterface getFlowInterface() {
-      //  if (mHGBFlowInterface != null) {
-            return mHGBFlowInterface;
-     //   }
-      //  return  null;
+        //  if (mHGBFlowInterface != null) {
+        return mHGBFlowInterface;
+        //   }
+        //  return  null;
     }
 
     protected HGBMainInterface getActivityInterface() {
 
-      //  if (mActivityInterface != null) {
-            return mActivityInterface;
+        //  if (mActivityInterface != null) {
+        return mActivityInterface;
      /*   }
         return  null;*/
     }
@@ -147,7 +147,7 @@ public class HGBAbstractFragment extends DialogFragment {
 
     public CreditCardItem getCreditCard(String token){
 
-        for(CreditCardItem card: getActivityInterface().getCreditCards())
+        for(CreditCardItem card: getFlowInterface().getCreditCards())
         {
             if(card.getToken() != null && card.getToken().equals(token)){
                 return card;
@@ -160,11 +160,11 @@ public class HGBAbstractFragment extends DialogFragment {
 
     public String getPrimaryGuid(String guiSelected, List<NodesVO> alternative){
 
-                for (NodesVO node: alternative){
-                    if(node.getmGuid().equals(guiSelected)){
-                        return node.getmPrimaryguid();
-                    }
-                }
+        for (NodesVO node: alternative){
+            if(node.getmGuid().equals(guiSelected)){
+                return node.getmPrimaryguid();
+            }
+        }
         return null;
     }
 

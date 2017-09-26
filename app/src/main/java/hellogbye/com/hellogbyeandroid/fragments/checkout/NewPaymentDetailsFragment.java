@@ -71,7 +71,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
     private LinearLayout mTotalCCLinearLayout;
     private FontTextView mTotalCCText;
     private ImageView mTotalCCImage;
- //   private ImageView mTotalCCDropDown;
+    //   private ImageView mTotalCCDropDown;
 
 
 
@@ -107,7 +107,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         mTotalPrice = (FontTextView) view.findViewById(R.id.payment_total_price);
         mPaymentSubmit = (FontButtonView) view.findViewById(R.id.payment_submit);
         mPaymentSubmit.setEnabled(false);
-      //  mPaymentDisableSubmit = (FontTextView) view.findViewById(R.id.payment_submit_disable);
+        //  mPaymentDisableSubmit = (FontTextView) view.findViewById(R.id.payment_submit_disable);
         mPaymentTextView = (FontTextView) view.findViewById(R.id.steps_checkout_payment_text);
         mTravlerTextView = (FontTextView) view.findViewById(R.id.steps_checkout_travler_text);
         mReviewTextView = (FontTextView) view.findViewById(R.id.steps_checkout_review_text);
@@ -119,7 +119,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
         mTotalCCText = (FontTextView) view.findViewById(R.id.passenger_select_cc);
         mTotalCCImage = (ImageView) view.findViewById(R.id.passenger_select_cc_image);
-      //  mTotalCCDropDown = (ImageView) view.findViewById(R.id.passenger_select_cc_dropdown);
+        //  mTotalCCDropDown = (ImageView) view.findViewById(R.id.passenger_select_cc_dropdown);
         mTotalCCLinearLayout = (LinearLayout) view.findViewById(R.id.passenger_select_cc_ll);
 
 
@@ -184,34 +184,34 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 NodesVO nodesVO = hashMap.get(passengerItem);
                 paymnentGroup.setCurrency(nodesVO.getmCurrency());
 /*                if (nodesVO != null) {*/
-                    if (nodesVO != null) {//&& list.size() > 0) {
-                        PaymentChild paymentChild;
-                        if (NodeTypeEnum.HOTEL.getType().equals(nodesVO.getmType())) {
-                            paymentChild = new PaymentChild("Hotel",
-                                    "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card),null);
-                            paymentChild.setHotelCheckIn(HGBUtilityDate.parseDateToMMddyyyyForPayment(nodesVO.getmCheckIn()));
-                            int days = Integer.valueOf(HGBUtilityDate.getDateDiffInt(nodesVO.getmCheckIn(),nodesVO.getmCheckOut()));
-                            double pricenight = nodesVO.getmMinimumAmount()/days;
-                            paymentChild.setHotelPricePerNight(String.valueOf(pricenight));
-                            paymentChild.setHotelRoomType(nodesVO.getRoomsVOs().get(0).getmRoomType());
-                            paymentChild.setHotelDuration(HGBUtilityDate.getDateDiffString(nodesVO.getmCheckIn(),nodesVO.getmCheckOut()));
-                            paymentChild.setHotelName(nodesVO.getmHotelName());
-                            passengerChildArray.add(paymentChild);
-                        } else if (NodeTypeEnum.FLIGHT.getType().equals(nodesVO.getmType())) {
+                if (nodesVO != null) {//&& list.size() > 0) {
+                    PaymentChild paymentChild;
+                    if (NodeTypeEnum.HOTEL.getType().equals(nodesVO.getmType())) {
+                        paymentChild = new PaymentChild("Hotel",
+                                "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card),null);
+                        paymentChild.setHotelCheckIn(HGBUtilityDate.parseDateToMMddyyyyForPayment(nodesVO.getmCheckIn()));
+                        int days = Integer.valueOf(HGBUtilityDate.getDateDiffInt(nodesVO.getmCheckIn(),nodesVO.getmCheckOut()));
+                        double pricenight = nodesVO.getmMinimumAmount()/days;
+                        paymentChild.setHotelPricePerNight(String.valueOf(pricenight));
+                        paymentChild.setHotelRoomType(nodesVO.getRoomsVOs().get(0).getmRoomType());
+                        paymentChild.setHotelDuration(HGBUtilityDate.getDateDiffString(nodesVO.getmCheckIn(),nodesVO.getmCheckOut()));
+                        paymentChild.setHotelName(nodesVO.getmHotelName());
+                        passengerChildArray.add(paymentChild);
+                    } else if (NodeTypeEnum.FLIGHT.getType().equals(nodesVO.getmType())) {
 
-                            paymentChild = new PaymentChild("Flight",
-                                    "$" + String.valueOf(nodesVO.getCost()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card),nodesVO.getParentflightid());
-                            paymentChild.setFlightPath(nodesVO.getmOriginCityName() + " to " + nodesVO.getmDestinationCityName() );
-                            paymentChild.setFlightDuraion(nodesVO.getmFlightTime());
-                            paymentChild.setFlighNumber(nodesVO.getmOperator()+nodesVO.getLegs().get(0).getmFlightNumber());
-                            paymentChild.setFlightClass(nodesVO.getmFareClass());
-                            paymentChild.setFlightDeparture(HGBUtilityDate.parseDateToDateHHmm(nodesVO.getmDeparture()));
-                            paymentChild.setFlightArrival(HGBUtilityDate.parseDateToDateHHmm(nodesVO.getmArrival()));
-                            passengerChildArray.add(paymentChild);
-                        }
+                        paymentChild = new PaymentChild("Flight",
+                                "$" + String.valueOf(nodesVO.getCost()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card),nodesVO.getParentflightid());
+                        paymentChild.setFlightPath(nodesVO.getmOriginCityName() + " to " + nodesVO.getmDestinationCityName() );
+                        paymentChild.setFlightDuraion(nodesVO.getmFlightTime());
+                        paymentChild.setFlighNumber(nodesVO.getmOperator()+nodesVO.getLegs().get(0).getmFlightNumber());
+                        paymentChild.setFlightClass(nodesVO.getmFareClass());
+                        paymentChild.setFlightDeparture(HGBUtilityDate.parseDateToDateHHmm(nodesVO.getmDeparture()));
+                        paymentChild.setFlightArrival(HGBUtilityDate.parseDateToDateHHmm(nodesVO.getmArrival()));
+                        passengerChildArray.add(paymentChild);
                     }
+                }
 
-   //             }
+                //             }
             }
             groups.add(paymnentGroup);
             children.add(passengerChildArray);
@@ -248,23 +248,28 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             set.add(key);
         }
 
+        System.out.println("Kate sendPaymentSolution");
         ConnectionManager.getInstance(getActivity()).checkoutSolutionId(getActivityInterface().getSolutionID(), set, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                ((MainActivityBottomTabs)getActivity()).getCreditCardsList(new RefreshComplete() {
-                    @Override
-                    public void onRefreshSuccess(Object data) {
+
+                getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
 
 
-
-                        getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
-                    }
-
-                    @Override
-                    public void onRefreshError(Object data) {
-
-                    }
-                });
+//                ((MainActivityBottomTabs)getActivity()).getCreditCardsList(new RefreshComplete() {
+//                    @Override
+//                    public void onRefreshSuccess(Object data) {
+//
+//
+//
+//                        getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
+//                    }
+//
+//                    @Override
+//                    public void onRefreshError(Object data) {
+//
+//                    }
+//                });
             }
 
             @Override
@@ -286,11 +291,12 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 //                    calculateCard(getActivityInterface().getCreditCard(), mSelectedView);
 //                }
 
-             //   getFlowInterface().goToFragment(ToolBarNavEnum.CREDIT_CARDS_LIST.getNavNumber(), null);
+                //   getFlowInterface().goToFragment(ToolBarNavEnum.CREDIT_CARDS_LIST.getNavNumber(), null);
 
 
                 itemsList = new ArrayList<>();
                 ArrayList<CreditCardItem> creditCards = getFlowInterface().getCreditCards();
+                System.out.println("Kate creditCards =" + creditCards.size());
                 for (CreditCardItem item : creditCards) {
                     itemsList.add(item);
                 }
@@ -300,7 +306,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 CreditCardItem cLast = new CreditCardItem();
                 cLast.setLast4(getActivity().getResources().getString(R.string.remove_card));
                 itemsList.add(0,cAdd);
-               // itemsList.add(cLast);
+                // itemsList.add(cLast);
 
 
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
@@ -462,7 +468,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         if (mSelectedView.getTag() instanceof PaymnentGroup) {
             mTotalCCText.setText(getString(R.string.select_card));
             mTotalCCImage.setVisibility(View.GONE);
-    //        mTotalCCDropDown.setVisibility(View.VISIBLE);
+            //        mTotalCCDropDown.setVisibility(View.VISIBLE);
 
 
 
@@ -501,6 +507,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             //This is to set bookingitem array  final json for payment
             for (String strItem : paymentGroup.getItems()) {
                 if (add) {
+                    System.out.println("Kate selectedCreditCard.getToken() =" + selectedCreditCard.getToken());
                     getFlowInterface().getBookingHashMap().put(strItem, selectedCreditCard.getToken());
                 } else {
                     getFlowInterface().getBookingHashMap().remove(strItem);
@@ -512,7 +519,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         } else if (mSelectedView.getTag() instanceof PaymentChild) {
             mTotalCCText.setText(getString(R.string.select_card));
             mTotalCCImage.setVisibility(View.GONE);
-       //     mTotalCCDropDown.setVisibility(View.VISIBLE);
+            //     mTotalCCDropDown.setVisibility(View.VISIBLE);
 
             PaymentChild paymentchild = (PaymentChild) mSelectedView.getTag();
 
@@ -549,6 +556,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
             //This is to set bookingitem array  final json for payment
             if (add) {
+                System.out.println("Kate  selectedCreditCard.getToken() 2 =" +  selectedCreditCard.getToken());
                 getFlowInterface().getBookingHashMap().put(paymentchild.getGuid(), selectedCreditCard.getToken());
             } else {
                 getFlowInterface().getBookingHashMap().remove(paymentchild.getGuid());
@@ -559,12 +567,12 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             if (add) {
                 mTotalCCText.setText(selectedCreditCard.getLast4());
                 mTotalCCImage.setVisibility(View.VISIBLE);
-          //      mTotalCCDropDown.setVisibility(View.GONE);
+                //      mTotalCCDropDown.setVisibility(View.GONE);
                 HGBUtility.setCCIcon(mTotalCCImage, selectedCreditCard.getCardtypeid());
             } else {
                 mTotalCCText.setText(getString(R.string.select_card));
                 mTotalCCImage.setVisibility(View.GONE);
-           //     mTotalCCDropDown.setVisibility(View.VISIBLE);
+                //     mTotalCCDropDown.setVisibility(View.VISIBLE);
                 getFlowInterface().getCreditCardsSelected().clear();
             }
 
@@ -575,6 +583,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
                 for (String passengerItem : passenger.getmItineraryItems()) {
                     if (add) {
+                        System.out.println("Kate selectedCreditCard.getToken() 3 =" + selectedCreditCard.getToken());
                         getFlowInterface().getBookingHashMap().put(passengerItem, selectedCreditCard.getToken());
                         currentPassenger.getmBookingItems().addAll(passenger.getmItineraryItems());
                     } else {
@@ -689,9 +698,12 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
                 holder.childNametext = (FontTextView) convertView.findViewById(R.id.payment_child_name);
                 holder.childPricetext = (FontTextView) convertView.findViewById(R.id.payment_child_price);
+                holder.payment_info_text = (FontTextView) convertView.findViewById(R.id.payment_info_text);
+
+
                 holder.childSelectCCText = (FontTextView) convertView.findViewById(R.id.passenger_select_cc);
                 holder.childSelectCCImage = (ImageView) convertView.findViewById(R.id.passenger_select_cc_image);
-              //  holder.childSelectCCDropDown = (ImageView) convertView.findViewById(R.id.passenger_select_cc_dropdown);
+                //  holder.childSelectCCDropDown = (ImageView) convertView.findViewById(R.id.passenger_select_cc_dropdown);
                 holder.childSelectCCLinearLayout = (LinearLayout) convertView.findViewById(R.id.passenger_select_cc_ll);
                 holder.childPlaneLinearLayout = (LinearLayout) convertView.findViewById(R.id.plane_ll);
                 holder.childHotelCCLinearLayout = (LinearLayout) convertView.findViewById(R.id.hotel_ll);
@@ -707,7 +719,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 holder.childImage = (ImageView) convertView.findViewById(R.id.node_image);
                 holder.childPlaneFlightArrival = (FontTextView) convertView.findViewById(R.id.plane_flight_arrival);
                 holder.plane_flight_seat_location = (FontTextView)convertView.findViewById(R.id.plane_flight_seat_location);
-             //   holder.plane_flight_seat_location_ll = (LinearLayout)convertView.findViewById(R.id.plane_flight_seat_location_ll);
+                //   holder.plane_flight_seat_location_ll = (LinearLayout)convertView.findViewById(R.id.plane_flight_seat_location_ll);
 
                 convertView.setTag(holder);
             } else {
@@ -716,7 +728,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             final PaymentChild child = (PaymentChild) getChild(groupPosition, childPosition);
             holder.childNametext.setText(child.getNameText());
             //Kate add currency
-            holder.childPricetext.setText("Total Price " + child.getTotalText() + " ");
+            holder.childPricetext.setText( child.getTotalText() + " ");
             holder.childSelectCCText.setText(child.getCreditcard()
             );
             holder.childSelectCCLinearLayout.setOnClickListener(new View.OnClickListener() {
@@ -734,7 +746,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                     if (selectCCDialog != null) {
                         selectCCDialog.show();
 
-                    //    getFlowInterface().goToFragment(ToolBarNavEnum.CREDIT_CARDS_LIST.getNavNumber(), null);
+                        //    getFlowInterface().goToFragment(ToolBarNavEnum.CREDIT_CARDS_LIST.getNavNumber(), null);
 
                         LinearLayout ll = (LinearLayout)v;
                         mSelectedView = (FontTextView) ll.getChildAt(1);
@@ -746,10 +758,10 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             });
 
             if(child.getCreditcard().equals(getString(R.string.select_card))){
-               // holder.childSelectCCText.setVisibility(View.VISIBLE);
+                // holder.childSelectCCText.setVisibility(View.VISIBLE);
                 holder.childSelectCCImage.setVisibility(View.GONE);
             }else{
-              //  holder.childSelectCCText.setVisibility(View.GONE);
+                //  holder.childSelectCCText.setVisibility(View.GONE);
                 holder.childSelectCCImage.setVisibility(View.VISIBLE);
                 setCCIcon(holder.childSelectCCImage,child.getCreditcardid());
             }
@@ -764,30 +776,33 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 holder.childPlaneLinearLayout.setVisibility(View.GONE);
                 holder.childHotelCCLinearLayout.setVisibility(View.VISIBLE);
                 holder.childPath.setText(child.getHotelName());
-                holder.childDurationPricenight.setText(child.getHotelPricePerNight());
+                //holder.childDurationPricenight.setText(child.getHotelPricePerNight());
+                holder.childDurationPricenight.setVisibility(View.GONE);
                 holder.childHotelRoomType.setText(child.getHotelRoomType());
                 holder.childHotelCheckIn.setText(child.getHotelCheckIn());
                 holder.childHotelDuration.setText(child.getHotelDuration());
                 holder.childImage.setBackgroundResource(R.drawable.hotels);
+                holder.payment_info_text.setText("Hotel Info");
 
             }else{
                 holder.childPlaneLinearLayout.setVisibility(View.VISIBLE);
                 holder.childHotelCCLinearLayout.setVisibility(View.GONE);
                 holder.childPath.setText(child.getFlightPath());
                 holder.childDurationPricenight.setText(child.getFlightDuraion());
-                holder.childPlaneFlightNumber.setText("Flight: "+child.getFlighNumber());
+                holder.childPlaneFlightNumber.setText(child.getFlighNumber());
                 holder.childPlaneFlightPath.setText(child.getFlightPath());
                 holder.childPlaneFlightClass.setText(child.getFlightClass());
-                holder.childPlaneFlightDeparture.setText("Departure: "+child.getFlightDeparture());
-                holder.childPlaneFlightArrival.setText("Arrival: "+child.getFlightArrival());
+                holder.childPlaneFlightDeparture.setText(child.getFlightDeparture());
+                holder.childPlaneFlightArrival.setText(child.getFlightArrival());
                 holder.childImage.setBackgroundResource(R.drawable.dlight_b_icon);
+                holder.payment_info_text.setText("Flight Info");
 
 
                 holder.plane_flight_seat_location.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         String selectedStr = holder.plane_flight_seat_location.getText().toString();
-                        System.out.println("Kate selectedStr =" + selectedStr);
+
                         ((MainActivityBottomTabs)getActivity()).buildSeatTypeDialog(selectedStr,new RefreshComplete() {
                             @Override
                             public void onRefreshSuccess(Object data) {
@@ -823,7 +838,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 holder.groupPricetext = (FontTextView) convertView.findViewById(R.id.payment_group_price);
                 holder.groupSelectCC = (FontTextView) convertView.findViewById(R.id.passenger_select_cc);
                 holder.groupSelectCCImage = (ImageView) convertView.findViewById(R.id.passenger_select_cc_image);
-         //       holder.groupSelectCCDropDown = (ImageView) convertView.findViewById(R.id.passenger_select_cc_dropdown);
+                //       holder.groupSelectCCDropDown = (ImageView) convertView.findViewById(R.id.passenger_select_cc_dropdown);
                 holder.groupSelectCCLinearLayout = (LinearLayout) convertView.findViewById(R.id.passenger_select_cc_ll);
 
                 // holder.groupCheckBox = (CheckBox) convertView.findViewById(R.id.payment_group_checkbox);
@@ -863,7 +878,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             if (group.isSelected()) {
                 holder.groupImageView.setBackgroundResource(R.drawable.open_icon);
             } else {
-                holder.groupImageView.setBackgroundResource(R.drawable.minimize);
+                holder.groupImageView.setBackgroundResource(R.drawable.close_icon);
             }
             holder.groupImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -875,16 +890,16 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                     } else {
                         lv.expandGroup(groupPosition);
                         group.setSelected(false);
-                        v.setBackgroundResource(R.drawable.minimize);
+                        v.setBackgroundResource(R.drawable.close_icon);
                     }
                 }
             });
 
             if(group.getCreditcard().equals(getString(R.string.select_card))){
-             //   holder.groupSelectCCDropDown.setVisibility(View.VISIBLE);
+                //   holder.groupSelectCCDropDown.setVisibility(View.VISIBLE);
                 holder.groupSelectCCImage.setVisibility(View.GONE);
             }else{
-              //  holder.groupSelectCCDropDown.setVisibility(View.GONE);
+                //  holder.groupSelectCCDropDown.setVisibility(View.GONE);
                 holder.groupSelectCCImage.setVisibility(View.VISIBLE);
                 setCCIcon(holder.groupSelectCCImage,group.getCreditcardid());
             }
@@ -905,7 +920,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             //CheckBox groupCheckBox;
             ImageView groupImageView;
             FontTextView groupSelectCC;
-        //    ImageView groupSelectCCDropDown;
+            //    ImageView groupSelectCCDropDown;
             ImageView groupSelectCCImage;
             LinearLayout groupSelectCCLinearLayout;
         }
@@ -914,9 +929,11 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
             FontTextView childNametext;
             FontTextView childPricetext;
+            FontTextView payment_info_text;
+
             FontTextView childSelectCCText;
             ImageView childSelectCCImage;
-          //  ImageView childSelectCCDropDown;
+            //  ImageView childSelectCCDropDown;
             ImageView childImage;
             LinearLayout childSelectCCLinearLayout;
             LinearLayout childPlaneLinearLayout;

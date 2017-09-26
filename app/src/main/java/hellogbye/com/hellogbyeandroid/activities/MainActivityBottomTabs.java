@@ -56,6 +56,7 @@ import hellogbye.com.hellogbyeandroid.fragments.checkout.CheckoutLoyltyAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.LoyaltyProgramsAdd;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.LoyaltyProgramsPopup;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.ManagePaymentFragment;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.SummaryPaymentExpendableFragment;
 import hellogbye.com.hellogbyeandroid.fragments.cnc.CNCSignalRFragment;
 import hellogbye.com.hellogbyeandroid.fragments.cnc.CNCTutorials;
 import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionAddNewCompanion;
@@ -159,11 +160,11 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private final int BOTTOM_BAR_THIRD_INDEX = 2;
     private final int BOTTOM_BAR_FOURTH_INDEX = 3;
     private final int BOTTOM_BAR_FIFTH_INDEX = 4;
-  //  private LinearLayout tool_bar_profile_name;
+    //  private LinearLayout tool_bar_profile_name;
     private LinearLayout edit_preferences_ll;
     private FontTextView edit_preferences_imagebtn;
     private ImageButton check_preferences;
-   // private ImageButton up_bar_favorite;
+    // private ImageButton up_bar_favorite;
     private ImageButton toolbar_new_iternerary;
     private ImageButton toolbar_add_companion;
     private FontTextView my_trip_profile;
@@ -221,7 +222,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
         getUpComingTrips();
 
-       // getRelationshipTypes();
+        // getRelationshipTypes();
 
         hgbSaveDataClass.setPersonalUserInformation(new PersonalUserInformationVO());
         setContentView(R.layout.main_activity_bottom_tab_layout);
@@ -273,9 +274,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         GPSTracker gpsTracker = new GPSTracker(getBaseContext());
         if(location){
             Location locationCoord = gpsTracker.getLocation();
-           // String[] locationArr = location.split("&");
-         //   hgbSaveDataClass.getTravelOrder().setLocation(locationArr);
-          //  hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_LOCATION_TOKEN, false);
+            // String[] locationArr = location.split("&");
+            //   hgbSaveDataClass.getTravelOrder().setLocation(locationArr);
+            //  hgbPrefrenceManager.putBooleanSharedPreferences(HGBPreferencesManager.HGB_LOCATION_TOKEN, false);
 
         }
 
@@ -437,16 +438,16 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             return;
         }
 
-            try {
-                Gson gsonback = new Gson();
-                String json = gsonback.toJson(hgbSaveDataClass.getCNCItems());
-                // When user exit the app, next time hi will see his itirnarary
+        try {
+            Gson gsonback = new Gson();
+            String json = gsonback.toJson(hgbSaveDataClass.getCNCItems());
+            // When user exit the app, next time hi will see his itirnarary
 
-                hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.HGB_CNC_LIST, json);
+            hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.HGB_CNC_LIST, json);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         unregisterReceiver(receiver);
         unregisterReceiver(broadcastReceiver);
     }
@@ -471,22 +472,22 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             @Override
             public void onClick(View view) {*/
 
-                HGBUtility.showAlertPopUp(MainActivityBottomTabs.this, null, promptsView,
-                        null,getResources().getString(R.string.logout_button),
-                        new PopUpAlertStringCB() {
-                            @Override
-                            public void itemSelected(String inputItem) {
-                                gotToStartMenuActivity();
-                            }
+        HGBUtility.showAlertPopUp(MainActivityBottomTabs.this, null, promptsView,
+                null,getResources().getString(R.string.logout_button),
+                new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+                        gotToStartMenuActivity();
+                    }
 
-                            @Override
-                            public void itemCanceled() {
+                    @Override
+                    public void itemCanceled() {
 
-                            }
-                        });
-           // }
+                    }
+                });
+        // }
 
-      //  });
+        //  });
     }
 
  /*   private void LogOutPopup() {
@@ -513,7 +514,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
         setSupportActionBar(mToolbar);
 
-      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -534,11 +535,11 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
    /*     tool_bar_profile_name = (LinearLayout) mToolbar.findViewById(R.id.tool_bar_profile_name);
         tool_bar_profile_name.setVisibility(View.GONE);*/
         edit_preferences_ll = (LinearLayout) mToolbar.findViewById(R.id.preferences_edit_mode);
-       // edit_preferences_imagebtn = (ImageButton) mToolbar.findViewById(R.id.edit_preferences);
+        // edit_preferences_imagebtn = (ImageButton) mToolbar.findViewById(R.id.edit_preferences);
         edit_preferences_imagebtn = (FontTextView) mToolbar.findViewById(R.id.edit_preferences);
         check_preferences = (ImageButton) mToolbar.findViewById(R.id.check_preferences);
         itirnarary_title_Bar = (FontTextView)mToolbar.findViewById(R.id.itirnarary_title_Bar);
-     //   up_bar_favorite = (ImageButton)mToolbar.findViewById(R.id.up_bar_favorite);
+        //   up_bar_favorite = (ImageButton)mToolbar.findViewById(R.id.up_bar_favorite);
         preference_save_changes = (FontTextView) mToolbar.findViewById(R.id.preference_save_changes);
         preference_add_card = (ImageView) mToolbar.findViewById(R.id.add_cc);
         toolbar_new_iternerary = (ImageButton) mToolbar.findViewById(R.id.toolbar_new_iternerary);
@@ -557,10 +558,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         connection_toast_layout_disconnected = (LinearLayout)findViewById(R.id.connection_toast_layout_disconnected);
 
 
-      //  toolbar_trip_name = (FontTextView)findViewById(R.id.toolbar_trip_name);
+        //  toolbar_trip_name = (FontTextView)findViewById(R.id.toolbar_trip_name);
 
         table_scroll = (HorizontalScrollView)findViewById(R.id.table_scroll);
-       // table_scroll = ((MainActivityBottomTabs)getBaseContext()).getItitneraryHS();
+        // table_scroll = ((MainActivityBottomTabs)getBaseContext()).getItitneraryHS();
 
     }
 
@@ -603,7 +604,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         toolbar_new_iternerary_cnc_chat_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               goToFragment(ToolBarNavEnum.CNC.getNavNumber(),null);
+                goToFragment(ToolBarNavEnum.CNC.getNavNumber(),null);
             }
         });
     }
@@ -678,7 +679,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 if (!mCurrentUser.getIsTravelprofile()) {
 
                     userProfilePreferences.getUserDefaultSettings(MainActivityBottomTabs.this, MainActivityBottomTabs.this, hgbSaveDataClass);
-                   // showUserProfiles();
+                    // showUserProfiles();
                 }
 
                 String profileID = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_PROFILE_ID, "");
@@ -848,7 +849,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
                 break;
             case CNC:
-               // fragment = CNCFragment.newInstance(navPosition);
+                // fragment = CNCFragment.newInstance(navPosition);
                 fragment = CNCSignalRFragment.newInstance(navPosition);
                 selectBottomBar(R.id.bb_menu_cnc);
 
@@ -880,7 +881,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 fragment = PreferenceSettingsEmailFragment.newInstance(navPosition);
                 break;
             case TRAVEL_PREFERENCE:
-               // fragment = PreferenceSettingsFragment.newInstance(navPosition);
+                // fragment = PreferenceSettingsFragment.newInstance(navPosition);
                 fragment = PreferenceSettingsSlideFragment.newInstance(navPosition);
 
                 break;
@@ -899,9 +900,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 //fragment = ItineraryFragment.newInstance(navPosition);
                 fragment = ItineraryFragmentComposeView.newInstance(navPosition);
                 stashToBack = false;
-               //fragment = ItineraryFragmentAdapter.newInstance(navPosition);
-             //   fragment = ItineraryFragmentHelperAdapter.newInstance(navPosition);
-               // fragment = ItineraryFragmentNoScrollingAdapter.newInstance(navPosition);
+                //fragment = ItineraryFragmentAdapter.newInstance(navPosition);
+                //   fragment = ItineraryFragmentHelperAdapter.newInstance(navPosition);
+                // fragment = ItineraryFragmentNoScrollingAdapter.newInstance(navPosition);
 
 
                 // setItineraryTitleName();
@@ -910,11 +911,11 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             case ALTERNATIVE_FLIGHT_ROUND_TRIP:
                 fragment = AlternativeFlightTabsWidgetFragment.newInstance(navPosition);
-               // stashToBack = false;
+                // stashToBack = false;
                 break;
             case ALTERNATIVE_FLIGHT_ONE_WAY_TRIP:
                 fragment = AlternativeFlightFragment.newInstance(navPosition);
-              //  stashToBack = false;
+                //  stashToBack = false;
                 break;
             case FARE_CLASS_FRAGMENT:
                 fragment = FareClassFragment.newInstance(navPosition);
@@ -924,7 +925,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 break;
             case ALTERNATIVE_FLIGHT_DETAILS:
                 fragment = AlternativeFlightsDetailsFragment.newInstance(navPosition);
-              //  stashToBack = false;
+                //  stashToBack = false;
                 break;
             case ALTERNATIVE_FLIGHT_FACTORY:
                 fragment = FactoryAlternativeFlight.newInstance(navPosition);
@@ -951,7 +952,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 break;
 
             case SELECT_CREDIT_CARD:
-                fragment = SummaryPaymentFragment.newInstance(navPosition);
+                //fragment = SummaryPaymentFragment.newInstance(navPosition);
+
+                fragment = SummaryPaymentExpendableFragment.newInstance(navPosition);
+
                 break;
             case ADD_CREDIT_CARD:
                 fragment = AddCreditCardFragment.newInstance(navPosition);
@@ -967,8 +971,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 fragment = HazardousNoticeFragment.newInstance(navPosition);
                 break;
             case FREE_USER_FRAGMENT:
-               // fragment = FreeUserFragment.newInstance(navPosition);
-             //   stashToBack = false;
+                // fragment = FreeUserFragment.newInstance(navPosition);
+                //   stashToBack = false;
                 freeUserPopUp();
                 //isAddAnimation = true;
                 break;
@@ -1010,7 +1014,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             isAddAnimation = true;
             fragment = isFreeUser(fragment, navPosition);
-           // mToolbar.setVisibility(View.GONE);
+            // mToolbar.setVisibility(View.GONE);
         }else {
 
 
@@ -1036,7 +1040,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
 
 
-      LinearLayout free_user_sign_in = (LinearLayout)popupView.findViewById(R.id.free_user_sign_in);
+        LinearLayout free_user_sign_in = (LinearLayout)popupView.findViewById(R.id.free_user_sign_in);
         free_user_sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1061,7 +1065,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
 
         HGBUtility.showAlertPopUp(MainActivityBottomTabs.this, null, popupView,
-               null, null, new PopUpAlertStringCB() {
+                null, null, new PopUpAlertStringCB() {
                     @Override
                     public void itemSelected(String inputItem) {
 
@@ -1120,16 +1124,16 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
 
 
-          //  Intent intent = new Intent(getBaseContext(), SignUpActivity.class);
-          //  startActivity(intent);
+            //  Intent intent = new Intent(getBaseContext(), SignUpActivity.class);
+            //  startActivity(intent);
 
-          //  fragment = FreeUserFragment.newInstance(navPosition);
-          //  mToolbar.setVisibility(View.GONE);
+            //  fragment = FreeUserFragment.newInstance(navPosition);
+            //  mToolbar.setVisibility(View.GONE);
         }
        /* else {
             mToolbar.setVisibility(View.VISIBLE);
         }*/
-      //  mToolbar.setVisibility(View.VISIBLE);
+        //  mToolbar.setVisibility(View.VISIBLE);
         return fragment;
     }
 
@@ -1170,9 +1174,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
         startActivity(intent);
 
-       // getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.content_frame)).commit();
+        // getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.content_frame)).commit();
 
-       // finish();
+        // finish();
 
     }
 
@@ -1554,9 +1558,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             if(isConnected){
                 connection_toast_layout_connected.setVisibility(View.VISIBLE);
                 connection_toast_layout_disconnected.setVisibility(View.GONE);
-              //  cnc_fragment_profile_line.setVisibility(View.VISIBLE);
+                //  cnc_fragment_profile_line.setVisibility(View.VISIBLE);
 
-              //  connection_toast_rl.setVisibility(View.VISIBLE);
+                //  connection_toast_rl.setVisibility(View.VISIBLE);
 
                 Animation anim = AnimationUtils.loadAnimation(MainActivityBottomTabs.this, R.anim.fade_out);
                 anim.setAnimationListener(new Animation.AnimationListener(){
@@ -1576,10 +1580,10 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
 
             }else{
-              //  connection_toast_rl.setVisibility(View.VISIBLE);
+                //  connection_toast_rl.setVisibility(View.VISIBLE);
                 connection_toast_layout_disconnected.setVisibility(View.VISIBLE);
                 connection_toast_layout_connected.setVisibility(View.GONE);
-           //     cnc_fragment_profile_line.setVisibility(View.GONE);
+                //     cnc_fragment_profile_line.setVisibility(View.GONE);
 
             }
 
@@ -1619,7 +1623,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
 
     public void setNewRelationshipForCompanion(int relationshiptypeId, String paxID){
-     //   String paxID  = companionVO.getmCompanionid();
+        //   String paxID  = companionVO.getmCompanionid();
         ConnectionManager.getInstance(MainActivityBottomTabs.this).putCompanionRelationship(paxID, relationshiptypeId,new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
@@ -1787,7 +1791,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 ArrayList<CreditCardItem> creditCards = (ArrayList<CreditCardItem>) data;
                 setCreditCards(creditCards);
                 refreslistner.onRefreshSuccess(data);
-               // goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
+                // goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
 
             }
 
@@ -1800,16 +1804,16 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     private AlertDialog mSeatTypeDialog;
     private String[] seatArray = {"No Preference","Window","Aisle"};
-        public void buildSeatTypeDialog(final String chooseItem, final RefreshComplete refreslistner) {
+    public void buildSeatTypeDialog(final String chooseItem, final RefreshComplete refreslistner) {
 
-            int choosenNum =0;
-            for(int i=0;i<seatArray.length;i++){
-                String seatName = seatArray[i];
-                if(chooseItem.equalsIgnoreCase(seatName)){
-                    choosenNum = i;
-                    break;
-                }
+        int choosenNum =0;
+        for(int i=0;i<seatArray.length;i++){
+            String seatName = seatArray[i];
+            if(chooseItem.equalsIgnoreCase(seatName)){
+                choosenNum = i;
+                break;
             }
+        }
 
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
                 MainActivityBottomTabs.this, R.layout.dialog_radio, seatArray);

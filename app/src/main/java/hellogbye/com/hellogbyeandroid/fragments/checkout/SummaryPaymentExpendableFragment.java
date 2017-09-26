@@ -55,9 +55,6 @@ import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
-/**
- * Created by arisprung on 12/2/15.
- */
 public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
 
     // private ListView mListViewCC;

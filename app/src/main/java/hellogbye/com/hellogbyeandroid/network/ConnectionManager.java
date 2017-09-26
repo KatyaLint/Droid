@@ -42,10 +42,10 @@ public class ConnectionManager {
     }
 
     public static String BASE_URL_SIGNALR_URL = "https://apiprod.hellogbye.com/prod/"; //"https://apiprod.hellogbye.com/prod/";
-     public static String BASE_URL;// = "http://apidev.hellogbye.com/dev/rest/";
+    public static String BASE_URL;// = "http://apidev.hellogbye.com/dev/rest/";
 
     //public static String BASE_URL = "http://demo.hellogbye.com/dev/rest/";
-   // public static String BASE_URL = "http://apiuat.hellogbye.com/uat/rest/";
+    // public static String BASE_URL = "http://apiuat.hellogbye.com/uat/rest/";
     //public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
 
 
@@ -60,7 +60,7 @@ public class ConnectionManager {
 
 
     private ConnectionManager(Context context) {
-         mHGBPrefrenceManager = HGBPreferencesManager.getInstance(context.getApplicationContext());
+        mHGBPrefrenceManager = HGBPreferencesManager.getInstance(context.getApplicationContext());
     }
 
     public static ConnectionManager getInstance(Context context) {
@@ -974,7 +974,7 @@ public class ConnectionManager {
 
 
     public void getCompanionsForSearch(final String searchParam, final ServerRequestListener listener){
-      //  https://apiuat.hellogbye.com/uat/rest/UserProfile/Search?count=5&excludeCompanions=false&searchParam=a&skip=0
+        //  https://apiuat.hellogbye.com/uat/rest/UserProfile/Search?count=5&excludeCompanions=false&searchParam=a&skip=0
         String url = getURL(Services.COMPANION_SEARCH) + "searchParam="+searchParam+"&skip="+0;
         JSONObject jsonObject = new JSONObject();
         HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
@@ -989,7 +989,7 @@ public class ConnectionManager {
                 listener.onError(Parser.parseErrorMessage(error));
             }
         }, false);
-       // https://apiuat.hellogbye.com/uat/rest/UserProfile/Search?count=5&excludeCompanions=false&searchParam=a&skip=0
+        // https://apiuat.hellogbye.com/uat/rest/UserProfile/Search?count=5&excludeCompanions=false&searchParam=a&skip=0
     }
 
     public void getConfirmationBooking(String iteneraryid,String itemGuid, final ServerRequestListener listener) {
@@ -1080,7 +1080,7 @@ public class ConnectionManager {
 
     public void getMyTripsFavorite(final ServerRequestListener listener) {
 
-     //   http://apidev.hellogbye.com/dev/rest/Itinerary?count=15&skip=0&isFavorite=true
+        //   http://apidev.hellogbye.com/dev/rest/Itinerary?count=15&skip=0&isFavorite=true
         String url = getURL(Services.ITINERARY_MY_TRIP) + "?count=15&skip=0&isFavorite=true";
         //  http://ec2-54-172-8-232.compute-1.amazonaws.com/web.api/rest/itinerary?count=15&skip=0
 
@@ -1158,7 +1158,7 @@ public class ConnectionManager {
 
     }
 
-        public void getUserSettingsDefault(final ServerRequestListener listener) {
+    public void getUserSettingsDefault(final ServerRequestListener listener) {
         String url = getURL(Services.USER_GET_TRAVEL_PROFILES);
         JSONObject jsonObject = new JSONObject();
 
@@ -1305,7 +1305,7 @@ public class ConnectionManager {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                  listener.onError(Parser.parseErrorMessage(error));
+                listener.onError(Parser.parseErrorMessage(error));
             }
         },false);
     }
@@ -1388,8 +1388,8 @@ public class ConnectionManager {
 // &checkin=2017-06-21&checkout=2017-06-24&isPromoAlternative=false
 
         //USER_HOTEL_SOLUTIONS
-    //https://apiprod.hellogbye.com/prod/rest/Flight?solution=9f5dc7d9-24f2-46fd-b6ec-54ad0fb40b21&paxid=c47ae6eb-d3da-42b2-a2dc-af9e0eb322ee&flight=bfe3f7ec-fe19-430b-b9b3-a9176629d5c9
-    //https://apiprod.hellogbye.com/prod/rest/Flight?solution=957a8e48-3d4c-4c38-bd03-598e434b0478&paxid=66ceb3dc-faf7-40c8-8292-32a641f782fd&flight=69cc12f0-5b98-4c30-a938-6caf696ede0b
+        //https://apiprod.hellogbye.com/prod/rest/Flight?solution=9f5dc7d9-24f2-46fd-b6ec-54ad0fb40b21&paxid=c47ae6eb-d3da-42b2-a2dc-af9e0eb322ee&flight=bfe3f7ec-fe19-430b-b9b3-a9176629d5c9
+        //https://apiprod.hellogbye.com/prod/rest/Flight?solution=957a8e48-3d4c-4c38-bd03-598e434b0478&paxid=66ceb3dc-faf7-40c8-8292-32a641f782fd&flight=69cc12f0-5b98-4c30-a938-6caf696ede0b
     }
 
 
@@ -1420,7 +1420,7 @@ public class ConnectionManager {
     }
 
 
-  //  http://cnc.hellogbye.com/cnc/rest/Statics/GetProvinceByCountryCode?countryCode=ID
+    //  http://cnc.hellogbye.com/cnc/rest/Statics/GetProvinceByCountryCode?countryCode=ID
 
     public void getStaticBookingProvince(String countryCode, final ServerRequestListener listener) {
 
@@ -2248,73 +2248,73 @@ public class ConnectionManager {
         });
     }
 
-            public enum Services {
-                USER_POST_LOGIN("Session"),
-                USER_GET_PROFILE("UserProfile"),
-                USER_POST_CHANGE_PASSWORD("UserProfile/Password"),
-                USER_GET_TRAVEL_PROFILES("TravelPreference/Profiles"),
-           //     USER_GET_TRAVEL_PROFILES_DEFAULT("TravelPreference/Profiles/Defaults"),
-                USER_POST_CHECKOUT("CheckOut"),
-                USER_GET_SEARCH_QUERY("Solution/Primarysearch?query="),
-                USER_GET_HOTEL_ALTERNATIVE("Hotel"),
-                USER_HOTEL_ROOM_ALTERNATIVE("hotelroom"),
-                USER_PUT_HOTEL("Hotel"),
-                USER_GET_BOOKING_OPTIONS("Statics/BookingOptions"),
-                USER_FLIGHT_SOLUTIONS("Flight"),
-                USER_HOTEL_SOLUTIONS("Hotel"),
-                USER_GET_TRAVELER_INFO("Traveler/GetAll/"),
-                USER_GET_USER_PROFILE_ACCOUNTS("UserProfile/Accounts"),
-                USER_POST_USER_PROFILE_EMAIL("UserProfile/ResetPassword?email="),
-                USER_TRAVEL_PROFILES("TravelPreference/Profiles/"),
-                USER_PROFILE_RESET_PASSWORD("UserProfile/ResetPassword?email="),
-                USER_SOLUTION("Solution/"),
-                ITINERARY("Itinerary/"),
-                ITINERARYV2("Itinerary/V2"),
-                USER_GET_TRAVEL_PREFERENCES("TravelPreference"),
+    public enum Services {
+        USER_POST_LOGIN("Session"),
+        USER_GET_PROFILE("UserProfile"),
+        USER_POST_CHANGE_PASSWORD("UserProfile/Password"),
+        USER_GET_TRAVEL_PROFILES("TravelPreference/Profiles"),
+        //     USER_GET_TRAVEL_PROFILES_DEFAULT("TravelPreference/Profiles/Defaults"),
+        USER_POST_CHECKOUT("CheckOut"),
+        USER_GET_SEARCH_QUERY("Solution/Primarysearch?query="),
+        USER_GET_HOTEL_ALTERNATIVE("Hotel"),
+        USER_HOTEL_ROOM_ALTERNATIVE("hotelroom"),
+        USER_PUT_HOTEL("Hotel"),
+        USER_GET_BOOKING_OPTIONS("Statics/BookingOptions"),
+        USER_FLIGHT_SOLUTIONS("Flight"),
+        USER_HOTEL_SOLUTIONS("Hotel"),
+        USER_GET_TRAVELER_INFO("Traveler/GetAll/"),
+        USER_GET_USER_PROFILE_ACCOUNTS("UserProfile/Accounts"),
+        USER_POST_USER_PROFILE_EMAIL("UserProfile/ResetPassword?email="),
+        USER_TRAVEL_PROFILES("TravelPreference/Profiles/"),
+        USER_PROFILE_RESET_PASSWORD("UserProfile/ResetPassword?email="),
+        USER_SOLUTION("Solution/"),
+        ITINERARY("Itinerary/"),
+        ITINERARYV2("Itinerary/V2"),
+        USER_GET_TRAVEL_PREFERENCES("TravelPreference"),
 
-                COMPANIONS("Companions"),
-                COMPANIONS_CONFIRM("Companions/Confirm/"),
-                COMPANIONS_INVITATION("Companions/Invitations"),
-                CARD_TOKEN("Card/Token"),
-                ITINERARY_MY_TRIP("Itinerary"),
-                ITINERARY_HIGHLIGHT("Highlight?input="),
-                USER_AVATAR("UserProfile/Avatar"),
-                RELATIONSHIP_TYPES("Statics/RelationshipTypes"),
-                ACCOUNTS_PREFERENCES("UserProfile/Accounts/TravelPreference"),
-                USER_PROFILE_REGISTER("UserProfile/Register"),
-                STATIC_PROVINCE_BY_COUNTRY_CODE("Statics/GetProvinceByCountryCode?countryCode="),
-                CARD_SESSION("Card/Session"),
-                BOOKING_PAY("booking/pay"),
-                USER_PROFILE_DEVICE_AUTHENTICATION("Session/Anonymous/"),
-                BOOKING_CONFIRMATION("Booking/flight/confirmation/pdf?"),
-                SUBMIT_FEEDBACK("Feedback"),
-                USER_ACTIVATION_PIN("UserProfile/Activate?activationKey="),
-                ACTIVATE_NOTIFICATION("PushNotifications/Enable/"),
+        COMPANIONS("Companions"),
+        COMPANIONS_CONFIRM("Companions/Confirm/"),
+        COMPANIONS_INVITATION("Companions/Invitations"),
+        CARD_TOKEN("Card/Token"),
+        ITINERARY_MY_TRIP("Itinerary"),
+        ITINERARY_HIGHLIGHT("Highlight?input="),
+        USER_AVATAR("UserProfile/Avatar"),
+        RELATIONSHIP_TYPES("Statics/RelationshipTypes"),
+        ACCOUNTS_PREFERENCES("UserProfile/Accounts/TravelPreference"),
+        USER_PROFILE_REGISTER("UserProfile/Register"),
+        STATIC_PROVINCE_BY_COUNTRY_CODE("Statics/GetProvinceByCountryCode?countryCode="),
+        CARD_SESSION("Card/Session"),
+        BOOKING_PAY("booking/pay"),
+        USER_PROFILE_DEVICE_AUTHENTICATION("Session/Anonymous/"),
+        BOOKING_CONFIRMATION("Booking/flight/confirmation/pdf?"),
+        SUBMIT_FEEDBACK("Feedback"),
+        USER_ACTIVATION_PIN("UserProfile/Activate?activationKey="),
+        ACTIVATE_NOTIFICATION("PushNotifications/Enable/"),
 
-                HOTEL_SEARCH("hotel/Search"),
-                USER_GET_TRAVEL_PROFILES_DEFAULT("TravelPreference/Profiles/Defaults"),
-                STATIC_CITY_AUTOCOMPLETE("statics/cityautocomplete"),
-                COMPANION_SEARCH("UserProfile/Search?count=5&excludeCompanions=false&"),
-                RESEND_ACTIVATION("UserProfile/ResendWelcomeEmail?email="),
-                POST_SIGNALR_REGISTRATION("Signalr/Register"),
-                AIRLINE_POINTS_PROGRAM("AirlinePointsProgram/itinerary/"),
-                STATIC_AIRLINE_POINTS_PROGRAM("Statics/AllAirlinePointsPrograms"),
-                UPDATE_AVAILABILITY("Itinerary/UpdateAvailability");
+        HOTEL_SEARCH("hotel/Search"),
+        USER_GET_TRAVEL_PROFILES_DEFAULT("TravelPreference/Profiles/Defaults"),
+        STATIC_CITY_AUTOCOMPLETE("statics/cityautocomplete"),
+        COMPANION_SEARCH("UserProfile/Search?count=5&excludeCompanions=false&"),
+        RESEND_ACTIVATION("UserProfile/ResendWelcomeEmail?email="),
+        POST_SIGNALR_REGISTRATION("Signalr/Register"),
+        AIRLINE_POINTS_PROGRAM("AirlinePointsProgram/itinerary/"),
+        STATIC_AIRLINE_POINTS_PROGRAM("Statics/AllAirlinePointsPrograms"),
+        UPDATE_AVAILABILITY("Itinerary/UpdateAvailability");
 
-                //https://apiprod.hellogbye.com/prod/rest/AirlinePointsProgram/itinerary/cb37f18e-d8cb-45ed-8ccf-ef0df6d01701/passenger/c47ae6eb-d3da-42b2-a2dc-af9e0eb322ee
+        //https://apiprod.hellogbye.com/prod/rest/AirlinePointsProgram/itinerary/cb37f18e-d8cb-45ed-8ccf-ef0df6d01701/passenger/c47ae6eb-d3da-42b2-a2dc-af9e0eb322ee
 
 
-                String url;
-                Services(String url){
-                    this.url =  url;
-                }
+        String url;
+        Services(String url){
+            this.url =  url;
+        }
 
-                public String getURL(){
-                    String baseUrl = changeServerURL();
-                    baseUrl = baseUrl + url;
-                    return baseUrl;
-                }
-            }
+        public String getURL(){
+            String baseUrl = changeServerURL();
+            baseUrl = baseUrl + url;
+            return baseUrl;
+        }
+    }
 
     public static String getURL(Services type) {
         return type.getURL();

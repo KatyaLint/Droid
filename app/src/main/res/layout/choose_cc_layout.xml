@@ -13,7 +13,17 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"/>
 
+    <ExpandableListView
+        android:id="@+id/expandable_list_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cc_proceed"
+        android:groupIndicator="@null"
+        android:layout_below="@+id/steps_layout" />
+
+
     <LinearLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/steps_layout"
