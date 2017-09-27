@@ -16,14 +16,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
@@ -1466,7 +1464,7 @@ public class ConnectionManager {
 
     public void getTravellersInforWithSolutionId(String solutionid, final ServerRequestListener listener) {
 
-        String url = getURL(Services.USER_GET_TRAVELER_INFO) + solutionid;
+        String url = getURL(Services.USER_GET_TRAVELERS_INFO) + solutionid;
         JSONObject jsonObject = new JSONObject();
         HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
                 jsonObject, new Response.Listener<String>() {
@@ -1482,6 +1480,23 @@ public class ConnectionManager {
         });
     }
 
+    public void getTravellerInforWithSolutionId(String solutionid, final ServerRequestListener listener) {
+
+        String url = getURL(Services.USER_GET_TRAVELER_INFO) + solutionid;
+        JSONObject jsonObject = new JSONObject();
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.getTravel(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+    }
 
     public void getUserProfileAccounts(final ServerRequestListener listener) {
         String url = getURL(Services.USER_GET_USER_PROFILE_ACCOUNTS);
@@ -2262,7 +2277,8 @@ public class ConnectionManager {
         USER_GET_BOOKING_OPTIONS("Statics/BookingOptions"),
         USER_FLIGHT_SOLUTIONS("Flight"),
         USER_HOTEL_SOLUTIONS("Hotel"),
-        USER_GET_TRAVELER_INFO("Traveler/GetAll/"),
+        USER_GET_TRAVELERS_INFO("Traveler/GetAll/"),
+        USER_GET_TRAVELER_INFO("Traveler/Get/"),
         USER_GET_USER_PROFILE_ACCOUNTS("UserProfile/Accounts"),
         USER_POST_USER_PROFILE_EMAIL("UserProfile/ResetPassword?email="),
         USER_TRAVEL_PROFILES("TravelPreference/Profiles/"),

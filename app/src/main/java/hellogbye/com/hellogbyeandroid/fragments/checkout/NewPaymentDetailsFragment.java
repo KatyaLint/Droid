@@ -248,13 +248,26 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             set.add(key);
         }
 
-        System.out.println("Kate sendPaymentSolution");
+
         ConnectionManager.getInstance(getActivity()).checkoutSolutionId(getActivityInterface().getSolutionID(), set, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
 
-                getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
+            //    getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
 
+
+                ((MainActivityBottomTabs)getActivity()).getTravellerInfoWithSolutionId(new RefreshComplete() {
+                    @Override
+                    public void onRefreshSuccess(Object data) {
+
+                        //getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
+                    }
+
+                    @Override
+                    public void onRefreshError(Object data) {
+
+                    }
+                });
 
 //                ((MainActivityBottomTabs)getActivity()).getCreditCardsList(new RefreshComplete() {
 //                    @Override

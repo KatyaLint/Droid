@@ -323,6 +323,19 @@ public class Parser {
         return mTravelList;
     }
 
+    public static Object getTravel(String response){
+        UserProfileVO  mTravelList = null;
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<UserProfileVO>() {
+            }.getType();
+            mTravelList = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mTravelList;
+    }
+
     public static Object getAccounts(String response){
         ArrayList<AccountsVO>  mResponseData = null;
         try {

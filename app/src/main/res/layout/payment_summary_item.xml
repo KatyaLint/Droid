@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:padding="@dimen/DP20"
     android:background="@color/COLOR_WHITE"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/name_summary_ll"
@@ -67,7 +66,6 @@
         android:orientation="horizontal"
         android:background="@drawable/cvv_shape"
         android:layout_alignParentRight="true">
-
 
 
         <hellogbye.com.hellogbyeandroid.views.FontEditTextView

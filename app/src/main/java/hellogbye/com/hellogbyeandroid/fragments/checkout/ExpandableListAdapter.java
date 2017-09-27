@@ -116,7 +116,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             holder = (ExpandableListAdapter.ChildViewHolder) convertView.getTag();
         }
         final PaymentChild child = (PaymentChild) getChild(groupPosition, childPosition);
-        holder.childNametext.setText(child.getNameText());
+
         //Kate add currency
         holder.childPricetext.setText( child.getTotalText() + " ");
         holder.childSelectCCText.setText(child.getCreditcard()
@@ -173,8 +173,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             holder.childHotelDuration.setText(child.getHotelDuration());
             holder.childImage.setBackgroundResource(R.drawable.hotels);
             holder.payment_info_text.setText("Hotel Info");
+            holder.childNametext.setText(child.getNameText());
 
-        }else{
+        }else if(child.getNameText().equalsIgnoreCase("Flight")){
+
+            holder.childNametext.setText(child.getOperatorName() +"\n" + child.getFlighNumber());
+
             holder.childPlaneLinearLayout.setVisibility(View.VISIBLE);
             holder.childHotelCCLinearLayout.setVisibility(View.GONE);
             holder.childPath.setText(child.getFlightPath());
@@ -207,6 +211,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     });
                 }
             });
+        }else if(child.getNameText().equalsIgnoreCase("Traveller")){ //Traveller info
+
         }
 
         return convertView;

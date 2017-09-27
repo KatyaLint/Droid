@@ -1764,6 +1764,25 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 });
     }
 
+    public void getTravellerInfoWithSolutionId(final RefreshComplete refreslistner) {
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).getTravellerInforWithSolutionId(hgbSaveDataClass.getTravelOrder().getmSolutionID(),
+                new ConnectionManager.ServerRequestListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+
+                        UserProfileVO mCurrentUser = (UserProfileVO) data;
+                        hgbSaveDataClass.setCurrentUser(mCurrentUser);
+
+                        goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
+                    }
+
+                    @Override
+                    public void onError(Object data) {
+                        ErrorMessage(data);
+                    }
+                });
+    }
+
     public void updateAvailability(final RefreshComplete refreslistner){
 
         ArrayList<UserProfileVO> users = getListUsers();

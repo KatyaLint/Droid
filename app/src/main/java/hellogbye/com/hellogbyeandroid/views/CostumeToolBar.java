@@ -319,7 +319,7 @@ public class CostumeToolBar extends Toolbar {
             case ADD_CREDIT_CARD:
                 preference_save_changes.setVisibility(View.VISIBLE);
                 break;
-            case HAZARDOUS_NOTICE:
+
             case CREDIT_CARD_LIST:
                 preference_add_cc.setVisibility(View.VISIBLE);
                 break;
@@ -353,6 +353,7 @@ public class CostumeToolBar extends Toolbar {
             case LOYLTY_NEW_PROGRAMME:
             case LOYALTY_ADD_PROGRAMME:
             case SELECT_HOTEL_FRAGMENT:
+            case HAZARDOUS_NOTICE:
                 titleBar.setVisibility(View.VISIBLE);
                 break;
             /**
