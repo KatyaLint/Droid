@@ -1488,7 +1488,7 @@ public class ConnectionManager {
                 jsonObject, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(Parser.getTravel(response));
+                listener.onSuccess(Parser.getTravels(response));
             }
         }, new Response.ErrorListener() {
             @Override

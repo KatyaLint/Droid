@@ -6,7 +6,7 @@ package hellogbye.com.hellogbyeandroid.models.vo.creditcard;
 public class PaymentChild {
 
     private String nameText;
-    private String totalText;
+    private double totalText;
     private boolean selected;
     private String guid;
     private String paxguid;
@@ -25,8 +25,16 @@ public class PaymentChild {
     private String hotelCheckIn;
     private String hotelDuration;
     private String operatorName;
+    private String currency;
+    private String userName;
+    private String userEmail;
+    private String userTel;
+    private String userDOB;
 
-    public PaymentChild(String nameText, String totalText, boolean selected,String guid,String paxguid,String creditcard,String parentflight) {
+
+
+
+    public PaymentChild(String nameText, double totalText, boolean selected,String guid,String paxguid,String creditcard,String parentflight, String currency) {
         this.nameText = nameText;
         this.totalText = totalText;
         this.selected = selected;
@@ -34,6 +42,10 @@ public class PaymentChild {
         this.paxguid = paxguid;
         this.creditcard = creditcard;
         this.parentflight = parentflight;
+        this.currency = currency;
+    }
+    public PaymentChild(String nameText){
+        this.nameText = nameText;
     }
 
     public String getFlightPath() {
@@ -132,13 +144,7 @@ public class PaymentChild {
         this.nameText = nameText;
     }
 
-    public String getTotalText() {
-        return totalText;
-    }
 
-    public void setTotalText(String totalText) {
-        this.totalText = totalText;
-    }
 
     public boolean isSelected() {
         return selected;
@@ -194,5 +200,62 @@ public class PaymentChild {
 
     public void setOperatorName(String operatorName) {
         this.operatorName = operatorName;
+    }
+
+    public double getTotalText() {
+        return totalText; }
+
+    public void setTotalText(double totalText) {
+        this.totalText = totalText; }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public void putChild(PaymentChild child){
+        this.nameText = child.nameText;
+        this.totalText = child.totalText;
+        this.selected = child.selected;
+        this.guid = child.guid;
+        this.paxguid = child.paxguid;
+        this.creditcard = child.creditcard;
+        this.parentflight = child.parentflight;
+        this.currency = child.currency;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserTel() {
+        return userTel;
+    }
+
+    public void setUserTel(String userTel) {
+        this.userTel = userTel;
+    }
+
+    public String getUserDOB() {
+        return userDOB;
+    }
+
+    public void setUserDOB(String userDOB) {
+        this.userDOB = userDOB;
     }
 }

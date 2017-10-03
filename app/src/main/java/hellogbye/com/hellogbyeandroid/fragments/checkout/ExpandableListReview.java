@@ -1,6 +1,9 @@
 package hellogbye.com.hellogbyeandroid.fragments.checkout;
 
-import android.app.Activity;
+/**
+ * Created by amirlubashevsky on 02/10/2017.
+ */
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,56 +14,57 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
-import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
-import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymentChild;
-import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymnentGroup;
-import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 import static hellogbye.com.hellogbyeandroid.utilities.HGBUtility.setCCIcon;
 
-/**
- * Created by amirlubashevsky on 25/09/2017.
- */
 
-public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
-    private final LayoutInflater inf;
-    private final ArrayList<PaymnentGroup> groupsList;
-    private List<ArrayList<PaymentChild>> childrenList = new ArrayList<>();
+
+public class ExpandableListReview extends BaseExpandableListAdapter {
+
+    private LayoutInflater inf;
+
+    private List<PaymentChild> _listDataHeader; // header titles
+    private HashMap<PaymentChild, List<PaymentChild>> _listDataChild;
     private Context context;
     private SummaryPaymentExpendableFragment.IGroupClickListener igroupClickListener;
 
-    public ExpandableListAdapter(ArrayList<PaymnentGroup> groups, List<ArrayList<PaymentChild>> children, Context context) {
-        this.groupsList = groups;
-        this.childrenList = children;
+    public ExpandableListReview(List<PaymentChild> listDataHeader,
+                                 HashMap<PaymentChild, List<PaymentChild>> listChildData, Context context) {
+        this._listDataHeader = listDataHeader;
+        this._listDataChild = listChildData;
+
         this.inf = LayoutInflater.from(context);
         this.context = context;
     }
 
     @Override
     public int getGroupCount() {
-        return groupsList.size();
+        return _listDataHeader.size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return childrenList.get(groupPosition).size();
+        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
+                .size();
     }
+
+
 
     @Override
     public Object getGroup(int groupPosition) {
-        return groupsList.get(groupPosition);
+        return _listDataHeader.get(groupPosition);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return childrenList.get(groupPosition).get(childPosition);
+        return _listDataChild.get(_listDataHeader.get(groupPosition)).get(childPosition);
     }
 
     @Override
@@ -81,73 +85,88 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
-        final ExpandableListAdapter.ChildViewHolder holder;
+        final ExpandableListReview.ChildViewHolder holder;
         if (convertView == null) {
-            convertView = inf.inflate(R.layout.payment_child_item, parent, false);
-            holder = new ExpandableListAdapter.ChildViewHolder();
+            convertView = inf.inflate(R.layout.payment_child_review_item, parent, false);
+            holder = new ExpandableListReview.ChildViewHolder();
 
             holder.childNametext = (FontTextView) convertView.findViewById(R.id.payment_child_name);
             holder.childPricetext = (FontTextView) convertView.findViewById(R.id.payment_child_price);
-            holder.payment_info_text = (FontTextView) convertView.findViewById(R.id.payment_info_text);
+
 
 
             holder.childSelectCCText = (FontTextView) convertView.findViewById(R.id.passenger_select_cc);
             holder.childSelectCCImage = (ImageView) convertView.findViewById(R.id.passenger_select_cc_image);
             //  holder.childSelectCCDropDown = (ImageView) convertView.findViewById(R.id.passenger_select_cc_dropdown);
-            holder.childSelectCCLinearLayout = (LinearLayout) convertView.findViewById(R.id.passenger_select_cc_ll);
+            holder.childSelectCCLinearLayout = (View) convertView.findViewById(R.id.passenger_select_cc_ll_include);
             holder.childPlaneLinearLayout = (LinearLayout) convertView.findViewById(R.id.plane_ll);
             holder.childHotelCCLinearLayout = (LinearLayout) convertView.findViewById(R.id.hotel_ll);
-            holder.childPath = (FontTextView) convertView.findViewById(R.id.payment_child_path);
-            holder.childDurationPricenight = (FontTextView) convertView.findViewById(R.id.payment_child_duration_pricenight);
+
+         //   holder.childDurationPricenight = (FontTextView) convertView.findViewById(R.id.payment_child_duration_pricenight);
             holder.childHotelRoomType = (FontTextView) convertView.findViewById(R.id.hotel_room_type);
             holder.childHotelCheckIn = (FontTextView) convertView.findViewById(R.id.hotel_checkin);
             holder.childHotelDuration = (FontTextView) convertView.findViewById(R.id.hotel_duration);
-            holder.childPlaneFlightNumber = (FontTextView) convertView.findViewById(R.id.plane_flight_number);
+
             holder.childPlaneFlightPath = (FontTextView) convertView.findViewById(R.id.plane_flight_path);
             holder.childPlaneFlightClass = (FontTextView) convertView.findViewById(R.id.plane_flight_class);
             holder.childPlaneFlightDeparture = (FontTextView) convertView.findViewById(R.id.plane_flight_departure);
-            holder.childImage = (ImageView) convertView.findViewById(R.id.node_image);
+
             holder.childPlaneFlightArrival = (FontTextView) convertView.findViewById(R.id.plane_flight_arrival);
-            holder.plane_flight_seat_location = (FontTextView)convertView.findViewById(R.id.plane_flight_seat_location);
+
+
+            holder.review_details_price_flight_ll = (LinearLayout)convertView.findViewById(R.id.review_details_price_flight_ll) ;
+            holder.review_details_price_hotel_ll = (LinearLayout)convertView.findViewById(R.id.review_details_price_hotel_ll) ;
+
+            holder.review_tax_details_traveler_ll = (LinearLayout)convertView.findViewById(R.id.review_tax_details_traveler_ll);
+            holder.review_tax_details_flight_ll = (LinearLayout)convertView.findViewById(R.id.review_tax_details_flight_ll);
+            holder.payment_child_review_price_ll = (LinearLayout)convertView.findViewById(R.id.payment_child_review_price_ll);
+
+            holder.review_child_traveller_name = (FontTextView) convertView.findViewById(R.id.review_child_traveller_name);
+            holder.review_child_traveller_email = (FontTextView) convertView.findViewById(R.id.review_child_traveller_email);
+            holder.review_child_traveller_phone = (FontTextView) convertView.findViewById(R.id.review_child_traveller_phone);
+            holder.review_child_traveller_dob = (FontTextView) convertView.findViewById(R.id.review_child_traveller_dob);
+
+
+
             //   holder.plane_flight_seat_location_ll = (LinearLayout)convertView.findViewById(R.id.plane_flight_seat_location_ll);
 
             convertView.setTag(holder);
         } else {
-            holder = (ExpandableListAdapter.ChildViewHolder) convertView.getTag();
+            holder = (ExpandableListReview.ChildViewHolder) convertView.getTag();
         }
         final PaymentChild child = (PaymentChild) getChild(groupPosition, childPosition);
 
-        //Kate add currency
-        holder.childPricetext.setText( child.getTotalText() + " ");
-        holder.childSelectCCText.setText(child.getCreditcard()
-        );
-        holder.childSelectCCLinearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-//                    getFlowInterface().goToFragment(ToolBarNavEnum.CREDIT_CARDS_LIST.getNavNumber(), null);
+        holder.childPricetext.setText( child.getTotalText() + " " + child.getCurrency());
+        holder.childSelectCCText.setText(child.getCreditcard());
+
+//        holder.childSelectCCLinearLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
 //
-//                    LinearLayout ll = (LinearLayout)v;
-//                    mSelectedView = (FontTextView) ll.getChildAt(1);
-//                    mSelectedView.setTag(child);
-
-//Kate
-
-//                if (selectCCDialog != null) {
-//                    selectCCDialog.show();
+////                    getFlowInterface().goToFragment(ToolBarNavEnum.CREDIT_CARDS_LIST.getNavNumber(), null);
+////
+////                    LinearLayout ll = (LinearLayout)v;
+////                    mSelectedView = (FontTextView) ll.getChildAt(1);
+////                    mSelectedView.setTag(child);
 //
-//                    //    getFlowInterface().goToFragment(ToolBarNavEnum.CREDIT_CARDS_LIST.getNavNumber(), null);
+////Kate
 //
-//                    LinearLayout ll = (LinearLayout)v;
-//                    mSelectedView = (FontTextView) ll.getChildAt(1);
-//                    mSelectedView.setTag(child);
-//                }
+////                if (selectCCDialog != null) {
+////                    selectCCDialog.show();
+////
+////                    //    getFlowInterface().goToFragment(ToolBarNavEnum.CREDIT_CARDS_LIST.getNavNumber(), null);
+////
+////                    LinearLayout ll = (LinearLayout)v;
+////                    mSelectedView = (FontTextView) ll.getChildAt(1);
+////                    mSelectedView.setTag(child);
+////                }
+//
+//
+//            }
+//        });
 
-
-            }
-        });
-
-        if(child.getCreditcard().equals(context.getString(R.string.select_card))){
+        if(child.getCreditcard() != null && child.getCreditcard().equals(context.getString(R.string.select_card))){
             // holder.childSelectCCText.setVisibility(View.VISIBLE);
             holder.childSelectCCImage.setVisibility(View.GONE);
         }else{
@@ -162,56 +181,75 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             holder.childSelectCCLinearLayout.setVisibility(View.INVISIBLE);
         }
 
-        if(child.getNameText().equalsIgnoreCase("Hotel")){
+        if(child.getNameText().equalsIgnoreCase("Hotel information")){
+
+            holder.review_tax_details_flight_ll.setVisibility(View.VISIBLE);
+            holder.review_details_price_flight_ll.setVisibility(View.GONE);
+            holder.review_details_price_hotel_ll.setVisibility(View.VISIBLE);
+            holder.childSelectCCLinearLayout.setVisibility(View.VISIBLE);
             holder.childPlaneLinearLayout.setVisibility(View.GONE);
+
             holder.childHotelCCLinearLayout.setVisibility(View.VISIBLE);
-            holder.childPath.setText(child.getHotelName());
+            holder.payment_child_review_price_ll.setVisibility(View.VISIBLE);
+            holder.childNametext.setVisibility(View.VISIBLE);
+
+            holder.review_tax_details_traveler_ll.setVisibility(View.GONE);
+            
             //holder.childDurationPricenight.setText(child.getHotelPricePerNight());
-            holder.childDurationPricenight.setVisibility(View.GONE);
+          //  holder.childDurationPricenight.setVisibility(View.GONE);
             holder.childHotelRoomType.setText(child.getHotelRoomType());
             holder.childHotelCheckIn.setText(child.getHotelCheckIn());
             holder.childHotelDuration.setText(child.getHotelDuration());
-            holder.childImage.setBackgroundResource(R.drawable.hotels);
-            holder.payment_info_text.setText("Hotel Info");
-            holder.childNametext.setText(child.getNameText());
 
-        }else if(child.getNameText().equalsIgnoreCase("Flight")){
+
+            holder.childNametext.setText(child.getHotelName());
+
+        }else if(child.getNameText().equalsIgnoreCase("Flight information")){
+
+            holder.review_tax_details_flight_ll.setVisibility(View.VISIBLE);
+            holder.review_details_price_flight_ll.setVisibility(View.VISIBLE);
+            holder.review_details_price_hotel_ll.setVisibility(View.GONE);
+            holder.childSelectCCLinearLayout.setVisibility(View.VISIBLE);
+            holder.childPlaneLinearLayout.setVisibility(View.VISIBLE);
+
+            holder.childHotelCCLinearLayout.setVisibility(View.GONE);
+            holder.payment_child_review_price_ll.setVisibility(View.GONE);
+            holder.childNametext.setVisibility(View.VISIBLE);
+
+            holder.review_tax_details_traveler_ll.setVisibility(View.GONE);
+
+
 
             holder.childNametext.setText(child.getOperatorName() +"\n" + child.getFlighNumber());
 
-            holder.childPlaneLinearLayout.setVisibility(View.VISIBLE);
-            holder.childHotelCCLinearLayout.setVisibility(View.GONE);
-            holder.childPath.setText(child.getFlightPath());
-            holder.childDurationPricenight.setText(child.getFlightDuraion());
-            holder.childPlaneFlightNumber.setText(child.getFlighNumber());
+
+          //  holder.childDurationPricenight.setText(child.getFlightDuraion());
+
             holder.childPlaneFlightPath.setText(child.getFlightPath());
             holder.childPlaneFlightClass.setText(child.getFlightClass());
             holder.childPlaneFlightDeparture.setText(child.getFlightDeparture());
             holder.childPlaneFlightArrival.setText(child.getFlightArrival());
-            holder.childImage.setBackgroundResource(R.drawable.dlight_b_icon);
-            holder.payment_info_text.setText(child.getOperatorName());
 
 
-            holder.plane_flight_seat_location.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String selectedStr = holder.plane_flight_seat_location.getText().toString();
+        }else if(child.getNameText().equalsIgnoreCase("Traveller information")){ //Traveller info
 
-                    ((MainActivityBottomTabs)context).buildSeatTypeDialog(selectedStr,new RefreshComplete() {
-                        @Override
-                        public void onRefreshSuccess(Object data) {
-                            String choosenText = (String)data;
-                            holder.plane_flight_seat_location.setText(choosenText);
-                        }
+            holder.review_tax_details_flight_ll.setVisibility(View.GONE);
+            holder.review_details_price_flight_ll.setVisibility(View.GONE);
+            holder.review_details_price_hotel_ll.setVisibility(View.GONE);
+            holder.childSelectCCLinearLayout.setVisibility(View.GONE);
+            holder.childPlaneLinearLayout.setVisibility(View.GONE);
 
-                        @Override
-                        public void onRefreshError(Object data) {
+            holder.childHotelCCLinearLayout.setVisibility(View.GONE);
+            holder.payment_child_review_price_ll.setVisibility(View.GONE);
+            holder.childNametext.setVisibility(View.GONE);
 
-                        }
-                    });
-                }
-            });
-        }else if(child.getNameText().equalsIgnoreCase("Traveller")){ //Traveller info
+
+            holder.review_tax_details_traveler_ll.setVisibility(View.VISIBLE);
+
+            holder.review_child_traveller_name.setText(child.getUserName());
+            holder.review_child_traveller_email.setText(child.getUserEmail());
+            holder.review_child_traveller_phone.setText(child.getUserTel());
+            holder.review_child_traveller_dob.setText(child.getUserDOB());
 
         }
 
@@ -224,12 +262,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        final ExpandableListAdapter.GroupViewHolder holder;
+        final ExpandableListReview.GroupViewHolder holder;
 
         if (convertView == null) {
             convertView = inf.inflate(R.layout.payment_group_item, parent, false);
 
-            holder = new ExpandableListAdapter.GroupViewHolder();
+            holder = new ExpandableListReview.GroupViewHolder();
             holder.groupNametext = (FontTextView) convertView.findViewById(R.id.payment_group_name);
             holder.groupPricetext = (FontTextView) convertView.findViewById(R.id.payment_group_price);
             holder.groupSelectCC = (FontTextView) convertView.findViewById(R.id.passenger_select_cc);
@@ -242,17 +280,25 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
             convertView.setTag(holder);
         } else {
-            holder = (ExpandableListAdapter.GroupViewHolder) convertView.getTag();
+            holder = (ExpandableListReview.GroupViewHolder) convertView.getTag();
 
         }
 
-        final PaymnentGroup group = (PaymnentGroup) getGroup(groupPosition);
+        //    final PaymnentGroup group = (PaymnentGroup) getGroup(groupPosition);
+
+        final PaymentChild group = (PaymentChild) getGroup(groupPosition);
+
         holder.groupNametext.setText(group.getNameText());
-        holder.groupPricetext.setText("Total: $"+ HGBUtility.roundNumber(group.getTotalText())+" "+group.getCurrency());
+        if(group.getNameText().equalsIgnoreCase("Traveller information")){
+            holder.groupPricetext.setVisibility(View.GONE);
+        }else{
+            holder.groupPricetext.setVisibility(View.VISIBLE);
+        }
+        holder.groupPricetext.setText("Total: $"+ group.getTotalText() + " " + group.getCurrency());
 
         holder.groupSelectCCLinearLayout.setVisibility(View.GONE);
 
-      //  holder.groupSelectCC.setText(group.getCreditcard());
+        //  holder.groupSelectCC.setText(group.getCreditcard());
         holder.groupSelectCCLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -345,44 +391,53 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         FontTextView childNametext;
         FontTextView childPricetext;
-        FontTextView payment_info_text;
+
 
         FontTextView childSelectCCText;
         ImageView childSelectCCImage;
         //  ImageView childSelectCCDropDown;
-        ImageView childImage;
-        LinearLayout childSelectCCLinearLayout;
+
+        View childSelectCCLinearLayout;
         LinearLayout childPlaneLinearLayout;
         LinearLayout childHotelCCLinearLayout;
-        FontTextView childPath;
-        FontTextView childDurationPricenight;
+        LinearLayout review_details_price_hotel_ll;
+        LinearLayout review_details_price_flight_ll;
+        LinearLayout review_tax_details_traveler_ll;
+        LinearLayout review_tax_details_flight_ll;
+        LinearLayout payment_child_review_price_ll;
+//        FontTextView childDurationPricenight;
         FontTextView childHotelRoomType;
         FontTextView childHotelCheckIn;
         FontTextView childHotelDuration;
-        FontTextView childPlaneFlightNumber;
+
         FontTextView childPlaneFlightPath;
         FontTextView childPlaneFlightClass;
         FontTextView childPlaneFlightDeparture;
         FontTextView childPlaneFlightArrival;
-        FontTextView plane_flight_seat_location;
+
+
+        FontTextView review_child_traveller_name;
+        FontTextView review_child_traveller_email;
+        FontTextView review_child_traveller_phone;
+        FontTextView review_child_traveller_dob;
 
     }
 
 
-    private void setGroupPrice(boolean add, int groupPosition, FontTextView childPricetext) {
-        PaymnentGroup paymnentGroup = groupsList.get(groupPosition);
-        String string = childPricetext.getText().toString().substring(1);
-
-        if (add) {
-            double d = Double.valueOf(paymnentGroup.getTotalText()) + Double.valueOf(string);
-            groupsList.get(groupPosition).setTotalText(d);
-        } else {
-
-            double d = Double.valueOf(paymnentGroup.getTotalText()) - Double.valueOf(string);
-            groupsList.get(groupPosition).setTotalText(d);
-        }
-
-    }
+//    private void setGroupPrice(boolean add, int groupPosition, FontTextView childPricetext) {
+//        PaymnentGroup paymnentGroup = groupsList.get(groupPosition);
+//        String string = childPricetext.getText().toString().substring(1);
+//
+//        if (add) {
+//            double d = Double.valueOf(paymnentGroup.getTotalText()) + Double.valueOf(string);
+//            groupsList.get(groupPosition).setTotalText(d);
+//        } else {
+//
+//            double d = Double.valueOf(paymnentGroup.getTotalText()) - Double.valueOf(string);
+//            groupsList.get(groupPosition).setTotalText(d);
+//        }
+//
+//    }
 
     private View getNameHeaderPriceView(CompoundButton buttonView) {
         ViewGroup viewParent = (ViewGroup) buttonView.getParent();

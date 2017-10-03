@@ -188,7 +188,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                     PaymentChild paymentChild;
                     if (NodeTypeEnum.HOTEL.getType().equals(nodesVO.getmType())) {
                         paymentChild = new PaymentChild("Hotel",
-                                "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card),null);
+                                nodesVO.getmMinimumAmount(), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card),null,nodesVO.getmCurrency());
                         paymentChild.setHotelCheckIn(HGBUtilityDate.parseDateToMMddyyyyForPayment(nodesVO.getmCheckIn()));
                         int days = Integer.valueOf(HGBUtilityDate.getDateDiffInt(nodesVO.getmCheckIn(),nodesVO.getmCheckOut()));
                         double pricenight = nodesVO.getmMinimumAmount()/days;
@@ -200,7 +200,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                     } else if (NodeTypeEnum.FLIGHT.getType().equals(nodesVO.getmType())) {
 
                         paymentChild = new PaymentChild("Flight",
-                                "$" + String.valueOf(nodesVO.getCost()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card),nodesVO.getParentflightid());
+                                nodesVO.getCost(), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card),nodesVO.getParentflightid(),nodesVO.getmCurrency());
                         paymentChild.setFlightPath(nodesVO.getmOriginCityName() + " to " + nodesVO.getmDestinationCityName() );
                         paymentChild.setFlightDuraion(nodesVO.getmFlightTime());
                         paymentChild.setFlighNumber(nodesVO.getmOperator()+nodesVO.getLegs().get(0).getmFlightNumber());
@@ -741,7 +741,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             final PaymentChild child = (PaymentChild) getChild(groupPosition, childPosition);
             holder.childNametext.setText(child.getNameText());
             //Kate add currency
-            holder.childPricetext.setText( child.getTotalText() + " ");
+            holder.childPricetext.setText( "$ " +child.getTotalText() + " ");
             holder.childSelectCCText.setText(child.getCreditcard()
             );
             holder.childSelectCCLinearLayout.setOnClickListener(new View.OnClickListener() {

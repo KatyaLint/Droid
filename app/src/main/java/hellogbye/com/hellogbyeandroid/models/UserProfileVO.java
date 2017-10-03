@@ -73,6 +73,10 @@ public class UserProfileVO {
     @SerializedName("paxmileage")
     private int paxmileage;
 
+    @SerializedName("validpointsprograms")
+    private String[] validpointsprograms;
+
+
     private HashSet<String> bookingItems;
 
 
@@ -294,5 +298,13 @@ public class UserProfileVO {
 
     public void setPaxmileage(int paxmileage) {
         this.paxmileage = paxmileage;
+    }
+
+    public String[] getValidpointsprograms() {
+        return validpointsprograms;
+    }
+
+    public void setValidpointsprograms(String[] validpointsprograms) {
+        this.validpointsprograms = validpointsprograms;
     }
 }

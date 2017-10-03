@@ -6,8 +6,7 @@
     android:id="@+id/payment_group_root"
     android:padding="@dimen/DP10"
     android:background="@color/COLOR_WHITE"
-    android:clickable="true"
-    >
+    android:clickable="true" >
 
 
 

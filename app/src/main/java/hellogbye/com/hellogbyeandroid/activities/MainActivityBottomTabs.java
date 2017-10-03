@@ -1770,9 +1770,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                     @Override
                     public void onSuccess(Object data) {
 
-                        UserProfileVO mCurrentUser = (UserProfileVO) data;
-                        hgbSaveDataClass.setCurrentUser(mCurrentUser);
-
+                       List< UserProfileVO> mCurrentUser = (List<UserProfileVO>) data;
+                        hgbSaveDataClass.setCurrentUser(mCurrentUser.get(0));
                         goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
                     }
 

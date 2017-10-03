@@ -160,7 +160,7 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
         });
 
         loadBookingItemList();
-        loadTravlerList(view);
+      //  loadTravlerList(view);
         loadCCList(view);
 
         mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -173,10 +173,14 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
 
     }
 
-    private PaymentChild addTravelerInfo(PassengersVO passengersVO){
-        UserProfileVO currentUser = getActivityInterface().getCurrentUser();
-        PaymentChild paymentChild = new PaymentChild("Traveller information",
-                "", true, "", "", "", "");
+    private PaymentChild addTravelerInfo(){
+        UserProfileVO currentUser = ((MainActivityBottomTabs)getActivity()).getHGBSaveDataClass().getCurrentUser(); //getActivityInterface().getCurrentUser();
+        System.out.println("Kate currentUser =" + currentUser.toString());
+        PaymentChild paymentChild = new PaymentChild("Traveller information");
+        paymentChild.setUserName(currentUser.getTitle() + " "+ currentUser.getFirstname() + " " + currentUser.getLastname());
+        paymentChild.setUserEmail(currentUser.getEmailaddress());
+        paymentChild.setUserDOB(currentUser.getDob());
+        paymentChild.setSelected(true);
 //            paymentChild.setFlightPath(nodesVO.getmOriginCityName() + " to " + nodesVO.getmDestinationCityName());
 //            paymentChild.setFlightDuraion(nodesVO.getmFlightTime());
 //            paymentChild.setFlighNumber(nodesVO.getmOperator() + nodesVO.getLegs().get(0).getmFlightNumber());
@@ -190,8 +194,9 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
     }
 
     private PaymentChild addHotel( NodesVO nodesVO, PassengersVO passengersVO ){
+
         PaymentChild paymentChild = new PaymentChild("Hotel information",
-                "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card), null);
+                nodesVO.getmMinimumAmount(), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card), null, nodesVO.getmCurrency());
         paymentChild.setHotelCheckIn(HGBUtilityDate.parseDateToMMddyyyyForPayment(nodesVO.getmCheckIn()));
         int days = Integer.valueOf(HGBUtilityDate.getDateDiffInt(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()));
         double pricenight = nodesVO.getmMinimumAmount() / days;
@@ -205,8 +210,9 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
 
 
     private PaymentChild addFlight(NodesVO nodesVO, PassengersVO passengersVO){
+
         PaymentChild paymentChild = new PaymentChild("Flight information",
-                "$" + String.valueOf(nodesVO.getCost()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card), nodesVO.getParentflightid());
+                nodesVO.getCost(), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card), nodesVO.getParentflightid(), nodesVO.getmCurrency());
         paymentChild.setFlightPath(nodesVO.getmOriginCityName() + " to " + nodesVO.getmDestinationCityName());
         paymentChild.setFlightDuraion(nodesVO.getmFlightTime());
         paymentChild.setFlighNumber(nodesVO.getmOperator()+" "+ nodesVO.getLegs().get(0).getmFlightNumber());
@@ -217,99 +223,147 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
         return paymentChild;
     }
 
+    List<PaymentChild> listDataHeader;
+    HashMap<PaymentChild, List<PaymentChild>> listDataChild;
+
     private void addGroupAndChildExpandable() {
+        listDataHeader = new ArrayList<PaymentChild>();
+        listDataChild = new HashMap<PaymentChild, List<PaymentChild>>();
+
+
         UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
+        Map<String, NodesVO> items = travelOrder.getItems();
         passangers = travelOrder.getPassengerses();
+        List<PaymentChild> travellerList = new ArrayList<>();
 
-        for (PassengersVO passengersVO : passangers) {
+        PaymentChild paymentChild =  null;
+        for (PassengersVO passengerVO : passangers) {
+            List<PaymentChild> hotelList = new ArrayList<>();
+            List<PaymentChild> flightList = new ArrayList<>();
 
-            ArrayList<PaymentChild> passengerChildArray = new ArrayList<>();
+            ArrayList<String> itineraryItems = passengerVO.getmItineraryItems();
 
+            for(String itineraryItem : itineraryItems){
+                NodesVO node = items.get(itineraryItem);
 
-            Map<String, NodesVO> hashMap = travelOrder.getItems();
+                if(NodeTypeEnum.HOTEL.getType().equals(node.getmType())){
 
+                    paymentChild = addHotel(node, passengerVO);
+                    hotelList.add(paymentChild);
+                }else if(NodeTypeEnum.FLIGHT.getType().equals(node.getmType())){
 
-            ArrayList<String> passengerItems = passengersVO.getmItineraryItems();
-            for (String passengerItem : passengerItems) {
-                NodesVO nodesVO = hashMap.get(passengerItem);
-                PaymnentGroup paymnentGroup = new PaymnentGroup(passengersVO.getmName(),
-                        passengersVO.getmTotalPrice(), true, passengersVO.getmItineraryItems(), getString(R.string.select_card),
-                        passengersVO.getCurrency());
-                paymnentGroup.setCurrency(nodesVO.getmCurrency());
-/*                if (nodesVO != null) {*/
-
-                if (nodesVO != null) {//&& list.size() > 0) {
-                    PaymentChild paymentChild;
-                    if (NodeTypeEnum.HOTEL.getType().equals(nodesVO.getmType())) {
-                        System.out.println("Kate HOTEL");
-//                        paymentChild = new PaymentChild("Hotel information",
-//                                "$" + String.valueOf(nodesVO.getmMinimumAmount()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card), null);
-//                        paymentChild.setHotelCheckIn(HGBUtilityDate.parseDateToMMddyyyyForPayment(nodesVO.getmCheckIn()));
-//                        int days = Integer.valueOf(HGBUtilityDate.getDateDiffInt(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()));
-//                        double pricenight = nodesVO.getmMinimumAmount() / days;
-//                        paymentChild.setHotelPricePerNight(String.valueOf(pricenight));
-//                        paymentChild.setHotelRoomType(nodesVO.getRoomsVOs().get(0).getmRoomType());
-//                        paymentChild.setHotelDuration(HGBUtilityDate.getDateDiffString(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()));
-//                        paymentChild.setHotelName(nodesVO.getmHotelName());
-
-                        paymentChild = addHotel(nodesVO, passengersVO);
-
-                        passengerChildArray.add(paymentChild);
-                        paymnentGroup.setNameText("Hotel information");
-                    } else if (NodeTypeEnum.FLIGHT.getType().equals(nodesVO.getmType())) {
-                        System.out.println("Kate FLIGHT");
-//                        paymentChild = new PaymentChild("Flight information",
-//                                "$" + String.valueOf(nodesVO.getCost()), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card), nodesVO.getParentflightid());
-//                        paymentChild.setFlightPath(nodesVO.getmOriginCityName() + " to " + nodesVO.getmDestinationCityName());
-//                        paymentChild.setFlightDuraion(nodesVO.getmFlightTime());
-//                        paymentChild.setFlighNumber(nodesVO.getmOperator()+" "+ nodesVO.getLegs().get(0).getmFlightNumber());
-//                        paymentChild.setOperatorName(nodesVO.getmOperatorName());
-//                        paymentChild.setFlightClass(nodesVO.getmFareClass());
-//                        paymentChild.setFlightDeparture(HGBUtilityDate.parseDateToDateHHmm(nodesVO.getmDeparture()));
-//                        paymentChild.setFlightArrival(HGBUtilityDate.parseDateToDateHHmm(nodesVO.getmArrival()));
-
-                        paymentChild = addFlight(nodesVO,passengersVO);
-
-                        passengerChildArray.add(paymentChild);
-                        paymnentGroup.setNameText("Flight information");
-                    }
+                    paymentChild = addFlight(node,passengerVO);
+                    flightList.add(paymentChild);
                 }
-
-
-                groups.add(paymnentGroup);
-                children.add(passengerChildArray);
-                //             }
             }
 
-            //Add Traveller
-            System.out.println("Kate Traveller");
-            PaymentChild paymentChild = addTravelerInfo(passengersVO);
-            passengerChildArray.add(paymentChild);
-            PaymnentGroup paymnentGroup = new PaymnentGroup(passengersVO.getmName(),
-                    passengersVO.getmTotalPrice(), true, passengersVO.getmItineraryItems(), getString(R.string.select_card),
-                    passengersVO.getCurrency());
-            paymnentGroup.setNameText("Traveller information");
+            // Adding child data
 
-            groups.add(paymnentGroup);
-            children.add(passengerChildArray);
+
+
+            if(!flightList.isEmpty()){
+                PaymentChild paymentChildFlight =  new PaymentChild("Flight Info");
+                paymentChildFlight.putChild(flightList.get(0));
+                listDataHeader.add(paymentChildFlight);
+                listDataChild.put(listDataHeader.get(0), flightList);
+            }
+            if(!hotelList.isEmpty()){
+                PaymentChild paymentChildHotel =  new PaymentChild("Hotel Info");
+                paymentChildHotel.putChild(hotelList.get(0));
+                listDataHeader.add(paymentChildHotel);
+                listDataChild.put(listDataHeader.get(1), hotelList);
+            }
+
+           PaymentChild paymentChildTraveller =  new PaymentChild("Traveller Info");
+            paymentChild = addTravelerInfo();
+            travellerList.add(paymentChild);
+            paymentChildTraveller.putChild(paymentChild);
+
+            listDataHeader.add(paymentChildTraveller);
+            listDataChild.put(listDataHeader.get(2), travellerList);
+
+
+//            PaymentChild paymentChildTraveller =  new PaymentChild("Traveller Info");
+//            paymentChild = addTravelerInfo();
+//            paymentChildTraveller.putChild(paymentChild);
+//
+//            listDataHeader.add(paymentChildTraveller);
+//            listDataChild.put(listDataHeader.get(2), travellerList);
+
+            ExpandableListReview mAdapter = new ExpandableListReview(listDataHeader, listDataChild, getActivity());
+            mAdapter.setGroupClickListenerPosition(new IGroupClickListener(){
+
+                @Override
+                public void groupClicked(int position) {
+                    System.out.println("Kate position =" + position);
+                    if (expandable_list_summary.isGroupExpanded(position)) {
+                        expandable_list_summary.collapseGroup(position);
+                    }else{
+                        expandable_list_summary.expandGroup(position);
+                    }
+//                    lv.collapseGroup(groupPosition);
+                }
+            });
+            expandable_list_summary.setAdapter(mAdapter);
+
+//            ArrayList<PaymentChild> passengerChildArray = new ArrayList<>();
+//
+//
+//            Map<String, NodesVO> hashMap = travelOrder.getItems();
+//
+//
+//            ArrayList<String> passengerItems = passengersVO.getmItineraryItems();
+//            for (String passengerItem : passengerItems) {
+//                NodesVO nodesVO = hashMap.get(passengerItem);
+//                PaymnentGroup paymnentGroup = new PaymnentGroup(passengersVO.getmName(),
+//                        passengersVO.getmTotalPrice(), true, passengersVO.getmItineraryItems(), getString(R.string.select_card),
+//                        passengersVO.getCurrency());
+//                paymnentGroup.setCurrency(nodesVO.getmCurrency());
+///*                if (nodesVO != null) {*/
+//
+//                if (nodesVO != null) {//&& list.size() > 0) {
+//                    PaymentChild paymentChild;
+//                    if (NodeTypeEnum.HOTEL.getType().equals(nodesVO.getmType())) {
+//                        System.out.println("Kate HOTEL");
+//
+//                        paymentChild = addHotel(nodesVO, passengersVO);
+//
+//                        passengerChildArray.add(paymentChild);
+//                        paymnentGroup.setNameText("Hotel information");
+//                    } else if (NodeTypeEnum.FLIGHT.getType().equals(nodesVO.getmType())) {
+//                        System.out.println("Kate FLIGHT");
+//
+//                        paymentChild = addFlight(nodesVO,passengersVO);
+//
+//                        passengerChildArray.add(paymentChild);
+//                        paymnentGroup.setNameText("Flight information");
+//                    }
+//                }
+//
+//
+//                groups.add(paymnentGroup);
+//                children.add(passengerChildArray);
+//                //             }
+//            }
+//
+//            //Add Traveller
+//            System.out.println("Kate Traveller");
+//            PaymentChild paymentChild = addTravelerInfo(passengersVO);
+//            passengerChildArray.add(paymentChild);
+//            PaymnentGroup paymnentGroup = new PaymnentGroup(passengersVO.getmName(),
+//                    passengersVO.getmTotalPrice(), true, passengersVO.getmItineraryItems(), getString(R.string.select_card),
+//                    passengersVO.getCurrency());
+//            paymnentGroup.setNameText("Traveller information");
+//
+//            groups.add(paymnentGroup);
+//            children.add(passengerChildArray);
+//
+//            System.out.println("Kate children =" + children.size());
+//            System.out.println("Kate groups =" + groups.size());
         }
 
 
-        ExpandableListAdapter mAdapter = new ExpandableListAdapter(groups, children, getActivity());
-        mAdapter.setGroupClickListenerPosition(new IGroupClickListener(){
 
-            @Override
-            public void groupClicked(int position) {
-
-                if (expandable_list_summary.isGroupExpanded(position)) {
-                    expandable_list_summary.collapseGroup(position);
-                }else{
-                    expandable_list_summary.expandGroup(position);
-                }
-//                    lv.collapseGroup(groupPosition);
-            }
-        });
-        expandable_list_summary.setAdapter(mAdapter);
 
     }
 
@@ -520,7 +574,9 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
 
         // use a linear layout manager
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerViewTravlers.setLayoutManager(layoutManager);
+
+
+       // mRecyclerViewTravlers.setLayoutManager(layoutManager);
         mRecyclerViewCC.setLayoutManager(mLayoutManager);
 
         ArrayList<CreditCardItem> list = new ArrayList<>(getFlowInterface().getCreditCardsSelected());
