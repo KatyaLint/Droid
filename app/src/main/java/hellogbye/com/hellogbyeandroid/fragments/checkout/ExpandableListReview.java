@@ -194,7 +194,7 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
             holder.childNametext.setVisibility(View.VISIBLE);
 
             holder.review_tax_details_traveler_ll.setVisibility(View.GONE);
-            
+
             //holder.childDurationPricenight.setText(child.getHotelPricePerNight());
           //  holder.childDurationPricenight.setVisibility(View.GONE);
             holder.childHotelRoomType.setText(child.getHotelRoomType());

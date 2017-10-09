@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
 import hellogbye.com.hellogbyeandroid.adapters.creditcardadapters.AlertCheckoutAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.NodeTypeEnum;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymentChild;
@@ -40,6 +42,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
+import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 import static hellogbye.com.hellogbyeandroid.utilities.HGBUtility.setCCIcon;
@@ -309,7 +312,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
                 itemsList = new ArrayList<>();
                 ArrayList<CreditCardItem> creditCards = getFlowInterface().getCreditCards();
-                System.out.println("Kate creditCards =" + creditCards.size());
+
                 for (CreditCardItem item : creditCards) {
                     itemsList.add(item);
                 }
@@ -356,9 +359,28 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                             }
 
                         } else {
-                            CreditCardItem selectedCreditCard = getCardByNumber(selectedText.getLast4());
+                            final CreditCardItem selectedCreditCard = getCardByNumber(selectedText.getLast4());
+                            System.out.println("Kate selectedCVVForCreditCard =" + selectedCVVForCreditCard);
+                          //  selectedCreditCard.setCvv(selectedCVVForCreditCard);
+                            System.out.println("Kate (String)mPaymentTextView.getTag() =" + (String)mPaymentTextView.getTag());
                             getFlowInterface().getCreditCardsSelected().add(selectedCreditCard);
+                            System.out.println("Kate mSelectedView 245=" + mSelectedView);
                             calculateCard(selectedCreditCard, mSelectedView, true);
+
+                            System.out.println("Kate mSelectedView 3=" + mSelectedView);
+                            enterCVVNumberPopup(mSelectedView, selectedCreditCard, new RefreshComplete() {
+                                @Override
+                                public void onRefreshSuccess(Object data) {
+                                    System.out.println("Kate ");
+                                    System.out.println("Kate mSelectedView 2=" + mSelectedView);
+                                }
+
+                                @Override
+                                public void onRefreshError(Object data) {
+
+                                }
+                            });
+
                         }
                         mSelectedView = null;
 
@@ -374,7 +396,6 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 //Create alert dialog object via builder
                 selectCCDialog = dialogBuilder.create();
 
-
             }
 
             @Override
@@ -382,86 +403,44 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
             }
         });
+    }
 
 
+    private String selectedCVVForCreditCard;
 
-//        ConnectionManager.getInstance(getActivity()).getCreditCards(new ConnectionManager.ServerRequestListener() {
-//            @Override
-//            public void onSuccess(Object data) {
-//
-//                itemsList = new ArrayList<>();
-//                getFlowInterface().setCreditCards((ArrayList<CreditCardItem>) data);
-//                for (CreditCardItem item : (ArrayList<CreditCardItem>) data) {
-//                    itemsList.add(item);
-//                }
-//
-//                CreditCardItem cAdd = new CreditCardItem();
-//                cAdd.setLast4(getActivity().getResources().getString(R.string.add_card));
-//                CreditCardItem cLast = new CreditCardItem();
-//                cLast.setLast4(getActivity().getResources().getString(R.string.remove_card));
-//                itemsList.add(cAdd);
-//                itemsList.add(cLast);
-//
-//
-//                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-//                dialogBuilder.setTitle(getResources().getString(R.string.payment_select_payment_method));
-//
-//                dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//
-//
-//                    } });
-//
-//                AlertCheckoutAdapter adapter = new AlertCheckoutAdapter(itemsList,getActivity().getApplicationContext());
-//                dialogBuilder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int item) {
-//
-//                        CreditCardItem selectedText = itemsList.get(item);
-//                        if(selectedText == null){
-//                            ErrorMessage("Wrong credit Card");
-//                            return;
-//                        }
-//                        //This is to set creditcard  array  final json for payment
-//
-//                        if ( selectedText.getLast4().equals(getString(R.string.cancel))) {
-//
-//                        } else if (selectedText.getLast4().equals(getString(R.string.add_card))) {
-//                            getFlowInterface().goToFragment(ToolBarNavEnum.ADD_CREDIT_CARD.getNavNumber(), null);
-//                        } else if (selectedText.getLast4().equals(getString(R.string.remove_card))) {
-//                            if (!mSelectedView.getText().toString().equals(getString(R.string.select_card))) {
-//                                CreditCardItem selectedCreditCard = getCardByNumber(mSelectedView.getText().toString());
-//                                getFlowInterface().getCreditCardsSelected().remove(selectedCreditCard);
-//                                calculateCard(selectedCreditCard, mSelectedView, false);
-//                            }
-//
-//                        } else {
-//                            CreditCardItem selectedCreditCard = getCardByNumber(selectedText.getLast4());
-//                            getFlowInterface().getCreditCardsSelected().add(selectedCreditCard);
-//                            calculateCard(selectedCreditCard, mSelectedView, true);
-//                        }
-//                        mSelectedView = null;
-//
-//                        if (getFlowInterface().getCreditCardsSelected().size() == 0) {
-//                            disablePaymentSolution();
-//                        } else {
-//                            enablePaymentSelection();
-//                        }
-//
-//                        selectCCDialog.dismiss();
-//                    }
-//                });
-//                //Create alert dialog object via builder
-//                selectCCDialog = dialogBuilder.create();
-//
-//            }
-//
-//            @Override
-//            public void onError(Object data) {
-//                ErrorMessage(data);
-//            }
-//        });
+    private void enterCVVNumberPopup(final FontTextView mSelectedView, final CreditCardItem selectedCreditCard, RefreshComplete refreshComplete){
+
+        LayoutInflater li = LayoutInflater.from(getActivity());
+        final View promptsView = li.inflate(R.layout.popup_layout_change_iteinarary_name, null);
+
+        FontTextView title_text_change_name = (FontTextView)promptsView.findViewById(R.id.title_text_change_name);
+        title_text_change_name.setText("Enter CVV number");
+        FontEditTextView change_iteinarary_name = (FontEditTextView)promptsView.findViewById(R.id.change_iteinarary_name);
+        change_iteinarary_name.setHint("Enter cvv number");
 
 
+        HGBUtility.showAlertPopUp(getActivity(), change_iteinarary_name, promptsView, null
+                , getActivity().getResources().getString(R.string.ok_button),
+                new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+                        selectedCVVForCreditCard = inputItem;
+                        selectedCreditCard.setCvv(selectedCVVForCreditCard);
+
+                        getFlowInterface().getCreditCardsSelected().add(selectedCreditCard);
+                        System.out.println("Kate mSelectedView 65=" + mSelectedView);
+                        calculateCard(selectedCreditCard, mSelectedView, true);
+
+
+                     //   mPaymentTextView.setTag(inputItem);
+
+                    }
+
+                    @Override
+                    public void itemCanceled() {
+
+                    }
+                });
     }
 
     @Override
@@ -476,7 +455,6 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 //        if(selectedCreditCard == null){
 //            add = false;
 //        }
-
 
         if (mSelectedView.getTag() instanceof PaymnentGroup) {
             mTotalCCText.setText(getString(R.string.select_card));
@@ -520,7 +498,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             //This is to set bookingitem array  final json for payment
             for (String strItem : paymentGroup.getItems()) {
                 if (add) {
-                    System.out.println("Kate selectedCreditCard.getToken() =" + selectedCreditCard.getToken());
+
                     getFlowInterface().getBookingHashMap().put(strItem, selectedCreditCard.getToken());
                 } else {
                     getFlowInterface().getBookingHashMap().remove(strItem);
@@ -569,7 +547,6 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
             //This is to set bookingitem array  final json for payment
             if (add) {
-                System.out.println("Kate  selectedCreditCard.getToken() 2 =" +  selectedCreditCard.getToken());
                 getFlowInterface().getBookingHashMap().put(paymentchild.getGuid(), selectedCreditCard.getToken());
             } else {
                 getFlowInterface().getBookingHashMap().remove(paymentchild.getGuid());
@@ -596,7 +573,6 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
                 for (String passengerItem : passenger.getmItineraryItems()) {
                     if (add) {
-                        System.out.println("Kate selectedCreditCard.getToken() 3 =" + selectedCreditCard.getToken());
                         getFlowInterface().getBookingHashMap().put(passengerItem, selectedCreditCard.getToken());
                         currentPassenger.getmBookingItems().addAll(passenger.getmItineraryItems());
                     } else {
