@@ -368,18 +368,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                             calculateCard(selectedCreditCard, mSelectedView, true);
 
                             System.out.println("Kate mSelectedView 3=" + mSelectedView);
-                            enterCVVNumberPopup(mSelectedView, selectedCreditCard, new RefreshComplete() {
-                                @Override
-                                public void onRefreshSuccess(Object data) {
-                                    System.out.println("Kate ");
-                                    System.out.println("Kate mSelectedView 2=" + mSelectedView);
-                                }
-
-                                @Override
-                                public void onRefreshError(Object data) {
-
-                                }
-                            });
+                            enterCVVNumberPopup(mSelectedView, selectedCreditCard);
 
                         }
                         mSelectedView = null;
@@ -408,16 +397,13 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
     private String selectedCVVForCreditCard;
 
-    private void enterCVVNumberPopup(final FontTextView mSelectedView, final CreditCardItem selectedCreditCard, RefreshComplete refreshComplete){
+    private void enterCVVNumberPopup(final FontTextView mSelectedView, final CreditCardItem selectedCreditCard){
 
         LayoutInflater li = LayoutInflater.from(getActivity());
         final View promptsView = li.inflate(R.layout.popup_layout_change_iteinarary_name, null);
 
         FontTextView title_text_change_name = (FontTextView)promptsView.findViewById(R.id.title_text_change_name);
-        title_text_change_name.setText("Enter CVV number");
         FontEditTextView change_iteinarary_name = (FontEditTextView)promptsView.findViewById(R.id.change_iteinarary_name);
-        change_iteinarary_name.setHint("Enter cvv number");
-
 
         HGBUtility.showAlertPopUp(getActivity(), change_iteinarary_name, promptsView, null
                 , getActivity().getResources().getString(R.string.ok_button),
@@ -428,9 +414,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                         selectedCreditCard.setCvv(selectedCVVForCreditCard);
 
                         getFlowInterface().getCreditCardsSelected().add(selectedCreditCard);
-                        System.out.println("Kate mSelectedView 65=" + mSelectedView);
                         calculateCard(selectedCreditCard, mSelectedView, true);
-
 
                      //   mPaymentTextView.setTag(inputItem);
 
@@ -450,11 +434,6 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
     }
 
     private void calculateCard(CreditCardItem selectedCreditCard, FontTextView mSelectedView, boolean add) {
-
-//        boolean add = true;
-//        if(selectedCreditCard == null){
-//            add = false;
-//        }
 
         if (mSelectedView.getTag() instanceof PaymnentGroup) {
             mTotalCCText.setText(getString(R.string.select_card));
@@ -558,7 +537,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                 mTotalCCText.setText(selectedCreditCard.getLast4());
                 mTotalCCImage.setVisibility(View.VISIBLE);
                 //      mTotalCCDropDown.setVisibility(View.GONE);
-                HGBUtility.setCCIcon(mTotalCCImage, selectedCreditCard.getCardtypeid());
+                HGBUtility.setCCIcon(mTotalCCImage, selectedCreditCard.getCardtypeid(), true);
             } else {
                 mTotalCCText.setText(getString(R.string.select_card));
                 mTotalCCImage.setVisibility(View.GONE);
@@ -752,7 +731,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             }else{
                 //  holder.childSelectCCText.setVisibility(View.GONE);
                 holder.childSelectCCImage.setVisibility(View.VISIBLE);
-                setCCIcon(holder.childSelectCCImage,child.getCreditcardid());
+                setCCIcon(holder.childSelectCCImage,child.getCreditcardid(), true);
             }
             if(child.getParentflight() == null){
                 holder.childSelectCCLinearLayout.setVisibility(View.VISIBLE);
@@ -890,7 +869,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             }else{
                 //  holder.groupSelectCCDropDown.setVisibility(View.GONE);
                 holder.groupSelectCCImage.setVisibility(View.VISIBLE);
-                setCCIcon(holder.groupSelectCCImage,group.getCreditcardid());
+                setCCIcon(holder.groupSelectCCImage,group.getCreditcardid(), true);
             }
 
 

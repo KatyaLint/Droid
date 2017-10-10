@@ -19,6 +19,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymentChild;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 import static hellogbye.com.hellogbyeandroid.utilities.HGBUtility.setCCIcon;
@@ -126,6 +127,10 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
             holder.review_child_traveller_phone = (FontTextView) convertView.findViewById(R.id.review_child_traveller_phone);
             holder.review_child_traveller_dob = (FontTextView) convertView.findViewById(R.id.review_child_traveller_dob);
 
+            holder.flight_review_total_bf = (FontTextView) convertView.findViewById(R.id.flight_review_total_bf);
+            holder.flight_review_total_gst = (FontTextView) convertView.findViewById(R.id.flight_review_total_gst);
+            holder.flight_review_total_hst = (FontTextView) convertView.findViewById(R.id.flight_review_total_hst);
+
 
 
             //   holder.plane_flight_seat_location_ll = (LinearLayout)convertView.findViewById(R.id.plane_flight_seat_location_ll);
@@ -138,7 +143,7 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
 
 
         holder.childPricetext.setText( child.getTotalText() + " " + child.getCurrency());
-        holder.childSelectCCText.setText(child.getCreditcard());
+
 
 //        holder.childSelectCCLinearLayout.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -165,14 +170,17 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
 //
 //            }
 //        });
+        holder.childSelectCCText.setVisibility(View.GONE);
 
         if(child.getCreditcard() != null && child.getCreditcard().equals(context.getString(R.string.select_card))){
             // holder.childSelectCCText.setVisibility(View.VISIBLE);
             holder.childSelectCCImage.setVisibility(View.GONE);
+
         }else{
             //  holder.childSelectCCText.setVisibility(View.GONE);
             holder.childSelectCCImage.setVisibility(View.VISIBLE);
-            setCCIcon(holder.childSelectCCImage,child.getCreditcardid());
+
+            setCCIcon(holder.childSelectCCImage,child.getCreditcardid(), false);
         }
         if(child.getParentflight() == null){
             holder.childSelectCCLinearLayout.setVisibility(View.VISIBLE);
@@ -186,6 +194,8 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
             holder.review_tax_details_flight_ll.setVisibility(View.VISIBLE);
             holder.review_details_price_flight_ll.setVisibility(View.GONE);
             holder.review_details_price_hotel_ll.setVisibility(View.VISIBLE);
+
+            //PassengersVO currentPassenger = getCurrentPassengerByName(getActivityInterface().getCurrentUser().getFirstname());
             holder.childSelectCCLinearLayout.setVisibility(View.VISIBLE);
             holder.childPlaneLinearLayout.setVisibility(View.GONE);
 
@@ -213,11 +223,10 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
             holder.childPlaneLinearLayout.setVisibility(View.VISIBLE);
 
             holder.childHotelCCLinearLayout.setVisibility(View.GONE);
-            holder.payment_child_review_price_ll.setVisibility(View.GONE);
+            holder.payment_child_review_price_ll.setVisibility(View.VISIBLE);
             holder.childNametext.setVisibility(View.VISIBLE);
 
             holder.review_tax_details_traveler_ll.setVisibility(View.GONE);
-
 
 
             holder.childNametext.setText(child.getOperatorName() +"\n" + child.getFlighNumber());
@@ -229,6 +238,13 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
             holder.childPlaneFlightClass.setText(child.getFlightClass());
             holder.childPlaneFlightDeparture.setText(child.getFlightDeparture());
             holder.childPlaneFlightArrival.setText(child.getFlightArrival());
+
+
+//            holder.flight_review_total_bf.setText();
+//            holder.flight_review_total_gst.setText();
+//            holder.flight_review_total_hst.setText();
+
+
 
 
         }else if(child.getNameText().equalsIgnoreCase("Traveller information")){ //Traveller info
@@ -271,7 +287,7 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
             holder.groupNametext = (FontTextView) convertView.findViewById(R.id.payment_group_name);
             holder.groupPricetext = (FontTextView) convertView.findViewById(R.id.payment_group_price);
             holder.groupSelectCC = (FontTextView) convertView.findViewById(R.id.passenger_select_cc);
-            holder.groupSelectCCImage = (ImageView) convertView.findViewById(R.id.passenger_select_cc_image);
+        //    holder.groupSelectCCImage = (ImageView) convertView.findViewById(R.id.passenger_select_cc_image);
             //       holder.groupSelectCCDropDown = (ImageView) convertView.findViewById(R.id.passenger_select_cc_dropdown);
             holder.groupSelectCCLinearLayout = (LinearLayout) convertView.findViewById(R.id.passenger_select_cc_ll);
 
@@ -383,7 +399,7 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
         ImageView groupImageView;
         FontTextView groupSelectCC;
         //    ImageView groupSelectCCDropDown;
-        ImageView groupSelectCCImage;
+      //  ImageView groupSelectCCImage;
         LinearLayout groupSelectCCLinearLayout;
     }
 
@@ -420,6 +436,12 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
         FontTextView review_child_traveller_email;
         FontTextView review_child_traveller_phone;
         FontTextView review_child_traveller_dob;
+
+
+        FontTextView flight_review_total_bf;
+        FontTextView flight_review_total_gst;
+        FontTextView flight_review_total_hst;
+
 
     }
 

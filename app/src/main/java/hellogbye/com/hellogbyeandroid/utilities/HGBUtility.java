@@ -7,6 +7,8 @@ import android.app.DatePickerDialog;
 
 
 import android.content.pm.PackageManager;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.PorterDuff;
 import android.location.Criteria;
 import android.os.Build;
@@ -1067,10 +1069,7 @@ public class HGBUtility {
 
 
 
-
-
-    public static void setCCIcon(ImageView view, String cardid) {
-
+    private static ImageView setPicture(ImageView view, String cardid){
         if ("1".equals(cardid)) {
             view.setBackgroundResource(R.drawable.amex_icons);
 
@@ -1083,12 +1082,25 @@ public class HGBUtility {
         } else if ("4".equals(cardid)) {
             view.setBackgroundResource(R.drawable.visa_icon);
 
-        }else  {
+        } else {
             view.setBackgroundResource(R.drawable.all_card_icon);
-
         }
+        return view;
+    }
 
+    public static void setCCIcon(ImageView view, String cardid, boolean isColorful) {
+        setPicture(view, cardid);
 
+        //TODO in the future try to conver to grey image
+//        ColorMatrix matrix = new ColorMatrix();
+//        matrix.setSaturation(0);
+//
+//        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+//
+//        view = setPicture(view, cardid);
+//        if(!isColorful) {
+//            view.setColorFilter(filter);
+//        }
     }
 
 

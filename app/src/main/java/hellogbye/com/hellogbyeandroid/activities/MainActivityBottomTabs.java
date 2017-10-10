@@ -108,6 +108,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.cnc.CNCTutorialsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelationshipTypesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.UpdateAvailabilityVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
@@ -1790,6 +1791,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 new ConnectionManager.ServerRequestListener() {
                     @Override
                     public void onSuccess(Object data) {
+                        UpdateAvailabilityVO updateAvailabilityVO = (UpdateAvailabilityVO)data;
                         refreslistner.onRefreshSuccess(data);
                     }
 

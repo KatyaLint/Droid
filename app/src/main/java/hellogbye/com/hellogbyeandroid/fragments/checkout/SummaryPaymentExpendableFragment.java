@@ -29,6 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -193,34 +194,53 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
 
     }
 
-    private PaymentChild addHotel( NodesVO nodesVO, PassengersVO passengersVO ){
+    private PaymentChild addHotel( NodesVO nodeVO, PassengersVO passengersVO ){
 
         PaymentChild paymentChild = new PaymentChild("Hotel information",
-                nodesVO.getmMinimumAmount(), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card), null, nodesVO.getmCurrency());
-        paymentChild.setHotelCheckIn(HGBUtilityDate.parseDateToMMddyyyyForPayment(nodesVO.getmCheckIn()));
-        int days = Integer.valueOf(HGBUtilityDate.getDateDiffInt(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()));
-        double pricenight = nodesVO.getmMinimumAmount() / days;
+                nodeVO.getmMinimumAmount(), true, nodeVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card), null, nodeVO.getmCurrency());
+        setCreditCardForItem( nodeVO,  paymentChild);
+        paymentChild.setHotelCheckIn(HGBUtilityDate.parseDateToMMddyyyyForPayment(nodeVO.getmCheckIn()));
+        int days = Integer.valueOf(HGBUtilityDate.getDateDiffInt(nodeVO.getmCheckIn(), nodeVO.getmCheckOut()));
+        double pricenight = nodeVO.getmMinimumAmount() / days;
         paymentChild.setHotelPricePerNight(String.valueOf(pricenight));
-        paymentChild.setHotelRoomType(nodesVO.getRoomsVOs().get(0).getmRoomType());
-        paymentChild.setHotelDuration(HGBUtilityDate.getDateDiffString(nodesVO.getmCheckIn(), nodesVO.getmCheckOut()));
-        paymentChild.setHotelName(nodesVO.getmHotelName());
+        paymentChild.setHotelRoomType(nodeVO.getRoomsVOs().get(0).getmRoomType());
+        paymentChild.setHotelDuration(HGBUtilityDate.getDateDiffString(nodeVO.getmCheckIn(), nodeVO.getmCheckOut()));
+        paymentChild.setHotelName(nodeVO.getmHotelName());
         return paymentChild;
 
     }
 
 
-    private PaymentChild addFlight(NodesVO nodesVO, PassengersVO passengersVO){
+    private PaymentChild addFlight(NodesVO nodeVO, PassengersVO passengersVO){
 
         PaymentChild paymentChild = new PaymentChild("Flight information",
-                nodesVO.getCost(), true, nodesVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card), nodesVO.getParentflightid(), nodesVO.getmCurrency());
-        paymentChild.setFlightPath(nodesVO.getmOriginCityName() + " to " + nodesVO.getmDestinationCityName());
-        paymentChild.setFlightDuraion(nodesVO.getmFlightTime());
-        paymentChild.setFlighNumber(nodesVO.getmOperator()+" "+ nodesVO.getLegs().get(0).getmFlightNumber());
-        paymentChild.setOperatorName(nodesVO.getmOperatorName());
-        paymentChild.setFlightClass(nodesVO.getmFareClass());
-        paymentChild.setFlightDeparture(HGBUtilityDate.parseDateToDateHHmm(nodesVO.getmDeparture()));
-        paymentChild.setFlightArrival(HGBUtilityDate.parseDateToDateHHmm(nodesVO.getmArrival()));
+                nodeVO.getCost(), true, nodeVO.getmGuid(), passengersVO.getmPaxguid(), getString(R.string.select_card), nodeVO.getParentflightid(), nodeVO.getmCurrency());
+        paymentChild = setCreditCardForItem( nodeVO,  paymentChild);
+        paymentChild.setFlightPath(nodeVO.getmOriginCityName() + " to " + nodeVO.getmDestinationCityName());
+        paymentChild.setFlightDuraion(nodeVO.getmFlightTime());
+        paymentChild.setFlighNumber(nodeVO.getmOperator()+" "+ nodeVO.getLegs().get(0).getmFlightNumber());
+        paymentChild.setOperatorName(nodeVO.getmOperatorName());
+        paymentChild.setFlightClass(nodeVO.getmFareClass());
+        paymentChild.setFlightDeparture(HGBUtilityDate.parseDateToDateHHmm(nodeVO.getmDeparture()));
+        paymentChild.setFlightArrival(HGBUtilityDate.parseDateToDateHHmm(nodeVO.getmArrival()));
+
         return paymentChild;
+    }
+
+
+    private PaymentChild setCreditCardForItem(NodesVO nodeVO, PaymentChild paymentChild){
+        //pax=userId
+        //creditcard
+
+        HashSet<CreditCardItem> selectedCreditCards = getFlowInterface().getCreditCardsSelected();
+        for(CreditCardItem creditCard : selectedCreditCards){
+            if(creditCard.getUserid().equals(nodeVO.getmPaxguid())){
+                paymentChild.setCreditcardid(creditCard.getCardtypeid());
+                paymentChild.setCreditcard(creditCard.getCardtypeid());
+                return paymentChild;
+            }
+        }
+        return null;
     }
 
     List<PaymentChild> listDataHeader;
@@ -253,6 +273,7 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
                 }else if(NodeTypeEnum.FLIGHT.getType().equals(node.getmType())){
 
                     paymentChild = addFlight(node,passengerVO);
+                    System.out.println("Kate paymentChild =" + paymentChild.getCreditcardid());
                     flightList.add(paymentChild);
                 }
             }
@@ -263,7 +284,9 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
 
             if(!flightList.isEmpty()){
                 PaymentChild paymentChildFlight =  new PaymentChild("Flight Info");
+
                 paymentChildFlight.putChild(flightList.get(0));
+                System.out.println("Kate flightList =" + flightList.get(0).getCreditcardid());
                 listDataHeader.add(paymentChildFlight);
                 listDataChild.put(listDataHeader.get(0), flightList);
             }
@@ -290,6 +313,7 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
 //            listDataHeader.add(paymentChildTraveller);
 //            listDataChild.put(listDataHeader.get(2), travellerList);
 
+
             ExpandableListReview mAdapter = new ExpandableListReview(listDataHeader, listDataChild, getActivity());
             mAdapter.setGroupClickListenerPosition(new IGroupClickListener(){
 
@@ -306,60 +330,6 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
             });
             expandable_list_summary.setAdapter(mAdapter);
 
-//            ArrayList<PaymentChild> passengerChildArray = new ArrayList<>();
-//
-//
-//            Map<String, NodesVO> hashMap = travelOrder.getItems();
-//
-//
-//            ArrayList<String> passengerItems = passengersVO.getmItineraryItems();
-//            for (String passengerItem : passengerItems) {
-//                NodesVO nodesVO = hashMap.get(passengerItem);
-//                PaymnentGroup paymnentGroup = new PaymnentGroup(passengersVO.getmName(),
-//                        passengersVO.getmTotalPrice(), true, passengersVO.getmItineraryItems(), getString(R.string.select_card),
-//                        passengersVO.getCurrency());
-//                paymnentGroup.setCurrency(nodesVO.getmCurrency());
-///*                if (nodesVO != null) {*/
-//
-//                if (nodesVO != null) {//&& list.size() > 0) {
-//                    PaymentChild paymentChild;
-//                    if (NodeTypeEnum.HOTEL.getType().equals(nodesVO.getmType())) {
-//                        System.out.println("Kate HOTEL");
-//
-//                        paymentChild = addHotel(nodesVO, passengersVO);
-//
-//                        passengerChildArray.add(paymentChild);
-//                        paymnentGroup.setNameText("Hotel information");
-//                    } else if (NodeTypeEnum.FLIGHT.getType().equals(nodesVO.getmType())) {
-//                        System.out.println("Kate FLIGHT");
-//
-//                        paymentChild = addFlight(nodesVO,passengersVO);
-//
-//                        passengerChildArray.add(paymentChild);
-//                        paymnentGroup.setNameText("Flight information");
-//                    }
-//                }
-//
-//
-//                groups.add(paymnentGroup);
-//                children.add(passengerChildArray);
-//                //             }
-//            }
-//
-//            //Add Traveller
-//            System.out.println("Kate Traveller");
-//            PaymentChild paymentChild = addTravelerInfo(passengersVO);
-//            passengerChildArray.add(paymentChild);
-//            PaymnentGroup paymnentGroup = new PaymnentGroup(passengersVO.getmName(),
-//                    passengersVO.getmTotalPrice(), true, passengersVO.getmItineraryItems(), getString(R.string.select_card),
-//                    passengersVO.getCurrency());
-//            paymnentGroup.setNameText("Traveller information");
-//
-//            groups.add(paymnentGroup);
-//            children.add(passengerChildArray);
-//
-//            System.out.println("Kate children =" + children.size());
-//            System.out.println("Kate groups =" + groups.size());
         }
 
 
@@ -599,7 +569,6 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
         Bundle args = getArguments();
         if (args != null) {
             mCheckBox.setChecked(args.getBoolean("i_accept"));
-
         }
     }
 

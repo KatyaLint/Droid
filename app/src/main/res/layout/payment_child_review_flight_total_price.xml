@@ -23,6 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:id="@+id/flight_review_total_bf"
                 android:text="$10.000000"/>
         </LinearLayout>
 
@@ -43,6 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:id="@+id/flight_review_total_gst"
                 android:text="$000000"/>
         </LinearLayout>
 
@@ -61,16 +63,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+
                 android:text="HST"/>
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:id="@+id/flight_review_total_hst"
                 android:text="$000000"/>
         </LinearLayout>
-
-
 
 
     </LinearLayout>

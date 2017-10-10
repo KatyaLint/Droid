@@ -24,6 +24,7 @@ import hellogbye.com.hellogbyeandroid.fragments.checkout.AirlinePointsProgramVO;
 import hellogbye.com.hellogbyeandroid.models.CreditCardSessionItem;
 
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.UpdateAvailabilityVO;
 import hellogbye.com.hellogbyeandroid.signalr.AirportServerResultCNCVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionsSearchItemsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
@@ -321,6 +322,19 @@ public class Parser {
             e.printStackTrace();
         }
         return mTravelList;
+    }
+
+    public static Object getUpdateAvailabilityVO(String response){
+        UpdateAvailabilityVO updateAvailabilityVO = null;
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<UpdateAvailabilityVO>() {
+            }.getType();
+            updateAvailabilityVO = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return updateAvailabilityVO;
     }
 
     public static Object getTravel(String response){

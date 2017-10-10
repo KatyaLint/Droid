@@ -74,7 +74,7 @@ public class AlertCheckoutAdapter extends BaseAdapter {
             text.setTypeface(textFont);
         }else{
 
-            HGBUtility.setCCIcon(image, mData.get(position).getCardtypeid());
+            HGBUtility.setCCIcon(image, mData.get(position).getCardtypeid(), true);
          //   image.setBackgroundResource(R.drawable.all_card_icon);
             text.setTypeface(textFontReg);
         }

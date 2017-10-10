@@ -1825,7 +1825,7 @@ public class ConnectionManager {
                 json1, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(response);
+                listener.onSuccess(Parser.getUpdateAvailabilityVO(response));
             }
         }, new Response.ErrorListener() {
             @Override

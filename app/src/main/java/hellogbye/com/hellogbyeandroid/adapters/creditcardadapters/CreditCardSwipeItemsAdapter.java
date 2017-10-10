@@ -121,7 +121,7 @@ public class CreditCardSwipeItemsAdapter extends RecyclerSwipeAdapter<CreditCard
 //                viewHolder.mCardImage.setBackgroundResource(R.drawable.visa);
 //        }
 
-        HGBUtility.setCCIcon(viewHolder.mCardImage,cardID);
+        HGBUtility.setCCIcon(viewHolder.mCardImage,cardID, true);
 
 
         viewHolder.credit_card_layiut_rl.setTag(item.getToken());

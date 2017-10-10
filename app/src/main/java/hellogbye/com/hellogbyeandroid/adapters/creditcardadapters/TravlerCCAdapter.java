@@ -137,7 +137,7 @@ public class TravlerCCAdapter extends RecyclerView.Adapter<TravlerCCAdapter.View
             holder.mCVVEditText.setText(item.getCvv());
         }
 
-        HGBUtility.setCCIcon(holder.mCCImage,item.getCardtypeid());
+        HGBUtility.setCCIcon(holder.mCCImage,item.getCardtypeid(), true);
 
         holder.mCVVEditText.addTextChangedListener(new TextWatcher() {
             @Override

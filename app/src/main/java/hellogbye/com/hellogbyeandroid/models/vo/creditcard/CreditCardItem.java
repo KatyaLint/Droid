@@ -58,15 +58,6 @@ public class CreditCardItem {
 
 
 
-
-
-
-
-
-
-
-
-
     private String cvv;
 
     private boolean isSelected;
