@@ -14,12 +14,14 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymentChild;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.UpdateAvailabilityItemVO;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.UpdateAvailabilityVO;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 import static hellogbye.com.hellogbyeandroid.utilities.HGBUtility.setCCIcon;
@@ -27,7 +29,7 @@ import static hellogbye.com.hellogbyeandroid.utilities.HGBUtility.setCCIcon;
 
 
 
-public class ExpandableListReview extends BaseExpandableListAdapter {
+public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
 
     private LayoutInflater inf;
 
@@ -35,12 +37,13 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
     private HashMap<PaymentChild, List<PaymentChild>> _listDataChild;
     private Context context;
     private SummaryPaymentExpendableFragment.IGroupClickListener igroupClickListener;
+    private UpdateAvailabilityVO updateAvailabilityVO;
 
-    public ExpandableListReview(List<PaymentChild> listDataHeader,
-                                 HashMap<PaymentChild, List<PaymentChild>> listChildData, Context context) {
+    public ExpandableListReviewAdapter(List<PaymentChild> listDataHeader,
+                                       HashMap<PaymentChild, List<PaymentChild>> listChildData, Context context, UpdateAvailabilityVO updateAvailabilityVO) {
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
-
+        this.updateAvailabilityVO = updateAvailabilityVO;
         this.inf = LayoutInflater.from(context);
         this.context = context;
     }
@@ -86,10 +89,10 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
     @Override
     public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
-        final ExpandableListReview.ChildViewHolder holder;
+        final ExpandableListReviewAdapter.ChildViewHolder holder;
         if (convertView == null) {
             convertView = inf.inflate(R.layout.payment_child_review_item, parent, false);
-            holder = new ExpandableListReview.ChildViewHolder();
+            holder = new ExpandableListReviewAdapter.ChildViewHolder();
 
             holder.childNametext = (FontTextView) convertView.findViewById(R.id.payment_child_name);
             holder.childPricetext = (FontTextView) convertView.findViewById(R.id.payment_child_price);
@@ -118,26 +121,47 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
             holder.review_details_price_flight_ll = (LinearLayout)convertView.findViewById(R.id.review_details_price_flight_ll) ;
             holder.review_details_price_hotel_ll = (LinearLayout)convertView.findViewById(R.id.review_details_price_hotel_ll) ;
 
+
+            holder.total_taxes = (FontTextView)convertView.findViewById(R.id.total_taxes) ;
+            holder.review_details_price_flight_im = (ImageView)convertView.findViewById(R.id.review_details_price_flight_im) ;
+
+
+
+            holder.total_taxes_hotel = (FontTextView)convertView.findViewById(R.id.total_taxes_hotel);
+            holder.review_details_price_hotel_price_im = (ImageView)convertView.findViewById(R.id.review_details_price_hotel_price_im) ;
+
+
+
             holder.review_tax_details_traveler_ll = (LinearLayout)convertView.findViewById(R.id.review_tax_details_traveler_ll);
             holder.review_tax_details_flight_ll = (LinearLayout)convertView.findViewById(R.id.review_tax_details_flight_ll);
+            holder.review_tax_details_hotel_ll = (LinearLayout)convertView.findViewById(R.id.review_tax_details_hotel_ll);
             holder.payment_child_review_price_ll = (LinearLayout)convertView.findViewById(R.id.payment_child_review_price_ll);
+            holder.review_details_price_hotel_price_ll = (LinearLayout)convertView.findViewById(R.id.review_details_price_hotel_price_ll);
+
+
 
             holder.review_child_traveller_name = (FontTextView) convertView.findViewById(R.id.review_child_traveller_name);
             holder.review_child_traveller_email = (FontTextView) convertView.findViewById(R.id.review_child_traveller_email);
             holder.review_child_traveller_phone = (FontTextView) convertView.findViewById(R.id.review_child_traveller_phone);
             holder.review_child_traveller_dob = (FontTextView) convertView.findViewById(R.id.review_child_traveller_dob);
 
+
+
             holder.flight_review_total_bf = (FontTextView) convertView.findViewById(R.id.flight_review_total_bf);
             holder.flight_review_total_gst = (FontTextView) convertView.findViewById(R.id.flight_review_total_gst);
             holder.flight_review_total_hst = (FontTextView) convertView.findViewById(R.id.flight_review_total_hst);
 
 
+            holder.hotel_review_total_charges = (FontTextView) convertView.findViewById(R.id.hotel_review_total_charges);
+            holder.hotel_review_total_night_cost = (FontTextView) convertView.findViewById(R.id.hotel_review_total_night_cost);
+            holder.hotel_review_total_num_of_nights = (FontTextView) convertView.findViewById(R.id.hotel_review_total_num_of_nights);
+            holder.hotel_review_nightly = (FontTextView) convertView.findViewById(R.id.hotel_review_nightly);
 
             //   holder.plane_flight_seat_location_ll = (LinearLayout)convertView.findViewById(R.id.plane_flight_seat_location_ll);
 
             convertView.setTag(holder);
         } else {
-            holder = (ExpandableListReview.ChildViewHolder) convertView.getTag();
+            holder = (ExpandableListReviewAdapter.ChildViewHolder) convertView.getTag();
         }
         final PaymentChild child = (PaymentChild) getChild(groupPosition, childPosition);
 
@@ -170,16 +194,16 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
 //
 //            }
 //        });
-        holder.childSelectCCText.setVisibility(View.GONE);
+       // holder.childSelectCCText.setVisibility(View.GONE);
 
         if(child.getCreditcard() != null && child.getCreditcard().equals(context.getString(R.string.select_card))){
-            // holder.childSelectCCText.setVisibility(View.VISIBLE);
+             holder.childSelectCCText.setVisibility(View.GONE);
             holder.childSelectCCImage.setVisibility(View.GONE);
 
         }else{
-            //  holder.childSelectCCText.setVisibility(View.GONE);
+            holder.childSelectCCText.setVisibility(View.VISIBLE);
             holder.childSelectCCImage.setVisibility(View.VISIBLE);
-
+            holder.childSelectCCText.setText(child.getCreditcard());
             setCCIcon(holder.childSelectCCImage,child.getCreditcardid(), false);
         }
         if(child.getParentflight() == null){
@@ -191,9 +215,11 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
 
         if(child.getNameText().equalsIgnoreCase("Hotel information")){
 
-            holder.review_tax_details_flight_ll.setVisibility(View.VISIBLE);
+            holder.review_tax_details_flight_ll.setVisibility(View.GONE);
+            holder.review_details_price_hotel_price_ll.setVisibility(View.VISIBLE);
+            holder.review_tax_details_hotel_ll.setVisibility(View.VISIBLE);
             holder.review_details_price_flight_ll.setVisibility(View.GONE);
-            holder.review_details_price_hotel_ll.setVisibility(View.VISIBLE);
+            holder.review_details_price_hotel_ll.setVisibility(View.GONE);
 
             //PassengersVO currentPassenger = getCurrentPassengerByName(getActivityInterface().getCurrentUser().getFirstname());
             holder.childSelectCCLinearLayout.setVisibility(View.VISIBLE);
@@ -211,12 +237,43 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
             holder.childHotelCheckIn.setText(child.getHotelCheckIn());
             holder.childHotelDuration.setText(child.getHotelDuration());
 
-
             holder.childNametext.setText(child.getHotelName());
 
-        }else if(child.getNameText().equalsIgnoreCase("Flight information")){
 
+//            holder.hotel_review_total_charges.setText(updateAvailabilityVO.getHotels().get(0).get);
+            ArrayList<UpdateAvailabilityItemVO> hotels = updateAvailabilityVO.getHotels();
+            double nightlyRate = 0;
+            for(Double d : hotels.get(0).getNightlyrate()){
+                nightlyRate = nightlyRate+d;
+            }
+
+            holder.hotel_review_total_night_cost.setText(""+nightlyRate);
+            holder.hotel_review_total_num_of_nights.setText(""+updateAvailabilityVO.getHotels().get(0).getNightlyrate().size() + " Nights:");
+            holder.hotel_review_nightly.setText(""+updateAvailabilityVO.getHotels().get(0).getNightlyrate().get(0));
+
+
+            double totalPriceTax = 0;
+            if(updateAvailabilityVO.getHotels().get(0).getTaxbreakdown().getCity_tax() != null){
+
+                totalPriceTax = totalPriceTax + Double.parseDouble(updateAvailabilityVO.getHotels().get(0).getTaxbreakdown().getCity_tax());
+
+            }
+            if(updateAvailabilityVO.getHotels().get(0).getTaxbreakdown().getTax() != null){
+                totalPriceTax = totalPriceTax + Double.parseDouble(updateAvailabilityVO.getHotels().get(0).getTaxbreakdown().getTax());
+
+            }
+
+            holder.total_taxes_hotel.setText("" +totalPriceTax);
+
+
+
+            holder.review_details_price_hotel_price_im.setOnClickListener(showTaxesDialogListener);
+
+
+        }else if(child.getNameText().equalsIgnoreCase("Flight information")){
+            holder.review_details_price_hotel_price_ll.setVisibility(View.GONE);
             holder.review_tax_details_flight_ll.setVisibility(View.VISIBLE);
+            holder.review_tax_details_hotel_ll.setVisibility(View.GONE);
             holder.review_details_price_flight_ll.setVisibility(View.VISIBLE);
             holder.review_details_price_hotel_ll.setVisibility(View.GONE);
             holder.childSelectCCLinearLayout.setVisibility(View.VISIBLE);
@@ -240,16 +297,20 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
             holder.childPlaneFlightArrival.setText(child.getFlightArrival());
 
 
-//            holder.flight_review_total_bf.setText();
-//            holder.flight_review_total_gst.setText();
-//            holder.flight_review_total_hst.setText();
+            holder.flight_review_total_bf.setText(""+updateAvailabilityVO.getFlights().get(0).getBasefare());
+            holder.flight_review_total_gst.setText(""+updateAvailabilityVO.getFlights().get(0).getGst());
+            holder.flight_review_total_hst.setText(""+updateAvailabilityVO.getFlights().get(0).getHst());
 
 
+            holder.total_taxes.setText("" +updateAvailabilityVO.getFlights().get(0).getTotaltax());
+
+            holder.review_details_price_flight_im.setOnClickListener(showTaxesDialogListener);
 
 
         }else if(child.getNameText().equalsIgnoreCase("Traveller information")){ //Traveller info
 
             holder.review_tax_details_flight_ll.setVisibility(View.GONE);
+            holder.review_tax_details_hotel_ll.setVisibility(View.GONE);
             holder.review_details_price_flight_ll.setVisibility(View.GONE);
             holder.review_details_price_hotel_ll.setVisibility(View.GONE);
             holder.childSelectCCLinearLayout.setVisibility(View.GONE);
@@ -273,17 +334,22 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
     }
 
 
-
+    View.OnClickListener showTaxesDialogListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            System.out.println("Kate show taxes");
+        }
+    };
 
 
     @Override
     public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        final ExpandableListReview.GroupViewHolder holder;
+        final ExpandableListReviewAdapter.GroupViewHolder holder;
 
         if (convertView == null) {
             convertView = inf.inflate(R.layout.payment_group_item, parent, false);
 
-            holder = new ExpandableListReview.GroupViewHolder();
+            holder = new ExpandableListReviewAdapter.GroupViewHolder();
             holder.groupNametext = (FontTextView) convertView.findViewById(R.id.payment_group_name);
             holder.groupPricetext = (FontTextView) convertView.findViewById(R.id.payment_group_price);
             holder.groupSelectCC = (FontTextView) convertView.findViewById(R.id.passenger_select_cc);
@@ -296,7 +362,7 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
 
             convertView.setTag(holder);
         } else {
-            holder = (ExpandableListReview.GroupViewHolder) convertView.getTag();
+            holder = (ExpandableListReviewAdapter.GroupViewHolder) convertView.getTag();
 
         }
 
@@ -420,7 +486,9 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
         LinearLayout review_details_price_flight_ll;
         LinearLayout review_tax_details_traveler_ll;
         LinearLayout review_tax_details_flight_ll;
+        LinearLayout review_tax_details_hotel_ll;
         LinearLayout payment_child_review_price_ll;
+        LinearLayout review_details_price_hotel_price_ll;
 //        FontTextView childDurationPricenight;
         FontTextView childHotelRoomType;
         FontTextView childHotelCheckIn;
@@ -442,7 +510,17 @@ public class ExpandableListReview extends BaseExpandableListAdapter {
         FontTextView flight_review_total_gst;
         FontTextView flight_review_total_hst;
 
+        FontTextView hotel_review_total_charges;
+        FontTextView hotel_review_total_night_cost;
+        FontTextView hotel_review_total_num_of_nights;
+        FontTextView hotel_review_nightly;
 
+
+        FontTextView total_taxes;
+        FontTextView total_taxes_hotel;
+
+        ImageView review_details_price_hotel_price_im;
+        ImageView review_details_price_flight_im;
     }
 
 

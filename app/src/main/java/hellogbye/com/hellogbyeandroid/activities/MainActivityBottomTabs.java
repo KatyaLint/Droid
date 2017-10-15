@@ -185,6 +185,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private HorizontalScrollView table_scroll;
     private ImageButton toolbar_new_grid_add_companions;
     private UserProfilePreferences userProfilePreferences;
+    private UpdateAvailabilityVO updateAvailabilityVO;
     // private SignalRHubConnection mSignalRHubConnection;
 
 
@@ -1247,6 +1248,16 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     }
 
     @Override
+    public void setUpdateAvailability(UpdateAvailabilityVO updateAvailabilityVO) {
+        this.updateAvailabilityVO = updateAvailabilityVO;
+    }
+
+    @Override
+    public UpdateAvailabilityVO getUpdateAvailability() {
+        return this.updateAvailabilityVO;
+    }
+
+    @Override
     public void setListUsers(ArrayList<UserProfileVO> travellist) {
         mTravelList = travellist;
     }
@@ -1792,6 +1803,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                     @Override
                     public void onSuccess(Object data) {
                         UpdateAvailabilityVO updateAvailabilityVO = (UpdateAvailabilityVO)data;
+                        setUpdateAvailability(updateAvailabilityVO);
                         refreslistner.onRefreshSuccess(data);
                     }
 

@@ -248,6 +248,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
         HashSet<String> set = new HashSet<String>();
         for (String key : getFlowInterface().getBookingHashMap().keySet()) {
+            System.out.println("Kate key =" + key);
             set.add(key);
         }
 
@@ -360,14 +361,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
                         } else {
                             final CreditCardItem selectedCreditCard = getCardByNumber(selectedText.getLast4());
-                            System.out.println("Kate selectedCVVForCreditCard =" + selectedCVVForCreditCard);
-                          //  selectedCreditCard.setCvv(selectedCVVForCreditCard);
-                            System.out.println("Kate (String)mPaymentTextView.getTag() =" + (String)mPaymentTextView.getTag());
                             getFlowInterface().getCreditCardsSelected().add(selectedCreditCard);
-                            System.out.println("Kate mSelectedView 245=" + mSelectedView);
                             calculateCard(selectedCreditCard, mSelectedView, true);
-
-                            System.out.println("Kate mSelectedView 3=" + mSelectedView);
                             enterCVVNumberPopup(mSelectedView, selectedCreditCard);
 
                         }
@@ -404,7 +399,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
         FontTextView title_text_change_name = (FontTextView)promptsView.findViewById(R.id.title_text_change_name);
         FontEditTextView change_iteinarary_name = (FontEditTextView)promptsView.findViewById(R.id.change_iteinarary_name);
-
+        title_text_change_name.setText("Enter CVV Number");
+        change_iteinarary_name.setHint("Enter CVV Number");
         HGBUtility.showAlertPopUp(getActivity(), change_iteinarary_name, promptsView, null
                 , getActivity().getResources().getString(R.string.ok_button),
                 new PopUpAlertStringCB() {
@@ -477,7 +473,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             //This is to set bookingitem array  final json for payment
             for (String strItem : paymentGroup.getItems()) {
                 if (add) {
-
+                    System.out.println("Kate add =" + add);
                     getFlowInterface().getBookingHashMap().put(strItem, selectedCreditCard.getToken());
                 } else {
                     getFlowInterface().getBookingHashMap().remove(strItem);

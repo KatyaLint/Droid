@@ -408,8 +408,10 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
     private void setTextForTrip(String name){
         itirnarary_title_Bar = ((MainActivityBottomTabs) getActivity()).getItirnaryTitleBar();
-        if(name != null) {
+        if(name != null && !name.isEmpty()) {
             itirnarary_title_Bar.setText(name);
+        }else{
+            itirnarary_title_Bar.setText("New Trip");
         }
         if(getActivityInterface().getTravelOrder() != null) {
             itirnarary_title_Bar.setTag(getActivityInterface().getTravelOrder().getmSolutionID());
@@ -1423,6 +1425,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
     private void setSolutionNameForItirnarary() {
         String solutionName = getActivityInterface().getTravelOrder().getmSolutionName();
+        System.out.println("Kate solutionName =" + solutionName);
         setTextForTrip(solutionName);
     }
 

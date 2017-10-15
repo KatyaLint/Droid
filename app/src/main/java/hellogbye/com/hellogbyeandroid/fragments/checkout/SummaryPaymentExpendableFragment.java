@@ -16,12 +16,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import org.json.JSONArray;
@@ -45,6 +43,7 @@ import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymentChild;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymnentGroup;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.UpdateAvailabilityVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
@@ -176,7 +175,7 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
 
     private PaymentChild addTravelerInfo(){
         UserProfileVO currentUser = ((MainActivityBottomTabs)getActivity()).getHGBSaveDataClass().getCurrentUser(); //getActivityInterface().getCurrentUser();
-        System.out.println("Kate currentUser =" + currentUser.toString());
+
         PaymentChild paymentChild = new PaymentChild("Traveller information");
         paymentChild.setUserName(currentUser.getTitle() + " "+ currentUser.getFirstname() + " " + currentUser.getLastname());
         paymentChild.setUserEmail(currentUser.getEmailaddress());
@@ -236,7 +235,7 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
         for(CreditCardItem creditCard : selectedCreditCards){
             if(creditCard.getUserid().equals(nodeVO.getmPaxguid())){
                 paymentChild.setCreditcardid(creditCard.getCardtypeid());
-                paymentChild.setCreditcard(creditCard.getCardtypeid());
+                paymentChild.setCreditcard(creditCard.getLast4());
                 return paymentChild;
             }
         }
@@ -273,7 +272,6 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
                 }else if(NodeTypeEnum.FLIGHT.getType().equals(node.getmType())){
 
                     paymentChild = addFlight(node,passengerVO);
-                    System.out.println("Kate paymentChild =" + paymentChild.getCreditcardid());
                     flightList.add(paymentChild);
                 }
             }
@@ -286,7 +284,6 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
                 PaymentChild paymentChildFlight =  new PaymentChild("Flight Info");
 
                 paymentChildFlight.putChild(flightList.get(0));
-                System.out.println("Kate flightList =" + flightList.get(0).getCreditcardid());
                 listDataHeader.add(paymentChildFlight);
                 listDataChild.put(listDataHeader.get(0), flightList);
             }
@@ -297,13 +294,14 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
                 listDataChild.put(listDataHeader.get(1), hotelList);
             }
 
-           PaymentChild paymentChildTraveller =  new PaymentChild("Traveller Info");
+            PaymentChild paymentChildTraveller =  new PaymentChild("Traveller Info");
             paymentChild = addTravelerInfo();
             travellerList.add(paymentChild);
             paymentChildTraveller.putChild(paymentChild);
 
             listDataHeader.add(paymentChildTraveller);
-            listDataChild.put(listDataHeader.get(2), travellerList);
+            //getting last item
+            listDataChild.put(listDataHeader.get(listDataHeader.size()-1), travellerList);
 
 
 //            PaymentChild paymentChildTraveller =  new PaymentChild("Traveller Info");
@@ -313,13 +311,13 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
 //            listDataHeader.add(paymentChildTraveller);
 //            listDataChild.put(listDataHeader.get(2), travellerList);
 
-
-            ExpandableListReview mAdapter = new ExpandableListReview(listDataHeader, listDataChild, getActivity());
+            UpdateAvailabilityVO updateAvailabilityVO = getFlowInterface().getUpdateAvailability();
+            ExpandableListReviewAdapter mAdapter = new ExpandableListReviewAdapter(listDataHeader, listDataChild, getActivity(), updateAvailabilityVO);
             mAdapter.setGroupClickListenerPosition(new IGroupClickListener(){
 
                 @Override
                 public void groupClicked(int position) {
-                    System.out.println("Kate position =" + position);
+
                     if (expandable_list_summary.isGroupExpanded(position)) {
                         expandable_list_summary.collapseGroup(position);
                     }else{

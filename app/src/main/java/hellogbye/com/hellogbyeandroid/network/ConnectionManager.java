@@ -739,9 +739,14 @@ public class ConnectionManager {
 //                //TODO need to remove
              /*   jsonObjectMain.put("latitude", "0");
                 jsonObjectMain.put("longitude", "0");*/
+                //latitude:32.0742538
+                //longitude:34.8087051
 
-                jsonObjectMain.put("latitude", airportSendValuesVO.getLatitude());
-                jsonObjectMain.put("longitude", airportSendValuesVO.getLongitude());
+                jsonObjectMain.put("latitude", 32.0742538);
+                jsonObjectMain.put("longitude",34.8087051);
+
+//                jsonObjectMain.put("latitude", airportSendValuesVO.getLatitude());
+//                jsonObjectMain.put("longitude", airportSendValuesVO.getLongitude());
 
                 jsonObjectMain.put("token", jsonArray);
 

@@ -9,6 +9,7 @@ import java.util.HashSet;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.UpdateAvailabilityVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.NodesVO;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 
@@ -39,6 +40,9 @@ public interface HGBFlowInterface {
     ArrayList<CountryItemVO> getEligabileCountries();
     ArrayList<CreditCardItem> getCreditCards();
     void setCreditCards(ArrayList<CreditCardItem> mCreditCardList);
+
+    void setUpdateAvailability( UpdateAvailabilityVO updateAvailabilityVO);
+    UpdateAvailabilityVO getUpdateAvailability();
 
     void closeRightPane();
     void openRightPane();
