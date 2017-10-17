@@ -13,15 +13,20 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymentChild;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.TaxVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.UpdateAvailabilityItemVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.UpdateAvailabilityVO;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 import static hellogbye.com.hellogbyeandroid.utilities.HGBUtility.setCCIcon;
@@ -267,7 +272,7 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
 
 
 
-            holder.review_details_price_hotel_price_im.setOnClickListener(showTaxesDialogListener);
+            holder.review_details_price_hotel_price_im.setOnClickListener(showTaxesHotelDialogListener);
 
 
         }else if(child.getNameText().equalsIgnoreCase("Flight information")){
@@ -304,11 +309,11 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
 
             holder.total_taxes.setText("" +updateAvailabilityVO.getFlights().get(0).getTotaltax());
 
-            holder.review_details_price_flight_im.setOnClickListener(showTaxesDialogListener);
+            holder.review_details_price_flight_im.setOnClickListener(showTaxesFlightDialogListener);
 
 
         }else if(child.getNameText().equalsIgnoreCase("Traveller information")){ //Traveller info
-
+            holder.review_details_price_hotel_price_ll.setVisibility(View.GONE);
             holder.review_tax_details_flight_ll.setVisibility(View.GONE);
             holder.review_tax_details_hotel_ll.setVisibility(View.GONE);
             holder.review_details_price_flight_ll.setVisibility(View.GONE);
@@ -333,14 +338,78 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
+    private void taxesDialog(Context context, Map<String, Object> taxVreakDown, boolean isFlight){
 
-    View.OnClickListener showTaxesDialogListener = new View.OnClickListener(){
+
+        if(taxVreakDown == null){
+            return;
+        }
+
+        LayoutInflater li = LayoutInflater.from(context);
+
+
+        CheckoutTaxesPopupAdapter alternativeFlightsSortAdapter = new CheckoutTaxesPopupAdapter(taxVreakDown);
+
+
+
+
+        View promptsViewTeest = li.inflate(R.layout.popup_alternative_layout_sort, null);
+
+        FontTextView text_title = (FontTextView)promptsViewTeest.findViewById(R.id.text_title);
+        text_title.setVisibility(View.VISIBLE);
+        if(isFlight){
+            text_title.setText("Tax Breakdown");
+        }else{
+            text_title.setText("Tax Currency");
+        }
+
+        ListView user_profile_popup_list_view = (ListView) promptsViewTeest.findViewById(R.id.alternative_popup_sort);
+
+        user_profile_popup_list_view.setAdapter(alternativeFlightsSortAdapter);
+
+
+        HGBUtility.showAlertPopUpOneButton(context,  null, promptsViewTeest,
+                null, null);
+
+//        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//            } });
+
+
+
+
+        //Create alert dialog object via builder
+//        alertDialog = dialogBuilder.create();
+//        alertDialog.setView(promptsViewTeest);
+//        alertDialog.setCancelable(false);
+//
+//
+//        Button positive_button = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+//        if (positive_button != null) {
+//            positive_button.setTextColor(context.getResources()
+//                    .getColor(R.color.COLOR_EE3A3C));
+//        }
+
+    }
+
+
+    View.OnClickListener showTaxesHotelDialogListener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            System.out.println("Kate show taxes");
+
+            Map<String, Object> taxBreakDown = updateAvailabilityVO.getHotels().get(0).getTaxbreakdownhash();
+            taxesDialog(context, taxBreakDown, false);
         }
     };
 
+    View.OnClickListener showTaxesFlightDialogListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            Map<String, Object> taxBreakDown = updateAvailabilityVO.getFlights().get(0).getTaxbreakdownhash();
+            taxesDialog(context, taxBreakDown, true);
+        }
+    };
 
     @Override
     public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {

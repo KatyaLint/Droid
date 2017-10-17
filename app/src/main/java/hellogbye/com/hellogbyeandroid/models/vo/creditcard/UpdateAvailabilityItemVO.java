@@ -22,8 +22,17 @@ public class UpdateAvailabilityItemVO {
     private TaxVO taxbreakdown;
 
 
-//    @SerializedName("taxbreakdown")
-//    Map<String,String> result;
+    private Map<String,Object> taxbreakdownhash;
+
+    public Map<String, Object> getTaxbreakdownhash() {
+        return taxbreakdownhash;
+    }
+
+    public void setTaxbreakdownhash(Map<String, Object> taxbreakdownhash) {
+        this.taxbreakdownhash = taxbreakdownhash;
+    }
+
+
 
     @SerializedName("averagerate")
     private double averagerate;

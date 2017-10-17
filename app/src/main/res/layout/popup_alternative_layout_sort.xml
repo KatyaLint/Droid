@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+ <hellogbye.com.hellogbyeandroid.views.FontTextView
+     android:visibility="gone"
+     android:id="@+id/text_title"
+     android:layout_margin="@dimen/DP16"
+     android:text="Tax Breakdown"
+     android:textSize="@dimen/SP24"
+     app:fontName="dinnextltpro_condensed.ttf"
+     android:textColor="@color/COLOR_00516f"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content" />
+
+
  <ListView
      android:choiceMode="singleChoice"
      android:layout_alignParentTop="true"

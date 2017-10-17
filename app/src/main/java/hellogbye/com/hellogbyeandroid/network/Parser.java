@@ -17,6 +17,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.application.HGBApplication;
@@ -336,6 +337,26 @@ public class Parser {
         }
         return updateAvailabilityVO;
     }
+    public static Object getUpdateAvailabilityVOMap(String response){
+        UpdateAvailabilityVO updateAvailabilityVO = null;
+
+        Map<String, Object> myMap = null;
+
+        try {
+            Gson gson = new Gson();
+            Type type = new TypeToken<Map<String, Object>>(){}.getType();
+             myMap = gson.fromJson(response, type);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return myMap;
+    }
+
+
+
+
+
 
     public static Object getTravel(String response){
         UserProfileVO  mTravelList = null;

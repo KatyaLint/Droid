@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
@@ -22,6 +24,8 @@ import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.airports.AirportSendValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.UpdateAvailabilityItemVO;
+import hellogbye.com.hellogbyeandroid.models.vo.creditcard.UpdateAvailabilityVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
@@ -1830,7 +1834,29 @@ public class ConnectionManager {
                 json1, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(Parser.getUpdateAvailabilityVO(response));
+
+                Map<String,Object> map = (Map<String, Object>) Parser.getUpdateAvailabilityVOMap(response);
+
+                //hotels
+                ArrayList<UpdateAvailabilityItemVO>  hotels = (ArrayList<UpdateAvailabilityItemVO> )map.get("hotels");
+
+                Map<String, Object> taxesHotel = (Map<String, Object>) hotels.get(0);
+                Map<String, Object>  taxHotelHash = (Map<String, Object>) taxesHotel.get("taxbreakdown");
+
+                //flights
+                ArrayList<UpdateAvailabilityItemVO>  flights = (ArrayList<UpdateAvailabilityItemVO> )map.get("flights");
+
+                Map<String, Object> taxesFlight = (Map<String, Object>) flights.get(0);
+                Map<String, Object>  taxFlightHash = (Map<String, Object>) taxesFlight.get("taxbreakdown");
+
+                UpdateAvailabilityVO updateAvailabilityVO = (UpdateAvailabilityVO)Parser.getUpdateAvailabilityVO(response);
+                updateAvailabilityVO.getFlights().get(0).setTaxbreakdownhash(taxFlightHash);
+
+                updateAvailabilityVO.getHotels().get(0).setTaxbreakdownhash(taxHotelHash);
+
+              //  updateAvailability.getFlights().get(0).setTaxbreakdownhash();
+
+                listener.onSuccess(updateAvailabilityVO);
             }
         }, new Response.ErrorListener() {
             @Override
