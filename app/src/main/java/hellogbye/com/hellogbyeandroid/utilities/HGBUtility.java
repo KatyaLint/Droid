@@ -795,7 +795,7 @@ public class HGBUtility {
 
 
 
-  public static void showAlertPopUp(final Activity activity, final EditText input, final View popupView ,
+  public static void showAlertPopUp(final Context activity, final EditText input, final View popupView ,
                                   /*  View customTitleView, */
                                     final String popupTitle, String positiveButton, final PopUpAlertStringCB
                                     alertCB){

@@ -65,9 +65,7 @@ public class ManagePaymentFragment extends HGBAbstractFragment {
                     ErrorMessage("Wrong credit Card");
                     return;
                 }
-                System.out.println("Kate onItemClick section =" + section);
-                System.out.println("Kate onItemClick position =" + position);
-                System.out.println("Kate onItemClick id =" + id);
+
                 getActivityInterface().setSelectedCreditCard(slectedCreditCard);
                 getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
 

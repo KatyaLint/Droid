@@ -1835,24 +1835,29 @@ public class ConnectionManager {
             @Override
             public void onResponse(String response) {
 
+                UpdateAvailabilityVO updateAvailabilityVO = (UpdateAvailabilityVO)Parser.getUpdateAvailabilityVO(response);
                 Map<String,Object> map = (Map<String, Object>) Parser.getUpdateAvailabilityVOMap(response);
+
 
                 //hotels
                 ArrayList<UpdateAvailabilityItemVO>  hotels = (ArrayList<UpdateAvailabilityItemVO> )map.get("hotels");
 
-                Map<String, Object> taxesHotel = (Map<String, Object>) hotels.get(0);
-                Map<String, Object>  taxHotelHash = (Map<String, Object>) taxesHotel.get("taxbreakdown");
+                if(hotels != null && !hotels.isEmpty()){
+                    Map<String, Object> taxesHotel = (Map<String, Object>) hotels.get(0);
+                    Map<String, Object>  taxHotelHash = (Map<String, Object>) taxesHotel.get("taxbreakdown");
+                    updateAvailabilityVO.getHotels().get(0).setTaxbreakdownhash(taxHotelHash);
+                }
 
                 //flights
-                ArrayList<UpdateAvailabilityItemVO>  flights = (ArrayList<UpdateAvailabilityItemVO> )map.get("flights");
+                ArrayList<UpdateAvailabilityItemVO> flights = (ArrayList<UpdateAvailabilityItemVO>) map.get("flights");
+                if(flights != null && !flights.isEmpty()) {
 
-                Map<String, Object> taxesFlight = (Map<String, Object>) flights.get(0);
-                Map<String, Object>  taxFlightHash = (Map<String, Object>) taxesFlight.get("taxbreakdown");
+                    Map<String, Object> taxesFlight = (Map<String, Object>) flights.get(0);
+                    Map<String, Object> taxFlightHash = (Map<String, Object>) taxesFlight.get("taxbreakdown");
 
-                UpdateAvailabilityVO updateAvailabilityVO = (UpdateAvailabilityVO)Parser.getUpdateAvailabilityVO(response);
-                updateAvailabilityVO.getFlights().get(0).setTaxbreakdownhash(taxFlightHash);
+                    updateAvailabilityVO.getFlights().get(0).setTaxbreakdownhash(taxFlightHash);
+                }
 
-                updateAvailabilityVO.getHotels().get(0).setTaxbreakdownhash(taxHotelHash);
 
               //  updateAvailability.getFlights().get(0).setTaxbreakdownhash();
 

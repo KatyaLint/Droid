@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymentChild;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.TaxVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.UpdateAvailabilityItemVO;
@@ -36,6 +38,7 @@ import static hellogbye.com.hellogbyeandroid.utilities.HGBUtility.setCCIcon;
 
 public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
 
+    private final View promptsView;
     private LayoutInflater inf;
 
     private List<PaymentChild> _listDataHeader; // header titles
@@ -51,6 +54,8 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
         this.updateAvailabilityVO = updateAvailabilityVO;
         this.inf = LayoutInflater.from(context);
         this.context = context;
+        promptsView = inf.inflate(R.layout.popup_layout_with_edit_text_new, null);
+
     }
 
     @Override
@@ -149,6 +154,11 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
             holder.review_child_traveller_email = (FontTextView) convertView.findViewById(R.id.review_child_traveller_email);
             holder.review_child_traveller_phone = (FontTextView) convertView.findViewById(R.id.review_child_traveller_phone);
             holder.review_child_traveller_dob = (FontTextView) convertView.findViewById(R.id.review_child_traveller_dob);
+            holder.review_child_traveller_name_confirmation = (FontTextView) convertView.findViewById(R.id.review_child_traveller_name_confirmation);
+            holder.review_child_traveller_email_confirmation = (FontTextView) convertView.findViewById(R.id.review_child_traveller_email_confirmation);
+            holder.review_child_traveller_edit_email_confirmation = (FontTextView) convertView.findViewById(R.id.review_child_traveller_edit_email_confirmation);
+
+
 
 
 
@@ -333,6 +343,37 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
             holder.review_child_traveller_phone.setText(child.getUserTel());
             holder.review_child_traveller_dob.setText(child.getUserDOB());
 
+
+            holder.review_child_traveller_name_confirmation.setText(child.getUserName());
+            holder.review_child_traveller_email_confirmation.setText(child.getUserEmail());
+            holder.review_child_traveller_edit_email_confirmation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    final EditText input = (EditText) promptsView
+                            .findViewById(R.id.change_iteinarary_name);
+
+
+                    HGBUtility.showAlertPopUp(context, input, promptsView, null
+                            , context.getResources().getString(R.string.save_button),
+                            new PopUpAlertStringCB() {
+                                @Override
+                                public void itemSelected(String inputItem) {
+                                    holder.review_child_traveller_email_confirmation.setText(inputItem);
+                                }
+
+                                @Override
+                                public void itemCanceled() {
+
+                                }
+                            });
+
+                }
+            });
+
+
+
+
         }
 
         return convertView;
@@ -345,15 +386,9 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
             return;
         }
 
-        LayoutInflater li = LayoutInflater.from(context);
-
-
         CheckoutTaxesPopupAdapter alternativeFlightsSortAdapter = new CheckoutTaxesPopupAdapter(taxVreakDown);
 
-
-
-
-        View promptsViewTeest = li.inflate(R.layout.popup_alternative_layout_sort, null);
+        View promptsViewTeest = inf.inflate(R.layout.popup_alternative_layout_sort, null);
 
         FontTextView text_title = (FontTextView)promptsViewTeest.findViewById(R.id.text_title);
         text_title.setVisibility(View.VISIBLE);
@@ -590,6 +625,9 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
 
         ImageView review_details_price_hotel_price_im;
         ImageView review_details_price_flight_im;
+        FontTextView review_child_traveller_name_confirmation;
+        FontTextView review_child_traveller_email_confirmation;
+        FontTextView review_child_traveller_edit_email_confirmation;
     }
 
 
