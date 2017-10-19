@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-    <LinearLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/review_tax_details_hotel_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/hotel_review_currency_title"
+        android:visibility="gone"
+        android:text="Tax Currency"
+        app:fontName="dinnextltpro_condensed.ttf"
+        android:textSize="@dimen/SP24"
+        android:textColor="@color/COLOR_00516f"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,5 +86,7 @@
                 android:id="@+id/hotel_review_total_charges"
                 android:text="$000000"/>
         </LinearLayout>
+
+    </LinearLayout>
 
     </LinearLayout>

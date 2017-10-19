@@ -234,7 +234,7 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
             holder.review_details_price_hotel_price_ll.setVisibility(View.VISIBLE);
             holder.review_tax_details_hotel_ll.setVisibility(View.VISIBLE);
             holder.review_details_price_flight_ll.setVisibility(View.GONE);
-            holder.review_details_price_hotel_ll.setVisibility(View.GONE);
+            holder.review_details_price_hotel_ll.setVisibility(View.VISIBLE);
 
             //PassengersVO currentPassenger = getCurrentPassengerByName(getActivityInterface().getCurrentUser().getFirstname());
             holder.childSelectCCLinearLayout.setVisibility(View.VISIBLE);
@@ -258,13 +258,13 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
 //            holder.hotel_review_total_charges.setText(updateAvailabilityVO.getHotels().get(0).get);
             ArrayList<UpdateAvailabilityItemVO> hotels = updateAvailabilityVO.getHotels();
             double nightlyRate = 0;
-            for(Double d : hotels.get(0).getNightlyrate()){
+            for(Double d : hotels.get(0).getNightlyrateusd()){
                 nightlyRate = nightlyRate+d;
             }
 
             holder.hotel_review_total_night_cost.setText(""+nightlyRate);
-            holder.hotel_review_total_num_of_nights.setText(""+updateAvailabilityVO.getHotels().get(0).getNightlyrate().size() + " Nights:");
-            holder.hotel_review_nightly.setText(""+updateAvailabilityVO.getHotels().get(0).getNightlyrate().get(0));
+            holder.hotel_review_total_num_of_nights.setText(""+updateAvailabilityVO.getHotels().get(0).getNightlyrateusd().size() + " Nights:");
+            holder.hotel_review_nightly.setText(""+updateAvailabilityVO.getHotels().get(0).getNightlyrateusd().get(0));
 
 
             double totalPriceTax = 0;
@@ -283,6 +283,9 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
 
 
             holder.review_details_price_hotel_price_im.setOnClickListener(showTaxesHotelDialogListener);
+
+            holder.review_details_price_hotel_ll.setOnClickListener(showCurrentCurrencyHotelDialogListener);
+
 
 
         }else if(child.getNameText().equalsIgnoreCase("Flight information")){
@@ -386,7 +389,7 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
             return;
         }
 
-        CheckoutTaxesPopupAdapter alternativeFlightsSortAdapter = new CheckoutTaxesPopupAdapter(taxVreakDown);
+        CheckoutTaxesPopupAdapter checkoutTaxesPopupAdapter = new CheckoutTaxesPopupAdapter(taxVreakDown);
 
         View promptsViewTeest = inf.inflate(R.layout.popup_alternative_layout_sort, null);
 
@@ -400,33 +403,52 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
 
         ListView user_profile_popup_list_view = (ListView) promptsViewTeest.findViewById(R.id.alternative_popup_sort);
 
-        user_profile_popup_list_view.setAdapter(alternativeFlightsSortAdapter);
+        user_profile_popup_list_view.setAdapter(checkoutTaxesPopupAdapter);
 
 
         HGBUtility.showAlertPopUpOneButton(context,  null, promptsViewTeest,
                 null, null);
 
-//        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int which) {
-//
-//            } });
-
-
-
-
-        //Create alert dialog object via builder
-//        alertDialog = dialogBuilder.create();
-//        alertDialog.setView(promptsViewTeest);
-//        alertDialog.setCancelable(false);
-//
-//
-//        Button positive_button = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-//        if (positive_button != null) {
-//            positive_button.setTextColor(context.getResources()
-//                    .getColor(R.color.COLOR_EE3A3C));
-//        }
 
     }
+
+
+    View.OnClickListener showCurrentCurrencyHotelDialogListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+
+
+
+            View promptsViewTeest = inf.inflate(R.layout.payment_child_review_hotel_total_price, null);
+
+            FontTextView text_title = (FontTextView)promptsViewTeest.findViewById(R.id.hotel_review_currency_title);
+            text_title.setVisibility(View.VISIBLE);
+
+
+            FontTextView hotel_review_nightly = (FontTextView)promptsViewTeest.findViewById(R.id.hotel_review_nightly);
+            FontTextView hotel_review_total_night_cost = (FontTextView)promptsViewTeest.findViewById(R.id.hotel_review_total_night_cost);
+            FontTextView hotel_review_total_num_of_nights = (FontTextView)promptsViewTeest.findViewById(R.id.hotel_review_total_num_of_nights);
+            FontTextView hotel_review_total_charges = (FontTextView)promptsViewTeest.findViewById(R.id.hotel_review_total_charges);
+
+
+            ArrayList<UpdateAvailabilityItemVO> hotels = updateAvailabilityVO.getHotels();
+            double nightlyRate = 0;
+            for(Double d : hotels.get(0).getNightlyrate()){
+                nightlyRate = nightlyRate+d;
+            }
+
+            hotel_review_total_night_cost.setText(""+nightlyRate);
+            hotel_review_total_num_of_nights.setText(""+updateAvailabilityVO.getHotels().get(0).getNightlyrate().size() + " Nights:");
+            hotel_review_nightly.setText(""+updateAvailabilityVO.getHotels().get(0).getNightlyrate().get(0));
+
+
+            HGBUtility.showAlertPopUpOneButton(context,  null, promptsViewTeest,
+                    null, null);
+
+
+
+        }
+    };
 
 
     View.OnClickListener showTaxesHotelDialogListener = new View.OnClickListener(){
