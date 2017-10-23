@@ -37,6 +37,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
+import pl.droidsonroids.gif.GifImageView;
 
 import static android.media.CamcorderProfile.get;
 import static hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum.PAYMENT_DETAILS;
@@ -62,6 +63,7 @@ public class TravelersFragment extends HGBAbstractFragment {
     private ImageView mPaymentImageView;
     private ImageView mTravlerImageView;
     private ImageView mReviewImageView;
+    private GifImageView gif_update_availability;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new TravelersFragment();
@@ -99,6 +101,8 @@ public class TravelersFragment extends HGBAbstractFragment {
         mTravlerImageView = (ImageView) view.findViewById(R.id.steps_checkout_travler_image);
         mReviewImageView = (ImageView) view.findViewById(R.id.steps_checkout_review_image);
 
+        gif_update_availability = (GifImageView)view.findViewById(R.id.gif_update_availability);
+
 //        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
 //        // use this setting to improve performance if you know that changes
 //        // in content do not change the layout size of the RecyclerView
@@ -125,11 +129,12 @@ public class TravelersFragment extends HGBAbstractFragment {
             @Override
             public void onClick(View v) {
 
-
+                gif_update_availability.setVisibility(View.VISIBLE);
                 ((MainActivityBottomTabs)getActivity()).updateAvailability(new RefreshComplete() {
                     @Override
                     public void onRefreshSuccess(Object data) {
                         getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
+                        gif_update_availability.setVisibility(View.GONE);
                     }
 
                     @Override

@@ -26,7 +26,13 @@
     <!--android:dividerHeight="@dimen/DP20"-->
 
 
-
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif_update_availability"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/update_availability"
+        android:background="@color/COLOR_80e1ebf3" />
 
     <hellogbye.com.hellogbyeandroid.views.FontButtonView
         android:id="@+id/traveler_next"
