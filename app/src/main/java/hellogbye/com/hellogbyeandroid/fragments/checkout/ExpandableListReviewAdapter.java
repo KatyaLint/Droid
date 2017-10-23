@@ -29,6 +29,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.creditcard.TaxVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.UpdateAvailabilityItemVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.UpdateAvailabilityVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
+import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 import static hellogbye.com.hellogbyeandroid.utilities.HGBUtility.setCCIcon;
@@ -39,6 +40,7 @@ import static hellogbye.com.hellogbyeandroid.utilities.HGBUtility.setCCIcon;
 public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
 
     private final View promptsView;
+    private final FontEditTextView companion_editTextDialog;
     private LayoutInflater inf;
 
     private List<PaymentChild> _listDataHeader; // header titles
@@ -55,6 +57,8 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
         this.inf = LayoutInflater.from(context);
         this.context = context;
         promptsView = inf.inflate(R.layout.popup_layout_with_edit_text_new, null);
+        companion_editTextDialog = (FontEditTextView) promptsView
+                .findViewById(R.id.companion_editTextDialog);
 
     }
 
@@ -263,8 +267,8 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
             }
 
             holder.hotel_review_total_night_cost.setText(""+nightlyRate);
-            holder.hotel_review_total_num_of_nights.setText(""+updateAvailabilityVO.getHotels().get(0).getNightlyrateusd().size() + " Nights:");
-            holder.hotel_review_nightly.setText(""+updateAvailabilityVO.getHotels().get(0).getNightlyrateusd().get(0));
+            holder.hotel_review_total_num_of_nights.setText(String.format("%.2f", updateAvailabilityVO.getHotels().get(0).getNightlyrateusd().size()) + " Nights:");
+            holder.hotel_review_nightly.setText(String.format("%.2f", updateAvailabilityVO.getHotels().get(0).getNightlyrateusd().get(0)));
 
 
             double totalPriceTax = 0;
@@ -278,7 +282,7 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
 
             }
 
-            holder.total_taxes_hotel.setText("" +totalPriceTax);
+            holder.total_taxes_hotel.setText(String.format("%.2f",totalPriceTax));
 
 
 
@@ -320,7 +324,7 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
             holder.flight_review_total_hst.setText(""+updateAvailabilityVO.getFlights().get(0).getHst());
 
 
-            holder.total_taxes.setText("" +updateAvailabilityVO.getFlights().get(0).getTotaltax());
+            holder.total_taxes.setText(String.format("%.2f",updateAvailabilityVO.getFlights().get(0).getTotaltax()));
 
             holder.review_details_price_flight_im.setOnClickListener(showTaxesFlightDialogListener);
 
@@ -353,15 +357,12 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
                 @Override
                 public void onClick(View view) {
 
-                    final EditText input = (EditText) promptsView
-                            .findViewById(R.id.change_iteinarary_name);
-
-
-                    HGBUtility.showAlertPopUp(context, input, promptsView, null
+                    HGBUtility.showAlertPopUp(context, companion_editTextDialog, promptsView, null
                             , context.getResources().getString(R.string.save_button),
                             new PopUpAlertStringCB() {
                                 @Override
                                 public void itemSelected(String inputItem) {
+
                                     holder.review_child_traveller_email_confirmation.setText(inputItem);
                                 }
 
@@ -437,9 +438,9 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
                 nightlyRate = nightlyRate+d;
             }
 
-            hotel_review_total_night_cost.setText(""+nightlyRate);
+            hotel_review_total_night_cost.setText(String.format("%.2f",nightlyRate));
             hotel_review_total_num_of_nights.setText(""+updateAvailabilityVO.getHotels().get(0).getNightlyrate().size() + " Nights:");
-            hotel_review_nightly.setText(""+updateAvailabilityVO.getHotels().get(0).getNightlyrate().get(0));
+            hotel_review_nightly.setText(String.format("%.2f",updateAvailabilityVO.getHotels().get(0).getNightlyrate().get(0)));
 
 
             HGBUtility.showAlertPopUpOneButton(context,  null, promptsViewTeest,

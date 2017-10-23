@@ -39,8 +39,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:id="@+id/hotel_review_nightly"
-                android:text="$10.000000 USD"/>
+                android:text="$0 USD"/>
         </LinearLayout>
 
 
@@ -61,8 +62,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:id="@+id/hotel_review_total_night_cost"
-                android:text="$000000"/>
+                android:text="$0"/>
         </LinearLayout>
 
         <LinearLayout
@@ -83,8 +85,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:id="@+id/hotel_review_total_charges"
-                android:text="$000000"/>
+                android:text="$0"/>
         </LinearLayout>
 
     </LinearLayout>

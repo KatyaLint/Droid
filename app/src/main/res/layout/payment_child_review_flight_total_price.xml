@@ -24,7 +24,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:id="@+id/flight_review_total_bf"
-                android:text="$10.000000"/>
+                android:gravity="center"
+                android:text="$0"/>
         </LinearLayout>
 
 
@@ -45,7 +46,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:id="@+id/flight_review_total_gst"
-                android:text="$000000"/>
+                android:gravity="center"
+                android:text="$0"/>
         </LinearLayout>
 
         <LinearLayout
@@ -71,7 +73,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:id="@+id/flight_review_total_hst"
-                android:text="$000000"/>
+                android:gravity="center"
+                android:text="$0"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -111,7 +111,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/DP20"
+        android:layout_marginBottom="@dimen/DP20"
+        android:layout_marginTop="@dimen/DP20"
         android:background="@color/COLOR_e1ebf3"
         android:padding="@dimen/DP20">
 

@@ -451,7 +451,7 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
 
         boolean isCVVEntered = checkCVVValueForList();
 
-        if (mCheckBox.isChecked() && isCVVEntered) {
+        if (mCheckBox.isChecked()){// && isCVVEntered) {
             mProceed.setEnabled(true);
         } else {
             mProceed.setEnabled(false);

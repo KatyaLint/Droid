@@ -810,7 +810,7 @@ public class HGBUtility {
           alert.setCustomTitle(customTitleView);
       }*/
 
-      alert.setPositiveButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+      alert.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
 
           @Override
           public void onClick(DialogInterface dialog, int which) {
@@ -827,7 +827,7 @@ public class HGBUtility {
           }
       });
 
-      alert.setNegativeButton(positiveButton, new DialogInterface.OnClickListener() {
+      alert.setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
           public void onClick(DialogInterface dialog, int which) {
               String newName ="";
               if(input != null){
@@ -837,6 +837,8 @@ public class HGBUtility {
                   ( (InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
               }
               if(alertCB != null){
+                  System.out.println("Kate newName =" + newName);
+                  System.out.println("Kate input =" + input);
                   alertCB.itemSelected(newName);
               }
               ((ViewGroup) popupView.getParent()).removeView(popupView);

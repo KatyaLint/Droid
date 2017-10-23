@@ -11,6 +11,7 @@
 
     <LinearLayout
         android:paddingLeft="@dimen/DP26"
+        android:paddingRight="@dimen/DP26"
         android:id="@+id/information_review_details"
         android:layout_below="@+id/payment_method_and_name"
         android:layout_width="match_parent"
@@ -394,6 +395,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/review_details_price_hotel_price_im"
+            android:layout_marginRight="@dimen/DP4"
             android:src="@drawable/android_info_tax_icon"/>
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/total_taxes_title_hotel"
@@ -401,6 +403,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
+            android:gravity="center"
             android:text="Fees Due at Hotel"
             android:drawablePadding="@dimen/DP4"/>
 
@@ -415,9 +418,10 @@
 
 
     <LinearLayout
+        android:layout_marginLeft="@dimen/DP6"
         android:visibility="gone"
         android:id="@+id/review_details_price_hotel_ll"
-        android:layout_below="@+id/information_review_details"
+        android:layout_below="@+id/review_details_price_hotel_price_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -426,6 +430,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/DP4"
             android:src="@drawable/android_local_currency_icon"/>
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_width="match_parent"
