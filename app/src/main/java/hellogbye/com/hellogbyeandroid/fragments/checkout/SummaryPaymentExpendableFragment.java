@@ -506,6 +506,7 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
 
                 @Override
                 public void onError(Object data) {
+                    System.out.println("Kate checkout error 2 ");
                     ErrorMessage(data);
                 }
             });

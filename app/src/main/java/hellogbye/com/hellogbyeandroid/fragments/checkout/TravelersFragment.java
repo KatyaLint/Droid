@@ -48,7 +48,7 @@ import static hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum.PAYMENT_DETAI
 public class TravelersFragment extends HGBAbstractFragment {
 
 
-    private FontButtonView mNext;
+    private FontButtonView traveler_next;
    // private FontTextView mNextDisable;
 
     private ArrayList<PassengersVO> passangers;
@@ -88,8 +88,8 @@ public class TravelersFragment extends HGBAbstractFragment {
         UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
 
         passangers = travelOrder.getPassengerses();
-        mNext = (FontButtonView) view.findViewById(R.id.traveler_next);
-        mNext.setEnabled(false);
+        traveler_next = (FontButtonView) view.findViewById(R.id.traveler_next);
+        traveler_next.setEnabled(false);
       //  mNextDisable = (FontTextView) view.findViewById(R.id.traveler_next_disable);
 
         mRecyclerView = (ExpandableListView) view.findViewById(R.id.traveler_recyclerView);
@@ -125,21 +125,23 @@ public class TravelersFragment extends HGBAbstractFragment {
             }
         });*/
 
-        mNext.setOnClickListener(new View.OnClickListener() {
+        traveler_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                traveler_next.setEnabled(false);
                 gif_update_availability.setVisibility(View.VISIBLE);
                 ((MainActivityBottomTabs)getActivity()).updateAvailability(new RefreshComplete() {
                     @Override
                     public void onRefreshSuccess(Object data) {
+                        traveler_next.setEnabled(true);
                         getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_DETAILS.getNavNumber(), null);
                         gif_update_availability.setVisibility(View.GONE);
                     }
 
                     @Override
                     public void onRefreshError(Object data) {
-
+                        gif_update_availability.setVisibility(View.GONE);
+                        traveler_next.setEnabled(true);
                     }
                 });
 
@@ -191,11 +193,11 @@ public class TravelersFragment extends HGBAbstractFragment {
 
                         passangers.get(z).setCurrency(currency);
                         if(isMissing){
-                            mNext.setEnabled(false);
+                            traveler_next.setEnabled(false);
 
                         }else{
 
-                            mNext.setEnabled(true);
+                            traveler_next.setEnabled(true);
 
                         }
 
@@ -300,12 +302,12 @@ public class TravelersFragment extends HGBAbstractFragment {
     }
 
     private void setNextButtonBackround(boolean isEnabled) {
-        mNext.setEnabled(isEnabled);
+        traveler_next.setEnabled(isEnabled);
         if (isEnabled) {
-            mNext.setBackgroundResource(R.drawable.red_button);
+            traveler_next.setBackgroundResource(R.drawable.red_button);
 
         } else {
-            mNext.setBackgroundResource(R.drawable.red_disable_button);
+            traveler_next.setBackgroundResource(R.drawable.red_disable_button);
         }
     }
 
