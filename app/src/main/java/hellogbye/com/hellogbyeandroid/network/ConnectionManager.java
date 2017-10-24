@@ -43,8 +43,8 @@ public class ConnectionManager {
         void onError(Object data);
     }
 
-    public static String BASE_URL_SIGNALR_URL = "https://apiprod.hellogbye.com/prod/"; //"https://apiprod.hellogbye.com/prod/";
-    public static String BASE_URL;// = "http://apidev.hellogbye.com/dev/rest/";
+    public static String BASE_URL_SIGNALR_URL = "http://apidev.hellogbye.com/dev/"; //"https://apiprod.hellogbye.com/prod/";
+    public static String BASE_URL = "http://apidev.hellogbye.com/dev/rest/";
 
     //public static String BASE_URL = "http://demo.hellogbye.com/dev/rest/";
     // public static String BASE_URL = "http://apiuat.hellogbye.com/uat/rest/";
@@ -83,7 +83,7 @@ public class ConnectionManager {
         String choosenServer = mHGBPrefrenceManager.getStringSharedPreferences(HGBConstants.CHOOSEN_SERVER,"");
 
         if(choosenServer == null || choosenServer.isEmpty()){
-            BASE_URL = "https://apiprod.hellogbye.com/prod/rest/"; // "http://apidev.hellogbye.com/dev/rest/ "https://apiprod.hellogbye.com/prod/rest/"; //"http://apidev.hellogbye.com/dev/rest/";// //"https://apiuat.hellogbye.com/uat/rest/";//This is default server
+            BASE_URL = "http://apidev.hellogbye.com/dev/rest/" ; //https://apiprod.hellogbye.com/prod/rest/"; // "http://apidev.hellogbye.com/dev/rest/ "https://apiprod.hellogbye.com/prod/rest/"; //"http://apidev.hellogbye.com/dev/rest/";// //"https://apiuat.hellogbye.com/uat/rest/";//This is default server
         }else{
             BASE_URL = choosenServer;
         }

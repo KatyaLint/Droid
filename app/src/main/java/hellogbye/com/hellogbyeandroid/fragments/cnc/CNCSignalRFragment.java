@@ -206,7 +206,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                information_popup_view.freeUserPopUp();
+                information_popup_view.freeUserPopUp(true);
 
 
             }
@@ -396,7 +396,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
     private void clearCNCItems() {
 
         getActivityInterface().setCNCItems(null);
-
+        System.out.println("Kate Clear");
         args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
         getActivityInterface().setTravelOrder(new UserTravelMainVO());
         setTextForTrip("New Trip");

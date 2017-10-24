@@ -398,9 +398,9 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
                 jsonUser.put("paxguid", userData.getPaxid());
                 jsonUser.put("address", userData.getAddress());
                 jsonUser.put("passportcountry", userData.getCountry());//TODO need to add
-                jsonUser.put("middlename", "");//TODO need to add
+                jsonUser.put("middlename", userData.getMiddlename());//TODO need to add
                 jsonUser.put("email", userData.getEmailaddress());
-                jsonUser.put("paxmileage", 1);//TODO need to add
+                jsonUser.put("paxmileage", userData.getPaxmileage());//TODO need to add
 
                 if (BuildConfig.IS_DEV) {
                     jsonUser.put("firstname", "Roofus");
@@ -454,15 +454,16 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
             for (CreditCardItem selectedCreditCard : getFlowInterface().getCreditCardsSelected()) {
                 creditObject.put("cardnumber", selectedCreditCard.getToken());
                 creditObject.put("expirymonth", selectedCreditCard.getExpmonth());
+                creditObject.put("cvv", selectedCreditCard.getCvv());
                 ArrayList<CreditCardItem> cardList = new ArrayList<CreditCardItem>(getFlowInterface().getCreditCardsSelected());
-                for (int i = 0; i < cardList.size(); i++) {
-
-                    if (selectedCreditCard.getToken().equals(cardList.get(i).getToken())) {
-                        View view = mRecyclerViewCC.getChildAt(i);
-                        EditText edit = (EditText) view.findViewById(R.id.ccv_edittext);
-                        creditObject.put("cvv", edit.getText().toString());
-                    }
-                }
+//                for (int i = 0; i < cardList.size(); i++) {
+//
+//                    if (selectedCreditCard.getToken().equals(cardList.get(i).getToken())) {
+//                        View view = mRecyclerViewCC.getChildAt(i);
+//                        EditText edit = (EditText) view.findViewById(R.id.ccv_edittext);
+//                        creditObject.put("cvv", edit.getText().toString());
+//                    }
+//                }
 
 
                 if (BuildConfig.IS_DEV) {
@@ -495,7 +496,7 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
             e.printStackTrace();
         }
 
-        if (!BuildConfig.IS_DEV) {
+      //  if (!BuildConfig.IS_DEV) {
             ConnectionManager.getInstance(getActivity()).pay(jsonObject, new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
@@ -506,11 +507,14 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
 
                 @Override
                 public void onError(Object data) {
+
                     System.out.println("Kate checkout error 2 ");
+                    getFlowInterface().goToFragment(ToolBarNavEnum.CHECKOUT_CONFIRMATION_FAILED.getNavNumber(), null);
+
                     ErrorMessage(data);
                 }
             });
-        }
+      //  }
 
 
     }

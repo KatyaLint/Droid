@@ -41,7 +41,7 @@ public class Information_Popup_View {
     }
 
 
-    public void freeUserPopUp(){
+    public void freeUserPopUp(final boolean isCNCScreen){
 
         LayoutInflater li = LayoutInflater.from(activity);
 
@@ -58,6 +58,11 @@ public class Information_Popup_View {
             @Override
             public void onClick(View v) {
                 iClearCNC.clearCNCScreen();// clearCNCItems();
+                if(!isCNCScreen) {
+                    Bundle args = new Bundle();
+                    args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
+                    flowInterface.goToFragment(ToolBarNavEnum.CNC.getNavNumber(), args);
+                }
                 HGBUtility.dialog.cancel();
             }
         });

@@ -142,7 +142,7 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
         newIteneraryImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                information_popup_view.freeUserPopUp();
+                information_popup_view.freeUserPopUp(false);
 
 
             }

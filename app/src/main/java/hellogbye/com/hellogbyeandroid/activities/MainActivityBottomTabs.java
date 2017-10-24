@@ -52,6 +52,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.FareClassFragment;
 
 import hellogbye.com.hellogbyeandroid.fragments.checkout.AirlinePointsProgramVO;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.CheckoutConfirmationFailedFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CheckoutLoyltyAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.LoyaltyProgramsAdd;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.LoyaltyProgramsPopup;
@@ -980,6 +981,9 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 break;
             case CHECKOUT_CONFIRMATION:
                 fragment = CheckoutConfirmationFragment.newInstance(navPosition);
+                break;
+            case CHECKOUT_CONFIRMATION_FAILED:
+                fragment = CheckoutConfirmationFailedFragment.newInstance(navPosition);
                 break;
             case PAYMENT_TRAVELERS:
                 fragment = TravelersFragment.newInstance(navPosition);

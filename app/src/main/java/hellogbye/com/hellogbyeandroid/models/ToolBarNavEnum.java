@@ -30,7 +30,7 @@ public enum ToolBarNavEnum {
     COMPANIONS_PERSONAL_DETAILS(24,"Personal Info"),
     PREFERENCE_SETTINGS_EMAILS(25,"Email"),
     CREDIT_CARD_LIST(26,"Payment Cards"),
-    CHECKOUT_CONFIRMATION(27,"Checkout confirmation"),
+    CHECKOUT_CONFIRMATION(27,"Checkout Confirmation"),
     CNC_TUTORIAL(28,"CNC Tutorial"),
     HAZARDOUS_NOTICE(29,"Make Payment"),
     ALL_COMPANIONS_VIEW(30,"Companions"),
@@ -47,10 +47,8 @@ public enum ToolBarNavEnum {
     COMPANION_ADD_NEW_COMPANION(40,"Add New Companion"),
     LOYLTY_NEW_PROGRAMME(41,"Add New Program"),
     LOYALTY_ADD_PROGRAMME(42,"Loyalty Programs"),
-    CREDIT_CARDS_LIST(43,"Select Card")
-
-
-    ;
+    CREDIT_CARDS_LIST(43,"Select Card"),
+    CHECKOUT_CONFIRMATION_FAILED(44,"Checkout Confirmation"),;
 
 
 
