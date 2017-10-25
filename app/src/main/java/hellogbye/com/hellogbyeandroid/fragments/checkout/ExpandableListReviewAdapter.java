@@ -267,7 +267,7 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
             }
 
             holder.hotel_review_total_night_cost.setText(""+nightlyRate);
-            holder.hotel_review_total_num_of_nights.setText(String.format("%.2f", updateAvailabilityVO.getHotels().get(0).getNightlyrateusd().size()) + " Nights:");
+            holder.hotel_review_total_num_of_nights.setText(updateAvailabilityVO.getHotels().get(0).getNightlyrateusd().size() + " Nights:");
             holder.hotel_review_nightly.setText(String.format("%.2f", updateAvailabilityVO.getHotels().get(0).getNightlyrateusd().get(0)));
 
 

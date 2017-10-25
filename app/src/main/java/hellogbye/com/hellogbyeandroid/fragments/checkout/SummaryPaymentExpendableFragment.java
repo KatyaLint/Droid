@@ -402,13 +402,16 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
                 jsonUser.put("email", userData.getEmailaddress());
                 jsonUser.put("paxmileage", userData.getPaxmileage());//TODO need to add
 
-                if (BuildConfig.IS_DEV) {
-                    jsonUser.put("firstname", "Roofus");
-                    jsonUser.put("lastname", "Summers");
-                } else {
-                    jsonUser.put("firstname", userData.getFirstname());
-                    jsonUser.put("lastname", userData.getLastname());
-                }
+//                if (BuildConfig.IS_DEV) {
+//                    jsonUser.put("firstname", "Roofus");
+//                    jsonUser.put("lastname", "Summers");
+//                } else {
+//                    jsonUser.put("firstname", userData.getFirstname());
+//                    jsonUser.put("lastname", userData.getLastname());
+//                }
+
+                jsonUser.put("firstname", userData.getFirstname());
+                jsonUser.put("lastname", userData.getLastname());
 
                 jsonUser.put("frequentflyernumber", "");//TODO need to add
                 jsonUser.put("postalcode", userData.getPostalcode());
@@ -464,15 +467,16 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
 //                        creditObject.put("cvv", edit.getText().toString());
 //                    }
 //                }
+                creditObject.put("firstname", selectedCreditCard.getBuyerfirstname());
+                creditObject.put("lastname", selectedCreditCard.getBuyerlastname());
 
-
-                if (BuildConfig.IS_DEV) {
-                    creditObject.put("firstname", "Roofus");
-                    creditObject.put("lastname", "Summers");
-                } else {
-                    creditObject.put("firstname", selectedCreditCard.getBuyerfirstname());
-                    creditObject.put("lastname", selectedCreditCard.getBuyerlastname());
-                }
+//                if (BuildConfig.IS_DEV) {
+//                    creditObject.put("firstname", "Roofus");
+//                    creditObject.put("lastname", "Summers");
+//                } else {
+//                    creditObject.put("firstname", selectedCreditCard.getBuyerfirstname());
+//                    creditObject.put("lastname", selectedCreditCard.getBuyerlastname());
+//                }
 
 
                 creditObject.put("cardtype", selectedCreditCard.getCardtypeid());
@@ -500,6 +504,8 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
             ConnectionManager.getInstance(getActivity()).pay(jsonObject, new ConnectionManager.ServerRequestListener() {
                 @Override
                 public void onSuccess(Object data) {
+                    List<BookingPayVO> bookingPayVOList = (List<BookingPayVO>)data;
+                    System.out.println("Kate onSuccess");
                     // Toast.makeText(getActivity().getApplicationContext(), "Trip Booked", Toast.LENGTH_SHORT).show();
                     getFlowInterface().goToFragment(ToolBarNavEnum.CHECKOUT_CONFIRMATION.getNavNumber(), null);
 
@@ -509,6 +515,7 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
                 public void onError(Object data) {
 
                     System.out.println("Kate checkout error 2 ");
+                    //TODO delete
                     getFlowInterface().goToFragment(ToolBarNavEnum.CHECKOUT_CONFIRMATION_FAILED.getNavNumber(), null);
 
                     ErrorMessage(data);

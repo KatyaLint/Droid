@@ -37,7 +37,6 @@ public class CheckoutConfirmationFailedFragment extends HGBAbstractFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.checkout_complete_layout, container, false);
-
         return rootView;
     }
 

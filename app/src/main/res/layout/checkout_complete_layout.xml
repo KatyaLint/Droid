@@ -11,7 +11,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:layout_marginTop="@dimen/DP20"
         android:orientation="vertical"
         android:id="@+id/checkout_image_baloon_ll"
         android:layout_above="@+id/confirm_done"
@@ -29,6 +29,48 @@
             android:gravity="center"
             android:layout_marginBottom="@dimen/DP10" />
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkout_failed"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Some items could not be booked"
+                android:textColor="@color/COLOR_00516f"
+                android:textSize="@dimen/SP24"
+                app:fontName="dinnextltpro_condensed.ttf"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="@dimen/DP10"
+                android:id="@+id/check_out_failed_small_title" />
+
+
+            <hellogbye.com.hellogbyeandroid.views.FontTextView
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="An error occured processing the following item(s):"
+                android:textColor="@color/COLOR_00516f"
+                android:textSize="@dimen/SP16"
+                app:fontName="dinnextltpro_regular.otf" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/checkout_succeded">
+
+
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:gravity="center"
             android:layout_width="match_parent"
@@ -44,6 +86,7 @@
             android:id="@+id/check_out_small_title" />
 
         <ImageView
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/baloon" />
@@ -100,6 +143,9 @@
             android:textColor="@color/COLOR_00516f"
             android:layout_marginTop="@dimen/DP20"
             android:text="Your Trip has been booked"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 

@@ -22,6 +22,7 @@ import java.util.Map;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.application.HGBApplication;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.AirlinePointsProgramVO;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.BookingPayVO;
 import hellogbye.com.hellogbyeandroid.models.CreditCardSessionItem;
 
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
@@ -448,6 +449,21 @@ public class Parser {
         try {
             Gson gson = new Gson();
             Type listType = new TypeToken<CompanionVO>() {
+            }.getType();
+            campanionVO = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return campanionVO;
+
+    }
+
+    public static Object parsePayCheckoutResponse(String response) {
+
+        List<BookingPayVO>  campanionVO = null;
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<BookingPayVO>>() {
             }.getType();
             campanionVO = gson.fromJson((String) response, listType);
         } catch (Exception e) {

@@ -237,7 +237,7 @@
     <!--<string name="terms">By clicking pre-register. You agree to HelloGbye\nUser Agreement and Privacy Policy.</string>-->
     <string name="sign_up_done">Done!</string>
 
-    <string name="continue_to_checkout">Checkout</string>
+    <string name="continue_to_checkout">BOOK NOW</string>
     <string name="continue_to_checkout_flight_baggage">Flight Baggage &amp; Hotel info</string>
     <string name="continue_to_checkout_price">PRICE :</string>
     <string name="continue_to_checkout_last_screen">An email confirmation has been\nsent to the email address above.</string>

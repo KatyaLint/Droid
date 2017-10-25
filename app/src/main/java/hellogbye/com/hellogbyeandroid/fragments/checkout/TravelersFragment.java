@@ -182,7 +182,7 @@ public class TravelersFragment extends HGBAbstractFragment {
                 System.out.println("Kate user =" + user.getFirstname());
                 for (int z = 0; z <passangers.size() ; z++) {
                     System.out.println("Kate passangers.get(z).getmName() =" + passangers.get(z).getmName());
-                    if(passangers.get(z).getmName().equalsIgnoreCase(user.getFirstname())){
+                    if(passangers.get(z).getmPaxguid().equalsIgnoreCase(user.getPaxid())){
                         ArrayList<UserProfileVO> passengerChildArray = new ArrayList<>();
                         UserProfileVO userInfo = userList.get(z);
                         passengerChildArray.add(userInfo);
@@ -190,7 +190,7 @@ public class TravelersFragment extends HGBAbstractFragment {
                         children.add(passengerChildArray);
                         boolean isMissing = checkIfMissing(userInfo);
                         passangers.get(z).setmChildDataMissing(isMissing);
-
+                        passangers.get(z).setmName(userInfo.getFirstname());
                         passangers.get(z).setCurrency(currency);
                         traveler_next.setEnabled(!isMissing);
 
@@ -272,6 +272,9 @@ public class TravelersFragment extends HGBAbstractFragment {
 
 
     }
+
+
+
 
 
     private boolean checkIfMissing(UserProfileVO child) {

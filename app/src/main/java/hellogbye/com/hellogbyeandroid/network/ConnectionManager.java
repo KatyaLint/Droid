@@ -398,7 +398,7 @@ public class ConnectionManager {
                 json, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(response);
+                listener.onSuccess(Parser.parsePayCheckoutResponse(response));
             }
         }, new Response.ErrorListener() {
             @Override
