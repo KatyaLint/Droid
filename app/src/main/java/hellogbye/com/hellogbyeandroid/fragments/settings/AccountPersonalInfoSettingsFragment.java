@@ -74,7 +74,7 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
     private int maxValueForStateDialog;
     private String[] stateArray;
     private int countryMaxValueSize;
-    private String[] countryarray;
+  //  private String[] countryarray;
     private String mCounterPicked;
     private LinearLayout personal_settings_change_password_ll;
     private FontEditTextView change_pswd_current_pswd;
@@ -308,12 +308,15 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
 
         changeNewUser();
 
-        ArrayList<CountryItemVO> countries = getActivityInterface().getBookingRequest().getCountries();
-        countryMaxValueSize = countries.size();
-        countryarray = new String[countries.size()];
-        for (int i = 0; i < countries.size(); i++) {
-            countryarray[i] = countries.get(i).getName();
-        }
+
+//        ArrayList<CountryItemVO> countries = getActivityInterface().getBookingRequest().getCountries();
+//        if(countries != null ) {
+//            countryMaxValueSize = countries.size();
+//            countryarray = new String[countryMaxValueSize];
+//            for (int i = 0; i < countryMaxValueSize; i++) {
+//                countryarray[i] = countries.get(i).getName();
+//            }
+//        }
 
         // selectStates("0");
 

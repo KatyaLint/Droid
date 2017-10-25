@@ -87,7 +87,8 @@
             android:textColor="@color/COLOR_EE3A3C"
             android:textSize="@dimen/SP12"
             app:fontName="dinnextltpro_medium.otf"
-            android:drawablePadding="@dimen/DP4"
+            android:drawablePadding="@dimen/DP2"
+            android:layout_marginRight="@dimen/DP2"
             android:layout_toRightOf="@+id/payment_group_edit"
             android:drawableRight="@drawable/missing_details" />
 

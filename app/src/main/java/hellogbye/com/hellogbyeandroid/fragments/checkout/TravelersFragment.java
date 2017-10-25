@@ -192,14 +192,7 @@ public class TravelersFragment extends HGBAbstractFragment {
                         passangers.get(z).setmChildDataMissing(isMissing);
 
                         passangers.get(z).setCurrency(currency);
-                        if(isMissing){
-                            traveler_next.setEnabled(false);
-
-                        }else{
-
-                            traveler_next.setEnabled(true);
-
-                        }
+                        traveler_next.setEnabled(!isMissing);
 
                         //TODO talk with ARIK getAirlinePointsProgram
                         ((MainActivityBottomTabs)getActivity()).getAirlinePointsProgram( passangers.get(z).getmPaxguid(),userInfo.getUserprofileid(), new RefreshComplete(){
@@ -284,9 +277,10 @@ public class TravelersFragment extends HGBAbstractFragment {
     private boolean checkIfMissing(UserProfileVO child) {
         if (child.getFirstname() == null || child.getFirstname().equals("")) {
             return true;
-        } else if (child.getPostalcode() == null || child.getPostalcode().equals("")) {
-            return true;
         }
+//        else if (child.getPostalcode() == null || child.getPostalcode().equals("")) {
+//            return true;
+//        }
         if (child.getEmailaddress() == null || child.getEmailaddress().equals("")) {
             return true;
         }

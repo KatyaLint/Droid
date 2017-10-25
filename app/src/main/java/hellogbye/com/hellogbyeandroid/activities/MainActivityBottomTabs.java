@@ -1813,6 +1813,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
                     @Override
                     public void onError(Object data) {
+                        refreslistner.onRefreshError(data);
                         ErrorMessage(data);
                     }
                 });
