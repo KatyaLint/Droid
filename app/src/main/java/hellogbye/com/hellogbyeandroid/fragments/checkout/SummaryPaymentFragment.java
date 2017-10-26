@@ -299,9 +299,6 @@ public class SummaryPaymentFragment extends HGBAbstractFragment {
 
                         @Override
                         public void onError(Object data) {
-                            System.out.println("Kate checkout error");
-                            getFlowInterface().goToFragment(ToolBarNavEnum.CHECKOUT_CONFIRMATION_FAILED.getNavNumber(), null);
-
                             ErrorMessage(data);
 
                         }

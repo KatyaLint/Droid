@@ -59,6 +59,13 @@
                 android:textColor="@color/COLOR_00516f"
                 android:textSize="@dimen/SP16"
                 app:fontName="dinnextltpro_regular.otf" />
+
+
+            <ListView
+                android:id="@+id/checkout_complete_failed_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
 
 
@@ -157,7 +164,32 @@
         android:layout_margin="@dimen/DP20"
         style="@style/RedButton"
         android:textAllCaps="false"
-        android:text="@string/done" />
+        android:text="@string/done"
+        android:visibility="gone"/>
+
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:layout_above="@+id/confirm_failed_itinerary"
+        android:id="@+id/confirm_call_us"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/BlueButton"
+        android:textAllCaps="false"
+        android:text="CALL US 844-209-3404" />
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontButtonView
+        android:id="@+id/confirm_failed_itinerary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/DP20"
+        style="@style/RedButton"
+        android:textAllCaps="true"
+        android:text="BACK TO ITINERARY" />
+
+
 
 
 </RelativeLayout>

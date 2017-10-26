@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/COLOR_80EE3A3C"
+    android:orientation="vertical">
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/check_out_failed_pay_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/COLOR_EE3A3C"
+        android:textSize="@dimen/SP18"
+        app:fontName="dinnextltpro_bold.otf"
+        android:layout_margin="@dimen/DP10"
+        android:text="Flight/Hotel" />
+
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:layout_marginTop="@dimen/DP10"
+        android:layout_marginBottom="@dimen/DP20"
+        android:layout_marginLeft="@dimen/DP10"
+        android:layout_marginRight="@dimen/DP10"
+        android:id="@+id/check_out_failed_pay_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/COLOR_EE3A3C"
+        android:textSize="@dimen/SP14"
+        app:fontName="dinnextltpro_medium.otf"
+        android:text="Flight/Hotel" />
+
+    <hellogbye.com.hellogbyeandroid.views.FontTextView
+        android:id="@+id/check_out_failed_pay_error_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/COLOR_EE3A3C"
+        android:textSize="@dimen/SP12"
+        app:fontName="dinnextltpro_regular.otf"
+        android:layout_margin="@dimen/DP10"
+        android:text="Flight/Hotel" />
+
+</LinearLayout>
+

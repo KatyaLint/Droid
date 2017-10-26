@@ -256,8 +256,9 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
         ConnectionManager.getInstance(getActivity()).checkoutSolutionId(getActivityInterface().getSolutionID(), set, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-
-            //    getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
+                UserTravelMainVO userTravelMainVO = (UserTravelMainVO)data;
+                getActivityInterface().setBookedTravelOrder(userTravelMainVO);
+                        //    getFlowInterface().goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
 
 
                 ((MainActivityBottomTabs)getActivity()).getTravellerInfoWithSolutionId(new RefreshComplete() {

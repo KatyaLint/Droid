@@ -52,7 +52,8 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.FareClassFragment;
 
 import hellogbye.com.hellogbyeandroid.fragments.checkout.AirlinePointsProgramVO;
-import hellogbye.com.hellogbyeandroid.fragments.checkout.CheckoutConfirmationFailedFragment;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.BookingPayVO;
+
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CheckoutLoyltyAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.LoyaltyProgramsAdd;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.LoyaltyProgramsPopup;
@@ -187,6 +188,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private ImageButton toolbar_new_grid_add_companions;
     private UserProfilePreferences userProfilePreferences;
     private UpdateAvailabilityVO updateAvailabilityVO;
+    private List<BookingPayVO> bookingPayAnswear;
     // private SignalRHubConnection mSignalRHubConnection;
 
 
@@ -982,9 +984,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             case CHECKOUT_CONFIRMATION:
                 fragment = CheckoutConfirmationFragment.newInstance(navPosition);
                 break;
-            case CHECKOUT_CONFIRMATION_FAILED:
-                fragment = CheckoutConfirmationFailedFragment.newInstance(navPosition);
-                break;
             case PAYMENT_TRAVELERS:
                 fragment = TravelersFragment.newInstance(navPosition);
                 break;
@@ -1259,6 +1258,16 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     @Override
     public UpdateAvailabilityVO getUpdateAvailability() {
         return this.updateAvailabilityVO;
+    }
+
+    @Override
+    public void setBookingPayAnswear(List<BookingPayVO> bookingPayAnswear) {
+        this.bookingPayAnswear = bookingPayAnswear;
+    }
+
+    @Override
+    public List<BookingPayVO> getBookingPayAnswear() {
+        return bookingPayAnswear;
     }
 
     @Override
@@ -1766,7 +1775,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                     public void onSuccess(Object data) {
                         ArrayList<UserProfileVO> usersProfiles = (ArrayList<UserProfileVO>) data;
                         for(UserProfileVO userProfileVO : usersProfiles){
-                            System.out.println("Kate usersProfiles = " + userProfileVO.getFirstname());
+
                         }
 
                         setListUsers(usersProfiles);
@@ -1818,6 +1827,26 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                     }
                 });
 
+    }
+
+
+    public void payForCheckout(final RefreshComplete refreslistne,  JSONObject jsonObject ) {
+
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).pay(jsonObject, new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                List<BookingPayVO> bookingPayVOList = (List<BookingPayVO>)data;
+                setBookingPayAnswear(bookingPayVOList);
+                // Toast.makeText(getActivity().getApplicationContext(), "Trip Booked", Toast.LENGTH_SHORT).show();
+                goToFragment(ToolBarNavEnum.CHECKOUT_CONFIRMATION.getNavNumber(), null);
+
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
     }
 
 

@@ -34,6 +34,7 @@ import java.util.Map;
 import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
+import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
 import hellogbye.com.hellogbyeandroid.adapters.TravlerAdapter;
 import hellogbye.com.hellogbyeandroid.adapters.creditcardadapters.TravlerCCAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
@@ -500,29 +501,18 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
             e.printStackTrace();
         }
 
-      //  if (!BuildConfig.IS_DEV) {
-            ConnectionManager.getInstance(getActivity()).pay(jsonObject, new ConnectionManager.ServerRequestListener() {
-                @Override
-                public void onSuccess(Object data) {
-                    List<BookingPayVO> bookingPayVOList = (List<BookingPayVO>)data;
-                    System.out.println("Kate onSuccess");
-                    // Toast.makeText(getActivity().getApplicationContext(), "Trip Booked", Toast.LENGTH_SHORT).show();
-                    getFlowInterface().goToFragment(ToolBarNavEnum.CHECKOUT_CONFIRMATION.getNavNumber(), null);
 
-                }
+        ((MainActivityBottomTabs)getActivity()).payForCheckout(new RefreshComplete() {
+            @Override
+            public void onRefreshSuccess(Object data) {
 
-                @Override
-                public void onError(Object data) {
+            }
 
-                    System.out.println("Kate checkout error 2 ");
-                    //TODO delete
-                    getFlowInterface().goToFragment(ToolBarNavEnum.CHECKOUT_CONFIRMATION_FAILED.getNavNumber(), null);
+            @Override
+            public void onRefreshError(Object data) {
 
-                    ErrorMessage(data);
-                }
-            });
-      //  }
-
+            }
+        }, jsonObject);
 
     }
 

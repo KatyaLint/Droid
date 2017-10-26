@@ -355,7 +355,6 @@ public class CostumeToolBar extends Toolbar {
             case SELECT_HOTEL_FRAGMENT:
             case HAZARDOUS_NOTICE:
             case CHECKOUT_CONFIRMATION:
-            case CHECKOUT_CONFIRMATION_FAILED:
                 titleBar.setVisibility(View.VISIBLE);
                 break;
             /**

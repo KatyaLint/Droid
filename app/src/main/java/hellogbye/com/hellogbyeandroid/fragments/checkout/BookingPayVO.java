@@ -20,6 +20,11 @@ public class BookingPayVO {
     @SerializedName("errormessages")
     private ArrayList<String> errormessages;
 
+
+    private String itemTitle;
+    private String itemDescription;
+    private String checkIn;
+
     public String getItineraryid() {
         return itineraryid;
     }
@@ -50,5 +55,29 @@ public class BookingPayVO {
 
     public void setErrormessages(ArrayList<String> errormessages) {
         this.errormessages = errormessages;
+    }
+
+    public String getItemTitle() {
+        return itemTitle;
+    }
+
+    public void setItemTitle(String itemTitle) {
+        this.itemTitle = itemTitle;
+    }
+
+    public String getItemDescription() {
+        return itemDescription;
+    }
+
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
+    }
+
+    public String getCheckIn() {
+        return checkIn;
+    }
+
+    public void setCheckIn(String checkIn) {
+        this.checkIn = checkIn;
     }
 }

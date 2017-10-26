@@ -5,7 +5,9 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.fragments.checkout.BookingPayVO;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
@@ -43,6 +45,10 @@ public interface HGBFlowInterface {
 
     void setUpdateAvailability( UpdateAvailabilityVO updateAvailabilityVO);
     UpdateAvailabilityVO getUpdateAvailability();
+
+    void setBookingPayAnswear(   List<BookingPayVO> bookingPayAnswear);
+    List<BookingPayVO> getBookingPayAnswear();
+
 
     void closeRightPane();
     void openRightPane();
