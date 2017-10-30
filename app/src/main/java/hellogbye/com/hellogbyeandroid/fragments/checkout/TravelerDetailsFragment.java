@@ -44,7 +44,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
 
     private FontEditTextView mTitle;
-    private FontEditTextView travel_seat_type;
+    private FontEditTextView travel_loyalty_program;
     private FontEditTextView mFirstName;
     private FontEditTextView mLastName;
     private FontEditTextView mDOB;
@@ -90,7 +90,7 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
         mTitle = (FontEditTextView) view.findViewById(R.id.travel_detail_title);
         mFirstName = (FontEditTextView) view.findViewById(R.id.travel_detail_first_name);
 
-        travel_seat_type= (FontEditTextView) view.findViewById(R.id.travel_seat_type);
+        travel_loyalty_program= (FontEditTextView) view.findViewById(R.id.travel_loyalty_program);
         mLastName = (FontEditTextView) view.findViewById(R.id.travel_detail_last_name);
         travel_detail_middle_name = (FontEditTextView) view.findViewById(R.id.travel_detail_middle_name);
         mDOB = (FontEditTextView) view.findViewById(R.id.travel_detail_dob);
@@ -207,11 +207,17 @@ public class TravelerDetailsFragment extends HGBAbstractFragment {
 
 
 
-        travel_seat_type.setOnClickListener(new View.OnClickListener() {
+        travel_loyalty_program.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View v) {
+                String solutionID = getActivityInterface().getTravelOrder().getmSolutionID();
 
-                ((MainActivityBottomTabs)getActivity()).getStaticAllAirlinePointsProgram(new RefreshComplete() {
+                ArrayList<UserProfileVO> users = getFlowInterface().getListUsers();
+                String passengerId = users.get(0).getPaxid();
+
+                ((MainActivityBottomTabs)getActivity()).getAirlinePointsProgram("",passengerId, new RefreshComplete() {
                     @Override
                     public void onRefreshSuccess(Object data) {
 

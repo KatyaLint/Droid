@@ -20,6 +20,22 @@ public class AirlinePointsProgramVO {
     @SerializedName("programname")
     private String programname;
 
+    @SerializedName("firstname")
+    private String firstname;
+
+    @SerializedName("lastname")
+    private String lastname;
+
+    @SerializedName("userprofileid")
+    private String userprofileid;
+
+    @SerializedName("programnumber")
+    private String programnumber;
+
+    @SerializedName("programid")
+    private int programid;
+
+
 
     public String getId() {
         return id;

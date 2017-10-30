@@ -73,6 +73,8 @@ public class HGBSaveDataClass implements HGBMainInterface {
     private AirlinePointsProgramVO selectedAirlinePointsProgramVO;
     private List<AirlinePointsProgramVO> userAirlinePointsProgramVO = new ArrayList<>();
     private CreditCardItem selectedCreditCard;
+    private List<AirlinePointsProgramVO> userAirlinePointsProgram;
+    private List<AirlinePointsProgramVO> userSelectedAirlinePointsProgram;
 
 //    public HGBSaveDataClass(MainActivity mainActivity ,HGBPreferencesManager hgbPrefrenceManager) {
 //        this.hgbPrefrenceManager = hgbPrefrenceManager;
@@ -448,6 +450,26 @@ public class HGBSaveDataClass implements HGBMainInterface {
     }
 
     @Override
+    public List<AirlinePointsProgramVO> getUserAirlinePointsProgram() {
+        return userAirlinePointsProgram;
+    }
+
+    @Override
+    public void setUserAirlinePointsProgram(List<AirlinePointsProgramVO> userAirlinePointsProgram) {
+        this.userAirlinePointsProgram = userAirlinePointsProgram;
+    }
+
+    @Override
+    public List<AirlinePointsProgramVO> getUserSelectedAirlinePointsProgram() {
+        return userSelectedAirlinePointsProgram;
+    }
+
+    @Override
+    public void setUserSelectedAirlinePointsProgram(List<AirlinePointsProgramVO> userSelectedAirlinePointsProgram) {
+        this.userSelectedAirlinePointsProgram = userSelectedAirlinePointsProgram;
+    }
+
+    @Override
     public AirlinePointsProgramVO getSelectedProgram() {
         return selectedAirlinePointsProgramVO;
     }
@@ -456,14 +478,16 @@ public class HGBSaveDataClass implements HGBMainInterface {
     public void setSelectedProgram(AirlinePointsProgramVO airlinePointsProgramVO) {
         this.selectedAirlinePointsProgramVO = airlinePointsProgramVO;
     }
-    @Override
-    public List<AirlinePointsProgramVO> getUserAirlinePointsProgram(){
-        return userAirlinePointsProgramVO;
-    }
-    @Override
-    public void setUserAirlinePointsProgram(List<AirlinePointsProgramVO> userAirlinePointsProgram) {
-        this.userAirlinePointsProgramVO = userAirlinePointsProgram;
-    }
+
+//    @Override
+//    public List<AirlinePointsProgramVO> getUserAirlinePointsProgram(){
+//        return userAirlinePointsProgramVO;
+//    }
+//    @Override
+//    public void setUserAirlinePointsProgram(List<AirlinePointsProgramVO> userAirlinePointsProgram) {
+//        this.userAirlinePointsProgramVO = userAirlinePointsProgram;
+//    }
+
 
  /*   @Override
     public void setCreditCardsSelected(HashSet<CreditCardItem> cardsList) {

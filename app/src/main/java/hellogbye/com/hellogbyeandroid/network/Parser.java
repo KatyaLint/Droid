@@ -531,6 +531,21 @@ public class Parser {
         return userdata;
     }
 
+    public static Object parseUsers(String response) {
+        List<UserProfileVO> userdata = new ArrayList<>();
+        try {
+            Gson gson = new Gson();
+            Type type = new TypeToken<List<UserProfileVO>>() {
+            }.getType();
+            userdata = gson.fromJson(response, type);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userdata;
+    }
+
+
     public static Object parseBookingOptions(String response) {
         BookingRequestVO bookingrequest = new BookingRequestVO();
         try {

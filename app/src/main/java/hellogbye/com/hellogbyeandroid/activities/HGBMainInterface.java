@@ -133,12 +133,18 @@ public interface HGBMainInterface {
     void setCNCTutorialsVOs(CNCTutorialsVO cncTutorialsVO);
 
 
-    List<AirlinePointsProgramVO> getStaticAirlinePointsProgram();
-    void setStaticAirlinePointsProgram(List<AirlinePointsProgramVO> staticAirlinePointsProgram) ;
-
     AirlinePointsProgramVO getSelectedProgram();
     void setSelectedProgram(AirlinePointsProgramVO airlinePointsProgramVO);
 
+    List<AirlinePointsProgramVO> getStaticAirlinePointsProgram();
+    void setStaticAirlinePointsProgram(List<AirlinePointsProgramVO> staticAirlinePointsProgram) ;
+
+
     List<AirlinePointsProgramVO> getUserAirlinePointsProgram();
     void setUserAirlinePointsProgram(List<AirlinePointsProgramVO> userAirlinePointsProgram) ;
+
+
+    List<AirlinePointsProgramVO> getUserSelectedAirlinePointsProgram();
+    void setUserSelectedAirlinePointsProgram(List<AirlinePointsProgramVO> userAirlinePointsProgram) ;
+
 }

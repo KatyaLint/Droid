@@ -18,6 +18,8 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
+import hellogbye.com.hellogbyeandroid.models.ValidpointsprogramsVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
@@ -31,7 +33,8 @@ public class LoyaltyProgramsAdd extends HGBAbstractFragment {
 
     private RecyclerView checkout_recycle_view_preferences;
     private CheckoutLoyltyAdapter checkoutLoyltyAdapter;
-  // private List<AirlinePointsProgramVO> staticAirlinePointsProgramCurrent;
+    private ArrayList<AirlinePointsProgramVO> validPrograms;
+    // private List<AirlinePointsProgramVO> staticAirlinePointsProgramCurrent;
 
     public static Fragment newInstance(int position) {
         Fragment fragment = new LoyaltyProgramsAdd();
@@ -44,10 +47,6 @@ public class LoyaltyProgramsAdd extends HGBAbstractFragment {
     /** The system calls this only when creating the layout in a dialog. */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // The only reason you might override this method when using onCreateView() is
-        // to modify any dialog characteristics. For example, the dialog includes a
-        // title by default, but your custom layout might not need it. So here you can
-        // remove the dialog title, but you must call the superclass to get the Dialog.
         Dialog dialog = super.onCreateDialog(savedInstanceState);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         return dialog;
@@ -65,7 +64,6 @@ public class LoyaltyProgramsAdd extends HGBAbstractFragment {
 
 
 
-
               //  input.setText(itirnarary_title_Bar.getText());
                 HGBUtility.showAlertPopUp(getActivity(), input, promptsView, null
                         , getActivity().getResources().getString(R.string.save_button),
@@ -73,13 +71,10 @@ public class LoyaltyProgramsAdd extends HGBAbstractFragment {
                             @Override
                             public void itemSelected(String inputItem) {
 
-                                List<AirlinePointsProgramVO> userAirlineProgram = getActivityInterface().getUserAirlinePointsProgram();
-                                userAirlineProgram.add(selectedProgramm);
-                                checkoutLoyltyAdapter.updateItems(userAirlineProgram);
-
-//                                itirnarary_title_Bar.setText(inputItem);
-//                                userTravelMainVO.setmSolutionName(inputItem);
-//                                sendNewSolutionName(inputItem, activity, solutionID);
+                                ArrayList<UserProfileVO> users = getFlowInterface().getListUsers();
+                                validPrograms = users.get(0).getValidpointsprograms();
+                                validPrograms.add(selectedProgramm);
+                                checkoutLoyltyAdapter.updateItems(validPrograms);
                             }
 
                             @Override
@@ -94,6 +89,7 @@ public class LoyaltyProgramsAdd extends HGBAbstractFragment {
     public void onDestroyView() {
         super.onDestroyView();
         getActivityInterface().setSelectedProgram(null);
+        getActivityInterface().setUserSelectedAirlinePointsProgram(null);
     }
 
 
@@ -118,10 +114,14 @@ public class LoyaltyProgramsAdd extends HGBAbstractFragment {
         checkout_recycle_view_preferences.setLayoutManager(new LinearLayoutManager(getContext()));
 
         //checkout_recycle_view.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST));
-        List<AirlinePointsProgramVO> userAirlineProgram = getActivityInterface().getUserAirlinePointsProgram();
+      //  List<AirlinePointsProgramVO> userAirlineProgram =  getActivityInterface().getUserSelectedAirlinePointsProgram();//getActivityInterface().getUserAirlinePointsProgram();//getStaticAirlinePointsProgram();
 
-        checkoutLoyltyAdapter = new CheckoutLoyltyAdapter(userAirlineProgram);
-        checkoutLoyltyAdapter.updateItems(userAirlineProgram);
+        ArrayList<UserProfileVO> users = getFlowInterface().getListUsers();
+        validPrograms = users.get(0).getValidpointsprograms();
+
+      //  System.out.println("Kate userAirlineProgram =" + userAirlineProgram.size());
+        checkoutLoyltyAdapter = new CheckoutLoyltyAdapter(validPrograms);
+       // checkoutLoyltyAdapter.updateItems(userAirlineProgram);
         checkout_recycle_view_preferences.setAdapter(checkoutLoyltyAdapter);
 
 
@@ -135,6 +135,8 @@ public class LoyaltyProgramsAdd extends HGBAbstractFragment {
 
         return rootView;
     }
+
+
 
 
 

@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import hellogbye.com.hellogbyeandroid.fragments.checkout.AirlinePointsProgramVO;
+
 /**
  * Created by arisprung on 10/29/15.
  */
@@ -74,7 +76,7 @@ public class UserProfileVO {
     private int paxmileage;
 
     @SerializedName("validpointsprograms")
-    private String[] validpointsprograms;
+    private ArrayList<AirlinePointsProgramVO> validpointsprograms;
 
 
     private HashSet<String> bookingItems;
@@ -300,11 +302,12 @@ public class UserProfileVO {
         this.paxmileage = paxmileage;
     }
 
-    public String[] getValidpointsprograms() {
+
+    public ArrayList<AirlinePointsProgramVO> getValidpointsprograms() {
         return validpointsprograms;
     }
 
-    public void setValidpointsprograms(String[] validpointsprograms) {
+    public void setValidpointsprograms(ArrayList<AirlinePointsProgramVO> validpointsprograms) {
         this.validpointsprograms = validpointsprograms;
     }
 }

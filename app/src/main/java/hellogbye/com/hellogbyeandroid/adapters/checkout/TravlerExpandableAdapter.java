@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.fragments.checkout.AirlinePointsProgramVO;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.PaymnentGroup;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
@@ -99,14 +100,15 @@ public class TravlerExpandableAdapter extends BaseExpandableListAdapter {
         holder.childPhone.setText(child.getPhone());
         holder.childAddress.setText(child.getAddress() + "\n" + child.getCity() + "," + child.getState() + "\n" + child.getPostalcode());
         holder.childEmail.setText(child.getEmailaddress());
-
+        ArrayList<AirlinePointsProgramVO>  validProgramms = child.getValidpointsprograms();
         if(!child.ispremiumuser()){
             holder.travler_loyalty_program_entry.setText("None");
-        }else{
-            holder.travler_loyalty_program_entry.setText("Premium");
+        }else if(child.ispremiumuser() && !validProgramms.isEmpty()) {
+            holder.travler_loyalty_program_entry.setText(validProgramms.get(0).getProgramname());
         }
 
-
+        //get program
+        //holder.travler_loyalty_program.setText();
 
         if(child.getFirstname() == null){
             holder.childNametext.setText("");
@@ -136,9 +138,10 @@ public class TravlerExpandableAdapter extends BaseExpandableListAdapter {
         if (child.getDob() == null || child.getDob().equals("")) {
             holder.childDOBLabel.setTextColor(ContextCompat.getColor(context, R.color.COLOR_EE3A3C));
         }
-        if (!child.ispremiumuser()){// || child.getDob().equals("")) {
-            holder.travler_loyalty_program.setTextColor(ContextCompat.getColor(context, R.color.COLOR_EE3A3C));
-        }
+
+//        if (!child.ispremiumuser()){// || child.getDob().equals("")) {
+//            holder.travler_loyalty_program.setTextColor(ContextCompat.getColor(context, R.color.COLOR_EE3A3C));
+//        }
 
 
     }

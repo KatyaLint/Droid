@@ -54,10 +54,8 @@ import hellogbye.com.hellogbyeandroid.fragments.alternative.FareClassFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.AirlinePointsProgramVO;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.BookingPayVO;
 
-import hellogbye.com.hellogbyeandroid.fragments.checkout.CheckoutLoyltyAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.LoyaltyProgramsAdd;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.LoyaltyProgramsPopup;
-import hellogbye.com.hellogbyeandroid.fragments.checkout.ManagePaymentFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.SummaryPaymentExpendableFragment;
 import hellogbye.com.hellogbyeandroid.fragments.cnc.CNCSignalRFragment;
 import hellogbye.com.hellogbyeandroid.fragments.cnc.CNCTutorials;
@@ -73,16 +71,13 @@ import hellogbye.com.hellogbyeandroid.fragments.checkout.CheckoutConfirmationFra
 import hellogbye.com.hellogbyeandroid.fragments.checkout.CreditCardListFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.HazardousNoticeFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.NewPaymentDetailsFragment;
-import hellogbye.com.hellogbyeandroid.fragments.checkout.SummaryPaymentFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.TravelerDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.TravelersFragment;
 import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionDetailsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.companions.CompanionsTravelers;
 import hellogbye.com.hellogbyeandroid.fragments.companions.TravelCompanionTabsWidgetFragment;
 import hellogbye.com.hellogbyeandroid.fragments.hotel.SelectNewRoomFragment;
-
 import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragmentComposeView;
-
 import hellogbye.com.hellogbyeandroid.fragments.membership.MembershipFragment;
 import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsTabsView;
 import hellogbye.com.hellogbyeandroid.fragments.notification.NotificationFragment;
@@ -103,7 +98,6 @@ import hellogbye.com.hellogbyeandroid.models.MyTripItem;
 import hellogbye.com.hellogbyeandroid.models.PersonalUserInformationVO;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
-import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.accounts.AccountsVO;
 import hellogbye.com.hellogbyeandroid.models.vo.cnc.CNCTutorialsVO;
@@ -111,12 +105,10 @@ import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelatio
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.UpdateAvailabilityVO;
-import hellogbye.com.hellogbyeandroid.models.vo.flights.PassengersVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
-import hellogbye.com.hellogbyeandroid.network.HGBJsonRequest;
 import hellogbye.com.hellogbyeandroid.network.Parser;
 import hellogbye.com.hellogbyeandroid.signalr.SignalRService;
 import hellogbye.com.hellogbyeandroid.utilities.GPSTracker;
@@ -125,7 +117,6 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityNetwork;
-import hellogbye.com.hellogbyeandroid.utilities.SpeechRecognitionUtil;
 import hellogbye.com.hellogbyeandroid.views.CostumeToolBar;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -142,8 +133,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private HGBPreferencesManager hgbPrefrenceManager;
     private UserProfileVO mCurrentUser;
     private OnBackPressedListener onBackPressedListener;
-
-    private PreferenceSettingsFragment.OnItemClickListener editClickCB;
     private ArrayList<String> mCvvList;
     private ArrayList<UserProfileVO> mTravelList = new ArrayList<>();
     private ArrayList<CountryItemVO> mEligabileCountryList = new ArrayList<>();
@@ -152,8 +141,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private CharSequence mTitle;
     private FontTextView preference_save_changes;
     private ImageView preference_add_card;
-    private AlertDialog selectDefaultProfileDialog;
-    private ArrayList<DefaultsProfilesVO> userDefaultProfiles;
     private HashSet<CreditCardItem> mSelectedCreditCards = new HashSet<>();
     private HashMap<String, String> mBookingHashMap = new HashMap<>();
     private BottomBar mBottomBar;
@@ -189,11 +176,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private UserProfilePreferences userProfilePreferences;
     private UpdateAvailabilityVO updateAvailabilityVO;
     private List<BookingPayVO> bookingPayAnswear;
-    // private SignalRHubConnection mSignalRHubConnection;
+    private List<AirlinePointsProgramVO> userAirlinePointsProgramVO;
 
-
-
-    //private FontTextView toolbar_trip_name;
 
     public HGBSaveDataClass getHGBSaveDataClass() {
         return hgbSaveDataClass;
@@ -1275,6 +1259,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         mTravelList = travellist;
     }
 
+
     @Override
     public void closeRightPane() {
       /*  mDrawerLayout.closeDrawer(frameLayout);
@@ -1734,12 +1719,33 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
     }
 
+
+//    public void getTravelerGetAllInfo(String itineraryId, final RefreshComplete refreslistner){
+//
+//        ConnectionManager.getInstance(MainActivityBottomTabs.this).getUserTravelerAll( itineraryId, new ConnectionManager.ServerRequestListener() {
+//            @Override
+//            public void onSuccess(Object data) {
+//
+//                List<UserProfileVO> airlinePointsProgramVO = (List<UserProfileVO>)data;
+//                refreslistner.onRefreshSuccess(airlinePointsProgramVO);
+//
+//            }
+//
+//            @Override
+//            public void onError(Object data) {
+//                ErrorMessage(data);
+//            }
+//        });
+//    }
+
+
     public void getAirlinePointsProgram(String itineraryId, String passengerId,final RefreshComplete refreslistner){
-        ConnectionManager.getInstance(MainActivityBottomTabs.this).getAirlinePointsProgram( itineraryId,  passengerId,new ConnectionManager.ServerRequestListener() {
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).getAirlinePointsProgram( hgbSaveDataClass.getTravelOrder().getmSolutionID(),  passengerId,new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
 
                 List<AirlinePointsProgramVO> airlinePointsProgramVO = (List<AirlinePointsProgramVO>)data;
+                hgbSaveDataClass.setUserAirlinePointsProgram(airlinePointsProgramVO);
                 refreslistner.onRefreshSuccess(airlinePointsProgramVO);
 
             }
@@ -1751,12 +1757,19 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
     }
 
-    public void getStaticAllAirlinePointsProgram(final RefreshComplete refreslistner){
+    public void getStaticAllAirlinePointsProgram(String itineraryID, final RefreshComplete refreslistner){
+
+        //getStaticAllAirlinePointsProgram
+
         ConnectionManager.getInstance(MainActivityBottomTabs.this).getStaticAllAirlinePointsProgram(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
                 List<AirlinePointsProgramVO> airlinePointsProgramVO = (List<AirlinePointsProgramVO>)data;
+
+                System.out.println("Kate getAllAirlinePointsForItirneraryProgram = " + airlinePointsProgramVO.size());
+           //     setUserAirlinePointsProgram(airlinePointsProgramVO) ;
                 hgbSaveDataClass.setStaticAirlinePointsProgram(airlinePointsProgramVO);
+          //      hgbSaveDataClass.setStaticAirlinePointsProgram(airlinePointsProgramVO);
                 refreslistner.onRefreshSuccess(airlinePointsProgramVO);
 
             }
@@ -1779,7 +1792,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                         }
 
                         setListUsers(usersProfiles);
-                        goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS.getNavNumber(), null);
+                        refreslistner.onRefreshSuccess(data);
+                       // goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS.getNavNumber(), null);
                     }
 
                     @Override
@@ -1795,7 +1809,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                     @Override
                     public void onSuccess(Object data) {
 
-                       List< UserProfileVO> mCurrentUser = (List<UserProfileVO>) data;
+                       List<UserProfileVO> mCurrentUser = (List<UserProfileVO>) data;
                         hgbSaveDataClass.setCurrentUser(mCurrentUser.get(0));
                         goToFragment(ToolBarNavEnum.SELECT_CREDIT_CARD.getNavNumber(), null);
                     }

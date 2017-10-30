@@ -66,10 +66,10 @@ public class LoyaltyProgramsPopup extends HGBAbstractFragment implements SearchV
 
         //checkout_recycle_view.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST));
 
-        staticAirlinePointsProgramCurrent = getActivityInterface().getStaticAirlinePointsProgram();
+        staticAirlinePointsProgramCurrent =  getActivityInterface().getUserAirlinePointsProgram();
 
         checkoutLoyltyAdapter = new CheckoutLoyltyAdapter(staticAirlinePointsProgramCurrent);
-        checkoutLoyltyAdapter.updateItems(staticAirlinePointsProgramCurrent);
+   //     checkoutLoyltyAdapter.updateItems(staticAirlinePointsProgramCurrent);
         checkout_recycle_view.setAdapter(checkoutLoyltyAdapter);
         SearchView checkout_loyalty_search = (SearchView)rootView.findViewById(R.id.checkout_loyalty_search);
         checkout_loyalty_search.setIconifiedByDefault(false);
@@ -81,7 +81,7 @@ public class LoyaltyProgramsPopup extends HGBAbstractFragment implements SearchV
         checkoutLoyltyAdapter.setOnItemClickListener(new CheckoutLoyltyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                    FontTextView checkout_item_loyalty_program = (FontTextView) view.findViewById(R.id.checkout_item_loyalty_program);
+                FontTextView checkout_item_loyalty_program = (FontTextView) view.findViewById(R.id.checkout_item_loyalty_program);
                 String name = checkout_item_loyalty_program.getText().toString();
                 AirlinePointsProgramVO selectedAirlineProgramm = findSelectedProgram(name);
                 getActivityInterface().setSelectedProgram(selectedAirlineProgramm);

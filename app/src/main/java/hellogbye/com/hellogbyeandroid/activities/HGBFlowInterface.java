@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
+import hellogbye.com.hellogbyeandroid.fragments.checkout.AirlinePointsProgramVO;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.BookingPayVO;
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
@@ -57,9 +58,6 @@ public interface HGBFlowInterface {
 
     void setCvvList(ArrayList<String> cvvList);
     ArrayList<String> getCvvList();
-
-
-
 
 
 

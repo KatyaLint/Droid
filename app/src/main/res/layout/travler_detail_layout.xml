@@ -26,7 +26,7 @@
 
     <hellogbye.com.hellogbyeandroid.views.FontEditTextView
 
-        android:id="@+id/travel_seat_type"
+        android:id="@+id/travel_loyalty_program"
         style="@style/TravelerDetailsTextStyle"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="false"

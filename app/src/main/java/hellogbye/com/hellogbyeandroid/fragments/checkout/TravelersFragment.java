@@ -195,18 +195,18 @@ public class TravelersFragment extends HGBAbstractFragment {
                         traveler_next.setEnabled(!isMissing);
 
                         //TODO talk with ARIK getAirlinePointsProgram
-                        ((MainActivityBottomTabs)getActivity()).getAirlinePointsProgram( passangers.get(z).getmPaxguid(),userInfo.getUserprofileid(), new RefreshComplete(){
-
-                            @Override
-                            public void onRefreshSuccess(Object data) {
-                                System.out.println("Kate Talk to Arik");
-                            }
-
-                            @Override
-                            public void onRefreshError(Object data) {
-
-                            }
-                        });
+//                        ((MainActivityBottomTabs)getActivity()).getAirlinePointsProgram(passangers.get(z).getmPaxguid(),userInfo.getUserprofileid(), new RefreshComplete(){
+//
+//                            @Override
+//                            public void onRefreshSuccess(Object data) {
+//                                System.out.println("Kate Talk to Arik");
+//                            }
+//
+//                            @Override
+//                            public void onRefreshError(Object data) {
+//
+//                            }
+//                        });
 
 
                     }
@@ -228,6 +228,8 @@ public class TravelersFragment extends HGBAbstractFragment {
 //            mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), passangers, children);
 //            mRecyclerView.setAdapter(mAdapter);
         }
+
+
 
 
         System.out.println("Kate children passangers= " + children.size() + " passangers" +passangers.size());

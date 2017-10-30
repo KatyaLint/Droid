@@ -261,7 +261,17 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
             @Override
             public void onClick(View view) {
 
-                ((MainActivityBottomTabs)getActivity()). getTravellersInfoWithSolutionId(null);
+                ((MainActivityBottomTabs)getActivity()). getTravellersInfoWithSolutionId(new RefreshComplete() {
+                    @Override
+                    public void onRefreshSuccess(Object data) {
+                        getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS.getNavNumber(), null);
+                    }
+
+                    @Override
+                    public void onRefreshError(Object data) {
+
+                    }
+                });
 
 
 //                ConnectionManager.getInstance(getActivity()).getTravellersInforWithSolutionId(getActivityInterface().getTravelOrder().getmSolutionID(),
@@ -298,7 +308,17 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
             @Override
             public void onClick(View view) {
 
-                ((MainActivityBottomTabs)getActivity()). getTravellersInfoWithSolutionId(null);
+                ((MainActivityBottomTabs)getActivity()). getTravellersInfoWithSolutionId(new RefreshComplete() {
+                    @Override
+                    public void onRefreshSuccess(Object data) {
+                        getFlowInterface().goToFragment(ToolBarNavEnum.PAYMENT_TRAVELERS.getNavNumber(), null);
+                    }
+
+                    @Override
+                    public void onRefreshError(Object data) {
+
+                    }
+                });
 //                ConnectionManager.getInstance(getActivity()).getTravellersInforWithSolutionId(getActivityInterface().getTravelOrder().getmSolutionID(),
 //                        new ConnectionManager.ServerRequestListener() {
 //                            @Override

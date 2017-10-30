@@ -1590,6 +1590,7 @@ public class ConnectionManager {
 
     }
 
+
     public void getAirlinePointsProgram(String itineraryId, String passengerId, final ServerRequestListener listener) {
 
         String url = getURL(Services.AIRLINE_POINTS_PROGRAM);
@@ -1610,6 +1611,7 @@ public class ConnectionManager {
         }, false);
 
     }
+
 
     public void getStaticAllAirlinePointsProgram( final ServerRequestListener listener) {
 
@@ -2350,6 +2352,7 @@ public class ConnectionManager {
         RESEND_ACTIVATION("UserProfile/ResendWelcomeEmail?email="),
         POST_SIGNALR_REGISTRATION("Signalr/Register"),
         AIRLINE_POINTS_PROGRAM("AirlinePointsProgram/itinerary/"),
+
         STATIC_AIRLINE_POINTS_PROGRAM("Statics/AllAirlinePointsPrograms"),
         UPDATE_AVAILABILITY("Itinerary/UpdateAvailability");
 
