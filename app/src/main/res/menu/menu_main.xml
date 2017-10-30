@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group android:checkableBehavior="single">
 
@@ -39,7 +38,13 @@
             android:id="@+id/help"
             android:checked="false"
             android:icon="@drawable/selected_item"
-            android:title="Help and Feedback" />
+            android:title="Feedback" />
+
+        <item
+            android:id="@+id/loyalty_programs"
+            android:checked="false"
+            android:icon="@drawable/selected_item"
+            android:title="Loyalty Programs" />
 
 
     </group>
