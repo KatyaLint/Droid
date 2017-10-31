@@ -40,13 +40,6 @@
             android:icon="@drawable/selected_item"
             android:title="Feedback" />
 
-        <item
-            android:id="@+id/loyalty_programs"
-            android:checked="false"
-            android:icon="@drawable/selected_item"
-            android:title="Loyalty Programs" />
-
-
     </group>
 
 

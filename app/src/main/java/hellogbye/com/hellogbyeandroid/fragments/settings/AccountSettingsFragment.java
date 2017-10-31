@@ -39,6 +39,7 @@ import hellogbye.com.hellogbyeandroid.R;
 //import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.activities.CreateAccountActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
+import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
 import hellogbye.com.hellogbyeandroid.activities.dialogs.SignInDialog;
 import hellogbye.com.hellogbyeandroid.adapters.settingaccount.AccountSettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
@@ -227,6 +228,12 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
                         getFlowInterface().goToFragment(ToolBarNavEnum.COMPANION_HELP_FEEDBACK.getNavNumber(), null);
                         //help & feedback
                         break;
+                    case 5:
+                        getUserLoyaltyProgramm();
+
+                        //Loyalty
+                        break;
+
                 }
 
 
@@ -281,6 +288,21 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
         return rootView;
     }
 
+
+    private void getUserLoyaltyProgramm(){
+        ((MainActivityBottomTabs)getActivity()).getTravellersInfoWithSolutionId(new RefreshComplete() {
+            @Override
+            public void onRefreshSuccess(Object data) {
+                getFlowInterface().goToFragment(ToolBarNavEnum.LOYALTY_ADD_PROGRAMME.getNavNumber(), null);
+            }
+
+            @Override
+            public void onRefreshError(Object data) {
+
+            }
+        });
+
+    }
 
 
    private View.OnClickListener imageClickListener = new View.OnClickListener(){
