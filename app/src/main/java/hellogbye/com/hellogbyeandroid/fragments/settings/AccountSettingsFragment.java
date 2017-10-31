@@ -293,7 +293,10 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
         ((MainActivityBottomTabs)getActivity()).getTravellersInfoWithSolutionId(new RefreshComplete() {
             @Override
             public void onRefreshSuccess(Object data) {
-                getFlowInterface().goToFragment(ToolBarNavEnum.LOYALTY_ADD_PROGRAMME.getNavNumber(), null);
+                Bundle arg = new Bundle();
+                arg.putBoolean(HGBConstants.BUNDLE_ALL_LOYALTY_PROGRAMS, true);
+              //  getStaticAllAirlinePointsProgram(final RefreshComplete refreslistner)
+                getFlowInterface().goToFragment(ToolBarNavEnum.LOYALTY_ADD_PROGRAMME.getNavNumber(), arg);
             }
 
             @Override

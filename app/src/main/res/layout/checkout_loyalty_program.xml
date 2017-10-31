@@ -6,6 +6,7 @@
 
 
     <ImageButton
+        android:visibility="gone"
         android:id="@+id/checkout_loyalty_close_btn"
         android:layout_margin="@dimen/DP6"
         android:layout_width="wrap_content"
@@ -14,7 +15,6 @@
 
     <android.support.v7.widget.SearchView
         android:layout_below="@+id/checkout_loyalty_close_btn"
-
         android:id="@+id/checkout_loyalty_search"
         android:background="@color/COLOR_WHITE"
         android:layout_width="match_parent"

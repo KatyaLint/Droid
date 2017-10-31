@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import hellogbye.com.hellogbyeandroid.models.vo.acountsettings.SettingsValuesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
@@ -95,6 +94,37 @@ public class ConnectionManager {
     ////////////////////////////////
     // POST
     ///////////////////////////////
+
+    public void postAirlinePointsProgram(String programId , String programNumber, final ServerRequestListener listener) {
+        String url = getURL(Services.AIRLINE_POINTS_USER_PROGRAMS);
+
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("programid", programId);
+            jsonObject.put("programnumber", programNumber);
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseAirlinePointsProgram(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
+    }
+
 
     public void postSubmitFeedback(String message , String preferenceID, final ServerRequestListener listener) {
         String url = getURL(Services.SUBMIT_FEEDBACK);
@@ -1601,7 +1631,7 @@ public class ConnectionManager {
                 jsonObject, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(Parser.parseAirlinePointsProgram(response));
+                listener.onSuccess(Parser.parseAirlinePointsPrograms(response));
             }
         }, new Response.ErrorListener() {
             @Override
@@ -1623,7 +1653,7 @@ public class ConnectionManager {
                 jsonObject, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                listener.onSuccess(Parser.parseAirlinePointsProgram(response));
+                listener.onSuccess(Parser.parseAirlinePointsPrograms(response));
             }
         }, new Response.ErrorListener() {
             @Override
@@ -1663,6 +1693,27 @@ public class ConnectionManager {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void deleteAirlinePointsProgram(String programNumber, final ServerRequestListener listener) {
+        String url = getURL(Services.AIRLINE_POINTS_USER_PROGRAMS);
+
+        url = url + programNumber;
+        JSONObject json = new JSONObject();
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.DELETE, url,
+                json, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
     }
 
 
@@ -2352,7 +2403,7 @@ public class ConnectionManager {
         RESEND_ACTIVATION("UserProfile/ResendWelcomeEmail?email="),
         POST_SIGNALR_REGISTRATION("Signalr/Register"),
         AIRLINE_POINTS_PROGRAM("AirlinePointsProgram/itinerary/"),
-
+        AIRLINE_POINTS_USER_PROGRAMS("AirlinePointsProgram"),
         STATIC_AIRLINE_POINTS_PROGRAM("Statics/AllAirlinePointsPrograms"),
         UPDATE_AVAILABILITY("Itinerary/UpdateAvailability");
 

@@ -50,37 +50,37 @@ public class LoyaltyProgramsAdd extends HGBAbstractFragment {
     }
 
 
-    private void loyaltyProgrammPopupMembershipCode(final AirlinePointsProgramVO selectedProgramm){
-        LayoutInflater li = LayoutInflater.from(getActivity());
-        final View promptsView = li.inflate(R.layout.popup_layout_loyalty_membership_code, null);
-        final EditText input = (EditText) promptsView
-                .findViewById(R.id.loyalty_membership_code_edittext);
-
-        FontTextView lyoalty_membership_name = (FontTextView)promptsView.findViewById(R.id.lyoalty_membership_name);
-        lyoalty_membership_name.setText(selectedProgramm.getProgramname());
-
-
-
-              //  input.setText(itirnarary_title_Bar.getText());
-                HGBUtility.showAlertPopUp(getActivity(), input, promptsView, null
-                        , getActivity().getResources().getString(R.string.save_button),
-                        new PopUpAlertStringCB() {
-                            @Override
-                            public void itemSelected(String inputItem) {
-
-                                ArrayList<UserProfileVO> users = getFlowInterface().getListUsers();
-                                validPrograms = users.get(0).getValidpointsprograms();
-                                validPrograms.add(selectedProgramm);
-                                checkoutLoyltyAdapter.updateItems(validPrograms);
-                            }
-
-                            @Override
-                            public void itemCanceled() {
-
-                            }
-                        });
-
-    }
+//    private void loyaltyProgrammPopupMembershipCode(final AirlinePointsProgramVO selectedProgramm){
+//        LayoutInflater li = LayoutInflater.from(getActivity());
+//        final View promptsView = li.inflate(R.layout.popup_layout_loyalty_membership_code, null);
+//        final EditText input = (EditText) promptsView
+//                .findViewById(R.id.loyalty_membership_code_edittext);
+//
+//        FontTextView lyoalty_membership_name = (FontTextView)promptsView.findViewById(R.id.lyoalty_membership_name);
+//        lyoalty_membership_name.setText(selectedProgramm.getProgramname());
+//
+//
+//
+//              //  input.setText(itirnarary_title_Bar.getText());
+//                HGBUtility.showAlertPopUp(getActivity(), input, promptsView, null
+//                        , getActivity().getResources().getString(R.string.save_button),
+//                        new PopUpAlertStringCB() {
+//                            @Override
+//                            public void itemSelected(String inputItem) {
+//
+//                                ArrayList<UserProfileVO> users = getFlowInterface().getListUsers();
+//                                validPrograms = users.get(0).getValidpointsprograms();
+//                                validPrograms.add(selectedProgramm);
+//                                checkoutLoyltyAdapter.updateItems(validPrograms);
+//                            }
+//
+//                            @Override
+//                            public void itemCanceled() {
+//
+//                            }
+//                        });
+//
+//    }
 
     @Override
     public void onDestroyView() {
@@ -95,10 +95,10 @@ public class LoyaltyProgramsAdd extends HGBAbstractFragment {
                              Bundle savedInstanceState) {
         getFlowInterface().enableFullScreen(true);
 
-        AirlinePointsProgramVO selectedProgramm = getActivityInterface().getSelectedProgram();
-        if(selectedProgramm != null){
-            loyaltyProgrammPopupMembershipCode(selectedProgramm);
-        }
+//        AirlinePointsProgramVO selectedProgramm = getActivityInterface().getSelectedProgram();
+//        if(selectedProgramm != null){
+//            loyaltyProgrammPopupMembershipCode(selectedProgramm);
+//        }
 
 
         // Inflate the layout to use as dialog or embedded fragment
@@ -113,8 +113,11 @@ public class LoyaltyProgramsAdd extends HGBAbstractFragment {
         //checkout_recycle_view.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST));
       //  List<AirlinePointsProgramVO> userAirlineProgram =  getActivityInterface().getUserSelectedAirlinePointsProgram();//getActivityInterface().getUserAirlinePointsProgram();//getStaticAirlinePointsProgram();
 
+
         ArrayList<UserProfileVO> users = getFlowInterface().getListUsers();
         validPrograms = users.get(0).getValidpointsprograms();
+
+
 
       //  System.out.println("Kate userAirlineProgram =" + userAirlineProgram.size());
         checkoutLoyltyAdapter = new CheckoutLoyltyAdapter(validPrograms);
@@ -126,7 +129,7 @@ public class LoyaltyProgramsAdd extends HGBAbstractFragment {
         layout_program_add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFlowInterface().goToFragment(ToolBarNavEnum.LOYLTY_NEW_PROGRAMME.getNavNumber(), null);
+                getFlowInterface().goToFragment(ToolBarNavEnum.LOYLTY_NEW_PROGRAMME.getNavNumber(), getArguments());
             }
         });
 

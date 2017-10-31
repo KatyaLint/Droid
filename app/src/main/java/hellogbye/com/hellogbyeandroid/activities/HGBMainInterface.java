@@ -136,8 +136,8 @@ public interface HGBMainInterface {
     AirlinePointsProgramVO getSelectedProgram();
     void setSelectedProgram(AirlinePointsProgramVO airlinePointsProgramVO);
 
-    List<AirlinePointsProgramVO> getStaticAirlinePointsProgram();
-    void setStaticAirlinePointsProgram(List<AirlinePointsProgramVO> staticAirlinePointsProgram) ;
+    ArrayList<AirlinePointsProgramVO> getStaticAirlinePointsProgram();
+    void setStaticAirlinePointsProgram(ArrayList<AirlinePointsProgramVO> staticAirlinePointsProgram) ;
 
 
     List<AirlinePointsProgramVO> getUserAirlinePointsProgram();

@@ -274,6 +274,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         registerReceiver(broadcastReceiver, intentFilter);
 
 
+        getStaticAllAirlinePointsProgram(null);
+
 
      /*   if (location != null && hgbSaveDataClass.getTravelOrder() != null) {
             String[] locationArr = location.split("&");
@@ -1739,7 +1741,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 //    }
 
 
-    public void getAirlinePointsProgram(String itineraryId, String passengerId,final RefreshComplete refreslistner){
+    public void getAirlinePointsProgram(String itineraryId, String passengerId, final RefreshComplete refreslistner){
         ConnectionManager.getInstance(MainActivityBottomTabs.this).getAirlinePointsProgram( hgbSaveDataClass.getTravelOrder().getmSolutionID(),  passengerId,new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
@@ -1757,21 +1759,47 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
     }
 
-    public void getStaticAllAirlinePointsProgram(String itineraryID, final RefreshComplete refreslistner){
+    public void postLoyaltyProgram(AirlinePointsProgramVO selectedAirlineProgram, final RefreshComplete refreslistner){
+
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).postAirlinePointsProgram(selectedAirlineProgram.getId(),selectedAirlineProgram.getProgramnumber(),new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                refreslistner.onRefreshSuccess(data);
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+
+    }
+
+    public void deleteLoyaltyProgram(AirlinePointsProgramVO selectedAirlineProgram, final RefreshComplete refreslistner){
+
+        ConnectionManager.getInstance(MainActivityBottomTabs.this).deleteAirlinePointsProgram(selectedAirlineProgram.getId(), new ConnectionManager.ServerRequestListener() {
+            @Override
+            public void onSuccess(Object data) {
+                refreslistner.onRefreshSuccess(data);
+            }
+
+            @Override
+            public void onError(Object data) {
+                ErrorMessage(data);
+            }
+        });
+    }
+    
+
+    public void getStaticAllAirlinePointsProgram(final RefreshComplete refreslistner){
 
         //getStaticAllAirlinePointsProgram
 
         ConnectionManager.getInstance(MainActivityBottomTabs.this).getStaticAllAirlinePointsProgram(new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
-                List<AirlinePointsProgramVO> airlinePointsProgramVO = (List<AirlinePointsProgramVO>)data;
-
-                System.out.println("Kate getAllAirlinePointsForItirneraryProgram = " + airlinePointsProgramVO.size());
-           //     setUserAirlinePointsProgram(airlinePointsProgramVO) ;
+                ArrayList<AirlinePointsProgramVO> airlinePointsProgramVO = (ArrayList<AirlinePointsProgramVO>)data;
                 hgbSaveDataClass.setStaticAirlinePointsProgram(airlinePointsProgramVO);
-          //      hgbSaveDataClass.setStaticAirlinePointsProgram(airlinePointsProgramVO);
-                refreslistner.onRefreshSuccess(airlinePointsProgramVO);
-
             }
 
             @Override
@@ -1881,6 +1909,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             }
         });
     }
+
+
 
     private AlertDialog mSeatTypeDialog;
     private String[] seatArray = {"No Preference","Window","Aisle"};

@@ -603,7 +603,22 @@ public class Parser {
         return mCompanionRelationshipTypes;
     }
 
+
     public static Object parseAirlinePointsProgram(String response) {
+        AirlinePointsProgramVO  airlinePointsProgramVO= null;
+        try {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<AirlinePointsProgramVO>() {
+            }.getType();
+            airlinePointsProgramVO = gson.fromJson((String) response, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return airlinePointsProgramVO;
+    }
+
+
+    public static Object parseAirlinePointsPrograms(String response) {
         ArrayList<AirlinePointsProgramVO>  airlinePointsProgramVO= null;
         try {
             Gson gson = new Gson();

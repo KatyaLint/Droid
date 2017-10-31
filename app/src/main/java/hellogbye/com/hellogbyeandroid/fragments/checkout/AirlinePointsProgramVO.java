@@ -68,4 +68,28 @@ public class AirlinePointsProgramVO {
     public void setProgramname(String programname) {
         this.programname = programname;
     }
+
+    public String getProgramnumber() {
+        return programnumber;
+    }
+
+    public void setProgramnumber(String programnumber) {
+        this.programnumber = programnumber;
+    }
+
+    public int getProgramid() {
+        return programid;
+    }
+
+    public void setProgramid(int programid) {
+        this.programid = programid;
+    }
+
+    public String getUserprofileid() {
+        return userprofileid;
+    }
+
+    public void setUserprofileid(String userprofileid) {
+        this.userprofileid = userprofileid;
+    }
 }

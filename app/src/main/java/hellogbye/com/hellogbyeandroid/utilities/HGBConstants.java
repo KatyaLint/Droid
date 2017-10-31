@@ -43,7 +43,7 @@ public class HGBConstants {
  //   public static final String BUNDLE_IS_POST_BOOKING_EXIST = "bundle_is_post_booking_exist";
     public static final String BUNDLE_IS_PROPOSED_ITINERARY = "bundle_is_proposed_itinerary";
 
-
+    public static final String BUNDLE_ALL_LOYALTY_PROGRAMS= "all_loyalty_programs";
     /* GPS Constant Permission */
     public static final int MY_PERMISSION_ACCESS_COARSE_LOCATION = 11;
     public static final int MY_PERMISSION_ACCESS_FINE_LOCATION = 12;

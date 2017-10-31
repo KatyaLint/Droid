@@ -94,7 +94,11 @@ public class CheckoutLoyltyAdapter extends RecyclerView.Adapter<CheckoutLoyltyAd
 
         @Override
         public void onClick(View view) {
-            onItemClickListener.onItemClick(view, getAdapterPosition());
+
+            if(onItemClickListener != null) { // can be null when from myaccount screen, all loyalty programs
+
+                onItemClickListener.onItemClick(view, getAdapterPosition());
+            }
         }
     }
 

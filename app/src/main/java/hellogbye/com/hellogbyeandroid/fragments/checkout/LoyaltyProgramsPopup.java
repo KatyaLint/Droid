@@ -10,14 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
+import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
+import hellogbye.com.hellogbyeandroid.models.UserProfileVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
 
@@ -66,7 +71,19 @@ public class LoyaltyProgramsPopup extends HGBAbstractFragment implements SearchV
 
         //checkout_recycle_view.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST));
 
-        staticAirlinePointsProgramCurrent =  getActivityInterface().getUserAirlinePointsProgram();
+        Bundle args = getArguments();
+        boolean isAllLoyalty = false;
+        if (args != null) {
+            isAllLoyalty = args.getBoolean(HGBConstants.BUNDLE_ALL_LOYALTY_PROGRAMS);
+        }
+
+        if(isAllLoyalty){
+            staticAirlinePointsProgramCurrent = getActivityInterface().getStaticAirlinePointsProgram();
+        }else{
+            staticAirlinePointsProgramCurrent =  getActivityInterface().getUserAirlinePointsProgram();
+
+        }
+
 
         checkoutLoyltyAdapter = new CheckoutLoyltyAdapter(staticAirlinePointsProgramCurrent);
    //     checkoutLoyltyAdapter.updateItems(staticAirlinePointsProgramCurrent);
@@ -84,13 +101,75 @@ public class LoyaltyProgramsPopup extends HGBAbstractFragment implements SearchV
                 FontTextView checkout_item_loyalty_program = (FontTextView) view.findViewById(R.id.checkout_item_loyalty_program);
                 String name = checkout_item_loyalty_program.getText().toString();
                 AirlinePointsProgramVO selectedAirlineProgramm = findSelectedProgram(name);
+
                 getActivityInterface().setSelectedProgram(selectedAirlineProgramm);
-                ((MainActivityBottomTabs)getActivity()).onBackPressed();
+
+
+                loyaltyProgrammPopupMembershipCode(selectedAirlineProgramm);
+
+//                AirlinePointsProgramVO selectedProgramm = getActivityInterface().getSelectedProgram();
+//                if(selectedProgramm != null){
+//
+//                }
+
+
+
+
 
             }});
 
         return rootView;
     }
+
+
+    private void loyaltyProgrammPopupMembershipCode(final AirlinePointsProgramVO selectedProgramm){
+        LayoutInflater li = LayoutInflater.from(getActivity());
+        final View promptsView = li.inflate(R.layout.popup_layout_loyalty_membership_code, null);
+        final EditText input = (EditText) promptsView
+                .findViewById(R.id.loyalty_membership_code_edittext);
+
+        FontTextView lyoalty_membership_name = (FontTextView)promptsView.findViewById(R.id.lyoalty_membership_name);
+        lyoalty_membership_name.setText(selectedProgramm.getProgramname());
+
+
+
+        //  input.setText(itirnarary_title_Bar.getText());
+        HGBUtility.showAlertPopUp(getActivity(), input, promptsView, null
+                , getActivity().getResources().getString(R.string.save_button),
+                new PopUpAlertStringCB() {
+                    @Override
+                    public void itemSelected(String inputItem) {
+
+                        ArrayList<UserProfileVO> users = getFlowInterface().getListUsers();
+                        ArrayList<AirlinePointsProgramVO> validPrograms = users.get(0).getValidpointsprograms();
+                        selectedProgramm.setProgramnumber(inputItem);
+                        validPrograms.add(selectedProgramm);
+
+
+                        ((MainActivityBottomTabs)getActivity()).postLoyaltyProgram(selectedProgramm, new RefreshComplete() {
+                            @Override
+                            public void onRefreshSuccess(Object data) {
+                                ((MainActivityBottomTabs)getActivity()).onBackPressed();
+                            }
+
+                            @Override
+                            public void onRefreshError(Object data) {
+                                //When posting is failed
+                            }
+                        });
+
+
+                        // checkoutLoyltyAdapter.updateItems(validPrograms);
+                    }
+
+                    @Override
+                    public void itemCanceled() {
+
+                    }
+                });
+
+    }
+
 
     private AirlinePointsProgramVO findSelectedProgram(String name){
         for(AirlinePointsProgramVO airlinePointsProgramVO : staticAirlinePointsProgramCurrent){

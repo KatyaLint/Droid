@@ -69,7 +69,7 @@ public class HGBSaveDataClass implements HGBMainInterface {
     private HashMap<String, List<NodesVO>> alternativeFlightsHash = new HashMap<>();
     private HashMap<String, List<NodesVO>> alternativeHotelsHash = new HashMap<>();
     private List<NodesVO> alternativeHotelsVO;
-    private List<AirlinePointsProgramVO> staticAirlinePointsProgram;
+    private ArrayList<AirlinePointsProgramVO> staticAirlinePointsProgram;
     private AirlinePointsProgramVO selectedAirlinePointsProgramVO;
     private List<AirlinePointsProgramVO> userAirlinePointsProgramVO = new ArrayList<>();
     private CreditCardItem selectedCreditCard;
@@ -441,11 +441,11 @@ public class HGBSaveDataClass implements HGBMainInterface {
         this.cncTutorialsVOs = cncTutorialsVO;
     }
 
-    public List<AirlinePointsProgramVO> getStaticAirlinePointsProgram() {
+    public ArrayList<AirlinePointsProgramVO> getStaticAirlinePointsProgram() {
         return staticAirlinePointsProgram;
     }
 
-    public void setStaticAirlinePointsProgram(List<AirlinePointsProgramVO> staticAirlinePointsProgram) {
+    public void setStaticAirlinePointsProgram(ArrayList<AirlinePointsProgramVO> staticAirlinePointsProgram) {
         this.staticAirlinePointsProgram = staticAirlinePointsProgram;
     }
 
