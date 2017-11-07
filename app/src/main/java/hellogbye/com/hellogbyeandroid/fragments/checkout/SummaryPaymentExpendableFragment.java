@@ -7,11 +7,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -342,42 +345,65 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
 
     private void hazardSpannable(){
         SpannableString ss = new SpannableString(getString(R.string.i_have_read_and_understood_the_hazardous_nmaterial_notice));
-        ClickableSpan clickableSpan = new ClickableSpan() {
-            @Override
-            public void onClick(View textView) {
-//                Bundle args = new Bundle();
-//                cvvList = new ArrayList<>();
-//                for (CreditCardItem selectedCreditCard : getFlowInterface().getCreditCardsSelected()) {
+
+//        ClickableSpan clickableSpan = new ClickableSpan() {
+//            @Override
+//            public void onClick(View textView) {
+////                Bundle args = new Bundle();
+////                cvvList = new ArrayList<>();
+////                for (CreditCardItem selectedCreditCard : getFlowInterface().getCreditCardsSelected()) {
+////
+////                    ArrayList<CreditCardItem> cardList = new ArrayList<CreditCardItem>(getFlowInterface().getCreditCardsSelected());
+////                    for (int i = 0; i < cardList.size(); i++) {
+////                        if (selectedCreditCard.getToken().equals(cardList.get(i).getToken())) {
+////                            View view = mRecyclerViewCC.getChildAt(i);
+////                            FontEditTextView edit = (FontEditTextView) view.findViewById(R.id.ccv_edittext);
+////                            cvvList.add(edit.getText().toString());
+////                        }
+////                    }
+////                }
+////
+////                getFlowInterface().setCvvList(cvvList);
+//              //  getFlowInterface().goToFragment(ToolBarNavEnum.HAZARDOUS_NOTICE.getNavNumber(), args);
 //
-//                    ArrayList<CreditCardItem> cardList = new ArrayList<CreditCardItem>(getFlowInterface().getCreditCardsSelected());
-//                    for (int i = 0; i < cardList.size(); i++) {
-//                        if (selectedCreditCard.getToken().equals(cardList.get(i).getToken())) {
-//                            View view = mRecyclerViewCC.getChildAt(i);
-//                            FontEditTextView edit = (FontEditTextView) view.findViewById(R.id.ccv_edittext);
-//                            cvvList.add(edit.getText().toString());
-//                        }
-//                    }
-//                }
 //
-//                getFlowInterface().setCvvList(cvvList);
-              //  getFlowInterface().goToFragment(ToolBarNavEnum.HAZARDOUS_NOTICE.getNavNumber(), args);
+//                getFlowInterface().goToFragment(ToolBarNavEnum.HAZARDOUS_NOTICE.getNavNumber(), null);
+//            }
+//
+//            @Override
+//            public void updateDrawState(TextPaint ds) {
+//                super.updateDrawState(ds);
+//                ds.setUnderlineText(false);
+//            }
+//        };
 
 
-                getFlowInterface().goToFragment(ToolBarNavEnum.HAZARDOUS_NOTICE.getNavNumber(), null);
-            }
-
-            @Override
-            public void updateDrawState(TextPaint ds) {
-                super.updateDrawState(ds);
-                ds.setUnderlineText(false);
-            }
-        };
-        ss.setSpan(clickableSpan, 31, 56, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
+        ss.setSpan(new myClickableSpan(1), 29, 47, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss.setSpan(new myClickableSpan(2), 52, 75, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         mHazerdiusText.setText(ss);
         mHazerdiusText.setMovementMethod(LinkMovementMethod.getInstance());
         mHazerdiusText.setHighlightColor(Color.TRANSPARENT);
+    }
+
+
+    public class myClickableSpan extends ClickableSpan{
+
+        int pos;
+        public myClickableSpan(int position){
+            this.pos=position;
+        }
+
+        @Override
+        public void onClick(View widget) {
+            getFlowInterface().goToFragment(ToolBarNavEnum.HAZARDOUS_NOTICE.getNavNumber(), null);
+        }
+
+        @Override
+        public void updateDrawState(TextPaint ds) {
+            super.updateDrawState(ds);
+            ds.setUnderlineText(false);
+        }
     }
 
 

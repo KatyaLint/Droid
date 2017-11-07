@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
@@ -199,6 +200,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                         paymentChild.setHotelRoomType(nodesVO.getRoomsVOs().get(0).getmRoomType());
                         paymentChild.setHotelDuration(HGBUtilityDate.getDateDiffString(nodesVO.getmCheckIn(),nodesVO.getmCheckOut()));
                         paymentChild.setHotelName(nodesVO.getmHotelName());
+                        //TODO can be removed setPaymentProcessing
+                        paymentChild.setPaymentProcessing(nodesVO.getmPaymentProcessingState());
                         passengerChildArray.add(paymentChild);
                     } else if (NodeTypeEnum.FLIGHT.getType().equals(nodesVO.getmType())) {
 
@@ -210,6 +213,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
                         paymentChild.setFlightClass(nodesVO.getmFareClass());
                         paymentChild.setFlightDeparture(HGBUtilityDate.parseDateToDateHHmm(nodesVO.getmDeparture()));
                         paymentChild.setFlightArrival(HGBUtilityDate.parseDateToDateHHmm(nodesVO.getmArrival()));
+                        //TODO can be removed setPaymentProcessing
+                        paymentChild.setPaymentProcessing(nodesVO.getmPaymentProcessingState());
                         passengerChildArray.add(paymentChild);
                     }
                 }
@@ -244,13 +249,36 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
     }
 
 
+    private HashSet<String> checkCorrectItems(){
+        HashSet<String> set = new HashSet<String>();
+        UserTravelMainVO travelOrder = getActivityInterface().getTravelOrder();
+        Map<String, NodesVO> hashMap = travelOrder.getItems();
+        Set<String> bookingKeytoSEnd = getFlowInterface().getBookingHashMap().keySet();
+
+        for(String bookingID : bookingKeytoSEnd){
+            if(hashMap.containsKey(bookingID)){
+                NodesVO node =(NodesVO)hashMap.get(bookingID);
+                if(!node.getmPaymentProcessingState().equals("PAID")){
+                    System.out.println("Kate key bookingID");
+                    set.add(bookingID);
+                }
+            }
+        }
+        return set;
+
+    }
+
     private void sendPaymentSolution() {
 
-        HashSet<String> set = new HashSet<String>();
-        for (String key : getFlowInterface().getBookingHashMap().keySet()) {
-            System.out.println("Kate key =" + key);
-            set.add(key);
-        }
+
+        HashSet<String> set = checkCorrectItems();
+
+
+
+//        for (String key : getFlowInterface().getBookingHashMap().keySet()) {
+//            System.out.println("Kate key =" + key);
+//            set.add(key);
+//        }
 
 
         ConnectionManager.getInstance(getActivity()).checkoutSolutionId(getActivityInterface().getSolutionID(), set, new ConnectionManager.ServerRequestListener() {
@@ -474,9 +502,10 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             //This is to set bookingitem array  final json for payment
             for (String strItem : paymentGroup.getItems()) {
                 if (add) {
-                    System.out.println("Kate add =" + add);
+                    System.out.println("Kate add =" + strItem);
                     getFlowInterface().getBookingHashMap().put(strItem, selectedCreditCard.getToken());
                 } else {
+                    System.out.println("Kate remove =" + strItem);
                     getFlowInterface().getBookingHashMap().remove(strItem);
                 }
 
@@ -523,8 +552,10 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
             //This is to set bookingitem array  final json for payment
             if (add) {
+                System.out.println("Kate adding paymentchild.getGuid(), selectedCreditCard.getToken()");
                 getFlowInterface().getBookingHashMap().put(paymentchild.getGuid(), selectedCreditCard.getToken());
             } else {
+                System.out.println("Kate removing paymentchild.getGuid(), selectedCreditCard.getToken()");
                 getFlowInterface().getBookingHashMap().remove(paymentchild.getGuid());
             }
 
@@ -549,9 +580,11 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
                 for (String passengerItem : passenger.getmItineraryItems()) {
                     if (add) {
+                        System.out.println("Kate adding passengerItem, selectedCreditCard.getToken()");
                         getFlowInterface().getBookingHashMap().put(passengerItem, selectedCreditCard.getToken());
                         currentPassenger.getmBookingItems().addAll(passenger.getmItineraryItems());
                     } else {
+                        System.out.println("Kate removing passengerItem, selectedCreditCard.getToken()");
                         getFlowInterface().getBookingHashMap().remove(passengerItem);
                         currentPassenger.getmBookingItems().removeAll(passenger.getmItineraryItems());
                     }

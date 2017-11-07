@@ -30,8 +30,7 @@ public class PaymentChild {
     private String userEmail;
     private String userTel;
     private String userDOB;
-
-
+    private String paymentProcessing;
 
 
     public PaymentChild(String nameText, double totalText, boolean selected,String guid,String paxguid,String creditcard,String parentflight, String currency) {
@@ -257,5 +256,13 @@ public class PaymentChild {
 
     public void setUserDOB(String userDOB) {
         this.userDOB = userDOB;
+    }
+
+    public void setPaymentProcessing(String paymentProcessing) {
+        this.paymentProcessing = paymentProcessing;
+    }
+
+    public String getPaymentProcessing() {
+        return paymentProcessing;
     }
 }
