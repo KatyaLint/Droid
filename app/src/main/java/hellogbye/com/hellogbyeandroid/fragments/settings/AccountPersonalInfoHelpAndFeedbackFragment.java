@@ -13,11 +13,16 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ScrollView;
+
+import java.util.ArrayList;
+
 import hellogbye.com.hellogbyeandroid.R;
 //import hellogbye.com.hellogbyeandroid.activities.MainActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.ConversationVO;
+import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
@@ -112,7 +117,18 @@ public class AccountPersonalInfoHelpAndFeedbackFragment extends HGBAbstractFragm
 
 
     private void sendFeedback(){
-        ConnectionManager.getInstance(getActivity()).postSubmitFeedback(account_submit_edit_text.getText().toString(), userPreferenceID,new ConnectionManager.ServerRequestListener() {
+
+        UserTravelMainVO traveller = getActivityInterface().getTravelOrder();
+        String solutionID = "";
+        ArrayList<ConversationVO> conversation= new ArrayList<>();
+        if(traveller != null){
+            solutionID = traveller.getmSolutionID();
+            conversation = traveller.getConversation();
+        }
+
+
+        ConnectionManager.getInstance(getActivity()).postSubmitFeedback(account_submit_edit_text.getText().toString(), userPreferenceID, solutionID,
+                conversation, new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
 
