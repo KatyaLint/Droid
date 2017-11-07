@@ -1029,7 +1029,47 @@ public class ConnectionManager {
 
     }
 
+    public void getCaptcha(final ServerRequestListener listener){
+        String url = getURL(Services.GET_CAPTCHA);
+        JSONObject jsonObject = new JSONObject();
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.captcha(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, false);
+        //http://apidev.hellogbye.com/dev/rest/UserProfile/CAPTCHA
+    }
 
+    public void putCaptcha(String captchaid,String captchatext,String email, final ServerRequestListener listener){
+        //http://apidev.hellogbye.com/dev/rest/UserProfile/PasswordReset?captchaid=a8d2ff02-ae29-4669-be80-7deeb4d1c334&captchatext=wsert3er&email=ktlint%2B1234@gmail.com
+
+
+        String url = getURL(Services.PUT_CAPTCHA);
+
+        url = url+"?captchaid="+captchaid+"&captchatext="+captchatext+"&email="+email;
+
+        JSONObject json = new JSONObject();
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.PUT, url,
+                json, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseCreditCardList(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        },false);
+    }
 
     public void getCompanionsForSearch(final String searchParam, final ServerRequestListener listener){
         //  https://apiuat.hellogbye.com/uat/rest/UserProfile/Search?count=5&excludeCompanions=false&searchParam=a&skip=0
@@ -2426,7 +2466,10 @@ public class ConnectionManager {
         AIRLINE_POINTS_PROGRAM("AirlinePointsProgram/itinerary/"),
         AIRLINE_POINTS_USER_PROGRAMS("AirlinePointsProgram"),
         STATIC_AIRLINE_POINTS_PROGRAM("Statics/AllAirlinePointsPrograms"),
-        UPDATE_AVAILABILITY("Itinerary/UpdateAvailability");
+        UPDATE_AVAILABILITY("Itinerary/UpdateAvailability"),
+        GET_CAPTCHA("UserProfile/CAPTCHA"),
+        PUT_CAPTCHA("UserProfile/PasswordReset");
+
 
         //https://apiprod.hellogbye.com/prod/rest/AirlinePointsProgram/itinerary/cb37f18e-d8cb-45ed-8ccf-ef0df6d01701/passenger/c47ae6eb-d3da-42b2-a2dc-af9e0eb322ee
 

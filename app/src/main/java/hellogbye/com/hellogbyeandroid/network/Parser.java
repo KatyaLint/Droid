@@ -23,6 +23,7 @@ import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.application.HGBApplication;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.AirlinePointsProgramVO;
 import hellogbye.com.hellogbyeandroid.fragments.checkout.BookingPayVO;
+import hellogbye.com.hellogbyeandroid.models.CaptchaVO;
 import hellogbye.com.hellogbyeandroid.models.CreditCardSessionItem;
 
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
@@ -410,6 +411,20 @@ public class Parser {
         }
         return user;
     }
+
+    public static Object captcha(String response){
+        CaptchaVO user = null;
+        try {
+            Gson gson = new Gson();
+            Type type = new TypeToken<CaptchaVO>() {
+            }.getType();
+            user = gson.fromJson((String) response, type);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
 
 
 
