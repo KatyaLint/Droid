@@ -82,7 +82,7 @@ public class ForgotPasswordActivity extends BaseActivity {
 
     private void resetEmail() {
         if (mEmail.getText().length() > 0 && HGBUtility.checkEmailIsValid(mEmail.getText().toString()) && forgot_enter_catcha_text.getText().length() > 0) {
-            
+
             String emailStr = mEmail.getText().toString().replace("+","%2b");
 
             ConnectionManager.getInstance(ForgotPasswordActivity.this).putCaptcha(captchaVO.getId(),forgot_enter_catcha_text.getText().toString(),emailStr,

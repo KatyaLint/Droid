@@ -130,8 +130,7 @@
                     android:layout_weight="1"
                     android:inputType="textAutoComplete"
                     android:privateImeOptions="nm"
-                    android:hint="City"
-                     />
+                    android:hint="City" />
 
                 <hellogbye.com.hellogbyeandroid.views.FontEditTextView
                     android:id="@+id/companion_personal_settings_location_country"

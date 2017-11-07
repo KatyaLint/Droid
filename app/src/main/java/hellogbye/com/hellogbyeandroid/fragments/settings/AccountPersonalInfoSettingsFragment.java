@@ -340,12 +340,14 @@ public class AccountPersonalInfoSettingsFragment extends HGBAbstractFragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-
-
             }
 
             @Override
             public void afterTextChanged(final Editable editable) {
+
+                if(editable.toString().isEmpty()){
+                    return;
+                }
 
                 ConnectionManager.getInstance(getActivity()).postAutocompleteCity(editable.toString(), companion_personal_settings_location_country.getText().toString(),
                         companion_personal_settings_location_province.getText().toString()
