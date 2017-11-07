@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 
@@ -12,13 +13,13 @@ import hellogbye.com.hellogbyeandroid.models.CountryItemVO;
 public class BookingRequestVO {
 
     @SerializedName("titles")
-    private ArrayList<String> titles;
+    private ArrayList<String> titles = new ArrayList<String>();
 
     @SerializedName("underagedtitles")
-    private ArrayList<String> underagedtitles;
+    private ArrayList<String> underagedtitles  = new ArrayList<String>();
 
     @SerializedName("cardtypes")
-    private ArrayList<String> cardtypes;
+    private HashMap<String,String> cardtypes;
 
     @SerializedName("countries")
     private ArrayList<CountryItemVO> countries;
@@ -38,7 +39,9 @@ public class BookingRequestVO {
     public ArrayList<CountryItemVO> getCountries() {
         return countries;
     }
-
+    public void setCountries(ArrayList<CountryItemVO> countries) {
+        this.countries = countries;
+    }
 
     public void sortCountryItems(){
         if(getCountries() == null){
@@ -55,9 +58,7 @@ public class BookingRequestVO {
         getCountries().addAll(0,firstItems);
 
     }
-    public void setCountries(ArrayList<CountryItemVO> countries) {
-        this.countries = countries;
-    }
+
 
     @Override
     public String toString() {
@@ -75,11 +76,5 @@ public class BookingRequestVO {
         this.underagedtitles = underagedtitles;
     }
 
-    public ArrayList<String> getCardtypes() {
-        return cardtypes;
-    }
 
-    public void setCardtypes(ArrayList<String> cardtypes) {
-        this.cardtypes = cardtypes;
-    }
 }

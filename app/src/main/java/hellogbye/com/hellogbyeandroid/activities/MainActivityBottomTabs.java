@@ -806,6 +806,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             public void onSuccess(Object data) {
                 BookingRequestVO bookingrequest = (BookingRequestVO) data;
                 hgbSaveDataClass.setBookingRequest(bookingrequest);
+                System.out.println("Kate bookingrequest =" + bookingrequest.getCountries());
                 hgbSaveDataClass.getBookingRequest().sortCountryItems();
             }
 
