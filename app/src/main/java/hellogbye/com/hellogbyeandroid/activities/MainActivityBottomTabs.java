@@ -1,6 +1,5 @@
 package hellogbye.com.hellogbyeandroid.activities;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -13,13 +12,11 @@ import android.location.Location;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.speech.RecognizerIntent;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -31,10 +28,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
@@ -45,7 +38,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.UUID;
 
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
@@ -81,7 +73,6 @@ import hellogbye.com.hellogbyeandroid.fragments.itinerary.ItineraryFragmentCompo
 import hellogbye.com.hellogbyeandroid.fragments.membership.MembershipFragment;
 import hellogbye.com.hellogbyeandroid.fragments.mytrips.TripsTabsView;
 import hellogbye.com.hellogbyeandroid.fragments.notification.NotificationFragment;
-import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsRadioCheckFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferenceSettingsSlideFragment;
 import hellogbye.com.hellogbyeandroid.fragments.preferences.PreferencesCheckListFragment;
@@ -106,7 +97,6 @@ import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.UpdateAvailabilityVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
-import hellogbye.com.hellogbyeandroid.models.vo.profiles.DefaultsProfilesVO;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.network.Parser;
@@ -211,7 +201,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
         getUpComingTrips();
 
-        // getRelationshipTypes();
 
         hgbSaveDataClass.setPersonalUserInformation(new PersonalUserInformationVO());
         setContentView(R.layout.main_activity_bottom_tab_layout);
@@ -275,7 +264,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
 
         getStaticAllAirlinePointsProgram(null);
-
+        getStaticRelationshipTypes();
 
      /*   if (location != null && hgbSaveDataClass.getTravelOrder() != null) {
             String[] locationArr = location.split("&");
@@ -806,7 +795,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             public void onSuccess(Object data) {
                 BookingRequestVO bookingrequest = (BookingRequestVO) data;
                 hgbSaveDataClass.setBookingRequest(bookingrequest);
-                System.out.println("Kate bookingrequest =" + bookingrequest.getCountries());
                 hgbSaveDataClass.getBookingRequest().sortCountryItems();
             }
 
@@ -1649,7 +1637,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         });
     }
 
-    public void getRelationshipTypes(){
+    public void getStaticRelationshipTypes(){
         ConnectionManager.getInstance(MainActivityBottomTabs.this).getStaticCompanionsRelationTypesVO( new ConnectionManager.ServerRequestListener() {
             @Override
             public void onSuccess(Object data) {
@@ -1687,7 +1675,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
                             }
                         });
-
+                onBackPressed();
                 //  setNewRelationshipForCompanion(companionVO);
 
             }

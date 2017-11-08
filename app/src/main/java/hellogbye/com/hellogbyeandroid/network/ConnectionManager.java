@@ -371,13 +371,21 @@ public class ConnectionManager {
 
             jsonObject.put("addedviastatus", companionData.getmAddedvia());
             jsonObject.put("isAdult", companionData.ismIsAdult());
-            jsonObject.put("relationshiptypeid", companionData.getRelationshiptypeid());
-
+            jsonObject.put("relationshiptypeid", Integer.getInteger(companionData.getRelationshiptypeid()));
             jsonObjectStub.put("emailaddress", companionData.getCompanionUserProfile().getmEmailAddress());
+
+//            if(!companionData.getCompanionUserProfile().getmEmailAddress().isEmpty()) {
+//
+//            }
+            if(companionData.getCompanionUserProfile().getmDoB().isEmpty()){
+                jsonObjectStub.put("dob",  null);
+            }else{
+                jsonObjectStub.put("dob",  companionData.getCompanionUserProfile().getmEmailAddress());
+            }
             jsonObjectStub.put("firstname", companionData.getCompanionUserProfile().getmFirstName());
             jsonObjectStub.put("lastname",  companionData.getCompanionUserProfile().getmLastName());
-            jsonObjectStub.put("dob",  companionData.getCompanionUserProfile().getmDoB());
-            jsonObjectStub.put("gender",  companionData.getCompanionUserProfile().getmGender());
+
+           // jsonObjectStub.put("gender",  companionData.getCompanionUserProfile().getmGender());
             jsonObject.put("stubcompanion",jsonObjectStub);
 
         } catch (Exception e) {

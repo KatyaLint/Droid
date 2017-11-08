@@ -67,7 +67,7 @@
         android:id="@+id/account_settings_preferences_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/account_logout_button"
+        android:layout_above="@+id/buttons_layout"
         android:layout_below="@+id/account_image_view_ll" />
 
 
@@ -92,16 +92,23 @@
     </LinearLayout>-->
 
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/buttons_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/DP20">
+
     <hellogbye.com.hellogbyeandroid.views.FontButtonView
         android:visibility="gone"
         android:id="@+id/account_logout_button"
-        android:layout_marginBottom="@dimen/DP20"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:text="@string/component_log_out"
         style="@style/RedButton"/>
+
 
     <hellogbye.com.hellogbyeandroid.views.FontButtonView
 
@@ -114,16 +121,17 @@
         style="@style/RedButton"/>
 
 
-    <hellogbye.com.hellogbyeandroid.views.FontButtonView
-        android:id="@+id/account_create_acount_button"
-        android:layout_marginBottom="@dimen/DP20"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="@string/account_create_account"
-        style="@style/BlueButton"/>
+        <hellogbye.com.hellogbyeandroid.views.FontButtonView
+            android:layout_marginTop="@dimen/DP10"
+            android:id="@+id/account_create_acount_button"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="@string/account_create_account"
+            style="@style/BlueButton"/>
 
+    </LinearLayout>
 
 
 </RelativeLayout>

@@ -18,7 +18,6 @@ import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionUserProfileVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionVO;
 import hellogbye.com.hellogbyeandroid.models.vo.companion.CompanionStaticRelationshipTypesVO;
-import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
@@ -122,7 +121,7 @@ public class CompanionDetailsFragment  extends HGBAbstractFragment {
             public void onClick(View view) {
                 final ArrayList<CompanionStaticRelationshipTypesVO> componentsDescription = getActivityInterface().getCompanionsStaticRelationshipTypes();
                 if (componentsDescription == null) {
-                    ((MainActivityBottomTabs)getActivity()).getRelationshipTypes();
+                    ((MainActivityBottomTabs)getActivity()).getStaticRelationshipTypes();
                 } else {
 
 

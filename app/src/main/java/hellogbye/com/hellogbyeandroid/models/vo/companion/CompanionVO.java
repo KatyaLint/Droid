@@ -8,6 +8,15 @@ import com.google.gson.annotations.SerializedName;
  * Created by nyawka on 1/6/16.
  */
 public class CompanionVO {
+
+    @SerializedName("addeddatetime")
+    private String mAddedatetime;
+    @SerializedName("addedvia")
+    private String mAddedvia;
+    @SerializedName("companionid")
+    private String mCompanionid;
+
+
     @SerializedName("confirmationstatus")
     private String mConfirmationstatus;
     @SerializedName("relationshiptype")
@@ -15,12 +24,6 @@ public class CompanionVO {
     @SerializedName("relationshiptypeid")
     private String relationshiptypeid;
 
-    @SerializedName("companionid")
-    private String mCompanionid;
-    @SerializedName("addeddatetime")
-    private String mAddedatetime;
-    @SerializedName("addedvia")
-    private String mAddedvia;
 
     @SerializedName("companionuserprofile")
     private CompanionUserProfileVO companionUserProfile;
