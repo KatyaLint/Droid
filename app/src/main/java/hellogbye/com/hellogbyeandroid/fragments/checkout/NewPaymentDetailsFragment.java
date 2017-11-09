@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -428,8 +430,20 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
         FontTextView title_text_change_name = (FontTextView)promptsView.findViewById(R.id.title_text_change_name);
         FontEditTextView change_iteinarary_name = (FontEditTextView)promptsView.findViewById(R.id.change_iteinarary_name);
+
+        String cardType = selectedCreditCard.getCardtypeid();
+        if(cardType.equals("1")){
+            change_iteinarary_name.setFilters(new InputFilter[] {new InputFilter.LengthFilter(4)});
+        }else{
+            change_iteinarary_name.setFilters(new InputFilter[] {new InputFilter.LengthFilter(3)});
+        }
+
+        change_iteinarary_name.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
         title_text_change_name.setText("Enter CVV Number");
         change_iteinarary_name.setHint("Enter CVV Number");
+
+
+
         HGBUtility.showAlertPopUp(getActivity(), change_iteinarary_name, promptsView, null
                 , getActivity().getResources().getString(R.string.ok_button),
                 new PopUpAlertStringCB() {
