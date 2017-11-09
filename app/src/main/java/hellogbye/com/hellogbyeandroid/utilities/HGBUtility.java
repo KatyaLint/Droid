@@ -848,6 +848,15 @@ public class HGBUtility {
       });
 
       dialog = alert.create();
+      dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+
+          @Override
+          public void onShow(DialogInterface dialog) {
+              InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+              if(input != null)
+                imm.showSoftInput(input, InputMethodManager.SHOW_IMPLICIT);
+          }
+      });
       dialog.show();
 
 
