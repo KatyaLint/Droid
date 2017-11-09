@@ -4,7 +4,12 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@color/COLOR_003D4C</item>
+
+
+        <item name="colorPrimary">@color/COLOR_WHITE</item>
+        <item name="colorPrimaryDark">@color/COLOR_003D4C</item>
+
+
     </style>
 
     <style name="AppTheme.ActionBar.Transparent" parent="AppTheme">
@@ -12,35 +17,36 @@
     </style>
 
     <style name="AppTheme.ActionBar" parent="AppTheme">
-        <item name="windowActionBarOverlay">false</item>
+        <item name="windowActionBarOverlay">true</item>
         <item name="colorPrimary">@color/COLOR_003D4C</item>
     </style>
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
-
         <item name="color">@android:color/white</item>
     </style>
+
+
     <style name="bottom_bar_text">
         <item name="android:textSize">@dimen/SP10</item>
         <item name="android:fontFamily">dinnextltpro_regular.otf</item>
     </style>
 
-    <style name="NavigationTextStyle">
-        <item name="android:textColor">@color/navigation_text_state</item>
-        <item name="android:textSize">@dimen/SP18</item>
-        <item name="android:fontFamily">dinnextltpro_regular.otf</item>
-    </style>
+    <!--<style name="NavigationTextStyle">-->
+        <!--<item name="android:textColor">@color/navigation_text_state</item>-->
+        <!--<item name="android:textSize">@dimen/SP18</item>-->
+        <!--<item name="android:fontFamily">dinnextltpro_regular.otf</item>-->
+    <!--</style>-->
 
 
-    <style name="StateText">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:padding">4dp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:background">#33000000</item>
-    </style>
+    <!--<style name="StateText">-->
+        <!--<item name="android:layout_width">0dp</item>-->
+        <!--<item name="android:layout_height">wrap_content</item>-->
+        <!--<item name="android:layout_weight">1</item>-->
+        <!--<item name="android:padding">4dp</item>-->
+        <!--<item name="android:gravity">center</item>-->
+        <!--<item name="android:textColor">#ffffff</item>-->
+        <!--<item name="android:background">#33000000</item>-->
+    <!--</style>-->
 
 
     <style name="GridTextStyle">
