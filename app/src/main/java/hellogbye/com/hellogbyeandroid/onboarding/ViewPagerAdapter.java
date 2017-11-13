@@ -63,7 +63,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         container.addView(itemView);
         if(onboardingPagerTextVOArrayList.size() -1 == position){
            FontButtonView onboarding_next_button = (FontButtonView)itemView.findViewById(R.id.onboarding_next_button);
-            onboarding_next_button.setVisibility(View.VISIBLE);
+            //onboarding_next_button.setVisibility(View.VISIBLE);
             onboarding_next_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
