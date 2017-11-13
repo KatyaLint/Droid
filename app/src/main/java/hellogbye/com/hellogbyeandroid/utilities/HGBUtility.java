@@ -837,8 +837,6 @@ public class HGBUtility {
                   ( (InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE ) ).hideSoftInputFromWindow( token, 0 );
               }
               if(alertCB != null){
-                  System.out.println("Kate newName =" + newName);
-                  System.out.println("Kate input =" + input);
                   alertCB.itemSelected(newName);
               }
               ((ViewGroup) popupView.getParent()).removeView(popupView);

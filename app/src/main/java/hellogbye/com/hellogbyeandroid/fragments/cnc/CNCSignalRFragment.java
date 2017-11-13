@@ -1425,7 +1425,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
     private void setSolutionNameForItirnarary() {
         String solutionName = getActivityInterface().getTravelOrder().getmSolutionName();
-        System.out.println("Kate solutionName =" + solutionName);
         setTextForTrip(solutionName);
     }
 

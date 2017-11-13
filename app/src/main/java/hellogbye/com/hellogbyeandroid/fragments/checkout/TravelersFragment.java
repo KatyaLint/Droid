@@ -179,9 +179,7 @@ public class TravelersFragment extends HGBAbstractFragment {
         if(userList.size() !=0 ){
             for (int i = 0; i < userList.size(); i++) {
                 UserProfileVO user = userList.get(i);
-                System.out.println("Kate user =" + user.getFirstname());
                 for (int z = 0; z <passangers.size() ; z++) {
-                    System.out.println("Kate passangers.get(z).getmName() =" + passangers.get(z).getmName());
                     if(passangers.get(z).getmPaxguid().equalsIgnoreCase(user.getPaxid())){
                         ArrayList<UserProfileVO> passengerChildArray = new ArrayList<>();
                         UserProfileVO userInfo = userList.get(z);
@@ -231,8 +229,6 @@ public class TravelersFragment extends HGBAbstractFragment {
 
 
 
-
-        System.out.println("Kate children passangers= " + children.size() + " passangers" +passangers.size());
         mAdapter = new TravlerExpandableAdapter(getActivity().getApplicationContext(), passangers, children);
         mRecyclerView.setAdapter(mAdapter);
 

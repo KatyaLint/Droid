@@ -261,7 +261,7 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             if(hashMap.containsKey(bookingID)){
                 NodesVO node =(NodesVO)hashMap.get(bookingID);
                 if(!node.getmPaymentProcessingState().equals("PAID")){
-                    System.out.println("Kate key bookingID");
+
                     set.add(bookingID);
                 }
             }
@@ -516,10 +516,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
             //This is to set bookingitem array  final json for payment
             for (String strItem : paymentGroup.getItems()) {
                 if (add) {
-                    System.out.println("Kate add =" + strItem);
                     getFlowInterface().getBookingHashMap().put(strItem, selectedCreditCard.getToken());
                 } else {
-                    System.out.println("Kate remove =" + strItem);
                     getFlowInterface().getBookingHashMap().remove(strItem);
                 }
 
@@ -566,10 +564,8 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
             //This is to set bookingitem array  final json for payment
             if (add) {
-                System.out.println("Kate adding paymentchild.getGuid(), selectedCreditCard.getToken()");
                 getFlowInterface().getBookingHashMap().put(paymentchild.getGuid(), selectedCreditCard.getToken());
             } else {
-                System.out.println("Kate removing paymentchild.getGuid(), selectedCreditCard.getToken()");
                 getFlowInterface().getBookingHashMap().remove(paymentchild.getGuid());
             }
 
@@ -594,11 +590,9 @@ public class NewPaymentDetailsFragment extends HGBAbstractFragment {
 
                 for (String passengerItem : passenger.getmItineraryItems()) {
                     if (add) {
-                        System.out.println("Kate adding passengerItem, selectedCreditCard.getToken()");
                         getFlowInterface().getBookingHashMap().put(passengerItem, selectedCreditCard.getToken());
                         currentPassenger.getmBookingItems().addAll(passenger.getmItineraryItems());
                     } else {
-                        System.out.println("Kate removing passengerItem, selectedCreditCard.getToken()");
                         getFlowInterface().getBookingHashMap().remove(passengerItem);
                         currentPassenger.getmBookingItems().removeAll(passenger.getmItineraryItems());
                     }

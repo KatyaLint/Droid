@@ -62,7 +62,7 @@ public class PreferencesTabCommonFragment extends HGBAbstractFragment {
             initializeFlightRecycle(rootView, accountFlightSettings);
             addFlightPreferenceText();
         }else{
-            System.out.println("Kate");
+
             removeBedAndSmoking();
             initializeHotelRecycle(rootView, accountHotelSettings);
             addHotelPreferenceText();
@@ -76,13 +76,10 @@ public class PreferencesTabCommonFragment extends HGBAbstractFragment {
     private void removeBedAndSmoking(){
         ArrayList<SettingsAttributesVO> accountHotelList = new ArrayList<>(accountHotelSettings);
         for(SettingsAttributesVO accountHotel: accountHotelSettings){
-            System.out.println("Kate accountHotel.getmName() =" + accountHotel.getmName());
             if(accountHotel.getmName().equals("Bed Types") || accountHotel.getmName().equals("Smoking")){
                 accountHotelList.remove(accountHotel);
             }
         }
-        System.out.println("Kate accountHotelSettings =" + accountHotelSettings.size());
-        System.out.println("Kate accountHotelList =" + accountHotelList.size());
         accountHotelSettings = new ArrayList<>(accountHotelList);
     }
 
