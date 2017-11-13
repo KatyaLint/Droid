@@ -19,6 +19,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -399,7 +400,7 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
         if(isFlight){
             text_title.setText("Tax Breakdown");
         }else{
-            text_title.setText("Tax Currency");
+            text_title.setText("Local Currency");
         }
 
         ListView user_profile_popup_list_view = (ListView) promptsViewTeest.findViewById(R.id.alternative_popup_sort);
@@ -452,12 +453,12 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
 
 
 
-            Map<String, Object> taxBreakDown = new HashMap<String, Object>();
+            LinkedHashMap<String, Object> taxBreakDown = new LinkedHashMap<String, Object>();
             taxBreakDown.put("Nightly",String.format("%.2f",nightlyRate));
             taxBreakDown.put(updateAvailabilityVO.getHotels().get(0).getNightlyrate().size() + " Nights:",String.format("%.2f",updateAvailabilityVO.getHotels().get(0).getNightlyrate().get(0)));
 
             //TODO check taxes fees
-            taxBreakDown.put("Taxes, fees"+"\n"+" and charges",0);
+            taxBreakDown.put("Taxes, fees"+"\n"+"and charges",0);
 
             taxesDialog(context, taxBreakDown, false);
 
