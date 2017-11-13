@@ -310,7 +310,7 @@ public class CostumeToolBar extends Toolbar {
              */
             case ALL_COMPANIONS_VIEW:
             case COMPANIONS_PERSONAL_DETAILS:
-            case HELP:
+
 
                 preference_save_changes.setVisibility(View.GONE);
                 break;
@@ -358,6 +358,7 @@ public class CostumeToolBar extends Toolbar {
             case HAZARDOUS_NOTICE:
             case CHECKOUT_CONFIRMATION:
             case ADD_CREDIT_CARD:
+            case HELP:
                 titleBar.setVisibility(View.VISIBLE);
                 break;
             /**
