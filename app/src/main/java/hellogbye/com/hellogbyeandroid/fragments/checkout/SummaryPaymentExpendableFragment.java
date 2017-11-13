@@ -379,7 +379,7 @@ public class SummaryPaymentExpendableFragment extends HGBAbstractFragment {
 
 
         ss.setSpan(new myClickableSpan(1), 29, 47, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ss.setSpan(new myClickableSpan(2), 52, 75, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss.setSpan(new myClickableSpan(2), 52, 62, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         mHazerdiusText.setText(ss);
         mHazerdiusText.setMovementMethod(LinkMovementMethod.getInstance());
