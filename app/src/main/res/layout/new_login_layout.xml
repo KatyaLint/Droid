@@ -63,34 +63,50 @@
         app:fontName="dinnextltpro_light.otf" />
 
 
-    <RelativeLayout
+    <!--<RelativeLayout-->
+        <!--android:layout_marginLeft="@dimen/DP26"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="@dimen/DP10">-->
+        <!--<CheckBox-->
+            <!--android:id="@+id/remmember_me_checkbox"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:button="@drawable/selector_hgb_checkbox"-->
+            <!--android:checked="true"-->
+            <!--/>-->
+
+        <!--<hellogbye.com.hellogbyeandroid.views.FontTextView-->
+            <!--android:textSize="@dimen/SP16"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:fontName="dinnextltpro_light.otf"-->
+            <!--android:textColor="@color/COLOR_00516f"-->
+            <!--android:text="@string/remmeber_me"-->
+            <!--android:layout_marginLeft="@dimen/DP8"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_alignTop="@+id/remmember_me_checkbox"-->
+            <!--android:layout_alignBottom="@+id/remmember_me_checkbox"-->
+            <!--android:layout_toRightOf="@+id/remmember_me_checkbox" />-->
+
+    <!--</RelativeLayout>-->
+
+
+    <hellogbye.com.hellogbyeandroid.views.FontCheckedTextView
         android:layout_marginLeft="@dimen/DP26"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/DP10">
-        <CheckBox
-            android:id="@+id/remmember_me_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/selector_hgb_checkbox"
-            android:checked="true"
-            />
+        android:layout_centerInParent="true"
+        android:id="@+id/login_remmember_me_checkbox"
+        android:layout_marginRight="@dimen/DP20"
+        android:textSize="@dimen/SP16"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DP38"
+        android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="true"
+        android:gravity="center_vertical"
+        android:text="@string/remmeber_me"
+        app:fontName="dinnextltpro_medium.otf"
+        android:textColor="@color/COLOR_00516f" />
 
-        <hellogbye.com.hellogbyeandroid.views.FontTextView
-            android:textSize="@dimen/SP16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fontName="dinnextltpro_light.otf"
-            android:textColor="@color/COLOR_00516f"
-            android:text="@string/remmeber_me"
-            android:layout_marginLeft="@dimen/DP8"
-            android:gravity="center"
-            android:layout_alignTop="@+id/remmember_me_checkbox"
-            android:layout_alignBottom="@+id/remmember_me_checkbox"
-            android:layout_toRightOf="@+id/remmember_me_checkbox"
-            />
-
-    </RelativeLayout>
 
 
     <hellogbye.com.hellogbyeandroid.views.FontButtonView

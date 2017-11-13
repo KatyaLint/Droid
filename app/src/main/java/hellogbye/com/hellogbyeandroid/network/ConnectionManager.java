@@ -575,7 +575,9 @@ public class ConnectionManager {
     public void login(String email, String password,String id,String connectionID, final ServerRequestListener listener) {
         String url = getURL(Services.USER_POST_LOGIN);
 
-        String emailStr = email.replace("+","%2b");
+        //String emailStr = email.replace("+","%2b");
+
+        String emailStr = email;
 
         JSONObject jsonObject = new JSONObject();
         try {

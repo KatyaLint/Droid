@@ -1148,7 +1148,8 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
         hgbPrefrenceManager.removeKey(HGBConstants.HGB_FREE_USER);
         hgbPrefrenceManager.removeKey(HGBConstants.HGB_USER_PROFILE_ID);
-        hgbPrefrenceManager.removeKey(HGBConstants.HGB_USER_LAST_EMAIL);
+
+      //  hgbPrefrenceManager.removeKey(HGBConstants.HGB_USER_LAST_EMAIL);
 
 
 

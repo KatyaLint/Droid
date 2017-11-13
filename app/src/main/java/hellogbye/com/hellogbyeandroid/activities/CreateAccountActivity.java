@@ -64,6 +64,7 @@ import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtility;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityNetwork;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
+import hellogbye.com.hellogbyeandroid.views.FontCheckedTextView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
@@ -144,7 +145,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     private RelativeLayout mRoot;
     private ImageView mBird1;
     private ImageView mBird2;
-    private CheckBox mRemmeberMeCheckbox;
+    private FontCheckedTextView mRemmeberMeCheckbox;
     private FontTextView mForgotPasswordTextView;
     private boolean remember_me;
     private int CURRENT_STATE = 0;
@@ -266,7 +267,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         mForgotPasswordTextView = (FontTextView) findViewById(R.id.forgotpassword);
         mBird1 = (ImageView) findViewById(R.id.bird_1);
         mBird2 = (ImageView) findViewById(R.id.bird_2);
-        mRemmeberMeCheckbox = (CheckBox) findViewById(R.id.remmember_me_checkbox);
+        mRemmeberMeCheckbox = (FontCheckedTextView) findViewById(R.id.login_remmember_me_checkbox);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         mNextTextView = (FontTextView) findViewById(R.id.sign_in);
@@ -303,6 +304,26 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         login_button = (FontButtonView) findViewById(R.id.login_button);
         mHelloGbyePromotionCheckBox = (CheckBox)findViewById(R.id.promotion_checkbox);
         mThirdPartyPromotionCheckBox = (CheckBox)findViewById(R.id.special_offer_checkbox);
+
+
+        boolean remember = hgbPrefrenceManager.getBooleanSharedPreferences(HGBConstants.REMMEMBER_ME, false);
+        mRemmeberMeCheckbox.setChecked(remember);
+        String email = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_LAST_EMAIL, null);
+        if(remember && email!= null){
+            mLoginEmail.setText(email);
+        }
+
+        mRemmeberMeCheckbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mRemmeberMeCheckbox.isChecked()){
+                    mRemmeberMeCheckbox.setChecked(false);
+                }else{
+                    mRemmeberMeCheckbox.setChecked(true);
+                }
+            }
+        });
+
 
 
         login_button.setOnClickListener(new View.OnClickListener() {
@@ -443,9 +464,11 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 //                //TODO
 //            }
            // TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-            hgbPrefrenceManager.putBooleanSharedPreferences(HGBConstants.REMMEMBER_ME, mRemmeberMeCheckbox.isChecked());
+
            // String strUdid = tm.getDeviceId();
           //  long udid = Long.valueOf(strUdid);
+
+
 
             String uuid = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_UUID,"");
             if("".equals(uuid)){
@@ -464,6 +487,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
                             hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.HGB_USER_LAST_EMAIL, mLoginEmail.getText().toString());
                             hgbPrefrenceManager.putBooleanSharedPreferences(HGBConstants.HGB_FREE_USER, false);
+                            hgbPrefrenceManager.putBooleanSharedPreferences(HGBConstants.REMMEMBER_ME, mRemmeberMeCheckbox.isChecked());
                             goToMainActivity();
                         }
 
@@ -957,7 +981,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
             remember_me = hgbPrefrenceManager.getBooleanSharedPreferences(HGBConstants.REMMEMBER_ME, false);
             String email = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_LAST_EMAIL, null);
-            if (remember_me && email != null) {
+            if (remember_me && email != null && !email.isEmpty()) {
                 mLoginEmail.setText(email);
                 String pswd = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_LAST_PSWD, null);
                 if (pswd != null) {

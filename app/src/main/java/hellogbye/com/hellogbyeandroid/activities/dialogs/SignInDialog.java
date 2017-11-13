@@ -108,7 +108,7 @@ public class SignInDialog extends Dialog {
 //                //TODO
 //            }
             // TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-            hgbPrefrenceManager.putBooleanSharedPreferences(HGBConstants.REMMEMBER_ME, remmember_me_checkbox.isChecked());
+
             // String strUdid = tm.getDeviceId();
             //  long udid = Long.valueOf(strUdid);
 
@@ -130,6 +130,7 @@ public class SignInDialog extends Dialog {
 
                             hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.HGB_USER_LAST_EMAIL, email);
                             hgbPrefrenceManager.putBooleanSharedPreferences(HGBConstants.HGB_FREE_USER, false);
+                            hgbPrefrenceManager.putBooleanSharedPreferences(HGBConstants.REMMEMBER_ME, remmember_me_checkbox.isChecked());
 
                             goToMainActivity();
                         }
