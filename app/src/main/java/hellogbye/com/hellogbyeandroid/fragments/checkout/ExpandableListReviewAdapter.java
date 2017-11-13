@@ -414,38 +414,52 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
     }
 
 
+
+
+
+
     View.OnClickListener showCurrentCurrencyHotelDialogListener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
 
 
 
-            View promptsViewTeest = inf.inflate(R.layout.payment_child_review_hotel_total_price, null);
-
-            FontTextView text_title = (FontTextView)promptsViewTeest.findViewById(R.id.hotel_review_currency_title);
-            text_title.setVisibility(View.VISIBLE);
-
-
-            FontTextView hotel_review_nightly = (FontTextView)promptsViewTeest.findViewById(R.id.hotel_review_nightly);
-            FontTextView hotel_review_total_night_cost = (FontTextView)promptsViewTeest.findViewById(R.id.hotel_review_total_night_cost);
-            FontTextView hotel_review_total_num_of_nights = (FontTextView)promptsViewTeest.findViewById(R.id.hotel_review_total_num_of_nights);
-            FontTextView hotel_review_total_charges = (FontTextView)promptsViewTeest.findViewById(R.id.hotel_review_total_charges);
-
-
+//            View promptsViewTeest = inf.inflate(R.layout.payment_child_review_hotel_total_price, null);
+//
+//            FontTextView text_title = (FontTextView)promptsViewTeest.findViewById(R.id.hotel_review_currency_title);
+//            text_title.setVisibility(View.VISIBLE);
+//
+//
+//            FontTextView hotel_review_nightly = (FontTextView)promptsViewTeest.findViewById(R.id.hotel_review_nightly);
+//            FontTextView hotel_review_total_night_cost = (FontTextView)promptsViewTeest.findViewById(R.id.hotel_review_total_night_cost);
+//            FontTextView hotel_review_total_num_of_nights = (FontTextView)promptsViewTeest.findViewById(R.id.hotel_review_total_num_of_nights);
+//            FontTextView hotel_review_total_charges = (FontTextView)promptsViewTeest.findViewById(R.id.hotel_review_total_charges);
+//
+//
             ArrayList<UpdateAvailabilityItemVO> hotels = updateAvailabilityVO.getHotels();
             double nightlyRate = 0;
             for(Double d : hotels.get(0).getNightlyrate()){
                 nightlyRate = nightlyRate+d;
             }
+//
+//            hotel_review_total_night_cost.setText(String.format("%.2f",nightlyRate));
+//            hotel_review_total_num_of_nights.setText(""+updateAvailabilityVO.getHotels().get(0).getNightlyrate().size() + " Nights:");
+//            hotel_review_nightly.setText(String.format("%.2f",updateAvailabilityVO.getHotels().get(0).getNightlyrate().get(0)));
+//
+//
+//            HGBUtility.showAlertPopUpOneButton(context,  null, promptsViewTeest,
+//                    null, null);
 
-            hotel_review_total_night_cost.setText(String.format("%.2f",nightlyRate));
-            hotel_review_total_num_of_nights.setText(""+updateAvailabilityVO.getHotels().get(0).getNightlyrate().size() + " Nights:");
-            hotel_review_nightly.setText(String.format("%.2f",updateAvailabilityVO.getHotels().get(0).getNightlyrate().get(0)));
 
 
-            HGBUtility.showAlertPopUpOneButton(context,  null, promptsViewTeest,
-                    null, null);
+            Map<String, Object> taxBreakDown = new HashMap<String, Object>();
+            taxBreakDown.put("Nightly",String.format("%.2f",nightlyRate));
+            taxBreakDown.put(updateAvailabilityVO.getHotels().get(0).getNightlyrate().size() + " Nights:",String.format("%.2f",updateAvailabilityVO.getHotels().get(0).getNightlyrate().get(0)));
 
+            //TODO check taxes fees
+            taxBreakDown.put("Taxes, fees"+"\n"+" and charges",0);
+
+            taxesDialog(context, taxBreakDown, false);
 
 
         }

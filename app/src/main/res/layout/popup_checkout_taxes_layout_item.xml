@@ -14,7 +14,6 @@
         android:layout_toRightOf="@+id/image_profile_switch_a_1"
         android:textColor="@color/COLOR_565656"
         android:textSize="@dimen/SP16"
-
         app:fontName="dinnextltpro_regular.otf"
         android:padding="@dimen/DP20"
         android:text="@string/profile_choose_between"
@@ -36,6 +35,15 @@
 
 
     <!-- profile_choose_between-->
+
+
+    <View
+        android:visibility="gone"
+        android:id="@+id/popup_checkout_bottom_line"
+        android:layout_below="@+id/check_out_taxes_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DP1"
+        android:background="@color/COLOR_80999999" />
 
 
 </RelativeLayout>

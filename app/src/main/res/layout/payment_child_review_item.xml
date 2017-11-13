@@ -403,9 +403,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
-            android:gravity="center"
-            android:text="Fees Due at Hotel"
-            android:drawablePadding="@dimen/DP4"/>
+            android:text="Fees Due at Hotel" />
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:layout_width="match_parent"
@@ -441,11 +439,6 @@
             android:drawablePadding="@dimen/DP4"/>
 
     </LinearLayout>
-
-
-
-
-
 
 
 

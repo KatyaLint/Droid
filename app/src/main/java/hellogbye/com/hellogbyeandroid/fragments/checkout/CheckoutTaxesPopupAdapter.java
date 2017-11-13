@@ -60,7 +60,13 @@ public class CheckoutTaxesPopupAdapter extends BaseAdapter {
         FontTextView check_out_taxes_price = (FontTextView)v.findViewById(R.id.check_out_taxes_price);
         check_out_taxes_name.setText(key);
         check_out_taxes_price.setText("$" + HGBUtility.roundNumber(Double.parseDouble(Value)));
+        View popup_checkout_bottom_line = (View)v.findViewById(R.id.popup_checkout_bottom_line);
+        if(position == taxBreakDown.size()-1){
 
+            popup_checkout_bottom_line.setVisibility(View.VISIBLE);
+        }else{
+            popup_checkout_bottom_line.setVisibility(View.GONE);
+        }
 
         return v;
     }

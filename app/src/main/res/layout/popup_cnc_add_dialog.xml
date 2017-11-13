@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:textColor="@color/COLOR_00516f"
         android:textSize="@dimen/SP24"
-
         app:fontName="dinnextltpro_condensed.ttf"
         android:padding="@dimen/DP20"
         android:text="@string/cnc_add_dialog"/>
