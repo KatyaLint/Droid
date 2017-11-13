@@ -574,10 +574,13 @@ public class ConnectionManager {
 
     public void login(String email, String password,String id,String connectionID, final ServerRequestListener listener) {
         String url = getURL(Services.USER_POST_LOGIN);
+
+        String emailStr = email.replace("+","%2b");
+
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("password", password);
-            jsonObject.put("username", email);
+            jsonObject.put("username", emailStr);
             jsonObject.put("DeviceUUID", id);
             jsonObject.put("ConnectionId", connectionID);
 
@@ -1058,6 +1061,7 @@ public class ConnectionManager {
     public void putCaptcha(String captchaid,String captchatext,String email, final ServerRequestListener listener){
         //http://apidev.hellogbye.com/dev/rest/UserProfile/PasswordReset?captchaid=a8d2ff02-ae29-4669-be80-7deeb4d1c334&captchatext=wsert3er&email=ktlint%2B1234@gmail.com
 
+        email = email.replace("+","%2b");
 
         String url = getURL(Services.PUT_CAPTCHA);
 

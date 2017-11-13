@@ -13,7 +13,6 @@
 
 
     <string-array name="base_url">
-        <item>https://qa.hellogbye.com/qa/Rest/</item>
         <item>https://newdev.hellogbye.com/dev/Rest/</item>
         <item>https://apiprod.hellogbye.com/prod/rest/</item>
         <item>https://apiuat.hellogbye.com/uat/rest/</item>

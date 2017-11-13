@@ -13,6 +13,9 @@
         android:layout_height="match_parent">
 
 
+
+
+
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleHorizontal"
@@ -28,6 +31,7 @@
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:translationZ="@dimen/DP100" />
+
 
 
         <ImageView
@@ -141,6 +145,9 @@
 
             android:src="@drawable/building" />
 
+
+
+
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/create_login"
             android:layout_width="match_parent"
@@ -154,6 +161,15 @@
             android:textSize="@dimen/SP16"
             android:translationZ="2dp"
             app:fontName="dinnextltpro_regular.otf" />
+        <hellogbye.com.hellogbyeandroid.views.FontTextView
+            android:layout_above="@+id/create_login"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/SP20"
+            android:layout_height="wrap_content"
+            android:text="Choose server"
+            android:id="@+id/change_server_url"/>
+
 
         <hellogbye.com.hellogbyeandroid.views.FontTextView
             android:id="@+id/amex_logo"

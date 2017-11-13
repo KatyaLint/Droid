@@ -20,9 +20,6 @@ import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontEditTextView;
 import hellogbye.com.hellogbyeandroid.views.FontTextView;
 
-/**
- * Created by arisprung on 11/22/16.
- */
 
 public class EnterPinActivity extends Activity {
 

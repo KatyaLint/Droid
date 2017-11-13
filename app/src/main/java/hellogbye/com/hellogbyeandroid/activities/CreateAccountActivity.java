@@ -51,6 +51,7 @@ import java.util.UUID;
 
 import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.models.vo.UserSignUpDataVO;
@@ -163,6 +164,32 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     private Tooltip mTooltip;
 
+
+    private  View.OnClickListener changeServerUrlListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            String[] account_settings = getResources().getStringArray(R.array.base_url);
+
+            HGBUtility.showPikerDialog(0,change_server_url, CreateAccountActivity.this, "Choose url",
+                    account_settings, 0, account_settings.length -1, new PopUpAlertStringCB(){
+
+                        @Override
+                        public void itemSelected(String inputItem) {
+                            hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.CHOOSEN_SERVER, inputItem);
+                            //      ConnectionManager.getInstance(StartingMenuActivity.this).BASE_URL = inputItem;
+                            //ConnectionManager.BASE_URL = inputItem;
+                        }
+
+                        @Override
+                        public void itemCanceled() {
+
+                        }
+                    }, true);
+        }
+    };
+    private FontTextView change_server_url;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -174,6 +201,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
 */
 
+        change_server_url = (FontTextView)findViewById(R.id.change_server_url);
+        change_server_url.setOnClickListener(changeServerUrlListener);
 
         mCityList = new ArrayList<>();
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(getApplicationContext());
