@@ -118,7 +118,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
                     accountDefaultSettings = (ArrayList<DefaultsProfilesVO>) data;
                     //     List<AccountDefaultSettingsVO> accountDefaultSettings = (List<AccountDefaultSettingsVO>) data;
                     accountDefaultSettings.remove(accountDefaultSettings.size()-1);
-                    profilesDialog(accountDefaultSettings, context, flowInterface, activityInterface);
+                    profilesDialog(accountDefaultSettings, context, flowInterface, activityInterface, false);
                 }
             }
             @Override
@@ -143,7 +143,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
                     activityInterface.setDefaultsProfilesVOs(accountDefaultSettings);
                     if(isDialog) {
                         //     List<AccountDefaultSettingsVO> accountDefaultSettings = (List<AccountDefaultSettingsVO>) data;
-                        profilesDialog(accountDefaultSettings, context, flowInterface, activityInterface);
+                        profilesDialog(accountDefaultSettings, context, flowInterface, activityInterface, true);
                     }else{
                         miProfileUpdated.profileUpdated("");
                     }
@@ -159,7 +159,8 @@ public class UserProfilePreferences extends HGBAbstractFragment {
     }
 
 
-    private void profilesDialog(final ArrayList<DefaultsProfilesVO> userProfileVOs, final Activity activity, final HGBFlowInterface flowInterface, final HGBMainInterface activityInterface) {
+    private void profilesDialog(final ArrayList<DefaultsProfilesVO> userProfileVOs, final Activity activity, final HGBFlowInterface flowInterface,
+                                final HGBMainInterface activityInterface, boolean showDialog) {
         LayoutInflater li = LayoutInflater.from(activity);
         View promptsView = li.inflate(R.layout.popup_custom_title, null);
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
@@ -235,7 +236,7 @@ public class UserProfilePreferences extends HGBAbstractFragment {
 
                 if(radioButtonSelected != -1) {
 
-                    if(isDefaultProfile){
+                    if(isDefaultProfile){ //isDefaultProfile == freeUser
 
                         final DefaultsProfilesVO selected = accountDefaultSettings.get(radioButtonSelected);
                         postDefaultProfile(String.valueOf(selected.getId()), selected.getName(), activity, activityInterface, userProfileVOs);
@@ -253,7 +254,24 @@ public class UserProfilePreferences extends HGBAbstractFragment {
         selectDefaultProfileDialog = dialogBuilder.create();
         selectDefaultProfileDialog.setView(promptsViewTeest);
         selectDefaultProfileDialog.setCancelable(false);
-        selectDefaultProfileDialog.show();
+        //not showing the first popup in freeUser
+
+      //  selectDefaultProfileDialog.show();
+
+        if(!showDialog) {
+            final DefaultsProfilesVO selected = accountDefaultSettings.get(radioButtonSelected);
+            postDefaultProfile(String.valueOf(selected.getId()), selected.getName(), activity, activityInterface, userProfileVOs);
+//            if(isDefaultProfile){
+//
+//                final DefaultsProfilesVO selected = accountDefaultSettings.get(radioButtonSelected);
+//                postDefaultProfile(String.valueOf(selected.getId()), selected.getName(), activity, activityInterface, userProfileVOs);
+//            }
+//            else{
+//                putAccoutToServer(activity, activityInterface);
+//            }
+        }else{
+            selectDefaultProfileDialog.show();
+        }
 
 
 

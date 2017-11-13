@@ -658,6 +658,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 //showUserProfiles();
                 if (!mCurrentUser.getIsTravelprofile()) {
 
+                    //kate
                     userProfilePreferences.getUserDefaultSettings(MainActivityBottomTabs.this, MainActivityBottomTabs.this, hgbSaveDataClass);
                     // showUserProfiles();
                 }
