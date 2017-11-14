@@ -59,13 +59,17 @@
             <hellogbye.com.hellogbyeandroid.views.FontTextView
                 android:id="@+id/grid_hotel_name"
                 android:textSize="@dimen/SP14"
-                android:layout_margin="@dimen/DP6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Hotel name"
                 android:textColor="@color/COLOR_WHITE"
                 app:fontName="dinnextltpro_medium.otf"
-                android:maxLines="2" />
+                android:maxLines="2"
+                android:layout_marginLeft="@dimen/DP6"
+                android:layout_marginTop="@dimen/DP6"
+                android:layout_marginBottom="@dimen/DP6"
+                android:layout_toLeftOf="@+id/grid_hotel_price_ll"
+                android:layout_toStartOf="@+id/grid_hotel_price_ll" />
 
 
             <!--  <ImageView

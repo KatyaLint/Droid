@@ -39,8 +39,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/grid_airplane_logo"
-            android:layout_toEndOf="@+id/grid_airplane_logo" >
+            android:layout_toRightOf="@+id/grid_airplane_logo_booked"
+            android:layout_toEndOf="@+id/grid_airplane_logo_booked">
 
             <hellogbye.com.hellogbyeandroid.views.FontTextView
 
