@@ -159,7 +159,7 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
                             @Override
                             public void itemCanceled() {
                             }
-                        });
+                        }, true);
             }
 
             @Override
@@ -315,6 +315,6 @@ public class PreferenceSettingsEmailFragment extends HGBAbstractFragment {
     @Override
     public void onDestroyView() {
         noBack = true;
-        super.onDetach();
+        super.onDestroyView();
     }
 }

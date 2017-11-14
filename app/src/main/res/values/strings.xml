@@ -368,7 +368,7 @@
 
 
     <string name = "free_user_title">Become A Registered User</string>
-    <string name = "free_user_explanation">This option is available only for registered users</string>
+    <string name = "free_user_explanation">This option is available only for\nregistered users</string>
 
 
     <string name = "cnc_add_dialog">What do you want to add?</string>

@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.HGBFlowInterface;
 import hellogbye.com.hellogbyeandroid.activities.HGBMainInterface;
+import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ToolBarNavEnum;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.UserTravelMainVO;
@@ -31,13 +32,14 @@ public class Information_Popup_View {
     private HGBFlowInterface flowInterface;
     private HGBMainInterface mainInterface;
     private CNCSignalRFragment.IClearCNC iClearCNC;
+    private boolean isFreeUser ;
 
-
-    public Information_Popup_View(Activity activity, final HGBFlowInterface flowInterface, HGBMainInterface activityInterface, CNCSignalRFragment.IClearCNC iClearCNC){
+    public Information_Popup_View(Activity activity, final HGBFlowInterface flowInterface, HGBMainInterface activityInterface, CNCSignalRFragment.IClearCNC iClearCNC, boolean isFreeUser){
         this.activity = activity;
         this.flowInterface = flowInterface;
         this.mainInterface = activityInterface;
         this.iClearCNC = iClearCNC;
+        this.isFreeUser = isFreeUser;
     }
 
 
@@ -94,9 +96,13 @@ public class Information_Popup_View {
         });
 
 
+
+
         FontTextView cnc_add_dialog_favorites_text  =  (FontTextView)cnc_add_dialog_favorites.findViewById(R.id.cnc_add_dialog_favorites_text);
         ImageView add_to_favorites_img = (ImageView)cnc_add_dialog_favorites.findViewById(R.id.add_to_favorites_img);
         ImageView remove_to_favorites_img = (ImageView)cnc_add_dialog_favorites.findViewById(R.id.remove_to_favorites_img);
+
+        System.out.println("Kate isFreeUser =" + isFreeUser);
 
         if (mainInterface.getTravelOrder() != null && !mainInterface.getTravelOrder().ismIsFavorite()) {
             cnc_add_dialog_favorites_text.setText(R.string.cnc_add_dialog_add_favorites);
@@ -117,6 +123,10 @@ public class Information_Popup_View {
             cnc_add_dialog_favorites.setVisibility(View.GONE);
         }
 
+        if(isFreeUser) { //leave only add new trip
+            cnc_add_dialog_add_companion.setVisibility(View.GONE);
+            cnc_add_dialog_favorites.setVisibility(View.GONE);
+        }
 
         HGBUtility.showAlertPopUp(activity, null, popup_cnc_add_dialog,
                 null, null, new PopUpAlertStringCB() {

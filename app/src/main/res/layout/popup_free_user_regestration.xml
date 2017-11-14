@@ -14,7 +14,7 @@
         android:textSize="@dimen/SP24"
 
         app:fontName="dinnextltpro_condensed.ttf"
-        android:padding="@dimen/DP20"
+        android:padding="@dimen/DP14"
         android:text="@string/free_user_title"/>
    <!-- profile_choose_between-->
     <hellogbye.com.hellogbyeandroid.views.FontTextView
@@ -25,13 +25,13 @@
         android:textColor="@color/COLOR_565656"
         android:textSize="@dimen/SP16"
         android:layout_centerVertical="true"
-        app:fontName="dinnextltpro_condensed.ttf"
-        android:padding="@dimen/DP20"
+        app:fontName="dinnextltpro_regular.otf"
+        android:padding="@dimen/DP14"
         android:text="@string/free_user_explanation"/>
 
 
     <LinearLayout
-        android:padding="@dimen/DP20"
+        android:padding="@dimen/DP14"
         android:id="@+id/free_user_sign_in"
         android:layout_below="@+id/free_user_explanation"
         android:layout_width="match_parent"
@@ -56,7 +56,7 @@
 
 
     <LinearLayout
-        android:padding="@dimen/DP20"
+        android:padding="@dimen/DP14"
         android:id="@+id/free_user_create_new"
         android:layout_below="@+id/free_user_sign_in"
         android:layout_width="match_parent"
@@ -78,5 +78,12 @@
             android:text="CREATE A NEW ACCOUNT"/>
 
     </LinearLayout>
+
+    <View
+        android:layout_below="@+id/free_user_create_new"
+        android:id="@+id/flight_details_bottom_separator_1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DP1"
+        android:background="@color/COLOR_22999999" />
 
 </RelativeLayout>

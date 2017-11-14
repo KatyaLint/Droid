@@ -23,6 +23,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -954,7 +955,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             case FREE_USER_FRAGMENT:
                 // fragment = FreeUserFragment.newInstance(navPosition);
                 //   stashToBack = false;
-                freeUserPopUp();
+              //  freeUserPopUp();
                 //isAddAnimation = true;
                 break;
             case CHECKOUT_CONFIRMATION:
@@ -991,8 +992,14 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                 navBar.equals(ToolBarNavEnum.PAYMENT_TRAVELERS) ||
                 navBar.equals(ToolBarNavEnum.ALL_COMPANIONS_VIEW) ||
                 navBar.equals(ToolBarNavEnum.CREDIT_CARD_LIST) ||
-                navBar.equals(ToolBarNavEnum.NOTIFICATIONS))) {
+                navBar.equals(ToolBarNavEnum.NOTIFICATIONS) ||
+                navBar.equals(ToolBarNavEnum.SELECT_CREDIT_CARD) ||
+                navBar.equals(ToolBarNavEnum.FREE_USER_FRAGMENT) ||
+                navBar.equals(ToolBarNavEnum.LOYALTY_ADD_PROGRAMME)
+                         )
+                ) {
 
+            freeUserPopUp();
             isAddAnimation = true;
             fragment = isFreeUser(fragment, navPosition);
             // mToolbar.setVisibility(View.GONE);
@@ -1011,7 +1018,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     }
 
-    private void freeUserPopUp(){
+    public void freeUserPopUp(){
         LayoutInflater li = LayoutInflater.from(MainActivityBottomTabs.this);
         final  View popupView = li.inflate(R.layout.popup_free_user_regestration, null);
       /*  FontTextView popup_flight_baggage_text = (FontTextView) popupView.findViewById(R.id.popup_flight_baggage_text);
@@ -1045,18 +1052,22 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
 
 
-        HGBUtility.showAlertPopUp(MainActivityBottomTabs.this, null, popupView,
-                null, null, new PopUpAlertStringCB() {
-                    @Override
-                    public void itemSelected(String inputItem) {
+        HGBUtility.showAlertPopUpOneButton(MainActivityBottomTabs.this, null,  popupView ,
+        null, null, false);
 
-                    }
 
-                    @Override
-                    public void itemCanceled() {
-
-                    }
-                });
+//        HGBUtility.showAlertPopUp(MainActivityBottomTabs.this, null, popupView,
+//                null, null, new PopUpAlertStringCB() {
+//                    @Override
+//                    public void itemSelected(String inputItem) {
+//
+//                    }
+//
+//                    @Override
+//                    public void itemCanceled() {
+//
+//                    }
+//                });
 
 
     }
@@ -1108,7 +1119,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             //  Intent intent = new Intent(getBaseContext(), SignUpActivity.class);
             //  startActivity(intent);
 
-            //  fragment = FreeUserFragment.newInstance(navPosition);
+           //  fragment = FreeUserFragment.newInstance(navPosition);
             //  mToolbar.setVisibility(View.GONE);
         }
        /* else {
@@ -1676,7 +1687,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
                             public void itemCanceled() {
 
                             }
-                        });
+                        }, true);
                 onBackPressed();
                 //  setNewRelationshipForCompanion(companionVO);
 
@@ -1905,6 +1916,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
     private AlertDialog mSeatTypeDialog;
     private String[] seatArray = {"No Preference","Window","Aisle"};
+
     public void buildSeatTypeDialog(final String chooseItem, final RefreshComplete refreslistner) {
 
         int choosenNum =0;

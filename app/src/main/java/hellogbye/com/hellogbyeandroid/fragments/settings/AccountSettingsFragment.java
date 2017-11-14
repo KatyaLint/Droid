@@ -314,6 +314,7 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
 
 
             if(isFreeUser){
+                //((MainActivityBottomTabs)getActivity()).freeUserPopUp();
                 getFlowInterface().goToFragment(ToolBarNavEnum.FREE_USER_FRAGMENT.getNavNumber(), null);
             }
             else {

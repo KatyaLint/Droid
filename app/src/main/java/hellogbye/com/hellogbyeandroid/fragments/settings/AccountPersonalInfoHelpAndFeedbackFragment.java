@@ -143,7 +143,7 @@ public class AccountPersonalInfoHelpAndFeedbackFragment extends HGBAbstractFragm
                             @Override
                             public void itemCanceled() {
                             }
-                        });
+                        }, true);
             }
 
             @Override

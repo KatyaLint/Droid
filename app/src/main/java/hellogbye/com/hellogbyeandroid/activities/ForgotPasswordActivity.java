@@ -98,7 +98,7 @@ public class ForgotPasswordActivity extends BaseActivity {
                             LayoutInflater li = LayoutInflater.from(getApplicationContext());
                             View popupView = li.inflate(R.layout.popup_layout_log_out, null);
                             HGBUtility.showAlertPopUpOneButton(ForgotPasswordActivity.this, null, popupView,
-                                    (String) data, null);
+                                    (String) data, null, true);
 
                         }
                     });
@@ -143,7 +143,7 @@ public class ForgotPasswordActivity extends BaseActivity {
                         LayoutInflater li = LayoutInflater.from(getApplicationContext());
                         View popupView = li.inflate(R.layout.popup_layout_log_out, null);
                         HGBUtility.showAlertPopUpOneButton(ForgotPasswordActivity.this, null, popupView,
-                                (String) data, null);
+                                (String) data, null, true);
 
                     }
                 });

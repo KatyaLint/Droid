@@ -409,7 +409,7 @@ public class ExpandableListReviewAdapter extends BaseExpandableListAdapter {
 
 
         HGBUtility.showAlertPopUpOneButton(context,  null, promptsViewTeest,
-                null, null);
+                null, null, true);
 
 
     }

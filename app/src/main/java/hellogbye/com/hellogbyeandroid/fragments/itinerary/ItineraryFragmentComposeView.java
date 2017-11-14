@@ -104,6 +104,7 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
         getFlowInterface().enableFullScreen(true);
 
 
+        boolean isFreeUser = ((MainActivityBottomTabs)getActivity()).isFreeUser;
 
         final Information_Popup_View information_popup_view = new Information_Popup_View(getActivity(), getFlowInterface(), getActivityInterface(),
                 new CNCSignalRFragment.IClearCNC() {
@@ -111,7 +112,7 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
                     public void clearCNCScreen() {
                         //   clearCNCItems();
                     }
-                });
+                }, isFreeUser);
 
         cellHieght = (int) getResources().getDimension(R.dimen.DP220);
         iScreenSize = getActivity().getResources().getDimension(R.dimen.DP335); //dp + activity.getResources().getDimension(R.dimen.DP50);
@@ -446,7 +447,7 @@ public class ItineraryFragmentComposeView extends HGBAbstractFragment implements
         String text = String.format(getActivity().getResources().getString(R.string.popup_flight_baggage_info_text),currency );
         popup_flight_baggage_text.setText(text);
         HGBUtility.showAlertPopUpOneButton(getActivity(),  null, popupView,
-                null, null);
+                null, null, true);
     }
 
     private void setSolutionNameForItirnarary(boolean isEmpty, String solutionName, String solutionID) {

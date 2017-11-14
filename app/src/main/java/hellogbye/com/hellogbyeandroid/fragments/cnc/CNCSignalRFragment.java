@@ -143,13 +143,13 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
+        boolean isFreeUser = ((MainActivityBottomTabs)getActivity()).isFreeUser;
         final Information_Popup_View information_popup_view = new Information_Popup_View(getActivity(), getFlowInterface(), getActivityInterface(),new IClearCNC() {
             @Override
             public void clearCNCScreen() {
                 clearCNCItems();
             }
-        });
+        }, isFreeUser);
 
         cncTutorials = getActivityInterface().getCNCTutorialsVOs();
 

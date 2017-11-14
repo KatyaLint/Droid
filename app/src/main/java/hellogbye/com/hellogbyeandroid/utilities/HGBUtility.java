@@ -864,9 +864,9 @@ public class HGBUtility {
 
 
       if (negative_button != null) {
-
           negative_button.setTextColor(ContextCompat.getColor(activity, R.color.COLOR_999999));
       }
+
       if (positive_button != null) {
           positive_button.setTextColor(ContextCompat.getColor(activity, R.color.COLOR_EE3A3C));
       }
@@ -877,15 +877,21 @@ public class HGBUtility {
 
     public static void showAlertPopUpOneButton(final Context activity, final EditText input, final View popupView ,
                                       final String popupTitle, final PopUpAlertStringCB
-                                              alertCB){
+                                              alertCB, boolean isPositiveButton){
 
         final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
         alert.setCancelable(false);
         if(popupTitle != null) {
             alert.setTitle(popupTitle);
         }
+
+        int buttonTitle = android.R.string.ok;
+        if(!isPositiveButton){
+            buttonTitle = android.R.string.cancel;
+        }
+
         alert.setView(popupView)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(buttonTitle, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         String newName = "";
                         if(input != null) {
@@ -909,7 +915,7 @@ public class HGBUtility {
 
 
 
-        AlertDialog dialog = alert.create();
+        dialog = alert.create();
         dialog.show();
 
         Button positive_button = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
@@ -917,8 +923,6 @@ public class HGBUtility {
         if (positive_button != null) {
             positive_button.setTextColor(ContextCompat.getColor(activity, R.color.COLOR_EE3A3C));
         }
-
-
 
     }
 

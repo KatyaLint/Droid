@@ -275,17 +275,7 @@ public class PreferencesSearchListFragment extends PreferencesSettingsMainClass 
         text.setText(getResources().getString(R.string.settings_more_then_allowed_selected));
 
         HGBUtility.showAlertPopUpOneButton(getActivity(), input, promptsView, getResources().getString(R.string.settings_more_then_allowed_selected_title),
-                new PopUpAlertStringCB() {
-                    @Override
-                    public void itemSelected(String inputItem) {
-
-                    }
-
-                    @Override
-                    public void itemCanceled() {
-
-                    }
-                });
+               null, true);
 
 
 
