@@ -102,8 +102,6 @@ public class Information_Popup_View {
         ImageView add_to_favorites_img = (ImageView)cnc_add_dialog_favorites.findViewById(R.id.add_to_favorites_img);
         ImageView remove_to_favorites_img = (ImageView)cnc_add_dialog_favorites.findViewById(R.id.remove_to_favorites_img);
 
-        System.out.println("Kate isFreeUser =" + isFreeUser);
-
         if (mainInterface.getTravelOrder() != null && !mainInterface.getTravelOrder().ismIsFavorite()) {
             cnc_add_dialog_favorites_text.setText(R.string.cnc_add_dialog_add_favorites);
             add_to_favorites_img.setVisibility(View.VISIBLE);

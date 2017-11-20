@@ -165,7 +165,7 @@ public class PreferencesTabCommonFragment extends HGBAbstractFragment {
                 switchBetweenOptions(clickedItemID, titleName);
             }
         });
-        System.out.println("Kate initializeHotelRecycle accountFlightSettings =" + accountFlightSettings.size());
+
         PreferencesSettingsDragListAdapter mTabsAdapter = new PreferencesSettingsDragListAdapter(getActivity(),accountFlightSettings,true);
         mHotelDynamicListView.setAdapter(mTabsAdapter);
         mHotelDynamicListView.enableDragAndDrop();

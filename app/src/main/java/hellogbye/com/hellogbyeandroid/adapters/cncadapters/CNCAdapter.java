@@ -168,14 +168,40 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     class ViewHolderWaiting extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         // each data item is just a string in this case
         private DotsTextView itemWaiting;
+        private FontTextView cnc_hgb_input_signalr;
 
 
          ViewHolderWaiting(View itemLayoutView) {
             super(itemLayoutView);
             itemWaiting = (DotsTextView) itemLayoutView.findViewById(R.id.dots);
+            cnc_hgb_input_signalr = (FontTextView)itemLayoutView.findViewById(R.id.cnc_hgb_input_signalr);
             //itemLayoutView.setOnClickListener(this);
+
+        }
+
+
+        private void setVisableSignalRText(boolean isVisible){
+            if(isVisible){
+                cnc_hgb_input_signalr.setVisibility(View.VISIBLE);
+                itemWaiting.setVisibility(View.GONE);
+            }else{
+                cnc_hgb_input_signalr.setVisibility(View.GONE);
+                itemWaiting.setVisibility(View.VISIBLE);
+            }
+
+        }
+
+        private void setVisableWaitingSignalRText(boolean isVisible){
+            if(isVisible){
+                itemWaiting.setVisibility(View.VISIBLE);
+                cnc_hgb_input_signalr.setVisibility(View.GONE);
+            }else{
+                itemWaiting.setVisibility(View.GONE);
+                cnc_hgb_input_signalr.setVisibility(View.VISIBLE);
+            }
 
         }
 
@@ -192,19 +218,21 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case ME_ITEM:
+
                 // create a new view
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cnc_item, parent, false);
                 ViewHolderMe vh = new ViewHolderMe(view);
                 return vh;
 
             case HGB_ITEM:
-            case HGB_ITEM_SIGNALR:
+
                 View hgbview = LayoutInflater.from(parent.getContext()).inflate(R.layout.cnc_hgb_item, parent, false);
                 ViewHolderHGB vh2 = new ViewHolderHGB(hgbview);
                 vh2.setVisabilityBubbleIcon(false);
                 return vh2;
 
             case HGB_ITEM_SELECTED:
+
                 View hgbviewselected = LayoutInflater.from(parent.getContext()).inflate(R.layout.cnc_hgb_item, parent, false);
                 ViewHolderHGB vhselected = new ViewHolderHGB(hgbviewselected);
                 vhselected.setVisabilityBubbleIcon(true);
@@ -213,6 +241,7 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
              //   vh2.setVisabilityIcon(true);
                 return vhselected;
             case HGB_ITEM_NO_ICON:
+
                 View hgbview2 = LayoutInflater.from(parent.getContext()).inflate(R.layout.cnc_hgb_item, parent, false);
                 ViewHolderHGB vh3 = new ViewHolderHGB(hgbview2);
 
@@ -220,9 +249,18 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 return vh3;
 
             case WAITING_ITEM:
+
                 View waitview = LayoutInflater.from(parent.getContext()).inflate(R.layout.cnc_waiting_item, parent, false);
                 ViewHolderWaiting vhwait = new ViewHolderWaiting(waitview);
+                vhwait.setVisableSignalRText(false);
                 return vhwait;
+            case HGB_ITEM_SIGNALR:
+
+                View waitview2 = LayoutInflater.from(parent.getContext()).inflate(R.layout.cnc_waiting_item, parent, false);
+                ViewHolderWaiting vhwait2 = new ViewHolderWaiting(waitview2);
+                vhwait2.setVisableSignalRText(true);
+              //  vhwait2.setVisableWaitingSignalRText(false);
+                return vhwait2;
 
     /*        case HGB_ITEM_VIDEO_TUTORIAL:
                 View videoTutorial = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
@@ -243,12 +281,14 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             case ME_ITEM:
                 ViewHolderMe meholder = (ViewHolderMe) holder;
+
                 meholder.itemME.setText(strMessage);
           //      HGBUtility.getAndSaveUserImage(avatarUrl,  meholder.cnc_image_view_user, null);
                 meholder.itemME.setTextIsSelectable(true);
               //  meholder.cnc_image_view_user.setImageBitmap(HGBUtility.getBitmapFromCache(mContext));
                 break;
             case HGB_ERROR_ITEM:
+
                 ViewHolderHGB hgbholderError = (ViewHolderHGB) holder;
                 hgbholderError.itemHGB.setBackgroundResource(R.drawable.hgb_red_cnc_backround);
                 hgbholderError.itemHGB.setTextColor(mContext.getResources().getColor(R.color.COLOR_BLACK));
@@ -281,7 +321,7 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             case HGB_ITEM:
             case HGB_ITEM_NO_ICON:
-
+                System.out.println("Kate onBindViewHolder HGB_ITEM HGB_ITEM_NO_ICON");
                 ViewHolderHGB hgbholder = (ViewHolderHGB) holder;
 
                     hgbholder.itemHGB.setBackgroundResource(R.drawable.hgb_cnc_backround);
@@ -296,17 +336,20 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     hgbholder.itemHGB.setText(strMessage);
                  break;
             case HGB_ITEM_SIGNALR:
-                ViewHolderHGB hgbholderSignalR = (ViewHolderHGB) holder;
-                hgbholderSignalR.itemHGB.setBackgroundResource(R.drawable.hgb_cnc_backround_signalr_green);
-                hgbholderSignalR.itemHGB.setTextColor(ContextCompat.getColor(mContext, R.color.COLOR_00503e));//getApmContext.getResources().getColor(R.color.COLOR_00503e));
-                hgbholderSignalR.itemHGB.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
+                ViewHolderWaiting hgbholderSignalR = (ViewHolderWaiting) holder;
+                hgbholderSignalR.cnc_hgb_input_signalr.setBackgroundResource(R.drawable.hgb_cnc_backround_signalr_green);
+                hgbholderSignalR.cnc_hgb_input_signalr.setTextColor(ContextCompat.getColor(mContext, R.color.COLOR_00503e));//getApmContext.getResources().getColor(R.color.COLOR_00503e));
+                hgbholderSignalR.cnc_hgb_input_signalr.setPadding(padding_integer, padding_integer, padding_integer, padding_integer);
 
                 // hgbholder.itemHGB.setPaintFlags(hgbholder.itemHGB.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                 //hgbholder.itemHGB.setSelected(false);
                 //  hgbholder.itemHGB.setTextIsSelectable(false);
-                hgbholderSignalR.itemHGB.setSelected(true);
-                hgbholderSignalR.itemHGB.setTextIsSelectable(true);
-                hgbholderSignalR.itemHGB.setText(strMessage);
+                hgbholderSignalR.cnc_hgb_input_signalr.setSelected(true);
+                hgbholderSignalR.cnc_hgb_input_signalr.setTextIsSelectable(true);
+                hgbholderSignalR.cnc_hgb_input_signalr.setText(strMessage);
+
+
+
                 break;
             case HGB_ITEM_SELECTED:
 
@@ -319,10 +362,21 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         hgbholderselected.itemHGB.setSelected(false);
                         hgbholderselected.itemHGB.setTextIsSelectable(false);
                         hgbholderselected.itemHGB.setText(strMessage);
+
                 break;
 
             case WAITING_ITEM:
+
                 ViewHolderWaiting hgbwaiting = (ViewHolderWaiting) holder;
+//                CNCItem cncItem = mArrayList.get(position);
+//                if(cncItem.isAddSIgnalRText()){
+//                    hgbwaiting.setVisableSignalRText(true);
+//                    hgbwaiting.setVisableWaitingSignalRText(true);
+//                }else {
+//                    hgbwaiting.setVisableSignalRText(false);
+//                    hgbwaiting.setVisableWaitingSignalRText(true);
+//                }
+             //   hgbwaiting.setVisableWaitingSignalRText(false);
                 //TODO magic
                 break;
          /*   case HGB_ITEM_VIDEO_TUTORIAL:

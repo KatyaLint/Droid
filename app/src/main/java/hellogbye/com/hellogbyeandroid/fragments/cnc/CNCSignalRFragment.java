@@ -396,7 +396,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
     private void clearCNCItems() {
 
         getActivityInterface().setCNCItems(null);
-        System.out.println("Kate Clear");
+
         args.putBoolean(HGBConstants.CNC_CLEAR_CHAT, true);
         getActivityInterface().setTravelOrder(new UserTravelMainVO());
         setTextForTrip("New Trip");
@@ -914,6 +914,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         }
     }
 
+    private boolean EmptyRespoce = false;
 
     private void serverFinishedResult(AirportServerResultCNCVO airportServerResultVO) {
 
@@ -924,6 +925,11 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
        // ArrayList<ResponsesVO> responses = airportServerResultVO.getHighlightdataVO().getResponses();
 
         ArrayList<ResponsesVO> responses = airportServerResultVO.getResponses();
+
+
+        if(responses.isEmpty() || responses.size() ==0){
+            EmptyRespoce = true;
+        }
 
         String signalrConnectionID = mHGBPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_SIGNALR_CONNECTION_ID, "");
         String userId = mHGBPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_PROFILE_ID, "");
@@ -1219,14 +1225,31 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         public void SignalRCNCConversation(final String cncConversation) {
             //all cnc items
 
+            System.out.println("Kate SignalR");
+//            CNCItem cncItem = new CNCItem(cncConversation, CNCAdapter.WAITING_ITEM);
+//            cncItem.setAddSIgnalRText(true);
+
+
+          // removeWaitingItem();
             getActivityInterface().addCNCItem(new CNCItem(cncConversation, CNCAdapter.HGB_ITEM_SIGNALR));
+
+         //   addWaitingItem();
+
+         //   getActivityInterface().addCNCItem(cncItem);
+
 
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
 
-//stuff that updates ui
-                    removeWaitingItem();
+                    if(!EmptyRespoce){
+                        //   removeWaitingItem();
+                        addWaitingItem();
+                    }else{
+                        removeWaitingItem();
+                    }
+                //stuff that updates ui
+
 
                     mCNCAdapter.notifyDataSetChanged();
 
@@ -1363,6 +1386,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
 
     private void handleHGBMessagesViews(UserTravelMainVO userTraveler){
+        removeWaitingItem();
         if(userTraveler.getItems().size() <=0){
             handleHGBMessage(getString(R.string.itinerary_no_items),CNCAdapter.HGB_ITEM);
         }

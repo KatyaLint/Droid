@@ -7,6 +7,7 @@ public class CNCItem {
 
     private String text;
     private int type;
+    private boolean addSignalRText = false;
 
 
     public CNCItem(){
@@ -20,6 +21,7 @@ public class CNCItem {
         this.text = text;
         this.type = type;
     }
+
 
     public String getText() {
         return text;
@@ -35,5 +37,13 @@ public class CNCItem {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public boolean isAddSIgnalRText() {
+        return addSignalRText;
+    }
+
+    public void setAddSIgnalRText(boolean addSIgnalRText) {
+        this.addSignalRText = addSIgnalRText;
     }
 }
