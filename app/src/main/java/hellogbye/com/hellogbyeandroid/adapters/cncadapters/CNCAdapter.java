@@ -321,7 +321,6 @@ public class CNCAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             case HGB_ITEM:
             case HGB_ITEM_NO_ICON:
-                System.out.println("Kate onBindViewHolder HGB_ITEM HGB_ITEM_NO_ICON");
                 ViewHolderHGB hgbholder = (ViewHolderHGB) holder;
 
                     hgbholder.itemHGB.setBackgroundResource(R.drawable.hgb_cnc_backround);

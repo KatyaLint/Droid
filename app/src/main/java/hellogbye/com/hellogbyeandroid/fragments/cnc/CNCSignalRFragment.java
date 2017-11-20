@@ -919,17 +919,10 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
     private void serverFinishedResult(AirportServerResultCNCVO airportServerResultVO) {
 
 
-
-
-
        // ArrayList<ResponsesVO> responses = airportServerResultVO.getHighlightdataVO().getResponses();
 
         ArrayList<ResponsesVO> responses = airportServerResultVO.getResponses();
-
-
-        if(responses.isEmpty() || responses.size() ==0){
-            EmptyRespoce = true;
-        }
+        
 
         String signalrConnectionID = mHGBPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_SIGNALR_CONNECTION_ID, "");
         String userId = mHGBPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_PROFILE_ID, "");
@@ -952,12 +945,17 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         maxAirportSize = responses.size();
 
 
+        if(responses.isEmpty() || responses.size() ==0){
+
+            EmptyRespoce = true;
+          //  airportSendValuesVOs = new ArrayList<>();
+            sendItineraryNoSearch(airportServerResultVO);
+            return;
+        }
+
         for (ResponsesVO response: responses) {
 
-            AirportSendValuesVO  airportSendValuesVO = new AirportSendValuesVO();
-            airportSendValuesVO.setQuery(airportServerResultVO.getQuery());
-            airportSendValuesVO.setItineraryid(airportServerResultVO.getItineraryid());
-            airportSendValuesVO.setTravelpreferenceprofileid(getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId());
+            AirportSendValuesVO airportSendValuesVO = setFlightDEtailsToSEndToSErver( airportServerResultVO);
             airportSendValuesVO.setType(response.getType());
             airportSendValuesVO.setStart(response.getPositionVO().getStart());
             airportSendValuesVO.setEnd(response.getPositionVO().getEnd());
@@ -987,7 +985,44 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
     }
 
 
+    private void sendItineraryNoSearch(AirportServerResultCNCVO airportSendValuesVOs){
 
+            // SignalRService service = ((MainActivityBottomTabs) getActivity()).getSignalRService();
+            String preferencesProfileId = getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId();
+
+            //Kate
+            String connectionID = mHGBPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_SIGNALR_CONNECTION_ID,"");
+
+            ConnectionManager.getInstance(getActivity()).postItineraryCNCNoSearch(airportSendValuesVOs,preferencesProfileId, connectionID, new ConnectionManager.ServerRequestListener() {
+                @Override
+                public void onSuccess(Object data) {
+
+                    UserTravelMainVO userTraveler = (UserTravelMainVO) data;
+                    handleHGBMessagesViews(userTraveler);
+                    getActivityInterface().setTravelOrder(userTraveler);
+                    getPostBookingItinerary();
+                    setSolutionNameForItirnarary();
+
+                }
+                @Override
+                public void onError(Object data) {
+
+                    System.out.println("Kate postItineraryCNCSearch");
+                    //   ErrorMessage(data);
+
+                }
+            });
+
+    }
+
+    private AirportSendValuesVO setFlightDEtailsToSEndToSErver(AirportServerResultCNCVO airportServerResultVO){
+
+        AirportSendValuesVO  airportSendValuesVO = new AirportSendValuesVO();
+        airportSendValuesVO.setQuery(airportServerResultVO.getQuery());
+        airportSendValuesVO.setItineraryid(airportServerResultVO.getItineraryid());
+        airportSendValuesVO.setTravelpreferenceprofileid(getActivityInterface().getPersonalUserInformation().getmTravelPreferencesProfileId());
+        return airportSendValuesVO;
+    }
 
 
     private void popupDialogForAirports(){
@@ -1090,6 +1125,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
                 user_profile_popup_list_view.invalidate();
 
                 AirportResultsVO choosenAirport = findChoosenAirport(airportName, airportSendValueVO.getResults());
+
                 sendUserAnswearToServer(choosenAirport);
 
                 alertDialog.dismiss();
@@ -1146,6 +1182,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
         }
 
+        System.out.println("Kate sendUserAnswearToServer");
         if (maxAirportSize == selectedCount) {
             sendVOForIternarary(airportSendValuesVOs);
         }
@@ -1225,12 +1262,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
         public void SignalRCNCConversation(final String cncConversation) {
             //all cnc items
 
-            System.out.println("Kate SignalR");
-//            CNCItem cncItem = new CNCItem(cncConversation, CNCAdapter.WAITING_ITEM);
-//            cncItem.setAddSIgnalRText(true);
-
-
-          // removeWaitingItem();
             getActivityInterface().addCNCItem(new CNCItem(cncConversation, CNCAdapter.HGB_ITEM_SIGNALR));
 
          //   addWaitingItem();
@@ -1440,6 +1471,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
             @Override
             public void onError(Object data) {
 
+                System.out.println("Kate postItineraryCNCSearch");
                 //   ErrorMessage(data);
 
             }

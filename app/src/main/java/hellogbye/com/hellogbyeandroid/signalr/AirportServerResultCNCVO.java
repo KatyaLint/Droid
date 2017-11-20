@@ -23,6 +23,9 @@ public class AirportServerResultCNCVO {
     @SerializedName("dontinitiatesearch")
     private boolean dontinitiatesearch;
 
+    @SerializedName("nosearch")
+    private boolean nosearch;
+
     @SerializedName("query")
     private String query;
 
@@ -84,5 +87,13 @@ public class AirportServerResultCNCVO {
 
     public void setQuery(String query) {
         this.query = query;
+    }
+
+    public boolean isDontinitiatesearch() {
+        return dontinitiatesearch;
+    }
+
+    public void setDontinitiatesearch(boolean dontinitiatesearch) {
+        this.dontinitiatesearch = dontinitiatesearch;
     }
 }

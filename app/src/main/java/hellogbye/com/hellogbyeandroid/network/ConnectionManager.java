@@ -26,6 +26,7 @@ import hellogbye.com.hellogbyeandroid.models.vo.creditcard.CreditCardItem;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.UpdateAvailabilityItemVO;
 import hellogbye.com.hellogbyeandroid.models.vo.creditcard.UpdateAvailabilityVO;
 import hellogbye.com.hellogbyeandroid.models.vo.flights.ConversationVO;
+import hellogbye.com.hellogbyeandroid.signalr.AirportServerResultCNCVO;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBUtilityDate;
@@ -786,6 +787,59 @@ public class ConnectionManager {
 
 
 
+    public void postItineraryCNCNoSearch(AirportServerResultCNCVO airportSendValuesVOs,String travelPrefProfId , String connectionID, final ServerRequestListener listener) {
+        String url = getURL(Services.ITINERARYV2);//getURL(Services.ITINERARY);
+        JSONObject jsonObjectMain = new JSONObject();
+
+        JSONArray jsonArray = new JSONArray();
+
+
+            try {
+
+                jsonObjectMain.put("goroomintersect", 1);
+                jsonObjectMain.put("itineraryid",airportSendValuesVOs.getItineraryid());
+                //Main for all query request
+
+                jsonObjectMain.put("query", airportSendValuesVOs.getQuery());
+                jsonObjectMain.put("travelpreferenceprofileid", travelPrefProfId);
+
+//                //TODO need to remove
+             /*   jsonObjectMain.put("latitude", "0");
+                jsonObjectMain.put("longitude", "0");*/
+                //latitude:32.0742538
+                //longitude:34.8087051
+
+                jsonObjectMain.put("latitude", 32.0742538);
+                jsonObjectMain.put("longitude",34.8087051);
+
+//                jsonObjectMain.put("latitude", airportSendValuesVO.getLatitude());
+//                jsonObjectMain.put("longitude", airportSendValuesVO.getLongitude());
+
+                jsonObjectMain.put("token", jsonArray);
+
+                JSONObject jsonObjectSecond = new JSONObject();
+                //it's array of cities
+                jsonObjectSecond.put("type", "City");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObjectMain, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.parseAirplaneData(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+
+        }, false);
+    }
 
     public void postItineraryCNCSearch(ArrayList<AirportSendValuesVO> airportSendValuesVOs, String connectionID,final ServerRequestListener listener) {
         String url = getURL(Services.ITINERARYV2);//getURL(Services.ITINERARY);

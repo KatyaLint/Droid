@@ -42,6 +42,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.dialogs.SignInDialog;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.FareClassFragment;
 
 import hellogbye.com.hellogbyeandroid.fragments.checkout.AirlinePointsProgramVO;
@@ -1032,9 +1033,14 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         free_user_sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivityBottomTabs.this, CreateAccountActivity.class);
-                intent.putExtra("free_user_sign_in",true);
-                startActivity(intent);
+
+                SignInDialog signInDialog = new SignInDialog(MainActivityBottomTabs.this, android.R.style.Theme_NoTitleBar_Fullscreen);
+                signInDialog.show();
+
+
+//                Intent intent = new Intent(MainActivityBottomTabs.this, CreateAccountActivity.class);
+//                intent.putExtra("free_user_sign_in",true);
+//                startActivity(intent);
             }
         });
 
