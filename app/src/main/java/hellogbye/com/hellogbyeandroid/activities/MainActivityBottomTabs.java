@@ -42,6 +42,7 @@ import java.util.List;
 
 import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
+
 import hellogbye.com.hellogbyeandroid.activities.dialogs.SignInDialog;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.FareClassFragment;
 
@@ -427,11 +428,13 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
             hgbPrefrenceManager.putStringSharedPreferences(HGBConstants.HGB_CNC_LIST, json);
 
+            unregisterReceiver(receiver);
+            unregisterReceiver(broadcastReceiver);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        unregisterReceiver(receiver);
-        unregisterReceiver(broadcastReceiver);
+
     }
 
 

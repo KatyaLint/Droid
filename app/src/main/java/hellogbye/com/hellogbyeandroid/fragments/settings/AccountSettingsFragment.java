@@ -40,6 +40,7 @@ import hellogbye.com.hellogbyeandroid.R;
 import hellogbye.com.hellogbyeandroid.activities.CreateAccountActivity;
 import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
+
 import hellogbye.com.hellogbyeandroid.activities.dialogs.SignInDialog;
 import hellogbye.com.hellogbyeandroid.adapters.settingaccount.AccountSettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
@@ -252,7 +253,11 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
             @Override
             public void onClick(View view) {
 
+//                SignInDialog signInDialog = new SignInDialog(getActivity(), android.R.style.Theme_NoTitleBar_Fullscreen,
+//                        getFragmentManager());
+
                 SignInDialog signInDialog = new SignInDialog(getActivity(), android.R.style.Theme_NoTitleBar_Fullscreen);
+
                 signInDialog.show();
             }
         });
@@ -261,6 +266,11 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
         account_create_acount_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+//                CreateAccountDialog signInDialog = new CreateAccountDialog(getActivity(), android.R.style.Theme_NoTitleBar_Fullscreen);
+//                signInDialog.show();
+
+
                 Intent intent = new Intent(getActivity(), CreateAccountActivity.class);
                 intent.putExtra("free_user_create_user",true);
                 startActivity(intent);

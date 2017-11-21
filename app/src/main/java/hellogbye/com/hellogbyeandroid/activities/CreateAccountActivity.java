@@ -1067,12 +1067,17 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     }
 
     private void processBackPressed() {
+        System.out.println("Kate CURRENT_STATE =" + CURRENT_STATE);
         switch (CURRENT_STATE) {
             case WELCOME_STATE:
                 finish();
                 break;
             case NAME_STATE:
-                animateNameView(false);
+                if(freeUser) {
+                    finish();
+                } else {
+                    animateNameView(false);
+                }
                 break;
             case EMAIL_STATE:
                 animateEmailView(false);
@@ -1466,6 +1471,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         });
     }
 
+    private boolean freeUser = false;
     private void checkFlow() {
         if (!HGBUtilityNetwork.haveNetworkConnection(getApplicationContext())) {
 
@@ -1477,8 +1483,11 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         String strToken = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.TOKEN, "");
         if (!strToken.equals("")) {
             if(getIntent().hasExtra("free_user_sign_in") || getIntent().hasExtra("free_user_create_user")){
+                freeUser = true;
+                System.out.println("Kate checkFlow freeUser =" + freeUser);
                 checkIfCameFromFreeUser();
             }else{
+                freeUser = false;
                 goToMainActivity();
             }
         }

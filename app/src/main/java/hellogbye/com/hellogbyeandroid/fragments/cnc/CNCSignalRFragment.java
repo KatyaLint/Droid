@@ -922,7 +922,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
        // ArrayList<ResponsesVO> responses = airportServerResultVO.getHighlightdataVO().getResponses();
 
         ArrayList<ResponsesVO> responses = airportServerResultVO.getResponses();
-        
+
 
         String signalrConnectionID = mHGBPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_SIGNALR_CONNECTION_ID, "");
         String userId = mHGBPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_PROFILE_ID, "");

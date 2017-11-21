@@ -1,11 +1,13 @@
 package hellogbye.com.hellogbyeandroid.activities.dialogs;
 
+import android.app.Activity;
 import android.app.Dialog;
+
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.StyleRes;
+
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -18,6 +20,7 @@ import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
 import hellogbye.com.hellogbyeandroid.network.ConnectionManager;
 import hellogbye.com.hellogbyeandroid.onboarding.OnBoardingPager;
 import hellogbye.com.hellogbyeandroid.utilities.HGBConstants;
+import hellogbye.com.hellogbyeandroid.utilities.HGBErrorHelper;
 import hellogbye.com.hellogbyeandroid.utilities.HGBPreferencesManager;
 import hellogbye.com.hellogbyeandroid.views.FontButtonView;
 import hellogbye.com.hellogbyeandroid.views.FontCheckedTextView;
@@ -34,9 +37,16 @@ public class SignInDialog extends Dialog {
     private FontEditTextView login_password;
     private FontEditTextView username_email;
     private FontCheckedTextView remmember_me_checkbox;
+    private FragmentManager fragmentManager;
+    private Activity activity;
 
-    public SignInDialog(@NonNull Context context, @StyleRes int themeResId) {
-        super(context, themeResId);
+
+
+
+    public SignInDialog(Activity context, int theme_noTitleBar_fullscreen) {
+        super(context, theme_noTitleBar_fullscreen);
+        this.activity = context;
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
@@ -137,6 +147,9 @@ public class SignInDialog extends Dialog {
 
                         @Override
                         public void onError(Object data) {
+                            HGBErrorHelper errorHelper = new HGBErrorHelper();
+                            errorHelper.setMessageForError((String) data);
+                            errorHelper.show(activity.getFragmentManager(), (String) data);
                            // ErrorMessage(data);
                         }
                     });
