@@ -1007,7 +1007,7 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
                 @Override
                 public void onError(Object data) {
 
-                    System.out.println("Kate postItineraryCNCSearch");
+
                     //   ErrorMessage(data);
 
                 }
@@ -1182,7 +1182,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
 
         }
 
-        System.out.println("Kate sendUserAnswearToServer");
         if (maxAirportSize == selectedCount) {
             sendVOForIternarary(airportSendValuesVOs);
         }
@@ -1471,7 +1470,6 @@ public class CNCSignalRFragment extends HGBAbstractFragment implements TitleName
             @Override
             public void onError(Object data) {
 
-                System.out.println("Kate postItineraryCNCSearch");
                 //   ErrorMessage(data);
 
             }

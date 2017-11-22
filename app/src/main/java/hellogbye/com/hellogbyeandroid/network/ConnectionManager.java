@@ -44,9 +44,9 @@ public class ConnectionManager {
         void onError(Object data);
     }
 
-    public static String BASE_URL_SIGNALR_URL = "http://apidev.hellogbye.com/dev/"; //"https://apiprod.hellogbye.com/prod/";
-    public static String BASE_URL = "http://apidev.hellogbye.com/dev/rest/";
-
+   // public static String BASE_URL_SIGNALR_URL = "http://apidev.hellogbye.com/dev/"; //"https://apiprod.hellogbye.com/prod/";
+    public static String BASE_URL = "https://apiprod.hellogbye.com/prod/"; //"http://apidev.hellogbye.com/dev/";
+    public static String BASE_URL_SIGNALR_URL = "https://apiprod.hellogbye.com/prod/";
     //public static String BASE_URL = "http://demo.hellogbye.com/dev/rest/";
     // public static String BASE_URL = "http://apiuat.hellogbye.com/uat/rest/";
     //public static String BASE_URL = "http://cnc.hellogbye.com/cnc/rest/";
@@ -84,9 +84,10 @@ public class ConnectionManager {
         String choosenServer = mHGBPrefrenceManager.getStringSharedPreferences(HGBConstants.CHOOSEN_SERVER,"");
 
         if(choosenServer == null || choosenServer.isEmpty()){
-            BASE_URL = "http://apidev.hellogbye.com/dev/rest/" ; //https://apiprod.hellogbye.com/prod/rest/"; // "http://apidev.hellogbye.com/dev/rest/ "https://apiprod.hellogbye.com/prod/rest/"; //"http://apidev.hellogbye.com/dev/rest/";// //"https://apiuat.hellogbye.com/uat/rest/";//This is default server
-        }else{
-            BASE_URL = choosenServer;
+            BASE_URL = "https://apiprod.hellogbye.com/prod/rest/"; //"http://apidev.hellogbye.com/dev/rest/" ; //https://apiprod.hellogbye.com/prod/rest/"; // "http://apidev.hellogbye.com/dev/rest/ "https://apiprod.hellogbye.com/prod/rest/"; //"http://apidev.hellogbye.com/dev/rest/";// //"https://apiuat.hellogbye.com/uat/rest/";//This is default server
+        }else {
+            BASE_URL_SIGNALR_URL = choosenServer;
+            BASE_URL = choosenServer + "rest/";
         }
 
 
@@ -1070,16 +1071,34 @@ public class ConnectionManager {
     }
 
 
+    private String buildCNCRequest(String choosenUrl, String query, String connectionId){
+        boolean serverProd = choosenUrl.toLowerCase().contains("apiprod");
+//        query = query.replaceAll(" " +
+//                "", "%20");
+        if(serverProd){
+            query = query.replaceAll(" " +
+                    "", "+");
+            choosenUrl = choosenUrl+ "?clientconnectionid=" + connectionId +"&input="+ query;
+
+        }else{
+            query = query.replaceAll(" " +
+                    "", "%20");
+
+            choosenUrl = choosenUrl +"?input="+ query+"&clientConnectionId=" + connectionId;
+        }
+        return choosenUrl;
+    }
 
     public void getItineraryCNCSearch(String query,String connectionId, final ServerRequestListener listener) {
 
         String url = getURL(Services.ITINERARY_HIGHLIGHT);
         JSONObject jsonObject = new JSONObject();
-        query = query.replaceAll(" " +
-                "", "%20");
+//        query = query.replaceAll(" " +
+//                "", "%20");
+//
+//        url = url +"?input="+ query+"&clientConnectionId=" + connectionId;
 
-        url = url + query+"&clientConnectionId=" + connectionId;
-
+        url = buildCNCRequest(url,query,connectionId);
         HGBJsonRequest req = new HGBJsonRequest(Request.Method.GET, url,
                 jsonObject, new Response.Listener<String>() {
             @Override
@@ -2511,7 +2530,7 @@ public class ConnectionManager {
         COMPANIONS_INVITATION("Companions/Invitations"),
         CARD_TOKEN("Card/Token"),
         ITINERARY_MY_TRIP("Itinerary"),
-        ITINERARY_HIGHLIGHT("Highlight?input="),
+        ITINERARY_HIGHLIGHT("Highlight"),
         USER_AVATAR("UserProfile/Avatar"),
         RELATIONSHIP_TYPES("Statics/RelationshipTypes"),
         ACCOUNTS_PREFERENCES("UserProfile/Accounts/TravelPreference"),

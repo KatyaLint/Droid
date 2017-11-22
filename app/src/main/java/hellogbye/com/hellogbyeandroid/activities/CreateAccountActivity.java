@@ -1067,7 +1067,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     }
 
     private void processBackPressed() {
-        System.out.println("Kate CURRENT_STATE =" + CURRENT_STATE);
+
         switch (CURRENT_STATE) {
             case WELCOME_STATE:
                 finish();
@@ -1484,7 +1484,6 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         if (!strToken.equals("")) {
             if(getIntent().hasExtra("free_user_sign_in") || getIntent().hasExtra("free_user_create_user")){
                 freeUser = true;
-                System.out.println("Kate checkFlow freeUser =" + freeUser);
                 checkIfCameFromFreeUser();
             }else{
                 freeUser = false;
