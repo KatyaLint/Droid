@@ -1111,7 +1111,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     }
 
     private void processBackPressed() {
-
+        System.out.println("Kate processBackPressed");
         switch (CURRENT_STATE) {
             case WELCOME_STATE:
                 finish();
