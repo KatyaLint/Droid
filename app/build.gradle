@@ -33,8 +33,6 @@ android {
 
     defaultConfig {
         applicationId "hellogbye.com.hellogbyeandroid"
-
-
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 7
@@ -55,7 +53,7 @@ android {
     buildTypes {
         release {
             debuggable false
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
