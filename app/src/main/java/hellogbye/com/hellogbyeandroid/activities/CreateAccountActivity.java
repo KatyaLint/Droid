@@ -1017,7 +1017,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 //                }
 //            }
 
-            CURRENT_STATE = LOGIN_STATE;
+           // CURRENT_STATE = LOGIN_STATE;
 
             SignInWithFB signInWithFB = new SignInWithFB(CreateAccountActivity.this, android.R.style.Theme_NoTitleBar_Fullscreen, callbackManager, new RefreshComplete() {
                 @Override
