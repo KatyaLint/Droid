@@ -159,9 +159,11 @@
             android:text="@string/already_have_an_account_sign_in"
             android:textColor="@color/COLOR_00516f"
             android:textSize="@dimen/SP16"
-            android:translationZ="2dp"
+            android:translationZ="@dimen/DP2"
             app:fontName="dinnextltpro_regular.otf" />
         <hellogbye.com.hellogbyeandroid.views.FontTextView
+
+            android:visibility="gone"
             android:layout_above="@+id/create_login"
             android:layout_width="match_parent"
             android:gravity="center_horizontal"
@@ -248,6 +250,15 @@
             android:text="@string/try_it_now"
             app:fontName="dinnextltpro_medium.otf" />
 
+
+        <!--<com.facebook.login.widget.LoginButton-->
+            <!--android:layout_above="@+id/try_now_new_create"-->
+            <!--android:id="@+id/login_button_fb_btn"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginTop="@dimen/DP30"-->
+            <!--android:layout_marginBottom="@dimen/DP30" />-->
 
         <ImageView
             android:id="@+id/logo_onboardong"
@@ -381,7 +392,7 @@
             android:focusableInTouchMode="false"
             android:hint="What type of traveller describes you?"
             android:maxLines="1"
-            android:translationZ="3dp"
+            android:translationZ="@dimen/DP4"
             android:singleLine="true"
             android:visibility="gone" />
 
@@ -529,7 +540,7 @@
             android:layout_below="@+id/cloud_01"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/DP10"
-            android:translationZ="2dp"
+            android:translationZ="@dimen/DP2"
             android:visibility="gone" />
 
         <ImageView

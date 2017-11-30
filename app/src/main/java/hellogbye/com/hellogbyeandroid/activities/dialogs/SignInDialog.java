@@ -46,7 +46,6 @@ public class SignInDialog extends Dialog {
     public SignInDialog(Activity context, int theme_noTitleBar_fullscreen) {
         super(context, theme_noTitleBar_fullscreen);
         this.activity = context;
-        this.fragmentManager = fragmentManager;
     }
 
     @Override

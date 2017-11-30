@@ -10,7 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
@@ -41,6 +40,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
 import com.fenchtose.tooltip.Tooltip;
 import com.fenchtose.tooltip.TooltipAnimation;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -51,6 +51,8 @@ import java.util.UUID;
 
 import hellogbye.com.hellogbyeandroid.BuildConfig;
 import hellogbye.com.hellogbyeandroid.R;
+import hellogbye.com.hellogbyeandroid.activities.dialogs.CreateAccountWithFB;
+import hellogbye.com.hellogbyeandroid.activities.dialogs.SignInWithFB;
 import hellogbye.com.hellogbyeandroid.models.PopUpAlertStringCB;
 import hellogbye.com.hellogbyeandroid.models.ProvincesItem;
 import hellogbye.com.hellogbyeandroid.models.UserLoginCredentials;
@@ -189,6 +191,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         }
     };
     private FontTextView change_server_url;
+    private CallbackManager callbackManager;
 
 
     @Override
@@ -240,6 +243,8 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     }
 
     private void initView() {
+
+        callbackManager = CallbackManager.Factory.create();
         // mPlane = (ImageView) findViewById(R.id.airplane_01);
         mPlane1 = (ImageView) findViewById(R.id.airplane_01_01);
         mPlane2 = (ImageView) findViewById(R.id.airplane_02);
@@ -563,6 +568,7 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
     }
 
     private void goToEmailView() {
+
         HGBUtility.hideKeyboard(getApplicationContext(), mEmail);
         if (true) {//checkNameIsValid()
             animateEmailView(true);
@@ -801,9 +807,26 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
                 break;
 
             case R.id.create_account:
-                animateNameView(true);
+
+
+                CreateAccountWithFB signInWithFBDialog = new CreateAccountWithFB(CreateAccountActivity.this, callbackManager,
+                        new RefreshComplete() {
+                            @Override
+                            public void onRefreshSuccess(Object data) { // FBChoosed
+
+                            }
+
+                            @Override
+                            public void onRefreshError(Object data) { // email choosed
+                                animateNameView(true);
+                            }
+                        });
+
+
+
                 break;
             case R.id.sign_in:
+
                 if (CURRENT_STATE != WELCOME_STATE) {
                     if (CURRENT_STATE == NAME_STATE) {
                         userData.setFirstName(mFirstName.getText().toString());
@@ -958,6 +981,9 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     private void goToLoginState(boolean animateFoward) {
 
+
+        System.out.println("Kate sign in Login" );
+
         disableScreen();
 
         ArrayList<View> secondViewViews = new ArrayList<>();
@@ -975,20 +1001,38 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
 
         if (animateFoward) {
-            mSignIn.setVisibility(View.GONE);
-            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), firstViewViews, secondViewViews);
-            mNextTextView.setText(R.string.next);
 
-            remember_me = hgbPrefrenceManager.getBooleanSharedPreferences(HGBConstants.REMMEMBER_ME, false);
-            String email = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_LAST_EMAIL, null);
-            if (remember_me && email != null && !email.isEmpty()) {
-                mLoginEmail.setText(email);
-                String pswd = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_LAST_PSWD, null);
-                if (pswd != null) {
-                    mLoginPassword.setText(pswd);
-                }
-            }
+
+//            mSignIn.setVisibility(View.GONE);
+//            HGBAnimationUtility.CreateAccountDynamicViews(getApplicationContext(), firstViewViews, secondViewViews);
+//            mNextTextView.setText(R.string.next);
+//
+//            remember_me = hgbPrefrenceManager.getBooleanSharedPreferences(HGBConstants.REMMEMBER_ME, false);
+//            String email = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_LAST_EMAIL, null);
+//            if (remember_me && email != null && !email.isEmpty()) {
+//                mLoginEmail.setText(email);
+//                String pswd = hgbPrefrenceManager.getStringSharedPreferences(HGBConstants.HGB_USER_LAST_PSWD, null);
+//                if (pswd != null) {
+//                    mLoginPassword.setText(pswd);
+//                }
+//            }
+
             CURRENT_STATE = LOGIN_STATE;
+
+            SignInWithFB signInWithFB = new SignInWithFB(CreateAccountActivity.this, android.R.style.Theme_NoTitleBar_Fullscreen, callbackManager, new RefreshComplete() {
+                @Override
+                public void onRefreshSuccess(Object data) {
+
+                }
+
+                @Override
+                public void onRefreshError(Object data) {
+
+                }
+            });
+            signInWithFB.show();
+
+
 
         } else {
             mSignIn.setVisibility(View.GONE);
@@ -1287,6 +1331,13 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
         }
 
 
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     private void getStaticProvince() {

@@ -29,6 +29,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.facebook.CallbackManager;
+import com.facebook.login.LoginManager;
 import com.google.gson.Gson;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
@@ -44,6 +46,7 @@ import hellogbye.com.hellogbyeandroid.OnBackPressedListener;
 import hellogbye.com.hellogbyeandroid.R;
 
 import hellogbye.com.hellogbyeandroid.activities.dialogs.SignInDialog;
+import hellogbye.com.hellogbyeandroid.activities.dialogs.SignInWithFB;
 import hellogbye.com.hellogbyeandroid.fragments.alternative.FareClassFragment;
 
 import hellogbye.com.hellogbyeandroid.fragments.checkout.AirlinePointsProgramVO;
@@ -170,6 +173,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
     private UpdateAvailabilityVO updateAvailabilityVO;
     private List<BookingPayVO> bookingPayAnswear;
     private List<AirlinePointsProgramVO> userAirlinePointsProgramVO;
+    private CallbackManager callbackManager;
 
 
     public HGBSaveDataClass getHGBSaveDataClass() {
@@ -193,7 +197,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         //after free user, remove all fragments and start all over again
         removeAllFragments();
 
-
+        callbackManager = CallbackManager.Factory.create();
         CNCTutorials cncTutorials = new CNCTutorials();
         CNCTutorialsVO cncTutorialsVO = cncTutorials.parseTutorials(MainActivityBottomTabs.this);
         hgbSaveDataClass.setCNCTutorialsVOs(cncTutorialsVO);
@@ -1037,8 +1041,22 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             @Override
             public void onClick(View v) {
 
-                SignInDialog signInDialog = new SignInDialog(MainActivityBottomTabs.this, android.R.style.Theme_NoTitleBar_Fullscreen);
-                signInDialog.show();
+                SignInWithFB signInWithFB = new SignInWithFB(MainActivityBottomTabs.this, android.R.style.Theme_NoTitleBar_Fullscreen, callbackManager, new RefreshComplete() {
+                    @Override
+                    public void onRefreshSuccess(Object data) {
+
+                    }
+
+                    @Override
+                    public void onRefreshError(Object data) {
+
+                    }
+                });
+
+                signInWithFB.show();
+
+//                SignInDialog signInDialog = new SignInDialog(MainActivityBottomTabs.this, android.R.style.Theme_NoTitleBar_Fullscreen);
+//                signInDialog.show();
 
 
 //                Intent intent = new Intent(MainActivityBottomTabs.this, CreateAccountActivity.class);
@@ -1063,22 +1081,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 
         HGBUtility.showAlertPopUpOneButton(MainActivityBottomTabs.this, null,  popupView ,
         null, null, false);
-
-
-//        HGBUtility.showAlertPopUp(MainActivityBottomTabs.this, null, popupView,
-//                null, null, new PopUpAlertStringCB() {
-//                    @Override
-//                    public void itemSelected(String inputItem) {
-//
-//                    }
-//
-//                    @Override
-//                    public void itemCanceled() {
-//
-//                    }
-//                });
-
-
     }
 
 
@@ -1166,6 +1168,7 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
         Intent intent = new Intent(getBaseContext(), CreateAccountActivity.class);
 
 
+        LoginManager.getInstance().logOut();
 
         hgbPrefrenceManager.removeKey(HGBConstants.HGB_FREE_USER);
         hgbPrefrenceManager.removeKey(HGBConstants.HGB_USER_PROFILE_ID);
@@ -1518,6 +1521,11 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
 */
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
 
     private void ErrorMessage(Object data){
         HGBErrorHelper errorHelper = new HGBErrorHelper();
@@ -1920,7 +1928,6 @@ public class MainActivityBottomTabs extends BaseActivity implements HGBVoiceInte
             }
         });
     }
-
 
 
     private AlertDialog mSeatTypeDialog;

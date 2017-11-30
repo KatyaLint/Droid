@@ -42,6 +42,7 @@ import hellogbye.com.hellogbyeandroid.activities.MainActivityBottomTabs;
 import hellogbye.com.hellogbyeandroid.activities.RefreshComplete;
 
 import hellogbye.com.hellogbyeandroid.activities.dialogs.SignInDialog;
+import hellogbye.com.hellogbyeandroid.activities.dialogs.SignInWithFB;
 import hellogbye.com.hellogbyeandroid.adapters.settingaccount.AccountSettingsAdapter;
 import hellogbye.com.hellogbyeandroid.fragments.HGBAbstractFragment;
 import hellogbye.com.hellogbyeandroid.models.vo.statics.BookingRequestVO;
@@ -257,8 +258,8 @@ public class AccountSettingsFragment extends HGBAbstractFragment {
 //                        getFragmentManager());
 
                 SignInDialog signInDialog = new SignInDialog(getActivity(), android.R.style.Theme_NoTitleBar_Fullscreen);
-
                 signInDialog.show();
+
             }
         });
 

@@ -16,6 +16,7 @@ public class UserSignUpDataVO {
     private String username;
     private String userEmail;
     private String gender;
+    private String token;
     private int userTravelerType;
 
     public String getState() {
@@ -120,5 +121,13 @@ public class UserSignUpDataVO {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

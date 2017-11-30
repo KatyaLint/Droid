@@ -341,8 +341,42 @@ public class ConnectionManager {
             jsonObject.put("cardtoken","");
 
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        }, true);
+    }
 
+    public void postUserCreateFBAccount(UserSignUpDataVO userData, final ServerRequestListener listener) {
+
+        String url = getURL(Services.USER_PROFILE_REGISTER);
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+        //    jsonObject.put("city", userData.getCity());
+          //  jsonObject.put("confirmPassword", userData.getConfirmPassword());
+            jsonObject.put("country", userData.getCountry());
+            jsonObject.put("externalloginsource", "Facebook");
+            jsonObject.put("externallogintoken", userData.getToken());
+            jsonObject.put("firstname", userData.getFirstName());
+         //   jsonObject.put("firstname", userData.getFirstName());
+            jsonObject.put("lastname", userData.getLastName());
+            jsonObject.put("gender", userData.getGender());
+            jsonObject.put("isEmailObtainedFromNoAccountError", false);
+            jsonObject.put("username", userData.getUserEmail());
+            jsonObject.put("usertypeid", "NPAY");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -361,6 +395,7 @@ public class ConnectionManager {
             }
         }, true);
     }
+
 
 
     public void postSearchCompanionAdd(CompanionVO companionData, final ServerRequestListener listener) {
@@ -704,6 +739,38 @@ public class ConnectionManager {
             }
         },true);
     }
+
+    public void postSessionExternal(String token, final ServerRequestListener listener) {
+        //Kate
+        //https://apiprod.hellogbye.com/prod/rest/Session/External
+
+        String url = getURL(Services.USER_SESSION_EXTERNAL);
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("source", "Facebook");
+            jsonObject.put("token", token);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HGBJsonRequest req = new HGBJsonRequest(Request.Method.POST, url,
+                jsonObject, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                listener.onSuccess(Parser.loginData(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onError(Parser.parseErrorMessage(error));
+            }
+        });
+
+    }
+
 
     public void postUserProfileAccountsWithEmail(String email, final ServerRequestListener listener) {
         String url = getURL(Services.USER_GET_USER_PROFILE_ACCOUNTS);
@@ -2555,7 +2622,8 @@ public class ConnectionManager {
         STATIC_AIRLINE_POINTS_PROGRAM("Statics/AllAirlinePointsPrograms"),
         UPDATE_AVAILABILITY("Itinerary/UpdateAvailability"),
         GET_CAPTCHA("UserProfile/CAPTCHA"),
-        PUT_CAPTCHA("UserProfile/PasswordReset");
+        PUT_CAPTCHA("UserProfile/PasswordReset"),
+        USER_SESSION_EXTERNAL("Session/External");
 
 
         //https://apiprod.hellogbye.com/prod/rest/AirlinePointsProgram/itinerary/cb37f18e-d8cb-45ed-8ccf-ef0df6d01701/passenger/c47ae6eb-d3da-42b2-a2dc-af9e0eb322ee
