@@ -37,6 +37,11 @@ android {
     buildToolsVersion '25.0.0'
 }
 
+
+if (file("signing.properties").exists()) {
+    file('signing.properties').foo;
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibraryVersion
