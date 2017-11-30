@@ -3,7 +3,7 @@
     package="com.roughike.bottombar.test" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="16"
         android:targetSdkVersion="24" />
 
     <instrumentation
@@ -13,7 +13,7 @@
         android:label="Tests for com.roughike.bottombar.test"
         android:targetPackage="com.roughike.bottombar.test" />
 
-    <application>
+    <application android:debuggable="true" >
         <uses-library android:name="android.test.runner" />
     </application>
 
