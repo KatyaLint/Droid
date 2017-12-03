@@ -39,8 +39,8 @@ android {
         applicationId "hellogbye.com.hellogbyeandroid"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 7
-        versionName "0.0.7"
+        versionCode 8
+        versionName "0.0.8"
         multiDexEnabled false
 
     }
@@ -67,19 +67,15 @@ android {
         dev {
             buildConfigField 'boolean', 'IS_DEV', 'true'
             applicationId "com.hellogbye.dev"
-            versionName "0.0.7-dev"
+            versionName "0.0.8-dev"
         }
         live {
             buildConfigField 'boolean', 'IS_DEV', 'false'
             applicationId "com.hellogbye"
-            versionName "0.0.7"
+            versionName "0.0.8"
         }
     }
 
-}
-
-if (file("signing.properties").exists()) {
-    file('signing.properties').foo;
 }
 
 android {
