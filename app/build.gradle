@@ -77,6 +77,11 @@ android {
     }
 
 }
+
+if (file("signing.properties").exists()) {
+    file('signing.properties').foo;
+}
+
 android {
     useLibrary 'org.apache.http.legacy'
     dexOptions {

@@ -38,5 +38,8 @@ ext {
     junitVersion = "4.12"
 }
 
+if (file("signing.properties").exists()) {
+    file('signing.properties').foo;
+}
 
 
