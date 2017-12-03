@@ -72,16 +72,6 @@ public class SignInWithFB extends Dialog {//extends BaseActivity {//Dialog {
 
     }
 
-
-//    public SignInWithFB(Activity activity, CallbackManager callbackManager, RefreshComplete refreshComplete){
-//          this.activity = activity;
-//          this.callbackManager = callbackManager;
-//        //  initializeFB();
-//          this.refreshComplete = refreshComplete;
-//        signInInitialization();
-//      }
-
-
     private void sendLoginToServer(final String email,String pass) {
 
         try{
@@ -124,7 +114,7 @@ public class SignInWithFB extends Dialog {//extends BaseActivity {//Dialog {
 
     private void goToMainActivity() {
 
-
+        System.out.println("Kate goToMainActivity");
         hgbPrefrenceManager = HGBPreferencesManager.getInstance(activity);
         boolean doesExist = hgbPrefrenceManager.getBooleanSharedPreferences(HGBConstants.TRAVEL_PREF_ENTRY, false);
 
@@ -152,11 +142,6 @@ public class SignInWithFB extends Dialog {//extends BaseActivity {//Dialog {
     }
 
     private void signInInitialization(){
-
-//          LayoutInflater li = LayoutInflater.from(activity);
-//          final  View popupView = li.inflate(R.layout.new_sigin_layout, null);
-
-
         ImageButton new_sign_in_close_btn = (ImageButton) findViewById(R.id.new_sign_in_close_btn);
         new_sign_in_close_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,16 +152,6 @@ public class SignInWithFB extends Dialog {//extends BaseActivity {//Dialog {
 
 
           hgbPrefrenceManager = HGBPreferencesManager.getInstance(activity.getApplicationContext());
-
-//          ImageButton new_sign_in_close_btn = (ImageButton)popupView. findViewById(R.id.new_sign_in_close_btn);
-//          new_sign_in_close_btn.setOnClickListener(new View.OnClickListener() {
-//              @Override
-//              public void onClick(View view) {
-//                  if(HGBUtility.dialog != null )
-//                        HGBUtility.dialog.dismiss();
-//              }
-//          });
-
 
           login_remmember_me_checkbox = (FontCheckedTextView)findViewById(R.id.remmember_me_checkbox);
           login_password = (FontEditTextView)findViewById(R.id.login_password);
@@ -215,39 +190,7 @@ public class SignInWithFB extends Dialog {//extends BaseActivity {//Dialog {
 
 
           LogInFB();
-
-
-//          HGBUtility.showAlertPopUp(activity, null,  popupView , null, "Log In", null);
-
-
       }
-
-
-    private void initializeFB(){
-        LayoutInflater li = LayoutInflater.from(activity);
-        final  View popupView = li.inflate(R.layout.new_sigin_with_fb_email_layout, null);
-
-        LinearLayout sign_in_with_email = (LinearLayout) popupView.findViewById(R.id.sign_in_with_email);
-        sign_in_with_email.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(HGBUtility.dialog != null){
-                    HGBUtility.dialog.cancel();
-                }
-                refreshComplete.onRefreshError("");
-
-            }
-        });
-
-
-        hgbPrefrenceManager = HGBPreferencesManager.getInstance(activity.getApplicationContext());
-
-        LogInFB();
-
-//        HGBUtility.showAlertPopUpOneButton(activity, null,  popupView ,
-//                null, null, false);
-
-    }
 
 
     private void logiWithFBSuccess(Object data){
@@ -278,6 +221,7 @@ public class SignInWithFB extends Dialog {//extends BaseActivity {//Dialog {
             @Override
             public void onError(Object data) {
 
+                System.out.println("Kate postSessionExternal error");
                 postUserCreateFBAccountUser();
 
             }
@@ -315,8 +259,8 @@ public class SignInWithFB extends Dialog {//extends BaseActivity {//Dialog {
 //        ProgressDialog progressDialog = new ProgressDialog(CreateAccountActivity.this);
 //        progressDialog.setMessage("Procesando datos...");
 //        progressDialog.show();
-        final String accessToken = loginResult.getAccessToken().getToken();
 
+        final String accessToken = loginResult.getAccessToken().getToken();
 
         GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
 
@@ -341,6 +285,7 @@ public class SignInWithFB extends Dialog {//extends BaseActivity {//Dialog {
                 userData.setLastName(last_name);
                 userData.setGender(gender);
 
+                System.out.println("Kate accessToken =" + accessToken);
                 logInAsFBUser(accessToken, object);
 
                 //sendLoginToServer(email,userID );
@@ -357,9 +302,6 @@ public class SignInWithFB extends Dialog {//extends BaseActivity {//Dialog {
     private void LogInFB(){
         LoginButton login_button_fb_btn = (LoginButton)findViewById(R.id.login_button_fb_btn);
         login_button_fb_btn.setReadPermissions( Arrays.asList("public_profile", "email"));
-
-
-      //  callbackManager = CallbackManager.Factory.create();
 
         login_button_fb_btn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override

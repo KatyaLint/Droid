@@ -981,9 +981,6 @@ public class CreateAccountActivity extends BaseActivity implements View.OnClickL
 
     private void goToLoginState(boolean animateFoward) {
 
-
-        System.out.println("Kate sign in Login" );
-
         disableScreen();
 
         ArrayList<View> secondViewViews = new ArrayList<>();
